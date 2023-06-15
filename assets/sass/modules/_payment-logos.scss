@@ -1,0 +1,21 @@
+.merchant-payment-logos{
+  flex: 1;
+  width: 100%;
+  display: flex;
+  grid-gap: 15px;
+  flex-direction: column;
+  margin-top: var(--merchant-margin-top, 20px);
+  margin-bottom: var(--merchant-margin-bottom, 20px);
+}
+
+.merchant-payment-logos-images{
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 5px;
+  justify-content: var(--merchant-align, 'flex-start');
+
+  img{
+    max-width: var(--merchant-image-max-width, 100px) !important;
+    max-height: var(--merchant-image-max-height, 100px) !important;
+  }
+}

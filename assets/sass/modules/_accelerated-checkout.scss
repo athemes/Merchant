@@ -1,0 +1,19 @@
+.products{
+
+  .product{
+
+    .merchant_buy_now_button{
+      align-self: flex-start;
+    }
+  }
+}
+
+.single-product{
+
+  .product{
+    
+    .single_add_to_cart_button.merchant_buy_now_button{
+      margin-left: 5px;
+    }
+  }
+}

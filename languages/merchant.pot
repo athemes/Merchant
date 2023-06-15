@@ -1,0 +1,1026 @@
+# Copyright (C) 2023 merchant
+# This file is distributed under the same license as the merchant package.
+msgid ""
+msgstr ""
+"Project-Id-Version: merchant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: aThemes <team@athemes.com>\n"
+"Last-Translator: aThemes <team@athemes.com>\n"
+"POT-Creation-Date: 2023-06-15 18:53+0000\n"
+"Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin/class-merchant-admin-loader.php:84, admin/pages/page-settings.php:48, admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:10, admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:10, admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:10, admin/modules/auto-external-links/admin-page-auto-external-links.php:10, admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:10, admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:10, admin/modules/payment-logos/admin-page-payment-logos.php:26, admin/modules/pre-orders/admin-page-pre-orders.php:10, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:41, admin/modules/quick-view/admin-page-quick-view.php:10
+msgid "Settings"
+msgstr ""
+
+#: admin/class-merchant-admin-loader.php:101
+msgid "Join our community"
+msgstr ""
+
+#: admin/class-merchant-admin-loader.php:102
+msgid "to discuss about the product and ask for support or help the community."
+msgstr ""
+
+#: inc/class-merchant-loader.php:127, admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:19
+msgid "☞ Donʼt forget this..."
+msgstr ""
+
+#: inc/class-merchant-loader.php:195, admin/modules/pre-orders/admin-page-pre-orders.php:18, inc/modules/pre-orders/pre-orders.php:111
+msgid "Pre Order Now!"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:61
+msgid "Convert More"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:66, admin/modules/quick-view/admin-page-quick-view.php:18, inc/modules/quick-view/quick-view.php:10
+msgid "Quick View"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:67
+msgid "Define plugin general settings and default settings for your services."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:75
+msgid "Animated Add to Cart"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:76
+msgid "Make sure your Add To Cart button stands out by adding a subtle animation on the mouse over or every few seconds."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:84
+msgid "Accelerated Checkout"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:85, admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:16
+msgid "If increasing average order value is not important for your store, send your customers directly to checkout instead of cart."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:95
+msgid "Boost Revenue"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:100
+msgid "Sale Tags"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:101
+msgid "Increase conversion rate with discount badges on top of your product image."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:109
+msgid "Pre-Orders"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:110
+msgid "Increase revenue by allowing visitors to pre-order products that are either out of stock or not yet released."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:120
+msgid "Improve Experience"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:125
+msgid "Ajax Real-Time Search"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:126
+msgid "Help visitors instantly find the products they're looking for by using predictive search and displaying frequent searches."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:134
+msgid "Auto External Links"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:135
+msgid "All the external links on your store will be opened in a new browser tab by enabling this app. It prevents visitors from navigating away from your online store."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:143
+msgid "Scroll to Top Button"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:144
+msgid "Help your customers get back easily to the top of the page, where they can see the product photos and purchase options."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:152
+msgid "Code Snippets"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:153
+msgid "Add code snippets in WordPress without having to edit your theme’s functions.php file."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:163
+msgid "Build Trust"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:168, admin/modules/payment-logos/admin-page-payment-logos.php:10
+msgid "Payment Logos"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:169
+msgid "Build trust by letting your visitors know that you are accepting a wide assortment of payment methods."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:177, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:10
+msgid "Product Trust Badge"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:178
+msgid "Increase trust and conversion rate with premium, professionally-designed badges that match your store's look and feel."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:188
+msgid "Reduce Abandonment"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:193
+msgid "Cart Count Favicon"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:194
+msgid "Make sure your store's browser tab stands out by displaying the number of items in the cart on the favicon."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:202
+msgid "Inactive Tab Message"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:203
+msgid "Reduce cart abandonment by dynamically modifying the browser tab's title when the visitor navigates away from your store."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:213
+msgid "Protect Your Store"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:218
+msgid "Agree to Terms Checkbox"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:219
+msgid "Follow EU's regulations on processing personal data by obtaining consent before visitors start the checkout process."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:227, admin/modules/cookie-banner/admin-page-cookie-banner.php:82
+msgid "Cookie Banner"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:228
+msgid "Inform your visitors that the site uses cookies to improve the user experience and track the visitors activity."
+msgstr ""
+
+#: admin/classes/class-merchant-admin-options.php:209
+msgid "Field not found!"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:6
+msgid "Website"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:40
+msgid "Welcome To Merchant"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:40
+msgid "👋🏻"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:41
+msgid "We’re glad to see you :)"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:61
+msgid "Your"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:61
+msgid "%s module"
+msgid_plural "%s modules"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/pages/page-dashboard.php:61
+msgid "enabled"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:77
+msgid "Get"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:77
+msgid "help and support"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:93
+msgid "Manage your"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:93
+msgid "Merchant settings"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:110
+msgid "Leave a"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:110
+msgid "review"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:126
+msgid "Have an"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:126
+msgid "idea or feedback?"
+msgstr ""
+
+#: admin/pages/page-module.php:16, admin/pages/page-settings.php:10
+msgid "Your settings have been modified. Save?"
+msgstr ""
+
+#: admin/pages/page-module.php:18, admin/pages/page-settings.php:12
+msgid "Discard"
+msgstr ""
+
+#: admin/pages/page-module.php:19, admin/pages/page-settings.php:13
+msgid "Save"
+msgstr ""
+
+#: admin/pages/page-module.php:31, admin/pages/page-modules.php:12, admin/pages/page-settings.php:24
+msgid "Go Back"
+msgstr ""
+
+#: admin/pages/page-module.php:60
+msgid "Enable"
+msgstr ""
+
+#: admin/pages/page-module.php:65
+msgid "Enabled"
+msgstr ""
+
+#: admin/pages/page-module.php:81
+msgid "Did something go wrong?"
+msgstr ""
+
+#: admin/pages/page-module.php:85
+msgid "Submit a bug: the module doesn’t work as expected"
+msgstr ""
+
+#: admin/pages/page-module.php:88
+msgid "Some options are missing"
+msgstr ""
+
+#: admin/pages/page-module.php:91
+msgid "It conflicts with another feature"
+msgstr ""
+
+#: admin/pages/page-module.php:94
+msgid "I don’t need it any more."
+msgstr ""
+
+#: admin/pages/page-module.php:97
+msgid "Other"
+msgstr ""
+
+#: admin/pages/page-module.php:107
+msgid "Please tell us why, and we’ll look into it."
+msgstr ""
+
+#: admin/pages/page-module.php:111
+msgid "What feature are you looking for?"
+msgstr ""
+
+#: admin/pages/page-module.php:115
+msgid "Please tell us what app it conflicts with."
+msgstr ""
+
+#: admin/pages/page-module.php:119
+msgid "Would you mind telling us why?"
+msgstr ""
+
+#: admin/pages/page-module.php:126
+msgid "Submit"
+msgstr ""
+
+#: admin/pages/page-module.php:134
+msgid "Thank you"
+msgstr ""
+
+#: admin/pages/page-module.php:138
+msgid "Your feedback helps us improve Merchant."
+msgstr ""
+
+#: admin/pages/page-module.php:146, admin/pages/page-settings.php:77
+msgid "Preview"
+msgstr ""
+
+#: admin/pages/page-module.php:153
+msgid "Tutorial"
+msgstr ""
+
+#: admin/pages/page-module.php:160
+msgid "Help Center"
+msgstr ""
+
+#: admin/pages/page-modules.php:16
+msgid "Your Enabled Modules"
+msgstr ""
+
+#: admin/pages/page-modules.php:16
+msgid "👍"
+msgstr ""
+
+#: admin/pages/page-modules.php:18
+msgid "Quickly navigate through all the enabled modules and customize each in real-time."
+msgstr ""
+
+#: admin/pages/page-modules.php:62
+msgid "My Modules"
+msgstr ""
+
+#: admin/pages/page-settings.php:34
+msgid "Global Settings"
+msgstr ""
+
+#: admin/pages/page-settings.php:36
+msgid "Further enhance and customize the Merchant modules to your own needs."
+msgstr ""
+
+#: admin/pages/page-settings.php:49
+msgid "Choose who can see Merchant on your store. Note: it can take few seconds for changes to take effect."
+msgstr ""
+
+#: admin/pages/page-settings.php:55
+msgid "Lazy Load Images"
+msgstr ""
+
+#: admin/pages/page-settings.php:56
+msgid "Load images when the visitor scrolls, to speed up the initial page load. This affects all modules that show images such as product reviews, recently viewed, related products, etc."
+msgstr ""
+
+#: admin/pages/page-settings.php:65
+msgid "Merchant Operating Mode"
+msgstr ""
+
+#: admin/pages/page-settings.php:73
+msgid "Active"
+msgstr ""
+
+#: admin/pages/page-settings.php:74
+msgid "Merchant is active and visible for all customers. This is the standard operating mode."
+msgstr ""
+
+#: admin/pages/page-settings.php:78
+msgid "All Merchant modules are active and visible only to admins. Use this mode to test Merchant modules before going live."
+msgstr ""
+
+#: admin/pages/page-settings.php:81
+msgid "Inactive"
+msgstr ""
+
+#: admin/pages/page-settings.php:82
+msgid "Merchant is inactive for everyone, including you. While in this mode, your store operates like Merchant is not installed."
+msgstr ""
+
+#: admin/pages/page-settings.php:93
+msgid "Global Customizations"
+msgstr ""
+
+#: admin/pages/page-settings.php:98
+msgid "Do not modify these settings unless you're an experienced developer"
+msgstr ""
+
+#: admin/pages/page-settings.php:108, admin/modules/code-snippets/admin-page-code-snippets.php:17
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/pages/page-settings.php:114, admin/modules/code-snippets/admin-page-code-snippets.php:35
+msgid "Custom JS First - runs at the beginning of Merchant"
+msgstr ""
+
+#: admin/pages/page-settings.php:120, admin/modules/code-snippets/admin-page-code-snippets.php:42
+msgid "Custom JS Last - runs at the end of Merchant"
+msgstr ""
+
+#: admin/pages/page-settings.php:126, admin/modules/code-snippets/admin-page-code-snippets.php:49
+msgid "Custom JS"
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:17
+msgid "Checkbox text on cart page"
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:18
+msgid "Please keep the ##terms_link## magic keyword there, it will be replaced with the link you set below."
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:26
+msgid "Terms and conditions link"
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:27
+msgid "The link to your Terms and Conditions page."
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:33
+msgid "Checkbox warning text on cart page"
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:34
+msgid "You must read and accept the terms and conditions to cart."
+msgstr ""
+
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:35
+msgid "The error that will be shown if the user tries to go to cart without accepting your terms and conditions."
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:17
+msgid "Results Amount Per Search"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:18
+msgid "Control the maximum amount of products to show in the search results."
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:28
+msgid "Results Description"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:30
+msgid "Product Description"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:31
+msgid "Product Short Description"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:39
+msgid "Results Description Length"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:40
+msgid "The number of words to show in the results description. Save/publish the changes is required to see this option working in the customizer preview."
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:50
+msgid "Results Order By"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:52
+msgid "None"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:53
+msgid "Product Name"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:54
+msgid "Published Date"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:55
+msgid "Modified Date"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:56
+msgid "Random"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:57
+msgid "Product Price"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:65
+msgid "Results Order"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:67
+msgid "Ascendant"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:68
+msgid "Descendant"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:76
+msgid "Results Box Width"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:87
+msgid "Display Categories"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:88
+msgid "Display product categories in the results if the searched term matches with category name."
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:94
+msgid "Enable Search By SKU"
+msgstr ""
+
+#: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:95
+msgid "Return search results based on either product name or SKU."
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:17
+msgid "Trigger Animation"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:19
+msgid "Select an option"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:20
+msgid "On hover and every few seconds"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:21
+msgid "On hover"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:22
+msgid "Every few seconds"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:30
+msgid "Delay before playing animation (seconds)"
+msgstr ""
+
+#: admin/modules/animated-add-to-cart/admin-page-animated-add-to-cart.php:48
+msgid "Animation Style"
+msgstr ""
+
+#: admin/modules/auto-external-links/admin-page-auto-external-links.php:16
+msgid "All the external links on your store will be opened in a new browser tab by enabling this module. It prevents visitors from navigating away from your online store. Automatically open external links in a new browser tab and prevent users from navigating away from your online store."
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:17
+msgid "Shape"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:19
+msgid "Circle"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:20
+msgid "Rectangle"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:28
+msgid "The location of the bullet."
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:30
+msgid "Top Left"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:31
+msgid "Top Right"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:32
+msgid "Bottom Left"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:33
+msgid "Bottom Right"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:41, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:184
+msgid "Background Color"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:48
+msgid "Text Color"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:55
+msgid "Animation repetition interval"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:57
+msgid "1 Second"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:58
+msgid "2 Seconds"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:59
+msgid "3 Seconds"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:60
+msgid "5 Seconds"
+msgstr ""
+
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:61
+msgid "Never"
+msgstr ""
+
+#: admin/modules/code-snippets/admin-page-code-snippets.php:10
+msgid "CSS"
+msgstr ""
+
+#: admin/modules/code-snippets/admin-page-code-snippets.php:28
+msgid "Javascript"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:10
+msgid "General and Design settings"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:17
+msgid "Theme"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:19
+msgid "Floating"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:20
+msgid "Fixed Bottom"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:28
+msgid "Cookie banner background color"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:35
+msgid "Cookie banner text color"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:42
+msgid "Cookie banner link color"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:49
+msgid "\"Accept\" button background color"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:56
+msgid "\"Accept\" button text color"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:63
+msgid "\"Learn More\""
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:64, inc/modules/cookie-banner/cookie-banner.php:11
+msgid "Learn More"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:70
+msgid "URL of your Privacy Policy"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:71
+msgid "Every site needs to have a privacy policy. Until you add a link to that page, the \"Learn more\" message will not be shown."
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:89
+msgid "Text on cookie banner"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:90, inc/modules/cookie-banner/cookie-banner.php:9
+msgid "We use cookies to improve your experience and track website usage."
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:96
+msgid "\"I Accept\""
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:97, inc/modules/cookie-banner/cookie-banner.php:12
+msgid "I Understand"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:103
+msgid "Cookie Duration (days)"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:104
+msgid "365"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:110
+msgid "Close X Button"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:112
+msgid "Show Button"
+msgstr ""
+
+#: admin/modules/cookie-banner/admin-page-cookie-banner.php:113
+msgid "Hide Button"
+msgstr ""
+
+#: admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:17
+msgid "Message"
+msgstr ""
+
+#: admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:18
+msgid "The message that will show in the browser tab's title when the visitor changes to another tab."
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:17
+msgid "Select Logos"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:33
+msgid "Align Logos"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:35, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:50, admin/modules/sale-tags/admin-page-sale-tags.php:41
+msgid "Left"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:36, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:51
+msgid "Center"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:37, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:52, admin/modules/sale-tags/admin-page-sale-tags.php:42
+msgid "Right"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:45
+msgid "Text Above the Logos"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:46, inc/modules/payment-logos/payment-logos.php:8
+msgid "Checkout safely using your preferred payment method"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:52, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:60
+msgid "Margin Top"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:59, admin/modules/product-trust-badge/admin-page-product-trust-badge.php:67
+msgid "Margin Bottom"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:66
+msgid "Image Max Width"
+msgstr ""
+
+#: admin/modules/payment-logos/admin-page-payment-logos.php:73
+msgid "Image Max Height"
+msgstr ""
+
+#: admin/modules/pre-orders/admin-page-pre-orders.php:17
+msgid "Add Button Title"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:17
+msgid "Select Badge"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:23
+msgid "Title"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:24, inc/modules/product-trust-badge/product-trust-badge.php:8
+msgid "Guaranteed Safe Checkout"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:30
+msgid "Border Color"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:48
+msgid "Align Badge"
+msgstr ""
+
+#: admin/modules/product-trust-badge/admin-page-product-trust-badge.php:74
+msgid "Image Width"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:17
+msgid "Button Title"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:24
+msgid "Button Type"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:26
+msgid "Text"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:27
+msgid "Button"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:35
+msgid "Button Position"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:37
+msgid "Before - Add to Cart"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:38
+msgid "After - Add to Cart"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:39
+msgid "Overlay"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:47
+msgid "Modal Width"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:58
+msgid "Modal Height"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:69
+msgid "Modal Overlay Color"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:76, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:93
+msgid "Visibility"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:78, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:95
+msgid "Show on all devices"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:79, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:96
+msgid "Desktop Only"
+msgstr ""
+
+#: admin/modules/quick-view/admin-page-quick-view.php:80, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:97
+msgid "Mobile Only"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:10
+msgid "General Settings"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:17
+msgid "Badge Text"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:18, inc/modules/sale-tags/sale-tags.php:9
+msgid "Sale!"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:24
+msgid "Display Sale Percentage"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:31
+msgid "You may use the {value} tag. E.g. <strong>{value}% OFF!</strong>"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:39, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:60
+msgid "Position"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:50
+msgid "Top Offset"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:61, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:71, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:115
+msgid "Side Offset"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:72, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:49
+msgid "Border Radius"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:83
+msgid "Font Size"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:94
+msgid "Top/Bottom Spacing"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:105
+msgid "Left/Right Spacing"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:120
+msgid "Design Settings"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:127
+msgid "Badge Background Color"
+msgstr ""
+
+#: admin/modules/sale-tags/admin-page-sale-tags.php:134
+msgid "Badge Text Color"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:17, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:32
+msgid "Icon"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:30
+msgid "Type"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:33
+msgid "Text + Icon"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:42
+msgid "Back to top"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:82, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:126
+msgid "Bottom Offset"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:142
+msgid "Style Settings"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:159
+msgid "Padding"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:170
+msgid "Icon Color"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:177
+msgid "Icon Hover Color"
+msgstr ""
+
+#: admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:191
+msgid "Background Hover Color"
+msgstr ""
+
+#: inc/modules/accelerated-checkout/accelerated-checkout.php:18, inc/modules/accelerated-checkout/accelerated-checkout.php:43
+msgid "Buy Now"
+msgstr ""
+
+#: inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php:29
+msgid "You must read and accept the terms and conditions to checkout."
+msgstr ""
+
+#: inc/modules/ajax-real-time-search/ajax-real-time-search.php:117
+msgid "Products"
+msgstr ""
+
+#: inc/modules/ajax-real-time-search/ajax-real-time-search.php:147
+msgid "Categories"
+msgstr ""
+
+#: inc/modules/ajax-real-time-search/ajax-real-time-search.php:169
+msgid "No products found."
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:53
+msgid "Pre Ordered"
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:58
+msgid "Pre Ordered <span class=\"count\">(%s)</span>"
+msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/modules/pre-orders/pre-orders.php:125
+msgid "Pre Order Product - Set this product as pre-order"
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:134, inc/modules/pre-orders/pre-orders.php:179
+msgid "Pre Order Date"
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:169
+msgid "Pre Order Product"
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:170
+msgid "Set this product as pre-order"
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:290
+msgid "We detected that your cart has pre-order products. Please remove them before being able to add this product."
+msgstr ""
+
+#: inc/modules/pre-orders/pre-orders.php:288
+msgid "We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding."
+msgstr ""
+
+#: inc/modules/quick-view/quick-view.php:59
+msgid "Close quick view modal"
+msgstr ""

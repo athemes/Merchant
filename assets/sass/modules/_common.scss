@@ -1,0 +1,17 @@
+.merchant-hidden{
+  display: none;
+}
+
+@media(max-width: 767px) {
+
+  .merchant-visibility-desktop-only{
+    display: none !important;
+  }
+}
+
+@media(min-width: 767px) {
+
+  .merchant-visibility-mobile-only{
+    display: none !important;
+  }
+}

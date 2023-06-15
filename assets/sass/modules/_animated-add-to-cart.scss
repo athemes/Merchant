@@ -1,0 +1,147 @@
+@keyframes merchant-bounce{
+  to{
+    transform: scale(1.2);
+  }
+}
+
+@keyframes merchant-shake{
+  33%{
+    transform: rotate(10deg);
+  }
+  67%{
+    transform: rotate(-10deg);
+  }
+  to{
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes merchant-pulse{
+  0%{
+    animation-timing-function: ease-out;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+  10%{
+    animation-timing-function: ease-in;
+    transform: scale(.91);
+  }
+  17%{
+    animation-timing-function: ease-out;
+    transform: scale(.98);
+  }
+  33%{
+    animation-timing-function: ease-in;
+    transform: scale(.87);
+  }
+  45%{
+    animation-timing-function: ease-out;
+    transform: scale(1);
+  }
+}
+
+@keyframes merchant-jello-shake{
+  0%{
+    transform: scaleX(1);
+  }
+  30%{
+    transform: scale3d(1.25,.75,1);
+  }
+  40%{
+    transform: scale3d(.75,1.25,1);
+  }
+  50%{
+    transform: scale3d(1.15,.85,1);
+  }
+  65%{
+    transform: scale3d(.95,1.05,1);
+  }
+  75%{
+    transform: scale3d(1.05,.95,1);
+  }
+  to{
+    transform: scaleX(1);
+  }
+}
+
+@keyframes merchant-wobble{
+  0%, to{
+    transform: translateX(0);
+    transform-origin: 50% 50%;
+  }
+  15%{
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30%{
+    transform: translateX(15px) rotate(6deg);
+  }
+  45%{
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60%{
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75%{
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+
+@keyframes merchant-vibrate{
+  0%{
+    transform: translate(0);
+  }
+  20%{
+    transform: translate(-2px,2px);
+  }
+  40%{
+    transform: translate(-2px,-2px);
+  }
+  60%{
+    transform: translate(2px,2px);
+  }
+  80%{
+    transform: translate(2px,-2px);
+  }
+  to{
+    transform: translate(0);
+  }
+}
+
+@keyframes merchant-swing{
+  0%{
+    transform: rotate(0deg);
+  }
+  20%{
+    transform: rotate(3deg);
+  }
+  40%{
+    transform: rotate(-3deg);
+  }
+  60%{
+    transform: rotate(3deg);
+  }
+  80%{
+    transform: rotate(-3deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes merchant-tada{
+  0%{
+    transform: scaleX(1);
+  }
+  10%, 20%{
+    transform: scale3d(.9,.9,.9) rotate(-3deg);
+  }
+  30%, 50%, 70%, 90%{
+    transform: scale3d(1.1,1.1,1.1) rotate(3deg);
+  }
+  40%, 60%, 80%{
+    transform: scale3d(1.1,1.1,1.1) rotate(-3deg);
+  }
+  to{
+    transform: scaleX(1);
+  }
+}

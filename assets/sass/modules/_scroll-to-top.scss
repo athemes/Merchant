@@ -1,0 +1,48 @@
+.merchant-scroll-to-top-button{
+  display: flex;
+  grid-gap: 5px;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  position: fixed;
+  z-index: 999999;
+  bottom: var(--merchant-bottom-offset, 30px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s;
+  color: var(--merchant-icon-color, #ffffff);
+  background-color: var(--merchant-background-color, #212121);
+  padding: var(--merchant-padding, 15px);
+  border-radius: var(--merchant-border-radius, 30px);
+
+  &:hover{
+    color: var(--merchant-icon-hover-color, #ffffff);
+    background-color: var(--merchant-background-hover-color, #212121);
+  }
+
+  span{
+    font-size: .875rem;
+  }
+
+  svg{
+    width: var(--merchant-icon-size, 18px);
+    height: var(--merchant-icon-size, 18px);
+    fill: none;
+    stroke: currentColor;
+    transition: all .2s;
+  }
+
+  &.merchant-show{
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.merchant-position-left{
+    left: var(--merchant-side-offset, 30px);
+  }
+
+  &.merchant-position-right{
+    right: var(--merchant-side-offset, 30px);
+  }
+}

@@ -1,0 +1,262 @@
+.merchant-pcr-app * {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+.merchant-pcr-app input:focus,
+.merchant-pcr-app input.pcr-active,
+.merchant-pcr-app button:focus,
+.merchant-pcr-app button.pcr-active{
+  box-shadow: none;
+}
+
+.merchant-pcr-app .pcr-palette:focus,
+.merchant-pcr-app .pcr-slider:focus {
+  box-shadow: none;
+}
+
+.merchant-pcr-app {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.1em;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+  box-shadow: 0 0.15em 1.5em 0 rgba(0, 0, 0, 0.1), 0 0 1em 0 rgba(0, 0, 0, 0.03);
+  background: #fff;
+}
+
+.merchant-pcr-app.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.merchant-pcr-app .pcr-swatches {
+  display: flex;
+  justify-content: space-between;
+}
+
+.merchant-pcr-app .pcr-swatches>button {
+  cursor: pointer;
+  font-size: 1em;
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+.merchant-pcr-app .pcr-swatches>button::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
+  background-size: 6px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  z-index: -1;
+}
+
+.merchant-pcr-app .pcr-swatches>button::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--pcr-color);
+}
+
+.merchant-pcr-app .pcr-interaction {
+  display: flex;
+  grid-gap: 5px;
+}
+
+.merchant-pcr-app .pcr-interaction input {
+  font-size: 11px;
+  border-radius: 3px;
+
+  &:focus{
+    border-color: #3858E9;
+  }
+}
+
+.merchant-pcr-app .pcr-interaction .pcr-result {
+  flex: 1;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.merchant-pcr-app .pcr-interaction .pcr-clear {
+  cursor: pointer;
+  margin: 0;
+  padding: 0 10px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #3858E9;
+  text-transform: uppercase;
+}
+
+.merchant-pcr-app .pcr-selection .pcr-picker {
+  user-select: none;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  background-color: #fff !important;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+}
+
+.merchant-pcr-app .pcr-selection .pcr-color-palette,
+.merchant-pcr-app .pcr-selection .pcr-color-chooser,
+.merchant-pcr-app .pcr-selection .pcr-color-opacity {
+  user-select: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: grab;
+}
+
+.merchant-pcr-app .pcr-selection .pcr-color-palette:active,
+.merchant-pcr-app .pcr-selection .pcr-color-chooser:active,
+.merchant-pcr-app .pcr-selection .pcr-color-opacity:active {
+  cursor: grabbing;
+}
+
+.merchant-pcr-app[data-theme='merchant'] {
+  width: 250px;
+  max-width: 95vw;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  grid-gap: 10px;
+  flex-direction: column;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 5fr auto auto;
+  align-items: center;
+  height: 150px;
+  width: 100%;
+  align-self: flex-start;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-preview {
+  grid-area: 2 / 1 / 4 / 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-preview .pcr-last-color {
+  display: none;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-preview .pcr-current-color {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: var(--pcr-color);
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-preview .pcr-current-color::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
+  background-size: 6px;
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-palette {
+  grid-area: 1 / 1 / 2 / 3;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-palette .pcr-picker{
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 1px 2px #000, inset 0 0 1px 1px #000;
+  background-color: transparent !important;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-palette .pcr-palette {
+  width: 100%;
+  height: 100%;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-palette .pcr-palette::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
+  background-size: 8px;
+  z-index: -1;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-chooser {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-opacity {
+  grid-area: 3 / 2 / 3 / 2;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-chooser,
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-opacity {
+  height: 12px;
+  margin-right: 10px;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-chooser .pcr-picker,
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-opacity .pcr-picker {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-chooser .pcr-slider,
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-opacity .pcr-slider {
+  flex-grow: 1;
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-chooser .pcr-slider {
+  background: linear-gradient(to right, red, #ff0, lime, cyan, blue, #f0f, red);
+}
+
+.merchant-pcr-app[data-theme='merchant'] .pcr-selection .pcr-color-opacity .pcr-slider {
+  background: linear-gradient(to right, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
+  background-size: 100%, 6px;
+}

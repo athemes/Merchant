@@ -1,0 +1,35 @@
+.merchant-product-trust-badge{
+  flex: 1;
+  width: 100%;
+  display: block;
+  margin-top: var(--merchant-margin-top, 20px);
+  margin-bottom: var(--merchant-margin-bottom, 20px);
+  text-align: var(--merchant-align, 'left');
+  border: 1px solid var(--border-color, #e5e5e5);
+  padding: 20px;
+  box-sizing: border-box;
+
+  .merchant-product-trust-badge-image{
+    max-width: var(--merchant-image-width, 300px);
+  }
+
+  img{
+    max-width: 100%;
+  }
+
+  legend{
+    font-size: inherit;
+    font-weight: bold;
+    padding: 0 8px;
+    margin: 0;
+    line-height: 1em;
+    border-top: none;
+    border-bottom: none;
+    color: inherit;
+  }
+}
+
+.merchant-product-trust-badge-image{
+  display: inline-block;
+  vertical-align: top;
+}

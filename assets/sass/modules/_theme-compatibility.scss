@@ -1,0 +1,189 @@
+.merchant-theme-botiga{
+
+  .botiga-add-to-cart-button-layout3{
+
+    .add_to_cart_button:hover,
+    .product_type_grouped:hover,
+    .single_add_to_cart_button:hover{
+      animation: none;
+    }
+  }
+
+  ul.products.columns-4 li.product .button,
+  ul.products.columns-5 li.product .button,
+  ul.products.columns-6 li.product .button,
+  ul.wc-block-grid__products.columns-4 li.product .button,
+  ul.wc-block-grid__products.columns-5 li.product .button,
+  ul.wc-block-grid__products.columns-6 li.product .button{
+    width: 100%;
+  }
+
+  .product{
+    
+    .single_add_to_cart_button.merchant_buy_now_button{
+      margin-left: 0;
+    }
+  }
+}
+
+.merchant-theme-kadence{
+
+  .products{
+
+    .product{
+
+      .product-action-wrap{
+        display: flex;
+        grid-gap: 10px;
+        flex-wrap: wrap;
+      }
+    } 
+  } 
+}
+
+.merchant-theme-blocksy{
+
+  .products{
+
+    .product{
+
+      .ct-woo-card-actions{
+        display: flex;
+        grid-gap: 10px;
+        flex-wrap: wrap;
+      }
+    } 
+  } 
+}
+
+.merchant-theme-zakra{
+
+  .products{
+
+    .product{
+
+      .wp-element-button{
+        margin-right: 10px;
+      }
+    } 
+  } 
+}
+
+.merchant-theme-avada{
+
+  .products{
+
+    .product{
+
+      .product-buttons-container{
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 10px;
+      }
+
+      .merchant-quick-view-open{
+        padding-left: 0;
+      }
+    } 
+  } 
+}
+
+.merchant-theme-oceanwp{
+
+  .products{
+
+    .product{
+      text-align: center;
+
+      form.cart{
+        display: flex;
+        grid-gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      .merchant-quick-view-open{
+        margin: 10px;
+      }
+    }
+  }
+
+  .product{
+
+    .summary{
+
+      form.cart{
+        display: flex;
+        grid-gap: 10px;
+        flex-wrap: wrap;
+
+        div.quantity{
+          margin-right: 0;
+        }
+      }
+
+      .merchant_buy_now_button{
+        margin-left: 0
+      }
+    }
+  }
+}
+
+.merchant-theme-woostify{
+
+  .product{
+    
+    .summary{
+
+      form.cart{
+        display: flex;
+        grid-gap: 10px;
+        flex-wrap: wrap;
+
+        div.quantity{
+          margin-right: 0;
+        }
+      }
+
+      .merchant_buy_now_button{
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.merchant-theme-blocksy{
+
+  .product{
+    
+    .summary{
+
+      .merchant_buy_now_button{
+        margin-left: 0;
+      }
+    }
+  }
+
+  .merchant-quick-view-summary{
+
+    .merchant_buy_now_button{
+      align-self: inherit;
+      margin-left: 0;
+    }
+  }
+}
+
+.merchant-theme-woodmart{
+
+  .products{
+
+    .product{
+
+      .woodmart-add-btn{
+        display: flex;
+        grid-gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  }
+}
