@@ -64,7 +64,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->capability,
 				$this->plugin_slug,
 				array( $this, 'page_dashboard' ),
-				'dashicons-superhero-alt',
+				MERCHANT_URI. 'assets/images/merchant-logo.svg',
 				$this->priority
 			);
 
