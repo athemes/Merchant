@@ -128,8 +128,6 @@ merchant.modules = merchant.modules || {};
 
 	};
 
-	$(document).ready(function() {
-		merchant.modules.ajaxRealTimeSearch.init();
-	});
+	merchant.modules.ajaxRealTimeSearch.init();
 
 }(jQuery));
