@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-06-15 18:53+0000\n"
+"POT-Creation-Date: 2023-06-18 20:08+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -420,7 +420,7 @@ msgid "Custom JS"
 msgstr ""
 
 #: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:17
-msgid "Checkbox text on cart page"
+msgid "Checkbox text on checkbox page"
 msgstr ""
 
 #: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:18
@@ -436,15 +436,15 @@ msgid "The link to your Terms and Conditions page."
 msgstr ""
 
 #: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:33
-msgid "Checkbox warning text on cart page"
+msgid "Checkbox warning text on checkbox page"
 msgstr ""
 
 #: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:34
-msgid "You must read and accept the terms and conditions to cart."
+msgid "You must read and accept the terms and conditions to checkbox."
 msgstr ""
 
 #: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:35
-msgid "The error that will be shown if the user tries to go to cart without accepting your terms and conditions."
+msgid "The error that will be shown if the user tries to go to checkbox without accepting your terms and conditions."
 msgstr ""
 
 #: admin/modules/ajax-real-time-search/admin-page-ajax-real-time-search.php:17
