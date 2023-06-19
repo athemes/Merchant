@@ -37,7 +37,7 @@
 				</strong>
 			</div>
 			<div class="merchant-modules-header-status-box">
-				<span><?php esc_html_e( 'Active Modules' ); ?><i class="merchant-modules-indicator dashicons dashicons-yes-alt"></i></span>
+				<span><?php esc_html_e( 'Active Modules' ); ?></span>
 				<strong><?php echo count( array_filter( get_option( 'merchant-modules', array() ) ) ); ?></strong>
 			</div>
 		</div>
@@ -87,7 +87,7 @@
 								<div class="merchant-modules-list-item-content">
 									<div class="merchant-modules-list-item-title">
 										<?php echo esc_html( $module['title'] ); ?>
-										<i class="merchant-modules-indicator dashicons dashicons-yes-alt"></i>
+										<i class="merchant-modules-indicator"></i>
 									</div>
 									<?php if ( ! empty( $module['desc'] ) ) : ?>
 										<div class="merchant-modules-list-item-desc"><?php echo esc_html( $module['desc']  ); ?></div>
