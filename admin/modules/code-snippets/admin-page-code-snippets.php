@@ -4,49 +4,34 @@
  */
 
 /**
- * CSS
+ * Global Header and Footer
  */
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'CSS', 'merchant' ),
+	'title'  => esc_html__( 'Global Header and Footer', 'merchant' ),
 	'module' => 'code-snippets',
 	'fields' => array(
 
 		array(
-			'id'    => 'custom_css',
+			'id'    => 'header_scripts',
 			'type'  => 'textarea',
-			'title' => esc_html__( 'Custom CSS', 'merchant' ),
-			'class' => 'merchant-code-snippets-textarea',
-		),
-
-	),
-) );
-
-/**
- * Javascript
- */
-Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Javascript', 'merchant' ),
-	'module' => 'code-snippets',
-	'fields' => array(
-
-		array(
-			'id'    => 'custom_js_first',
-			'type'  => 'textarea',
-			'title' => esc_html__( 'Custom JS First - runs at the beginning of Merchant', 'merchant' ),
+			'title' => esc_html__( 'Header', 'merchant' ),
+			'desc'  => esc_html__( 'These scripts will be printed in the <head> section.', 'merchant' ),
 			'class' => 'merchant-code-snippets-textarea',
 		),
 
 		array(
-			'id'    => 'custom_js_last',
+			'id'    => 'body_scripts',
 			'type'  => 'textarea',
-			'title' => esc_html__( 'Custom JS Last - runs at the end of Merchant', 'merchant' ),
+			'title' => esc_html__( 'Body', 'merchant' ),
+			'desc'  => esc_html__( 'These scripts will be printed just below the opening <body> tag.', 'merchant' ),
 			'class' => 'merchant-code-snippets-textarea',
 		),
 
 		array(
-			'id'    => 'custom_js',
+			'id'    => 'footer_scripts',
 			'type'  => 'textarea',
-			'title' => esc_html__( 'Custom JS', 'merchant' ),
+			'title' => esc_html__( 'Footer', 'merchant' ),
+			'desc'  => esc_html__( 'These scripts will be printed above the closing </body> tag.', 'merchant' ),
 			'class' => 'merchant-code-snippets-textarea',
 		),
 

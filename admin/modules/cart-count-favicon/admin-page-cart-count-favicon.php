@@ -25,7 +25,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'position',
 			'type'    => 'select',
-			'title'   => esc_html__( 'The location of the bullet.', 'merchant' ),
+			'title'   => esc_html__( 'Location of the bullet', 'merchant' ),
 			'options' => array(
 				'up-left'    => esc_html__( 'Top Left', 'merchant' ),
 				'up-right'   => esc_html__( 'Top Right', 'merchant' ),

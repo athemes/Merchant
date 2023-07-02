@@ -3,34 +3,37 @@
   grid-gap: 5px;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
   line-height: 1;
   position: fixed;
-  z-index: 999999;
+  z-index: 92;
   bottom: var(--merchant-bottom-offset, 30px);
   opacity: 0;
   visibility: hidden;
   transition: all .2s;
-  color: var(--merchant-icon-color, #ffffff);
-  background-color: var(--merchant-background-color, #212121);
+  color: var(--merchant-text-color, #ffffff);
   padding: var(--merchant-padding, 15px);
   border-radius: var(--merchant-border-radius, 30px);
 
   &:hover{
-    color: var(--merchant-icon-hover-color, #ffffff);
-    background-color: var(--merchant-background-hover-color, #212121);
+    color: var(--merchant-text-hover-color, #ffffff);
   }
 
   span{
-    font-size: .875rem;
+    font-size: var(--merchant-text-size, 18px);
   }
 
   svg{
     width: var(--merchant-icon-size, 18px);
     height: var(--merchant-icon-size, 18px);
-    fill: none;
-    stroke: currentColor;
+    stroke: var(--merchant-icon-color, #ffffff);
     transition: all .2s;
+  }
+
+  &:hover{
+
+    svg{
+      stroke: var(--merchant-icon-hover-color, #ffffff);
+    }
   }
 
   &.merchant-show{
@@ -44,5 +47,21 @@
 
   &.merchant-position-right{
     right: var(--merchant-side-offset, 30px);
+  }
+
+  &.merchant-style-filled{
+    background-color: var(--merchant-background-color, #212121);
+
+    &:hover{
+      background-color: var(--merchant-background-hover-color, #212121);
+    }
+  }
+
+  &.merchant-style-outline{
+    border: var(--merchant-border-size, 2px) solid var(--merchant-border-color, #212121);
+
+    &:hover{
+      border-color: var(--merchant-border-hover-color, #757575);
+    }
   }
 }

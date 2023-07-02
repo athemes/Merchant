@@ -12,21 +12,35 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
-			'id'      => 'button_title',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Button Title', 'merchant' ),
-			'default' => esc_html__( 'Quick View', 'merchant' ),
+			'id'      => 'button_type',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Button Type', 'merchant' ),
+			'options' => array(
+				'text'      => esc_html__( 'Text', 'merchant' ),
+				'icon'      => esc_html__( 'Icon', 'merchant' ),
+				'icon-text' => esc_html__( 'Icon + Text', 'merchant' ),
+			),
+			'default' => 'text',
 		),
 
 		array(
-			'id'       => 'button_type',
-			'type'     => 'select',
-			'title'    => esc_html__( 'Button Type', 'merchant' ),
-			'options'  => array(
-				'text'   => esc_html__( 'Text', 'merchant' ),
-				'button' => esc_html__( 'Button', 'merchant' ),
+			'id'        => 'button_text',
+			'type'      => 'text',
+			'title'     => esc_html__( 'Button Text', 'merchant' ),
+			'default'   => esc_html__( 'Quick View', 'merchant' ),
+			'condition' => array( 'button_type', 'any', 'text|icon-text' ),
+		),
+
+		array(
+			'id'        => 'button_icon',
+			'type'      => 'choices',
+			'title'     => esc_html__( 'Select an icon', 'merchant' ),
+			'options'   => array(
+				'eye'     => '%s/eye.svg',
+				'cart'    => '%s/cart.svg',
 			),
-			'default'  => 'button',
+			'default'   => 'eye',
+			'condition' => array( 'button_type', 'any', 'icon|icon-text' ),
 		),
 
 		array(
@@ -40,6 +54,78 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'   => 'after',
 		),
+
+		array(
+			'id'        => 'icon-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Icon Color', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'button_type', 'any', 'icon|icon-text' ),
+		),
+
+		array(
+			'id'        => 'icon-hover-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Icon Color Hover', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'button_type', 'any', 'icon|icon-text' ),
+		),
+
+		array(
+			'id'        => 'text-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Button Text Color', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'button_type', 'any', 'text|icon-text' ),
+		),
+
+		array(
+			'id'        => 'text-hover-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Button Text Color Hover', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'button_type', 'any', 'text|icon-text' ),
+		),
+
+		array(
+			'id'    => 'border-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button Border Color', 'merchant' ),
+			'default' => '#212121',
+		),
+
+		array(
+			'id'    => 'border-hover-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button Border Color Hover', 'merchant' ),
+			'default' => '#414141',
+		),
+
+		array(
+			'id'    => 'background-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button Background Color', 'merchant' ),
+			'default' => '#212121',
+		),
+
+		array(
+			'id'    => 'background-hover-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button Background Color Hover', 'merchant' ),
+			'default' => '#414141',
+		),
+
+	),
+) );
+
+
+/**
+ * Modal
+ */
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Modal', 'merchant' ),
+	'module' => 'quick-view',
+	'fields' => array(
 
 		array(
       'id'      => 'modal_width',
@@ -64,21 +150,65 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'      => 'modal_overlay_color',
-			'type'    => 'color',
-			'title'   => esc_html__( 'Modal Overlay Color', 'merchant' ),
-			'default' => 'rgba(0, 0, 0, 0.9)',
+			'id'      => 'place_product_image',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Place Product Image', 'merchant' ),
+			'options' => array(
+				'thumbs-at-left'   => esc_html__( 'Thumbs at left', 'merchant' ),
+				'thumbs-at-right'  => esc_html__( 'Thumbs at right', 'merchant' ),
+				'thumbs-at-bottom' => esc_html__( 'Thumbs at bottom', 'merchant' ),
+			),
+			'default' => 'thumbs-at-left',
 		),
 
 		array(
-			'id'      => 'visibility',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Visibility', 'merchant' ),
-			'options' => array(
-				'all'          => esc_html__( 'Show on all devices', 'merchant' ),
-				'desktop-only' => esc_html__( 'Desktop Only', 'merchant' ),
-				'mobile-only'  => esc_html__( 'Mobile Only', 'merchant' ),
+			'id'      => 'zoom_effect',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Zoom Effect on Image', 'merchant' ),
+			'default' => 1,
+		),
+
+		array(
+			'id'       => 'place_product_description',
+			'type'     => 'radio',
+			'title'    => esc_html__( 'Place Product Description', 'merchant' ),
+			'options'  => array(
+				'top'    => esc_html__( 'Top', 'merchant' ),
+				'bottom' => esc_html__( 'Bottom', 'merchant' ),
 			),
+			'default'  => 'top',
+		),
+
+		array(
+			'id'      => 'description_style',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Description Style', 'merchant' ),
+			'options' => array(
+				'full'  => esc_html__( 'Full Description', 'merchant' ),
+				'short' => esc_html__( 'Short Description', 'merchant' ),
+			),
+			'default' => 'full',
+		),
+
+		array(
+			'id'      => 'show_quantity',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show Quantity Selector', 'merchant' ),
+			'default' => 1,
+		),
+
+		array(
+			'id'      => 'sale-price-color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Sale Price Color', 'merchant' ),
+			'default' => '#212121',
+		),
+
+		array(
+			'id'      => 'regular-price-color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Regular Price Color', 'merchant' ),
+			'default' => '#999999',
 		),
 
 	),

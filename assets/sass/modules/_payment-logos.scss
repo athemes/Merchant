@@ -8,11 +8,16 @@
   margin-bottom: var(--merchant-margin-bottom, 20px);
 }
 
+.merchant-payment-logos-title{
+  color: var(--merchant-text-color, #212121);
+  font-size: var(--merchant-font-size, 18px);
+}
+
 .merchant-payment-logos-images{
   display: flex;
   flex-wrap: wrap;
   grid-gap: 5px;
-  justify-content: var(--merchant-align, 'flex-start');
+  justify-content: var(--merchant-align, flex-start);
 
   img{
     max-width: var(--merchant-image-max-width, 100px) !important;

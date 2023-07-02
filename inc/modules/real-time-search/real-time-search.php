@@ -4,8 +4,8 @@ function merchant_content_ajax_search_item( $args ) {
 
 	if( $args['type'] === 'product' ) {
 
-		$desc_type   = Merchant_Admin_Options::get( 'ajax-real-time-search', 'results_description', 'product-post-content' );
-		$desc_length = Merchant_Admin_Options::get( 'ajax-real-time-search', 'results_description_length', 10 );
+		$desc_type   = Merchant_Admin_Options::get( 'real-time-search', 'results_description', 'product-post-content' );
+		$desc_length = Merchant_Admin_Options::get( 'real-time-search', 'results_description_length', 10 );
 
 		$item_post_id   = $args['post_id'];
 		$product        = wc_get_product( $item_post_id );
@@ -56,7 +56,7 @@ function merchant_content_ajax_search_item( $args ) {
 
 function merchant_ajax_search_callback() {
 
-	if ( ! Merchant_Modules::is_module_active( 'ajax-real-time-search' ) ) {
+	if ( ! Merchant_Modules::is_module_active( 'real-time-search' ) ) {
 		return;
 	}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Merchant - Ajax Real Time Search
+ * Merchant - Real Time Search
  */
 
 /**
@@ -8,7 +8,7 @@
  */
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Settings', 'merchant' ),
-	'module' => 'ajax-real-time-search',
+	'module' => 'real-time-search',
 	'fields' => array(
 
 		array(
@@ -19,7 +19,7 @@ Merchant_Admin_Options::create( array(
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,
-			'default' => 15,
+			'default' => 5,
 		),
 
     array(
@@ -30,14 +30,14 @@ Merchant_Admin_Options::create( array(
 			'product-post-content'      => esc_html__( 'Product Description', 'merchant' ),
 			'product-short-description' => esc_html__( 'Product Short Description', 'merchant' )
 			),
-      'default' => 'product-post-content',
+      'default' => 'product-short-description',
 		),
         
 		array(
       'id'      => 'results_description_length',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Results Description Length', 'merchant' ),
-      'desc'    => esc_html__( 'The number of words to show in the results description. Save/publish the changes is required to see this option working in the customizer preview.', 'merchant' ),
+      'desc'    => esc_html__( 'The number of words to show in the description of the results.', 'merchant' ),
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,

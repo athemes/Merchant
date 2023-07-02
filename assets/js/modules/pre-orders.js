@@ -16,13 +16,27 @@ merchant.modules = merchant.modules || {};
 
       $(document).on('show_variation', '.variations_form', function ( event, variation ) {
 
-        var $button = $('.single_add_to_cart_button:not(.merchant_buy_now_button)');
+        var $product = $(this).closest('.product');
+
+        var $button  = $product.find('.single_add_to_cart_button:not(.merchant_buy_now_button)');
+        var $form    = $product.find('.variations_form');
+        var $dateTxt = $product.find('.merchant-pre-orders-date');
 
         if ( ! cachedAddToCartText ) {
           cachedAddToCartText = $button.html();
         }
 
+        if ( $dateTxt.length ) {
+          $dateTxt.remove();
+        }
+
+        $product.removeClass('merchant-pre-ordered-product');
+
         if( variation.is_pre_order == true ) {
+          if ( variation.is_pre_order_date ) {
+            $product.addClass('merchant-pre-ordered-product');
+            $product.find('.woocommerce-variation-add-to-cart').before('<div class="merchant-pre-orders-date">'+ variation.is_pre_order_date +'</div>')
+          }
           $button.html(window.merchant.setting.pre_orders_add_button_title);
         } else {
           $button.html(cachedAddToCartText);
@@ -31,7 +45,19 @@ merchant.modules = merchant.modules || {};
       });
 
       $(document).on('click.wc-variation-form', '.reset_variations', function () {
-        $('.single_add_to_cart_button:not(.merchant_buy_now_button)').html(cachedAddToCartText);
+
+        var $product = $(this).closest('.product');
+
+        var $dateTxt = $product.find('.merchant-pre-orders-date');
+
+        if ( $dateTxt.length ) {
+          $dateTxt.remove();
+        }
+
+        $product.removeClass('merchant-pre-ordered-product');
+
+        $product.find('.single_add_to_cart_button:not(.merchant_buy_now_button)').html(cachedAddToCartText);
+
       });
 
     },

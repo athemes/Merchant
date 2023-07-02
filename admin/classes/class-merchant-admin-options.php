@@ -159,6 +159,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				break;
 
 				case 'checkbox':
+				case 'switcher':
 					return ( $value === '1' ) ? 1 : 0;
 				break;
 
@@ -261,6 +262,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							<span><?php echo esc_html( $settings['label'] ); ?></span>
 						<?php endif; ?>
 					</label>
+				</div>
+			<?php
+
+		}
+
+		/**
+		 * Field: Switcher
+		 */
+		public static function switcher( $settings, $value ) {
+
+			?>
+				<div class="merchant-toggle-switch">
+					<input type="checkbox" id="<?php echo esc_attr( $settings['id'] ); ?>" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="1" <?php checked( $value, 1, true ); ?> class="toggle-switch-checkbox" />
+					<label class="toggle-switch-label" for="<?php echo esc_attr( $settings['id'] ); ?>">
+						<span class="toggle-switch-inner"></span>
+						<span class="toggle-switch-switch"></span>
+					</label>
+					<?php if ( ! empty( $settings['label'] ) ) : ?>
+						<span><?php echo esc_html( $settings['label'] ); ?></span>
+					<?php endif; ?>
 				</div>
 			<?php
 

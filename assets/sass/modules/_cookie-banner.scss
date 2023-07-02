@@ -1,31 +1,37 @@
 .merchant-cookie-banner{
   position: fixed;
-  z-index: 10000000;
   left: 0;
+  right: 0;
   bottom: 0;
   width: 100%;
-  padding: 16px;
   display: none;
-  align-items: baseline;
+
+  &.merchant-show{
+    display: block;
+  }
+}
+
+.merchant-cookie-banner-inner{
+  position: relative;
+  padding: 16px;
+  display: flex;
+  align-items: center;
   justify-content: center;
   box-shadow: rgba(0,0,0,.1) 0 0 9px 1px;
-  color: var(--merchant-cookie-banner-text-color, #ffffff);
-  background-color: var(--merchant-cookie-banner-background, #000000);
+  color: var(--merchant-text-color, #ffffff);
+  background-color: var(--merchant-background, #000000);
+  min-height: var(--merchant-modal-height, 50px);
 
   a{
     margin-left: 2px;
     text-decoration: underline;
-    color: var(--merchant-cookie-banner-link-color, #aeaeae);
+    color: var(--merchant-link-color, #aeaeae);
 
     &:focus,
     &:hover,
     &:visited{
-      color: var(--merchant-cookie-banner-link-color, #aeaeae);
+      color: var(--merchant-link-color, #aeaeae);
     }
-  }
-
-  &.merchant-show{
-    display: flex;
   }
 }
 
@@ -57,10 +63,19 @@
 
 .merchant-cookie-banner-floating{
   bottom: 35px;
-  width: 90%;
-  margin: auto 5%;
-  border-radius: 10px;
-  box-shadow: 1px 3px 8px rgba(0,0,0,.2);
+  z-index: 91;
+
+  .merchant-cookie-banner-inner{
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 1px 3px 8px rgba(0,0,0,.2);
+    width: var(--merchant-modal-width, 750px);
+    max-width: 95%;
+  }
+}
+
+.merchant-cookie-banner-fixed-bottom{
+  z-index: 93;
 }
 
 .merchant-cookie-banner-content{
@@ -78,8 +93,8 @@
   font-weight: bold;
   padding: 6px 20px;
   border-radius: 4px;
-  color: var(--merchant-cookie-banner-button-text-color, #151515);
-  background-color: var(--merchant-cookie-banner-button-background, #dddddd);
+  color: var(--merchant-button-text-color, #151515);
+  background-color: var(--merchant-button-background, #dddddd);
 }
 
 @media (max-width: 768px) {

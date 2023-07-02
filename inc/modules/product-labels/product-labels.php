@@ -1,15 +1,16 @@
 <?php
 
-function merchant_sale_flash() {
+function merchant_product_labels() {
 	
 	global $product;
 
-	if ( ! empty( $product ) && $product->is_on_sale() && Merchant_Modules::is_module_active( 'sale-tags' ) ) {
+	if ( ! empty( $product ) && $product->is_on_sale() && Merchant_Modules::is_module_active( 'product-labels' ) ) {
 
-		$badge_text         = Merchant_Admin_Options::get( 'sale-tags', 'badge_text', esc_html__( 'Sale!', 'merchant' ) );
-		$badge_position     = Merchant_Admin_Options::get( 'sale-tags', 'badge_position', 'left' );
-		$display_percentage = Merchant_Admin_Options::get( 'sale-tags', 'display_percentage', '' );
-		$percentage_text    = Merchant_Admin_Options::get( 'sale-tags', 'percentage_text', '-{value}%' );
+		$label_text         = Merchant_Admin_Options::get( 'product-labels', 'label_text', esc_html__( 'Spring Special', 'merchant' ) );
+		$label_position     = Merchant_Admin_Options::get( 'product-labels', 'label_position', 'top-left' );
+		$label_shape        = Merchant_Admin_Options::get( 'product-labels', 'label_shape', 'square' );
+		$display_percentage = Merchant_Admin_Options::get( 'product-labels', 'display_percentage', '' );
+		$percentage_text    = Merchant_Admin_Options::get( 'product-labels', 'percentage_text', '-{value}%' );
 
 		if ( ! empty( $display_percentage ) ) {
 			
@@ -55,15 +56,15 @@ function merchant_sale_flash() {
 				
 			}
 			
-			$badge_text = str_replace( '{value}', $percentage, $percentage_text );
+			$label_text = str_replace( '{value}', $percentage, $percentage_text );
 			
 		}
 		
-		echo '<span class="merchant-onsale merchant-onsale-'. sanitize_html_class( $badge_position ) .'">'. esc_html( $badge_text ) .'</span>';
+		echo '<span class="merchant-onsale merchant-onsale-'. sanitize_html_class( $label_position ) .' merchant-onsale-shape-'. sanitize_html_class( $label_shape ) .'">'. esc_html( $label_text ) .'</span>';
 
 	}
 	
 }
-add_action( 'woocommerce_before_shop_loop_item_title', 'merchant_sale_flash' );
-add_action( 'woocommerce_product_thumbnails', 'merchant_sale_flash' );
-add_action( 'woostify_product_images_box_end', 'merchant_sale_flash' );
+add_action( 'woocommerce_before_shop_loop_item_title', 'merchant_product_labels' );
+add_action( 'woocommerce_product_thumbnails', 'merchant_product_labels' );
+add_action( 'woostify_product_images_box_end', 'merchant_product_labels' );

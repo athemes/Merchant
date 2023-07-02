@@ -1,446 +1,462 @@
-.merchant-button-shake:hover {
-  -webkit-animation: shakeThatBooty .3s;
-          animation: shakeThatBooty .3s;
-  -webkit-animation-iteration-count: 2;
-          animation-iteration-count: 2;
+.merchant-animated-buttons .merchant-button-flash:hover {
+  -webkit-animation: merchant-flash 1s infinite both;
+          animation: merchant-flash 1s infinite both;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
 }
 
-.merchant-button-pulse:hover {
-  -webkit-animation: pulse 1.5s ease-in-out infinite both;
-          animation: pulse 1.5s ease-in-out infinite both;
-}
-
-.merchant-button-jello-shake:hover {
-  -webkit-animation: jello-shake 1.5s infinite both;
-          animation: jello-shake 1.5s infinite both;
-}
-
-.merchant-button-wobble:hover {
-  -webkit-animation: wobble 1.5s ease-in-out infinite both;
-          animation: wobble 1.5s ease-in-out infinite both;
-}
-
-.merchant-button-vibrate:hover {
-  -webkit-animation: vibrate .3s linear 4 both;
-          animation: vibrate .3s linear 4 both;
-}
-
-.merchant-button-swing:hover {
-  -webkit-animation: swing 2s ease-in-out infinite alternate;
-          animation: swing 2s ease-in-out infinite alternate;
-  -webkit-transform-origin: center -20px;
-          transform-origin: center -20px;
-}
-
-.merchant-button-tada:hover {
-  -webkit-animation: tada 1s infinite both;
-          animation: tada 1s infinite both;
-}
-
-@-webkit-keyframes tada {
-  0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-  10%, 20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-  }
-  30%, 50%, 70%, 90% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-  }
-  40%, 60%, 80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-  }
-  to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-}
-
-@keyframes tada {
-  0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-  10%, 20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-  }
-  30%, 50%, 70%, 90% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-  }
-  40%, 60%, 80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-  }
-  to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-}
-
-@-webkit-keyframes swing {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  20% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
-  }
-  40% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
-  }
-  60% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
-  }
-  80% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
-  }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-}
-
-@keyframes swing {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  20% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
-  }
-  40% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
-  }
-  60% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
-  }
-  80% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
-  }
-  to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-}
-
-@-webkit-keyframes pulse {
-  0% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    -webkit-transform-origin: center center;
-            transform-origin: center center;
-  }
-  10% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.91);
-            transform: scale(0.91);
-  }
-  17% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(0.98);
-            transform: scale(0.98);
-  }
-  33% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.87);
-            transform: scale(0.87);
-  }
-  45% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    -webkit-transform-origin: center center;
-            transform-origin: center center;
-  }
-  10% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.91);
-            transform: scale(0.91);
-  }
-  17% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(0.98);
-            transform: scale(0.98);
-  }
-  33% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.87);
-            transform: scale(0.87);
-  }
-  45% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@-webkit-keyframes jello-shake {
-  0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
-  }
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
-  }
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
-  }
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
-  }
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
-  }
-  to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-}
-
-@keyframes jello-shake {
-  0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
-  }
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
-  }
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
-  }
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
-  }
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
-  }
-  to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
-  }
-}
-
-@-webkit-keyframes wobble {
-  0%, to {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-  }
-  15% {
-    -webkit-transform: translateX(-30px) rotate(-6deg);
-            transform: translateX(-30px) rotate(-6deg);
-  }
-  30% {
-    -webkit-transform: translateX(15px) rotate(6deg);
-            transform: translateX(15px) rotate(6deg);
-  }
-  45% {
-    -webkit-transform: translateX(-15px) rotate(-3.6deg);
-            transform: translateX(-15px) rotate(-3.6deg);
-  }
-  60% {
-    -webkit-transform: translateX(9px) rotate(2.4deg);
-            transform: translateX(9px) rotate(2.4deg);
-  }
-  75% {
-    -webkit-transform: translateX(-6px) rotate(-1.2deg);
-            transform: translateX(-6px) rotate(-1.2deg);
-  }
-}
-
-@keyframes wobble {
-  0%, to {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-  }
-  15% {
-    -webkit-transform: translateX(-30px) rotate(-6deg);
-            transform: translateX(-30px) rotate(-6deg);
-  }
-  30% {
-    -webkit-transform: translateX(15px) rotate(6deg);
-            transform: translateX(15px) rotate(6deg);
-  }
-  45% {
-    -webkit-transform: translateX(-15px) rotate(-3.6deg);
-            transform: translateX(-15px) rotate(-3.6deg);
-  }
-  60% {
-    -webkit-transform: translateX(9px) rotate(2.4deg);
-            transform: translateX(9px) rotate(2.4deg);
-  }
-  75% {
-    -webkit-transform: translateX(-6px) rotate(-1.2deg);
-            transform: translateX(-6px) rotate(-1.2deg);
-  }
-}
-
-@-webkit-keyframes vibrate {
-  0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
-  }
-  20% {
-    -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
-  }
-  40% {
-    -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
-  }
-  60% {
-    -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
-  }
-  80% {
-    -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
-  }
-  to {
-    -webkit-transform: translate(0);
-            transform: translate(0);
-  }
-}
-
-@keyframes vibrate {
-  0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
-  }
-  20% {
-    -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
-  }
-  40% {
-    -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
-  }
-  60% {
-    -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
-  }
-  80% {
-    -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
-  }
-  to {
-    -webkit-transform: translate(0);
-            transform: translate(0);
-  }
-}
-
-@-webkit-keyframes shakeThatBooty {
-  33% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-  67% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-  to {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-}
-
-@keyframes shakeThatBooty {
-  33% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-  67% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-  to {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-}
-
-.merchant-button-zoom-in {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all .1s ease-in;
-  transition: all .1s ease-in;
-}
-
-.merchant-button-zoom-in:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.merchant-button-bounce:hover {
-  -webkit-animation: bounce .3s alternate;
-          animation: bounce .3s alternate;
+.merchant-animated-buttons .merchant-button-bounce:hover {
+  -webkit-animation: merchant-bounce .3s alternate;
+          animation: merchant-bounce .3s alternate;
   -webkit-animation-iteration-count: 4;
           animation-iteration-count: 4;
 }
 
-@-webkit-keyframes bounce {
+.merchant-animated-buttons .merchant-button-zoom-in:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.merchant-animated-buttons .merchant-button-shake:hover {
+  -webkit-animation: merchant-shake .3s;
+          animation: merchant-shake .3s;
+  -webkit-animation-iteration-count: 2;
+          animation-iteration-count: 2;
+}
+
+.merchant-animated-buttons .merchant-button-pulse:hover {
+  -webkit-animation: merchant-pulse 1.5s ease-in-out infinite both;
+          animation: merchant-pulse 1.5s ease-in-out infinite both;
+}
+
+.merchant-animated-buttons .merchant-button-jello-shake:hover {
+  -webkit-animation: merchant-jello-shake 1.5s infinite both;
+          animation: merchant-jello-shake 1.5s infinite both;
+}
+
+.merchant-animated-buttons .merchant-button-wobble:hover {
+  -webkit-animation: merchant-wobble 1.5s ease-in-out infinite both;
+          animation: merchant-wobble 1.5s ease-in-out infinite both;
+}
+
+.merchant-animated-buttons .merchant-button-vibrate:hover {
+  -webkit-animation: merchant-vibrate .3s linear 4 both;
+          animation: merchant-vibrate .3s linear 4 both;
+}
+
+.merchant-animated-buttons .merchant-button-swing:hover {
+  -webkit-animation: merchant-swing 2s ease-in-out infinite alternate;
+          animation: merchant-swing 2s ease-in-out infinite alternate;
+}
+
+.merchant-animated-buttons .merchant-button-tada:hover {
+  -webkit-animation: merchant-tada 1s infinite both;
+          animation: merchant-tada 1s infinite both;
+}
+
+@-webkit-keyframes merchant-flash {
+  0%, 50%, to {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@keyframes merchant-flash {
+  0%, 50%, to {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes merchant-bounce {
   to {
     -webkit-transform: scale(1.2);
             transform: scale(1.2);
   }
 }
 
-@keyframes bounce {
+@keyframes merchant-bounce {
   to {
     -webkit-transform: scale(1.2);
             transform: scale(1.2);
+  }
+}
+
+@-webkit-keyframes merchant-shake {
+  33% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  67% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  to {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+}
+
+@keyframes merchant-shake {
+  33% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  67% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  to {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+}
+
+@-webkit-keyframes merchant-pulse {
+  0% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+  }
+  10% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+  }
+  17% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+  }
+  33% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+  }
+  45% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes merchant-pulse {
+  0% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+  }
+  10% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+  }
+  17% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+  }
+  33% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+  }
+  45% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes merchant-jello-shake {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@keyframes merchant-jello-shake {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@-webkit-keyframes merchant-wobble {
+  0%, to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+
+@keyframes merchant-wobble {
+  0%, to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+
+@-webkit-keyframes merchant-vibrate {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  to {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+
+@keyframes merchant-vibrate {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  to {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+
+@-webkit-keyframes merchant-swing {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  20% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  40% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+  60% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  80% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@keyframes merchant-swing {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  20% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  40% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+  60% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  80% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes merchant-tada {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+  10%, 20% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+  }
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+  }
+  40%, 60%, 80% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+}
+
+@keyframes merchant-tada {
+  0% {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+  }
+  10%, 20% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+  }
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+  }
+  40%, 60%, 80% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+  }
+  to {
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -769,44 +785,350 @@
   display: none;
 }
 
-.merchant-athemes {
-  margin-left: -20px;
+.merchant-top-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 20px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 60px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-bottom: 30px;
-  background-color: #fff;
+  background-color: #FFF;
+  margin: 0 0 30px -20px;
+  padding: 18px 20px;
 }
 
-.merchant-athemes a {
+.merchant-top-bar * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-top-bar * *:before,
+.merchant-top-bar * *:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-top-bar .merchant-top-bar-infos {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 7px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.merchant-top-bar .merchant-top-bar-infos .merchant-top-bar-info-item {
+  position: relative;
+  padding: 0 10px;
+}
+
+.merchant-top-bar .merchant-top-bar-infos .merchant-top-bar-info-item + .merchant-top-bar-info-item:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 17px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  border-left: 1px solid #F0F0F0;
+}
+
+.merchant-top-bar .merchant-version {
+  font-size: 13px;
+  line-height: 13px;
+  color: #97A3B6;
+}
+
+.merchant-top-bar .merchant-version strong {
+  position: relative;
+  top: 1px;
+}
+
+.merchant-top-bar .merchant-version .merchant-badge {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-left: 5px;
+  font-size: 9px;
+  line-height: 10px;
+}
+
+.merchant-top-bar .merchant-notifications {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #DFDFDF;
+  border-radius: 35px;
+}
+
+.merchant-top-bar .merchant-notifications:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-top-bar .merchant-notifications .merchant-notifications-count {
+  position: absolute;
+  top: -8px;
+  right: -7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: #FFF;
+  background-color: #FA1212;
+  border-radius: 35px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.merchant-top-bar .merchant-notifications.read .merchant-notifications-count {
+  display: none;
+}
+
+.merchant-top-bar .merchant-website {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 16px;
   color: #3858E9;
   text-decoration: none;
 }
 
-.merchant-athemes a:focus {
-  outline: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+/* Notifications Sidebar */
+.merchant-notifications-sidebar {
+  position: fixed;
+  top: calc( 32px + 64px);
+  right: 0;
+  width: 100%;
+  max-width: 500px;
+  height: calc( 100vh - 92px);
+  background-color: #FFF;
+  -webkit-box-shadow: -10px 12px 14px rgba(0, 0, 0, 0.05);
+          box-shadow: -10px 12px 14px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+  -webkit-transition: ease transform 300ms, ease opacity 300ms;
+  transition: ease transform 300ms, ease opacity 300ms;
+  z-index: 1000;
+}
+
+.merchant-notifications-sidebar.opened {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.merchant-notifications-sidebar.closing {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  -webkit-transition: ease opacity 300ms;
+  transition: ease opacity 300ms;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-close:hover {
+  opacity: 0.7;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  background-color: #EAEEF2;
+  padding: 20px 22px;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-header .merchant-notifications-sidebar-header-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #FFF;
+  border: 1px solid #EBEDEF;
+  border-radius: 35px;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-header .merchant-notifications-sidebar-header-icon svg {
+  position: relative;
+  top: -2px;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-header .merchant-notifications-sidebar-header-content h3 {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #3858E9;
+  margin: 0;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-header .merchant-notifications-sidebar-header-content p {
+  font-size: 13px;
+  line-height: 18px;
+  color: #757575;
+  margin: 0;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-tabs {
+  position: relative;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-tabs:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: calc( 100% - 40px);
+  border-bottom: 1px solid #F0F0F1;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-tabs + .merchant-notifications-sidebar-body {
+  max-height: calc( 100vh - 232px);
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-body {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc( 100vh - 180px);
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-body::-webkit-scrollbar-track {
+  background: #e2e2e2;
+}
+
+.merchant-notifications-sidebar .merchant-notifications-sidebar-body::-webkit-scrollbar-thumb {
+  background-color: #CCC;
+}
+
+/* Notifications (card) */
+.merchant-notification .merchant-notification-date {
+  display: block;
+  font-size: 13px;
+  line-height: 18px;
+  color: #757575;
+}
+
+.merchant-notification .merchant-notification-date + .merchant-notification-content {
+  margin-top: 20px;
+}
+
+.merchant-notification .changelog-tag {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 18px;
+  color: #FFF;
+  padding: 0px 10px;
+  background-color: #CCC;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.merchant-notification .changelog-tag.changelog-added {
+  background-color: #73B189;
+}
+
+.merchant-notification .changelog-tag.changelog-changed {
+  background-color: #F6CA45;
+}
+
+.merchant-notification .changelog-tag.changelog-fixed {
+  background-color: #967BE3;
+}
+
+.merchant-notification .changelog-description {
+  display: block;
+  font-size: 13px;
+  line-height: 21px;
+  font-weight: 400;
+  color: #757575;
+  margin-top: 5px;
+}
+
+.merchant-notification .merchant-notification-content ul {
+  margin: 0;
+}
+
+.merchant-notification .merchant-notification-content ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #101517;
+}
+
+.merchant-notification .merchant-notification-content ul li + li {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #E7E7E7;
+}
+
+.merchant-notification + .merchant-notification {
+  margin: 20px -20px 0px;
+  padding: 20px 20px 0px;
+  border-top: 1px solid #E7E7E7;
+}
+
+.merchant-wrap {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .merchant-wrap * {
@@ -824,7 +1146,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 40px;
+  grid-gap: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -851,11 +1173,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .merchant-modules-header-heading {
   font-size: 24px;
-  line-height: 1.35em;
+  line-height: 34px;
   font-weight: 500;
   color: #101517;
 }
@@ -903,7 +1228,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 4px;
+  grid-gap: 5px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -933,7 +1258,7 @@
 }
 
 .merchant-modules-header-shortlinks {
-  margin: 0;
+  margin: 20px 0;
   padding: 0;
   list-style: none;
   display: -webkit-box;
@@ -944,19 +1269,23 @@
       -ms-flex-direction: column;
           flex-direction: column;
   border-radius: 4px;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border: 2px solid #F0F0F1;
   background-color: #fff;
   border-radius: 4px;
 }
 
 .merchant-modules-header-shortlinks li {
-  margin: 0 10px;
+  margin: 0 15px;
   border-bottom: 1px solid #EFEFEF;
 }
 
 .merchant-modules-header-shortlinks li:last-child {
   border-bottom: none;
+  margin-bottom: 5px;
+}
+
+.merchant-modules-header-shortlinks li:first-child {
+  margin-top: 5px;
 }
 
 .merchant-modules-header-shortlinks a {
@@ -964,7 +1293,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 7px;
+  grid-gap: 8px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -997,12 +1326,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 25px;
+  grid-gap: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 25px;
+  padding: 20px;
   background-color: #fff;
   -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
           box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
@@ -1012,6 +1341,7 @@
 .merchant-modules-box-heading {
   font-size: 20px;
   font-weight: 500;
+  line-height: 30px;
   color: #101517;
 }
 
@@ -1025,19 +1355,19 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 12px;
+  grid-gap: 10px;
   padding: 20px;
   text-decoration: none;
   border: 2px solid #F0F0F1;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 4px;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
 
 .merchant-modules-list-item:hover {
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 8px 12px 0px rgba(240, 240, 241, 0.7);
+          box-shadow: 0px 8px 12px 0px rgba(240, 240, 241, 0.7);
 }
 
 .merchant-modules-list-item:focus {
@@ -1053,8 +1383,8 @@
 }
 
 .merchant-modules-list-item-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 26px;
   fill: #787C82;
 }
 
@@ -1062,7 +1392,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 10px;
+  grid-gap: 8px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -1076,8 +1406,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  grid-gap: 4px;
+  grid-gap: 5px;
   font-size: 16px;
+  line-height: 26px;
   font-weight: 500;
   color: #101517;
 }
@@ -1091,6 +1422,9 @@
 
 .merchant-modules-list-item-desc {
   color: #757575;
+  font-size: 13px;
+  line-height: 20px;
+  max-width: 300px;
 }
 
 .merchant-module-page {
@@ -1152,16 +1486,44 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.merchant-module-page-header-content {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   grid-gap: 20px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 25px;
-  background-color: #fff;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
+  padding: 30px;
+}
+
+.merchant-module-page-header-placeholder {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 40px 60px 0 60px;
+}
+
+.merchant-module-page-header-placeholder img {
+  max-width: 100%;
+  max-height: 300px;
 }
 
 .merchant-module-page-heading {
@@ -1190,15 +1552,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 10px;
+  grid-gap: 15px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .merchant-module-page-title svg {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   fill: #787C82;
 }
 
@@ -1207,6 +1569,7 @@
   line-height: 28px;
   font-weight: normal;
   color: #757575;
+  max-width: 500px;
 }
 
 .merchant-module-page-actions {
@@ -1753,12 +2116,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 50px;
 }
 
 .merchant-module-page-setting-title {
+  width: 40%;
   margin-top: 10px;
-  width: 300px;
+  padding-right: 50px;
   font-size: 20px;
   font-weight: 500;
   color: #2F2F2F;
@@ -1780,11 +2143,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  width: 100%;
-  padding: 24px;
+  width: 60%;
+  padding: 30px;
   border-radius: 4px;
   border: 2px solid #F0F0F1;
   background-color: #fff;
@@ -1826,7 +2186,7 @@
 .merchant-module-page-setting-field-text input,
 .merchant-module-page-setting-field-number input {
   padding: 12px;
-  line-height: 1em;
+  line-height: 1.3em;
   width: 100%;
   max-width: 100%;
   min-height: auto;
@@ -1897,6 +2257,8 @@
 .merchant-module-page-setting-field-radio input,
 .merchant-module-page-setting-field-radio_alt input,
 .merchant-module-page-setting-field-checkbox input {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   margin: 0;
   width: 20px;
   height: 20px;
@@ -2001,6 +2363,14 @@
   background-color: #3858E9;
 }
 
+.merchant-module-page-setting-field-radio span {
+  opacity: 0.80;
+}
+
+.merchant-module-page-setting-field-radio input[type=radio]:checked + span {
+  opacity: 1;
+}
+
 .merchant-module-page-setting-field-radio_alt div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2035,9 +2405,72 @@
   max-width: 60vw;
 }
 
+.merchant-tag-pre-orders {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 16px;
+}
+
+.merchant-tag-pre-orders a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  padding: 8px 26px;
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  min-width: 145px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #202223;
+  border: 1px solid #C9CCCF;
+  background-color: #fff;
+}
+
+.merchant-tag-pre-orders a:focus, .merchant-tag-pre-orders a:active {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-tag-pre-orders p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  grid-gap: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.merchant-tag-pre-orders p i {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
 .merchant-module-page-setting-field-select select {
   padding: 12px;
-  line-height: 1em;
+  line-height: 1.3em;
   width: 100%;
   max-width: 100%;
   min-height: auto;
@@ -2191,10 +2624,19 @@
   padding: 3px;
 }
 
+.merchant-animated-buttons .merchant-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.merchant-animated-buttons span {
+  width: 100%;
+}
+
 .merchant-module-page-setting-field-range .merchant-range {
   position: relative;
   width: 100%;
-  width: 250px;
+  width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2269,8 +2711,8 @@
 }
 
 .merchant-module-page-setting-field-range input[type="number"] {
-  padding: 10px 25px 10px 10px;
-  line-height: 1em;
+  padding: 12px 25px 12px 10px;
+  line-height: 1.3em;
   width: 100%;
   max-width: 85px;
   min-height: auto;
@@ -2297,7 +2739,7 @@
   padding: 0 10px;
   line-height: 1em;
   width: 100%;
-  max-width: 150px;
+  max-width: 254px;
   min-height: auto;
   border: 1px solid #D6D6D6;
 }
@@ -2558,19 +3000,110 @@
           box-shadow: none;
 }
 
+.merchant-module-page-setting-field-switcher .merchant-toggle-switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.merchant-module-page-setting-field-switcher input {
+  display: none;
+}
+
+.merchant-module-page-setting-field-switcher input:checked + .toggle-switch-label .toggle-switch-inner {
+  margin-left: 0;
+  background: #3858E9;
+}
+
+.merchant-module-page-setting-field-switcher input:checked + .toggle-switch-label .toggle-switch-switch {
+  right: 1px;
+}
+
+.merchant-module-page-setting-field-switcher .toggle-switch {
+  float: right;
+  position: relative;
+  width: 36px;
+  margin-top: 2px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.merchant-module-page-setting-field-switcher .toggle-switch-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 0;
+  margin: 0;
+  width: 36px;
+}
+
+.merchant-module-page-setting-field-switcher .toggle-switch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  background: #c8c8c8;
+  height: 18px;
+}
+
+.merchant-module-page-setting-field-switcher .toggle-switch-switch {
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 3px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 18px;
+  border-radius: 20px;
+  -webkit-transition: all 0.1s ease-in 0s;
+  transition: all 0.1s ease-in 0s;
+}
+
 /* Utils */
 .merchant-height-auto {
   height: auto;
 }
 
 /* Admin Footer Text */
-.merchant-admin-footer-text-link {
+.merchant-admin-page .merchant-admin-footer-text-link {
   display: inline-block;
   padding-right: 5px;
   color: #3858E9;
 }
 
-.merchant-admin-footer-text-link:hover, .merchant-admin-footer-text-link:active {
+.merchant-admin-page .merchant-admin-footer-text-link:hover, .merchant-admin-page .merchant-admin-footer-text-link:active, .merchant-admin-page .merchant-admin-footer-text-link:visited {
+  color: #3858E9;
+}
+
+.merchant-admin-page-module #wpfooter {
+  display: none;
+}
+
+.merchant-admin-page-module #wpbody-content {
+  padding-bottom: 30px;
+}
+
+.merchant-module-footer-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 5px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  margin-top: 37px;
+}
+
+.merchant-module-footer-text i {
   color: #3858E9;
 }
 
@@ -2586,6 +3119,9 @@
             flex-direction: column;
     grid-gap: 20px;
   }
+  .merchant-modules-header-shortlinks {
+    margin: 0;
+  }
   .merchant-modules-header {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -2593,11 +3129,17 @@
             flex-direction: column;
     grid-gap: 20px;
   }
-  .merchant-modules-header-image {
+  .merchant-module-page-header-content {
+    width: 100%;
+  }
+  .merchant-module-page-desc {
+    max-width: none;
+  }
+  .merchant-module-page-header-placeholder {
     display: none;
   }
-  .merchant-modules-panel {
-    grid-gap: 20px;
+  .merchant-modules-header-image {
+    display: none;
   }
   .merchant-modules-list {
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -2611,5 +3153,9 @@
         -ms-flex-direction: column;
             flex-direction: column;
     grid-gap: 20px;
+  }
+  .merchant-module-page-setting-title,
+  .merchant-module-page-setting-fields {
+    width: 100%;
   }
 }

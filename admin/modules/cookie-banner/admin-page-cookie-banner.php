@@ -4,15 +4,15 @@
  */
 
 /**
- * General and Design settings
+ * Settings
  */
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'General and Design settings', 'merchant' ),
+	'title'  => esc_html__( 'Settings', 'merchant' ),
 	'module' => 'cookie-banner',
 	'fields' => array(
 
 		array(
-			'id'             => 'banner_theme',
+			'id'             => 'theme',
 			'type'           => 'select',
 			'title'          => esc_html__( 'Theme', 'merchant' ),
 			'options'        => array(
@@ -23,77 +23,31 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'      => 'background_color',
-			'type'    => 'color',
-			'title'   => esc_html__( 'Cookie banner background color', 'merchant' ),
-			'default' => '#000000',
-		),
-
-		array(
-			'id'      => 'text_color',
-			'type'    => 'color',
-			'title'   => esc_html__( 'Cookie banner text color', 'merchant' ),
-			'default' => '#ffffff',
-		),
-
-		array(
-			'id'      => 'link_color',
-			'type'    => 'color',
-			'title'   => esc_html__( 'Cookie banner link color', 'merchant' ),
-			'default' => '#aeaeae',
-		),
-
-		array(
-			'id'      => 'button_background_color',
-			'type'    => 'color',
-			'title'   => esc_html__( '"Accept" button background color', 'merchant' ),
-			'default' => '#dddddd',
-		),
-
-		array(
-			'id'      => 'button_text_color',
-			'type'    => 'color',
-			'title'   => esc_html__( '"Accept" button text color', 'merchant' ),
-			'default' => '#151515',
-		),
-
-		array(
-			'id'      => 'learn_more_text',
+			'id'      => 'bar_text',
 			'type'    => 'text',
-			'title'   => esc_html__( '"Learn More"', 'merchant' ),
+			'title'   => esc_html__( 'Bar Text', 'merchant' ),
+			'default' => esc_html__( '🍪 We\'re using cookies to give you the best experience on our site.', 'merchant' ),
+		),
+
+		array(
+			'id'      => 'privacy_policy_text',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Privacy Policy Text', 'merchant' ),
+			'desc'    => esc_html__( 'The error will be shown if the user tries to go to checkout without accepting terms & conditions.', 'merchant' ),
 			'default' => esc_html__( 'Learn More', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'privacy_policy_url',
 			'type'    => 'text',
-			'title'   => esc_html__( 'URL of your Privacy Policy', 'merchant' ),
-			'desc'    => esc_html__( 'Every site needs to have a privacy policy. Until you add a link to that page, the "Learn more" message will not be shown.', 'merchant' ),
+			'title'   => esc_html__( 'Privacy Policy URL', 'merchant' ),
 			'default' => get_privacy_policy_url(),
 		),
 
-	),
-) );
-
-/**
- * Cookie Banner
- */
-Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Cookie Banner', 'merchant' ),
-	'module' => 'cookie-banner',
-	'fields' => array(
-
 		array(
-			'id'      => 'banner_text',
+			'id'      => 'button_text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Text on cookie banner', 'merchant' ),
-			'default' => esc_html__( 'We use cookies to improve your experience and track website usage.', 'merchant' ),
-		),
-
-		array(
-			'id'      => 'accept_text',
-			'type'    => 'text',
-			'title'   => esc_html__( '"I Accept"', 'merchant' ),
+			'title'   => esc_html__( 'Button Text', 'merchant' ),
 			'default' => esc_html__( 'I Understand', 'merchant' ),
 		),
 
@@ -106,13 +60,78 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'close_button',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Close X Button', 'merchant' ),
-			'options' => array(
-				'show'  => esc_html__( 'Show Button', 'merchant' ),
-				'hide'  => esc_html__( 'Hide Button', 'merchant' ),
-			),
-			'default' => 'hide',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show Close ‘x’ Button', 'merchant' ),
+			'default' => 1,
+		),
+
+	),
+) );
+
+/**
+ * Design
+ */
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Design', 'merchant' ),
+	'module' => 'cookie-banner',
+	'fields' => array(
+
+		array(
+			'id'        => 'modal_width',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Modal Width', 'merchant' ),
+			'min'       => 1,
+			'max'       => 2000,
+			'step'      => 1,
+			'default'   => 750,
+			'unit'      => 'px',
+			'condition' => array( 'theme', '==', 'floating' ),
+		),
+
+		array(
+			'id'      => 'modal_height',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Modal Height', 'merchant' ),
+			'min'     => 1,
+			'max'     => 1000,
+			'step'    => 1,
+			'default' => 80,
+			'unit'    => 'px',
+		),
+
+		array(
+			'id'      => 'background_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Modal Background Color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'text_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Text Color', 'merchant' ),
+			'default' => '#ffffff',
+		),
+
+		array(
+			'id'      => 'link_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Link Color', 'merchant' ),
+			'default' => '#aeaeae',
+		),
+
+		array(
+			'id'      => 'button_background_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Button Background Color', 'merchant' ),
+			'default' => '#dddddd',
+		),
+
+		array(
+			'id'      => 'button_text_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Button Text Color', 'merchant' ),
+			'default' => '#151515',
 		),
 
 	),

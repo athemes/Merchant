@@ -4,13 +4,13 @@
 (function ($, window, document, undefined) {
   'use strict';
 
-  var MerchantSave = MerchantSave || {};
+  var merchant = merchant || {};
   $(document).ready(function () {
     $('.merchant-module-page-setting-field').each(function () {
       var $field = $(this);
       if ($field.data('condition') && $field.data('condition').length) {
         var condition = $field.data('condition');
-        var $target = $('input[name="merchant[' + condition[0] + ']"]');
+        var $target = $('input[name="merchant[' + condition[0] + ']"],select[name="merchant[' + condition[0] + ']"]');
         if ($target.length) {
           $target.on('change merchant.change', function (e) {
             var $element = $(this);
@@ -21,6 +21,19 @@
                   if ($element.is(':checked') && $element.val() == condition[2]) {
                     passed = true;
                   }
+                }
+                if ($element.is('select') && $element.val() == condition[2]) {
+                  passed = true;
+                }
+                break;
+              case 'any':
+                if ($element.attr('type') === 'radio' || $element.attr('type') === 'checkbox') {
+                  if ($element.is(':checked') && condition[2].split('|').includes($element.val())) {
+                    passed = true;
+                  }
+                }
+                if ($element.is('select') && condition[2].split('|').includes($element.val())) {
+                  passed = true;
                 }
                 break;
             }
@@ -39,10 +52,10 @@
     var $ajaxHeader = $('.merchant-module-page-ajax-header');
     var $ajaxSaveBtn = $('.merchant-module-save-button');
     $('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea)', function () {
-      if (!MerchantSave.show_save) {
+      if (!merchant.show_save) {
         $ajaxHeader.addClass('merchant-show');
         $ajaxHeader.removeClass('merchant-saving');
-        MerchantSave.show_save = true;
+        merchant.show_save = true;
       }
     });
     $ajaxForm.ajaxForm({
@@ -51,7 +64,7 @@
       },
       success: function success() {
         $ajaxHeader.removeClass('merchant-show');
-        MerchantSave.show_save = false;
+        merchant.show_save = false;
       }
     });
     $('.merchant-module-question-answer-button').on('click', function (e) {
@@ -332,4 +345,72 @@
       });
     });
   });
+  $('.merchant-animated-buttons').each(function () {
+    var $button = $(this).find('label');
+    var $demo = $('.merchant-animation-demo');
+    var animation;
+    var animationHover;
+    $button.on('click', function () {
+      $demo.removeClass('merchant-animation-' + animation);
+      $demo.removeClass('merchant-animation-' + animationHover);
+      animation = $(this).find('input').attr('value');
+      setTimeout(function () {
+        $demo.addClass('merchant-animation-' + animation);
+      }, 100);
+      setTimeout(function () {
+        $demo.removeClass('merchant-animation-' + animation);
+      }, 1000);
+    });
+    $button.mouseover(function () {
+      $demo.removeClass('merchant-animation-' + animation);
+      animationHover = $(this).find('input').attr('value');
+      $demo.addClass('merchant-animation-' + animationHover);
+    }).mouseout(function () {
+      $demo.removeClass('merchant-animation-' + animationHover);
+    });
+  });
+
+  // Notifications Sidebar
+  var $notificationsSidebar = $('.merchant-notifications-sidebar');
+  if ($notificationsSidebar.length) {
+    var $notifications = $('.merchant-notifications');
+    $notifications.on('click', function (e) {
+      e.preventDefault();
+      var $notification = $(this);
+      var latestNotificationDate = $notificationsSidebar.find('.merchant-notification:first-child .merchant-notification-date').data('raw-date');
+      $notificationsSidebar.toggleClass('opened');
+      if (!$notification.hasClass('read')) {
+        $.post(window.merchant.ajax_url, {
+          action: 'merchant_notifications_read',
+          nonce: window.merchant.nonce,
+          latest_notification_date: latestNotificationDate
+        }, function (response) {
+          if (response.success) {
+            setTimeout(function () {
+              $notification.addClass('read');
+            }, 2000);
+          }
+        });
+      }
+    });
+    $(window).on('scroll', function () {
+      if (window.pageYOffset > 60) {
+        $notificationsSidebar.addClass('closing');
+        setTimeout(function () {
+          $notificationsSidebar.removeClass('opened');
+          $notificationsSidebar.removeClass('closing');
+        }, 300);
+      }
+    });
+
+    // Close Sidebar
+    $('.merchant-notifications-sidebar-close').on('click', function (e) {
+      e.preventDefault();
+      $notificationsSidebar.addClass('closing');
+      setTimeout(function () {
+        $notificationsSidebar.removeClass('opened');
+        $notificationsSidebar.removeClass('closing');
+      }, 300);
+    });
+  }
 })(jQuery, window, document);

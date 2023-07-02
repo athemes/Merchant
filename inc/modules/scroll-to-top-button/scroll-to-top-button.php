@@ -4,15 +4,17 @@ function merchant_scroll_to_top_buttton() {
 
 	if ( Merchant_Modules::is_module_active( 'scroll-to-top-button' ) ) {
 
+		$style = Merchant_Option::get( 'scroll-to-top-button', 'style', 'filled' );
+
 		$type = Merchant_Option::get( 'scroll-to-top-button', 'type', 'icon' );
 
 		$position = Merchant_Option::get( 'scroll-to-top-button', 'position', 'right' );
 	
 		$visibility = Merchant_Admin_Options::get( 'scroll-to-top-button', 'visibility', 'all' );
 
-		echo '<div class="merchant-scroll-to-top-button merchant-position-'. esc_attr( $position ) .' merchant-visibility-'. esc_attr( $visibility ) .'">';
+		echo '<div class="merchant-scroll-to-top-button merchant-position-'. esc_attr( $position ) .' merchant-style-'. esc_attr( $style ) .' merchant-visibility-'. esc_attr( $visibility ) .'">';
 
-			if ( $type === 'text+icon' ) {
+			if ( $type === 'text-icon' ) {
 
 				$text = Merchant_Option::get( 'scroll-to-top-button', 'text', 'Back to top' );
 

@@ -46,19 +46,24 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		 */
 		public function output_css() {
 
-			$css    = '';
-			$css768 = '';
+			$css = '';
 
-			// Scroll To Top Button Styles
+			// Scroll To Top Button
 			if ( Merchant_Modules::is_module_active( 'scroll-to-top-button' ) ) {
 
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'icon-color', '#ffffff', '.merchant-scroll-to-top-button', '--merchant-icon-color' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'icon-hover-color', '#ffffff', '.merchant-scroll-to-top-button', '--merchant-icon-hover-color' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'text-color', '#ffffff', '.merchant-scroll-to-top-button', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'text-hover-color', '#ffffff', '.merchant-scroll-to-top-button', '--merchant-text-hover-color' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'border-color', '#212121', '.merchant-scroll-to-top-button', '--merchant-border-color' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'border-hover-color', '#757575', '.merchant-scroll-to-top-button', '--merchant-border-hover-color' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'background-color', '#212121', '.merchant-scroll-to-top-button', '--merchant-background-color' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'background-hover-color', '#757575', '.merchant-scroll-to-top-button', '--merchant-background-hover-color' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'border-radius', 30, '.merchant-scroll-to-top-button', '--merchant-border-radius', 'px' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'padding', 15, '.merchant-scroll-to-top-button', '--merchant-padding', 'px' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'text-size', 18, '.merchant-scroll-to-top-button', '--merchant-text-size', 'px' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'icon-size', 18, '.merchant-scroll-to-top-button', '--merchant-icon-size', 'px' );
+				$css .= $this->get_variable_css( 'scroll-to-top-button', 'border-size', 2, '.merchant-scroll-to-top-button', '--merchant-border-size', 'px' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'side-offset', 30, '.merchant-scroll-to-top-button', '--merchant-side-offset', 'px' );
 				$css .= $this->get_variable_css( 'scroll-to-top-button', 'bottom-offset', 30, '.merchant-scroll-to-top-button', '--merchant-bottom-offset', 'px' );
 
@@ -73,27 +78,31 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			// Animated Add to Cart
 			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
 
-				$animation = $this->get_option( 'animated-add-to-cart', 'animation', 'bounce' );
+				$animation = $this->get_option( 'animated-add-to-cart', 'animation', 'flash' );
 
 				$css .= '.add_to_cart_button:not(.merchant_buy_now_button),';
 				$css .= '.product_type_grouped:not(.merchant_buy_now_button){';
 				$css .= 'transition: all .3s ease-in;';
 				$css .= '}';
 
-				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'every-seconds' );
+				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
 
-				if ( in_array( $trigger, array( 'on-hover', 'on-hover-seconds' ) ) ) {
+				if ( $trigger === 'on-mouse-hover' ) {
 					$css .= '.add_to_cart_button:not(.merchant_buy_now_button):hover,';
 					$css .= '.product_type_grouped:not(.merchant_buy_now_button):hover,';
 					$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button):hover,';
 				}
-
 
 				$css .= '.add_to_cart_button:not(.merchant_buy_now_button).merchant-active,';
 				$css .= '.product_type_grouped:not(.merchant_buy_now_button).merchant-active,';
 				$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button).merchant-active{';
 
 				switch ( $animation ) {
+
+					case 'flash':
+						$css .= 'animation: merchant-flash 1s infinite both;';
+						$css .= 'animation-iteration-count: 1;';
+					break;
 
 					case 'bounce':
 						$css .= 'animation: merchant-bounce .3s alternate;';
@@ -139,79 +148,108 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			}
 
+			// Buy Now
+			if ( Merchant_Modules::is_module_active( 'buy-now' ) ) {
+
+				$css .= $this->get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-hover-color' );
+				$css .= $this->get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant_buy_now_button', '--merchant-border-color' );
+				$css .= $this->get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-border-hover-color' );
+				$css .= $this->get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant_buy_now_button', '--merchant-background-color' );
+				$css .= $this->get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-background-hover-color' );
+				
+			}
+
+			// Pre Orders
+			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
+
+				$css .= $this->get_variable_css( 'pre-orders', 'text-color', '#ffffff', '.merchant-pre-ordered-product', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'pre-orders', 'text-hover-color', '#ffffff', '.merchant-pre-ordered-product', '--merchant-text-hover-color' );
+				$css .= $this->get_variable_css( 'pre-orders', 'border-color', '#212121', '.merchant-pre-ordered-product', '--merchant-border-color' );
+				$css .= $this->get_variable_css( 'pre-orders', 'border-hover-color', '#414141', '.merchant-pre-ordered-product', '--merchant-border-hover-color' );
+				$css .= $this->get_variable_css( 'pre-orders', 'background-color', '#212121', '.merchant-pre-ordered-product', '--merchant-background-color' );
+				$css .= $this->get_variable_css( 'pre-orders', 'background-hover-color', '#414141', '.merchant-pre-ordered-product', '--merchant-background-hover-color' );
+				
+			}
+
 			// Payment Logos
 			if ( Merchant_Modules::is_module_active( 'payment-logos' ) ) {
 
-				$css .= $this->get_variable_css( 'payment-logos', 'margin-top', '20', '.merchant-payment-logos', '--merchant-margin-top', 'px' );
-				$css .= $this->get_variable_css( 'payment-logos', 'margin-bottom', '20', '.merchant-payment-logos', '--merchant-margin-bottom', 'px' );
+				$css .= $this->get_variable_css( 'payment-logos', 'font-size', 18, '.merchant-payment-logos', '--merchant-font-size', 'px' );
+				$css .= $this->get_variable_css( 'payment-logos', 'text-color', '#212121', '.merchant-payment-logos', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'payment-logos', 'margin-top', 20, '.merchant-payment-logos', '--merchant-margin-top', 'px' );
+				$css .= $this->get_variable_css( 'payment-logos', 'margin-bottom', 20, '.merchant-payment-logos', '--merchant-margin-bottom', 'px' );
 				$css .= $this->get_variable_css( 'payment-logos', 'align', 'flex-start', '.merchant-payment-logos', '--merchant-align' );
 				$css .= $this->get_variable_css( 'payment-logos', 'image-max-width', 100, '.merchant-payment-logos', '--merchant-image-max-width', 'px' );
 				$css .= $this->get_variable_css( 'payment-logos', 'image-max-height', 100, '.merchant-payment-logos', '--merchant-image-max-height', 'px' );
 
 			}
 
-			// Product Trust Badge
-			if ( Merchant_Modules::is_module_active( 'product-trust-badge' ) ) {
+			// Trust Badges
+			if ( Merchant_Modules::is_module_active( 'trust-badges' ) ) {
 
-				$css .= $this->get_variable_css( 'product-trust-badge', 'margin-top', '20', '.merchant-product-trust-badge', '--merchant-margin-top', 'px' );
-				$css .= $this->get_variable_css( 'product-trust-badge', 'margin-bottom', '20', '.merchant-product-trust-badge', '--merchant-margin-bottom', 'px' );
-				$css .= $this->get_variable_css( 'product-trust-badge', 'image-width', '300', '.merchant-product-trust-badge', '--merchant-image-width', 'px' );
-				$css .= $this->get_variable_css( 'product-trust-badge', 'align', 'flex-start', '.merchant-product-trust-badge', '--merchant-align' );
-				$css .= $this->get_variable_css( 'product-trust-badge', 'border-color', '#e5e5e5', '.merchant-product-trust-badge', '--border-color' );
+				$css .= $this->get_variable_css( 'trust-badges', 'font-size', 18, '.merchant-trust-badges', '--merchant-font-size', 'px' );
+				$css .= $this->get_variable_css( 'trust-badges', 'text-color', '#212121', '.merchant-trust-badges', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'trust-badges', 'border-color', '#e5e5e5', '.merchant-trust-badges', '--merchant-border-color' );
+				$css .= $this->get_variable_css( 'trust-badges', 'margin-top', 20, '.merchant-trust-badges', '--merchant-margin-top', 'px' );
+				$css .= $this->get_variable_css( 'trust-badges', 'margin-bottom', 20, '.merchant-trust-badges', '--merchant-margin-bottom', 'px' );
+				$css .= $this->get_variable_css( 'trust-badges', 'align', 'flex-start', '.merchant-trust-badges', '--merchant-align' );
+				$css .= $this->get_variable_css( 'trust-badges', 'image-max-width', 100, '.merchant-trust-badges', '--merchant-image-max-width', 'px' );
+				$css .= $this->get_variable_css( 'trust-badges', 'image-max-height', 100, '.merchant-trust-badges', '--merchant-image-max-height', 'px' );
 
 			}
 
-			// Sale Tags
-			if ( Merchant_Modules::is_module_active( 'sale-tags' ) ) {
+			// Product Labels
+			if ( Merchant_Modules::is_module_active( 'product-labels' ) ) {
 
-				$css .= $this->get_variable_css( 'sale-tags', 'text_color', '#ffffff', '.merchant-onsale', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'sale-tags', 'background_color', '#212121', '.merchant-onsale', '--merchant-background-color' );
-				$css .= $this->get_variable_css( 'sale-tags', 'top-offset', 10, '.merchant-onsale', '--merchant-top-offset', 'px' );
-				$css .= $this->get_variable_css( 'sale-tags', 'side-offset', 10, '.merchant-onsale', '--merchant-side-offset', 'px' );
-				$css .= $this->get_variable_css( 'sale-tags', 'border-radius', 0, '.merchant-onsale', '--merchant-border-radius', 'px' );
-				$css .= $this->get_variable_css( 'sale-tags', 'font-size', 14, '.merchant-onsale', '--merchant-font-size', 'px' );
-
-				$css .= $this->get_variable_css( 'sale-tags', 'tb-spacing', 5, '.merchant-onsale', '--merchant-tb-spacing', 'px' );
-				$css .= $this->get_variable_css( 'sale-tags', 'lr-spacing', 20, '.merchant-onsale', '--merchant-lr-spacing', 'px' );
-
-				// Mobile
-				$css768 .= $this->get_variable_css( 'sale-tags', 'font-size-768', 16, '.merchant-onsale', '--merchant-font-size', 'px' );
+				$css .= $this->get_variable_css( 'product-labels', 'label_text_transform', 'uppercase', '.merchant-onsale', '--merchant-text-transform' );
+				$css .= $this->get_variable_css( 'product-labels', 'padding', 8, '.merchant-onsale', '--merchant-padding', 'px' );
+				$css .= $this->get_variable_css( 'product-labels', 'font-size', 14, '.merchant-onsale', '--merchant-font-size', 'px' );
+				$css .= $this->get_variable_css( 'product-labels', 'text_color', '#ffffff', '.merchant-onsale', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'product-labels', 'background_color', '#212121', '.merchant-onsale', '--merchant-background-color' );
 
 				$css .= '.woocommerce .ast-onsale-card,';
 				$css .= '.woocommerce .onsale{ display: none !important; }';
 
 			}
 
-			if ( ! empty( $css768 ) ) {
-				$css .= '@media (max-width: 768px) {';
-				$css .= $css768;
-				$css .= '}';
-			}
-
 			// Quick View
 			if ( Merchant_Modules::is_module_active( 'quick-view' ) ) {
 
+
+				$css .= $this->get_variable_css( 'quick-view', 'icon-color', '#ffffff', '.merchant-quick-view-open', '--merchant-icon-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'icon-hover-color', '#ffffff', '.merchant-quick-view-open', '--merchant-icon-hover-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'text-color', '#ffffff', '.merchant-quick-view-open', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'text-hover-color', '#ffffff', '.merchant-quick-view-open', '--merchant-text-hover-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'border-color', '#212121', '.merchant-quick-view-open', '--merchant-border-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'border-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-border-hover-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'background-color', '#212121', '.merchant-quick-view-open', '--merchant-background-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'background-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-background-hover-color' );
+				
 				$css .= $this->get_variable_css( 'quick-view', 'modal_width', 1000, '.merchant-quick-view-modal', '--merchant-quick-view-modal-width', 'px' );
 				$css .= $this->get_variable_css( 'quick-view', 'modal_height', 500, '.merchant-quick-view-modal', '--merchant-quick-view-modal-height', 'px' );
-				$css .= $this->get_variable_css( 'quick-view', 'modal_overlay_color', 'rgba(0, 0, 0, 0.9)', '.merchant-quick-view-modal', '--merchant-quick-view-modal-overlay-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'sale-price-color', '#212121', '.merchant-quick-view-modal', '--merchant-sale-price-color' );
+				$css .= $this->get_variable_css( 'quick-view', 'regular-price-color', '#414141', '.merchant-quick-view-modal', '--merchant-regular-price-color' );
 
 			}
 
 			// Cookie Banner
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 
-				$css .= $this->get_variable_css( 'cookie-banner', 'background_color', '#000000', '.merchant-cookie-banner', '--merchant-cookie-banner-background' );
-				$css .= $this->get_variable_css( 'cookie-banner', 'text_color', '#ffffff', '.merchant-cookie-banner', '--merchant-cookie-banner-text-color' );
-				$css .= $this->get_variable_css( 'cookie-banner', 'link_color', '#aeaeae', '.merchant-cookie-banner', '--merchant-cookie-banner-link-color' );
-				$css .= $this->get_variable_css( 'cookie-banner', 'button_background_color', '#dddddd', '.merchant-cookie-banner', '--merchant-cookie-banner-button-background' );
-				$css .= $this->get_variable_css( 'cookie-banner', 'button_text_color', '#222222', '.merchant-cookie-banner', '--merchant-cookie-banner-button-text-color' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'modal_width', 750, '.merchant-cookie-banner', '--merchant-modal-width', 'px' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'modal_height', 50, '.merchant-cookie-banner', '--merchant-modal-height', 'px' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'background_color', '#000000', '.merchant-cookie-banner', '--merchant-background' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'text_color', '#ffffff', '.merchant-cookie-banner', '--merchant-text-color' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'link_color', '#aeaeae', '.merchant-cookie-banner', '--merchant-link-color' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'button_background_color', '#dddddd', '.merchant-cookie-banner', '--merchant-button-background' );
+				$css .= $this->get_variable_css( 'cookie-banner', 'button_text_color', '#222222', '.merchant-cookie-banner', '--merchant-button-text-color' );
 
 			}
 
-			// Ajax Real Time Search
-			if ( Merchant_Modules::is_module_active( 'ajax-real-time-search' ) ) {
+			// Real Time Search
+			if ( Merchant_Modules::is_module_active( 'real-time-search' ) ) {
 
-				$css .= $this->get_variable_css( 'ajax-real-time-search', 'results_box_width', 500, '.merchant-ajax-search-wrapper', '--merchant-results-box-width', 'px' );
+				$css .= $this->get_variable_css( 'real-time-search', 'results_box_width', 500, '.merchant-ajax-search-wrapper', '--merchant-results-box-width', 'px' );
 
 			}
 
@@ -237,11 +275,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			$value = $this->get_option( $module, $setting, $default );
 
-			if ( $setting === 'font-size-768' ) {
-				$value = 10;
-			}
-
-			if ( $value === '' || $value === NULL || $value == $default ) {
+			if ( $value === '' || $value === NULL ) {
 				return '';
 			}
 

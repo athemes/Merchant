@@ -30,7 +30,8 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );
-			add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ) );
+			add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ), 999 );
+			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ), 999 );
 
 		}
 
@@ -66,7 +67,8 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 				wp_enqueue_script( 'merchant-admin', MERCHANT_URI .'assets/js/admin/admin.min.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-core', 'wp-util' ), MERCHANT_VERSION, true );
 
 				wp_localize_script( 'merchant-admin', 'merchant', array(
-					'nonce' => wp_create_nonce( 'merchant' ),
+					'nonce'    => wp_create_nonce( 'merchant' ),
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
 				) );
 
 			}
@@ -93,17 +95,53 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function add_admin_footer_text( $text ) {
 
-			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 
-				$text  = '';
-				$text .= sprintf( '<a href="https://athemes.com/" target="_blank" class="merchant-admin-footer-text-link">%s</a>', esc_html__( 'Join our community', 'merchant' ) );
-				$text .= esc_html__( 'to discuss about the product and ask for support or help the community.', 'merchant' );
+				if ( ! empty( $module ) ) {
+
+					$text = '';
+					$text = '';
+
+				} else {
+
+				  $text  = '';
+					$text .= sprintf( '<a href="https://athemes.com/" target="_blank" class="merchant-admin-footer-text-link">%s</a>', esc_html__( 'Join our community', 'merchant' ) );
+					$text .= esc_html__( 'to discuss about the product and ask for support or help the community.', 'merchant' );
+
+				}
 
 			}
 
 			return $text;
+
+		}
+
+		/**
+		 * Add admin body class.
+		 */
+		public function add_admin_body_class( $classes ) {
+
+			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+
+			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
+
+				if ( ! empty( $module ) ) {
+
+					$classes .= ' merchant-admin-page-module';
+
+				} else {
+
+					$classes .= ' merchant-admin-page';
+
+				}
+
+			}
+
+			return $classes;
 
 		}
 

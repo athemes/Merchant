@@ -18,10 +18,34 @@
     width: 100%;
   }
 
+  .products{
+
+    .product{
+
+      a.merchant_buy_now_button{
+        display: inline-block;
+      }
+    }
+  }
+
   .product{
     
     .single_add_to_cart_button.merchant_buy_now_button{
       margin-left: 0;
+    }
+
+    .button-layout2 + .merchant_buy_now_button{
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .botiga-sc-payment-methods{
+
+    + #merchant_agree_to_terms_field{
+      margin-top: 20px;
+      margin-bottom: 0;
     }
   }
 }

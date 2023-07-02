@@ -13,22 +13,13 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'trigger',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Trigger Animation', 'merchant' ),
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Activate this animation', 'merchant' ),
 			'options' => array(
-				''                 => esc_html__( 'Select an option', 'merchant' ),
-				'on-hover-seconds' => esc_html__( 'On hover and every few seconds', 'merchant' ),
-				'on-hover'         => esc_html__( 'On hover', 'merchant' ),
-				'every-seconds'    => esc_html__( 'Every few seconds', 'merchant' ),
+				'on-mouse-hover' => esc_html__( 'On mouse hover', 'merchant' ),
+				'on-page-load'   => esc_html__( 'On page load', 'merchant' ),
 			),
-			'default' => 'every-seconds'
-		),
-
-		array(
-			'id'      => 'trigger_delay',
-			'type'    => 'number',
-			'title'   => esc_html__( 'Delay before playing animation (seconds)', 'merchant' ),
-			'default' => 10
+			'default' => 'on-mouse-hover'
 		),
 
 	),
@@ -46,7 +37,10 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'animation',
 			'type'    => 'buttons_alt',
 			'title'   => esc_html__( 'Animation Style', 'merchant' ),
+			'class'   => 'merchant-animated-buttons',
+			'desc'    => esc_html__( 'Move your mouse over each option to see the animations. Click on one of the buttons to select that animation.', 'merchant' ),
 			'options' => array(
+				'flash'       => 'Flash',
 				'bounce'      => 'Bounce',
 				'zoom-in'     => 'Zoom in',
 				'shake'       => 'Shake',
@@ -57,7 +51,7 @@ Merchant_Admin_Options::create( array(
 				'swing'       => 'Swing',
 				'tada'        => 'Tada',
 			),
-			'default' => 'bounce',
+			'default' => 'flash',
 		),
 
 	),

@@ -23,10 +23,15 @@
 				<strong>
 					<?php
 						$count = 0;
+						$active_modules = 0;
+						$merchant_modules = get_option( 'merchant-modules', array() );
 						if ( ! empty( $modules ) ) {
 							foreach ( $modules as $data ) {
 								if ( ! empty( $data['modules'] ) ) {
-									foreach ( $data['modules'] as $module ) {
+									foreach ( $data['modules'] as $module_id => $module ) {
+										if ( ! empty( $merchant_modules[ $module_id ] ) ) {
+											$active_modules++;
+										}
 										$count++;
 									}
 								}
@@ -37,8 +42,8 @@
 				</strong>
 			</div>
 			<div class="merchant-modules-header-status-box">
-				<span><?php esc_html_e( 'Active Modules' ); ?></span>
-				<strong><?php echo count( array_filter( get_option( 'merchant-modules', array() ) ) ); ?></strong>
+				<span><?php esc_html_e( 'Active Modules' ); ?><i class="merchant-modules-indicator"></i></span>
+				<strong><?php echo esc_html( $active_modules ); ?></strong>
 			</div>
 		</div>
 

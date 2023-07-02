@@ -47,15 +47,15 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/scroll-to-top-button.php';
 			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/animated-add-to-cart.php';
 			require_once MERCHANT_DIR . 'inc/modules/payment-logos/payment-logos.php';
-			require_once MERCHANT_DIR . 'inc/modules/product-trust-badge/product-trust-badge.php';
-			require_once MERCHANT_DIR . 'inc/modules/accelerated-checkout/accelerated-checkout.php';
+			require_once MERCHANT_DIR . 'inc/modules/trust-badges/trust-badges.php';
+			require_once MERCHANT_DIR . 'inc/modules/buy-now/buy-now.php';
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/cookie-banner.php';
 			require_once MERCHANT_DIR . 'inc/modules/distraction-free-checkout/distraction-free-checkout.php';
 			require_once MERCHANT_DIR . 'inc/modules/quick-view/quick-view.php';
-			require_once MERCHANT_DIR . 'inc/modules/sale-tags/sale-tags.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-labels/product-labels.php';
 			require_once MERCHANT_DIR . 'inc/modules/pre-orders/pre-orders.php';
-			require_once MERCHANT_DIR . 'inc/modules/ajax-real-time-search/ajax-real-time-search.php';
+			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
 			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
 
 		}
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			$setting = array(
 				'nonce'    => wp_create_nonce( 'merchant-nonce' ),
-      	'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
 			);
 
 			// Scroll to Top Button
@@ -100,11 +100,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Animated Add to Cart
 			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
 
-				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'every-seconds' );
+				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
 
-				if ( in_array( $trigger, array( 'every-seconds', 'on-hover-seconds' ) ) ) {
-
-					$setting['trigger_delay'] = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger_delay', '10' );
+				if ( $trigger === 'on-page-load' ) {
 
 					wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI .'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
@@ -124,7 +122,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Inactive Tab Message
 			if ( Merchant_Modules::is_module_active( 'inactive-tab-messsage' ) ) {
 
-				$setting['inactive_tab_messsage'] = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'message', esc_html__( '☞ Donʼt forget this...', 'merchant' ) );
+				$setting['inactive_tab_messsage'] = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'message', esc_html__( '✋ Don\'t forget this...', 'merchant' ) );
 
 				wp_enqueue_script( 'merchant-inactive-tab-messsage', MERCHANT_URI .'assets/js/modules/inactive-tab-messsage.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
@@ -163,8 +161,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Quick View
 			if ( Merchant_Modules::is_module_active( 'quick-view' ) ) {
 
-				$setting['quick_view'] = true;
-				
+				$setting['quick_view']      = true;
+				$setting['quick_view_zoom'] = Merchant_Admin_Options::get( 'quick-view', 'zoom_effect', 1 );
+
 				wp_enqueue_script( 'zoom' );
 				wp_enqueue_script( 'flexslider' );
 				wp_enqueue_script( 'wc-single-product' );
@@ -174,17 +173,17 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				
 			}
 
-			// Ajax Real Time Search
-			if ( Merchant_Modules::is_module_active( 'ajax-real-time-search' ) ) {
+			// Real Time Search
+			if ( Merchant_Modules::is_module_active( 'real-time-search' ) ) {
 
 				$setting['ajax_search'] = true;
-				$setting['ajax_search_results_amounth_per_search']   = Merchant_Admin_Options::get( 'ajax-real-time-search', 'results_amounth_per_search', 15 );
-				$setting['ajax_search_results_order_by']             = Merchant_Admin_Options::get( 'ajax-real-time-search', 'results_order_by', 'title' );
-				$setting['ajax_search_results_order']                = Merchant_Admin_Options::get( 'ajax-real-time-search', 'results_order', 'asc' );
-				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'ajax-real-time-search', 'display_categories', 0 );
-				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'ajax-real-time-search', 'enable_search_by_sku', 0 );
+				$setting['ajax_search_results_amounth_per_search']   = Merchant_Admin_Options::get( 'real-time-search', 'results_amounth_per_search', 15 );
+				$setting['ajax_search_results_order_by']             = Merchant_Admin_Options::get( 'real-time-search', 'results_order_by', 'title' );
+				$setting['ajax_search_results_order']                = Merchant_Admin_Options::get( 'real-time-search', 'results_order', 'asc' );
+				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'real-time-search', 'display_categories', 0 );
+				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
 
-				wp_enqueue_script( 'merchant-ajax-real-time-search', MERCHANT_URI .'assets/js/modules/ajax-real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
+				wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI .'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 

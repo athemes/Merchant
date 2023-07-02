@@ -6,17 +6,35 @@ function merchant_agree_to_terms_checkout() {
 		return;
 	}
 
-	$text = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'text', 'I have read, understood and agreed with your terms and conditions. <a href="##terms_link##" target="_blank">terms and conditions</a>' );
-	$link = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'link', '' );
+	$label = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'label', 'I agree with the' );
+	$text  = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'text', 'Terms & Conditions' );
+	$link  = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'link', '' );
 	
 	woocommerce_form_field( 'merchant_agree_to_terms', array(
 	'type'     => 'checkbox',
-	'label'    => str_replace( '##terms_link##', $link, $text ),
+	'label'    => sprintf( '%s <a href="%s" target="_blank">%s</a>', esc_html( $label ), esc_url( $link ), esc_html( $text ) ),
 	'required' => true,
 	) );
 
 }
 add_action( 'woocommerce_checkout_terms_and_conditions', 'merchant_agree_to_terms_checkout', 20 );
+
+function merchant_botiga_agree_to_terms_checkout( $name ) {
+
+	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {
+		return;
+	}
+
+	$shop_checkout_layout = get_theme_mod( 'shop_checkout_layout', 'layout1' );
+
+	if ( ! in_array( $shop_checkout_layout, array( 'layout5', 'layout4' ) ) ) {
+		return;
+	}
+
+	merchant_agree_to_terms_checkout();
+
+}
+add_action( 'woocommerce_review_order_after_submit', 'merchant_botiga_agree_to_terms_checkout', 20 );
 
 function merchant_agree_to_terms_validation( $fields, $errors ){
 
@@ -26,7 +44,7 @@ function merchant_agree_to_terms_validation( $fields, $errors ){
 
 	if ( empty( $_POST['merchant_agree_to_terms'] ) ) {
 		
-		$warning_text = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'warning_text', esc_html__( 'You must read and accept the terms and conditions to checkout.', 'merchant' ) );
+		$warning_text = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'warning_text', esc_html__( 'You must read and accept the terms and conditions to complete checkout.', 'merchant' ) );
 
 		$errors->add( 'validation', $warning_text );
 	

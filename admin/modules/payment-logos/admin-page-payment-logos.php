@@ -16,6 +16,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'gallery',
 			'label' => esc_html__( 'Select Logos', 'merchant' ),
 		),
+
 	),
 ) );
 
@@ -36,42 +37,65 @@ Merchant_Admin_Options::create( array(
 				'center'     => esc_html__( 'Center', 'merchant' ),
 				'flex-end'   => esc_html__( 'Right', 'merchant' ),
 			),
-			'default'      => 'flex-start',
+			'default'      => 'center',
 		),
 
 		array(
 			'id'      => 'title',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Text Above the Logos', 'merchant' ),
-			'default' => esc_html__( 'Checkout safely using your preferred payment method', 'merchant' ),
+			'default' => esc_html__( '🔒 Safe & Secure Checkout', 'merchant' ),
 		),
 
 		array(
-			'id'      => 'margin-top',
-			'type'    => 'number',
-			'title'   => esc_html__( 'Margin Top', 'merchant' ),
-			'default' => 20,
+			'id'      => 'font-size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Font Size', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 18,
+			'unit'    => 'px',
+		),
+
+		array(
+			'id'      => 'text-color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Text Color', 'merchant' ),
+			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'margin-bottom',
-			'type'    => 'number',
+			'type'    => 'range',
 			'title'   => esc_html__( 'Margin Bottom', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
 			'default' => 20,
+			'unit'    => 'px',
 		),
 
 		array(
 			'id'      => 'image-max-width',
-			'type'    => 'number',
+			'type'    => 'range',
 			'title'   => esc_html__( 'Image Max Width', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
 			'default' => 100,
+			'unit'    => 'px',
 		),
 
 		array(
 			'id'      => 'image-max-height',
-			'type'    => 'number',
+			'type'    => 'range',
 			'title'   => esc_html__( 'Image Max Height', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
 			'default' => 100,
+			'unit'    => 'px',
 		),
 
 	),

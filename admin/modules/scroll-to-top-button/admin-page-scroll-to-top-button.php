@@ -12,6 +12,28 @@ Merchant_Admin_Options::create( array(
 	'fields'    => array(
 
 		array(
+			'id'      => 'style',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Button Style', 'merchant' ),
+			'options' => array(
+				'filled'  => 'Filled',
+				'outline' => 'Outline',
+			),
+			'default' => 'filled',
+		),
+
+		array(
+			'id'      => 'type',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Type', 'merchant' ),
+			'options' => array(
+				'icon'      => esc_html__( 'Icon', 'merchant' ),
+				'text-icon' => esc_html__( 'Text + Icon', 'merchant' ),
+			),
+			'default' => 'icon',
+		),
+
+		array(
 			'id'      => 'icon',
 			'type'    => 'choices',
 			'title'   => esc_html__( 'Icon', 'merchant' ),
@@ -25,38 +47,16 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'      => 'type',
-			'type'    => 'buttons',
-			'title'   => esc_html__( 'Type', 'merchant' ),
-			'options' => array(
-				'icon'      => esc_html__( 'Icon', 'merchant' ),
-				'text+icon' => esc_html__( 'Text + Icon', 'merchant' ),
-			),
-			'default' => 'icon',
-		),
-
-		array(
 			'id'        => 'text',
 			'type'      => 'text',
 			'title'     => 'Text',
 			'default'   => esc_html__( 'Back to top', 'merchant' ),
-			'condition' => array( 'type', '==', 'text+icon' ),
-		),
-
-		array(
-			'id'      => 'border-radius',
-			'type'    => 'range',
-			'title'   => esc_html__( 'Border Radius', 'merchant' ),
-			'min'     => 1,
-			'max'     => 500,
-			'step'    => 1,
-			'unit'    => 'px',
-			'default' => 30,
+			'condition' => array( 'type', '==', 'text-icon' ),
 		),
 
 		array(
 			'id'      => 'position',
-			'type'    => 'buttons',
+			'type'    => 'select',
 			'title'   => esc_html__( 'Position', 'merchant' ),
 			'options' => array(
 				'left'  => 'Left',
@@ -154,6 +154,18 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'        => 'text-size',
+			'type'      => 'range',
+			'title'     => 'Text Size',
+			'min'       => 1,
+			'max'       => 500,
+			'step'      => 1,
+			'unit'      => 'px',
+			'default'   => 18,
+			'condition' => array( 'type', '==', 'text-icon' ),
+		),
+
+		array(
 			'id'      => 'padding',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Padding', 'merchant' ),
@@ -162,6 +174,29 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'unit'    => 'px',
 			'default' => 15,
+		),
+
+		array(
+			'id'        => 'border-size',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Border Size', 'merchant' ),
+			'min'       => 1,
+			'max'       => 500,
+			'step'      => 1,
+			'unit'      => 'px',
+			'default'   => 2,
+			'condition' => array( 'style', '==', 'outline' ),
+		),
+
+		array(
+			'id'      => 'border-radius',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Border Radius', 'merchant' ),
+			'min'     => 1,
+			'max'     => 500,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 30,
 		),
 
 		array(
@@ -174,8 +209,40 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon-hover-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Icon Hover Color', 'merchant' ),
+			'title'   => esc_html__( 'Icon Color Hover', 'merchant' ),
 			'default' => '#FFFFFF',
+		),
+
+		array(
+			'id'        => 'text-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Text Color', 'merchant' ),
+			'default'   => '#FFFFFF',
+			'condition' => array( 'type', '==', 'text-icon' ),
+		),
+
+		array(
+			'id'        => 'text-hover-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Text Color Hover', 'merchant' ),
+			'default'   => '#FFFFFF',
+			'condition' => array( 'type', '==', 'text-icon' ),
+		),
+
+		array(
+			'id'        => 'border-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Border Color', 'merchant' ),
+			'default'   => '#212121',
+			'condition' => array( 'style', '==', 'outline' ),
+		),
+
+		array(
+			'id'        => 'border-hover-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Border Color Hover', 'merchant' ),
+			'default'   => '#757575',
+			'condition' => array( 'style', '==', 'outline' ),
 		),
 
 		array(
@@ -188,7 +255,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'background-hover-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Background Hover Color', 'merchant' ),
+			'title'   => esc_html__( 'Background Color Hover', 'merchant' ),
 			'default' => '#757575',
 		),
 

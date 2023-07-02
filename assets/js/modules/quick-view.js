@@ -8,9 +8,9 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.quickView = {
 
-	  init: function() {
+		init: function() {
 
-	    var self    = this;
+			var self    = this;
 			var $modals = $('.merchant-quick-view-modal');
 
 			if ( ! $modals.length ) {
@@ -38,25 +38,29 @@ merchant.modules = merchant.modules || {};
 
 					isOpen = true;
 
-		      $.post( window.merchant.setting.ajax_url, {
-		        action: 'merchant_quick_view_content',
-		        nonce: window.merchant.setting.nonce,
-		        product_id: $(this).data('product-id'),
-		      }, function( response ) {
+					$.post( window.merchant.setting.ajax_url, {
+						action: 'merchant_quick_view_content',
+						nonce: window.merchant.setting.nonce,
+						product_id: $(this).data('product-id'),
+					}, function( response ) {
 
-		        if ( response.success && isOpen ) {
+						if ( response.success && isOpen ) {
 
-		        	$content.html(response.data);
+							$content.html(response.data);
 
 							$inner.addClass('merchant-show');
 							$modal.removeClass('merchant-loading');
 
-							var $gallery = $content.find('.woocommerce-product-gallery');
+	            var $gallery = $content.find('.woocommerce-product-gallery');
+
+            	wc_single_product_params.zoom_enabled = window.merchant.setting.quick_view_zoom;
 
 							if ( typeof $.fn.wc_product_gallery === 'function' && $gallery.length ) {
-								$gallery.wc_product_gallery(wc_single_product_params);
-							}
-							
+	              $gallery.trigger('wc-product-gallery-before-init', [$gallery.get(0), wc_single_product_params]);
+	              $gallery.wc_product_gallery(wc_single_product_params);
+	              $gallery.trigger('wc-product-gallery-after-init', [$gallery.get(0), wc_single_product_params]);
+	            }
+
 							var $variations = $content.find('.variations_form');
 							
 							if ( typeof $.fn.wc_variation_form === 'function' && $variations.length ) {
@@ -65,23 +69,31 @@ merchant.modules = merchant.modules || {};
 								});
 							}
 
-		        } else {
+							if ( window.botiga && window.botiga.productSwatch ) {
+								window.botiga.productSwatch.init();
+							}
 
-		        	$content.html(response.data);
+							if ( window.botiga && window.botiga.qtyButton ) {
+            		window.botiga.qtyButton.init('quick-view');
+							}
+
+						} else {
+
+							$content.html(response.data);
 
 							$inner.addClass('merchant-show');
 							$modal.removeClass('merchant-loading');
 			
-		        }
+						}
 
-		      }).fail( function( xhr, textStatus ) {
+					}).fail( function( xhr, textStatus ) {
 
 						$content.html(textStatus);
 			
 						$inner.addClass('merchant-show');
 						$modal.removeClass('merchant-loading');
 
-		      });
+					});
 					
 				});
 				
