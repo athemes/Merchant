@@ -70,7 +70,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->capability,
 				$this->plugin_slug,
 				array( $this, 'page_dashboard' ),
-				MERCHANT_URI. 'assets/images/merchant-logo.svg',
+				MERCHANT_URI . 'assets/images/merchant-logo.svg',
 				$this->priority
 			);
 
@@ -81,68 +81,68 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 */
 		public function get_notifications() {
 
-			// $notifications = get_transient( 'merchant_notifications' );
+			$notifications = get_transient( 'merchant_notifications' );
 
-			// if ( ! empty( $notifications ) ) {
+			if ( ! empty( $notifications ) ) {
 
-			// 	$this->notifications = $notifications;
+				$this->notifications = $notifications;
 
-			// } else {
+			} else {
 
 				$response = wp_remote_get( 'https://athemes.com/wp-json/wp/v2/changelogs?themes=7103&per_page=3' );
 
 				if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
 					$this->notifications = json_decode( wp_remote_retrieve_body( $response ) );
-					// set_transient( 'merchant_notifications', $this->notifications, 24 * HOUR_IN_SECONDS );
+					set_transient( 'merchant_notifications', $this->notifications, 24 * HOUR_IN_SECONDS );
 				}
 
-			// }
+			}
 
 			return $this->notifications;
 
 		}
 
-    /**
-     * Check if the latest notification is read
-     */
+		/**
+		 * Check if the latest notification is read
+		 */
 		public function is_latest_notification_read() {
 
-      if ( ! isset( $this->notifications ) || empty( $this->notifications ) ) {
+			if ( ! isset( $this->notifications ) || empty( $this->notifications ) ) {
 				return false;
-      }
-      
-      $user_id        = get_current_user_id();
-      $user_read_meta = get_user_meta( $user_id, 'merchant_dashboard_notifications_latest_read', true );
+			}
+			
+			$user_id        = get_current_user_id();
+			$user_read_meta = get_user_meta( $user_id, 'merchant_dashboard_notifications_latest_read', true );
 
-      $last_notification_date      = strtotime( is_string( $this->notifications[0]->date ) ? $this->notifications[0]->date : '' );
-      $last_notification_date_ondb = $user_read_meta ? strtotime( $user_read_meta ) : false;
+			$last_notification_date      = strtotime( is_string( $this->notifications[0]->date ) ? $this->notifications[0]->date : '' );
+			$last_notification_date_ondb = $user_read_meta ? strtotime( $user_read_meta ) : false;
 
-      if ( ! $last_notification_date_ondb ) {
-        return false;
-      }
+			if ( ! $last_notification_date_ondb ) {
+				return false;
+			}
 
-      if ( $last_notification_date > $last_notification_date_ondb ) {
-      	return false;
-      }
+			if ( $last_notification_date > $last_notification_date_ondb ) {
+				return false;
+			}
 
-      return true;
+			return true;
 
 		}
 
-    /**
-     * Ajax notifications.
-     */
-    public function ajax_notifications_read() {
+		/**
+		 * Ajax notifications.
+		 */
+		public function ajax_notifications_read() {
 
-      check_ajax_referer( 'merchant', 'nonce' );
+			check_ajax_referer( 'merchant', 'nonce' );
 
-      $latest_notification_date = ( isset( $_POST[ 'latest_notification_date' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'latest_notification_date' ] ) ) : false;
+			$latest_notification_date = ( isset( $_POST[ 'latest_notification_date' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'latest_notification_date' ] ) ) : false;
 
-      update_user_meta( get_current_user_id(), 'merchant_dashboard_notifications_latest_read', $latest_notification_date );
+			update_user_meta( get_current_user_id(), 'merchant_dashboard_notifications_latest_read', $latest_notification_date );
 
-      wp_send_json_success();
+			wp_send_json_success();
 
-    }
+		}
 
 		public function page_dashboard() {
 			require_once MERCHANT_DIR . 'admin/pages/page-dashboard.php';

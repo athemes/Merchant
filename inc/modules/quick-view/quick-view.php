@@ -124,7 +124,7 @@ function merchant_quick_view_content_callback() {
 	global $post;
 	global $product;
 
-	$product = wc_get_product( $args['product_id'] ); 
+	$product = wc_get_product( $args['product_id'] ); // phpcs:ignore
 	
 	if ( is_wp_error( $product ) || empty( $product ) ) {
 		wp_send_json_error();
@@ -162,7 +162,7 @@ function merchant_quick_view_content_callback() {
 						<div class="merchant-quick-view-product-price"><?php woocommerce_template_single_price(); ?></div>
 						<?php if ( $place_product_description === 'top' ) : ?>
 							<?php if ( $description_style === 'full' ) : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php echo the_content( $args['product_id'] ); ?></div>
+								<div class="merchant-quick-view-product-excerpt"><?php the_content(); ?></div>
 							<?php else : ?>
 								<div class="merchant-quick-view-product-excerpt"><?php woocommerce_template_single_excerpt(); ?></div>
 							<?php endif; ?>
@@ -170,7 +170,7 @@ function merchant_quick_view_content_callback() {
 						<div class="merchant-quick-view-product-add-to-cart <?php echo sanitize_html_class( $hide_quantity ); ?>"><?php woocommerce_template_single_add_to_cart(); ?></div>
 						<?php if ( $place_product_description === 'bottom' ) : ?>
 							<?php if ( $description_style === 'full' ) : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php echo the_content( $args['product_id'] ); ?></div>
+								<div class="merchant-quick-view-product-excerpt"><?php the_content(); ?></div>
 							<?php else : ?>
 								<div class="merchant-quick-view-product-excerpt"><?php woocommerce_template_single_excerpt(); ?></div>
 							<?php endif; ?>

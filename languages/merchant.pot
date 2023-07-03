@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-07-02 15:29+0000\n"
+"POT-Creation-Date: 2023-07-03 17:15+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -21,19 +21,19 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-merchant-admin-loader.php:111
+#: admin/class-merchant-admin-loader.php:109
 msgid "Join our community"
 msgstr ""
 
-#: admin/class-merchant-admin-loader.php:112
+#: admin/class-merchant-admin-loader.php:110
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: inc/class-merchant-loader.php:125
+#: inc/class-merchant-loader.php:124
 msgid "✋ Don't forget this..."
 msgstr ""
 
-#: inc/class-merchant-loader.php:194, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:132
+#: inc/class-merchant-loader.php:193, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:133
 msgid "Pre Order Now!"
 msgstr ""
 
@@ -197,77 +197,78 @@ msgstr ""
 msgid "Close the sidebar"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:51
-msgid "Latest News"
-msgstr ""
-
-#: admin/pages/page-dashboard.php:51
+#: admin/pages/page-dashboard.php:56
 msgid "New Update"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:52
+#: admin/pages/page-dashboard.php:54
+msgid "Latest News"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:60
 msgid "Check the latest news from Merchant"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:82
+#: admin/pages/page-dashboard.php:90
 msgid "No notifications found"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:142
+#: admin/pages/page-dashboard.php:149
 msgid "Welcome To Merchant"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:142
+#: admin/pages/page-dashboard.php:149
 msgid "👋🏻"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:143
+#: admin/pages/page-dashboard.php:150
 msgid "We’re glad to see you :)"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:161
+#. translators: %s: active module count
+#: admin/pages/page-dashboard.php:169
 msgid "Your"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:161
+#: admin/pages/page-dashboard.php:169
 msgid "%s module"
 msgid_plural "%s modules"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/pages/page-dashboard.php:161
+#: admin/pages/page-dashboard.php:169
 msgid "enabled"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:177
+#: admin/pages/page-dashboard.php:185
 msgid "Get"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:177
+#: admin/pages/page-dashboard.php:185
 msgid "help and support"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:193
+#: admin/pages/page-dashboard.php:201
 msgid "Manage your"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:193
+#: admin/pages/page-dashboard.php:201
 msgid "Merchant settings"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:210
+#: admin/pages/page-dashboard.php:218
 msgid "Leave a"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:210
+#: admin/pages/page-dashboard.php:218
 msgid "review"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:226
+#: admin/pages/page-dashboard.php:234
 msgid "Have an"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:226
+#: admin/pages/page-dashboard.php:234
 msgid "idea or feedback?"
 msgstr ""
 
@@ -293,6 +294,10 @@ msgstr ""
 
 #: admin/pages/page-module.php:60
 msgid "Enabled"
+msgstr ""
+
+#: admin/pages/page-module.php:68
+msgid "Disable"
 msgstr ""
 
 #: admin/pages/page-module.php:76
@@ -355,7 +360,15 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#: admin/pages/page-module.php:191
+#: admin/pages/page-module.php:193
+msgid "Important info!"
+msgstr ""
+
+#: admin/pages/page-module.php:196
+msgid "This module is currently disabled. Please enable the module to see it in your store."
+msgstr ""
+
+#: admin/pages/page-module.php:202
 msgid "Copyright © aThemes 2023. All Rights Reserved."
 msgstr ""
 
@@ -369,6 +382,14 @@ msgstr ""
 
 #: admin/pages/page-modules.php:18
 msgid "Quickly navigate through all the enabled modules and customize each in real-time."
+msgstr ""
+
+#: admin/pages/page-modules.php:22
+msgid "Total Modules"
+msgstr ""
+
+#: admin/pages/page-modules.php:45
+msgid "Active Modules"
 msgstr ""
 
 #: admin/pages/page-modules.php:67
@@ -767,7 +788,7 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: admin/modules/pre-orders/admin-page-pre-orders.php:94, inc/modules/pre-orders/pre-orders.php:87, inc/modules/pre-orders/pre-orders.php:104
+#: admin/modules/pre-orders/admin-page-pre-orders.php:94, inc/modules/pre-orders/pre-orders.php:88, inc/modules/pre-orders/pre-orders.php:105
 msgid "Ships in {date}."
 msgstr ""
 
@@ -1091,33 +1112,34 @@ msgstr ""
 msgid "Pre Ordered"
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:68
+#. translators: %s: pre ordered product count
+#: inc/modules/pre-orders/pre-orders.php:69
 msgid "Pre Ordered <span class=\"count\">(%s)</span>"
 msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/modules/pre-orders/pre-orders.php:146
+#: inc/modules/pre-orders/pre-orders.php:147
 msgid "Pre Order Product - Set this product as pre-order"
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:155, inc/modules/pre-orders/pre-orders.php:200
+#: inc/modules/pre-orders/pre-orders.php:156, inc/modules/pre-orders/pre-orders.php:198
 msgid "Pre Order Date"
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:190
+#: inc/modules/pre-orders/pre-orders.php:188
 msgid "Pre Order Product"
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:191
+#: inc/modules/pre-orders/pre-orders.php:189
 msgid "Set this product as pre-order"
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:311
+#: inc/modules/pre-orders/pre-orders.php:310
 msgid "We detected that your cart has pre-order products. Please remove them before being able to add this product."
 msgstr ""
 
-#: inc/modules/pre-orders/pre-orders.php:309
+#: inc/modules/pre-orders/pre-orders.php:308
 msgid "We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding."
 msgstr ""
 

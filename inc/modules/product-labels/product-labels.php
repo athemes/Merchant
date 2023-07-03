@@ -17,7 +17,7 @@ function merchant_product_labels() {
 			if ( $product->is_type('variable' ) ) {
 
 				$percentages = array();
-				$prices = $product->get_variation_prices();
+				$prices      = $product->get_variation_prices();
 			
 				foreach ( $prices['price'] as $key => $price ) {
 					if ( $prices['regular_price'][$key] !== $price ) {
@@ -27,9 +27,9 @@ function merchant_product_labels() {
 				
 				$percentage = max( $percentages );
 				
-			} else if ( $product->is_type('grouped') ) {
+			} elseif ( $product->is_type('grouped') ) {
 				
-				$percentages = array();
+				$percentages  = array();
 				$children_ids = $product->get_children();
 				
 				foreach ( $children_ids as $child_id ) {
@@ -60,7 +60,7 @@ function merchant_product_labels() {
 			
 		}
 		
-		echo '<span class="merchant-onsale merchant-onsale-'. sanitize_html_class( $label_position ) .' merchant-onsale-shape-'. sanitize_html_class( $label_shape ) .'">'. esc_html( $label_text ) .'</span>';
+		echo '<span class="merchant-onsale merchant-onsale-' . sanitize_html_class( $label_position ) . ' merchant-onsale-shape-' . sanitize_html_class( $label_shape ) . '">' . esc_html( $label_text ) . '</span>';
 
 	}
 	

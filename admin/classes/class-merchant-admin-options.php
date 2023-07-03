@@ -66,25 +66,25 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						<div class="merchant-module-page-setting-fields">
 							<?php
 
-								if ( ! empty( $settings['fields'] ) ) {
+							if ( ! empty( $settings['fields'] ) ) {
 
-									foreach ( $settings['fields'] as $field ) {
+								foreach ( $settings['fields'] as $field ) {
 
-										$value = null;
+									$value = null;
 
-										if ( isset( $field['default'] ) ) {
-											$value = $field['default'];
-										}
-
-										if ( isset( $field['id'] ) && isset( $options[ $settings['module'] ] ) && isset( $options[ $settings['module'] ][ $field['id'] ] ) ) {
-											$value = $options[ $settings['module'] ][ $field['id'] ];
-										}
-
-										self::field( $field, $value );
-
+									if ( isset( $field['default'] ) ) {
+										$value = $field['default'];
 									}
 
+									if ( isset( $field['id'] ) && isset( $options[ $settings['module'] ] ) && isset( $options[ $settings['module'] ][ $field['id'] ] ) ) {
+										$value = $options[ $settings['module'] ][ $field['id'] ];
+									}
+
+									self::field( $field, $value );
+
 								}
+
+							}
 
 							?>
 						</div>
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						$value = null;
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
-							$value = wp_unslash( $_POST['merchant'][ $field['id'] ] );
+							$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
 						}
 
 						$options[ $settings['module'] ][ $field['id'] ] = self::sanitize( $field, $value );
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				}
 
-			} else if ( ! empty( $reset ) ) {
+			} elseif ( ! empty( $reset ) ) {
 
 				$options[ $settings['module'] ] = array();
 
@@ -151,33 +151,33 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'text':
 				case 'color':
 				case 'number':
-					return sanitize_text_field( $value );
-				break;
+					$value = sanitize_text_field( $value );
+				    break;
 
 				case 'textarea':
-					return sanitize_textarea_field( $value );
-				break;
+					$value = sanitize_textarea_field( $value );
+				    break;
 
 				case 'checkbox':
 				case 'switcher':
-					return ( $value === '1' ) ? 1 : 0;
-				break;
+					$value = ( $value === '1' ) ? 1 : 0;
+				    break;
 
 				case 'range':
 				case 'number':
-					return absint( $value );
-				break;
+					$value = absint( $value );
+				    break;
 
 				case 'radio':
 				case 'radio_alt':
 				case 'select':
 				case 'choices':
-					return ( in_array( $value, array_keys( $field['options'] ) ) ) ? sanitize_key( $value ) : '';
-				break;
+					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
+				    break;
 
 				case 'code-editor':
-					return wp_kses_post( $value );
-				break;
+					$value = wp_kses_post( $value );
+				    break;
 
 			}
 
@@ -194,26 +194,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				$type = $settings['type'];
 
-				$class     = ( ! empty( $settings['class'] ) ) ? ' '. $settings['class'] : '';
+				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
 
-				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-'. esc_attr( $type ) .''. esc_attr( $class ) .'" data-condition="'. esc_attr( json_encode( $condition ) ) .'">';
+				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 
-					if ( ! empty( $settings['title'] ) ) {
-						echo sprintf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
-					}
+				if ( ! empty( $settings['title'] ) ) {
+					echo sprintf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
+				}
 
 					echo '<div class="merchant-module-page-setting-field-inner">';
-						if ( method_exists( 'Merchant_Admin_Options', $type ) ) {
-							call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value );
-						} else {
-			        esc_html_e( 'Field not found!', 'merchant' );
-						}
+				if ( method_exists( 'Merchant_Admin_Options', $type ) ) {
+					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value );
+				} else {
+					esc_html_e( 'Field not found!', 'merchant' );
+				}
 					echo '</div>';
 
-					if ( ! empty( $settings['desc'] ) ) {
-						echo sprintf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['desc'] ) );
-					}
+				if ( ! empty( $settings['desc'] ) ) {
+					echo sprintf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['desc'] ) );
+				}
 
 				echo '</div>';
 
@@ -337,7 +337,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						<?php foreach ( $settings['options'] as $key => $option ) : ?>
 							<label>
 								<input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
-								<figure><img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI .'assets/images' ) ); ?>" title="" /></figure>
+								<figure><img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>" title="" /></figure>
 							</label>
 						<?php endforeach; ?>
 					<?php endif; ?>
@@ -392,7 +392,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				<div class="merchant-buttons">
 					<?php if ( ! empty( $settings['options'] ) ) : ?>
 						<?php foreach ( $settings['options'] as $key => $option ) : ?>
-							<label class="merchant-button-<?php echo esc_attr( $key ) ?>">
+							<label class="merchant-button-<?php echo esc_attr( $key ); ?>">
 								<input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
 								<span><?php echo esc_html( $option ); ?></span>
 							</label>
@@ -457,21 +457,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			echo '<div class="merchant-gallery-images">';
 
-				if ( ! empty( $images ) ) :
+			if ( ! empty( $images ) ) :
 
-					foreach ( $images as $image_id ) :
+				foreach ( $images as $image_id ) :
 
-						$image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
+					$image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
 
-						if ( ! empty( $image ) && ! empty( $image[0] ) ) :
+					if ( ! empty( $image ) && ! empty( $image[0] ) ) :
 
-							echo sprintf( '<div class="merchant-gallery-image" data-item-id="%s">', esc_attr( $image_id ) );
+						echo sprintf( '<div class="merchant-gallery-image" data-item-id="%s">', esc_attr( $image_id ) );
 
-							echo '<i class="merchant-gallery-remove dashicons dashicons-no-alt"></i>';
+						echo '<i class="merchant-gallery-remove dashicons dashicons-no-alt"></i>';
 
-							echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
+						echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
 
-							echo '</div>';
+						echo '</div>';
 
 						endif;
 
@@ -498,16 +498,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			echo '<div class="merchant-upload-wrapper">';
 
-				if ( ! empty( $value ) ) :
+			if ( ! empty( $value ) ) :
 
-					$image = wp_get_attachment_image_src( $value, 'thumbnail' );
+				$image = wp_get_attachment_image_src( $value, 'thumbnail' );
 
-					if ( ! empty( $image ) && ! empty( $image[0] ) ) :
+				if ( ! empty( $image ) && ! empty( $image[0] ) ) :
 
-						echo '<div class="merchant-upload-image">';
-							echo '<i class="merchant-upload-remove dashicons dashicons-no-alt"></i>';
-							echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
-						echo '</div>';
+					echo '<div class="merchant-upload-image">';
+						echo '<i class="merchant-upload-remove dashicons dashicons-no-alt"></i>';
+						echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
+					echo '</div>';
 
 					endif;
 
@@ -524,19 +524,19 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Warning
 		 */
-		public static function warning( $settings, $value ) {
+		public static function warning( $settings ) {
 			echo wp_kses_post( $settings['content'] );
 		}
 
 		/**
 		 * Field: Divider
 		 */
-		public static function divider( $settings, $value ) {}
+		public static function divider() {}
 
 		/**
 		 * Field: Content
 		 */
-		public static function content( $settings, $value ) {
+		public static function content( $settings ) {
 			echo wp_kses_post( $settings['content'] );
 		}
 

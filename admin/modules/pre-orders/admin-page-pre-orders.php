@@ -7,14 +7,14 @@
  * Tag Pre-Orders
  */
 
-$content  = '';
-$content .= '<div class="merchant-tag-pre-orders">';
-$content .= '<i class="dashicons dashicons-info"></i>';
-$content .= '<p>';
-$content .= esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.', 'merchant' );
-$content .= sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ), esc_html__( 'View Pre-Orders', 'merchant' ) );
-$content .= '</p>';
-$content .= '</div>';
+$merchant_pre_orders_notice  = '';
+$merchant_pre_orders_notice .= '<div class="merchant-tag-pre-orders">';
+$merchant_pre_orders_notice .= '<i class="dashicons dashicons-info"></i>';
+$merchant_pre_orders_notice .= '<p>';
+$merchant_pre_orders_notice .= esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.', 'merchant' );
+$merchant_pre_orders_notice .= sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ), esc_html__( 'View Pre-Orders', 'merchant' ) );
+$merchant_pre_orders_notice .= '</p>';
+$merchant_pre_orders_notice .= '</div>';
 
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Tag Pre-Orders', 'merchant' ),
@@ -24,7 +24,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tag-pre-orders',
 			'type'    => 'content',
-			'content' => $content,
+			'content' => $merchant_pre_orders_notice,
 		),
 
 	),

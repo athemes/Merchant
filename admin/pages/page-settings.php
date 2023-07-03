@@ -44,91 +44,91 @@
 
 				<?php
 
-					Merchant_Admin_Options::create( array(
-						'module'    => 'global-settings',
-						'title'     => esc_html__( 'Settings', 'merchant' ),
-						'subtitle'  => esc_html__( 'Choose who can see Merchant on your store. Note: it can take few seconds for changes to take effect.', 'merchant' ),
-						'fields'    => array(
+				Merchant_Admin_Options::create( array(
+					'module'    => 'global-settings',
+					'title'     => esc_html__( 'Settings', 'merchant' ),
+					'subtitle'  => esc_html__( 'Choose who can see Merchant on your store. Note: it can take few seconds for changes to take effect.', 'merchant' ),
+					'fields'    => array(
 
-							array(
-								'id'      => 'lazy_load_images',
-								'type'    => 'checkbox',
-								'label'   => esc_html__( 'Lazy Load Images', 'merchant' ),
-								'desc'    => esc_html__( 'Load images when the visitor scrolls, to speed up the initial page load. This affects all modules that show images such as product reviews, recently viewed, related products, etc.', 'merchant' ),
-								'default' => 1,
-							),
-
+						array(
+							'id'      => 'lazy_load_images',
+							'type'    => 'checkbox',
+							'label'   => esc_html__( 'Lazy Load Images', 'merchant' ),
+							'desc'    => esc_html__( 'Load images when the visitor scrolls, to speed up the initial page load. This affects all modules that show images such as product reviews, recently viewed, related products, etc.', 'merchant' ),
+							'default' => 1,
 						),
-					) );
 
-					Merchant_Admin_Options::create( array(
-						'module'    => 'global-settings',
-						'title'     => esc_html__( 'Merchant Operating Mode', 'merchant' ),
-						'fields'    => array(
+					),
+				) );
 
-							array(
-								'id'      => 'operating_mode',
-								'type'    => 'radio_alt',
-								'options' => array(
-									'active'   => array(
-										'title' => esc_html__( 'Active', 'merchant' ),
-										'desc'  => esc_html__( 'Merchant is active and visible for all customers. This is the standard operating mode.', 'merchant' ),
-									),
-									'preview'   => array(
-										'title' => esc_html__( 'Preview', 'merchant' ),
-										'desc'  => esc_html__( 'All Merchant modules are active and visible only to admins. Use this mode to test Merchant modules before going live.', 'merchant' ),
-									),
-									'inactive'   => array(
-										'title' => esc_html__( 'Inactive', 'merchant' ),
-										'desc'  => esc_html__( 'Merchant is inactive for everyone, including you. While in this mode, your store operates like Merchant is not installed.', 'merchant' ),
-									),
+				Merchant_Admin_Options::create( array(
+					'module'    => 'global-settings',
+					'title'     => esc_html__( 'Merchant Operating Mode', 'merchant' ),
+					'fields'    => array(
+
+						array(
+							'id'      => 'operating_mode',
+							'type'    => 'radio_alt',
+							'options' => array(
+								'active'   => array(
+									'title' => esc_html__( 'Active', 'merchant' ),
+									'desc'  => esc_html__( 'Merchant is active and visible for all customers. This is the standard operating mode.', 'merchant' ),
 								),
-								'default' => 'active',
+								'preview'   => array(
+									'title' => esc_html__( 'Preview', 'merchant' ),
+									'desc'  => esc_html__( 'All Merchant modules are active and visible only to admins. Use this mode to test Merchant modules before going live.', 'merchant' ),
+								),
+								'inactive'   => array(
+									'title' => esc_html__( 'Inactive', 'merchant' ),
+									'desc'  => esc_html__( 'Merchant is inactive for everyone, including you. While in this mode, your store operates like Merchant is not installed.', 'merchant' ),
+								),
 							),
-
+							'default' => 'active',
 						),
-					) );
 
-					Merchant_Admin_Options::create( array(
-						'module'    => 'global-settings',
-						'title'     => esc_html__( 'Global Customizations', 'merchant' ),
-						'fields'    => array(
+					),
+				) );
 
-							array(
-								'type'    => 'warning',
-								'content' => esc_html__( 'Do not modify these settings unless you\'re an experienced developer', 'merchant' ),
-							),
+				Merchant_Admin_Options::create( array(
+					'module'    => 'global-settings',
+					'title'     => esc_html__( 'Global Customizations', 'merchant' ),
+					'fields'    => array(
 
-							array(
-								'type' => 'divider',
-							),
-
-							array(
-								'id'    => 'custom_css',
-								'type'  => 'textarea',
-								'title' => esc_html__( 'Custom CSS', 'merchant' ),
-							),
-
-							array(
-								'id'    => 'custom_js_first',
-								'type'  => 'textarea',
-								'title' => esc_html__( 'Custom JS First - runs at the beginning of Merchant', 'merchant' ),
-							),
-
-							array(
-								'id'    => 'custom_js_last',
-								'type'  => 'textarea',
-								'title' => esc_html__( 'Custom JS Last - runs at the end of Merchant', 'merchant' ),
-							),
-
-							array(
-								'id'    => 'custom_js',
-								'type'  => 'textarea',
-								'title' => esc_html__( 'Custom JS', 'merchant' ),
-							),
-
+						array(
+							'type'    => 'warning',
+							'content' => esc_html__( 'Do not modify these settings unless you\'re an experienced developer', 'merchant' ),
 						),
-					) );
+
+						array(
+							'type' => 'divider',
+						),
+
+						array(
+							'id'    => 'custom_css',
+							'type'  => 'textarea',
+							'title' => esc_html__( 'Custom CSS', 'merchant' ),
+						),
+
+						array(
+							'id'    => 'custom_js_first',
+							'type'  => 'textarea',
+							'title' => esc_html__( 'Custom JS First - runs at the beginning of Merchant', 'merchant' ),
+						),
+
+						array(
+							'id'    => 'custom_js_last',
+							'type'  => 'textarea',
+							'title' => esc_html__( 'Custom JS Last - runs at the end of Merchant', 'merchant' ),
+						),
+
+						array(
+							'id'    => 'custom_js',
+							'type'  => 'textarea',
+							'title' => esc_html__( 'Custom JS', 'merchant' ),
+						),
+
+					),
+				) );
 
 				?>
 

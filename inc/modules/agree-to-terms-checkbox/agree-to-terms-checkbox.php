@@ -19,7 +19,7 @@ function merchant_agree_to_terms_checkout() {
 }
 add_action( 'woocommerce_checkout_terms_and_conditions', 'merchant_agree_to_terms_checkout', 20 );
 
-function merchant_botiga_agree_to_terms_checkout( $name ) {
+function merchant_botiga_agree_to_terms_checkout() {
 
 	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {
 		return;
@@ -36,7 +36,7 @@ function merchant_botiga_agree_to_terms_checkout( $name ) {
 }
 add_action( 'woocommerce_review_order_after_submit', 'merchant_botiga_agree_to_terms_checkout', 20 );
 
-function merchant_agree_to_terms_validation( $fields, $errors ){
+function merchant_agree_to_terms_validation( $fields, $errors ) { // phpcs:ignore
 
 	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {
 		return;
