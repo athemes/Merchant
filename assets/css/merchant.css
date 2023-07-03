@@ -696,7 +696,7 @@
 
 .merchant-cookie-banner-floating {
   bottom: 35px;
-  z-index: 91;
+  z-index: 997;
 }
 
 .merchant-cookie-banner-floating .merchant-cookie-banner-inner {
@@ -709,7 +709,7 @@
 }
 
 .merchant-cookie-banner-fixed-bottom {
-  z-index: 93;
+  z-index: 999;
 }
 
 .merchant-cookie-banner-content {
@@ -1451,7 +1451,7 @@
   cursor: pointer;
   line-height: 1;
   position: fixed;
-  z-index: 92;
+  z-index: 998;
   bottom: var(--merchant-bottom-offset, 30px);
   opacity: 0;
   visibility: hidden;
