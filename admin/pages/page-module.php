@@ -187,17 +187,6 @@
 
 	</div>
 
-	<div class="merchant-module-alert">
-		<div class="merchant-module-alert-overlay"></div>
-		<div class="merchant-module-alert-wrapper">
-			<div class="merchant-module-alert-header"><strong><?php esc_html_e( 'Important info!', 'merchant' ); ?></strong><a href="#" class="merchant-module-alert-close"><i class="dashicons dashicons-no-alt"></i></a></div>
-			<div class="merchant-module-alert-content">
-				<p><img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/enable-module.png' ); ?>" /></p>
-				<p><?php esc_html_e( 'This module is currently disabled. Please enable the module to see it in your store.', 'merchant' ); ?></p></div>
-			<div class="merchant-module-alert-footer"><a href="#" class="merchant-module-alert-close">Close</a></div>
-		</div>
-	</div>
-
 	<div class="merchant-module-footer-text">
 		<i class="dashicons dashicons-warning"></i><?php esc_html_e( 'Copyright © aThemes 2023. All Rights Reserved.', 'merchant' ); ?>
 	</div>
