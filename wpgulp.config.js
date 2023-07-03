@@ -60,7 +60,11 @@ const zipIgnoreGlob  = [
 	'!../@(Merchant|merchant)/**/*playwright-report/**/*',
 	'!../@(Merchant|merchant)/**/*playwright-report',
 	'!../@(Merchant|merchant)/**/*.wp-env.json',
-	'!../@(Merchant|merchant)/**/*playwright.config.js'
+	'!../@(Merchant|merchant)/**/*playwright.config.js',
+	'!../@(Merchant|merchant)/**/*composer.json',
+	'!../@(Merchant|merchant)/**/*composer.lock',
+	'!../@(Merchant|merchant)/**/*phpcs.xml',
+	'!../@(Merchant|merchant)/{vendor,vendor/**/*}'
 ];
 
 // Translation options.
