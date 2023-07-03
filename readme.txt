@@ -164,4 +164,4 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Installation ==
 
-Go to Plugins > Add New and search for aThemes Blocks. Install and activate it.
+Go to Plugins > Add New and search for Merchant. Install and activate it.
