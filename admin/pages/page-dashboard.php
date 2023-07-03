@@ -12,7 +12,7 @@
 	<div class="merchant-top-bar-infos">
 		<div class="merchant-top-bar-info-item">
 			<div class="merchant-version">
-				<strong><?php echo esc_html( MERCHANT_VERSION ); ?></strong>
+				<strong><?php echo esc_html( ( defined( 'MERCHANT_PRO_VERSION' ) ? MERCHANT_PRO_VERSION : MERCHANT_VERSION ) ); ?></strong>
 			</div>
 		</div>
 	<div class="merchant-top-bar-info-item">
@@ -78,7 +78,7 @@
 						<?php endif; ?>
 						<?php if ( $merchant_content ) : ?>
 							<div class="merchant-notification-content">
-								<?php echo wp_kses_post( $merchant_content ); ?>
+								<?php echo wp_kses_post( apply_filters( 'merchant_notifications_content', $merchant_content ) ); ?>
 							</div>
 						<?php endif; ?>
 					</div>
