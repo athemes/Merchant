@@ -78,7 +78,7 @@
 						<?php endif; ?>
 						<?php if ( $merchant_content ) : ?>
 							<div class="merchant-notification-content">
-								<?php echo wp_kses_post( apply_filters( 'merchant_notifications_content', $merchant_content ) ); ?>
+								<?php echo wp_kses_post( $merchant_content ); ?>
 							</div>
 						<?php endif; ?>
 					</div>
