@@ -262,6 +262,8 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			$css .= Merchant_Option::get( 'global-settings', 'custom_css', '' );
 
+			$css .= apply_filters( 'merchant_custom_css', '', $this );
+
 			$css = $this->minify( $css );
 
 			return $css;

@@ -48,6 +48,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function create( $settings ) {
 
+			$settings = apply_filters( 'merchant_module_settings', $settings );
+
 			self::save_options( $settings );
 
 			$options = get_option( 'merchant', array() );

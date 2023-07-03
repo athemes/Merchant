@@ -237,6 +237,8 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			);
 
+			$modules = apply_filters( 'merchant_modules', $modules );
+
 			return $modules;
 
 		}
