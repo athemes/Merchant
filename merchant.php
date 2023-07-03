@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Merchant
  * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
- * Version:     1.0.0
+ * Version:     1.0
  * Author:      aThemes
  * Author URI:  https://athemes.com
  * License:     GPL-2.0+
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Merchant constants.
-define( 'MERCHANT_VERSION', '1.0.0' );
+define( 'MERCHANT_VERSION', '1.0' );
 define( 'MERCHANT_FILE', __FILE__ );
 define( 'MERCHANT_BASE', trailingslashit( plugin_basename( MERCHANT_FILE ) ) );
 define( 'MERCHANT_DIR', trailingslashit( plugin_dir_path( MERCHANT_FILE ) ) );
