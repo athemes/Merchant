@@ -67,7 +67,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 							'desc' => esc_html__( 'Increasing average order value by sending your customers directly to checkout instead of cart.', 'merchant' ),
 							'placeholder' => MERCHANT_URI . 'assets/images/modules/buy-now.png',
 							'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-							'preview_url' => $shop_url,
+							'preview_url' => $product_url,
 						),
 
 						'animated-add-to-cart' => array(
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 							'desc' => esc_html__( 'Stands out Add to Cart button by adding a subtle animation on the mouse over.', 'merchant' ),
 							'placeholder' => MERCHANT_URI . 'assets/images/modules/animated-add-to-cart.png',
 							'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
-							'preview_url' => $shop_url,
+							'preview_url' => $product_url,
 						),
 
 						'quick-view' => array(
