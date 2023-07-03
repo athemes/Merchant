@@ -14,10 +14,10 @@ const precision       = 10;
 // Style options.
 const styleDestination      = './assets/css';
 const styleSRC              = './assets/sass/merchant.scss';
-const styleRTLSRC           = './assets/sass/merchant-rtl.scss';
+// const styleRTLSRC           = './assets/sass/merchant-rtl.scss';
 const adminStyleDestination = './assets/css/admin';
 const adminStyleSRC         = './assets/sass/admin/admin.scss';
-const adminStyleRTLSRC      = './assets/sass/admin/admin-rtl.scss';
+// const adminStyleRTLSRC      = './assets/sass/admin/admin-rtl.scss';
 
 // Script options.
 const scriptDestination      = './assets/js';
@@ -90,10 +90,10 @@ module.exports = {
 	// Style options.
 	styleDestination,
 	styleSRC,
-	styleRTLSRC,
+	// styleRTLSRC,
 	adminStyleDestination,
 	adminStyleSRC,
-	adminStyleRTLSRC,
+	// adminStyleRTLSRC,
 
 	// Script options.
 	scriptDestination,

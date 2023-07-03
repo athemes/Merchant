@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Merchant
- * Description: Provides enhancements for your website. Get started now!
+ * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
  * Version:     1.0.0
  * Author:      aThemes
  * Author URI:  https://athemes.com
