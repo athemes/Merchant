@@ -132,61 +132,61 @@ gulp.task('stylesMin', () => {
 /**
  * Task: `stylesRTL`.
  */
-gulp.task('stylesRTL', () => {
-	return gulp
-		.src(config.styleRTLSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.styleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Styles RTL Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
+// gulp.task('stylesRTL', () => {
+// 	return gulp
+// 		.src(config.styleRTLSRC, {allowEmpty: true})
+// 		.pipe(plumber(errorHandler))
+// 		.pipe(
+// 			sass({
+// 				errLogToConsole: config.errLogToConsole,
+// 				outputStyle: 'expanded',
+// 				precision: config.precision
+// 			})
+// 		)
+// 		.on('error', sass.logError)
+// 		.pipe(autoprefixer(config.BROWSERS_LIST))
+// 		.pipe(lineec())
+// 		.pipe(gulp.dest(config.styleDestination))
+// 		.pipe(filter('**/*.css'))
+// 		.pipe(mmq({log: true}))
+// 		.pipe(browserSync.stream())
+// 		.pipe(
+// 			notify({
+// 				message: '\n\n✅  ===> Styles RTL Expanded — completed!\n',
+// 				onLast: true
+// 			})
+// 		);
+// });
 
 /**
  * Task: `stylesRTLMin`.
  */
-gulp.task('stylesRTLMin', () => {
-	return gulp
-	  .src(config.styleRTLSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.styleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Styles RTL Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
+// gulp.task('stylesRTLMin', () => {
+// 	return gulp
+// 	  .src(config.styleRTLSRC, {allowEmpty: true})
+// 	  .pipe(plumber(errorHandler))
+// 	  .pipe(
+// 			sass({
+// 				errLogToConsole: config.errLogToConsole,
+// 				outputStyle: 'compressed',
+// 				precision: config.precision
+// 			})
+// 		)
+// 	  .on('error', sass.logError)
+// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
+// 	  .pipe(rename({suffix: '.min'}))
+// 	  .pipe(lineec())
+// 	  .pipe(gulp.dest(config.styleDestination))
+// 	  .pipe(filter('**/*.css'))
+// 	  .pipe(mmq({log: true}))
+// 	  .pipe(browserSync.stream())
+// 	  .pipe(
+// 			notify({
+// 				message: '\n\n✅  ===> Styles RTL Minified — completed!\n',
+// 				onLast: true
+// 			})
+// 		);
+// });
 
 /**
  * Task: `adminStyles`.
@@ -250,61 +250,61 @@ gulp.task('adminStylesMin', () => {
 /**
  * Task: `adminStylesRTL`.
  */
-gulp.task('adminStylesRTL', () => {
-	return gulp
-		.src(config.adminStyleRTLSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.adminStyleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Admin Styles RTL Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
+// gulp.task('adminStylesRTL', () => {
+// 	return gulp
+// 		.src(config.adminStyleRTLSRC, {allowEmpty: true})
+// 		.pipe(plumber(errorHandler))
+// 		.pipe(
+// 			sass({
+// 				errLogToConsole: config.errLogToConsole,
+// 				outputStyle: 'expanded',
+// 				precision: config.precision
+// 			})
+// 		)
+// 		.on('error', sass.logError)
+// 		.pipe(autoprefixer(config.BROWSERS_LIST))
+// 		.pipe(lineec())
+// 		.pipe(gulp.dest(config.adminStyleDestination))
+// 		.pipe(filter('**/*.css'))
+// 		.pipe(mmq({log: true}))
+// 		.pipe(browserSync.stream())
+// 		.pipe(
+// 			notify({
+// 				message: '\n\n✅  ===> Admin Styles RTL Expanded — completed!\n',
+// 				onLast: true
+// 			})
+// 		);
+// });
 
 /**
  * Task: `adminStylesRTLMin`.
  */
-gulp.task('adminStylesRTLMin', () => {
-	return gulp
-	  .src(config.adminStyleRTLSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.adminStyleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Admin Styles RTL Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
+// gulp.task('adminStylesRTLMin', () => {
+// 	return gulp
+// 	  .src(config.adminStyleRTLSRC, {allowEmpty: true})
+// 	  .pipe(plumber(errorHandler))
+// 	  .pipe(
+// 			sass({
+// 				errLogToConsole: config.errLogToConsole,
+// 				outputStyle: 'compressed',
+// 				precision: config.precision
+// 			})
+// 		)
+// 	  .on('error', sass.logError)
+// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
+// 	  .pipe(rename({suffix: '.min'}))
+// 	  .pipe(lineec())
+// 	  .pipe(gulp.dest(config.adminStyleDestination))
+// 	  .pipe(filter('**/*.css'))
+// 	  .pipe(mmq({log: true}))
+// 	  .pipe(browserSync.stream())
+// 	  .pipe(
+// 			notify({
+// 				message: '\n\n✅  ===> Admin Styles RTL Minified — completed!\n',
+// 				onLast: true
+// 			})
+// 		);
+// });
 
 /**
  * Task: `scripts`.
@@ -436,12 +436,12 @@ gulp.task(
 	gulp.parallel(
 		'styles',
 		'stylesMin',
-		'stylesRTL',
-		'stylesRTLMin',
+		// 'stylesRTL',
+		// 'stylesRTLMin',
 		'adminStyles',
 		'adminStylesMin',
-		'adminStylesRTL',
-		'adminStylesRTLMin',
+		// 'adminStylesRTL',
+		// 'adminStylesRTLMin',
 		'scripts',
 		'adminScripts',
 		browsersync, () => {
@@ -452,14 +452,14 @@ gulp.task(
 		// Frontend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('styles'));
 		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('stylesRTL'));
-		gulp.watch(config.watchStyles, gulp.parallel('stylesRTLMin'));
+		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTL'));
+		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTLMin'));
 
 		// Backend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('adminStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('adminStylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTL'));
-		gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTLMin'));
+		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTL'));
+		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTLMin'));
 
 		// Frontend JS
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
