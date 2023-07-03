@@ -126,13 +126,13 @@
 		<?php
 
 			$merchant_active_modules = 0;
-			$merchant_modules = get_option( 'merchant-modules', array() );
+			$merchant_option_modules = get_option( 'merchant-modules', array() );
 
 		if ( ! empty( $merchant_modules ) ) {
 			foreach ( $merchant_modules as $merchant_data ) {
 				if ( ! empty( $merchant_data['modules'] ) ) {
 					foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) {
-						if ( ! empty( $merchant_modules[ $merchant_module_id ] ) ) {
+						if ( ! empty( $merchant_option_modules[ $merchant_module_id ] ) ) {
 							$merchant_active_modules++;
 						}
 					}
