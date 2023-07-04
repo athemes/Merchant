@@ -21,8 +21,8 @@ merchant.modules = merchant.modules || {};
 			});
 			
 			$( document.body ).on('added_to_cart', function( event, data ) {
-				if ( data && data['.cart_count_favicon_count'] !== undefined ) {
-					count = data['.cart_count_favicon_count'];
+				if ( data && data['.merchant_cart_count'] !== undefined ) {
+					count = data['.merchant_cart_count'];
 					favicon.badge( count );
 				}
 			});
@@ -32,8 +32,8 @@ merchant.modules = merchant.modules || {};
 					var fragments = sessionStorage.getItem( window.wc_cart_fragments_params.fragment_name );
 					if ( fragments ) {
 						var data = JSON.parse( fragments );
-						if ( data && data['.cart_count_favicon_count'] !== undefined ) {
-							count = data['.cart_count_favicon_count'];
+						if ( data && data['.merchant_cart_count'] !== undefined ) {
+							count = data['.merchant_cart_count'];
 							favicon.badge( count );
 						}
 					}
