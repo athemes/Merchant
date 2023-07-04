@@ -34,7 +34,7 @@ function merchant_botiga_agree_to_terms_checkout() {
 	merchant_agree_to_terms_checkout();
 
 }
-add_action( 'woocommerce_review_order_after_submit', 'merchant_botiga_agree_to_terms_checkout', 20 );
+add_action( 'woocommerce_review_order_before_submit', 'merchant_botiga_agree_to_terms_checkout', 20 );
 
 function merchant_agree_to_terms_validation( $fields, $errors ) { // phpcs:ignore
 
