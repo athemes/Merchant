@@ -27,6 +27,14 @@ const adminScriptDestination = './assets/js/admin';
 const adminScriptSRC         = './assets/js/src/admin/admin.js';
 const adminScriptFile        = 'admin';
 
+// Metabox script/style options.
+const metaboxCssDestination      = './assets/css/admin';
+const metaboxCssSRC              = './assets/sass/admin/metabox.scss';
+
+const metaboxJsDestination      = './assets/js/admin';
+const metaboxJsSRC              = './assets/js/src/admin/metabox.js';
+const metaboxJsFile             = 'merchant-metabox';
+
 // Watch options.
 const watchStyles  = './assets/sass/**/*.scss';
 const watchScripts = './assets/js/src/**/*.js';
@@ -94,6 +102,8 @@ module.exports = {
 	// Style options.
 	styleDestination,
 	styleSRC,
+	metaboxCssDestination,
+	metaboxCssSRC,
 	// styleRTLSRC,
 	adminStyleDestination,
 	adminStyleSRC,
@@ -103,6 +113,9 @@ module.exports = {
 	scriptDestination,
 	scriptSRC,
 	scriptFile,
+	metaboxJsDestination,
+	metaboxJsSRC,
+	metaboxJsFile,
 	adminScriptDestination,
 	adminScriptSRC,
 	adminScriptFile,
