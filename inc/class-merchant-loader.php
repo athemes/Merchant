@@ -42,6 +42,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-modules.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-custom-css.php';
 
+			// Metabox
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-metabox.php';
+
 			// Modules
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
 			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/scroll-to-top-button.php';
