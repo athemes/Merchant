@@ -171,7 +171,7 @@
 
 					<?php
 
-						$merchant_module_file = MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php';
+						$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
 						if ( file_exists( $merchant_module_file ) ) {
 							require $merchant_module_file;

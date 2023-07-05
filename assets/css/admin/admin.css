@@ -2633,6 +2633,79 @@
   width: 100%;
 }
 
+/* Sortable Field */
+.merchant-sortable {
+  max-width: 300px;
+}
+
+.merchant-sortable ul.ui-sortable li {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  color: #1E1E1E;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  text-transform: capitalize;
+  line-height: 36px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons {
+  width: 36px;
+  height: 36px;
+  -ms-flex-preferred-size: 36px;
+      flex-basis: 36px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons:before {
+  font-size: 16px;
+  line-height: 1em;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.dashicons-menu {
+  float: left;
+  padding: 0;
+  margin: 0 10px 0 0;
+  border: none;
+  border-right: 1px solid #ddd;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.dashicons-visibility {
+  float: right;
+  color: #3858E9;
+  padding: 0;
+  margin: 0 0 0 10px;
+  border: none;
+  border-left: 1px solid #ddd;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.visibility {
+  cursor: pointer;
+}
+
+.merchant-sortable ul.ui-sortable li.invisible {
+  color: #6E7780;
+  border: 1px solid #CAD2F6;
+  background-color: #EBEEFB;
+}
+
+.merchant-sortable ul.ui-sortable li.invisible .dashicons.dashicons-visibility:before {
+  content: "\f530";
+}
+
 .merchant-module-page-setting-field-range .merchant-range {
   position: relative;
   width: 100%;

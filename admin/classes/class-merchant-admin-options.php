@@ -542,6 +542,46 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo wp_kses_post( $settings['content'] );
 		}
 
+		/**
+		 * Field: Sortable
+		 */
+		public static function sortable( $settings, $value ) {
+			$value = json_decode( $value );
+
+			?>
+				<div class="merchant-sortable">
+					<ul class="merchant-sortable-list ui-sortable">
+						<?php foreach( $value as $option_key ) :
+							$option_val = $settings[ 'options' ][ $option_key ];
+						
+							if( in_array( $option_key, $value ) ) : ?>
+								<li class="merchant-sortable-item" data-value="<?php echo esc_attr( $option_key ); ?>">
+									<i class='dashicons dashicons-menu'></i>
+									<i class="dashicons dashicons-visibility visibility"></i>
+									<?php echo esc_html( $option_val ); ?>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+
+						<?php foreach( $settings[ 'options' ] as $option_key => $option_val ) : 
+							if( ! in_array( $option_key, $value ) ) :
+								$invisible = ! in_array( $option_key, $value ) ? ' invisible' : '';
+
+								?>
+								<li class="merchant-sortable-item<?php echo esc_attr( $invisible ); ?>" data-value="<?php echo esc_attr( $option_key ); ?>">
+									<i class='dashicons dashicons-menu'></i>
+									<i class="dashicons dashicons-visibility visibility"></i>
+									<?php echo esc_html( $option_val ); ?>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+
+					<input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
+				</div>
+			<?php
+		}
+
 	}
 
 	Merchant_Admin_Options::instance();
