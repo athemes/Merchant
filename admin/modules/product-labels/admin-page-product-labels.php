@@ -15,6 +15,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'label_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label Text', 'merchant' ),
+			'desc'    => esc_html__( 'Note: This label will be shown only on sales products.', 'merchant' ),
 			'default' => esc_html__( 'Spring Special', 'merchant' ),
 		),
 

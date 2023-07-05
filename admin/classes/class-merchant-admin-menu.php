@@ -89,7 +89,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 			} else {
 
-				$response = wp_remote_get( 'https://athemes.com/wp-json/wp/v2/changelogs?themes=7103&per_page=3' );
+				$response = wp_remote_get( apply_filters( 'merchant_changelog_api_url', 'https://athemes.com/wp-json/wp/v2/changelogs?themes=7103&per_page=3' ) );
 
 				if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
 					$this->notifications = json_decode( wp_remote_retrieve_body( $response ) );
