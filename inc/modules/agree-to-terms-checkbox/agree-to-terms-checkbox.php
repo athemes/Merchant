@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_agree_to_terms_checkout() {
 
 	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {

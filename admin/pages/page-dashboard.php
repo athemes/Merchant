@@ -1,5 +1,13 @@
-<?php $merchant_notifications = $this->get_notifications(); ?>
-<?php $merchant_notification_read = $this->is_latest_notification_read(); ?>
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$merchant_notifications 	= $this->get_notifications();
+$merchant_notification_read = $this->is_latest_notification_read(); 
+
+?>
 
 <div class="merchant-top-bar">
 	<a href="https://athemes.com/" class="merchant-top-bar-logo" target="_blank">

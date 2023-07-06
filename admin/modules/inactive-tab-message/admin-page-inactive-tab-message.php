@@ -3,6 +3,10 @@
  * Merchant - Inactive Tab Message
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Settings
  */

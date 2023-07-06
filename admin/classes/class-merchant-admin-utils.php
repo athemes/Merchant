@@ -3,6 +3,10 @@
  * Merchant Admin Utils Functions.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * SVG - wp_kses.
  * Allows to svg in wp_kses.

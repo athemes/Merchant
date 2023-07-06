@@ -3,6 +3,10 @@
  * Merchant - Payment Logos
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Payment Logos
  */

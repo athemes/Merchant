@@ -2,6 +2,11 @@
 /**
  * Merchant_Admin_Modules Class.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 	class Merchant_Admin_Modules {

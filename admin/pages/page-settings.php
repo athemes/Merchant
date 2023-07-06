@@ -1,3 +1,11 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+?>
+
 <div class="merchant-module-page">
 
 	<div class="merchant-module-page-content">

@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_add_payment_logos_add_to_cart_form() {
 
 	if ( Merchant_Modules::is_module_active( 'payment-logos' ) ) {

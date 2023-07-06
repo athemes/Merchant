@@ -2,6 +2,11 @@
 /**
  * Merchant_Custom_CSS Class.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 	class Merchant_Custom_CSS {

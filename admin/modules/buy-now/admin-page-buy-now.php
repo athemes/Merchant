@@ -3,6 +3,10 @@
  * Merchant Buy Now
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Settings
  */

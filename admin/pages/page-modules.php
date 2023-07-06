@@ -1,4 +1,12 @@
-<?php $merchant_modules = Merchant_Admin_Modules::get_modules(); ?>
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$merchant_modules = Merchant_Admin_Modules::get_modules(); 
+
+?>
 
 <div class="merchant-modules-header">
 

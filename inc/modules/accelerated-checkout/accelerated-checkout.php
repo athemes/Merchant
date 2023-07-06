@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_add_buy_now_button() {
 
 	if ( ! Merchant_Modules::is_module_active( 'accelerated-checkout' ) ) {

@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_content_ajax_search_item( $args ) {
 
 	if ( 'product' === $args['type'] ) {

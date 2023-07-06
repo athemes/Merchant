@@ -1,6 +1,13 @@
-<?php $merchant_module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; ?>
+<?php
 
-<?php $merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$merchant_module	  = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+$merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); 
+
+?>
 
 <?php if ( ! empty( $merchant_module_info ) ) : ?>
 
