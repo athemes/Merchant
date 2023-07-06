@@ -48,6 +48,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function create( $settings ) {
 
+			/**
+			 * Hook: merchant_module_settings
+			 * 
+			 * @since 1.0
+			 */
 			$settings = apply_filters( 'merchant_module_settings', $settings );
 
 			self::save_options( $settings );
@@ -154,32 +159,32 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'color':
 				case 'number':
 					$value = sanitize_text_field( $value );
-				    break;
+					break;
 
 				case 'textarea':
 					$value = sanitize_textarea_field( $value );
-				    break;
+					break;
 
 				case 'checkbox':
 				case 'switcher':
-					$value = ( $value === '1' ) ? 1 : 0;
-				    break;
+					$value = ( '1' === $value ) ? 1 : 0;
+					break;
 
 				case 'range':
 				case 'number':
 					$value = absint( $value );
-				    break;
+					break;
 
 				case 'radio':
 				case 'radio_alt':
 				case 'select':
 				case 'choices':
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
-				    break;
+					break;
 
 				case 'code-editor':
 					$value = wp_kses_post( $value );
-				    break;
+					break;
 
 			}
 
@@ -551,10 +556,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
 				<div class="merchant-sortable">
 					<ul class="merchant-sortable-list ui-sortable">
-						<?php foreach( $value as $option_key ) :
+						<?php 
+						foreach ( $value as $option_key ) :
 							$option_val = $settings[ 'options' ][ $option_key ];
 						
-							if( in_array( $option_key, $value ) ) : ?>
+							if ( in_array( $option_key, $value ) ) : 
+								?>
 								<li class="merchant-sortable-item" data-value="<?php echo esc_attr( $option_key ); ?>">
 									<i class='dashicons dashicons-menu'></i>
 									<i class="dashicons dashicons-visibility visibility"></i>
@@ -563,8 +570,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							<?php endif; ?>
 						<?php endforeach; ?>
 
-						<?php foreach( $settings[ 'options' ] as $option_key => $option_val ) : 
-							if( ! in_array( $option_key, $value ) ) :
+						<?php 
+						foreach ( $settings[ 'options' ] as $option_key => $option_val ) : 
+							if ( ! in_array( $option_key, $value ) ) :
 								$invisible = ! in_array( $option_key, $value ) ? ' invisible' : '';
 
 								?>

@@ -52,7 +52,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function enqueue_styles_scripts() {
 			
-			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 
@@ -94,11 +94,8 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 * Add plugin settings link on the plugin page.
 		 */
 		public function add_admin_footer_text( $text ) {
-
-			// phpcs:disable WordPress.Security.NonceVerification
 			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
-			// phpcs:enable WordPress.Security.NonceVerification
 			
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 
@@ -120,12 +117,9 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		/**
 		 * Add admin body class.
 		 */
-		public function add_admin_body_class( $classes ) {
-			
-			// phpcs:disable WordPress.Security.NonceVerification
+		public function add_admin_body_class( $classes ) {			
 			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
-			// phpcs:enable WordPress.Security.NonceVerification
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 

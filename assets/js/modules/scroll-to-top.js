@@ -8,14 +8,14 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.scrollTop = {
 
-	  init: function() {
+		init: function() {
 
-	  	var self    = this;
-	  	var $button = $('.merchant-scroll-to-top-button');
+		  var self    = this;
+		  var $button = $('.merchant-scroll-to-top-button');
 
-	  	if ( ! $button.length ) {
-	  		return;
-	  	}
+			if ( ! $button.length ) {
+				return;
+			}
 
 			$button.on('click', function() {
 				self.onScrollTop();
@@ -27,9 +27,9 @@ merchant.modules = merchant.modules || {};
 
 			self.onScroll( $button );
 
-	  },
+		},
 
-	  onScroll: function( $button ) {
+		onScroll: function( $button ) {
 
 			var rootElement = document.documentElement;
 			var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
@@ -40,9 +40,9 @@ merchant.modules = merchant.modules || {};
 				$button.removeClass('merchant-show');
 			}
 
-	  },
+		},
 
-	  onScrollTop: function() {
+		onScrollTop: function() {
 
 			$('html, body').animate({scrollTop: 0}, 200, function() {
 
@@ -54,7 +54,7 @@ merchant.modules = merchant.modules || {};
 
 			});
 
-	  }
+		}
 
 	};
 

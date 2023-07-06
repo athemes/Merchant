@@ -12,7 +12,7 @@
 
 .products .product .merchant_buy_now_button {
   -ms-flex-item-align: start;
-      align-self: flex-start;
+	  align-self: flex-start;
 }
 
 .single-product .product .single_add_to_cart_button.merchant_buy_now_button {
@@ -88,7 +88,7 @@
   background-color: #fff;
   border: 1px solid #eee;
   -webkit-box-shadow: 0px 30px 80px -10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 30px 80px -10px rgba(0, 0, 0, 0.1);
+		  box-shadow: 0px 30px 80px -10px rgba(0, 0, 0, 0.1);
 }
 
 .merchant-ajax-search-wrapper.merchant-reverse {
@@ -125,21 +125,21 @@
 
 .merchant-ajax-search-item-image {
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+	  flex-shrink: 0;
   max-width: 60px;
 }
 
 .merchant-ajax-search-item-info {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+	  -ms-flex: 1;
+		  flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
   grid-gap: 5px;
 }
 
@@ -155,7 +155,7 @@
 
 .merchant-ajax-search-item-price {
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+	  flex-shrink: 0;
   text-align: right;
 }
 
@@ -200,422 +200,422 @@
 
 @media (max-width: 767px) {
   .merchant-ajax-search-wrapper {
-    min-width: 500px;
+	min-width: 500px;
   }
   .merchant-ajax-search-item-image {
-    display: none;
+	display: none;
   }
 }
 
 @media (max-width: 575px) {
   .merchant-ajax-search-wrapper {
-    min-width: calc(100vw - 30px);
+	min-width: calc(100vw - 30px);
   }
 }
 
 @-webkit-keyframes merchant-flash {
   0%, 50%, to {
-    opacity: 1;
+	opacity: 1;
   }
   25%, 75% {
-    opacity: 0;
+	opacity: 0;
   }
 }
 
 @keyframes merchant-flash {
   0%, 50%, to {
-    opacity: 1;
+	opacity: 1;
   }
   25%, 75% {
-    opacity: 0;
+	opacity: 0;
   }
 }
 
 @-webkit-keyframes merchant-bounce {
   to {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+			transform: scale(1.2);
   }
 }
 
 @keyframes merchant-bounce {
   to {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+			transform: scale(1.2);
   }
 }
 
 @-webkit-keyframes merchant-shake {
   33% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+	-webkit-transform: rotate(10deg);
+			transform: rotate(10deg);
   }
   67% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+	-webkit-transform: rotate(-10deg);
+			transform: rotate(-10deg);
   }
   to {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+	-webkit-transform: rotate(10deg);
+			transform: rotate(10deg);
   }
 }
 
 @keyframes merchant-shake {
   33% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+	-webkit-transform: rotate(10deg);
+			transform: rotate(10deg);
   }
   67% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+	-webkit-transform: rotate(-10deg);
+			transform: rotate(-10deg);
   }
   to {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+	-webkit-transform: rotate(10deg);
+			transform: rotate(10deg);
   }
 }
 
 @-webkit-keyframes merchant-pulse {
   0% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    -webkit-transform-origin: center center;
-            transform-origin: center center;
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(1);
+			transform: scale(1);
+	-webkit-transform-origin: center center;
+			transform-origin: center center;
   }
   10% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.91);
-            transform: scale(0.91);
+	-webkit-animation-timing-function: ease-in;
+			animation-timing-function: ease-in;
+	-webkit-transform: scale(0.91);
+			transform: scale(0.91);
   }
   17% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(0.98);
-            transform: scale(0.98);
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(0.98);
+			transform: scale(0.98);
   }
   33% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.87);
-            transform: scale(0.87);
+	-webkit-animation-timing-function: ease-in;
+			animation-timing-function: ease-in;
+	-webkit-transform: scale(0.87);
+			transform: scale(0.87);
   }
   45% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(1);
+			transform: scale(1);
   }
 }
 
 @keyframes merchant-pulse {
   0% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    -webkit-transform-origin: center center;
-            transform-origin: center center;
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(1);
+			transform: scale(1);
+	-webkit-transform-origin: center center;
+			transform-origin: center center;
   }
   10% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.91);
-            transform: scale(0.91);
+	-webkit-animation-timing-function: ease-in;
+			animation-timing-function: ease-in;
+	-webkit-transform: scale(0.91);
+			transform: scale(0.91);
   }
   17% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(0.98);
-            transform: scale(0.98);
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(0.98);
+			transform: scale(0.98);
   }
   33% {
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-    -webkit-transform: scale(0.87);
-            transform: scale(0.87);
+	-webkit-animation-timing-function: ease-in;
+			animation-timing-function: ease-in;
+	-webkit-transform: scale(0.87);
+			transform: scale(0.87);
   }
   45% {
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-    -webkit-transform: scale(1);
-            transform: scale(1);
+	-webkit-animation-timing-function: ease-out;
+			animation-timing-function: ease-out;
+	-webkit-transform: scale(1);
+			transform: scale(1);
   }
 }
 
 @-webkit-keyframes merchant-jello-shake {
   0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
   30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
+	-webkit-transform: scale3d(1.25, 0.75, 1);
+			transform: scale3d(1.25, 0.75, 1);
   }
   40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
+	-webkit-transform: scale3d(0.75, 1.25, 1);
+			transform: scale3d(0.75, 1.25, 1);
   }
   50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
+	-webkit-transform: scale3d(1.15, 0.85, 1);
+			transform: scale3d(1.15, 0.85, 1);
   }
   65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
+	-webkit-transform: scale3d(0.95, 1.05, 1);
+			transform: scale3d(0.95, 1.05, 1);
   }
   75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
+	-webkit-transform: scale3d(1.05, 0.95, 1);
+			transform: scale3d(1.05, 0.95, 1);
   }
   to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
 }
 
 @keyframes merchant-jello-shake {
   0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
   30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
+	-webkit-transform: scale3d(1.25, 0.75, 1);
+			transform: scale3d(1.25, 0.75, 1);
   }
   40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
+	-webkit-transform: scale3d(0.75, 1.25, 1);
+			transform: scale3d(0.75, 1.25, 1);
   }
   50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-            transform: scale3d(1.15, 0.85, 1);
+	-webkit-transform: scale3d(1.15, 0.85, 1);
+			transform: scale3d(1.15, 0.85, 1);
   }
   65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
+	-webkit-transform: scale3d(0.95, 1.05, 1);
+			transform: scale3d(0.95, 1.05, 1);
   }
   75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
+	-webkit-transform: scale3d(1.05, 0.95, 1);
+			transform: scale3d(1.05, 0.95, 1);
   }
   to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
 }
 
 @-webkit-keyframes merchant-wobble {
   0%, to {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+	-webkit-transform: translateX(0);
+			transform: translateX(0);
+	-webkit-transform-origin: 50% 50%;
+			transform-origin: 50% 50%;
   }
   15% {
-    -webkit-transform: translateX(-30px) rotate(-6deg);
-            transform: translateX(-30px) rotate(-6deg);
+	-webkit-transform: translateX(-30px) rotate(-6deg);
+			transform: translateX(-30px) rotate(-6deg);
   }
   30% {
-    -webkit-transform: translateX(15px) rotate(6deg);
-            transform: translateX(15px) rotate(6deg);
+	-webkit-transform: translateX(15px) rotate(6deg);
+			transform: translateX(15px) rotate(6deg);
   }
   45% {
-    -webkit-transform: translateX(-15px) rotate(-3.6deg);
-            transform: translateX(-15px) rotate(-3.6deg);
+	-webkit-transform: translateX(-15px) rotate(-3.6deg);
+			transform: translateX(-15px) rotate(-3.6deg);
   }
   60% {
-    -webkit-transform: translateX(9px) rotate(2.4deg);
-            transform: translateX(9px) rotate(2.4deg);
+	-webkit-transform: translateX(9px) rotate(2.4deg);
+			transform: translateX(9px) rotate(2.4deg);
   }
   75% {
-    -webkit-transform: translateX(-6px) rotate(-1.2deg);
-            transform: translateX(-6px) rotate(-1.2deg);
+	-webkit-transform: translateX(-6px) rotate(-1.2deg);
+			transform: translateX(-6px) rotate(-1.2deg);
   }
 }
 
 @keyframes merchant-wobble {
   0%, to {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
-    -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+	-webkit-transform: translateX(0);
+			transform: translateX(0);
+	-webkit-transform-origin: 50% 50%;
+			transform-origin: 50% 50%;
   }
   15% {
-    -webkit-transform: translateX(-30px) rotate(-6deg);
-            transform: translateX(-30px) rotate(-6deg);
+	-webkit-transform: translateX(-30px) rotate(-6deg);
+			transform: translateX(-30px) rotate(-6deg);
   }
   30% {
-    -webkit-transform: translateX(15px) rotate(6deg);
-            transform: translateX(15px) rotate(6deg);
+	-webkit-transform: translateX(15px) rotate(6deg);
+			transform: translateX(15px) rotate(6deg);
   }
   45% {
-    -webkit-transform: translateX(-15px) rotate(-3.6deg);
-            transform: translateX(-15px) rotate(-3.6deg);
+	-webkit-transform: translateX(-15px) rotate(-3.6deg);
+			transform: translateX(-15px) rotate(-3.6deg);
   }
   60% {
-    -webkit-transform: translateX(9px) rotate(2.4deg);
-            transform: translateX(9px) rotate(2.4deg);
+	-webkit-transform: translateX(9px) rotate(2.4deg);
+			transform: translateX(9px) rotate(2.4deg);
   }
   75% {
-    -webkit-transform: translateX(-6px) rotate(-1.2deg);
-            transform: translateX(-6px) rotate(-1.2deg);
+	-webkit-transform: translateX(-6px) rotate(-1.2deg);
+			transform: translateX(-6px) rotate(-1.2deg);
   }
 }
 
 @-webkit-keyframes merchant-vibrate {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
+	-webkit-transform: translate(0);
+			transform: translate(0);
   }
   20% {
-    -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
+	-webkit-transform: translate(-2px, 2px);
+			transform: translate(-2px, 2px);
   }
   40% {
-    -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
+	-webkit-transform: translate(-2px, -2px);
+			transform: translate(-2px, -2px);
   }
   60% {
-    -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
+	-webkit-transform: translate(2px, 2px);
+			transform: translate(2px, 2px);
   }
   80% {
-    -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
+	-webkit-transform: translate(2px, -2px);
+			transform: translate(2px, -2px);
   }
   to {
-    -webkit-transform: translate(0);
-            transform: translate(0);
+	-webkit-transform: translate(0);
+			transform: translate(0);
   }
 }
 
 @keyframes merchant-vibrate {
   0% {
-    -webkit-transform: translate(0);
-            transform: translate(0);
+	-webkit-transform: translate(0);
+			transform: translate(0);
   }
   20% {
-    -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
+	-webkit-transform: translate(-2px, 2px);
+			transform: translate(-2px, 2px);
   }
   40% {
-    -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
+	-webkit-transform: translate(-2px, -2px);
+			transform: translate(-2px, -2px);
   }
   60% {
-    -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
+	-webkit-transform: translate(2px, 2px);
+			transform: translate(2px, 2px);
   }
   80% {
-    -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
+	-webkit-transform: translate(2px, -2px);
+			transform: translate(2px, -2px);
   }
   to {
-    -webkit-transform: translate(0);
-            transform: translate(0);
+	-webkit-transform: translate(0);
+			transform: translate(0);
   }
 }
 
 @-webkit-keyframes merchant-swing {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
   20% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+			transform: rotate(3deg);
   }
   40% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+			transform: rotate(-3deg);
   }
   60% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+			transform: rotate(3deg);
   }
   80% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+			transform: rotate(-3deg);
   }
   to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
 }
 
 @keyframes merchant-swing {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
   20% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+			transform: rotate(3deg);
   }
   40% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+			transform: rotate(-3deg);
   }
   60% {
-    -webkit-transform: rotate(3deg);
-            transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+			transform: rotate(3deg);
   }
   80% {
-    -webkit-transform: rotate(-3deg);
-            transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+			transform: rotate(-3deg);
   }
   to {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
 }
 
 @-webkit-keyframes merchant-tada {
   0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
   10%, 20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+	-webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+			transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
   }
   30%, 50%, 70%, 90% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+	-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+			transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
   }
   40%, 60%, 80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+	-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+			transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
   }
   to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
 }
 
 @keyframes merchant-tada {
   0% {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
   10%, 20% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
-            transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+	-webkit-transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
+			transform: scale3d(0.9, 0.9, 0.9) rotate(-3deg);
   }
   30%, 50%, 70%, 90% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+	-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
+			transform: scale3d(1.1, 1.1, 1.1) rotate(3deg);
   }
   40%, 60%, 80% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
-            transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+	-webkit-transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
+			transform: scale3d(1.1, 1.1, 1.1) rotate(-3deg);
   }
   to {
-    -webkit-transform: scaleX(1);
-            transform: scaleX(1);
+	-webkit-transform: scaleX(1);
+			transform: scaleX(1);
   }
 }
 
@@ -639,13 +639,13 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px 1px;
-          box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px 1px;
+		  box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px 1px;
   color: var(--merchant-text-color, #ffffff);
   background-color: var(--merchant-background, #000000);
   min-height: var(--merchant-modal-height, 50px);
@@ -672,11 +672,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
   font-size: 18px;
   line-height: 1em;
   opacity: 0.5;
@@ -703,7 +703,7 @@
   margin: 0 auto;
   border-radius: 10px;
   -webkit-box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
-          box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+		  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
   width: var(--merchant-modal-width, 750px);
   max-width: 95%;
 }
@@ -719,20 +719,20 @@
   display: flex;
   grid-gap: 10px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-cookie-banner-button {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+	 -moz-user-select: none;
+	  -ms-user-select: none;
+		  user-select: none;
   cursor: pointer;
   font-weight: bold;
   padding: 6px 20px;
@@ -743,24 +743,24 @@
 
 @media (max-width: 768px) {
   .merchant-cookie-banner-floating {
-    bottom: 15px;
+	bottom: 15px;
   }
   .merchant-cookie-banner-content {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+			flex-direction: column;
   }
   .merchant-cookie-banner-button {
-    width: 100%;
-    text-align: center;
+	width: 100%;
+	text-align: center;
   }
 }
 
 .merchant-payment-logos {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+	  -ms-flex: 1;
+		  flex: 1;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -768,8 +768,8 @@
   grid-gap: 15px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
   margin-top: var(--merchant-margin-top, 20px);
   margin-bottom: var(--merchant-margin-bottom, 20px);
 }
@@ -784,11 +784,11 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   grid-gap: 5px;
   -webkit-box-pack: var(--merchant-align, flex-start);
-      -ms-flex-pack: var(--merchant-align, flex-start);
-          justify-content: var(--merchant-align, flex-start);
+	  -ms-flex-pack: var(--merchant-align, flex-start);
+		  justify-content: var(--merchant-align, flex-start);
 }
 
 .merchant-payment-logos-images img {
@@ -798,8 +798,8 @@
 
 .merchant-trust-badges {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+	  -ms-flex: 1;
+		  flex: 1;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -807,8 +807,8 @@
   grid-gap: 15px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
   padding: 15px;
   border: 1px solid var(--merchant-border-color, #e5e5e5);
   margin-top: var(--merchant-margin-top, 20px);
@@ -828,11 +828,11 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   grid-gap: 5px;
   -webkit-box-pack: var(--merchant-align, flex-start);
-      -ms-flex-pack: var(--merchant-align, flex-start);
-          justify-content: var(--merchant-align, flex-start);
+	  -ms-flex-pack: var(--merchant-align, flex-start);
+		  justify-content: var(--merchant-align, flex-start);
 }
 
 .merchant-trust-badges-images img {
@@ -866,16 +866,16 @@
   display: -ms-inline-flexbox !important;
   display: inline-flex !important;
   -webkit-box-pack: center !important;
-      -ms-flex-pack: center !important;
-          justify-content: center !important;
+	  -ms-flex-pack: center !important;
+		  justify-content: center !important;
   -webkit-box-align: center !important;
-      -ms-flex-align: center !important;
-          align-items: center !important;
+	  -ms-flex-align: center !important;
+		  align-items: center !important;
   -webkit-transition: all .2s;
   transition: all .2s;
   text-decoration: none;
   -ms-flex-item-align: start;
-      align-self: flex-start;
+	  align-self: flex-start;
   color: var(--merchant-text-color, #ffffff) !important;
   border-color: var(--merchant-border-color, #212121) !important;
   background-color: var(--merchant-background-color, #212121) !important;
@@ -915,7 +915,7 @@
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+		  transform: translate(-50%, -50%);
   margin: 0;
   white-space: nowrap !important;
   opacity: 0;
@@ -938,11 +938,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -979,7 +979,7 @@
   display: flex;
   font-size: 26px;
   -webkit-animation: merchant-fa-spin .75s linear infinite;
-          animation: merchant-fa-spin .75s linear infinite;
+		  animation: merchant-fa-spin .75s linear infinite;
   opacity: 0;
   visibility: hidden;
 }
@@ -1021,11 +1021,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
 }
 
 .merchant-quick-view-close-button svg {
@@ -1036,23 +1036,23 @@
 
 @-webkit-keyframes merchant-fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(1turn);
-            transform: rotate(1turn);
+	-webkit-transform: rotate(1turn);
+			transform: rotate(1turn);
   }
 }
 
 @keyframes merchant-fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(1turn);
-            transform: rotate(1turn);
+	-webkit-transform: rotate(1turn);
+			transform: rotate(1turn);
   }
 }
 
@@ -1065,8 +1065,8 @@
 
 .merchant-quick-view-column {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+	  -ms-flex: 1;
+		  flex: 1;
   width: 50%;
 }
 
@@ -1121,22 +1121,22 @@
   grid-gap: 5px !important;
   -webkit-box-orient: horizontal !important;
   -webkit-box-direction: reverse !important;
-      -ms-flex-direction: row-reverse !important;
-          flex-direction: row-reverse !important;
+	  -ms-flex-direction: row-reverse !important;
+		  flex-direction: row-reverse !important;
 }
 
 .merchant-quick-view-thumbs-at-left .woocommerce-product-gallery .flex-control-thumbs {
   padding-right: 5px !important;
   -ms-flex-negative: 0 !important;
-      flex-shrink: 0 !important;
+	  flex-shrink: 0 !important;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   grid-gap: 10px !important;
   -webkit-box-orient: vertical !important;
   -webkit-box-direction: normal !important;
-      -ms-flex-direction: column !important;
-          flex-direction: column !important;
+	  -ms-flex-direction: column !important;
+		  flex-direction: column !important;
   margin: 0 !important;
   overflow-y: auto !important;
   max-height: calc(var(--merchant-quick-view-modal-height, 500px) - 70px) !important;
@@ -1156,15 +1156,15 @@
 .merchant-quick-view-thumbs-at-right .woocommerce-product-gallery .flex-control-thumbs {
   padding-right: 5px !important;
   -ms-flex-negative: 0 !important;
-      flex-shrink: 0 !important;
+	  flex-shrink: 0 !important;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   grid-gap: 10px !important;
   -webkit-box-orient: vertical !important;
   -webkit-box-direction: normal !important;
-      -ms-flex-direction: column !important;
-          flex-direction: column !important;
+	  -ms-flex-direction: column !important;
+		  flex-direction: column !important;
   margin: 0 !important;
   overflow-y: auto !important;
   max-height: calc(var(--merchant-quick-view-modal-height, 500px) - 70px) !important;
@@ -1177,19 +1177,19 @@
   grid-gap: 10px !important;
   -webkit-box-orient: vertical !important;
   -webkit-box-direction: normal !important;
-      -ms-flex-direction: column !important;
-          flex-direction: column !important;
+	  -ms-flex-direction: column !important;
+		  flex-direction: column !important;
   max-height: calc(var(--merchant-quick-view-modal-height, 500px) - 70px) !important;
 }
 
 .merchant-quick-view-thumbs-at-bottom .woocommerce-product-gallery .flex-control-thumbs {
   -ms-flex-negative: 0 !important;
-      flex-shrink: 0 !important;
+	  flex-shrink: 0 !important;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   -ms-flex-wrap: wrap !important;
-      flex-wrap: wrap !important;
+	  flex-wrap: wrap !important;
   grid-gap: 10px !important;
   margin: 0 !important;
 }
@@ -1201,8 +1201,8 @@
   grid-gap: 10px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
   max-height: calc(var(--merchant-quick-view-modal-height, 500px) - 70px);
   overflow-y: auto;
   padding-right: 12px;
@@ -1233,14 +1233,14 @@
   display: flex;
   grid-gap: 10px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   margin: 0 !important;
 }
 
 .merchant-quick-view-summary form.cart > *,
 .merchant-quick-view-summary .woocommerce-variation-add-to-cart > * {
   -ms-flex-item-align: inherit !important;
-      align-self: inherit !important;
+	  align-self: inherit !important;
   justify-self: inherit !important;
   margin: 0 !important;
 }
@@ -1304,9 +1304,9 @@
 
 .merchant-quick-view-product-add-to-cart .disabled {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+	 -moz-user-select: none;
+	  -ms-user-select: none;
+		  user-select: none;
   pointer-events: none;
 }
 
@@ -1321,8 +1321,8 @@
   grid-gap: 5px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
 }
 
 .merchant-quick-view-product-meta .product_meta span {
@@ -1336,73 +1336,73 @@
 
 @media (max-width: 767px) {
   .merchant-quick-view-row {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+			flex-direction: column;
   }
   .merchant-quick-view-column {
-    width: 100%;
+	width: 100%;
   }
   .merchant-quick-view-content {
-    max-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+	max-height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
   }
   .merchant-quick-view-inner {
-    padding: 15px;
-    max-width: 80vw;
-    max-height: 85vh;
-    height: 85vh;
+	padding: 15px;
+	max-width: 80vw;
+	max-height: 85vh;
+	height: 85vh;
   }
   .merchant-quick-view-modal {
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    padding-top: 7vh;
+	-webkit-box-align: start;
+		-ms-flex-align: start;
+			align-items: flex-start;
+	padding-top: 7vh;
   }
   .merchant-quick-view-summary {
-    max-height: none;
-    overflow: hidden;
+	max-height: none;
+	overflow: hidden;
   }
   .merchant-quick-view-product-gallery .woocommerce-product-gallery__image {
-    max-height: none;
+	max-height: none;
   }
   .merchant-quick-view-product-gallery .woocommerce-product-gallery__image img {
-    max-height: none;
+	max-height: none;
   }
   .merchant-quick-view-thumbs-at-left .woocommerce-product-gallery,
   .merchant-quick-view-thumbs-at-right .woocommerce-product-gallery {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-    grid-gap: 10px !important;
-    -webkit-box-orient: vertical !important;
-    -webkit-box-direction: normal !important;
-        -ms-flex-direction: column !important;
-            flex-direction: column !important;
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
+	display: flex !important;
+	grid-gap: 10px !important;
+	-webkit-box-orient: vertical !important;
+	-webkit-box-direction: normal !important;
+		-ms-flex-direction: column !important;
+			flex-direction: column !important;
   }
   .merchant-quick-view-thumbs-at-left .woocommerce-product-gallery .flex-control-thumbs,
   .merchant-quick-view-thumbs-at-right .woocommerce-product-gallery .flex-control-thumbs {
-    -ms-flex-negative: 0 !important;
-        flex-shrink: 0 !important;
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-    -ms-flex-wrap: wrap !important;
-        flex-wrap: wrap !important;
-    -webkit-box-orient: horizontal !important;
-    -webkit-box-direction: normal !important;
-        -ms-flex-direction: row !important;
-            flex-direction: row !important;
-    grid-gap: 10px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    max-height: none !important;
+	-ms-flex-negative: 0 !important;
+		flex-shrink: 0 !important;
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
+	display: flex !important;
+	-ms-flex-wrap: wrap !important;
+		flex-wrap: wrap !important;
+	-webkit-box-orient: horizontal !important;
+	-webkit-box-direction: normal !important;
+		-ms-flex-direction: row !important;
+			flex-direction: row !important;
+	grid-gap: 10px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: hidden !important;
+	max-height: none !important;
   }
   .merchant-quick-view-thumbs-at-bottom .woocommerce-product-gallery {
-    max-height: none !important;
+	max-height: none !important;
   }
 }
 
@@ -1417,11 +1417,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
   text-align: center;
   text-transform: var(--merchant-text-transform, uppercase);
   color: var(--merchant-text-color, #ffffff);
@@ -1446,8 +1446,8 @@
   display: flex;
   grid-gap: 5px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+	  -ms-flex-align: center;
+		  align-items: center;
   cursor: pointer;
   line-height: 1;
   position: fixed;
@@ -1515,7 +1515,7 @@
 .merchant-theme-botiga .botiga-add-to-cart-button-layout3 .product_type_grouped:hover,
 .merchant-theme-botiga .botiga-add-to-cart-button-layout3 .single_add_to_cart_button:hover {
   -webkit-animation: none;
-          animation: none;
+		  animation: none;
 }
 
 .merchant-theme-botiga ul.products.columns-4 li.product .button,
@@ -1552,7 +1552,7 @@
   display: flex;
   grid-gap: 10px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-theme-blocksy .products .product .ct-woo-card-actions {
@@ -1561,7 +1561,7 @@
   display: flex;
   grid-gap: 10px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-theme-zakra .products .product .wp-element-button {
@@ -1573,7 +1573,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   grid-gap: 10px;
 }
 
@@ -1591,7 +1591,7 @@
   display: flex;
   grid-gap: 5px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-theme-oceanwp .products .product .merchant-quick-view-open {
@@ -1604,7 +1604,7 @@
   display: flex;
   grid-gap: 10px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-theme-oceanwp .product .summary form.cart div.quantity {
@@ -1621,7 +1621,7 @@
   display: flex;
   grid-gap: 10px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
 }
 
 .merchant-theme-woostify .product .summary form.cart div.quantity {
@@ -1638,7 +1638,7 @@
 
 .merchant-theme-blocksy .merchant-quick-view-summary .merchant_buy_now_button {
   -ms-flex-item-align: inherit;
-      align-self: inherit;
+	  align-self: inherit;
   margin-left: 0;
 }
 
@@ -1648,10 +1648,10 @@
   display: flex;
   grid-gap: 5px;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+	  -ms-flex-pack: center;
+		  justify-content: center;
 }
 
 .merchant-hidden {
@@ -1660,12 +1660,12 @@
 
 @media (max-width: 767px) {
   .merchant-visibility-desktop-only {
-    display: none !important;
+	display: none !important;
   }
 }
 
 @media (min-width: 767px) {
   .merchant-visibility-mobile-only {
-    display: none !important;
+	display: none !important;
   }
 }

@@ -676,5 +676,3 @@
 	}
 
 })( jQuery, window, document );
-
-

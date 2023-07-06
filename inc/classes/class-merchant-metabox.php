@@ -30,7 +30,7 @@ class Merchant_Metabox {
 	 */
 	public function __construct() {
 
-		if( ! is_null( self::$initialized ) ) {
+		if ( ! is_null( self::$initialized ) ) {
 			return;
 		}
 
@@ -52,9 +52,9 @@ class Merchant_Metabox {
 	}
 
 	/**
-     * Enqueue scripts.
-     * 
-     */
+	 * Enqueue scripts.
+	 * 
+	 */
 	public function enqueue_metabox_scripts() {
 		wp_enqueue_code_editor(
 			array(
@@ -68,7 +68,7 @@ class Merchant_Metabox {
 		wp_enqueue_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
 		wp_enqueue_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13', 'all' );
 
-		wp_enqueue_style( 'merchant-metabox-styles', MERCHANT_URI . 'assets/css/admin/metabox.min.css', MERCHANT_VERSION );
+		wp_enqueue_style( 'merchant-metabox-styles', MERCHANT_URI . 'assets/css/admin/metabox.min.css', array(), MERCHANT_VERSION );
 		wp_enqueue_script( 'merchant-metabox-scripts', MERCHANT_URI . 'assets/js/admin/merchant-metabox.min.js', array( 'jquery', 'jquery-ui-sortable' ), MERCHANT_VERSION, true );
 		
 		wp_localize_script( 'merchant-metabox-scripts', 'merchant_metabox', array(
@@ -95,7 +95,6 @@ class Merchant_Metabox {
 				
 				case 'post':
 				case 'product':
-					
 					$query = new WP_Query( array(
 						's'              => $term,
 						'post_type'      => $source,
@@ -113,7 +112,7 @@ class Merchant_Metabox {
 						}
 					}
 		
-				break;
+					break;
 				
 			}
 
@@ -128,15 +127,26 @@ class Merchant_Metabox {
 	 * 
 	 */
 	public function metabox_options() {
+
+		/**
+		 * Hook: merchant_metabox_options
+		 * 
+		 * @since 1.0
+		 */
 		do_action( 'merchant_metabox_options', self::$options );
 
+		/**
+		 * Hook: merchant_metabox_options_filter
+		 * 
+		 * @since 1.0
+		 */
 		self::$options = apply_filters( 'merchant_metabox_options_filter', self::$options );
 
 		// Set priority order
-  		self::$options = wp_list_sort( self::$options, array( 'priority' => 'ASC' ), 'ASC', true );
+		self::$options = wp_list_sort( self::$options, array( 'priority' => 'ASC' ), 'ASC', true );
 
 		foreach ( self::$options as $key => $value ) {
-    		self::$options[ $key ]['fields'] = wp_list_sort( $value['fields'], array( 'priority' => 'ASC' ), 'ASC', true );
+		self::$options[ $key ]['fields'] = wp_list_sort( $value['fields'], array( 'priority' => 'ASC' ), 'ASC', true );
 		}
 
 		return self::$options;
@@ -188,7 +198,7 @@ class Merchant_Metabox {
 		global $post;
 
 		// Do not render the metabox on attachment post type.
-		if ( $post_type === 'attachment' ) {
+		if ( 'attachment' === $post_type ) {
 			return;
 		}
 
@@ -222,6 +232,11 @@ class Merchant_Metabox {
 			unset( $types[ 'athemes_hf' ] );
 		}
 
+		/**
+		 * Hook: merchant_metabox_title
+		 * 
+		 * @since 1.0
+		 */
 		$metabox_title = apply_filters( 'merchant_metabox_title', $metabox_title, $post_type );
 
 		add_meta_box( 'merchant_metabox', $metabox_title, array( $this, 'render_metabox_content' ), $types, 'normal', 'low' );
@@ -229,7 +244,7 @@ class Merchant_Metabox {
 
 	/**
 	 * Metabox content.
-	 * 
+	 *
 	 */
 	public function render_metabox_content( $post ) {
 		$options   = $this->metabox_options();
@@ -240,99 +255,99 @@ class Merchant_Metabox {
 		echo '<div class="merchant-metabox">';
 			$has_tabs = ( ! empty( array_filter( array_column( $options, 'title' ) ) ) ) ? true : false;
 
-			if ( ! empty( $has_tabs ) ) {
-				echo '<div class="merchant-metabox-tabs">';
+		if ( ! empty( $has_tabs ) ) {
+			echo '<div class="merchant-metabox-tabs">';
 
-					$num = 0;
-					foreach ( $options as $option ) {
-						if ( ! empty( $option['title'] ) ) {
-							$active = ( $num === 0 ) ? ' active' : '';
-							echo '<a href="#" class="merchant-metabox-tab'. esc_attr( $active ) .'">'. esc_html( $option['title'] ) .'</a>';
+				$num = 0;
+			foreach ( $options as $option ) {
+				if ( ! empty( $option['title'] ) ) {
+					$active = ( 0 === $num ) ? ' active' : '';
+					echo '<a href="#" class="merchant-metabox-tab' . esc_attr( $active ) . '">' . esc_html( $option['title'] ) . '</a>';
 							
-							$num++;
-						}
-					}
+					$num++;
+				}
+			}
 
 				echo '</div>';
-			}
+		}
 
 			echo '<div class="merchant-metabox-contents">';
 
 				$num = 0;
-				foreach ( $options as $option ) {
-					$active = ( $num === 0 ) ? ' active' : '';
-					echo '<div class="merchant-metabox-content'. esc_attr( $active ) .'">';
+		foreach ( $options as $option ) {
+			$active = ( 0 === $num ) ? ' active' : '';
+			echo '<div class="merchant-metabox-content' . esc_attr( $active ) . '">';
 
-						if ( ! empty( $option['title'] ) ) {
-							echo '<h4 class="merchant-metabox-content-title">'. esc_html( $option['title'] ) .'</h4>';
+			if ( ! empty( $option['title'] ) ) {
+					echo '<h4 class="merchant-metabox-content-title">' . esc_html( $option['title'] ) . '</h4>';
+			}
+
+			if ( ! empty( $option['fields'] ) ) {
+				foreach ( $option['fields'] as $field_id => $field ) {
+					$separator = ( ! empty( $field['separator'] ) ) ? $field['separator'] : 'after';
+					$classes   = array();
+					$classes[] = 'merchant-metabox-field';
+					$classes[] = 'merchant-metabox-field-separator-' . $separator;
+					$classes[] = 'merchant-metabox-field-' . $field['type'];
+
+					if ( ! empty( $field['class'] ) ) {
+						$classes[] = $field['class'];
+					}
+
+					if ( ! empty( $field['inline'] ) ) {
+						$classes[] = 'merchant-metabox-field-inline';
+					}
+
+					if ( ! empty( $field['depend'] ) ) {
+						$depend_meta = get_post_meta( $post->ID, $field['depend'], true );
+
+						if ( empty( $depend_meta ) ) {
+							$classes[] = 'merchant-metabox-field-hidden';
 						}
-
-						if ( ! empty( $option['fields'] ) ) {
-							foreach ( $option['fields'] as $field_id => $field ) {
-								$separator = ( ! empty( $field['separator'] ) ) ? $field['separator'] : 'after';
-								$classes   = array();
-								$classes[] = 'merchant-metabox-field';
-								$classes[] = 'merchant-metabox-field-separator-'. $separator;
-								$classes[] = 'merchant-metabox-field-'. $field['type'];
-
-								if ( ! empty( $field['class'] ) ) {
-									$classes[] = $field['class'];
-								}
-
-								if ( ! empty( $field['inline'] ) ) {
-									$classes[] = 'merchant-metabox-field-inline';
-								}
-
-								if ( ! empty( $field['depend'] ) ) {
-									$depend_meta = get_post_meta( $post->ID, $field['depend'], true );
-
-									if ( empty( $depend_meta ) ) {
-										$classes[] = 'merchant-metabox-field-hidden';
-									}
 								
-									echo '<div class="'. esc_attr( join( ' ', $classes ) ) .'" data-depend-on="'. esc_attr( $field['depend'] ) .'">';
-								} else {
-									echo '<div class="'. esc_attr( join( ' ', $classes ) ) .'">';
-								}
+						echo '<div class="' . esc_attr( join( ' ', $classes ) ) . '" data-depend-on="' . esc_attr( $field['depend'] ) . '">';
+					} else {
+						echo '<div class="' . esc_attr( join( ' ', $classes ) ) . '">';
+					}
 
-									if ( isset( $field['title'] ) || isset( $field['subtitle'] ) ) {
-										echo '<div class="merchant-metabox-field-title">';
+					if ( isset( $field['title'] ) || isset( $field['subtitle'] ) ) {
+						echo '<div class="merchant-metabox-field-title">';
 
-											if ( ! empty( $field['title'] ) ) {
-												echo '<h4>'. wp_kses_post( $field['title'] ) .'</h4>';
-											}
-
-											if ( ! empty( $field['subtitle'] ) ) {
-												echo '<small class="merchant-metabox-field-subtitle">'. wp_kses_post( $field['subtitle'] ) .'</small>';
-											}
-
-										echo '</div>';
-									}
-
-									echo '<div class="merchant-metabox-field-content">';
-
-										$meta    = get_post_meta( $post->ID, $field_id );
-										$default = ( isset( $field['default'] ) ) ? $field['default'] : null;
-										$value   = ( isset( $meta[0] ) ) ? $meta[0] : $default;
-
-										$this->get_field( $field_id, $field, $value );
-
-										if ( ! empty( $field['desc'] ) ) {
-											echo '<div class="merchant-metabox-field-description">'. wp_kses_post( $field['desc'] ) .'</div>';
-										}
-
-									echo '</div>';
-
-								echo '</div>';
-
-							}
-
+						if ( ! empty( $field['title'] ) ) {
+						echo '<h4>' . wp_kses_post( $field['title'] ) . '</h4>';
 						}
+
+						if ( ! empty( $field['subtitle'] ) ) {
+							echo '<small class="merchant-metabox-field-subtitle">' . wp_kses_post( $field['subtitle'] ) . '</small>';
+						}
+
+							echo '</div>';
+					}
+
+						echo '<div class="merchant-metabox-field-content">';
+
+							$meta    = get_post_meta( $post->ID, $field_id );
+							$default = ( isset( $field['default'] ) ) ? $field['default'] : null;
+							$value   = ( isset( $meta[0] ) ) ? $meta[0] : $default;
+
+							$this->get_field( $field_id, $field, $value );
+
+					if ( ! empty( $field['desc'] ) ) {
+						echo '<div class="merchant-metabox-field-description">' . wp_kses_post( $field['desc'] ) . '</div>';
+					}
+
+							echo '</div>';
+
+							echo '</div>';
+
+				}
+
+			}
 
 					echo '</div>';
 
 					$num++;
-				}
+		}
 
 			echo '</div>';
 		echo '</div>';
@@ -374,7 +389,7 @@ class Merchant_Metabox {
 						continue;
 					}
 
-					$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( $_POST[ $field_id ] ) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+					$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( sanitize_text_field( $_POST[ $field_id ] ) ) : null;
 					$value = $this->sanitize( $field, $value );
 
 					update_post_meta( $post_id, $field_id, $value );
@@ -403,7 +418,7 @@ class Merchant_Metabox {
 
 			case 'checkbox':
 			case 'switcher':
-				return ( $value === '1' ) ? 1 : 0;
+				return ( '1' === $value ) ? 1 : 0;
 				break;
 
 			case 'number':
@@ -449,15 +464,15 @@ class Merchant_Metabox {
 	public function get_field( $field_id, $field, $value ) {
 		switch ( $field['type'] ) {
 			case 'text':
-				echo '<input type="text" name="'. esc_attr( $field_id ) .'" value="'. esc_attr( $value ) .'" />';
+				echo '<input type="text" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" />';
 				break;
 
 			case 'number':
-				echo '<input type="number" name="'. esc_attr( $field_id ) .'" value="'. esc_attr( $value ) .'" />';
+				echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" />';
 				break;
 
 			case 'textarea':
-				echo '<textarea name="'. esc_attr( $field_id ) .'">'. esc_textarea( $value ) .'</textarea>';
+				echo '<textarea name="' . esc_attr( $field_id ) . '">' . esc_textarea( $value ) . '</textarea>';
 				break;
 
 			case 'checkbox':
@@ -467,24 +482,24 @@ class Merchant_Metabox {
 				) );
 
 				echo '<label>';
-					echo '<input type="checkbox" name="'. esc_attr( $field_id ) .'" value="1"'. checked( $value, true, false ) .' />';
+					echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '" value="1"' . checked( $value, true, false ) . ' />';
 
-					if ( $field['type'] === 'switcher' ) {
-						echo '<i></i>';
-					}
+				if ( 'switcher' === $field['type'] ) {
+					echo '<i></i>';
+				}
 
-					if ( ! empty( $field['label'] ) ) {
-						echo '<span>'. esc_html( $field['label'] ) .'</span>';
-					}
+				if ( ! empty( $field['label'] ) ) {
+					echo '<span>' . esc_html( $field['label'] ) . '</span>';
+				}
 				echo '</label>';
 				break;
 
 			case 'select':
-				echo '<select name="'. esc_attr( $field_id ) .'">';
+				echo '<select name="' . esc_attr( $field_id ) . '">';
 
-					foreach ( $field['options'] as $key => $option ) {
-						echo '<option value="'. esc_attr( $key ) .'"'. selected( $key, $value, false ) .'>'. esc_html( $option ) .'</option>';
-					}
+				foreach ( $field['options'] as $key => $option ) {
+					echo '<option value="' . esc_attr( $key ) . '"' . selected( $key, $value, false ) . '>' . esc_html( $option ) . '</option>';
+				}
 
 				echo '</select>';
 				break;
@@ -493,27 +508,27 @@ class Merchant_Metabox {
 				$field = wp_parse_args( $field, array(
 					'source' => 'post',
 				) );
-				$ids = ( is_array( $value ) && ! empty( $value ) ) ? $value : (array) $value;
+				$ids   = ( is_array( $value ) && ! empty( $value ) ) ? $value : (array) $value;
 
-				echo '<select name="'. esc_attr( $field_id ) .'[]" multiple data-source="'. esc_attr( $field['source'] ) .'">';
+				echo '<select name="' . esc_attr( $field_id ) . '[]" multiple data-source="' . esc_attr( $field['source'] ) . '">';
 
-					if ( ! empty( $ids ) ) {
-						foreach ( $ids as $id ) {
+				if ( ! empty( $ids ) ) {
+					foreach ( $ids as $id ) {
 
-							switch ( $field['source'] ) {
-								case 'post':
-								case 'product':
-									$post = get_post( $id );
+						switch ( $field['source'] ) {
+							case 'post':
+							case 'product':
+								$post = get_post( $id );
 
-									if ( ! empty( $post ) ) {
-										echo '<option value="'. esc_attr( $post->ID ) .'" selected>'. esc_html( $post->post_title ) .'</option>';
-									}
-									break;
+								if ( ! empty( $post ) ) {
+									echo '<option value="' . esc_attr( $post->ID ) . '" selected>' . esc_html( $post->post_title ) . '</option>';
+								}
+								break;
 
-							}
-						
 						}
+						
 					}
+				}
 
 				echo '</select>';
 				break;
@@ -527,27 +542,27 @@ class Merchant_Metabox {
 						echo '<ul class="merchant-sortable">';
 
 							$selected_attributes = array();
-							foreach ( $values as $id ) {
-								if ( isset( $attributes[ $id ] ) ) {
-									$selected_attributes[ $id ] = $attributes[ $id ];
-									unset( $attributes[ $id ] );
-								}
-							}
+					foreach ( $values as $id ) {
+						if ( isset( $attributes[ $id ] ) ) {
+							$selected_attributes[ $id ] = $attributes[ $id ];
+							unset( $attributes[ $id ] );
+						}
+					}
 
 							$attributes = array_replace( $selected_attributes, $attributes );
-							foreach ( $attributes as $attribute_id => $attribute_label ) {
+					foreach ( $attributes as $attribute_id => $attribute_label ) {
 
-								$checked = ( in_array( $attribute_id, $values ) ) ? ' checked' : '';
+						$checked = ( in_array( $attribute_id, $values ) ) ? ' checked' : '';
 
-								echo '<li class="merchant-sortable-item">';
-								echo '<label>';
-								echo '<input type="checkbox" name="'. esc_attr( $field_id ) .'[]" value="'. esc_attr( $attribute_id ) .'"'. esc_attr( $checked ) .' />';
-								echo '<span>'. esc_html( $attribute_label ) .'</span>';
-								echo '</label>';
-								echo '<span class="merchant-sortable-move dashicons dashicons-menu"></span>';
-								echo '</li>';
+						echo '<li class="merchant-sortable-item">';
+						echo '<label>';
+						echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '[]" value="' . esc_attr( $attribute_id ) . '"' . esc_attr( $checked ) . ' />';
+						echo '<span>' . esc_html( $attribute_label ) . '</span>';
+						echo '</label>';
+						echo '<span class="merchant-sortable-move dashicons dashicons-menu"></span>';
+						echo '</li>';
 
-							}
+					}
 						
 						echo '</ul>';
 					echo '</div>';
@@ -558,13 +573,13 @@ class Merchant_Metabox {
 			case 'choices':
 				echo '<div class="merchant-metabox-field-choices-images">';
 
-					foreach ( $field['options'] as $key => $option ) {
-						echo '<label>';
-							echo '<input type="radio" name="'. esc_attr( $field_id ) .'" value="'. esc_attr( $key ) .'"'. checked( $value, $key, false ) .' />';
-							echo '<figure><img src="'. esc_url( sprintf( $option['image'], MERCHANT_URI ) ) .'" title="'. esc_attr( $option['label'] ) .'" alt="'. esc_attr( $option['label'] ) .'" /></figure>';
-						echo '</label>';
+				foreach ( $field['options'] as $key => $option ) {
+					echo '<label>';
+						echo '<input type="radio" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $key ) . '"' . checked( $value, $key, false ) . ' />';
+						echo '<figure><img src="' . esc_url( sprintf( $option['image'], MERCHANT_URI ) ) . '" title="' . esc_attr( $option['label'] ) . '" alt="' . esc_attr( $option['label'] ) . '" /></figure>';
+					echo '</label>';
 
-					}
+				}
 
 				echo '</div>';
 				break;
@@ -583,20 +598,20 @@ class Merchant_Metabox {
 
 					echo '<ul class="merchant-metabox-field-repeater-list">';
 						echo '<li class="merchant-metabox-field-repeater-list-item hidden">';
-						echo '<input type="text" name="" value="" data-name="'. esc_attr( $field_id ) .'[]" />';
+						echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[]" />';
 						echo '<span class="merchant-metabox-field-repeater-move dashicons dashicons-menu"></span>';
 						echo '<span class="merchant-metabox-field-repeater-remove dashicons dashicons-trash"></span>';
 						echo '</li>';
 
-						foreach ( $values as $key => $value ) {
-							echo '<li class="merchant-metabox-field-repeater-list-item">';
-							echo '<input type="text" name="'. esc_attr( $field_id ) .'[]" value="'. esc_attr( $value ) .'" />';
-							echo '<span class="merchant-metabox-field-repeater-move dashicons dashicons-menu"></span>';
-							echo '<span class="merchant-metabox-field-repeater-remove dashicons dashicons-trash"></span>';
-							echo '</li>';
-						}
+				foreach ( $values as $key => $value ) {
+					echo '<li class="merchant-metabox-field-repeater-list-item">';
+					echo '<input type="text" name="' . esc_attr( $field_id ) . '[]" value="' . esc_attr( $value ) . '" />';
+					echo '<span class="merchant-metabox-field-repeater-move dashicons dashicons-menu"></span>';
+					echo '<span class="merchant-metabox-field-repeater-remove dashicons dashicons-trash"></span>';
+					echo '</li>';
+				}
 					echo '</ul>';
-					echo '<button class="merchant-metabox-field-repeater-add button button-primary">'. esc_html( $field['button'] ) .'</button>';
+					echo '<button class="merchant-metabox-field-repeater-add button button-primary">' . esc_html( $field['button'] ) . '</button>';
 				echo '</div>';
 
 				break;
@@ -612,15 +627,15 @@ class Merchant_Metabox {
 					$thumbnail = $placeholder;
 				}
 
-        		echo '<div class="merchant-metabox-field-media-content">';
-	        		echo '<figure class="merchant-metabox-field-media-preview">';
-	        			echo '<img src="'. esc_url( $thumbnail ) .'" data-placeholder="'. esc_url( $placeholder ) .'" />';
+				echo '<div class="merchant-metabox-field-media-content">';
+					echo '<figure class="merchant-metabox-field-media-preview">';
+						echo '<img src="' . esc_url( $thumbnail ) . '" data-placeholder="' . esc_url( $placeholder ) . '" />';
 					echo '</figure>';
 
 					echo '<div class="merchant-metabox-field-media-button">';
-						echo '<a href="#" class="merchant-metabox-field-media-upload button">'. esc_html__( 'Upload/Add Image', 'merchant' ) .'</a>';
-						echo '<a href="#" class="merchant-metabox-field-media-remove merchant-button-remove button'. esc_attr( $hidden_class ) .'">'. esc_html__( 'Remove Image', 'merchant' ) .'</a>';
-						echo '<input type="hidden" name="'. esc_attr( $field_id ) .'" value="'. esc_attr( $value ) .'" class="merchant-metabox-field-media-input" />';
+						echo '<a href="#" class="merchant-metabox-field-media-upload button">' . esc_html__( 'Upload/Add Image', 'merchant' ) . '</a>';
+						echo '<a href="#" class="merchant-metabox-field-media-remove merchant-button-remove button' . esc_attr( $hidden_class ) . '">' . esc_html__( 'Remove Image', 'merchant' ) . '</a>';
+						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" class="merchant-metabox-field-media-input" />';
 					echo '</div>';
 				echo '</div>';
 
@@ -634,62 +649,60 @@ class Merchant_Metabox {
 
 				echo '<div class="merchant-metabox-field-uploads-content">';
 					$values 	= ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
-					$name 		= $field['library'] === 'video' ? $field_id . '[0][src]' : $field_id . '[]';
-                    $thumb_name = $field_id . '[0][thumb]';
+					$name 		= 'video' === $field['library'] ? $field_id . '[0][src]' : $field_id . '[]';
+					$thumb_name = $field_id . '[0][thumb]';
 
-					echo '<ul class="merchant-metabox-field-uploads-list" data-library="'. esc_attr( $field['library'] ) .'">';
+					echo '<ul class="merchant-metabox-field-uploads-list" data-library="' . esc_attr( $field['library'] ) . '">';
 						echo '<li class="merchant-metabox-field-uploads-list-item hidden">';
-						
-						if( 'video' === $field['library'] ) {
-							echo '<div class="merchant-metabox-field-uploads-thumbnail">';
-							echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-remove dashicons dashicons-dismiss" style="display:none"></a>';
-							echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-upload"><span>+</span></a>';
-							echo '<input type="hidden" name="" value="" data-name="' . esc_attr( $thumb_name ) . '" />';
-							echo '</div>';
-						}
 
- 						echo '<input type="text" name="" value="" data-name="'. esc_attr( $name ) .'" />';
-						echo '<button class="merchant-metabox-field-uploads-upload button">'. esc_html__( 'Upload', 'merchant' ) .'</button>';
+				if ( 'video' === $field['library'] ) {
+					echo '<div class="merchant-metabox-field-uploads-thumbnail">';
+						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-remove dashicons dashicons-dismiss" style="display:none"></a>';
+						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-upload"><span>+</span></a>';
+						echo '<input type="hidden" name="" value="" data-name="' . esc_attr( $thumb_name ) . '" />';
+					echo '</div>';
+				}
+
+							echo '<input type="text" name="" value="" data-name="' . esc_attr( $name ) . '" />';
+							echo '<button class="merchant-metabox-field-uploads-upload button">' . esc_html__( 'Upload', 'merchant' ) . '</button>';
+							echo '<span class="merchant-metabox-field-uploads-move dashicons dashicons-menu"></span>';
+							echo '<span class="merchant-metabox-field-uploads-remove dashicons dashicons-trash"></span>';
+						echo '</li>';
+
+				foreach ( $values as $key => $value ) {
+					$item_name 	= 'video' === $field['library'] ? str_replace('0', $key, $name) : $name;
+					$item_value = is_array($value) ? ( isset( $value['src'] ) ? $value['src'] : '' ) : $value;
+
+					echo '<li class="merchant-metabox-field-uploads-list-item">';
+					if ( 'video' === $field['library'] ) {
+						$item_thumb 	 = is_array( $value ) && isset( $value['thumb'] ) ? $value['thumb'] : '';
+						$item_thumb_name = str_replace( '0', $key, $thumb_name );
+
+						echo '<div class="merchant-metabox-field-uploads-thumbnail">';
+						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-remove dashicons dashicons-dismiss" ' . ( empty( $item_thumb ) ? 'style="display: none"' : '' ) . '></a>';
+						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-upload">';
+						echo empty( $item_thumb )
+							? '<span>+</span>'
+							: '<img src="' . esc_url( wp_get_attachment_thumb_url( $item_thumb ) ) . '" /><span style="display: none">+</span>';
+						echo '</a>';
+						echo '<input type="hidden" name="' . esc_attr( $item_thumb_name ) . '" value="' . absint( $item_thumb ) . '" />';
+						echo '</div>';
+					}
+						echo '<input type="text" name="' . esc_attr( $item_name ) . '" value="' . esc_attr( $item_value ) . '" />';
+
+						echo '<button class="merchant-metabox-field-uploads-upload button">' . esc_html__( 'Upload', 'merchant' ) . '</button>';
 						echo '<span class="merchant-metabox-field-uploads-move dashicons dashicons-menu"></span>';
 						echo '<span class="merchant-metabox-field-uploads-remove dashicons dashicons-trash"></span>';
 						echo '</li>';
-
-						foreach ( $values as $key => $value ) {
-							$item_name 	= $field['library'] === 'video' ? str_replace('0', $key, $name) : $name;
-							$item_value = is_array($value) ? ( isset( $value['src'] ) ? $value['src'] : '' ) : $value;
-
-							echo '<li class="merchant-metabox-field-uploads-list-item">';
-								if( $field['library'] === 'video' ) {
-									$item_thumb 	 = is_array( $value ) && isset( $value['thumb'] ) ? $value['thumb'] : '';
-									$item_thumb_name = str_replace( '0', $key, $thumb_name );
-
-									echo '<div class="merchant-metabox-field-uploads-thumbnail">';
-									echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-remove dashicons dashicons-dismiss" '. ( empty( $item_thumb ) ? 'style="display: none"' : '' ) .'></a>';
-									echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-upload">';
-									echo empty( $item_thumb )
-										? '<span>+</span>'
-										: '<img src="' . esc_url( wp_get_attachment_thumb_url( $item_thumb ) ) . '" /><span style="display: none">+</span>';
-									echo '</a>';
-									echo '<input type="hidden" name="'. esc_attr( $item_thumb_name ) .'" value="' . absint( $item_thumb ) . '" />';
-									echo '</div>';
-								}
-								echo '<input type="text" name="'. esc_attr( $item_name ) .'" value="'. esc_attr( $item_value ) .'" />';
-
-								echo '<button class="merchant-metabox-field-uploads-upload button">'. esc_html__( 'Upload', 'merchant' ) .'</button>';
-								echo '<span class="merchant-metabox-field-uploads-move dashicons dashicons-menu"></span>';
-								echo '<span class="merchant-metabox-field-uploads-remove dashicons dashicons-trash"></span>';
-							echo '</li>';
-						}
+				}
 	
 					echo '</ul>';
-
-					echo '<button class="merchant-metabox-field-uploads-add button button-primary">'. esc_html( $field['button'] ) .'</button>';
+					echo '<button class="merchant-metabox-field-uploads-add button button-primary">' . esc_html( $field['button'] ) . '</button>';
 				echo '</div>';
 
 				break;
 
 			case 'size-chart':
-
 				$field = wp_parse_args( $field, array(
 					'button' => '',
 				) );
@@ -702,85 +715,85 @@ class Merchant_Metabox {
 									echo '<tr>';
 										echo '<td colspan="100%">';
 											echo '<label>';
-											echo '<strong>'. esc_html__( 'Size Name', 'merchant' ) .':</strong>';
-											echo '<input type="text" value="" data-name="'. esc_attr( $field_id ) .'[0][name]" />';
+											echo '<strong>' . esc_html__( 'Size Name', 'merchant' ) . ':</strong>';
+											echo '<input type="text" value="" data-name="' . esc_attr( $field_id ) . '[0][name]" />';
 											echo '</label>';
 										echo '</td>';
 									echo '</tr>';
 								echo '</thead>';
 								echo '<tbody>';
 									echo '<tr>';
-										for ( $a = 0; $a < 4 ; $a++ ) { 
-											echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
-										}
-										echo '<td><a href="#" class="merchant-duplicate" title="'. esc_attr__( 'Duplicate', 'merchant' ) .'">icon</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				for ( $a = 0; $a < 4 ; $a++ ) { 
+					echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
+				}
+										echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '">icon</td>';
 									echo '</tr>';
-									for ( $b = 0; $b < 4 ; $b++ ) { 
-										echo '<tr>';
-											for ( $c =0 ; $c < 4 ; $c++ ) { 
-												echo '<td><input type="text" value="" data-name="'. esc_attr( $field_id ) .'[0][sizes][0][0]" /></td>';
-											}
-											echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-row">+</a><a href="#" class="merchant-del-row">-</a></div></td>';
+				for ( $b = 0; $b < 4 ; $b++ ) { 
+					echo '<tr>';
+					for ( $c =0 ; $c < 4 ; $c++ ) { 
+										echo '<td><input type="text" value="" data-name="' . esc_attr( $field_id ) . '[0][sizes][0][0]" /></td>';
+					}
+						echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-row">+</a><a href="#" class="merchant-del-row">-</a></div></td>';
 										echo '</tr>';
-									}
+				}
 								echo '</tbody>';
 								echo '<tfoot>';
 									echo '<tr>';
 										echo '<td colspan="100%">';
-											echo '<a href="#" class="merchant-remove button button-primary">'. esc_html__( 'Remove', 'merchant' ) .'</a>';
+											echo '<a href="#" class="merchant-remove button button-primary">' . esc_html__( 'Remove', 'merchant' ) . '</a>';
 										echo '</td>';
 									echo '</tr>';
 								echo '</tfoot>';
 							echo '</table>';
 						echo '</li>';
 						$tabs = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
-						if ( ! empty( $tabs ) ) {
-							foreach ( $tabs as $tab_key => $tab ) {
-								$name  = ( ! empty( $tab['name'] ) ) ? $tab['name'] : '';
-								$sizes = ( ! empty( $tab['sizes'] ) ) ? $tab['sizes'] : array();
-								echo '<li>';
-									echo '<table>';
-										echo '<thead>';
+				if ( ! empty( $tabs ) ) {
+					foreach ( $tabs as $tab_key => $tab ) {
+						$name  = ( ! empty( $tab['name'] ) ) ? $tab['name'] : '';
+						$sizes = ( ! empty( $tab['sizes'] ) ) ? $tab['sizes'] : array();
+						echo '<li>';
+							echo '<table>';
+								echo '<thead>';
+									echo '<tr>';
+										echo '<td colspan="100%">';
+											echo '<label>';
+											echo '<strong>' . esc_html__( 'Size Name', 'merchant' ) . ':</strong>';
+											echo '<input type="text" value="' . esc_attr( $name ) . '" name="' . esc_attr( $field_id . '[' . $tab_key . '][name]' ) . '" />';
+											echo '</label>';
+										echo '</td>';
+									echo '</tr>';
+								echo '</thead>';
+								echo '<tbody>';
+						foreach ( $sizes as $row_key => $rows ) {
+							if ( 0 === $row_key ) {
 											echo '<tr>';
-												echo '<td colspan="100%">';
-													echo '<label>';
-													echo '<strong>'. esc_html__( 'Size Name', 'merchant' ) .':</strong>';
-													echo '<input type="text" value="'. esc_attr( $name ) .'" name="'. esc_attr( $field_id .'['. $tab_key .'][name]' ) .'" />';
-													echo '</label>';
-												echo '</td>';
+								for ( $i = 0; $i < count( $rows ); $i++ ) { 
+							echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
+								}
+											echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '">icon-duplicate</td>';
 											echo '</tr>';
-										echo '</thead>';
-										echo '<tbody>';
-											foreach ( $sizes as $row_key => $rows ) {
-												if ( $row_key === 0 ) {
-													echo '<tr>';
-														for ( $i = 0; $i < count( $rows ); $i++ ) { 
-															echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
-														}
-													echo '<td><a href="#" class="merchant-duplicate" title="'. esc_attr__( 'Duplicate', 'merchant' ) .'">icon-duplicate</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo '</tr>';
-												}
-												echo '<tr>';
-													foreach ( $rows as $col_key => $col ) {
-														echo '<td><input type="text" name="'. esc_attr( $field_id .'['. $tab_key .'][sizes]['. $row_key .']['. $col_key .']' ) .'" value="'. esc_attr( $col ) .'" /></td>';
-													}
-													echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-row">+</a><a href="#" class="merchant-del-row">-</a></div></td>';
-												echo '</tr>';
-											}
-										echo '</tbody>';
-										echo '<tfoot>';
-											echo '<tr>';
-												echo '<td colspan="100%">';
-													echo '<a href="#" class="merchant-remove button button-primary">'. esc_html__( 'Remove', 'merchant' ) .'</a>';
-												echo '</td>';
-											echo '</tr>';
-										echo '</tfoot>';
-									echo '</table>';
-								echo '</li>';
 							}
+									echo '<tr>';
+							foreach ( $rows as $col_key => $col ) {
+								echo '<td><input type="text" name="' . esc_attr( $field_id . '[' . $tab_key . '][sizes][' . $row_key . '][' . $col_key . ']' ) . '" value="' . esc_attr( $col ) . '" /></td>';
+							}
+										echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-row">+</a><a href="#" class="merchant-del-row">-</a></div></td>';
+									echo '</tr>';
 						}
+								echo '</tbody>';
+								echo '<tfoot>';
+									echo '<tr>';
+										echo '<td colspan="100%">';
+											echo '<a href="#" class="merchant-remove button button-primary">' . esc_html__( 'Remove', 'merchant' ) . '</a>';
+										echo '</td>';
+									echo '</tr>';
+								echo '</tfoot>';
+							echo '</table>';
+								echo '</li>';
+					}
+				}
 					echo '</ul>';
-					echo '<button class="merchant-add button button-primary">'. esc_html__( 'Add Size Chart', 'merchant' ) .'</button>';
+					echo '<button class="merchant-add button button-primary">' . esc_html__( 'Add Size Chart', 'merchant' ) . '</button>';
 				echo '</div>';
 
 				break;
@@ -789,7 +802,7 @@ class Merchant_Metabox {
 				$options = array();
 				$posts	 = get_posts( array(
 					'post_type'      => 'size_chart',
-					'posts_per_page' => -1, // phpcs:ignore WPThemeReview.CoreFunctionality.PostsPerPage.posts_per_page_posts_per_page
+					'posts_per_page' => -1,
 					'post_status'    => 'publish'
 				) );
 					
@@ -799,12 +812,12 @@ class Merchant_Metabox {
 					}
 				}
 
-				echo '<select name="'. esc_attr( $field_id ) .'">';
-					echo '<option value="">'. esc_html__( 'Select a size chart', 'merchant' ) .'</option>';
+				echo '<select name="' . esc_attr( $field_id ) . '">';
+					echo '<option value="">' . esc_html__( 'Select a size chart', 'merchant' ) . '</option>';
 
-					foreach ( $options as $key => $option ) {
-						echo '<option value="'. esc_attr( $key ) .'"'. selected( $key, $value, false ) .'>'. esc_html( $option ) .'</option>';
-					}
+				foreach ( $options as $key => $option ) {
+					echo '<option value="' . esc_attr( $key ) . '"' . selected( $key, $value, false ) . '>' . esc_html( $option ) . '</option>';
+				}
 				echo '</select>';
 
 				break;
@@ -819,12 +832,12 @@ class Merchant_Metabox {
 					}
 				}
 
-				echo '<select name="'. esc_attr( $field_id ) .'">';
-					echo '<option value="">'. esc_html__( 'Default', 'merchant' ) .'</option>';
+				echo '<select name="' . esc_attr( $field_id ) . '">';
+					echo '<option value="">' . esc_html__( 'Default', 'merchant' ) . '</option>';
 
-					foreach ( $options as $key => $option ) {
-						echo '<option value="'. esc_attr( $key ) .'"'. selected( $key, $value, false ) .'>'. esc_html( $option ) .'</option>';
-					}
+				foreach ( $options as $key => $option ) {
+					echo '<option value="' . esc_attr( $key ) . '"' . selected( $key, $value, false ) . '>' . esc_html( $option ) . '</option>';
+				}
 				echo '</select>';
 
 				break;
@@ -841,7 +854,7 @@ class Merchant_Metabox {
 				break;
 
 			case 'code-editor':
-				echo '<textarea name="'. esc_attr( $field_id ) .'">'. esc_textarea( $value ) .'</textarea>';
+				echo '<textarea name="' . esc_attr( $field_id ) . '">' . esc_textarea( $value ) . '</textarea>';
 				break;
 
 		}

@@ -44,7 +44,7 @@ function merchant_add_buy_now_button_archive() {
 	$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
 	?>
- 		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant_buy_now_button"><?php echo esc_html( $text ); ?></a>
+		 <a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant_buy_now_button"><?php echo esc_html( $text ); ?></a>
 	<?php
 
 }
@@ -71,7 +71,7 @@ function merchant_buy_now_listener() {
 
 		} else {
 
-	    WC()->cart->add_to_cart( $product_id, 1 );
+		WC()->cart->add_to_cart( $product_id, 1 );
 
 		}
 

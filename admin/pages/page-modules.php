@@ -22,7 +22,7 @@
 				<?php esc_html_e( 'Total Modules', 'merchant' ); ?>
 				<strong>
 					<?php
-						$merchant_count = 0;
+						$merchant_count          = 0;
 						$merchant_active_modules = 0;
 						$merchant_option_modules = get_option( 'merchant-modules', array() );
 					if ( ! empty( $merchant_modules ) ) {
@@ -76,9 +76,9 @@
 						<?php foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) : ?>
 
 							<?php 
-								if ( ! Merchant_Modules::is_module_active( $merchant_module_id ) ) {
-									continue;
-								} 
+							if ( ! Merchant_Modules::is_module_active( $merchant_module_id ) ) {
+								continue;
+							} 
 							?>
 
 							<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' ) ); ?>" class="merchant-modules-list-item">

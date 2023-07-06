@@ -1,4 +1,4 @@
-<?php $merchant_module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification ?>
+<?php $merchant_module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; ?>
 
 <?php $merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); ?>
 
@@ -171,11 +171,16 @@
 
 					<?php
 
-						$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
+					/**
+					 * Hook: merchant_module_file_path
+					 * 
+					 * @since 1.0
+					 */
+					$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
-						if ( file_exists( $merchant_module_file ) ) {
-							require $merchant_module_file;
-						}
+					if ( file_exists( $merchant_module_file ) ) {
+						require $merchant_module_file;
+					}
 
 					?>
 

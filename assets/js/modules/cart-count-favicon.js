@@ -8,9 +8,9 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.cartCountFavicon = {
 
-	  init: function() {
+		init: function() {
 
-	  	var self    = this;
+		  var self      = this;
 			var count   = parseInt( window.merchant.setting.cart_count_favicon_count ) || 0;
 			var favicon = new Favico({
 				animation:'none',
@@ -18,7 +18,7 @@ merchant.modules = merchant.modules || {};
 				position: window.merchant.setting.cart_count_favicon_position,
 				bgColor: window.merchant.setting.cart_count_favicon_background_color,
 				textColor: window.merchant.setting.cart_count_favicon_text_color,
-			});
+			  });
 			
 			$( document.body ).on('added_to_cart', function( event, data ) {
 				if ( data && data['.merchant_cart_count'] !== undefined ) {

@@ -2,7 +2,7 @@
 
 function merchant_content_ajax_search_item( $args ) {
 
-	if ( $args['type'] === 'product' ) {
+	if ( 'product' === $args['type'] ) {
 
 		$desc_type   = Merchant_Admin_Options::get( 'real-time-search', 'results_description', 'product-post-content' );
 		$desc_length = Merchant_Admin_Options::get( 'real-time-search', 'results_description_length', 10 );
@@ -12,7 +12,7 @@ function merchant_content_ajax_search_item( $args ) {
 		$item_permalink = get_the_permalink( $item_post_id );
 		$item_image     = wp_get_attachment_image( $product->get_image_id() );
 		$item_title     = get_the_title( $item_post_id );
-		$description    = wp_trim_words( $desc_type === 'product-post-content' ? $product->get_description() : $product->get_short_description(), $desc_length );
+		$description    = wp_trim_words( 'product-post-content' === $desc_type ? $product->get_description() : $product->get_short_description(), $desc_length );
 		$price          = $product->get_price_html();
 
 	} else {
@@ -77,7 +77,7 @@ function merchant_ajax_search_callback() {
 		'post_status'    => array( 'publish' )
 	);
 	
-	if ( $orderby === 'price' ) {
+	if ( 'price' === $orderby ) {
 		$args[ 'meta_key' ] = '_price';
 		$args[ 'orderby' ]  = 'meta_value_num';
 	}
@@ -103,7 +103,7 @@ function merchant_ajax_search_callback() {
 			)
 		);
 		
-		if ( $orderby === 'price' ) {
+		if ( 'price' === $orderby ) {
 			$args[ 'meta_key' ] = '_price';
 			$args[ 'orderby' ]  = 'meta_value_num';
 		}

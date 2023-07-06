@@ -97,15 +97,15 @@
 
 <div class="wrap merchant-wrap">
 
-	<?php if ( ! empty( $_GET['module'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
+	<?php if ( ! empty( $_GET['module'] ) ) : ?>
 
 		<?php require MERCHANT_DIR . 'admin/pages/page-module.php'; ?>
 
-	<?php elseif ( ! empty( $_GET['section'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
+	<?php elseif ( ! empty( $_GET['section'] ) ) : ?>
 
 		<?php
 
-		switch ( $_GET['section'] ) {  // phpcs:ignore WordPress.Security.NonceVerification
+		switch ( $_GET['section'] ) {
 
 			case 'modules':
 				require MERCHANT_DIR . 'admin/pages/page-modules.php';

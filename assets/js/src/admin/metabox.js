@@ -1,7 +1,7 @@
 ;(function( $ ) {
 	'use strict';
 
-    $.fn.merchantMetabox = function() {
+	$.fn.merchantMetabox = function() {
 		return this.each( function() {
 
 			var $this     = $(this);
@@ -150,7 +150,7 @@
 						wpMediaFrame.on('select', function() {
 
 							var attachment = wpMediaFrame.state().get( 'selection' ).first().toJSON();
-							var thumbnail = wpMediaInput.parent();
+							var thumbnail  = wpMediaInput.parent();
 
 							wpMediaInput.val(attachment.id);
 

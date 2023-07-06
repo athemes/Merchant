@@ -14,7 +14,7 @@ function merchant_scroll_to_top_buttton() {
 
 		echo '<div class="merchant-scroll-to-top-button merchant-position-' . esc_attr( $position ) . ' merchant-style-' . esc_attr( $style ) . ' merchant-visibility-' . esc_attr( $visibility ) . '">';
 
-		if ( $type === 'text-icon' ) {
+		if ( 'text-icon' === $type ) {
 
 			$text = Merchant_Option::get( 'scroll-to-top-button', 'text', 'Back to top' );
 

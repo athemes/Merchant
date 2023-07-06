@@ -4,7 +4,7 @@
 
 		<form method="post" action="" class="merchant-module-page-ajax-form">
 
-			<input type="hidden" name="merchant_nonce" value="<?php echo wp_create_nonce( 'merchant_nonce' ); ?>" />
+			<input type="hidden" name="merchant_nonce" value="<?php echo esc_attr( wp_create_nonce( 'merchant_nonce' ) ); ?>" />
 
 			<div class="merchant-module-page-ajax-header">
 				<div class="merchant-module-page-ajax-notice"><?php esc_html_e( 'Your settings have been modified. Save?', 'merchant' ); ?></div>

@@ -380,7 +380,7 @@ gulp.task('scripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-						}
+				}
 					]
 				]
 			})
@@ -421,7 +421,7 @@ gulp.task('adminScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-						}
+				}
 					]
 				]
 			})
@@ -462,7 +462,7 @@ gulp.task('metaboxScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-						}
+				}
 					]
 				]
 			})

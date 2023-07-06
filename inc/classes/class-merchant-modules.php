@@ -118,20 +118,20 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			$modules = get_option( self::$option, array() );
 
 			// Preview Mode
-			if ( isset( $_GET['preview'] ) && isset( $_GET['module'] ) && $_GET['module'] === $module && current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			if ( isset( $_GET['preview'] ) && isset( $_GET['module'] ) && $_GET['module'] === $module && current_user_can( 'manage_options' ) ) {
 				return true;
 			}
 
 			// Preview Mode
 			$operation_mode = Merchant_Option::get( 'global-settings', 'operating_mode', 'active' );
 
-			if ( $operation_mode === 'inactive' ) {
+			if ( 'inactive' === $operation_mode ) {
 				return false;
-			} elseif ( $operation_mode === 'preview' && ! current_user_can( 'manage_options' ) ) {
+			} elseif ( 'preview' === $operation_mode && ! current_user_can( 'manage_options' ) ) {
 				return false;
 			}
 
-			if ( is_array( $modules ) && array_key_exists( $module, $modules ) && $modules[ $module ] === true ) {
+			if ( is_array( $modules ) && array_key_exists( $module, $modules ) && true === $modules[ $module ] ) {
 				return true;
 			}
 

@@ -7,9 +7,9 @@ function merchant_code_snippets_header_scripts() {
 
 	if ( ! empty( $header_scripts ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $header_scripts );
+			echo sprintf( '<script>%s</script>', wp_kses( $header_scripts, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $header_scripts );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $header_scripts, array() ) );
 		}
 	}
 
@@ -24,9 +24,9 @@ function merchant_code_snippets_body_scripts() {
 
 	if ( ! empty( $body_scripts ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $body_scripts );
+			echo sprintf( '<script>%s</script>', wp_kses( $body_scripts, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $body_scripts );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $body_scripts, array() ) );
 		}
 	}
 
@@ -41,9 +41,9 @@ function merchant_code_snippets_footer_scripts() {
 
 	if ( ! empty( $footer_scripts ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $footer_scripts );
+			echo sprintf( '<script>%s</script>', wp_kses( $footer_scripts, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $footer_scripts );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $footer_scripts, array() ) );
 		}
 	}
 

@@ -8,33 +8,33 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.animatedAddToCart = {
 
-	  init: function() {
+		init: function() {
 
-	  	var self     = this;
+		  var self       = this;
 			var $buttons = $('.merchant-animated-add-to-cart .add_to_cart_button:not(.merchant_buy_now_button), .merchant-animated-add-to-cart .single_add_to_cart_button:not(.merchant_buy_now_button), .merchant-animated-add-to-cart .product_type_grouped:not(.merchant_buy_now_button)');
 
-	  	if ( ! $buttons.length ) {
-	  		return;
-	  	}
+			if ( ! $buttons.length ) {
+				return;
+			}
 
-	  	$(window).on('scroll', function() {
-	  		self.onScroll( $buttons );
-	  	});
+		  $(window).on('scroll', function() {
+				self.onScroll( $buttons );
+			});
 
-  		self.onScroll( $buttons );
+		  self.onScroll( $buttons );
 
-	  },
+		},
 
-	  onScroll: function( $buttons ) {
+		onScroll: function( $buttons ) {
 
 			$buttons.each( function() {
 
 				var $button = $(this);
-	  		var btnRect = $button.get(0).getBoundingClientRect();
+			var btnRect     = $button.get(0).getBoundingClientRect();
 
-	  		if ( $button.hasClass('merchant-animated') ) {
-	  			return;
-	  		}
+				if ( $button.hasClass('merchant-animated') ) {
+					return;
+				}
 
 				if ( btnRect.top >= 0 && btnRect.left >= 0 && btnRect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + ($button.outerHeight()/2)) && btnRect.right <= ((window.innerWidth || document.documentElement.clientWidth) + ($button.outerWidth()/2)) ) {
 
@@ -49,7 +49,7 @@ merchant.modules = merchant.modules || {};
 
 			});
 
-	  },
+		},
 
 	};
 
