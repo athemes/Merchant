@@ -1726,7 +1726,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   white-space: nowrap;
-  padding: 12px 15px 0 15px;
+  padding: 15px 15px 0 15px;
   color: #202223;
   -webkit-transition: all .2s;
   transition: all .2s;
@@ -1757,7 +1757,7 @@
 
 .merchant-module-dropdown ul li span {
   width: 100%;
-  padding-bottom: 12px;
+  padding-bottom: 15px;
   border-bottom: 1px solid #eee;
 }
 
@@ -1781,7 +1781,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   white-space: nowrap;
-  padding: 12px 15px;
+  padding: 15px;
   font-size: 14px;
   line-height: 16px;
   color: #202223;

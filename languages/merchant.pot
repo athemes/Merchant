@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-07-03 17:15+0000\n"
+"POT-Creation-Date: 2023-07-04 18:35+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-merchant-admin-loader.php:86, admin/pages/page-settings.php:49, admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:10, admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:10, admin/modules/auto-external-links/admin-page-auto-external-links.php:10, admin/modules/buy-now/admin-page-buy-now.php:10, admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:10, admin/modules/cookie-banner/admin-page-cookie-banner.php:10, admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:10, admin/modules/payment-logos/admin-page-payment-logos.php:27, admin/modules/pre-orders/admin-page-pre-orders.php:37, admin/modules/product-labels/admin-page-product-labels.php:10, admin/modules/quick-view/admin-page-quick-view.php:10, admin/modules/real-time-search/admin-page-real-time-search.php:10, admin/modules/trust-badges/admin-page-trust-badges.php:27
+#: admin/class-merchant-admin-loader.php:86, admin/pages/page-settings.php:49, admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:10, admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:10, admin/modules/auto-external-links/admin-page-auto-external-links.php:10, admin/modules/buy-now/admin-page-buy-now.php:10, admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:10, admin/modules/cookie-banner/admin-page-cookie-banner.php:10, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:10, admin/modules/payment-logos/admin-page-payment-logos.php:27, admin/modules/pre-orders/admin-page-pre-orders.php:37, admin/modules/product-labels/admin-page-product-labels.php:10, admin/modules/quick-view/admin-page-quick-view.php:10, admin/modules/real-time-search/admin-page-real-time-search.php:10, admin/modules/trust-badges/admin-page-trust-badges.php:27
 msgid "Settings"
 msgstr ""
 
@@ -29,11 +29,15 @@ msgstr ""
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: inc/class-merchant-loader.php:124
-msgid "✋ Don't forget this..."
+#: inc/class-merchant-loader.php:126, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:19
+msgid "✋ Don't forget this"
 msgstr ""
 
-#: inc/class-merchant-loader.php:193, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:133
+#: inc/class-merchant-loader.php:127, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:27
+msgid "✋ You left something in the cart"
+msgstr ""
+
+#: inc/class-merchant-loader.php:201, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:133
 msgid "Pre Order Now!"
 msgstr ""
 
@@ -181,7 +185,7 @@ msgstr ""
 msgid "Inform your visitors that the site uses cookies to improve the user experience."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:210
+#: admin/classes/class-merchant-admin-options.php:212
 msgid "Field not found!"
 msgstr ""
 
@@ -360,15 +364,7 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#: admin/pages/page-module.php:193
-msgid "Important info!"
-msgstr ""
-
-#: admin/pages/page-module.php:196
-msgid "This module is currently disabled. Please enable the module to see it in your store."
-msgstr ""
-
-#: admin/pages/page-module.php:202
+#: admin/pages/page-module.php:191
 msgid "Copyright © aThemes 2023. All Rights Reserved."
 msgstr ""
 
@@ -552,7 +548,7 @@ msgstr ""
 msgid "Button Background Color Hover"
 msgstr ""
 
-#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:17, admin/modules/product-labels/admin-page-product-labels.php:50
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:17, admin/modules/product-labels/admin-page-product-labels.php:51
 msgid "Shape"
 msgstr ""
 
@@ -568,11 +564,11 @@ msgstr ""
 msgid "Location of the bullet"
 msgstr ""
 
-#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:30, admin/modules/product-labels/admin-page-product-labels.php:41
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:30, admin/modules/product-labels/admin-page-product-labels.php:42
 msgid "Top Left"
 msgstr ""
 
-#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:31, admin/modules/product-labels/admin-page-product-labels.php:42
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:31, admin/modules/product-labels/admin-page-product-labels.php:43
 msgid "Top Right"
 msgstr ""
 
@@ -584,11 +580,11 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:41, admin/modules/product-labels/admin-page-product-labels.php:96, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:251
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:41, admin/modules/product-labels/admin-page-product-labels.php:97, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:251
 msgid "Background Color"
 msgstr ""
 
-#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:48, admin/modules/cookie-banner/admin-page-cookie-banner.php:112, admin/modules/payment-logos/admin-page-payment-logos.php:64, admin/modules/product-labels/admin-page-product-labels.php:103, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:219, admin/modules/trust-badges/admin-page-trust-badges.php:63
+#: admin/modules/cart-count-favicon/admin-page-cart-count-favicon.php:48, admin/modules/cookie-banner/admin-page-cookie-banner.php:112, admin/modules/payment-logos/admin-page-payment-logos.php:64, admin/modules/product-labels/admin-page-product-labels.php:104, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:219, admin/modules/trust-badges/admin-page-trust-badges.php:63
 msgid "Text Color"
 msgstr ""
 
@@ -716,16 +712,20 @@ msgstr ""
 msgid "Link Color"
 msgstr ""
 
-#: admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:17
+#: admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:17
 msgid "Message"
 msgstr ""
 
-#: admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:18
+#: admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:18
 msgid "This message will be shown if there's no item in the cart when user switches to another tab"
 msgstr ""
 
-#: admin/modules/inactive-tab-messsage/admin-page-inactive-tab-messsage.php:19
-msgid "✋ Don't forget this.."
+#: admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:25
+msgid "Abandoned Cart Message"
+msgstr ""
+
+#: admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:26
+msgid "This message will be shown if the user left items in the cart when user switches to another tab"
 msgstr ""
 
 #: admin/modules/payment-logos/admin-page-payment-logos.php:17
@@ -756,7 +756,7 @@ msgstr ""
 msgid "🔒 Safe & Secure Checkout"
 msgstr ""
 
-#: admin/modules/payment-logos/admin-page-payment-logos.php:53, admin/modules/product-labels/admin-page-product-labels.php:85, admin/modules/trust-badges/admin-page-trust-badges.php:52
+#: admin/modules/payment-logos/admin-page-payment-logos.php:53, admin/modules/product-labels/admin-page-product-labels.php:86, admin/modules/trust-badges/admin-page-trust-badges.php:52
 msgid "Font Size"
 msgstr ""
 
@@ -812,35 +812,39 @@ msgstr ""
 msgid "Position"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:52
-msgid "Square"
+#: admin/modules/product-labels/admin-page-product-labels.php:40
+msgid "Note: This label will be shown only on sales products."
 msgstr ""
 
 #: admin/modules/product-labels/admin-page-product-labels.php:53
+msgid "Square"
+msgstr ""
+
+#: admin/modules/product-labels/admin-page-product-labels.php:54
 msgid "Rounded"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:61
+#: admin/modules/product-labels/admin-page-product-labels.php:62
 msgid "Letter Case"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:63
+#: admin/modules/product-labels/admin-page-product-labels.php:64
 msgid "Uppercase"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:64
+#: admin/modules/product-labels/admin-page-product-labels.php:65
 msgid "Lowercase"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:65
+#: admin/modules/product-labels/admin-page-product-labels.php:66
 msgid "Capitalize"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:66, admin/modules/real-time-search/admin-page-real-time-search.php:52
+#: admin/modules/product-labels/admin-page-product-labels.php:67, admin/modules/real-time-search/admin-page-real-time-search.php:52
 msgid "None"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:74, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:171
+#: admin/modules/product-labels/admin-page-product-labels.php:75, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:171
 msgid "Padding"
 msgstr ""
 
