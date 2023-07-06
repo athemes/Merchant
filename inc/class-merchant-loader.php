@@ -38,6 +38,10 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		 */
 		public function includes() {
 
+			// Helpers.
+			require_once MERCHANT_DIR . 'inc/helpers.php';
+
+			// Core classes.
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-option.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-modules.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-custom-css.php';
