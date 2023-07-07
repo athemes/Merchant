@@ -43,6 +43,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		 */
 		public function includes() {
 
+			// Essential functions.
+			require_once MERCHANT_DIR . 'inc/functions.php';
+
 			// Helpers.
 			require_once MERCHANT_DIR . 'inc/helpers.php';
 

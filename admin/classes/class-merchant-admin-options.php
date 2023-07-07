@@ -49,6 +49,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Get all options.
+		 */
+		public static function get_all( $module ) {
+
+			$options = get_option( 'merchant', array() );
+
+			if ( isset( $options[ $module ] ) ) {
+				$value = $options[ $module ];
+			}
+
+			return $value;
+
+		}
+
+		/**
 		 * Create options.
 		 */
 		public static function create( $settings ) {
@@ -189,6 +204,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				case 'code-editor':
 					$value = wp_kses_post( $value );
+					break;
+
+				case 'sortable':
+					$values = json_decode( $value );
+					$value  = array();
+
+					foreach( $values as $val ) {
+						if( in_array( $val, array_keys( $field['options'] ), true ) ) {
+							$value[] = sanitize_key( $val );
+						}
+					}
 					break;
 
 			}
@@ -556,7 +582,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Field: Sortable
 		 */
 		public static function sortable( $settings, $value ) {
-			$value = json_decode( $value );
 
 			?>
 				<div class="merchant-sortable">
