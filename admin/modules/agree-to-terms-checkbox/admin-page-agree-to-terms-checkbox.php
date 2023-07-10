@@ -3,6 +3,10 @@
  * Merchant - Agree to Terms Checkout
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Settings
  */

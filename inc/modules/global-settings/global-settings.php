@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 // Lazy load Images
 function merchant_loaded() {
 
@@ -27,9 +31,9 @@ function merchant_head_custom_js() {
 
 	if ( ! empty( $custom_js ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $custom_js );
+			echo sprintf( '<script>%s</script>', wp_kses( $custom_js, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $custom_js );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js, array() ) );
 		}
 	}
 
@@ -38,9 +42,9 @@ function merchant_head_custom_js() {
 
 	if ( ! empty( $custom_js_first ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $custom_js_first );
+			echo sprintf( '<script>%s</script>', wp_kses( $custom_js_first, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $custom_js_first );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js_first, array() ) );
 		}
 	}
 
@@ -55,9 +59,9 @@ function merchant_footer_custom_js() {
 
 	if ( ! empty( $custom_js_last ) ) {
 		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', $custom_js_last );
+			echo sprintf( '<script>%s</script>', wp_kses( $custom_js_last, array() ) );
 		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', $custom_js_last );
+			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js_last, array() ) );
 		}
 	}
 

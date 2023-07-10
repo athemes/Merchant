@@ -2,6 +2,11 @@
 /**
  * Merchant_Admin_Modules Class.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 	class Merchant_Admin_Modules {
@@ -237,6 +242,11 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			);
 
+			/**
+			 * Hook: merchant_modules
+			 * 
+			 * @since 1.0
+			 */
 			$modules = apply_filters( 'merchant_modules', $modules );
 
 			return $modules;

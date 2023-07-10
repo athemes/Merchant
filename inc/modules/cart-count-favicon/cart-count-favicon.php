@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_favicon_cart_count_fragment( $fragments ) {
 	
 	if ( Merchant_Modules::is_module_active( 'cart-count-favicon' ) ) {

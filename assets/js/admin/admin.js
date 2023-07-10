@@ -249,6 +249,38 @@
         });
       });
     });
+
+    // Field: Sortable.
+    $('.merchant-sortable').each(function () {
+      var field = $(this),
+        input = field.find('.merchant-sortable-input');
+
+      // Init sortable.
+      $(field.find('ul.merchant-sortable-list').first()).sortable({
+        // Update value when we stop sorting.
+        update: function update() {
+          input.val(sortableGetNewVal(field)).trigger('change.merchant');
+        }
+      }).disableSelection().find('li').each(function () {
+        // Enable/disable options when we click on the eye of Thundera.
+        $(this).find('i.visibility').click(function () {
+          $(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+        });
+      }).click(function () {
+        // Update value on click.
+        input.val(sortableGetNewVal(field)).trigger('change.merchant');
+      });
+    });
+    var sortableGetNewVal = function sortableGetNewVal(field) {
+      var items = $(field.find('li'));
+      var newVal = [];
+      _.each(items, function (item) {
+        if (!$(item).hasClass('invisible')) {
+          newVal.push($(item).data('value'));
+        }
+      });
+      return JSON.stringify(newVal);
+    };
     $('.merchant-module-page-setting-field-gallery').each(function () {
       var $this = $(this);
       var $button = $this.find('.merchant-gallery-button');

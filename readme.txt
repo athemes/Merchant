@@ -5,8 +5,8 @@ Tested up to: 6.2.2
 Requires PHP: 5.6
 Stable tag: trunk
 Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
 

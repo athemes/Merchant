@@ -2,6 +2,11 @@
 /**
  * Merchant_Admin_Options Class.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 	class Merchant_Admin_Options {
@@ -44,10 +49,30 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Get all options.
+		 */
+		public static function get_all( $module ) {
+
+			$options = get_option( 'merchant', array() );
+
+			if ( isset( $options[ $module ] ) ) {
+				$value = $options[ $module ];
+			}
+
+			return $value;
+
+		}
+
+		/**
 		 * Create options.
 		 */
 		public static function create( $settings ) {
 
+			/**
+			 * Hook: merchant_module_settings
+			 * 
+			 * @since 1.0
+			 */
 			$settings = apply_filters( 'merchant_module_settings', $settings );
 
 			self::save_options( $settings );
@@ -154,32 +179,43 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'color':
 				case 'number':
 					$value = sanitize_text_field( $value );
-				    break;
+					break;
 
 				case 'textarea':
 					$value = sanitize_textarea_field( $value );
-				    break;
+					break;
 
 				case 'checkbox':
 				case 'switcher':
-					$value = ( $value === '1' ) ? 1 : 0;
-				    break;
+					$value = ( '1' === $value ) ? 1 : 0;
+					break;
 
 				case 'range':
 				case 'number':
 					$value = absint( $value );
-				    break;
+					break;
 
 				case 'radio':
 				case 'radio_alt':
 				case 'select':
 				case 'choices':
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
-				    break;
+					break;
 
 				case 'code-editor':
 					$value = wp_kses_post( $value );
-				    break;
+					break;
+
+				case 'sortable':
+					$values = json_decode( $value );
+					$value  = array();
+
+					foreach( $values as $val ) {
+						if( in_array( $val, array_keys( $field['options'] ), true ) ) {
+							$value[] = sanitize_key( $val );
+						}
+					}
+					break;
 
 			}
 
@@ -540,6 +576,48 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function content( $settings ) {
 			echo wp_kses_post( $settings['content'] );
+		}
+
+		/**
+		 * Field: Sortable
+		 */
+		public static function sortable( $settings, $value ) {
+
+			?>
+				<div class="merchant-sortable">
+					<ul class="merchant-sortable-list ui-sortable">
+						<?php 
+						foreach ( $value as $option_key ) :
+							$option_val = $settings[ 'options' ][ $option_key ];
+						
+							if ( in_array( $option_key, $value ) ) : 
+								?>
+								<li class="merchant-sortable-item" data-value="<?php echo esc_attr( $option_key ); ?>">
+									<i class='dashicons dashicons-menu'></i>
+									<i class="dashicons dashicons-visibility visibility"></i>
+									<?php echo esc_html( $option_val ); ?>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+
+						<?php 
+						foreach ( $settings[ 'options' ] as $option_key => $option_val ) : 
+							if ( ! in_array( $option_key, $value ) ) :
+								$invisible = ! in_array( $option_key, $value ) ? ' invisible' : '';
+
+								?>
+								<li class="merchant-sortable-item<?php echo esc_attr( $invisible ); ?>" data-value="<?php echo esc_attr( $option_key ); ?>">
+									<i class='dashicons dashicons-menu'></i>
+									<i class="dashicons dashicons-visibility visibility"></i>
+									<?php echo esc_html( $option_val ); ?>
+								</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+
+					<input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
+				</div>
+			<?php
 		}
 
 	}

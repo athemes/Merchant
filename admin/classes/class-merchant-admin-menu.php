@@ -2,6 +2,11 @@
 /**
  * Merchant_Admin_Menu Class.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 	class Merchant_Admin_Menu {
@@ -80,26 +85,26 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 * Get Notifications
 		 */
 		public function get_notifications() {
-
 			$notifications = get_transient( 'merchant_notifications' );
 
 			if ( ! empty( $notifications ) ) {
-
 				$this->notifications = $notifications;
-
 			} else {
 
+				/**
+				 * Hook: merchant_changelog_api_url
+				 * 
+				 * @since 1.0
+				 */
 				$response = wp_remote_get( apply_filters( 'merchant_changelog_api_url', 'https://athemes.com/wp-json/wp/v2/changelogs?themes=7103&per_page=3' ) );
 
 				if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
 					$this->notifications = json_decode( wp_remote_retrieve_body( $response ) );
 					set_transient( 'merchant_notifications', $this->notifications, 24 * HOUR_IN_SECONDS );
 				}
-
 			}
 
 			return $this->notifications;
-
 		}
 
 		/**

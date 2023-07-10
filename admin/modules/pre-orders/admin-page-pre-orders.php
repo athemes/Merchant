@@ -3,10 +3,13 @@
  * Merchant - Pre Orders
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Tag Pre-Orders
  */
-
 $merchant_pre_orders_notice  = '';
 $merchant_pre_orders_notice .= '<div class="merchant-tag-pre-orders">';
 $merchant_pre_orders_notice .= '<i class="dashicons dashicons-info"></i>';

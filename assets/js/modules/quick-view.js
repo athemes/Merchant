@@ -51,15 +51,15 @@ merchant.modules = merchant.modules || {};
 							$inner.addClass('merchant-show');
 							$modal.removeClass('merchant-loading');
 
-	            var $gallery = $content.find('.woocommerce-product-gallery');
+				var $gallery = $content.find('.woocommerce-product-gallery');
 
-            	wc_single_product_params.zoom_enabled = window.merchant.setting.quick_view_zoom;
+				wc_single_product_params.zoom_enabled = window.merchant.setting.quick_view_zoom;
 
 							if ( typeof $.fn.wc_product_gallery === 'function' && $gallery.length ) {
-	              $gallery.trigger('wc-product-gallery-before-init', [$gallery.get(0), wc_single_product_params]);
-	              $gallery.wc_product_gallery(wc_single_product_params);
-	              $gallery.trigger('wc-product-gallery-after-init', [$gallery.get(0), wc_single_product_params]);
-	            }
+				  $gallery.trigger('wc-product-gallery-before-init', [$gallery.get(0), wc_single_product_params]);
+				  $gallery.wc_product_gallery(wc_single_product_params);
+				  $gallery.trigger('wc-product-gallery-after-init', [$gallery.get(0), wc_single_product_params]);
+							}
 
 							var $variations = $content.find('.variations_form');
 							
@@ -74,7 +74,7 @@ merchant.modules = merchant.modules || {};
 							}
 
 							if ( window.botiga && window.botiga.qtyButton ) {
-            		window.botiga.qtyButton.init('quick-view');
+					window.botiga.qtyButton.init('quick-view');
 							}
 
 						} else {

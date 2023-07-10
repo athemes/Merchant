@@ -8,9 +8,8 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.cartCountFavicon = {
 
-	  init: function() {
+		init: function() {
 
-	  	var self    = this;
 			var count   = parseInt( window.merchant.setting.cart_count_favicon_count ) || 0;
 			var favicon = new Favico({
 				animation:'none',
