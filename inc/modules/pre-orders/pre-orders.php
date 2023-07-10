@@ -144,7 +144,7 @@ class Merchant_Pre_Orders {
 			woocommerce_wp_checkbox(
 				[
 					'id'    => '_is_pre_order_' . $variation->ID,
-					'label' => '&nbsp;' . esc_html__( 'Pre Order Product - Set this product as pre-order', 'merchant' ),
+					'label' => '&nbsp;' . esc_html__( 'Pre-Order Product - Set this product as pre-order', 'merchant' ),
 					'value' => get_post_meta( $variation->ID, '_is_pre_order', true ),
 				]
 			);
@@ -153,7 +153,7 @@ class Merchant_Pre_Orders {
 				[
 					'type'  => 'date',
 					'id'    => '_pre_order_date_' . $variation->ID,
-					'label' => esc_html__( 'Pre Order Date', 'merchant' ),
+					'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
 					'value' => get_post_meta( $variation->ID, '_pre_order_date', true ),
 				]
 			);
@@ -185,7 +185,7 @@ class Merchant_Pre_Orders {
 			woocommerce_wp_checkbox(
 				[
 					'id'          => '_is_pre_order',
-					'label'       => esc_html__( 'Pre Order Product', 'merchant' ),
+					'label'       => esc_html__( 'Pre-Order Product', 'merchant' ),
 					'description' => esc_html__( 'Set this product as pre-order', 'merchant' ),
 					'value'       => get_post_meta( get_the_ID(), '_is_pre_order', true ),
 				]
@@ -195,7 +195,7 @@ class Merchant_Pre_Orders {
 				array(
 					'type'  => 'date',
 					'id'    => '_pre_order_date',
-					'label' => esc_html__( 'Pre Order Date', 'merchant' ),
+					'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
 					'value' => get_post_meta( get_the_ID(), '_pre_order_date', true ),
 				)
 			);
