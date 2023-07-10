@@ -3,6 +3,10 @@
  * Merchant - Animated Add to Cart
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Settings
  */

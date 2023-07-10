@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_product_labels() {
 	
 	global $product;
@@ -38,7 +42,7 @@ function merchant_product_labels() {
 					$regular_price = (float) $child_product->get_regular_price();
 					$sale_price    = (float) $child_product->get_sale_price();
 					
-					if ( $sale_price != 0 || ! empty( $sale_price ) ) {
+					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
 						$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 					}
 					
@@ -50,7 +54,7 @@ function merchant_product_labels() {
 				$regular_price = (float) $product->get_regular_price();
 				$sale_price    = (float) $product->get_sale_price();
 				
-				if ( $sale_price != 0 || ! empty( $sale_price ) ) {
+				if ( 0 != $sale_price || ! empty( $sale_price ) ) {
 					$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 				}
 				

@@ -3,6 +3,10 @@
  * Merchant Code Snippets
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Global Header and Footer
  */

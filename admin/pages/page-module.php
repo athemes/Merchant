@@ -1,6 +1,13 @@
-<?php $merchant_module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification ?>
+<?php
 
-<?php $merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$merchant_module	  = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+$merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); 
+
+?>
 
 <?php if ( ! empty( $merchant_module_info ) ) : ?>
 
@@ -107,7 +114,7 @@
 											</div>
 
 											<div class="merchant-module-question-answer-title" data-answer-title="conflict">
-												<?php esc_html_e( 'Please tell us what app it conflicts with.', 'merchant' ); ?><i class="dashicons dashicons-no-alt merchant-module-dropdown-close"></i>
+												<?php esc_html_e( 'Please tell us what plugin/theme it conflicts with.', 'merchant' ); ?><i class="dashicons dashicons-no-alt merchant-module-dropdown-close"></i>
 											</div>
 
 											<div class="merchant-module-question-answer-title" data-answer-title="other">
@@ -171,11 +178,16 @@
 
 					<?php
 
-						$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
+					/**
+					 * Hook: merchant_module_file_path
+					 * 
+					 * @since 1.0
+					 */
+					$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
-						if ( file_exists( $merchant_module_file ) ) {
-							require $merchant_module_file;
-						}
+					if ( file_exists( $merchant_module_file ) ) {
+						require $merchant_module_file;
+					}
 
 					?>
 
@@ -185,6 +197,18 @@
 
 		</div>
 
+	</div>
+
+	<div class="merchant-module-alert">
+		<div class="merchant-module-alert-overlay"></div>
+		<div class="merchant-module-alert-wrapper">
+			<div class="merchant-module-alert-header"><strong><?php esc_html_e( 'Important info!', 'merchant' ); ?></strong><a href="#" class="merchant-module-alert-close"><i class="dashicons dashicons-no-alt"></i></a></div>
+			<div class="merchant-module-alert-content">
+				<figure><img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/enable-module.png' ); ?>" /></figure>
+				<p><?php esc_html_e( 'This module is currently disabled. Please enable the module to see it in your store.', 'merchant' ); ?></p>
+			</div>
+			<div class="merchant-module-alert-footer"><a href="#" class="merchant-module-alert-close">Close</a></div>
+		</div>
 	</div>
 
 	<div class="merchant-module-footer-text">

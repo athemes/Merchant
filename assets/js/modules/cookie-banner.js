@@ -8,9 +8,9 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.cookieBanner = {
 
-	  init: function() {
+		init: function() {
 
-	    var self    = this;
+		  var self      = this;
 			var $banner = $('.merchant-cookie-banner');
 
 			if ( ! $banner.length ) {
@@ -37,7 +37,7 @@ merchant.modules = merchant.modules || {};
 
 			}
 
-	  },
+		},
 
 		setCookie: function( cookieName, cookieValue, expDays ) {
 
@@ -54,19 +54,19 @@ merchant.modules = merchant.modules || {};
 		  var name    = cookieName + '=';
 		  var cookies = decodeURIComponent( document.cookie ).split(';');
 
-		  for ( var i = 0; i < cookies.length; i++ ) {
+			for ( var i = 0; i < cookies.length; i++ ) {
 
-		    var cookie = cookies[i];
+			  var cookie = cookies[i];
 
-		    while ( cookie.charAt(0) === ' ' ) {
-		      cookie = cookie.substring(1);
-		    }
+				while ( cookie.charAt(0) === ' ' ) {
+				  cookie = cookie.substring(1);
+				}
 
-		    if ( cookie.indexOf( name ) === 0 ) {
-		      return cookie.substring(name.length, cookie.length);
-		    }
+				if ( cookie.indexOf( name ) === 0 ) {
+				  return cookie.substring(name.length, cookie.length);
+				}
 
-		  }
+			}
 
 		  return '';
 

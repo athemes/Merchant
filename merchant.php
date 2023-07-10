@@ -1,16 +1,21 @@
 <?php
 /**
  * Plugin Name: Merchant
+ * Plugin URI:  https://athemes.com
  * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
  * Version:     1.0
  * Author:      aThemes
  * Author URI:  https://athemes.com
- * License:     GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * License:     GPLv3 or later License
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: merchant
  * Domain Path: /languages
+ * 
+ * WC requires at least: 6.0
+ * WC tested up to: 7.8
  *
  * @package Merchant
+ * @since 1.0
  */
 
 // Exit if accessed directly.

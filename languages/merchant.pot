@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-07-04 18:35+0000\n"
+"POT-Creation-Date: 2023-07-10 12:43+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -29,15 +29,15 @@ msgstr ""
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: inc/class-merchant-loader.php:126, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:19
+#: inc/class-merchant-loader.php:129, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:19
 msgid "✋ Don't forget this"
 msgstr ""
 
-#: inc/class-merchant-loader.php:127, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:27
+#: inc/class-merchant-loader.php:130, admin/modules/inactive-tab-message/admin-page-inactive-tab-message.php:27
 msgid "✋ You left something in the cart"
 msgstr ""
 
-#: inc/class-merchant-loader.php:201, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:133
+#: inc/class-merchant-loader.php:204, admin/modules/pre-orders/admin-page-pre-orders.php:45, inc/modules/pre-orders/pre-orders.php:133
 msgid "Pre Order Now!"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgid "Buy Now"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:67
-msgid "Increasing average order value by sending your customers directly to checkout instead of cart."
+msgid "Add Buy Now buttons to your product pages that take customers directly to the Checkout."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:75
@@ -58,7 +58,7 @@ msgid "Animated Add to Cart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:76
-msgid "Stands out Add to Cart button by adding a subtle animation on the mouse over."
+msgid "Make your Add To Cart button stand out more by showing a subtle animation on mouseover."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:84, admin/modules/quick-view/admin-page-quick-view.php:30, inc/modules/quick-view/quick-view.php:9
@@ -66,7 +66,7 @@ msgid "Quick View"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:85
-msgid "Instantly preview product details without leaving the page, enhancing browsing efficiency."
+msgid "Let customers instantly preview product details without leaving the page they are on."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:93
@@ -74,7 +74,7 @@ msgid "Product Labels"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:94
-msgid "Increase conversion rate with different badges on top of your product image."
+msgid "Add customizable labels on top of your product images to promote special deals or discounts, highlight new products, or anything else you want."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:104
@@ -86,7 +86,7 @@ msgid "Payment Logos"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:110
-msgid "Letting your visitors know that you are accepting a wide assortment of payment methods."
+msgid "Let visitors know what payment methods you accept by displaying the logos of credit card and payment processor companies."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:118, admin/modules/trust-badges/admin-page-trust-badges.php:10
@@ -94,7 +94,7 @@ msgid "Trust Badges"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:119
-msgid "Increase conversion rate and reassure customers with badge-shaped store benefits."
+msgid "Reassure customers with badges that showcase the benefits of shopping with your store, e.g. ‘easy returns’ or ‘30 day money back guarantee’."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:129
@@ -118,7 +118,7 @@ msgid "Cart Count Favicon"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:151
-msgid "Stands out your store's browser tab by displaying the number of items in the cart on the favicon."
+msgid "Make your store’s browser tab stand out by showing the number of items in the cart on the favicon."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:159
@@ -126,7 +126,7 @@ msgid "Inactive Tab Message"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:160
-msgid "Dynamically modifying the browser tab's title when the visitor navigates away from your store."
+msgid "Don’t let customers forget about their order – change the title of the browser tab when visitors navigate away from your store."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:170
@@ -138,7 +138,7 @@ msgid "Auto External Links"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:176
-msgid "Prevent users from navigating away from online store by opening links in a new browser tab."
+msgid "Keep customers on your store by automatically opening third-party links in a new browser tab."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:184
@@ -146,7 +146,7 @@ msgid "Real-Time Search"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:185
-msgid "Help visitors instantly find the products they're looking for by using predictive search."
+msgid "Help visitors instantly find the products they’re looking for by using predictive search."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:193
@@ -154,7 +154,7 @@ msgid "Code Snippets"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:194
-msgid "Add code snippets in WordPress without having to edit your theme's functions.php file."
+msgid "Add custom code to your global header, body, or footer without editing your theme’s functions.php file."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:202
@@ -174,7 +174,7 @@ msgid "Agree to Terms Checkbox"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:220
-msgid "Obtain consent before customers start the checkout process."
+msgid "Get customers to agree to your Terms & Conditions as part of the checkout process."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:228
@@ -182,7 +182,7 @@ msgid "Cookie Banner"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:229
-msgid "Inform your visitors that the site uses cookies to improve the user experience."
+msgid "Inform visitors about your cookie policy to comply with GDPR and other regulations."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-options.php:212
@@ -337,7 +337,7 @@ msgid "What feature are you looking for?"
 msgstr ""
 
 #: admin/pages/page-module.php:110
-msgid "Please tell us what app it conflicts with."
+msgid "Please tell us what plugin/theme it conflicts with."
 msgstr ""
 
 #: admin/pages/page-module.php:114
@@ -364,7 +364,15 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#: admin/pages/page-module.php:191
+#: admin/pages/page-module.php:193
+msgid "Important info!"
+msgstr ""
+
+#: admin/pages/page-module.php:196
+msgid "This module is currently disabled. Please enable the module to see it in your store."
+msgstr ""
+
+#: admin/pages/page-module.php:203
 msgid "Copyright © aThemes 2023. All Rights Reserved."
 msgstr ""
 
@@ -458,6 +466,58 @@ msgstr ""
 
 #: admin/pages/page-settings.php:127
 msgid "Custom JS"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:203
+msgid "Merchant Options"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:206
+msgid "Merchant Post Options"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:210
+msgid "Merchant Page Options"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:214
+msgid "Merchant Product Options"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:621
+msgid "Upload/Add Image"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:622
+msgid "Remove Image"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:652, inc/classes/class-merchant-metabox.php:678
+msgid "Upload"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:705, inc/classes/class-merchant-metabox.php:747
+msgid "Size Name"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:716, inc/classes/class-merchant-metabox.php:760
+msgid "Duplicate"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:730, inc/classes/class-merchant-metabox.php:774
+msgid "Remove"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:783
+msgid "Add Size Chart"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:803
+msgid "Select a size chart"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:823
+msgid "Default"
 msgstr ""
 
 #: admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:16
@@ -796,24 +856,24 @@ msgstr ""
 msgid "Label Text"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:18, inc/modules/product-labels/product-labels.php:9
+#: admin/modules/product-labels/admin-page-product-labels.php:18
+msgid "Note: This label will be shown only on sales products."
+msgstr ""
+
+#: admin/modules/product-labels/admin-page-product-labels.php:19, inc/modules/product-labels/product-labels.php:9
 msgid "Spring Special"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:24
+#: admin/modules/product-labels/admin-page-product-labels.php:25
 msgid "Display Sale Percentage"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:31
+#: admin/modules/product-labels/admin-page-product-labels.php:32
 msgid "You may use the {value} tag. E.g. <strong>{value}% OFF!</strong>"
 msgstr ""
 
-#: admin/modules/product-labels/admin-page-product-labels.php:39, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:60
+#: admin/modules/product-labels/admin-page-product-labels.php:40, admin/modules/scroll-to-top-button/admin-page-scroll-to-top-button.php:60
 msgid "Position"
-msgstr ""
-
-#: admin/modules/product-labels/admin-page-product-labels.php:40
-msgid "Note: This label will be shown only on sales products."
 msgstr ""
 
 #: admin/modules/product-labels/admin-page-product-labels.php:53

@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_animated_add_to_cart_body_class( $classes ) {
 
 	if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
