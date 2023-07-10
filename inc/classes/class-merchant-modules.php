@@ -96,11 +96,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) ) {
 
-				//
-				// Do stuff.
-				//
-				// $subject
-				// $message
+				wp_mail( 'team@athemes.com', $subject, $message );
 
 				wp_send_json_success();
 

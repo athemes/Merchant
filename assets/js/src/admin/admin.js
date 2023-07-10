@@ -175,7 +175,6 @@
 		$('.merchant-module-question-list-dropdown li').on('click', function( e ) {
 
 			var $question = $(this);
-			var index     = $question.index();
 			var target    = $question.data('answer-target');
 
 			var $answer = $('[data-answer-title="'+ target +'"]' );
@@ -184,7 +183,7 @@
 
 				$answer.addClass('merchant-show').siblings().removeClass('merchant-show');
 				$('.merchant-module-question-answer-dropdown').addClass('merchant-show');
-				$('.merchant-module-question-answer-textarea').attr('data-subject', target);
+				$('.merchant-module-question-answer-textarea').attr('data-subject', $question.text().trim());
 			} else {
 
 				$('.merchant-module-question-thank-you-dropdown').addClass('merchant-show');
