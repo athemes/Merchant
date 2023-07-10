@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Merchant
- * Plugin URI:        https://athemes.com
+ * Plugin URI:  https://athemes.com
  * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
  * Version:     1.0
  * Author:      aThemes
