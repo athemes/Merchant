@@ -210,8 +210,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$values = json_decode( $value );
 					$value  = array();
 
-					foreach( $values as $val ) {
-						if( in_array( $val, array_keys( $field['options'] ), true ) ) {
+					foreach ( $values as $val ) {
+						if ( in_array( $val, array_keys( $field['options'] ), true ) ) {
 							$value[] = sanitize_key( $val );
 						}
 					}

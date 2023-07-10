@@ -34,7 +34,6 @@ function merchant_get_template_part( $module_slug, $name = '', $args = array() )
 
 	/**
 	 * Hook: 'merchant_get_template_part'
-	 * Allow 3rd party plugin filter template file from their plugin.
 	 * 
 	 * @since 1.0
 	 */
