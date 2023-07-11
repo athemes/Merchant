@@ -1,5 +1,13 @@
-<?php $merchant_notifications = $this->get_notifications(); ?>
-<?php $merchant_notification_read = $this->is_latest_notification_read(); ?>
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$merchant_notifications 	= $this->get_notifications();
+$merchant_notification_read = $this->is_latest_notification_read(); 
+
+?>
 
 <div class="merchant-top-bar">
 	<a href="https://athemes.com/" class="merchant-top-bar-logo" target="_blank">
@@ -97,15 +105,15 @@
 
 <div class="wrap merchant-wrap">
 
-	<?php if ( ! empty( $_GET['module'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
+	<?php if ( ! empty( $_GET['module'] ) ) : ?>
 
 		<?php require MERCHANT_DIR . 'admin/pages/page-module.php'; ?>
 
-	<?php elseif ( ! empty( $_GET['section'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification ?>
+	<?php elseif ( ! empty( $_GET['section'] ) ) : ?>
 
 		<?php
 
-		switch ( $_GET['section'] ) {  // phpcs:ignore WordPress.Security.NonceVerification
+		switch ( $_GET['section'] ) {
 
 			case 'modules':
 				require MERCHANT_DIR . 'admin/pages/page-modules.php';

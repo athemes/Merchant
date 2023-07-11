@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function merchant_agree_to_terms_checkout() {
 
 	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {
@@ -36,14 +40,12 @@ function merchant_botiga_agree_to_terms_checkout() {
 }
 add_action( 'woocommerce_review_order_before_submit', 'merchant_botiga_agree_to_terms_checkout', 20 );
 
-function merchant_agree_to_terms_validation( $fields, $errors ) { // phpcs:ignore
-
+function merchant_agree_to_terms_validation( $fields, $errors ) {
 	if ( ! Merchant_Modules::is_module_active( 'agree-to-terms-checkbox' ) ) {
 		return;
 	}
 
-	if ( empty( $_POST['merchant_agree_to_terms'] ) ) {
-		
+	if ( empty( $_REQUEST['merchant_agree_to_terms'] ) ) {
 		$warning_text = Merchant_Admin_Options::get( 'agree-to-terms-checkbox', 'warning_text', esc_html__( 'You must read and accept the terms and conditions to complete checkout.', 'merchant' ) );
 
 		$errors->add( 'validation', $warning_text );

@@ -8,14 +8,14 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.autoExternalLinks = {
 
-	  init: function() {
+		init: function() {
 
-	  	var self   = this;
+		  var self     = this;
 			var $links = $(document).find('a');
 
-	  	if ( ! $links.length ) {
-	  		return;
-	  	}
+			if ( ! $links.length ) {
+				return;
+			}
 
 			$links.each(function() {
 
@@ -29,7 +29,7 @@ merchant.modules = merchant.modules || {};
 
 			});
 
-	  }
+		}
 
 	};
 

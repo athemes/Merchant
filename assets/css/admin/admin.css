@@ -1424,7 +1424,7 @@
   color: #757575;
   font-size: 13px;
   line-height: 20px;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 .merchant-module-page {
@@ -1682,7 +1682,6 @@
   background-color: #fff;
   font-size: 13px;
   line-height: 14px;
-  padding-bottom: 6px;
   margin: 0;
   -webkit-box-shadow: 0 3px 6px -3px rgba(23, 24, 24, 0.08), 0 8px 20px -4px rgba(23, 24, 24, 0.12);
           box-shadow: 0 3px 6px -3px rgba(23, 24, 24, 0.08), 0 8px 20px -4px rgba(23, 24, 24, 0.12);
@@ -1781,7 +1780,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   white-space: nowrap;
-  padding: 15px;
+  padding: 15px 15px 5px 15px;
   font-size: 14px;
   line-height: 16px;
   color: #202223;
@@ -1826,7 +1825,7 @@
 }
 
 .merchant-module-question-answer-form {
-  padding: 15px;
+  padding: 5px 15px 15px 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1864,7 +1863,7 @@
 }
 
 .merchant-module-question-answer-thank-you-text {
-  padding: 15px;
+  padding: 5px 15px 15px 15px;
 }
 
 .merchant-module-question-thank-you-dropdown .merchant-module-question-answer-title {
@@ -2633,6 +2632,79 @@
   width: 100%;
 }
 
+/* Sortable Field */
+.merchant-sortable {
+  max-width: 300px;
+}
+
+.merchant-sortable ul.ui-sortable li {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  color: #1E1E1E;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  text-transform: capitalize;
+  line-height: 36px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons {
+  width: 36px;
+  height: 36px;
+  -ms-flex-preferred-size: 36px;
+      flex-basis: 36px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons:before {
+  font-size: 16px;
+  line-height: 1em;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.dashicons-menu {
+  float: left;
+  padding: 0;
+  margin: 0 10px 0 0;
+  border: none;
+  border-right: 1px solid #ddd;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.dashicons-visibility {
+  float: right;
+  color: #3858E9;
+  padding: 0;
+  margin: 0 0 0 10px;
+  border: none;
+  border-left: 1px solid #ddd;
+}
+
+.merchant-sortable ul.ui-sortable li .dashicons.visibility {
+  cursor: pointer;
+}
+
+.merchant-sortable ul.ui-sortable li.invisible {
+  color: #6E7780;
+  border: 1px solid #CAD2F6;
+  background-color: #EBEEFB;
+}
+
+.merchant-sortable ul.ui-sortable li.invisible .dashicons.dashicons-visibility:before {
+  content: "\f530";
+}
+
 .merchant-module-page-setting-field-range .merchant-range {
   position: relative;
   width: 100%;
@@ -3065,6 +3137,163 @@
   border-radius: 20px;
   -webkit-transition: all 0.1s ease-in 0s;
   transition: all 0.1s ease-in 0s;
+}
+
+.merchant-module-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.merchant-module-alert.merchant-show {
+  -webkit-user-select: auto;
+     -moz-user-select: auto;
+      -ms-user-select: auto;
+          user-select: auto;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.merchant-module-alert-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 640px;
+  max-width: 90%;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.merchant-module-alert-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.merchant-module-alert-header strong {
+  font-size: 18px;
+  line-height: 1em;
+}
+
+.merchant-module-alert-header a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #212121;
+  text-decoration: none;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.merchant-module-alert-header a:hover {
+  opacity: 0.6;
+}
+
+.merchant-module-alert-header a:focus, .merchant-module-alert-header a:active {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-module-alert-header i {
+  font-size: 32px;
+  line-height: 1em;
+  width: auto;
+  height: auto;
+}
+
+.merchant-module-alert-content {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  grid-gap: 20px;
+  padding: 30px;
+}
+
+.merchant-module-alert-content p {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #757575;
+}
+
+.merchant-module-alert-content figure {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.merchant-module-alert-content img {
+  max-width: 100%;
+}
+
+.merchant-module-alert-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 30px;
+}
+
+.merchant-module-alert-footer a {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #212121;
+  border: 1px solid #e5e5e5;
+}
+
+.merchant-module-alert-footer a:focus, .merchant-module-alert-footer a:active {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 /* Utils */

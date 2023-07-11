@@ -3,6 +3,10 @@
  * Merchant - Scroll to Top Button
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Settings for Desktop
  */

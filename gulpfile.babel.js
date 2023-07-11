@@ -71,6 +71,65 @@ const browsersync = done => {
 };
 
 /**
+ * Task: `metaboxStyles`.
+ */
+gulp.task('metaboxStyles', () => {
+	return gulp
+		.src(config.metaboxCssSRC, {allowEmpty: true})
+		.pipe(plumber(errorHandler))
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'expanded',
+				precision: config.precision
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(autoprefixer(config.BROWSERS_LIST))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.metaboxCssDestination))
+		.pipe(filter('**/*.css'))
+		.pipe(mmq({log: true}))
+		.pipe(browserSync.stream())
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Metabox CSS Expanded — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `metaboxStylesMin`.
+ */
+gulp.task('metaboxStylesMin', () => {
+	return gulp
+	  .src(config.metaboxCssSRC, {allowEmpty: true})
+	  .pipe(plumber(errorHandler))
+	  .pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'compressed',
+				precision: config.precision
+			})
+		)
+	  .on('error', sass.logError)
+	  .pipe(autoprefixer(config.BROWSERS_LIST))
+	  .pipe(rename({suffix: '.min'}))
+	  .pipe(lineec())
+	  .pipe(gulp.dest(config.metaboxCssDestination))
+	  .pipe(filter('**/*.css'))
+	  .pipe(mmq({log: true}))
+	  .pipe(browserSync.stream())
+	  .pipe(
+			notify({
+				message: '\n\n✅  ===> Metabox CSS Minified — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
  * Task: `styles`.
  */
 gulp.task('styles', () => {
@@ -321,7 +380,7 @@ gulp.task('scripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-						}
+				}
 					]
 				]
 			})
@@ -362,7 +421,7 @@ gulp.task('adminScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-						}
+				}
 					]
 				]
 			})
@@ -383,6 +442,47 @@ gulp.task('adminScripts', () => {
 		.pipe(
 			notify({
 				message: '\n\n✅  ===> Admin Scripts — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `metaboxScripts`.
+ */
+gulp.task('metaboxScripts', () => {
+	return gulp
+		.src(config.metaboxJsSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.metaboxJsDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.metaboxJsSRC))
+		.pipe(concat(config.metaboxJsFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.metaboxJsDestination))
+		.pipe(
+			rename({
+				basename: config.metaboxJsFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.metaboxJsDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Metabox JS — completed!\n',
 				onLast: true
 			})
 		);
@@ -436,6 +536,8 @@ gulp.task(
 	gulp.parallel(
 		'styles',
 		'stylesMin',
+		'metaboxStyles',
+		'metaboxStylesMin',
 		// 'stylesRTL',
 		// 'stylesRTLMin',
 		'adminStyles',
@@ -444,6 +546,7 @@ gulp.task(
 		// 'adminStylesRTLMin',
 		'scripts',
 		'adminScripts',
+		'metaboxScripts',
 		browsersync, () => {
 
 		// Global
@@ -452,6 +555,8 @@ gulp.task(
 		// Frontend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('styles'));
 		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
+		gulp.watch(config.watchStyles, gulp.parallel('metaboxStyles'));
+		gulp.watch(config.watchStyles, gulp.parallel('metaboxStylesMin'));
 		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTL'));
 		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTLMin'));
 
@@ -460,6 +565,9 @@ gulp.task(
 		gulp.watch(config.watchStyles, gulp.parallel('adminStylesMin'));
 		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTL'));
 		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTLMin'));
+
+		// Admin JS
+		gulp.watch(config.watchScripts, gulp.series('metaboxScripts', reload));
 
 		// Frontend JS
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
