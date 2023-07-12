@@ -98,13 +98,23 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			$nonce   = ( isset( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$subject = ( isset( $_POST['subject'] ) ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : '';
 			$message = ( isset( $_POST['message'] ) ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+			$from    = get_bloginfo( 'admin_email' );
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) ) {
+				$response = wp_remote_post( 'https://athemes.com/merchant/', array(
+					'body' => array(
+						'mailsender' => true,
+						'from'    => $from,
+						'subject' => $subject,
+						'message' => $message
+					),
+				) );
 
-				wp_mail( 'team@athemes.com', $subject, $message );
+				if ( is_wp_error( $response ) ) {
+					wp_send_json_error();
+				}
 
 				wp_send_json_success();
-
 			}
 			
 			wp_send_json_error();
