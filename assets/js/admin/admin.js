@@ -89,6 +89,7 @@
       window.wp.ajax.post('merchant_module_feedback', {
         subject: $textarea.data('subject'),
         message: $textarea.val(),
+        module: $button.closest('.merchant-module-action').find('.merchant-module-page-button-action-activate').data('module'),
         nonce: window.merchant.nonce
       });
     });

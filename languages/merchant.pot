@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-07-11 19:19+0000\n"
+"POT-Creation-Date: 2023-07-12 17:50+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Checkbox Warning Text"
 msgstr ""
 
-#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:42, inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php:49
+#: admin/modules/agree-to-terms-checkbox/admin-page-agree-to-terms-checkbox.php:42, inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php:61
 msgid "You must read and accept the terms and conditions to complete checkout."
 msgstr ""
 

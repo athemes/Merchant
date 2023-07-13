@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Merchant
  * Plugin URI:  https://athemes.com
- * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
+ * Description: All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
  * Version:     1.0
  * Author:      aThemes
  * Author URI:  https://athemes.com

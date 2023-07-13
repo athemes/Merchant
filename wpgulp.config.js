@@ -55,6 +55,7 @@ const zipIgnoreGlob  = [
 	'!../@(Merchant|merchant)/**/*.editorconfig',
 	'!../@(Merchant|merchant)/**/*phpcs.xml.dist',
 	'!../@(Merchant|merchant)/**/*vscode',
+	'!../@(Merchant|merchant)/*.code-workspace',
 	'!../@(Merchant|merchant)/**/*package.json',
 	'!../@(Merchant|merchant)/**/*package-lock.json',
 	'!../@(Merchant|merchant)/**/*assets/img/raw/**/*',

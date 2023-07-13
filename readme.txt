@@ -8,7 +8,7 @@ Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
+All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
 
 == Description ==
 

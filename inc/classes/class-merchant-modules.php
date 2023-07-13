@@ -98,6 +98,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			$nonce   = ( isset( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$subject = ( isset( $_POST['subject'] ) ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : '';
 			$message = ( isset( $_POST['message'] ) ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+			$module  = ( isset( $_POST['module'] ) ) ? sanitize_text_field( wp_unslash( $_POST['module'] ) ) : '';
 			$from    = get_bloginfo( 'admin_email' );
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) ) {
@@ -106,7 +107,8 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 						'mailsender' => true,
 						'from'    => $from,
 						'subject' => $subject,
-						'message' => $message
+						'message' => $message,
+						'module'  => $module
 					),
 				) );
 
