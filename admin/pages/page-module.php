@@ -212,7 +212,7 @@ $merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_modul
 	</div>
 
 	<div class="merchant-module-footer-text">
-		<i class="dashicons dashicons-warning"></i><?php esc_html_e( 'Copyright © aThemes 2023. All Rights Reserved.', 'merchant' ); ?>
+		<?php esc_html_e( 'Copyright © aThemes 2023. All Rights Reserved.', 'merchant' ); ?>
 	</div>
 
 <?php else : ?>

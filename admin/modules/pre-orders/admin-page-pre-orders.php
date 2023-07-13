@@ -94,7 +94,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'additional_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Additional Information', 'merchant' ),
-			'default' => esc_html__( 'Ships in {date}.', 'merchant' ),
+			'default' => esc_html__( 'Ships on {date}.', 'merchant' ),
 		),
 
 	),

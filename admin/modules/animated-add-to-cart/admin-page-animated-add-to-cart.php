@@ -55,7 +55,7 @@ Merchant_Admin_Options::create( array(
 				'swing'       => 'Swing',
 				'tada'        => 'Tada',
 			),
-			'default' => 'flash',
+			'default' => 'swing',
 		),
 
 	),
