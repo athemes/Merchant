@@ -47,9 +47,9 @@
     .merchant-quick-view-position-overlay{
       position: absolute;
       z-index: 10;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: var(--merchant-button-position-top, 50%);
+      left: var(--merchant-button-position-left, 50%);
+      transform: translate(calc(var(--merchant-button-position-top, 50%) * -1), calc(var(--merchant-button-position-left, 50%) * -1));
       margin: 0;
       white-space: nowrap !important;
       opacity: 0;
