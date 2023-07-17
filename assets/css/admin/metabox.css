@@ -11,8 +11,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 225px;
   margin-left: -20px;
 }
@@ -50,7 +50,7 @@
   color: #757575;
   outline: none;
   -webkit-box-shadow: none;
-		  box-shadow: none;
+          box-shadow: none;
 }
 
 .merchant-metabox-tabs a:focus:before, .merchant-metabox-tabs a:active:before, .merchant-metabox-tabs a:hover:before {
@@ -71,15 +71,15 @@
 
 .merchant-metabox-contents {
   -webkit-box-flex: 1;
-	  -ms-flex: 1;
-		  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border: 1px solid #F0F0F1;
   border-radius: 4px;
 }
@@ -90,8 +90,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .merchant-metabox-content:not(.active) {
@@ -111,7 +111,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-	  flex-wrap: wrap;
+      flex-wrap: wrap;
   grid-gap: 20px;
   padding: 20px;
 }
@@ -139,8 +139,8 @@
 .merchant-metabox-field-inline {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .merchant-metabox-field-title {
@@ -150,12 +150,12 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-	  flex-wrap: wrap;
+      flex-wrap: wrap;
   grid-gap: 5px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .merchant-metabox-field-title h4 {
@@ -173,8 +173,8 @@
 
 .merchant-metabox-field-content {
   -webkit-box-flex: 1;
-	  -ms-flex: 1;
-		  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .merchant-metabox-field-description {
@@ -210,12 +210,12 @@
   display: flex;
   grid-gap: 6px;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .merchant-metabox-field-checkbox label input {
@@ -228,12 +228,12 @@
   display: inline-flex;
   grid-gap: 6px;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .merchant-metabox-field-switcher i {
@@ -281,7 +281,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-	  flex-wrap: wrap;
+      flex-wrap: wrap;
   grid-gap: 2px;
 }
 
@@ -290,9 +290,9 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .merchant-metabox-field-choices-images figure {
@@ -352,15 +352,15 @@
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-	  justify-content: center;
+      justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 40px;
   height: 40px;
   border: 1px solid #e5e5e5;
   -webkit-box-sizing: border-box;
-		  box-sizing: border-box;
+          box-sizing: border-box;
   color: #d4d4d4;
   font-size: 25px;
   font-weight: 200;
@@ -371,9 +371,9 @@
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-	 object-fit: cover;
+     object-fit: cover;
   -o-object-position: center center;
-	 object-position: center center;
+     object-position: center center;
 }
 
 .merchant-metabox-field-uploads-content,
@@ -383,11 +383,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: start;
-	  -ms-flex-align: start;
-		  align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .merchant-metabox-field-uploads-content ul,
@@ -406,11 +406,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: start;
-	  -ms-flex-pack: start;
-		  justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-bottom: 10px;
 }
 
@@ -427,9 +427,9 @@
   width: auto;
   height: auto;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   color: #1e1e1e;
   opacity: 0.5;
   -webkit-transition: all .2s;
@@ -498,11 +498,11 @@
   display: inline-flex;
   grid-gap: 5px;
   -webkit-box-pack: center;
-	  -ms-flex-pack: center;
-		  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .merchant-metabox-field-size-chart table tbody input {
@@ -525,11 +525,11 @@
   display: flex;
   grid-gap: 10px;
   -webkit-box-pack: center;
-	  -ms-flex-pack: center;
-		  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .merchant-metabox-field-size-chart .merchant-buttons a {
@@ -537,11 +537,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-	  -ms-flex-pack: center;
-		  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 16px;
   height: 16px;
   font-size: 14px;
@@ -550,11 +550,11 @@
   padding: 2px;
   border-radius: 4px;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   -webkit-box-shadow: none;
-		  box-shadow: none;
+          box-shadow: none;
   text-decoration: none;
 }
 
@@ -587,7 +587,7 @@
 
 .merchant-metabox-field-size-chart .merchant-remove:focus {
   -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
-		  box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
+          box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
 }
 
 .merchant-metabox-field-size-chart .merchant-remove:active {
@@ -600,17 +600,17 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-	  -ms-flex-pack: center;
-		  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   -webkit-box-shadow: none;
-		  box-shadow: none;
+          box-shadow: none;
   text-decoration: none;
 }
 
@@ -629,11 +629,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-	  -ms-flex-pack: center;
-		  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0;
   padding: 5px;
   width: 75px;
@@ -641,7 +641,7 @@
   border: 1px solid #e5e5e5;
   background-color: #fff;
   -webkit-box-sizing: border-box;
-		  box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .merchant-metabox-field-media figure img {
@@ -667,7 +667,7 @@
 
 .merchant-metabox-field-media .merchant-button-remove:focus {
   -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
-		  box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
+          box-shadow: 0 0 0 1px #fff, 0 0 0 3px #b32d2e;
 }
 
 .merchant-metabox-field-select-ajax select {
@@ -730,8 +730,8 @@
   grid-gap: 5px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .merchant-metabox-field-wc-attributes ul li {
@@ -742,8 +742,8 @@
   display: flex;
   max-width: 300px;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 1px solid #e5e5e5;
   background-color: #fdfdfd;
   border-radius: 3px;
@@ -759,16 +759,16 @@
   display: flex;
   grid-gap: 5px;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-flex: 1;
-	  -ms-flex: 1;
-		  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 8px;
   -webkit-user-select: none;
-	 -moz-user-select: none;
-	  -ms-user-select: none;
-		  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .merchant-metabox-field-wc-attributes ul li label input {
@@ -790,14 +790,14 @@
   display: flex;
   grid-gap: 10px;
   -webkit-box-align: center;
-	  -ms-flex-align: center;
-		  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .merchant-metabox-field-media-button {
   -webkit-box-flex: 1;
-	  -ms-flex: 1;
-		  flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -828,8 +828,8 @@ body:not(.block-editor-page) #merchant_metabox .inside {
   padding: 10px 15px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-	  -ms-flex-direction: column;
-		  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 #side-sortables .merchant-metabox-field-title {
@@ -869,36 +869,36 @@ body:not(.block-editor-page) #merchant_metabox .inside {
 
 @media only screen and (max-width: 991px) {
   .merchant-metabox-tabs {
-	display: none;
+    display: none;
   }
   .merchant-metabox-content-title,
   .merchant-metabox-content:not(.active) {
-	display: block;
+    display: block;
   }
   .merchant-metabox-field {
-	grid-gap: 8px;
-	padding: 15px;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-		-ms-flex-direction: column;
-			flex-direction: column;
+    grid-gap: 8px;
+    padding: 15px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .merchant-metabox-field-title {
-	width: auto;
+    width: auto;
   }
   .merchant-metabox-field-title:empty {
-	display: none;
+    display: none;
   }
   .merchant-metabox-contents {
-	border-left: none;
-	border-right: none;
+    border-left: none;
+    border-right: none;
   }
   #merchant_metabox .inside {
-	padding: 0;
+    padding: 0;
   }
   .merchant-metabox-field-text input,
   .merchant-metabox-field-uploads-content input,
   .merchant-metabox-field-repeater-content input {
-	width: 100%;
+    width: 100%;
   }
 }

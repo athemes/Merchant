@@ -189,65 +189,6 @@ gulp.task('stylesMin', () => {
 });
 
 /**
- * Task: `stylesRTL`.
- */
-// gulp.task('stylesRTL', () => {
-// 	return gulp
-// 		.src(config.styleRTLSRC, {allowEmpty: true})
-// 		.pipe(plumber(errorHandler))
-// 		.pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'expanded',
-// 				precision: config.precision
-// 			})
-// 		)
-// 		.on('error', sass.logError)
-// 		.pipe(autoprefixer(config.BROWSERS_LIST))
-// 		.pipe(lineec())
-// 		.pipe(gulp.dest(config.styleDestination))
-// 		.pipe(filter('**/*.css'))
-// 		.pipe(mmq({log: true}))
-// 		.pipe(browserSync.stream())
-// 		.pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Styles RTL Expanded — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
-
-/**
- * Task: `stylesRTLMin`.
- */
-// gulp.task('stylesRTLMin', () => {
-// 	return gulp
-// 	  .src(config.styleRTLSRC, {allowEmpty: true})
-// 	  .pipe(plumber(errorHandler))
-// 	  .pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'compressed',
-// 				precision: config.precision
-// 			})
-// 		)
-// 	  .on('error', sass.logError)
-// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
-// 	  .pipe(rename({suffix: '.min'}))
-// 	  .pipe(lineec())
-// 	  .pipe(gulp.dest(config.styleDestination))
-// 	  .pipe(filter('**/*.css'))
-// 	  .pipe(mmq({log: true}))
-// 	  .pipe(browserSync.stream())
-// 	  .pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Styles RTL Minified — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
-
-/**
  * Task: `adminStyles`.
  */
 gulp.task('adminStyles', () => {
@@ -305,65 +246,6 @@ gulp.task('adminStylesMin', () => {
 			})
 		);
 });
-
-/**
- * Task: `adminStylesRTL`.
- */
-// gulp.task('adminStylesRTL', () => {
-// 	return gulp
-// 		.src(config.adminStyleRTLSRC, {allowEmpty: true})
-// 		.pipe(plumber(errorHandler))
-// 		.pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'expanded',
-// 				precision: config.precision
-// 			})
-// 		)
-// 		.on('error', sass.logError)
-// 		.pipe(autoprefixer(config.BROWSERS_LIST))
-// 		.pipe(lineec())
-// 		.pipe(gulp.dest(config.adminStyleDestination))
-// 		.pipe(filter('**/*.css'))
-// 		.pipe(mmq({log: true}))
-// 		.pipe(browserSync.stream())
-// 		.pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Admin Styles RTL Expanded — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
-
-/**
- * Task: `adminStylesRTLMin`.
- */
-// gulp.task('adminStylesRTLMin', () => {
-// 	return gulp
-// 	  .src(config.adminStyleRTLSRC, {allowEmpty: true})
-// 	  .pipe(plumber(errorHandler))
-// 	  .pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'compressed',
-// 				precision: config.precision
-// 			})
-// 		)
-// 	  .on('error', sass.logError)
-// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
-// 	  .pipe(rename({suffix: '.min'}))
-// 	  .pipe(lineec())
-// 	  .pipe(gulp.dest(config.adminStyleDestination))
-// 	  .pipe(filter('**/*.css'))
-// 	  .pipe(mmq({log: true}))
-// 	  .pipe(browserSync.stream())
-// 	  .pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Admin Styles RTL Minified — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
 
 /**
  * Task: `scripts`.
@@ -442,6 +324,88 @@ gulp.task('adminScripts', () => {
 		.pipe(
 			notify({
 				message: '\n\n✅  ===> Admin Scripts — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `scrollDirectionScript`.
+ */
+gulp.task('scrollDirectionScript', () => {
+	return gulp
+		.src(config.scrollDirectionScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.scrollDirectionScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.scrollDirectionScriptSRC))
+		.pipe(concat(config.scrollDirectionScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
+		.pipe(
+			rename({
+				basename: config.scrollDirectionScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Scroll Direction Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `toggleClassScript`.
+ */
+gulp.task('toggleClassScript', () => {
+	return gulp
+		.src(config.toggleClassScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.toggleClassScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.toggleClassScriptSRC))
+		.pipe(concat(config.toggleClassScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.toggleClassScriptDestination))
+		.pipe(
+			rename({
+				basename: config.toggleClassScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.toggleClassScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Toggle Class Script — completed!\n',
 				onLast: true
 			})
 		);
@@ -538,14 +502,12 @@ gulp.task(
 		'stylesMin',
 		'metaboxStyles',
 		'metaboxStylesMin',
-		// 'stylesRTL',
-		// 'stylesRTLMin',
 		'adminStyles',
 		'adminStylesMin',
-		// 'adminStylesRTL',
-		// 'adminStylesRTLMin',
 		'scripts',
 		'adminScripts',
+		'scrollDirectionScript',
+		'toggleClassScript',
 		'metaboxScripts',
 		browsersync, () => {
 
@@ -557,20 +519,18 @@ gulp.task(
 		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStylesMin'));
-		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTL'));
-		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTLMin'));
 
 		// Backend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('adminStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('adminStylesMin'));
-		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTL'));
-		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTLMin'));
 
 		// Admin JS
 		gulp.watch(config.watchScripts, gulp.series('metaboxScripts', reload));
 
 		// Frontend JS
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
+		gulp.watch(config.watchScripts, gulp.series('scrollDirectionScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('toggleClassScript', reload));
 
 		// Backend JS
 		gulp.watch(config.watchScripts, gulp.series('adminScripts', reload));

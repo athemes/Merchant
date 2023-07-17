@@ -14,18 +14,27 @@ const precision       = 10;
 // Style options.
 const styleDestination = './assets/css';
 const styleSRC         = './assets/sass/merchant.scss';
-// const styleRTLSRC           = './assets/sass/merchant-rtl.scss';
+
 const adminStyleDestination = './assets/css/admin';
 const adminStyleSRC         = './assets/sass/admin/admin.scss';
-// const adminStyleRTLSRC      = './assets/sass/admin/admin-rtl.scss';
+
 
 // Script options.
 const scriptDestination      = './assets/js';
 const scriptSRC              = './assets/js/src/merchant.js';
 const scriptFile             = 'merchant';
+
 const adminScriptDestination = './assets/js/admin';
 const adminScriptSRC         = './assets/js/src/admin/admin.js';
 const adminScriptFile        = 'admin';
+
+const scrollDirectionScriptDestination = './assets/js/';
+const scrollDirectionScriptSRC         = './assets/js/src/scroll-direction.js';
+const scrollDirectionScriptFile        = 'scroll-direction';
+
+const toggleClassScriptDestination = './assets/js/';
+const toggleClassScriptSRC         = './assets/js/src/toggle-class.js';
+const toggleClassScriptFile        = 'toggle-class';
 
 // Metabox script/style options.
 const metaboxCssDestination = './assets/css/admin';
@@ -104,10 +113,9 @@ module.exports = {
 	styleSRC,
 	metaboxCssDestination,
 	metaboxCssSRC,
-	// styleRTLSRC,
+
 	adminStyleDestination,
 	adminStyleSRC,
-	// adminStyleRTLSRC,
 
 	// Script options.
 	scriptDestination,
@@ -119,6 +127,14 @@ module.exports = {
 	adminScriptDestination,
 	adminScriptSRC,
 	adminScriptFile,
+
+	scrollDirectionScriptDestination,
+	scrollDirectionScriptSRC,
+	scrollDirectionScriptFile,
+
+	toggleClassScriptDestination,
+	toggleClassScriptSRC,
+	toggleClassScriptFile,
 
 	// Watch options.
 	watchStyles,

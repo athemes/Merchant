@@ -33,7 +33,13 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			$this->includes();
 
+			// Register scripts.
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
+
+			// Enqueue scripts.
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
+
+			// Add identifier to body class.
 			add_filter( 'body_class', array( $this, 'add_body_class' ) );
 
 		}
@@ -91,12 +97,43 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		}
 
 		/**
+		 * Register scripts.
+		 * Scripts that might be used by multiple modules should be registered here.
+		 * 
+		 */
+		public function register_scripts() {
+			$scripts = array(
+
+				// Scroll Direction
+				array(
+					'handle'	=> 'merchant-scroll-direction',
+					'src'		=> 'assets/js/scroll-direction.min.js',
+					'dep'		=> array(),
+					'in_footer' => true
+				),
+
+				// Toggle Class
+				array(
+					'handle'	=> 'merchant-toggle-class',
+					'src'		=> 'assets/js/toggle-class.min.js',
+					'dep'		=> array(),
+					'in_footer' => true
+				)
+			);
+
+			foreach( $scripts as $script ) {
+				wp_register_script( $script[ 'handle' ], MERCHANT_URI . $script[ 'src' ], $script[ 'dep' ], MERCHANT_VERSION, $script[ 'in_footer' ] );
+			}
+		}
+
+		/**
 		 * Enqueue styles and scripts.
 		 */
 		public function enqueue_styles_scripts() {
 
-			wp_enqueue_style( 'merchant', MERCHANT_URI . 'assets/css/merchant.min.css', array(), MERCHANT_VERSION );
+			do_action( 'merchant_enqueue_before_main_css_js' );
 
+			wp_enqueue_style( 'merchant', MERCHANT_URI . 'assets/css/merchant.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_script( 'merchant', MERCHANT_URI . 'assets/js/merchant.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 
 			$setting = array(
@@ -220,6 +257,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			}
 
 			wp_localize_script( 'merchant', 'merchant', array( 'setting' =>  $setting ) );
+
+			do_action( 'merchant_enqueue_after_main_css_js' );
 
 		}
 
