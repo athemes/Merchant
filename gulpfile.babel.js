@@ -303,7 +303,7 @@ gulp.task('adminScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-				}
+						}
 					]
 				]
 			})

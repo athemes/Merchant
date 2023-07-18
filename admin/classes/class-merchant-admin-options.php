@@ -217,6 +217,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					}
 					break;
 
+				case 'sortable_repeater':
+					$values = json_decode( $value );
+					$value  = array_map( 'sanitize_text_field', $values );
+					break;
+
 			}
 
 			return $value;
@@ -616,6 +621,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					</ul>
 
 					<input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
+				</div>
+			<?php
+		}
+
+		/**
+		 * Field: Sortable Repeater.
+		 */
+		public static function sortable_repeater( $settings, $value ) {
+
+			?>
+				<div class="merchant-sortable-repeater-control">
+					<div class="merchant-sortable-repeater sortable regular-field">
+						<div class="repeater">
+							<input type="text" value="" class="repeater-input"/><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
+						</div>
+					</div>
+					<button class="button customize-control-sortable-repeater-add" type="button"><?php echo esc_html( $settings[ 'button_label' ] ); ?></button>
+					<input class="merchant-sortable-repeater-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
 				</div>
 			<?php
 		}

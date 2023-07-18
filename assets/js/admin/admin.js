@@ -238,37 +238,147 @@
       });
     });
 
-    // Field: Sortable.
-    $('.merchant-sortable').each(function () {
-      var field = $(this),
-        input = field.find('.merchant-sortable-input');
+    // Sortable.
+    var SortableField = {
+      init: function init(field) {
+        this.events();
+      },
+      events: function events() {
+        var self = this;
+        $('.merchant-sortable').each(function () {
+          var field = $(this),
+            input = field.find('.merchant-sortable-input');
 
-      // Init sortable.
-      $(field.find('ul.merchant-sortable-list').first()).sortable({
-        // Update value when we stop sorting.
-        update: function update() {
-          input.val(sortableGetNewVal(field)).trigger('change.merchant');
-        }
-      }).disableSelection().find('li').each(function () {
-        // Enable/disable options when we click on the eye of Thundera.
-        $(this).find('i.visibility').click(function () {
-          $(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+          // Init sortable.
+          $(field.find('ul.merchant-sortable-list').first()).sortable({
+            // Update value when we stop sorting.
+            update: function update() {
+              input.val(self.sortableGetNewVal(field)).trigger('change.merchant');
+            }
+          }).disableSelection().find('li').each(function () {
+            // Enable/disable options when we click on the eye of Thundera.
+            $(this).find('i.visibility').click(function () {
+              $(this).toggleClass('dashicons-visibility-faint').parents('li:eq(0)').toggleClass('invisible');
+            });
+          }).click(function () {
+            // Update value on click.
+            input.val(self.sortableGetNewVal(field)).trigger('change.merchant');
+          });
         });
-      }).click(function () {
-        // Update value on click.
-        input.val(sortableGetNewVal(field)).trigger('change.merchant');
-      });
-    });
-    var sortableGetNewVal = function sortableGetNewVal(field) {
-      var items = $(field.find('li'));
-      var newVal = [];
-      _.each(items, function (item) {
-        if (!$(item).hasClass('invisible')) {
-          newVal.push($(item).data('value'));
-        }
-      });
-      return JSON.stringify(newVal);
+      },
+      sortableGetNewVal: function sortableGetNewVal(field) {
+        var items = $(field.find('li'));
+        var newVal = [];
+        _.each(items, function (item) {
+          if (!$(item).hasClass('invisible')) {
+            newVal.push($(item).data('value'));
+          }
+        });
+        return JSON.stringify(newVal);
+      }
     };
+
+    // Intialize Sortable.
+    SortableField.init();
+
+    // Sortable Repeater.
+    var SortableRepeaterField = {
+      init: function init(field) {
+        var self = this;
+
+        // Update the values for all our input fields and initialise the sortable repeater.
+        $('.merchant-sortable-repeater-control').each(function () {
+          console.log($(this).find('.merchant-sortable-repeater-input').val());
+          // If there is an existing customizer value, populate our rows
+          var defaultValuesArray = JSON.parse($(this).find('.merchant-sortable-repeater-input').val());
+          var numRepeaterItems = defaultValuesArray.length;
+          if (numRepeaterItems > 0) {
+            // Add the first item to our existing input field
+            $(this).find('.repeater-input').val(defaultValuesArray[0]);
+            // Create a new row for each new value
+            if (numRepeaterItems > 1) {
+              var i;
+              for (i = 1; i < numRepeaterItems; ++i) {
+                self.appendRow($(this), defaultValuesArray[i]);
+              }
+            }
+          }
+        });
+
+        // Make our Repeater fields sortable.
+        $('.merchant-sortable-repeater.sortable').sortable({
+          update: function update(event, ui) {
+            self.getAllInputs($(this).parent());
+          }
+        });
+
+        // Events.
+        this.events();
+      },
+      events: function events() {
+        var self = this;
+
+        // Remove item starting from it's parent element
+        $('.merchant-sortable-repeater.sortable').on('click', '.customize-control-sortable-repeater-delete', function (event) {
+          event.preventDefault();
+          var numItems = $(this).parent().parent().find('.repeater').length;
+          if (numItems > 1) {
+            $(this).parent().slideUp('fast', function () {
+              var parentContainer = $(this).parent().parent();
+              $(this).remove();
+              self.getAllInputs(parentContainer);
+            });
+          } else {
+            $(this).parent().find('.repeater-input').val('');
+            self.getAllInputs($(this).parent().parent().parent());
+          }
+        });
+
+        // Add new item
+        $('.customize-control-sortable-repeater-add').click(function (event) {
+          event.preventDefault();
+          self.appendRow($(this).parent());
+          self.getAllInputs($(this).parent());
+        });
+
+        // Refresh our hidden field if any fields change
+        $('.merchant-sortable-repeater.sortable').change(function () {
+          self.getAllInputs($(this).parent());
+        });
+        $('.merchant-sortable-repeater.sortable').on('focusout', '.repeater-input', function () {
+          self.getAllInputs($(this).parent());
+        });
+      },
+      /**
+       * Append a new row to our list of elements.
+       * 
+       */
+      appendRow: function appendRow($element) {
+        var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+        var newRow = '<div class="repeater" style="display:none"><input type="text" value="' + defaultValue + '" class="repeater-input" /><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a></div>';
+        $element.find('.sortable').append(newRow);
+        $element.find('.sortable').find('.repeater:last').slideDown('slow', function () {
+          $(this).find('input').focus();
+        });
+      },
+      /**
+       * Get the values from the repeater input fields and add to our hidden field.
+       * 
+       */
+      getAllInputs: function getAllInputs($element) {
+        var inputValues = $element.find('.repeater-input').map(function () {
+          return $(this).val();
+        }).toArray();
+
+        // Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
+        $element.find('.merchant-sortable-repeater-input').val(JSON.stringify(inputValues));
+        // Important! Make sure to trigger change event so Customizer knows it has to save the field
+        $element.find('.merchant-sortable-repeater-input').trigger('change');
+      }
+    };
+
+    // Initialize Sortable Repeater.
+    SortableRepeaterField.init();
     $('.merchant-module-page-setting-field-gallery').each(function () {
       var $this = $(this);
       var $button = $this.find('.merchant-gallery-button');

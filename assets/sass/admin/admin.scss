@@ -1578,6 +1578,114 @@
 	}
 }
 
+/* Sortable Repeater Field */
+.merchant-sortable-repeater-control {
+	max-width: 100%;
+	
+	.sortable {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	
+		input[type="text"] {
+			width: 100%;
+			margin: 0;
+			border-radius: 4px 0 0 4px;
+			border: 1px solid #D6D6D6;
+			padding: 12px;
+			line-height: 1.3em;
+
+			&:focus {
+				border-color: #3858E9;
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	
+		div {
+			cursor: grab;
+			margin-bottom: 7px;
+		}
+	}
+	
+	.customize-control-sortable-repeater-delete {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		width: 44px;
+		height: auto;
+		font-size: 1.3em;
+		line-height: 34px;
+		color: #d4d4d4;
+		background: #fff;
+		padding: 0;
+		vertical-align: top;
+		margin-left: -1px;
+		border: 1px solid #D6D6D6;
+	
+		.dashicons-no-alt {
+			width: 100%;
+			text-decoration: none;
+			margin: 0;
+			font-weight: 600;
+			color: #50575e;
+			font-size: 1.1em;
+			line-height: 34px;
+			height: auto;
+		}
+
+		&:hover,
+		&:focus {
+			outline: none;
+			box-shadow: none;
+
+			.dashicons-no-alt {
+				color: #a7a7a7;
+			}
+		}
+	}
+	
+	.repeater {
+		display: flex;
+
+		.dashicons-menu {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0;
+			width: 44px;
+			height: auto;
+			font-size: 1.3em;
+			line-height: 34px;
+			background: #fff;
+			padding: 0;
+			vertical-align: top;
+			margin-left: -1px;
+			border: 1px solid #D6D6D6;
+
+			&:hover {
+				color: #a7a7a7;
+			}
+		}
+	}
+
+	.customize-control-sortable-repeater-add {
+		color: #3858E9;
+		border-color: #3858E9;
+		background-color: transparent;
+		margin-top: 10px;
+		padding: 4px 19px;
+
+		&:hover,
+		&:focus {
+			outline: none;
+			box-shadow: none;
+			background-color: #ffffff;
+		}
+	}
+}
+
 .merchant-module-page-setting-field-range{
 
 	.merchant-range{
@@ -1591,6 +1699,7 @@
 
 	input[type="range"]{
 		-webkit-appearance: none;
+		appearance: none;
 		width: calc(100% - 105px);
 		height: 2px;
 		border-radius: 5px;
