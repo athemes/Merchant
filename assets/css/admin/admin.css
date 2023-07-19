@@ -2467,7 +2467,8 @@
       flex-shrink: 0;
 }
 
-.merchant-module-page-setting-field-select select {
+.merchant-module-page-setting-field-select select,
+.merchant-module-page-setting-field-select_size_chart select {
   padding: 12px;
   line-height: 1.3em;
   width: 100%;
@@ -2478,18 +2479,21 @@
   border: 1px solid #D6D6D6;
 }
 
-.merchant-module-page-setting-field-select select:hover {
+.merchant-module-page-setting-field-select select:hover,
+.merchant-module-page-setting-field-select_size_chart select:hover {
   color: #2F2F2F;
 }
 
-.merchant-module-page-setting-field-select select:focus {
+.merchant-module-page-setting-field-select select:focus,
+.merchant-module-page-setting-field-select_size_chart select:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
   border-color: #3858E9;
 }
 
-.merchant-module-page-setting-field-select select option {
+.merchant-module-page-setting-field-select select option,
+.merchant-module-page-setting-field-select_size_chart select option {
   color: #2F2F2F;
 }
 
