@@ -802,7 +802,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				case 'size-chart-select':
 					$options = array();
 					$posts	 = get_posts( array(
-						'post_type'      => 'size_chart',
+						'post_type'      => 'merchant_size_chart',
 						'posts_per_page' => -1,
 						'post_status'    => 'publish'
 					) );

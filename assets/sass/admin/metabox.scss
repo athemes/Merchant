@@ -149,6 +149,14 @@
 	code{
 		font-size: 1em;
 	}
+	
+	a{
+		color: #3858E9;
+
+		&:focus{
+			box-shadow: none;
+		}
+	}
 }
 
 .merchant-metabox-field-text {

@@ -2182,6 +2182,15 @@
   color: #777;
 }
 
+.merchant-module-page-setting-field-desc a {
+  color: #3858E9;
+}
+
+.merchant-module-page-setting-field-desc a:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .merchant-module-page-setting-field-text input,
 .merchant-module-page-setting-field-number input {
   padding: 12px;

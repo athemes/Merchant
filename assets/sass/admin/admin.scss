@@ -1127,6 +1127,14 @@
 	font-size: 13px;
 	font-weight: 400;
 	color: #777;
+
+	a{
+		color: #3858E9;
+
+		&:focus{
+			box-shadow: none;
+		}
+	}
 }
 
 .merchant-module-page-setting-field-text,
