@@ -8,6 +8,10 @@
   border: 1px solid var(--merchant-border-color, #e5e5e5);
   margin-top: var(--merchant-margin-top, 20px);
   margin-bottom: var(--merchant-margin-bottom, 20px);
+
+  + .merchant-trust-badges{
+    display: none;
+  }
 }
 
 .merchant-trust-badges-title{

@@ -6,6 +6,10 @@
   flex-direction: column;
   margin-top: var(--merchant-margin-top, 20px);
   margin-bottom: var(--merchant-margin-bottom, 20px);
+
+  + .merchant-payment-logos{
+    display: none;
+  }
 }
 
 .merchant-payment-logos-title{

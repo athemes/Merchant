@@ -774,6 +774,10 @@
   margin-bottom: var(--merchant-margin-bottom, 20px);
 }
 
+.merchant-payment-logos + .merchant-payment-logos {
+  display: none;
+}
+
 .merchant-payment-logos-title {
   color: var(--merchant-text-color, #212121);
   font-size: var(--merchant-font-size, 18px);
@@ -813,6 +817,10 @@
   border: 1px solid var(--merchant-border-color, #e5e5e5);
   margin-top: var(--merchant-margin-top, 20px);
   margin-bottom: var(--merchant-margin-bottom, 20px);
+}
+
+.merchant-trust-badges + .merchant-trust-badges {
+  display: none;
 }
 
 .merchant-trust-badges-title {
