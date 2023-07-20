@@ -374,8 +374,10 @@
 		
 					}).click( function() {
 		
-						// Update value on click.
-						input.val( self.sortableGetNewVal( field ) ).trigger('change.merchant');
+						// Update value when click in the eye.
+						if( $( event.target ).hasClass( 'dashicons-visibility' ) ) {
+							input.val( self.sortableGetNewVal( field ) ).trigger('change.merchant');
+						}
 						
 					});
 		
@@ -504,6 +506,71 @@
 
 		// Initialize Sortable Repeater.
 		SortableRepeaterField.init();
+
+		// Create Page Control.
+		const CreatePageControl = {
+			init: function() {
+				this.events();
+			},
+
+			events: function() {
+				const self = this;
+
+				$( document ).on( 'click', '.merchant-create-page-control-button', function ( e ) {
+					e.preventDefault();
+
+					var $this = $( this ),
+						$create_message = $this.parent().find( '.merchant-create-page-control-create-message' ),
+						$success_message = $this.parent().find( '.merchant-create-page-control-success-message' ),
+						initial_text = $this.text(),
+						creating_text = $this.data( 'creating-text' ),
+						created_text = $this.data( 'created-text' ),
+						page_title = $this.data( 'page-title' ),
+						page_meta_key = $this.data( 'page-meta-key' ),
+						page_meta_value = $this.data( 'page-meta-value' ),
+						option_name = $this.data( 'option-name' ),
+						nonce = $this.data( 'nonce' );
+			
+					if ( ! page_title ) {
+						return false;
+					}
+			
+					$( this ).text( creating_text );
+					$( this ).attr( 'disabled', true );
+			
+					$.ajax({
+						type: 'post',
+						url: ajaxurl,
+						data: {
+							action: 'merchant_create_page_control',
+							page_title: page_title,
+							page_meta_key: page_meta_key,
+							page_meta_value: page_meta_value,
+							option_name: option_name,
+							nonce: nonce
+						},
+						success: self.ajaxResponseHandler( $success_message, $create_message )
+					});
+				});
+			},
+
+			ajaxResponseHandler: function( response ) {
+				if ('success' === response.status) {
+					const 
+						href 	= $success_message.find( 'a' ).attr( 'href' ),
+						newhref = href.replace( '?post=&', '?post=' + response.page_id + '&' );
+
+					$success_message.find( 'a' ).attr( 'href', newhref );
+					$success_message.css( 'display', 'block' );
+
+					$create_message.remove();
+					$this.remove();
+				}
+			}
+		}
+
+		// Initialize Create Page Control.
+		CreatePageControl.init();
 
 		$('.merchant-module-page-setting-field-gallery').each( function() {
 

@@ -29,7 +29,54 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+			// Ajax callbacks.
+			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
+		}
+
+		/**
+		 * Ajax callbacks.
+		 */
+		public function create_page_control_ajax_callback() {
+			check_ajax_referer( 'customize-create-page-control-nonce', 'nonce' );
+
+			$page_title      = isset( $_POST['page_title'] ) ? sanitize_text_field( $_POST['page_title'] ) : '';
+			$page_meta_key   = isset( $_POST['page_meta_key'] ) ? sanitize_text_field( $_POST['page_meta_key'] ) : '';
+			$page_meta_value = isset( $_POST['page_meta_value'] ) ? sanitize_text_field( $_POST['page_meta_value'] ) : '';
+			$option_name     = isset( $_POST['option_name'] ) ? sanitize_text_field( $_POST['option_name'] ) : '';
+
+			$meta_input = array();
+			if ( $page_meta_key && $page_meta_value ) { 
+				$meta_input = array(
+					$page_meta_key => $page_meta_value
+				);
+			}
+
+			$postarr = array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'    => $page_title,
+				'post_content' => '',
+				'meta_input'   => $meta_input
+			);
+
+			$page_id = wp_insert_post( $postarr );
+
+			if ( ! is_wp_error( $page_id ) ) {
+				if ( $option_name ) {
+					update_option( $option_name, $page_id );
+				}
+
+				wp_send_json( array(
+					'status'  => 'success',
+					'page_id' => $page_id
+				) );
+			} else {
+				wp_send_json( array(
+					'status'  => 'error'
+				) );
+			}
+		}
 
 		/**
 		 * Get option.
@@ -492,7 +539,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function gallery( $settings, $value ) {
 
 			$settings = wp_parse_args( $settings, array(
-				'label' => esc_Html__( 'Select Images', 'merchant' ),
+				'label' => esc_html__( 'Select Images', 'merchant' ),
 			) );
 
 			$images = ( ! empty( $value ) ) ? explode( ',', $value ) : array();
@@ -536,7 +583,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function upload( $settings, $value ) {
 
 			$settings = wp_parse_args( $settings, array(
-				'label' => esc_Html__( 'Select Image', 'merchant' ),
+				'label' => esc_html__( 'Select Image', 'merchant' ),
 			) );
 
 			echo '<div class="merchant-upload-wrapper">';
@@ -641,6 +688,57 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<input class="merchant-sortable-repeater-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
 				</div>
 			<?php
+		}
+
+		/**
+		 * Field: Create Page.
+		 */
+		public static function create_page( $settings, $value ) {
+			$page_id = get_option( $settings[ 'option_name' ] );
+
+			echo '<div class="merchant-create-page-control">';
+
+			if ( $page_id && post_exists( get_the_title( $page_id ) ) && 'publish' === get_post_status( $page_id ) ) { 
+				echo wp_kses_post( 
+					sprintf(  /* translators: 1: link to edit page */
+						__( 'Your page is created!<br>Click <a href="%s" target="_blank">here</a> if you want to edit the page.<br><br>If you want to show a link to this page, assign the page to a menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a>', 'merchant' ), 
+						get_admin_url() . 'post.php?post=' . $page_id . '&action=edit'
+					) 
+				);
+			} else {
+				echo '<div class="merchant-create-page-control-create-message">';
+					echo wp_kses_post( 
+						sprintf( /* translators: 1: page name */	 
+							__( 'It looks like you haven\'t created a <strong>%s</strong> page yet. Click the below button to create the page.', 'merchant' ), 
+							$settings[ 'page_title'] 
+						)
+					);
+					echo '<br><br>';
+				echo '</div>';
+				echo '<div class="merchant-create-page-control-success-message" style="display: none;">';
+					echo wp_kses_post( 
+						sprintf( /* translators: 1: link to edit page */	
+							__( 'Page created with success!<br>Click <a href="%s" target="_blank">here</a> if you want to edit the page.<br><br>If you want to show a link to this page, assign the page to a menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a>', 'merchant' ), 
+							get_admin_url() . 'post.php?post=&action=edit' 
+						) 
+					);
+				echo '</div>';
+				echo wp_kses_post( 
+					sprintf( /* translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text  */	
+						__( '<a href="#" class="merchant-create-page-control-button button" data-page-title="%2$s" data-page-meta-key="%3$s" data-page-meta-value="%4$s" data-option-name="%5$s" data-nonce="%6$s" data-creating-text="%7$s" data-created-text="%8$s">%1$s</a>', 'merchant' ),
+						__( 'Create Page', 'merchant' ),
+						$settings[ 'page_title'],
+						$settings[ 'page_meta_key'],
+						$settings[ 'page_meta_value'],
+						$settings[ 'option_name'],
+						wp_create_nonce( 'customize-create-page-control-nonce' ),
+						__( 'Creating...', 'merchant' ),
+						__( 'Created!', 'merchant' )
+					) 
+				);
+			}
+			
+			echo '</div>';
 		}
 
 	}
