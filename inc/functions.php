@@ -19,17 +19,19 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 		extract( $args );
 	}
 
-	$plugin_dir = ! defined( 'MERCHANT_PRO_DIR' ) ? MERCHANT_DIR : MERCHANT_PRO_DIR;
+	$plugin_dir  = ! defined( 'MERCHANT_PRO_DIR' ) ? MERCHANT_DIR : MERCHANT_PRO_DIR;
+	$folder_path = ! empty( $folder_path ) ? "/$folder_path/" : '';
+
 	$template	 = '';
 
 	// Look in yourtheme/merchant/folder-path/name.php and yourtheme/merchant/folder-path/name.php.
 	if ( $name ) {
-		$template = locate_template( array( "merchant/{$folder_path}/{$name}.php" ) );
+		$template = locate_template( array( "merchant{$folder_path}{$name}.php" ) );
 	}
 
 	// Get default.
-	if ( ! $template && $name && file_exists( $plugin_dir . "templates/{$folder_path}/{$name}.php" ) ) {
-		$template = $plugin_dir . "templates/{$folder_path}/{$name}.php";
+	if ( ! $template && $name && file_exists( $plugin_dir . "templates{$folder_path}{$name}.php" ) ) {
+		$template = $plugin_dir . "templates{$folder_path}{$name}.php";
 	}
 
 	/**

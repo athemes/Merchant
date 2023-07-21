@@ -18,6 +18,8 @@ const styleSRC         = './assets/sass/merchant.scss';
 const adminStyleDestination = './assets/css/admin';
 const adminStyleSRC         = './assets/sass/admin/admin.scss';
 
+const gridStyleDestination = './assets/css';
+const gridStyleSRC         = './assets/sass/grid.scss';
 
 // Script options.
 const scriptDestination      = './assets/js';
@@ -116,6 +118,9 @@ module.exports = {
 
 	adminStyleDestination,
 	adminStyleSRC,
+
+	gridStyleDestination,
+	gridStyleSRC,
 
 	// Script options.
 	scriptDestination,

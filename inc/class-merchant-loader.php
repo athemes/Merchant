@@ -34,7 +34,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			$this->includes();
 
 			// Register scripts.
-			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_global_js_and_css' ) );
 
 			// Enqueue scripts.
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
@@ -102,7 +102,36 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		 * Scripts that might be used by multiple modules should be registered here.
 		 * 
 		 */
-		public function register_scripts() {
+		public function register_global_js_and_css() {
+			
+			// Register styles.
+			$styles = array(
+
+				// Grid.
+				array(
+					'handle'	=> 'merchant-grid',
+					'src'		=> 'assets/css/grid.min.css',
+					'dep'		=> array(),
+					'ver'		=> MERCHANT_VERSION,
+					'media'		=> 'all'
+				),
+
+				// Utilities.
+				array(
+					'handle'	=> 'merchant-utilities',
+					'src'		=> 'assets/css/utilities.min.css',
+					'dep'		=> array(),
+					'ver'		=> MERCHANT_VERSION,
+					'media'		=> 'all'
+				)
+
+			);
+
+			foreach ( $styles as $style ) {
+				wp_register_style( $style[ 'handle' ], MERCHANT_URI . $style[ 'src' ], $style[ 'dep' ], $style[ 'ver' ], $style[ 'media' ] );
+			}
+
+			// Register scripts.
 			$scripts = array(
 
 				// Scroll Direction
@@ -122,7 +151,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				)
 			);
 
-			foreach( $scripts as $script ) {
+			foreach ( $scripts as $script ) {
 				wp_register_script( $script[ 'handle' ], MERCHANT_URI . $script[ 'src' ], $script[ 'dep' ], MERCHANT_VERSION, $script[ 'in_footer' ] );
 			}
 		}
@@ -256,10 +285,11 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				wp_enqueue_script( 'merchant-pre-orders', MERCHANT_URI . 'assets/js/modules/pre-orders.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
+			
+			do_action( 'merchant_enqueue_after_main_css_js' );
 
 			wp_localize_script( 'merchant', 'merchant', array( 'setting' =>  $setting ) );
 
-			do_action( 'merchant_enqueue_after_main_css_js' );
 
 		}
 

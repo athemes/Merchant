@@ -248,6 +248,65 @@ gulp.task('adminStylesMin', () => {
 });
 
 /**
+ * Task: `gridStyles`.
+ */
+gulp.task('gridStyles', () => {
+	return gulp
+		.src(config.gridStyleSRC, {allowEmpty: true})
+		.pipe(plumber(errorHandler))
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'expanded',
+				precision: config.precision
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(autoprefixer(config.BROWSERS_LIST))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.gridStyleDestination))
+		.pipe(filter('**/*.css'))
+		.pipe(mmq({log: true}))
+		.pipe(browserSync.stream())
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Grid Styles Expanded — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `gridStylesMin`.
+ */
+gulp.task('gridStylesMin', () => {
+	return gulp
+	  .src(config.gridStyleSRC, {allowEmpty: true})
+	  .pipe(plumber(errorHandler))
+	  .pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'compressed',
+				precision: config.precision
+			})
+		)
+	  .on('error', sass.logError)
+	  .pipe(autoprefixer(config.BROWSERS_LIST))
+	  .pipe(rename({suffix: '.min'}))
+	  .pipe(lineec())
+	  .pipe(gulp.dest(config.gridStyleDestination))
+	  .pipe(filter('**/*.css'))
+	  .pipe(mmq({log: true}))
+	  .pipe(browserSync.stream())
+	  .pipe(
+			notify({
+				message: '\n\n✅  ===> Grid Styles Minified — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
  * Task: `scripts`.
  */
 gulp.task('scripts', () => {
@@ -504,6 +563,8 @@ gulp.task(
 		'metaboxStylesMin',
 		'adminStyles',
 		'adminStylesMin',
+		'gridStyles',
+		'gridStylesMin',
 		'scripts',
 		'adminScripts',
 		'scrollDirectionScript',
@@ -519,6 +580,8 @@ gulp.task(
 		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStylesMin'));
+		gulp.watch(config.watchStyles, gulp.parallel('gridStyles'));
+		gulp.watch(config.watchStyles, gulp.parallel('gridStylesMin'));
 
 		// Backend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('adminStyles'));
