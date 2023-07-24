@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function merchant_add_payment_logos_add_to_cart_form() {
 
-	if ( Merchant_Modules::is_module_active( 'payment-logos' ) ) {
+	if ( Merchant_Modules::is_module_active( 'payment-logos' ) && ! is_archive() ) {
 
 		$logos = Merchant_Admin_Options::get( 'payment-logos', 'logos', '' );
 		$title = Merchant_Admin_Options::get( 'payment-logos', 'title', esc_html__( 'Checkout safely using your preferred payment method', 'merchant' ) );
