@@ -378,7 +378,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						<?php foreach ( $settings['options'] as $key => $option ) : ?>
 							<label>
 								<input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
-								<figure><img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>" title="" /></figure>
+								<figure>
+									<?php if ( ! empty( $option['image'] ) ) : ?>
+										<img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>" />
+									<?php else : ?>
+										<img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>" />
+									<?php endif; ?>
+									<?php if ( ! empty( $option['label'] ) ) : ?>
+										<span class="merchant-tooltip"><?php echo esc_html( $option['label'] ); ?></span>
+									<?php endif; ?>
+								</figure>
 							</label>
 						<?php endforeach; ?>
 					<?php endif; ?>
