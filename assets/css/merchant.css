@@ -1287,8 +1287,8 @@
   line-height: 1.2;
 }
 
-.merchant-quick-view-product-rating .woocommerce-product-rating {
-  margin: 0;
+.merchant-quick-view-product-rating .star-rating {
+  margin-left: 0;
 }
 
 .merchant-quick-view-product-excerpt p:last-child {

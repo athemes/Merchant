@@ -146,25 +146,47 @@ function merchant_quick_view_content_callback() {
 
 					<div class="merchant-quick-view-summary">
 
-						<div class="merchant-quick-view-product-title"><?php woocommerce_template_single_title(); ?></div>
-						<div class="merchant-quick-view-product-rating"><?php woocommerce_template_single_rating(); ?></div>
-						<div class="merchant-quick-view-product-price"><?php woocommerce_template_single_price(); ?></div>
+						<div class="merchant-quick-view-product-title">
+							<h2 class="product_title entry-title"><?php echo esc_html( $product->get_title() ); ?></h2>
+						</div>
+						<?php if ( 0 != $product->get_average_rating() ) : ?>
+							<div class="merchant-quick-view-product-rating">
+								<div class="woocommerce-product-rating">
+									<?php echo wp_kses( wc_get_rating_html( $product->get_average_rating() ), merchant_kses_allowed_tags() ); ?>
+								</div>
+							</div>
+						<?php endif; ?>
+						<div class="merchant-quick-view-product-price">
+							<div class="price"><?php echo wp_kses( $product->get_price_html(), merchant_kses_allowed_tags() ); ?></div>
+						</div>
 						<?php if ( 'top' === $place_product_description ) : ?>
 							<?php if ( 'full' === $description_style ) : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php the_content(); ?></div>
+								<div class="merchant-quick-view-product-excerpt">
+									<?php echo wp_kses_post( $product->get_description() ); ?>
+								</div>
 							<?php else : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php woocommerce_template_single_excerpt(); ?></div>
+								<div class="merchant-quick-view-product-excerpt">
+									<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
+								</div>
 							<?php endif; ?>
 						<?php endif; ?>
-						<div class="merchant-quick-view-product-add-to-cart <?php echo sanitize_html_class( $hide_quantity ); ?>"><?php woocommerce_template_single_add_to_cart(); ?></div>
+						<div class="merchant-quick-view-product-add-to-cart <?php echo esc_attr( $hide_quantity ); ?>">
+							<?php woocommerce_template_single_add_to_cart(); ?>
+						</div>
 						<?php if ( 'bottom' === $place_product_description ) : ?>
 							<?php if ( 'full' === $description_style ) : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php the_content(); ?></div>
+								<div class="merchant-quick-view-product-excerpt">
+									<?php echo wp_kses_post( $product->get_description() ); ?>
+								</div>
 							<?php else : ?>
-								<div class="merchant-quick-view-product-excerpt"><?php woocommerce_template_single_excerpt(); ?></div>
+								<div class="merchant-quick-view-product-excerpt">
+									<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
+								</div>
 							<?php endif; ?>
 						<?php endif; ?>
-						<div class="merchant-quick-view-product-meta"><?php woocommerce_template_single_meta(); ?></div>
+						<div class="merchant-quick-view-product-meta">
+							<?php woocommerce_template_single_meta(); ?>
+						</div>
 
 					</div>
 
