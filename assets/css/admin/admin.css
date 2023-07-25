@@ -2413,6 +2413,15 @@
   max-width: 60vw;
 }
 
+.merchant-module-page-setting-field-content a {
+  color: #3858E9;
+}
+
+.merchant-module-page-setting-field-content a:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .merchant-tag-pre-orders {
   display: -webkit-box;
   display: -ms-flexbox;
