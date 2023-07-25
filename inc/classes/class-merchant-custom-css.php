@@ -230,8 +230,8 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				$css .= $this->get_variable_css( 'quick-view', 'border-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-border-hover-color' );
 				$css .= $this->get_variable_css( 'quick-view', 'background-color', '#212121', '.merchant-quick-view-open', '--merchant-background-color' );
 				$css .= $this->get_variable_css( 'quick-view', 'background-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-background-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-top', '50%', '.merchant-quick-view-open', '--merchant-button-position-top', '%' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-left', '50%', '.merchant-quick-view-open', '--merchant-button-position-left', '%' );
+				$css .= $this->get_variable_css( 'quick-view', 'button-position-top', '50', '.merchant-quick-view-open', '--merchant-button-position-top', '%' );
+				$css .= $this->get_variable_css( 'quick-view', 'button-position-left', '50', '.merchant-quick-view-open', '--merchant-button-position-left', '%' );
 				
 				$css .= $this->get_variable_css( 'quick-view', 'modal_width', 1000, '.merchant-quick-view-modal', '--merchant-quick-view-modal-width', 'px' );
 				$css .= $this->get_variable_css( 'quick-view', 'modal_height', 500, '.merchant-quick-view-modal', '--merchant-quick-view-modal-height', 'px' );

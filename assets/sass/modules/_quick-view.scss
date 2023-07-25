@@ -24,6 +24,10 @@
 				height: 1em;
 				fill: var(--merchant-icon-color, #ffffff) !important;
 				transition: all .2s;
+
+				path {
+					fill: var(--merchant-icon-color, #ffffff) !important;
+				}
 			}
 			
 			&:hover{
@@ -33,6 +37,10 @@
 				
 				svg{
 					fill: var(--merchant-icon-hover-color, #ffffff) !important;
+
+					path {
+						fill: var(--merchant-icon-hover-color, #ffffff) !important;
+					}
 				}
 			}
 		}

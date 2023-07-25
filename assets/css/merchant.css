@@ -903,6 +903,10 @@
   transition: all .2s;
 }
 
+.woocommerce .product .merchant-quick-view-open svg path {
+  fill: var(--merchant-icon-color, #ffffff) !important;
+}
+
 .woocommerce .product .merchant-quick-view-open:hover {
   color: var(--merchant-text-hover-color, #ffffff) !important;
   border-color: var(--merchant-border-hover-color, #414141) !important;
@@ -910,6 +914,10 @@
 }
 
 .woocommerce .product .merchant-quick-view-open:hover svg {
+  fill: var(--merchant-icon-hover-color, #ffffff) !important;
+}
+
+.woocommerce .product .merchant-quick-view-open:hover svg path {
   fill: var(--merchant-icon-hover-color, #ffffff) !important;
 }
 
