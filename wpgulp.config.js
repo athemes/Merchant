@@ -38,6 +38,10 @@ const toggleClassScriptDestination = './assets/js/';
 const toggleClassScriptSRC         = './assets/js/src/toggle-class.js';
 const toggleClassScriptFile        = 'toggle-class';
 
+const customAddToCartButtonScriptDestination = './assets/js/';
+const customAddToCartButtonScriptSRC         = './assets/js/src/custom-addtocart-button.js';
+const customAddToCartButtonScriptFile        = 'custom-addtocart-button';
+
 // Metabox script/style options.
 const metaboxCssDestination = './assets/css/admin';
 const metaboxCssSRC         = './assets/sass/admin/metabox.scss';
@@ -140,6 +144,10 @@ module.exports = {
 	toggleClassScriptDestination,
 	toggleClassScriptSRC,
 	toggleClassScriptFile,
+
+	customAddToCartButtonScriptDestination,
+	customAddToCartButtonScriptSRC,
+	customAddToCartButtonScriptFile,
 
 	// Watch options.
 	watchStyles,

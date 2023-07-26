@@ -549,12 +549,14 @@
 							option_name: option_name,
 							nonce: nonce
 						},
-						success: self.ajaxResponseHandler( $success_message, $create_message )
+						success: function( response ) {
+							self.ajaxResponseHandler( response, $this, $success_message, $create_message )
+						}
 					});
 				});
 			},
 
-			ajaxResponseHandler: function( response ) {
+			ajaxResponseHandler: function( response, $this, $success_message, $create_message ) {
 				if ('success' === response.status) {
 					const 
 						href 	= $success_message.find( 'a' ).attr( 'href' ),

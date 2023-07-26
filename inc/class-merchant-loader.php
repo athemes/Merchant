@@ -55,6 +55,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Helpers.
 			require_once MERCHANT_DIR . 'inc/helpers.php';
 
+			// Ajax callbacks.
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-ajax-callbacks.php';
+
 			// Core classes.
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-option.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-modules.php';
@@ -146,6 +149,14 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				array(
 					'handle'	=> 'merchant-toggle-class',
 					'src'		=> 'assets/js/toggle-class.min.js',
+					'dep'		=> array(),
+					'in_footer' => true
+				),
+
+				// Custom Add To Cart Button
+				array(
+					'handle'	=> 'merchant-custom-addtocart-button',
+					'src'		=> 'assets/js/custom-addtocart-button.min.js',
 					'dep'		=> array(),
 					'in_footer' => true
 				)

@@ -418,11 +418,13 @@
               option_name: option_name,
               nonce: nonce
             },
-            success: self.ajaxResponseHandler($success_message, $create_message)
+            success: function success(response) {
+              self.ajaxResponseHandler(response, $this, $success_message, $create_message);
+            }
           });
         });
       },
-      ajaxResponseHandler: function ajaxResponseHandler(response) {
+      ajaxResponseHandler: function ajaxResponseHandler(response, $this, $success_message, $create_message) {
         if ('success' === response.status) {
           var href = $success_message.find('a').attr('href'),
             newhref = href.replace('?post=&', '?post=' + response.page_id + '&');

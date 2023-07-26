@@ -471,6 +471,47 @@ gulp.task('toggleClassScript', () => {
 });
 
 /**
+ * Task: `customAddToCartButtonScript`.
+ */
+gulp.task('customAddToCartButtonScript', () => {
+	return gulp
+		.src(config.customAddToCartButtonScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.customAddToCartButtonScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.customAddToCartButtonScriptSRC))
+		.pipe(concat(config.customAddToCartButtonScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
+		.pipe(
+			rename({
+				basename: config.customAddToCartButtonScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Custom Add To Cart Button Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
  * Task: `metaboxScripts`.
  */
 gulp.task('metaboxScripts', () => {
@@ -569,6 +610,7 @@ gulp.task(
 		'adminScripts',
 		'scrollDirectionScript',
 		'toggleClassScript',
+		'customAddToCartButtonScript',
 		'metaboxScripts',
 		browsersync, () => {
 
@@ -594,6 +636,7 @@ gulp.task(
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
 		gulp.watch(config.watchScripts, gulp.series('scrollDirectionScript', reload));
 		gulp.watch(config.watchScripts, gulp.series('toggleClassScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('customAddToCartButtonScript', reload));
 
 		// Backend JS
 		gulp.watch(config.watchScripts, gulp.series('adminScripts', reload));

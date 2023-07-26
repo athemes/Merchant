@@ -1,3 +1,12 @@
+/* Utilities */
+.mrc-mb-0 {
+  margin-bottom: 0;
+}
+
+.mrc-mt-0 {
+  margin-top: 0;
+}
+
 .merchant-animated-buttons .merchant-button-flash:hover {
   -webkit-animation: merchant-flash 1s infinite both;
           animation: merchant-flash 1s infinite both;
@@ -774,6 +783,39 @@
   background: -webkit-gradient(linear, left top, right top, from(transparent), to(black)), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
   background: linear-gradient(to right, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
   background-size: 100%, 6px;
+}
+
+/* Buttons */
+.button-tertiary {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.4375rem 1rem;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-transform: none;
+  text-decoration: none;
+  color: #212b36;
+  background-color: #fff;
+  border: 1px solid #c4cdd5;
+  border-radius: 0.25rem;
+  -webkit-transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.button-tertiary:hover, .button-tertiary:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .toplevel_page_merchant {
