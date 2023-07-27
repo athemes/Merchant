@@ -126,7 +126,16 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'dep'		=> array(),
 					'ver'		=> MERCHANT_VERSION,
 					'media'		=> 'all'
-				)
+				),
+
+				// Carousel.
+				array(
+					'handle'	=> 'merchant-carousel',
+					'src'		=> 'assets/css/carousel.min.css',
+					'dep'		=> array(),
+					'ver'		=> MERCHANT_VERSION,
+					'media'		=> 'all'
+				),
 
 			);
 
@@ -157,6 +166,14 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				array(
 					'handle'	=> 'merchant-custom-addtocart-button',
 					'src'		=> 'assets/js/custom-addtocart-button.min.js',
+					'dep'		=> array(),
+					'in_footer' => true
+				),
+
+				// Carousel
+				array(
+					'handle'	=> 'merchant-carousel',
+					'src'		=> 'assets/js/carousel.min.js',
 					'dep'		=> array(),
 					'in_footer' => true
 				)

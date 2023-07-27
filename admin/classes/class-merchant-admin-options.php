@@ -171,11 +171,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Save options.
 		 */
 		public static function save_options( $settings ) {
-
 			$save  = ( isset( $_POST['merchant_save'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_save'] ) ) : '';
 			$reset = ( isset( $_POST['merchant_reset'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_reset'] ) ) : '';
 			$nonce = ( isset( $_POST['merchant_nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_nonce'] ) ) : '';
-
+			
 			if ( ! wp_verify_nonce( $nonce, 'merchant_nonce' ) ) {
 				return;
 			}
