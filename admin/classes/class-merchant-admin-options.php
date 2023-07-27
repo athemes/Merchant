@@ -701,7 +701,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( $page_id && post_exists( get_the_title( $page_id ) ) && 'publish' === get_post_status( $page_id ) ) { 
 				echo wp_kses_post( 
 					sprintf(  /* translators: 1: link to edit page */
-						__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">Your page is created!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%1$s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">If you want to show a link to this page, assign the page to a menu by clicking <a href="%2$s" target="_blank">here</a></p>', 'merchant' ), 
+						__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">Your page is created!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%1$s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="%2$s" target="_blank">here</a></p>', 'merchant' ), 
 						get_admin_url() . 'post.php?post=' . $page_id . '&action=edit',
 						get_admin_url() . 'nav-menus.php'
 					) 
@@ -718,7 +718,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo '<div class="merchant-create-page-control-success-message" style="display: none;">';
 					echo wp_kses_post( 
 						sprintf( /* translators: 1: link to edit page */	
-							__( '<p class="merchant-module-page-setting-field-desc">Page created with success!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">If you want to show a link to this page, assign the page to a menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a></p>', 'merchant' ), 
+							__( '<p class="merchant-module-page-setting-field-desc">Page created with success!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a></p>', 'merchant' ), 
 							get_admin_url() . 'post.php?post=&action=edit' 
 						) 
 					);

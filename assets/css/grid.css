@@ -6,6 +6,7 @@
 */
 .mrc-container {
   margin: 0 auto;
+  width: 100%;
   max-width: 1140px;
   min-width: 320px;
 }
