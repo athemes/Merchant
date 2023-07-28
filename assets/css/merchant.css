@@ -1577,6 +1577,10 @@
       flex-wrap: wrap;
 }
 
+.merchant-theme-kadence .merchant-floating-side-mini-cart-widget .product_list_widget {
+  padding: 40px !important;
+}
+
 .merchant-theme-blocksy .products .product .ct-woo-card-actions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1607,6 +1611,10 @@
 
 .merchant-theme-zakra .merchant-floating-side-mini-cart-widget .product_list_widget li {
   line-height: 1;
+}
+
+.merchant-theme-zakra .merchant-floating-side-mini-cart-widget .product_list_widget li a.remove {
+  color: var(--merchant-side-cart-content-remove-color, #fff) !important;
 }
 
 .merchant-theme-zakra .merchant-pro-multi-step-wrapper .col-1,
@@ -1683,6 +1691,29 @@
   display: flex;
 }
 
+.merchant-theme-oceanwp .merchant-floating-side-mini-cart .product_list_widget {
+  padding: 40px;
+}
+
+.merchant-theme-oceanwp .merchant-floating-side-mini-cart .product_list_widget h3 {
+  font-size: 16px;
+}
+
+.merchant-theme-oceanwp .merchant-floating-side-mini-cart .product_list_widget li a.remove {
+  top: -5px;
+  margin-top: 0;
+}
+
+.merchant-theme-oceanwp .merchant-floating-side-mini-cart .product_list_widget li .quantity {
+  min-width: auto !important;
+  margin-left: 20px;
+  overflow: unset;
+}
+
+.merchant-theme-oceanwp .merchant-floating-side-mini-cart .product_list_widget li img {
+  max-width: 50px;
+}
+
 .merchant-theme-oceanwp .merchant-login-popup .owp-account-links {
   display: none;
 }
@@ -1716,6 +1747,19 @@
   margin-left: 0;
 }
 
+.merchant-theme-woostify .merchant-floating-side-mini-cart .woostify-svg-icon {
+  display: none;
+}
+
+.merchant-theme-woostify .merchant-floating-side-mini-cart .product_list_widget img {
+  position: relative;
+  top: 0;
+}
+
+.merchant-theme-woostify .merchant-floating-side-mini-cart .product_list_widget .quantity {
+  overflow: unset;
+}
+
 .merchant-theme-woostify .merchant-login-popup .woocommerce-form.woocommerce-form-login {
   border: none;
   padding: 0;
@@ -1736,6 +1780,10 @@
 
 .merchant-theme-woostify .merchant-pro-multi-step-wrapper [name=checkout] {
   float: none;
+}
+
+.merchant-theme-woostify .merchant-pro-sc .address-field + .address-field {
+  margin-top: 5px;
 }
 
 .merchant-theme-blocksy .product .summary .merchant_buy_now_button {
@@ -1815,19 +1863,8 @@
   line-height: 1;
 }
 
-.merchant-theme-neve .merchant-pro-sc-order-review {
-  width: 100%;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  padding-right: 0;
-  border-right: 0;
-}
-
-.merchant-theme-neve .merchant-pro-sc-contents {
-  width: 60%;
-  padding-right: 30px;
+.merchant-theme-neve form.checkout {
+  grid-column-gap: 0 !important;
 }
 
 .merchant-theme-neve .woocommerce .merchant-pro-sc-form {
@@ -1836,17 +1873,34 @@
   display: flex;
 }
 
+.merchant-theme-neve .woocommerce .merchant-pro-sc-form .row {
+  margin: 0;
+  display: block;
+}
+
 .merchant-theme-neve .merchant-pro-multi-step-wrapper form.checkout {
   display: block;
 }
 
+.merchant-theme-neve .merchant-floating-side-mini-cart .product_list_widget {
+  padding: 40px;
+}
+
+.merchant-theme-neve .merchant-floating-side-mini-cart .product_list_widget li a.remove {
+  top: -5px;
+  margin-top: 0;
+  color: var(--merchant-side-cart-content-remove-color, #fff) !important;
+}
+
+.merchant-theme-neve .merchant-floating-side-mini-cart .product_list_widget li .quantity {
+  margin-left: 20px;
+}
+
+.merchant-theme-neve .merchant-floating-side-mini-cart .product_list_widget li img {
+  width: 50px;
+}
+
 @media (max-width: 767px) {
-  .merchant-theme-neve .merchant-pro-sc-order-review {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
   .merchant-theme-neve .merchant-pro-sc-contents {
     width: 100%;
     padding-right: 0;
@@ -1859,6 +1913,14 @@
 
 .merchant-theme-sydney .merchant-pro-sc-fields .form-row-wide {
   clear: none;
+}
+
+.merchant-theme-sydney .merchant-floating-side-mini-cart .product_list_widget {
+  padding: 40px;
+}
+
+.merchant-theme-sydney .merchant-floating-side-mini-cart .product_list_widget a.remove {
+  top: 0;
 }
 
 .merchant-theme-twentytwenty .merchant-pro-multi-step-wrapper .woocommerce-checkout,
