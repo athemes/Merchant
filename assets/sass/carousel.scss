@@ -66,7 +66,8 @@
 			display: flex !important;
 			flex-wrap: wrap;
 			margin: calc(-1 * var(--merchant-rvp-columns-gap, 15px)) 0 0 calc(-1 * var(--merchant-rvp-columns-gap, 15px)) !important;
-			width: calc(100% + var(--merchant-rvp-columns-gap, 15px));
+			width: calc(100% + var(--merchant-rvp-columns-gap, 15px)) !important;
+			column-gap: 0 !important;
 
 			> li.product {
 				margin: var(--merchant-rvp-columns-gap, 15px) 0 0 var(--merchant-rvp-columns-gap, 15px) !important;
