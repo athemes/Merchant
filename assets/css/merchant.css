@@ -619,6 +619,20 @@
   }
 }
 
+.woocommerce .merchant-agree-to-terms-checkbox {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.woocommerce .merchant-agree-to-terms-checkbox p.form-row {
+  margin: 0;
+  padding: 0;
+}
+
+.woocommerce .merchant-agree-to-terms-checkbox .error {
+  color: #a00;
+}
+
 .merchant-cookie-banner {
   position: fixed;
   left: 0;
@@ -1845,6 +1859,38 @@
 
 .merchant-theme-sydney .merchant-pro-sc-fields .form-row-wide {
   clear: none;
+}
+
+.merchant-theme-twentytwenty .merchant-pro-multi-step-wrapper .woocommerce-checkout,
+.merchant-theme-twentytwenty .merchant-pro-multi-step-wrapper .woocommerce-order-pay,
+.merchant-theme-twentytwenty-one .merchant-pro-multi-step-wrapper .woocommerce-checkout,
+.merchant-theme-twentytwenty-one .merchant-pro-multi-step-wrapper .woocommerce-order-pay,
+.merchant-theme-twentytwenty-two .merchant-pro-multi-step-wrapper .woocommerce-checkout,
+.merchant-theme-twentytwenty-two .merchant-pro-multi-step-wrapper .woocommerce-order-pay,
+.merchant-theme-twentytwenty-three .merchant-pro-multi-step-wrapper .woocommerce-checkout,
+.merchant-theme-twentytwenty-three .merchant-pro-multi-step-wrapper .woocommerce-order-pay {
+  width: 100%;
+}
+
+.merchant-theme-twentytwenty .merchant-pro-multi-step-wrapper .woocommerce-checkout .col2-set,
+.merchant-theme-twentytwenty .merchant-pro-multi-step-wrapper .woocommerce-order-pay .col2-set,
+.merchant-theme-twentytwenty-one .merchant-pro-multi-step-wrapper .woocommerce-checkout .col2-set,
+.merchant-theme-twentytwenty-one .merchant-pro-multi-step-wrapper .woocommerce-order-pay .col2-set,
+.merchant-theme-twentytwenty-two .merchant-pro-multi-step-wrapper .woocommerce-checkout .col2-set,
+.merchant-theme-twentytwenty-two .merchant-pro-multi-step-wrapper .woocommerce-order-pay .col2-set,
+.merchant-theme-twentytwenty-three .merchant-pro-multi-step-wrapper .woocommerce-checkout .col2-set,
+.merchant-theme-twentytwenty-three .merchant-pro-multi-step-wrapper .woocommerce-order-pay .col2-set {
+  float: none;
+  width: 100%;
+}
+
+.merchant-theme-twentytwenty .woocommerce .merchant-pro-sc form[name=checkout],
+.merchant-theme-twentytwenty-one .woocommerce .merchant-pro-sc form[name=checkout],
+.merchant-theme-twentytwenty-two .woocommerce .merchant-pro-sc form[name=checkout],
+.merchant-theme-twentytwenty-three .woocommerce .merchant-pro-sc form[name=checkout] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .merchant-hidden {

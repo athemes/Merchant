@@ -425,3 +425,25 @@
     }
   }
 }
+
+.merchant-theme-twentytwenty,
+.merchant-theme-twentytwenty-one,
+.merchant-theme-twentytwenty-two,
+.merchant-theme-twentytwenty-three{
+
+  .merchant-pro-multi-step-wrapper{
+    .woocommerce-checkout,
+    .woocommerce-order-pay{
+      width: 100%;
+
+      .col2-set{
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+
+  .woocommerce .merchant-pro-sc form[name=checkout]{
+    display: flex;
+  }
+}
