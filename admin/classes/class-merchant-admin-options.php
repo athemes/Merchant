@@ -272,6 +272,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Text (readonly)
+		 */
+		public static function text_readonly( $settings, $value ) {
+			?>
+				<input type="text" value="<?php echo esc_attr( $value ); ?>" readonly />
+			<?php
+		}
+
+		/**
 		 * Field: Number
 		 */
 		public static function number( $settings, $value ) {
