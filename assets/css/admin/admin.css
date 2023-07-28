@@ -2192,7 +2192,8 @@
 }
 
 .merchant-module-page-setting-field-text input,
-.merchant-module-page-setting-field-number input {
+.merchant-module-page-setting-field-number input,
+.merchant-module-page-setting-field-text_readonly input {
   padding: 12px;
   line-height: 1.3em;
   width: 100%;
@@ -2202,7 +2203,8 @@
 }
 
 .merchant-module-page-setting-field-text input:focus,
-.merchant-module-page-setting-field-number input:focus {
+.merchant-module-page-setting-field-number input:focus,
+.merchant-module-page-setting-field-text_readonly input:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
