@@ -2,6 +2,12 @@
  * Merchant Carousel
  *
  */
+.merchant-carousel {
+  --mrc-carousel-nav-icon-color: #FFF;
+  --mrc-carousel-nav-color: #212121;
+  --mrc-carousel-nav-color-hover: #757575;
+}
+
 .merchant-carousel .merchant-carousel-wrapper {
   position: relative;
 }
@@ -64,6 +70,20 @@
   z-index: 1;
 }
 
+.merchant-carousel.no-nav .merchant-carousel-stage {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: calc(-1 * var(--merchant-rvp-columns-gap, 15px)) 0 0 calc(-1 * var(--merchant-rvp-columns-gap, 15px)) !important;
+  width: calc(100% + var(--merchant-rvp-columns-gap, 15px));
+}
+
+.merchant-carousel.no-nav .merchant-carousel-stage > li.product {
+  margin: var(--merchant-rvp-columns-gap, 15px) 0 0 var(--merchant-rvp-columns-gap, 15px) !important;
+}
+
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-next,
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-prev {
   display: -webkit-box;
@@ -77,7 +97,7 @@
           justify-content: center;
   top: 50%;
   right: 15px;
-  background: #212121;
+  background: var(--mrc-carousel-nav-color);
   width: 35px;
   height: 35px;
   opacity: 0;
@@ -96,12 +116,12 @@
 
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-next svg path,
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-prev svg path {
-  stroke: #FFF;
+  stroke: var(--mrc-carousel-nav-icon-color);
 }
 
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-next:hover,
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-prev:hover {
-  background: #757575;
+  background: var(--mrc-carousel-nav-color-hover);
 }
 
 .merchant-carousel.merchant-carousel-nav2 .merchant-carousel-nav-prev {

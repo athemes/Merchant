@@ -235,6 +235,7 @@ class Siema {
      */
     buildSliderFrame() {
         if( this.innerElements.length <= this.perPage ) {
+            this.parentSelector.classList.add( 'no-nav' );
             this.parentSelector.querySelector( '.merchant-carousel-nav-next' ).remove();
             this.parentSelector.querySelector( '.merchant-carousel-nav-prev' ).remove();
             return false;
