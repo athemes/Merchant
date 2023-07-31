@@ -137,6 +137,15 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'media'		=> 'all'
 				),
 
+				// Pagination.
+				array(
+					'handle'	=> 'merchant-pagination',
+					'src'		=> 'assets/css/pagination.min.css',
+					'dep'		=> array(),
+					'ver'		=> MERCHANT_VERSION,
+					'media'		=> 'all'
+				)
+
 			);
 
 			foreach ( $styles as $style ) {
@@ -174,6 +183,14 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				array(
 					'handle'	=> 'merchant-carousel',
 					'src'		=> 'assets/js/carousel.min.js',
+					'dep'		=> array(),
+					'in_footer' => true
+				),
+
+				// Pagination
+				array(
+					'handle'	=> 'merchant-pagination',
+					'src'		=> 'assets/js/pagination.min.js',
 					'dep'		=> array(),
 					'in_footer' => true
 				)

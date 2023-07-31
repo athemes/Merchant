@@ -1,0 +1,57 @@
+/**
+ * Merchant Pagination
+ *
+ */
+
+.merchant-pagination-load-more {
+	.navigation.pagination,
+	.woocommerce-pagination {
+		display: none;
+	}
+}
+.merchant-pagination-wrapper {
+    text-align: center;
+    margin-top: 60px;
+}
+.merchant-pagination-button {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    .merchant-pagination-button__label {
+        display: inline-block;
+		font-size: 0.9em;
+		text-transform: uppercase;
+        transition: ease all 300ms;
+    }
+    .merchant-pagination-button__loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+    }
+    svg {
+        opacity: 0;
+        animation-name: rotateAnim;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        transition: ease all 300ms;
+    }
+
+    &.loading,
+	&.loading-anim {
+        .merchant-pagination-button__label {
+            opacity: 0;
+            visibility: hidden;
+        }
+        svg {
+            display: block;
+            opacity: 0.7;
+        }
+    }
+	&.loading-anim {
+		.merchant-pagination-button__label {
+			display: none;
+		}
+	}
+}

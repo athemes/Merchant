@@ -24,6 +24,9 @@ const gridStyleSRC         = './assets/sass/grid.scss';
 const carouselStyleDestination = './assets/css';
 const carouselStyleSRC         = './assets/sass/carousel.scss';
 
+const paginationStyleDestination = './assets/css';
+const paginationStyleSRC         = './assets/sass/pagination.scss';
+
 // Script options.
 const scriptDestination      = './assets/js';
 const scriptSRC              = './assets/js/src/merchant.js';
@@ -48,6 +51,10 @@ const customAddToCartButtonScriptFile        = 'custom-addtocart-button';
 const carouselScriptDestination = './assets/js/';
 const carouselScriptSRC         = './assets/js/src/carousel.js';
 const carouselScriptFile        = 'carousel';
+
+const paginationScriptDestination = './assets/js/';
+const paginationScriptSRC         = './assets/js/src/pagination.js';
+const paginationScriptFile        = 'pagination';
 
 // Metabox script/style options.
 const metaboxCssDestination = './assets/css/admin';
@@ -136,6 +143,9 @@ module.exports = {
 	carouselStyleDestination,
 	carouselStyleSRC,
 
+	paginationStyleDestination,
+	paginationStyleSRC,
+
 	// Script options.
 	scriptDestination,
 	scriptSRC,
@@ -162,6 +172,10 @@ module.exports = {
 	carouselScriptDestination,
 	carouselScriptSRC,
 	carouselScriptFile,
+
+	paginationScriptDestination,
+	paginationScriptSRC,
+	paginationScriptFile,
 
 	// Watch options.
 	watchStyles,
