@@ -3,6 +3,17 @@
  *
  */
 
+// Animation
+@keyframes rotateAnim {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+// Load More
 .merchant-pagination-load-more {
 	.navigation.pagination,
 	.woocommerce-pagination {
@@ -21,6 +32,7 @@
         display: inline-block;
 		font-size: 0.9em;
 		text-transform: uppercase;
+        letter-spacing: 1.5px;
         transition: ease all 300ms;
     }
     .merchant-pagination-button__loader {
@@ -47,6 +59,7 @@
         svg {
             display: block;
             opacity: 0.7;
+            max-width: 17px;
         }
     }
 	&.loading-anim {

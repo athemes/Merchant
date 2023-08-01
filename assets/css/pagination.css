@@ -2,6 +2,27 @@
  * Merchant Pagination
  *
  */
+@-webkit-keyframes rotateAnim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotateAnim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .merchant-pagination-load-more .navigation.pagination,
 .merchant-pagination-load-more .woocommerce-pagination {
   display: none;
@@ -26,6 +47,7 @@
   display: inline-block;
   font-size: 0.9em;
   text-transform: uppercase;
+  letter-spacing: 1.5px;
   -webkit-transition: ease all 300ms;
   transition: ease all 300ms;
 }
@@ -60,6 +82,7 @@
 .merchant-pagination-button.loading svg, .merchant-pagination-button.loading-anim svg {
   display: block;
   opacity: 0.7;
+  max-width: 17px;
 }
 
 .merchant-pagination-button.loading-anim .merchant-pagination-button__label {

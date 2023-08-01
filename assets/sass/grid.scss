@@ -20,6 +20,13 @@
 .mrc-row { 
     display:flex;
     flex-wrap: wrap;
+
+    &.mrc-columns-no-gutter {
+        [class*="mrc-col"] {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
 }
 
 .mrc-col {
