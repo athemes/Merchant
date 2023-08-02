@@ -8,7 +8,7 @@ Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
+All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
 
 == Description ==
 
@@ -152,6 +152,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 16. Cookie Banner Module
 
 == Changelog ==
+
+= 1.1 =
+* Fixed - Quick View: Icon absolute position values not working properly. 
+* Fixed - Quick View: Icon hover color not working with some themes.
+* Fixed - Payment Logos: In some themes the logos are wrongly being displayed in variable products on shop categories pages.
+* Fixed - Payment Logos: Logos being display twice when 'in cart quantity' from Botiga theme is enabled. 
+* Added - Declare compatibility with WooCommerce HPOS. 
 
 = 1.0 =
 * A brand new plugin with a new dashboard.

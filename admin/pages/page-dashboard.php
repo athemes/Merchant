@@ -174,7 +174,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 							</svg>
 
 							<?php /* translators: %s: active module count */ ?>
-							<span><?php esc_html_e( 'Your', 'merchant' ); ?> <strong><?php echo esc_html( sprintf( _n( '%s module', '%s modules', $merchant_active_modules, 'merchant' ), $merchant_active_modules ) ); ?></strong> <?php esc_html_e( 'enabled', 'merchant' ); ?></span>
+							<span><?php esc_html_e( 'You have', 'merchant' ); ?> <strong><?php echo esc_html( sprintf( _n( '%s module', '%s modules', $merchant_active_modules, 'merchant' ), $merchant_active_modules ) ); ?></strong> <?php esc_html_e( 'enabled', 'merchant' ); ?></span>
 
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M10.8626 8.04102L14.2809 12.0291L10.8626 16.0172L9.72363 15.041L12.3053 12.0291L9.72363 9.01721L10.8626 8.04102Z" fill="#757575"/>

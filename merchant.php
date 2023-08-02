@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Merchant
- * Plugin URI:        https://athemes.com
- * Description: All-in-one conversion plugin to boost sales and grow your store. Pre-orders, Buy Now button, product labels, trust badge, payment logos, and more.
- * Version:     1.0
+ * Plugin URI:  https://athemes.com
+ * Description: All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
+ * Version:     1.1
  * Author:      aThemes
  * Author URI:  https://athemes.com
  * License:     GPLv3 or later License
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  * 
  * WC requires at least: 6.0
- * WC tested up to: 7.8
+ * WC tested up to: 7.9
  *
  * @package Merchant
  * @since 1.0
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Merchant constants.
-define( 'MERCHANT_VERSION', '1.0' );
+define( 'MERCHANT_VERSION', '1.1' );
 define( 'MERCHANT_FILE', __FILE__ );
 define( 'MERCHANT_BASE', trailingslashit( plugin_basename( MERCHANT_FILE ) ) );
 define( 'MERCHANT_DIR', trailingslashit( plugin_dir_path( MERCHANT_FILE ) ) );
@@ -32,16 +32,19 @@ define( 'MERCHANT_URI', trailingslashit( plugins_url( '/', MERCHANT_FILE ) ) );
 
 /**
  * Merchant class.
+ * 
  */
 class Merchant {
 
 	/**
 	 * The single class instance.
+	 * 
 	 */
 	private static $instance = null;
 
 	/**
 	 * Instance.
+	 * 
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -52,22 +55,35 @@ class Merchant {
 
 	/**
 	 * Constructor.
+	 * 
 	 */
 	public function __construct() {
+
+		// Declare WooCommerce HPOS Compatibility.
+		add_action( 'before_woocommerce_init', function() {
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			}
+		} );
+
+		// Includes.
 		$this->includes();
 	}
 
+	/**
+	 * Includes.
+	 * 
+	 */
 	public function includes() {
-
 		require_once MERCHANT_DIR . 'admin/class-merchant-admin-loader.php';
 		require_once MERCHANT_DIR . 'inc/class-merchant-loader.php';
-
 	}
 
 }
 
 /**
  * Function works with the Merchant class instance
+ * 
  */
 function merchant() {
 	return Merchant::instance();

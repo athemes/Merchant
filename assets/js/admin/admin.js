@@ -65,6 +65,19 @@
       success: function success() {
         $ajaxHeader.removeClass('merchant-show');
         merchant.show_save = false;
+
+        // Module Alert after Ajax Save
+        if (!$('.merchant-module-action').hasClass('merchant-enabled')) {
+          var $moduleAlert = $('.merchant-module-alert');
+          $moduleAlert.addClass('merchant-show');
+          $(document).off('click.merchant-alert-close');
+          $(document).on('click.merchant-alert-close', function (e) {
+            if (!$(e.target).closest('.merchant-module-alert-wrapper').length) {
+              $moduleAlert.removeClass('merchant-show');
+              $(document).off('click.merchant-alert-close');
+            }
+          });
+        }
       }
     });
     $('.merchant-module-question-answer-button').on('click', function (e) {
@@ -76,6 +89,7 @@
       window.wp.ajax.post('merchant_module_feedback', {
         subject: $textarea.data('subject'),
         message: $textarea.val(),
+        module: $button.closest('.merchant-module-action').find('.merchant-module-page-button-action-activate').data('module'),
         nonce: window.merchant.nonce
       });
     });
@@ -106,13 +120,12 @@
     });
     $('.merchant-module-question-list-dropdown li').on('click', function (e) {
       var $question = $(this);
-      var index = $question.index();
       var target = $question.data('answer-target');
       var $answer = $('[data-answer-title="' + target + '"]');
       if ($answer.length) {
         $answer.addClass('merchant-show').siblings().removeClass('merchant-show');
         $('.merchant-module-question-answer-dropdown').addClass('merchant-show');
-        $('.merchant-module-question-answer-textarea').attr('data-subject', target);
+        $('.merchant-module-question-answer-textarea').attr('data-subject', $question.text().trim());
       } else {
         $('.merchant-module-question-thank-you-dropdown').addClass('merchant-show');
         $('.merchant-module-question-answer-dropdown').removeClass('merchant-show');
@@ -545,73 +558,83 @@
         });
       });
     });
-  });
-  $('.merchant-animated-buttons').each(function () {
-    var $button = $(this).find('label');
-    var $demo = $('.merchant-animation-demo');
-    var animation;
-    var animationHover;
-    $button.on('click', function () {
-      $demo.removeClass('merchant-animation-' + animation);
-      $demo.removeClass('merchant-animation-' + animationHover);
-      animation = $(this).find('input').attr('value');
-      setTimeout(function () {
-        $demo.addClass('merchant-animation-' + animation);
-      }, 100);
-      setTimeout(function () {
+    $('.merchant-animated-buttons').each(function () {
+      var $button = $(this).find('label');
+      var $demo = $('.merchant-animation-demo');
+      var animation;
+      var animationHover;
+      $button.on('click', function () {
         $demo.removeClass('merchant-animation-' + animation);
-      }, 1000);
+        $demo.removeClass('merchant-animation-' + animationHover);
+        animation = $(this).find('input').attr('value');
+        setTimeout(function () {
+          $demo.addClass('merchant-animation-' + animation);
+        }, 100);
+        setTimeout(function () {
+          $demo.removeClass('merchant-animation-' + animation);
+        }, 1000);
+      });
+      $button.mouseover(function () {
+        $demo.removeClass('merchant-animation-' + animation);
+        animationHover = $(this).find('input').attr('value');
+        $demo.addClass('merchant-animation-' + animationHover);
+      }).mouseout(function () {
+        $demo.removeClass('merchant-animation-' + animationHover);
+      });
     });
-    $button.mouseover(function () {
-      $demo.removeClass('merchant-animation-' + animation);
-      animationHover = $(this).find('input').attr('value');
-      $demo.addClass('merchant-animation-' + animationHover);
-    }).mouseout(function () {
-      $demo.removeClass('merchant-animation-' + animationHover);
-    });
-  });
 
-  // Notifications Sidebar
-  var $notificationsSidebar = $('.merchant-notifications-sidebar');
-  if ($notificationsSidebar.length) {
-    var $notifications = $('.merchant-notifications');
-    $notifications.on('click', function (e) {
-      e.preventDefault();
-      var $notification = $(this);
-      var latestNotificationDate = $notificationsSidebar.find('.merchant-notification:first-child .merchant-notification-date').data('raw-date');
-      $notificationsSidebar.toggleClass('opened');
-      if (!$notification.hasClass('read')) {
-        $.post(window.merchant.ajax_url, {
-          action: 'merchant_notifications_read',
-          nonce: window.merchant.nonce,
-          latest_notification_date: latestNotificationDate
-        }, function (response) {
-          if (response.success) {
-            setTimeout(function () {
-              $notification.addClass('read');
-            }, 2000);
-          }
-        });
-      }
-    });
-    $(window).on('scroll', function () {
-      if (window.pageYOffset > 60) {
+    // Notifications Sidebar
+    var $notificationsSidebar = $('.merchant-notifications-sidebar');
+    if ($notificationsSidebar.length) {
+      var $notifications = $('.merchant-notifications');
+      $notifications.on('click', function (e) {
+        e.preventDefault();
+        var $notification = $(this);
+        var latestNotificationDate = $notificationsSidebar.find('.merchant-notification:first-child .merchant-notification-date').data('raw-date');
+        $notificationsSidebar.toggleClass('opened');
+        if (!$notification.hasClass('read')) {
+          $.post(window.merchant.ajax_url, {
+            action: 'merchant_notifications_read',
+            nonce: window.merchant.nonce,
+            latest_notification_date: latestNotificationDate
+          }, function (response) {
+            if (response.success) {
+              setTimeout(function () {
+                $notification.addClass('read');
+              }, 2000);
+            }
+          });
+        }
+      });
+      $(window).on('scroll', function () {
+        if (window.pageYOffset > 60) {
+          $notificationsSidebar.addClass('closing');
+          setTimeout(function () {
+            $notificationsSidebar.removeClass('opened');
+            $notificationsSidebar.removeClass('closing');
+          }, 300);
+        }
+      });
+
+      // Close Sidebar
+      $('.merchant-notifications-sidebar-close').on('click', function (e) {
+        e.preventDefault();
         $notificationsSidebar.addClass('closing');
         setTimeout(function () {
           $notificationsSidebar.removeClass('opened');
           $notificationsSidebar.removeClass('closing');
         }, 300);
-      }
-    });
+      });
+    }
 
-    // Close Sidebar
-    $('.merchant-notifications-sidebar-close').on('click', function (e) {
-      e.preventDefault();
-      $notificationsSidebar.addClass('closing');
-      setTimeout(function () {
-        $notificationsSidebar.removeClass('opened');
-        $notificationsSidebar.removeClass('closing');
-      }, 300);
-    });
-  }
+    // Module Alert
+    var $moduleAlert = $('.merchant-module-alert');
+    if ($moduleAlert.length) {
+      $moduleAlert.find('.merchant-module-alert-close').on('click', function (e) {
+        e.preventDefault();
+        $moduleAlert.removeClass('merchant-show');
+        $(document).off('click.merchant-alert-close');
+      });
+    }
+  });
 })(jQuery, window, document);

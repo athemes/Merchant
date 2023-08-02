@@ -774,6 +774,10 @@
   margin-bottom: var(--merchant-margin-bottom, 20px);
 }
 
+.merchant-payment-logos + .merchant-payment-logos {
+  display: none;
+}
+
 .merchant-payment-logos-title {
   color: var(--merchant-text-color, #212121);
   font-size: var(--merchant-font-size, 18px);
@@ -813,6 +817,10 @@
   border: 1px solid var(--merchant-border-color, #e5e5e5);
   margin-top: var(--merchant-margin-top, 20px);
   margin-bottom: var(--merchant-margin-bottom, 20px);
+}
+
+.merchant-trust-badges + .merchant-trust-badges {
+  display: none;
 }
 
 .merchant-trust-badges-title {
@@ -895,6 +903,10 @@
   transition: all .2s;
 }
 
+.woocommerce .product .merchant-quick-view-open svg path {
+  fill: var(--merchant-icon-color, #ffffff) !important;
+}
+
 .woocommerce .product .merchant-quick-view-open:hover {
   color: var(--merchant-text-hover-color, #ffffff) !important;
   border-color: var(--merchant-border-hover-color, #414141) !important;
@@ -905,6 +917,10 @@
   fill: var(--merchant-icon-hover-color, #ffffff) !important;
 }
 
+.woocommerce .product .merchant-quick-view-open:hover svg path {
+  fill: var(--merchant-icon-hover-color, #ffffff) !important;
+}
+
 .products .product {
   position: relative;
 }
@@ -912,10 +928,10 @@
 .products .product .merchant-quick-view-position-overlay {
   position: absolute;
   z-index: 10;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  top: var(--merchant-button-position-top, 50%);
+  left: var(--merchant-button-position-left, 50%);
+  -webkit-transform: translate(calc(var(--merchant-button-position-top, 50%) * -1), calc(var(--merchant-button-position-left, 50%) * -1));
+          transform: translate(calc(var(--merchant-button-position-top, 50%) * -1), calc(var(--merchant-button-position-left, 50%) * -1));
   margin: 0;
   white-space: nowrap !important;
   opacity: 0;
@@ -1279,8 +1295,8 @@
   line-height: 1.2;
 }
 
-.merchant-quick-view-product-rating .woocommerce-product-rating {
-  margin: 0;
+.merchant-quick-view-product-rating .star-rating {
+  margin-left: 0;
 }
 
 .merchant-quick-view-product-excerpt p:last-child {

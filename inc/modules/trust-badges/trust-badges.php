@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function merchant_add_trust_badges_add_to_cart_form() {
 
-	if ( Merchant_Modules::is_module_active( 'trust-badges' ) ) {
+	if ( Merchant_Modules::is_module_active( 'trust-badges' ) && ! is_archive() ) {
 
 		$badges = Merchant_Admin_Options::get( 'trust-badges', 'badges', '' );
 		$title  = Merchant_Admin_Options::get( 'trust-badges', 'title', '' );

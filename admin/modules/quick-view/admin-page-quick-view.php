@@ -60,6 +60,30 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'      => 'button-position-top',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button Position Top', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
+			'id'      => 'button-position-left',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button Position Left', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
 			'id'        => 'icon-color',
 			'type'      => 'color',
 			'title'     => esc_html__( 'Icon Color', 'merchant' ),
