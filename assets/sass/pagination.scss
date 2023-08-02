@@ -3,7 +3,31 @@
  *
  */
 
-// Animation
+/**
+ * Animations.
+ *
+ */
+.mrc-animated {
+    opacity: 0;
+}
+
+.mrc-anim-infinite {
+    animation-iteration-count: infinite;
+}
+
+.mrc-anim-fowards {
+    animation-fill-mode: forwards;
+}
+
+.mrc-anim-timing-linear {
+    animation-timing-function: linear;
+}
+
+.mrc-anim-duration-300ms {
+    animation-duration: 600ms;
+}
+
+// Rotate.
 @keyframes rotateAnim {
 	from {
 		transform: rotate(0deg);
@@ -13,7 +37,61 @@
 	}
 }
 
-// Load More
+.mrcPagRotateAnim {
+    animation: rotateAnim 1.5s linear infinite;
+}
+
+// Fade In Short.
+@keyframes mrcPagFadeInShort {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.mrcPagFadeInShort {
+    animation-name: mrcPagFadeInShort;
+}
+
+// Default pagination.
+.merchant-pagination {
+    ul {
+        border: none !important;
+
+        li {
+            border: none !important;
+            margin: 0 !important;
+            list-style: none !important;
+
+            & + li {
+                margin-left: 5px;
+            }
+
+            .page-numbers {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 35px !important;
+                height: 35px !important;
+                text-decoration: none !important;
+
+                &.next,
+                &.prev {
+                    &:before,
+                    &:after {
+                        content: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Load More.
 .merchant-pagination-load-more {
 	.navigation.pagination,
 	.woocommerce-pagination {

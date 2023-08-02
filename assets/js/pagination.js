@@ -90,10 +90,10 @@ merchant.pagination = {
           var list_item = document.createElement(_this.defaults.itemsTag);
           list_item.setAttribute('class', items[i].classList.value);
           if (!is_masonry_layout && !is_shop_masonry_layout) {
-            list_item.classList.add('merchant-animated');
-            list_item.classList.add('merchantFadeInShort');
-            list_item.classList.add('merchant-anim-duration-300ms');
-            list_item.classList.add('merchant-anim-fowards');
+            list_item.classList.add('mrc-animated');
+            list_item.classList.add('mrcPagFadeInShort');
+            list_item.classList.add('mrc-anim-duration-300ms');
+            list_item.classList.add('mrc-anim-fowards');
             list_item.setAttribute('style', 'animation-delay: ' + i * 200 + 'ms;');
           }
           list_item.innerHTML = items[i].innerHTML;

@@ -2,6 +2,34 @@
  * Merchant Pagination
  *
  */
+/**
+ * Animations.
+ *
+ */
+.mrc-animated {
+  opacity: 0;
+}
+
+.mrc-anim-infinite {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.mrc-anim-fowards {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.mrc-anim-timing-linear {
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.mrc-anim-duration-300ms {
+  -webkit-animation-duration: 600ms;
+          animation-duration: 600ms;
+}
+
 @-webkit-keyframes rotateAnim {
   from {
     -webkit-transform: rotate(0deg);
@@ -12,6 +40,7 @@
             transform: rotate(360deg);
   }
 }
+
 @keyframes rotateAnim {
   from {
     -webkit-transform: rotate(0deg);
@@ -21,6 +50,75 @@
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
+}
+
+.mrcPagRotateAnim {
+  -webkit-animation: rotateAnim 1.5s linear infinite;
+          animation: rotateAnim 1.5s linear infinite;
+}
+
+@-webkit-keyframes mrcPagFadeInShort {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes mrcPagFadeInShort {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.mrcPagFadeInShort {
+  -webkit-animation-name: mrcPagFadeInShort;
+          animation-name: mrcPagFadeInShort;
+}
+
+.merchant-pagination ul {
+  border: none !important;
+}
+
+.merchant-pagination ul li {
+  border: none !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.merchant-pagination ul li + li {
+  margin-left: 5px;
+}
+
+.merchant-pagination ul li .page-numbers {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  width: 35px !important;
+  height: 35px !important;
+  text-decoration: none !important;
+}
+
+.merchant-pagination ul li .page-numbers.next:before, .merchant-pagination ul li .page-numbers.next:after, .merchant-pagination ul li .page-numbers.prev:before, .merchant-pagination ul li .page-numbers.prev:after {
+  content: none !important;
 }
 
 .merchant-pagination-load-more .navigation.pagination,
