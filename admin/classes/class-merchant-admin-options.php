@@ -224,6 +224,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'text':
 				case 'color':
 				case 'number':
+				case 'select_size_chart':
 					$value = sanitize_text_field( $value );
 					break;
 
@@ -245,6 +246,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'radio_alt':
 				case 'select':
 				case 'choices':
+				case 'buttons':
+				case 'buttons_alt':
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
@@ -316,6 +319,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function text( $settings, $value ) {
 			?>
 				<input type="text" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $value ); ?>" />
+			<?php
+		}
+
+		/**
+		 * Field: Text (readonly)
+		 */
+		public static function text_readonly( $settings, $value ) {
+			?>
+				<input type="text" value="<?php echo esc_attr( $value ); ?>" readonly />
 			<?php
 		}
 
@@ -426,7 +438,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						<?php foreach ( $settings['options'] as $key => $option ) : ?>
 							<label>
 								<input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
-								<figure><img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>" title="" /></figure>
+								<figure>
+									<?php if ( ! empty( $option['image'] ) ) : ?>
+										<img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>" />
+									<?php else : ?>
+										<img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>" />
+									<?php endif; ?>
+									<?php if ( ! empty( $option['label'] ) ) : ?>
+										<span class="merchant-tooltip"><?php echo esc_html( $option['label'] ); ?></span>
+									<?php endif; ?>
+								</figure>
 							</label>
 						<?php endforeach; ?>
 					<?php endif; ?>
@@ -444,6 +465,39 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				<?php if ( ! empty( $settings['options'] ) ) : ?>
 					<select name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]">
 						<?php foreach ( $settings['options'] as $key => $option ) : ?>
+							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $value, $key, true ); ?>><?php echo esc_html( $option ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				<?php endif; ?>
+			<?php
+
+		}
+
+		/**
+		 * Field: Select Size Chart
+		 */
+		public static function select_size_chart( $settings, $value ) {
+
+			$options = array(
+				'' => esc_html__( 'Default', 'merchant' ),
+			);
+
+			$posts = get_posts( array(
+				'post_type'      => 'merchant_size_chart',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish'
+			) );
+				
+			if ( ! is_wp_error( $posts ) && ! empty( $posts ) ) {
+				foreach ( $posts as $_post ) {
+					$options[ $_post->ID ] = $_post->post_title;
+				}
+			}
+
+			?>
+				<?php if ( ! empty( $options ) ) : ?>
+					<select name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]">
+						<?php foreach ( $options as $key => $option ) : ?>
 							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $value, $key, true ); ?>><?php echo esc_html( $option ); ?></option>
 						<?php endforeach; ?>
 					</select>

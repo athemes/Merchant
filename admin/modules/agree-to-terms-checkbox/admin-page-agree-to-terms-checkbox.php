@@ -30,9 +30,10 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'    => 'link',
-			'type'  => 'text',
-			'title' => esc_html__( 'Terms and Conditions Link', 'merchant' ),
+			'id'      => 'link',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Terms and Conditions Link', 'merchant' ),
+			'default' => get_privacy_policy_url(),
 		),
 
 		array(

@@ -11,8 +11,7 @@ const config = require('./wpgulp.config.js');
 /**
  * Load Plugins.
  */
-const gulp  = require('gulp');
-const newer = require('gulp-newer');
+const gulp = require('gulp');
 
 // CSS related plugins.
 const nodesass     = require('node-sass')
@@ -430,7 +429,6 @@ gulp.task('paginationStylesMin', () => {
 gulp.task('scripts', () => {
 	return gulp
 		.src(config.scriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.scriptDestination))
 		.pipe(plumber(errorHandler))
 		.pipe(
 			babel({
@@ -471,7 +469,6 @@ gulp.task('scripts', () => {
 gulp.task('adminScripts', () => {
 	return gulp
 		.src(config.adminScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.adminScriptDestination))
 		.pipe(plumber(errorHandler))
 		.pipe(
 			babel({
@@ -717,7 +714,6 @@ gulp.task('paginationScript', () => {
 gulp.task('metaboxScripts', () => {
 	return gulp
 		.src(config.metaboxJsSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.metaboxJsDestination))
 		.pipe(plumber(errorHandler))
 		.pipe(
 			babel({

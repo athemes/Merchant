@@ -390,7 +390,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							continue;
 						}
 
-						$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( sanitize_text_field( $_POST[ $field_id ] ) ) : null;
+						$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( $_POST[ $field_id ] ) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 						$value = $this->sanitize( $field, $value );
 
 						update_post_meta( $post_id, $field_id, $value );
@@ -727,7 +727,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					for ( $a = 0; $a < 4 ; $a++ ) { 
 						echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
 					}
-											echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '">icon</td>';
+											echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '"><i class="dashicons dashicons-admin-page"></i></td>';
 										echo '</tr>';
 					for ( $b = 0; $b < 4 ; $b++ ) { 
 						echo '<tr>';
@@ -771,7 +771,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 									for ( $i = 0; $i < count( $rows ); $i++ ) { 
 								echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
 									}
-												echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '">icon-duplicate</td>';
+												echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '"><i class="dashicons dashicons-admin-page"></i></td>';
 												echo '</tr>';
 								}
 										echo '<tr>';
@@ -802,7 +802,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				case 'size-chart-select':
 					$options = array();
 					$posts	 = get_posts( array(
-						'post_type'      => 'size_chart',
+						'post_type'      => 'merchant_size_chart',
 						'posts_per_page' => -1,
 						'post_status'    => 'publish'
 					) );

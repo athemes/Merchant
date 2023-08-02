@@ -1129,10 +1129,19 @@
 	font-size: 13px;
 	font-weight: 400;
 	color: #777;
+
+	a{
+		color: #3858E9;
+
+		&:focus{
+			box-shadow: none;
+		}
+	}
 }
 
 .merchant-module-page-setting-field-text,
-.merchant-module-page-setting-field-number{
+.merchant-module-page-setting-field-number,
+.merchant-module-page-setting-field-text_readonly{
 
 	input{
 		padding: 12px;
@@ -1310,6 +1319,14 @@
 
 .merchant-module-page-setting-field-content{
 	max-width: 60vw;
+
+	a{
+		color: #3858E9;
+
+		&:focus{
+			box-shadow: none;
+		}
+	}
 }
 
 .merchant-tag-pre-orders{
@@ -1356,7 +1373,8 @@
 	}
 }
 
-.merchant-module-page-setting-field-select{
+.merchant-module-page-setting-field-select,
+.merchant-module-page-setting-field-select_size_chart{
 
 	select{
 		padding: 12px;
@@ -1399,6 +1417,16 @@
 
 	label{
 		display: flex;
+		position: relative;
+
+		&:hover{
+
+			.merchant-tooltip {
+				opacity: 1;
+				visibility: visible;
+				transform: translate3d(-50%, 0, 0);
+			}
+		}
 	}
 
 	figure{
@@ -1407,6 +1435,33 @@
 		padding: 2px;
 		border-radius: 4px;
 		border: 2px solid transparent;
+	}
+
+	.merchant-tooltip{
+		position: absolute;
+		z-index: 10;
+		left: 50%;
+		bottom: calc(100% + 12px);
+		padding: 3px 12px;
+		font-size: 11px;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transform: translate3d(-50%, 6px, 0);
+		transition: all .2s;
+		border-radius: 3px;
+		color: #f7f7f7;
+		background-color: #212121;
+
+		&:after{
+			content: '';
+			position: absolute;
+			left: 50%;
+			bottom: -12px;
+			border: 6px solid transparent;
+			border-top-color: #212121;
+			transform: translate3d(-50%, 0, 0);
+		}
 	}
 
 	.merchant-choices{

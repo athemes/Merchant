@@ -149,6 +149,14 @@
 	code{
 		font-size: 1em;
 	}
+	
+	a{
+		color: #3858E9;
+
+		&:focus{
+			box-shadow: none;
+		}
+	}
 }
 
 .merchant-metabox-field-text {
@@ -516,15 +524,18 @@
 		user-select: none;
 		box-shadow: none;
 		text-decoration: none;
+		color: #000;
+		transition: all .2s;
 
+		&:hover,
 		&:active{
 			opacity: 0.5;
 		}
 
-		svg{
-			width: 16px;
-			height: 16px;
-			fill: #000;
+		i{
+			width: auto;
+			height: auto;
+			font-size: 20px;
 		}
 	}
 }

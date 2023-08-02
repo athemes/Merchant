@@ -333,6 +333,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			
 			do_action( 'merchant_enqueue_after_main_css_js' );
 
+			$setting = apply_filters( 'merchant_localize_script', $setting );
+
 			wp_localize_script( 'merchant', 'merchant', array( 'setting' =>  $setting ) );
 
 
