@@ -363,49 +363,237 @@
 
 		});
 
-		// Field: Sortable.
-		$( '.merchant-sortable' ).each( function() {
+		// Sortable.
+		const SortableField = {
+			init: function( field ) {
+				this.events();
+			},
+		
+			events: function() {
+				const self = this;
+		
+				$( '.merchant-sortable' ).each( function() {
+		
+					const 
+						field = $( this ),
+						input = field.find( '.merchant-sortable-input' );
+		
+					// Init sortable.
+					$( field.find( 'ul.merchant-sortable-list' ).first() ).sortable({
+		
+						// Update value when we stop sorting.
+						update: function() {
+							input.val( self.sortableGetNewVal( field ) ).trigger('change.merchant');
+						}
+		
+					}).disableSelection().find( 'li' ).each( function() {
+		
+						// Enable/disable options when we click on the eye of Thundera.
+						$( this ).find( 'i.visibility' ).click( function() {
+							$( this ).toggleClass( 'dashicons-visibility-faint' ).parents( 'li:eq(0)' ).toggleClass( 'invisible' );
+						});
+		
+					}).click( function() {
+		
+						// Update value when click in the eye.
+						if( $( event.target ).hasClass( 'dashicons-visibility' ) ) {
+							input.val( self.sortableGetNewVal( field ) ).trigger('change.merchant');
+						}
+						
+					});
+		
+				} );
+			},
+		
+			sortableGetNewVal: function( field ) {
+				const items  = $( field.find( 'li' ) );
+				let newVal   = [];
+		
+				_.each( items, function( item ) {
+					if ( ! $( item ).hasClass( 'invisible' ) ) {
+						newVal.push( $( item ).data( 'value' ) );
+					}
+				});
+		
+				return JSON.stringify( newVal );
+			}
+		}
 
-			const 
-				field = $( this ),
-				input = field.find( '.merchant-sortable-input' );
+		// Intialize Sortable.
+		SortableField.init();
 
-			// Init sortable.
-			$( field.find( 'ul.merchant-sortable-list' ).first() ).sortable({
+		// Sortable Repeater.
+		const SortableRepeaterField = {
+			init: function( field ) {
+				const self = this;
 
-				// Update value when we stop sorting.
-				update: function() {
-					input.val( sortableGetNewVal( field ) ).trigger('change.merchant');
-				}
+				// Update the values for all our input fields and initialise the sortable repeater.
+				$('.merchant-sortable-repeater-control').each(function() {
+					console.log($(this).find('.merchant-sortable-repeater-input').val());
+					// If there is an existing customizer value, populate our rows
+					var defaultValuesArray = JSON.parse( $(this).find('.merchant-sortable-repeater-input').val() );
+					var numRepeaterItems = defaultValuesArray.length;
 
-			}).disableSelection().find( 'li' ).each( function() {
-
-				// Enable/disable options when we click on the eye of Thundera.
-				$( this ).find( 'i.visibility' ).click( function() {
-					$( this ).toggleClass( 'dashicons-visibility-faint' ).parents( 'li:eq(0)' ).toggleClass( 'invisible' );
+					if(numRepeaterItems > 0) {
+						// Add the first item to our existing input field
+						$(this).find('.repeater-input').val(defaultValuesArray[0]);
+						// Create a new row for each new value
+						if(numRepeaterItems > 1) {
+							var i;
+							for (i = 1; i < numRepeaterItems; ++i) {
+								self.appendRow($(this), defaultValuesArray[i]);
+							}
+						}
+					}
 				});
 
-			}).click( function() {
+				// Make our Repeater fields sortable.
+				$('.merchant-sortable-repeater.sortable').sortable({
+					update: function(event, ui) {
+						self.getAllInputs($(this).parent());
+					}
+				});
 
-				// Update value on click.
-				input.val( sortableGetNewVal( field ) ).trigger('change.merchant');
-				
-			});
+				// Events.
+				this.events();
+			},
+		
+			events: function() {
+				const self = this;
+		
+				// Remove item starting from it's parent element
+				$( '.merchant-sortable-repeater.sortable' ).on( 'click', '.customize-control-sortable-repeater-delete', function( event ) {
+					event.preventDefault();
+					var numItems = $(this).parent().parent().find('.repeater').length;
 
-		} );
+					if(numItems > 1) {
+						$(this).parent().slideUp('fast', function() {
+							var parentContainer = $(this).parent().parent();
+							$(this).remove();
+							self.getAllInputs(parentContainer);
+						})
+					}
+					else {
+						$(this).parent().find('.repeater-input').val('');
+						self.getAllInputs($(this).parent().parent().parent());
+					}
+				});
 
-		const sortableGetNewVal = function( field ) {
-			const items  = $( field.find( 'li' ) );
-			let newVal   = [];
+				// Add new item
+				$('.customize-control-sortable-repeater-add').click(function(event) {
+					event.preventDefault();
+					self.appendRow($(this).parent());
+					self.getAllInputs($(this).parent());
+				});
 
-			_.each( items, function( item ) {
-				if ( ! $( item ).hasClass( 'invisible' ) ) {
-					newVal.push( $( item ).data( 'value' ) );
-				}
-			});
+				// Refresh our hidden field if any fields change
+				$('.merchant-sortable-repeater.sortable').change(function() {
+					self.getAllInputs($(this).parent());
+				})
 
-			return JSON.stringify( newVal );
+				$('.merchant-sortable-repeater.sortable').on('focusout', '.repeater-input', function() {
+					self.getAllInputs($(this).parent());
+				});
+			},
+		
+			/**
+			 * Append a new row to our list of elements.
+			 * 
+			 */
+			appendRow: function( $element, defaultValue = '' ) {
+				var newRow = '<div class="repeater" style="display:none"><input type="text" value="' + defaultValue + '" class="repeater-input" /><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a></div>';
+
+				$element.find('.sortable').append(newRow);
+				$element.find('.sortable').find('.repeater:last').slideDown('slow', function(){
+					$(this).find('input').focus();
+				});
+			},
+
+			/**
+			 * Get the values from the repeater input fields and add to our hidden field.
+			 * 
+			 */
+			getAllInputs: function( $element ) {
+				var inputValues = $element.find('.repeater-input').map(function() {
+					return $(this).val();
+				}).toArray();
+
+				// Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
+				$element.find('.merchant-sortable-repeater-input').val( JSON.stringify( inputValues ) );
+				// Important! Make sure to trigger change event so Customizer knows it has to save the field
+				$element.find('.merchant-sortable-repeater-input').trigger('change');
+			}
 		}
+
+		// Initialize Sortable Repeater.
+		SortableRepeaterField.init();
+
+		// Create Page Control.
+		const CreatePageControl = {
+			init: function() {
+				this.events();
+			},
+
+			events: function() {
+				const self = this;
+
+				$( document ).on( 'click', '.merchant-create-page-control-button', function ( e ) {
+					e.preventDefault();
+
+					var $this = $( this ),
+						$create_message = $this.parent().find( '.merchant-create-page-control-create-message' ),
+						$success_message = $this.parent().find( '.merchant-create-page-control-success-message' ),
+						initial_text = $this.text(),
+						creating_text = $this.data( 'creating-text' ),
+						created_text = $this.data( 'created-text' ),
+						page_title = $this.data( 'page-title' ),
+						page_meta_key = $this.data( 'page-meta-key' ),
+						page_meta_value = $this.data( 'page-meta-value' ),
+						option_name = $this.data( 'option-name' ),
+						nonce = $this.data( 'nonce' );
+			
+					if ( ! page_title ) {
+						return false;
+					}
+			
+					$( this ).text( creating_text );
+					$( this ).attr( 'disabled', true );
+			
+					$.ajax({
+						type: 'post',
+						url: ajaxurl,
+						data: {
+							action: 'merchant_create_page_control',
+							page_title: page_title,
+							page_meta_key: page_meta_key,
+							page_meta_value: page_meta_value,
+							option_name: option_name,
+							nonce: nonce
+						},
+						success: function( response ) {
+							self.ajaxResponseHandler( response, $this, $success_message, $create_message )
+						}
+					});
+				});
+			},
+
+			ajaxResponseHandler: function( response, $this, $success_message, $create_message ) {
+				if ('success' === response.status) {
+					const 
+						href 	= $success_message.find( 'a' ).attr( 'href' ),
+						newhref = href.replace( '?post=&', '?post=' + response.page_id + '&' );
+
+					$success_message.find( 'a' ).attr( 'href', newhref );
+					$success_message.css( 'display', 'block' );
+
+					$create_message.remove();
+					$this.remove();
+				}
+			}
+		}
+
+		// Initialize Create Page Control.
+		CreatePageControl.init();
 
 		$('.merchant-module-page-setting-field-gallery').each( function() {
 

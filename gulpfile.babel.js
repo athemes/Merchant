@@ -189,65 +189,6 @@ gulp.task('stylesMin', () => {
 });
 
 /**
- * Task: `stylesRTL`.
- */
-// gulp.task('stylesRTL', () => {
-// 	return gulp
-// 		.src(config.styleRTLSRC, {allowEmpty: true})
-// 		.pipe(plumber(errorHandler))
-// 		.pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'expanded',
-// 				precision: config.precision
-// 			})
-// 		)
-// 		.on('error', sass.logError)
-// 		.pipe(autoprefixer(config.BROWSERS_LIST))
-// 		.pipe(lineec())
-// 		.pipe(gulp.dest(config.styleDestination))
-// 		.pipe(filter('**/*.css'))
-// 		.pipe(mmq({log: true}))
-// 		.pipe(browserSync.stream())
-// 		.pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Styles RTL Expanded — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
-
-/**
- * Task: `stylesRTLMin`.
- */
-// gulp.task('stylesRTLMin', () => {
-// 	return gulp
-// 	  .src(config.styleRTLSRC, {allowEmpty: true})
-// 	  .pipe(plumber(errorHandler))
-// 	  .pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'compressed',
-// 				precision: config.precision
-// 			})
-// 		)
-// 	  .on('error', sass.logError)
-// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
-// 	  .pipe(rename({suffix: '.min'}))
-// 	  .pipe(lineec())
-// 	  .pipe(gulp.dest(config.styleDestination))
-// 	  .pipe(filter('**/*.css'))
-// 	  .pipe(mmq({log: true}))
-// 	  .pipe(browserSync.stream())
-// 	  .pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Styles RTL Minified — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
-
-/**
  * Task: `adminStyles`.
  */
 gulp.task('adminStyles', () => {
@@ -307,63 +248,181 @@ gulp.task('adminStylesMin', () => {
 });
 
 /**
- * Task: `adminStylesRTL`.
+ * Task: `gridStyles`.
  */
-// gulp.task('adminStylesRTL', () => {
-// 	return gulp
-// 		.src(config.adminStyleRTLSRC, {allowEmpty: true})
-// 		.pipe(plumber(errorHandler))
-// 		.pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'expanded',
-// 				precision: config.precision
-// 			})
-// 		)
-// 		.on('error', sass.logError)
-// 		.pipe(autoprefixer(config.BROWSERS_LIST))
-// 		.pipe(lineec())
-// 		.pipe(gulp.dest(config.adminStyleDestination))
-// 		.pipe(filter('**/*.css'))
-// 		.pipe(mmq({log: true}))
-// 		.pipe(browserSync.stream())
-// 		.pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Admin Styles RTL Expanded — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
+gulp.task('gridStyles', () => {
+	return gulp
+		.src(config.gridStyleSRC, {allowEmpty: true})
+		.pipe(plumber(errorHandler))
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'expanded',
+				precision: config.precision
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(autoprefixer(config.BROWSERS_LIST))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.gridStyleDestination))
+		.pipe(filter('**/*.css'))
+		.pipe(mmq({log: true}))
+		.pipe(browserSync.stream())
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Grid Styles Expanded — completed!\n',
+				onLast: true
+			})
+		);
+});
 
 /**
- * Task: `adminStylesRTLMin`.
+ * Task: `gridStylesMin`.
  */
-// gulp.task('adminStylesRTLMin', () => {
-// 	return gulp
-// 	  .src(config.adminStyleRTLSRC, {allowEmpty: true})
-// 	  .pipe(plumber(errorHandler))
-// 	  .pipe(
-// 			sass({
-// 				errLogToConsole: config.errLogToConsole,
-// 				outputStyle: 'compressed',
-// 				precision: config.precision
-// 			})
-// 		)
-// 	  .on('error', sass.logError)
-// 	  .pipe(autoprefixer(config.BROWSERS_LIST))
-// 	  .pipe(rename({suffix: '.min'}))
-// 	  .pipe(lineec())
-// 	  .pipe(gulp.dest(config.adminStyleDestination))
-// 	  .pipe(filter('**/*.css'))
-// 	  .pipe(mmq({log: true}))
-// 	  .pipe(browserSync.stream())
-// 	  .pipe(
-// 			notify({
-// 				message: '\n\n✅  ===> Admin Styles RTL Minified — completed!\n',
-// 				onLast: true
-// 			})
-// 		);
-// });
+gulp.task('gridStylesMin', () => {
+	return gulp
+	  .src(config.gridStyleSRC, {allowEmpty: true})
+	  .pipe(plumber(errorHandler))
+	  .pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'compressed',
+				precision: config.precision
+			})
+		)
+	  .on('error', sass.logError)
+	  .pipe(autoprefixer(config.BROWSERS_LIST))
+	  .pipe(rename({suffix: '.min'}))
+	  .pipe(lineec())
+	  .pipe(gulp.dest(config.gridStyleDestination))
+	  .pipe(filter('**/*.css'))
+	  .pipe(mmq({log: true}))
+	  .pipe(browserSync.stream())
+	  .pipe(
+			notify({
+				message: '\n\n✅  ===> Grid Styles Minified — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `carouselStyles`.
+ */
+gulp.task('carouselStyles', () => {
+	return gulp
+		.src(config.carouselStyleSRC, {allowEmpty: true})
+		.pipe(plumber(errorHandler))
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'expanded',
+				precision: config.precision
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(autoprefixer(config.BROWSERS_LIST))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.carouselStyleDestination))
+		.pipe(filter('**/*.css'))
+		.pipe(mmq({log: true}))
+		.pipe(browserSync.stream())
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Carousel Styles Expanded — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `carouselStylesMin`.
+ */
+gulp.task('carouselStylesMin', () => {
+	return gulp
+	  .src(config.carouselStyleSRC, {allowEmpty: true})
+	  .pipe(plumber(errorHandler))
+	  .pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'compressed',
+				precision: config.precision
+			})
+		)
+	  .on('error', sass.logError)
+	  .pipe(autoprefixer(config.BROWSERS_LIST))
+	  .pipe(rename({suffix: '.min'}))
+	  .pipe(lineec())
+	  .pipe(gulp.dest(config.carouselStyleDestination))
+	  .pipe(filter('**/*.css'))
+	  .pipe(mmq({log: true}))
+	  .pipe(browserSync.stream())
+	  .pipe(
+			notify({
+				message: '\n\n✅  ===> Carousel Styles Minified — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `paginationStyles`.
+ */
+gulp.task('paginationStyles', () => {
+	return gulp
+		.src(config.paginationStyleSRC, {allowEmpty: true})
+		.pipe(plumber(errorHandler))
+		.pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'expanded',
+				precision: config.precision
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(autoprefixer(config.BROWSERS_LIST))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.paginationStyleDestination))
+		.pipe(filter('**/*.css'))
+		.pipe(mmq({log: true}))
+		.pipe(browserSync.stream())
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Pagination Styles Expanded — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `paginationStylesMin`.
+ */
+gulp.task('paginationStylesMin', () => {
+	return gulp
+	  .src(config.paginationStyleSRC, {allowEmpty: true})
+	  .pipe(plumber(errorHandler))
+	  .pipe(
+			sass({
+				errLogToConsole: config.errLogToConsole,
+				outputStyle: 'compressed',
+				precision: config.precision
+			})
+		)
+	  .on('error', sass.logError)
+	  .pipe(autoprefixer(config.BROWSERS_LIST))
+	  .pipe(rename({suffix: '.min'}))
+	  .pipe(lineec())
+	  .pipe(gulp.dest(config.paginationStyleDestination))
+	  .pipe(filter('**/*.css'))
+	  .pipe(mmq({log: true}))
+	  .pipe(browserSync.stream())
+	  .pipe(
+			notify({
+				message: '\n\n✅  ===> Pagination Styles Minified — completed!\n',
+				onLast: true
+			})
+		);
+});
 
 /**
  * Task: `scripts`.
@@ -421,7 +480,7 @@ gulp.task('adminScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-				}
+						}
 					]
 				]
 			})
@@ -442,6 +501,211 @@ gulp.task('adminScripts', () => {
 		.pipe(
 			notify({
 				message: '\n\n✅  ===> Admin Scripts — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `scrollDirectionScript`.
+ */
+gulp.task('scrollDirectionScript', () => {
+	return gulp
+		.src(config.scrollDirectionScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.scrollDirectionScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.scrollDirectionScriptSRC))
+		.pipe(concat(config.scrollDirectionScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
+		.pipe(
+			rename({
+				basename: config.scrollDirectionScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Scroll Direction Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `toggleClassScript`.
+ */
+gulp.task('toggleClassScript', () => {
+	return gulp
+		.src(config.toggleClassScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.toggleClassScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.toggleClassScriptSRC))
+		.pipe(concat(config.toggleClassScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.toggleClassScriptDestination))
+		.pipe(
+			rename({
+				basename: config.toggleClassScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.toggleClassScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Toggle Class Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `customAddToCartButtonScript`.
+ */
+gulp.task('customAddToCartButtonScript', () => {
+	return gulp
+		.src(config.customAddToCartButtonScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.customAddToCartButtonScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.customAddToCartButtonScriptSRC))
+		.pipe(concat(config.customAddToCartButtonScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
+		.pipe(
+			rename({
+				basename: config.customAddToCartButtonScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Custom Add To Cart Button Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `carouselScript`.
+ */
+gulp.task('carouselScript', () => {
+	return gulp
+		.src(config.carouselScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.carouselScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.carouselScriptSRC))
+		.pipe(concat(config.carouselScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.carouselScriptDestination))
+		.pipe(
+			rename({
+				basename: config.carouselScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.carouselScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Carousel Script — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `paginationScript`.
+ */
+gulp.task('paginationScript', () => {
+	return gulp
+		.src(config.paginationScriptSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.paginationScriptDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+				}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.paginationScriptSRC))
+		.pipe(concat(config.paginationScriptFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.paginationScriptDestination))
+		.pipe(
+			rename({
+				basename: config.paginationScriptFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.paginationScriptDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Pagination Script — completed!\n',
 				onLast: true
 			})
 		);
@@ -538,14 +802,21 @@ gulp.task(
 		'stylesMin',
 		'metaboxStyles',
 		'metaboxStylesMin',
-		// 'stylesRTL',
-		// 'stylesRTLMin',
 		'adminStyles',
 		'adminStylesMin',
-		// 'adminStylesRTL',
-		// 'adminStylesRTLMin',
+		'gridStyles',
+		'gridStylesMin',
+		'carouselStyles',
+		'carouselStylesMin',
+		'paginationStyles',
+		'paginationStylesMin',
 		'scripts',
 		'adminScripts',
+		'scrollDirectionScript',
+		'toggleClassScript',
+		'customAddToCartButtonScript',
+		'carouselScript',
+		'paginationScript',
 		'metaboxScripts',
 		browsersync, () => {
 
@@ -557,20 +828,27 @@ gulp.task(
 		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('metaboxStylesMin'));
-		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTL'));
-		// gulp.watch(config.watchStyles, gulp.parallel('stylesRTLMin'));
+		gulp.watch(config.watchStyles, gulp.parallel('gridStyles'));
+		gulp.watch(config.watchStyles, gulp.parallel('gridStylesMin'));
+		gulp.watch(config.watchStyles, gulp.parallel('carouselStyles'));
+		gulp.watch(config.watchStyles, gulp.parallel('carouselStylesMin'));
+		gulp.watch(config.watchStyles, gulp.parallel('paginationStyles'));
+		gulp.watch(config.watchStyles, gulp.parallel('paginationStylesMin'));
 
 		// Backend CSS
 		gulp.watch(config.watchStyles, gulp.parallel('adminStyles'));
 		gulp.watch(config.watchStyles, gulp.parallel('adminStylesMin'));
-		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTL'));
-		// gulp.watch(config.watchStyles, gulp.parallel('adminStylesRTLMin'));
 
 		// Admin JS
 		gulp.watch(config.watchScripts, gulp.series('metaboxScripts', reload));
 
 		// Frontend JS
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
+		gulp.watch(config.watchScripts, gulp.series('scrollDirectionScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('toggleClassScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('customAddToCartButtonScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('carouselScript', reload));
+		gulp.watch(config.watchScripts, gulp.series('paginationScript', reload));
 
 		// Backend JS
 		gulp.watch(config.watchScripts, gulp.series('adminScripts', reload));

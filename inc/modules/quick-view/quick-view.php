@@ -188,6 +188,15 @@ function merchant_quick_view_content_callback() {
 							<?php woocommerce_template_single_meta(); ?>
 						</div>
 
+						<?php 
+						/**
+						 * Hook 'merchant_quick_view_after_product_excerpt'
+						 * 
+						 * @since 1.0.0
+						 */
+						do_action( 'merchant_quick_view_after_product_meta' ); 
+						?>
+
 					</div>
 
 				</div>
