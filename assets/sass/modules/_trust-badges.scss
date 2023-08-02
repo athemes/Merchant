@@ -14,22 +14,22 @@
   }
 }
 
-.merchant-trust-badges-title{
-  color: var(--merchant-text-color, #212121);
-  font-size: var(--merchant-font-size, 18px);
-  font-weight: 700;
-  padding-left: 10px;
-  padding-right: 10px;
+.merchant-trust-badges-title {
+	color: var(--merchant-text-color, #212121);
+	font-size: var(--merchant-font-size, 18px);
+	font-weight: 700;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.merchant-trust-badges-images{
-  display: flex;
-  flex-wrap: wrap;
-  grid-gap: 5px;
-  justify-content: var(--merchant-align, flex-start);
-
-  img{
-    max-width: var(--merchant-image-max-width, 100px) !important;
-    max-height: var(--merchant-image-max-height, 100px) !important;
-  }
+.merchant-trust-badges-images {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 5px;
+	justify-content: var(--merchant-align, flex-start);
+	
+	img {
+		max-width: var(--merchant-image-max-width, 100px) !important;
+		max-height: var(--merchant-image-max-height, 100px) !important;
+	}
 }

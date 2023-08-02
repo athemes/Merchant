@@ -29,7 +29,54 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+			// Ajax callbacks.
+			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
+		}
+
+		/**
+		 * Ajax callbacks.
+		 */
+		public function create_page_control_ajax_callback() {
+			check_ajax_referer( 'customize-create-page-control-nonce', 'nonce' );
+
+			$page_title      = isset( $_POST['page_title'] ) ? sanitize_text_field( $_POST['page_title'] ) : '';
+			$page_meta_key   = isset( $_POST['page_meta_key'] ) ? sanitize_text_field( $_POST['page_meta_key'] ) : '';
+			$page_meta_value = isset( $_POST['page_meta_value'] ) ? sanitize_text_field( $_POST['page_meta_value'] ) : '';
+			$option_name     = isset( $_POST['option_name'] ) ? sanitize_text_field( $_POST['option_name'] ) : '';
+
+			$meta_input = array();
+			if ( $page_meta_key && $page_meta_value ) { 
+				$meta_input = array(
+					$page_meta_key => $page_meta_value
+				);
+			}
+
+			$postarr = array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'    => $page_title,
+				'post_content' => '',
+				'meta_input'   => $meta_input
+			);
+
+			$page_id = wp_insert_post( $postarr );
+
+			if ( ! is_wp_error( $page_id ) ) {
+				if ( $option_name ) {
+					update_option( $option_name, $page_id );
+				}
+
+				wp_send_json( array(
+					'status'  => 'success',
+					'page_id' => $page_id
+				) );
+			} else {
+				wp_send_json( array(
+					'status'  => 'error'
+				) );
+			}
+		}
 
 		/**
 		 * Get option.
@@ -54,13 +101,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function get_all( $module ) {
 
 			$options = get_option( 'merchant', array() );
+			$value 	 = array();
 
 			if ( isset( $options[ $module ] ) ) {
 				$value = $options[ $module ];
 			}
 
 			return $value;
-
 		}
 
 		/**
@@ -124,11 +171,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Save options.
 		 */
 		public static function save_options( $settings ) {
-
 			$save  = ( isset( $_POST['merchant_save'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_save'] ) ) : '';
 			$reset = ( isset( $_POST['merchant_reset'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_reset'] ) ) : '';
 			$nonce = ( isset( $_POST['merchant_nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_nonce'] ) ) : '';
-
+			
 			if ( ! wp_verify_nonce( $nonce, 'merchant_nonce' ) ) {
 				return;
 			}
@@ -218,6 +264,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							$value[] = sanitize_key( $val );
 						}
 					}
+					break;
+
+				case 'sortable_repeater':
+					$values = json_decode( $value );
+					$value  = array_map( 'sanitize_text_field', $values );
 					break;
 
 			}
@@ -541,7 +592,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function gallery( $settings, $value ) {
 
 			$settings = wp_parse_args( $settings, array(
-				'label' => esc_Html__( 'Select Images', 'merchant' ),
+				'label' => esc_html__( 'Select Images', 'merchant' ),
 			) );
 
 			$images = ( ! empty( $value ) ) ? explode( ',', $value ) : array();
@@ -585,7 +636,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function upload( $settings, $value ) {
 
 			$settings = wp_parse_args( $settings, array(
-				'label' => esc_Html__( 'Select Image', 'merchant' ),
+				'label' => esc_html__( 'Select Image', 'merchant' ),
 			) );
 
 			echo '<div class="merchant-upload-wrapper">';
@@ -672,6 +723,75 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
 				</div>
 			<?php
+		}
+
+		/**
+		 * Field: Sortable Repeater.
+		 */
+		public static function sortable_repeater( $settings, $value ) {
+
+			?>
+				<div class="merchant-sortable-repeater-control">
+					<div class="merchant-sortable-repeater sortable regular-field">
+						<div class="repeater">
+							<input type="text" value="" class="repeater-input"/><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
+						</div>
+					</div>
+					<button class="button customize-control-sortable-repeater-add" type="button"><?php echo esc_html( $settings[ 'button_label' ] ); ?></button>
+					<input class="merchant-sortable-repeater-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>" />
+				</div>
+			<?php
+		}
+
+		/**
+		 * Field: Create Page.
+		 */
+		public static function create_page( $settings, $value ) {
+			$page_id = get_option( $settings[ 'option_name' ] );
+
+			echo '<div class="merchant-create-page-control">';
+
+			if ( $page_id && post_exists( get_the_title( $page_id ) ) && 'publish' === get_post_status( $page_id ) ) { 
+				echo wp_kses_post( 
+					sprintf(  /* translators: 1: link to edit page */
+						__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">Your page is created!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%1$s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="%2$s" target="_blank">here</a></p>', 'merchant' ), 
+						get_admin_url() . 'post.php?post=' . $page_id . '&action=edit',
+						get_admin_url() . 'nav-menus.php'
+					) 
+				);
+			} else {
+				echo '<div class="merchant-create-page-control-create-message">';
+					echo wp_kses_post( 
+						sprintf( /* translators: 1: page name */	 
+							__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">It looks like you haven\'t created a <strong>%s</strong> page yet. Click the below button to create the page.</p>', 'merchant' ), 
+							$settings[ 'page_title'] 
+						)
+					);
+				echo '</div>';
+				echo '<div class="merchant-create-page-control-success-message" style="display: none;">';
+					echo wp_kses_post( 
+						sprintf( /* translators: 1: link to edit page */	
+							__( '<p class="merchant-module-page-setting-field-desc">Page created with success!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a></p>', 'merchant' ), 
+							get_admin_url() . 'post.php?post=&action=edit' 
+						) 
+					);
+				echo '</div>';
+				echo wp_kses_post( 
+					sprintf( /* translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text  */	
+						__( '<a href="#" class="merchant-create-page-control-button button-tertiary" data-page-title="%2$s" data-page-meta-key="%3$s" data-page-meta-value="%4$s" data-option-name="%5$s" data-nonce="%6$s" data-creating-text="%7$s" data-created-text="%8$s">%1$s</a>', 'merchant' ),
+						__( 'Create Page', 'merchant' ),
+						$settings[ 'page_title'],
+						$settings[ 'page_meta_key'],
+						$settings[ 'page_meta_value'],
+						$settings[ 'option_name'],
+						wp_create_nonce( 'customize-create-page-control-nonce' ),
+						__( 'Creating...', 'merchant' ),
+						__( 'Created!', 'merchant' )
+					) 
+				);
+			}
+			
+			echo '</div>';
 		}
 
 	}

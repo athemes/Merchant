@@ -153,6 +153,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 
+= 1.1 =
+* Fixed - Quick View: Icon absolute position values not working properly. 
+* Fixed - Quick View: Icon hover color not working with some themes.
+* Fixed - Payment Logos: In some themes the logos are wrongly being displayed in variable products on shop categories pages.
+* Fixed - Payment Logos: Logos being display twice when 'in cart quantity' from Botiga theme is enabled. 
+* Added - Declare compatibility with WooCommerce HPOS. 
+
 = 1.0 =
 * A brand new plugin with a new dashboard.
 * 4 modules: Buy Now, Animated Add to Cart, Product Labels, and Quick View under the Convert More category.

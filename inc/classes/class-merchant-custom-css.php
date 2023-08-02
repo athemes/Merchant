@@ -230,8 +230,8 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				$css .= $this->get_variable_css( 'quick-view', 'border-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-border-hover-color' );
 				$css .= $this->get_variable_css( 'quick-view', 'background-color', '#212121', '.merchant-quick-view-open', '--merchant-background-color' );
 				$css .= $this->get_variable_css( 'quick-view', 'background-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-background-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-top', '50%', '.merchant-quick-view-open', '--merchant-button-position-top', '%' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-left', '50%', '.merchant-quick-view-open', '--merchant-button-position-left', '%' );
+				$css .= $this->get_variable_css( 'quick-view', 'button-position-top', '50', '.merchant-quick-view-open', '--merchant-button-position-top', '%' );
+				$css .= $this->get_variable_css( 'quick-view', 'button-position-left', '50', '.merchant-quick-view-open', '--merchant-button-position-left', '%' );
 				
 				$css .= $this->get_variable_css( 'quick-view', 'modal_width', 1000, '.merchant-quick-view-modal', '--merchant-quick-view-modal-width', 'px' );
 				$css .= $this->get_variable_css( 'quick-view', 'modal_height', 500, '.merchant-quick-view-modal', '--merchant-quick-view-modal-height', 'px' );
@@ -284,10 +284,19 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 		/**
 		 * Get variable CSS
+		 * 
+		 * @param string $module Module name.
+		 * @param string $setting Setting name.
+		 * @param string $default Default value.
+		 * @param string $selector CSS selector.
+		 * @param string $variable CSS variable.
+		 * @param string $unit CSS unit.
+		 * @param string $condition CSS condition.
+		 * 
 		 */
-		public function get_variable_css( $module, $setting = '', $default = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
+		public static function get_variable_css( $module, $setting = '', $default = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
 
-			$value = $this->get_option( $module, $setting, $default );
+			$value = self::get_option( $module, $setting, $default );
 
 			if ( '' === $value || null === $value ) {
 				return '';
@@ -312,7 +321,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 		}
 
-		public function get_option( $module, $setting, $default ) {
+		public static function get_option( $module, $setting, $default ) {
 
 			$options = get_option( 'merchant', array() );
 

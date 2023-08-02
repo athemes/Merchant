@@ -1,0 +1,148 @@
+/**
+ * Merchant Pagination
+ *
+ */
+
+/**
+ * Animations.
+ *
+ */
+.mrc-animated {
+    opacity: 0;
+}
+
+.mrc-anim-infinite {
+    animation-iteration-count: infinite;
+}
+
+.mrc-anim-fowards {
+    animation-fill-mode: forwards;
+}
+
+.mrc-anim-timing-linear {
+    animation-timing-function: linear;
+}
+
+.mrc-anim-duration-300ms {
+    animation-duration: 600ms;
+}
+
+// Rotate.
+@keyframes rotateAnim {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.mrcPagRotateAnim {
+    animation: rotateAnim 1.5s linear infinite;
+}
+
+// Fade In Short.
+@keyframes mrcPagFadeInShort {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.mrcPagFadeInShort {
+    animation-name: mrcPagFadeInShort;
+}
+
+// Default pagination.
+.merchant-pagination {
+    ul {
+        border: none !important;
+
+        li {
+            border: none !important;
+            margin: 0 !important;
+            list-style: none !important;
+
+            & + li {
+                margin-left: 5px;
+            }
+
+            .page-numbers {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 35px !important;
+                height: 35px !important;
+                text-decoration: none !important;
+
+                &.next,
+                &.prev {
+                    &:before,
+                    &:after {
+                        content: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Load More.
+.merchant-pagination-load-more {
+	.navigation.pagination,
+	.woocommerce-pagination {
+		display: none;
+	}
+}
+.merchant-pagination-wrapper {
+    text-align: center;
+    margin-top: 60px;
+}
+.merchant-pagination-button {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    .merchant-pagination-button__label {
+        display: inline-block;
+		font-size: 0.9em;
+		text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: ease all 300ms;
+    }
+    .merchant-pagination-button__loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+    }
+    svg {
+        opacity: 0;
+        animation-name: rotateAnim;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        transition: ease all 300ms;
+    }
+
+    &.loading,
+	&.loading-anim {
+        .merchant-pagination-button__label {
+            opacity: 0;
+            visibility: hidden;
+        }
+        svg {
+            display: block;
+            opacity: 0.7;
+            max-width: 17px;
+        }
+    }
+	&.loading-anim {
+		.merchant-pagination-button__label {
+			display: none;
+		}
+	}
+}
