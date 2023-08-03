@@ -300,10 +300,19 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 		/**
 		 * Get variable CSS
+		 * 
+		 * @param string $module Module name.
+		 * @param string $setting Setting name.
+		 * @param string $default Default value.
+		 * @param string $selector CSS selector.
+		 * @param string $variable CSS variable.
+		 * @param string $unit CSS unit.
+		 * @param string $condition CSS condition.
+		 * 
 		 */
-		public function get_variable_css( $module, $setting = '', $default = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
+		public static function get_variable_css( $module, $setting = '', $default = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
 
-			$value = $this->get_option( $module, $setting, $default );
+			$value = self::get_option( $module, $setting, $default );
 
 			if ( '' === $value || null === $value ) {
 				return '';
@@ -328,7 +337,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 		}
 
-		public function get_option( $module, $setting, $default ) {
+		public static function get_option( $module, $setting, $default ) {
 
 			$options = get_option( 'merchant', array() );
 

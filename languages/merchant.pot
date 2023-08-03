@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-07-14 11:30+0000\n"
+"POT-Creation-Date: 2023-07-19 20:51+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -185,8 +185,12 @@ msgstr ""
 msgid "Inform visitors about your cookie policy to comply with GDPR and other regulations."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:248
+#: admin/classes/class-merchant-admin-options.php:251
 msgid "Field not found!"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-options.php:413, inc/classes/class-merchant-metabox.php:837
+msgid "Default"
 msgstr ""
 
 #: admin/pages/page-dashboard.php:27
@@ -514,10 +518,6 @@ msgstr ""
 
 #: inc/classes/class-merchant-metabox.php:817
 msgid "Select a size chart"
-msgstr ""
-
-#: inc/classes/class-merchant-metabox.php:837
-msgid "Default"
 msgstr ""
 
 #: admin/modules/accelerated-checkout/admin-page-accelerated-checkout.php:20

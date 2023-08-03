@@ -1,3 +1,12 @@
+/* Utilities */
+.mrc-mb-0 {
+  margin-bottom: 0;
+}
+
+.mrc-mt-0 {
+  margin-top: 0;
+}
+
 .merchant-animated-buttons .merchant-button-flash:hover {
   -webkit-animation: merchant-flash 1s infinite both;
           animation: merchant-flash 1s infinite both;
@@ -774,6 +783,39 @@
   background: -webkit-gradient(linear, left top, right top, from(transparent), to(black)), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
   background: linear-gradient(to right, transparent, black), url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="white" d="M1,0H2V1H1V0ZM0,1H1V2H0V1Z"/><path fill="gray" d="M0,0H1V1H0V0ZM1,1H2V2H1V1Z"/></svg>');
   background-size: 100%, 6px;
+}
+
+/* Buttons */
+.button-tertiary {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 0.4375rem 1rem;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-transform: none;
+  text-decoration: none;
+  color: #212b36;
+  background-color: #fff;
+  border: 1px solid #c4cdd5;
+  border-radius: 0.25rem;
+  -webkit-transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+  transition: background 0.2s cubic-bezier(0.64, 0, 0.35, 1), border 0.2s cubic-bezier(0.64, 0, 0.35, 1), box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1), -webkit-box-shadow 0.2s cubic-bezier(0.64, 0, 0.35, 1);
+}
+
+.button-tertiary:hover, .button-tertiary:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .toplevel_page_merchant {
@@ -2263,8 +2305,18 @@
   color: #777;
 }
 
+.merchant-module-page-setting-field-desc a {
+  color: #3858E9;
+}
+
+.merchant-module-page-setting-field-desc a:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .merchant-module-page-setting-field-text input,
-.merchant-module-page-setting-field-number input {
+.merchant-module-page-setting-field-number input,
+.merchant-module-page-setting-field-text_readonly input {
   padding: 12px;
   line-height: 1.3em;
   width: 100%;
@@ -2274,7 +2326,8 @@
 }
 
 .merchant-module-page-setting-field-text input:focus,
-.merchant-module-page-setting-field-number input:focus {
+.merchant-module-page-setting-field-number input:focus,
+.merchant-module-page-setting-field-text_readonly input:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -2485,6 +2538,15 @@
   max-width: 60vw;
 }
 
+.merchant-module-page-setting-field-content a {
+  color: #3858E9;
+}
+
+.merchant-module-page-setting-field-content a:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .merchant-tag-pre-orders {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2548,7 +2610,8 @@
       flex-shrink: 0;
 }
 
-.merchant-module-page-setting-field-select select {
+.merchant-module-page-setting-field-select select,
+.merchant-module-page-setting-field-select_size_chart select {
   padding: 12px;
   line-height: 1.3em;
   width: 100%;
@@ -2559,18 +2622,21 @@
   border: 1px solid #D6D6D6;
 }
 
-.merchant-module-page-setting-field-select select:hover {
+.merchant-module-page-setting-field-select select:hover,
+.merchant-module-page-setting-field-select_size_chart select:hover {
   color: #2F2F2F;
 }
 
-.merchant-module-page-setting-field-select select:focus {
+.merchant-module-page-setting-field-select select:focus,
+.merchant-module-page-setting-field-select_size_chart select:focus {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
   border-color: #3858E9;
 }
 
-.merchant-module-page-setting-field-select select option {
+.merchant-module-page-setting-field-select select option,
+.merchant-module-page-setting-field-select_size_chart select option {
   color: #2F2F2F;
 }
 
@@ -2586,6 +2652,14 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+}
+
+.merchant-module-page-setting-field-choices label:hover .merchant-tooltip {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
 }
 
 .merchant-module-page-setting-field-choices figure {
@@ -2596,6 +2670,36 @@
   padding: 2px;
   border-radius: 4px;
   border: 2px solid transparent;
+}
+
+.merchant-module-page-setting-field-choices .merchant-tooltip {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  padding: 3px 12px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate3d(-50%, 6px, 0);
+          transform: translate3d(-50%, 6px, 0);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  border-radius: 3px;
+  color: #f7f7f7;
+  background-color: #212121;
+}
+
+.merchant-module-page-setting-field-choices .merchant-tooltip:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  border: 6px solid transparent;
+  border-top-color: #212121;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
 }
 
 .merchant-module-page-setting-field-choices .merchant-choices {
@@ -2786,6 +2890,130 @@
   content: "\f530";
 }
 
+/* Sortable Repeater Field */
+.merchant-sortable-repeater-control {
+  max-width: 100%;
+}
+
+.merchant-sortable-repeater-control .sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.merchant-sortable-repeater-control .sortable input[type="text"] {
+  width: 100%;
+  margin: 0;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #D6D6D6;
+  padding: 12px;
+  line-height: 1.3em;
+}
+
+.merchant-sortable-repeater-control .sortable input[type="text"]:focus {
+  border-color: #3858E9;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-sortable-repeater-control .sortable div {
+  cursor: -webkit-grab;
+  cursor: grab;
+  margin-bottom: 7px;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  width: 44px;
+  height: auto;
+  font-size: 1.3em;
+  line-height: 34px;
+  color: #d4d4d4;
+  background: #fff;
+  padding: 0;
+  vertical-align: top;
+  margin-left: -1px;
+  border: 1px solid #D6D6D6;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-delete .dashicons-no-alt {
+  width: 100%;
+  text-decoration: none;
+  margin: 0;
+  font-weight: 600;
+  color: #50575e;
+  font-size: 1.1em;
+  line-height: 34px;
+  height: auto;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-delete:hover, .merchant-sortable-repeater-control .customize-control-sortable-repeater-delete:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-delete:hover .dashicons-no-alt, .merchant-sortable-repeater-control .customize-control-sortable-repeater-delete:focus .dashicons-no-alt {
+  color: #a7a7a7;
+}
+
+.merchant-sortable-repeater-control .repeater {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.merchant-sortable-repeater-control .repeater .dashicons-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  width: 44px;
+  height: auto;
+  font-size: 1.3em;
+  line-height: 34px;
+  background: #fff;
+  padding: 0;
+  vertical-align: top;
+  margin-left: -1px;
+  border: 1px solid #D6D6D6;
+}
+
+.merchant-sortable-repeater-control .repeater .dashicons-menu:hover {
+  color: #a7a7a7;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-add {
+  color: #3858E9;
+  border-color: #3858E9;
+  background-color: transparent;
+  margin-top: 10px;
+  padding: 4px 19px;
+}
+
+.merchant-sortable-repeater-control .customize-control-sortable-repeater-add:hover, .merchant-sortable-repeater-control .customize-control-sortable-repeater-add:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #ffffff;
+}
+
 .merchant-module-page-setting-field-range .merchant-range {
   position: relative;
   width: 100%;
@@ -2803,6 +3031,8 @@
 
 .merchant-module-page-setting-field-range input[type="range"] {
   -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
   width: calc(100% - 105px);
   height: 2px;
   border-radius: 5px;

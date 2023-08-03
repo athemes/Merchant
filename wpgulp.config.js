@@ -14,18 +14,47 @@ const precision       = 10;
 // Style options.
 const styleDestination = './assets/css';
 const styleSRC         = './assets/sass/merchant.scss';
-// const styleRTLSRC           = './assets/sass/merchant-rtl.scss';
+
 const adminStyleDestination = './assets/css/admin';
 const adminStyleSRC         = './assets/sass/admin/admin.scss';
-// const adminStyleRTLSRC      = './assets/sass/admin/admin-rtl.scss';
+
+const gridStyleDestination = './assets/css';
+const gridStyleSRC         = './assets/sass/grid.scss';
+
+const carouselStyleDestination = './assets/css';
+const carouselStyleSRC         = './assets/sass/carousel.scss';
+
+const paginationStyleDestination = './assets/css';
+const paginationStyleSRC         = './assets/sass/pagination.scss';
 
 // Script options.
 const scriptDestination      = './assets/js';
 const scriptSRC              = './assets/js/src/merchant.js';
 const scriptFile             = 'merchant';
+
 const adminScriptDestination = './assets/js/admin';
 const adminScriptSRC         = './assets/js/src/admin/admin.js';
 const adminScriptFile        = 'admin';
+
+const scrollDirectionScriptDestination = './assets/js/';
+const scrollDirectionScriptSRC         = './assets/js/src/scroll-direction.js';
+const scrollDirectionScriptFile        = 'scroll-direction';
+
+const toggleClassScriptDestination = './assets/js/';
+const toggleClassScriptSRC         = './assets/js/src/toggle-class.js';
+const toggleClassScriptFile        = 'toggle-class';
+
+const customAddToCartButtonScriptDestination = './assets/js/';
+const customAddToCartButtonScriptSRC         = './assets/js/src/custom-addtocart-button.js';
+const customAddToCartButtonScriptFile        = 'custom-addtocart-button';
+
+const carouselScriptDestination = './assets/js/';
+const carouselScriptSRC         = './assets/js/src/carousel.js';
+const carouselScriptFile        = 'carousel';
+
+const paginationScriptDestination = './assets/js/';
+const paginationScriptSRC         = './assets/js/src/pagination.js';
+const paginationScriptFile        = 'pagination';
 
 // Metabox script/style options.
 const metaboxCssDestination = './assets/css/admin';
@@ -110,10 +139,18 @@ module.exports = {
 	styleSRC,
 	metaboxCssDestination,
 	metaboxCssSRC,
-	// styleRTLSRC,
+
 	adminStyleDestination,
 	adminStyleSRC,
-	// adminStyleRTLSRC,
+
+	gridStyleDestination,
+	gridStyleSRC,
+
+	carouselStyleDestination,
+	carouselStyleSRC,
+
+	paginationStyleDestination,
+	paginationStyleSRC,
 
 	// Script options.
 	scriptDestination,
@@ -128,6 +165,26 @@ module.exports = {
 	adminScriptDestination,
 	adminScriptSRC,
 	adminScriptFile,
+
+	scrollDirectionScriptDestination,
+	scrollDirectionScriptSRC,
+	scrollDirectionScriptFile,
+
+	toggleClassScriptDestination,
+	toggleClassScriptSRC,
+	toggleClassScriptFile,
+
+	customAddToCartButtonScriptDestination,
+	customAddToCartButtonScriptSRC,
+	customAddToCartButtonScriptFile,
+
+	carouselScriptDestination,
+	carouselScriptSRC,
+	carouselScriptFile,
+
+	paginationScriptDestination,
+	paginationScriptSRC,
+	paginationScriptFile,
 
 	// Watch options.
 	watchStyles,

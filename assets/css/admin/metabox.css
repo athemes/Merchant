@@ -187,6 +187,15 @@
   font-size: 1em;
 }
 
+.merchant-metabox-field-description a {
+  color: #3858E9;
+}
+
+.merchant-metabox-field-description a:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .merchant-metabox-field-text input {
   width: 50%;
   max-width: 100%;
@@ -643,16 +652,19 @@
   -webkit-box-shadow: none;
           box-shadow: none;
   text-decoration: none;
+  color: #000;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
-.merchant-metabox-field-size-chart .merchant-duplicate:active {
+.merchant-metabox-field-size-chart .merchant-duplicate:hover, .merchant-metabox-field-size-chart .merchant-duplicate:active {
   opacity: 0.5;
 }
 
-.merchant-metabox-field-size-chart .merchant-duplicate svg {
-  width: 16px;
-  height: 16px;
-  fill: #000;
+.merchant-metabox-field-size-chart .merchant-duplicate i {
+  width: auto;
+  height: auto;
+  font-size: 20px;
 }
 
 .merchant-metabox-field-media figure {

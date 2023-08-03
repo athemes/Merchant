@@ -1,0 +1,188 @@
+/**
+ * Merchant Pagination
+ *
+ */
+/**
+ * Animations.
+ *
+ */
+.mrc-animated {
+  opacity: 0;
+}
+
+.mrc-anim-infinite {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.mrc-anim-fowards {
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.mrc-anim-timing-linear {
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+.mrc-anim-duration-300ms {
+  -webkit-animation-duration: 600ms;
+          animation-duration: 600ms;
+}
+
+@-webkit-keyframes rotateAnim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateAnim {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.mrcPagRotateAnim {
+  -webkit-animation: rotateAnim 1.5s linear infinite;
+          animation: rotateAnim 1.5s linear infinite;
+}
+
+@-webkit-keyframes mrcPagFadeInShort {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes mrcPagFadeInShort {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 20px, 0);
+            transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.mrcPagFadeInShort {
+  -webkit-animation-name: mrcPagFadeInShort;
+          animation-name: mrcPagFadeInShort;
+}
+
+.merchant-pagination ul {
+  border: none !important;
+}
+
+.merchant-pagination ul li {
+  border: none !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.merchant-pagination ul li + li {
+  margin-left: 5px;
+}
+
+.merchant-pagination ul li .page-numbers {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  width: 35px !important;
+  height: 35px !important;
+  text-decoration: none !important;
+}
+
+.merchant-pagination ul li .page-numbers.next:before, .merchant-pagination ul li .page-numbers.next:after, .merchant-pagination ul li .page-numbers.prev:before, .merchant-pagination ul li .page-numbers.prev:after {
+  content: none !important;
+}
+
+.merchant-pagination-load-more .navigation.pagination,
+.merchant-pagination-load-more .woocommerce-pagination {
+  display: none;
+}
+
+.merchant-pagination-wrapper {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.merchant-pagination-button {
+  position: relative;
+  display: -webkit-inline-box !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.merchant-pagination-button .merchant-pagination-button__label {
+  display: inline-block;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  -webkit-transition: ease all 300ms;
+  transition: ease all 300ms;
+}
+
+.merchant-pagination-button .merchant-pagination-button__loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+
+.merchant-pagination-button svg {
+  opacity: 0;
+  -webkit-animation-name: rotateAnim;
+          animation-name: rotateAnim;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-transition: ease all 300ms;
+  transition: ease all 300ms;
+}
+
+.merchant-pagination-button.loading .merchant-pagination-button__label, .merchant-pagination-button.loading-anim .merchant-pagination-button__label {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.merchant-pagination-button.loading svg, .merchant-pagination-button.loading-anim svg {
+  display: block;
+  opacity: 0.7;
+  max-width: 17px;
+}
+
+.merchant-pagination-button.loading-anim .merchant-pagination-button__label {
+  display: none;
+}

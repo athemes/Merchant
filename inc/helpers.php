@@ -29,17 +29,31 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 
 				// SVG Support
 				'svg'     => array(
-					'class'       => true,
-					'xmlns'       => true,
-					'width'       => true,
-					'height'      => true,
-					'viewbox'     => true,
-					'aria-hidden' => true,
-					'role'        => true,
-					'focusable'   => true,
-					'fill'      => true,
+					'class'       	  => true,
+					'xmlns'       	  => true,
+					'width'       	  => true,
+					'height'      	  => true,
+					'viewbox'     	  => true,
+					'aria-hidden' 	  => true,
+					'role'        	  => true,
+					'focusable'   	  => true,
+					'fill'		  	  => true,
+					'stroke'	  	  => true,
+					'stroke-linecap'  => true,
+					'stroke-linejoin' => true,
+					'stroke-width' 	  => true
 				),
 				'path'    => array(
+					'fill'      => true,
+					'fill-rule' => true,
+					'd'         => true,
+					'transform' => true,
+					'stroke'	=> true,
+					'stroke-width' => true,
+					'stroke-linejoin' => true
+				),
+				'polyline'    => array(
+					'points'    => true,
 					'fill'      => true,
 					'fill-rule' => true,
 					'd'         => true,
@@ -54,13 +68,16 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'points'    => true,
 					'transform' => true,
 					'focusable' => true,
+					'stroke'	=> true
 				),
 				'rect'    => array(
 					'x'      => true,
 					'y'      => true,
 					'width'  => true,
 					'height' => true,
-					'transform' => true
+					'transform' => true,
+					'fill'		=> true,
+					'stroke'	=> true
 				)			
 			),
 			$include_post_tags ? wp_kses_allowed_html( 'post' ) : array() 
