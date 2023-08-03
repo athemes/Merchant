@@ -10,7 +10,7 @@
 
 		> .updated,
 		> .notice{
-			display: none;			
+			display: none;
 		}
 	}
 }
@@ -220,7 +220,7 @@
     padding: 20px;
     overflow-y: auto;
     max-height: calc( 100vh - 180px );
-    
+
     &::-webkit-scrollbar{
       width: 5px;
     }
@@ -297,7 +297,7 @@
           padding-top: 15px;
           border-top: 1px solid #E7E7E7;
         }
-      }   
+      }
     }
   }
 
@@ -563,6 +563,27 @@
 	display: flex;
 	grid-gap: 20px;
 	flex-direction: column;
+}
+
+.merchant-module-page-body {
+	display: flex;
+}
+
+.merchant-module-page-preview {
+  width: 50%;
+  margin-left: 20px;
+}
+
+.merchant-module-page-body.has-preview {
+  .merchant-module-page-setting-box {
+    flex-direction: column;
+    grid-gap: 20px;
+  }
+
+  .merchant-module-page-setting-title,
+  .merchant-module-page-setting-fields {
+    width: 100%;
+  }
 }
 
 .merchant-module-page-ajax-form{
@@ -980,7 +1001,7 @@
 		i{
 			opacity: 1;
 		}
-		
+
 		span{
 			opacity: 0;
 		}
@@ -1064,7 +1085,48 @@
 	}
 }
 
-.merchant-module-page-settings{
+.merchant-module-page-preview-browser-top {
+	background: #323232;
+	display: flex;
+	align-items: center;
+	height: 45px;
+	padding-left: 9px;
+}
+
+.merchant-module-page-preview-browser-top-circle {
+	background: #616161;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: block;
+	margin-left: 7px;
+}
+
+.merchant-module-page-preview-browser {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	overflow: hidden;
+	min-height: 500px;
+	box-shadow: 0 0 50px #0000001f;
+	margin-bottom: -29px;
+	display: flex;
+	flex-direction: column;
+}
+
+.merchant-module-page-preview-browser-inner {
+	flex-grow: 1;
+	position: relative;
+	display: block;
+}
+
+.merchant-module-page-preview-box {
+	overflow: hidden;
+	position: sticky;
+	top: 45px;
+}
+
+.merchant-module-page-settings,
+.merchant-module-page-preview-box {
 	display: flex;
 	grid-gap: 30px;
 	flex-direction: column;
@@ -1078,13 +1140,17 @@
 	display: flex;
 }
 
-.merchant-module-page-setting-title{
-	width: 40%;
+.merchant-module-page-preview-title,
+.merchant-module-page-setting-title {
 	margin-top: 10px;
 	padding-right: 50px;
 	font-size: 20px;
 	font-weight: 500;
 	color: #2F2F2F;
+}
+
+.merchant-module-page-setting-title {
+  width: 40%;
 }
 
 .merchant-module-page-setting-subtitle{
@@ -1556,7 +1622,7 @@
 
 .merchant-animated-buttons{
 
-	.merchant-buttons{	
+	.merchant-buttons{
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 	}
@@ -2242,7 +2308,7 @@
 			outline: none;
 			box-shadow: none;
 		}
-	}	
+	}
 }
 
 /* Utils */
@@ -2343,4 +2409,14 @@
 	.merchant-module-page-setting-fields{
 		width: 100%;
 	}
+
+  .merchant-module-page-body {
+    flex-direction: column-reverse;
+  }
+
+  .merchant-module-page-preview {
+    margin-left: 0;
+    margin-bottom: 20px;
+    width: 100%;
+  }
 }
