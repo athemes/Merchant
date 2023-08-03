@@ -5,7 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $merchant_module	  = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
-$merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module ); 
+$merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_module );
+
+Merchant_Admin_Preview::set_preview($merchant_module);
 
 ?>
 
@@ -174,24 +176,48 @@ $merchant_module_info = Merchant_Admin_Modules::get_module_info( $merchant_modul
 
 				</div>
 
-				<div class="merchant-module-page-content">
+                <div class="merchant-module-page-body <?php echo Merchant_Admin_Preview::has_preview() ? 'has-preview' : '' ?>">
+                    <div class="merchant-module-page-content">
 
-					<?php
+                        <?php
 
-					/**
-					 * Hook: merchant_module_file_path
-					 * 
-					 * @since 1.0
-					 */
-					$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
+                        /**
+                         * Hook: merchant_module_file_path
+                         *
+                         * @since 1.0
+                         */
+                        $merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
-					if ( file_exists( $merchant_module_file ) ) {
-						require $merchant_module_file;
-					}
+                        if ( file_exists( $merchant_module_file ) ) {
+                            require $merchant_module_file;
+                        }
 
-					?>
+                        ?>
 
-				</div>
+                    </div>
+
+	                <?php if (Merchant_Admin_Preview::has_preview() ) : ?>
+
+                        <div class="merchant-module-page-preview">
+                            <div class="merchant-module-page-preview-box">
+                                <div class="merchant-module-page-preview-title">
+                                    <?php esc_html_e( 'Preview', 'merchant' ); ?>
+                                </div>
+                                <div class="merchant-module-page-preview-browser">
+                                    <div class="merchant-module-page-preview-browser-top">
+                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
+                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
+                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
+                                    </div>
+                                    <div class="merchant-module-page-preview-browser-inner">
+                                        <?php echo Merchant_Admin_Preview::get_html() ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+	                <?php endif; ?>
+                </div>
 
 			</form>
 

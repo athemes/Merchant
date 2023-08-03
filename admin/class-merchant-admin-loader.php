@@ -49,6 +49,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-modules.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
+			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-preview.php';
 
 		}
 
@@ -76,6 +77,11 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 				) );
 
+				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+
+				if( !empty($module) ) {
+					wp_enqueue_script( 'merchant-admin-preview', MERCHANT_URI . 'assets/js/admin/merchant-preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				}
 			}
 
 		}

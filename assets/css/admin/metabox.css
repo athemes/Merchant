@@ -455,6 +455,37 @@
   margin-right: 5px;
 }
 
+.merchant-metabox-field-uploads-content .merchant-metabox-field-repeater-list-item-field,
+.merchant-metabox-field-repeater-content .merchant-metabox-field-repeater-list-item-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 5px;
+}
+
+.merchant-metabox-field-uploads-content .merchant-metabox-field-repeater-list-item-field input,
+.merchant-metabox-field-repeater-content .merchant-metabox-field-repeater-list-item-field input {
+  width: 100%;
+}
+
+.merchant-metabox-field-uploads-content .merchant-metabox-field-repeater-list-item-field span,
+.merchant-metabox-field-repeater-content .merchant-metabox-field-repeater-list-item-field span {
+  font-size: 14px;
+}
+
+.merchant-metabox-field-uploads-content .merchant-metabox-field-repeater-list-item-fields,
+.merchant-metabox-field-repeater-content .merchant-metabox-field-repeater-list-item-fields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
 .merchant-metabox-field-size-chart ul {
   margin: 0;
   padding: 0;
