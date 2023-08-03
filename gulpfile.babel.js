@@ -70,723 +70,124 @@ const browsersync = done => {
 };
 
 /**
- * Task: `metaboxStyles`.
- */
-gulp.task('metaboxStyles', () => {
-	return gulp
-		.src(config.metaboxCssSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.metaboxCssDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Metabox CSS Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `metaboxStylesMin`.
- */
-gulp.task('metaboxStylesMin', () => {
-	return gulp
-	  .src(config.metaboxCssSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.metaboxCssDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Metabox CSS Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
  * Task: `styles`.
  */
-gulp.task('styles', () => {
-	return gulp
-		.src(config.styleSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.styleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Styles Expanded — completed!\n',
-				onLast: true
-			})
-		);
+const styleTasks = config.styles.map((style) => {
+
+	const taskName = style.name + 'StyleTask';
+
+	gulp.task(taskName, () => {
+		return gulp
+			.src(style.src, {allowEmpty: true})
+			.pipe(plumber(errorHandler))
+			.pipe(
+				sass({
+					errLogToConsole: config.errLogToConsole,
+					outputStyle: 'expanded',
+					precision: config.precision
+				})
+			)
+			.on('error', sass.logError)
+			.pipe(autoprefixer(config.BROWSERS_LIST))
+			.pipe(lineec())
+			.pipe(gulp.dest(style.destination))
+			.pipe(filter('**/*.css'))
+			.pipe(mmq({log: true}))
+			.pipe(browserSync.stream())
+			.pipe(
+				notify({
+					message: '\n\n✅  ===> CSS - ' + style.name + ' Expanded — completed!\n',
+					onLast: true
+				})
+			);
+	});
+
+	return taskName;
 });
 
 /**
- * Task: `stylesMin`.
+ * Task: StylesMin.
  */
-gulp.task('stylesMin', () => {
-	return gulp
-	  .src(config.styleSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.styleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Styles Minified — completed!\n',
-				onLast: true
-			})
-		);
+const styleMinTasks = config.styles.map((style) => {
+
+	const taskName = style.name + 'StyleMinTask';
+
+	gulp.task(taskName, () => {
+		return gulp
+			.src(style.src, {allowEmpty: true})
+			.pipe(plumber(errorHandler))
+			.pipe(
+				sass({
+					errLogToConsole: config.errLogToConsole,
+					outputStyle: 'compressed',
+					precision: config.precision
+				})
+			)
+			.on('error', sass.logError)
+			.pipe(autoprefixer(config.BROWSERS_LIST))
+			.pipe(rename({suffix: '.min'}))
+			.pipe(lineec())
+			.pipe(gulp.dest(style.destination))
+			.pipe(filter('**/*.css'))
+			.pipe(mmq({log: true}))
+			.pipe(browserSync.stream())
+			.pipe(
+				notify({
+					message: '\n\n✅  ===> CSS - ' + style.name + ' Minified — completed!\n',
+					onLast: true
+				})
+			);
+	});
+
+	return taskName;
 });
 
 /**
- * Task: `adminStyles`.
+ * Task: Scripts.
  */
-gulp.task('adminStyles', () => {
-	return gulp
-		.src(config.adminStyleSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.adminStyleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Admin Styles Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
+const scriptTasks = config.scripts.map((script) => {
 
-/**
- * Task: `adminStylesMin`.
- */
-gulp.task('adminStylesMin', () => {
-	return gulp
-	  .src(config.adminStyleSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.adminStyleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Admin Styles Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
+	const taskName = script.name + 'ScriptTask';
 
-/**
- * Task: `gridStyles`.
- */
-gulp.task('gridStyles', () => {
-	return gulp
-		.src(config.gridStyleSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.gridStyleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Grid Styles Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `gridStylesMin`.
- */
-gulp.task('gridStylesMin', () => {
-	return gulp
-	  .src(config.gridStyleSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.gridStyleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Grid Styles Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `carouselStyles`.
- */
-gulp.task('carouselStyles', () => {
-	return gulp
-		.src(config.carouselStyleSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.carouselStyleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Carousel Styles Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `carouselStylesMin`.
- */
-gulp.task('carouselStylesMin', () => {
-	return gulp
-	  .src(config.carouselStyleSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.carouselStyleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Carousel Styles Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `paginationStyles`.
- */
-gulp.task('paginationStyles', () => {
-	return gulp
-		.src(config.paginationStyleSRC, {allowEmpty: true})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'expanded',
-				precision: config.precision
-			})
-		)
-		.on('error', sass.logError)
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.paginationStyleDestination))
-		.pipe(filter('**/*.css'))
-		.pipe(mmq({log: true}))
-		.pipe(browserSync.stream())
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Pagination Styles Expanded — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `paginationStylesMin`.
- */
-gulp.task('paginationStylesMin', () => {
-	return gulp
-	  .src(config.paginationStyleSRC, {allowEmpty: true})
-	  .pipe(plumber(errorHandler))
-	  .pipe(
-			sass({
-				errLogToConsole: config.errLogToConsole,
-				outputStyle: 'compressed',
-				precision: config.precision
-			})
-		)
-	  .on('error', sass.logError)
-	  .pipe(autoprefixer(config.BROWSERS_LIST))
-	  .pipe(rename({suffix: '.min'}))
-	  .pipe(lineec())
-	  .pipe(gulp.dest(config.paginationStyleDestination))
-	  .pipe(filter('**/*.css'))
-	  .pipe(mmq({log: true}))
-	  .pipe(browserSync.stream())
-	  .pipe(
-			notify({
-				message: '\n\n✅  ===> Pagination Styles Minified — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `scripts`.
- */
-gulp.task('scripts', () => {
-	return gulp
-		.src(config.scriptSRC, {since: gulp.lastRun('scripts')})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
+	gulp.task(taskName, () => {
+		return gulp
+			.src(script.src, {since: gulp.lastRun(taskName)})
+			// .pipe(newer(script.destination))
+			.pipe(plumber(errorHandler))
+			.pipe(
+				babel({
+					presets: [
+						[
+							'@babel/preset-env',
+							{
+								targets: {browsers: config.BROWSERS_LIST}
+							}
+						]
 					]
-				]
-			})
-		)
-		.pipe(remember(config.scriptSRC))
-		.pipe(concat(config.scriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.scriptDestination))
-		.pipe(
-			rename({
-				basename: config.scriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.scriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Scripts — completed!\n',
-				onLast: true
-			})
-		);
-});
+				})
+			)
+			.pipe(remember(script.src))
+			.pipe(concat(script.file + '.js'))
+			.pipe(lineec())
+			.pipe(gulp.dest(script.destination))
+			.pipe(
+				rename({
+					basename: script.file,
+					suffix: '.min'
+				})
+			)
+			.pipe(uglify())
+			.pipe(lineec())
+			.pipe(gulp.dest(script.destination))
+			.pipe(
+				notify({
+					message: '\n\n✅  ===> JS - ' + script.name + ' — completed!\n',
+					onLast: true
+				})
+			);
+	});
 
-/**
- * Task: `adminScripts`.
- */
-gulp.task('adminScripts', () => {
-	return gulp
-		.src(config.adminScriptSRC, {since: gulp.lastRun('scripts')})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-						}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.adminScriptSRC))
-		.pipe(concat(config.adminScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.adminScriptDestination))
-		.pipe(
-			rename({
-				basename: config.adminScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.adminScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Admin Scripts — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `scrollDirectionScript`.
- */
-gulp.task('scrollDirectionScript', () => {
-	return gulp
-		.src(config.scrollDirectionScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.scrollDirectionScriptDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.scrollDirectionScriptSRC))
-		.pipe(concat(config.scrollDirectionScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
-		.pipe(
-			rename({
-				basename: config.scrollDirectionScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.scrollDirectionScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Scroll Direction Script — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `toggleClassScript`.
- */
-gulp.task('toggleClassScript', () => {
-	return gulp
-		.src(config.toggleClassScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.toggleClassScriptDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.toggleClassScriptSRC))
-		.pipe(concat(config.toggleClassScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.toggleClassScriptDestination))
-		.pipe(
-			rename({
-				basename: config.toggleClassScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.toggleClassScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Toggle Class Script — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `customAddToCartButtonScript`.
- */
-gulp.task('customAddToCartButtonScript', () => {
-	return gulp
-		.src(config.customAddToCartButtonScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.customAddToCartButtonScriptDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.customAddToCartButtonScriptSRC))
-		.pipe(concat(config.customAddToCartButtonScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
-		.pipe(
-			rename({
-				basename: config.customAddToCartButtonScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.customAddToCartButtonScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Custom Add To Cart Button Script — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `carouselScript`.
- */
-gulp.task('carouselScript', () => {
-	return gulp
-		.src(config.carouselScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.carouselScriptDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.carouselScriptSRC))
-		.pipe(concat(config.carouselScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.carouselScriptDestination))
-		.pipe(
-			rename({
-				basename: config.carouselScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.carouselScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Carousel Script — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `paginationScript`.
- */
-gulp.task('paginationScript', () => {
-	return gulp
-		.src(config.paginationScriptSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.paginationScriptDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-				}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.paginationScriptSRC))
-		.pipe(concat(config.paginationScriptFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.paginationScriptDestination))
-		.pipe(
-			rename({
-				basename: config.paginationScriptFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.paginationScriptDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Pagination Script — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `metaboxScripts`.
- */
-gulp.task('metaboxScripts', () => {
-	return gulp
-		.src(config.metaboxJsSRC, {since: gulp.lastRun('scripts')})
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-						}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.metaboxJsSRC))
-		.pipe(concat(config.metaboxJsFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.metaboxJsDestination))
-		.pipe(
-			rename({
-				basename: config.metaboxJsFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.metaboxJsDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Metabox JS — completed!\n',
-				onLast: true
-			})
-		);
-});
-
-/**
- * Task: `previewScripts`.
- */
-gulp.task('previewScripts', () => {
-	return gulp
-		.src(config.previewJsSRC, {since: gulp.lastRun('scripts')})
-		// .pipe(newer(config.metaboxJsDestination))
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: {browsers: config.BROWSERS_LIST}
-						}
-					]
-				]
-			})
-		)
-		.pipe(remember(config.previewJsSRC))
-		.pipe(concat(config.previewJsFile + '.js'))
-		.pipe(lineec())
-		.pipe(gulp.dest(config.previewJsDestination))
-		.pipe(
-			rename({
-				basename: config.previewJsFile,
-				suffix: '.min'
-			})
-		)
-		.pipe(uglify())
-		.pipe(lineec())
-		.pipe(gulp.dest(config.previewJsDestination))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> Preview JS — completed!\n',
-				onLast: true
-			})
-		);
+	return taskName;
 });
 
 /**
@@ -835,62 +236,24 @@ gulp.task('zip', () => {
 gulp.task(
 	'default',
 	gulp.parallel(
-		'styles',
-		'stylesMin',
-		'metaboxStyles',
-		'metaboxStylesMin',
-		'adminStyles',
-		'adminStylesMin',
-		'gridStyles',
-		'gridStylesMin',
-		'carouselStyles',
-		'carouselStylesMin',
-		'paginationStyles',
-		'paginationStylesMin',
-		'scripts',
-		'adminScripts',
-		'scrollDirectionScript',
-		'toggleClassScript',
-		'customAddToCartButtonScript',
-		'carouselScript',
-		'paginationScript',
-		'metaboxScripts',
-		'previewScripts',
+		...styleTasks,
+		...styleMinTasks,
+		...scriptTasks,
 		browsersync, () => {
 
-		// Global
+		// Global.
 		gulp.watch(config.watchPhp, reload);
+		
+		// Styles.
+		for (const style of config.styles) {
+			gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleTask'));
+			gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleMinTask'));
+		}
 
-		// Frontend CSS
-		gulp.watch(config.watchStyles, gulp.parallel('styles'));
-		gulp.watch(config.watchStyles, gulp.parallel('stylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('metaboxStyles'));
-		gulp.watch(config.watchStyles, gulp.parallel('metaboxStylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('gridStyles'));
-		gulp.watch(config.watchStyles, gulp.parallel('gridStylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('carouselStyles'));
-		gulp.watch(config.watchStyles, gulp.parallel('carouselStylesMin'));
-		gulp.watch(config.watchStyles, gulp.parallel('paginationStyles'));
-		gulp.watch(config.watchStyles, gulp.parallel('paginationStylesMin'));
-
-		// Backend CSS
-		gulp.watch(config.watchStyles, gulp.parallel('adminStyles'));
-		gulp.watch(config.watchStyles, gulp.parallel('adminStylesMin'));
-
-		// Admin JS
-		gulp.watch(config.watchScripts, gulp.series('metaboxScripts', reload));
-		gulp.watch(config.watchScripts, gulp.series('previewScripts', reload));
-
-		// Frontend JS
-		gulp.watch(config.watchScripts, gulp.series('scripts', reload));
-		gulp.watch(config.watchScripts, gulp.series('scrollDirectionScript', reload));
-		gulp.watch(config.watchScripts, gulp.series('toggleClassScript', reload));
-		gulp.watch(config.watchScripts, gulp.series('customAddToCartButtonScript', reload));
-		gulp.watch(config.watchScripts, gulp.series('carouselScript', reload));
-		gulp.watch(config.watchScripts, gulp.series('paginationScript', reload));
-
-		// Backend JS
-		gulp.watch(config.watchScripts, gulp.series('adminScripts', reload));
+		// Scripts.
+		for (const script of config.scripts) {
+			gulp.watch(config.watchScripts, gulp.series(script.name + 'ScriptTask', reload));
+		}
 
 	})
 );

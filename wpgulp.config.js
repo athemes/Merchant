@@ -11,69 +11,129 @@ const outputStyle     = 'compressed';
 const errLogToConsole = true;
 const precision       = 10;
 
-// Core.
-const styleDestination = './assets/css';
-const styleSRC         = './assets/sass/merchant.scss';
+// Styles to process.
+const styles = [
 
-const scriptDestination      = './assets/js';
-const scriptSRC              = './assets/js/src/merchant.js';
-const scriptFile             = 'merchant';
+	// Core.
+	{
+		name: 'core',
+		src: './assets/sass/merchant.scss',
+		destination: './assets/css',
+	},
 
-// Admin.
-const adminStyleDestination = './assets/css/admin';
-const adminStyleSRC         = './assets/sass/admin/admin.scss';
+	// Admin.
+	{
+		name: 'admin',
+		src: './assets/sass/admin/admin.scss',
+		destination: './assets/css/admin',
+	},
 
-const adminScriptDestination = './assets/js/admin';
-const adminScriptSRC         = './assets/js/src/admin/admin.js';
-const adminScriptFile        = 'admin';
+	// Metabox.
+	{
+		name: 'metabox',
+		src: './assets/sass/admin/metabox.scss',
+		destination: './assets/css/admin',
+	},
 
-// Grid.
-const gridStyleDestination = './assets/css';
-const gridStyleSRC         = './assets/sass/grid.scss';
+	// Grid.
+	{
+		name: 'grid',
+		src: './assets/sass/grid.scss',
+		destination: './assets/css',
+	},
 
-// Carousel.
-const carouselStyleDestination = './assets/css';
-const carouselStyleSRC         = './assets/sass/carousel.scss';
+	// Carousel.
+	{
+		name: 'carousel',
+		src: './assets/sass/carousel.scss',
+		destination: './assets/css',
+	},
 
-const carouselScriptDestination = './assets/js/';
-const carouselScriptSRC         = './assets/js/src/carousel.js';
-const carouselScriptFile        = 'carousel';
+	// Pagination.
+	{
+		name: 'pagination',
+		src: './assets/sass/pagination.scss',
+		destination: './assets/css',
+	}
 
-// Pagination.
-const paginationStyleDestination = './assets/css';
-const paginationStyleSRC         = './assets/sass/pagination.scss';
+];
 
-const paginationScriptDestination = './assets/js/';
-const paginationScriptSRC         = './assets/js/src/pagination.js';
-const paginationScriptFile        = 'pagination';
+// Scripts to process.
+const scripts = [
 
-// Scroll Direction.
-const scrollDirectionScriptDestination = './assets/js/';
-const scrollDirectionScriptSRC         = './assets/js/src/scroll-direction.js';
-const scrollDirectionScriptFile        = 'scroll-direction';
+	// Core.
+	{
+		name: 'core',
+		src: './assets/js/src/merchant.js',
+		destination: './assets/js',
+		file: 'merchant',
+	},
 
-// Toggle Class.
-const toggleClassScriptDestination = './assets/js/';
-const toggleClassScriptSRC         = './assets/js/src/toggle-class.js';
-const toggleClassScriptFile        = 'toggle-class';
+	// Admin.
+	{
+		name: 'admin',
+		src: './assets/js/src/admin/admin.js',
+		destination: './assets/js/admin',
+		file: 'admin',
+	},
 
-// Custom Add To Cart Button.
-const customAddToCartButtonScriptDestination = './assets/js/';
-const customAddToCartButtonScriptSRC         = './assets/js/src/custom-addtocart-button.js';
-const customAddToCartButtonScriptFile        = 'custom-addtocart-button';
+	// Metabox.
+	{
+		name: 'metabox',
+		src: './assets/js/src/admin/metabox.js',
+		destination: './assets/js/admin',
+		file: 'merchant-metabox',
+	},
 
-// Metabox.
-const metaboxCssDestination = './assets/css/admin';
-const metaboxCssSRC         = './assets/sass/admin/metabox.scss';
+	// Preview.
+	{
+		name: 'preview',
+		src: './assets/js/src/admin/preview.js',
+		destination: './assets/js/admin',
+		file: 'merchant-preview',
+	},
 
-const metaboxJsDestination = './assets/js/admin';
-const metaboxJsSRC         = './assets/js/src/admin/metabox.js';
-const metaboxJsFile        = 'merchant-metabox';
+	// Carousel.
+	{
+		name: 'carousel',
+		src: './assets/js/src/carousel.js',
+		destination: './assets/js',
+		file: 'carousel',
+	},
 
+	// Pagination.
+	{
+		name: 'pagination',
+		src: './assets/js/src/pagination.js',
+		destination: './assets/js',
+		file: 'pagination',
+	},
 
-const previewJsDestination = './assets/js/admin';
-const previewJsSRC         = './assets/js/src/admin/preview.js';
-const previewJsFile        = 'merchant-preview';
+	// Scroll Direction.
+	{
+		name: 'scrollDirection',
+		src: './assets/js/src/scroll-direction.js',
+		destination: './assets/js',
+		file: 'scroll-direction',
+	},
+
+	// Toggle Class.
+	{
+		name: 'toggleClass',
+		src: './assets/js/src/toggle-class.js',
+		destination: './assets/js',
+		file: 'toggle-class',
+	},
+
+	// Custom Add To Cart Button.
+	{
+		name: 'customAddToCartButton',
+		src: './assets/js/src/custom-addtocart-button.js',
+		destination: './assets/js',
+		file: 'custom-addtocart-button',
+	}
+
+];
 
 // Watch options.
 const watchStyles  = './assets/sass/**/*.scss';
@@ -140,69 +200,11 @@ module.exports = {
 	errLogToConsole,
 	precision,
 
-	// Core.
-	styleDestination,
-	styleSRC,
+	// Style options.
+	styles,
 
-	scriptDestination,
-	scriptSRC,
-	scriptFile,
-
-	// Admin.
-	adminStyleDestination,
-	adminStyleSRC,
-
-	adminScriptDestination,
-	adminScriptSRC,
-	adminScriptFile,
-
-	// Metabox.
-	metaboxCssDestination,
-	metaboxCssSRC,
-
-	metaboxJsDestination,
-	metaboxJsSRC,
-	metaboxJsFile,
-
-	// Preview Script options.
-	previewJsDestination,
-	previewJsSRC,
-	previewJsFile,
-
-	// Grid.
-	gridStyleDestination,
-	gridStyleSRC,
-
-	// Carousel.
-	carouselStyleDestination,
-	carouselStyleSRC,
-
-	carouselScriptDestination,
-	carouselScriptSRC,
-	carouselScriptFile,
-
-	// Pagination.
-	paginationStyleDestination,
-	paginationStyleSRC,
-  
-	paginationScriptDestination,
-	paginationScriptSRC,
-	paginationScriptFile,
-
-	// Scroll Direction.
-	scrollDirectionScriptDestination,
-	scrollDirectionScriptSRC,
-	scrollDirectionScriptFile,
-
-	// Toggle Class.
-	toggleClassScriptDestination,
-	toggleClassScriptSRC,
-	toggleClassScriptFile,
-
-	// Custom Add To Cart Button.
-	customAddToCartButtonScriptDestination,
-	customAddToCartButtonScriptSRC,
-	customAddToCartButtonScriptFile,  
+	// Script options.
+	scripts,
 
 	// Watch options.
 	watchStyles,
