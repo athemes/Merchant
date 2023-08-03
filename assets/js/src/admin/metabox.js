@@ -46,10 +46,18 @@
 
 						e.preventDefault();
 
+						var $items = $list.find('li');
 						var $item  = $list.find('li').first().clone(true);
 						var $input = $item.find('input');
 
-						$input.attr('name', $input.data('name'));
+						if ($item.find('.merchant-metabox-field-repeater-list-item-fields').length) {
+							$item.find('input').each(function() {
+								$(this).attr('name', $(this).data('name').replace('0', ($items.length - 1)))
+							})
+						} else {
+							$input.attr('name', $input.data('name'));
+						}
+
 						$item.removeClass('hidden');
 
 						$list.append( $item );

@@ -387,6 +387,25 @@
 		max-width: 100%;
 		margin-right: 5px;
 	}
+
+	.merchant-metabox-field-repeater-list-item-field {
+		display: flex;
+		margin-right: 5px;
+
+		input {
+			width: 100%;
+		}
+
+		span {
+			font-size: 14px;
+		}
+	}
+
+	.merchant-metabox-field-repeater-list-item-fields {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
 }
 
 .merchant-metabox-field-size-chart{

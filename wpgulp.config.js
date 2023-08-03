@@ -70,6 +70,11 @@ const metaboxJsDestination = './assets/js/admin';
 const metaboxJsSRC         = './assets/js/src/admin/metabox.js';
 const metaboxJsFile        = 'merchant-metabox';
 
+
+const previewJsDestination = './assets/js/admin';
+const previewJsSRC         = './assets/js/src/admin/preview.js';
+const previewJsFile        = 'merchant-preview';
+
 // Watch options.
 const watchStyles  = './assets/sass/**/*.scss';
 const watchScripts = './assets/js/src/**/*.js';
@@ -159,6 +164,11 @@ module.exports = {
 	metaboxJsSRC,
 	metaboxJsFile,
 
+	// Preview Script options.
+	previewJsDestination,
+	previewJsSRC,
+	previewJsFile,
+
 	// Grid.
 	gridStyleDestination,
 	gridStyleSRC,
@@ -174,7 +184,7 @@ module.exports = {
 	// Pagination.
 	paginationStyleDestination,
 	paginationStyleSRC,
-
+  
 	paginationScriptDestination,
 	paginationScriptSRC,
 	paginationScriptFile,
@@ -192,7 +202,7 @@ module.exports = {
 	// Custom Add To Cart Button.
 	customAddToCartButtonScriptDestination,
 	customAddToCartButtonScriptSRC,
-	customAddToCartButtonScriptFile,
+	customAddToCartButtonScriptFile,  
 
 	// Watch options.
 	watchStyles,

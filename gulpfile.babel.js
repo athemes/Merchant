@@ -722,7 +722,7 @@ gulp.task('metaboxScripts', () => {
 						'@babel/preset-env',
 						{
 							targets: {browsers: config.BROWSERS_LIST}
-				}
+						}
 					]
 				]
 			})
@@ -743,6 +743,47 @@ gulp.task('metaboxScripts', () => {
 		.pipe(
 			notify({
 				message: '\n\n✅  ===> Metabox JS — completed!\n',
+				onLast: true
+			})
+		);
+});
+
+/**
+ * Task: `previewScripts`.
+ */
+gulp.task('previewScripts', () => {
+	return gulp
+		.src(config.previewJsSRC, {since: gulp.lastRun('scripts')})
+		// .pipe(newer(config.metaboxJsDestination))
+		.pipe(plumber(errorHandler))
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env',
+						{
+							targets: {browsers: config.BROWSERS_LIST}
+						}
+					]
+				]
+			})
+		)
+		.pipe(remember(config.previewJsSRC))
+		.pipe(concat(config.previewJsFile + '.js'))
+		.pipe(lineec())
+		.pipe(gulp.dest(config.previewJsDestination))
+		.pipe(
+			rename({
+				basename: config.previewJsFile,
+				suffix: '.min'
+			})
+		)
+		.pipe(uglify())
+		.pipe(lineec())
+		.pipe(gulp.dest(config.previewJsDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> Preview JS — completed!\n',
 				onLast: true
 			})
 		);
@@ -814,6 +855,7 @@ gulp.task(
 		'carouselScript',
 		'paginationScript',
 		'metaboxScripts',
+		'previewScripts',
 		browsersync, () => {
 
 		// Global
@@ -837,6 +879,7 @@ gulp.task(
 
 		// Admin JS
 		gulp.watch(config.watchScripts, gulp.series('metaboxScripts', reload));
+		gulp.watch(config.watchScripts, gulp.series('previewScripts', reload));
 
 		// Frontend JS
 		gulp.watch(config.watchScripts, gulp.series('scripts', reload));

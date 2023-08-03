@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Metabox class.
- * 
+ *
  */
 if ( ! class_exists( 'Merchant_Metabox' ) ) {
 	class Merchant_Metabox {
@@ -21,13 +21,13 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Options.
-		 * 
+		 *
 		 */
 		public static $options = array();
 
 		/**
 		 * Constructor.
-		 * 
+		 *
 		 */
 		public function __construct() {
 
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			}
 
 			self::$initialized = true;
-			
+
 			add_action( 'load-post.php', array( $this, 'init_metabox' ) );
 			add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
 			add_action( 'wp_ajax_merchant_select_ajax', array( $this, 'select_content_ajax' ) );
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Init metabox.
-		 * 
+		 *
 		 */
 		public function init_metabox() {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_metabox_scripts' ) );
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Enqueue scripts.
-		 * 
+		 *
 		 */
 		public function enqueue_metabox_scripts() {
 			wp_enqueue_code_editor(
@@ -65,13 +65,13 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					'tabSize'    => 2
 				),
 			) );
-		
+
 			wp_enqueue_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
 			wp_enqueue_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13', 'all' );
 
 			wp_enqueue_style( 'merchant-metabox-styles', MERCHANT_URI . 'assets/css/admin/metabox.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_script( 'merchant-metabox-scripts', MERCHANT_URI . 'assets/js/admin/merchant-metabox.min.js', array( 'jquery', 'jquery-ui-sortable' ), MERCHANT_VERSION, true );
-			
+
 			wp_localize_script( 'merchant-metabox-scripts', 'merchant_metabox', array(
 				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
 				'ajaxnonce' => wp_create_nonce( 'merchant_metabox' ),
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Select content ajax callback.
-		 * 
+		 *
 		 */
 		public function select_content_ajax() {
 			$term   = ( isset( $_GET['term'] ) ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				$options = array();
 
 				switch ( $source ) {
-					
+
 					case 'post':
 					case 'product':
 						$query = new WP_Query( array(
@@ -112,9 +112,9 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 								);
 							}
 						}
-			
+
 						break;
-					
+
 				}
 
 				wp_send_json_success( $options );
@@ -125,20 +125,20 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Options.
-		 * 
+		 *
 		 */
 		public function metabox_options() {
 
 			/**
 			 * Hook: merchant_metabox_options
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			do_action( 'merchant_metabox_options', self::$options );
 
 			/**
 			 * Hook: merchant_metabox_options_filter
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			self::$options = apply_filters( 'merchant_metabox_options_filter', self::$options );
@@ -155,7 +155,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Add section.
-		 * 
+		 *
 		 */
 		public function add_section( $id, $args ) {
 			if ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) {
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Add field.
-		 * 
+		 *
 		 */
 		public function add_field( $id, $args ) {
 			if ( ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) || empty( self::$options[ $args['section'] ] ) ) {
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Add metabox.
-		 * 
+		 *
 		 */
 		public function add_metabox( $post_type ) {
 			global $post;
@@ -235,7 +235,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 			/**
 			 * Hook: merchant_metabox_title
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			$metabox_title = apply_filters( 'merchant_metabox_title', $metabox_title, $post_type );
@@ -264,7 +264,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					if ( ! empty( $option['title'] ) ) {
 						$active = ( 0 === $num ) ? ' active' : '';
 						echo '<a href="#" class="merchant-metabox-tab' . esc_attr( $active ) . '">' . esc_html( $option['title'] ) . '</a>';
-								
+
 						$num++;
 					}
 				}
@@ -305,7 +305,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							if ( empty( $depend_meta ) ) {
 								$classes[] = 'merchant-metabox-field-hidden';
 							}
-									
+
 							echo '<div class="' . esc_attr( join( ' ', $classes ) ) . '" data-depend-on="' . esc_attr( $field['depend'] ) . '">';
 						} else {
 							echo '<div class="' . esc_attr( join( ' ', $classes ) ) . '">';
@@ -357,7 +357,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Save metabox.
-		 * 
+		 *
 		 */
 		public function save_metabox( $post_id ) {
 			if ( ! isset( $_POST['merchant_metabox_nonce'] ) ) {
@@ -391,6 +391,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						}
 
 						$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( $_POST[ $field_id ] ) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
 						$value = $this->sanitize( $field, $value );
 
 						update_post_meta( $post_id, $field_id, $value );
@@ -402,7 +403,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Sanitize.
-		 * 
+		 *
 		 */
 		public function sanitize( $field, $value ) {
 			switch ( $field['type'] ) {
@@ -460,7 +461,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 		/**
 		 * Get field.
-		 * 
+		 *
 		 */
 		public function get_field( $field_id, $field, $value ) {
 			switch ( $field['type'] ) {
@@ -527,7 +528,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 									break;
 
 							}
-							
+
 						}
 					}
 
@@ -564,7 +565,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							echo '</li>';
 
 						}
-							
+
 							echo '</ul>';
 						echo '</div>';
 					}
@@ -594,19 +595,60 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						'button' => '',
 					) );
 
-					echo '<div class="merchant-metabox-field-repeater-content">';
+					echo '<div class="merchant-metabox-field-repeater-content" data-id="'.$field_id.'">';
 						$values = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
 
 						echo '<ul class="merchant-metabox-field-repeater-list">';
 							echo '<li class="merchant-metabox-field-repeater-list-item hidden">';
-							echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[]" />';
+							if ( isset( $field['fields'] ) ) {
+								echo '<div class="merchant-metabox-field-repeater-list-item-fields">';
+								foreach($field['fields'] as $sub_field_id => $sub_field) {
+									echo '<div class="merchant-metabox-field-repeater-list-item-field">';
+									if ( isset( $sub_field['title'] ) ) {
+										echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . $sub_field['title'] . '</span>';
+									}
+									echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="'.$sub_field_id.'">';
+									if($sub_field['type'] === 'text') {
+										echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . $sub_field_id . ']" />';
+									}
+									if($sub_field['type'] === 'number') {
+										echo '<input type="number" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . $sub_field_id . ']" />';
+									}
+									echo '</div>';
+									echo '</div>';
+								}
+								echo '</div>';
+							} else {
+								echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[]" />';
+							}
 							echo '<span class="merchant-metabox-field-repeater-move dashicons dashicons-menu"></span>';
 							echo '<span class="merchant-metabox-field-repeater-remove dashicons dashicons-trash"></span>';
 							echo '</li>';
 
 					foreach ( $values as $key => $value ) {
 						echo '<li class="merchant-metabox-field-repeater-list-item">';
-						echo '<input type="text" name="' . esc_attr( $field_id ) . '[]" value="' . esc_attr( $value ) . '" />';
+						if(isset($field['fields'])) {
+							echo '<div class="merchant-metabox-field-repeater-list-item-fields">';
+							foreach($field['fields'] as $sub_field_id => $sub_field) {
+								echo '<div class="merchant-metabox-field-repeater-list-item-field">';
+								if ( isset( $sub_field['title'] ) ) {
+									echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . $sub_field['title'] . '</span>';
+								}
+								echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="'.$sub_field_id.'">';
+								if($sub_field['type'] === 'text') {
+									echo '<input type="text" name="' . esc_attr( $field_id ) . '[' . $key . '][' . $sub_field_id . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
+								}
+								if($sub_field['type'] === 'number') {
+									echo '<input type="number" name="' . esc_attr( $field_id ) . '[' . $key . '][' . $sub_field_id . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
+								}
+								echo '</div>';
+								echo '</div>';
+							}
+							echo '</div>';
+						} else {
+							echo '<input type="text" name="' . esc_attr( $field_id ) . '[]" value="' . esc_attr( $value ) . '" />';
+						}
+
 						echo '<span class="merchant-metabox-field-repeater-move dashicons dashicons-menu"></span>';
 						echo '<span class="merchant-metabox-field-repeater-remove dashicons dashicons-trash"></span>';
 						echo '</li>';
@@ -696,7 +738,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							echo '<span class="merchant-metabox-field-uploads-remove dashicons dashicons-trash"></span>';
 							echo '</li>';
 					}
-		
+
 						echo '</ul>';
 						echo '<button class="merchant-metabox-field-uploads-add button button-primary">' . esc_html( $field['button'] ) . '</button>';
 					echo '</div>';
@@ -724,14 +766,14 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 									echo '</thead>';
 									echo '<tbody>';
 										echo '<tr>';
-					for ( $a = 0; $a < 4 ; $a++ ) { 
+					for ( $a = 0; $a < 4 ; $a++ ) {
 						echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
 					}
 											echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '"><i class="dashicons dashicons-admin-page"></i></td>';
 										echo '</tr>';
-					for ( $b = 0; $b < 4 ; $b++ ) { 
+					for ( $b = 0; $b < 4 ; $b++ ) {
 						echo '<tr>';
-						for ( $c =0 ; $c < 4 ; $c++ ) { 
+						for ( $c =0 ; $c < 4 ; $c++ ) {
 											echo '<td><input type="text" value="" data-name="' . esc_attr( $field_id ) . '[0][sizes][0][0]" /></td>';
 						}
 							echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-row">+</a><a href="#" class="merchant-del-row">-</a></div></td>';
@@ -768,7 +810,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							foreach ( $sizes as $row_key => $rows ) {
 								if ( 0 === $row_key ) {
 												echo '<tr>';
-									for ( $i = 0; $i < count( $rows ); $i++ ) { 
+									for ( $i = 0; $i < count( $rows ); $i++ ) {
 								echo '<td><div class="merchant-buttons"><a href="#" class="merchant-add-col">+</a><a href="#" class="merchant-del-col">-</a></div></td>';
 									}
 												echo '<td><a href="#" class="merchant-duplicate" title="' . esc_attr__( 'Duplicate', 'merchant' ) . '"><i class="dashicons dashicons-admin-page"></i></td>';
@@ -806,7 +848,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						'posts_per_page' => -1,
 						'post_status'    => 'publish'
 					) );
-						
+
 					if ( ! is_wp_error( $posts ) && ! empty( $posts ) ) {
 						foreach ( $posts as $_post ) {
 							$options[ $_post->ID ] = $_post->post_title;
@@ -842,7 +884,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '</select>';
 
 					break;
-				
+
 				case 'wp-editor':
 					$field = wp_parse_args( $field, array(
 						'height' => 150,

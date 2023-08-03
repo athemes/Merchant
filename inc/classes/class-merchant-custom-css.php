@@ -32,7 +32,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		public function __construct() {
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'print_styles' ), 15 );
-
+			add_action( 'admin_enqueue_scripts', array( $this, 'print_styles_admin' ), 15 );
 		}
 
 		/**
@@ -43,6 +43,22 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			$css = $this->output_css();
 
 			wp_add_inline_style( 'merchant', $css );
+
+		}
+
+		/**
+		 * Print Styles In Admin
+		 */
+		public function print_styles_admin() {
+
+			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+
+			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) && !empty($module) ) {
+				$css = $this->output_css();
+
+				wp_add_inline_style( 'merchant-admin', $css );
+			}
 
 		}
 
