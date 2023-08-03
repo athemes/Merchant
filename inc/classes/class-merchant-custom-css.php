@@ -333,6 +333,10 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				
 			}
 
+			if( class_exists( 'Merchant_Admin_Preview' ) ) {
+				Merchant_Admin_Preview::instance()->set_css( $setting, $selector, $variable, $unit );
+			}
+
 			return $selector . '{ ' . esc_attr( $variable ) . ':' . esc_attr( $value ) . esc_attr( $unit ) . '; }' . "\n";
 
 		}

@@ -190,7 +190,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 */
 		public static function set_preview( $module_id ) {
 			/**
-			 * Hook: merchant_module_previe
+			 * Hook: merchant_module_preview
 			 *
 			 * @since 1.2
 			 */
