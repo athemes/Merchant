@@ -103,8 +103,8 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 */
 		public function set_attribute( $setting, $selector, $attribute, $replacements = array() ) {
 			$manipulator = array(
-				'setting'  => $setting,
-				'selector' => $selector,
+				'setting'   => $setting,
+				'selector'  => $selector,
 				'attribute' => $attribute,
 			);
 
@@ -137,18 +137,25 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 *
 		 * @param string $setting the setting ID
 		 * @param string $selector the selector
-		 * @param array $to_remove optional, classes to remove prior to adding the new one.
+		 * @param array $remove optional, classes to remove prior to adding the new one.
+		 * @param string $add optional, Toggle a pre-defined class. When this is set it will
+		 *                   toggle this class instead of adding the value from the setting.
+		 *                   Best used with switchers and checkboxes.
 		 *
 		 * @return void
 		 */
-		public function set_class( $setting, $selector, $to_remove = array() ) {
+		public function set_class( $setting, $selector, $remove = array(), $add = '' ) {
 			$manipulator = array(
 				'setting'  => $setting,
 				'selector' => $selector,
 			);
 
-			if ( ! empty( $to_remove ) ) {
-				$manipulator['to_remove'] = $to_remove;
+			if ( ! empty( $remove ) ) {
+				$manipulator['remove'] = $remove;
+			}
+
+			if ( ! empty( $add ) ) {
+				$manipulator['add'] = $add;
 			}
 
 			$this->manipulators['classes'][] = $manipulator;
