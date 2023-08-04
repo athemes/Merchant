@@ -39,13 +39,55 @@
             if (hasManipulators(manipulators.attributes)) {
                 for (const key in manipulators.attributes) {
                     if (manipulators.attributes.hasOwnProperty(key)) {
-                        let inputText = $('input[name="merchant[' + manipulators.attributes[key].setting + ']"]').val();
+                        let input = $('[name="merchant[' + manipulators.attributes[key].setting + ']"]');
+                        let inputType = input.attr('type');
 
-                        if (manipulators.attributes[key].hasOwnProperty('replacements')) {
-                            inputText = setReplacements(inputText, manipulators.attributes[key]);
+                        if (inputType === 'radio') {
+                            input = $('[name="merchant[' + manipulators.attributes[key].setting + ']"]' + ':checked')
                         }
 
-                        $(manipulators.attributes[key].selector).attr(manipulators.attributes[key].attribute, inputText)
+                        let inputValue = input.val();
+
+
+                        if (manipulators.attributes[key].hasOwnProperty('replacements')) {
+                            inputValue = setReplacements(inputValue, manipulators.attributes[key]);
+                        }
+
+                        $(manipulators.attributes[key].selector).attr(manipulators.attributes[key].attribute, inputValue)
+                    }
+                }
+            }
+            if (hasManipulators(manipulators.classes)) {
+                for (const key in manipulators.classes) {
+                    if (manipulators.classes.hasOwnProperty(key)) {
+                        if (manipulators.classes[key].hasOwnProperty('remove')) {
+                            for (const classToRemove of manipulators.classes[key].remove) {
+                                $(manipulators.classes[key].selector).removeClass(classToRemove)
+                            }
+                        }
+
+                        let input = $('[name="merchant[' + manipulators.classes[key].setting + ']"]');
+                        let inputType = input.attr('type');
+
+                        if (inputType === 'radio') {
+                            input = $('[name="merchant[' + manipulators.classes[key].setting + ']"]' + ':checked')
+                        }
+
+                        if (inputType === 'checkbox') {
+                            if (input.is(':checked')) {
+                                $(manipulators.classes[key].selector).addClass(manipulators.classes[key].add)
+                            } else {
+                                $(manipulators.classes[key].selector).removeClass(manipulators.classes[key].add)
+                            }
+                        } else {
+                            let inputValue = input.val();
+
+                            if (manipulators.classes[key].hasOwnProperty('add')) {
+                                $(manipulators.classes[key].selector).toggleClass(manipulators.classes[key].add)
+                            } else {
+                                $(manipulators.classes[key].selector).addClass(inputValue)
+                            }
+                        }
                     }
                 }
             }
@@ -88,7 +130,7 @@
             }
 
             // Select
-            if (input.is('select')) {
+            if (inputType === 'checkbox' || input.is('select')) {
                 input.on('change', () => updateElements());
             }
         }
@@ -108,6 +150,11 @@
             if (hasManipulators(manipulators.attributes)) {
                 for (const key in manipulators.attributes) {
                     triggerElementsChange($('[name="merchant[' + manipulators.attributes[key].setting + ']"]'))
+                }
+            }
+            if (hasManipulators(manipulators.classes)) {
+                for (const key in manipulators.classes) {
+                    triggerElementsChange($('[name="merchant[' + manipulators.classes[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.icons)) {

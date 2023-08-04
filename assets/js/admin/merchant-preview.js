@@ -50,20 +50,64 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (hasManipulators(manipulators.attributes)) {
         for (var _key2 in manipulators.attributes) {
           if (manipulators.attributes.hasOwnProperty(_key2)) {
-            var _inputText = $('input[name="merchant[' + manipulators.attributes[_key2].setting + ']"]').val();
-            if (manipulators.attributes[_key2].hasOwnProperty('replacements')) {
-              _inputText = setReplacements(_inputText, manipulators.attributes[_key2]);
+            var input = $('[name="merchant[' + manipulators.attributes[_key2].setting + ']"]');
+            var inputType = input.attr('type');
+            if (inputType === 'radio') {
+              input = $('[name="merchant[' + manipulators.attributes[_key2].setting + ']"]' + ':checked');
             }
-            $(manipulators.attributes[_key2].selector).attr(manipulators.attributes[_key2].attribute, _inputText);
+            var inputValue = input.val();
+            if (manipulators.attributes[_key2].hasOwnProperty('replacements')) {
+              inputValue = setReplacements(inputValue, manipulators.attributes[_key2]);
+            }
+            $(manipulators.attributes[_key2].selector).attr(manipulators.attributes[_key2].attribute, inputValue);
+          }
+        }
+      }
+      if (hasManipulators(manipulators.classes)) {
+        for (var _key3 in manipulators.classes) {
+          if (manipulators.classes.hasOwnProperty(_key3)) {
+            if (manipulators.classes[_key3].hasOwnProperty('remove')) {
+              var _iterator = _createForOfIteratorHelper(manipulators.classes[_key3].remove),
+                _step;
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  var classToRemove = _step.value;
+                  $(manipulators.classes[_key3].selector).removeClass(classToRemove);
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+            }
+            var _input = $('[name="merchant[' + manipulators.classes[_key3].setting + ']"]');
+            var _inputType = _input.attr('type');
+            if (_inputType === 'radio') {
+              _input = $('[name="merchant[' + manipulators.classes[_key3].setting + ']"]' + ':checked');
+            }
+            if (_inputType === 'checkbox') {
+              if (_input.is(':checked')) {
+                $(manipulators.classes[_key3].selector).addClass(manipulators.classes[_key3].add);
+              } else {
+                $(manipulators.classes[_key3].selector).removeClass(manipulators.classes[_key3].add);
+              }
+            } else {
+              var _inputValue = _input.val();
+              if (manipulators.classes[_key3].hasOwnProperty('add')) {
+                $(manipulators.classes[_key3].selector).toggleClass(manipulators.classes[_key3].add);
+              } else {
+                $(manipulators.classes[_key3].selector).addClass(_inputValue);
+              }
+            }
           }
         }
       }
       if (hasManipulators(manipulators.icons)) {
-        for (var _key3 in manipulators.icons) {
-          if (manipulators.icons.hasOwnProperty(_key3)) {
-            var radioElement = $('[name="merchant[' + manipulators.icons[_key3].setting + ']"]' + ':checked');
+        for (var _key4 in manipulators.icons) {
+          if (manipulators.icons.hasOwnProperty(_key4)) {
+            var radioElement = $('[name="merchant[' + manipulators.icons[_key4].setting + ']"]' + ':checked');
             var iconSrc = radioElement.parent().find('figure img').attr('src');
-            var iconSelector = $(manipulators.icons[_key3].selector);
+            var iconSelector = $(manipulators.icons[_key4].selector);
             if (radioElement.val() === 'none') {
               iconSelector.hide();
             } else {
@@ -103,7 +147,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       // Select
-      if (input.is('select')) {
+      if (inputType === 'checkbox' || input.is('select')) {
         input.on('change', function () {
           return updateElements();
         });
@@ -116,23 +160,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
       if (hasManipulators(manipulators.text)) {
-        for (var _key4 in manipulators.text) {
-          triggerElementsChange($('[name="merchant[' + manipulators.text[_key4].setting + ']"]'));
+        for (var _key5 in manipulators.text) {
+          triggerElementsChange($('[name="merchant[' + manipulators.text[_key5].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.attributes)) {
-        for (var _key5 in manipulators.attributes) {
-          triggerElementsChange($('[name="merchant[' + manipulators.attributes[_key5].setting + ']"]'));
+        for (var _key6 in manipulators.attributes) {
+          triggerElementsChange($('[name="merchant[' + manipulators.attributes[_key6].setting + ']"]'));
+        }
+      }
+      if (hasManipulators(manipulators.classes)) {
+        for (var _key7 in manipulators.classes) {
+          triggerElementsChange($('[name="merchant[' + manipulators.classes[_key7].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.icons)) {
-        for (var _key6 in manipulators.icons) {
-          triggerElementsChange($('[name="merchant[' + manipulators.icons[_key6].setting + ']"]'));
+        for (var _key8 in manipulators.icons) {
+          triggerElementsChange($('[name="merchant[' + manipulators.icons[_key8].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.update)) {
-        for (var _key7 in manipulators.update) {
-          triggerElementsChange($('[name="merchant[' + manipulators.update[_key7].setting + ']"]'));
+        for (var _key9 in manipulators.update) {
+          triggerElementsChange($('[name="merchant[' + manipulators.update[_key9].setting + ']"]'));
         }
       }
 
@@ -151,13 +200,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var replacements = manipulator['replacements'][1]; // Replacements
 
       // Do search replacements
-      var _iterator = _createForOfIteratorHelper(searches.entries()),
-        _step;
+      var _iterator2 = _createForOfIteratorHelper(searches.entries()),
+        _step2;
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _step$value = _slicedToArray(_step.value, 2),
-            index = _step$value[0],
-            search = _step$value[1];
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _step2$value = _slicedToArray(_step2.value, 2),
+            index = _step2$value[0],
+            search = _step2$value[1];
           var replacement = replacements[index];
           if (typeof replacement === 'string') {
             inputText = inputText.replace(search, replacement);
@@ -183,9 +232,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
       return inputText;
     };

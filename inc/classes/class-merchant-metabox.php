@@ -432,6 +432,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					return ( in_array( $value, array_keys( $field['options'] ) ) ) ? sanitize_key( $value ) : '';
 					break;
 
+				case 'wc-attributes':
 				case 'select-ajax':
 					return ( is_array( $value ) && ! empty( $value ) ) ? array_filter( array_map( 'sanitize_text_field', $value ) ) : array();
 					break;
@@ -446,6 +447,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					break;
 
 				case 'size-chart':
+				case 'uploads':
 					return ( is_array( $value ) && ! empty( $value ) ) ? array_filter( map_deep( $value, 'sanitize_text_field' ) ) : array();
 					break;
 
@@ -453,6 +455,15 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					return wp_kses_post( $value );
 					break;
 
+				case 'flexible-content':
+					return is_array($value) && !empty($value) ?  array_map( function ( $sub_fields ) use ( $field ) {
+						foreach ( $sub_fields as $sub_field => $value ) {
+							$sub_fields[ $sub_field ] = $this->sanitize( $field['layouts'][$sub_fields['type']]['fields'][ $sub_field ], $value );
+						}
+
+						return $sub_fields;
+					}, $value ) : array();
+					break;
 			}
 
 			return $value;
@@ -466,11 +477,39 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		public function get_field( $field_id, $field, $value ) {
 			switch ( $field['type'] ) {
 				case 'text':
+					if ( isset( $field['append'] ) || isset( $field['prepend'] ) ) {
+						echo '<div class="merchant-metabox-field-input-container">';
+						if ( isset( $field['prepend'] ) ) {
+							echo '<div class="merchant-metabox-field-prepend">' . esc_attr( $field['prepend'] ) . '</div>';
+						}
 					echo '<input type="text" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" />';
+						if ( isset( $field['append'] ) ) {
+							echo '<div class="merchant-metabox-field-append">' . esc_attr( $field['append'] ) . '</div>';
+						}
+						echo '</div>';
+					} else {
+						echo '<input type="text" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" />';
+					}
 					break;
 
 				case 'number':
-					echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" />';
+					$style = '';
+					if ( isset( $field['style'] ) && ! empty( $field['style'] ) ) {
+						$style = 'style="' . str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) . '"';
+					}
+					if ( isset( $field['append'] ) || isset( $field['prepend'] ) ) {
+						echo '<div class="merchant-metabox-field-input-container">';
+						if ( isset( $field['prepend'] ) ) {
+							echo '<div class="merchant-metabox-field-prepend">' . esc_attr( $field['prepend'] ) . '</div>';
+						}
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />';
+						if ( isset( $field['append'] ) ) {
+							echo '<div class="merchant-metabox-field-append">' . esc_attr( $field['append'] ) . '</div>';
+						}
+						echo '</div>';
+					} else {
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />';
+					}
 					break;
 
 				case 'textarea':
@@ -632,9 +671,9 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							foreach($field['fields'] as $sub_field_id => $sub_field) {
 								echo '<div class="merchant-metabox-field-repeater-list-item-field">';
 								if ( isset( $sub_field['title'] ) ) {
-									echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . $sub_field['title'] . '</span>';
+									echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . esc_attr( $sub_field['title'] ) . '</span>';
 								}
-								echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="'.$sub_field_id.'">';
+								echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="' . esc_attr( $sub_field_id ) . '">';
 								if($sub_field['type'] === 'text') {
 									echo '<input type="text" name="' . esc_attr( $field_id ) . '[' . $key . '][' . $sub_field_id . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
 								}
@@ -900,6 +939,106 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '<textarea name="' . esc_attr( $field_id ) . '">' . esc_textarea( $value ) . '</textarea>';
 					break;
 
+
+				case 'flexible-content':
+					$field  = wp_parse_args( $field, array(
+						'button' => '',
+					) );
+					$values = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
+
+					$empty = empty( $values ) ? 'empty' : '';
+
+					echo '<ul data-id="' . $field_id . '" class="merchant-metabox-field-flexible-content-list ' . $empty . '">';
+
+					ob_start();
+					echo '<li class="merchant-metabox-field-flexible-content-item">';
+					foreach ( $field['layouts'] as $layout_type => $layout ) {
+						echo '<div data-layout="' . esc_attr( $layout_type ) . '">';
+						echo '<div class="merchant-metabox-field-flexible-content-item-header">';
+						echo '<div class="merchant-metabox-field-flexible-content-item-count">0</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-title">' . esc_html( $layout['title'] ) . '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-actions">';
+						echo '<span class="merchant-metabox-field-flexible-content-move dashicons dashicons-menu"></span>';
+						echo '<span class="merchant-metabox-field-flexible-content-remove dashicons dashicons-trash"></span>';
+						echo '</div>';
+						echo '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-content">';
+						foreach ( $layout['fields'] as $sub_field_key => $sub_field ) {
+							$sub_field_classes = array( 'merchant-metabox-field-flexible-content-item-' . esc_attr( $sub_field['type'] ) );
+							$sub_field_id      = $field_id . '[0][' . $sub_field_key . ']';
+							$sub_field_value   = '';
+							if ( $sub_field['type'] === 'select-ajax' ) {
+								$sub_field_classes[] = 'merchant-metabox-field-flexible-content-select-ajax-clone';
+								$sub_field_value     = array();
+								$sub_field           = wp_parse_args( $sub_field, array(
+									'source' => 'post',
+								) );
+							}
+							echo '<div class="' . implode( ' ', $sub_field_classes ) . '">';
+							echo '<label>';
+							echo esc_html( $sub_field['title'] );
+							echo '</label>';
+							echo '<div class="merchant-metabox-field-flexible-content-item-field" data-id="' . esc_attr( $sub_field_key ) . '">';
+							$this->get_field( $sub_field_id, $sub_field, $sub_field_value );
+							echo '</div>';
+							echo '</div>';
+						}
+						echo '</div>';
+						echo '<input type="hidden" name="' . $field_id . '[0][layout]" value="' . $layout_type . '">';
+						echo '</div>';
+					}
+					echo '</li>';
+					$sub_fields = ob_get_clean();
+
+					echo str_replace( 'name=', 'data-name=', $sub_fields );
+
+					foreach ( $values as $value_key => $value ) {
+						echo '<li class="merchant-metabox-field-flexible-content-item">';
+						echo '<div class="merchant-metabox-field-flexible-content-item-header">';
+						echo '<div class="merchant-metabox-field-flexible-content-item-count">' . ( $value_key + 1 ) . '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-title">' . esc_html( $field['layouts'][$value['layout']]['title'] ) . '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-actions">';
+						echo '<span class="merchant-metabox-field-flexible-content-move dashicons dashicons-menu"></span>';
+						echo '<span class="merchant-metabox-field-flexible-content-remove dashicons dashicons-trash"></span>';
+						echo '</div>';
+						echo '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-content">';
+						foreach ( $field['layouts'][ $value['layout'] ]['fields'] as $sub_field_key => $sub_field ) {
+							$sub_field_classes = array( 'merchant-metabox-field-flexible-content-item-' . esc_attr( $sub_field['type'] ) );
+							$sub_field_id      = $field_id . '[' . $value_key . '][' . $sub_field_key . ']';
+							$sub_field_value   = isset( $value[ $sub_field_key ] ) ? $value[ $sub_field_key ] : '';
+							if ( $sub_field['type'] === 'select-ajax' ) {
+								$sub_field_classes[] = 'merchant-metabox-field-flexible-content-select-ajax';
+								$sub_field_value     = empty( $sub_field_value ) ? array() : $sub_field_value;
+								$sub_field           = wp_parse_args( $sub_field, array(
+									'source' => 'post',
+								) );
+							}
+							echo '<div class="' . implode( ' ', $sub_field_classes ) . '">';
+							echo '<label>';
+							echo esc_html( $sub_field['title'] );
+							echo '</label>';
+							echo '<div class="merchant-metabox-field-flexible-content-item-field" data-id="' . esc_attr( $sub_field_key ) . '">';
+							$this->get_field( $sub_field_id, $sub_field, $sub_field_value );
+							echo '</div>';
+							echo '</div>';
+						}
+						echo '</div>';
+						echo '<input type="hidden" name="' . $field_id . '[' . $value_key . '][layout]" value="' . $value['layout'] . '">';
+						echo '</li>';
+					}
+
+					echo '</ul>';
+					echo '<div class="merchant-metabox-field-flexible-content-add-wrapper">';
+					echo '<div class="merchant-metabox-field-flexible-content-add-list">';
+					foreach ( $field['layouts']as $layout_type => $layout ) {
+						echo '<a class="merchant-metabox-field-flexible-content-add" data-id="' . $field_id . '" data-layout="' . esc_attr( $layout_type ) . '" href="#">' . esc_html( $layout['title'] ) . '</a>';
+					}
+					echo '</div>';
+					echo '<button class="merchant-metabox-field-flexible-content-add-button button button-primary">' . esc_html( $field['button'] ) . '</button>';
+					echo '</div>';
+
+					break;
 			}
 
 		}

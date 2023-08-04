@@ -5,6 +5,40 @@
   'use strict';
 
   $.fn.merchantMetabox = function () {
+    function initSelectAjax($selectAjax) {
+      $selectAjax.each(function () {
+        var $select = $(this).find('select');
+        var source = $select.data('source');
+        var config = window.merchant_metabox;
+        $select.select2({
+          width: '100%',
+          minimumInputLength: 1,
+          ajax: {
+            url: config.ajaxurl,
+            dataType: 'json',
+            delay: 250,
+            cache: true,
+            data: function data(params) {
+              return {
+                action: 'merchant_select_ajax',
+                nonce: config.ajaxnonce,
+                term: params.term,
+                source: source
+              };
+            },
+            processResults: function processResults(response, params) {
+              if (response.success) {
+                return {
+                  results: response.data
+                };
+              }
+              return {};
+            }
+          }
+        });
+        $selectAjax.find('.select2-selection--multiple').append('<span class="merchant-select2-clear"></span>');
+      });
+    }
     return this.each(function () {
       var $this = $(this);
       var $tabs = $this.find('.merchant-metabox-tab');
@@ -19,6 +53,85 @@
           $(document).trigger('merchant-metabox-content-show', $content);
         });
       });
+      var $flexibleContent = $contents.find('.merchant-metabox-field-flexible-content');
+      if ($flexibleContent.length) {
+        $flexibleContent.each(function () {
+          var $selectAjaxSelector = '.merchant-metabox-field-flexible-content-select-ajax';
+          var $selectAjax = $($selectAjaxSelector);
+          if ($selectAjax.length) {
+            initSelectAjax($selectAjax);
+          }
+          var $list = $(this).find('.merchant-metabox-field-flexible-content-list');
+          $list.sortable({
+            axis: 'y',
+            cursor: 'move',
+            helper: 'original',
+            handle: '.merchant-metabox-field-flexible-content-move',
+            stop: function stop(event, ui) {
+              $list.find('> li').each(function (index) {
+                var $countSelector = '.merchant-metabox-field-flexible-content-item-count';
+                var $count = $(this).find($countSelector).text();
+                var $inputIndex = parseInt($count) - 1;
+                $(this).find($countSelector).text(index);
+                $(this).find('input, select').each(function () {
+                  if ($(this).attr('name')) {
+                    $(this).attr('name', $(this).attr('name').replace('[' + $inputIndex + ']', '[' + (index - 1) + ']'));
+                  }
+                });
+              });
+            }
+          });
+          $flexibleContent.find('.merchant-metabox-field-flexible-content-add-button').on('click', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $(this).parent().find('.merchant-metabox-field-flexible-content-add-list').toggleClass('active');
+          });
+          $flexibleContent.find('.merchant-metabox-field-flexible-content-add').on('click', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var $layouts = $('.merchant-metabox-field-flexible-content-list[data-id=' + $(this).data('id') + ']');
+            var $layout = $(this).data('layout');
+            var $items = $layouts.find('> li');
+            var $item = $layouts.find('> li').first().clone(true);
+            $item.find(' > div').each(function () {
+              if ($(this).data('layout') !== $layout) {
+                $(this).remove();
+              } else {
+                $(this).children().appendTo($(this).parent());
+                $(this).remove();
+              }
+            });
+            $item.find('input, select').each(function () {
+              if ($(this).data('name')) {
+                $(this).attr('name', $(this).data('name').replace('0', $items.length - 1));
+              }
+            });
+            $item.find('.merchant-metabox-field-flexible-content-item-count').text($items.length);
+            $item.find('.merchant-metabox-field-flexible-content-select-ajax-clone').each(function () {
+              $(this).removeClass('merchant-metabox-field-flexible-content-select-ajax-clone');
+              $(this).addClass('merchant-metabox-field-flexible-content-select-ajax');
+            });
+            $item.removeClass('hidden');
+            $layouts.append($item);
+            $selectAjax = $($selectAjaxSelector);
+            if ($selectAjax.length) {
+              initSelectAjax($selectAjax);
+            }
+            $(this).parent().removeClass('active');
+            $layouts.removeClass('empty');
+          });
+          $flexibleContent.find('.merchant-metabox-field-flexible-content-remove').on('click', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var $item = $(this).closest('li');
+            var $layouts = $item.parent();
+            $item.remove();
+            if ($layouts.find('>li').length === 1) {
+              $layouts.addClass('empty');
+            }
+          });
+        });
+      }
       var $repeater = $contents.find('.merchant-metabox-field-repeater');
       if ($repeater.length) {
         $repeater.each(function () {
@@ -260,38 +373,7 @@
       }
       var $selectAjax = $('.merchant-metabox-field-select-ajax');
       if ($selectAjax.length) {
-        $selectAjax.each(function () {
-          var $select = $(this).find('select');
-          var source = $select.data('source');
-          var config = window.merchant_metabox;
-          $select.select2({
-            width: '100%',
-            minimumInputLength: 1,
-            ajax: {
-              url: config.ajaxurl,
-              dataType: 'json',
-              delay: 250,
-              cache: true,
-              data: function data(params) {
-                return {
-                  action: 'merchant_select_ajax',
-                  nonce: config.ajaxnonce,
-                  term: params.term,
-                  source: source
-                };
-              },
-              processResults: function processResults(response, params) {
-                if (response.success) {
-                  return {
-                    results: response.data
-                  };
-                }
-                return {};
-              }
-            }
-          });
-          $selectAjax.find('.select2-selection--multiple').append('<span class="merchant-select2-clear"></span>');
-        });
+        initSelectAjax($selectAjax);
       }
       var $attributes = $('.merchant-metabox-field-wc-attributes');
       if ($attributes.length) {
