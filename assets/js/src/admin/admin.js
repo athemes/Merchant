@@ -474,7 +474,7 @@
 						})
 					}
 					else {
-						$(this).parent().find('.repeater-input').val('');
+						// $(this).parent().find('.repeater-input').val('');
 						self.getAllInputs($(this).parent().parent().parent());
 					}
 				});

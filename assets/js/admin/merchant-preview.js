@@ -117,6 +117,59 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }
       }
+      if (hasManipulators(manipulators.svg_icons)) {
+        for (var _key5 in manipulators.svg_icons) {
+          if (manipulators.svg_icons.hasOwnProperty(_key5)) {
+            var _radioElement = $('[name="merchant[' + manipulators.svg_icons[_key5].setting + ']"]' + ':checked');
+            var iconsLib = manipulators.svg_icons[_key5].icons_lib;
+            var icon = iconsLib[_radioElement.val()];
+            var _iconSelector = $(manipulators.svg_icons[_key5].selector);
+            if (_radioElement.val() === 'none') {
+              _iconSelector.hide();
+            } else {
+              _iconSelector.show();
+              _iconSelector.html(icon);
+            }
+          }
+        }
+      }
+      if (hasManipulators(manipulators.repeater_content)) {
+        for (var _key6 in manipulators.repeater_content) {
+          if (manipulators.repeater_content.hasOwnProperty(_key6)) {
+            var repeaterElement = $('[name="merchant[' + manipulators.repeater_content[_key6].setting + ']"]');
+            var repeaterValue = repeaterElement.val() ? JSON.parse(repeaterElement.val()) : [];
+            var repeaterItemSelector = $(manipulators.repeater_content[_key6].selector);
+            if (repeaterValue.length) {
+              var _iterator2 = _createForOfIteratorHelper(repeaterValue.entries()),
+                _step2;
+              try {
+                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                  var _step2$value = _slicedToArray(_step2.value, 2),
+                    index = _step2$value[0],
+                    repeaterItem = _step2$value[1];
+                  if (repeaterItemSelector.length) {
+                    repeaterItemSelector.eq(index).html(repeaterItem);
+                  }
+                }
+              } catch (err) {
+                _iterator2.e(err);
+              } finally {
+                _iterator2.f();
+              }
+              if (repeaterItemSelector.length > repeaterValue.length) {
+                for (var i = repeaterValue.length; i < repeaterItemSelector.length; i++) {
+                  repeaterItemSelector.eq(i).parent().remove();
+                }
+              }
+              if (repeaterItemSelector.length < repeaterValue.length) {
+                for (var _i = repeaterItemSelector.length; _i < repeaterValue.length; _i++) {
+                  repeaterItemSelector.eq(0).parent().clone().appendTo(repeaterItemSelector.eq(0).parent().parent());
+                }
+              }
+            }
+          }
+        }
+      }
     };
     var triggerElementsChange = function triggerElementsChange(input) {
       var inputType = input.attr('type');
@@ -152,6 +205,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return updateElements();
         });
       }
+
+      // Repeater
+      console.log(input);
+      if (input.hasClass('merchant-sortable-repeater-input')) {
+        input.on('change', function () {
+          return updateElements();
+        });
+      }
     };
     if (typeof manipulators !== 'undefined') {
       if (hasManipulators(manipulators.css)) {
@@ -160,34 +221,44 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
       if (hasManipulators(manipulators.text)) {
-        for (var _key5 in manipulators.text) {
-          triggerElementsChange($('[name="merchant[' + manipulators.text[_key5].setting + ']"]'));
+        for (var _key7 in manipulators.text) {
+          triggerElementsChange($('[name="merchant[' + manipulators.text[_key7].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.attributes)) {
-        for (var _key6 in manipulators.attributes) {
-          triggerElementsChange($('[name="merchant[' + manipulators.attributes[_key6].setting + ']"]'));
+        for (var _key8 in manipulators.attributes) {
+          triggerElementsChange($('[name="merchant[' + manipulators.attributes[_key8].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.classes)) {
-        for (var _key7 in manipulators.classes) {
-          triggerElementsChange($('[name="merchant[' + manipulators.classes[_key7].setting + ']"]'));
+        for (var _key9 in manipulators.classes) {
+          triggerElementsChange($('[name="merchant[' + manipulators.classes[_key9].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.icons)) {
-        for (var _key8 in manipulators.icons) {
-          triggerElementsChange($('[name="merchant[' + manipulators.icons[_key8].setting + ']"]'));
+        for (var _key10 in manipulators.icons) {
+          triggerElementsChange($('[name="merchant[' + manipulators.icons[_key10].setting + ']"]'));
+        }
+      }
+      if (hasManipulators(manipulators.svg_icons)) {
+        for (var _key11 in manipulators.svg_icons) {
+          triggerElementsChange($('[name="merchant[' + manipulators.svg_icons[_key11].setting + ']"]'));
+        }
+      }
+      if (hasManipulators(manipulators.repeater_content)) {
+        for (var _key12 in manipulators.repeater_content) {
+          triggerElementsChange($('[name="merchant[' + manipulators.repeater_content[_key12].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.update)) {
-        for (var _key9 in manipulators.update) {
-          triggerElementsChange($('[name="merchant[' + manipulators.update[_key9].setting + ']"]'));
+        for (var _key13 in manipulators.update) {
+          triggerElementsChange($('[name="merchant[' + manipulators.update[_key13].setting + ']"]'));
         }
       }
 
       // On color picker interaction
-      for (var _i = 0, _arr = ['.pcr-color-palette', '.pcr-swatches button', '.pcr-color-chooser', '.pcr-color-opacity']; _i < _arr.length; _i++) {
-        var selector = _arr[_i];
+      for (var _i2 = 0, _arr2 = ['.pcr-color-palette', '.pcr-swatches button', '.pcr-color-chooser', '.pcr-color-opacity']; _i2 < _arr2.length; _i2++) {
+        var selector = _arr2[_i2];
         $(document).on('click', selector, function () {
           return updateElements();
         });
@@ -200,13 +271,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var replacements = manipulator['replacements'][1]; // Replacements
 
       // Do search replacements
-      var _iterator2 = _createForOfIteratorHelper(searches.entries()),
-        _step2;
+      var _iterator3 = _createForOfIteratorHelper(searches.entries()),
+        _step3;
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var _step2$value = _slicedToArray(_step2.value, 2),
-            index = _step2$value[0],
-            search = _step2$value[1];
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _step3$value = _slicedToArray(_step3.value, 2),
+            index = _step3$value[0],
+            search = _step3$value[1];
           var replacement = replacements[index];
           if (typeof replacement === 'string') {
             inputText = inputText.replace(search, replacement);
@@ -232,9 +303,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator2.f();
+        _iterator3.f();
       }
       return inputText;
     };
