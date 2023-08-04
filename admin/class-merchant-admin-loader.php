@@ -60,6 +60,10 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			
 			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
+			wp_register_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
+
+			wp_register_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13' );
+
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 
 				wp_enqueue_media();

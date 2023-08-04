@@ -334,6 +334,30 @@
 	}
 }
 
+.merchant-metabox-field-repeater-move,
+.merchant-metabox-field-repeater-remove,
+.merchant-metabox-field-flexible-content-move,
+.merchant-metabox-field-flexible-content-remove {
+	cursor: pointer;
+	padding: 5px;
+	width: auto;
+	height: auto;
+	user-select: none;
+	color: #1e1e1e;
+	opacity: 0.5;
+	transition: all .2s;
+
+	&:hover{
+		opacity: 1;
+	}
+}
+
+.merchant-metabox-field-repeater-remove,
+.merchant-metabox-field-flexible-content-remove {
+	color: #a00;
+	font-size: 18px;
+}
+
 .merchant-metabox-field-uploads-content,
 .merchant-metabox-field-repeater-content{
 	display: flex;
@@ -359,24 +383,11 @@
 			}
 
 			span{
-				cursor: pointer;
 				font-size: 20px;
 				padding: 5px;
 				width: auto;
 				height: auto;
 				user-select: none;
-				color: #1e1e1e;
-				opacity: 0.5;
-				transition: all .2s;
-
-				&:hover{
-					opacity: 1;
-				}
-
-				&.dashicons-trash{
-					color: #a00;
-					font-size: 18px;
-				}
 			}
 		}
 	}
@@ -794,6 +805,178 @@ body:not(.block-editor-page){
 		}
 	}
 }
+
+
+.merchant-metabox-field-flexible-content-list {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	grid-gap: 10px;
+
+	&.empty {
+		border: 2px dashed #dcdcde;
+		min-height: 100px;
+	}
+}
+
+.merchant-metabox-field-flexible-content-item {
+	border: 1px solid #c3c4c7;
+	border-left: 3px solid #3858e9;
+
+	&:first-child {
+	 display: none;
+	}
+
+}
+
+.merchant-metabox-field-flexible-content-item-content {
+	display: flex;
+	flex-direction: column;
+	grid-gap: 10px;
+	padding: 15px;
+
+	> div {
+		display: flex;
+		grid-gap: 10px;
+
+		label {
+			width: 200px;
+		}
+
+		> div {
+			width: calc(100% - 200px);
+		}
+	}
+}
+
+.merchant-metabox-field-flexible-content-item-title {
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.merchant-metabox-field-flexible-content-item-actions {
+	display: flex;
+	justify-content: flex-end;
+	flex-grow: 1;
+}
+
+.merchant-metabox-field-flexible-content-item-header {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+	border-bottom: 1px solid #f3f3f3;
+}
+
+.merchant-metabox-field-flexible-content-item-count {
+	border-radius: 50%;
+	width: 24px;
+	height: 23px;
+	border: 1px solid #949494;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.merchant-metabox-field-flexible-content-add-wrapper {
+	position: relative;
+	display: inline-block;
+}
+
+.merchant-metabox-field-flexible-content-add-list {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	background-color: #ffffff;
+	border: 1px solid #c3c4c7;
+	border-left: 3px solid #3858e9;
+	box-shadow: 0 2px 10px 0 #0000001a;
+	width: 180px;
+	bottom: 100%;
+	display: flex;
+	flex-direction: column;
+	left: 50%;
+	transform: translate(-50%, 10px);
+	padding: 3px 3px 3px 5px;
+
+	&.active {
+		z-index: 10;
+		opacity: 1;
+		visibility: visible;
+		transform: translate(-50%, -15px);
+		transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+	}
+
+	&:before,
+	&:after {
+		position: absolute;
+		z-index: -1;
+		content: "";
+		border-style: solid;
+		transition-duration: 0.3s;
+		transition-property: transform;
+	}
+
+	&:before {
+		right: calc(50% - 12px);
+		bottom: -14px;
+		border-width: 14px 14px 0 15px;
+		border-color: #c3c4c7 transparent transparent transparent;
+	}
+
+
+	&:after {
+		content: "";
+		right: calc(50% - 10px);
+		bottom: -12px;
+		border-width: 12px 12px 0 13px;
+		border-color: #ffffff transparent transparent transparent;
+	}
+}
+
+.merchant-metabox-field-flexible-content-add {
+	display: block;
+	flex-shrink: 0;
+	padding: 10px;
+	text-decoration: none;
+
+	&:hover {
+		background: #f0f0f1;
+	}
+}
+
+.merchant-metabox-field-input-container {
+	display: flex;
+}
+
+.merchant-metabox-field-append, .merchant-metabox-field-prepend {
+	background: #f0f0f1;
+	border: 1px solid #8c8f94;
+	align-items: center;
+	display: flex;
+	position: relative;
+	padding: 0 8px;
+}
+
+.merchant-metabox-field-append {
+	font-size: 12px;
+	margin-left: -7px;
+	flex-shrink: 0;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.merchant-metabox-field-prepend {
+	font-size: 14px;
+	margin-right: -3px;
+	padding: 0 10px;
+	margin-left: 4px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
 
 @media only screen and (max-width: 991px) {
 
