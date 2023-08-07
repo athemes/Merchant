@@ -132,18 +132,22 @@
                         const repeaterItemSelector = $(manipulators.repeater_content[key].selector);
 
                         if (repeaterValue.length) {
+
+                            // Update content.
                             for(const [index, repeaterItem] of repeaterValue.entries()) {
                                 if (repeaterItemSelector.length) {
                                     repeaterItemSelector.eq(index).html(repeaterItem);
                                 }
                             }
 
+                            // Update content when removing.
                             if (repeaterItemSelector.length > repeaterValue.length) {
                                 for (let i = repeaterValue.length; i < repeaterItemSelector.length; i++) {
                                     repeaterItemSelector.eq(i).parent().remove();
                                 }
                             }
 
+                            // Update content when adding.
                             if (repeaterItemSelector.length < repeaterValue.length) {
                                 for (let i = repeaterItemSelector.length; i < repeaterValue.length; i++) {
                                     repeaterItemSelector.eq(0).parent().clone().appendTo(repeaterItemSelector.eq(0).parent().parent());
