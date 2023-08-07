@@ -15,7 +15,14 @@
                 for (const key in manipulators.css) {
                     if (manipulators.css.hasOwnProperty(key)) {
                         const elements = document.querySelectorAll(manipulators.css[key].selector);
-                        const value = $('[name="merchant[' + manipulators.css[key].setting + ']"]').val() + manipulators.css[key].unit;
+                        let value = $('[name="merchant[' + manipulators.css[key].setting + ']"]').val() + manipulators.css[key].unit;
+
+                        const input = $('[name="merchant[' + manipulators.css[key].setting + ']"]');
+                        const inputType = input.attr('type');
+
+                        if( inputType === 'radio' ) {
+                            value = $('[name="merchant[' + manipulators.css[key].setting + ']"]' + ':checked').val() + manipulators.css[key].unit;
+                        }
 
                         elements.forEach((element) => {
                             element.style.setProperty(manipulators.css[key].variable, value);
@@ -26,7 +33,7 @@
             if (hasManipulators(manipulators.text)) {
                 for (const key in manipulators.text) {
                     if (manipulators.text.hasOwnProperty(key)) {
-                        let inputText = $('input[name="merchant[' + manipulators.text[key].setting + ']"]').val();
+                        let inputText = $('[name="merchant[' + manipulators.text[key].setting + ']"]').val();
 
                         if (manipulators.text[key].hasOwnProperty('replacements')) {
                             inputText = setReplacements(inputText, manipulators.text[key]);
@@ -162,7 +169,7 @@
             const inputType = input.attr('type');
 
             // Text inputs
-            if (inputType === 'text') {
+            if (inputType === 'text' || input.prop('tagName') === 'TEXTAREA') {
                 input.on('keyup', () => updateElements());
             }
 
@@ -185,9 +192,7 @@
             }
 
             // Repeater
-            console.log(input);
             if (input.hasClass('merchant-sortable-repeater-input')) {
-                
                 input.on('change', () => updateElements());
             }
         }

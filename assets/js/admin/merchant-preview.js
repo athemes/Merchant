@@ -27,6 +27,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           if (manipulators.css.hasOwnProperty(key)) {
             var elements = document.querySelectorAll(manipulators.css[key].selector);
             var value = $('[name="merchant[' + manipulators.css[key].setting + ']"]').val() + manipulators.css[key].unit;
+            var input = $('[name="merchant[' + manipulators.css[key].setting + ']"]');
+            var inputType = input.attr('type');
+            if (inputType === 'radio') {
+              value = $('[name="merchant[' + manipulators.css[key].setting + ']"]' + ':checked').val() + manipulators.css[key].unit;
+            }
             elements.forEach(function (element) {
               element.style.setProperty(manipulators.css[key].variable, value);
             });
@@ -39,7 +44,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (hasManipulators(manipulators.text)) {
         for (var _key in manipulators.text) {
           if (manipulators.text.hasOwnProperty(_key)) {
-            var inputText = $('input[name="merchant[' + manipulators.text[_key].setting + ']"]').val();
+            var inputText = $('[name="merchant[' + manipulators.text[_key].setting + ']"]').val();
             if (manipulators.text[_key].hasOwnProperty('replacements')) {
               inputText = setReplacements(inputText, manipulators.text[_key]);
             }
@@ -140,6 +145,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             var repeaterValue = repeaterElement.val() ? JSON.parse(repeaterElement.val()) : [];
             var repeaterItemSelector = $(manipulators.repeater_content[_key6].selector);
             if (repeaterValue.length) {
+              // Update content.
               var _iterator2 = _createForOfIteratorHelper(repeaterValue.entries()),
                 _step2;
               try {
@@ -151,6 +157,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                     repeaterItemSelector.eq(index).html(repeaterItem);
                   }
                 }
+
+                // Update content when removing.
               } catch (err) {
                 _iterator2.e(err);
               } finally {
@@ -161,6 +169,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                   repeaterItemSelector.eq(i).parent().remove();
                 }
               }
+
+              // Update content when adding.
               if (repeaterItemSelector.length < repeaterValue.length) {
                 for (var _i = repeaterItemSelector.length; _i < repeaterValue.length; _i++) {
                   repeaterItemSelector.eq(0).parent().clone().appendTo(repeaterItemSelector.eq(0).parent().parent());
@@ -175,7 +185,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var inputType = input.attr('type');
 
       // Text inputs
-      if (inputType === 'text') {
+      if (inputType === 'text' || input.prop('tagName') === 'TEXTAREA') {
         input.on('keyup', function () {
           return updateElements();
         });
@@ -207,7 +217,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       // Repeater
-      console.log(input);
       if (input.hasClass('merchant-sortable-repeater-input')) {
         input.on('change', function () {
           return updateElements();
