@@ -176,48 +176,48 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 
 				</div>
 
-                <div class="merchant-module-page-body <?php echo Merchant_Admin_Preview::has_preview() ? 'has-preview' : '' ?>">
-                    <div class="merchant-module-page-content">
+				<div class="merchant-module-page-body <?php echo Merchant_Admin_Preview::has_preview() ? 'has-preview' : ''; ?>">
+					<div class="merchant-module-page-content">
 
-                        <?php
+						<?php
 
-                        /**
-                         * Hook: merchant_module_file_path
-                         *
-                         * @since 1.0
-                         */
-                        $merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
+						/**
+						 * Hook: merchant_module_file_path
+						 *
+						 * @since 1.0
+						 */
+						$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
-                        if ( file_exists( $merchant_module_file ) ) {
-                            require $merchant_module_file;
-                        }
+						if ( file_exists( $merchant_module_file ) ) {
+							require $merchant_module_file;
+						}
 
-                        ?>
+						?>
 
-                    </div>
+					</div>
 
-	                <?php if (Merchant_Admin_Preview::has_preview() ) : ?>
+					<?php if (Merchant_Admin_Preview::has_preview() ) : ?>
 
-                        <div class="merchant-module-page-preview">
-                            <div class="merchant-module-page-preview-box">
-                                <div class="merchant-module-page-preview-title">
-                                    <?php esc_html_e( 'Preview', 'merchant' ); ?>
-                                </div>
-                                <div class="merchant-module-page-preview-browser">
-                                    <div class="merchant-module-page-preview-browser-top">
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                    </div>
-                                    <div class="merchant-module-page-preview-browser-inner">
-                                        <?php echo Merchant_Admin_Preview::get_html() ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<div class="merchant-module-page-preview">
+							<div class="merchant-module-page-preview-box">
+								<div class="merchant-module-page-preview-title">
+									<?php esc_html_e( 'Preview', 'merchant' ); ?>
+								</div>
+								<div class="merchant-module-page-preview-browser">
+									<div class="merchant-module-page-preview-browser-top">
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+									</div>
+									<div class="merchant-module-page-preview-browser-inner">
+										<?php echo Merchant_Admin_Preview::get_html(); ?>
+									</div>
+								</div>
+							</div>
+						</div>
 
-	                <?php endif; ?>
-                </div>
+					<?php endif; ?>
+				</div>
 
 			</form>
 
@@ -233,7 +233,7 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 				<figure><img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/enable-module.png' ); ?>" /></figure>
 				<p><?php esc_html_e( 'This module is currently disabled. Please enable the module to see it in your store.', 'merchant' ); ?></p>
 			</div>
-			<div class="merchant-module-alert-footer"><a href="#" class="merchant-module-alert-close">Close</a></div>
+			<div class="merchant-module-alert-footer"><a href="#" class="merchant-module-alert-close"><?php echo esc_html__( 'Close', 'merchant' ); ?></a></div>
 		</div>
 	</div>
 
