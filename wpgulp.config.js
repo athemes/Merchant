@@ -54,7 +54,19 @@ const styles = [
 		name: 'pagination',
 		src: './assets/sass/pagination.scss',
 		destination: './assets/css',
-	}
+	},
+
+	// Buy Now.
+	{
+		name: 'buyNow',
+		src: './assets/sass/modules/buy-now/buy-now.scss',
+		destination: './assets/css/modules/buy-now',
+	},
+	{
+		name: 'buyNowAdmin',
+		src: './assets/sass/modules/buy-now/admin/preview.scss',
+		destination: './assets/css/modules/buy-now/admin',
+	},
 
 ];
 

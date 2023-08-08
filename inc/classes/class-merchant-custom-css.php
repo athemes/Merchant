@@ -170,16 +170,16 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			}
 
 			// Buy Now
-			if ( Merchant_Modules::is_module_active( 'buy-now' ) ) {
+			// if ( Merchant_Modules::is_module_active( 'buy-now' ) ) {
 
-				$css .= $this->get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-hover-color' );
-				$css .= $this->get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant_buy_now_button', '--merchant-border-color' );
-				$css .= $this->get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-border-hover-color' );
-				$css .= $this->get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant_buy_now_button', '--merchant-background-color' );
-				$css .= $this->get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-background-hover-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-hover-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant_buy_now_button', '--merchant-border-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-border-hover-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant_buy_now_button', '--merchant-background-color' );
+			// 	$css .= $this->get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-background-hover-color' );
 				
-			}
+			// }
 
 			// Pre Orders
 			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
