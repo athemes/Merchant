@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Payment Logos
+ * Payment Logos
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +20,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'    => 'logos',
 			'type'  => 'gallery',
-			'label' => esc_html__( 'Select Logos', 'merchant' ),
+			'label' => esc_html__( 'Select Logos', 'merchant' )
 		),
 
 	),

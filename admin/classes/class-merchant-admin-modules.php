@@ -64,32 +64,12 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 				'convert-more' => array(
 					'title' => esc_html__( 'Convert More', 'merchant' ),
-					'modules' => array(
-
-						'product-labels' => array(
-							'icon'  => '<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.114 0h7.775c.295 0 .577.111.786.31.208.197.325.465.325.745v7.387c0 .139-.027.276-.082.405a1.052 1.052 0 0 1-.24.344l-.322.306h-2.688c-1.768 0-3.463.667-4.713 1.854-1.25 1.188-1.952 2.798-1.952 4.477v2.554l-.322.306a1.115 1.115 0 0 1-.361.23 1.161 1.161 0 0 1-1.216-.23L.329 11.3a1.054 1.054 0 0 1-.244-.343A1.01 1.01 0 0 1 .33 9.803L10.325.306c.104-.098.227-.175.363-.228.135-.052.28-.079.426-.078Zm4.073 5.01c.274.173.596.266.925.266.442 0 .866-.167 1.179-.464.312-.296.488-.699.488-1.119 0-.313-.098-.619-.281-.88a1.65 1.65 0 0 0-.748-.582 1.748 1.748 0 0 0-.963-.09c-.323.06-.62.212-.853.433a1.56 1.56 0 0 0-.456.81 1.51 1.51 0 0 0 .095.915c.126.29.34.536.614.71Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M17.193 11.75c0-.414-.393-.75-.877-.75-.485 0-.877.336-.877.75v.128c-1.023.309-1.755 1.142-1.755 2.122 0 .76.316 1.327.9 1.702.473.304 1.065.43 1.461.513l.058.013c.483.103.732.168.893.27.074.048.197.137.197.502 0 .41-.385.743-.863.75a1.623 1.623 0 0 1-.285-.055 2.306 2.306 0 0 1-.863-.475.986.986 0 0 0-1.24 0 .676.676 0 0 0 0 1.06 4.132 4.132 0 0 0 1.497.823v.147c0 .414.392.75.877.75.484 0 .877-.336.877-.75v-.128c1.022-.309 1.754-1.142 1.754-2.122 0-.76-.315-1.327-.899-1.702-.474-.303-1.065-.43-1.461-.513l-.058-.013c-.483-.103-.733-.168-.893-.27-.074-.048-.197-.137-.197-.502 0-.41.384-.743.862-.75l.042.004c.05.006.134.02.244.051.215.062.532.192.863.475a.985.985 0 0 0 1.24 0 .676.676 0 0 0 0-1.06 4.131 4.131 0 0 0-1.497-.823v-.147Z"/></svg>',
-							'title' => esc_html__( 'Product Labels', 'merchant' ),
-							'desc'  => esc_html__( 'Add customizable labels on top of your product images to promote special deals or discounts, highlight new products, or anything else you want.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/product-labels.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/product-labels/',
-							'preview_url' => $shop_url,
-						),
-
-					),
+					'modules' => array()
 				),
 
 				'build-trust' => array(
 					'title' => esc_html__( 'Build Trust', 'merchant' ),
 					'modules' => array(
-
-						'payment-logos' => array(
-							'icon' => '<svg width="20" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 14"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h17A1.5 1.5 0 0 1 20 1.5V3H0V1.5Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5v7.5A1.5 1.5 0 0 0 1.5 14h17a1.5 1.5 0 0 0 1.5-1.5V5H0Zm7 4H2V7h5v2Z"/></svg>',
-							'title' => esc_html__( 'Payment Logos', 'merchant' ),
-							'desc' => esc_html__( 'Let visitors know what payment methods you accept by displaying the logos of credit card and payment processor companies.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/payment-logos.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/payment-logos/',
-							'preview_url' => $product_url,
-						),
 
 						'trust-badges' => array(
 							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1.493 2.879C3.757 2.562 6.757 1.616 9.128.233a1.733 1.733 0 0 1 1.728-.004c2.369 1.354 5.502 2.29 7.65 2.628.818.128 1.491.81 1.491 1.638v.501c.031 6.043-.48 11.332-9.472 14.903a1.45 1.45 0 0 1-1.062 0C.478 16.328-.029 11.04.001 4.996L0 4.499c-.002-.83.672-1.505 1.493-1.62Zm9.214 6.414a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm-4 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm8 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Z" clip-rule="evenodd"/></svg>',

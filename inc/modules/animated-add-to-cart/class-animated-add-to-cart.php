@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Adnimated Add To Cart Class.
+ * Animated Add To Cart Class.
  * 
  */
 class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {

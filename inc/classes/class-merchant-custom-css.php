@@ -108,19 +108,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				
 			}
 
-			// Payment Logos
-			if ( Merchant_Modules::is_module_active( 'payment-logos' ) ) {
-
-				$css .= $this->get_variable_css( 'payment-logos', 'font-size', 18, '.merchant-payment-logos', '--merchant-font-size', 'px' );
-				$css .= $this->get_variable_css( 'payment-logos', 'text-color', '#212121', '.merchant-payment-logos', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'payment-logos', 'margin-top', 20, '.merchant-payment-logos', '--merchant-margin-top', 'px' );
-				$css .= $this->get_variable_css( 'payment-logos', 'margin-bottom', 20, '.merchant-payment-logos', '--merchant-margin-bottom', 'px' );
-				$css .= $this->get_variable_css( 'payment-logos', 'align', 'flex-start', '.merchant-payment-logos', '--merchant-align' );
-				$css .= $this->get_variable_css( 'payment-logos', 'image-max-width', 100, '.merchant-payment-logos', '--merchant-image-max-width', 'px' );
-				$css .= $this->get_variable_css( 'payment-logos', 'image-max-height', 100, '.merchant-payment-logos', '--merchant-image-max-height', 'px' );
-
-			}
-
 			// Trust Badges
 			if ( Merchant_Modules::is_module_active( 'trust-badges' ) ) {
 

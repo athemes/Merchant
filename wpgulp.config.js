@@ -104,6 +104,18 @@ const styles = [
 		destination: './assets/css/modules/product-labels/admin',
 	},
 
+	// Product Labels.
+	{
+		name: 'paymentLogos',
+		src: './assets/sass/modules/payment-logos/payment-logos.scss',
+		destination: './assets/css/modules/payment-logos',
+	},
+	{
+		name: 'paymentLogosAdmin',
+		src: './assets/sass/modules/payment-logos/admin/preview.scss',
+		destination: './assets/css/modules/payment-logos/admin',
+	},
+
 ];
 
 // Scripts to process.
