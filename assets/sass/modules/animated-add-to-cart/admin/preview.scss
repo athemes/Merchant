@@ -1,0 +1,118 @@
+/**
+ * Admin Preview
+ * Animated Add To Cart
+ *
+ */
+
+.merchant-module-page-preview-browser-inner {
+	display: flex;
+	flex-grow: 0;
+	max-width: 600px;
+	margin: auto;
+	padding: 0 25px;
+}
+
+.add_to_cart_button {
+	color: #FFF !important;
+	background-color: #212121;
+	font-size: 1rem;
+	padding: 12px 25px;
+	text-decoration: none;
+	transition: ease background-color 300ms;
+
+	&:hover {
+		background-color: #292929;
+	}
+
+	&.on-mouse-hover:hover {
+
+		&.flash {
+			animation: merchant-flash 1s infinite both;
+			animation-iteration-count: 1;
+		}
+
+		&.bounce {
+			animation: merchant-bounce .3s alternate;
+			animation-iteration-count: 4;
+		}
+
+		&.zoom-in {
+			transform: scale(1.2);
+		}
+
+		&.shake {
+			animation: merchant-shake .3s;
+			animation-iteration-count: 2;
+		}
+
+		&.pulse {
+			animation: merchant-pulse 1.5s ease-in-out infinite both;
+		}
+
+		&.jello-shake {
+			animation: merchant-jello-shake 1.5s infinite both;
+		}
+
+		&.wobble {
+			animation: merchant-wobble 1.5s ease-in-out infinite both;
+		}
+
+		&.vibrate {
+			animation: merchant-vibrate .3s linear 4 both;
+		}
+
+		&.swing {
+			animation: merchant-swing 2s ease-in-out infinite alternate;
+		}
+
+		&.tada {
+			animation: merchant-tada 1s infinite both;
+		}
+		
+	}
+
+	&.on-page-load {
+		&.flash {
+			animation: merchant-flash 1s both;
+			animation-iteration-count: 1;
+		}
+
+		&.bounce {
+			animation: merchant-bounce .3s alternate;
+			animation-iteration-count: 4;
+		}
+
+		&.zoom-in {
+			transform: scale(1.2);
+		}
+
+		&.shake {
+			animation: merchant-shake .3s;
+			animation-iteration-count: 2;
+		}
+
+		&.pulse {
+			animation: merchant-pulse 1.5s ease-in-out both;
+		}
+
+		&.jello-shake {
+			animation: merchant-jello-shake 1.5s both;
+		}
+
+		&.wobble {
+			animation: merchant-wobble 1.5s ease-in-out both;
+		}
+
+		&.vibrate {
+			animation: merchant-vibrate .3s linear 4 both;
+		}
+
+		&.swing {
+			animation: merchant-swing 2s ease-in-out alternate;
+		}
+
+		&.tada {
+			animation: merchant-tada 1s both;
+		}
+	}
+}

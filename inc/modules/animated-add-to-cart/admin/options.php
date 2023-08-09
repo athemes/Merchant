@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Animated Add to Cart
+ * Animated Add to Cart
+ * 
+ * @package Merchant_Pro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

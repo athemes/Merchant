@@ -99,71 +99,71 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			// Animated Add to Cart
 			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
 
-				$animation = $this->get_option( 'animated-add-to-cart', 'animation', 'flash' );
+				// $animation = $this->get_option( 'animated-add-to-cart', 'animation', 'flash' );
 
-				$css .= '.add_to_cart_button:not(.merchant_buy_now_button),';
-				$css .= '.product_type_grouped:not(.merchant_buy_now_button){';
-				$css .= 'transition: all .3s ease-in;';
-				$css .= '}';
+				// $css .= '.add_to_cart_button:not(.merchant_buy_now_button),';
+				// $css .= '.product_type_grouped:not(.merchant_buy_now_button){';
+				// $css .= 'transition: all .3s ease-in;';
+				// $css .= '}';
 
-				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
+				// $trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
 
-				if ( 'on-mouse-hover' === $trigger ) {
-					$css .= '.add_to_cart_button:not(.merchant_buy_now_button):hover,';
-					$css .= '.product_type_grouped:not(.merchant_buy_now_button):hover,';
-					$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button):hover,';
-				}
+				// if ( 'on-mouse-hover' === $trigger ) {
+				// 	$css .= '.add_to_cart_button:not(.merchant_buy_now_button):hover,';
+				// 	$css .= '.product_type_grouped:not(.merchant_buy_now_button):hover,';
+				// 	$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button):hover,';
+				// }
 
-				$css .= '.add_to_cart_button:not(.merchant_buy_now_button).merchant-active,';
-				$css .= '.product_type_grouped:not(.merchant_buy_now_button).merchant-active,';
-				$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button).merchant-active{';
+				// $css .= '.add_to_cart_button:not(.merchant_buy_now_button).merchant-active,';
+				// $css .= '.product_type_grouped:not(.merchant_buy_now_button).merchant-active,';
+				// $css .= '.single_add_to_cart_button:not(.merchant_buy_now_button).merchant-active{';
 
-				switch ( $animation ) {
+				// switch ( $animation ) {
 
-					case 'flash':
-						$css .= 'animation: merchant-flash 1s infinite both;';
-						$css .= 'animation-iteration-count: 1;';
-						break;
+				// 	case 'flash':
+				// 		$css .= 'animation: merchant-flash 1s infinite both;';
+				// 		$css .= 'animation-iteration-count: 1;';
+				// 		break;
 
-					case 'bounce':
-						$css .= 'animation: merchant-bounce .3s alternate;';
-						$css .= 'animation-iteration-count: 4;';
-						break;
+				// 	case 'bounce':
+				// 		$css .= 'animation: merchant-bounce .3s alternate;';
+				// 		$css .= 'animation-iteration-count: 4;';
+				// 		break;
 
-					case 'zoom-in':
-						$css .= 'transform: scale(1.2);';
-						break;
+				// 	case 'zoom-in':
+				// 		$css .= 'transform: scale(1.2);';
+				// 		break;
 
-					case 'shake':
-						$css .= 'animation: merchant-shake .3s;';
-						$css .= 'animation-iteration-count: 2;';
-						break;
+				// 	case 'shake':
+				// 		$css .= 'animation: merchant-shake .3s;';
+				// 		$css .= 'animation-iteration-count: 2;';
+				// 		break;
 
-					case 'pulse':
-						$css .= 'animation: merchant-pulse 1.5s ease-in-out infinite both;';
-						break;
+				// 	case 'pulse':
+				// 		$css .= 'animation: merchant-pulse 1.5s ease-in-out infinite both;';
+				// 		break;
 
-					case 'jello-shake':
-						$css .= 'animation: merchant-jello-shake 1.5s infinite both;';
-						break;
+				// 	case 'jello-shake':
+				// 		$css .= 'animation: merchant-jello-shake 1.5s infinite both;';
+				// 		break;
 
-					case 'wobble':
-						$css .= 'animation: merchant-wobble 1.5s ease-in-out infinite both;';
-						break;
+				// 	case 'wobble':
+				// 		$css .= 'animation: merchant-wobble 1.5s ease-in-out infinite both;';
+				// 		break;
 
-					case 'vibrate':
-						$css .= 'animation: merchant-vibrate .3s linear 4 both;';
-						break;
+				// 	case 'vibrate':
+				// 		$css .= 'animation: merchant-vibrate .3s linear 4 both;';
+				// 		break;
 
-					case 'swing':
-						$css .= 'animation: merchant-swing 2s ease-in-out infinite alternate;';
-						break;
+				// 	case 'swing':
+				// 		$css .= 'animation: merchant-swing 2s ease-in-out infinite alternate;';
+				// 		break;
 
-					case 'tada':
-						$css .= 'animation: merchant-tada 1s infinite both;';
-						break;
+				// 	case 'tada':
+				// 		$css .= 'animation: merchant-tada 1s infinite both;';
+				// 		break;
 
-				}
+				// }
 
 				$css .= '}';
 

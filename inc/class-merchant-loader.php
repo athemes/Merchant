@@ -71,7 +71,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/class-add-module.php';
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
 			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/scroll-to-top-button.php';
-			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/animated-add-to-cart.php';
+			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
 			require_once MERCHANT_DIR . 'inc/modules/payment-logos/payment-logos.php';
 			require_once MERCHANT_DIR . 'inc/modules/trust-badges/trust-badges.php';
 			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';

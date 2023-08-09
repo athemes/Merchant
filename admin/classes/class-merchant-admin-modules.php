@@ -66,24 +66,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Convert More', 'merchant' ),
 					'modules' => array(
 
-						// 'buy-now' => array(
-						// 	'icon' => '<svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 20"><path d="M8.707 1.293a1 1 0 0 0-1.414 1.414L8.586 4 7.293 5.293a1 1 0 0 0 1.414 1.414L10 5.414l1.293 1.293a1 1 0 1 0 1.414-1.414L11.414 4l1.293-1.293a1 1 0 0 0-1.414-1.414L10 2.586 8.707 1.293Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h1.5A1.5 1.5 0 0 1 4 1.5V10h11.133l.877-6.141a1 1 0 1 1 1.98.282l-.939 6.571A1.5 1.5 0 0 1 15.566 12H4v2h10a3 3 0 1 1-2.83 2H5.83A3 3 0 1 1 2 14.17V2H1a1 1 0 0 1-1-1Zm13 16a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM2 17a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"/></svg>',
-						// 	'title' => esc_html__( 'Buy Now', 'merchant' ),
-						// 	'desc' => esc_html__( 'Add Buy Now buttons to your product pages that take customers directly to the checkout.', 'merchant' ),
-						// 	'placeholder' => MERCHANT_URI . 'assets/images/modules/buy-now.png',
-						// 	'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-						// 	'preview_url' => $product_url,
-						// ),
-
-						'animated-add-to-cart' => array(
-							'icon' => '<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h1V0H1.5A1.5 1.5 0 0 0 0 1.5V3h2V2ZM0 9a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H4a4 4 0 0 1-4-4ZM16 3V2h-1V0h1.5A1.5 1.5 0 0 1 18 1.5V3h-2ZM16 16h-1v2h1.5a1.5 1.5 0 0 0 1.5-1.5V15h-2v1ZM2 15v1h1v2H1.5A1.5 1.5 0 0 1 0 16.5V15h2ZM8 18H5v-2h3v2ZM10 18h3v-2h-3v2ZM8 2H5V0h3v2ZM10 2h3V0h-3v2Z"/></svg>',
-							'title' => esc_html__( 'Animated Add to Cart', 'merchant' ),
-							'desc' => esc_html__( 'Make your Add To Cart button stand out more by showing a subtle animation on mouseover.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/animated-add-to-cart.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
-							'preview_url' => $product_url,
-						),
-
 						'quick-view' => array(
 							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"><path d="M12.5 8c0 1.654-1.122 3-2.5 3S7.5 9.654 7.5 8 8.622 5 10 5s2.5 1.346 2.5 3Zm7.5-.449S16.457 16 10.012 16C4.03 16 0 7.551 0 7.551S3.705 0 10.012 0C16.424 0 20 7.551 20 7.551ZM14.167 8c0-2.757-1.87-5-4.167-5-2.298 0-4.167 2.243-4.167 5s1.87 5 4.167 5c2.297 0 4.167-2.243 4.167-5Z"/></svg>',
 							'title' => esc_html__( 'Quick View', 'merchant' ),

@@ -68,6 +68,18 @@ const styles = [
 		destination: './assets/css/modules/buy-now/admin',
 	},
 
+	// Animated Add To Cart.
+	{
+		name: 'animatedAddToCart',
+		src: './assets/sass/modules/animated-add-to-cart/animated-add-to-cart.scss',
+		destination: './assets/css/modules/animated-add-to-cart',
+	},
+	{
+		name: 'animatedAddToCartAdmin',
+		src: './assets/sass/modules/animated-add-to-cart/admin/preview.scss',
+		destination: './assets/css/modules/animated-add-to-cart/admin',
+	},
+
 ];
 
 // Scripts to process.
