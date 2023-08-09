@@ -77,7 +77,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/cookie-banner.php';
-			require_once MERCHANT_DIR . 'inc/modules/quick-view/quick-view.php';
+			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
 			require_once MERCHANT_DIR . 'inc/modules/product-labels/product-labels.php';
 			require_once MERCHANT_DIR . 'inc/modules/pre-orders/pre-orders.php';
 			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
@@ -291,21 +291,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				
 				wp_enqueue_script( 'merchant-cookie-banner', MERCHANT_URI . 'assets/js/modules/cookie-banner.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
-			}
-
-			// Quick View
-			if ( Merchant_Modules::is_module_active( 'quick-view' ) ) {
-
-				$setting['quick_view']      = true;
-				$setting['quick_view_zoom'] = Merchant_Admin_Options::get( 'quick-view', 'zoom_effect', 1 );
-
-				wp_enqueue_script( 'zoom' );
-				wp_enqueue_script( 'flexslider' );
-				wp_enqueue_script( 'wc-single-product' );
-				wp_enqueue_script( 'wc-add-to-cart-variation' );
-				
-				wp_enqueue_script( 'merchant-quick-view', MERCHANT_URI . 'assets/js/modules/quick-view.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				
 			}
 
 			// Real Time Search

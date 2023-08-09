@@ -7,9 +7,9 @@
 
   .merchant-pre-ordered-product{
 
-    .add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-open),
-    .product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-open),
-    .single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-open){
+    .add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
+    .product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
+    .single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button){
       color: var(--merchant-text-color, #ffffff);
       border-color: var(--merchant-border-color, #212121);
       background-color: var(--merchant-background-color, #212121);

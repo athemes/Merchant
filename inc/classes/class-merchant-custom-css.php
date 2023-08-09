@@ -96,91 +96,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			}
 
-			// Animated Add to Cart
-			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
-
-				// $animation = $this->get_option( 'animated-add-to-cart', 'animation', 'flash' );
-
-				// $css .= '.add_to_cart_button:not(.merchant_buy_now_button),';
-				// $css .= '.product_type_grouped:not(.merchant_buy_now_button){';
-				// $css .= 'transition: all .3s ease-in;';
-				// $css .= '}';
-
-				// $trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
-
-				// if ( 'on-mouse-hover' === $trigger ) {
-				// 	$css .= '.add_to_cart_button:not(.merchant_buy_now_button):hover,';
-				// 	$css .= '.product_type_grouped:not(.merchant_buy_now_button):hover,';
-				// 	$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button):hover,';
-				// }
-
-				// $css .= '.add_to_cart_button:not(.merchant_buy_now_button).merchant-active,';
-				// $css .= '.product_type_grouped:not(.merchant_buy_now_button).merchant-active,';
-				// $css .= '.single_add_to_cart_button:not(.merchant_buy_now_button).merchant-active{';
-
-				// switch ( $animation ) {
-
-				// 	case 'flash':
-				// 		$css .= 'animation: merchant-flash 1s infinite both;';
-				// 		$css .= 'animation-iteration-count: 1;';
-				// 		break;
-
-				// 	case 'bounce':
-				// 		$css .= 'animation: merchant-bounce .3s alternate;';
-				// 		$css .= 'animation-iteration-count: 4;';
-				// 		break;
-
-				// 	case 'zoom-in':
-				// 		$css .= 'transform: scale(1.2);';
-				// 		break;
-
-				// 	case 'shake':
-				// 		$css .= 'animation: merchant-shake .3s;';
-				// 		$css .= 'animation-iteration-count: 2;';
-				// 		break;
-
-				// 	case 'pulse':
-				// 		$css .= 'animation: merchant-pulse 1.5s ease-in-out infinite both;';
-				// 		break;
-
-				// 	case 'jello-shake':
-				// 		$css .= 'animation: merchant-jello-shake 1.5s infinite both;';
-				// 		break;
-
-				// 	case 'wobble':
-				// 		$css .= 'animation: merchant-wobble 1.5s ease-in-out infinite both;';
-				// 		break;
-
-				// 	case 'vibrate':
-				// 		$css .= 'animation: merchant-vibrate .3s linear 4 both;';
-				// 		break;
-
-				// 	case 'swing':
-				// 		$css .= 'animation: merchant-swing 2s ease-in-out infinite alternate;';
-				// 		break;
-
-				// 	case 'tada':
-				// 		$css .= 'animation: merchant-tada 1s infinite both;';
-				// 		break;
-
-				// }
-
-				$css .= '}';
-
-			}
-
-			// Buy Now
-			// if ( Merchant_Modules::is_module_active( 'buy-now' ) ) {
-
-			// 	$css .= $this->get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-color' );
-			// 	$css .= $this->get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant_buy_now_button', '--merchant-text-hover-color' );
-			// 	$css .= $this->get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant_buy_now_button', '--merchant-border-color' );
-			// 	$css .= $this->get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-border-hover-color' );
-			// 	$css .= $this->get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant_buy_now_button', '--merchant-background-color' );
-			// 	$css .= $this->get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant_buy_now_button', '--merchant-background-hover-color' );
-				
-			// }
-
 			// Pre Orders
 			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
 
@@ -231,28 +146,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 				$css .= '.woocommerce .ast-onsale-card,';
 				$css .= '.woocommerce .onsale{ display: none !important; }';
-
-			}
-
-			// Quick View
-			if ( Merchant_Modules::is_module_active( 'quick-view' ) ) {
-
-
-				$css .= $this->get_variable_css( 'quick-view', 'icon-color', '#ffffff', '.merchant-quick-view-open', '--merchant-icon-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'icon-hover-color', '#ffffff', '.merchant-quick-view-open', '--merchant-icon-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'text-color', '#ffffff', '.merchant-quick-view-open', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'text-hover-color', '#ffffff', '.merchant-quick-view-open', '--merchant-text-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'border-color', '#212121', '.merchant-quick-view-open', '--merchant-border-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'border-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-border-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'background-color', '#212121', '.merchant-quick-view-open', '--merchant-background-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'background-hover-color', '#414141', '.merchant-quick-view-open', '--merchant-background-hover-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-top', '50', '.merchant-quick-view-open', '--merchant-button-position-top', '%' );
-				$css .= $this->get_variable_css( 'quick-view', 'button-position-left', '50', '.merchant-quick-view-open', '--merchant-button-position-left', '%' );
-				
-				$css .= $this->get_variable_css( 'quick-view', 'modal_width', 1000, '.merchant-quick-view-modal', '--merchant-quick-view-modal-width', 'px' );
-				$css .= $this->get_variable_css( 'quick-view', 'modal_height', 500, '.merchant-quick-view-modal', '--merchant-quick-view-modal-height', 'px' );
-				$css .= $this->get_variable_css( 'quick-view', 'sale-price-color', '#212121', '.merchant-quick-view-modal', '--merchant-sale-price-color' );
-				$css .= $this->get_variable_css( 'quick-view', 'regular-price-color', '#414141', '.merchant-quick-view-modal', '--merchant-regular-price-color' );
 
 			}
 

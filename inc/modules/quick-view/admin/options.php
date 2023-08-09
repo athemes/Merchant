@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Quick View
+ * Quick View
+ * 
+ * @package Merchant_Pro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,7 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Settings
+ * Settings.
+ * 
  */
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Settings', 'merchant' ),
@@ -148,7 +151,8 @@ Merchant_Admin_Options::create( array(
 
 
 /**
- * Modal
+ * Modal.
+ * 
  */
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Modal', 'merchant' ),

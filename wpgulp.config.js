@@ -80,6 +80,18 @@ const styles = [
 		destination: './assets/css/modules/animated-add-to-cart/admin',
 	},
 
+	// Quick View.
+	{
+		name: 'quickView',
+		src: './assets/sass/modules/quick-view/quick-view.scss',
+		destination: './assets/css/modules/quick-view',
+	},
+	{
+		name: 'quickViewAdmin',
+		src: './assets/sass/modules/quick-view/admin/preview.scss',
+		destination: './assets/css/modules/quick-view/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -155,6 +167,14 @@ const scripts = [
 		src: './assets/js/src/custom-addtocart-button.js',
 		destination: './assets/js',
 		file: 'custom-addtocart-button',
+	},
+
+	// Quick View.
+	{
+		name: 'quickView',
+		src: './assets/js/src/modules/quick-view/quick-view.js',
+		destination: './assets/js/modules/quick-view',
+		file: 'quick-view',
 	}
 
 ];
