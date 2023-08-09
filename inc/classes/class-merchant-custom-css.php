@@ -135,20 +135,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			}
 
-			// Product Labels
-			if ( Merchant_Modules::is_module_active( 'product-labels' ) ) {
-
-				$css .= $this->get_variable_css( 'product-labels', 'label_text_transform', 'uppercase', '.merchant-onsale', '--merchant-text-transform' );
-				$css .= $this->get_variable_css( 'product-labels', 'padding', 8, '.merchant-onsale', '--merchant-padding', 'px' );
-				$css .= $this->get_variable_css( 'product-labels', 'font-size', 14, '.merchant-onsale', '--merchant-font-size', 'px' );
-				$css .= $this->get_variable_css( 'product-labels', 'text_color', '#ffffff', '.merchant-onsale', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'product-labels', 'background_color', '#212121', '.merchant-onsale', '--merchant-background-color' );
-
-				$css .= '.woocommerce .ast-onsale-card,';
-				$css .= '.woocommerce .onsale{ display: none !important; }';
-
-			}
-
 			// Cookie Banner
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 

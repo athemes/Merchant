@@ -862,40 +862,6 @@
   background-color: var(--merchant-background-hover-color, #414141);
 }
 
-.merchant-onsale {
-  position: absolute;
-  z-index: 10;
-  top: 10px;
-  font-size: var(--merchant-font-size, 14px);
-  line-height: 1em;
-  padding: var(--merchant-padding, 8px);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-  text-transform: var(--merchant-text-transform, uppercase);
-  color: var(--merchant-text-color, #ffffff);
-  background-color: var(--merchant-background-color, #212121);
-}
-
-.merchant-onsale-top-left {
-  left: 10px;
-}
-
-.merchant-onsale-top-right {
-  right: 10px;
-}
-
-.merchant-onsale-shape-rounded {
-  border-radius: 4px;
-}
-
 .merchant-scroll-to-top-button {
   display: -webkit-box;
   display: -ms-flexbox;

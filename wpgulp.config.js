@@ -92,6 +92,18 @@ const styles = [
 		destination: './assets/css/modules/quick-view/admin',
 	},
 
+	// Product Labels.
+	{
+		name: 'productLabels',
+		src: './assets/sass/modules/product-labels/product-labels.scss',
+		destination: './assets/css/modules/product-labels',
+	},
+	{
+		name: 'productLabelsAdmin',
+		src: './assets/sass/modules/product-labels/admin/preview.scss',
+		destination: './assets/css/modules/product-labels/admin',
+	},
+
 ];
 
 // Scripts to process.

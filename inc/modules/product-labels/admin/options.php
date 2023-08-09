@@ -27,6 +27,7 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'display_percentage',
 			'type'  => 'checkbox',
 			'label' => esc_html__( 'Display Sale Percentage', 'merchant' ),
+			'default' => 0
 		),
 
 		array(
@@ -51,13 +52,13 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'label_shape',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Shape', 'merchant' ),
-			'options' => array(
-				'square'  => esc_html__( 'Square', 'merchant' ),
-				'rounded' => esc_html__( 'Rounded', 'merchant' ),
-			),
-			'default' => 'square',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Shape Radius', 'merchant' ),
+			'min'     => 0,
+			'max'     => 35,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 0
 		),
 
 		array(
