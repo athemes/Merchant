@@ -130,7 +130,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	 */
 	public function enqueue_css() {
 		if ( ! is_singular( 'product' ) && ! Merchant_Modules::is_module_active( 'quick-view' ) ) {
-			return $css;
+			return;
 		}
 
 		// Specific module styles.

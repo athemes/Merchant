@@ -128,6 +128,18 @@ const styles = [
 		destination: './assets/css/modules/trust-badges/admin',
 	},
 
+	// Pre Orders.
+	{
+		name: 'preOrders',
+		src: './assets/sass/modules/pre-orders/pre-orders.scss',
+		destination: './assets/css/modules/pre-orders',
+	},
+	{
+		name: 'preOrdersAdmin',
+		src: './assets/sass/modules/pre-orders/admin/preview.scss',
+		destination: './assets/css/modules/pre-orders/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -211,6 +223,14 @@ const scripts = [
 		src: './assets/js/src/modules/quick-view/quick-view.js',
 		destination: './assets/js/modules/quick-view',
 		file: 'quick-view',
+	},
+
+	// Pre Orders.
+	{
+		name: 'preOrders',
+		src: './assets/js/src/modules/pre-orders/pre-orders.js',
+		destination: './assets/js/modules/pre-orders',
+		file: 'pre-orders',
 	}
 
 ];

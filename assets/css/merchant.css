@@ -750,27 +750,6 @@
   }
 }
 
-.merchant-pre-orders-date {
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.woocommerce .merchant-pre-ordered-product .add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
-.woocommerce .merchant-pre-ordered-product .product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
-.woocommerce .merchant-pre-ordered-product .single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button) {
-  color: var(--merchant-text-color, #ffffff);
-  border-color: var(--merchant-border-color, #212121);
-  background-color: var(--merchant-background-color, #212121);
-}
-
-.woocommerce .merchant-pre-ordered-product .add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button):hover,
-.woocommerce .merchant-pre-ordered-product .product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-button):hover,
-.woocommerce .merchant-pre-ordered-product .single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button):hover {
-  color: var(--merchant-text-hover-color, #ffffff);
-  border-color: var(--merchant-border-hover-color, #414141);
-  background-color: var(--merchant-background-hover-color, #414141);
-}
-
 .merchant-scroll-to-top-button {
   display: -webkit-box;
   display: -ms-flexbox;

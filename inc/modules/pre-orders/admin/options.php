@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Pre Orders
+ * Pre Orders.
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -9,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Tag Pre-Orders
+ * 
  */
 $merchant_pre_orders_notice  = '';
 $merchant_pre_orders_notice .= '<div class="merchant-tag-pre-orders">';

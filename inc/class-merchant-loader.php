@@ -79,7 +79,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/cookie-banner.php';
 			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
 			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
-			require_once MERCHANT_DIR . 'inc/modules/pre-orders/pre-orders.php';
+			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
 			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
 			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
 			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/inactive-tab-message.php';
