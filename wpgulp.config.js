@@ -116,6 +116,18 @@ const styles = [
 		destination: './assets/css/modules/payment-logos/admin',
 	},
 
+	// Trust Badges.
+	{
+		name: 'trustBadges',
+		src: './assets/sass/modules/trust-badges/trust-badges.scss',
+		destination: './assets/css/modules/trust-badges',
+	},
+	{
+		name: 'trustBadgesAdmin',
+		src: './assets/sass/modules/trust-badges/admin/preview.scss',
+		destination: './assets/css/modules/trust-badges/admin',
+	},
+
 ];
 
 // Scripts to process.

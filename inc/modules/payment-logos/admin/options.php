@@ -43,7 +43,7 @@ Merchant_Admin_Options::create( array(
 				'center'     => esc_html__( 'Center', 'merchant' ),
 				'flex-end'   => esc_html__( 'Right', 'merchant' ),
 			),
-			'default'      => 'center',
+			'default'      => 'flex-start',
 		),
 
 		array(
@@ -69,6 +69,17 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text Color', 'merchant' ),
 			'default' => '#212121',
+		),
+
+		array(
+			'id'      => 'margin-top',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Margin Top', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 20,
+			'unit'    => 'px',
 		),
 
 		array(

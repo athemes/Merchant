@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Trust Badges
+ * Trust Badges
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -48,6 +50,7 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'title',
 			'type'  => 'text',
 			'title' => esc_html__( 'Text Above the Logos', 'merchant' ),
+			'default' => esc_html__( 'Product Quality Guaranteed!', 'merchant' )
 		),
 
 		array(
@@ -73,6 +76,17 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border Color', 'merchant' ),
 			'default' => '#e5e5e5',
+		),
+
+		array(
+			'id'      => 'margin-top',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Margin Top', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 20,
+			'unit'    => 'px',
 		),
 
 		array(

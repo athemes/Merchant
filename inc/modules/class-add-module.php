@@ -61,7 +61,7 @@ class Merchant_Add_Module {
 	 * 
 	 */
 	public function get_module_settings() {
-		$settings = get_option( 'merchant' );
+		$settings = get_option( 'merchant' ) ? get_option( 'merchant' ) : array();
 
 		// Default settings.
 		$defaults = $this->module_default_settings;

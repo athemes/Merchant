@@ -36,7 +36,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'built-trust';
+		$this->module_section = 'build-trust';
 
 		// Module id.
 		$this->module_id = self::MODULE_ID;
@@ -128,6 +128,9 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function enqueue_css() {
+		if ( ! is_singular( 'product' ) && ! Merchant_Modules::is_module_active( 'quick-view' ) ) {
+			return;
+		}
 
 		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/payment-logos.min.css', array(), MERCHANT_VERSION );
@@ -150,6 +153,9 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			// HTML.
 			$preview->set_html( $content );
 
+			// Text Above the Logos.
+			$preview->set_text( 'title', '.merchant-payment-logos-title > strong' );
+
 		}
 
 		return $preview;
@@ -161,44 +167,23 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$settings = $this->get_module_settings();
+		$this->payment_logos_output();
+	}
 
-		$logos	  = ! empty( $settings[ 'logos' ] ) 
-			? explode( ',', $settings[ 'logos' ] ) 
-			: MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/payment-logos.png';
-		
-		?>
-
-		<div class="merchant-payment-logos">
-			<div class="merchant-payment-logos-title">
-				<strong><?php echo esc_html( $settings[ 'title' ] ); ?></strong>
-			</div>
-
-			<?php if ( is_array( $logos ) ) : ?>
-
-				<div class="merchant-payment-logos-images">
-					<?php 
-					foreach ( $logos as $image_id ) :
-						$imagedata = wp_get_attachment_image_src( $image_id, 'full' );
-
-						if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) :
-							echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) );
-						endif;
-					endforeach; 
-					?>
-				</div>
-
-			<?php else : ?>
-
-				<div class="merchant-payment-logos-images">
-					<img src="<?php echo esc_url( $logos ); ?>" />
-				</div>
-
-			<?php endif; ?>
-
-		</div>
-
-		<?php
+	/**
+	 * Get logos.
+	 * 
+	 * @param string $logos
+	 * @return array $logos Array of logos.
+	 */
+	public function get_logos( $logos ) {
+		return ! empty( $logos ) 
+			? explode( ',', $logos ) 
+			: array(
+				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/visa.svg',
+				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/master.svg',
+				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/pp.svg'
+			);
 	}
 
 	/**
@@ -212,12 +197,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			return;
 		}
 		
-		$settings = $this->get_module_settings();
-		$logos    = explode( ',', $settings[ 'logos' ] );
+		$settings		= $this->get_module_settings();
+		$is_placeholder = empty( $settings[ 'logos' ] ) ? true : false;
 
-		if ( empty( $logos ) ) {
-			return;
-		}
+		$logos	= $this->get_logos( $settings[ 'logos' ] );
 
 		?>
 
@@ -229,7 +212,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 				</div>
 			<?php endif; ?>
 
-			<?php if ( ! empty( $logos ) ) : ?>
+			<?php if ( ! $is_placeholder ) : ?>
 
 				<div class="merchant-payment-logos-images">
 
@@ -245,6 +228,14 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 					<?php endforeach; ?>
 
+				</div>
+
+			<?php else : ?>
+
+				<div class="merchant-payment-logos-images is-placeholder">
+					<?php foreach ( $logos as $logo_src ) : ?>
+						<img src="<?php echo esc_url( $logo_src ); ?>" />
+					<?php endforeach; ?>
 				</div>
 
 			<?php endif; ?>
@@ -306,6 +297,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 * @return string $css The custom CSS.
 	 */
 	public function frontend_custom_css( $css ) {
+		if ( ! is_singular( 'product' ) && ! Merchant_Modules::is_module_active( 'quick-view' ) ) {
+			return $css;
+		}
+		
 		$css .= $this->get_module_custom_css();
 
 		return $css;

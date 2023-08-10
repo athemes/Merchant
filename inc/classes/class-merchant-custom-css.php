@@ -108,20 +108,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				
 			}
 
-			// Trust Badges
-			if ( Merchant_Modules::is_module_active( 'trust-badges' ) ) {
-
-				$css .= $this->get_variable_css( 'trust-badges', 'font-size', 18, '.merchant-trust-badges', '--merchant-font-size', 'px' );
-				$css .= $this->get_variable_css( 'trust-badges', 'text-color', '#212121', '.merchant-trust-badges', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'trust-badges', 'border-color', '#e5e5e5', '.merchant-trust-badges', '--merchant-border-color' );
-				$css .= $this->get_variable_css( 'trust-badges', 'margin-top', 20, '.merchant-trust-badges', '--merchant-margin-top', 'px' );
-				$css .= $this->get_variable_css( 'trust-badges', 'margin-bottom', 20, '.merchant-trust-badges', '--merchant-margin-bottom', 'px' );
-				$css .= $this->get_variable_css( 'trust-badges', 'align', 'flex-start', '.merchant-trust-badges', '--merchant-align' );
-				$css .= $this->get_variable_css( 'trust-badges', 'image-max-width', 100, '.merchant-trust-badges', '--merchant-image-max-width', 'px' );
-				$css .= $this->get_variable_css( 'trust-badges', 'image-max-height', 100, '.merchant-trust-badges', '--merchant-image-max-height', 'px' );
-
-			}
-
 			// Cookie Banner
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 

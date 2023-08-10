@@ -1,0 +1,49 @@
+/**
+ * Trust Badges.
+ *
+ */
+
+.merchant-trust-badges {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	grid-gap: 15px;
+	flex-direction: column;
+	padding: 15px;
+	border: 1px solid var(--mrc-tb-border-color, #e5e5e5);
+	margin-top: var(--mrc-tb-margin-top, 20px) !important;
+	margin-bottom: var(--mrc-tb-margin-bottom, 20px) !important;
+	
+	+ .merchant-trust-badges {
+		display: none;
+	}
+}
+
+.merchant-trust-badges-title  {
+	display: flex;
+	justify-content: var(--mrc-tb-align, center);
+	width: 100%;
+	color: var(--mrc-tb-text-color, #212121);
+	font-size: var(--mrc-tb-font-size, 18px);
+	font-weight: 700;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.merchant-trust-badges-images  {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 5px;
+	justify-content: var(--mrc-tb-align, center);
+	
+	img {
+		max-width: var(--mrc-tb-image-max-width, 100px) !important;
+		max-height: var(--mrc-tb-image-max-height, 100px) !important;
+	}
+	
+	&.is-placeholder {
+		img {
+			width: 100%;
+		}
+	}
+}
