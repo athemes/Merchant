@@ -154,6 +154,18 @@ const styles = [
 		destination: './assets/css/modules/inactive-tab-message/admin',
 	},
 
+	// Agree To Terms Checkbox.
+	{
+		name: 'agreeToTermsCheckbox',
+		src: './assets/sass/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.scss',
+		destination: './assets/css/modules/agree-to-terms-checkbox',
+	},
+	{
+		name: 'agreeToTermsCheckboxAdmin',
+		src: './assets/sass/modules/agree-to-terms-checkbox/admin/preview.scss',
+		destination: './assets/css/modules/agree-to-terms-checkbox/admin',
+	},
+
 ];
 
 // Scripts to process.

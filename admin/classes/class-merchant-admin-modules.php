@@ -126,18 +126,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 
-				'product-your-store' => array(
+				'protect-your-store' => array(
 					'title' => esc_html__( 'Protect Store', 'merchant' ),
 					'modules' => array(
-
-						'agree-to-terms-checkbox' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M.623 1.253.014 4.836C-.09 5.446.39 6 1.021 6h.91c.58 0 1.11-.321 1.37-.83L3.897 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L9 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L14.102 4l.598 1.17c.259.509.789.83 1.369.83h.91c.63 0 1.11-.555 1.007-1.164l-.61-3.583A1.522 1.522 0 0 0 15.867 0H2.134C1.385 0 .746.53.623 1.253ZM12.707 8.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L8 11.586l3.293-3.293a1 1 0 0 1 1.414 0Z"/><path d="M3 8H1v8.5A1.5 1.5 0 0 0 2.5 18h13a1.5 1.5 0 0 0 1.5-1.5V8h-2v8H3V8Z"/></svg>',
-							'title' => esc_html__( 'Agree to Terms Checkbox', 'merchant' ),
-							'desc' => esc_html__( 'Get customers to agree to your Terms & Conditions as part of the checkout process.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/agree-to-terms-checkbox.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/agree-to-terms-checkbox/',
-							'preview_url' => $checkout_url,
-						),
 
 						'cookie-banner' => array(
 							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20"><path d="M6 4h4v2H6V4ZM4 10v2h4v-2H4ZM4 14h6v2H4v-2Z"/><path fill-rule="evenodd" d="M0 18.5v-17C0 .7.7 0 1.5 0h13.1c.8 0 1.5.7 1.5 1.5v17c0 .8-.7 1.5-1.5 1.5H1.5C.7 20 0 19.3 0 18.5Zm2-.5h12V6h-2V4h2V2H2v2h2v2H2v12Z" clip-rule="evenodd"/></svg>',

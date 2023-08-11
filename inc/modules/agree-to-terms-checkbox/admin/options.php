@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Agree to Terms Checkout
+ * Agree to Terms Checkout
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
