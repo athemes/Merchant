@@ -83,7 +83,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
 			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
 			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/inactive-tab-message.php';
-			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/cart-count-favicon.php';
+			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
 
 		}
 
@@ -260,26 +260,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				}
 
 				wp_enqueue_script( 'merchant-inactive-tab-messsage', MERCHANT_URI . 'assets/js/modules/inactive-tab-messsage.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
-
-			// Cart Count Favicon
-			if ( Merchant_Modules::is_module_active( 'cart-count-favicon' ) ) {
-
-				$setting['cart_count_favicon']                  = true;
-				$setting['cart_count_favicon_shape']            = Merchant_Admin_Options::get( 'cart-count-favicon', 'shape', 'circle' );
-				$setting['cart_count_favicon_position']         = Merchant_Admin_Options::get( 'cart-count-favicon', 'position', 'down-left' );
-				$setting['cart_count_favicon_background_color'] = Merchant_Admin_Options::get( 'cart-count-favicon', 'background_color', '#ff0101' );
-				$setting['cart_count_favicon_text_color']       = Merchant_Admin_Options::get( 'cart-count-favicon', 'text_color', '#ffffff' );
-				$setting['cart_count_favicon_delay']            = Merchant_Admin_Options::get( 'cart-count-favicon', 'delay', '0' );
-				$setting['cart_count_favicon_count']            = '0';
-				
-				if ( function_exists( 'WC' ) ) {
-					$setting['cart_count_favicon_count'] = WC()->cart->get_cart_contents_count();
-				}
-
-				wp_enqueue_script( 'merchant-favico', MERCHANT_URI . 'assets/js/vendor/favico.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				wp_enqueue_script( 'merchant-cart-count-favicon', MERCHANT_URI . 'assets/js/modules/cart-count-favicon.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 

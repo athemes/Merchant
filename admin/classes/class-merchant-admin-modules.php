@@ -81,15 +81,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Reduce Abandonment', 'merchant' ),
 					'modules' => array(
 
-						'cart-count-favicon' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20"><path fill-rule="evenodd" d="M15 0c.27 0 .52.11.71.29.18.19.29.44.29.71v10c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29H1c-.27 0-.52-.11-.71-.29C.11 11.52 0 11.27 0 11V1C0 .73.11.48.29.29.48.11.73 0 1 0h14Zm-3.41 5.168L14 7V2H2v5l1.48-.892c.32-.16.7-.14 1 .06L7 8l3.44-2.802c.33-.25.8-.27 1.15-.03Z" clip-rule="evenodd"/><path d="M.29 14.29C.48 14.11.73 14 1 14c.27 0 .52.11.71.29.18.19.29.44.29.71v4c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29-.27 0-.52-.11-.71-.29C.11 19.52 0 19.27 0 19v-4c0-.27.11-.52.29-.71ZM7 16c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29-1.65 0-3 1.35-3 3s1.35 3 3 3c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31Z"/><path fill-rule="evenodd" d="M13 14c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3Zm.68 3.69c-.18.19-.42.3-.68.31a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31.26.01.5.12.68.31.18.18.28.43.28.69 0 .26-.1.51-.28.69Z" clip-rule="evenodd"/></svg>',
-							'title' => esc_html__( 'Cart Count Favicon', 'merchant' ),
-							'desc' => esc_html__( 'Make your store’s browser tab stand out by showing the number of items in the cart on the favicon.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/cart-count-favicon.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/cart-count-favicon/',
-							'preview_url' => $shop_url,
-						),
-
 						'inactive-tab-message' => array(
 							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h17A1.5 1.5 0 0 1 20 1.5v6A1.5 1.5 0 0 1 18.5 9h-5.889a1.5 1.5 0 0 1-1.5-1.5V5.111a1.111 1.111 0 1 0-2.222 0V7.5a1.5 1.5 0 0 1-1.5 1.5H1.5A1.5 1.5 0 0 1 0 7.5v-6Z"/><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 6 0v4.384a.5.5 0 0 0 .356.479l2.695.808a2.5 2.5 0 0 1 1.756 2.748l-.633 4.435A2.5 2.5 0 0 1 14.699 20H6.96a2.5 2.5 0 0 1-2.27-1.452l-2.06-4.464a2.417 2.417 0 0 1-.106-1.777c.21-.607.719-1.16 1.516-1.273 1.035-.148 2.016.191 2.961.82V5Zm3-1a1 1 0 0 0-1 1v7.793c0 1.39-1.609 1.921-2.527 1.16-.947-.784-1.59-.987-2.069-.948a.486.486 0 0 0 .042.241l2.06 4.463A.5.5 0 0 0 6.96 18h7.74a.5.5 0 0 0 .494-.43l.633-4.434a.5.5 0 0 0-.35-.55l-2.695-.808A2.5 2.5 0 0 1 11 9.384V5a1 1 0 0 0-1-1Z" clip-rule="evenodd"/></svg>',
 							'title' => esc_html__( 'Inactive Tab Message', 'merchant' ),

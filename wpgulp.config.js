@@ -140,6 +140,13 @@ const styles = [
 		destination: './assets/css/modules/pre-orders/admin',
 	},
 
+	// Cart Count Favicon.
+	{
+		name: 'cartCountFaviconAdmin',
+		src: './assets/sass/modules/cart-count-favicon/admin/preview.scss',
+		destination: './assets/css/modules/cart-count-favicon/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -231,6 +238,14 @@ const scripts = [
 		src: './assets/js/src/modules/pre-orders/pre-orders.js',
 		destination: './assets/js/modules/pre-orders',
 		file: 'pre-orders',
+	},
+
+	// Cart Count Favicon.
+	{
+		name: 'cartCountFavicon',
+		src: './assets/js/src/modules/cart-count-favicon/cart-count-favicon.js',
+		destination: './assets/js/modules/cart-count-favicon',
+		file: 'cart-count-favicon',
 	}
 
 ];

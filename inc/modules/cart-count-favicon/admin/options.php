@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Cart Count Favicon
+ * Cart Count Favicon
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,6 +53,20 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text Color', 'merchant' ),
 			'default' => '#ffffff',
+		),
+
+		array(
+			'id'      => 'animation',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Animation', 'merchant' ),
+			'options' => array(
+				'none' => esc_html__( 'None', 'merchant' ),
+				'slide'    => esc_html__( 'Slide', 'merchant' ),
+				'fade'   => esc_html__( 'Fade', 'merchant' ),
+				'pop'  => esc_html__( 'Pop', 'merchant' ),
+				'popFade' => esc_html__( 'popFade', 'merchant' )
+			),
+			'default' => 'slide',
 		),
 
 		array(
