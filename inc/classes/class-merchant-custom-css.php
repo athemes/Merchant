@@ -96,18 +96,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			}
 
-			// Pre Orders
-			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
-
-				$css .= $this->get_variable_css( 'pre-orders', 'text-color', '#ffffff', '.merchant-pre-ordered-product', '--merchant-text-color' );
-				$css .= $this->get_variable_css( 'pre-orders', 'text-hover-color', '#ffffff', '.merchant-pre-ordered-product', '--merchant-text-hover-color' );
-				$css .= $this->get_variable_css( 'pre-orders', 'border-color', '#212121', '.merchant-pre-ordered-product', '--merchant-border-color' );
-				$css .= $this->get_variable_css( 'pre-orders', 'border-hover-color', '#414141', '.merchant-pre-ordered-product', '--merchant-border-hover-color' );
-				$css .= $this->get_variable_css( 'pre-orders', 'background-color', '#212121', '.merchant-pre-ordered-product', '--merchant-background-color' );
-				$css .= $this->get_variable_css( 'pre-orders', 'background-hover-color', '#414141', '.merchant-pre-ordered-product', '--merchant-background-hover-color' );
-				
-			}
-
 			// Cookie Banner
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 

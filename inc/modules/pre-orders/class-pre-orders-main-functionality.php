@@ -31,7 +31,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'allow_one_type_only' ), 99, 2 );
 
 		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'manage_pre_orders' ), 10, 2 );
-		add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'set_pre_order_status'), 10, 3 );
+		add_filter( 'woocommerce_thankyou', array( $this, 'set_pre_order_status'), 10 );
 		add_filter( 'woocommerce_billing_fields', array( $this, 'add_shipping_date_field' ) );
 
 		// Cronjob.
@@ -61,7 +61,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * Validation (one type onlye).
+	 * Validation (one type only).
 	 * 
 	 * @param  boolean $passed
 	 * @param  integer $product_id
@@ -137,14 +137,20 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @param  object  $order
 	 * @return string
 	 */
-	public function set_pre_order_status( $status, $order_id, $order ) {
-		$order = wc_get_order( $order_id );
-
-		if ( $order->get_meta('_preorder_date') ) {
-			return 'wc-pre-ordered';
+	public function set_pre_order_status( $order_id ) {
+		if ( ! $order_id ) {
+			return;
 		}
 
-		return $status;
+		$order = wc_get_order($order_id);
+		
+		// Change the order status.
+		if ( $order->get_meta( '_preorder_date' ) ) {
+			$order->update_status( 'wc-pre-ordered' );
+		}
+
+		// Save.
+		$order->save();
 	}
 
 	/**

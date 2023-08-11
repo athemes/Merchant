@@ -29,11 +29,19 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Main functionality dependency.
+	 * 
+	 */
+	public $main_func;
+
+	/**
 	 * Constructor.
 	 * 
 	 */
 	public function __construct( Merchant_Pre_Orders_Main_Functionality $main_func ) {
 		parent::__construct();
+
+		$this->main_func = $main_func;
 
 		// Module section.
 		$this->module_section = 'boost-revenue';
@@ -101,6 +109,9 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 		// Enqueue scripts.
 		add_action( 'merchant_enqueue_after_main_css_js', array( $this, 'enqueue_scripts' ) );
+
+		// Localize script.
+		add_filter( 'merchant_localize_script', array( $this, 'localize_script' ) );
 		
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -145,6 +156,21 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Localize script with module settings.
+	 * 
+	 * @param array $setting The merchant global object setting parameter.
+	 * @return array $setting The merchant global object setting parameter.
+	 */
+	public function localize_script( $setting ) {
+		$module_settings = $this->get_module_settings();
+
+		$setting[ 'pre_orders' ]				  = true;
+		$setting[ 'pre_orders_add_button_title' ] = $module_settings[ 'button_text' ];
+
+		return $setting;
+	}
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -154,16 +180,32 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( self::MODULE_ID === $module ) {
+			$settings = $this->get_module_settings();
+			
+			// Additional text.
+			$additional_text = $settings[ 'additional_text' ];
+			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( gmdate( 'Y-m-d', strtotime('+2 days') ) ) );
+			$text            = $this->main_func->replaceDateTxt( $additional_text, $time_format );
+
 			ob_start();
-			self::admin_preview_content();
+			self::admin_preview_content( $settings, $text );
 			$content = ob_get_clean();
 
 			// HTML.
 			$preview->set_html( $content );
 
 			// Button Text.
+			$preview->set_text( 'button_text', '.add_to_cart_button' );
 
 			// Additional Text.
+			$preview->set_text( 'additional_text', '.merchant-pre-orders-date', array(
+				array(
+					'{date}'
+				),
+				array(
+					$time_format
+				)
+			) );
 
 		}
 
@@ -175,10 +217,13 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 * 
 	 * @return void
 	 */
-	public function admin_preview_content() {
+	public function admin_preview_content( $settings, $text ) {
 		?>
 
-		xxxx
+		<div class="merchant-pre-ordered-product">
+			<div class="merchant-pre-orders-date"><?php echo sprintf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) ); ?></div>
+			<a href="#" class="add_to_cart_button"><?php echo esc_html( $settings[ 'button_text' ] ); ?></a>
+		</div>
 
 		<?php
 	}
@@ -190,6 +235,24 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 */
 	public function get_module_custom_css() {
 		$css = '';
+
+		// Text Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'text-color', '#FFF', '.merchant-pre-ordered-product', '--mrc-po-text-color' );
+
+		// Text Color (hover).
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'text-hover-color', '#FFF', '.merchant-pre-ordered-product', '--mrc-po-text-hover-color' );
+
+		// Border Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'border-color', '#212121', '.merchant-pre-ordered-product', '--mrc-po-border-color' );
+
+		// Border Color (hover).
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'border-hover-color', '#414141', '.merchant-pre-ordered-product', '--mrc-po-border-hover-color' );
+
+		// Background Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'background-color', '#212121', '.merchant-pre-ordered-product', '--mrc-po-background-color' );
+
+		// Background Color (hover).
+		$css .= Merchant_Custom_CSS::get_variable_css( 'pre-orders', 'background-hover-color', '#414141', '.merchant-pre-ordered-product', '--mrc-po-background-hover-color' );
 
 		return $css;
 	}

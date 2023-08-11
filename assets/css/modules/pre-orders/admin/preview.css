@@ -15,3 +15,25 @@
   margin: auto;
   padding: 0 25px;
 }
+
+.merchant-pre-orders-date {
+  font-size: 1rem;
+}
+
+.add_to_cart_button {
+  display: inline-block;
+  color: var(--mrc-po-text-color, #FFF) !important;
+  border: 1px solid var(--mrc-po-border-color, #212121) !important;
+  background-color: var(--mrc-po-background-color, #212121) !important;
+  font-size: 1rem;
+  padding: 12px 25px;
+  text-decoration: none;
+  -webkit-transition: ease background-color 300ms;
+  transition: ease background-color 300ms;
+}
+
+.add_to_cart_button:hover {
+  color: var(--mrc-po-text-hover-color, #FFF) !important;
+  border-color: var(--mrc-po-border-hover-color, #414141) !important;
+  background-color: var(--mrc-po-background-hover-color, #414141) !important;
+}

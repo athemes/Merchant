@@ -55,14 +55,14 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'text-color',
 			'type'  => 'color',
 			'title' => esc_html__( 'Button Text Color', 'merchant' ),
-			'default' => '#ffffff',
+			'default' => '#FFF',
 		),
 
 		array(
 			'id'    => 'text-hover-color',
 			'type'  => 'color',
 			'title' => esc_html__( 'Button Text Color Hover', 'merchant' ),
-			'default' => '#ffffff',
+			'default' => '#FFF',
 		),
 
 		array(

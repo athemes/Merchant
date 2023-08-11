@@ -306,16 +306,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI . 'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
-
-			// Pre Orders
-			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
-				
-				$setting['pre_orders']                  = true;
-				$setting['pre_orders_add_button_title'] = Merchant_Admin_Options::get( 'pre-orders', 'add_button_title', esc_html__( 'Pre Order Now!', 'merchant' ) );
-
-				wp_enqueue_script( 'merchant-pre-orders', MERCHANT_URI . 'assets/js/modules/pre-orders.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
 			
 			do_action( 'merchant_enqueue_after_main_css_js' );
 
