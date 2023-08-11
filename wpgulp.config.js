@@ -147,6 +147,13 @@ const styles = [
 		destination: './assets/css/modules/cart-count-favicon/admin',
 	},
 
+	// Inactive Tab Message.
+	{
+		name: 'inactiveTabMessageAdmin',
+		src: './assets/sass/modules/inactive-tab-message/admin/preview.scss',
+		destination: './assets/css/modules/inactive-tab-message/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -246,6 +253,14 @@ const scripts = [
 		src: './assets/js/src/modules/cart-count-favicon/cart-count-favicon.js',
 		destination: './assets/js/modules/cart-count-favicon',
 		file: 'cart-count-favicon',
+	},
+
+	// Inactive Tab Message.
+	{
+		name: 'inactiveTabMessage',
+		src: './assets/js/src/modules/inactive-tab-message/inactive-tab-message.js',
+		destination: './assets/js/modules/inactive-tab-message',
+		file: 'inactive-tab-message',
 	}
 
 ];

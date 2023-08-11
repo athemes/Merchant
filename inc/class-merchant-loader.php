@@ -82,7 +82,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
 			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
 			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
-			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/inactive-tab-message.php';
+			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
 			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
 
 		}
@@ -245,21 +245,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['auto_external_links'] = true;
 
 				wp_enqueue_script( 'merchant-auto-external-links', MERCHANT_URI . 'assets/js/modules/auto-external-links.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
-
-			// Inactive Tab Message
-			if ( Merchant_Modules::is_module_active( 'inactive-tab-messsage' ) ) {
-
-				$setting['inactive_tab_messsage']          = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'message', esc_html__( '✋ Don\'t forget this', 'merchant' ) );
-				$setting['inactive_tab_abandoned_message'] = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'abandoned_message', esc_html__( '✋ You left something in the cart', 'merchant' ) );
-				$setting['inactive_tab_cart_count']        = '0';
-				
-				if ( function_exists( 'WC' ) ) {
-					$setting['inactive_tab_cart_count'] = WC()->cart->get_cart_contents_count();
-				}
-
-				wp_enqueue_script( 'merchant-inactive-tab-messsage', MERCHANT_URI . 'assets/js/modules/inactive-tab-messsage.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 

@@ -1,6 +1,8 @@
 <?php
 /**
- * Merchant - Inactive Tab Message
+ * Inactive Tab Message
+ * 
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

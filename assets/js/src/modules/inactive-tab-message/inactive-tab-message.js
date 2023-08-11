@@ -1,3 +1,8 @@
+/**
+ * Merchant Inactive Tab Message.
+ * 
+ */
+
 'use strict';
 
 var merchant = merchant || {};
