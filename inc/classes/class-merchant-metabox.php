@@ -550,8 +550,13 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						'source' => 'post',
 					) );
 					$ids   = ( is_array( $value ) && ! empty( $value ) ) ? $value : (array) $value;
+					if ( isset( $field['multiple'] ) ) {
+						$multiple = $field['multiple'] === true ? 'multiple' : '';
+					} else {
+						$multiple = 'multiple';
+					}
 
-					echo '<select name="' . esc_attr( $field_id ) . '[]" multiple data-source="' . esc_attr( $field['source'] ) . '">';
+					echo '<select name="' . esc_attr( $field_id ) . '[]" ' . $multiple . ' data-source="' . esc_attr( $field['source'] ) . '">';
 
 					if ( ! empty( $ids ) ) {
 						foreach ( $ids as $id ) {
@@ -1004,7 +1009,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						echo '</div>';
 						echo '<div class="merchant-metabox-field-flexible-content-item-content">';
 						foreach ( $field['layouts'][ $value['layout'] ]['fields'] as $sub_field_key => $sub_field ) {
-							$sub_field_classes = array( 'merchant-metabox-field-flexible-content-item-' . esc_attr( $sub_field['type'] ) );
+							$sub_field_classes = array( 'merchant-metabox-field-flexible-content-' . esc_attr( $sub_field['type'] ) );
 							$sub_field_id      = $field_id . '[' . $value_key . '][' . $sub_field_key . ']';
 							$sub_field_value   = isset( $value[ $sub_field_key ] ) ? $value[ $sub_field_key ] : '';
 							if ( $sub_field['type'] === 'select-ajax' ) {
@@ -1018,7 +1023,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							echo '<label>';
 							echo esc_html( $sub_field['title'] );
 							echo '</label>';
-							echo '<div class="merchant-metabox-field-flexible-content-item-field" data-id="' . esc_attr( $sub_field_key ) . '">';
+							echo '<div class="merchant-metabox-field-flexible-content-' . $sub_field['type'] . '-field" data-id="' . esc_attr( $sub_field_key ) . '">';
 							$this->get_field( $sub_field_id, $sub_field, $sub_field_value );
 							echo '</div>';
 							echo '</div>';

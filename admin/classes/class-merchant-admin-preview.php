@@ -175,6 +175,11 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			);
 		}
 
+		/***
+		 * Get price format to use in replacements.
+		 *
+		 * @return string
+		 */
 		public function get_price_format() {
 			return str_replace( '0.00', '{string}', wc_price( '0' ) );
 		}
@@ -197,7 +202,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 */
 		public static function set_preview( $module_id ) {
 			/**
-			 * Hook: merchant_module_previe
+			 * Hook: merchant_module_preview
 			 *
 			 * @since 1.2
 			 */
