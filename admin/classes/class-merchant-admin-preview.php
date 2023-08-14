@@ -39,7 +39,24 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+
+			// Add admin preview class to body.
+			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ) );
+		}
+
+		/**
+		 * Add admin preview class to body.
+		 *
+		 * @param string $classes
+		 *
+		 * @return string
+		 */
+		public function add_admin_body_class( $classes ) {
+			$classes .= ' merchant-has-admin-preview';
+
+			return $classes;
+		}
 
 		/**
 		 * @param $html
@@ -256,6 +273,4 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			return self::instance()->html;
 		}
 	}
-
-	Merchant_Admin_Preview::instance();
 }

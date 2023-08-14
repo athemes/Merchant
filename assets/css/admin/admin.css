@@ -1592,6 +1592,10 @@
   max-height: 300px;
 }
 
+body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
+  display: none;
+}
+
 .merchant-module-page-heading {
   display: -webkit-box;
   display: -ms-flexbox;
