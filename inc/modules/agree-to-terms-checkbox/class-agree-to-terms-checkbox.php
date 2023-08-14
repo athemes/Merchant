@@ -53,7 +53,7 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		$preview_url = site_url( '/' );
 
 		if ( function_exists( 'wc_get_page_id' ) ) {
-			$checkout_url = get_permalink( wc_get_page_id( 'checkout' ) );
+			$preview_url = get_permalink( wc_get_page_id( 'checkout' ) );
 		}
 
 		// Module data.
