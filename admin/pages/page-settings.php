@@ -52,6 +52,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php
 
+				/**
+				 * Hook: 'merchant_admin_settings_before_options'
+				 * 
+				 * @since 1.0
+				 */
+				do_action( 'merchant_admin_settings_before_options' );
+
 				Merchant_Admin_Options::create( array(
 					'module'    => 'global-settings',
 					'title'     => esc_html__( 'Settings', 'merchant' ),
@@ -137,6 +144,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					),
 				) );
+
+				/**
+				 * Hook: 'merchant_admin_settings_after_options'
+				 * 
+				 * @since 1.0
+				 */
+				do_action( 'merchant_admin_settings_after_options' );
 
 				?>
 

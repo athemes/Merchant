@@ -2318,6 +2318,107 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
           box-shadow: none;
 }
 
+.merchant-license-form-wrapper .merchant-license-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  grid-gap: 10px;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input {
+  width: 400px;
+  max-width: 100%;
+  padding-left: 36px;
+  min-height: 36px;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input::-webkit-input-placeholder {
+  opacity: 0.75;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input::-moz-placeholder {
+  opacity: 0.75;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input:-ms-input-placeholder {
+  opacity: 0.75;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input::-ms-input-placeholder {
+  opacity: 0.75;
+}
+
+.merchant-license-form-wrapper .merchant-license-form input::placeholder {
+  opacity: 0.75;
+}
+
+.merchant-license-form-wrapper .merchant-license-form button {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 1em;
+  min-height: 36px;
+  padding: 10px 40px !important;
+  background-color: transparent;
+  color: #3858E9;
+  border-color: #3858E9;
+}
+
+.merchant-license-form-wrapper .merchant-license-form button:hover, .merchant-license-form-wrapper .merchant-license-form button:focus, .merchant-license-form-wrapper .merchant-license-form button:active {
+  color: #FFF;
+  background-color: #3452da;
+  border-color: #3452da;
+}
+
+.merchant-license-form-wrapper .merchant-license-form button.merchant-license-button-deactivate {
+  color: #d82c0d;
+  border-color: #d82c0d;
+}
+
+.merchant-license-form-wrapper .merchant-license-form button.merchant-license-button-deactivate:hover, .merchant-license-form-wrapper .merchant-license-form button.merchant-license-button-deactivate:focus, .merchant-license-form-wrapper .merchant-license-form button.merchant-license-button-deactivate:active {
+  color: #FFF;
+  background-color: #d82c0d;
+  border-color: #d82c0d;
+}
+
+.merchant-license-form-wrapper .merchant-license-key-input {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.merchant-license-form-wrapper .merchant-license-key-input i {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 10px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  margin-top: -1px;
+  font-size: 20px !important;
+  color: #5C5F62;
+}
+
+.mechant-license-response-wrapper,
+.merchant-dashboard-license-success {
+  display: block;
+  margin-top: 10px;
+  color: #757575;
+}
+
+.mechant-license-response-wrapper span,
+.merchant-dashboard-license-success span {
+  margin-left: 5px;
+}
+
 .merchant-module-page-setting-field-text input,
 .merchant-module-page-setting-field-number input,
 .merchant-module-page-setting-field-text_readonly input {

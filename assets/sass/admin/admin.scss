@@ -1213,6 +1213,86 @@ body.merchant-has-admin-preview {
 	}
 }
 
+.merchant-license-form-wrapper {
+	.merchant-license-form {
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 10px;
+
+		input {
+			width: 400px;
+			max-width: 100%;
+			padding-left: 36px;
+			min-height: 36px;
+
+			&::placeholder {
+				opacity: 0.75;
+			}
+		}
+
+		button {
+			position: relative;
+			display: flex;
+			grid-gap: 2px;
+			align-items: center;
+			line-height: 1em;
+			min-height: 36px;
+			padding: 10px 40px !important;
+			background-color: transparent;
+			color: #3858E9;
+			border-color: #3858E9;
+
+			&:hover,
+			&:focus,
+			&:active {
+				color: #FFF;
+				background-color: #3452da;
+				border-color: #3452da;
+			}
+
+			&.merchant-license-button-deactivate {
+				color: #d82c0d;
+				border-color: #d82c0d;
+
+				&:hover,
+				&:focus,
+				&:active {
+					color: #FFF;
+					background-color: #d82c0d;
+					border-color: #d82c0d;
+				}
+			}
+		}
+	}
+
+	.merchant-license-key-input {
+		position: relative;
+		display: flex;
+	
+		i {
+			position: absolute;
+			z-index: 1;
+			top: 50%;
+			left: 10px;
+			transform: translateY(-50%);
+			margin-top: -1px;
+			font-size: 20px !important;
+			color: #5C5F62;
+		}
+	}
+}
+
+.mechant-license-response-wrapper,
+.merchant-dashboard-license-success {
+	display: block;
+	margin-top: 10px;
+	color: #757575;
+
+	span {
+		margin-left: 5px;
+	}
+}
+
 .merchant-module-page-setting-field-text,
 .merchant-module-page-setting-field-number,
 .merchant-module-page-setting-field-text_readonly {

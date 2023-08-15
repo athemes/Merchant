@@ -51,7 +51,7 @@
     var $ajaxForm = $('.merchant-module-page-ajax-form');
     var $ajaxHeader = $('.merchant-module-page-ajax-header');
     var $ajaxSaveBtn = $('.merchant-module-save-button');
-    $('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea)', function () {
+    $('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea):not(.merchant-license-code-input)', function () {
       if (!merchant.show_save) {
         $ajaxHeader.addClass('merchant-show');
         $ajaxHeader.removeClass('merchant-saving');

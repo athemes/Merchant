@@ -794,6 +794,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo '</div>';
 		}
 
+		/**
+		 * Field: Custom callback.
+		 */
+		public static function custom_callback( $settings, $value ) {
+			if( ! empty( $settings[ 'class_name' ] ) && ! empty( $settings[ 'callback_name' ] ) ) {
+				return call_user_func( array( $settings[ 'class_name' ], $settings[ 'callback_name' ] ), $settings, $value );
+			}
+			
+			if( ! empty( $settings[ 'callback_name' ] ) ) {
+				return call_user_func( $settings[ 'callback_name' ], $settings, $value );
+			}
+
+			return false;
+		}
+
 	}
 
 	Merchant_Admin_Options::instance();
