@@ -818,6 +818,161 @@
           box-shadow: none;
 }
 
+/* Botiga Dashboard Tabs Nav Items */
+.merchant-tabs-nav {
+  padding: 0 20px;
+  margin-bottom: -100%;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+}
+
+.merchant-tabs-nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+.merchant-tabs-nav .merchant-tabs-nav-item .merchant-tabs-nav-link {
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 16px;
+  color: #6D7175;
+  text-decoration: none;
+  -webkit-transition: ease color 300ms;
+  transition: ease color 300ms;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.merchant-tabs-nav .merchant-tabs-nav-item .merchant-tabs-nav-link:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.merchant-tabs-nav .merchant-tabs-nav-item.active .merchant-tabs-nav-link {
+  color: #3858E9;
+  font-weight: 500;
+}
+
+.merchant-tabs-nav .merchant-tabs-nav-item.active .merchant-tabs-nav-link:after {
+  background-color: #3858E9;
+}
+
+.merchant-tabs-nav .merchant-tabs-nav-item:hover .merchant-tabs-nav-link, .merchant-tabs-nav .merchant-tabs-nav-item:focus .merchant-tabs-nav-link, .merchant-tabs-nav .merchant-tabs-nav-item:active .merchant-tabs-nav-link {
+  color: #3858E9;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item .merchant-tabs-nav-link {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  padding: 9px 16px;
+  border-bottom: 0;
+  color: #1e1e1e;
+  -webkit-transition: ease color 200ms;
+  transition: ease color 200ms;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item .merchant-tabs-nav-link svg {
+  margin-right: 8px;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item .merchant-tabs-nav-link svg path {
+  -webkit-transition: ease fill 200ms;
+  transition: ease fill 200ms;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item .merchant-tabs-nav-link:after {
+  content: none;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item .merchant-tabs-nav-link:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  width: 4px;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: ease opacity 200ms;
+  transition: ease opacity 200ms;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:hover .merchant-tabs-nav-link, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:focus .merchant-tabs-nav-link, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:active .merchant-tabs-nav-link {
+  color: #757575;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:hover .merchant-tabs-nav-link svg path, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:focus .merchant-tabs-nav-link svg path, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:active .merchant-tabs-nav-link svg path {
+  fill: #757575;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:hover .merchant-tabs-nav-link:before, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:focus .merchant-tabs-nav-link:before, .merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item:active .merchant-tabs-nav-link:before {
+  background-color: #e1e1e1;
+  opacity: 1;
+  visibility: visible;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item.active .merchant-tabs-nav-link {
+  color: #3858E9;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item.active .merchant-tabs-nav-link svg path {
+  fill: #3858E9;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-with-icons .merchant-tabs-nav-item.active .merchant-tabs-nav-link:before {
+  background-color: #3858E9;
+  opacity: 1;
+  visibility: visible;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-vertical {
+  padding: 0;
+  margin-left: -20px;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-vertical ul {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0;
+}
+
+.merchant-tabs-nav.merchant-tabs-nav-no-negative-margin {
+  margin-bottom: 0;
+  -webkit-transform: none;
+          transform: none;
+}
+
+/* Botiga Tabs Content */
+.merchant-tab-content {
+  display: none;
+}
+
+.merchant-tab-content.active {
+  display: block;
+}
+
 .toplevel_page_merchant {
   background-color: #F4F6F8;
 }
@@ -1074,7 +1229,7 @@
 .merchant-notifications-sidebar .merchant-notifications-sidebar-body {
   padding: 20px;
   overflow-y: auto;
-  max-height: calc( 100vh - 180px);
+  max-height: calc( 100vh - 230px);
 }
 
 .merchant-notifications-sidebar .merchant-notifications-sidebar-body::-webkit-scrollbar {
@@ -1394,6 +1549,7 @@
 }
 
 .merchant-modules-list-item {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1418,6 +1574,75 @@
           box-shadow: none;
 }
 
+.merchant-badge {
+  color: #99A5B8;
+  padding: 3px 6px;
+  border: 1px solid #DFDFDF;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.merchant-badge.merchant-badge-pro {
+  color: #3858e9;
+  border-color: #3858e9;
+}
+
+.merchant-pro-badge.merchant-pro-tooltip {
+  position: relative;
+}
+
+.merchant-pro-badge.merchant-pro-tooltip:before {
+  content: attr(data-tooltip-message);
+  position: absolute;
+  right: -30px;
+  bottom: calc( 100% + 11px);
+  color: #FFF;
+  font-size: 11px;
+  line-height: 16px;
+  padding: 3px 6px;
+  background-color: #1E1E1E;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate3d(0, 6px, 0);
+          transform: translate3d(0, 6px, 0);
+  -webkit-transition: ease opacity 300ms, ease transform 300ms;
+  transition: ease opacity 300ms, ease transform 300ms;
+  z-index: 2;
+}
+
+.merchant-pro-badge.merchant-pro-tooltip:after {
+  content: '';
+  position: absolute;
+  bottom: calc( 100% + 3px);
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 4px 4px 4px;
+  border-color: #1E1E1E transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate3d(0, 6px, 0);
+          transform: translate3d(0, 6px, 0);
+  -webkit-transition: ease opacity 300ms, ease transform 300ms;
+  transition: ease opacity 300ms, ease transform 300ms;
+  z-index: 2;
+}
+
+.merchant-pro-badge.merchant-pro-tooltip:hover:before, .merchant-pro-badge.merchant-pro-tooltip:hover:after {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.merchant-modules-list-item-upsell {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .merchant-modules-list-item-icon {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1428,6 +1653,11 @@
   width: 18px;
   height: 26px;
   fill: #787C82;
+}
+
+.merchant-modules-list-item-icon svg.stroke-based {
+  fill: none;
+  stroke: #787C82;
 }
 
 .merchant-modules-list-item-content {

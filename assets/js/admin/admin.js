@@ -627,6 +627,30 @@
       });
     }
 
+    // Tabs Navigation.
+    var tabs = $('.merchant-tabs-nav');
+    if (tabs.length) {
+      tabs.each(function () {
+        var tabWrapperId = $(this).data('tab-wrapper-id');
+        $(this).find('.merchant-tabs-nav-link').on('click', function (e) {
+          e.preventDefault();
+          var tabsNavLink = $(this).closest('.merchant-tabs-nav').find('.merchant-tabs-nav-link'),
+            to = $(this).data('tab-to');
+
+          // Tab Nav Item
+          tabsNavLink.each(function () {
+            $(this).closest('.merchant-tabs-nav-item').removeClass('active');
+          });
+          $(this).closest('.merchant-tabs-nav-item').addClass('active');
+
+          // Tab Content
+          var tabContentWrapper = $('.merchant-tab-content-wrapper[data-tab-wrapper-id="' + tabWrapperId + '"]');
+          tabContentWrapper.find('> .merchant-tab-content').removeClass('active');
+          tabContentWrapper.find('> .merchant-tab-content[data-tab-content-id="' + to + '"]').addClass('active');
+        });
+      });
+    }
+
     // Module Alert
     var $moduleAlert = $('.merchant-module-alert');
     if ($moduleAlert.length) {

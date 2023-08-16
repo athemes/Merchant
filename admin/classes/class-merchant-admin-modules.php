@@ -12,6 +12,12 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 	class Merchant_Admin_Modules {
 
 		/**
+		 * Upsell modules.
+		 * 
+		 */
+		public static $upsell_modules = array();
+
+		/**
 		 * The single class instance.
 		 */
 		private static $instance = null;
@@ -29,7 +35,158 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+			self::$upsell_modules = array(
+
+				// Convert More.
+				'sticky-add-to-cart' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-sticky-add-to-cart' ),
+					'title' => esc_html__( 'Sticky Add To Cart', 'merchant' ),
+					'desc' => esc_html__( 'Improve conversion rate by displaying a sticky add-to-cart bar when the visitors are scrolling down.', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/sticky-add-to-cart/'
+				),
+				'checkout' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-checkout' ),
+					'title'        => esc_html__( 'Checkout', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Choose a layout that aligns with your audience\'s preferences, resulting in a frictionless checkout experience that drives more successful transactions.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/checkout/'
+				),
+				'countdown-timer' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-countdown-timer' ),
+					'title'        => esc_html__( 'Countdown Timer', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Create urgency and increase conversion rate using a countdown timer for all your discounted products.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/countdown-timer/'
+				),
+				'recently-viewed-products' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-recently-viewed-products' ),
+					'title' => esc_html__( 'Recently Viewed Products', 'merchant-pro' ),
+					'desc' => esc_html__( 'Cross-sell efficiently by displaying on product pages and in the cart the products your visitors have recently viewed.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/recently-viewed-products/'
+				),
+				'waitlist' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-waitlist' ),
+					'title'        => esc_html__( 'Wait List', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Wait-list for where user can opt-in for back-in-stock alert. A lead magnet and sales booster.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/waitlist/'
+				),
+
+				// Build Trust.
+				'advanced-reviews' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'title' => esc_html__( 'Advanced Reviews', 'merchant-pro' ),
+					'desc' => esc_html__( 'Easily collect, import, and display reviews with photos and boost trust and conversion rates with social proof. Have voting for reviews (vote for helpful or unhelpful). Option to sort reviews by most helpful.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/advanced-reviews/'
+				),
+				'product-brand-image' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-brand-image' ),
+					'title'        => esc_html__( 'Product Brand Image', 'merchant-pro' ),
+					'desc'         => esc_html__( 'With a consistent brand image for each product, you present a unified and professional facade that instills confidence in potential buyers, making them more likely to convert.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-brand-image/'
+				),
+				'reasons-to-buy' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-reasons-to-buy' ),
+					'title' => esc_html__( 'Reasons To Buy List', 'merchant-pro' ),
+					'desc' => esc_html__( 'Provide prospective customers with a concise and persuasive summary of the key features, benefits, and selling points of your products.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/reasons-to-buy/'
+				),
+
+				// Reduce Abandonment.
+				'cart-reserved-timer' => array(
+					'upsell' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cart-reserved-timer' ),
+					'title'        => esc_html__( 'Cart Reserved Timer', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Create urgency by letting your visitors know that the products in cart are reserved only for a limited time.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/cart-reserved-timer/'
+				),
+				'floating-mini-cart' => array(
+					'upsell' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
+					'title'        => esc_html__( 'Floating Mini Cart', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Reduce the cart abandonment by providing a convenient and distraction-free way for customers to manage their cart contents and proceed to checkout.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/floating-mini-cart/'
+				),
+
+				// Improve Experience.
+				'login-popup' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-login-popup' ),
+					'title'        => esc_html__( 'Login Popup', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Capture more leads and prevent cart abandonment by displaying automatic and exit-intent customizable pop-ups.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/login-popup/'
+				),
+				'product-audio' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-audio' ),
+					'title'        => esc_html__( 'Product Audio', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Empower customers to engage with your products using their sense of sound, enriching their shopping journey and fostering satisfaction.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-audio/'
+				),
+				'product-video' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-video' ),
+					'title'        => esc_html__( 'Product Video', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Help customers visualize your products potential. Whether it\'s demonstrating product features, usage scenarios, or showcasing intricate details.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-video/'
+				),
+				'size-chart' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-size-chart' ),
+					'title'        => esc_html__( 'Size Chart', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Seamlessly integrate sizing insights into your product pages. The feature offers customers immediate access to valuable sizing details, eliminating the need to navigate to external resources and creating a smoother shopping journey.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/size-chart/'
+				),
+				'wishlist' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wishlist' ),
+					'title' => esc_html__( 'Wishlist', 'merchant-pro' ),
+					'desc' => esc_html__( 'Prevent cart abandonment and increase your customer\'s engagement by allowing them to save products in Wishlists, for later purchases.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/wishlist/'
+				),
+
+				// Boost Revenue.
+				'spending-goal' => array(
+					'upsell' => true,
+					'section' => 'boost-revenue',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-spending-goal' ),
+					'title'        => esc_html__( 'Spending Goal', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Increase your store’s average order value by incentivizing customers with a discount when they reach the spending goal target.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/spending-goal/'
+				),
+				'volume-discounts' => array(
+					'upsell' => true,
+					'section' => 'boost-revenue',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
+					'title'        => esc_html__( 'Volume Discounts', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Increase your store’s average order value, by providing discounts when customers buy larger quantities.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/volume-discounts/'
+				),
+
+			);
+
+		}
 
 		/**
 		 * Get modules.
@@ -153,6 +310,30 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			return $modules;
 
+		}
+
+		/**
+		 * Get upsell modules.
+		 * 
+		 */
+		public static function get_upsell_modules() {
+			return self::$upsell_modules;
+		}
+
+		/**
+		 * Add upsell to modules.
+		 * 
+		 */
+		public static function add_upsell_modules( $modules ) {
+			if ( defined( 'MERCHANT_PRO_VERSION' ) ) {
+				return $modules;
+			}
+
+			foreach ( self::$upsell_modules as $module_id => $module_data ) {
+				$modules[ $module_data[ 'section' ] ][ 'modules' ][ $module_id ] = $module_data;
+			}
+			
+			return $modules;
 		}
 
 		/**

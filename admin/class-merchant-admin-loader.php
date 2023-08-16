@@ -45,6 +45,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function includes() {
 
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-svg-icons.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-menu.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-modules.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';

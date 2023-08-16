@@ -5,12 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $merchant_notifications 	= $this->get_notifications();
-$merchant_notification_read = $this->is_latest_notification_read(); 
+$merchant_notifications_pro = apply_filters( 'merchant_notifications_pro', false );
+$merchant_notification_tabs = apply_filters( 'merchant_notification_tabs', false );
+$merchant_notification_read = $this->is_latest_notification_read();
 
 ?>
 
 <div class="merchant-top-bar">
-	<a href="https://athemes.com/" class="merchant-top-bar-logo" target="_blank">
+	<a href="https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-top-bar-logo" target="_blank">
 		<svg width="96" height="24" viewBox="0 0 96 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M23.4693 1.32313L8.45381 14.3107L0.67962 4.82163L23.4693 1.32313Z" fill="#335EEA"/>
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M23.2942 1.17329L8.23868 14.112L16.0129 23.601L23.2942 1.17329Z" fill="#BECCF9"/>
@@ -21,18 +23,21 @@ $merchant_notification_read = $this->is_latest_notification_read();
 		<div class="merchant-top-bar-info-item">
 			<div class="merchant-version">
 				<strong><?php echo esc_html( ( defined( 'MERCHANT_PRO_VERSION' ) ? MERCHANT_PRO_VERSION : MERCHANT_VERSION ) ); ?></strong>
+				<span class="merchant-badge<?php echo ( defined( 'MERCHANT_PRO_VERSION' ) ) ? ' merchant-badge-pro' : ''; ?>">
+					<?php echo esc_html( ( ! defined( 'MERCHANT_PRO_VERSION' ) ) ? __( 'FREE', 'botiga' ) : __( 'PRO', 'botiga' ) ); ?>
+				</span>
 			</div>
 		</div>
-	<div class="merchant-top-bar-info-item">
+		<div class="merchant-top-bar-info-item">
 			<a href="#" class="merchant-notifications<?php echo esc_attr( ( $merchant_notification_read ) ? ' read' : '' ); ?>" title="<?php esc_html_e( 'Merchant News', 'merchant' ); ?>">
-		<span class="merchant-notifications-count">1</span>
-		<svg width="13" height="11" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M8.86194 0.131242C8.75503 0.0584347 8.63276 0.0143876 8.50589 0.0029728C8.37902 -0.00844195 8.25143 0.0131252 8.13433 0.0657785L4.29726 1.65655C4.20642 1.69547 4.10927 1.71548 4.01119 1.71547H1.55473C1.34856 1.71547 1.15083 1.80168 1.00505 1.95514C0.859264 2.1086 0.777363 2.31674 0.777363 2.53377V2.59923H0V4.56315H0.777363V4.64825C0.782235 4.86185 0.866281 5.06498 1.01154 5.21422C1.1568 5.36346 1.35175 5.44697 1.55473 5.44691L2.48756 7.52866C2.55073 7.66885 2.65017 7.78744 2.77448 7.87081C2.89878 7.95418 3.04291 7.99896 3.1903 8H3.58209C3.78718 7.99827 3.98331 7.9113 4.12775 7.75802C4.27219 7.60475 4.35324 7.3976 4.35323 7.1817V5.52547L8.13433 7.11624C8.22733 7.1552 8.32652 7.17519 8.42662 7.17515C8.58191 7.17252 8.73314 7.12249 8.86194 7.03114C8.96423 6.95843 9.0486 6.86114 9.10808 6.7473C9.16755 6.63347 9.20043 6.50636 9.20398 6.3765V0.80552C9.20341 0.672312 9.17196 0.541263 9.11235 0.423757C9.05274 0.30625 8.96678 0.205839 8.86194 0.131242ZM3.57587 2.53377V4.64825H1.55473V2.53377H3.57587ZM3.57587 7.1817H3.18408L2.41915 5.44691H3.57587V7.1817ZM4.58333 4.74645C4.5095 4.70672 4.4325 4.67387 4.35323 4.64825V2.48794C4.43174 2.47089 4.50872 2.4468 4.58333 2.41593L8.42662 0.80552V6.35686L4.58333 4.74645ZM9.22264 2.76289V4.39949C9.42881 4.39949 9.62653 4.31327 9.77232 4.15981C9.9181 4.00635 10 3.79821 10 3.58119C10 3.36416 9.9181 3.15602 9.77232 3.00256C9.62653 2.8491 9.42881 2.76289 9.22264 2.76289Z" fill="#1E1E1E"/>
-		</svg>
+				<span class="merchant-notifications-count">1</span>
+				<svg width="13" height="11" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M8.86194 0.131242C8.75503 0.0584347 8.63276 0.0143876 8.50589 0.0029728C8.37902 -0.00844195 8.25143 0.0131252 8.13433 0.0657785L4.29726 1.65655C4.20642 1.69547 4.10927 1.71548 4.01119 1.71547H1.55473C1.34856 1.71547 1.15083 1.80168 1.00505 1.95514C0.859264 2.1086 0.777363 2.31674 0.777363 2.53377V2.59923H0V4.56315H0.777363V4.64825C0.782235 4.86185 0.866281 5.06498 1.01154 5.21422C1.1568 5.36346 1.35175 5.44697 1.55473 5.44691L2.48756 7.52866C2.55073 7.66885 2.65017 7.78744 2.77448 7.87081C2.89878 7.95418 3.04291 7.99896 3.1903 8H3.58209C3.78718 7.99827 3.98331 7.9113 4.12775 7.75802C4.27219 7.60475 4.35324 7.3976 4.35323 7.1817V5.52547L8.13433 7.11624C8.22733 7.1552 8.32652 7.17519 8.42662 7.17515C8.58191 7.17252 8.73314 7.12249 8.86194 7.03114C8.96423 6.95843 9.0486 6.86114 9.10808 6.7473C9.16755 6.63347 9.20043 6.50636 9.20398 6.3765V0.80552C9.20341 0.672312 9.17196 0.541263 9.11235 0.423757C9.05274 0.30625 8.96678 0.205839 8.86194 0.131242ZM3.57587 2.53377V4.64825H1.55473V2.53377H3.57587ZM3.57587 7.1817H3.18408L2.41915 5.44691H3.57587V7.1817ZM4.58333 4.74645C4.5095 4.70672 4.4325 4.67387 4.35323 4.64825V2.48794C4.43174 2.47089 4.50872 2.4468 4.58333 2.41593L8.42662 0.80552V6.35686L4.58333 4.74645ZM9.22264 2.76289V4.39949C9.42881 4.39949 9.62653 4.31327 9.77232 4.15981C9.9181 4.00635 10 3.79821 10 3.58119C10 3.36416 9.9181 3.15602 9.77232 3.00256C9.62653 2.8491 9.42881 2.76289 9.22264 2.76289Z" fill="#1E1E1E"/>
+				</svg>
 			</a>
 		</div>
 		<div class="merchant-top-bar-info-item">
-			<a href="https://athemes.com/" class="merchant-website" target="_blank">
+			<a href="https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-website" target="_blank">
 				<?php esc_html_e( 'Website', 'merchant' ); ?>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M13.6 2.40002H7.20002L8.00002 4.00002H11.264L6.39202 8.88002L7.52002 10.008L12 5.53602V8.00002L13.6 8.80002V2.40002ZM9.60002 9.60002V12H4.00002V6.40002H7.20002L8.80002 4.80002H2.40002V13.6H11.2V8.00002L9.60002 9.60002Z" fill="#3858E9"/>
@@ -68,36 +73,91 @@ $merchant_notification_read = $this->is_latest_notification_read();
 				<p><?php echo esc_html__( 'Check the latest news from Merchant', 'merchant' ); ?></p>
 			</div>
 		</div>
-		<div class="merchant-notifications-sidebar-body">
-			<?php if ( ! empty( $merchant_notifications ) ) : ?>
-				<?php $merchant_display_version = false; ?>
-				<?php foreach ( $merchant_notifications as $merchant_notification ) : ?>
-					<?php $merchant_date = isset( $merchant_notification->date ) ? $merchant_notification->date : false; ?>
-					<?php $merchant_version = isset( $merchant_notification->title->rendered ) ? $merchant_notification->title->rendered : false; ?>
-					<?php $merchant_content = isset( $merchant_notification->content->rendered ) ? $merchant_notification->content->rendered : false; ?>
+		<?php if ( $merchant_notification_tabs ) : ?>
+			<div class="merchant-notifications-sidebar-tabs">
+				<nav class="merchant-tabs-nav merchant-tabs-nav-no-negative-margin" data-tab-wrapper-id="notifications-sidebar">
+					<ul>
+						<li class="merchant-tabs-nav-item active">
+							<a href="#" class="merchant-tabs-nav-link" data-tab-to="notifications-sidebar-merchant">
+								<?php echo esc_html__( 'Merchant', 'merchant' ); ?>
+							</a>
+						</li>
+						<li class="merchant-tabs-nav-item">
+							<a href="#" class="merchant-tabs-nav-link" data-tab-to="notifications-sidebar-merchant-pro">
+								<?php echo esc_html__( 'Merchant Pro', 'merchant' ); ?>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		<?php endif; ?>
+		<div class="merchant-notifications-sidebar-body merchant-tab-content-wrapper" data-tab-wrapper-id="notifications-sidebar">
+			<div class="merchant-tab-content active" data-tab-content-id="notifications-sidebar-merchant">
+				<?php if ( ! empty( $merchant_notifications ) ) : ?>
+					<?php $merchant_display_version = false; ?>
+					<?php foreach ( $merchant_notifications as $merchant_notification ) : ?>
+						<?php $merchant_date = isset( $merchant_notification->post_date ) ? $merchant_notification->post_date : false; ?>
+						<?php $merchant_version = isset( $merchant_notification->post_title ) ? $merchant_notification->post_title : false; ?>
+						<?php $merchant_content = isset( $merchant_notification->post_content ) ? $merchant_notification->post_content : false; ?>
+						<div class="merchant-notification">
+							<?php if ( $merchant_date ) : ?>
+								<span class="merchant-notification-date" data-raw-date="<?php echo esc_attr( $merchant_date ); ?>">
+									<?php echo esc_html( date_format( date_create( $merchant_date ), 'F j, Y' ) ); ?>
+									<?php if ( $merchant_display_version ) : ?>
+										<span class="merchant-notification-version">(<?php echo esc_html( $merchant_version ); ?>)</span>
+									<?php endif; ?>
+								</span>
+							<?php endif; ?>
+							<?php if ( $merchant_content ) : ?>
+								<div class="merchant-notification-content">
+									<?php echo wp_kses_post( $merchant_content ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+						<?php $merchant_display_version = true; ?>
+					<?php endforeach; ?>
+				<?php else : ?>
 					<div class="merchant-notification">
-						<?php if ( $merchant_date ) : ?>
-							<span class="merchant-notification-date" data-raw-date="<?php echo esc_attr( $merchant_date ); ?>">
-								<?php echo esc_html( date_format( date_create( $merchant_date ), 'F j, Y' ) ); ?>
-								<?php if ( $merchant_display_version ) : ?>
-									<span class="merchant-notification-version">(<?php echo esc_html( $merchant_version ); ?>)</span>
-								<?php endif; ?>
-							</span>
-						<?php endif; ?>
-						<?php if ( $merchant_content ) : ?>
-							<div class="merchant-notification-content">
-								<?php echo wp_kses_post( $merchant_content ); ?>
-							</div>
-						<?php endif; ?>
+						<div class="merchant-notification-content">
+							<p class="changelog-description"><?php echo esc_html__( 'No notifications found', 'merchant' ); ?></p>
+						</div>
 					</div>
-					<?php $merchant_display_version = true; ?>
-				<?php endforeach; ?>
-			<?php else : ?>
-				<div class="merchant-notification">
-					<div class="merchant-notification-content">
-						<p class="changelog-description"><?php echo esc_html__( 'No notifications found', 'merchant' ); ?></p>
+				<?php endif; ?>
+			</div>
+
+			<?php if ( $merchant_notification_tabs ) : ?>
+			<div class="merchant-tab-content" data-tab-content-id="notifications-sidebar-merchant-pro">
+				<?php if ( ! empty( $merchant_notifications_pro ) ) : ?>
+					<?php $merchant_display_version = false; ?>
+					<?php foreach ( $merchant_notifications_pro as $merchant_notification ) : ?>
+						<?php $merchant_date = isset( $merchant_notification->post_date ) ? $merchant_notification->post_date : false; ?>
+						<?php $merchant_version = isset( $merchant_notification->post_title ) ? $merchant_notification->post_title : false; ?>
+						<?php $merchant_content = isset( $merchant_notification->post_content ) ? $merchant_notification->post_content : false; ?>
+						<div class="merchant-notification">
+							<?php if ( $merchant_date ) : ?>
+								<span class="merchant-notification-date" data-raw-date="<?php echo esc_attr( $merchant_date ); ?>">
+									<?php echo esc_html( date_format( date_create( $merchant_date ), 'F j, Y' ) ); ?>
+									<?php if ( $merchant_display_version ) : ?>
+										<span class="merchant-notification-version">(<?php echo esc_html( $merchant_version ); ?>)</span>
+									<?php endif; ?>
+								</span>
+							<?php endif; ?>
+							<?php if ( $merchant_content ) : ?>
+								<div class="merchant-notification-content">
+									<?php echo wp_kses_post( $merchant_content ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+						<?php $merchant_display_version = true; ?>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<div class="merchant-notification">
+						<div class="merchant-notification-content">
+							<p class="changelog-description"><?php echo esc_html__( 'No notifications found', 'merchant' ); ?></p>
+						</div>
 					</div>
-				</div>
+				<?php endif; ?>
+			</div>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -129,7 +189,10 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 	<?php else : ?>
 
-		<?php $merchant_modules = Merchant_Admin_Modules::get_modules(); ?>
+		<?php 
+		$merchant_modules = Merchant_Admin_Modules::get_modules();
+		$merchant_modules = Merchant_Admin_Modules::add_upsell_modules( $merchant_modules );
+		?>
 
 		<?php
 
@@ -270,9 +333,26 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 						<div class="merchant-modules-list">
 
-							<?php foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) : ?>
+							<?php 
+							foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) : 
+								$is_upsell   = isset( $merchant_module['upsell'] ) && true === $merchant_module['upsell'];
+								$module_link = $is_upsell ? 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant' : add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
+								$link_target = $is_upsell ? '_blank' : '_self';
 
-								<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' ) ); ?>" class="merchant-modules-list-item">
+								?>
+
+								<a href="<?php echo esc_url( $module_link ); ?>" class="merchant-modules-list-item" target="<?php echo esc_attr( $link_target ); ?>">
+
+									<?php if( $is_upsell ) : ?>
+										<div class="merchant-modules-list-item-upsell">
+											<span class="merchant-pro-badge merchant-pro-tooltip" data-tooltip-message="<?php echo esc_attr__( 'This option is only available on Merchant Pro', 'merchant' ); ?>">
+												<svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M7.41309 8.90723H5.58203V7.85254H7.41309C7.71257 7.85254 7.95508 7.80371 8.14062 7.70605C8.32943 7.60514 8.46777 7.46842 8.55566 7.2959C8.64355 7.12012 8.6875 6.91992 8.6875 6.69531C8.6875 6.47721 8.64355 6.27376 8.55566 6.08496C8.46777 5.89616 8.32943 5.74316 8.14062 5.62598C7.95508 5.50879 7.71257 5.4502 7.41309 5.4502H6.02148V11.5H4.67871V4.39062H7.41309C7.96647 4.39062 8.43848 4.48991 8.8291 4.68848C9.22298 4.88379 9.52246 5.1556 9.72754 5.50391C9.93587 5.84896 10.04 6.24284 10.04 6.68555C10.04 7.14453 9.93587 7.54004 9.72754 7.87207C9.52246 8.2041 9.22298 8.45964 8.8291 8.63867C8.43848 8.81771 7.96647 8.90723 7.41309 8.90723ZM11.0947 4.39062H13.6777C14.2181 4.39062 14.682 4.47201 15.0693 4.63477C15.4567 4.79753 15.7546 5.03841 15.9629 5.35742C16.1712 5.67643 16.2754 6.06868 16.2754 6.53418C16.2754 6.90202 16.2103 7.22103 16.0801 7.49121C15.9499 7.76139 15.766 7.98763 15.5283 8.16992C15.2939 8.35221 15.0173 8.49544 14.6982 8.59961L14.2783 8.81445H11.998L11.9883 7.75488H13.6924C13.9691 7.75488 14.1986 7.70605 14.3809 7.6084C14.5632 7.51074 14.6999 7.37565 14.791 7.20312C14.8854 7.0306 14.9326 6.83366 14.9326 6.6123C14.9326 6.37467 14.887 6.1696 14.7959 5.99707C14.7048 5.82129 14.5664 5.6862 14.3809 5.5918C14.1953 5.4974 13.9609 5.4502 13.6777 5.4502H12.4375V11.5H11.0947V4.39062ZM15.1084 11.5L13.4629 8.31641L14.8838 8.31152L16.5488 11.4316V11.5H15.1084ZM23.209 7.76465V8.13086C23.209 8.66797 23.1374 9.15137 22.9941 9.58105C22.8509 10.0075 22.6475 10.3704 22.3838 10.6699C22.1201 10.9694 21.806 11.1989 21.4414 11.3584C21.0768 11.5179 20.6715 11.5977 20.2256 11.5977C19.7861 11.5977 19.3825 11.5179 19.0146 11.3584C18.6501 11.1989 18.3343 10.9694 18.0674 10.6699C17.8005 10.3704 17.5938 10.0075 17.4473 9.58105C17.3008 9.15137 17.2275 8.66797 17.2275 8.13086V7.76465C17.2275 7.22428 17.3008 6.74089 17.4473 6.31445C17.5938 5.88802 17.7988 5.52507 18.0625 5.22559C18.3262 4.92285 18.6403 4.69173 19.0049 4.53223C19.3727 4.37272 19.7764 4.29297 20.2158 4.29297C20.6618 4.29297 21.0671 4.37272 21.4316 4.53223C21.7962 4.69173 22.1104 4.92285 22.374 5.22559C22.641 5.52507 22.846 5.88802 22.9893 6.31445C23.1357 6.74089 23.209 7.22428 23.209 7.76465ZM21.8516 8.13086V7.75488C21.8516 7.36751 21.8158 7.02734 21.7441 6.73438C21.6725 6.43815 21.5667 6.18913 21.4268 5.9873C21.2868 5.78548 21.1143 5.63411 20.9092 5.5332C20.7041 5.42904 20.473 5.37695 20.2158 5.37695C19.9554 5.37695 19.7243 5.42904 19.5225 5.5332C19.3239 5.63411 19.1546 5.78548 19.0146 5.9873C18.8747 6.18913 18.7673 6.43815 18.6924 6.73438C18.6208 7.02734 18.585 7.36751 18.585 7.75488V8.13086C18.585 8.51497 18.6208 8.85514 18.6924 9.15137C18.7673 9.44759 18.8747 9.69824 19.0146 9.90332C19.1579 10.1051 19.3304 10.2581 19.5322 10.3623C19.734 10.4665 19.9652 10.5186 20.2256 10.5186C20.486 10.5186 20.7171 10.4665 20.9189 10.3623C21.1208 10.2581 21.29 10.1051 21.4268 9.90332C21.5667 9.69824 21.6725 9.44759 21.7441 9.15137C21.8158 8.85514 21.8516 8.51497 21.8516 8.13086Z" fill="#3858E9"/>
+													<rect x="0.5" y="1" width="27" height="14" rx="1.5" stroke="#3858E9"/>
+												</svg>
+											</span>
+										</div>
+									<?php endif; ?>
 
 									<div class="merchant-modules-list-item-icon">
 										<?php if ( ! empty( $merchant_module['icon'] ) ) : ?>
@@ -289,7 +369,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 											<?php echo esc_html( $merchant_module['title'] ); ?>
 
-											<?php if ( Merchant_Modules::is_module_active( $merchant_module_id ) ) : ?>
+											<?php if ( Merchant_Modules::is_module_active( $merchant_module_id ) && ! $is_upsell ) : ?>
 												<i class="merchant-modules-indicator"></i>
 											<?php endif; ?>
 

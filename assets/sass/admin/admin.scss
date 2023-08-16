@@ -2,6 +2,7 @@
 @import 'animations';
 @import 'pickr';
 @import 'buttons';
+@import 'tabs';
 
 .toplevel_page_merchant {
 	background-color: #F4F6F8;
@@ -219,7 +220,7 @@
   .merchant-notifications-sidebar-body {
     padding: 20px;
     overflow-y: auto;
-    max-height: calc( 100vh - 180px );
+    max-height: calc( 100vh - 230px );
 
     &::-webkit-scrollbar {
       width: 5px;
@@ -476,6 +477,7 @@
 }
 
 .merchant-modules-list-item {
+	position: relative;
 	display: flex;
 	grid-gap: 10px;
 	padding: 20px;
@@ -495,6 +497,77 @@
 	}
 }
 
+.merchant-badge {
+	color: #99A5B8;
+	padding: 3px 6px;
+	border: 1px solid #DFDFDF;
+	border-radius: 2px;
+	font-weight: 700;
+
+	&.merchant-badge-pro {
+		color: #3858e9;
+		border-color: #3858e9;
+	}
+}
+
+.merchant-pro-badge {
+
+	&.merchant-pro-tooltip {
+		position: relative;
+	
+		&:before {
+			content: attr(data-tooltip-message);
+			position: absolute;
+			right: -30px;
+			bottom: calc( 100% + 11px );
+			color: #FFF;
+			font-size: 11px;
+			line-height: 16px;
+			padding: 3px 6px;
+			background-color: #1E1E1E;
+			white-space: nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transform: translate3d(0, 6px, 0);
+			transition: ease opacity 300ms, ease transform 300ms;
+			z-index: 2;
+		}
+	
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: calc( 100% + 3px );
+			right: 10px;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 4px 4px 4px 4px;
+			border-color: #1E1E1E transparent transparent transparent;
+			opacity: 0;
+			visibility: hidden;
+			transform: translate3d(0, 6px, 0);
+			transition: ease opacity 300ms, ease transform 300ms;
+			z-index: 2;
+		}
+	
+		&:hover {
+			&:before,
+			&:after {
+				opacity: 1;
+				visibility: visible;
+				transform: translate3d(0, 0, 0);
+			}
+		}
+	}
+
+}
+
+.merchant-modules-list-item-upsell {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
 .merchant-modules-list-item-icon {
 	display: flex;
 
@@ -502,6 +575,11 @@
 		width: 18px;
 		height: 26px;
 		fill: #787C82;
+
+		&.stroke-based {
+			fill: none;
+			stroke: #787C82;
+		}
 	}
 }
 

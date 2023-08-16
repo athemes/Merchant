@@ -30,9 +30,10 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 				<?php esc_html_e( 'Total Modules', 'merchant' ); ?>
 				<strong>
 					<?php
-						$merchant_count          = 0;
-						$merchant_active_modules = 0;
-						$merchant_option_modules = get_option( 'merchant-modules', array() );
+					$merchant_count          = 0;
+					$merchant_active_modules = 0;
+					$merchant_option_modules = get_option( 'merchant-modules', array() );
+
 					if ( ! empty( $merchant_modules ) ) {
 						foreach ( $merchant_modules as $merchant_data ) {
 							if ( ! empty( $merchant_data['modules'] ) ) {
@@ -40,12 +41,16 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 									if ( ! empty( $merchant_option_modules[ $merchant_module_id ] ) ) {
 										$merchant_active_modules++;
 									}
-									$merchant_count++;
+
+									if( ! isset( $merchant_module['upsell'] ) ) {
+										$merchant_count++;
+									}
 								}
 							}
 						}
 					}
-						echo esc_attr( $merchant_count );
+					
+					echo esc_attr( $merchant_count );
 					?>
 				</strong>
 			</div>
@@ -114,7 +119,7 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 							</a>
 
 						<?php endforeach; ?>
-
+				
 					<?php endif; ?>
 
 				<?php endforeach; ?>
