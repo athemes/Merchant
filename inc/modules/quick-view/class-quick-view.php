@@ -52,7 +52,8 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			'zoom_effect' => 1,
 			'show_quantity' => 1,
 			'place_product_description' => 'top',
-			'description_style' => 'short'
+			'description_style' => 'short',
+			'place_product_image' => 'thumbs-at-left'
 		);
 
 		// Mount preview url.
@@ -255,19 +256,19 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		<div class="merchant-quick-view-preview <?php echo esc_attr( $settings[ 'button_position' ] ); ?>">
 			<div class="image-wrapper">
 				<div class="button-position button-position-overlay">
-					<?php wp_kses( $this->admin_preview_quick_view_button(), merchant_kses_allowed_tags( [] ) ); ?>
+					<?php $this->admin_preview_quick_view_button(); ?>
 				</div>
 			</div>
 			<h3><?php echo esc_html__( 'Product Title', 'merchant' ); ?></h3>
 			<p><?php echo esc_html__( 'The product description normally is displayed here.', 'merchant' ); ?></p>
 			<div class="button-position button-position-before">
-				<?php wp_kses( $this->admin_preview_quick_view_button(), merchant_kses_allowed_tags( [] ) ); ?>
+				<?php $this->admin_preview_quick_view_button(); ?>
 			</div>
 			<div>
 				<a href="#" class="add_to_cart_button"><?php echo esc_html__( 'Add To Cart', 'merchant' ); ?></a>
 			</div>
 			<div class="button-position button-position-after">
-				<?php wp_kses( $this->admin_preview_quick_view_button(), merchant_kses_allowed_tags( [] ) ); ?>
+				<?php $this->admin_preview_quick_view_button(); ?>
 			</div>
 
 		</div>

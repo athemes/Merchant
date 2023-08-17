@@ -66,8 +66,10 @@ class Merchant {
 			}
 		} );
 
-		// Includes.
-		$this->includes();
+		// Load the plugin functionality.
+		add_action( 'init', array( $this, 'includes' ) );
+		// $this->includes();
+
 	}
 
 	/**

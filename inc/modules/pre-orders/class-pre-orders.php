@@ -95,9 +95,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			return;
 		}
 
-		// Init pre orders main functionality within the `woocommerce_loaded` hook. callback with a class method.
 		// TODO: Refactor the 'Merchant_Pre_Orders_Main_Functionality' class to load admin things separated from frontend things.
-		add_action( 'woocommerce_loaded', array( $main_func, 'init' ) );
+		$main_func->init();
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
