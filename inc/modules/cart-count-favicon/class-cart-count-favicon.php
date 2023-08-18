@@ -48,7 +48,7 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 			'background_color' => '#ff0101',
 			'text_color' => '#FFF',
 			'animation' => 'slide',
-			'delay' => '0'
+			'delay' => '0s'
 		);
 
 		// Mount preview url.

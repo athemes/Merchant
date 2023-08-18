@@ -68,7 +68,6 @@ class Merchant {
 
 		// Load the plugin functionality.
 		add_action( 'init', array( $this, 'includes' ) );
-		// $this->includes();
 
 	}
 

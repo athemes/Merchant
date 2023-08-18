@@ -1391,7 +1391,8 @@ body.merchant-has-admin-preview {
 	}
 }
 
-.merchant-module-page-setting-field-textarea {
+.merchant-module-page-setting-field-textarea,
+.merchant-module-page-setting-field-textarea_code {
 
 	textarea {
 		padding: 12px;
@@ -1409,7 +1410,8 @@ body.merchant-has-admin-preview {
 	}
 }
 
-.merchant-code-snippets-textarea {
+.merchant-code-snippets-textarea,
+.merchant-code-snippets-textarea_code {
 
 	textarea {
 		min-height: 200px;

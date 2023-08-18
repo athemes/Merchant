@@ -123,7 +123,10 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 	
 			}
 
-			$css .= Merchant_Option::get( 'global-settings', 'custom_css', '' );
+			// Global Settings.
+			if( ! is_admin() ) {
+				$css .= Merchant_Option::get( 'global-settings', 'custom_css', '' );
+			}
 
 			/**
 			 * Hook: merchant_custom_css

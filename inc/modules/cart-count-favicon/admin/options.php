@@ -74,13 +74,13 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Animation repetition interval', 'merchant' ),
 			'options' => array(
-				'1' => esc_html__( '1 Second', 'merchant' ),
-				'2' => esc_html__( '2 Seconds', 'merchant' ),
-				'3' => esc_html__( '3 Seconds', 'merchant' ),
-				'5' => esc_html__( '5 Seconds', 'merchant' ),
-				'0' => esc_html__( 'Never', 'merchant' ),
+				'1s' => esc_html__( '1 Second', 'merchant' ),
+				'2s' => esc_html__( '2 Seconds', 'merchant' ),
+				'3s' => esc_html__( '3 Seconds', 'merchant' ),
+				'5s' => esc_html__( '5 Seconds', 'merchant' ),
+				'0s' => esc_html__( 'Never', 'merchant' ),
 			),
-			'default' => '0',
+			'default' => '0s'
 		),
 
 	),
