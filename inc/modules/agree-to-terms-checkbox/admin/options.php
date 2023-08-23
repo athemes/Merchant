@@ -27,21 +27,21 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Terms and Conditions Text', 'merchant' ),
+			'title'   => esc_html__( 'Terms and conditions text', 'merchant' ),
 			'default' => esc_html__( 'Terms & Conditions', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'link',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Terms and Conditions Link', 'merchant' ),
+			'title'   => esc_html__( 'Terms and conditions link', 'merchant' ),
 			'default' => get_privacy_policy_url(),
 		),
 
 		array(
 			'id'      => 'warning_text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Checkbox Warning Text', 'merchant' ),
+			'title'   => esc_html__( 'Checkbox warning text', 'merchant' ),
 			'default' => esc_html__( 'You must read and accept the terms and conditions to complete checkout.', 'merchant' ),
 			'desc'    => esc_html__( 'The error will be shown if the user tries to go to checkout without accepting the terms & conditions.', 'merchant' ),
 		),

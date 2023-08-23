@@ -5,23 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Lazy load images
- * 
- */
-function merchant_loaded() {
-	$lazy_load_images = Merchant_Option::get( 'global-settings', 'lazy_load_images', 1 );
-
-	if ( ! empty( $lazy_load_images ) ) {
-		add_filter( 'wp_img_tag_add_loading_attr', '__return_true' );
-		add_filter( 'wp_lazy_loading_enabled', '__return_true' );
-	} else {
-		add_filter( 'wp_img_tag_add_loading_attr', '__return_false' );
-		add_filter( 'wp_lazy_loading_enabled', '__return_false' );
-	}
-}
-add_action( 'init', 'merchant_loaded' );
-
-/**
  * Head custom JS
  * 
  */

@@ -180,6 +180,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				<span class="merchant-onsale merchant-onsale-<?php echo sanitize_html_class( $settings[ 'label_position' ] ); ?> merchant-onsale-shape-<?php echo sanitize_html_class( $settings[ 'label_shape' ] ) ?>"><?php echo esc_html( $label_text ); ?></span>
 			</div>
 			<h3><?php echo esc_html__( 'Product Title', 'merchant' ); ?></h3>
+			<p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
 		</div>
 
 		<?php

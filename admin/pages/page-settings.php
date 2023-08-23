@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="merchant-module-page">
 
-	<div class="merchant-module-page-content">
+	<div class="merchant-module-page-content mrc-w-100">
 
 		<form method="post" action="" class="merchant-module-page-ajax-form">
 
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			</div>
 
-			<div class="merchant-module-page-content">
+			<div class="merchant-module-page-content mrc-w-100">
 
 				<?php
 
@@ -58,23 +58,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				 * @since 1.0
 				 */
 				do_action( 'merchant_admin_settings_before_options' );
-
-				Merchant_Admin_Options::create( array(
-					'module'    => 'global-settings',
-					'title'     => esc_html__( 'Settings', 'merchant' ),
-					'subtitle'  => esc_html__( 'Choose who can see Merchant on your store. Note: it can take few seconds for changes to take effect.', 'merchant' ),
-					'fields'    => array(
-
-						array(
-							'id'      => 'lazy_load_images',
-							'type'    => 'checkbox',
-							'label'   => esc_html__( 'Lazy Load Images', 'merchant' ),
-							'desc'    => esc_html__( 'Load images when the visitor scrolls, to speed up the initial page load. This affects all modules that show images such as product reviews, recently viewed, related products, etc.', 'merchant' ),
-							'default' => 1,
-						),
-
-					),
-				) );
 
 				Merchant_Admin_Options::create( array(
 					'module'    => 'global-settings',

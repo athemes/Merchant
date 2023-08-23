@@ -180,7 +180,25 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 	public function admin_preview_content() {
 		?>
 
-		<a href="#" class="add_to_cart_button"><?php echo esc_html__( 'Add To Cart', 'merchant' ); ?></a>
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
+				<a href="#" class="add_to_cart_button"><?php echo esc_html__( 'Add To Cart', 'merchant' ); ?></a>
+			</div>
+		</div>
 
 		<?php
 	}

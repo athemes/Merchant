@@ -34,10 +34,11 @@
           justify-content: var(--mrc-tb-align, center);
   width: 100%;
   color: var(--mrc-tb-text-color, #212121);
-  font-size: var(--mrc-tb-font-size, 18px);
+  font-size: var(--mrc-tb-font-size, 15px);
   font-weight: 700;
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 0;
 }
 
 .merchant-trust-badges-images {
@@ -53,8 +54,8 @@
 }
 
 .merchant-trust-badges-images img {
-  max-width: var(--mrc-tb-image-max-width, 100px) !important;
-  max-height: var(--mrc-tb-image-max-height, 100px) !important;
+  max-width: var(--mrc-tb-image-max-width, 70px) !important;
+  max-height: var(--mrc-tb-image-max-height, 70px) !important;
 }
 
 .merchant-trust-badges-images.is-placeholder img {

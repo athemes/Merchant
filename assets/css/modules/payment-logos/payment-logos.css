@@ -47,7 +47,7 @@
 }
 
 .merchant-payment-logos-images img {
-  max-width: var(--mrc-plogos-image-max-width, 100px) !important;
+  max-width: var(--mrc-plogos-image-max-width, 80px) !important;
   max-height: var(--mrc-plogos-image-max-height, 100px) !important;
 }
 

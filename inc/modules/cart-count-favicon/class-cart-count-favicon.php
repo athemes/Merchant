@@ -44,7 +44,7 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'shape' => 'circle',
-			'position' => 'down-left',
+			'position' => 'up-right',
 			'background_color' => '#ff0101',
 			'text_color' => '#FFF',
 			'animation' => 'slide',

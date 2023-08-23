@@ -1,4 +1,8 @@
 /* Utilities */
+.mrc-w-100 {
+  width: 100% !important;
+}
+
 .mrc-mb-0 {
   margin-bottom: 0;
 }
@@ -1727,6 +1731,7 @@
 }
 
 .merchant-module-page-content {
+  width: 50%;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -1822,8 +1827,16 @@
   max-height: 300px;
 }
 
-body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
+body.merchant-has-admin-preview .merchant-module-page-header-content {
+  width: 100%;
+}
+
+body.merchant-has-admin-preview .merchant-module-page-header-placeholder {
   display: none;
+}
+
+body.merchant-has-admin-preview .merchant-module-page-desc {
+  max-width: none;
 }
 
 .merchant-module-page-heading {
@@ -2239,6 +2252,19 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   color: #3858E9;
 }
 
+body.merchant-module-disabled .merchant-module-page-link-preview {
+  pointer-events: none;
+  color: #CCC;
+}
+
+body.merchant-module-disabled .merchant-module-page-link-preview span {
+  text-decoration: none;
+}
+
+body.merchant-module-disabled .merchant-module-page-link-preview svg path {
+  fill: #CCC;
+}
+
 .merchant-module-page-ajax-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2420,7 +2446,6 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   overflow: hidden;
-  min-height: 500px;
   -webkit-box-shadow: 0 0 50px #0000001f;
           box-shadow: 0 0 50px #0000001f;
   margin-bottom: -29px;
@@ -2468,6 +2493,19 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.merchant-module-page-setting-box.merchant-module-page-setting-box-style-2 {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  grid-gap: 20px;
+}
+
+.merchant-module-page-setting-box.merchant-module-page-setting-box-style-2 .merchant-module-page-setting-title,
+.merchant-module-page-setting-box.merchant-module-page-setting-box-style-2 .merchant-module-page-setting-fields {
+  width: 100%;
 }
 
 .merchant-module-page-preview-title,
@@ -3155,6 +3193,18 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   width: 100%;
 }
 
+@media (max-width: 1470px) {
+  .merchant-animated-buttons .merchant-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1050px) {
+  .merchant-animated-buttons .merchant-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Sortable Field */
 .merchant-sortable {
   max-width: 300px;
@@ -3282,6 +3332,7 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   vertical-align: top;
   margin-left: -1px;
   border: 1px solid #D6D6D6;
+  text-decoration: none;
 }
 
 .merchant-sortable-repeater-control .customize-control-sortable-repeater-delete .dashicons-no-alt {
@@ -3350,6 +3401,10 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
   -webkit-box-shadow: none;
           box-shadow: none;
   background-color: #ffffff;
+}
+
+.merchant-sortable-repeater-control.disable-sorting .dashicons-menu {
+  display: none;
 }
 
 .merchant-module-page-setting-field-range .merchant-range {
@@ -3859,6 +3914,8 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
 }
 
 .merchant-module-alert-header a {
+  position: relative;
+  right: -5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3886,8 +3943,6 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
 }
 
 .merchant-module-alert-content {
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3896,7 +3951,7 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
       -ms-flex-direction: column;
           flex-direction: column;
   grid-gap: 20px;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
 }
 
 .merchant-module-alert-content p {
@@ -4041,6 +4096,9 @@ body.merchant-has-admin-preview .merchant-module-page-header-placeholder img {
     -webkit-box-direction: reverse;
         -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
+  }
+  .merchant-module-page-content {
+    width: 100%;
   }
   .merchant-module-page-preview {
     margin-left: 0;

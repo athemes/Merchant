@@ -105,6 +105,7 @@
         module: $(this).data('module'),
         nonce: window.merchant.nonce
       }).done(function () {
+        $('body').removeClass('merchant-module-disabled').addClass('merchant-module-enabled');
         $('.merchant-module-action').addClass('merchant-enabled');
       });
     });
@@ -114,6 +115,7 @@
         module: $(this).data('module'),
         nonce: window.merchant.nonce
       }).done(function () {
+        $('body').removeClass('merchant-module-enabled').addClass('merchant-module-disabled');
         $('.merchant-module-action').removeClass('merchant-enabled');
         $('.merchant-module-question-list-dropdown').addClass('merchant-show');
       });
@@ -303,13 +305,13 @@
 
         // Update the values for all our input fields and initialise the sortable repeater.
         $('.merchant-sortable-repeater-control').each(function () {
-          console.log($(this).find('.merchant-sortable-repeater-input').val());
           // If there is an existing customizer value, populate our rows
           var defaultValuesArray = JSON.parse($(this).find('.merchant-sortable-repeater-input').val());
           var numRepeaterItems = defaultValuesArray.length;
           if (numRepeaterItems > 0) {
             // Add the first item to our existing input field
             $(this).find('.repeater-input').val(defaultValuesArray[0]);
+
             // Create a new row for each new value
             if (numRepeaterItems > 1) {
               var i;
@@ -318,12 +320,14 @@
               }
             }
           }
-        });
 
-        // Make our Repeater fields sortable.
-        $('.merchant-sortable-repeater.sortable').sortable({
-          update: function update(event, ui) {
-            self.getAllInputs($(this).parent());
+          // Make our Repeater fields sortable.
+          if (!$(this).hasClass('disable-sorting')) {
+            $(this).find('.merchant-sortable-repeater.sortable').sortable({
+              update: function update(event, ui) {
+                self.getAllInputs($(this).parent());
+              }
+            });
           }
         });
 

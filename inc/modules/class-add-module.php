@@ -44,6 +44,26 @@ class Merchant_Add_Module {
 		// Add module options.
 		add_filter( 'merchant_module_file_path', array( $this, 'add_module_options' ), 10, 2 );
 
+		// Add class to body to identify if module is active or not.
+		add_filter( 'admin_body_class', array( $this, 'add_module_activation_status_class' ), 10, 2 );
+	}
+
+	/**
+	 * Active modules class handler.
+	 * 
+	 */
+	public function add_module_activation_status_class( $classes ) {
+		if ( ! $this->is_module_settings_page() ) {
+			return $classes;
+		}
+
+		if ( Merchant_Modules::is_module_active( $this->module_id ) ) {
+			$classes = $classes . ' merchant-module-enabled';
+		} else {
+			$classes = $classes . ' merchant-module-disabled';
+		}
+
+		return $classes;
 	}
 
 	/**

@@ -82,6 +82,9 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
+			// Render module essencial instructions before the module page body content.
+			add_action( 'merchant_admin_after_module_page_page_header', array( $this, 'admin_module_essencial_instructions' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
@@ -170,6 +173,31 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Render module essencial instructions.
+	 * 
+	 * @return void
+	 */
+	public function admin_module_essencial_instructions() { ?>
+		<div class="merchant-module-page-settings">
+			<div class="merchant-module-page-setting-box merchant-module-page-setting-box-style-2">
+				<div class="merchant-module-page-setting-title"><?php echo esc_html__( 'Tag Pre-Orders', 'merchant' ); ?></div>
+				<div class="merchant-module-page-setting-fields">
+					<div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+						<div class="merchant-module-page-setting-field-inner">
+							<div class="merchant-tag-pre-orders">
+								<i class="dashicons dashicons-info"></i>
+								<p><?php echo esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.', 'merchant' ); ?> <?php echo sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ), esc_html__( 'View Pre-Orders', 'merchant' ) ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<?php
+	}
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -219,9 +247,27 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public function admin_preview_content( $settings, $text ) {
 		?>
 
-		<div class="merchant-pre-ordered-product">
-			<div class="merchant-pre-orders-date"><?php echo sprintf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) ); ?></div>
-			<a href="#" class="add_to_cart_button"><?php echo esc_html( $settings[ 'button_text' ] ); ?></a>
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-40 mrc-hide-on-smaller-screens"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30 mrc-hide-on-smaller-screens"></div>
+				<div class="merchant-pre-ordered-product">
+					<div class="merchant-pre-orders-date"><?php echo sprintf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) ); ?></div>
+					<a href="#" class="add_to_cart_button"><?php echo esc_html( $settings[ 'button_text' ] ); ?></a>
+				</div>
+			</div>
 		</div>
 
 		<?php

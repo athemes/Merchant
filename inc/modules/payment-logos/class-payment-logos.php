@@ -167,7 +167,30 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$this->payment_logos_output();
+		?>
+
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-40 mrc-hide-on-smaller-screens"></div>
+				<div class="mrc-preview-addtocart-placeholder mrc-hide-on-smaller-screens"></div>
+				<?php $this->payment_logos_output(); ?>
+			</div>
+		</div>
+
+		<?php
 	}
 
 	/**
@@ -270,7 +293,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( 'payment-logos', 'align', 'flex-start', '.merchant-payment-logos', '--mrc-plogos-align' );
 
 		// Image Max Width.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'payment-logos', 'image-max-width', 100, '.merchant-payment-logos', '--mrc-plogos-image-max-width', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'payment-logos', 'image-max-width', 80, '.merchant-payment-logos', '--mrc-plogos-image-max-width', 'px' );
 
 		// Image Max Height.
 		$css .= Merchant_Custom_CSS::get_variable_css( 'payment-logos', 'image-max-height', 100, '.merchant-payment-logos', '--mrc-plogos-image-max-height', 'px' );

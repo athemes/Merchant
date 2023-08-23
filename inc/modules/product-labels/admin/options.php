@@ -18,7 +18,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'label_text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Label Text', 'merchant' ),
+			'title'   => esc_html__( 'Label text', 'merchant' ),
 			'desc'    => esc_html__( 'Note: This label will be shown only on sales products.', 'merchant' ),
 			'default' => esc_html__( 'Spring Special', 'merchant' ),
 		),
@@ -33,7 +33,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'percentage_text',
 			'type'      => 'text',
-			'title'     => 'Sale Percentage Text',
+			'title'     => esc_html__( 'Sale percentage text', 'merchant' ),
 			'desc'      => esc_html__( 'You may use the {value} tag. E.g. <strong>{value}% OFF!</strong>', 'merchant' ),
 			'default'   => '-{value}%',
 			'condition' => array( 'display_percentage', '==', '1' ),
@@ -44,8 +44,8 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Position', 'merchant' ),
 			'options' => array(
-				'top-left'  => esc_html__( 'Top Left', 'merchant' ),
-				'top-right' => esc_html__( 'Top Right', 'merchant' ),
+				'top-left'  => esc_html__( 'Top left', 'merchant' ),
+				'top-right' => esc_html__( 'Top right', 'merchant' ),
 			),
 			'default' => 'left',
 		),
@@ -53,7 +53,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'label_shape',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Shape Radius', 'merchant' ),
+			'title'   => esc_html__( 'Shape radius', 'merchant' ),
 			'min'     => 0,
 			'max'     => 35,
 			'step'    => 1,
@@ -64,14 +64,14 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'label_text_transform',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Letter Case', 'merchant' ),
+			'title'   => esc_html__( 'Letter case', 'merchant' ),
 			'options' => array(
 				'uppercase'  => esc_html__( 'Uppercase', 'merchant' ),
 				'lowercase'  => esc_html__( 'Lowercase', 'merchant' ),
 				'capitalize' => esc_html__( 'Capitalize', 'merchant' ),
 				'none'       => esc_html__( 'None', 'merchant' ),
 			),
-			'default' => 'uppercase',
+			'default' => 'uppercase'
 		),
 
 		array(
@@ -88,7 +88,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'font-size',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Font Size', 'merchant' ),
+			'title'   => esc_html__( 'Font size', 'merchant' ),
 			'min'     => 0,
 			'max'     => 250,
 			'step'    => 1,
@@ -99,14 +99,14 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'background_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Background Color', 'merchant' ),
+			'title'   => esc_html__( 'Background color', 'merchant' ),
 			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'text_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Text Color', 'merchant' ),
+			'title'   => esc_html__( 'Text color', 'merchant' ),
 			'default' => '#ffffff',
 		),
 

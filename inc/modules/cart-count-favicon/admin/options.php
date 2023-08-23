@@ -33,25 +33,25 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Location of the bullet', 'merchant' ),
 			'options' => array(
-				'up-left'    => esc_html__( 'Top Left', 'merchant' ),
-				'up-right'   => esc_html__( 'Top Right', 'merchant' ),
-				'down-left'  => esc_html__( 'Bottom Left', 'merchant' ),
-				'down-right' => esc_html__( 'Bottom Right', 'merchant' ),
+				'up-left'    => esc_html__( 'Top left', 'merchant' ),
+				'up-right'   => esc_html__( 'Top right', 'merchant' ),
+				'down-left'  => esc_html__( 'Bottom left', 'merchant' ),
+				'down-right' => esc_html__( 'Bottom right', 'merchant' ),
 			),
-			'default' => 'down-left',
+			'default' => 'up-right',
 		),
 
 		array(
 			'id'      => 'background_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Background Color', 'merchant' ),
+			'title'   => esc_html__( 'Background color', 'merchant' ),
 			'default' => '#ff0101',
 		),
 
 		array(
 			'id'      => 'text_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Text Color', 'merchant' ),
+			'title'   => esc_html__( 'Text color', 'merchant' ),
 			'default' => '#ffffff',
 		),
 
@@ -74,10 +74,10 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Animation repetition interval', 'merchant' ),
 			'options' => array(
-				'1s' => esc_html__( '1 Second', 'merchant' ),
-				'2s' => esc_html__( '2 Seconds', 'merchant' ),
-				'3s' => esc_html__( '3 Seconds', 'merchant' ),
-				'5s' => esc_html__( '5 Seconds', 'merchant' ),
+				'1s' => esc_html__( '1 second', 'merchant' ),
+				'2s' => esc_html__( '2 seconds', 'merchant' ),
+				'3s' => esc_html__( '3 seconds', 'merchant' ),
+				'5s' => esc_html__( '5 seconds', 'merchant' ),
 				'0s' => esc_html__( 'Never', 'merchant' ),
 			),
 			'default' => '0s'

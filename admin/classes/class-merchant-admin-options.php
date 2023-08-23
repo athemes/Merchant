@@ -749,7 +749,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function sortable_repeater( $settings, $value ) {
 
 			?>
-				<div class="merchant-sortable-repeater-control">
+				<div class="merchant-sortable-repeater-control<?php echo isset( $settings[ 'sorting' ] ) && false === $settings[ 'sorting' ] ? ' disable-sorting' : ''; ?>">
 					<div class="merchant-sortable-repeater sortable regular-field">
 						<div class="repeater">
 							<input type="text" value="" class="repeater-input"/><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>

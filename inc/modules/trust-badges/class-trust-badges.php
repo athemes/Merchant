@@ -168,7 +168,29 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$this->trust_badges_output();
+		?>
+
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30 mrc-hide-on-smaller-screens"></div>
+				<div class="mrc-preview-addtocart-placeholder mrc-hide-on-smaller-screens"></div>
+				<?php $this->trust_badges_output(); ?>
+			</div>
+		</div>
+
+		<?php
 	}
 
 	/**
@@ -253,7 +275,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		$css = '';
 
 		// Font Size.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'font-size', 18, '.merchant-trust-badges', '--mrc-tb-font-size', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'font-size', 15, '.merchant-trust-badges', '--mrc-tb-font-size', 'px' );
 
 		// Text Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'text-color', '#212121', '.merchant-trust-badges', '--mrc-tb-text-color' );
@@ -271,10 +293,10 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'align', 'center', '.merchant-trust-badges', '--mrc-tb-align' );
 
 		// Image Max Width.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'image-max-width', 100, '.merchant-trust-badges', '--mrc-tb-image-max-width', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'image-max-width', 70, '.merchant-trust-badges', '--mrc-tb-image-max-width', 'px' );
 
 		// Image Max Height.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'image-max-height', 100, '.merchant-trust-badges', '--mrc-tb-image-max-height', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'trust-badges', 'image-max-height', 70, '.merchant-trust-badges', '--mrc-tb-image-max-height', 'px' );
 
 		return $css;
 	}

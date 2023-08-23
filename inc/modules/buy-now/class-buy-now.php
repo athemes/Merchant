@@ -175,7 +175,25 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		?>
 
-		<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
+				<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+			</div>
+		</div>
 
 		<?php
 	}

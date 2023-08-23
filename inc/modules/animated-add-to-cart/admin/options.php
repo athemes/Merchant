@@ -42,7 +42,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'animation',
 			'type'    => 'buttons_alt',
-			'title'   => esc_html__( 'Animation Style', 'merchant' ),
+			'title'   => esc_html__( 'Animation style', 'merchant' ),
 			'class'   => 'merchant-animated-buttons',
 			'desc'    => esc_html__( 'Move your mouse over each option to see the animations. Click on one of the buttons to select that animation.', 'merchant' ),
 			'options' => array(

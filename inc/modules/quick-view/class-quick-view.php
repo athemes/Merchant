@@ -46,7 +46,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			'button_type' => 'text',
 			'button_text' => __( 'Quick View', 'merchant' ),
 			'button_icon' => 'eye',
-			'button_position' => 'after',
+			'button_position' => 'overlay',
 			'button-position-top' => 50,
 			'button-position-left' => 50,
 			'zoom_effect' => 1,
@@ -120,7 +120,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 
 		// Button Position.
-		$button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'after' );
+		$button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'overlay' );
 
 		if ( 'before' === $button_position ) {
 			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 5 );

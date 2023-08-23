@@ -119,7 +119,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 				
 				if ( empty( $module ) ) {
 					
-					$text .= sprintf( '<a href="https://athemes.com/" target="_blank" class="merchant-admin-footer-text-link">%s</a>', esc_html__( 'Join our community', 'merchant' ) );
+					$text .= sprintf( '<a href="https://www.facebook.com/groups/245922400035997" target="_blank" class="merchant-admin-footer-text-link">%s</a>', esc_html__( 'Join our community', 'merchant' ) );
 					$text .= esc_html__( 'to discuss about the product and ask for support or help the community.', 'merchant' );
 					
 				}
