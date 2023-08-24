@@ -681,7 +681,7 @@
 }
 
 .merchant-module-page-header-content {
-	width: 60%;
+	width: 100%;
 	display: flex;
 	grid-gap: 20px;
 	flex-direction: column;
@@ -747,7 +747,7 @@ body.merchant-has-admin-preview {
 	line-height: 28px;
 	font-weight: normal;
 	color: #757575;
-	max-width: 500px;
+	max-width: none;
 }
 
 .merchant-module-page-actions {
@@ -1542,6 +1542,14 @@ body.merchant-module-disabled {
 		height: 12px;
 		border-radius: 12px;
 		background-color: #3858E9;
+	}
+}
+
+@media(max-width: 1300px) {
+	.merchant-module-page-setting-field-radio {
+		div {
+			grid-gap: 20px;
+		}
 	}
 }
 

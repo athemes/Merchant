@@ -168,12 +168,6 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 
 					</div>
 
-					<div class="merchant-module-page-header-placeholder">
-						<?php if ( ! empty( $merchant_module_info['placeholder'] ) ) : ?>
-							<img src="<?php echo esc_url( $merchant_module_info['placeholder'] ); ?>" alt="<?php echo esc_attr( $merchant_module_info['title'] ); ?>" />
-						<?php endif; ?>
-					</div>
-
 				</div>
 
 				<?php 
