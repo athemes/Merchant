@@ -100,6 +100,7 @@ Merchant_Admin_Options::create( array(
 				'desktop-only' => esc_html__( 'Desktop only', 'merchant' ),
 				'mobile-only'  => esc_html__( 'Mobile only', 'merchant' ),
 			),
+			'default' => 'all'
 		),
 
 	),

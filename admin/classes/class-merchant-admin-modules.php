@@ -268,16 +268,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 							'placeholder' => MERCHANT_URI . 'assets/images/modules/code-snippets.png',
 							'tutorial_url' => 'https://docs.athemes.com/article/code-snippets/',
 							'preview_url' => $shop_url,
-						),
-
-						'scroll-to-top-button' => array(
-							'icon' => '<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 0c5.514 0 10 4.486 10 10s-4.486 10-10 10S0 15.514 0 10 4.486 0 10 0Zm1 8.414 1.293 1.293a1 1 0 1 0 1.414-1.414l-3-3a.998.998 0 0 0-1.414 0l-3 3a1 1 0 0 0 1.414 1.414L9 8.414V14a1 1 0 1 0 2 0V8.414Z"/></svg>',
-							'title' => esc_html__( 'Scroll to Top Button', 'merchant' ),
-							'desc' => esc_html__( 'Help your customers get back easily to the top of the page with a single click.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/scroll-to-top-button.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/scroll-to-top-button/',
-							'preview_url' => $shop_url,
-						),
+						)
 
 					),
 				),

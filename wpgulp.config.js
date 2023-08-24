@@ -166,6 +166,18 @@ const styles = [
 		destination: './assets/css/modules/agree-to-terms-checkbox/admin',
 	},
 
+	// Scroll To Top Button.
+	{
+		name: 'scrollToTopButton',
+		src: './assets/sass/modules/scroll-to-top-button/scroll-to-top-button.scss',
+		destination: './assets/css/modules/scroll-to-top-button',
+	},
+	{
+		name: 'scrollToTopButtonAdmin',
+		src: './assets/sass/modules/scroll-to-top-button/admin/preview.scss',
+		destination: './assets/css/modules/scroll-to-top-button/admin',
+	}
+
 ];
 
 // Scripts to process.
@@ -273,6 +285,14 @@ const scripts = [
 		src: './assets/js/src/modules/inactive-tab-message/inactive-tab-message.js',
 		destination: './assets/js/modules/inactive-tab-message',
 		file: 'inactive-tab-message',
+	},
+
+	// Scroll To Top Button.
+	{
+		name: 'scrollToTopButton',
+		src: './assets/js/src/modules/scroll-to-top-button/scroll-to-top-button.js',
+		destination: './assets/js/modules/scroll-to-top-button',
+		file: 'scroll-to-top-button',
 	}
 
 ];

@@ -1,3 +1,8 @@
+/**
+ * Merchant Scroll To Top Button.
+ * 
+ */
+
 'use strict';
 
 var merchant = merchant || {};
