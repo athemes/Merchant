@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Get template part.
- * 
+ *
  */
-function merchant_get_template_part( $folder_path = '', $name = '', $args = array() ) {
+function merchant_get_template_part( $folder_path = '', $name = '', $args = array(), $return = false ) {
 	if ( ! empty( $args ) && is_array( $args ) ) {
 		extract( $args );
 	}
@@ -36,12 +36,21 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 
 	/**
 	 * Hook: 'merchant_get_template_part'
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	$template = apply_filters( 'merchant_get_template_part', $template, $folder_path, $name );
 
 	if ( $template ) {
-		return include( $template );
+
+		// Whether to return template HTML as string or to echo it
+		if ( $return) {
+			ob_start();
+			include( $template );
+
+			return ob_get_clean();
+		} else {
+			return include( $template );
+		}
 	}
 }

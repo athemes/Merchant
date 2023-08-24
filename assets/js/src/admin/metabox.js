@@ -184,7 +184,7 @@
 
 			}
 
-			var $repeater = $contents.find('.merchant-metabox-field-repeater');
+			var $repeater = $contents.find('.merchant-metabox-field-repeater, .merchant-metabox-field-flexible-content-repeater');
 
 			if ( $repeater.length ) {
 

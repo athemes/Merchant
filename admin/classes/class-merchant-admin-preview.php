@@ -230,6 +230,11 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			);
 		}
 
+		/***
+		 * Get price format to use in replacements.
+		 *
+		 * @return string
+		 */
 		public function get_price_format() {
 			return str_replace( '0.00', '{string}', wc_price( '0' ) );
 		}

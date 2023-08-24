@@ -20,10 +20,10 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Button style', 'merchant' ),
 			'options' => array(
-				'filled'  => 'Filled',
-				'outline' => 'Outline',
+				'merchant-style-filled'  => 'Filled',
+				'merchant-style-outline' => 'Outline',
 			),
-			'default' => 'filled',
+			'default' => 'merchant-style-filled',
 		),
 
 		array(
@@ -63,10 +63,10 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Position', 'merchant' ),
 			'options' => array(
-				'left'  => 'Left',
-				'right' => 'Right',
+				'merchant-position-left'  => 'Left',
+				'merchant-position-right' => 'Right',
 			),
-			'default' => 'right',
+			'default' => 'merchant-position-right',
 		),
 
 		array(
