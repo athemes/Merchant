@@ -4,53 +4,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-function merchant_code_snippets_header_scripts() {
+function merchant_code_snippets_header_code_snippets() {
 
 	// Header Scripts
-	$header_scripts = Merchant_Option::get( 'code-snippets', 'header_scripts', '' );
+	$header_code_snippets = Merchant_Option::get( 'code-snippets', 'header_code_snippets', '' );
 
-	if ( ! empty( $header_scripts ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $header_scripts, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $header_scripts, array() ) );
-		}
+	if ( ! empty( $header_code_snippets ) ) {
+		echo wp_unslash( $header_code_snippets ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 }
+add_action( 'wp_head', 'merchant_code_snippets_header_code_snippets' );
 
-add_action( 'wp_head', 'merchant_code_snippets_header_scripts' );
-
-function merchant_code_snippets_body_scripts() {
+function merchant_code_snippets_body_code_snippets() {
 
 	// Body Scripts
-	$body_scripts = Merchant_Option::get( 'code-snippets', 'body_scripts', '' );
+	$body_code_snippets = Merchant_Option::get( 'code-snippets', 'body_code_snippets', '' );
 
-	if ( ! empty( $body_scripts ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $body_scripts, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $body_scripts, array() ) );
-		}
+	if ( ! empty( $body_code_snippets ) ) {
+		echo wp_unslash( $body_code_snippets ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 }
+add_action( 'wp_body_open', 'merchant_code_snippets_body_code_snippets' );
 
-add_action( 'wp_body_open', 'merchant_code_snippets_body_scripts' );
-
-function merchant_code_snippets_footer_scripts() {
+function merchant_code_snippets_footer_code_snippets() {
 
 	// Footer Scripts
-	$footer_scripts = Merchant_Option::get( 'code-snippets', 'footer_scripts', '' );
+	$footer_code_snippets = Merchant_Option::get( 'code-snippets', 'footer_code_snippets', '' );
 
-	if ( ! empty( $footer_scripts ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $footer_scripts, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $footer_scripts, array() ) );
-		}
+	if ( ! empty( $footer_code_snippets ) ) {
+		echo wp_unslash( $footer_code_snippets ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 }
-
-add_action( 'wp_footer', 'merchant_code_snippets_footer_scripts', 99 );
+add_action( 'wp_footer', 'merchant_code_snippets_footer_code_snippets', 99 );

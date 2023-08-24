@@ -66,8 +66,9 @@ class Merchant {
 			}
 		} );
 
-		// Includes.
-		$this->includes();
+		// Load the plugin functionality.
+		add_action( 'init', array( $this, 'includes' ) );
+
 	}
 
 	/**
@@ -77,6 +78,9 @@ class Merchant {
 	public function includes() {
 		require_once MERCHANT_DIR . 'admin/class-merchant-admin-loader.php';
 		require_once MERCHANT_DIR . 'inc/class-merchant-loader.php';
+
+		// delete_option( 'merchant' );
+		// delete_option( 'merchant-modules' );
 	}
 
 }

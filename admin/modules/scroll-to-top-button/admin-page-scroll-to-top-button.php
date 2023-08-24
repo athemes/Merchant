@@ -18,7 +18,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'style',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Button Style', 'merchant' ),
+			'title'   => esc_html__( 'Button style', 'merchant' ),
 			'options' => array(
 				'merchant-style-filled'  => 'Filled',
 				'merchant-style-outline' => 'Outline',
@@ -32,7 +32,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Type', 'merchant' ),
 			'options' => array(
 				'icon'      => esc_html__( 'Icon', 'merchant' ),
-				'text-icon' => esc_html__( 'Text + Icon', 'merchant' ),
+				'text-icon' => esc_html__( 'Text + icon', 'merchant' ),
 			),
 			'default' => 'icon',
 		),
@@ -72,7 +72,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'side-offset',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Side Offset', 'merchant' ),
+			'title'   => esc_html__( 'Side offset', 'merchant' ),
 			'min'     => 1,
 			'max'     => 500,
 			'step'    => 1,
@@ -83,7 +83,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bottom-offset',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Bottom Offset', 'merchant' ),
+			'title'   => esc_html__( 'Bottom offset', 'merchant' ),
 			'min'     => 1,
 			'max'     => 500,
 			'step'    => 1,
@@ -97,8 +97,8 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Visibility', 'merchant' ),
 			'options' => array(
 				'all'          => esc_html__( 'Show on all devices', 'merchant' ),
-				'desktop-only' => esc_html__( 'Desktop Only', 'merchant' ),
-				'mobile-only'  => esc_html__( 'Mobile Only', 'merchant' ),
+				'desktop-only' => esc_html__( 'Desktop only', 'merchant' ),
+				'mobile-only'  => esc_html__( 'Mobile only', 'merchant' ),
 			),
 		),
 
@@ -116,7 +116,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'side-offset-mobile',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Side Offset', 'merchant' ),
+			'title'   => esc_html__( 'Side offset', 'merchant' ),
 			'min'     => 1,
 			'max'     => 50,
 			'step'    => 1,
@@ -127,7 +127,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bottom-offset-mobile',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Bottom Offset', 'merchant' ),
+			'title'   => esc_html__( 'Bottom offset', 'merchant' ),
 			'min'     => 1,
 			'max'     => 50,
 			'step'    => 1,
@@ -143,13 +143,13 @@ Merchant_Admin_Options::create( array(
  */
 Merchant_Admin_Options::create( array(
 	'module'    => 'scroll-to-top-button',
-	'title'     => esc_html__( 'Style Settings', 'merchant' ),
+	'title'     => esc_html__( 'Style', 'merchant' ),
 	'fields'    => array(
 
 		array(
 			'id'      => 'icon-size',
 			'type'    => 'range',
-			'title'   => 'Icon Size',
+			'title'   => esc_html__( 'Icon size', 'merchant' ),
 			'min'     => 1,
 			'max'     => 500,
 			'step'    => 1,
@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'text-size',
 			'type'      => 'range',
-			'title'     => 'Text Size',
+			'title'     => esc_html__( 'Text size', 'merchant' ),
 			'min'       => 1,
 			'max'       => 500,
 			'step'      => 1,
@@ -183,7 +183,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'border-size',
 			'type'      => 'range',
-			'title'     => esc_html__( 'Border Size', 'merchant' ),
+			'title'     => esc_html__( 'Border size', 'merchant' ),
 			'min'       => 1,
 			'max'       => 500,
 			'step'      => 1,
@@ -195,7 +195,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'border-radius',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Border Radius', 'merchant' ),
+			'title'   => esc_html__( 'Border radius', 'merchant' ),
 			'min'     => 1,
 			'max'     => 500,
 			'step'    => 1,
@@ -206,21 +206,21 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Icon Color', 'merchant' ),
+			'title'   => esc_html__( 'Icon color', 'merchant' ),
 			'default' => '#FFFFFF',
 		),
 
 		array(
 			'id'      => 'icon-hover-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Icon Color Hover', 'merchant' ),
+			'title'   => esc_html__( 'Icon color hover', 'merchant' ),
 			'default' => '#FFFFFF',
 		),
 
 		array(
 			'id'        => 'text-color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Text Color', 'merchant' ),
+			'title'     => esc_html__( 'Text color', 'merchant' ),
 			'default'   => '#FFFFFF',
 			'condition' => array( 'type', '==', 'text-icon' ),
 		),
@@ -228,7 +228,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'text-hover-color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Text Color Hover', 'merchant' ),
+			'title'     => esc_html__( 'Text color hover', 'merchant' ),
 			'default'   => '#FFFFFF',
 			'condition' => array( 'type', '==', 'text-icon' ),
 		),
@@ -236,7 +236,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'border-color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Border Color', 'merchant' ),
+			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'default'   => '#212121',
 			'condition' => array( 'style', '==', 'outline' ),
 		),
@@ -244,7 +244,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'border-hover-color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Border Color Hover', 'merchant' ),
+			'title'     => esc_html__( 'Border color hover', 'merchant' ),
 			'default'   => '#757575',
 			'condition' => array( 'style', '==', 'outline' ),
 		),
@@ -252,14 +252,14 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'background-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Background Color', 'merchant' ),
+			'title'   => esc_html__( 'Background color', 'merchant' ),
 			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'background-hover-color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Background Color Hover', 'merchant' ),
+			'title'   => esc_html__( 'Background color hover', 'merchant' ),
 			'default' => '#757575',
 		),
 

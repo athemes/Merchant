@@ -96,7 +96,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				 * 
 				 * @since 1.0
 				 */
-				$response = wp_remote_get( apply_filters( 'merchant_changelog_api_url', 'https://athemes.com/wp-json/wp/v2/changelogs?themes=7103&per_page=3' ) );
+				$response = wp_remote_get( apply_filters( 'merchant_changelog_api_url', 'https://athemes.com/wp-json/wp/v2/notifications?theme=7103&per_page=3' ) );
 
 				if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
 					$this->notifications = json_decode( wp_remote_retrieve_body( $response ) );
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			$user_id        = get_current_user_id();
 			$user_read_meta = get_user_meta( $user_id, 'merchant_dashboard_notifications_latest_read', true );
 
-			$last_notification_date      = strtotime( is_string( $this->notifications[0]->date ) ? $this->notifications[0]->date : '' );
+			$last_notification_date      = strtotime( is_string( $this->notifications[0]->post_date ) ? $this->notifications[0]->post_date : '' );
 			$last_notification_date_ondb = $user_read_meta ? strtotime( $user_read_meta ) : false;
 
 			if ( ! $last_notification_date_ondb ) {

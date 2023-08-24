@@ -1,0 +1,16 @@
+/**
+ * Admin Preview
+ * Agree To Terms Checkbox
+ *
+ */
+.merchant-module-page-preview-browser-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  max-width: 600px;
+  margin: auto;
+  padding: 35px 25px;
+}
