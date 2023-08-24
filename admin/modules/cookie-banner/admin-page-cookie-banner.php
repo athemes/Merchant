@@ -20,10 +20,10 @@ Merchant_Admin_Options::create( array(
 			'type'           => 'select',
 			'title'          => esc_html__( 'Theme', 'merchant' ),
 			'options'        => array(
-				'floating'     => esc_html__( 'Floating', 'merchant' ),
-				'fixed-bottom' => esc_html__( 'Fixed Bottom', 'merchant' ),
+				'merchant-cookie-banner-floating'     => esc_html__( 'Floating', 'merchant' ),
+				'merchant-cookie-banner-fixed-bottom' => esc_html__( 'Fixed Bottom', 'merchant' ),
 			),
-			'default'        => 'floating',
+			'default'        => 'merchant-cookie-banner-floating',
 		),
 
 		array(
