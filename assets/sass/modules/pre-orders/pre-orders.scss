@@ -1,0 +1,29 @@
+/**
+ * Pre Orders.
+ *
+ */
+
+.merchant-pre-orders-date {
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+.woocommerce {
+	
+	.merchant-pre-ordered-product {
+		
+		.add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
+		.product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
+		.single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button) {
+			color: var(--mrc-po-text-color, #FFF) !important;
+			border-color: var(--mrc-po-border-color, #212121) !important;
+			background-color: var(--mrc-po-background-color, #212121) !important;
+			
+			&:hover {
+				color: var(--mrc-po-text-hover-color, #FFF) !important;
+				border-color: var(--mrc-po-border-hover-color, #414141) !important;
+				background-color: var(--mrc-po-background-hover-color, #414141) !important;
+			}
+		}
+	}
+}

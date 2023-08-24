@@ -39,7 +39,24 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+
+			// Add admin preview class to body.
+			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ) );
+		}
+
+		/**
+		 * Add admin preview class to body.
+		 *
+		 * @param string $classes
+		 *
+		 * @return string
+		 */
+		public function add_admin_body_class( $classes ) {
+			$classes .= ' merchant-has-admin-preview';
+
+			return $classes;
+		}
 
 		/**
 		 * @param $html
@@ -133,6 +150,24 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		}
 
 		/**
+		 * This will update an svg icon elements based on icon choices.
+		 *
+		 * @param string $setting the setting ID
+		 * @param string $selector the selector
+		 *
+		 * @return void
+		 */
+		public function set_svg_icon( $setting, $selector ) {
+			$manipulator = array(
+				'icons_lib' => Merchant_SVG_Icons::$svg_icons,
+				'setting'  	=> $setting,
+				'selector' 	=> $selector
+			);
+
+			$this->manipulators['svg_icons'][] = $manipulator;
+		}
+
+		/**
 		 * This will update a class of an element with the value from the settings field.
 		 *
 		 * @param string $setting the setting ID
@@ -159,6 +194,26 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			}
 
 			$this->manipulators['classes'][] = $manipulator;
+		}
+
+		/**
+		 * This will update the repeater content of a selector with the value from the settings field.
+		 *
+		 * @param string $setting the setting ID
+		 * @param string $selector the selector
+		 * @param string $repeater_item_selector the repeater item selector
+		 * @param string $icon optional, the icon selector. Useful when the $list_item_selector contains
+		 * 					icon HTML markup inside his content.
+		 *
+		 * @return void
+		 */
+		public function set_repeater_content( $setting, $selector ) {
+			$manipulator = array(
+				'setting'  => $setting,
+				'selector' => $selector
+			);
+
+			$this->manipulators['repeater_content'][] = $manipulator;
 		}
 
 		/**
@@ -197,7 +252,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 */
 		public static function set_preview( $module_id ) {
 			/**
-			 * Hook: merchant_module_previe
+			 * Hook: merchant_module_preview
 			 *
 			 * @since 1.2
 			 */
@@ -218,6 +273,4 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			return self::instance()->html;
 		}
 	}
-
-	Merchant_Admin_Preview::instance();
 }

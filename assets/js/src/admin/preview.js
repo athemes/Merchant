@@ -15,7 +15,14 @@
                 for (const key in manipulators.css) {
                     if (manipulators.css.hasOwnProperty(key)) {
                         const elements = document.querySelectorAll(manipulators.css[key].selector);
-                        const value = $('[name="merchant[' + manipulators.css[key].setting + ']"]').val() + manipulators.css[key].unit;
+                        let value = $('[name="merchant[' + manipulators.css[key].setting + ']"]').val() + manipulators.css[key].unit;
+
+                        const input = $('[name="merchant[' + manipulators.css[key].setting + ']"]');
+                        const inputType = input.attr('type');
+
+                        if( inputType === 'radio' ) {
+                            value = $('[name="merchant[' + manipulators.css[key].setting + ']"]' + ':checked').val() + manipulators.css[key].unit;
+                        }
 
                         elements.forEach((element) => {
                             element.style.setProperty(manipulators.css[key].variable, value);
@@ -26,7 +33,7 @@
             if (hasManipulators(manipulators.text)) {
                 for (const key in manipulators.text) {
                     if (manipulators.text.hasOwnProperty(key)) {
-                        let inputText = $('input[name="merchant[' + manipulators.text[key].setting + ']"]').val();
+                        let inputText = $('[name="merchant[' + manipulators.text[key].setting + ']"]').val();
 
                         if (manipulators.text[key].hasOwnProperty('replacements')) {
                             inputText = setReplacements(inputText, manipulators.text[key]);
@@ -107,12 +114,62 @@
                     }
                 }
             }
+            if (hasManipulators(manipulators.svg_icons)) {
+                for (const key in manipulators.svg_icons) {
+                    if (manipulators.svg_icons.hasOwnProperty(key)) {
+                        let radioElement = $('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]'+ ':checked');
+                        const iconsLib = manipulators.svg_icons[key].icons_lib;
+                        let icon = iconsLib[radioElement.val()];
+                        let iconSelector = $(manipulators.svg_icons[key].selector);
+
+                        if (radioElement.val() === 'none') {
+                            iconSelector.hide();
+                        } else {
+                            iconSelector.show();
+                            iconSelector.html(icon);
+                        }
+                    }
+                }
+            }
+            if (hasManipulators(manipulators.repeater_content)) {
+                for (const key in manipulators.repeater_content) {
+                    if (manipulators.repeater_content.hasOwnProperty(key)) {
+                        const repeaterElement = $('[name="merchant[' + manipulators.repeater_content[key].setting + ']"]');
+                        const repeaterValue = repeaterElement.val() ? JSON.parse( repeaterElement.val() ) : [];
+                        const repeaterItemSelector = $(manipulators.repeater_content[key].selector);
+
+                        if (repeaterValue.length) {
+
+                            // Update content.
+                            for(const [index, repeaterItem] of repeaterValue.entries()) {
+                                if (repeaterItemSelector.length) {
+                                    repeaterItemSelector.eq(index).html(repeaterItem);
+                                }
+                            }
+
+                            // Update content when removing.
+                            if (repeaterItemSelector.length > repeaterValue.length) {
+                                for (let i = repeaterValue.length; i < repeaterItemSelector.length; i++) {
+                                    repeaterItemSelector.eq(i).parent().remove();
+                                }
+                            }
+
+                            // Update content when adding.
+                            if (repeaterItemSelector.length < repeaterValue.length) {
+                                for (let i = repeaterItemSelector.length; i < repeaterValue.length; i++) {
+                                    repeaterItemSelector.eq(0).parent().clone().appendTo(repeaterItemSelector.eq(0).parent().parent());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         const triggerElementsChange = (input) => {
             const inputType = input.attr('type');
 
             // Text inputs
-            if (inputType === 'text') {
+            if (inputType === 'text' || input.prop('tagName') === 'TEXTAREA') {
                 input.on('keyup', () => updateElements());
             }
 
@@ -131,6 +188,11 @@
 
             // Select
             if (inputType === 'checkbox' || input.is('select')) {
+                input.on('change', () => updateElements());
+            }
+
+            // Repeater
+            if (input.hasClass('merchant-sortable-repeater-input')) {
                 input.on('change', () => updateElements());
             }
         }
@@ -160,6 +222,16 @@
             if (hasManipulators(manipulators.icons)) {
                 for (const key in manipulators.icons) {
                     triggerElementsChange($('[name="merchant[' + manipulators.icons[key].setting + ']"]'))
+                }
+            }
+            if (hasManipulators(manipulators.svg_icons)) {
+                for (const key in manipulators.svg_icons) {
+                    triggerElementsChange($('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]'))
+                }
+            }
+            if (hasManipulators(manipulators.repeater_content)) {
+                for (const key in manipulators.repeater_content) {
+                    triggerElementsChange($('[name="merchant[' + manipulators.repeater_content[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.update)) {

@@ -77,7 +77,7 @@
 		var $ajaxHeader  = $('.merchant-module-page-ajax-header');
 		var $ajaxSaveBtn = $('.merchant-module-save-button');
 
-		$('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea)', function() {
+		$('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea):not(.merchant-license-code-input)', function() {
 			if ( ! merchant.show_save ) {
 				$ajaxHeader.addClass('merchant-show');
 				$ajaxHeader.removeClass('merchant-saving');
@@ -151,6 +151,7 @@
 				nonce: window.merchant.nonce,
 			}).done(function(){
 
+				$('body').removeClass('merchant-module-disabled').addClass('merchant-module-enabled');
 				$('.merchant-module-action').addClass('merchant-enabled');
 
 			});
@@ -166,6 +167,7 @@
 				nonce: window.merchant.nonce,
 			}).done(function(){
 
+				$('body').removeClass('merchant-module-enabled').addClass('merchant-module-disabled');
 				$('.merchant-module-action').removeClass('merchant-enabled');
 				$('.merchant-module-question-list-dropdown').addClass('merchant-show');
 
@@ -429,7 +431,7 @@
 
 				// Update the values for all our input fields and initialise the sortable repeater.
 				$('.merchant-sortable-repeater-control').each(function() {
-					console.log($(this).find('.merchant-sortable-repeater-input').val());
+
 					// If there is an existing customizer value, populate our rows
 					var defaultValuesArray = JSON.parse( $(this).find('.merchant-sortable-repeater-input').val() );
 					var numRepeaterItems = defaultValuesArray.length;
@@ -437,6 +439,7 @@
 					if(numRepeaterItems > 0) {
 						// Add the first item to our existing input field
 						$(this).find('.repeater-input').val(defaultValuesArray[0]);
+
 						// Create a new row for each new value
 						if(numRepeaterItems > 1) {
 							var i;
@@ -445,14 +448,16 @@
 							}
 						}
 					}
-				});
 
-				// Make our Repeater fields sortable.
-				$('.merchant-sortable-repeater.sortable').sortable({
-					update: function(event, ui) {
-						self.getAllInputs($(this).parent());
+					// Make our Repeater fields sortable.
+					if( ! $( this ).hasClass( 'disable-sorting' ) ) {
+						$( this ).find('.merchant-sortable-repeater.sortable').sortable({
+							update: function(event, ui) {
+								self.getAllInputs($(this).parent());
+							}
+						});
 					}
-				});
+				});				
 
 				// Events.
 				this.events();
@@ -474,7 +479,7 @@
 						})
 					}
 					else {
-						$(this).parent().find('.repeater-input').val('');
+						// $(this).parent().find('.repeater-input').val('');
 						self.getAllInputs($(this).parent().parent().parent());
 					}
 				});
@@ -878,6 +883,37 @@
 					$notificationsSidebar.removeClass('closing');
 				}, 300);
 
+			});
+
+		}
+
+		// Tabs Navigation.
+		const tabs = $( '.merchant-tabs-nav' );
+		if( tabs.length ) {
+
+			tabs.each(function(){
+				const tabWrapperId = $( this ).data( 'tab-wrapper-id' );
+
+				$( this ).find( '.merchant-tabs-nav-link' ).on( 'click', function(e){
+					e.preventDefault();
+
+					const 
+						tabsNavLink  = $( this ).closest( '.merchant-tabs-nav' ).find( '.merchant-tabs-nav-link' ),
+						to           = $( this ).data( 'tab-to' );
+
+					// Tab Nav Item
+					tabsNavLink.each( function(){
+						$( this ).closest( '.merchant-tabs-nav-item' ).removeClass( 'active' );
+					});
+					
+					$( this ).closest( '.merchant-tabs-nav-item' ).addClass( 'active' );
+
+					// Tab Content
+					const tabContentWrapper = $( '.merchant-tab-content-wrapper[data-tab-wrapper-id="'+ tabWrapperId +'"]' );
+					tabContentWrapper.find( '> .merchant-tab-content' ).removeClass( 'active' );
+					tabContentWrapper.find( '> .merchant-tab-content[data-tab-content-id="'+ to +'"]' ).addClass( 'active' );
+
+				} );
 			});
 
 		}

@@ -1,0 +1,204 @@
+/**
+ * Admin Preview
+ * Animated Add To Cart
+ *
+ */
+
+// Canvas.
+.merchant-module-page-preview-browser-inner {
+	display: flex;
+	flex-grow: 0;
+    width: 100%;
+    margin: auto;
+	padding: 25px;
+}
+
+// Canvas Placeholder (Single Product Style).
+.mrc-preview-single-product-elements {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+
+    .mrc-preview-left-column {
+        width: 30%;
+        min-width: 30%;
+    }
+
+    .mrc-preview-right-column {
+        width: 70%;
+        padding-top: 25px;
+    }
+
+    .mrc-preview-product-image-wrapper {
+        .mrc-preview-product-image {
+            background-color: #f5f5f5;
+            height: 12vw;
+        }
+
+        .mrc-preview-product-image-thumbs {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            flex-wrap: nowrap;
+
+            .mrc-preview-product-image-thumb {
+                width: 100%;
+                height: 3vw;
+                background-color: #f5f5f5;
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+.mrc-mw-70 {
+    max-width: 70%;
+}
+
+.mrc-mw-30 {
+    max-width: 30%;
+}
+
+.mrc-mw-40 {
+    max-width: 40%;
+}
+
+.mrc-preview-text-placeholder {
+    background-color: #f5f5f5;
+    height: 13px;
+
+    & + .mrc-preview-text-placeholder,
+    & + .mrc-preview-addtocart-placeholder {
+        margin-top: 15px;
+    }
+}
+
+.mrc-preview-addtocart-placeholder {
+    background-color: #e5e5e5;
+    width: 140px;
+    height: 30px;
+}
+
+@media(max-width: 991px) {
+    .mrc-preview-single-product-elements {
+        .mrc-preview-product-image-wrapper {
+            .mrc-preview-product-image {
+                height: 33vw;
+            }
+    
+            .mrc-preview-product-image-thumbs {
+                .mrc-preview-product-image-thumb {
+                    height: 7vw;
+                }
+            }
+        }
+    }
+}
+
+// Add to cart button.
+.add_to_cart_button {
+	display: inline-block;
+	color: #FFF !important;
+	background-color: #212121;
+	font-size: 1rem;
+	padding: 12px 25px;
+	margin-top: 30px;
+	text-decoration: none;
+	transition: ease background-color 300ms;
+
+	&:hover {
+		background-color: #292929;
+	}
+
+	&.on-mouse-hover:hover {
+
+		&.flash {
+			animation: merchant-flash 1s infinite both;
+			animation-iteration-count: 1;
+		}
+
+		&.bounce {
+			animation: merchant-bounce .3s alternate;
+			animation-iteration-count: 4;
+		}
+
+		&.zoom-in {
+			transform: scale(1.2);
+		}
+
+		&.shake {
+			animation: merchant-shake .3s;
+			animation-iteration-count: 2;
+		}
+
+		&.pulse {
+			animation: merchant-pulse 1.5s ease-in-out infinite both;
+		}
+
+		&.jello-shake {
+			animation: merchant-jello-shake 1.5s infinite both;
+		}
+
+		&.wobble {
+			animation: merchant-wobble 1.5s ease-in-out infinite both;
+		}
+
+		&.vibrate {
+			animation: merchant-vibrate .3s linear 4 both;
+		}
+
+		&.swing {
+			animation: merchant-swing 2s ease-in-out infinite alternate;
+		}
+
+		&.tada {
+			animation: merchant-tada 1s infinite both;
+		}
+		
+	}
+
+	&.on-page-load {
+		&.flash {
+			animation: merchant-flash 1s both;
+			animation-iteration-count: 1;
+		}
+
+		&.bounce {
+			animation: merchant-bounce .3s alternate;
+			animation-iteration-count: 4;
+		}
+
+		&.zoom-in {
+			transform: scale(1.2);
+		}
+
+		&.shake {
+			animation: merchant-shake .3s;
+			animation-iteration-count: 2;
+		}
+
+		&.pulse {
+			animation: merchant-pulse 1.5s ease-in-out both;
+		}
+
+		&.jello-shake {
+			animation: merchant-jello-shake 1.5s both;
+		}
+
+		&.wobble {
+			animation: merchant-wobble 1.5s ease-in-out both;
+		}
+
+		&.vibrate {
+			animation: merchant-vibrate .3s linear 4 both;
+		}
+
+		&.swing {
+			animation: merchant-swing 2s ease-in-out alternate;
+		}
+
+		&.tada {
+			animation: merchant-tada 1s both;
+		}
+	}
+}

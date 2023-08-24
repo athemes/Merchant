@@ -1,0 +1,159 @@
+/* Botiga Dashboard Tabs Nav Items */
+.merchant-tabs-nav {
+    padding: 0 20px;
+	margin-bottom: -100%;
+    transform: translate3d(0, 100%, 0);
+
+	ul {
+		display: flex;
+		padding: 0;
+	}
+
+	.merchant-tabs-nav-item {
+		.merchant-tabs-nav-link {
+			position: relative;
+			font-size: 14px;
+			line-height: 20px;
+			padding: 16px;
+			color: #6D7175;
+			text-decoration: none;
+			transition: ease color 300ms;
+			outline: none;
+			box-shadow: none;
+
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background-color: transparent;
+				border-radius: 4px 4px 0 0;
+			}
+		}
+
+		&.active {
+			.merchant-tabs-nav-link {
+				color: #3858E9;
+				font-weight: 500;
+
+				&:after {
+					background-color: #3858E9;
+				}
+			}	
+		}
+
+		&:hover,
+		&:focus,
+		&:active {
+			.merchant-tabs-nav-link {
+				color: #3858E9;
+			}
+		}
+	}
+
+	&.merchant-tabs-nav-with-icons {
+		.merchant-tabs-nav-item {
+			.merchant-tabs-nav-link {
+				position: relative;
+				display: flex;
+				align-items: center;
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 26px;
+				padding: 9px 16px;
+				border-bottom: 0;
+				color: #1e1e1e;
+				transition: ease color 200ms;
+
+				svg {
+					margin-right: 8px;
+					path {
+						transition: ease fill 200ms;
+					}
+				}
+
+				&:after {
+					content: none;
+				}
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-color: transparent;
+					width: 4px;
+					height: 100%;
+					border-radius: 0 4px 4px 0;
+					opacity: 0;
+					visibility: hidden;
+					transition: ease opacity 200ms;
+				}
+			}
+
+			&:hover,
+			&:focus,
+			&:active {
+				.merchant-tabs-nav-link {
+					color: #757575;
+
+					svg {
+						path {
+							fill: #757575;
+						}
+					}
+					
+					&:before {
+						background-color: #e1e1e1;
+						opacity: 1;
+						visibility: visible;
+					}
+				}
+			}
+
+			&.active {
+				.merchant-tabs-nav-link {
+					color: #3858E9;
+
+					svg {
+						path {
+							fill: #3858E9;
+						}
+					}
+
+					&:before {
+						background-color: #3858E9;
+						opacity: 1;
+						visibility: visible;
+					}
+				}
+			}
+		}
+	}
+
+	&.merchant-tabs-nav-vertical {
+		padding: 0;
+		margin-left: -20px;
+
+		ul {
+			flex-direction: column;
+			margin: 0;
+		}
+	}
+
+	&.merchant-tabs-nav-no-negative-margin {
+		margin-bottom: 0;
+		transform: none;
+	}
+}
+
+/* Botiga Tabs Content */
+.merchant-tab-content {
+	display: none;
+
+	&.active {
+		display: block;
+	}
+}

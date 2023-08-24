@@ -148,13 +148,13 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 
 								<div class="merchant-module-page-actions-links">
 
-									<a href="<?php echo esc_url( add_query_arg( array( 'preview' => 'true', 'module' => $merchant_module ), $merchant_module_info['preview_url'] ) ); ?>" class="merchant-module-page-link" target="_blank">
+									<a href="<?php echo esc_url( add_query_arg( array( 'preview' => 'true', 'module' => $merchant_module ), $merchant_module_info['preview_url'] ) ); ?>" class="merchant-module-page-link merchant-module-page-link-preview" target="_blank">
 										<span><?php echo esc_html__( 'Preview', 'merchant' ); ?></span>
 										<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4375 0H8.25C7.94531 0 7.66406 0.1875 7.54688 0.492188C7.42969 0.773438 7.5 1.10156 7.71094 1.3125L8.67188 2.27344L4.14844 6.79688C3.84375 7.07812 3.84375 7.57031 4.14844 7.85156C4.28906 7.99219 4.47656 8.0625 4.6875 8.0625C4.875 8.0625 5.0625 7.99219 5.20312 7.85156L9.72656 3.32812L10.6875 4.28906C10.8281 4.42969 11.0156 4.5 11.2266 4.5C11.3203 4.5 11.4141 4.5 11.5078 4.45312C11.8125 4.33594 12 4.05469 12 3.75V0.5625C12 0.257812 11.7422 0 11.4375 0ZM9.1875 7.5C8.85938 7.5 8.625 7.75781 8.625 8.0625V10.6875C8.625 10.8047 8.53125 10.875 8.4375 10.875H1.3125C1.19531 10.875 1.125 10.8047 1.125 10.6875V3.5625C1.125 3.46875 1.19531 3.375 1.3125 3.375H3.9375C4.24219 3.375 4.5 3.14062 4.5 2.8125C4.5 2.50781 4.24219 2.25 3.9375 2.25H1.3125C0.585938 2.25 0 2.85938 0 3.5625V10.6875C0 11.4141 0.585938 12 1.3125 12H8.4375C9.14062 12 9.75 11.4141 9.75 10.6875V8.0625C9.75 7.75781 9.49219 7.5 9.1875 7.5Z" fill="#3858E9"/></svg>
 									</a>
 
 									<?php if ( ! empty( $merchant_module_info['tutorial_url'] ) ) : ?>
-										<a href="<?php echo esc_url( $merchant_module_info['tutorial_url'] ); ?>" class="merchant-module-page-link" target="_blank">
+										<a href="<?php echo esc_url( $merchant_module_info['tutorial_url'] ); ?>" class="merchant-module-page-link merchant-module-page-link-tutorial" target="_blank">
 											<span><?php echo esc_html__( 'Tutorial', 'merchant' ); ?></span>
 											<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4375 0H8.25C7.94531 0 7.66406 0.1875 7.54688 0.492188C7.42969 0.773438 7.5 1.10156 7.71094 1.3125L8.67188 2.27344L4.14844 6.79688C3.84375 7.07812 3.84375 7.57031 4.14844 7.85156C4.28906 7.99219 4.47656 8.0625 4.6875 8.0625C4.875 8.0625 5.0625 7.99219 5.20312 7.85156L9.72656 3.32812L10.6875 4.28906C10.8281 4.42969 11.0156 4.5 11.2266 4.5C11.3203 4.5 11.4141 4.5 11.5078 4.45312C11.8125 4.33594 12 4.05469 12 3.75V0.5625C12 0.257812 11.7422 0 11.4375 0ZM9.1875 7.5C8.85938 7.5 8.625 7.75781 8.625 8.0625V10.6875C8.625 10.8047 8.53125 10.875 8.4375 10.875H1.3125C1.19531 10.875 1.125 10.8047 1.125 10.6875V3.5625C1.125 3.46875 1.19531 3.375 1.3125 3.375H3.9375C4.24219 3.375 4.5 3.14062 4.5 2.8125C4.5 2.50781 4.24219 2.25 3.9375 2.25H1.3125C0.585938 2.25 0 2.85938 0 3.5625V10.6875C0 11.4141 0.585938 12 1.3125 12H8.4375C9.14062 12 9.75 11.4141 9.75 10.6875V8.0625C9.75 7.75781 9.49219 7.5 9.1875 7.5Z" fill="#3858E9"/></svg>
 										</a>
@@ -168,56 +168,62 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 
 					</div>
 
-					<div class="merchant-module-page-header-placeholder">
-						<?php if ( ! empty( $merchant_module_info['placeholder'] ) ) : ?>
-							<img src="<?php echo esc_url( $merchant_module_info['placeholder'] ); ?>" alt="<?php echo esc_attr( $merchant_module_info['title'] ); ?>" />
-						<?php endif; ?>
-					</div>
-
 				</div>
 
-                <div class="merchant-module-page-body <?php echo Merchant_Admin_Preview::has_preview() ? 'has-preview' : '' ?>">
-                    <div class="merchant-module-page-content">
+				<?php 
+				/**
+				 * Hook 'merchant_admin_after_module_page_page_header'
+				 * 
+				 * @since 1.0
+				 */
+				do_action( 'merchant_admin_after_module_page_page_header' ); 
+				
+				?>
 
-                        <?php
+				<div class="merchant-module-page-body <?php echo Merchant_Admin_Preview::has_preview() ? 'has-preview' : ''; ?>">
 
-                        /**
-                         * Hook: merchant_module_file_path
-                         *
-                         * @since 1.0
-                         */
-                        $merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
+					<div class="merchant-module-page-content">
 
-                        if ( file_exists( $merchant_module_file ) ) {
-                            require $merchant_module_file;
-                        }
+						<?php
 
-                        ?>
+						/**
+						 * Hook: merchant_module_file_path
+						 *
+						 * @since 1.0
+						 */
+						$merchant_module_file = apply_filters( 'merchant_module_file_path', MERCHANT_DIR . 'admin/modules/' . $merchant_module . '/admin-page-' . $merchant_module . '.php', $merchant_module );
 
-                    </div>
+						if ( file_exists( $merchant_module_file ) ) {
+							require $merchant_module_file;
+						}
 
-	                <?php if (Merchant_Admin_Preview::has_preview() ) : ?>
+						?>
 
-                        <div class="merchant-module-page-preview">
-                            <div class="merchant-module-page-preview-box">
-                                <div class="merchant-module-page-preview-title">
-                                    <?php esc_html_e( 'Preview', 'merchant' ); ?>
-                                </div>
-                                <div class="merchant-module-page-preview-browser">
-                                    <div class="merchant-module-page-preview-browser-top">
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                        <span class="merchant-module-page-preview-browser-top-circle"></span>
-                                    </div>
-                                    <div class="merchant-module-page-preview-browser-inner">
-                                        <?php echo Merchant_Admin_Preview::get_html() ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+					</div>
 
-	                <?php endif; ?>
-                </div>
+					<?php if (Merchant_Admin_Preview::has_preview() ) : ?>
+
+						<div class="merchant-module-page-preview">
+							<div class="merchant-module-page-preview-box">
+								<div class="merchant-module-page-preview-title">
+									<?php esc_html_e( 'Preview', 'merchant' ); ?>
+								</div>
+								<div class="merchant-module-page-preview-browser">
+									<div class="merchant-module-page-preview-browser-top">
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+										<span class="merchant-module-page-preview-browser-top-circle"></span>
+									</div>
+									<div class="merchant-module-page-preview-browser-inner">
+										<?php echo Merchant_Admin_Preview::get_html(); ?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					<?php endif; ?>
+
+				</div>
 
 			</form>
 
@@ -233,7 +239,6 @@ Merchant_Admin_Preview::set_preview($merchant_module);
 				<figure><img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/enable-module.png' ); ?>" /></figure>
 				<p><?php esc_html_e( 'This module is currently disabled. Please enable the module to see it in your store.', 'merchant' ); ?></p>
 			</div>
-			<div class="merchant-module-alert-footer"><a href="#" class="merchant-module-alert-close">Close</a></div>
 		</div>
 	</div>
 

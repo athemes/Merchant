@@ -68,21 +68,22 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-metabox.php';
 
 			// Modules
+			require_once MERCHANT_DIR . 'inc/modules/class-add-module.php';
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
 			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/scroll-to-top-button.php';
-			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/animated-add-to-cart.php';
-			require_once MERCHANT_DIR . 'inc/modules/payment-logos/payment-logos.php';
-			require_once MERCHANT_DIR . 'inc/modules/trust-badges/trust-badges.php';
-			require_once MERCHANT_DIR . 'inc/modules/buy-now/buy-now.php';
-			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.php';
+			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
+			require_once MERCHANT_DIR . 'inc/modules/payment-logos/class-payment-logos.php';
+			require_once MERCHANT_DIR . 'inc/modules/trust-badges/class-trust-badges.php';
+			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
+			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/cookie-banner.php';
-			require_once MERCHANT_DIR . 'inc/modules/quick-view/quick-view.php';
-			require_once MERCHANT_DIR . 'inc/modules/product-labels/product-labels.php';
-			require_once MERCHANT_DIR . 'inc/modules/pre-orders/pre-orders.php';
+			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
+			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
 			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
 			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
-			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/inactive-tab-message.php';
-			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/cart-count-favicon.php';
+			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
+			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
 
 		}
 
@@ -247,41 +248,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			}
 
-			// Inactive Tab Message
-			if ( Merchant_Modules::is_module_active( 'inactive-tab-messsage' ) ) {
-
-				$setting['inactive_tab_messsage']          = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'message', esc_html__( '✋ Don\'t forget this', 'merchant' ) );
-				$setting['inactive_tab_abandoned_message'] = Merchant_Admin_Options::get( 'inactive-tab-messsage', 'abandoned_message', esc_html__( '✋ You left something in the cart', 'merchant' ) );
-				$setting['inactive_tab_cart_count']        = '0';
-				
-				if ( function_exists( 'WC' ) ) {
-					$setting['inactive_tab_cart_count'] = WC()->cart->get_cart_contents_count();
-				}
-
-				wp_enqueue_script( 'merchant-inactive-tab-messsage', MERCHANT_URI . 'assets/js/modules/inactive-tab-messsage.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
-
-			// Cart Count Favicon
-			if ( Merchant_Modules::is_module_active( 'cart-count-favicon' ) ) {
-
-				$setting['cart_count_favicon']                  = true;
-				$setting['cart_count_favicon_shape']            = Merchant_Admin_Options::get( 'cart-count-favicon', 'shape', 'circle' );
-				$setting['cart_count_favicon_position']         = Merchant_Admin_Options::get( 'cart-count-favicon', 'position', 'down-left' );
-				$setting['cart_count_favicon_background_color'] = Merchant_Admin_Options::get( 'cart-count-favicon', 'background_color', '#ff0101' );
-				$setting['cart_count_favicon_text_color']       = Merchant_Admin_Options::get( 'cart-count-favicon', 'text_color', '#ffffff' );
-				$setting['cart_count_favicon_delay']            = Merchant_Admin_Options::get( 'cart-count-favicon', 'delay', '0' );
-				$setting['cart_count_favicon_count']            = '0';
-				
-				if ( function_exists( 'WC' ) ) {
-					$setting['cart_count_favicon_count'] = WC()->cart->get_cart_contents_count();
-				}
-
-				wp_enqueue_script( 'merchant-favico', MERCHANT_URI . 'assets/js/vendor/favico.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				wp_enqueue_script( 'merchant-cart-count-favicon', MERCHANT_URI . 'assets/js/modules/cart-count-favicon.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
-
 			// Cookie Banner
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 
@@ -290,21 +256,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				
 				wp_enqueue_script( 'merchant-cookie-banner', MERCHANT_URI . 'assets/js/modules/cookie-banner.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
-			}
-
-			// Quick View
-			if ( Merchant_Modules::is_module_active( 'quick-view' ) ) {
-
-				$setting['quick_view']      = true;
-				$setting['quick_view_zoom'] = Merchant_Admin_Options::get( 'quick-view', 'zoom_effect', 1 );
-
-				wp_enqueue_script( 'zoom' );
-				wp_enqueue_script( 'flexslider' );
-				wp_enqueue_script( 'wc-single-product' );
-				wp_enqueue_script( 'wc-add-to-cart-variation' );
-				
-				wp_enqueue_script( 'merchant-quick-view', MERCHANT_URI . 'assets/js/modules/quick-view.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				
 			}
 
 			// Real Time Search
@@ -318,16 +269,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
 
 				wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI . 'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
-			}
-
-			// Pre Orders
-			if ( Merchant_Modules::is_module_active( 'pre-orders' ) ) {
-				
-				$setting['pre_orders']                  = true;
-				$setting['pre_orders_add_button_title'] = Merchant_Admin_Options::get( 'pre-orders', 'add_button_title', esc_html__( 'Pre Order Now!', 'merchant' ) );
-
-				wp_enqueue_script( 'merchant-pre-orders', MERCHANT_URI . 'assets/js/modules/pre-orders.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 			

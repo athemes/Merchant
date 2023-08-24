@@ -59,7 +59,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				'post_content' => '',
 				'meta_input'   => $meta_input
 			);
-
+		
 			$page_id = wp_insert_post( $postarr );
 
 			if ( ! is_wp_error( $page_id ) ) {
@@ -190,7 +190,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						$value = null;
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
-							$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
+							if ( 'textarea_code' === $field['type'] ) {
+								$value = wp_unslash( $_POST['merchant'][ $field['id'] ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+							} else {
+								$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
+							}
 						}
 
 						$options[ $settings['module'] ][ $field['id'] ] = self::sanitize( $field, $value );
@@ -230,6 +234,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				case 'textarea':
 					$value = sanitize_textarea_field( $value );
+					break;
+
+				case 'textarea_code':
+					$value = $value;
 					break;
 
 				case 'checkbox':
@@ -347,6 +355,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			$value = ( $value ) ? $value : '';
 			?>
 				<textarea name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]"><?php echo wp_kses_post( $value ); ?></textarea>
+			<?php
+		}
+
+		/**
+		 * Field: Textarea Code Snippet.
+		 */
+		public static function textarea_code( $settings, $value ) {
+			$value = ( $value ) ? $value : '';
+			?>
+				<textarea name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]"><?php echo wp_unslash( $value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></textarea>
 			<?php
 		}
 
@@ -731,7 +749,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function sortable_repeater( $settings, $value ) {
 
 			?>
-				<div class="merchant-sortable-repeater-control">
+				<div class="merchant-sortable-repeater-control<?php echo isset( $settings[ 'sorting' ] ) && false === $settings[ 'sorting' ] ? ' disable-sorting' : ''; ?>">
 					<div class="merchant-sortable-repeater sortable regular-field">
 						<div class="repeater">
 							<input type="text" value="" class="repeater-input"/><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
@@ -763,7 +781,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo '<div class="merchant-create-page-control-create-message">';
 					echo wp_kses_post( 
 						sprintf( /* translators: 1: page name */	 
-							__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">It looks like you haven\'t created a <strong>%s</strong> page yet. Click the below button to create the page.</p>', 'merchant' ), 
+							__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">It looks like you haven\'t created a <strong>%1$s</strong> page yet. Click the below button to create the page.</p>', 'merchant' ), 
 							$settings[ 'page_title'] 
 						)
 					);
@@ -771,8 +789,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo '<div class="merchant-create-page-control-success-message" style="display: none;">';
 					echo wp_kses_post( 
 						sprintf( /* translators: 1: link to edit page */	
-							__( '<p class="merchant-module-page-setting-field-desc">Page created with success!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="#" data-goto="nav_menus" data-type="panel">here</a></p>', 'merchant' ), 
-							get_admin_url() . 'post.php?post=&action=edit' 
+							__( '<p class="merchant-module-page-setting-field-desc">Page created with success!</p><p class="merchant-module-page-setting-field-desc">Click <a href="%1$s" target="_blank">here</a> if you want to edit the page.</p><p class="merchant-module-page-setting-field-desc mrc-mb-0">To display the page in your theme header area, assign the page to the primary menu by clicking <a href="%2$s" target="_blank">here</a></p>', 'merchant' ), 
+							get_admin_url() . 'post.php?post=&action=edit',
+							get_admin_url() . 'nav-menus.php' 
 						) 
 					);
 				echo '</div>';
@@ -792,6 +811,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			}
 			
 			echo '</div>';
+		}
+
+		/**
+		 * Field: Custom callback.
+		 */
+		public static function custom_callback( $settings, $value ) {
+			if ( ! empty( $settings[ 'class_name' ] ) && ! empty( $settings[ 'callback_name' ] ) ) {
+				return call_user_func( array( $settings[ 'class_name' ], $settings[ 'callback_name' ] ), $settings, $value );
+			}
+			
+			if ( ! empty( $settings[ 'callback_name' ] ) ) {
+				return call_user_func( $settings[ 'callback_name' ], $settings, $value );
+			}
+
+			return false;
 		}
 
 	}

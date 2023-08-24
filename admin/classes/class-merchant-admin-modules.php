@@ -12,6 +12,12 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 	class Merchant_Admin_Modules {
 
 		/**
+		 * Upsell modules.
+		 * 
+		 */
+		public static $upsell_modules = array();
+
+		/**
 		 * The single class instance.
 		 */
 		private static $instance = null;
@@ -29,7 +35,158 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 		/**
 		 * Constructor.
 		 */
-		public function __construct() {}
+		public function __construct() {
+			self::$upsell_modules = array(
+
+				// Convert More.
+				'sticky-add-to-cart' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-sticky-add-to-cart' ),
+					'title' => esc_html__( 'Sticky Add To Cart', 'merchant' ),
+					'desc' => esc_html__( 'Improve conversion rate by displaying a sticky add-to-cart bar when the visitors are scrolling down.', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/sticky-add-to-cart/'
+				),
+				'checkout' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-checkout' ),
+					'title'        => esc_html__( 'Checkout', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Choose a layout that aligns with your audience\'s preferences, resulting in a frictionless checkout experience that drives more successful transactions.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/checkout/'
+				),
+				'countdown-timer' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-countdown-timer' ),
+					'title'        => esc_html__( 'Countdown Timer', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Create urgency and increase conversion rate using a countdown timer for all your discounted products.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/countdown-timer/'
+				),
+				'recently-viewed-products' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-recently-viewed-products' ),
+					'title' => esc_html__( 'Recently Viewed Products', 'merchant-pro' ),
+					'desc' => esc_html__( 'Cross-sell efficiently by displaying on product pages and in the cart the products your visitors have recently viewed.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/recently-viewed-products/'
+				),
+				'waitlist' => array(
+					'upsell' => true,
+					'section' => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-waitlist' ),
+					'title'        => esc_html__( 'Wait List', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Wait-list for where user can opt-in for back-in-stock alert. A lead magnet and sales booster.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/waitlist/'
+				),
+
+				// Build Trust.
+				'advanced-reviews' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'title' => esc_html__( 'Advanced Reviews', 'merchant-pro' ),
+					'desc' => esc_html__( 'Easily collect, import, and display reviews with photos and boost trust and conversion rates with social proof. Have voting for reviews (vote for helpful or unhelpful). Option to sort reviews by most helpful.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/advanced-reviews/'
+				),
+				'product-brand-image' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-brand-image' ),
+					'title'        => esc_html__( 'Product Brand Image', 'merchant-pro' ),
+					'desc'         => esc_html__( 'With a consistent brand image for each product, you present a unified and professional facade that instills confidence in potential buyers, making them more likely to convert.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-brand-image/'
+				),
+				'reasons-to-buy' => array(
+					'upsell' => true,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-reasons-to-buy' ),
+					'title' => esc_html__( 'Reasons To Buy List', 'merchant-pro' ),
+					'desc' => esc_html__( 'Provide prospective customers with a concise and persuasive summary of the key features, benefits, and selling points of your products.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/reasons-to-buy/'
+				),
+
+				// Reduce Abandonment.
+				'cart-reserved-timer' => array(
+					'upsell' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cart-reserved-timer' ),
+					'title'        => esc_html__( 'Cart Reserved Timer', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Create urgency by letting your visitors know that the products in cart are reserved only for a limited time.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/cart-reserved-timer/'
+				),
+				'floating-mini-cart' => array(
+					'upsell' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
+					'title'        => esc_html__( 'Floating Mini Cart', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Reduce the cart abandonment by providing a convenient and distraction-free way for customers to manage their cart contents and proceed to checkout.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/floating-mini-cart/'
+				),
+
+				// Improve Experience.
+				'login-popup' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-login-popup' ),
+					'title'        => esc_html__( 'Login Popup', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Capture more leads and prevent cart abandonment by displaying automatic and exit-intent customizable pop-ups.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/login-popup/'
+				),
+				'product-audio' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-audio' ),
+					'title'        => esc_html__( 'Product Audio', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Empower customers to engage with your products using their sense of sound, enriching their shopping journey and fostering satisfaction.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-audio/'
+				),
+				'product-video' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-video' ),
+					'title'        => esc_html__( 'Product Video', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Help customers visualize your products potential. Whether it\'s demonstrating product features, usage scenarios, or showcasing intricate details.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/product-video/'
+				),
+				'size-chart' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-size-chart' ),
+					'title'        => esc_html__( 'Size Chart', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Seamlessly integrate sizing insights into your product pages. The feature offers customers immediate access to valuable sizing details, eliminating the need to navigate to external resources and creating a smoother shopping journey.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/size-chart/'
+				),
+				'wishlist' => array(
+					'upsell' => true,
+					'section' => 'improve-experience',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wishlist' ),
+					'title' => esc_html__( 'Wishlist', 'merchant-pro' ),
+					'desc' => esc_html__( 'Prevent cart abandonment and increase your customer\'s engagement by allowing them to save products in Wishlists, for later purchases.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/wishlist/'
+				),
+
+				// Boost Revenue.
+				'spending-goal' => array(
+					'upsell' => true,
+					'section' => 'boost-revenue',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-spending-goal' ),
+					'title'        => esc_html__( 'Spending Goal', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Increase your store’s average order value by incentivizing customers with a discount when they reach the spending goal target.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/spending-goal/'
+				),
+				'volume-discounts' => array(
+					'upsell' => true,
+					'section' => 'boost-revenue',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
+					'title'        => esc_html__( 'Volume Discounts', 'merchant-pro' ),
+					'desc'         => esc_html__( 'Increase your store’s average order value, by providing discounts when customers buy larger quantities.', 'merchant-pro' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/volume-discounts/'
+				),
+
+			);
+
+		}
 
 		/**
 		 * Get modules.
@@ -64,111 +221,22 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 				'convert-more' => array(
 					'title' => esc_html__( 'Convert More', 'merchant' ),
-					'modules' => array(
-
-						'buy-now' => array(
-							'icon' => '<svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 20"><path d="M8.707 1.293a1 1 0 0 0-1.414 1.414L8.586 4 7.293 5.293a1 1 0 0 0 1.414 1.414L10 5.414l1.293 1.293a1 1 0 1 0 1.414-1.414L11.414 4l1.293-1.293a1 1 0 0 0-1.414-1.414L10 2.586 8.707 1.293Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h1.5A1.5 1.5 0 0 1 4 1.5V10h11.133l.877-6.141a1 1 0 1 1 1.98.282l-.939 6.571A1.5 1.5 0 0 1 15.566 12H4v2h10a3 3 0 1 1-2.83 2H5.83A3 3 0 1 1 2 14.17V2H1a1 1 0 0 1-1-1Zm13 16a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM2 17a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"/></svg>',
-							'title' => esc_html__( 'Buy Now', 'merchant' ),
-							'desc' => esc_html__( 'Add Buy Now buttons to your product pages that take customers directly to the checkout.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/buy-now.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-							'preview_url' => $product_url,
-						),
-
-						'animated-add-to-cart' => array(
-							'icon' => '<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h1V0H1.5A1.5 1.5 0 0 0 0 1.5V3h2V2ZM0 9a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H4a4 4 0 0 1-4-4ZM16 3V2h-1V0h1.5A1.5 1.5 0 0 1 18 1.5V3h-2ZM16 16h-1v2h1.5a1.5 1.5 0 0 0 1.5-1.5V15h-2v1ZM2 15v1h1v2H1.5A1.5 1.5 0 0 1 0 16.5V15h2ZM8 18H5v-2h3v2ZM10 18h3v-2h-3v2ZM8 2H5V0h3v2ZM10 2h3V0h-3v2Z"/></svg>',
-							'title' => esc_html__( 'Animated Add to Cart', 'merchant' ),
-							'desc' => esc_html__( 'Make your Add To Cart button stand out more by showing a subtle animation on mouseover.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/animated-add-to-cart.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
-							'preview_url' => $product_url,
-						),
-
-						'quick-view' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"><path d="M12.5 8c0 1.654-1.122 3-2.5 3S7.5 9.654 7.5 8 8.622 5 10 5s2.5 1.346 2.5 3Zm7.5-.449S16.457 16 10.012 16C4.03 16 0 7.551 0 7.551S3.705 0 10.012 0C16.424 0 20 7.551 20 7.551ZM14.167 8c0-2.757-1.87-5-4.167-5-2.298 0-4.167 2.243-4.167 5s1.87 5 4.167 5c2.297 0 4.167-2.243 4.167-5Z"/></svg>',
-							'title' => esc_html__( 'Quick View', 'merchant' ),
-							'desc' => esc_html__( 'Let customers instantly preview product details without leaving the page they are on.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/quick-view.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/quick-view/',
-							'preview_url' => $shop_url,
-						),
-
-						'product-labels' => array(
-							'icon'  => '<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.114 0h7.775c.295 0 .577.111.786.31.208.197.325.465.325.745v7.387c0 .139-.027.276-.082.405a1.052 1.052 0 0 1-.24.344l-.322.306h-2.688c-1.768 0-3.463.667-4.713 1.854-1.25 1.188-1.952 2.798-1.952 4.477v2.554l-.322.306a1.115 1.115 0 0 1-.361.23 1.161 1.161 0 0 1-1.216-.23L.329 11.3a1.054 1.054 0 0 1-.244-.343A1.01 1.01 0 0 1 .33 9.803L10.325.306c.104-.098.227-.175.363-.228.135-.052.28-.079.426-.078Zm4.073 5.01c.274.173.596.266.925.266.442 0 .866-.167 1.179-.464.312-.296.488-.699.488-1.119 0-.313-.098-.619-.281-.88a1.65 1.65 0 0 0-.748-.582 1.748 1.748 0 0 0-.963-.09c-.323.06-.62.212-.853.433a1.56 1.56 0 0 0-.456.81 1.51 1.51 0 0 0 .095.915c.126.29.34.536.614.71Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M17.193 11.75c0-.414-.393-.75-.877-.75-.485 0-.877.336-.877.75v.128c-1.023.309-1.755 1.142-1.755 2.122 0 .76.316 1.327.9 1.702.473.304 1.065.43 1.461.513l.058.013c.483.103.732.168.893.27.074.048.197.137.197.502 0 .41-.385.743-.863.75a1.623 1.623 0 0 1-.285-.055 2.306 2.306 0 0 1-.863-.475.986.986 0 0 0-1.24 0 .676.676 0 0 0 0 1.06 4.132 4.132 0 0 0 1.497.823v.147c0 .414.392.75.877.75.484 0 .877-.336.877-.75v-.128c1.022-.309 1.754-1.142 1.754-2.122 0-.76-.315-1.327-.899-1.702-.474-.303-1.065-.43-1.461-.513l-.058-.013c-.483-.103-.733-.168-.893-.27-.074-.048-.197-.137-.197-.502 0-.41.384-.743.862-.75l.042.004c.05.006.134.02.244.051.215.062.532.192.863.475a.985.985 0 0 0 1.24 0 .676.676 0 0 0 0-1.06 4.131 4.131 0 0 0-1.497-.823v-.147Z"/></svg>',
-							'title' => esc_html__( 'Product Labels', 'merchant' ),
-							'desc'  => esc_html__( 'Add customizable labels on top of your product images to promote special deals or discounts, highlight new products, or anything else you want.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/product-labels.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/product-labels/',
-							'preview_url' => $shop_url,
-						),
-
-					),
+					'modules' => array()
 				),
 
 				'build-trust' => array(
 					'title' => esc_html__( 'Build Trust', 'merchant' ),
-					'modules' => array(
-
-						'payment-logos' => array(
-							'icon' => '<svg width="20" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 14"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h17A1.5 1.5 0 0 1 20 1.5V3H0V1.5Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5v7.5A1.5 1.5 0 0 0 1.5 14h17a1.5 1.5 0 0 0 1.5-1.5V5H0Zm7 4H2V7h5v2Z"/></svg>',
-							'title' => esc_html__( 'Payment Logos', 'merchant' ),
-							'desc' => esc_html__( 'Let visitors know what payment methods you accept by displaying the logos of credit card and payment processor companies.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/payment-logos.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/payment-logos/',
-							'preview_url' => $product_url,
-						),
-
-						'trust-badges' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1.493 2.879C3.757 2.562 6.757 1.616 9.128.233a1.733 1.733 0 0 1 1.728-.004c2.369 1.354 5.502 2.29 7.65 2.628.818.128 1.491.81 1.491 1.638v.501c.031 6.043-.48 11.332-9.472 14.903a1.45 1.45 0 0 1-1.062 0C.478 16.328-.029 11.04.001 4.996L0 4.499c-.002-.83.672-1.505 1.493-1.62Zm9.214 6.414a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm-4 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm8 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Z" clip-rule="evenodd"/></svg>',
-							'title' => esc_html__( 'Trust Badges', 'merchant' ),
-							'desc' => esc_html__( 'Reassure customers with badges that showcase the benefits of shopping with your store, e.g. ‘easy returns’ or ‘30 day money back guarantee’.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/trust-badges.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/',
-							'preview_url' => $product_url,
-						),
-
-					),
+					'modules' => array(),
 				),
 
 				'boost-revenue' => array(
 					'title' => esc_html__( 'Boost Revenue', 'merchant' ),
-					'modules' => array(
-
-						'pre-orders' => array(
-							'icon' => '<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17"><path d="m8.69 3.772-.243.123a1 1 0 1 1-.895-1.79l2-1a.998.998 0 0 1 1.434 1.06l-1 6a1 1 0 0 1-1.973-.33l.677-4.063ZM3.617 2.924a.997.997 0 0 1-.324-.217l-1-1A1 1 0 0 1 3.707.293l1 1a.999.999 0 0 1-1.09 1.631ZM14.383 2.924a.997.997 0 0 1-.94-.092 1 1 0 0 1-.15-1.54l1-1a1 1 0 1 1 1.414 1.415l-1 1a.996.996 0 0 1-.324.217ZM14.293 6.707A1 1 0 0 1 15 5h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-.707-.293ZM3 7H1a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2ZM0 15.5V10h2v2h3.5c.775 0 1.388.662 1.926 1.244l.11.12c.366.391.886.636 1.464.636s1.098-.245 1.463-.637l.11-.119C11.114 12.663 11.726 12 12.5 12H16v-2h2v5.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 0 15.5Z"/></svg>',
-							'title' => esc_html__( 'Pre-Orders', 'merchant' ),
-							'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/pre-orders.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
-							'preview_url' => $shop_url,
-						),
-
-					),
+					'modules' => array(),
 				),
 
 				'reduce-abandonment' => array(
 					'title' => esc_html__( 'Reduce Abandonment', 'merchant' ),
-					'modules' => array(
-
-						'cart-count-favicon' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20"><path fill-rule="evenodd" d="M15 0c.27 0 .52.11.71.29.18.19.29.44.29.71v10c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29H1c-.27 0-.52-.11-.71-.29C.11 11.52 0 11.27 0 11V1C0 .73.11.48.29.29.48.11.73 0 1 0h14Zm-3.41 5.168L14 7V2H2v5l1.48-.892c.32-.16.7-.14 1 .06L7 8l3.44-2.802c.33-.25.8-.27 1.15-.03Z" clip-rule="evenodd"/><path d="M.29 14.29C.48 14.11.73 14 1 14c.27 0 .52.11.71.29.18.19.29.44.29.71v4c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29-.27 0-.52-.11-.71-.29C.11 19.52 0 19.27 0 19v-4c0-.27.11-.52.29-.71ZM7 16c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29-1.65 0-3 1.35-3 3s1.35 3 3 3c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31Z"/><path fill-rule="evenodd" d="M13 14c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3Zm.68 3.69c-.18.19-.42.3-.68.31a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31.26.01.5.12.68.31.18.18.28.43.28.69 0 .26-.1.51-.28.69Z" clip-rule="evenodd"/></svg>',
-							'title' => esc_html__( 'Cart Count Favicon', 'merchant' ),
-							'desc' => esc_html__( 'Make your store’s browser tab stand out by showing the number of items in the cart on the favicon.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/cart-count-favicon.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/cart-count-favicon/',
-							'preview_url' => $shop_url,
-						),
-
-						'inactive-tab-message' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h17A1.5 1.5 0 0 1 20 1.5v6A1.5 1.5 0 0 1 18.5 9h-5.889a1.5 1.5 0 0 1-1.5-1.5V5.111a1.111 1.111 0 1 0-2.222 0V7.5a1.5 1.5 0 0 1-1.5 1.5H1.5A1.5 1.5 0 0 1 0 7.5v-6Z"/><path fill-rule="evenodd" d="M7 5a3 3 0 0 1 6 0v4.384a.5.5 0 0 0 .356.479l2.695.808a2.5 2.5 0 0 1 1.756 2.748l-.633 4.435A2.5 2.5 0 0 1 14.699 20H6.96a2.5 2.5 0 0 1-2.27-1.452l-2.06-4.464a2.417 2.417 0 0 1-.106-1.777c.21-.607.719-1.16 1.516-1.273 1.035-.148 2.016.191 2.961.82V5Zm3-1a1 1 0 0 0-1 1v7.793c0 1.39-1.609 1.921-2.527 1.16-.947-.784-1.59-.987-2.069-.948a.486.486 0 0 0 .042.241l2.06 4.463A.5.5 0 0 0 6.96 18h7.74a.5.5 0 0 0 .494-.43l.633-4.434a.5.5 0 0 0-.35-.55l-2.695-.808A2.5 2.5 0 0 1 11 9.384V5a1 1 0 0 0-1-1Z" clip-rule="evenodd"/></svg>',
-							'title' => esc_html__( 'Inactive Tab Message', 'merchant' ),
-							'desc' => esc_html__( 'Don’t let customers forget about their order – change the title of the browser tab when visitors navigate away from your store.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/inactive-tab-messsage.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/inactive-tab-message/',
-							'preview_url' => $shop_url,
-						),
-
-					),
+					'modules' => array(),
 				),
 
 				'improve-experience' => array(
@@ -215,18 +283,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 
-				'product-your-store' => array(
+				'protect-your-store' => array(
 					'title' => esc_html__( 'Protect Store', 'merchant' ),
 					'modules' => array(
-
-						'agree-to-terms-checkbox' => array(
-							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M.623 1.253.014 4.836C-.09 5.446.39 6 1.021 6h.91c.58 0 1.11-.321 1.37-.83L3.897 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L9 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L14.102 4l.598 1.17c.259.509.789.83 1.369.83h.91c.63 0 1.11-.555 1.007-1.164l-.61-3.583A1.522 1.522 0 0 0 15.867 0H2.134C1.385 0 .746.53.623 1.253ZM12.707 8.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L8 11.586l3.293-3.293a1 1 0 0 1 1.414 0Z"/><path d="M3 8H1v8.5A1.5 1.5 0 0 0 2.5 18h13a1.5 1.5 0 0 0 1.5-1.5V8h-2v8H3V8Z"/></svg>',
-							'title' => esc_html__( 'Agree to Terms Checkbox', 'merchant' ),
-							'desc' => esc_html__( 'Get customers to agree to your Terms & Conditions as part of the checkout process.', 'merchant' ),
-							'placeholder' => MERCHANT_URI . 'assets/images/modules/agree-to-terms-checkbox.png',
-							'tutorial_url' => 'https://docs.athemes.com/article/agree-to-terms-checkbox/',
-							'preview_url' => $checkout_url,
-						),
 
 						'cookie-banner' => array(
 							'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20"><path d="M6 4h4v2H6V4ZM4 10v2h4v-2H4ZM4 14h6v2H4v-2Z"/><path fill-rule="evenodd" d="M0 18.5v-17C0 .7.7 0 1.5 0h13.1c.8 0 1.5.7 1.5 1.5v17c0 .8-.7 1.5-1.5 1.5H1.5C.7 20 0 19.3 0 18.5Zm2-.5h12V6h-2V4h2V2H2v2h2v2H2v12Z" clip-rule="evenodd"/></svg>',
@@ -251,6 +310,30 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			return $modules;
 
+		}
+
+		/**
+		 * Get upsell modules.
+		 * 
+		 */
+		public static function get_upsell_modules() {
+			return self::$upsell_modules;
+		}
+
+		/**
+		 * Add upsell to modules.
+		 * 
+		 */
+		public static function add_upsell_modules( $modules ) {
+			if ( defined( 'MERCHANT_PRO_VERSION' ) ) {
+				return $modules;
+			}
+
+			foreach ( self::$upsell_modules as $module_id => $module_data ) {
+				$modules[ $module_data[ 'section' ] ][ 'modules' ][ $module_id ] = $module_data;
+			}
+			
+			return $modules;
 		}
 
 		/**

@@ -43,6 +43,12 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'stroke-linejoin' => true,
 					'stroke-width' 	  => true
 				),
+				'g'		  => array(
+					'id'		=> true,
+					'class'		=> true,
+					'clip-path' => true,
+					'style'		=> true
+				),
 				'path'    => array(
 					'fill'      => true,
 					'fill-rule' => true,
@@ -50,7 +56,8 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'transform' => true,
 					'stroke'	=> true,
 					'stroke-width' => true,
-					'stroke-linejoin' => true
+					'stroke-linejoin' => true,
+					'clip-rule' => true
 				),
 				'polyline'    => array(
 					'points'    => true,
@@ -68,17 +75,39 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'points'    => true,
 					'transform' => true,
 					'focusable' => true,
-					'stroke'	=> true
+					'stroke'	=> true,
+					'stroke-width' => true
 				),
 				'rect'    => array(
 					'x'      => true,
 					'y'      => true,
+					'rx' 	 => true,
 					'width'  => true,
 					'height' => true,
 					'transform' => true,
 					'fill'		=> true,
-					'stroke'	=> true
-				)			
+					'stroke'	=> true,
+					'stroke-width' => true
+				),
+				'circle'    => array(
+					'cx'      => true,
+					'cy'      => true,
+					'r' 	 => true,
+					'width'  => true,
+					'height' => true,
+					'transform' => true,
+					'fill'		=> true,
+					'stroke'	=> true,
+					'stroke-width' => true
+				),
+				'clipPath'	 => array(
+					'id' 	=> true,
+					'class' => true,
+					'style' => true
+				),
+				'defs'	 => array(
+					'id' 	=> true
+				),
 			),
 			$include_post_tags ? wp_kses_allowed_html( 'post' ) : array() 
 		);

@@ -54,7 +54,117 @@ const styles = [
 		name: 'pagination',
 		src: './assets/sass/pagination.scss',
 		destination: './assets/css',
-	}
+	},
+
+	// Buy Now.
+	{
+		name: 'buyNow',
+		src: './assets/sass/modules/buy-now/buy-now.scss',
+		destination: './assets/css/modules/buy-now',
+	},
+	{
+		name: 'buyNowAdmin',
+		src: './assets/sass/modules/buy-now/admin/preview.scss',
+		destination: './assets/css/modules/buy-now/admin',
+	},
+
+	// Animated Add To Cart.
+	{
+		name: 'animatedAddToCart',
+		src: './assets/sass/modules/animated-add-to-cart/animated-add-to-cart.scss',
+		destination: './assets/css/modules/animated-add-to-cart',
+	},
+	{
+		name: 'animatedAddToCartAdmin',
+		src: './assets/sass/modules/animated-add-to-cart/admin/preview.scss',
+		destination: './assets/css/modules/animated-add-to-cart/admin',
+	},
+
+	// Quick View.
+	{
+		name: 'quickView',
+		src: './assets/sass/modules/quick-view/quick-view.scss',
+		destination: './assets/css/modules/quick-view',
+	},
+	{
+		name: 'quickViewAdmin',
+		src: './assets/sass/modules/quick-view/admin/preview.scss',
+		destination: './assets/css/modules/quick-view/admin',
+	},
+
+	// Product Labels.
+	{
+		name: 'productLabels',
+		src: './assets/sass/modules/product-labels/product-labels.scss',
+		destination: './assets/css/modules/product-labels',
+	},
+	{
+		name: 'productLabelsAdmin',
+		src: './assets/sass/modules/product-labels/admin/preview.scss',
+		destination: './assets/css/modules/product-labels/admin',
+	},
+
+	// Product Labels.
+	{
+		name: 'paymentLogos',
+		src: './assets/sass/modules/payment-logos/payment-logos.scss',
+		destination: './assets/css/modules/payment-logos',
+	},
+	{
+		name: 'paymentLogosAdmin',
+		src: './assets/sass/modules/payment-logos/admin/preview.scss',
+		destination: './assets/css/modules/payment-logos/admin',
+	},
+
+	// Trust Badges.
+	{
+		name: 'trustBadges',
+		src: './assets/sass/modules/trust-badges/trust-badges.scss',
+		destination: './assets/css/modules/trust-badges',
+	},
+	{
+		name: 'trustBadgesAdmin',
+		src: './assets/sass/modules/trust-badges/admin/preview.scss',
+		destination: './assets/css/modules/trust-badges/admin',
+	},
+
+	// Pre Orders.
+	{
+		name: 'preOrders',
+		src: './assets/sass/modules/pre-orders/pre-orders.scss',
+		destination: './assets/css/modules/pre-orders',
+	},
+	{
+		name: 'preOrdersAdmin',
+		src: './assets/sass/modules/pre-orders/admin/preview.scss',
+		destination: './assets/css/modules/pre-orders/admin',
+	},
+
+	// Cart Count Favicon.
+	{
+		name: 'cartCountFaviconAdmin',
+		src: './assets/sass/modules/cart-count-favicon/admin/preview.scss',
+		destination: './assets/css/modules/cart-count-favicon/admin',
+	},
+
+	// Inactive Tab Message.
+	{
+		name: 'inactiveTabMessageAdmin',
+		src: './assets/sass/modules/inactive-tab-message/admin/preview.scss',
+		destination: './assets/css/modules/inactive-tab-message/admin',
+	},
+
+	// Agree To Terms Checkbox.
+	{
+		name: 'agreeToTermsCheckbox',
+		src: './assets/sass/modules/agree-to-terms-checkbox/agree-to-terms-checkbox.scss',
+		destination: './assets/css/modules/agree-to-terms-checkbox',
+	},
+	{
+		name: 'agreeToTermsCheckboxAdmin',
+		src: './assets/sass/modules/agree-to-terms-checkbox/admin/preview.scss',
+		destination: './assets/css/modules/agree-to-terms-checkbox/admin',
+	},
 
 ];
 
@@ -131,6 +241,38 @@ const scripts = [
 		src: './assets/js/src/custom-addtocart-button.js',
 		destination: './assets/js',
 		file: 'custom-addtocart-button',
+	},
+
+	// Quick View.
+	{
+		name: 'quickView',
+		src: './assets/js/src/modules/quick-view/quick-view.js',
+		destination: './assets/js/modules/quick-view',
+		file: 'quick-view',
+	},
+
+	// Pre Orders.
+	{
+		name: 'preOrders',
+		src: './assets/js/src/modules/pre-orders/pre-orders.js',
+		destination: './assets/js/modules/pre-orders',
+		file: 'pre-orders',
+	},
+
+	// Cart Count Favicon.
+	{
+		name: 'cartCountFavicon',
+		src: './assets/js/src/modules/cart-count-favicon/cart-count-favicon.js',
+		destination: './assets/js/modules/cart-count-favicon',
+		file: 'cart-count-favicon',
+	},
+
+	// Inactive Tab Message.
+	{
+		name: 'inactiveTabMessage',
+		src: './assets/js/src/modules/inactive-tab-message/inactive-tab-message.js',
+		destination: './assets/js/modules/inactive-tab-message',
+		file: 'inactive-tab-message',
 	}
 
 ];
