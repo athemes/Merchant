@@ -40,6 +40,17 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
+		// Module default settings.
+		$this->module_default_settings = array(
+			'theme' => 'merchant-cookie-banner-floating',
+			'bar_text' => esc_html__( '🍪 We\'re using cookies to give you the best experience on our site.', 'merchant' ),
+			'privacy_policy_text' => esc_html__( 'Learn More', 'merchant' ),
+			'privacy_policy_url' => get_privacy_policy_url(),
+			'button_text' => esc_html__( 'I Understand', 'merchant' ),
+			'cookie_duration' => '365',
+			'close_button' => 1
+		);
+
 		// Mount preview url.
 		$preview_url = site_url( '/' );
 
