@@ -59,14 +59,8 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20"><path fill-rule="evenodd" d="M15 0c.27 0 .52.11.71.29.18.19.29.44.29.71v10c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29H1c-.27 0-.52-.11-.71-.29C.11 11.52 0 11.27 0 11V1C0 .73.11.48.29.29.48.11.73 0 1 0h14Zm-3.41 5.168L14 7V2H2v5l1.48-.892c.32-.16.7-.14 1 .06L7 8l3.44-2.802c.33-.25.8-.27 1.15-.03Z" clip-rule="evenodd"/><path d="M.29 14.29C.48 14.11.73 14 1 14c.27 0 .52.11.71.29.18.19.29.44.29.71v4c0 .27-.11.52-.29.71-.19.18-.44.29-.71.29-.27 0-.52-.11-.71-.29C.11 19.52 0 19.27 0 19v-4c0-.27.11-.52.29-.71ZM7 16c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29-1.65 0-3 1.35-3 3s1.35 3 3 3c.27 0 .52-.11.71-.29.18-.19.29-.44.29-.71 0-.27-.11-.52-.29-.71-.19-.18-.44-.29-.71-.29a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31Z"/><path fill-rule="evenodd" d="M13 14c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3Zm.68 3.69c-.18.19-.42.3-.68.31a.982.982 0 0 1-.68-.31.976.976 0 0 1-.28-.69c0-.26.1-.51.28-.69.18-.19.42-.3.68-.31.26.01.5.12.68.31.18.18.28.43.28.69 0 .26-.1.51-.28.69Z" clip-rule="evenodd"/></svg>',
-			'title' => esc_html__( 'Cart Count Favicon', 'merchant' ),
-			'desc' => esc_html__( 'Make your store’s browser tab stand out by showing the number of items in the cart on the favicon.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/cart-count-favicon.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/cart-count-favicon/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

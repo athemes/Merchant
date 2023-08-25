@@ -42,9 +42,7 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 										$merchant_active_modules++;
 									}
 
-									if( ! isset( $merchant_module['upsell'] ) ) {
-										$merchant_count++;
-									}
+									$merchant_count++;
 								}
 							}
 						}

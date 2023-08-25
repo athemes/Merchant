@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 Merchant_Admin_Options::create( array(
 	'module'    => 'scroll-to-top-button',
-	'title'     => 'Settings for Desktop',
+	'title'     => __( 'Settings for Desktop', 'merchant' ),
 	'fields'    => array(
 
 		array(

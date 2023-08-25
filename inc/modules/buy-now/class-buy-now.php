@@ -58,14 +58,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg width="18" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 20"><path d="M8.707 1.293a1 1 0 0 0-1.414 1.414L8.586 4 7.293 5.293a1 1 0 0 0 1.414 1.414L10 5.414l1.293 1.293a1 1 0 1 0 1.414-1.414L11.414 4l1.293-1.293a1 1 0 0 0-1.414-1.414L10 2.586 8.707 1.293Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h1.5A1.5 1.5 0 0 1 4 1.5V10h11.133l.877-6.141a1 1 0 1 1 1.98.282l-.939 6.571A1.5 1.5 0 0 1 15.566 12H4v2h10a3 3 0 1 1-2.83 2H5.83A3 3 0 1 1 2 14.17V2H1a1 1 0 0 1-1-1Zm13 16a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM2 17a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"/></svg>',
-			'title' => esc_html__( 'Buy Now', 'merchant' ),
-			'desc' => esc_html__( 'Add Buy Now buttons to your product pages that take customers directly to the checkout.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/buy-now.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

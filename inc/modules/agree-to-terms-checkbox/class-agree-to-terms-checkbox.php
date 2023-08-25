@@ -46,7 +46,7 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			'label' => __( 'I agree with the', 'merchant' ),
 			'text' => __( 'Terms & Conditions', 'merchant' ),
 			'link' => get_privacy_policy_url(),
-			'warning_text' => __( 'You must read and accept the terms and conditions to complete checkout.', 'merchant' )
+			'warning_text' => __( 'Obtain consent before customers start the checkout process', 'merchant' )
 		);
 
 		// Mount preview url.
@@ -57,14 +57,8 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M.623 1.253.014 4.836C-.09 5.446.39 6 1.021 6h.91c.58 0 1.11-.321 1.37-.83L3.897 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L9 4l.597 1.17c.26.509.79.83 1.37.83h1.169c.58 0 1.11-.321 1.369-.83L14.102 4l.598 1.17c.259.509.789.83 1.369.83h.91c.63 0 1.11-.555 1.007-1.164l-.61-3.583A1.522 1.522 0 0 0 15.867 0H2.134C1.385 0 .746.53.623 1.253ZM12.707 8.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L8 11.586l3.293-3.293a1 1 0 0 1 1.414 0Z"/><path d="M3 8H1v8.5A1.5 1.5 0 0 0 2.5 18h13a1.5 1.5 0 0 0 1.5-1.5V8h-2v8H3V8Z"/></svg>',
-			'title' => esc_html__( 'Agree to Terms Checkbox', 'merchant' ),
-			'desc' => esc_html__( 'Get customers to agree to your Terms & Conditions as part of the checkout process.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/agree-to-terms-checkbox.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/agree-to-terms-checkbox/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

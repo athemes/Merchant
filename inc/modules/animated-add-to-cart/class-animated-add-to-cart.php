@@ -59,14 +59,8 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h1V0H1.5A1.5 1.5 0 0 0 0 1.5V3h2V2ZM0 9a4 4 0 0 1 4-4h10a4 4 0 0 1 0 8H4a4 4 0 0 1-4-4ZM16 3V2h-1V0h1.5A1.5 1.5 0 0 1 18 1.5V3h-2ZM16 16h-1v2h1.5a1.5 1.5 0 0 0 1.5-1.5V15h-2v1ZM2 15v1h1v2H1.5A1.5 1.5 0 0 1 0 16.5V15h2ZM8 18H5v-2h3v2ZM10 18h3v-2h-3v2ZM8 2H5V0h3v2ZM10 2h3V0h-3v2Z"/></svg>',
-			'title' => esc_html__( 'Animated Add to Cart', 'merchant' ),
-			'desc' => esc_html__( 'Make your Add To Cart button stand out more by showing a subtle animation on mouseover.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/animated-add-to-cart.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

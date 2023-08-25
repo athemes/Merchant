@@ -60,14 +60,8 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1.493 2.879C3.757 2.562 6.757 1.616 9.128.233a1.733 1.733 0 0 1 1.728-.004c2.369 1.354 5.502 2.29 7.65 2.628.818.128 1.491.81 1.491 1.638v.501c.031 6.043-.48 11.332-9.472 14.903a1.45 1.45 0 0 1-1.062 0C.478 16.328-.029 11.04.001 4.996L0 4.499c-.002-.83.672-1.505 1.493-1.62Zm9.214 6.414a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm-4 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Zm8 0a1 1 0 1 0-1.414 1.414 1 1 0 0 0 1.414-1.414Z" clip-rule="evenodd"/></svg>',
-			'title' => esc_html__( 'Trust Badges', 'merchant' ),
-			'desc' => esc_html__( 'Reassure customers with badges that showcase the benefits of shopping with your store, e.g. ‘easy returns’ or ‘30 day money back guarantee’.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/trust-badges.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

@@ -70,20 +70,21 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Modules
 			require_once MERCHANT_DIR . 'inc/modules/class-add-module.php';
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
-			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/class-scroll-to-top-button.php';
-			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
-			require_once MERCHANT_DIR . 'inc/modules/payment-logos/class-payment-logos.php';
-			require_once MERCHANT_DIR . 'inc/modules/trust-badges/class-trust-badges.php';
 			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
-			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
-			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/cookie-banner.php';
+			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
 			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
 			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
 			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
-			require_once MERCHANT_DIR . 'inc/modules/real-time-search/real-time-search.php';
-			require_once MERCHANT_DIR . 'inc/modules/code-snippets/code-snippets.php';
-			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
 			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
+			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
+			require_once MERCHANT_DIR . 'inc/modules/payment-logos/class-payment-logos.php';
+			require_once MERCHANT_DIR . 'inc/modules/trust-badges/class-trust-badges.php';
+			require_once MERCHANT_DIR . 'inc/modules/auto-external-links/class-auto-external-links.php';
+			require_once MERCHANT_DIR . 'inc/modules/real-time-search/class-real-time-search.php';
+			require_once MERCHANT_DIR . 'inc/modules/code-snippets/class-code-snippets.php';
+			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/class-scroll-to-top-button.php';
+			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
+			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
 
 		}
 
@@ -218,34 +219,33 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			);
 
 			// Scroll to Top Button
+			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'scroll-to-top-button' ) ) {
 
 				$setting['scroll_to_top'] = true;
 
-				wp_enqueue_script( 'merchant-scroll-to-top', MERCHANT_URI . 'assets/js/modules/scroll-to-top.js', array( 'merchant' ), MERCHANT_VERSION, true );
+				// wp_enqueue_script( 'merchant-scroll-to-top', MERCHANT_URI . 'assets/js/modules/scroll-to-top.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 
 			// Animated Add to Cart
+			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
 
 				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
 
 				if ( 'on-page-load' === $trigger ) {
 
-					wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
+					// wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 				}
 
 			}
 
 			// Auto External Links
+			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'auto-external-links' ) ) {
-
 				$setting['auto_external_links'] = true;
-
-				wp_enqueue_script( 'merchant-auto-external-links', MERCHANT_URI . 'assets/js/modules/auto-external-links.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
 			}
 
 			// Cookie Banner
@@ -254,11 +254,12 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['cookie_banner']          = true;
 				$setting['cookie_banner_duration'] = Merchant_Admin_Options::get( 'cookie-banner', 'cookie_duration', 365 );
 				
-				wp_enqueue_script( 'merchant-cookie-banner', MERCHANT_URI . 'assets/js/modules/cookie-banner.js', array( 'merchant' ), MERCHANT_VERSION, true );
+				// wp_enqueue_script( 'merchant-cookie-banner', MERCHANT_URI . 'assets/js/modules/cookie-banner.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 
 			// Real Time Search
+			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'real-time-search' ) ) {
 
 				$setting['ajax_search']                              = true;
@@ -268,7 +269,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'real-time-search', 'display_categories', 0 );
 				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
 
-				wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI . 'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
+				// wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI . 'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
 
 			}
 			

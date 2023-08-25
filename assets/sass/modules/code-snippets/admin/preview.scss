@@ -1,0 +1,22 @@
+/**
+ * Admin Preview
+ * Code Snippets
+ *
+ */
+
+// Canvas.
+.merchant-module-page-preview-browser-inner {
+	display: flex;
+	flex-grow: 0;
+	justify-content: center;
+	width: 100%;
+	margin: auto;
+	padding: 30px 25px 25px;
+}
+
+.mrc-code-snippets-preview {
+	img {
+		width: 100%;
+		max-width: 450px;
+	}
+}

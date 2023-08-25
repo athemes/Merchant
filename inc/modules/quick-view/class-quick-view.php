@@ -64,14 +64,8 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"><path d="M12.5 8c0 1.654-1.122 3-2.5 3S7.5 9.654 7.5 8 8.622 5 10 5s2.5 1.346 2.5 3Zm7.5-.449S16.457 16 10.012 16C4.03 16 0 7.551 0 7.551S3.705 0 10.012 0C16.424 0 20 7.551 20 7.551ZM14.167 8c0-2.757-1.87-5-4.167-5-2.298 0-4.167 2.243-4.167 5s1.87 5 4.167 5c2.297 0 4.167-2.243 4.167-5Z"/></svg>',
-			'title' => esc_html__( 'Quick View', 'merchant' ),
-			'desc' => esc_html__( 'Let customers instantly preview product details without leaving the page they are on.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/quick-view.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/quick-view/',
-			'preview_url' => $preview_url,
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

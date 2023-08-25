@@ -59,14 +59,8 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg width="20" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 14"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h17A1.5 1.5 0 0 1 20 1.5V3H0V1.5Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5v7.5A1.5 1.5 0 0 0 1.5 14h17a1.5 1.5 0 0 0 1.5-1.5V5H0Zm7 4H2V7h5v2Z"/></svg>',
-			'title' => esc_html__( 'Payment Logos', 'merchant' ),
-			'desc' => esc_html__( 'Let visitors know what payment methods you accept by displaying the logos of credit card and payment processor companies.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/payment-logos.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/payment-logos/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

@@ -153,6 +153,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 
+= 1.2 =
+* 
+* 
+
 = 1.1 =
 * Fixed - Quick View: Icon absolute position values not working properly. 
 * Fixed - Quick View: Icon hover color not working with some themes.

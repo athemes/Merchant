@@ -176,7 +176,45 @@ const styles = [
 		name: 'scrollToTopButtonAdmin',
 		src: './assets/sass/modules/scroll-to-top-button/admin/preview.scss',
 		destination: './assets/css/modules/scroll-to-top-button/admin',
-	}
+	},
+
+	// Auto External Links.
+	{
+		name: 'autoExternalLinksAdmin',
+		src: './assets/sass/modules/auto-external-links/admin/preview.scss',
+		destination: './assets/css/modules/auto-external-links/admin'
+	},
+
+	// Real Time Search.
+	{
+		name: 'realTimeSearch',
+		src: './assets/sass/modules/real-time-search/real-time-search.scss',
+		destination: './assets/css/modules/real-time-search',
+	},
+	{
+		name: 'realTimeSearchAdmin',
+		src: './assets/sass/modules/real-time-search/admin/preview.scss',
+		destination: './assets/css/modules/real-time-search/admin',
+	},
+
+	// Code Snippets.
+	{
+		name: 'codeSnippetsAdmin',
+		src: './assets/sass/modules/code-snippets/admin/preview.scss',
+		destination: './assets/css/modules/code-snippets/admin',
+	},
+
+	// Cookie Banner.
+	{
+		name: 'cookieBanner',
+		src: './assets/sass/modules/cookie-banner/cookie-banner.scss',
+		destination: './assets/css/modules/cookie-banner',
+	},
+	{
+		name: 'cookieBannerAdmin',
+		src: './assets/sass/modules/cookie-banner/admin/preview.scss',
+		destination: './assets/css/modules/cookie-banner/admin',
+	},
 
 ];
 
@@ -293,6 +331,30 @@ const scripts = [
 		src: './assets/js/src/modules/scroll-to-top-button/scroll-to-top-button.js',
 		destination: './assets/js/modules/scroll-to-top-button',
 		file: 'scroll-to-top-button',
+	},
+
+	// Auto External Links.
+	{
+		name: 'autoExternalLinks',
+		src: './assets/js/src/modules/auto-external-links/auto-external-links.js',
+		destination: './assets/js/modules/auto-external-links',
+		file: 'auto-external-links',
+	},
+
+	// Real Time Search.
+	{
+		name: 'realTimeSearch',
+		src: './assets/js/src/modules/real-time-search/real-time-search.js',
+		destination: './assets/js/modules/real-time-search',
+		file: 'real-time-search',
+	},
+
+	// Cookie Banner.
+	{
+		name: 'cookieBanner',
+		src: './assets/js/src/modules/cookie-banner/cookie-banner.js',
+		destination: './assets/js/modules/cookie-banner',
+		file: 'cookie-banner'
 	}
 
 ];
@@ -308,6 +370,7 @@ const zipDestination = './../';
 const zipIncludeGlob = ['../@(Merchant|merchant)/**/*'];
 const zipIgnoreGlob  = [
 	'!../@(Merchant|merchant)/**/*{node_modules,node_modules/**/*}',
+	'!../@(Merchant|merchant)/**/*.code-workspace',
 	'!../@(Merchant|merchant)/**/*.git',
 	'!../@(Merchant|merchant)/**/*.svn',
 	'!../@(Merchant|merchant)/**/*gulpfile.babel.js',
@@ -334,6 +397,7 @@ const zipIgnoreGlob  = [
 	'!../@(Merchant|merchant)/**/*playwright.config.js',
 	'!../@(Merchant|merchant)/**/*composer.json',
 	'!../@(Merchant|merchant)/**/*composer.lock',
+	'!../@(Merchant|merchant)/**/*yarn.lock',
 	'!../@(Merchant|merchant)/**/*phpcs.xml',
 	'!../@(Merchant|merchant)/{vendor,vendor/**/*}'
 ];

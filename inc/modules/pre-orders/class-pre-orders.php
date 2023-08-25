@@ -63,14 +63,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = array(
-			'icon' => '<svg width="18" height="17" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17"><path d="m8.69 3.772-.243.123a1 1 0 1 1-.895-1.79l2-1a.998.998 0 0 1 1.434 1.06l-1 6a1 1 0 0 1-1.973-.33l.677-4.063ZM3.617 2.924a.997.997 0 0 1-.324-.217l-1-1A1 1 0 0 1 3.707.293l1 1a.999.999 0 0 1-1.09 1.631ZM14.383 2.924a.997.997 0 0 1-.94-.092 1 1 0 0 1-.15-1.54l1-1a1 1 0 1 1 1.414 1.415l-1 1a.996.996 0 0 1-.324.217ZM14.293 6.707A1 1 0 0 1 15 5h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-.707-.293ZM3 7H1a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2ZM0 15.5V10h2v2h3.5c.775 0 1.388.662 1.926 1.244l.11.12c.366.391.886.636 1.464.636s1.098-.245 1.463-.637l.11-.119C11.114 12.663 11.726 12 12.5 12H16v-2h2v5.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 0 15.5Z"/></svg>',
-			'title' => esc_html__( 'Pre-Orders', 'merchant' ),
-			'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released.', 'merchant' ),
-			'placeholder' => MERCHANT_URI . 'assets/images/modules/pre-orders.png',
-			'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
-			'preview_url' => $preview_url
-		);
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
