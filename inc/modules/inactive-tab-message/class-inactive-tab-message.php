@@ -33,13 +33,18 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 	 * 
 	 */
 	public function __construct() {
+
+		// Module id.
+		$this->module_id = self::MODULE_ID;
+
+		// WooCommerce only.
+		$this->wc_only = true;
+
+		// Parent construct.
 		parent::__construct();
 
 		// Module section.
 		$this->module_section = 'reduce-abandonment';
-
-		// Module id.
-		$this->module_id = self::MODULE_ID;
 
 		// Module default settings.
 		$this->module_default_settings = array(

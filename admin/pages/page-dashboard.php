@@ -339,10 +339,21 @@ $merchant_notification_read = $this->is_latest_notification_read();
 								$module_link = $is_upsell ? 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant' : add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
 								$link_target = $is_upsell ? '_blank' : '_self';
 
+								$module_list_item_class = apply_filters( "merchant_admin_module_{$merchant_module_id}_list_item_class", 'merchant-modules-list-item' );
+								$has_wc_required_class  = strpos( $module_list_item_class, 'merchant-module-wc-only' ) !== FALSE ? true : false;
+								$module_link = $has_wc_required_class ? '#' : $module_link;
+
 								?>
 
-								<a href="<?php echo esc_url( $module_link ); ?>" class="merchant-modules-list-item" target="<?php echo esc_attr( $link_target ); ?>">
+								<a href="<?php echo esc_url( $module_link ); ?>" class="<?php echo esc_attr( $module_list_item_class ) ?>" target="<?php echo esc_attr( $link_target ); ?>">
 
+									<?php if( $has_wc_required_class ) : ?>
+										<div class="merchant-modules-list-item-woo-required">
+											<span class="merchant-pro-badge merchant-pro-tooltip" data-tooltip-message="<?php echo esc_attr__( 'The WooCommerce plugin is required for this option', 'merchant' ); ?>">
+												<?php echo esc_html__( 'WOO', 'merchant' ); ?>
+											</span>
+										</div>
+									<?php endif; ?>
 									<?php if( $is_upsell ) : ?>
 										<div class="merchant-modules-list-item-upsell">
 											<span class="merchant-pro-badge merchant-pro-tooltip" data-tooltip-message="<?php echo esc_attr__( 'This option is only available on Merchant Pro', 'merchant' ); ?>">

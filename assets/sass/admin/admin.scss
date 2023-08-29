@@ -562,10 +562,26 @@
 
 }
 
-.merchant-modules-list-item-upsell {
+.merchant-modules-list-item-upsell,
+.merchant-modules-list-item-woo-required {
 	position: absolute;
 	top: 20px;
 	right: 20px;
+}
+
+.merchant-modules-list-item-woo-required {
+	.merchant-pro-badge {
+		padding: 2px 6px;
+		color: #674399;
+		border: 1px solid #674399;
+		border-radius: 2px;
+		font-size: 9px;
+		font-weight: 700;
+
+		&:before {
+			font-weight: 400;
+		}
+	}
 }
 
 .merchant-modules-list-item-icon {

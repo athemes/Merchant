@@ -3,6 +3,12 @@
 class Merchant_Add_Module {
 
 	/**
+	 * WooCommerce only.
+	 * 
+	 */
+	public $wc_only = false;
+
+	/**
 	 * Module section.
 	 * 
 	 */
@@ -46,6 +52,9 @@ class Merchant_Add_Module {
 
 		// Add class to body to identify if module is active or not.
 		add_filter( 'admin_body_class', array( $this, 'add_module_activation_status_class' ), 10, 2 );
+
+		// Handle modules list item class.
+		add_filter( "merchant_admin_module_{$this->module_id}_list_item_class", array( $this, 'modules_list_item_class' ) );
 	}
 
 	/**
@@ -64,6 +73,20 @@ class Merchant_Add_Module {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Modules list item class.
+	 * 
+	 * @param string $class
+	 * @return string
+	 */
+	public function modules_list_item_class( $class ) {
+		if ( $this->wc_only && ! class_exists( 'Woocommerce' ) ) {
+			$class = $class . ' merchant-module-wc-only';
+		}
+
+		return $class;
 	}
 
 	/**

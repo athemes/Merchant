@@ -39,15 +39,20 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 * 
 	 */
 	public function __construct( Merchant_Pre_Orders_Main_Functionality $main_func ) {
+		
+		// Module id.
+		$this->module_id = self::MODULE_ID;
+
+		// WooCommerce only.
+		$this->wc_only = true;
+
+		// Parent construct.
 		parent::__construct();
 
 		$this->main_func = $main_func;
 
 		// Module section.
 		$this->module_section = 'boost-revenue';
-
-		// Module id.
-		$this->module_id = self::MODULE_ID;
 
 		// Module default settings.
 		$this->module_default_settings = array(
