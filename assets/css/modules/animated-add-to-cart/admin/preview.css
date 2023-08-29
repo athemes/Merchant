@@ -123,6 +123,8 @@
 }
 
 .add_to_cart_button.on-mouse-hover:hover.zoom-in {
+  -webkit-animation: none !important;
+          animation: none !important;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }

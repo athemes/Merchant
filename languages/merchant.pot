@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-08-25 21:15+0000\n"
+"POT-Creation-Date: 2023-08-28 16:15+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -784,7 +784,7 @@ msgid "Add To Cart"
 msgstr ""
 
 #: inc/modules/auto-external-links/admin/options.php:22
-msgid "All the external links on your store will be opened in a browser tab by enabling this app. It prevents visitors from navigating away from your online store."
+msgid "All the external links on your store will be opened in a browser tab by enabling this module. It prevents visitors from accidentally navigating away from your online store."
 msgstr ""
 
 #: inc/modules/buy-now/admin/options.php:21, inc/modules/cookie-banner/admin/options.php:54, inc/modules/pre-orders/admin/options.php:23, inc/modules/quick-view/admin/options.php:36
@@ -947,7 +947,7 @@ msgstr ""
 msgid "Bar text"
 msgstr ""
 
-#: inc/modules/cookie-banner/admin/options.php:33
+#: inc/modules/cookie-banner/admin/options.php:33, inc/modules/cookie-banner/class-cookie-banner.php:46
 msgid "🍪 We're using cookies to give you the best experience on our site."
 msgstr ""
 
@@ -959,7 +959,7 @@ msgstr ""
 msgid "The error will be shown if the user tries to go to checkout without accepting terms & conditions."
 msgstr ""
 
-#: inc/modules/cookie-banner/admin/options.php:41
+#: inc/modules/cookie-banner/admin/options.php:41, inc/modules/cookie-banner/class-cookie-banner.php:47
 msgid "Learn More"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Privacy policy URL"
 msgstr ""
 
-#: inc/modules/cookie-banner/admin/options.php:55
+#: inc/modules/cookie-banner/admin/options.php:55, inc/modules/cookie-banner/class-cookie-banner.php:49
 msgid "I Understand"
 msgstr ""
 

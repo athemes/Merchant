@@ -123,6 +123,7 @@
 		}
 
 		&.zoom-in {
+			animation: none !important;
 			transform: scale(1.2);
 		}
 

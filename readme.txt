@@ -1,7 +1,7 @@
 === Merchant ===
 Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quick view, buy now button, animated add to cart, payment logos, cart count favicon, inactive tab message, ajax real-time search, auto external links, code snippets, scroll to top button, agree to terms checkbox, cookie banner, accelerated checkout
 Requires at least: 5.5
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires PHP: 5.6
 Stable tag: trunk
 Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote
@@ -154,8 +154,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 == Changelog ==
 
 = 1.2 =
-* 
-* 
+* Added - Preview box to all modules in the admin.
+* Added - Compatibility with Merchant Pro.
 
 = 1.1 =
 * Fixed - Quick View: Icon absolute position values not working properly. 
