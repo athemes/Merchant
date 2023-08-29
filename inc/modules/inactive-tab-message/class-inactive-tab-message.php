@@ -205,4 +205,6 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Inactive_Tab_Message();
+add_action( 'init', function() {
+	new Merchant_Inactive_Tab_Message();
+} );

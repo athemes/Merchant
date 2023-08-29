@@ -326,4 +326,6 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Payment_Logos();
+add_action( 'init', function() {
+	new Merchant_Payment_Logos();
+} );

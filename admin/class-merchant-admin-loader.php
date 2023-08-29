@@ -31,7 +31,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function __construct() {
 
-			$this->includes();
+			add_action( 'init', array( $this, 'includes' ) );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );

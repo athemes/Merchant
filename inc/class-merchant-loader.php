@@ -31,6 +31,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		 */
 		public function __construct() {
 
+			// Includes.
 			$this->includes();
 
 			// Register scripts.
@@ -67,8 +68,10 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Metabox
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-metabox.php';
 
-			// Modules
+			// The main class for adding modules.
 			require_once MERCHANT_DIR . 'inc/modules/class-add-module.php';
+
+			// Modules.
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
 			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
 			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
@@ -86,6 +89,12 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
 
+			/**
+			 * Hook 'merchant_admin_after_include_modules_classes'.
+			 * 
+			 * @since 1.0
+			 */
+			do_action( 'merchant_admin_after_include_modules_classes' );
 		}
 
 		/**

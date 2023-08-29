@@ -554,4 +554,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Quick_View();
+add_action( 'init', function() {
+	new Merchant_Quick_View();
+} );

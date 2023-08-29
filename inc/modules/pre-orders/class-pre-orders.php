@@ -324,7 +324,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 // Main functionality.
 require MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders-main-functionality.php';
-$po_main_func = new Merchant_Pre_Orders_Main_Functionality();
 
 // Initialize the module.
-new Merchant_Pre_Orders( $po_main_func );
+add_action( 'init', function() {
+	new Merchant_Pre_Orders( new Merchant_Pre_Orders_Main_Functionality() );
+} );

@@ -323,4 +323,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Buy_Now();
+add_action( 'init', function() {
+	new Merchant_Buy_Now();
+} );

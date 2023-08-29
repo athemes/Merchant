@@ -184,4 +184,6 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Code_Snippets();
+add_action( 'init', function() {
+	new Merchant_Code_Snippets();
+} );

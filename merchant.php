@@ -66,23 +66,8 @@ class Merchant {
 			}
 		} );
 
-		// Ajax handlers.
-		$this->ajax_handlers();
-
 		// Load the plugin functionality.
-		add_action( 'init', array( $this, 'includes' ) );
-
-	}
-
-	/**
-	 * Ajax handlers.
-	 * 
-	 */
-	public function ajax_handlers() {
-
-		// Real Time Search.
-		require_once MERCHANT_DIR . 'inc/modules/real-time-search/class-real-time-search-ajax-handler.php';
-
+		$this->includes();
 	}
 
 	/**

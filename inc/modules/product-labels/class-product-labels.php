@@ -327,4 +327,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Product_Labels();
+add_action( 'init', function() {
+	new Merchant_Product_Labels();
+} );

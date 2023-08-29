@@ -147,4 +147,6 @@ class Merchant_Auto_External_Links extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-new Merchant_Auto_External_Links();
+add_action( 'init', function() {
+	new Merchant_Auto_External_Links();
+} );
