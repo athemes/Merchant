@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-08-28 16:15+0000\n"
+"POT-Creation-Date: 2023-08-29 17:57+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Stands out Add to Cart button by adding a subtle animation on the mouse over"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:62, inc/modules/quick-view/class-quick-view.php:47
+#: admin/classes/class-merchant-admin-modules.php:62, inc/modules/quick-view/class-quick-view.php:52
 msgid "Quick View"
 msgstr ""
 
@@ -491,7 +491,15 @@ msgstr ""
 msgid "idea or feedback?"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:348
+#: admin/pages/page-dashboard.php:352
+msgid "The WooCommerce plugin is required for this option"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:353
+msgid "WOO"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:359
 msgid "This option is only available on Merchant Pro"
 msgstr ""
 
@@ -727,7 +735,7 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: inc/modules/agree-to-terms-checkbox/admin/options.php:24, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:46
+#: inc/modules/agree-to-terms-checkbox/admin/options.php:24, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:51
 msgid "I agree with the"
 msgstr ""
 
@@ -735,7 +743,7 @@ msgstr ""
 msgid "Terms and conditions text"
 msgstr ""
 
-#: inc/modules/agree-to-terms-checkbox/admin/options.php:31, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:47
+#: inc/modules/agree-to-terms-checkbox/admin/options.php:31, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:52
 msgid "Terms & Conditions"
 msgstr ""
 
@@ -755,7 +763,7 @@ msgstr ""
 msgid "The error will be shown if the user tries to go to checkout without accepting the terms & conditions."
 msgstr ""
 
-#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:49
+#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:54
 msgid "Obtain consent before customers start the checkout process"
 msgstr ""
 
@@ -779,7 +787,7 @@ msgstr ""
 msgid "Move your mouse over each option to see the animations. Click on one of the buttons to select that animation."
 msgstr ""
 
-#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:193, inc/modules/quick-view/class-quick-view.php:262
+#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:198, inc/modules/quick-view/class-quick-view.php:267
 msgid "Add To Cart"
 msgstr ""
 
@@ -1007,7 +1015,7 @@ msgstr ""
 msgid "This message will be shown if there's no item in the cart when user switches to another tab"
 msgstr ""
 
-#: inc/modules/inactive-tab-message/admin/options.php:25, inc/modules/inactive-tab-message/class-inactive-tab-message.php:46
+#: inc/modules/inactive-tab-message/admin/options.php:25, inc/modules/inactive-tab-message/class-inactive-tab-message.php:51
 msgid "✋ Don't forget this"
 msgstr ""
 
@@ -1019,7 +1027,7 @@ msgstr ""
 msgid "This message will be shown if the user left items in the cart when user switches to another tab"
 msgstr ""
 
-#: inc/modules/inactive-tab-message/admin/options.php:33, inc/modules/inactive-tab-message/class-inactive-tab-message.php:47
+#: inc/modules/inactive-tab-message/admin/options.php:33, inc/modules/inactive-tab-message/class-inactive-tab-message.php:52
 msgid "✋ You left something in the cart"
 msgstr ""
 
@@ -1047,7 +1055,7 @@ msgstr ""
 msgid "Text above the logos"
 msgstr ""
 
-#: inc/modules/payment-logos/admin/options.php:53, inc/modules/payment-logos/class-payment-logos.php:47
+#: inc/modules/payment-logos/admin/options.php:53, inc/modules/payment-logos/class-payment-logos.php:52
 msgid "🔒 Safe & Secure Checkout"
 msgstr ""
 
@@ -1071,7 +1079,7 @@ msgstr ""
 msgid "Image max height"
 msgstr ""
 
-#: inc/modules/pre-orders/admin/options.php:24, inc/modules/pre-orders/class-pre-orders-main-functionality.php:387, inc/modules/pre-orders/class-pre-orders.php:54
+#: inc/modules/pre-orders/admin/options.php:24, inc/modules/pre-orders/class-pre-orders-main-functionality.php:387, inc/modules/pre-orders/class-pre-orders.php:59
 msgid "Pre Order Now!"
 msgstr ""
 
@@ -1079,7 +1087,7 @@ msgstr ""
 msgid "Additional information"
 msgstr ""
 
-#: inc/modules/pre-orders/admin/options.php:31, inc/modules/pre-orders/class-pre-orders-main-functionality.php:408, inc/modules/pre-orders/class-pre-orders-main-functionality.php:455, inc/modules/pre-orders/class-pre-orders.php:55
+#: inc/modules/pre-orders/admin/options.php:31, inc/modules/pre-orders/class-pre-orders-main-functionality.php:408, inc/modules/pre-orders/class-pre-orders-main-functionality.php:455, inc/modules/pre-orders/class-pre-orders.php:60
 msgid "Ships in {date}."
 msgstr ""
 
@@ -1118,15 +1126,15 @@ msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/modules/pre-orders/class-pre-orders.php:177
+#: inc/modules/pre-orders/class-pre-orders.php:182
 msgid "Tag Pre-Orders"
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders.php:183
+#: inc/modules/pre-orders/class-pre-orders.php:188
 msgid "Pre-orders captured by Merchant are tagged with \"MerchantPreOrder\" and can be found in your WooCommerce Order Section."
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders.php:183
+#: inc/modules/pre-orders/class-pre-orders.php:188
 msgid "View Pre-Orders"
 msgstr ""
 
@@ -1138,7 +1146,7 @@ msgstr ""
 msgid "Note: This label will be shown only on sales products."
 msgstr ""
 
-#: inc/modules/product-labels/admin/options.php:23, inc/modules/product-labels/class-product-labels.php:46
+#: inc/modules/product-labels/admin/options.php:23, inc/modules/product-labels/class-product-labels.php:51
 msgid "Spring Special"
 msgstr ""
 
@@ -1182,11 +1190,11 @@ msgstr ""
 msgid "Padding"
 msgstr ""
 
-#: inc/modules/product-labels/class-product-labels.php:176, inc/modules/quick-view/class-quick-view.php:256
+#: inc/modules/product-labels/class-product-labels.php:181, inc/modules/quick-view/class-quick-view.php:261
 msgid "Product Title"
 msgstr ""
 
-#: inc/modules/product-labels/class-product-labels.php:177
+#: inc/modules/product-labels/class-product-labels.php:182
 msgid "The product description normally goes here."
 msgstr ""
 
@@ -1306,11 +1314,11 @@ msgstr ""
 msgid "Regular price color"
 msgstr ""
 
-#: inc/modules/quick-view/class-quick-view.php:257
+#: inc/modules/quick-view/class-quick-view.php:262
 msgid "The product description normally is displayed here."
 msgstr ""
 
-#: inc/modules/quick-view/class-quick-view.php:438
+#: inc/modules/quick-view/class-quick-view.php:443
 msgid "Close quick view modal"
 msgstr ""
 
@@ -1398,27 +1406,27 @@ msgstr ""
 msgid "Return search results based on either product name or SKU."
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:197, inc/modules/real-time-search/class-real-time-search.php:336
+#: inc/modules/real-time-search/class-real-time-search.php:199, inc/modules/real-time-search/class-real-time-search.php:283
 msgid "Products"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:203
+#: inc/modules/real-time-search/class-real-time-search.php:205
 msgid "Ultra Facial Moisturizing Cream"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:204, inc/modules/real-time-search/class-real-time-search.php:211
+#: inc/modules/real-time-search/class-real-time-search.php:206, inc/modules/real-time-search/class-real-time-search.php:213
 msgid "Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:210
+#: inc/modules/real-time-search/class-real-time-search.php:212
 msgid "Rare Earth Deep Pore Cleansing"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:366
+#: inc/modules/real-time-search/class-real-time-search.php:313
 msgid "Categories"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:388
+#: inc/modules/real-time-search/class-real-time-search.php:335
 msgid "No products found."
 msgstr ""
 
@@ -1502,6 +1510,6 @@ msgstr ""
 msgid "Select badges"
 msgstr ""
 
-#: inc/modules/trust-badges/admin/options.php:53, inc/modules/trust-badges/class-trust-badges.php:48
+#: inc/modules/trust-badges/admin/options.php:53, inc/modules/trust-badges/class-trust-badges.php:53
 msgid "Product Quality Guaranteed!"
 msgstr ""
