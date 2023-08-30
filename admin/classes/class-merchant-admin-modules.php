@@ -79,6 +79,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Display a sticky add to cart bar when visitors are scrolling on your product pages', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-sticky-add-to-cart/'
 				),
+				'recently-viewed-products' => array(
+					'pro' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-recently-viewed-products' ),
+					'title' => esc_html__( 'Recently Viewed Products', 'merchant' ),
+					'desc' => esc_html__( 'Show recently viewed products on product pages and in the cart', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-recently-viewed-products/'
+				),
 				'wait-list' => array(
 					'pro' => true,
 					'section' => 'convert-more',
@@ -95,13 +103,13 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Create a sense of urgency by displaying a countdown timer on your discounted products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/'
 				),
-				'stock-scarcity' => array(
+				'advanced-reviews' => array(
 					'pro' => true,
 					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-stock-scarcity' ),
-					'title' => esc_html__( 'Stock Scarcity', 'merchant' ),
-					'desc' => esc_html__( 'Let customers know that stock is running low on products they are looking at', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-stock-scarcity/'
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'title' => esc_html__( 'Advanced Reviews', 'merchant' ),
+					'desc' => esc_html__( 'Easily collect and display advanced reviews ', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/'
 				),
 				'checkout' => array(
 					'pro' => true,
@@ -111,13 +119,13 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc'         => esc_html__( 'Different checkout options: Shopify-style, multi-step, and one-step', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-checkout/'
 				),
-				'recently-viewed-products' => array(
+				'stock-scarcity' => array(
 					'pro' => true,
 					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-recently-viewed-products' ),
-					'title' => esc_html__( 'Recently Viewed Products', 'merchant' ),
-					'desc' => esc_html__( 'Show recently viewed products on product pages and in the cart', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-recently-viewed-products/'
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-stock-scarcity' ),
+					'title' => esc_html__( 'Stock Scarcity', 'merchant' ),
+					'desc' => esc_html__( 'Let customers know that stock is running low on products they are looking at', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-stock-scarcity/'
 				),
 
 				// Boost Revenue.
@@ -220,14 +228,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Trust Badges', 'merchant' ),
 					'desc' => esc_html__( 'Reassure customers with badge-shaped store benefits', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/'
-				),
-				'advanced-reviews' => array(
-					'pro' => true,
-					'section' => 'build-trust',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
-					'title' => esc_html__( 'Advanced Reviews', 'merchant' ),
-					'desc' => esc_html__( 'Easily collect and display advanced reviews ', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/'
 				),
 				'reasons-to-buy' => array(
 					'pro' => true,
