@@ -115,16 +115,16 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'pro' => true,
 					'section' => 'convert-more',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-checkout' ),
-					'title'        => esc_html__( 'Checkout', 'merchant' ),
-					'desc'         => esc_html__( 'Different checkout options: Shopify-style, multi-step, and one-step', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-checkout/'
+					'title'        => esc_html__( 'Checkouts', 'merchant' ),
+					'desc'         => esc_html__( 'Choose from three different checkout layouts: Shopify-style, Multi-step or One-page', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-checkouts/'
 				),
 				'stock-scarcity' => array(
 					'pro' => true,
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-stock-scarcity' ),
 					'title' => esc_html__( 'Stock Scarcity', 'merchant' ),
-					'desc' => esc_html__( 'Let customers know that stock is running low on products they are looking at', 'merchant' ),
+					'desc' => esc_html__( 'Let visitors know that stock is running low on products they are looking at', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-stock-scarcity/'
 				),
 
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-frequently-bought-together' ),
 					'title' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-					'desc' => esc_html__( 'Create product bundles with items that are frequently purchased together as a group', 'merchant' ),
+					'desc' => esc_html__( 'Create discounted product bundles with items that are frequently purchased together', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-frequently-bought-together/'
 				),
 				'buy-x-get-y' => array(
@@ -174,7 +174,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-free-gifts' ),
 					'title' => esc_html__( 'Gifts', 'merchant' ),
-					'desc' => esc_html__( 'Set a spending goal which, if reached, will unlock a gift for the customer', 'merchant' ),
+					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/'
 				),
 
@@ -334,7 +334,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'protect-your-store',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cookie-banner' ),
 					'title' => esc_html__( 'Cookie Banner', 'merchant' ),
-					'desc' => esc_html__( 'Inform your visitors that the site uses cookies to improve the user experience', 'merchant' ),
+					'desc' => esc_html__( 'Inform your visitors that the site uses cookies', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cookie-banner/'
 				),
 				'content-protection' => array(

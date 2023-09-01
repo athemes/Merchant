@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-08-29 17:57+0000\n"
+"POT-Creation-Date: 2023-09-01 12:56+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -34,7 +34,7 @@ msgid "Buy Now"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:47
-msgid "Increasing average order value by sending your customers directly to checkout instead of cart"
+msgid "Send your customers directly to checkout instead of the cart with Buy Now buttons"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:54
@@ -42,7 +42,7 @@ msgid "Animated Add to Cart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:55
-msgid "Stands out Add to Cart button by adding a subtle animation on the mouse over"
+msgid "Make your Add To Cart button stand out by adding an animation on mouse over or page load"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:62, inc/modules/quick-view/class-quick-view.php:52
@@ -58,7 +58,7 @@ msgid "Product Labels"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:71
-msgid "Increase conversion rate with different badges on top of your product image"
+msgid "Add customizable labels on top of your product images"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:78
@@ -66,151 +66,151 @@ msgid "Sticky Add To Cart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:79
-msgid "Display sticky add-to-cart bar when the visitors are scrolling down"
+msgid "Display a sticky add to cart bar when visitors are scrolling on your product pages"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:86
-msgid "Waitlist"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:87
-msgid "Build a waiting list for sold-out items and auto-notify when stock's back"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:94
-msgid "Countdown Timer"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:95
-msgid "Create urgency using a countdown timer for all your discounted products"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:102
-msgid "Stock Scarcity"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:103
-msgid "Alert low inventory on the products to drive customer urgency when they're browsing"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:110
-msgid "Checkout"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:111
-msgid "Streamlined checkout options: Shopify-style, Multi-step, and One-step"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:118
 msgid "Recently Viewed Products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:119
-msgid "Increase cross-sells by showing recently viewed items on product pages and in the cart"
+#: admin/classes/class-merchant-admin-modules.php:87
+msgid "Show recently viewed products on product pages and in the cart"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:128
-msgid "Pre-Orders"
+#: admin/classes/class-merchant-admin-modules.php:94
+msgid "Waitlist"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:129
-msgid "Allow visitors to pre-order products that are either out of stock or not yet released"
+#: admin/classes/class-merchant-admin-modules.php:95
+msgid "Build a waiting list for sold-out items and auto-notify potential customers when items are back in stock"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:136
-msgid "Frequently Bought Together"
+#: admin/classes/class-merchant-admin-modules.php:102
+msgid "Countdown Timer"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:137
-msgid "Create product bundles with items that are purchased together as a group"
+#: admin/classes/class-merchant-admin-modules.php:103
+msgid "Create a sense of urgency by displaying a countdown timer on your discounted products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:144
-msgid "Buy X, Get Y"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:145
-msgid "Discount a product when another product is purchased and balance stock inventory"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:152
-msgid "Volume Discounts"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:153
-msgid "Increase store's average order value by offering discounts on larger quantity purchases"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:160
-msgid "Spending Discount Goal"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:161
-msgid "Incentivise customers with a discount when they reach the spending goal target"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:168
-msgid "Gift"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:169
-msgid "Increase customer satisfaction with gifts that remind your customers about your store"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:178
-msgid "Cart Count Favicon"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:179
-msgid "Stands out your store's browser tab by displaying the number of items in the cart on the favicon"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:186
-msgid "Inactive Tab Message"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:187
-msgid "Modify the browser tab's title when the visitor navigates away from your store"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:194
-msgid "Floating Mini Cart"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:195
-msgid "A cart icon with item count and a sliding cart to encourage customers for checkout"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:202
-msgid "Cart Reserved Timer"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:203
-msgid "Create urgency by letting visitors know that the products in cart are reserved for limited time"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:212, inc/modules/payment-logos/admin/options.php:16
-msgid "Payment Logos"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:213
-msgid "Letting your visitors know that you are accepting a wide assortment of payment methods"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:220, inc/modules/trust-badges/admin/options.php:16
-msgid "Trust Badges"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:221
-msgid "Increase conversion rate and reassure customers with badge-shaped store benefits"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:228
+#: admin/classes/class-merchant-admin-modules.php:110
 msgid "Advanced Reviews"
 msgstr ""
 
+#: admin/classes/class-merchant-admin-modules.php:111
+msgid "Easily collect and display advanced reviews "
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:118
+msgid "Checkout"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:119
+msgid "Different checkout options: Shopify-style, multi-step, and one-step"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:126
+msgid "Stock Scarcity"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:127
+msgid "Let customers know that stock is running low on products they are looking at"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:136
+msgid "Pre-Orders"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:137
+msgid "Allow visitors to pre-order products that are either out of stock or not yet released"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:144
+msgid "Frequently Bought Together"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:145
+msgid "Create product bundles with items that are frequently purchased together as a group"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:152
+msgid "Buy X, Get Y"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:153
+msgid "When product X is purchased, give a discount on product Y. "
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:160
+msgid "Volume Discounts"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:161
+msgid "Offer discounts on larger quantity purchases to drive up average order value"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:168
+msgid "Spending Discount Goal"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:169
+msgid "Motivate higher average order values by gamifying the shopping experience and offering customers discounts for reaching spending goals"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:176
+msgid "Gifts"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:177
+msgid "Set a spending goal which, if reached, will unlock a gift for the customer"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:186
+msgid "Cart Count Favicon"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:187
+msgid "Make sure your store’s browser tab stand out by showimg the number of items in the cart in the favicon"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:194
+msgid "Inactive Tab Message"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:195
+msgid "Modify the browser tab's title when the visitor navigates away from your store"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:202
+msgid "Floating Mini Cart"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:203
+msgid "A cart icon with item count will always be visible on all pages or only when the cart is not empty, and a sliding cart will be visible when the customer clicks it"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:210
+msgid "Cart Reserved Timer"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:211
+msgid "Create a sense of urgency by letting visitors know that the products in their cart are reserved for a limited time"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:220, inc/modules/payment-logos/admin/options.php:16
+msgid "Payment Logos"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:221
+msgid "Let your visitors know which payment methods you accept"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:228, inc/modules/trust-badges/admin/options.php:16
+msgid "Trust Badges"
+msgstr ""
+
 #: admin/classes/class-merchant-admin-modules.php:229
-msgid "Easily collect and display advanced reviews to boost trust and conversion rates"
+msgid "Reassure customers with badge-shaped store benefits"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:236
@@ -218,7 +218,7 @@ msgid "Reasons To Buy List"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:237
-msgid "Provide customer a persuasive summary of the key features and benefits of your products"
+msgid "Provide customers with a summary of the key features and benefits of your products"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:244
@@ -226,7 +226,7 @@ msgid "Product Brand Image"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:245
-msgid "Add brand image for each products to instil confidence in potential buyers"
+msgid "Add brand images to products"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:254
@@ -234,7 +234,7 @@ msgid "Auto External Links"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:255
-msgid "Prevent users from navigating away from your online store by opening links in a new browser tab"
+msgid "Keep users from accidentally navigating away from your store by automatically opening external links in a new browser tab"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:262
@@ -250,7 +250,7 @@ msgid "Code Snippets"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:271
-msgid "Add code snippets in WordPress without having to edit your theme's functions.php file"
+msgid "Add code snippets in WordPress without having to edit your theme's functions.php file "
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:278
@@ -266,7 +266,7 @@ msgid "Size Chart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:287
-msgid "Reduce returns and increase sales by showing a size chart on product pages"
+msgid "Reduce returns and increase sales by showing a size chart on specific products or all products"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:294
@@ -282,7 +282,7 @@ msgid "Product Video"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:303
-msgid "Upload or embed video in the product gallery on product single page and archive page"
+msgid "Replace the featured image for a product with a video"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:310
@@ -290,7 +290,7 @@ msgid "Product Audio"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:311
-msgid "Upload or embed audio in the product gallery on product single page and archive page"
+msgid "Replace the featured image for a product with audio"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:318
@@ -298,7 +298,7 @@ msgid "Login Popup"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:319
-msgid "Allow users to login/signup with the simple pop up without refreshing page"
+msgid "Allow users to login with a simple pop up"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:328
@@ -306,7 +306,7 @@ msgid "Agree to Terms Checkbox"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:329
-msgid "Get customers to agree to your Terms & Conditions as part of the checkout process."
+msgid "Get customers to agree to your Terms & Conditions as part of the checkout process"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:336
@@ -632,7 +632,7 @@ msgid "Global Settings"
 msgstr ""
 
 #: admin/pages/page-settings.php:43
-msgid "Further enhance and customize the Merchant modules to your own needs."
+msgid "License activation, operating mode selection and custom code."
 msgstr ""
 
 #: admin/pages/page-settings.php:64
