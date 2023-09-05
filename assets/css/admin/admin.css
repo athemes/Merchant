@@ -1458,6 +1458,13 @@
   width: 300px;
 }
 
+@media (max-width: 1400px) {
+  .merchant-modules-header-image img {
+    max-width: 450px;
+    margin-top: 20px;
+  }
+}
+
 .merchant-modules-header-shortlinks {
   margin: 20px 0;
   padding: 0;

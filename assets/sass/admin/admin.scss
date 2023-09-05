@@ -400,6 +400,13 @@
 	svg {
 		width: 300px;
 	}
+
+	@media(max-width: 1400px) {
+		img {
+			max-width: 450px;
+			margin-top: 20px;
+		}
+	}
 }
 
 .merchant-modules-header-shortlinks {

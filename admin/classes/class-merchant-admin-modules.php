@@ -336,17 +336,8 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Cookie Banner', 'merchant' ),
 					'desc' => esc_html__( 'Inform your visitors that the site uses cookies', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cookie-banner/'
-				),
-				'content-protection' => array(
-					'pro' => true,
-					'section' => 'protect-your-store',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-content-protection' ),
-					'title'        => esc_html__( 'Content Protection', 'merchant' ),
-					'desc'         => esc_html__( 'Prevent content theft by blocking text and image selection, copy, cut and save shortcuts', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-content-protection/'
-				),
+				)
 				
-
 			);
 
 		}

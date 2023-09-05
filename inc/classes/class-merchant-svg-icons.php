@@ -122,13 +122,6 @@ if ( ! class_exists( 'Merchant_SVG_Icons' ) ) {
 			</defs>
 			</svg>
 			',
-			'module-content-protection' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M8 4H12V6H8V4Z" fill="#5C5F62"/>
-			<path d="M6 10V12H10V10H6Z" fill="#5C5F62"/>
-			<path d="M6 14H12V16H6V14Z" fill="#5C5F62"/>
-			<path fill-rule="evenodd" clip-rule="evenodd" d="M2 18.5V1.5C2 0.7 2.7 0 3.5 0H16.6C17.4 0 18.1 0.7 18.1 1.5V18.5C18.1 19.3 17.4 20 16.6 20H3.5C2.7 20 2 19.3 2 18.5ZM4 18H16V6H14V4H16V2H4V4H6V6H4V18Z" fill="#5C5F62"/>
-			</svg>
-			',
 			'module-cookie-banner' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M8 4H12V6H8V4Z" fill="#5C5F62"/>
 			<path d="M6 10V12H10V10H6Z" fill="#5C5F62"/>
