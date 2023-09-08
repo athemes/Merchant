@@ -839,6 +839,11 @@ body:not(.block-editor-page){
 		display: flex;
 		grid-gap: 10px;
 
+		&:not(:last-child) > div {
+			border-bottom: 1px solid #f3f3f3;
+			padding-bottom: 15px;
+		}
+
 		label {
 			width: 200px;
 		}
