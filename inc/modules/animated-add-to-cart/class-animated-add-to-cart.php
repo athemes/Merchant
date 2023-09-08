@@ -3,7 +3,7 @@
 /**
  * Animated Add To Cart.
  * 
- * @package Merchant_Pro
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

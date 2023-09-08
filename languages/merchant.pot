@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-09-01 12:56+0000\n"
+"POT-Creation-Date: 2023-09-08 13:42+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -102,11 +102,11 @@ msgid "Easily collect and display advanced reviews "
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:118
-msgid "Checkout"
+msgid "Checkouts"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:119
-msgid "Different checkout options: Shopify-style, multi-step, and one-step"
+msgid "Choose from three different checkout layouts: Shopify-style, Multi-step or One-page"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:126
@@ -114,7 +114,7 @@ msgid "Stock Scarcity"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:127
-msgid "Let customers know that stock is running low on products they are looking at"
+msgid "Let visitors know that stock is running low on products they are looking at"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:136
@@ -130,7 +130,7 @@ msgid "Frequently Bought Together"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:145
-msgid "Create product bundles with items that are frequently purchased together as a group"
+msgid "Create discounted product bundles with items that are frequently purchased together"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:152
@@ -162,7 +162,7 @@ msgid "Gifts"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:177
-msgid "Set a spending goal which, if reached, will unlock a gift for the customer"
+msgid "Reward shoppers with a gift if they hit a specified spending target"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:186
@@ -314,38 +314,30 @@ msgid "Cookie Banner"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:337
-msgid "Inform your visitors that the site uses cookies to improve the user experience"
+msgid "Inform your visitors that the site uses cookies"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:344
-msgid "Content Protection"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:345
-msgid "Prevent content theft by blocking text and image selection, copy, cut and save shortcuts"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:362
+#: admin/classes/class-merchant-admin-modules.php:353
 msgid "Convert More"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:367
+#: admin/classes/class-merchant-admin-modules.php:358
 msgid "Boost Revenue"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:372
+#: admin/classes/class-merchant-admin-modules.php:363
 msgid "Reduce Abandonment"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:377
+#: admin/classes/class-merchant-admin-modules.php:368
 msgid "Build Trust"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:382
+#: admin/classes/class-merchant-admin-modules.php:373
 msgid "Improve Experience"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:387
+#: admin/classes/class-merchant-admin-modules.php:378
 msgid "Protect Store"
 msgstr ""
 
@@ -353,7 +345,7 @@ msgstr ""
 msgid "Field not found!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:500, inc/classes/class-merchant-metabox.php:923
+#: admin/classes/class-merchant-admin-options.php:500, inc/classes/class-merchant-metabox.php:905
 msgid "Default"
 msgstr ""
 
@@ -583,12 +575,16 @@ msgstr ""
 msgid "Your feedback helps us improve Merchant."
 msgstr ""
 
-#: admin/pages/page-module.php:152, admin/pages/page-module.php:209, admin/pages/page-settings.php:76
-msgid "Preview"
+#: admin/pages/page-module.php:152
+msgid "View on site"
 msgstr ""
 
 #: admin/pages/page-module.php:158
 msgid "Tutorial"
+msgstr ""
+
+#: admin/pages/page-module.php:209, admin/pages/page-settings.php:76
+msgid "Preview"
 msgstr ""
 
 #: admin/pages/page-module.php:237
@@ -683,52 +679,64 @@ msgstr ""
 msgid "Custom JS"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:214
+#: inc/classes/class-merchant-metabox.php:208
 msgid "Merchant Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:217
+#: inc/classes/class-merchant-metabox.php:211
 msgid "Merchant Post Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:221
+#: inc/classes/class-merchant-metabox.php:215
 msgid "Merchant Page Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:225
+#: inc/classes/class-merchant-metabox.php:219
 msgid "Merchant Product Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:723
+#: inc/classes/class-merchant-metabox.php:705
 msgid "Upload/Add Image"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:724
+#: inc/classes/class-merchant-metabox.php:706
 msgid "Remove Image"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:754, inc/classes/class-merchant-metabox.php:780
+#: inc/classes/class-merchant-metabox.php:736, inc/classes/class-merchant-metabox.php:762
 msgid "Upload"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:805, inc/classes/class-merchant-metabox.php:847
+#: inc/classes/class-merchant-metabox.php:787, inc/classes/class-merchant-metabox.php:829
 msgid "Size Name"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:816, inc/classes/class-merchant-metabox.php:860
+#: inc/classes/class-merchant-metabox.php:798, inc/classes/class-merchant-metabox.php:842
 msgid "Duplicate"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:830, inc/classes/class-merchant-metabox.php:874
+#: inc/classes/class-merchant-metabox.php:812, inc/classes/class-merchant-metabox.php:856
 msgid "Remove"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:883
+#: inc/classes/class-merchant-metabox.php:865
 msgid "Add Size Chart"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:903
+#: inc/classes/class-merchant-metabox.php:885
 msgid "Select a size chart"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:953
+msgid "No coupons found! <a href=\"%s\" target=\"%s\">Create a new coupon</a>"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:939
+msgid "Select a coupon"
+msgstr ""
+
+#: inc/classes/class-merchant-metabox.php:950
+msgid "Manage coupons"
 msgstr ""
 
 #: inc/modules/agree-to-terms-checkbox/admin/options.php:23

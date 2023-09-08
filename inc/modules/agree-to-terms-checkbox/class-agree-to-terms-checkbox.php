@@ -3,7 +3,7 @@
 /**
  * Agree To Terms Checkbox.
  * 
- * @package Merchant_Pro
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

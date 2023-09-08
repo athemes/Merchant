@@ -28,11 +28,9 @@ merchant.modules = merchant.modules || {};
       var delay = parseInt(window.merchant.setting.cart_count_favicon_delay) * 1000;
       if (delay) {
         setInterval(function () {
-          console.log(123);
           favicon.badge(0);
         }, delay);
         setInterval(function () {
-          console.log(44444);
           favicon.badge(count);
         }, delay * 2);
       }

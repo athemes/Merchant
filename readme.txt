@@ -152,6 +152,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 16. Cookie Banner Module
 
 == Changelog ==
+= 1.3 =
+* Fixed - Real-Time Search: Ajax isn't working.
+* Changed - Plugin dashboard modules order rearranged.
 
 = 1.2 =
 * Added - Preview box to all modules in the admin.
