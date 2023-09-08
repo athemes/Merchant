@@ -970,6 +970,11 @@ body:not(.block-editor-page) #merchant_metabox .inside {
   grid-gap: 10px;
 }
 
+.merchant-metabox-field-flexible-content-item-content > div:not(:last-child) > div {
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 15px;
+}
+
 .merchant-metabox-field-flexible-content-item-content > div label {
   width: 200px;
 }
