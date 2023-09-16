@@ -1,0 +1,43 @@
+/**
+ * Admin Preview
+ * Checkout Styles
+ *
+ */
+
+ .merchant-module-page-preview-browser-inner {
+	display: flex;
+	flex-grow: 0;
+	max-width: 100%;
+	margin: auto;
+	padding: 0;
+}
+
+.mrc-checkout-preview {
+	.mrc-checkout-preview-one-step,
+	.mrc-checkout-preview-shopify,
+	.mrc-checkout-preview-multi-step {
+		display: none;
+
+		img {
+			width: 100%;
+			height: auto;
+			max-width: 100%;
+		}
+	}
+
+	&.layout-one-step {
+		.mrc-checkout-preview-one-step {
+			display: block;
+		}
+	}
+	&.layout-shopify {
+		.mrc-checkout-preview-shopify {
+			display: block;
+		}
+	}
+	&.layout-multi-step {
+		.mrc-checkout-preview-multi-step {
+			display: block;
+		}
+	}
+}

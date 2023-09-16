@@ -336,8 +336,10 @@ $merchant_notification_read = $this->is_latest_notification_read();
 							<?php 
 							foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) : 
 								$is_upsell   = ! defined( 'MERCHANT_PRO_VERSION' ) && isset( $merchant_module['pro'] ) && true === $merchant_module['pro'];
-								$module_link = $is_upsell ? 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant' : add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
-								$link_target = $is_upsell ? '_blank' : '_self';
+								//$module_link = $is_upsell ? 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant' : add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
+								//$link_target = $is_upsell ? '_blank' : '_self';
+								$module_link = add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
+								$link_target = '_self';
 
 								$module_list_item_class = apply_filters( "merchant_admin_module_{$merchant_module_id}_list_item_class", 'merchant-modules-list-item' );
 								$has_wc_required_class  = strpos( $module_list_item_class, 'merchant-module-wc-only' ) !== FALSE ? true : false;

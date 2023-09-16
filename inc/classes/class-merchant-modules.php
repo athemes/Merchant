@@ -12,6 +12,11 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 	class Merchant_Modules {
 
 		/**
+		 * The modules container.
+		 */
+		private $container = array();
+
+		/**
 		 * Option name
 		 */
 		public static $option = 'merchant-modules';
@@ -124,6 +129,39 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		}
 
 		/**
+		 * Creates and adds the module instance to the container.
+		 *
+		 * @param Merchant_Add_Module $module The module instance.
+		 *
+		 * @return void
+		 */
+		public static function create_module( Merchant_Add_Module $module ) {
+			static::instance()->container[ $module->module_id ] = $module;
+		}
+
+		/**
+		 * Get the module instance.
+		 *
+		 * @param string $module_id The module ID.
+		 *
+		 * @return Merchant_Add_Module|mixed The module instance.
+		 */
+		public static function get_module( $module_id ) {
+			return static::instance()->container[ $module_id ];
+		}
+
+		/**
+		 * Determines if a module has already been added to the container.
+		 *
+		 * @param string $module_id The module ID.
+		 *
+		 * @return  bool
+		 */
+		public static function is_module_created( $module_id ) {
+			return in_array( $module_id, static::instance()->container );
+		}
+
+		/**
 		 * Check if a specific module is activated
 		 */
 		public static function is_module_active( $module ) {
@@ -149,9 +187,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			}
 
 			return false;
-
 		}
-
 	}
 
 	Merchant_Modules::instance();

@@ -1,0 +1,103 @@
+/**
+ * Wishlist button.
+ *
+ */
+ul.products {
+	li.product {
+		position: relative;
+	}
+}
+
+.wc-block-grid__products {
+	.wc-block-grid__product {
+		position: relative;
+	}
+}
+
+.merchant-wishlist-button {
+	position: absolute;
+	top: var( --mrc-wl-button-position-top, 20px );
+	right: var( --mrc-wl-button-position-left, 20px );
+	// transform: translate( calc( var( --mrc-wl-button-position-top, 10px ) * -1 ), calc( var( --mrc-wl-button-position-left, 20px ) * -1 ) );
+	z-index: 10;
+
+	svg {
+		fill: var( --mrc-wl-button-icon-fill-color, transparent );
+		stroke: var( --mrc-wl-button-icon-stroke-color, #212121 );
+
+		path {
+			fill: var( --mrc-wl-button-icon-fill-color, transparent );
+			stroke: var( --mrc-wl-button-icon-stroke-color, #212121 );
+		}
+	}
+
+	&:hover,
+	&.active {
+		svg {
+			fill: var( --mrc-wl-button-icon-fill-color-hover, #f04c4c );
+			stroke: var( --mrc-wl-button-icon-stroke-color-hover, #212121 );
+
+			path {
+				fill: var( --mrc-wl-button-icon-fill-color-hover, #f04c4c );
+				stroke: var( --mrc-wl-button-icon-stroke-color-hover, #212121 );
+			}
+		}
+	}
+
+	&.merchant-wishlist-button-tooltip:not(.active) {
+		&:before {
+			content: attr(data-merchant-wishlist-tooltip);
+			position: absolute;
+			top: 50%;
+			right: calc( 100% + 15px );
+			background: var( --mrc-wl-button-tooltip-background-color, #212121 );
+			color: var( --mrc-wl-button-tooltip-text-color, #FFF );
+			padding: 5px 14px;
+			font-size: 0.8rem;
+			border-radius: var( --mrc-wl-button-tooltip-border-radius, 4px );
+			white-space: nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transform: translate3d(0, -50%, 0);
+			transition: ease opacity 300ms;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			right: calc( 100% + 9px );
+			width: 0;
+			height: 0;
+			border-top: 7px solid transparent;
+			border-bottom: 7px solid transparent;
+			border-left: 7px solid var( --mrc-wl-button-tooltip-background-color, #212121 );
+			opacity: 0;
+			visibility: hidden;
+			transform: translate3d(0, -50%, 0);
+			transition: ease opacity 300ms;
+		}
+
+		&:hover {
+			&:before,
+			&:after {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+
+	&.merchant-wishlist-link {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+	}
+}
+
+.summary.entry-summary {
+	.merchant-wishlist-button {
+		position: relative;
+		top: auto;
+		right: auto;
+		transform: none;
+	}
+}

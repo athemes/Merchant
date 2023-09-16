@@ -1,0 +1,118 @@
+/**
+ * Recently Viewed Products
+ *
+ */
+
+.merchant-recently-viewed-products-section {
+    margin: 35px auto;
+
+    .section-title {
+        margin-bottom: 25px;
+        color: var( --mrc-rvp-section-title-color, #212121 );
+    }
+
+    // Hide title.
+    &.hide-title {
+        .section-title {
+            display: none;
+        }
+    }
+
+    &:not(.slider-style) {
+        .merchant-recently-viewed-products {
+            ul.products {
+                display: flex !important;
+                flex-wrap: wrap;
+                margin: calc(-1 * var(--mrc-rvp-columns-gap)) 0 0 calc(-1 * var(--mrc-rvp-columns-gap)) !important;
+                width: calc(100% + var(--mrc-rvp-columns-gap)) !important;
+                column-gap: 0 !important;
+
+                &:before,
+                &:after {
+                    content: none !important;
+                }
+
+                li.product {
+                    margin: var(--mrc-rvp-columns-gap) 0 0 var(--mrc-rvp-columns-gap) !important;
+                    padding: 0 !important;
+                }
+            }
+        }
+    }
+}
+
+.merchant-recently-viewed-products {
+    ul.products {
+        &.columns-1 li.product,
+        &.columns-2 li.product,
+        &.columns-3 li.product,
+        &.columns-4 li.product,
+        &.columns-5 li.product,
+        &.columns-6 li.product {
+            max-width: calc( 100% - var(--mrc-rvp-columns-gap) ) !important;
+            width: calc( 100% - var(--mrc-rvp-columns-gap) ) !important;
+        }
+
+        @media screen and (min-width: 768px) {
+            &.columns-1 li.product,
+            &.columns-2 li.product,
+            &.columns-3 li.product,
+            &.columns-4 li.product,
+            &.columns-5 li.product,
+            &.columns-6 li.product {
+                max-width: calc( 50% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 50% - var(--mrc-rvp-columns-gap) ) !important;
+            }	
+        }	
+
+        @media screen and (min-width: 992px) {
+            &.columns-1 li.product,
+            &.columns-2 li.product,
+            &.columns-3 li.product,
+            &.columns-4 li.product,
+            &.columns-5 li.product,
+            &.columns-6 li.product {
+                max-width: calc( 33.3333% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 33.3333% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+        }
+
+        @media screen and (min-width: 1199px) {
+            &.columns-1 li.product {
+                max-width: calc( 100% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 100% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 100% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+
+            &.columns-2 li.product {
+                max-width: calc( 50% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 50% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 50% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+
+            &.columns-3 li.product {
+                max-width: calc( 33.3333% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 33.3333% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 33.3333% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+
+            &.columns-4 li.product {
+                max-width: calc( 25% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 25% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 25% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+
+            &.columns-5 li.product {
+                max-width: calc( 20% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 20% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 20% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+
+            &.columns-6 li.product {
+                max-width: calc( 16.6666% - var(--mrc-rvp-columns-gap) ) !important;
+                width: calc( 16.6666% - var(--mrc-rvp-columns-gap) ) !important;
+                flex-basis: calc( 16.6666% - var(--mrc-rvp-columns-gap) ) !important;
+            }
+        }
+    }
+}

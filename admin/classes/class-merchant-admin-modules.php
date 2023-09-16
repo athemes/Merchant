@@ -101,7 +101,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-countdown-timer' ),
 					'title' => esc_html__( 'Countdown Timer', 'merchant' ),
 					'desc' => esc_html__( 'Create a sense of urgency by displaying a countdown timer on your discounted products', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/'
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-countdown-timer/'
 				),
 				'advanced-reviews' => array(
 					'pro' => true,

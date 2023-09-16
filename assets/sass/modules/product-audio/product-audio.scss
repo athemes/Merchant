@@ -1,0 +1,35 @@
+/**
+ * Product Video
+ */
+.merchant-product-has-audio{
+  display: block !important;
+
+  .merchant-product-audio{
+    width: 100%;
+    margin-bottom: 20px;
+
+    + .woocommerce-product-gallery__image,
+    + .woocommerce-product-gallery{
+      display: none !important;
+    }
+  }
+
+  .product-loop-image-wrapper,
+  .image-wrap,
+  .loop-image-wrap,
+  .ct-image-container{
+    display: none !important;
+  }
+
+  audio{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .onsale,
+  .merchant-onsale,
+  .woocommerce-product-gallery__trigger{
+    display: none !important;
+  }
+}

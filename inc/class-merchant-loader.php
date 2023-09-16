@@ -88,6 +88,27 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/class-scroll-to-top-button.php';
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
+			require_once MERCHANT_DIR . 'inc/modules/cart-reserved-timer/class-cart-reserved-timer.php';
+			require_once MERCHANT_DIR . 'inc/modules/buy-x-get-y/class-buy-x-get-y.php';
+			require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/class-advanced-reviews.php';
+			require_once MERCHANT_DIR . 'inc/modules/checkout/class-checkout.php';
+			require_once MERCHANT_DIR . 'inc/modules/countdown-timer/class-countdown-timer.php';
+			require_once MERCHANT_DIR . 'inc/modules/floating-mini-cart/class-floating-mini-cart.php';
+			require_once MERCHANT_DIR . 'inc/modules/free-gifts/class-free-gifts.php';
+			require_once MERCHANT_DIR . 'inc/modules/frequently-bought-together/class-frequently-bought-together.php';
+			require_once MERCHANT_DIR . 'inc/modules/login-popup/class-login-popup.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-audio/class-product-audio.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-brand-image/class-product-brand-image.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-video/class-product-video.php';
+			require_once MERCHANT_DIR . 'inc/modules/reasons-to-buy/class-reasons-to-buy.php';
+			require_once MERCHANT_DIR . 'inc/modules/recently-viewed-products/class-recently-viewed-products.php';
+			require_once MERCHANT_DIR . 'inc/modules/size-chart/class-size-chart.php';
+			require_once MERCHANT_DIR . 'inc/modules/spending-goal/class-spending-goal.php';
+			require_once MERCHANT_DIR . 'inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php';
+			require_once MERCHANT_DIR . 'inc/modules/stock-scarcity/class-stock-scarcity.php';
+			require_once MERCHANT_DIR . 'inc/modules/volume-discounts/class-volume-discounts.php';
+			require_once MERCHANT_DIR . 'inc/modules/wait-list/class-wait-list.php';
+			require_once MERCHANT_DIR . 'inc/modules/wishlist/class-wishlist.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.

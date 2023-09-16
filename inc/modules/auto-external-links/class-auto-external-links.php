@@ -3,7 +3,7 @@
 /**
  * Auto External Links.
  * 
- * @package Merchant_Pro
+ * @package Merchant
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
