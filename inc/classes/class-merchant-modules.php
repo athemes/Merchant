@@ -155,7 +155,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 *
 		 * @param string $module_id The module ID.
 		 *
-		 * @return  bool
+		 * @return bool
 		 */
 		public static function is_module_created( $module_id ) {
 			return in_array( $module_id, static::instance()->container );
