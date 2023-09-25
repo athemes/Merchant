@@ -2,6 +2,8 @@
 <ruleset name="WordPress Coding Standards">
 	<description>WooCommerce extension PHP_CodeSniffer ruleset.</description>
 
+	
+
 	<!-- Exclude paths -->
 	<exclude-pattern>tests/</exclude-pattern>
 	<exclude-pattern>woo-includes/woo-functions.php</exclude-pattern>
@@ -15,6 +17,9 @@
 
 	<!-- Rules -->
 	<rule ref="WordPress-Extra">
+		<exclude name="Generic" />
+		<exclude name="Squiz" />
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
 		<exclude name="Generic.Commenting.DocComment.SpacingAfter" />
 		<exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
 		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma" />
