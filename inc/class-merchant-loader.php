@@ -130,7 +130,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			$theme = wp_get_theme();
 			$theme = ( get_template_directory() !== get_stylesheet_directory() && $theme->parent() ) ? $theme->parent() : $theme;
 
-			$classes[] = 'merchant-theme-' . strtolower( sanitize_html_class( $theme->name ) );
+			$classes[] = 'merchant-theme-' . strtolower( esc_attr( $theme->name ) );
 
 			return $classes;
 		}

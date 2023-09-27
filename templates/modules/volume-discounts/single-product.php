@@ -7,6 +7,11 @@
  *
  * @since 1.4
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 ?>
 
 <div class="merchant-volume-discounts">

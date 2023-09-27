@@ -7,6 +7,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-bogo">
@@ -49,7 +53,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 			                    ? $offer['discount_value'] . '%'
 			                    : wc_price( $offer['discount_value'] );
 		                    echo isset( $settings['get_label'] )
-			                    ? esc_html( str_replace(
+			                    ? wp_kses( str_replace(
 				                    array(
 					                    '{quantity}',
 					                    '{discount}'
@@ -59,11 +63,12 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 					                    $discount
 				                    ),
 				                    $settings['get_label'] 
-                                ) )
-			                    : esc_html( 
+                                ), merchant_kses_allowed_tags( ['bdi'] ) )
+			                    : wp_kses( 
                                     /* Translators: 1. quantity 2. discount value*/
-                                    sprintf( __( 'Get %1$s with %2$s off', 'merchant' ), $offer['quantity'], $discount )
-                                ) ?>
+                                    sprintf( __( 'Get %1$s with %2$s off', 'merchant' ), $offer['quantity'], $discount ),
+                                    merchant_kses_allowed_tags( ['bdi'] )
+                                ); ?>
                         </div>
                         <div class="merchant-bogo-product">
 		                    <?php echo wp_kses_post( $offer['product']['image'] ); ?>

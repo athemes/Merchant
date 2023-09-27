@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-09-27 14:14+0000\n"
+"POT-Creation-Date: 2023-09-27 20:40+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Allow visitors to pre-order products that are either out of stock or not yet released"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:144, inc/modules/frequently-bought-together/admin/options.php:41, templates/modules/frequently-bought-together/single-product.php:14
+#: admin/classes/class-merchant-admin-modules.php:144, inc/modules/frequently-bought-together/admin/options.php:41, templates/modules/frequently-bought-together/single-product.php:18
 msgid "Frequently Bought Together"
 msgstr ""
 
@@ -349,50 +349,50 @@ msgstr ""
 msgid "Protect Store"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:338
+#: admin/classes/class-merchant-admin-options.php:343
 msgid "Field not found!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:514, inc/classes/class-merchant-metabox.php:905, inc/modules/advanced-reviews/admin/options.php:99
+#: admin/classes/class-merchant-admin-options.php:519, inc/classes/class-merchant-metabox.php:910, inc/modules/advanced-reviews/admin/options.php:99
 msgid "Default"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:621
+#: admin/classes/class-merchant-admin-options.php:626
 msgid "Select Images"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:664
+#: admin/classes/class-merchant-admin-options.php:669
 msgid "Select Image"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:791
+#: admin/classes/class-merchant-admin-options.php:796
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page.</p>"
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:800
+#: admin/classes/class-merchant-admin-options.php:805
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:809
+#: admin/classes/class-merchant-admin-options.php:814
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:811
+#: admin/classes/class-merchant-admin-options.php:816
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:817
+#: admin/classes/class-merchant-admin-options.php:822
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:818
+#: admin/classes/class-merchant-admin-options.php:823
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:781
+#: admin/classes/class-merchant-admin-options.php:786
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
@@ -499,15 +499,15 @@ msgstr ""
 msgid "idea or feedback?"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:371
+#: admin/pages/page-dashboard.php:379
 msgid "The WooCommerce plugin is required for this option"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:372
+#: admin/pages/page-dashboard.php:380
 msgid "WOO"
 msgstr ""
 
-#: admin/pages/page-dashboard.php:378
+#: admin/pages/page-dashboard.php:386
 msgid "This option is only available on Merchant Pro"
 msgstr ""
 
@@ -699,64 +699,64 @@ msgstr ""
 msgid "Custom JS"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:208
+#: inc/classes/class-merchant-metabox.php:213
 msgid "Merchant Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:211
+#: inc/classes/class-merchant-metabox.php:216
 msgid "Merchant Post Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:215
+#: inc/classes/class-merchant-metabox.php:220
 msgid "Merchant Page Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:219
+#: inc/classes/class-merchant-metabox.php:224
 msgid "Merchant Product Options"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:705
+#: inc/classes/class-merchant-metabox.php:710
 msgid "Upload/Add Image"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:706
+#: inc/classes/class-merchant-metabox.php:711
 msgid "Remove Image"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:736, inc/classes/class-merchant-metabox.php:762
+#: inc/classes/class-merchant-metabox.php:741, inc/classes/class-merchant-metabox.php:767
 msgid "Upload"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:787, inc/classes/class-merchant-metabox.php:829
+#: inc/classes/class-merchant-metabox.php:792, inc/classes/class-merchant-metabox.php:834
 msgid "Size Name"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:798, inc/classes/class-merchant-metabox.php:842
+#: inc/classes/class-merchant-metabox.php:803, inc/classes/class-merchant-metabox.php:847
 msgid "Duplicate"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:812, inc/classes/class-merchant-metabox.php:856
+#: inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
 msgid "Remove"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:865
+#: inc/classes/class-merchant-metabox.php:870
 msgid "Add Size Chart"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:885
+#: inc/classes/class-merchant-metabox.php:890
 msgid "Select a size chart"
 msgstr ""
 
 #. translators: 1. Coupon admin url 2. Link target attribute value
-#: inc/classes/class-merchant-metabox.php:954
+#: inc/classes/class-merchant-metabox.php:959
 msgid "No coupons found! <a href=\"%1$s\" target=\"%2$s\">Create a new coupon</a>"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:939
+#: inc/classes/class-merchant-metabox.php:944
 msgid "Select a coupon"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:950
+#: inc/classes/class-merchant-metabox.php:955
 msgid "Manage coupons"
 msgstr ""
 
@@ -828,19 +828,19 @@ msgstr ""
 msgid "Default reviews sorting"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:79, templates/modules/advanced-reviews/reviews.php:159
+#: inc/modules/advanced-reviews/admin/options.php:79, templates/modules/advanced-reviews/reviews.php:163
 msgid "Newest"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:80, templates/modules/advanced-reviews/reviews.php:160
+#: inc/modules/advanced-reviews/admin/options.php:80, templates/modules/advanced-reviews/reviews.php:164
 msgid "Oldest"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:81, templates/modules/advanced-reviews/reviews.php:161
+#: inc/modules/advanced-reviews/admin/options.php:81, templates/modules/advanced-reviews/reviews.php:165
 msgid "Top rated"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:82, templates/modules/advanced-reviews/reviews.php:162
+#: inc/modules/advanced-reviews/admin/options.php:82, templates/modules/advanced-reviews/reviews.php:166
 msgid "Low rated"
 msgstr ""
 
@@ -989,7 +989,7 @@ msgstr ""
 msgid "Move your mouse over each option to see the animations. Click on one of the buttons to select that animation."
 msgstr ""
 
-#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:198, inc/modules/buy-x-get-y/admin/options.php:62, inc/modules/quick-view/class-quick-view.php:267, templates/modules/buy-x-get-y/single-product.php:99
+#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:198, inc/modules/buy-x-get-y/admin/options.php:62, inc/modules/quick-view/class-quick-view.php:267, templates/modules/buy-x-get-y/single-product.php:104
 msgid "Add To Cart"
 msgstr ""
 
@@ -1037,7 +1037,7 @@ msgstr ""
 msgid "Text Formatting Settings"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:41, templates/modules/buy-x-get-y/single-product.php:14
+#: inc/modules/buy-x-get-y/admin/options.php:41, templates/modules/buy-x-get-y/single-product.php:18
 msgid "Buy One Get One"
 msgstr ""
 
@@ -1585,7 +1585,7 @@ msgstr ""
 msgid "Free text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:84, inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:43
+#: inc/modules/free-gifts/admin/options.php:84, inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:47
 msgid "Free"
 msgstr ""
 
@@ -1665,7 +1665,7 @@ msgstr ""
 msgid "Price label"
 msgstr ""
 
-#: inc/modules/frequently-bought-together/admin/options.php:48, templates/modules/frequently-bought-together/single-product.php:61
+#: inc/modules/frequently-bought-together/admin/options.php:48, templates/modules/frequently-bought-together/single-product.php:65
 msgid "Bundle price"
 msgstr ""
 
@@ -1677,7 +1677,7 @@ msgstr ""
 msgid "You save: {amount}"
 msgstr ""
 
-#: inc/modules/frequently-bought-together/admin/options.php:62, templates/modules/frequently-bought-together/single-product.php:76
+#: inc/modules/frequently-bought-together/admin/options.php:62, templates/modules/frequently-bought-together/single-product.php:80
 msgid "Add to cart"
 msgstr ""
 
@@ -3085,100 +3085,100 @@ msgid "Add To Wishlist"
 msgstr ""
 
 #. translators: %s is average rating value
-#: templates/modules/advanced-reviews/reviews.php:61, templates/modules/advanced-reviews/reviews.php:319, templates/modules/advanced-reviews/reviews.php:248
+#: templates/modules/advanced-reviews/reviews.php:65, templates/modules/advanced-reviews/reviews.php:323, templates/modules/advanced-reviews/reviews.php:252
 msgid "Rated %s out of 5 based on customer ratings."
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:76
+#: templates/modules/advanced-reviews/reviews.php:80
 msgid "Be the first to leave a review."
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:73
+#: templates/modules/advanced-reviews/reviews.php:77
 msgctxt "review count"
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/modules/advanced-reviews/reviews.php:84
+#: templates/modules/advanced-reviews/reviews.php:88
 msgid "5 Stars"
 msgstr ""
 
 #. translators: %s is stars quantity
-#: templates/modules/advanced-reviews/reviews.php:91, templates/modules/advanced-reviews/reviews.php:104, templates/modules/advanced-reviews/reviews.php:117, templates/modules/advanced-reviews/reviews.php:130, templates/modules/advanced-reviews/reviews.php:143
+#: templates/modules/advanced-reviews/reviews.php:95, templates/modules/advanced-reviews/reviews.php:108, templates/modules/advanced-reviews/reviews.php:121, templates/modules/advanced-reviews/reviews.php:134, templates/modules/advanced-reviews/reviews.php:147
 msgid "(%s)"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:97
+#: templates/modules/advanced-reviews/reviews.php:101
 msgid "4 Stars"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:110
+#: templates/modules/advanced-reviews/reviews.php:114
 msgid "3 Stars"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:123
+#: templates/modules/advanced-reviews/reviews.php:127
 msgid "2 Stars"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:136
+#: templates/modules/advanced-reviews/reviews.php:140
 msgid "1 Star"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:153
+#: templates/modules/advanced-reviews/reviews.php:157
 msgid "Write a Review"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:157
+#: templates/modules/advanced-reviews/reviews.php:161
 msgid "Sort by:"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:350
+#: templates/modules/advanced-reviews/reviews.php:354
 msgid "There are no reviews yet."
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:334, templates/modules/advanced-reviews/reviews.php:263
+#: templates/modules/advanced-reviews/reviews.php:338, templates/modules/advanced-reviews/reviews.php:267
 msgid " — verified owner"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:339
+#: templates/modules/advanced-reviews/reviews.php:343
 msgid "Your review is awaiting approval."
 msgstr ""
 
 #. translators: 1. quantity
-#: templates/modules/buy-x-get-y/single-product.php:28
+#: templates/modules/buy-x-get-y/single-product.php:32
 msgid "Buy %s"
 msgstr ""
 
 #. translators: 1. quantity 2. discount value
-#: templates/modules/buy-x-get-y/single-product.php:65
+#: templates/modules/buy-x-get-y/single-product.php:69
 msgid "Get %1$s with %2$s off"
 msgstr ""
 
 #. translators: 1. Attribute label
-#: templates/modules/buy-x-get-y/single-product.php:88, templates/modules/frequently-bought-together/single-product.php:42
+#: templates/modules/buy-x-get-y/single-product.php:93, templates/modules/frequently-bought-together/single-product.php:46
 msgid "Select %s"
 msgstr ""
 
 #. translators: 1. Amount
-#: templates/modules/free-gifts/widget-contents.php:27
+#: templates/modules/free-gifts/widget-contents.php:31
 msgid "Spend %s more to receive this free gift!"
 msgstr ""
 
 #. translators: 1. Total discount
-#: templates/modules/frequently-bought-together/single-product.php:72
+#: templates/modules/frequently-bought-together/single-product.php:76
 msgid "You save: %s"
 msgstr ""
 
-#: templates/modules/sticky-add-to-cart/content.php:66
+#: templates/modules/sticky-add-to-cart/content.php:70
 msgid "Add to Cart"
 msgstr ""
 
-#: templates/modules/sticky-add-to-cart/content.php:69
+#: templates/modules/sticky-add-to-cart/content.php:73
 msgid "Close"
 msgstr ""
 
 #. translators: 1. Quantity of units
-#: templates/modules/stock-scarcity/single-product.php:22
+#: templates/modules/stock-scarcity/single-product.php:26
 msgid "Hurry! Only %s units left in stock!"
 msgstr ""

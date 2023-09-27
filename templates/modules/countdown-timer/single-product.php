@@ -7,6 +7,10 @@
  * @since 1.4
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 ?>
 <div class="merchant-countdown-timer <?php echo esc_attr( $args['sale_ending_alignment'] ); ?>"
      data-max="<?php echo esc_attr( $args['max_expiration_deadline'] ); ?>"

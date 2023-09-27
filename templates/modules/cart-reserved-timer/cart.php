@@ -7,6 +7,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-cart-reserved-timer" data-duration="<?php echo esc_attr( $args['duration'] ); ?>" data-expires="<?php echo esc_attr( $args['time_expires'] ); ?>" style="<?php echo esc_attr( $args['css'] ); ?>">

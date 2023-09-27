@@ -213,7 +213,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		ob_start();
 		?>
 	
-		<div class="merchant-cookie-banner <?php echo sanitize_html_class( $settings[ 'theme' ] ); ?>">
+		<div class="merchant-cookie-banner <?php echo esc_attr( $settings[ 'theme' ] ); ?>">
 			<div class="merchant-cookie-banner-inner">
 				<?php if ( ! empty( $settings[ 'close_button' ] ) ) : ?>
 					<div class="merchant-cookie-close-button">

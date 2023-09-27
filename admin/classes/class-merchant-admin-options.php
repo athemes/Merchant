@@ -40,6 +40,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public function create_page_control_ajax_callback() {
 			check_ajax_referer( 'customize-create-page-control-nonce', 'nonce' );
 
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
+
 			$page_title      = isset( $_POST['page_title'] ) ? sanitize_text_field( $_POST['page_title'] ) : '';
 			$page_meta_key   = isset( $_POST['page_meta_key'] ) ? sanitize_text_field( $_POST['page_meta_key'] ) : '';
 			$page_meta_value = isset( $_POST['page_meta_value'] ) ? sanitize_text_field( $_POST['page_meta_value'] ) : '';

@@ -8,50 +8,46 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Head custom JS
  * 
  */
-function merchant_head_custom_js() {
-	
-	// Custom JS
-	$custom_js = Merchant_Option::get( 'global-settings', 'custom_js', '' );
-
-	if ( ! empty( $custom_js ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $custom_js, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js, array() ) );
-		}
-	}
+function merchant_head_custom_js_first() {
 
 	// Custom JS First - runs at the beginning of Merchant
 	$custom_js_first = Merchant_Option::get( 'global-settings', 'custom_js_first', '' );
 
 	if ( ! empty( $custom_js_first ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $custom_js_first, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js_first, array() ) );
-		}
+		wp_add_inline_script( 'merchant', wp_kses( $custom_js_first, array() ), 'before' );
 	}
 
 }
-add_action( 'wp_head', 'merchant_head_custom_js' );
+add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_first', 11 );
 
 /**
- * Footer custom JS
+ * Head Custom JS
  * 
  */
-function merchant_footer_custom_js() {
+function merchant_head_custom_js() {
+
+	// Custom JS
+	$custom_js = Merchant_Option::get( 'global-settings', 'custom_js', '' );
+
+	if ( ! empty( $custom_js ) ) {
+		wp_add_inline_script( 'merchant', wp_kses( $custom_js, array() ), 'after' );
+	}
+
+}
+add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js', 12 );
+
+/**
+ * Head Custom JS Later
+ * 
+ */
+function merchant_head_custom_js_later() {
 
 	// Custom JS Last - runs at the end of Merchant
 	$custom_js_last = Merchant_Option::get( 'global-settings', 'custom_js_last', '' );
 
 	if ( ! empty( $custom_js_last ) ) {
-		if ( current_theme_supports( 'html5', 'script' ) ) {
-			echo sprintf( '<script>%s</script>', wp_kses( $custom_js_last, array() ) );
-		} else {
-			echo sprintf( '<script type="text/javascript">%s</script>', wp_kses( $custom_js_last, array() ) );
-		}
+		wp_add_inline_script( 'merchant', wp_kses( $custom_js_last, array() ), 'after' );
 	}
 
 }
-
-add_action( 'wp_footer', 'merchant_footer_custom_js', 99 );
+add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_later', 13 );

@@ -7,6 +7,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-frequently-bought-together <?php echo isset( $settings['single_product_placement'] ) ? esc_attr( $settings['single_product_placement'] ) : 'after-summary' ?>">

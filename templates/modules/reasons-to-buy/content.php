@@ -8,6 +8,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 $icon 			 = Merchant_SVG_Icons::get_svg_icon( $args[ 'icon' ] );
 
 /**

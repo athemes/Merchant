@@ -198,11 +198,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function buy_now_listener() {
-		$product_id = ( isset( $_REQUEST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$product_id = ( isset( $_POST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant-buy-now'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		if ( $product_id ) {
 	
-			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$variation_id = ( isset( $_POST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['variation_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( $variation_id ) {
 				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
 			} else {

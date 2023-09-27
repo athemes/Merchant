@@ -186,7 +186,7 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function agree_to_terms_field_validation( $fields, $errors ) {
-		if ( empty( $_REQUEST['merchant_agree_to_terms'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $_POST['merchant_agree_to_terms'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$settings = $this->get_module_settings();
 	
 			$errors->add( 'validation', $settings[ 'warning_text' ] );

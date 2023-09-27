@@ -8,6 +8,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 // Settings.
 $settings = $args['settings'];
 

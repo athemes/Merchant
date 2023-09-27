@@ -250,7 +250,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 		
 		?>
 
-		<a href="#" class="merchant-floating-mini-cart-icon merchant-floating-mini-cart-icon-position-<?php echo sanitize_html_class( $settings[ 'icon-position' ] ); ?> merchant-floating-side-mini-cart-toggle" data-display="<?php echo esc_attr( $settings[ 'display' ] ); ?>">
+		<a href="#" class="merchant-floating-mini-cart-icon merchant-floating-mini-cart-icon-position-<?php echo esc_attr( $settings[ 'icon-position' ] ); ?> merchant-floating-side-mini-cart-toggle" data-display="<?php echo esc_attr( $settings[ 'display' ] ); ?>">
 			<span class="merchant-floating-mini-cart-icon-counter">0</span>
 			<i class="merchant-floating-mini-cart-icon-icon">
 				<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>

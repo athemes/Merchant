@@ -51,9 +51,13 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * Activate module with Ajax.
 		 */
 		public function activate_module() {
-
 			$nonce  = ( isset( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$module = ( isset( $_POST['module'] ) ) ? sanitize_text_field( wp_unslash( $_POST['module'] ) ) : '';
+
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) && ! empty( $module ) ) {
 
@@ -75,9 +79,13 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * Deactivate module with Ajax.
 		 */
 		public function deactivate_module() {
-
 			$nonce  = ( isset( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$module = ( isset( $_POST['module'] ) ) ? sanitize_text_field( wp_unslash( $_POST['module'] ) ) : '';
+
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) && ! empty( $module ) ) {
 
@@ -99,12 +107,16 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * Feedback module with Ajax.
 		 */
 		public function feedback_module() {
-
 			$nonce   = ( isset( $_POST['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 			$subject = ( isset( $_POST['subject'] ) ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : '';
 			$message = ( isset( $_POST['message'] ) ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
 			$module  = ( isset( $_POST['module'] ) ) ? sanitize_text_field( wp_unslash( $_POST['module'] ) ) : '';
 			$from    = get_bloginfo( 'admin_email' );
+
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
 
 			if ( wp_verify_nonce( $nonce, 'merchant' ) ) {
 				$response = wp_remote_post( 'https://athemes.com/merchant/', array(

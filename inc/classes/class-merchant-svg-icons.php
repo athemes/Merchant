@@ -5,6 +5,10 @@
  * @package Merchant
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 if ( ! class_exists( 'Merchant_SVG_Icons' ) ) {
 
 	/**

@@ -431,7 +431,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		$settings = $this->get_module_settings();
 
 		?>
-			<div class="single-product merchant-quick-view-modal merchant-quick-view-<?php echo sanitize_html_class( $settings[ 'place_product_image' ] ); ?>">
+			<div class="single-product merchant-quick-view-modal merchant-quick-view-<?php echo esc_attr( $settings[ 'place_product_image' ] ); ?>">
 				<div class="merchant-quick-view-overlay"></div>
 				<div class="merchant-quick-view-loader">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -474,7 +474,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 	
 		?>
-			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo sanitize_html_class( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( [], false ) ) . wp_kses_post( $button_text_html ); ?></a>
+			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( [], false ) ) . wp_kses_post( $button_text_html ); ?></a>
 		<?php
 	
 	}

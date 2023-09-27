@@ -86,6 +86,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			$nonce  = ( isset( $_GET['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
 			$source = ( isset( $_GET['source'] ) ) ? sanitize_text_field( wp_unslash( $_GET['source'] ) ) : '';
 
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
+
 			if ( ! empty( $term ) && ! empty( $source ) && ! empty( $nonce ) && wp_verify_nonce( $nonce, 'merchant_metabox' ) ) {
 				$options = array();
 

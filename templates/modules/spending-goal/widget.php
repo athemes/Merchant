@@ -7,6 +7,10 @@
  * @since 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 ?>
 <div id="merchant-spending-goal-widget" class="merchant-spending-goal-widget" onclick="document.getElementById('merchant-spending-goal-widget').classList.toggle('active');">
     <div class="merchant-spending-goal-widget-content">
