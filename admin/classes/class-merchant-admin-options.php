@@ -148,7 +148,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									$value = $options[ $settings['module'] ][ $field['id'] ];
 								}
 
-								if ( Merchant_Admin_Modules::get_module_info( $settings['module'] )['pro'] && ! defined( 'MERCHANT_PRO_DIR' ) ) {
+								$module_info = Merchant_Admin_Modules::get_module_info( $settings['module'] );
+								if ( ( $module_info && $module_info['pro'] ) && ! defined( 'MERCHANT_PRO_DIR' ) ) {
 									ob_start();
 									self::field( $field, $value );
 									$field_html = ob_get_clean();
@@ -743,7 +744,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<?php endforeach; ?>
                 </ul>
 
-                <input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>"/>
+                <input class="merchant-sortable-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( wp_json_encode( $value ) ); ?>"/>
             </div>
 			<?php
 		}
@@ -761,7 +762,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                     </div>
                 </div>
                 <button class="button customize-control-sortable-repeater-add" type="button"><?php echo esc_html( $settings['button_label'] ); ?></button>
-                <input class="merchant-sortable-repeater-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( json_encode( $value ) ); ?>"/>
+                <input class="merchant-sortable-repeater-input" type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( wp_json_encode( $value ) ); ?>"/>
             </div>
 			<?php
 		}

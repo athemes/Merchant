@@ -113,8 +113,8 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/agree-to-terms-checkbox.min.css', [], MERCHANT_VERSION );
@@ -186,7 +186,7 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function agree_to_terms_field_validation( $fields, $errors ) {
-		if ( empty( $_REQUEST['merchant_agree_to_terms'] ) ) {
+		if ( empty( $_REQUEST['merchant_agree_to_terms'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$settings = $this->get_module_settings();
 	
 			$errors->add( 'validation', $settings[ 'warning_text' ] );

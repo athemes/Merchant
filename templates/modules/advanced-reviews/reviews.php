@@ -22,7 +22,7 @@ $title_tag = $args[ 'title_tag' ];
 
 // Dropdown sort
 $default_sorting	= $args[ 'default_sorting' ];
-$sort_orderby		= isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting; 
+$sort_orderby		= isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 // Reviews bars rating
 $bars_data = $args['bars_data']; ?>
@@ -301,7 +301,7 @@ $bars_data = $args['bars_data']; ?>
 									</div>
 								</div>
 
-							<?php elseif( isset( $_GET['unapproved'] ) && $_comment->comment_ID === $_GET['unapproved'] ) : ?>
+							<?php elseif( isset( $_GET['unapproved'] ) && $_comment->comment_ID === $_GET['unapproved'] ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 
 								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item">
 									<div class="row">

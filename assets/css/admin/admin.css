@@ -1656,16 +1656,25 @@
 }
 
 .merchant-modules-list-item-woo-required .merchant-pro-badge {
-  padding: 2px 6px;
+  padding: 1px 2px;
   color: #674399;
   border: 1px solid #674399;
-  border-radius: 2px;
+  border-radius: 3px;
   font-size: 9px;
+  line-height: 1.2;
   font-weight: 700;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  top: -2px;
 }
 
 .merchant-modules-list-item-woo-required .merchant-pro-badge:before {
   font-weight: 400;
+}
+
+.merchant-modules-list-item-woo-required + .merchant-modules-list-item-upsell {
+  right: 53px;
 }
 
 .merchant-modules-list-item-icon {

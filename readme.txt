@@ -3,8 +3,7 @@ Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quic
 Requires at least: 5.5
 Tested up to: 6.3
 Requires PHP: 5.6
-Stable tag: trunk
-Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote,vladff
+Stable tag: 1.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

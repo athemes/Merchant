@@ -78,7 +78,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 		}
 
-		$variableId				   = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : 0;
+		$variableId				   = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$is_variable_has_pre_order = $this->isPreOrder( $product_id, $variableId );
 
 		if ( empty( $products ) || ( $is_variable_has_pre_order && $has_pre_orders ) || ( false === $is_variable_has_pre_order && false === $has_pre_orders ) ) {
@@ -336,11 +336,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function custom_fields_for_variable_products_save( $post_id ) {
 		$product = wc_get_product( $post_id );
 
-		$is_pre_order_variation = isset( $_REQUEST[ '_is_pre_order_' . $post_id ] ) ? 'yes' : 'no';
+		$is_pre_order_variation = isset( $_REQUEST[ '_is_pre_order_' . $post_id ] ) ? 'yes' : 'no'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$product->update_meta_data( '_is_pre_order', $is_pre_order_variation );
 
-		if ( 'yes' === $is_pre_order_variation && isset( $_REQUEST[ '_pre_order_date_' . $post_id ] ) ) {
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $_REQUEST[ '_pre_order_date_' . $post_id ] ) );
+		if ( 'yes' === $is_pre_order_variation && isset( $_REQUEST[ '_pre_order_date_' . $post_id ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $_REQUEST[ '_pre_order_date_' . $post_id ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$product->update_meta_data( '_pre_order_date', $pre_order_date_value );
 		}
 
@@ -355,11 +355,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function custom_fields_for_simple_products_save( $post_id ) {
 		$product      = wc_get_product( $post_id );
-		$is_pre_order = isset( $_REQUEST['_is_pre_order'] ) ? 'yes' : 'no';
+		$is_pre_order = isset( $_REQUEST['_is_pre_order'] ) ? 'yes' : 'no'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$product->update_meta_data( '_is_pre_order', $is_pre_order );
 
-		if ( 'yes' === $is_pre_order && isset( $_REQUEST['_pre_order_date'] ) ) {
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $_REQUEST['_pre_order_date'] ) );
+		if ( 'yes' === $is_pre_order && isset( $_REQUEST['_pre_order_date'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $_REQUEST['_pre_order_date'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$product->update_meta_data( '_pre_order_date', esc_attr( $pre_order_date_value ) );
 		} else {
 			$product->update_meta_data( '_pre_order_date', '' );
@@ -379,8 +379,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$_post = $post;
 
 		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $_REQUEST[ 'product_id' ] ) ) {
-			$_post = get_post( absint( $_REQUEST[ 'product_id' ] ) );
+		if ( ! $_post && isset( $_REQUEST[ 'product_id' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$_post = get_post( absint( $_REQUEST[ 'product_id' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		if ( 'yes' === get_post_meta( $_post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) > time() ) {
@@ -445,8 +445,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$_product = $product;
 
 		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $_REQUEST[ 'product_id' ] ) ) {
-			$_post 	  = get_post( absint( $_REQUEST[ 'product_id' ] ) );
+		if ( ! $_post && isset( $_REQUEST[ 'product_id' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$_post 	  = get_post( absint( $_REQUEST[ 'product_id' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$_product = wc_get_product( $_post->ID );
 		}
 

@@ -59,7 +59,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function enqueue_styles_scripts() {
 			
-			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			wp_register_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
 
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 				) );
 
-				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 				if( !empty($module) ) {
 					wp_enqueue_script( 'merchant-admin-preview', MERCHANT_URI . 'assets/js/admin/merchant-preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
@@ -110,8 +110,8 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 * Add plugin settings link on the plugin page.
 		 */
 		public function add_admin_footer_text( $text ) {
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 
@@ -134,8 +134,8 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 * Add admin body class.
 		 */
 		public function add_admin_body_class( $classes ) {			
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
 

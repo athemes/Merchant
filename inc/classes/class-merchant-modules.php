@@ -169,7 +169,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			$modules = get_option( self::$option, array() );
 
 			// Preview Mode
-			if ( isset( $_GET['preview'] ) && isset( $_GET['module'] ) && $_GET['module'] === $module && current_user_can( 'manage_options' ) ) {
+			if ( isset( $_GET['preview'] ) && isset( $_GET['module'] ) && $_GET['module'] === $module && current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				return true;
 			}
 

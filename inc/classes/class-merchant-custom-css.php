@@ -47,8 +47,8 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		 * Print Styles In Admin
 		 */
 		public function print_styles_admin() {
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) && ! empty( $module ) ) {
 				$css = $this->output_css();
