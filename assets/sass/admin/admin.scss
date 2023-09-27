@@ -660,7 +660,7 @@
 }
 
 .merchant-module-page-content {
-	width: 50%;
+	width: 40%;
 	flex: 1;
 	display: flex;
 	grid-gap: 20px;
@@ -672,7 +672,7 @@
 }
 
 .merchant-module-page-preview  {
-  width: 50%;
+  width: 60%;
   margin-left: 20px;
 }
 
@@ -2189,6 +2189,82 @@ body.merchant-module-disabled {
 	}
 }
 
+.merchant-module-page-settings-dimensions {
+	display: flex;
+	grid-gap: 10px;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+	}
+
+	label {
+		color: gray;
+		font-size: 12px;
+		margin-top: 7px;
+	}
+	input {
+		max-width: 70px;
+		width: 100%;
+		font-size: 12px;
+		border: 1px solid #D6D6D6;
+	}
+}
+
+
+.merchant-module-page-settings-unit {
+	margin-bottom: 10px;
+
+	select {
+		font-size: 13px;
+		border: 0;
+	}
+}
+
+.merchant-module-page-settings-devices {
+	display: flex;
+	column-gap: 10px;
+	justify-content: flex-end;
+
+	button {
+		border: 0;
+		background: transparent;
+		padding: 0;
+		cursor: pointer;
+
+		&.active {
+			color: #3858e9;
+		}
+
+		&:hover {
+			color: #3858e9;
+		}
+
+		i {
+			font-size: 14px;
+			line-height: 20px;
+			width: auto;
+		}
+	}
+}
+
+.merchant-module-page-settings-device-container {
+	&:not(.active) {
+		display: none;
+	}
+}
+
+.merchant-module-page-setting-field-responsive_dimensions {
+	.merchant-module-page-setting-field-inner {
+		max-width: 320px;
+	}
+	.merchant-module-page-settings-devices {
+		margin-bottom: -30px;
+		margin-top: 0;
+	}
+}
+
+
 .merchant-module-page-setting-field-warning {
 	padding: 8px 10px;
 	font-size: 14px;
@@ -2199,8 +2275,11 @@ body.merchant-module-disabled {
 }
 
 .merchant-module-page-setting-field-divider {
-	height: 2px;
-	background-color: #F0F0F1;
+	border-bottom: 1px solid #F0F0F1;
+
+  .merchant-module-page-setting-field-title {
+    font-size: 16px;
+  }
 }
 
 .merchant-module-page-setting-field-gallery {
@@ -2564,6 +2643,22 @@ body.merchant-module-disabled {
 			outline: none;
 			box-shadow: none;
 		}
+	}
+}
+
+.merchant-module-page-setting-field-inner.disabled {
+	.merchant-color-picker {
+		pointer-events: none;
+		opacity: 0.8;
+	}
+	.merchant-toggle-switch {
+		opacity: 0.5;
+	}
+	.merchant-range {
+		opacity: 0.5;
+	}
+	.merchant-module-page-settings-devices {
+		opacity: 0.5;
 	}
 }
 

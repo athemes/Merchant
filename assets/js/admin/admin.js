@@ -562,6 +562,23 @@
         });
       });
     });
+    $('.merchant-module-page-settings-responsive').each(function () {
+      var $this = $(this);
+      var $button = $this.find('.merchant-module-page-settings-devices button');
+      var $container = $this.find('.merchant-module-page-settings-device-container');
+      $button.on('click', function (e) {
+        e.preventDefault();
+        var $device = $(this).data('device');
+        $button.removeClass('active');
+        $container.removeClass('active');
+        $(this).addClass('active');
+        $container.each(function () {
+          if ($(this).data('device') === $device) {
+            $(this).addClass('active');
+          }
+        });
+      });
+    });
     $('.merchant-animated-buttons').each(function () {
       var $button = $(this).find('label');
       var $demo = $('.merchant-animation-demo');

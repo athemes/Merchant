@@ -53,6 +53,11 @@
   max-width: 100%;
 }
 
+.merchant-product-has-video .woocommerce-product-gallery__wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 .merchant-product-has-video .merchant-product-video {
   width: 100%;
   margin-bottom: 20px;

@@ -13,7 +13,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 		/**
 		 * Upsell modules.
-		 * 
+		 *
 		 */
 		public static $modules_data = array();
 
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wait-list' ),
 					'title' => esc_html__( 'Waitlist', 'merchant' ),
-					'desc' => esc_html__( 'Build a waiting list for sold-out items and auto-notify potential customers when items are back in stock', 'merchant' ),
+					'desc' => esc_html__( 'Build a waiting list for sold-out items and auto-notify potential customers when stock’s back', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/'
 				),
 				'countdown-timer' => array(
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
 					'title' => esc_html__( 'Advanced Reviews', 'merchant' ),
-					'desc' => esc_html__( 'Easily collect and display advanced reviews ', 'merchant' ),
+					'desc' => esc_html__( 'Let customers run your marketing by collecting and displaying advanced reviews', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/'
 				),
 				'checkout' => array(
@@ -166,7 +166,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-spending-goal' ),
 					'title' => esc_html__( 'Spending Discount Goal', 'merchant' ),
-					'desc' => esc_html__( 'Motivate higher average order values by gamifying the shopping experience and offering customers discounts for reaching spending goals', 'merchant' ),
+					'desc' => esc_html__( 'Motivate higher order values by offering customers discounts for reaching spending goals', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-spending-goal/'
 				),
 				'free-gifts' => array(
@@ -184,7 +184,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'reduce-abandonment',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cart-count-favicon' ),
 					'title' => esc_html__( 'Cart Count Favicon', 'merchant' ),
-					'desc' => esc_html__( 'Make sure your store’s browser tab stand out by showimg the number of items in the cart in the favicon', 'merchant' ),
+					'desc' => esc_html__( 'Make your browser tab stand out by showing the number of items in the cart on the favicon', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cart-count-favicon/'
 				),
 				'inactive-tab-message' => array(
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'reduce-abandonment',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
 					'title'        => esc_html__( 'Floating Mini Cart', 'merchant' ),
-					'desc'         => esc_html__( 'A cart icon with item count will always be visible on all pages or only when the cart is not empty, and a sliding cart will be visible when the customer clicks it', 'merchant' ),
+					'desc'         => esc_html__( 'A cart icon will always be visible and a sliding cart when the customer clicks it', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-floating-mini-cart/'
 				),
 				'cart-reserved-timer' => array(
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'reduce-abandonment',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cart-reserved-timer' ),
 					'title'        => esc_html__( 'Cart Reserved Timer', 'merchant' ),
-					'desc'         => esc_html__( 'Create a sense of urgency by letting visitors know that the products in their cart are reserved for a limited time', 'merchant' ),
+					'desc'         => esc_html__( 'Create urgency by letting visitors know that the products in cart are reserved for a limited time', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-cart-reserved-timer/'
 				),
 
@@ -218,7 +218,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'build-trust',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-payment-logos' ),
 					'title' => esc_html__( 'Payment Logos', 'merchant' ),
-					'desc' => esc_html__( 'Let your visitors know which payment methods you accept', 'merchant' ),
+					'desc' => esc_html__( 'Display the logos of the payment methods you accept on product pages', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/payment-logos/'
 				),
 				'trust-badges' => array(
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'build-trust',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-trust-badges' ),
 					'title' => esc_html__( 'Trust Badges', 'merchant' ),
-					'desc' => esc_html__( 'Reassure customers with badge-shaped store benefits', 'merchant' ),
+					'desc' => esc_html__( 'Reassure customers by showcasing different badge-shaped store benefits', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/'
 				),
 				'reasons-to-buy' => array(
@@ -242,9 +242,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'build-trust',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-brand-image' ),
 					'title'        => esc_html__( 'Product Brand Image', 'merchant' ),
-					'desc'         => esc_html__( 'Add brand images to products', 'merchant' ),
+					'desc'         => esc_html__( 'Add brand images to products to instill confidence in potential buyers', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-brand-image/'
-				),				
+				),
 
 				// Improve Experience.
 				'auto-external-links' => array(
@@ -252,7 +252,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-auto-external-links' ),
 					'title' => esc_html__( 'Auto External Links', 'merchant' ),
-					'desc' => esc_html__( 'Keep users from accidentally navigating away from your store by automatically opening external links in a new browser tab', 'merchant' ),
+					'desc' => esc_html__( 'Keep users from navigating away from your store by opening external links in a new browser tab', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/auto-external-links/'
 				),
 				'real-time-search' => array(
@@ -300,7 +300,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-video' ),
 					'title'        => esc_html__( 'Product Video', 'merchant' ),
-					'desc'         => esc_html__( 'Replace the featured image for a product with a video', 'merchant' ),
+					'desc'         => esc_html__( 'Upload video to be viewed in product galleries and on archive pages', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-video/'
 				),
 				'product-audio' => array(
@@ -308,7 +308,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-audio' ),
 					'title'        => esc_html__( 'Product Audio', 'merchant' ),
-					'desc'         => esc_html__( 'Replace the featured image for a product with audio', 'merchant' ),
+					'desc'         => esc_html__( 'Upload audio to be listened to in product galleries and on archive pages', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-audio/'
 				),
 				'login-popup' => array(
@@ -316,10 +316,18 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-login-popup' ),
 					'title'        => esc_html__( 'Login Popup', 'merchant' ),
-					'desc'         => esc_html__( 'Allow users to login with a simple pop up', 'merchant' ),
+					'desc'         => esc_html__( 'Allow users to log in with a simple pop up without navigating to a new page', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-login-popup/'
 				),
-				
+				'product-swatches' => array(
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-swatches' ),
+					'title'        => esc_html__( 'Product Swatches', 'merchant' ),
+					'desc'         => esc_html__( 'Swatches make it easy for customers to view your product variants at a glance', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-swatches/'
+				),
+
 				// Protect Store.
 				'agree-to-terms-checkbox' => array(
 					'pro' => false,
@@ -334,10 +342,10 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'protect-your-store',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-cookie-banner' ),
 					'title' => esc_html__( 'Cookie Banner', 'merchant' ),
-					'desc' => esc_html__( 'Inform your visitors that the site uses cookies', 'merchant' ),
+					'desc' => esc_html__( 'Inform your visitors that the site uses cookies via a dismissable banner', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cookie-banner/'
 				)
-				
+
 			);
 
 		}
@@ -383,7 +391,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			/**
 			 * Hook: merchant_modules
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			$modules = apply_filters( 'merchant_modules', $modules );
@@ -394,7 +402,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 		/**
 		 * Get upsell modules.
-		 * 
+		 *
 		 */
 		public static function get_upsell_modules() {
 			return array_filter( self::$modules_data, function( $module ){
@@ -404,7 +412,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 		/**
 		 * Add upsell to modules.
-		 * 
+		 *
 		 */
 		public static function add_upsell_modules( $modules ) {
 			if ( defined( 'MERCHANT_PRO_VERSION' ) ) {
@@ -414,7 +422,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 			foreach ( self::get_upsell_modules() as $module_id => $module_data ) {
 				$modules[ $module_data[ 'section' ] ][ 'modules' ][ $module_id ] = $module_data;
 			}
-			
+
 			return $modules;
 		}
 

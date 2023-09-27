@@ -8,8 +8,6 @@
  * @since 1.0
  */
 
-global $product;
-
 // Settings.
 $settings = $args['settings'];
 

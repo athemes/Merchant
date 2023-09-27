@@ -462,6 +462,14 @@ const styles = [
 		src: './assets/sass/modules/wishlist/admin/preview.scss',
 		destination: './assets/css/modules/wishlist/admin',
 	},
+
+	// Product swatches
+	{
+		name: 'productSwatchesAdminPreview',
+		src: './assets/sass/modules/product-swatches/admin/preview.scss',
+		destination: './assets/css/modules/product-swatches/admin',
+	},
+
 ];
 
 // Scripts to process.
