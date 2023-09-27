@@ -482,20 +482,20 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				case 'number':
 					$style = '';
 					if ( isset( $field['style'] ) && ! empty( $field['style'] ) ) {
-						$style = 'style="' . str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) . '"';
+						$style = 'style="' . esc_attr( str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) ) . '"';
 					}
 					if ( isset( $field['append'] ) || isset( $field['prepend'] ) ) {
 						echo '<div class="merchant-metabox-field-input-container">';
 						if ( isset( $field['prepend'] ) ) {
 							echo '<div class="merchant-metabox-field-prepend">' . esc_attr( $field['prepend'] ) . '</div>';
 						}
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />';
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						if ( isset( $field['append'] ) ) {
 							echo '<div class="merchant-metabox-field-append">' . esc_attr( $field['append'] ) . '</div>';
 						}
 						echo '</div>';
 					} else {
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />';
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					}
 					break;
 
@@ -543,7 +543,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						$multiple = 'multiple';
 					}
 
-					echo '<select name="' . esc_attr( $field_id ) . '[]" ' . $multiple . ' data-source="' . esc_attr( $field['source'] ) . '">';
+					echo '<select name="' . esc_attr( $field_id ) . '[]" ' . $multiple . ' data-source="' . esc_attr( $field['source'] ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 					if ( ! empty( $ids ) ) {
 						foreach ( $ids as $id ) {
@@ -621,7 +621,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						'button' => '',
 					) );
 
-					echo '<div class="merchant-metabox-field-repeater-content" data-id="' . $field_id . '">';
+					echo '<div class="merchant-metabox-field-repeater-content" data-id="' . esc_attr( $field_id ) . '">';
 					$values = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
 
 					echo '<ul class="merchant-metabox-field-repeater-list">';
@@ -631,14 +631,14 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						foreach ( $field['fields'] as $sub_field_id => $sub_field ) {
 							echo '<div class="merchant-metabox-field-repeater-list-item-field">';
 							if ( isset( $sub_field['title'] ) ) {
-								echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . $sub_field['title'] . '</span>';
+								echo '<span class="merchant-metabox-field-repeater-list-item-field-title">' . esc_html( $sub_field['title'] ) . '</span>';
 							}
-							echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="' . $sub_field_id . '">';
+							echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="' . esc_attr( $sub_field_id ) . '">';
 							if ( $sub_field['type'] === 'text' ) {
-								echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . $sub_field_id . ']" />';
+								echo '<input type="text" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . esc_attr( $sub_field_id ) . ']" />';
 							}
 							if ( $sub_field['type'] === 'number' ) {
-								echo '<input type="number" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . $sub_field_id . ']" />';
+								echo '<input type="number" name="" value="" data-name="' . esc_attr( $field_id ) . '[0][' . esc_attr( $sub_field_id ) . ']" />';
 							}
 							echo '</div>';
 							echo '</div>';
@@ -662,10 +662,10 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 								}
 								echo '<div class="merchant-metabox-field-repeater-list-item-field-input" data-id="' . esc_attr( $sub_field_id ) . '">';
 								if ( $sub_field['type'] === 'text' ) {
-									echo '<input type="text" name="' . esc_attr( $field_id ) . '[' . $key . '][' . $sub_field_id . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
+									echo '<input type="text" name="' . esc_attr( $field_id ) . '[' . esc_attr( $key ) . '][' . esc_attr( $sub_field_id ) . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
 								}
 								if ( $sub_field['type'] === 'number' ) {
-									echo '<input type="number" name="' . esc_attr( $field_id ) . '[' . $key . '][' . $sub_field_id . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
+									echo '<input type="number" name="' . esc_attr( $field_id ) . '[' . esc_attr( $key ) . '][' . esc_attr( $sub_field_id ) . ']" value="' . esc_attr( $value[ $sub_field_id ] ) . '" />';
 								}
 								echo '</div>';
 								echo '</div>';
@@ -936,7 +936,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					) );
 					if ( $coupons ) {
 						echo '<select name="' . esc_attr( $field_id ) . '">';
-						echo '<option value="">' . __( 'Select a coupon', 'merchant' ) . '</option>';
+						echo '<option value="">' . esc_html__( 'Select a coupon', 'merchant' ) . '</option>';
 
 						foreach ( $coupons as $coupon ) {
 							$coupon_code = strtolower( $coupon->post_title );
@@ -947,10 +947,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						}
 
 						echo '</select>';
-						echo '<a href="'.admin_url( 'edit.php?post_type=shop_coupon' ).'" target="_blank" style="margin-left: 10px;">' . __( 'Manage coupons', 'merchant' ) . '</a>';
+						echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=shop_coupon' ) ) . '" target="_blank" style="margin-left: 10px;">' . esc_html__( 'Manage coupons', 'merchant' ) . '</a>';
 					} else {
 						echo '<div style="color: red;">';
-						echo sprintf( __( 'No coupons found! <a href="%s" target="%s">Create a new coupon</a>', 'merchant' ), admin_url( 'post-new.php?post_type=shop_coupon' ), '_blank' );
+						/* Translators: 1. Coupon admin url 2. Link target attribute value */
+						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ), admin_url( 'post-new.php?post_type=shop_coupon' ), '_blank' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo '</div>';
 						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '" value="" />';
 					}
@@ -964,7 +965,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 					$empty = empty( $values ) ? 'empty' : '';
 
-					echo '<ul data-id="' . $field_id . '" class="merchant-metabox-field-flexible-content-list ' . $empty . '">';
+					echo '<ul data-id="' . esc_attr( $field_id ) . '" class="merchant-metabox-field-flexible-content-list ' . esc_attr( $empty ) . '">';
 
 					ob_start();
 					echo '<li class="merchant-metabox-field-flexible-content-item">';
@@ -990,7 +991,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 									'source' => 'post',
 								) );
 							}
-							echo '<div class="' . implode( ' ', $sub_field_classes ) . '">';
+							echo '<div class="' . esc_attr( implode( ' ', $sub_field_classes ) ) . '">';
 							echo '<label>';
 							echo esc_html( $sub_field['title'] );
 							echo '</label>';
@@ -1000,18 +1001,18 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							echo '</div>';
 						}
 						echo '</div>';
-						echo '<input type="hidden" name="' . $field_id . '[0][layout]" value="' . $layout_type . '">';
+						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '[0][layout]" value="' . esc_attr( $layout_type ) . '">';
 						echo '</div>';
 					}
 					echo '</li>';
 					$sub_fields = ob_get_clean();
 
-					echo str_replace( 'name=', 'data-name=', $sub_fields );
+					echo str_replace( 'name=', 'data-name=', $sub_fields ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
 
 					foreach ( $values as $value_key => $value ) {
 						echo '<li class="merchant-metabox-field-flexible-content-item">';
 						echo '<div class="merchant-metabox-field-flexible-content-item-header">';
-						echo '<div class="merchant-metabox-field-flexible-content-item-count">' . ( $value_key + 1 ) . '</div>';
+						echo '<div class="merchant-metabox-field-flexible-content-item-count">' . esc_html( ( $value_key + 1 ) ) . '</div>';
 						echo '<div class="merchant-metabox-field-flexible-content-item-title">' . esc_html( $field['layouts'][ $value['layout'] ]['title'] ) . '</div>';
 						echo '<div class="merchant-metabox-field-flexible-content-item-actions">';
 						echo '<span class="merchant-metabox-field-flexible-content-move dashicons dashicons-menu"></span>';
@@ -1030,17 +1031,17 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 									'source' => 'post',
 								) );
 							}
-							echo '<div class="' . implode( ' ', $sub_field_classes ) . '">';
+							echo '<div class="' . esc_attr( implode( ' ', $sub_field_classes ) ) . '">';
 							echo '<label>';
 							echo esc_html( $sub_field['title'] );
 							echo '</label>';
-							echo '<div class="merchant-metabox-field-flexible-content-' . $sub_field['type'] . '-field" data-id="' . esc_attr( $sub_field_key ) . '">';
+							echo '<div class="merchant-metabox-field-flexible-content-' . esc_attr( $sub_field['type'] ) . '-field" data-id="' . esc_attr( $sub_field_key ) . '">';
 							$this->get_field( $sub_field_id, $sub_field, $sub_field_value );
 							echo '</div>';
 							echo '</div>';
 						}
 						echo '</div>';
-						echo '<input type="hidden" name="' . $field_id . '[' . $value_key . '][layout]" value="' . $value['layout'] . '">';
+						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '[' . esc_attr( $value_key ) . '][layout]" value="' . esc_attr( $value['layout'] ) . '">';
 						echo '</li>';
 					}
 
@@ -1048,7 +1049,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '<div class="merchant-metabox-field-flexible-content-add-wrapper">';
 					echo '<div class="merchant-metabox-field-flexible-content-add-list">';
 					foreach ( $field['layouts'] as $layout_type => $layout ) {
-						echo '<a class="merchant-metabox-field-flexible-content-add" data-id="' . $field_id . '" data-layout="' . esc_attr( $layout_type ) . '" href="#">' . esc_html( $layout['title'] ) . '</a>';
+						echo '<a class="merchant-metabox-field-flexible-content-add" data-id="' . esc_attr( $field_id ) . '" data-layout="' . esc_attr( $layout_type ) . '" href="#">' . esc_html( $layout['title'] ) . '</a>';
 					}
 					echo '</div>';
 					echo '<button class="merchant-metabox-field-flexible-content-add-button button button-primary">' . esc_html( $field['button'] ) . '</button>';

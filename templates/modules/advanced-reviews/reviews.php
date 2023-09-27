@@ -216,24 +216,29 @@ $bars_data = $args['bars_data']; ?>
 					break;
 			}
 
-			$comments = isset($args['comments']) ? $args['comments'] : get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args',$comments_args ) ); ?>
+			/**
+			 * Hook 'merchant_wc_reviews_advanced_sorting_args'
+			 * 
+			 * @since 1.0
+			 */
+			$_comments = isset($args['comments']) ? $args['comments'] : get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args',$comments_args ) ); ?>
 
 			<div id="comments">
-				<?php if ( count( $comments ) > 0 ) : ?>
+				<?php if ( count( $_comments ) > 0 ) : ?>
 					<div class="merchant-reviews-list-wrapper">
 						
 						<?php 
-						foreach ( $comments as $comment ) :
-							if ( '1' === $comment->comment_approved ) : 
+						foreach ( $_comments as $_comment ) :
+							if ( '1' === $_comment->comment_approved ) : 
 							?>
 
-								<div id="comment-<?php echo esc_attr( $comment->comment_ID ); ?>" class="merchant-reviews-list-item">
+								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item">
 									<div class="mrc-row mrc-columns-no-gutter">
 										<div class="mrc-col">
 											<div class="merchant-reviews-author-wrapper">
 
 												<?php
-												$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $comment->comment_ID, 'rating', true ); ?>
+												$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $_comment->comment_ID, 'rating', true ); ?>
 
 												<?php if( wc_review_ratings_enabled() ) : ?>
 													<div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated <?php echo esc_attr( $comment_rating_value ); ?>.00 out of 5">
@@ -247,13 +252,13 @@ $bars_data = $args['bars_data']; ?>
 												<?php endif; ?>
 												
 												<strong class="merchant-review-author">
-													<?php echo esc_html( get_comment_author( $comment ) ); ?>
+													<?php echo esc_html( get_comment_author( $_comment ) ); ?>
 
 													<?php
 													/**
 													 * Verified owner
 													*/
-													$verified = wc_review_is_from_verified_owner( $comment->comment_ID );
+													$verified = wc_review_is_from_verified_owner( $_comment->comment_ID );
 													if ( 'yes' === get_option( 'woocommerce_review_rating_verification_label' ) && $verified ) {
 														echo '<em class="woocommerce-review__verified verified">'. esc_attr__( ' — verified owner', 'merchant' ) . '</em> ';
 													} ?>
@@ -261,7 +266,7 @@ $bars_data = $args['bars_data']; ?>
 											</div>
 										</div>
 										<div class="mrc-col-3 merchant-review-date-wrapper">
-											<time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $comment ) ); ?>"><?php echo esc_html( get_comment_date( 'F j, Y', $comment ) ); ?></time>
+											<time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $_comment ) ); ?>"><?php echo esc_html( get_comment_date( 'F j, Y', $_comment ) ); ?></time>
 										</div>
 									</div>
 									<div class="mrc-row mrc-columns-no-gutter">
@@ -269,32 +274,42 @@ $bars_data = $args['bars_data']; ?>
 											<div class="merchant-review-content">
 												<?php
 												// We need to include the $comment variable here because some extra plugins like Germanized for WooCommerce use it.
-												$comment = $comment; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-
-												do_action( 'woocommerce_review_before_comment_text', $comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+												$_comment = $comment; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+												
+												/**
+												 * Hook 'woocommerce_review_before_comment_text'
+												 * 
+												 * @since 1.0
+												 */
+												do_action( 'woocommerce_review_before_comment_text', $_comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
 												if ( isset( $args['comment_text'] ) ) {
-													echo $args['comment_text'];
+													echo wp_kses_post( $args['comment_text'] );
 												} else {
-													comment_text( $comment );
+													comment_text( $_comment );
 												}
-																					
-												do_action( 'woocommerce_review_after_comment_text', $comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+
+												/**
+												 * Hook 'woocommerce_review_after_comment_text'
+												 * 
+												 * @since 1.0
+												 */
+												do_action( 'woocommerce_review_after_comment_text', $_comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 												?>
 											</div>
 										</div>
 									</div>
 								</div>
 
-							<?php elseif( isset( $_GET['unapproved'] ) && $comment->comment_ID === $_GET['unapproved'] ) : ?>
+							<?php elseif( isset( $_GET['unapproved'] ) && $_comment->comment_ID === $_GET['unapproved'] ) : ?>
 
-								<div id="comment-<?php echo esc_attr( $comment->comment_ID ); ?>" class="merchant-reviews-list-item">
+								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item">
 									<div class="row">
 										<div class="col-12">
 											<div class="d-flex align-items-center">
 
 												<?php 
-												$comment_rating_value = get_comment_meta( $comment->comment_ID, 'rating', true ); ?>
+												$comment_rating_value = get_comment_meta( $_comment->comment_ID, 'rating', true ); ?>
 
 												<?php if( wc_review_ratings_enabled() ) : ?>
 													<div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated <?php echo esc_attr( $comment_rating_value ); ?>.00 out of 5">
@@ -308,13 +323,13 @@ $bars_data = $args['bars_data']; ?>
 												<?php endif; ?>
 
 												<strong class="merchant-review-author">
-													<?php echo esc_html( get_comment_author( $comment ) ); ?>
+													<?php echo esc_html( get_comment_author( $_comment ) ); ?>
 
 													<?php
 													/**
 													 * Verified owner
 													*/
-													$verified = wc_review_is_from_verified_owner( $comment->comment_ID );
+													$verified = wc_review_is_from_verified_owner( $_comment->comment_ID );
 													if ( 'yes' === get_option( 'woocommerce_review_rating_verification_label' ) && $verified ) {
 														echo '<em class="woocommerce-review__verified verified">'. esc_attr__( ' — verified owner', 'merchant' ) . '</em> ';
 													} ?>
@@ -359,7 +374,12 @@ $bars_data = $args['bars_data']; ?>
 					) );
 
 				echo '</nav>';
-
+				
+				/**
+				 * Hook 'merchant_after_shop_reviews_adv_pagination'
+				 * 
+				 * @since 1.0
+				 */
 				do_action( 'merchant_after_shop_reviews_adv_pagination' );
 			}
 
@@ -367,4 +387,10 @@ $bars_data = $args['bars_data']; ?>
 	} ?>
 </section>
 
-<?php do_action( 'merchant_after_adv_reviews_section' ); ?>
+<?php 
+/**
+ * Hook 'merchant_after_adv_reviews_section'
+ * 
+ * @since 1.0
+ */
+do_action( 'merchant_after_adv_reviews_section' ); ?>

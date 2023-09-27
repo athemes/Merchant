@@ -273,82 +273,82 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
                         <tbody>
                         <tr>
                             <th class="label">
-                                <label for="pa_color"><?php echo __( 'Color', 'merchant' ) ?></label>
+                                <label for="pa_color"><?php echo esc_html__( 'Color', 'merchant' ) ?></label>
                             </th>
                             <td class="value">
                                 <div class="merchant-variations-wrapper merchant-variations-mouseover" data-type="color">
                                     <div class="merchant-variation-type-color">
                                         <a href="#" role="button" class="merchant-variation-item" value="blue" data-stock-status="instock">
                             <span class="merchant-variation-text" style="background-color: #1e73be;">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'Blue', 'merchant' ) ?></span>
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Blue', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                         <a href="#" role="button" class="merchant-variation-item active" value="red" data-stock-status="instock">
                             <span class="merchant-variation-text" style="background-color: #dd3333;">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'Red', 'merchant' ) ?></span>
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Red', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                         <a href="#" role="button" class="merchant-variation-item" value="white" data-stock-status="instock">
                             <span class="merchant-variation-text" style="background-color: #ffffff;">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'White', 'merchant' ) ?></span>
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'White', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                     </div>
                                     <select id="pa_color" class="" name="attribute_pa_color" data-attribute_name="attribute_pa_color" data-show_option_none="yes">
-                                        <option value=""><?php echo __( 'Select', 'merchant' ) ?>></option>
-                                        <option value="blue"><?php echo __( 'Blue', 'merchant' ) ?></option>
-                                        <option value="red"><?php echo __( 'Red', 'merchant' ) ?></option>
-                                        <option value="white"><?php echo __( 'White', 'merchant' ) ?></option>
+                                        <option value=""><?php echo esc_html__( 'Select', 'merchant' ) ?>></option>
+                                        <option value="blue"><?php echo esc_html__( 'Blue', 'merchant' ) ?></option>
+                                        <option value="red"><?php echo esc_html__( 'Red', 'merchant' ) ?></option>
+                                        <option value="white"><?php echo esc_html__( 'White', 'merchant' ) ?></option>
                                     </select>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th class="label">
-                                <label for="pa_select"><?php echo __( 'Select', 'merchant' ) ?></label>
+                                <label for="pa_select"><?php echo esc_html__( 'Select', 'merchant' ) ?></label>
                             </th>
                             <td class="value">
                                 <div class="merchant-variation-type-select">
                                     <select class="merchant-variation-item active" id="pa_select" name="attribute_pa_select" data-attribute_name="attribute_pa_select" data-show_option_none="yes">
-                                        <option value=""><?php echo __( 'Select', 'merchant' ) ?></option>
-                                        <option value="slim"><?php echo __( 'Slim', 'merchant' ) ?></option>
-                                        <option value="wavy"><?php echo __( 'Wavy', 'merchant' ) ?></option>
+                                        <option value=""><?php echo esc_html__( 'Select', 'merchant' ) ?></option>
+                                        <option value="slim"><?php echo esc_html__( 'Slim', 'merchant' ) ?></option>
+                                        <option value="wavy"><?php echo esc_html__( 'Wavy', 'merchant' ) ?></option>
                                     </select>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th class="label">
-                                <label for="pa_image"><?php echo __( 'Image', 'merchant' ) ?></label>
+                                <label for="pa_image"><?php echo esc_html__( 'Image', 'merchant' ) ?></label>
                             </th>
                             <td class="value">
                                 <div class="merchant-variations-wrapper merchant-variations-mouseover" data-type="image">
                                     <div class="merchant-variation-type-image">
                                         <a href="#" role="button" class="merchant-variation-item" data-stock-status="instock" value="image-option-1">
                             <span class="merchant-variation-text">
-                                <img src="<?php echo MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg' ?>" alt="<?php echo __( 'Image option 1', 'merchant' ) ?>" loading="lazy">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'Image option 1', 'merchant' ) ?></span>
+                                <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg' ); ?>" alt="<?php echo esc_html__( 'Image option 1', 'merchant' ) ?>" loading="lazy">
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Image option 1', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                         <a href="#" role="button" class="merchant-variation-item active" data-stock-status="instock" value="image-option-2">
                             <span class="merchant-variation-text">
-                                <img src="<?php echo MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg' ?>" alt="<?php echo __( 'Image option 2', 'merchant' ) ?>" loading="lazy">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'Image option 2', 'merchant' ) ?></span>
+                                <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg' ); ?>" alt="<?php echo esc_html__( 'Image option 2', 'merchant' ) ?>" loading="lazy">
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Image option 2', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                         <a href="#" role="button" class="merchant-variation-item" data-stock-status="instock" value="image-option-3">
                             <span class="merchant-variation-text">
-                                <img src="<?php echo MERCHANT_URI . 'assets/images/dummy/Glamifiedviola.jpeg' ?>" alt="<?php echo __( 'Image option 3', 'merchant' ) ?>"
+                                <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/dummy/Glamifiedviola.jpeg' ); ?>" alt="<?php echo esc_html__( 'Image option 3', 'merchant' ) ?>"
                                      loading="lazy">
-                                <span class="merchant-variation-tooltip"><?php echo __( 'Image option 3', 'merchant' ) ?></span>
+                                <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Image option 3', 'merchant' ) ?></span>
                             </span>
                                         </a>
                                     </div>
                                     <select id="pa_image" class="" name="attribute_pa_image" data-attribute_name="attribute_pa_image" data-show_option_none="yes">
-                                        <option value=""><?php echo __( 'Select', 'merchant' ) ?></option>
-                                        <option value="image-option-1"><?php echo __( 'Image option 1', 'merchant' ) ?></option>
-                                        <option value="image-option-2"><?php echo __( 'Image option 2', 'merchant' ) ?></option>
-                                        <option value="image-option-3"><?php echo __( 'Image option 3', 'merchant' ) ?></option>
+                                        <option value=""><?php echo esc_html__( 'Select', 'merchant' ) ?></option>
+                                        <option value="image-option-1"><?php echo esc_html__( 'Image option 1', 'merchant' ) ?></option>
+                                        <option value="image-option-2"><?php echo esc_html__( 'Image option 2', 'merchant' ) ?></option>
+                                        <option value="image-option-3"><?php echo esc_html__( 'Image option 3', 'merchant' ) ?></option>
                                     </select>
                                 </div>
                             </td>
@@ -361,16 +361,16 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
                                 <div class="merchant-variations-wrapper merchant-variations-mouseover" data-type="button">
                                     <div class="merchant-variation-type-button">
                                         <a href="#" role="button" class="merchant-variation-item" data-stock-status="instock" value="button-option-1">
-											<?php echo __( 'Button option 1', 'merchant' ) ?>
+											<?php echo esc_html__( 'Button option 1', 'merchant' ) ?>
                                         </a>
                                         <a href="#" role="button" class="merchant-variation-item active" data-stock-status="instock" value="button-option-2">
-											<?php echo __( 'Button option 2', 'merchant' ) ?>
+											<?php echo esc_html__( 'Button option 2', 'merchant' ) ?>
                                         </a>
                                     </div>
                                     <select id="pa_button" class="" name="attribute_pa_button" data-attribute_name="attribute_pa_button" data-show_option_none="yes">
-                                        <option value=""><?php echo __( 'Select', 'merchant' ) ?></option>
-                                        <option value="button-option-1"><?php echo __( 'Button option 1', 'merchant' ) ?></option>
-                                        <option value="button-option-2"><?php echo __( 'Button option 2', 'merchant' ) ?></option>
+                                        <option value=""><?php echo esc_html__( 'Select', 'merchant' ) ?></option>
+                                        <option value="button-option-1"><?php echo esc_html__( 'Button option 1', 'merchant' ) ?></option>
+                                        <option value="button-option-2"><?php echo esc_html__( 'Button option 2', 'merchant' ) ?></option>
                                     </select>
                                 </div>
                             </td>

@@ -239,6 +239,12 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		 * Enqueue styles and scripts.
 		 */
 		public function enqueue_styles_scripts() {
+
+			/**
+			 * Hook 'merchant_enqueue_before_main_css_js'
+			 * 
+			 * @since 1.0
+			 */
 			do_action( 'merchant_enqueue_before_main_css_js' );
 
 			wp_enqueue_style( 'merchant', MERCHANT_URI . 'assets/css/merchant.min.css', array(), MERCHANT_VERSION );
@@ -253,8 +259,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'scroll-to-top-button' ) ) {
 				$setting['scroll_to_top'] = true;
-				// wp_enqueue_script( 'merchant-scroll-to-top', MERCHANT_URI . 'assets/js/modules/scroll-to-top.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
 			}
 
 			// Animated Add to Cart
@@ -278,8 +282,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 				$setting['cookie_banner']          = true;
 				$setting['cookie_banner_duration'] = Merchant_Admin_Options::get( 'cookie-banner', 'cookie_duration', 365 );
-				// wp_enqueue_script( 'merchant-cookie-banner', MERCHANT_URI . 'assets/js/modules/cookie-banner.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
 			}
 
 			// Real Time Search
@@ -291,12 +293,20 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['ajax_search_results_order']                = Merchant_Admin_Options::get( 'real-time-search', 'results_order', 'asc' );
 				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'real-time-search', 'display_categories', 0 );
 				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
-				// wp_enqueue_script( 'merchant-real-time-search', MERCHANT_URI . 'assets/js/modules/real-time-search.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
 			}
 
+			/**
+			 * Hook 'merchant_enqueue_after_main_css_js'
+			 * 
+			 * @since 1.0
+			 */
 			do_action( 'merchant_enqueue_after_main_css_js' );
 
+			/**
+			 * Hook 'merchant_localize_script'
+			 * 
+			 * @since 1.0
+			 */
 			$setting = apply_filters( 'merchant_localize_script', $setting );
 
 			wp_localize_script( 'merchant', 'merchant', array( 'setting' => $setting ) );

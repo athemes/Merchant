@@ -9,6 +9,12 @@
  */
 
 $icon 			 = Merchant_SVG_Icons::get_svg_icon( $args[ 'icon' ] );
+
+/**
+ * Hook 'merchant_reasons_to_buy_wrapper_class'
+ * 
+ * @since 1.0
+ */
 $wrapper_classes = apply_filters( 'merchant_reasons_to_buy_wrapper_class', array( 'merchant-reasons-list' ) );
 
 ?>

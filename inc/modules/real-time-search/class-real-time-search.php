@@ -202,15 +202,15 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 						<a class="merchant-ajax-search-item merchant-ajax-search-item-product" href="#">
 							<div class="merchant-ajax-search-item-image"></div>
 							<div class="merchant-ajax-search-item-info">
-								<div class="merchant-ajax-search-item-title"><?php echo __( 'Ultra Facial Moisturizing Cream', 'merchant' ) ?></div>
-								<p><?php echo __( 'Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…', 'merchant' ) ?></p></div>
+								<div class="merchant-ajax-search-item-title"><?php echo esc_html__( 'Ultra Facial Moisturizing Cream', 'merchant' ) ?></div>
+								<p><?php echo esc_html__( 'Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…', 'merchant' ) ?></p></div>
 							<div class="merchant-ajax-search-item-price"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>21.00</span></div>
 						</a>
 						<a class="merchant-ajax-search-item merchant-ajax-search-item-product" href="#">
 							<div class="merchant-ajax-search-item-image"></div>
 							<div class="merchant-ajax-search-item-info">
-								<div class="merchant-ajax-search-item-title"><?php echo __( 'Rare Earth Deep Pore Cleansing', 'merchant' ) ?></div>
-								<p><?php echo __( 'Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…', 'merchant' ) ?></p></div>
+								<div class="merchant-ajax-search-item-title"><?php echo esc_html__( 'Rare Earth Deep Pore Cleansing', 'merchant' ) ?></div>
+								<p><?php echo esc_html__( 'Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…', 'merchant' ) ?></p></div>
 							<div class="merchant-ajax-search-item-price"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>14.00</span></div>
 						</a></div>
 				</div>

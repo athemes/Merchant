@@ -45,8 +45,9 @@ Merchant_Admin_Options::create( array(
 			'type'         => 'sortable_repeater',
 			'sorting'      => false,
 			'title'        => esc_html__( 'Reasons to buy', 'merchant' ),
-			'desc'         => sprintf( esc_html__( 'Note: If you want to add a different reasons for each product, go to %sProducts%s, edit the desired product, set the title and reasons inside the metabox.',
-				'merchant-pro' ),
+			/* Translators: 1. Link open tag 2. Link close tag */
+			'desc'         => sprintf( esc_html__( 'Note: If you want to add a different reasons for each product, go to %1$sProducts%2$s, edit the desired product, set the title and reasons inside the metabox.',
+				'merchant' ),
 				'<a href="' . esc_url( admin_url( 'edit.php?post_type=product' ) ) . '">',
 				'</a>' ),
 			'button_label' => esc_html__( 'Add new', 'merchant' ),

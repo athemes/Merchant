@@ -10,9 +10,9 @@
 ?>
 <div id="merchant-spending-goal-widget" class="merchant-spending-goal-widget" onclick="document.getElementById('merchant-spending-goal-widget').classList.toggle('active');">
     <div class="merchant-spending-goal-widget-content">
-        <div class="merchant-spending-goal-widget-text"><?php echo $args['content'] ?></div>
+        <div class="merchant-spending-goal-widget-text"><?php echo wp_kses( $args['content'], merchant_kses_allowed_tags( [ 'bdi' ] ) ); ?></div>
         <div class="merchant-spending-goal-widget-progress-bar">
-            <div class="merchant-spending-goal-widget-progress-bar-content" style="width: <?php echo $args['spending'] ?>%">
+            <div class="merchant-spending-goal-widget-progress-bar-content" style="width: <?php echo esc_attr( $args['spending'] ); ?>%">
                 <div class="merchant-spending-goal-widget-progress-bar-filled"></div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                       fill="currentColor"/>
                 <path d="M11.8679 12V7H13.1321V12H11.8679ZM10 10.1321V8.86794H15V10.1321H10Z" fill="currentColor"/>
             </svg>
-			<?php echo $args['spending'] . '%' ?>
+			<?php echo esc_html( $args['spending'] ) . '%'; ?>
         </div>
     </div>
 </div>

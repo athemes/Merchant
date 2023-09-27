@@ -169,7 +169,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
                 <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
                 <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
 				<?php
-				echo merchant_get_template_part(
+				echo merchant_get_template_part( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in template.
 					self::MODULE_TEMPLATES_PATH,
 					'single-product',
 					array(

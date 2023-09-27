@@ -153,7 +153,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									self::field( $field, $value );
 									$field_html = ob_get_clean();
 
-									echo str_replace(
+									echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
 										array(
 											'<input ',
 											'<select ',
@@ -280,7 +280,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 					}
 					break;
-				case 'dimensions' :
+				case 'dimensions':
 					$values = is_array( $value ) ? $value : array();
 
 					foreach ( $values as $key => $val ) {
@@ -291,7 +291,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 					}
 					break;
-				case 'responsive_dimensions' :
+				case 'responsive_dimensions':
 					$values = is_array( $value ) ? $value : array();
 
 					foreach ( $values as $device => $device_fields ) {
@@ -862,7 +862,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                name="merchant[<?php echo esc_attr( $settings['id'] ); ?>][<?php echo esc_attr( $dimension ) ?>]"
                                value="<?php echo esc_attr( $value[ $dimension ] ); ?>"/>
                         <label for="merchant-<?php echo esc_attr( $settings['id'] ); ?>-<?php echo esc_attr( $dimension ) ?>">
-							<?php echo ucfirst( esc_html( $dimension ) ) ?>
+							<?php echo esc_html( ucfirst( $dimension ) ); ?>
                         </label>
                     </div>
 				<?php endforeach; ?>
@@ -905,15 +905,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
             <div class="merchant-module-page-settings-responsive">
                 <ul class="merchant-module-page-settings-devices">
 					<?php foreach ( $settings['devices'] as $device => $icon )  : ?>
-                        <li class="<?php echo $device ?>">
-                            <button type="button" class="preview-<?php echo $device ?> <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>" data-device="<?php echo $device ?>">
-                                <i class="dashicons <?php echo $icon ?>"></i>
+                        <li class="<?php echo esc_attr( $device ); ?>">
+                            <button type="button" class="preview-<?php echo esc_attr( $device ); ?> <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>" data-device="<?php echo esc_attr( $device ); ?>">
+                                <i class="dashicons <?php echo esc_attr( $icon ); ?>"></i>
                             </button>
                         </li>
 					<?php endforeach; ?>
                 </ul>
 				<?php foreach ( $settings['devices'] as $device => $icon ) : ?>
-                    <div class="merchant-module-page-settings-device-container <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>" data-device="<?php echo $device ?>">
+                    <div class="merchant-module-page-settings-device-container <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>" data-device="<?php echo esc_attr( $device ); ?>">
                         <div class="merchant-module-page-settings-unit">
                             <select name="merchant[<?php echo esc_attr( $settings['id'] ); ?>][<?php echo esc_attr( $device ) ?>][unit]">
 								<?php foreach ( $settings['units'] as $key => $option ) : ?>
@@ -929,7 +929,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                            name="merchant[<?php echo esc_attr( $settings['id'] ); ?>][<?php echo esc_attr( $device ) ?>][<?php echo esc_attr( $dimension ) ?>]"
                                            value="<?php echo esc_attr( $value[ $device ][ $dimension ] ); ?>"/>
                                     <label for="merchant-<?php echo esc_attr( $settings['id'] ); ?>-<?php echo esc_attr( $device ) ?>-<?php echo esc_attr( $dimension ) ?>">
-										<?php echo ucfirst( esc_html( $dimension ) ) ?>
+										<?php echo esc_html( ucfirst( $dimension ) ); ?>
                                     </label>
                                 </div>
 							<?php endforeach; ?>

@@ -246,7 +246,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                                         <span class="merchant-module-page-preview-browser-top-circle"></span>
                                     </div>
                                     <div class="merchant-module-page-preview-browser-inner">
-										<?php echo Merchant_Admin_Preview::get_html(); ?>
+										<?php echo Merchant_Admin_Preview::get_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped previously ?>
                                     </div>
                                 </div>
                             </div>

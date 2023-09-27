@@ -63,15 +63,20 @@ $attributes = array_reverse( $attributes );
 <div <?php echo wp_kses( implode( ' ', $attributes ), array() ); ?>>
 	<div class="merchant-sticky-add-to-cart-wrapper-content-mobile">
 		<a href="#" class="button merchant-mobile-sticky-addtocart-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
-			<?php echo esc_html__( 'Add to Cart', 'merchant-pro' ); ?>
+			<?php echo esc_html__( 'Add to Cart', 'merchant' ); ?>
 		</a>
 		<a href="#" class="button merchant-mobile-sticky-close-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
-			<?php echo esc_html__( 'Close', 'merchant-pro' ); ?>
+			<?php echo esc_html__( 'Close', 'merchant' ); ?>
 		</a>
 	</div>
 	<div class="merchant-sticky-add-to-cart-wrapper-content">
 		
 		<?php 
+		/**
+		 * Hook 'merchant_sticky_add_to_cart_elements_order'
+		 * 
+		 * @since 1.0
+		 */
 		$elements_order = apply_filters( 'merchant_sticky_add_to_cart_elements_order', array( 'product_image', 'product_title', 'product_price', 'add_to_cart' ) );
 
 		foreach ( $elements_order as $element ) {
@@ -95,7 +100,7 @@ $attributes = array_reverse( $attributes );
 			}
 
 			echo '<div class="merchant-sticky-add-to-cart-item ' . esc_attr( $class ) . '">';
-            echo $args['elements'][$element];
+            echo $args['elements'][$element]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped
 			echo '</div>';
 		} 
 		?>

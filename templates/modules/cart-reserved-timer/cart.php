@@ -9,13 +9,13 @@
 
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
-<div class="merchant-cart-reserved-timer" data-duration="<?php echo $args['duration'] ?>" data-expires="<?php echo $args['time_expires'] ?>" style="<?php echo $args['css'] ?>">
+<div class="merchant-cart-reserved-timer" data-duration="<?php echo esc_attr( $args['duration'] ); ?>" data-expires="<?php echo esc_attr( $args['time_expires'] ); ?>" style="<?php echo esc_attr( $args['css'] ); ?>">
     <div class="merchant-cart-reserved-timer-icon">
-        <img src="<?php echo $args['icon']["src"] ?>" alt="<?php echo $args['icon']["alt"] ?>">
+        <img src="<?php echo esc_url( $args['icon']["src"] ); ?>" alt="<?php echo esc_attr( $args['icon']["alt"] ); ?>">
         </div>
     <div class="merchant-cart-reserved-timer-content">
-        <p class="merchant-cart-reserved-timer-content-title"><?php echo $args['reserved_message'] ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo $args['timer_message_minutes'] ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo $args['timer_message_seconds'] ?></p>
+        <p class="merchant-cart-reserved-timer-content-title"><?php echo esc_html( $args['reserved_message'] ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo esc_html( $args['timer_message_minutes'] ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo esc_html( $args['timer_message_seconds'] ); ?></p>
         </div>
     </div>

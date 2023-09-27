@@ -5,7 +5,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $merchant_notifications 	= $this->get_notifications();
+
+/**
+ * Hook 'merchant_notifications_pro'
+ * 
+ * @since 1.0
+ */
 $merchant_notifications_pro = apply_filters( 'merchant_notifications_pro', false );
+
+/**
+ * Hook 'merchant_notification_tabs'
+ * 
+ * @since 1.0
+ */
 $merchant_notification_tabs = apply_filters( 'merchant_notification_tabs', false );
 $merchant_notification_read = $this->is_latest_notification_read();
 
@@ -24,7 +36,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 			<div class="merchant-version">
 				<strong><?php echo esc_html( ( defined( 'MERCHANT_PRO_VERSION' ) ? MERCHANT_PRO_VERSION : MERCHANT_VERSION ) ); ?></strong>
 				<span class="merchant-badge<?php echo ( defined( 'MERCHANT_PRO_VERSION' ) ) ? ' merchant-badge-pro' : ''; ?>">
-					<?php echo esc_html( ( ! defined( 'MERCHANT_PRO_VERSION' ) ) ? __( 'FREE', 'botiga' ) : __( 'PRO', 'botiga' ) ); ?>
+					<?php echo esc_html( ( ! defined( 'MERCHANT_PRO_VERSION' ) ) ? __( 'FREE', 'merchant' ) : __( 'PRO', 'merchant' ) ); ?>
 				</span>
 			</div>
 		</div>
@@ -341,6 +353,11 @@ $merchant_notification_read = $this->is_latest_notification_read();
 								$module_link = add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module_id ), 'admin.php' );
 								$link_target = '_self';
 
+								/**
+								 * Hook 'merchant_admin_module_{module_id}_list_item_class'
+								 * 
+								 * @since 1.0
+								 */
 								$module_list_item_class = apply_filters( "merchant_admin_module_{$merchant_module_id}_list_item_class", 'merchant-modules-list-item' );
 								$has_wc_required_class  = strpos( $module_list_item_class, 'merchant-module-wc-only' ) !== FALSE ? true : false;
 								$module_link = $has_wc_required_class ? '#' : $module_link;

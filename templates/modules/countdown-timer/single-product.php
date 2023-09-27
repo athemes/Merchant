@@ -8,12 +8,12 @@
  */
 
 ?>
-<div class="merchant-countdown-timer <?php echo $args['sale_ending_alignment'] ?>"
-     data-max="<?php echo $args['max_expiration_deadline'] ?>"
-     data-min="<?php echo $args['min_expiration_deadline'] ?>"
-     data-cop="<?php echo $args['cool_off_period'] ?>"
-     data-type="<?php echo $args['end_date'] ?>"
-     data-date="<?php echo isset( $args['sale_end_date'] ) ? $args['sale_end_date'] : '' ?>"
+<div class="merchant-countdown-timer <?php echo esc_attr( $args['sale_ending_alignment'] ); ?>"
+     data-max="<?php echo esc_attr( $args['max_expiration_deadline'] ); ?>"
+     data-min="<?php echo esc_attr( $args['min_expiration_deadline'] ); ?>"
+     data-cop="<?php echo esc_attr( $args['cool_off_period'] ); ?>"
+     data-type="<?php echo esc_attr( $args['end_date'] ); ?>"
+     data-date="<?php echo isset( $args['sale_end_date'] ) ? esc_attr( $args['sale_end_date'] ) : '' ?>"
      style="display: none">
     <svg fill="currentColor" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296.228 296.228">
         <g>
@@ -22,7 +22,7 @@
         </g>
     </svg>
     <div>
-        <span class="merchant-countdown-timer-text"><?php echo $args['sale_ending_text'] ?> </span>
+        <span class="merchant-countdown-timer-text"><?php echo esc_html( $args['sale_ending_text'] ); ?> </span>
         <span class="merchant-countdown-timer-countdown" id="merchant-countdown-timer"></span>
     </div>
 </div>

@@ -45,6 +45,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'text',
 			'title'     => esc_html__( 'Welcome message text', 'merchant' ),
 			'desc'      => esc_html__( 'You can use the following tags: {user_firstname}, {user_lastname}, {user_email}, {user_login}, {display_name}', 'merchant' ),
+			/* Translators: 1. Display name */
 			'default'   => sprintf( esc_html__( 'Welcome %s', 'merchant' ), '{display_name}' ),
 			'condition' => array( 'show_welcome_message', '==', true ),
 		),

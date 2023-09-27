@@ -20,7 +20,8 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'global-brand-image',
 			'type'  => 'upload',
 			'title' => esc_html__( 'Upload brand image', 'merchant' ),
-			'desc'  => sprintf( esc_html__( 'Note: If you want to add a different brand image for each product, go to %sProducts%s, edit the desired product and upload a different image.', 'merchant' ), '<a href="'. esc_url( admin_url( 'edit.php?post_type=product' ) ).'">', '</a>' ),
+			/* Translators: 1. Link open tag 2. Link close tag */
+			'desc'  => sprintf( esc_html__( 'Note: If you want to add a different brand image for each product, go to %1$sProducts%2$s, edit the desired product and upload a different image.', 'merchant' ), '<a href="'. esc_url( admin_url( 'edit.php?post_type=product' ) ).'">', '</a>' ),
 		),
 
 		array(

@@ -21,7 +21,7 @@
 		$total_price      = intval( $discount_tier['quantity'] ) * $discounted_price; ?>
         <div class="merchant-volume-discounts-item">
             <div class="merchant-volume-discounts-buy-label">
-				<?php echo str_replace(
+				<?php echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					array(
 						'{amount}',
 						'{discount}'
@@ -37,25 +37,25 @@
                 <li>
                     <div></div>
                     <div>
-                        <del><?php echo wc_price( $args['product_price'] ) ?></del>
+                        <del><?php echo wc_price( $args['product_price'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></del>
                     </div>
                 </li>
                 <li>
                     <div class="merchant-volume-discounts-item-text"><?php echo esc_html( $args['settings']['item_text'] ) ?></div>
-                    <div><strong><?php echo wc_price( $discounted_price ) ?></strong></div>
+                    <div><strong><?php echo wc_price( $discounted_price ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong></div>
                 </li>
                 <li>
                     <div class="merchant-volume-discounts-total-text"><?php echo esc_html( $args['settings']['total_text'] ) ?></div>
-                    <div><strong><?php echo wc_price( $total_price ) ?></strong></div>
+                    <div><strong><?php echo wc_price( $total_price ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong></div>
                 </li>
             </ul>
             <div class="merchant-volume-discounts-item-label">
 			<span class="merchant-volume-discounts-save-label">
-				<?php echo str_replace(
+				<?php echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					'{amount}',
 					wc_price( $total_discount ),
 					esc_html( $args['settings']['save_label'] )
-				) ?>
+				); ?>
 			</span>
             </div>
         </div>

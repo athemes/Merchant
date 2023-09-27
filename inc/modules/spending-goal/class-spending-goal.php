@@ -214,7 +214,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
             </div>
         </div>
 
-		<?php echo merchant_get_template_part(
+		<?php echo merchant_get_template_part( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the template
 			self::MODULE_TEMPLATES_PATH,
 			'widget',
 			array(

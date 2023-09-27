@@ -15,6 +15,9 @@
 
 	<!-- Rules -->
 	<rule ref="WordPress-Extra">
+		<exclude name="Generic" />
+		<exclude name="Squiz" />
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
 		<exclude name="Generic.Commenting.DocComment.SpacingAfter" />
 		<exclude name="Generic.Files.LineEndings.InvalidEOLChar" />
 		<exclude name="Generic.Functions.FunctionCallArgumentSpacing.SpaceBeforeComma" />

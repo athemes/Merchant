@@ -20,7 +20,8 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'global_size_chart',
 			'type'  => 'select_size_chart',
 			'title' => esc_html__( 'Global size chart (optional)', 'merchant' ),
-			'desc'  => sprintf( esc_html__( 'Your size charts will appear in this option as you create them. %sClick here%s to create or modify the available size charts.', 'merchant' ), '<a href="'. esc_url( admin_url( 'edit.php?post_type=merchant_size_chart' ) ) .'">', '</a>' ),
+			/* Translators: 1. Link open tag 2. Link close tag */
+			'desc'  => sprintf( esc_html__( 'Your size charts will appear in this option as you create them. %1$sClick here%2$s to create or modify the available size charts.', 'merchant' ), '<a href="'. esc_url( admin_url( 'edit.php?post_type=merchant_size_chart' ) ) .'">', '</a>' ),
 		),
 
 		array(
