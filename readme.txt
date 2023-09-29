@@ -152,7 +152,7 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 = 1.4 =
-* Changed - Added new previews & description changes
+* Changed - Added new previews & description changes.
 
 = 1.3 =
 * Fixed - Real-Time Search: Ajax isn't working.
