@@ -266,7 +266,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			$manipulators    = isset( self::instance()->manipulators ) && ! empty( self::instance()->manipulators )
 				? self::instance()->manipulators
 				: array();
-			$script_variable = 'var merchantPreviewManipulators = ' . json_encode( $manipulators );
+			$script_variable = 'var merchantPreviewManipulators = ' . wp_json_encode( $manipulators );
 
 			wp_add_inline_script( 'merchant-admin-preview', $script_variable );
 		}

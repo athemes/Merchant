@@ -1,0 +1,362 @@
+/**
+ * Login Popup.
+ *
+ */
+.merchant-login-popup-button {
+  font-size: 1em;
+  color: var(--merchant-login-text-color, #212121);
+  text-decoration: none !important;
+}
+
+.merchant-login-popup-button:hover {
+  color: var(--merchant-login-text-color-hover, #515151);
+}
+
+.merchant-login-popup-dropdown {
+  position: relative;
+}
+
+.merchant-login-popup-dropdown * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-login-popup-dropdown nav {
+  position: absolute;
+  z-index: 9999999;
+  top: 100%;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  min-width: 230px;
+  -webkit-transform: translate3d(0, -10px, 0);
+          transform: translate3d(0, -10px, 0);
+}
+
+.merchant-login-popup-dropdown nav a {
+  position: relative;
+  padding: 10px 15px;
+  white-space: nowrap;
+  text-decoration: none !important;
+  color: var(--merchant-dropdown-link-color, #212121);
+}
+
+.merchant-login-popup-dropdown nav a:hover {
+  color: var(--merchant-dropdown-link-color-hover, #515151);
+}
+
+.merchant-login-popup-dropdown nav a + a:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--merchant-dropdown-link-color, #212121);
+  opacity: 0.1;
+}
+
+.merchant-login-popup-dropdown:hover nav {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.merchant-login-popup-dropdown .merchant-login-popup-dropdown-button {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none !important;
+}
+
+.merchant-login-popup-dropdown .merchant-login-popup-dropdown-button:after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  margin-left: 10px;
+  margin-top: -4px;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+}
+
+.merchant-login-popup-dropdown-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 10px;
+  -webkit-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.09);
+          box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.09);
+  background-color: var(--merchant-dropdown-background-color, #ffffff);
+  border-radius: 4px;
+}
+
+.merchant-login-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.merchant-login-popup * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.merchant-login-popup-overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.9;
+  background-color: #000;
+}
+
+.merchant-login-popup-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--merchant-popup-width, 400px);
+  opacity: 0;
+  max-height: 75vh;
+  overflow-y: auto;
+  -webkit-transform: translate3d(0, 20px, 0);
+          transform: translate3d(0, 20px, 0);
+  -webkit-transition: .2s;
+  transition: .2s;
+  color: var(--merchant-popup-text-color, #212121);
+  background-color: var(--merchant-popup-background-color, #ffffff);
+}
+
+.merchant-login-popup-body.merchant-show {
+  opacity: 1;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.merchant-login-popup-close {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 14px;
+}
+
+.merchant-login-popup-close svg {
+  width: 1em;
+  height: 1em;
+  fill: var(--merchant-popup-icon-color, #212121);
+}
+
+.merchant-login-popup-close svg path {
+  -webkit-transform: scale(0.75);
+          transform: scale(0.75);
+}
+
+.merchant-login-popup-content {
+  padding: 50px 40px 30px 40px;
+  color: var(--merchant-popup-text-color, #212121);
+}
+
+.merchant-login-popup-content h2 {
+  margin-top: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--merchant-popup-title-color, #212121);
+}
+
+.merchant-login-popup-content a {
+  color: var(--merchant-popup-link-color, #212121);
+}
+
+.merchant-login-popup-content a:hover {
+  color: var(--merchant-popup-link-color-hover, #515151);
+}
+
+.merchant-login-popup-content .col-1,
+.merchant-login-popup-content .col-2 {
+  display: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+.merchant-login-popup-content .col-1 {
+  display: block;
+}
+
+.merchant-login-popup-content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.merchant-login-popup-content p {
+  margin: 0;
+}
+
+.merchant-login-popup-content label {
+  display: block;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.merchant-login-popup-content .woocommerce-Input,
+.merchant-login-popup-content .woocommerce-Button {
+  width: 100%;
+  padding: 10px;
+}
+
+.merchant-login-popup-content .woocommerce-form-login p + p:not(.woocommerce-form-row) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.merchant-login-popup-content .woocommerce-form-login__submit {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.merchant-login-popup-content .woocommerce-button {
+  opacity: 1;
+  color: var(--merchant-popup-button-color, #ffffff);
+  border-color: var(--merchant-popup-button-border-color, #212121);
+  background-color: var(--merchant-popup-button-background-color, #212121);
+}
+
+.merchant-login-popup-content .woocommerce-button:hover {
+  opacity: 1;
+  color: var(--merchant-popup-button-color-hover, #ffffff);
+  border-color: var(--merchant-popup-button-border-color-hover, #757575);
+  background-color: var(--merchant-popup-button-background-color-hover, #757575);
+}
+
+.merchant-login-popup-content .woocommerce-form-login__rememberme {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  margin-bottom: 0;
+}
+
+.merchant-login-popup-content .woocommerce-LostPassword {
+  margin-top: 20px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.merchant-login-popup-lost-password {
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.merchant-login-popup-footer {
+  padding: 20px;
+  color: var(--merchant-popup-footer-text-color, #212121);
+  background-color: var(--merchant-popup-footer-background-color, #f5f5f5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 5px;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.merchant-login-popup-footer a {
+  color: var(--merchant-popup-footer-link-color, #212121);
+}
+
+.merchant-login-popup-footer a:hover {
+  color: var(--merchant-popup-footer-link-color-hover, #515151);
+}
+
+.merchant-login-popup-show {
+  overflow: hidden;
+}
+
+.merchant-login-popup-show .merchant-login-popup {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.merchant-login-popup-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.merchant-login-popup-footer div {
+  display: none;
+}
+
+.merchant-login-popup-footer .merchant-show {
+  display: block;
+}

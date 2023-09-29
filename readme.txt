@@ -3,8 +3,7 @@ Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quic
 Requires at least: 5.5
 Tested up to: 6.3
 Requires PHP: 5.6
-Stable tag: trunk
-Contributors: aThemes,kmrzzmaan,relstudiosnx,maaprote,vladff
+Stable tag: 1.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,7 +63,7 @@ Let's take a closer look at some of the modules that make Merchant the ultimate 
 **Scroll to Top:** Assist customers in easily returning to the top of the page where they can view product photos and purchase options.
 
 ### PROTECT YOUR BUSINESS
-**Agree to Terms Checkbox:** Display a checkbox with a link to your store’s terms and conditions 
+**Agree to Terms Checkbox:** Display a checkbox with a link to your store’s terms and conditions
 
 **Cookie Banner:** Inform visitors that your site uses cookies.
 
@@ -152,6 +151,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 16. Cookie Banner Module
 
 == Changelog ==
+= 1.4 =
+* Changed - Added new previews & description changes.
+
 = 1.3 =
 * Fixed - Real-Time Search: Ajax isn't working.
 * Changed - Plugin dashboard modules order rearranged.
@@ -161,11 +163,11 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 * Added - Compatibility with Merchant Pro.
 
 = 1.1 =
-* Fixed - Quick View: Icon absolute position values not working properly. 
+* Fixed - Quick View: Icon absolute position values not working properly.
 * Fixed - Quick View: Icon hover color not working with some themes.
 * Fixed - Payment Logos: In some themes the logos are wrongly being displayed in variable products on shop categories pages.
-* Fixed - Payment Logos: Logos being display twice when 'in cart quantity' from Botiga theme is enabled. 
-* Added - Declare compatibility with WooCommerce HPOS. 
+* Fixed - Payment Logos: Logos being display twice when 'in cart quantity' from Botiga theme is enabled.
+* Added - Declare compatibility with WooCommerce HPOS.
 
 = 1.0 =
 * A brand new plugin with a new dashboard.

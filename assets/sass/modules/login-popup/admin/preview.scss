@@ -1,0 +1,56 @@
+/**
+ * Admin Preview
+ * Login Popup
+ *
+ */
+
+// Canvas.
+.merchant-module-page-preview-browser-inner {
+	display: flex;
+	flex-grow: 0;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+	padding: 50px 25px;
+
+    .notice,
+    .updated {
+        display: none !important;
+    }
+}
+
+// Login Popup.
+body.merchant-login-popup-show {
+	overflow: auto !important;
+
+    .merchant-module-page-preview-browser-inner {
+        height: 550px;
+    }
+}
+
+.merchant-login-popup-button {
+    font-size: 1rem;
+    text-decoration: none;
+    margin: auto;
+}
+
+.merchant-login-popup,
+.merchant-login-popup-overlay {
+    position: absolute;
+
+    .woocommerce-form-login__rememberme {
+        margin-top: 15px;
+    }
+
+    .woocommerce-form-login__submit {
+        pointer-events: none;
+        margin-top: 15px;
+    }
+
+    .woocommerce-LostPassword,
+    .woocommerce-form-register__submit,
+    input {
+        pointer-events: none;
+    }
+
+}

@@ -1,0 +1,33 @@
+/* Botiga Sticky Add To Cart Compatiblity */
+.merchant-sticky-add-to-cart-wrapper {
+	.merchant-sticky-add-to-cart-wrapper-content {
+		.merchant-sticky-add-to-cart-item {
+			&.product-addtocart {
+				.quantity {
+					.botiga-quantity-plus,
+					.botiga-quantity-minus {
+						justify-content: center;
+					}
+				}				
+
+				.variations_form.cart {
+					.botiga-variations-wrapper { 
+						.botiga-variation-type-button {
+							> a {
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+
+                .variations_form {
+                    .single_variation_wrap {
+                        .botiga-single-addtocart-wrapper {
+                            display: flex;
+                        }
+                    }
+                }
+			}
+		}
+	}
+}

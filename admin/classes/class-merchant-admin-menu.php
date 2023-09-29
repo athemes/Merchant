@@ -138,8 +138,12 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 * Ajax notifications.
 		 */
 		public function ajax_notifications_read() {
-
 			check_ajax_referer( 'merchant', 'nonce' );
+
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
 
 			$latest_notification_date = ( isset( $_POST[ 'latest_notification_date' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'latest_notification_date' ] ) ) : false;
 

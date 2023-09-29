@@ -114,8 +114,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-labels.min.css', [], MERCHANT_VERSION );
@@ -176,7 +176,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		<div class="merchant-product-labels-preview">
 			<div class="image-wrapper">
-				<span class="merchant-onsale merchant-onsale-<?php echo sanitize_html_class( $settings[ 'label_position' ] ); ?> merchant-onsale-shape-<?php echo sanitize_html_class( $settings[ 'label_shape' ] ) ?>"><?php echo esc_html( $label_text ); ?></span>
+				<span class="merchant-onsale merchant-onsale-<?php echo esc_attr( $settings[ 'label_position' ] ); ?> merchant-onsale-shape-<?php echo esc_attr( $settings[ 'label_shape' ] ) ?>"><?php echo esc_html( $label_text ); ?></span>
 			</div>
 			<h3><?php echo esc_html__( 'Product Title', 'merchant' ); ?></h3>
 			<p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
@@ -247,7 +247,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				
 			}
 			
-			echo '<span class="merchant-onsale merchant-onsale-' . sanitize_html_class( $settings[ 'label_position' ] ) . ' merchant-onsale-shape-' . sanitize_html_class( $settings[ 'label_shape' ] ) . '">' . esc_html( $label_text ) . '</span>';
+			echo '<span class="merchant-onsale merchant-onsale-' . esc_attr( $settings[ 'label_position' ] ) . ' merchant-onsale-shape-' . esc_attr( $settings[ 'label_shape' ] ) . '">' . esc_html( $label_text ) . '</span>';
 	
 		}
 		

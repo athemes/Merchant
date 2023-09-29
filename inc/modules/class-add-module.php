@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 class Merchant_Add_Module {
 
 	/**
@@ -95,8 +99,8 @@ class Merchant_Add_Module {
 	 * @return bool
 	 */
 	public function is_module_settings_page() {
-		return isset( $_GET[ 'page' ] ) && 'merchant' === $_GET[ 'page' ] 
-			&& isset( $_GET[ 'module' ] ) && $this->module_id === $_GET[ 'module' ];
+		return isset( $_GET[ 'page' ] ) && 'merchant' === $_GET[ 'page' ] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			&& isset( $_GET[ 'module' ] ) && $this->module_id === $_GET[ 'module' ]; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**

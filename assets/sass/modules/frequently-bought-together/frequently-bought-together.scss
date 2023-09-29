@@ -1,0 +1,183 @@
+/**
+ * Frequently Bought Together.
+ *
+ */
+
+.merchant-frequently-bought-together-title {
+	margin-bottom: 25px;
+}
+
+.merchant-frequently-bought-together {
+	&.after-tabs {
+		padding-bottom: 40px;
+	}	
+}
+
+.merchant-frequently-bought-together-bundles {
+	display: flex;
+	flex-direction: column;
+	grid-gap: 20px;
+}
+
+.merchant-frequently-bought-together-bundle {
+	display: flex;
+	grid-gap: 20px;
+	flex-wrap: wrap;
+
+	form {
+		display: flex;
+		grid-gap: 20px;
+		flex-wrap: wrap;
+	}
+	
+	&-products {
+		display: flex;
+		grid-gap: 20px;
+		align-items: flex-start;
+	}
+	
+	
+	&-product {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		max-width: 200px;
+		position: relative;
+
+		&-attributes {
+			display: grid;
+			grid-gap: 10px;
+			margin-top: 10px;
+
+			select {
+				min-height: inherit;
+				height: inherit;
+				padding: 7px;
+				font-size: 12px;
+			}
+		}
+		
+		&-plus {
+			position: absolute;
+			right: -30px;
+			top: 50px;
+			font-size: 25px;
+			background: var(--merchant-bg-color);
+			color:  var(--merchant-text-color);
+			border-radius: 50%;
+			width: 35px;
+			height: 35px;
+			z-index: 2;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: arial, serif;
+		}
+		
+		&:not(:first-child) {
+			border: 1px solid var(--merchant-border-color);
+			border-radius: var(--merchant-border-radius);
+			padding: 15px;
+			
+			img {
+				width: 100px;
+				height: 100px;
+			}
+		}
+		
+		p {
+			margin: 0 0 10px;
+		}
+		
+		img {
+			width: 125px;
+			height: 125px;
+			margin: 0 auto 20px;
+		}
+	}
+	
+	&-offer {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	&-total,
+	&-total-price {
+		margin: 0;
+	}
+	
+	&-total-price {
+		ins {
+			font-size: 21px;
+		}
+	}
+	
+	&-save {
+		margin-bottom: 15px;
+		font-style: italic;
+	}
+	
+	&-error {
+		color: red;
+		font-size: 14px;
+		margin-top: 5px;
+	}
+}
+
+.merchant-frequently-bought-together-bundle:not(:last-child) {
+	border-bottom: 1px solid #ededed;
+	padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+	.merchant-frequently-bought-together-bundle-offer {
+		max-width: 200px;
+	}
+}
+
+@media (max-width: 767px) {
+	.merchant-frequently-bought-together-bundle {
+		
+		&-products {
+			flex-direction: column;
+			width: 100%;
+		}
+		
+		&-product {
+			display: flex;
+			max-width: 100%;
+			flex-direction: row;
+			border: 1px solid #ededed;
+			padding: 15px;
+			border-radius: 5px;
+			width: 100%;
+			
+			img {
+				width: 60px;
+				height: 60px;
+				margin: 0;
+			}
+			
+			&-plus {
+				right: 50%;
+				left: 50%;
+				bottom: -20px;
+				top: inherit;
+			}
+			
+			&-contents {
+				text-align: left;
+				padding-left: 20px;
+			}
+			
+			&:not(:first-child) img {
+				width: 60px;
+				height: 60px;
+			}
+		}
+		
+		&-offer {
+			width: 100%;
+		}
+	}
+}

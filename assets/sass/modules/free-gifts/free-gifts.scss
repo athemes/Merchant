@@ -1,0 +1,127 @@
+/**
+ * Free Gifts.
+ *
+ */
+
+.merchant-free-gifts-widget {
+	right: calc(var(--merchant-content-width) * -1);
+	transition: all 1s;
+	position: fixed;
+	top: 200px;
+	z-index: 19999;
+	
+	&.active {
+		right: 0;
+	}
+	&.hide {
+		display: none;
+	}
+}
+
+.merchant-free-gifts-widget-offers {
+	width: var(--merchant-content-width);
+	max-height: 325px;
+	background-color: var(--merchant-bg-color);
+	display: flex;
+	flex-direction: column;
+	padding: 12px;
+	box-shadow: 2px 2px 20px rgba(0, 0, 0, .05);
+	overflow-y: auto;
+	border-bottom-left-radius: 4px;
+}
+
+.merchant-free-gifts-widget-offer-product {
+	display: flex;
+	padding: 10px 0;
+	
+	img {
+		width: 45px;
+		height: 45px;
+		margin-right: 10px;
+	}
+	
+	p {
+		margin: 0;
+	}
+	
+	
+	del,
+	strong,
+	p {
+		font-size: 13px;
+	}
+}
+
+.merchant-free-gifts-widget-offer-label {
+	font-size: 12px;
+	background-color: var(--merchant-bg-color);
+	color: var(--merchant-text-color);
+	padding: 6px;
+}
+
+
+.merchant-free-gifts-widget-icon {
+	width: 25px;
+	height: 25px;
+	margin: 0 auto;
+	
+	svg {
+		width: 25px;
+		height: 25px;
+	}
+	
+}
+
+.merchant-free-gifts-widget-button {
+	width: 45px;
+	height: 45px;
+	color: var(--merchant-text-color);
+	background-color: var(--merchant-bg-color);
+	border-radius: 5px 0 0 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	left: -45px;
+	top: 0;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	
+	&:hover {
+		background: var(--merchant-hover-bg-color);
+	}
+}
+
+.merchant-free-gifts-widget-count {
+	position: absolute;
+	top: -3px;
+	color: var(--merchant-text-color);
+	background-color: var(--merchant-bg-color);
+	border-radius: 50%;
+	left: -3px;
+	width: 15px;
+	height: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+}
+
+.merchant-free-gifts-widget-offer-product-title {
+	color: var(--merchant-text-color);
+	&:visited {
+		color: var(--merchant-text-color);
+	}
+	&:hover {
+		color: var(--merchant-text-hover-color);
+	}
+}
+
+
+.merchant-free-gifts-widget-offer-product-price del {
+	color: var(--merchant-text-color);
+}
+
+.merchant-free-gifts-widget-offer-product-free {
+	color: var(--merchant-text-color);
+}

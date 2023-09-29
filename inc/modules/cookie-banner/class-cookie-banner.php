@@ -110,8 +110,8 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/cookie-banner.min.css', [], MERCHANT_VERSION );
@@ -213,7 +213,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		ob_start();
 		?>
 	
-		<div class="merchant-cookie-banner <?php echo sanitize_html_class( $settings[ 'theme' ] ); ?>">
+		<div class="merchant-cookie-banner <?php echo esc_attr( $settings[ 'theme' ] ); ?>">
 			<div class="merchant-cookie-banner-inner">
 				<?php if ( ! empty( $settings[ 'close_button' ] ) ) : ?>
 					<div class="merchant-cookie-close-button">

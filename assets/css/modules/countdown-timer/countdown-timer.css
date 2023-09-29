@@ -1,0 +1,39 @@
+/**
+ * Countdown Timer.
+ *
+ */
+.merchant-countdown-timer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 25px 0;
+}
+
+.merchant-countdown-timer.center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.merchant-countdown-timer.right {
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+.merchant-countdown-timer svg {
+  margin-right: 5px;
+  fill: var(--merchant-icon-color);
+}
+
+.merchant-countdown-timer-text {
+  color: var(--merchant-sale-ending-color);
+}
+
+.merchant-countdown-timer-countdown {
+  color: var(--merchant-digits-color);
+  font-weight: bold;
+}

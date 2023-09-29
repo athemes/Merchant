@@ -216,6 +216,260 @@ const styles = [
 		destination: './assets/css/modules/cookie-banner/admin',
 	},
 
+	// Cart reserved timer.
+	{
+		name: 'cartReservedTimer',
+		src: './assets/sass/modules/cart-reserved-timer/cart-reserved-timer.scss',
+		destination: './assets/css/modules/cart-reserved-timer',
+	},
+	{
+		name: 'cartReservedTimerAdminPreview',
+		src: './assets/sass/modules/cart-reserved-timer/admin/preview.scss',
+		destination: './assets/css/modules/cart-reserved-timer/admin',
+	},
+
+	// Buy X, Get Y.
+	{
+		name: 'buyXGetY',
+		src: './assets/sass/modules/buy-x-get-y/buy-x-get-y.scss',
+		destination: './assets/css/modules/buy-x-get-y',
+	},
+	{
+		name: 'buyXGetYAdminPreview',
+		src: './assets/sass/modules/buy-x-get-y/admin/preview.scss',
+		destination: './assets/css/modules/buy-x-get-y/admin',
+	},
+
+	// Advanced Reviews.
+	{
+		name: 'advancedReviews',
+		src: './assets/sass/modules/advanced-reviews/advanced-reviews.scss',
+		destination: './assets/css/modules/advanced-reviews',
+	},
+	{
+		name: 'advancedReviewsAdmin',
+		src: './assets/sass/modules/advanced-reviews/admin/preview.scss',
+		destination: './assets/css/modules/advanced-reviews/admin',
+	},
+
+
+	// Checkout Admin Preview.
+	{
+		name: 'checkoutAdmin',
+		src: './assets/sass/modules/checkout/admin/preview.scss',
+		destination: './assets/css/modules/checkout/admin',
+	},
+
+	// Countdown timer.
+	{
+		name: 'countdownTimerAdmin',
+		src: './assets/sass/modules/countdown-timer/admin/preview.scss',
+		destination: './assets/css/modules/countdown-timer/admin',
+	},
+	{
+		name: 'countdownTimer',
+		src: './assets/sass/modules/countdown-timer/countdown-timer.scss',
+		destination: './assets/css/modules/countdown-timer',
+	},
+
+	// Floating Mini Cart.
+	{
+		name: 'floatingMiniCartAdmin',
+		src: './assets/sass/modules/floating-mini-cart/admin/preview.scss',
+		destination: './assets/css/modules/floating-mini-cart/admin',
+	},
+	{
+		name: 'floatingMiniCart',
+		src: './assets/sass/modules/floating-mini-cart/floating-mini-cart.scss',
+		destination: './assets/css/modules/floating-mini-cart',
+	},
+
+	// free-gifts
+	{
+		name: 'freeGiftsAdmin',
+		src: './assets/sass/modules/free-gifts/admin/preview.scss',
+		destination: './assets/css/modules/free-gifts/admin',
+	},
+	{
+		name: 'freeGifts',
+		src: './assets/sass/modules/free-gifts/free-gifts.scss',
+		destination: './assets/css/modules/free-gifts',
+	},
+
+	// Frequently Bought Together.
+	{
+		name: 'frequentlyBoughtTogetherAdmin',
+		src: './assets/sass/modules/frequently-bought-together/admin/preview.scss',
+		destination: './assets/css/modules/frequently-bought-together/admin',
+	},
+	{
+		name: 'frequentlyBoughtTogether',
+		src: './assets/sass/modules/frequently-bought-together/frequently-bought-together.scss',
+		destination: './assets/css/modules/frequently-bought-together',
+	},
+
+	// Login Popups.
+	{
+		name: 'loginPopupsAdmin',
+		src: './assets/sass/modules/login-popup/admin/preview.scss',
+		destination: './assets/css/modules/login-popup/admin',
+	},
+	{
+		name: 'loginPopups',
+		src: './assets/sass/modules/login-popup/login-popup.scss',
+		destination: './assets/css/modules/login-popup',
+	},
+
+	// Product Audio.
+	{
+		name: 'productAudioAdmin',
+		src: './assets/sass/modules/product-audio/admin/preview.scss',
+		destination: './assets/css/modules/product-audio/admin',
+	},
+	{
+		name: 'productAudio',
+		src: './assets/sass/modules/product-audio/product-audio.scss',
+		destination: './assets/css/modules/product-audio',
+	},
+
+	// Product Brand Image.
+	{
+		name: 'productBrandImage',
+		src: './assets/sass/modules/product-brand-image/product-brand-image.scss',
+		destination: './assets/css/modules/product-brand-image',
+	},
+	{
+		name: 'productBrandImageAdmin',
+		src: './assets/sass/modules/product-brand-image/admin/preview.scss',
+		destination: './assets/css/modules/product-brand-image/admin',
+	},
+
+	// Product Video.
+	{
+		name: 'productVideoAdmin',
+		src: './assets/sass/modules/product-video/admin/preview.scss',
+		destination: './assets/css/modules/product-video/admin',
+	},
+	{
+		name: 'productVideo',
+		src: './assets/sass/modules/product-video/product-video.scss',
+		destination: './assets/css/modules/product-video',
+	},
+
+	// Reasons to Buy.
+	{
+		name: 'reasonsToBuy',
+		src: './assets/sass/modules/reasons-to-buy/reasons-to-buy.scss',
+		destination: './assets/css/modules/reasons-to-buy',
+	},
+	{
+		name: 'reasonsToBuyAdmin',
+		src: './assets/sass/modules/reasons-to-buy/admin/preview.scss',
+		destination: './assets/css/modules/reasons-to-buy/admin',
+	},
+
+	// Recently Viewed Products.
+	{
+		name: 'recentlyViewedProducts',
+		src: './assets/sass/modules/recently-viewed-products/recently-viewed-products.scss',
+		destination: './assets/css/modules/recently-viewed-products',
+	},
+	{
+		name: 'recentlyViewedProductsAdmin',
+		src: './assets/sass/modules/recently-viewed-products/admin/preview.scss',
+		destination: './assets/css/modules/recently-viewed-products/admin',
+	},
+
+	// Size Chart.
+	{
+		name: 'sizeChartAdmin',
+		src: './assets/sass/modules/size-chart/admin/preview.scss',
+		destination: './assets/css/modules/size-chart/admin',
+	},
+	{
+		name: 'sizeChart',
+		src: './assets/sass/modules/size-chart/size-chart.scss',
+		destination: './assets/css/modules/size-chart',
+	},
+
+	// Spending goal.
+	{
+		name: 'spendingGoalAdmin',
+		src: './assets/sass/modules/spending-goal/admin/preview.scss',
+		destination: './assets/css/modules/spending-goal/admin',
+	},
+	{
+		name: 'spendingGoal',
+		src: './assets/sass/modules/spending-goal/spending-goal.scss',
+		destination: './assets/css/modules/spending-goal',
+	},
+
+	// Sticky add to cart.
+	{
+		name: 'stickyAddToCart',
+		src: './assets/sass/modules/sticky-add-to-cart/sticky-add-to-cart.scss',
+		destination: './assets/css/modules/sticky-add-to-cart',
+	},
+	{
+		name: 'stickyAddToCartAdmin',
+		src: './assets/sass/modules/sticky-add-to-cart/admin/preview.scss',
+		destination: './assets/css/modules/sticky-add-to-cart/admin',
+	},
+
+	// Stock Scarcity.
+	{
+		name: 'stockScarcityAdmin',
+		src: './assets/sass/modules/stock-scarcity/admin/preview.scss',
+		destination: './assets/css/modules/stock-scarcity/admin',
+	},
+	{
+		name: 'stockScarcity',
+		src: './assets/sass/modules/stock-scarcity/stock-scarcity.scss',
+		destination: './assets/css/modules/stock-scarcity',
+	},
+
+	// Volume discounts.
+	{
+		name: 'volumeDiscountsAdmin',
+		src: './assets/sass/modules/volume-discounts/admin/preview.scss',
+		destination: './assets/css/modules/volume-discounts/admin',
+	},
+	{
+		name: 'volumeDiscounts',
+		src: './assets/sass/modules/volume-discounts/volume-discounts.scss',
+		destination: './assets/css/modules/volume-discounts',
+	},
+
+	// Wait list.
+	{
+		name: 'waitListAdmin',
+		src: './assets/sass/modules/wait-list/admin/preview.scss',
+		destination: './assets/css/modules/wait-list/admin',
+	},
+	{
+		name: 'waitList',
+		src: './assets/sass/modules/wait-list/wait-list.scss',
+		destination: './assets/css/modules/wait-list',
+	},
+	// Wishlist.
+	{
+		name: 'wishlistButton',
+		src: './assets/sass/modules/wishlist/wishlist-button.scss',
+		destination: './assets/css/modules/wishlist',
+	},
+	{
+		name: 'wishlistAdmin',
+		src: './assets/sass/modules/wishlist/admin/preview.scss',
+		destination: './assets/css/modules/wishlist/admin',
+	},
+
+	// Product swatches
+	{
+		name: 'productSwatchesAdminPreview',
+		src: './assets/sass/modules/product-swatches/admin/preview.scss',
+		destination: './assets/css/modules/product-swatches/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -355,8 +609,58 @@ const scripts = [
 		src: './assets/js/src/modules/cookie-banner/cookie-banner.js',
 		destination: './assets/js/modules/cookie-banner',
 		file: 'cookie-banner'
-	}
+	},
 
+	// Countdown timer.
+	{
+		name: 'countdownTimer',
+		src: './assets/js/src/modules/countdown-timer/countdown-timer.js',
+		file: 'countdown-timer',
+		destination: './assets/js/modules/countdown-timer',
+	},
+	{
+		name: 'countdownTimerAdmin',
+		src: './assets/js/src/modules/countdown-timer/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/countdown-timer/admin',
+	},
+
+	// Floating Mini Cart.
+	{
+		name: 'floatingMiniCart',
+		src: './assets/js/src/modules/floating-mini-cart/floating-mini-cart.js',
+		file: 'floating-mini-cart',
+		destination: './assets/js/modules/floating-mini-cart',
+	},
+
+	// Login Popups.
+	{
+		name: 'loginPopups',
+		src: './assets/js/src/modules/login-popup/login-popup.js',
+		file: 'login-popup',
+		destination: './assets/js/modules/login-popup',
+	},
+
+	// Size Chart.
+	{
+		name: 'sizeChart',
+		src: './assets/js/src/modules/size-chart/size-chart.js',
+		file: 'size-chart',
+		destination: './assets/js/modules/size-chart',
+	},
+	// Spending goal.
+	{
+		name: 'spendingGoalAdmin',
+		src: './assets/js/src/modules/spending-goal/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/spending-goal/admin',
+	},
+	{
+		name: 'spendingGoal',
+		src: './assets/js/src/modules/spending-goal/spending-goal.js',
+		file: 'spending-goal',
+		destination: './assets/js/modules/spending-goal/',
+	},
 ];
 
 // Watch options.
