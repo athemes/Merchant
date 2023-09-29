@@ -38,12 +38,10 @@ merchant.modules = merchant.modules || {};
 			if ( delay ) {
 				
 				setInterval(function() {
-					console.log(123);
 					favicon.badge(0);
 				}, delay);
 
 				setInterval(function() {
-					console.log(44444);
 					favicon.badge(count);
 				}, delay * 2);
 
