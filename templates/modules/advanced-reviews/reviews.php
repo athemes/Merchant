@@ -277,8 +277,6 @@ $bars_data = $args['bars_data']; ?>
 										<div class="mrc-col">
 											<div class="merchant-review-content">
 												<?php
-												// We need to include the $comment variable here because some extra plugins like Germanized for WooCommerce use it.
-												$_comment = $comment; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 												
 												/**
 												 * Hook 'woocommerce_review_before_comment_text'

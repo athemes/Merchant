@@ -84,7 +84,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             </div>
                         </div>
 	                    <?php if ( isset( $offer['product']['attributes'] ) && ! empty( $offer['product']['attributes'] ) ) : ?>
-                            <div class="merchant-bogo-product-attributes">
+                            <div class="merchant-bogo-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
 			                    <?php foreach ( $offer['product']['attributes'] as $key => $attribute ) : ?>
                                     <select name="<?php echo esc_attr( $key ) ?>" required>
                                         <option value="">

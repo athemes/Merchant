@@ -113,7 +113,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		);
 
 		// Include schema markup tags
-		if ( in_array( array( 'all', 'schema_markup' ), $extra ) ) {
+		if ( in_array( 'schema_markup', $extra ) || in_array( 'all', $extra ) ) {
 			$tags = array( 'meta', 'nav', 'ul', 'li', 'a', 'span' );
 
 			foreach ( $tags as $tag ) {
@@ -132,7 +132,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include iframe tags
-		if ( in_array( array( 'all', 'iframe' ), $extra ) ) {
+		if ( in_array( 'iframe', $extra ) || in_array( 'all', $extra ) ) {
 			$allowed_tags[ 'iframe' ] = array(
 				'src'             => true,
 				'height'          => true,
@@ -143,7 +143,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include nonce tags
-		if ( in_array( array( 'all', 'nonce' ), $extra ) ) {
+		if ( in_array( 'nonce', $extra ) || in_array( 'all', $extra ) ) {
 			$allowed_tags[ 'input' ] = array(
 				'type'  => true,
 				'id'    => true,
@@ -153,7 +153,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include bdi tag
-		if ( in_array( array( 'all', 'bdi' ), $extra ) ) {
+		if ( in_array( 'bdi', $extra ) || in_array( 'all', $extra ) ) {
 			$allowed_tags[ 'bdi' ] = array(
 				'class' => true,
 				'id'    => true,
@@ -162,8 +162,14 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include dd, dt tags
-		if ( in_array( array( 'all', 'bdi' ), $extra ) ) {
+		if ( in_array( 'dd', $extra ) || in_array( 'all', $extra ) ) {
 			$allowed_tags[ 'dd' ] = array(
+				'class' => true,
+				'id'    => true,
+				'style' => true
+			);
+
+			$allowed_tags[ 'dt' ] = array(
 				'class' => true,
 				'id'    => true,
 				'style' => true
@@ -171,7 +177,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include forms tags.
-		if ( in_array( array( 'all', 'forms' ), $extra ) ) {
+		if ( in_array( 'forms', $extra ) || in_array( 'all', $extra ) ) {
 			$tags = array( 'form', 'input', 'textarea' );
 
 			foreach ( $tags as $tag ) {

@@ -212,7 +212,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 					),
 					true
 				),
-					merchant_kses_allowed_tags() );
+				merchant_kses_allowed_tags( ['bdi'] ) );
 				wp_add_inline_script(
                         'merchant-admin-preview',
                         "jQuery('.merchant-free-gifts-widget-button').on('click', function(){ jQuery('#merchant-free-gifts-widget').toggleClass('active') })"

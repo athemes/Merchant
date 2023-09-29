@@ -19,7 +19,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
         </div>
     <div class="merchant-cart-reserved-timer-content">
         <p class="merchant-cart-reserved-timer-content-title"><?php echo esc_html( $args['reserved_message'] ); ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo esc_html( $args['timer_message_minutes'] ); ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo esc_html( $args['timer_message_seconds'] ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo wp_kses_post( $args['timer_message_minutes'] ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo wp_kses_post( $args['timer_message_seconds'] ); ?></p>
         </div>
     </div>

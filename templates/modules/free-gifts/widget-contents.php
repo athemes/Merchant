@@ -21,14 +21,15 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 				<?php
 				$amount = wc_price( $offer['amount'] - $args['cart_total'] );
 				echo isset( $settings['spending_text'] )
-					? esc_html( str_replace(
+					? wp_kses( str_replace(
 						'{amount}',
 						$amount,
 						sanitize_text_field( $settings['spending_text'] )
-					) )
-					: esc_html( 
+                    ), merchant_kses_allowed_tags( ['bdi'] ) )
+					: wp_kses( 
                         /* Translators: 1. Amount */
-                        sprintf( __( 'Spend %s more to receive this free gift!', 'merchant' ), $amount )
+                        sprintf( __( 'Spend %s more to receive this free gift!', 'merchant' ), $amount ),
+                        merchant_kses_allowed_tags( ['bdi'] )
                     ); ?>
             </div>
             <div class="merchant-free-gifts-widget-offer-product">
