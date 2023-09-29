@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-09-28 20:37+0000\n"
+"POT-Creation-Date: 2023-09-29 14:16+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -1585,7 +1585,7 @@ msgstr ""
 msgid "Free text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:84, inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:47
+#: inc/modules/free-gifts/admin/options.php:84, inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:48
 msgid "Free"
 msgstr ""
 
@@ -1677,7 +1677,7 @@ msgstr ""
 msgid "You save: {amount}"
 msgstr ""
 
-#: inc/modules/frequently-bought-together/admin/options.php:62, templates/modules/frequently-bought-together/single-product.php:80
+#: inc/modules/frequently-bought-together/admin/options.php:62, templates/modules/frequently-bought-together/single-product.php:81
 msgid "Add to cart"
 msgstr ""
 
@@ -3085,7 +3085,7 @@ msgid "Add To Wishlist"
 msgstr ""
 
 #. translators: %s is average rating value
-#: templates/modules/advanced-reviews/reviews.php:65, templates/modules/advanced-reviews/reviews.php:323, templates/modules/advanced-reviews/reviews.php:252
+#: templates/modules/advanced-reviews/reviews.php:65, templates/modules/advanced-reviews/reviews.php:321, templates/modules/advanced-reviews/reviews.php:252
 msgid "Rated %s out of 5 based on customer ratings."
 msgstr ""
 
@@ -3133,15 +3133,15 @@ msgstr ""
 msgid "Sort by:"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:354
+#: templates/modules/advanced-reviews/reviews.php:352
 msgid "There are no reviews yet."
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:338, templates/modules/advanced-reviews/reviews.php:267
+#: templates/modules/advanced-reviews/reviews.php:336, templates/modules/advanced-reviews/reviews.php:267
 msgid " — verified owner"
 msgstr ""
 
-#: templates/modules/advanced-reviews/reviews.php:343
+#: templates/modules/advanced-reviews/reviews.php:341
 msgid "Your review is awaiting approval."
 msgstr ""
 
