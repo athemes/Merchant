@@ -173,7 +173,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'pro' => true,
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-free-gifts' ),
-					'title' => esc_html__( 'Gifts', 'merchant' ),
+					'title' => esc_html__( 'Free Gifts', 'merchant' ),
 					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/'
 				),
