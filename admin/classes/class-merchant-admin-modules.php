@@ -368,7 +368,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 				'reduce-abandonment' => array(
-					'title' => esc_html__( 'Reduce Abandonment', 'merchant' ),
+					'title' => esc_html__( 'Reduce Cart Abandonment', 'merchant' ),
 					'modules' => array(),
 				),
 
