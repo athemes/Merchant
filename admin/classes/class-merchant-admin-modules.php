@@ -292,7 +292,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wishlist' ),
 					'title' => esc_html__( 'Wishlist', 'merchant' ),
-					'desc' => esc_html__( 'Prevent cart abandonment by allowing customer to save products for later purchases', 'merchant' ),
+					'desc' => esc_html__( 'Prevent cart abandonment by allowing customers to save products for later purchase', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-wishlist/'
 				),
 				'product-video' => array(
