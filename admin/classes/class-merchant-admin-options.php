@@ -30,8 +30,30 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			// Enqueue hooks.
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 			// Ajax callbacks.
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
+			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
+		}
+
+		/**
+		 * Enqueue scripts.
+		 */
+		public function enqueue_scripts() {
+			if (
+				isset( $_GET['page'] ) && 'merchant' === $_GET['page'] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				&& isset( $_GET['module'] )  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			) {
+				wp_enqueue_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
+				wp_enqueue_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13', 'all' );
+
+				wp_localize_script( 'merchant-select2', 'merchant_admin_options', array(
+					'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+					'ajaxnonce' => wp_create_nonce( 'merchant_admin_options' ),
+				) );
+			}
 		}
 
 		/**
@@ -80,6 +102,52 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				wp_send_json( array(
 					'status' => 'error'
 				) );
+			}
+		}
+
+		/**
+		 * Select content ajax callback.
+		 *
+		 */
+		public function select_content_ajax() {
+			$term   = ( isset( $_GET['term'] ) ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
+			$nonce  = ( isset( $_GET['nonce'] ) ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
+			$source = ( isset( $_GET['source'] ) ) ? sanitize_text_field( wp_unslash( $_GET['source'] ) ) : '';
+
+			// Check current user capabilities
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to do this.' );
+			}
+
+			if ( ! empty( $term ) && ! empty( $source ) && ! empty( $nonce ) && wp_verify_nonce( $nonce, 'merchant_admin_options' ) ) {
+				$options = array();
+
+				switch ( $source ) {
+					case 'post':
+					case 'product':
+						$query = new WP_Query( array(
+							's'              => $term,
+							'post_type'      => $source,
+							'post_status'    => 'publish',
+							'posts_per_page' => 25,
+							'order'          => 'DESC',
+						) );
+
+						if ( ! empty( $query->posts ) ) {
+							foreach ( $query->posts as $post ) {
+								$options[] = array(
+									'id'   => $post->ID,
+									'text' => $post->post_title,
+								);
+							}
+						}
+
+						break;
+				}
+
+				wp_send_json_success( $options );
+			} else {
+				wp_send_json_error();
 			}
 		}
 
@@ -155,23 +223,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 								$module_info = Merchant_Admin_Modules::get_module_info( $settings['module'] );
 								if ( ( $module_info && $module_info['pro'] ) && ! defined( 'MERCHANT_PRO_DIR' ) ) {
-									ob_start();
-									self::field( $field, $value );
-									$field_html = ob_get_clean();
-
-									echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
-										array(
-											'<input ',
-											'<select ',
-											'merchant-module-page-setting-field-inner',
-										),
-										array(
-											'<input disabled ',
-											'<select disabled ',
-											'merchant-module-page-setting-field-inner disabled',
-										),
-										$field_html
-									);
+									self::disabled_field( $field, $value );
 								} else {
 									self::field( $field, $value );
 								}
@@ -202,8 +254,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( ! empty( $save ) ) {
 				if ( ! empty( $settings['fields'] ) ) {
 					foreach ( $settings['fields'] as $field ) {
-						$value = null;
+						if ( ! isset( $field['id'] ) ) {
+							continue;
+						}
 
+						$value = null;
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
@@ -262,7 +317,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'number':
 					$value = absint( $value );
 					break;
-
+				case 'select_ajax':
+					if ( is_array( $value ) && ! empty( $value ) ) {
+						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
+					} elseif ( is_string( $value ) ) {
+						$value = sanitize_text_field( $value );
+					} else {
+						$value = isset( $field['multiple'] ) && $field['multiple'] === false ? '' : array();
+					}
+					error_log( print_r( $value, true ) );
+					break;
 				case 'radio':
 				case 'radio_alt':
 				case 'select':
@@ -315,6 +379,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$values = json_decode( $value );
 					$value  = array_map( 'sanitize_text_field', $values );
 					break;
+				case 'flexible_content':
+					$value = ! is_array( $value ) || empty( $value ) ? array() : $value;
+
+					$value = array_map( function ( $sub_fields ) use ( $field ) {
+						foreach ( $sub_fields as $sub_field => $value ) {
+							if ( $sub_field === 'layout' ) {
+								$sub_fields[ $sub_field ] = sanitize_text_field( $value );
+							} else {
+								$layout_field = array_filter( $field['layouts'][ $sub_fields['layout'] ]['fields'], function ( $layout_field ) use ( $sub_field ) {
+									return $layout_field['id'] === $sub_field;
+								} );
+
+
+								$sub_fields[ $sub_field ] = self::sanitize( reset( $layout_field ), $value );
+							}
+						}
+
+						return $sub_fields;
+					}, $value );
+
+					break;
 			}
 
 			return $value;
@@ -327,10 +412,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( ! empty( $settings['type'] ) ) {
 				$type = $settings['type'];
 
+				$id        = ( ! empty( $settings['id'] ) ) ? $settings['id'] : '';
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
 
-				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
+				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-id="' . esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 
 				if ( ! empty( $settings['title'] ) ) {
 					echo sprintf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
@@ -350,6 +436,49 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				echo '</div>';
 			}
+		}
+
+		/**
+		 * Disabled field
+		 *
+		 * @param array $settings
+		 * @param mixed $value
+		 *
+		 * @return void
+		 */
+		public static function disabled_field( $settings, $value ) {
+			static::replace_field(
+				$settings,
+				$value,
+				array(
+					'<input ',
+					'<select ',
+					'merchant-module-page-setting-field-inner',
+				),
+				array(
+					'<input disabled ',
+					'<select disabled ',
+					'merchant-module-page-setting-field-inner disabled',
+				)
+			);
+		}
+
+		/**
+		 * Modified field.
+		 *
+		 * @param $settings
+		 * @param $value
+		 * @param $search
+		 * @param $replace
+		 *
+		 * @return void
+		 */
+		public static function replace_field( $settings, $value, $search, $replace ) {
+			ob_start();
+			self::field( $settings, $value );
+			$field = ob_get_clean();
+
+			echo str_replace( $search, $replace, $field ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
 		}
 
 		/**
@@ -474,21 +603,30 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function choices( $settings, $value ) {
 			?>
-            <div class="merchant-choices">
+            <div class="merchant-choices merchant-choices-<?php echo $settings['id'] ?>">
 				<?php if ( ! empty( $settings['options'] ) ) : ?>
 					<?php foreach ( $settings['options'] as $key => $option ) : ?>
                         <label>
                             <input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
-                            <figure>
-								<?php if ( ! empty( $option['image'] ) ) : ?>
-                                    <img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>"/>
-								<?php else : ?>
-                                    <img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>"/>
-								<?php endif; ?>
-								<?php if ( ! empty( $option['label'] ) ) : ?>
-                                    <span class="merchant-tooltip"><?php echo esc_html( $option['label'] ); ?></span>
-								<?php endif; ?>
-                            </figure>
+							<?php if ( ! empty( $option['svg'] ) ) : ?>
+                                <span class="merchant-svg">
+									<?php echo Merchant_SVG_Icons::get_svg_icon( $option['svg'] ) ?>
+									<?php if ( ! empty( $option['label'] ) ) : ?>
+                                        <span class="merchant-tooltip"><?php echo esc_html( $option['label'] ); ?></span>
+									<?php endif; ?>
+								</span>
+							<?php else : ?>
+                                <figure>
+									<?php if ( ! empty( $option['image'] ) ) : ?>
+                                        <img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>"/>
+									<?php else : ?>
+                                        <img src="<?php echo esc_url( sprintf( $option, MERCHANT_URI . 'assets/images' ) ); ?>"/>
+									<?php endif; ?>
+									<?php if ( ! empty( $option['label'] ) ) : ?>
+                                        <span class="merchant-tooltip"><?php echo esc_html( $option['label'] ); ?></span>
+									<?php endif; ?>
+                                </figure>
+							<?php endif; ?>
                         </label>
 					<?php endforeach; ?>
 				<?php endif; ?>
@@ -508,6 +646,64 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<?php endforeach; ?>
                 </select>
 			<?php endif; ?>
+			<?php
+		}
+
+		/**
+		 * Field: Select ajax
+		 *
+		 * @param $settings
+		 * @param $value
+		 *
+		 * @return void
+		 */
+		public static function select_ajax( $settings, $value ) {
+			$settings = wp_parse_args( $settings, array(
+				'source' => 'post',
+			) );
+
+			$ids = ( is_array( $value ) && ! empty( $value ) ) ? $value : (array) $value;
+
+			if ( isset( $settings['multiple'] ) ) {
+				$multiple = $settings['multiple'] === true ? 'multiple' : '';
+			} else {
+				$multiple = 'multiple';
+			}
+			?>
+            <select name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" <?php echo $multiple ?> data-source="<?php echo esc_attr( $settings['source'] ) ?>">
+				<?php if ( ! empty( $ids ) ) {
+					foreach ( $ids as $id ) {
+						switch ( $settings['source'] ) {
+							case 'post':
+							case 'product':
+								$post = get_post( $id );
+
+								if ( ! empty( $post ) ) {
+									echo '<option value="' . esc_attr( $post->ID ) . '" selected>' . esc_html( $post->post_title ) . '</option>';
+								}
+								break;
+							case'options':
+						}
+					}
+				}
+				if ( $settings['source'] === 'options' ) {
+					$value = ! empty( $value ) ? $value : '';
+
+					foreach ( $settings['options'] as $option ) {
+						if ( isset( $option['options'] ) ) {
+							echo '<optgroup label="' . esc_attr( $option['text'] ) . '">';
+
+							foreach ( $option['options'] as $child_option ) {
+								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $child_option['id'], $value ) . '>' . esc_html( $child_option['text'] ) . '</option>';
+							}
+
+							echo '</optgroup>';
+						} else {
+							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $option['id'], $value ) . '>' . esc_html( $option['text'] ) . '</option>';
+						}
+					}
+				} ?>
+            </select>
 			<?php
 		}
 
@@ -550,9 +746,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
             <div class="merchant-buttons">
 				<?php if ( ! empty( $settings['options'] ) ) : ?>
 					<?php foreach ( $settings['options'] as $key => $option ) : ?>
-                        <label>
-                            <input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
-                            <span><?php echo esc_html( $option ); ?></span>
+                        <label class="merchant-button-<?php echo esc_attr( $key ); ?>"">
+                        <input type="radio" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $value, $key, true ); ?>/>
+                        <span><?php echo esc_html( $option ); ?></span>
                         </label>
 					<?php endforeach; ?>
 				<?php endif; ?>
@@ -773,6 +969,138 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Flexible Content.
+		 *
+		 * @param array $settings
+		 * @param mixed $value
+		 *
+		 * @return void
+		 */
+		public static function flexible_content( $settings, $value ) {
+			$values = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
+			$empty  = empty( $values ) ? 'empty' : '';
+
+			$settings = wp_parse_args( $settings, array(
+				'sorting' => false,
+				'style'   => 'default'
+			) );
+
+			$classes = array(
+				'merchant-flexible-content-control',
+				"{$settings['style']}-style"
+			);
+
+			if ( $settings['sorting'] === false ) {
+				$classes[] = 'disable-sorting';
+			}
+			?>
+            <div class="<?php echo implode( ' ', $classes ) ?>"
+                 data-id="<?php echo esc_attr( $settings['id'] ) ?>">
+
+                <div class="layouts" data-id="<?php echo esc_attr( $settings['id'] ) ?>">
+
+					<?php foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
+
+                        <div class="layout" data-type="<?php echo esc_attr( $layout_type ) ?>">
+                            <div class="layout-header">
+                                <div class="layout-count">1</div>
+                                <div class="layout-title">
+									<?php echo $layout['title'] ?>
+                                </div>
+                                <div class="layout-actions">
+                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                    <a class="customize-control-flexible-content-delete" href="#">
+                                        <span class="dashicons dashicons-no-alt"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="layout-body">
+								<?php foreach ( $layout['fields'] as $sub_field ) :
+									$classes = array( 'layout-field' );
+
+									if ( isset( $sub_field['classes'] ) ) {
+										$classes = array_merge( $classes, $sub_field['classes'] );
+									} ?>
+                                    <div class="<?php echo implode( ' ', $classes ) ?>">
+										<?php static::replace_field( $sub_field,
+											'',
+											array(
+												"name=\"merchant[{$sub_field['id']}]",
+												'merchant-module-page-setting-field-upload',
+												'merchant-module-page-setting-field-select_ajax'
+											),
+											array(
+												"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
+												'merchant-module-page-setting-field-upload template',
+												'merchant-module-page-setting-field-select_ajax template'
+											) ) ?>
+                                    </div>
+								<?php endforeach; ?>
+                                <input type="hidden" data-name="merchant[<?php echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php echo esc_attr( $layout_type ) ?>">
+                            </div>
+                        </div>
+
+					<?php endforeach; ?>
+
+                </div>
+
+                <div class="merchant-flexible-content <?php echo $empty ?> sortable">
+
+					<?php foreach ( $values as $option_key => $option ) : ?>
+                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>">
+                            <div class="layout-header">
+                                <div class="layout-count"><?php echo absint( $option_key + 1 ) ?></div>
+                                <div class="layout-title">
+									<?php echo $settings['layouts'][ $option['layout'] ]['title'] ?>
+                                </div>
+                                <div class="layout-actions">
+                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                    <a class="customize-control-flexible-content-delete" href="#">
+                                        <span class="dashicons dashicons-no-alt"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="layout-body">
+								<?php foreach ( $settings['layouts'][ $option['layout'] ]['fields'] as $sub_field ) :
+									$classes = array( 'layout-field' );
+
+									if ( isset( $sub_field['classes'] ) ) {
+										$classes = array_merge( $classes, $sub_field['classes'] );
+									} ?>
+                                    <div class="<?php echo implode( ' ', $classes ) ?>">
+										<?php static::replace_field( $sub_field,
+											$option[ $sub_field['id'] ],
+											"name=\"merchant[{$sub_field['id']}]",
+											"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]" ) ?>
+                                    </div>
+								<?php endforeach; ?>
+                                <input type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ) ?>][<?php echo absint( $option_key ) ?>][layout]"
+                                       value="<?php echo esc_attr( $option['layout'] ) ?>">
+                            </div>
+                        </div>
+
+					<?php endforeach; ?>
+
+                </div>
+
+                <div class="customize-control-flexible-content-add-wrapper">
+                    <div class="customize-control-flexible-content-add-list">
+						<?php foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
+                            <a href="#"
+                               class="customize-control-flexible-content-add"
+                               data-id="<?php echo esc_attr( $settings['id'] ) ?>"
+                               data-layout="<?php echo esc_attr( $layout_type ) ?>">
+								<?php echo esc_attr( $layout['title'] ) ?>
+                            </a>
+						<?php endforeach; ?>
+                    </div>
+                    <button class="button customize-control-flexible-content-add-button" type="button"><?php echo esc_html( $settings['button_label'] ); ?></button>
+                </div>
+            </div>
+			<?php
+		}
+
+		/**
 		 * Field: Create Page.
 		 */
 		public static function create_page( $settings, $value ) {
@@ -912,7 +1240,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 <ul class="merchant-module-page-settings-devices">
 					<?php foreach ( $settings['devices'] as $device => $icon )  : ?>
                         <li class="<?php echo esc_attr( $device ); ?>">
-                            <button type="button" class="preview-<?php echo esc_attr( $device ); ?> <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>" data-device="<?php echo esc_attr( $device ); ?>">
+                            <button type="button" class="preview-<?php echo esc_attr( $device ); ?> <?php echo $device === key( $settings['devices'] ) ? 'active' : '' ?>"
+                                    data-device="<?php echo esc_attr( $device ); ?>">
                                 <i class="dashicons <?php echo esc_attr( $icon ); ?>"></i>
                             </button>
                         </li>

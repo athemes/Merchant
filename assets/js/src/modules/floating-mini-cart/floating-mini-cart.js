@@ -1,6 +1,6 @@
 /**
  * Merchant Floating Mini Cart.
- * 
+ *
  */
 
 'use strict';
@@ -24,7 +24,7 @@ merchant.modules = merchant.modules || {};
 			var $sideOverlay = $('.merchant-floating-side-mini-cart-overlay');
 			var $sideToggle  = $('.merchant-floating-side-mini-cart-toggle');
 
-			if ( ! $miniCart.length ) {
+			if ( ! $sideCart.length ) {
 				return false;
 			}
 
@@ -62,17 +62,8 @@ merchant.modules = merchant.modules || {};
 
 				self.updateFloatingMiniCartIconCount();
 				self.checkMiniCartCountAndDisplay();
-				self.updateFloatingMiniCartSideContentHeight();
 
 			});
-
-			$(window).on('resize merchant.floating-mini-cart-resize', function() {
-				self.updateFloatingMiniCartSideContentHeight();
-			});
-
-			setTimeout(function(){
-				self.updateFloatingMiniCartSideContentHeight();
-			}, 200);
 
 			$sideToggle.on( 'click', function(e){
 
@@ -124,19 +115,6 @@ merchant.modules = merchant.modules || {};
 					$counter.text(response);
 				}
 			})
-
-		},
-
-		updateFloatingMiniCartSideContentHeight: function() {
-
-			var $sideCart    = $('.merchant-floating-side-mini-cart');
-			var $sideTitle   = $sideCart.find('.merchant-floating-side-mini-cart-widget-title');
-			var $sideTotal   = $sideCart.find('.woocommerce-mini-cart__total');
-			var $sideButtons = $sideCart.find('.woocommerce-mini-cart__buttons');
-
-			var windowHeight = $(window).innerHeight() - ( $sideTitle.outerHeight() + $sideTotal.outerHeight() + $sideButtons.outerHeight() );
-
-			$sideCart.find('.woocommerce-mini-cart').css({'height': windowHeight});
 
 		},
 

@@ -2,7 +2,7 @@
 
 /**
  * Buy Now.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Buy Now Class.
- * 
+ *
  */
 class Merchant_Buy_Now extends Merchant_Add_Module {
 
@@ -24,13 +24,13 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Is module preview.
-	 * 
+	 *
 	 */
 	public static $is_module_preview = false;
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -46,20 +46,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			'button-text' => __( 'Buy Now', 'merchant' )
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
+		$this->module_data['preview_url'] = $this->set_module_preview_url( array( 'type' => 'product' ) );
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -86,7 +75,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return;
 		}
 
 		// Enqueue styles.
@@ -108,7 +97,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Admin enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
@@ -123,7 +112,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function enqueue_css() {
@@ -142,12 +131,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( self::MODULE_ID === $module ) {
-			ob_start();
-			self::admin_preview_content();
-			$content = ob_get_clean();
-
 			// HTML.
-			$preview->set_html( $content );
+			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
 
 			// Button Text.
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
@@ -159,14 +144,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Admin preview content.
-	 * 
+	 *
+	 * @param array $settings The module settings
+	 *
 	 * @return void
 	 */
-	public function admin_preview_content() {
-
-		// Get all settings.
-		$settings = $this->get_module_settings();
-
+	public function admin_preview_content( $settings ) {
 		?>
 
 		<div class="mrc-preview-single-product-elements">
@@ -194,23 +177,23 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Buy now listener.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function buy_now_listener() {
 		$product_id = ( isset( $_POST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant-buy-now'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		if ( $product_id ) {
-	
+
 			$variation_id = ( isset( $_POST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['variation_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( $variation_id ) {
 				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
 			} else {
 				WC()->cart->add_to_cart( $product_id, 1 );
 			}
-	
+
 			wp_safe_redirect( wc_get_checkout_url() );
-	
+
 			exit;
 		}
 	}
@@ -218,58 +201,58 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	/**
 	 * Single product buy now button.
 	 * TODO: Render the output trough template files.
-	 * 
+	 *
 	 * @return void
 	 */
-	public function single_product_buy_now_button() {	
+	public function single_product_buy_now_button() {
 		global $post, $product;
-	
+
 		if ( ! empty( $product ) ) {
 			if ( 'yes' == get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
 				return;
 			}
 		}
-	
+
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
-	
+
 		?>
-	
+
 		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( $text ); ?></button>
-	
-		<?php 
+
+		<?php
 	}
 
 	/**
 	 * Shop archive product buy now button.
 	 * TODO: Render the output trough template files.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function shop_archive_product_buy_now_button() {
 		global $post, $product;
-	
+
 		if ( ! $product->is_type( 'simple' ) ) {
 		  return;
 		}
-	
+
 		if ( ! empty( $product ) ) {
 			if ( 'yes' == get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
 				return;
 			}
 		}
-	
+
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
-	
+
 		?>
-		
+
 		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( $text ); ?></a>
-	
+
 		<?php
 	}
 
 	/**
 	 * Custom CSS.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_module_custom_css() {
@@ -298,19 +281,19 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 	/**
 	 * Admin custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
 	 * @return string $css The custom CSS.
 	 */
 	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css(); 
+		$css .= $this->get_module_custom_css();
 
 		return $css;
 	}
 
 	/**
 	 * Frontend custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
 	 * @return string $css The custom CSS.
 	 */

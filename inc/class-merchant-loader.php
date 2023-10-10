@@ -74,6 +74,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
 			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
 			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
+			require_once MERCHANT_DIR . 'inc/modules/add-to-cart-text/class-add-to-cart-text.php';
 			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
 			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
 			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
@@ -86,11 +87,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
 
-
-			if (
-				! defined( 'MERCHANT_PRO_VERSION' )
-				|| defined( 'MERCHANT_PRO_VERSION' ) && (float) MERCHANT_PRO_VERSION > 1.2
-			) {
+			// Pro modules;
+			if ( ! defined( 'MERCHANT_PRO_VERSION' )
+				|| defined( 'MERCHANT_PRO_VERSION' ) && (float) MERCHANT_PRO_VERSION > 1.2 ) {
 				require_once MERCHANT_DIR . 'inc/modules/cart-reserved-timer/class-cart-reserved-timer.php';
 				require_once MERCHANT_DIR . 'inc/modules/buy-x-get-y/class-buy-x-get-y.php';
 				require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/class-advanced-reviews.php';
@@ -113,6 +112,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				require_once MERCHANT_DIR . 'inc/modules/wait-list/class-wait-list.php';
 				require_once MERCHANT_DIR . 'inc/modules/wishlist/class-wishlist.php';
 				require_once MERCHANT_DIR . 'inc/modules/product-swatches/class-product-swatches.php';
+				require_once MERCHANT_DIR . 'inc/modules/slide-out-cart/class-slide-out-cart.php';
+				require_once MERCHANT_DIR . 'inc/modules/quick-social-links/class-quick-social-links.php';
+				require_once MERCHANT_DIR . 'inc/modules/product-navigation-buttons/class-product-navigation-buttons.php';
 			}
 
 			/**
@@ -242,7 +244,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			/**
 			 * Hook 'merchant_enqueue_before_main_css_js'
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			do_action( 'merchant_enqueue_before_main_css_js' );
@@ -297,14 +299,14 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			/**
 			 * Hook 'merchant_enqueue_after_main_css_js'
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			do_action( 'merchant_enqueue_after_main_css_js' );
 
 			/**
 			 * Hook 'merchant_localize_script'
-			 * 
+			 *
 			 * @since 1.0
 			 */
 			$setting = apply_filters( 'merchant_localize_script', $setting );

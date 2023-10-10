@@ -180,8 +180,71 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }
       }
+      if (hasManipulators(manipulators.flexible_content)) {
+        var _loop2 = function _loop2(_key7) {
+          var flexibleContentSelector = $(manipulators.flexible_content[_key7].selector);
+          var flexibleContentItems = flexibleContentSelector.children();
+          var flexibleContentTemplate = flexibleContentItems.eq(0);
+          var flexibleContentSettings = $('.merchant-flexible-content-control[data-id=' + manipulators.flexible_content[_key7].setting + ']').find('.merchant-flexible-content').children();
+
+          /**
+           * We're going to remove all items in the selector except for the template
+           * and regenerate the items based on the settings.
+           */
+
+          flexibleContentItems.each(function () {
+            if (!$(this).hasClass('flexible-content-template')) {
+              $(this).remove();
+            }
+          });
+          flexibleContentSettings.each(function () {
+            var item = flexibleContentTemplate.clone();
+            var layout = $(this).data('type');
+            for (var variable in manipulators.flexible_content[_key7].variables[layout]) {
+              var setting = manipulators.flexible_content[_key7].variables[layout][variable];
+              var field = $(this).find('.merchant-module-page-setting-field[data-id=' + setting + ']');
+              var fieldType = field.data('type');
+              var fieldInput = field.find('input').val();
+
+              // Handle variable replacement for text fields
+              if (fieldType === 'text') {
+                item.html(item.html().replace(variable, fieldInput));
+              }
+
+              // Handle variable replacement for upload fields
+              if (fieldType === 'upload') {
+                var image = field.find('.merchant-upload-image img').prop('outerHTML');
+                if (typeof image !== 'undefined') {
+                  item.html(item.html().replace(variable, image));
+                }
+              }
+
+              // Handle variable replacement for choices fields
+              if (fieldType === 'choices') {
+                var selectedChoice = field.find('input:checked');
+
+                // If choices uses SVG then we want to replace  the variable with the selected SVG
+                if (field.find('.merchant-svg').length) {
+                  var SVG = selectedChoice.parent().find('svg').prop('outerHTML');
+                  if (typeof SVG !== 'undefined') {
+                    item.html(item.html().replace(variable, SVG));
+                  }
+                }
+              }
+
+              // Append item to selector
+              item.html(item.html().replace(variable, '')) // First remove variable if it's not replaced yet
+              .removeClass('flexible-content-template') // Remove template class
+              .appendTo(flexibleContentSelector); // Append
+            }
+          });
+        };
+        for (var _key7 in manipulators.flexible_content) {
+          _loop2(_key7);
+        }
+      }
     };
-    var triggerElementsChange = function triggerElementsChange(input) {
+    var triggerChangeOnInput = function triggerChangeOnInput(input) {
       var inputType = input.attr('type');
 
       // Text inputs
@@ -222,46 +285,65 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return updateElements();
         });
       }
+
+      // Upload input
+      if (input.hasClass('merchant-upload-input')) {
+        input.on('change', function () {
+          return updateElements();
+        });
+      }
     };
     if (typeof manipulators !== 'undefined') {
       if (hasManipulators(manipulators.css)) {
         for (var key in manipulators.css) {
-          triggerElementsChange($('[name="merchant[' + manipulators.css[key].setting + ']"]'));
+          triggerChangeOnInput($('[name="merchant[' + manipulators.css[key].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.text)) {
-        for (var _key7 in manipulators.text) {
-          triggerElementsChange($('[name="merchant[' + manipulators.text[_key7].setting + ']"]'));
+        for (var _key8 in manipulators.text) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.text[_key8].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.attributes)) {
-        for (var _key8 in manipulators.attributes) {
-          triggerElementsChange($('[name="merchant[' + manipulators.attributes[_key8].setting + ']"]'));
+        for (var _key9 in manipulators.attributes) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.attributes[_key9].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.classes)) {
-        for (var _key9 in manipulators.classes) {
-          triggerElementsChange($('[name="merchant[' + manipulators.classes[_key9].setting + ']"]'));
+        for (var _key10 in manipulators.classes) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.classes[_key10].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.icons)) {
-        for (var _key10 in manipulators.icons) {
-          triggerElementsChange($('[name="merchant[' + manipulators.icons[_key10].setting + ']"]'));
+        for (var _key11 in manipulators.icons) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.icons[_key11].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.svg_icons)) {
-        for (var _key11 in manipulators.svg_icons) {
-          triggerElementsChange($('[name="merchant[' + manipulators.svg_icons[_key11].setting + ']"]'));
+        for (var _key12 in manipulators.svg_icons) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.svg_icons[_key12].setting + ']"]'));
         }
       }
       if (hasManipulators(manipulators.repeater_content)) {
-        for (var _key12 in manipulators.repeater_content) {
-          triggerElementsChange($('[name="merchant[' + manipulators.repeater_content[_key12].setting + ']"]'));
+        for (var _key13 in manipulators.repeater_content) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.repeater_content[_key13].setting + ']"]'));
+        }
+      }
+      if (hasManipulators(manipulators.flexible_content)) {
+        for (var _key14 in manipulators.flexible_content) {
+          var field = $('.merchant-flexible-content-control[data-id=' + manipulators.flexible_content[_key14].setting + ']');
+          triggerChangeOnInput(field.find('input'));
+          field.find('.customize-control-flexible-content-delete').on('click', function () {
+            return updateElements();
+          });
+          field.on('merchant.sorted', function () {
+            return updateElements();
+          });
         }
       }
       if (hasManipulators(manipulators.update)) {
-        for (var _key13 in manipulators.update) {
-          triggerElementsChange($('[name="merchant[' + manipulators.update[_key13].setting + ']"]'));
+        for (var _key15 in manipulators.update) {
+          triggerChangeOnInput($('[name="merchant[' + manipulators.update[_key15].setting + ']"]'));
         }
       }
 

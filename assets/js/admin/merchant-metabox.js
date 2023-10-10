@@ -175,6 +175,8 @@
           });
           $uploads.find('.merchant-metabox-field-uploads-add').on('click', function (e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
+            var $list = $(this).parent().find('ul');
             var $items = $list.find('li');
             var $item = $items.first().clone(true);
             $item.find('input').each(function () {
@@ -188,6 +190,9 @@
           $uploads.find('.merchant-metabox-field-uploads-upload').on('click', function (e) {
             e.preventDefault();
             wpMediaInput = $(this).closest('li').find(' > input');
+            if (!wpMediaInput.attr('name').length) {
+              return;
+            }
             if (wpMediaFrame && wpMediaFrame.options.library.type === $list.data('library')) {
               wpMediaFrame.open();
               return;
@@ -205,6 +210,9 @@
           $uploads.find('.merchant-metabox-field-uploads-thumbnail-upload').on('click', function (e) {
             e.preventDefault();
             wpMediaInput = $(this).parent().find('input');
+            if (!wpMediaInput.attr('name').length) {
+              return;
+            }
             if (wpMediaFrame && wpMediaFrame.options.library.type === 'image') {
               wpMediaFrame.open();
               return;

@@ -33,20 +33,20 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             ); ?>
                     </div>
                     <div class="merchant-bogo-product">
-						<?php echo wp_kses_post( $offer['buy_product']['image'] ); ?>
+						<?php echo wp_kses_post( $offer['product_x']['image'] ); ?>
                         <div class="merchant-bogo-product-contents">
                             <p class="woocommerce-loop-product__title">
-                                <a href="<?php echo esc_url( $offer['buy_product']['permalink'] ); ?>" target="_blank">
-									<?php echo esc_html( $offer['buy_product']['title'] ); ?>
+                                <a href="<?php echo esc_url( $offer['product_x']['permalink'] ); ?>" target="_blank">
+									<?php echo esc_html( $offer['product_x']['title'] ); ?>
                                 </a>
                             </p>
-							<?php echo $offer['buy_product']['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped ?>
+							<?php echo $offer['product_x']['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped ?>
                         </div>
                     </div>
                     <div class="merchant-bogo-arrow">→</div>
                 </div>
                 <div class="merchant-bogo-product-y">
-                    <form data-product="<?php echo esc_attr( $offer['product']['id'] ); ?>">
+                    <form class="merchant-bogo-form" data-product="<?php echo esc_attr( $offer['product']['id'] ); ?>">
                         <div class="merchant-bogo-product-label merchant-bogo-product-get-label">
 		                    <?php
 		                    $discount = $offer['layout'] === 'percentage_discount'
@@ -86,7 +86,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 	                    <?php if ( isset( $offer['product']['attributes'] ) && ! empty( $offer['product']['attributes'] ) ) : ?>
                             <div class="merchant-bogo-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
 			                    <?php foreach ( $offer['product']['attributes'] as $key => $attribute ) : ?>
-                                    <select name="<?php echo esc_attr( $key ) ?>" required>
+                                    <select class="merchant-bogo-select-attribute" name="<?php echo esc_attr( $key ) ?>" required>
                                         <option value="">
                                             <?php echo esc_html( 
                                                 /* Translators: 1. Attribute label */
