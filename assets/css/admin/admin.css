@@ -1574,6 +1574,15 @@
   transition: all .2s;
 }
 
+.merchant-modules-list-item.merchant-module-deactivated-by-bp {
+  text-transform: uppsercase;
+}
+
+.merchant-modules-list-item.merchant-module-deactivated-by-bp .merchant-modules-list-item-icon,
+.merchant-modules-list-item.merchant-module-deactivated-by-bp .merchant-modules-list-item-content {
+  opacity: 0.5;
+}
+
 .merchant-modules-list-item:hover {
   -webkit-box-shadow: 0px 8px 12px 0px rgba(240, 240, 241, 0.7);
           box-shadow: 0px 8px 12px 0px rgba(240, 240, 241, 0.7);
@@ -1648,11 +1657,31 @@
           transform: translate3d(0, 0, 0);
 }
 
-.merchant-modules-list-item-upsell,
-.merchant-modules-list-item-woo-required {
+.merchant-modules-list-item-badge-wrapper {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.merchant-modules-list-item-removed-by-bp .merchant-pro-badge {
+  padding: 3px 7px;
+  color: #FFF;
+  border: 1px solid #212121;
+  background-color: #212121;
+  border-radius: 3px;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 400;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  top: -2px;
+  text-transform: uppercase;
+}
+
+.merchant-modules-list-item-removed-by-bp .merchant-pro-badge:before {
+  font-weight: 400;
+  text-transform: none;
 }
 
 .merchant-modules-list-item-woo-required .merchant-pro-badge {
