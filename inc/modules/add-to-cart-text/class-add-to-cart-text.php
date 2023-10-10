@@ -105,9 +105,8 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( $module === self::MODULE_ID ) {
-
 			// HTML.
-			$preview->set_html( array($this, 'admin_preview_content'), $this->get_module_settings() );
+			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
 
 			// Simple product add to cart text
 			$preview->set_text( 'simple_product_shop_label', '.merchant-preview-add-to-cart-simple' );
@@ -130,7 +129,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 	 *
 	 * @return void
 	 */
-	public function admin_preview_content($settings) {
+	public function admin_preview_content( $settings ) {
 		?>
 
 		<div class="merchant-preview-product">
@@ -139,10 +138,10 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			<p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
 			<span class="price">
 				<span class="woocommerce-Price-amount amount">
-					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo get_woocommerce_currency_symbol() ?></span><?php echo esc_html__( '14.00', 'merchant' ) ?></bdi>
+					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo esc_html( get_woocommerce_currency_symbol() ) ?></span><?php echo esc_html__( '14.00', 'merchant' ) ?></bdi>
 				</span>
 			</span>
-			<div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-simple"><?php echo $settings['simple_product_shop_label']; ?></div>
+			<div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-simple"><?php echo esc_html( $settings['simple_product_shop_label'] ); ?></div>
 		</div>
 		<div class="merchant-preview-product">
 			<div class="image-wrapper"></div>
@@ -150,22 +149,22 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			<p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
 			<span class="price">
 				<span class="woocommerce-Price-amount amount">
-					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo get_woocommerce_currency_symbol() ?></span><?php echo esc_html__( '20.00', 'merchant' ) ?></bdi>
+					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo esc_html( get_woocommerce_currency_symbol() ) ?></span><?php echo esc_html__( '20.00', 'merchant' ) ?></bdi>
 				</span>
 			</span>
-			<div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-variable"><?php echo $settings['variable_product_shop_label']; ?></div>
+			<div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-variable"><?php echo esc_html( $settings['variable_product_shop_label'] ); ?></div>
 		</div>
-        <div class="merchant-preview-product merchant-preview-product-out-of-stock <?php echo $settings['out_of_stock_custom_label'] ? 'display' : '' ?>">
-            <div class="image-wrapper"></div>
-            <h3><?php echo esc_html__( 'Out of stock product', 'merchant' ); ?></h3>
-            <p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
-            <span class="price">
+		<div class="merchant-preview-product merchant-preview-product-out-of-stock <?php echo esc_html( ( $settings['out_of_stock_custom_label'] ? 'display' : '' ) ) ?>">
+			<div class="image-wrapper"></div>
+			<h3><?php echo esc_html__( 'Out of stock product', 'merchant' ); ?></h3>
+			<p><?php echo esc_html__( 'The product description normally goes here.', 'merchant' ); ?></p>
+			<span class="price">
 				<span class="woocommerce-Price-amount amount">
-					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo get_woocommerce_currency_symbol() ?></span><?php echo esc_html__( '20.00', 'merchant' ) ?></bdi>
+					<bdi><span class="woocommerce-Price-currencySymbol"><?php echo esc_html( get_woocommerce_currency_symbol() ) ?></span><?php echo esc_html__( '20.00', 'merchant' ) ?></bdi>
 				</span>
 			</span>
-            <div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-out-of-stock"><?php echo $settings['out_of_stock_shop_label']; ?></div>
-        </div>
+			<div class="merchant-preview-add-to-cart merchant-preview-add-to-cart-out-of-stock"><?php echo esc_html( $settings['out_of_stock_shop_label'] ); ?></div>
+		</div>
 		<?php
 	}
 
@@ -208,12 +207,12 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 		} else {
 			// Simple products
 			if ( $product->is_type( 'simple' ) ) {
-				return esc_html__( $settings['simple_product_shop_label'] );
+				return esc_html( $settings['simple_product_shop_label'] );
 			}
 
 			// Variable products.
 			if ( $product->is_type( 'variable' ) ) {
-				return esc_html__( $settings['variable_product_shop_label'] );
+				return esc_html( $settings['variable_product_shop_label'] );
 			}
 		}
 
@@ -233,7 +232,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 		$settings = $this->get_module_settings();
 
 		if ( ! $product->is_in_stock() && $settings['out_of_stock_custom_label'] ) {
-			return esc_html__( $settings['out_of_stock_shop_label'] );
+			return esc_html( $settings['out_of_stock_shop_label'] );
 		}
 
 		/**
@@ -242,7 +241,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 		$product_specific_label = get_post_meta( $product->get_id(), '_merchant_add_to_cart_text_shop_label', true );
 
 		if ( ! empty( $product_specific_label ) ) {
-			return esc_html__( $product_specific_label );
+			return esc_html( $product_specific_label );
 		}
 
 		/**
@@ -251,12 +250,12 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 
 		// Simple products
 		if ( $product->is_type( 'simple' ) ) {
-			return esc_html__( $settings['simple_product_shop_label'] );
+			return esc_html( $settings['simple_product_shop_label'] );
 		}
 
 		// Variable products.
 		if ( $product->is_type( 'variable' ) ) {
-			return esc_html__( $settings['variable_product_shop_label'] );
+			return esc_html( $settings['variable_product_shop_label'] );
 		}
 
 		return $default;

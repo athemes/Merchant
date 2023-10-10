@@ -43,35 +43,35 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'layout'          => 'pos-bottom',
-			'visibility'      => 'visibility-all',
-			'icon_color'      => '#212121',
-			'bg_color'        => '#ffffff',
-			'border_radius'   => 15,
-			'condition_rules' => array(
-				array(
-					'layout'    => 'display',
-					'condition' => 'all',
-					'type'      => 'include'
+				'layout'          => 'pos-bottom',
+				'visibility'      => 'visibility-all',
+				'icon_color'      => '#212121',
+				'bg_color'        => '#ffffff',
+				'border_radius'   => 15,
+				'condition_rules' => array(
+						array(
+								'layout'    => 'display',
+								'condition' => 'all',
+								'type'      => 'include'
+						)
+				),
+				'links'           => array(
+						array(
+								'layout' => 'social',
+								'icon'   => 'facebook',
+								'url'    => esc_html__( 'https://www.facebook.com', 'merchant' )
+						),
+						array(
+								'layout' => 'social',
+								'icon'   => 'instagram',
+								'url'    => esc_html__( 'https://www.instagram.com', 'merchant' )
+						),
+						array(
+								'layout' => 'social',
+								'icon'   => 'twitter',
+								'url'    => esc_html__( 'https://www.twitter.com', 'merchant' )
+						),
 				)
-            ),
-			'links'           => array(
-				array(
-					'layout' => 'social',
-					'icon'   => 'facebook',
-					'url'    => esc_html__( 'https://www.facebook.com' )
-				),
-				array(
-					'layout' => 'social',
-					'icon'   => 'instagram',
-					'url'    => esc_html__( 'https://www.instagram.com' )
-				),
-				array(
-					'layout' => 'social',
-					'icon'   => 'twitter',
-					'url'    => esc_html__( 'https://www.twitter.com' )
-				),
-			)
 		);
 
 		// Module data.
@@ -141,23 +141,23 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 
 			// Layout position
 			$preview->set_class( 'layout', '.merchant-quick-social-links', array(
-				'pos-bottom',
-				'pos-left',
-				'pos-right'
+					'pos-bottom',
+					'pos-left',
+					'pos-right'
 			) );
 
 			// Layout visibility
 			$preview->set_class( 'layout', '.merchant-quick-social-links', array(
-				'visibility-all',
-				'pos-left',
-				'pos-right'
+					'visibility-all',
+					'pos-left',
+					'pos-right'
 			) );
 
 			// Links
 			$preview->set_flexible_content( 'links', '.merchant-quick-social-links-inner', array(
-					'social' => array( '{url}' => 'url', '{icon}' => 'icon' ),
-					'custom' => array( '{url}' => 'url', '{icon}' => 'image' )
-				)
+							'social' => array( '{url}' => 'url', '{icon}' => 'icon' ),
+							'custom' => array( '{url}' => 'url', '{icon}' => 'image' )
+					)
 			);
 
 			// Border radius
@@ -176,75 +176,75 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 	public function admin_preview_content( $settings ) {
 		// Classes
 		$classes = array(
-			'merchant-quick-social-links',
-			$settings['layout'],
-			$settings['visibility']
+				'merchant-quick-social-links',
+				$settings['layout'],
+				$settings['visibility']
 		);
 		?>
 
-        <div class="mrc-preview-single-product-elements">
-            <div class="mrc-preview-left-column">
-                <div class="mrc-preview-product-image-wrapper">
-                    <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="mrc-preview-right-column">
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-addtocart-placeholder"></div>
-            </div>
-        </div>
+		<div class="mrc-preview-single-product-elements">
+			<div class="mrc-preview-left-column">
+				<div class="mrc-preview-product-image-wrapper">
+					<div class="mrc-preview-product-image"></div>
+					<div class="mrc-preview-product-image-thumbs">
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+						<div class="mrc-preview-product-image-thumb"></div>
+					</div>
+				</div>
+			</div>
+			<div class="mrc-preview-right-column">
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+				<div class="mrc-preview-text-placeholder"></div>
+				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+				<div class="mrc-preview-addtocart-placeholder"></div>
+			</div>
+		</div>
 
-        <div class="<?php echo implode( ' ', $classes ) ?>">
-            <div class="merchant-quick-social-links-container">
-                <div class="merchant-quick-social-links-inner">
-                    <div class="merchant-quick-social-link flexible-content-template">
-                        <a href="{url}" target="_blank">
-                            <div class="ql-image">
-                                {icon}
-                            </div>
-                        </a>
-                    </div>
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<div class="merchant-quick-social-links-container">
+				<div class="merchant-quick-social-links-inner">
+					<div class="merchant-quick-social-link flexible-content-template">
+						<a href="{url}" target="_blank">
+							<div class="ql-image">
+								{icon}
+							</div>
+						</a>
+					</div>
 					<?php if ( isset( $settings['links'] ) && ! empty( $settings['links'] ) ) : ?>
 						<?php foreach ( $settings['links'] as $link ): ?>
 							<?php if ( ! empty( $link['url'] ) ) : ?>
-								<?php if ( $link['layout'] === 'social' && ! empty( $link['icon'] ) ): ?>
-                                    <div class="merchant-quick-social-link">
-                                        <a href="<?php echo $link["url"] ?>" target="_blank">
-                                            <div class="ql-image">
-												<?php echo Merchant_SVG_Icons::get_svg_icon( "icon-{$link['icon']}" ) ?>
-                                            </div>
-                                        </a>
-                                    </div>
-								<?php elseif ( $link['layout'] === 'custom' && ! empty( $link['image'] ) ) : ?>
-                                    <div class="merchant-quick-social-link">
-                                        <a href="<?php echo $link["url"] ?>" target="_blank">
-                                            <div class="ql-image">
-                                                <img src="<?php echo wp_get_attachment_url( $link["image"] ) ?>">
-                                            </div>
-                                        </a>
-                                    </div>
+								<?php if ( 'social' === $link['layout'] && ! empty( $link['icon'] ) ) : ?>
+									<div class="merchant-quick-social-link">
+										<a href="<?php echo esc_url( $link["url"] ); ?>" target="_blank">
+											<div class="ql-image">
+												<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( "icon-{$link['icon'] }" ), merchant_kses_allowed_tags( array(), false ) ); ?>
+											</div>
+										</a>
+									</div>
+								<?php elseif ( 'custom' === $link['layout'] && ! empty( $link['image'] ) ) : ?>
+									<div class="merchant-quick-social-link">
+										<a href="<?php echo esc_url( $link["url"] ); ?>" target="_blank">
+											<div class="ql-image">
+												<img src="<?php echo esc_url( wp_get_attachment_url( $link["image"] ) ); ?>">
+											</div>
+										</a>
+									</div>
 								<?php endif ?>
 							<?php endif; ?>
 						<?php endforeach; ?>
 					<?php endif ?>
-                </div>
-            </div>
-        </div>
+				</div>
+			</div>
+		</div>
 
 		<?php
 	}
@@ -256,31 +256,31 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 	 */
 	public static function get_socials() {
 		return array(
-			'facebook'   => esc_html__( 'Facebook', 'merchant' ),
-			'instagram'  => esc_html__( 'Instagram', 'merchant' ),
-			'twitter'    => esc_html__( 'Twitter', 'merchant' ),
-			'tiktok'     => esc_html__( 'TikTok', 'merchant' ),
-			'pinterest'  => esc_html__( 'Pinterest', 'merchant' ),
-			'whatsapp'   => esc_html__( 'WhatsApp', 'merchant' ),
-			'telegram'   => esc_html__( 'Telegram', 'merchant' ),
-			'flickr'     => esc_html__( 'Flickr', 'merchant' ),
-			'linkedin'   => esc_html__( 'LinkedIn', 'merchant' ),
-			'youtube'    => esc_html__( 'Youtube', 'merchant' ),
-			'discord'    => esc_html__( 'Discord', 'merchant' ),
-			'xing'       => esc_html__( 'Xing', 'merchant' ),
-			'dribble'    => esc_html__( 'Dribble', 'merchant' ),
-			'vk'         => esc_html__( 'VK', 'merchant' ),
-			'weibo'      => esc_html__( 'Weibo', 'merchant' ),
-			'vimeo'      => esc_html__( 'Vimeo', 'merchant' ),
-			'mix'        => esc_html__( 'Mix', 'merchant' ),
-			'behance'    => esc_html__( 'Behance', 'merchant' ),
-			'spotify'    => esc_html__( 'Spotify', 'merchant' ),
-			'soundcloud' => esc_html__( 'Sound Cloud', 'merchant' ),
-			'twitch'     => esc_html__( 'Twitch', 'merchant' ),
-			'etsy'       => esc_html__( 'Etsy', 'merchant' ),
-			'bandcamp'   => esc_html__( 'Bandcamp', 'merchant' ),
-			'reddit'     => esc_html__( 'Reddit', 'merchant' ),
-			'github'     => esc_html__( 'Github', 'merchant' ),
+				'facebook'   => esc_html__( 'Facebook', 'merchant' ),
+				'instagram'  => esc_html__( 'Instagram', 'merchant' ),
+				'twitter'    => esc_html__( 'Twitter', 'merchant' ),
+				'tiktok'     => esc_html__( 'TikTok', 'merchant' ),
+				'pinterest'  => esc_html__( 'Pinterest', 'merchant' ),
+				'whatsapp'   => esc_html__( 'WhatsApp', 'merchant' ),
+				'telegram'   => esc_html__( 'Telegram', 'merchant' ),
+				'flickr'     => esc_html__( 'Flickr', 'merchant' ),
+				'linkedin'   => esc_html__( 'LinkedIn', 'merchant' ),
+				'youtube'    => esc_html__( 'Youtube', 'merchant' ),
+				'discord'    => esc_html__( 'Discord', 'merchant' ),
+				'xing'       => esc_html__( 'Xing', 'merchant' ),
+				'dribble'    => esc_html__( 'Dribble', 'merchant' ),
+				'vk'         => esc_html__( 'VK', 'merchant' ),
+				'weibo'      => esc_html__( 'Weibo', 'merchant' ),
+				'vimeo'      => esc_html__( 'Vimeo', 'merchant' ),
+				'mix'        => esc_html__( 'Mix', 'merchant' ),
+				'behance'    => esc_html__( 'Behance', 'merchant' ),
+				'spotify'    => esc_html__( 'Spotify', 'merchant' ),
+				'soundcloud' => esc_html__( 'Sound Cloud', 'merchant' ),
+				'twitch'     => esc_html__( 'Twitch', 'merchant' ),
+				'etsy'       => esc_html__( 'Etsy', 'merchant' ),
+				'bandcamp'   => esc_html__( 'Bandcamp', 'merchant' ),
+				'reddit'     => esc_html__( 'Reddit', 'merchant' ),
+				'github'     => esc_html__( 'Github', 'merchant' ),
 		);
 	}
 

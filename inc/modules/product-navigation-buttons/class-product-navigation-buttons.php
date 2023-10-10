@@ -117,7 +117,7 @@ class Merchant_Product_Navigation_Buttons extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings ) {
 		?>
-		<div class="merchant-preview-dynamic-layout <?php echo $settings['placement'] ?>">
+		<div class="merchant-preview-dynamic-layout <?php echo esc_attr( $settings['placement'] ) ?>">
 
 			<?php self::get_preview_navigation_buttons( $settings, 'top' ) ?>
 
@@ -160,14 +160,14 @@ class Merchant_Product_Navigation_Buttons extends Merchant_Add_Module {
 	 */
 	public static function get_preview_navigation_buttons( $settings, $position_class ) {
 		?>
-		<div class="merchant-product-navigation <?php echo $position_class ?> <?php echo $settings['text'] ?>">
+		<div class="merchant-product-navigation <?php echo esc_attr( $position_class ) ?> <?php echo esc_attr( $settings['text'] ) ?>">
 			<a href="#" class="merchant-previous-product">
-				<span><?php echo __( '← Rare Earth Deep Pore Minimizing Cleansing', 'merchant' ) ?></span>
-				<span><?php echo __( '← Previous', 'merchant' ) ?></span>
+				<span><?php echo esc_html__( '← Rare Earth Deep Pore Minimizing Cleansing', 'merchant' ) ?></span>
+				<span><?php echo esc_html__( '← Previous', 'merchant' ) ?></span>
 			</a>
 			<a href="#" class="merchant-next-product">
-				<span><?php echo __( 'Mini Radiant Creamy Concealer and Blush →', 'merchant' ) ?></span>
-				<span><?php echo __( 'Next →', 'merchant' ) ?></span>
+				<span><?php echo esc_html__( 'Mini Radiant Creamy Concealer and Blush →', 'merchant' ) ?></span>
+				<span><?php echo esc_html__( 'Next →', 'merchant' ) ?></span>
 			</a>
 		</div>
 		<?php

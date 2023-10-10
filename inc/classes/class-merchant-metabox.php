@@ -226,7 +226,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			}
 
 			// Botiga theme compatibility:
-			// Do not render the metabox in the Botiga templates builder. 
+			// Do not render the metabox in the Botiga templates builder.
 			if ( class_exists( 'Botiga_Modules' ) && Botiga_Modules::is_module_active( 'templates' ) ) {
 				unset( $types['athemes_hf'] );
 			}
@@ -959,9 +959,9 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					} else {
 						echo '<div style="color: red;">';
 						/* Translators: 1. Coupon admin url 2. Link target attribute value */
-						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ),
-							admin_url( 'post-new.php?post_type=shop_coupon' ),
-							'_blank' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							esc_url( admin_url( 'post-new.php?post_type=shop_coupon' ) ),
+							'_blank' );
 						echo '</div>';
 						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '" value="" />';
 					}

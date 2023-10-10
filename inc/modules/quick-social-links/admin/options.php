@@ -288,30 +288,30 @@ Merchant_Admin_Options::create( array(
 							'options'  => array(
 								array(
 									'id'      => 'user-auth',
-									'text'    => esc_html__( 'User Auth', 'botiga' ),
+									'text'    => esc_html__( 'User Auth', 'merchant' ),
 									'options' => array(
 										array(
 											'id'   => 'logged-in',
-											'text' => esc_html__( 'User Logged In', 'botiga' ),
+											'text' => esc_html__( 'User Logged In', 'merchant' ),
 										),
 										array(
 											'id'   => 'logged-out',
-											'text' => esc_html__( 'User Logged Out', 'botiga' ),
+											'text' => esc_html__( 'User Logged Out', 'merchant' ),
 										),
 									),
 								),
 								array(
 									'id'      => 'user-roles',
-									'text'    => esc_html__( 'User Roles', 'botiga' ),
+									'text'    => esc_html__( 'User Roles', 'merchant' ),
 									'options' => $user_roles,
 								),
 								array(
 									'id'      => 'other',
-									'text'    => esc_html__( 'Other', 'botiga' ),
+									'text'    => esc_html__( 'Other', 'merchant' ),
 									'options' => array(
 										array(
 											'id'   => 'author',
-											'text' => esc_html__( 'Author', 'botiga' ),
+											'text' => esc_html__( 'Author', 'merchant' ),
 											'ajax' => true,
 										),
 									),
@@ -321,7 +321,7 @@ Merchant_Admin_Options::create( array(
 					)
 				),
 			),
-			'default' => array(
+			'default'      => array(
 				array(
 					'layout'    => 'display',
 					'condition' => 'all',
@@ -372,7 +372,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'URL', 'merchant' ),
 							'type'    => 'text',
 							'default' => 'https://',
-							'desc' => esc_html__( 'After entering the complete URL, an associated icon will be automatically chosen.', 'merchant' ),
+							'desc'    => esc_html__( 'After entering the complete URL, an associated icon will be automatically chosen.', 'merchant' ),
 						),
 					)
 				),
@@ -397,17 +397,17 @@ Merchant_Admin_Options::create( array(
 				array(
 					'layout' => 'social',
 					'icon'   => 'facebook',
-					'url'    => esc_html__( 'https://www.facebook.com' )
+					'url'    => esc_html__( 'https://www.facebook.com', 'merchant' )
 				),
 				array(
 					'layout' => 'social',
 					'icon'   => 'instagram',
-					'url'    => esc_html__( 'https://www.instagram.com' )
+					'url'    => esc_html__( 'https://www.instagram.com', 'merchant' )
 				),
 				array(
 					'layout' => 'social',
 					'icon'   => 'twitter',
-					'url'    => esc_html__( 'https://www.twitter.com' )
+					'url'    => esc_html__( 'https://www.twitter.com', 'merchant' )
 				),
 			)
 		),
