@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Product Navigation Buttons Options.
+ * Product Navigation Links Options.
  *
  * @package Merchant
  */
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Settings
 Merchant_Admin_Options::create( array(
-	'module' => Merchant_Product_Navigation_Buttons::MODULE_ID,
+	'module' => Merchant_Product_Navigation_Links::MODULE_ID,
 	'title'  => esc_html__( 'Settings', 'merchant' ),
 	'fields' => array(
 		array(
@@ -42,6 +42,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'priority',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Hook priority', 'merchant' ),
+			'desc'   => esc_html__( 'The product navigation is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location.', 'merchant' ),
 			'default' => 30,
 		),
 
@@ -51,7 +52,7 @@ Merchant_Admin_Options::create( array(
 
 // Settings
 Merchant_Admin_Options::create( array(
-	'module' => Merchant_Product_Navigation_Buttons::MODULE_ID,
+	'module' => Merchant_Product_Navigation_Links::MODULE_ID,
 	'title'  => esc_html__( 'Style Settings', 'merchant' ),
 	'fields' => array(
 

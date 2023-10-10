@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Product Navigation Buttons
+ * Product Navigation Links
  *
  * @package Merchant
  */
@@ -11,15 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Product Navigation Buttons Class.
+ * Product Navigation Links Class.
  *
  */
-class Merchant_Product_Navigation_Buttons extends Merchant_Add_Module {
+class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 
 	/**
 	 * Module ID.
 	 */
-	const MODULE_ID = 'product-navigation-buttons';
+	const MODULE_ID = 'product-navigation-links';
 
 	/**
 	 * Is module preview.
@@ -221,5 +221,5 @@ class Merchant_Product_Navigation_Buttons extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	Merchant_Modules::create_module( new Merchant_Product_Navigation_Buttons() );
+	Merchant_Modules::create_module( new Merchant_Product_Navigation_Links() );
 } );

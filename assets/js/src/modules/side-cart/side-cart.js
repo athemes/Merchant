@@ -1,5 +1,5 @@
 /**
- * Merchant slide out cart
+ * Merchant side cart
  *
  */
 

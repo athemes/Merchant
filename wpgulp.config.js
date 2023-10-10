@@ -491,9 +491,9 @@ const styles = [
 
 	// Product navigation buttons
 	{
-		name: 'productNavigationButtonsAdminPreview',
-		src: './assets/sass/modules/product-navigation-buttons/admin/preview.scss',
-		destination: './assets/css/modules/product-navigation-buttons/admin',
+		name: 'productNavigationLinksAdminPreview',
+		src: './assets/sass/modules/product-navigation-links/admin/preview.scss',
+		destination: './assets/css/modules/product-navigation-links/admin',
 	},
 
 ];
@@ -658,12 +658,12 @@ const scripts = [
 		file: 'floating-mini-cart',
 		destination: './assets/js/modules/floating-mini-cart',
 	},
-	// Slide-out cart
+	// Side cart
 	{
-		name: 'slideOutCart',
-		src: './assets/js/src/modules/slide-out-cart/slide-out-cart.js',
-		file: 'slide-out-cart',
-		destination: './assets/js/modules/slide-out-cart',
+		name: 'sideCart',
+		src: './assets/js/src/modules/side-cart/side-cart.js',
+		file: 'side-cart',
+		destination: './assets/js/modules/side-cart',
 	},
 
 	// Login Popups.

@@ -152,7 +152,7 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 = 1.5 =
-* Added - 4 Modules: Quick Social Links, Add To Cart Text, Slide-out cart and Product Navigation Buttons.
+* Added - 4 Modules: Quick Social Links, Add To Cart Text, Side cart and Product Navigation Links.
 * Changed - Renamed Product Swatches to Variation Swatches.
 * Fixed - Cookie Banner: In certain cases it was not possible to close the cookie banner.
 

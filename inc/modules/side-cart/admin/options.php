@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Slide-Out Cart Options.
+ * Side Cart Options.
  *
  * @package Merchant
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'module' => Merchant_Slide_Out_Cart::MODULE_ID,
+	'module' => Merchant_Side_Cart::MODULE_ID,
 	'title'  => esc_html__( 'Settings', 'merchant' ),
 	'fields' => array(
 		array(

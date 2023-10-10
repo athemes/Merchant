@@ -112,9 +112,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				require_once MERCHANT_DIR . 'inc/modules/wait-list/class-wait-list.php';
 				require_once MERCHANT_DIR . 'inc/modules/wishlist/class-wishlist.php';
 				require_once MERCHANT_DIR . 'inc/modules/product-swatches/class-product-swatches.php';
-				require_once MERCHANT_DIR . 'inc/modules/slide-out-cart/class-slide-out-cart.php';
+				require_once MERCHANT_DIR . 'inc/modules/side-cart/class-side-cart.php';
 				require_once MERCHANT_DIR . 'inc/modules/quick-social-links/class-quick-social-links.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-navigation-buttons/class-product-navigation-buttons.php';
+				require_once MERCHANT_DIR . 'inc/modules/product-navigation-links/class-product-navigation-links.php';
 			}
 
 			/**
