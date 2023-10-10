@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-09-29 14:16+0000\n"
+"POT-Creation-Date: 2023-10-10 08:52+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-merchant-admin-loader.php:102, inc/modules/advanced-reviews/admin/options.php:15, inc/modules/agree-to-terms-checkbox/admin/options.php:16, inc/modules/auto-external-links/admin/options.php:16, inc/modules/buy-now/admin/options.php:14, inc/modules/buy-x-get-y/admin/options.php:16, inc/modules/cart-count-favicon/admin/options.php:16, inc/modules/cart-reserved-timer/admin/options.php:18, inc/modules/checkout/admin/options.php:15, inc/modules/cookie-banner/admin/options.php:14, inc/modules/countdown-timer/admin/options.php:14, inc/modules/free-gifts/admin/options.php:17, inc/modules/frequently-bought-together/admin/options.php:15, inc/modules/inactive-tab-message/admin/options.php:16, inc/modules/login-popup/admin/options.php:15, inc/modules/payment-logos/admin/options.php:33, inc/modules/pre-orders/admin/options.php:16, inc/modules/product-audio/admin/options.php:15, inc/modules/product-brand-image/admin/options.php:15, inc/modules/product-labels/admin/options.php:14, inc/modules/product-swatches/admin/options.php:17, inc/modules/product-video/admin/options.php:15, inc/modules/quick-view/admin/options.php:17, inc/modules/real-time-search/admin/options.php:14, inc/modules/reasons-to-buy/admin/options.php:16, inc/modules/recently-viewed-products/admin/options.php:15, inc/modules/size-chart/admin/options.php:15, inc/modules/spending-goal/admin/options.php:15, inc/modules/sticky-add-to-cart/admin/options.php:15, inc/modules/stock-scarcity/admin/options.php:17, inc/modules/trust-badges/admin/options.php:33, inc/modules/volume-discounts/admin/options.php:14
+#: admin/class-merchant-admin-loader.php:102, inc/modules/advanced-reviews/admin/options.php:15, inc/modules/agree-to-terms-checkbox/admin/options.php:16, inc/modules/auto-external-links/admin/options.php:16, inc/modules/buy-now/admin/options.php:14, inc/modules/buy-x-get-y/admin/options.php:16, inc/modules/cart-count-favicon/admin/options.php:16, inc/modules/cart-reserved-timer/admin/options.php:18, inc/modules/checkout/admin/options.php:15, inc/modules/cookie-banner/admin/options.php:14, inc/modules/countdown-timer/admin/options.php:14, inc/modules/free-gifts/admin/options.php:17, inc/modules/frequently-bought-together/admin/options.php:15, inc/modules/inactive-tab-message/admin/options.php:16, inc/modules/login-popup/admin/options.php:15, inc/modules/payment-logos/admin/options.php:33, inc/modules/pre-orders/admin/options.php:16, inc/modules/product-audio/admin/options.php:15, inc/modules/product-brand-image/admin/options.php:15, inc/modules/product-labels/admin/options.php:14, inc/modules/product-navigation-buttons/admin/options.php:16, inc/modules/product-swatches/admin/options.php:17, inc/modules/product-video/admin/options.php:15, inc/modules/quick-social-links/admin/options.php:16, inc/modules/quick-view/admin/options.php:17, inc/modules/real-time-search/admin/options.php:14, inc/modules/reasons-to-buy/admin/options.php:16, inc/modules/recently-viewed-products/admin/options.php:15, inc/modules/size-chart/admin/options.php:15, inc/modules/slide-out-cart/admin/options.php:15, inc/modules/spending-goal/admin/options.php:15, inc/modules/sticky-add-to-cart/admin/options.php:15, inc/modules/stock-scarcity/admin/options.php:17, inc/modules/trust-badges/admin/options.php:33, inc/modules/volume-discounts/admin/options.php:14
 msgid "Settings"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/admin/options.php:22, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:233, inc/modules/buy-now/class-buy-now.php:261
+#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:216, inc/modules/buy-now/class-buy-now.php:244, inc/modules/buy-now/admin/options.php:22
 msgid "Buy Now"
 msgstr ""
 
@@ -61,338 +61,370 @@ msgstr ""
 msgid "Add customizable labels on top of your product images"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:78
-msgid "Sticky Add To Cart"
+#: admin/classes/class-merchant-admin-modules.php:78, inc/modules/add-to-cart-text/admin/class-add-to-cart-text-metabox.php:29
+msgid "Add To Cart Text"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:79
-msgid "Display a sticky add to cart bar when visitors are scrolling on your product pages"
+msgid "Change your store’s ‘Add to Cart’ text for simple, variable, out of stock and individual products."
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:86
-msgid "Recently Viewed Products"
+msgid "Sticky Add To Cart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:87
-msgid "Show recently viewed products on product pages and in the cart"
+msgid "Display a sticky add to cart bar when visitors are scrolling on your product pages"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:94
-msgid "Waitlist"
+msgid "Recently Viewed Products"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:95
-msgid "Build a waiting list for sold-out items and auto-notify potential customers when stock’s back"
+msgid "Show recently viewed products on product pages and in the cart"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:102
-msgid "Countdown Timer"
+msgid "Waitlist"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:103
-msgid "Create a sense of urgency by displaying a countdown timer on your discounted products"
+msgid "Build a waiting list for sold-out items and auto-notify potential customers when stock’s back"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:110
-msgid "Advanced Reviews"
+msgid "Countdown Timer"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:111
-msgid "Let customers run your marketing by collecting and displaying advanced reviews"
+msgid "Create a sense of urgency by displaying a countdown timer on your discounted products"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:118
-msgid "Checkouts"
+msgid "Advanced Reviews"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:119
-msgid "Choose from three different checkout layouts: Shopify-style, Multi-step or One-page"
+msgid "Let customers run your marketing by collecting and displaying advanced reviews"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:126
-msgid "Stock Scarcity"
+msgid "Checkouts"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:127
+msgid "Choose from three different checkout layouts: Shopify-style, Multi-step or One-page"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:134
+msgid "Stock Scarcity"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:135
 msgid "Let visitors know that stock is running low on products they are looking at"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:136
+#: admin/classes/class-merchant-admin-modules.php:144
 msgid "Pre-Orders"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:137
+#: admin/classes/class-merchant-admin-modules.php:145
 msgid "Allow visitors to pre-order products that are either out of stock or not yet released"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:144, inc/modules/frequently-bought-together/admin/options.php:41, templates/modules/frequently-bought-together/single-product.php:18
+#: admin/classes/class-merchant-admin-modules.php:152, templates/modules/frequently-bought-together/single-product.php:18, inc/modules/frequently-bought-together/admin/options.php:41
 msgid "Frequently Bought Together"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:145
+#: admin/classes/class-merchant-admin-modules.php:153
 msgid "Create discounted product bundles with items that are frequently purchased together"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:152
+#: admin/classes/class-merchant-admin-modules.php:160
 msgid "Buy X, Get Y"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:153
-msgid "When product X is purchased, give a discount on product Y. "
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:160
-msgid "Volume Discounts"
-msgstr ""
-
 #: admin/classes/class-merchant-admin-modules.php:161
-msgid "Offer discounts on larger quantity purchases to drive up average order value"
+msgid "When product X is purchased, give a discount on product Y "
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:168
-msgid "Spending Discount Goal"
+msgid "Volume Discounts"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:169
-msgid "Motivate higher order values by offering customers discounts for reaching spending goals"
+msgid "Offer discounts on larger quantity purchases to drive up average order value"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:176
-msgid "Gifts"
+msgid "Spending Discount Goal"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:177
+msgid "Motivate higher order values by offering customers discounts for reaching spending goals"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:184
+msgid "Free Gifts"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:185
 msgid "Reward shoppers with a gift if they hit a specified spending target"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:186
+#: admin/classes/class-merchant-admin-modules.php:194
 msgid "Cart Count Favicon"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:187
+#: admin/classes/class-merchant-admin-modules.php:195
 msgid "Make your browser tab stand out by showing the number of items in the cart on the favicon"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:194
+#: admin/classes/class-merchant-admin-modules.php:202
 msgid "Inactive Tab Message"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:195
+#: admin/classes/class-merchant-admin-modules.php:203
 msgid "Modify the browser tab's title when the visitor navigates away from your store"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:202
+#: admin/classes/class-merchant-admin-modules.php:210
 msgid "Floating Mini Cart"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:203
+#: admin/classes/class-merchant-admin-modules.php:211
 msgid "A cart icon will always be visible and a sliding cart when the customer clicks it"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:210
+#: admin/classes/class-merchant-admin-modules.php:218
+msgid "Slide-Out Cart"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:219
+msgid "Allow shoppers to see their shopping cart from any page on your online store"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:226
 msgid "Cart Reserved Timer"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:211
+#: admin/classes/class-merchant-admin-modules.php:227
 msgid "Create urgency by letting visitors know that the products in cart are reserved for a limited time"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:220, inc/modules/payment-logos/admin/options.php:16
+#: admin/classes/class-merchant-admin-modules.php:236, inc/modules/payment-logos/admin/options.php:16
 msgid "Payment Logos"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:221
+#: admin/classes/class-merchant-admin-modules.php:237
 msgid "Display the logos of the payment methods you accept on product pages"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:228, inc/modules/trust-badges/admin/options.php:16
+#: admin/classes/class-merchant-admin-modules.php:244, inc/modules/trust-badges/admin/options.php:16
 msgid "Trust Badges"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:229
+#: admin/classes/class-merchant-admin-modules.php:245
 msgid "Reassure customers by showcasing different badge-shaped store benefits"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:236
+#: admin/classes/class-merchant-admin-modules.php:252
 msgid "Reasons To Buy List"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:237
+#: admin/classes/class-merchant-admin-modules.php:253
 msgid "Provide customers with a summary of the key features and benefits of your products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:244
+#: admin/classes/class-merchant-admin-modules.php:260
+msgid "Quick Social Links"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:261
+msgid "Display floating social media icons to make it easier for your customers to connect with you"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:268
 msgid "Product Brand Image"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:245
+#: admin/classes/class-merchant-admin-modules.php:269
 msgid "Add brand images to products to instill confidence in potential buyers"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:254
+#: admin/classes/class-merchant-admin-modules.php:278
 msgid "Auto External Links"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:255
+#: admin/classes/class-merchant-admin-modules.php:279
 msgid "Keep users from navigating away from your store by opening external links in a new browser tab"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:262
+#: admin/classes/class-merchant-admin-modules.php:286
 msgid "Real-Time Search"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:263
+#: admin/classes/class-merchant-admin-modules.php:287
 msgid "Help visitors instantly find the products they're looking for by using predictive search"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:270
+#: admin/classes/class-merchant-admin-modules.php:294
 msgid "Code Snippets"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:271
+#: admin/classes/class-merchant-admin-modules.php:295
 msgid "Add code snippets in WordPress without having to edit your theme's functions.php file "
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:278
+#: admin/classes/class-merchant-admin-modules.php:302
 msgid "Scroll to Top Button"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:279
+#: admin/classes/class-merchant-admin-modules.php:303
 msgid "Help your customers get back easily to the top of the page with a single click"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:286, inc/modules/size-chart/admin/options.php:31, inc/modules/size-chart/class-size-chart.php:51
+#: admin/classes/class-merchant-admin-modules.php:310, inc/modules/size-chart/class-size-chart.php:51, inc/modules/size-chart/admin/options.php:31
 msgid "Size Chart"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:287
+#: admin/classes/class-merchant-admin-modules.php:311
 msgid "Reduce returns and increase sales by showing a size chart on specific products or all products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:294
+#: admin/classes/class-merchant-admin-modules.php:318
 msgid "Wishlist"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:295
-msgid "Prevent cart abandonment by allowing customer to save products for later purchases"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:302
-msgid "Product Video"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:303
-msgid "Upload video to be viewed in product galleries and on archive pages"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:310
-msgid "Product Audio"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:311
-msgid "Upload audio to be listened to in product galleries and on archive pages"
-msgstr ""
-
-#: admin/classes/class-merchant-admin-modules.php:318
-msgid "Login Popup"
-msgstr ""
-
 #: admin/classes/class-merchant-admin-modules.php:319
-msgid "Allow users to log in with a simple pop up without navigating to a new page"
+msgid "Prevent cart abandonment by allowing customers to save products for later purchase"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:326
-msgid "Product Swatches"
+msgid "Product Video"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:327
+msgid "Upload video to be viewed in product galleries and on archive pages"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:334
+msgid "Product Audio"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:335
+msgid "Upload audio to be listened to in product galleries and on archive pages"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:342
+msgid "Login Popup"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:343
+msgid "Allow users to log in with a simple pop up without navigating to a new page"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:350
+msgid "Variation Swatches"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:351
 msgid "Swatches make it easy for customers to view your product variants at a glance"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:336
+#: admin/classes/class-merchant-admin-modules.php:358
+msgid "Product Navigation Buttons"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:359
+msgid "Improve navigation by adding 'Next' and 'Previous' buttons for products"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-modules.php:368
 msgid "Agree to Terms Checkbox"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:337
+#: admin/classes/class-merchant-admin-modules.php:369
 msgid "Get customers to agree to your Terms & Conditions as part of the checkout process"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:344
+#: admin/classes/class-merchant-admin-modules.php:376
 msgid "Cookie Banner"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:345
+#: admin/classes/class-merchant-admin-modules.php:377
 msgid "Inform your visitors that the site uses cookies via a dismissable banner"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:361
+#: admin/classes/class-merchant-admin-modules.php:393
 msgid "Convert More"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:366
+#: admin/classes/class-merchant-admin-modules.php:398
 msgid "Boost Revenue"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:371
-msgid "Reduce Abandonment"
+#: admin/classes/class-merchant-admin-modules.php:403
+msgid "Reduce Cart Abandonment"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:376
+#: admin/classes/class-merchant-admin-modules.php:408
 msgid "Build Trust"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:381
+#: admin/classes/class-merchant-admin-modules.php:413
 msgid "Improve Experience"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:386
+#: admin/classes/class-merchant-admin-modules.php:418
 msgid "Protect Store"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:343
+#: admin/classes/class-merchant-admin-options.php:428
 msgid "Field not found!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:519, inc/classes/class-merchant-metabox.php:910, inc/modules/advanced-reviews/admin/options.php:99
+#: admin/classes/class-merchant-admin-options.php:715, inc/classes/class-merchant-metabox.php:912, inc/modules/advanced-reviews/admin/options.php:99
 msgid "Default"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:626
+#: admin/classes/class-merchant-admin-options.php:822
 msgid "Select Images"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:669
+#: admin/classes/class-merchant-admin-options.php:865
 msgid "Select Image"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:796
+#: admin/classes/class-merchant-admin-options.php:1124
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page.</p>"
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:805
+#: admin/classes/class-merchant-admin-options.php:1133
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:814
+#: admin/classes/class-merchant-admin-options.php:1142
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:816
+#: admin/classes/class-merchant-admin-options.php:1144
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:822
+#: admin/classes/class-merchant-admin-options.php:1150
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:823
+#: admin/classes/class-merchant-admin-options.php:1151
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:786
+#: admin/classes/class-merchant-admin-options.php:1114
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
@@ -563,7 +595,7 @@ msgstr ""
 msgid "I don’t need it anymore."
 msgstr ""
 
-#: admin/pages/page-module.php:121
+#: admin/pages/page-module.php:121, inc/modules/quick-social-links/admin/options.php:235, inc/modules/quick-social-links/admin/options.php:310
 msgid "Other"
 msgstr ""
 
@@ -723,49 +755,797 @@ msgstr ""
 msgid "Remove Image"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:741, inc/classes/class-merchant-metabox.php:767
+#: inc/classes/class-merchant-metabox.php:743, inc/classes/class-merchant-metabox.php:769
 msgid "Upload"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:792, inc/classes/class-merchant-metabox.php:834
+#: inc/classes/class-merchant-metabox.php:794, inc/classes/class-merchant-metabox.php:836
 msgid "Size Name"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:803, inc/classes/class-merchant-metabox.php:847
+#: inc/classes/class-merchant-metabox.php:805, inc/classes/class-merchant-metabox.php:849
 msgid "Duplicate"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
+#: inc/classes/class-merchant-metabox.php:819, inc/classes/class-merchant-metabox.php:863
 msgid "Remove"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:870
+#: inc/classes/class-merchant-metabox.php:872
 msgid "Add Size Chart"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:890
+#: inc/classes/class-merchant-metabox.php:892
 msgid "Select a size chart"
 msgstr ""
 
 #. translators: 1. Coupon admin url 2. Link target attribute value
-#: inc/classes/class-merchant-metabox.php:959
+#: inc/classes/class-merchant-metabox.php:962
 msgid "No coupons found! <a href=\"%1$s\" target=\"%2$s\">Create a new coupon</a>"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:944
+#: inc/classes/class-merchant-metabox.php:946
 msgid "Select a coupon"
 msgstr ""
 
-#: inc/classes/class-merchant-metabox.php:955
+#: inc/classes/class-merchant-metabox.php:957
 msgid "Manage coupons"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:46, inc/modules/add-to-cart-text/class-add-to-cart-text.php:47, inc/modules/add-to-cart-text/class-add-to-cart-text.php:49, templates/modules/frequently-bought-together/single-product.php:81, inc/modules/add-to-cart-text/admin/options.php:22, inc/modules/add-to-cart-text/admin/options.php:41, inc/modules/add-to-cart-text/admin/options.php:76, inc/modules/frequently-bought-together/admin/options.php:62
+msgid "Add to cart"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:50, inc/modules/add-to-cart-text/admin/options.php:57
+msgid "Select options"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:52, inc/modules/add-to-cart-text/admin/options.php:96
+msgid "Out of stock"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:137
+msgid "Simple product"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:138, inc/modules/add-to-cart-text/class-add-to-cart-text.php:149, inc/modules/add-to-cart-text/class-add-to-cart-text.php:160, inc/modules/product-labels/class-product-labels.php:182
+msgid "The product description normally goes here."
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:141
+msgid "14.00"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:148
+msgid "Variable product"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:152, inc/modules/add-to-cart-text/class-add-to-cart-text.php:163
+msgid "20.00"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:159
+msgid "Out of stock product"
+msgstr ""
+
+#: inc/modules/advanced-reviews/class-advanced-reviews.php:60, inc/modules/advanced-reviews/admin/options.php:24
+msgid "Why people love our products"
+msgstr ""
+
+#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:51, inc/modules/agree-to-terms-checkbox/admin/options.php:24
+msgid "I agree with the"
+msgstr ""
+
+#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:52, inc/modules/agree-to-terms-checkbox/admin/options.php:31
+msgid "Terms & Conditions"
+msgstr ""
+
+#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:54
+msgid "Obtain consent before customers start the checkout process"
+msgstr ""
+
+#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:198, inc/modules/quick-view/class-quick-view.php:267, templates/modules/buy-x-get-y/single-product.php:104, inc/modules/buy-x-get-y/admin/options.php:62
+msgid "Add To Cart"
+msgstr ""
+
+#: inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:55, inc/modules/cart-reserved-timer/admin/options.php:33
+msgid "An item in your cart is in high demand."
+msgstr ""
+
+#: inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:56, inc/modules/cart-reserved-timer/admin/options.php:40
+msgid "Your cart is saved for {timer} minutes!"
+msgstr ""
+
+#: inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:57, inc/modules/cart-reserved-timer/admin/options.php:47
+msgid "Your cart is saved for {timer} seconds!"
+msgstr ""
+
+#: inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:151
+msgid "Cart Reserved Timer Icon"
+msgstr ""
+
+#: inc/modules/cookie-banner/class-cookie-banner.php:46, inc/modules/cookie-banner/admin/options.php:33
+msgid "🍪 We're using cookies to give you the best experience on our site."
+msgstr ""
+
+#: inc/modules/cookie-banner/class-cookie-banner.php:47, inc/modules/cookie-banner/admin/options.php:41
+msgid "Learn More"
+msgstr ""
+
+#: inc/modules/cookie-banner/class-cookie-banner.php:49, inc/modules/cookie-banner/admin/options.php:55
+msgid "I Understand"
+msgstr ""
+
+#: inc/modules/countdown-timer/class-countdown-timer.php:55, inc/modules/countdown-timer/admin/options.php:29
+msgid "Sale ends in"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:175, inc/modules/slide-out-cart/class-slide-out-cart.php:170
+msgid "Close the side mini cart"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:180, inc/modules/slide-out-cart/class-slide-out-cart.php:175
+msgid "Your Cart"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:187, inc/modules/floating-mini-cart/class-floating-mini-cart.php:199, inc/modules/slide-out-cart/class-slide-out-cart.php:182, inc/modules/slide-out-cart/class-slide-out-cart.php:194
+msgid "Product Sample Title"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:210, inc/modules/slide-out-cart/class-slide-out-cart.php:205
+msgid "Subtotal:"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:216, inc/modules/slide-out-cart/class-slide-out-cart.php:211
+msgid "View cart:"
+msgstr ""
+
+#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:217, inc/modules/slide-out-cart/class-slide-out-cart.php:212
+msgid "Checkout:"
+msgstr ""
+
+#: inc/modules/free-gifts/class-free-gifts.php:59, inc/modules/free-gifts/admin/options.php:77
+msgid "Spend {amount} more to receive this free gift!"
+msgstr ""
+
+#: inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:48, inc/modules/free-gifts/admin/options.php:84
+msgid "Free"
+msgstr ""
+
+#: inc/modules/free-gifts/class-free-gifts.php:61, inc/modules/free-gifts/admin/options.php:91
+msgid "Free Gift"
+msgstr ""
+
+#: inc/modules/free-gifts/class-free-gifts.php:62, inc/modules/free-gifts/admin/options.php:99
+msgid "This item was added as a free gift"
+msgstr ""
+
+#: inc/modules/inactive-tab-message/class-inactive-tab-message.php:51, inc/modules/inactive-tab-message/admin/options.php:25
+msgid "✋ Don't forget this"
+msgstr ""
+
+#: inc/modules/inactive-tab-message/class-inactive-tab-message.php:52, inc/modules/inactive-tab-message/admin/options.php:33
+msgid "✋ You left something in the cart"
+msgstr ""
+
+#: inc/modules/login-popup/class-login-popup.php:51, inc/modules/login-popup/class-login-popup.php:198, inc/modules/login-popup/admin/options.php:32
+msgid "Login"
+msgstr ""
+
+#. translators: 1. Display name
+#: inc/modules/login-popup/class-login-popup.php:54, inc/modules/login-popup/admin/options.php:49
+msgid "Welcome %s"
+msgstr ""
+
+#: inc/modules/login-popup/class-login-popup.php:197
+msgid "Not a member?"
+msgstr ""
+
+#: inc/modules/login-popup/class-login-popup.php:197
+msgid "Register"
+msgstr ""
+
+#: inc/modules/login-popup/class-login-popup.php:198
+msgid "Already a member?"
+msgstr ""
+
+#: inc/modules/payment-logos/class-payment-logos.php:52, inc/modules/payment-logos/admin/options.php:53
+msgid "🔒 Safe & Secure Checkout"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:91
+msgid "We detected that your cart has pre-order products. Please remove them before being able to add this product."
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:89
+msgid "We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding."
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:287
+msgid "Pre-Order Product - Set this product as pre-order"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:296, inc/modules/pre-orders/class-pre-orders-main-functionality.php:323
+msgid "Pre-Order Shipping Date"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:313
+msgid "Pre-Order Product"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:314
+msgid "Set this product as pre-order"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:387, inc/modules/pre-orders/class-pre-orders.php:59, inc/modules/pre-orders/admin/options.php:24
+msgid "Pre Order Now!"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:408, inc/modules/pre-orders/class-pre-orders-main-functionality.php:455, inc/modules/pre-orders/class-pre-orders.php:60, inc/modules/pre-orders/admin/options.php:31
+msgid "Ships in {date}."
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:471
+msgid "Pre Ordered"
+msgstr ""
+
+#. translators: %s: pre ordered product count
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:477
+msgid "Pre Ordered <span class=\"count\">(%s)</span>"
+msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/modules/pre-orders/class-pre-orders.php:182
+msgid "Tag Pre-Orders"
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders.php:188
+msgid "Pre-orders captured by Merchant are tagged with \"MerchantPreOrder\" and can be found in your WooCommerce Order Section."
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders.php:188
+msgid "View Pre-Orders"
+msgstr ""
+
+#: inc/modules/product-audio/class-product-audio.php:107
+msgid "Once this module is enabled new options to upload audio files will appear under the admin product edit page. This means you have to edit and upload the audio file for each product in your store."
+msgstr ""
+
+#: inc/modules/product-audio/class-product-audio.php:107, inc/modules/product-brand-image/class-product-brand-image.php:117, inc/modules/product-video/class-product-video.php:109, inc/modules/size-chart/class-size-chart.php:133
+msgid "View All Products"
+msgstr ""
+
+#: inc/modules/product-brand-image/class-product-brand-image.php:117
+msgid "The product brand image can be either enabled globally to be displayed in all products or in specific products. If you want to display a different brand image for each product, that’s possible from the admin product edit page."
+msgstr ""
+
+#: inc/modules/product-labels/class-product-labels.php:51, inc/modules/product-labels/admin/options.php:23
+msgid "Spring Special"
+msgstr ""
+
+#: inc/modules/product-labels/class-product-labels.php:181, inc/modules/quick-view/class-quick-view.php:261, inc/modules/recently-viewed-products/class-recently-viewed-products.php:167, inc/modules/recently-viewed-products/class-recently-viewed-products.php:174, inc/modules/recently-viewed-products/class-recently-viewed-products.php:181, inc/modules/wishlist/class-wishlist.php:160
+msgid "Product Title"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/class-product-navigation-buttons.php:165
+msgid "← Rare Earth Deep Pore Minimizing Cleansing"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/class-product-navigation-buttons.php:166
+msgid "← Previous"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/class-product-navigation-buttons.php:169
+msgid "Mini Radiant Creamy Concealer and Blush →"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/class-product-navigation-buttons.php:170
+msgid "Next →"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:286
+msgid "Color"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:294, inc/modules/product-swatches/class-product-swatches.php:315
+msgid "Blue"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:301, inc/modules/product-swatches/class-product-swatches.php:316
+msgid "Red"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:308, inc/modules/product-swatches/class-product-swatches.php:317
+msgid "White"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:314, inc/modules/product-swatches/class-product-swatches.php:324, inc/modules/product-swatches/class-product-swatches.php:329, inc/modules/product-swatches/class-product-swatches.php:371, inc/modules/product-swatches/class-product-swatches.php:394
+msgid "Select"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:330
+msgid "Slim"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:331
+msgid "Wavy"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:338
+msgid "Image"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:345, inc/modules/product-swatches/class-product-swatches.php:348, inc/modules/product-swatches/class-product-swatches.php:372
+msgid "Image option 1"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:354, inc/modules/product-swatches/class-product-swatches.php:356, inc/modules/product-swatches/class-product-swatches.php:373
+msgid "Image option 2"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:362, inc/modules/product-swatches/class-product-swatches.php:365, inc/modules/product-swatches/class-product-swatches.php:374
+msgid "Image option 3"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:387, inc/modules/product-swatches/class-product-swatches.php:395
+msgid "Button option 1"
+msgstr ""
+
+#: inc/modules/product-swatches/class-product-swatches.php:390, inc/modules/product-swatches/class-product-swatches.php:396
+msgid "Button option 2"
+msgstr ""
+
+#: inc/modules/product-video/class-product-video.php:106
+msgid "Once this module is enabled new options to upload video files will appear under admin product edit page. This means you have to edit and upload the video file for each product in your store."
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:62, inc/modules/quick-social-links/admin/options.php:400
+msgid "https://www.facebook.com"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:67, inc/modules/quick-social-links/admin/options.php:405
+msgid "https://www.instagram.com"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:72, inc/modules/quick-social-links/admin/options.php:410
+msgid "https://www.twitter.com"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:259
+msgid "Facebook"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:260
+msgid "Instagram"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:261
+msgid "Twitter"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:262
+msgid "TikTok"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:263
+msgid "Pinterest"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:264
+msgid "WhatsApp"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:265
+msgid "Telegram"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:266
+msgid "Flickr"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:267
+msgid "LinkedIn"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:268
+msgid "Youtube"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:269
+msgid "Discord"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:270
+msgid "Xing"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:271
+msgid "Dribble"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:272
+msgid "VK"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:273
+msgid "Weibo"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:274
+msgid "Vimeo"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:275
+msgid "Mix"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:276
+msgid "Behance"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:277
+msgid "Spotify"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:278
+msgid "Sound Cloud"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:279
+msgid "Twitch"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:280
+msgid "Etsy"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:281
+msgid "Bandcamp"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:282
+msgid "Reddit"
+msgstr ""
+
+#: inc/modules/quick-social-links/class-quick-social-links.php:283
+msgid "Github"
+msgstr ""
+
+#: inc/modules/quick-view/class-quick-view.php:262
+msgid "The product description normally is displayed here."
+msgstr ""
+
+#: inc/modules/quick-view/class-quick-view.php:443
+msgid "Close quick view modal"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:199, inc/modules/real-time-search/class-real-time-search.php:283, inc/modules/recently-viewed-products/admin/options.php:79
+msgid "Products"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:205
+msgid "Ultra Facial Moisturizing Cream"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:206, inc/modules/real-time-search/class-real-time-search.php:213
+msgid "Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:212
+msgid "Rare Earth Deep Pore Cleansing"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:313
+msgid "Categories"
+msgstr ""
+
+#: inc/modules/real-time-search/class-real-time-search.php:335
+msgid "No products found."
+msgstr ""
+
+#: inc/modules/reasons-to-buy/class-reasons-to-buy.php:51, inc/modules/reasons-to-buy/admin/options.php:39
+msgid "Reasons to buy list"
+msgstr ""
+
+#: inc/modules/reasons-to-buy/class-reasons-to-buy.php:53, inc/modules/reasons-to-buy/admin/options.php:55
+msgid "100% Polyester."
+msgstr ""
+
+#: inc/modules/reasons-to-buy/class-reasons-to-buy.php:54, inc/modules/reasons-to-buy/admin/options.php:56
+msgid "Recycled Polyamid."
+msgstr ""
+
+#: inc/modules/reasons-to-buy/class-reasons-to-buy.php:55, inc/modules/reasons-to-buy/admin/options.php:57
+msgid "GOTS-certified organic cotton."
+msgstr ""
+
+#: inc/modules/recently-viewed-products/class-recently-viewed-products.php:51, inc/modules/recently-viewed-products/admin/options.php:24
+msgid "Recently Viewed"
+msgstr ""
+
+#: inc/modules/recently-viewed-products/class-recently-viewed-products.php:168, inc/modules/recently-viewed-products/class-recently-viewed-products.php:175, inc/modules/recently-viewed-products/class-recently-viewed-products.php:182, inc/modules/wishlist/class-wishlist.php:161
+msgid "Product description normally goes here."
+msgstr ""
+
+#: inc/modules/scroll-to-top-button/class-scroll-to-top-button.php:49, inc/modules/scroll-to-top-button/admin/options.php:57
+msgid "Back to top"
+msgstr ""
+
+#: inc/modules/size-chart/class-size-chart.php:130
+msgid "You can have as many size charts you want and either specify in which product you want to add them or simply enable one globally to be displayed in all products. But if you want to display different size charts for each product, that's possible from admin product edit page."
+msgstr ""
+
+#: inc/modules/size-chart/class-size-chart.php:211
+msgid "Size Chart Modal Title"
+msgstr ""
+
+#: inc/modules/size-chart/class-size-chart.php:217
+msgid "US"
+msgstr ""
+
+#: inc/modules/size-chart/class-size-chart.php:218
+msgid "EU"
+msgstr ""
+
+#: inc/modules/size-chart/class-size-chart.php:219
+msgid "UK"
+msgstr ""
+
+#: inc/modules/spending-goal/class-spending-goal.php:59, inc/modules/spending-goal/admin/options.php:22, inc/modules/spending-goal/admin/options.php:61
+msgid "Spending goal"
+msgstr ""
+
+#: inc/modules/spending-goal/class-spending-goal.php:60, inc/modules/spending-goal/admin/options.php:79
+msgid "Spend {spending_goal} to get a {discount_amount} discount!"
+msgstr ""
+
+#: inc/modules/spending-goal/class-spending-goal.php:61, inc/modules/spending-goal/admin/options.php:87
+msgid "Spend {spending_goal} more to get a {discount_amount} discount"
+msgstr ""
+
+#: inc/modules/spending-goal/class-spending-goal.php:62, inc/modules/spending-goal/admin/options.php:95
+msgid "Congratulations! You get a discount of {discount_amount} on this order!"
+msgstr ""
+
+#: inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:200
+msgid "<h5>Product Title</h5>"
+msgstr ""
+
+#: inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:203
+msgid "<a href=\"#\" class=\"single_add_to_cart_button button\">Add to cart</a>"
+msgstr ""
+
+#: inc/modules/stock-scarcity/class-stock-scarcity.php:62, inc/modules/stock-scarcity/admin/options.php:50
+msgid "Hurry! Only {stock} units left in stock!"
+msgstr ""
+
+#: inc/modules/trust-badges/class-trust-badges.php:53, inc/modules/trust-badges/admin/options.php:53
+msgid "Product Quality Guaranteed!"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:59, inc/modules/volume-discounts/class-volume-discounts.php:66, inc/modules/volume-discounts/admin/options.php:74
+msgid "Discount"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:61, inc/modules/volume-discounts/admin/options.php:39
+msgid "Buy more, save more!"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:62, inc/modules/volume-discounts/admin/options.php:46
+msgid "Save {amount}"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:63, inc/modules/volume-discounts/admin/options.php:53
+msgid "Buy {amount} with {discount} discount each"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:64, inc/modules/volume-discounts/admin/options.php:60
+msgid "Per item:"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:65, inc/modules/volume-discounts/admin/options.php:67
+msgid "Total price:"
+msgstr ""
+
+#: inc/modules/volume-discounts/class-volume-discounts.php:67, inc/modules/volume-discounts/admin/options.php:82
+msgid "A discount of {amount} is applied."
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:55, inc/modules/wait-list/admin/options.php:23
+msgid "New stock on its way! Email when stock available"
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:56, inc/modules/wait-list/admin/options.php:30
+msgid "Your Email Address"
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:57, inc/modules/wait-list/admin/options.php:37
+msgid "Notify Me"
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:58, inc/modules/wait-list/admin/options.php:44
+msgid "You have been successfully added to our wait list. As soon as new stock become available, we will notify you via email."
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:59, inc/modules/wait-list/admin/options.php:59
+msgid "Hello subscriber, Thank you for subscribing to {product}. We will email you once product back in stock."
+msgstr ""
+
+#: inc/modules/wait-list/class-wait-list.php:60, inc/modules/wait-list/admin/options.php:67
+msgid "Hello Subscriber, Thanks for your patience and finally the wait is over! Your Subscribed Product {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you'll get one, so hurry to be one of the lucky shoppers who do. Add this product {product} directly to your cart."
+msgstr ""
+
+#: inc/modules/wishlist/class-wishlist.php:63
+msgid "Add To Wishlist"
+msgstr ""
+
+#. translators: %s is average rating value
+#: templates/modules/advanced-reviews/reviews.php:65, templates/modules/advanced-reviews/reviews.php:321, templates/modules/advanced-reviews/reviews.php:252
+msgid "Rated %s out of 5 based on customer ratings."
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:80
+msgid "Be the first to leave a review."
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:77
+msgctxt "review count"
+msgid "%s Review"
+msgid_plural "%s Reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/modules/advanced-reviews/reviews.php:88
+msgid "5 Stars"
+msgstr ""
+
+#. translators: %s is stars quantity
+#: templates/modules/advanced-reviews/reviews.php:95, templates/modules/advanced-reviews/reviews.php:108, templates/modules/advanced-reviews/reviews.php:121, templates/modules/advanced-reviews/reviews.php:134, templates/modules/advanced-reviews/reviews.php:147
+msgid "(%s)"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:101
+msgid "4 Stars"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:114
+msgid "3 Stars"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:127
+msgid "2 Stars"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:140
+msgid "1 Star"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:157
+msgid "Write a Review"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:161
+msgid "Sort by:"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:163, inc/modules/advanced-reviews/admin/options.php:79
+msgid "Newest"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:164, inc/modules/advanced-reviews/admin/options.php:80
+msgid "Oldest"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:165, inc/modules/advanced-reviews/admin/options.php:81
+msgid "Top rated"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:166, inc/modules/advanced-reviews/admin/options.php:82
+msgid "Low rated"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:352
+msgid "There are no reviews yet."
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:336, templates/modules/advanced-reviews/reviews.php:267
+msgid " — verified owner"
+msgstr ""
+
+#: templates/modules/advanced-reviews/reviews.php:341
+msgid "Your review is awaiting approval."
+msgstr ""
+
+#: templates/modules/buy-x-get-y/single-product.php:18, inc/modules/buy-x-get-y/admin/options.php:41
+msgid "Buy One Get One"
+msgstr ""
+
+#. translators: 1. quantity
+#: templates/modules/buy-x-get-y/single-product.php:32
+msgid "Buy %s"
+msgstr ""
+
+#. translators: 1. quantity 2. discount value
+#: templates/modules/buy-x-get-y/single-product.php:69
+msgid "Get %1$s with %2$s off"
+msgstr ""
+
+#. translators: 1. Attribute label
+#: templates/modules/buy-x-get-y/single-product.php:93, templates/modules/frequently-bought-together/single-product.php:46
+msgid "Select %s"
+msgstr ""
+
+#. translators: 1. Amount
+#: templates/modules/free-gifts/widget-contents.php:31
+msgid "Spend %s more to receive this free gift!"
+msgstr ""
+
+#: templates/modules/frequently-bought-together/single-product.php:65, inc/modules/frequently-bought-together/admin/options.php:48
+msgid "Bundle price"
+msgstr ""
+
+#. translators: 1. Total discount
+#: templates/modules/frequently-bought-together/single-product.php:76
+msgid "You save: %s"
+msgstr ""
+
+#: templates/modules/sticky-add-to-cart/content.php:70
+msgid "Add to Cart"
+msgstr ""
+
+#: templates/modules/sticky-add-to-cart/content.php:73
+msgid "Close"
+msgstr ""
+
+#. translators: 1. Quantity of units
+#: templates/modules/stock-scarcity/single-product.php:26
+msgid "Hurry! Only %s units left in stock!"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/class-add-to-cart-text-metabox.php:35, inc/modules/add-to-cart-text/admin/options.php:40, inc/modules/add-to-cart-text/admin/options.php:75
+msgid "Label on single product page"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/class-add-to-cart-text-metabox.php:37, inc/modules/add-to-cart-text/admin/class-add-to-cart-text-metabox.php:46
+msgid "Leave empty to use global settings."
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/class-add-to-cart-text-metabox.php:44
+msgid "Label on shop pages"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:16
+msgid "Simple Product"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:21, inc/modules/add-to-cart-text/admin/options.php:56, inc/modules/add-to-cart-text/admin/options.php:95, inc/modules/agree-to-terms-checkbox/admin/options.php:23
+msgid "Label"
+msgstr ""
+
+#. translators: 1. Link open tag 2. Link close tag
+#: inc/modules/add-to-cart-text/admin/options.php:24, inc/modules/add-to-cart-text/admin/options.php:59
+msgid "Note: If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox."
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:33, inc/modules/add-to-cart-text/admin/options.php:68
+msgid "Customize label on single product page"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:51
+msgid "Variable Product"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:84
+msgid "Out of Stock Product"
+msgstr ""
+
+#: inc/modules/add-to-cart-text/admin/options.php:89
+msgid "Alter the label text when the product is out of stock"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:23, inc/modules/buy-x-get-y/admin/options.php:40, inc/modules/frequently-bought-together/admin/options.php:40, inc/modules/reasons-to-buy/admin/options.php:38, inc/modules/recently-viewed-products/admin/options.php:23, inc/modules/volume-discounts/admin/options.php:38
 msgid "Title"
-msgstr ""
-
-#: inc/modules/advanced-reviews/admin/options.php:24, inc/modules/advanced-reviews/class-advanced-reviews.php:60
-msgid "Why people love our products"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:31, inc/modules/recently-viewed-products/admin/options.php:31
@@ -812,7 +1592,7 @@ msgstr ""
 msgid "Title and description alignment"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:66, inc/modules/countdown-timer/admin/options.php:84, inc/modules/floating-mini-cart/admin/options.php:49, inc/modules/payment-logos/admin/options.php:42, inc/modules/trust-badges/admin/options.php:42
+#: inc/modules/advanced-reviews/admin/options.php:66, inc/modules/countdown-timer/admin/options.php:84, inc/modules/floating-mini-cart/admin/options.php:49, inc/modules/payment-logos/admin/options.php:42, inc/modules/quick-social-links/admin/options.php:29, inc/modules/trust-badges/admin/options.php:42
 msgid "Left"
 msgstr ""
 
@@ -820,28 +1600,12 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:68, inc/modules/countdown-timer/admin/options.php:86, inc/modules/floating-mini-cart/admin/options.php:50, inc/modules/payment-logos/admin/options.php:44, inc/modules/trust-badges/admin/options.php:44
+#: inc/modules/advanced-reviews/admin/options.php:68, inc/modules/countdown-timer/admin/options.php:86, inc/modules/floating-mini-cart/admin/options.php:50, inc/modules/payment-logos/admin/options.php:44, inc/modules/quick-social-links/admin/options.php:33, inc/modules/trust-badges/admin/options.php:44
 msgid "Right"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:77
 msgid "Default reviews sorting"
-msgstr ""
-
-#: inc/modules/advanced-reviews/admin/options.php:79, templates/modules/advanced-reviews/reviews.php:163
-msgid "Newest"
-msgstr ""
-
-#: inc/modules/advanced-reviews/admin/options.php:80, templates/modules/advanced-reviews/reviews.php:164
-msgid "Oldest"
-msgstr ""
-
-#: inc/modules/advanced-reviews/admin/options.php:81, templates/modules/advanced-reviews/reviews.php:165
-msgid "Top rated"
-msgstr ""
-
-#: inc/modules/advanced-reviews/admin/options.php:82, templates/modules/advanced-reviews/reviews.php:166
-msgid "Low rated"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:91
@@ -865,7 +1629,7 @@ msgstr ""
 msgid "Controls the display order from the entire advanced reviews section. Low values will move the section to top. High values will move the section to bottom."
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:128, inc/modules/advanced-reviews/admin/options.php:246, inc/modules/floating-mini-cart/admin/options.php:139, inc/modules/login-popup/admin/options.php:111, inc/modules/reasons-to-buy/admin/options.php:107, inc/modules/recently-viewed-products/admin/options.php:161, inc/modules/size-chart/admin/options.php:130, inc/modules/sticky-add-to-cart/admin/options.php:147
+#: inc/modules/advanced-reviews/admin/options.php:128, inc/modules/advanced-reviews/admin/options.php:246, inc/modules/floating-mini-cart/admin/options.php:139, inc/modules/login-popup/admin/options.php:111, inc/modules/reasons-to-buy/admin/options.php:107, inc/modules/recently-viewed-products/admin/options.php:161, inc/modules/size-chart/admin/options.php:130, inc/modules/slide-out-cart/admin/options.php:59, inc/modules/sticky-add-to-cart/admin/options.php:147
 msgid "Title color"
 msgstr ""
 
@@ -893,7 +1657,7 @@ msgstr ""
 msgid "Dividers color"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:184, inc/modules/floating-mini-cart/admin/options.php:202, inc/modules/login-popup/admin/options.php:139, inc/modules/sticky-add-to-cart/admin/options.php:171
+#: inc/modules/advanced-reviews/admin/options.php:184, inc/modules/floating-mini-cart/admin/options.php:202, inc/modules/login-popup/admin/options.php:139, inc/modules/slide-out-cart/admin/options.php:122, inc/modules/sticky-add-to-cart/admin/options.php:171
 msgid "Button color"
 msgstr ""
 
@@ -901,7 +1665,7 @@ msgstr ""
 msgid "Button color (hover)"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:200, inc/modules/buy-now/admin/options.php:56, inc/modules/cookie-banner/admin/options.php:130, inc/modules/floating-mini-cart/admin/options.php:230, inc/modules/login-popup/admin/options.php:167, inc/modules/pre-orders/admin/options.php:65, inc/modules/quick-view/admin/options.php:138, inc/modules/sticky-add-to-cart/admin/options.php:155
+#: inc/modules/advanced-reviews/admin/options.php:200, inc/modules/buy-now/admin/options.php:56, inc/modules/cookie-banner/admin/options.php:130, inc/modules/floating-mini-cart/admin/options.php:230, inc/modules/login-popup/admin/options.php:167, inc/modules/pre-orders/admin/options.php:65, inc/modules/quick-view/admin/options.php:138, inc/modules/slide-out-cart/admin/options.php:150, inc/modules/sticky-add-to-cart/admin/options.php:155
 msgid "Button background color"
 msgstr ""
 
@@ -933,20 +1697,8 @@ msgstr ""
 msgid "Modal background color"
 msgstr ""
 
-#: inc/modules/agree-to-terms-checkbox/admin/options.php:23
-msgid "Label"
-msgstr ""
-
-#: inc/modules/agree-to-terms-checkbox/admin/options.php:24, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:51
-msgid "I agree with the"
-msgstr ""
-
 #: inc/modules/agree-to-terms-checkbox/admin/options.php:30
 msgid "Terms and conditions text"
-msgstr ""
-
-#: inc/modules/agree-to-terms-checkbox/admin/options.php:31, inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:52
-msgid "Terms & Conditions"
 msgstr ""
 
 #: inc/modules/agree-to-terms-checkbox/admin/options.php:37
@@ -963,10 +1715,6 @@ msgstr ""
 
 #: inc/modules/agree-to-terms-checkbox/admin/options.php:46
 msgid "The error will be shown if the user tries to go to checkout without accepting the terms & conditions."
-msgstr ""
-
-#: inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php:54
-msgid "Obtain consent before customers start the checkout process"
 msgstr ""
 
 #: inc/modules/animated-add-to-cart/admin/options.php:23
@@ -989,10 +1737,6 @@ msgstr ""
 msgid "Move your mouse over each option to see the animations. Click on one of the buttons to select that animation."
 msgstr ""
 
-#: inc/modules/animated-add-to-cart/class-animated-add-to-cart.php:198, inc/modules/buy-x-get-y/admin/options.php:62, inc/modules/quick-view/class-quick-view.php:267, templates/modules/buy-x-get-y/single-product.php:104
-msgid "Add To Cart"
-msgstr ""
-
 #: inc/modules/auto-external-links/admin/options.php:22
 msgid "All the external links on your store will be opened in a browser tab by enabling this module. It prevents visitors from accidentally navigating away from your online store."
 msgstr ""
@@ -1009,15 +1753,15 @@ msgstr ""
 msgid "Button text color hover"
 msgstr ""
 
-#: inc/modules/buy-now/admin/options.php:42, inc/modules/floating-mini-cart/admin/options.php:216, inc/modules/login-popup/admin/options.php:153, inc/modules/pre-orders/admin/options.php:51, inc/modules/quick-view/admin/options.php:124
+#: inc/modules/buy-now/admin/options.php:42, inc/modules/floating-mini-cart/admin/options.php:216, inc/modules/login-popup/admin/options.php:153, inc/modules/pre-orders/admin/options.php:51, inc/modules/quick-view/admin/options.php:124, inc/modules/slide-out-cart/admin/options.php:136
 msgid "Button border color"
 msgstr ""
 
-#: inc/modules/buy-now/admin/options.php:49, inc/modules/floating-mini-cart/admin/options.php:223, inc/modules/login-popup/admin/options.php:160, inc/modules/pre-orders/admin/options.php:58, inc/modules/quick-view/admin/options.php:131
+#: inc/modules/buy-now/admin/options.php:49, inc/modules/floating-mini-cart/admin/options.php:223, inc/modules/login-popup/admin/options.php:160, inc/modules/pre-orders/admin/options.php:58, inc/modules/quick-view/admin/options.php:131, inc/modules/slide-out-cart/admin/options.php:143
 msgid "Button border color hover"
 msgstr ""
 
-#: inc/modules/buy-now/admin/options.php:63, inc/modules/floating-mini-cart/admin/options.php:237, inc/modules/login-popup/admin/options.php:174, inc/modules/pre-orders/admin/options.php:72, inc/modules/quick-view/admin/options.php:145
+#: inc/modules/buy-now/admin/options.php:63, inc/modules/floating-mini-cart/admin/options.php:237, inc/modules/login-popup/admin/options.php:174, inc/modules/pre-orders/admin/options.php:72, inc/modules/quick-view/admin/options.php:145, inc/modules/slide-out-cart/admin/options.php:157
 msgid "Button background color hover"
 msgstr ""
 
@@ -1037,10 +1781,6 @@ msgstr ""
 msgid "Text Formatting Settings"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:41, templates/modules/buy-x-get-y/single-product.php:18
-msgid "Buy One Get One"
-msgstr ""
-
 #: inc/modules/buy-x-get-y/admin/options.php:47
 msgid "Buy label"
 msgstr ""
@@ -1057,7 +1797,7 @@ msgstr ""
 msgid "Get {quantity} with {discount} off"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:71, inc/modules/free-gifts/admin/options.php:109, inc/modules/frequently-bought-together/admin/options.php:70, inc/modules/volume-discounts/admin/options.php:90
+#: inc/modules/buy-x-get-y/admin/options.php:71, inc/modules/free-gifts/admin/options.php:109, inc/modules/frequently-bought-together/admin/options.php:70, inc/modules/product-navigation-buttons/admin/options.php:55, inc/modules/quick-social-links/admin/options.php:55, inc/modules/volume-discounts/admin/options.php:90
 msgid "Style Settings"
 msgstr ""
 
@@ -1141,11 +1881,11 @@ msgstr ""
 msgid "Bottom right"
 msgstr ""
 
-#: inc/modules/cart-count-favicon/admin/options.php:47, inc/modules/floating-mini-cart/admin/options.php:98, inc/modules/login-popup/admin/options.php:188, inc/modules/product-labels/admin/options.php:102, inc/modules/product-swatches/admin/options.php:92, inc/modules/product-swatches/admin/options.php:151, inc/modules/product-swatches/admin/options.php:409, inc/modules/product-swatches/admin/options.php:514, inc/modules/scroll-to-top-button/admin/options.php:256, inc/modules/size-chart/admin/options.php:109, inc/modules/sticky-add-to-cart/admin/options.php:131
+#: inc/modules/cart-count-favicon/admin/options.php:47, inc/modules/floating-mini-cart/admin/options.php:98, inc/modules/login-popup/admin/options.php:188, inc/modules/product-labels/admin/options.php:102, inc/modules/product-swatches/admin/options.php:92, inc/modules/product-swatches/admin/options.php:151, inc/modules/product-swatches/admin/options.php:409, inc/modules/product-swatches/admin/options.php:514, inc/modules/quick-social-links/admin/options.php:67, inc/modules/scroll-to-top-button/admin/options.php:256, inc/modules/size-chart/admin/options.php:109, inc/modules/sticky-add-to-cart/admin/options.php:131
 msgid "Background color"
 msgstr ""
 
-#: inc/modules/cart-count-favicon/admin/options.php:54, inc/modules/cookie-banner/admin/options.php:116, inc/modules/login-popup/admin/options.php:118, inc/modules/payment-logos/admin/options.php:70, inc/modules/product-labels/admin/options.php:109, inc/modules/product-swatches/admin/options.php:76, inc/modules/product-swatches/admin/options.php:133, inc/modules/product-swatches/admin/options.php:377, inc/modules/product-swatches/admin/options.php:478, inc/modules/scroll-to-top-button/admin/options.php:224, inc/modules/trust-badges/admin/options.php:70
+#: inc/modules/cart-count-favicon/admin/options.php:54, inc/modules/cookie-banner/admin/options.php:116, inc/modules/login-popup/admin/options.php:118, inc/modules/payment-logos/admin/options.php:70, inc/modules/product-labels/admin/options.php:109, inc/modules/product-navigation-buttons/admin/options.php:75, inc/modules/product-swatches/admin/options.php:76, inc/modules/product-swatches/admin/options.php:133, inc/modules/product-swatches/admin/options.php:377, inc/modules/product-swatches/admin/options.php:478, inc/modules/scroll-to-top-button/admin/options.php:224, inc/modules/trust-badges/admin/options.php:70
 msgid "Text color"
 msgstr ""
 
@@ -1153,7 +1893,7 @@ msgstr ""
 msgid "Animation"
 msgstr ""
 
-#: inc/modules/cart-count-favicon/admin/options.php:63, inc/modules/product-labels/admin/options.php:72, inc/modules/real-time-search/admin/options.php:56
+#: inc/modules/cart-count-favicon/admin/options.php:63, inc/modules/product-labels/admin/options.php:72, inc/modules/product-navigation-buttons/admin/options.php:63, inc/modules/real-time-search/admin/options.php:56
 msgid "None"
 msgstr ""
 
@@ -1205,24 +1945,12 @@ msgstr ""
 msgid "Cart reserved message"
 msgstr ""
 
-#: inc/modules/cart-reserved-timer/admin/options.php:33, inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:55
-msgid "An item in your cart is in high demand."
-msgstr ""
-
 #: inc/modules/cart-reserved-timer/admin/options.php:39
 msgid "Timer message for > 1 min "
 msgstr ""
 
-#: inc/modules/cart-reserved-timer/admin/options.php:40, inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:56
-msgid "Your cart is saved for {timer} minutes!"
-msgstr ""
-
 #: inc/modules/cart-reserved-timer/admin/options.php:46
 msgid "Timer message for  < 1 min"
-msgstr ""
-
-#: inc/modules/cart-reserved-timer/admin/options.php:47, inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:57
-msgid "Your cart is saved for {timer} seconds!"
 msgstr ""
 
 #: inc/modules/cart-reserved-timer/admin/options.php:53
@@ -1245,11 +1973,7 @@ msgstr ""
 msgid "Choose background Color"
 msgstr ""
 
-#: inc/modules/cart-reserved-timer/class-cart-reserved-timer.php:151
-msgid "Cart Reserved Timer Icon"
-msgstr ""
-
-#: inc/modules/checkout/admin/options.php:21
+#: inc/modules/checkout/admin/options.php:21, inc/modules/quick-social-links/admin/options.php:21
 msgid "Layout"
 msgstr ""
 
@@ -1313,10 +2037,6 @@ msgstr ""
 msgid "Bar text"
 msgstr ""
 
-#: inc/modules/cookie-banner/admin/options.php:33, inc/modules/cookie-banner/class-cookie-banner.php:46
-msgid "🍪 We're using cookies to give you the best experience on our site."
-msgstr ""
-
 #: inc/modules/cookie-banner/admin/options.php:39
 msgid "Privacy policy text"
 msgstr ""
@@ -1325,16 +2045,8 @@ msgstr ""
 msgid "The error will be shown if the user tries to go to checkout without accepting terms & conditions."
 msgstr ""
 
-#: inc/modules/cookie-banner/admin/options.php:41, inc/modules/cookie-banner/class-cookie-banner.php:47
-msgid "Learn More"
-msgstr ""
-
 #: inc/modules/cookie-banner/admin/options.php:47
 msgid "Privacy policy URL"
-msgstr ""
-
-#: inc/modules/cookie-banner/admin/options.php:55, inc/modules/cookie-banner/class-cookie-banner.php:49
-msgid "I Understand"
 msgstr ""
 
 #: inc/modules/cookie-banner/admin/options.php:61
@@ -1367,10 +2079,6 @@ msgstr ""
 
 #: inc/modules/countdown-timer/admin/options.php:28
 msgid "Sale ending message"
-msgstr ""
-
-#: inc/modules/countdown-timer/admin/options.php:29, inc/modules/countdown-timer/class-countdown-timer.php:55
-msgid "Sale ends in"
 msgstr ""
 
 #: inc/modules/countdown-timer/admin/options.php:30
@@ -1413,7 +2121,7 @@ msgstr ""
 msgid "Align"
 msgstr ""
 
-#: inc/modules/countdown-timer/admin/options.php:94, inc/modules/floating-mini-cart/admin/options.php:91, inc/modules/login-popup/admin/options.php:125, inc/modules/quick-view/admin/options.php:92, inc/modules/scroll-to-top-button/admin/options.php:210, inc/modules/size-chart/admin/options.php:77
+#: inc/modules/countdown-timer/admin/options.php:94, inc/modules/floating-mini-cart/admin/options.php:91, inc/modules/login-popup/admin/options.php:125, inc/modules/quick-social-links/admin/options.php:60, inc/modules/quick-view/admin/options.php:92, inc/modules/scroll-to-top-button/admin/options.php:210, inc/modules/size-chart/admin/options.php:77
 msgid "Icon color"
 msgstr ""
 
@@ -1441,7 +2149,7 @@ msgstr ""
 msgid "Always"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:33, inc/modules/quick-view/admin/options.php:27, inc/modules/scroll-to-top-button/admin/options.php:34, inc/modules/scroll-to-top-button/admin/options.php:43, inc/modules/size-chart/admin/options.php:37
+#: inc/modules/floating-mini-cart/admin/options.php:33, inc/modules/quick-social-links/admin/options.php:366, inc/modules/quick-view/admin/options.php:27, inc/modules/scroll-to-top-button/admin/options.php:34, inc/modules/scroll-to-top-button/admin/options.php:43, inc/modules/size-chart/admin/options.php:37
 msgid "Icon"
 msgstr ""
 
@@ -1457,7 +2165,7 @@ msgstr ""
 msgid "Corner offset"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:80, inc/modules/product-swatches/admin/options.php:108, inc/modules/product-swatches/admin/options.php:169, inc/modules/product-swatches/admin/options.php:258, inc/modules/product-swatches/admin/options.php:349, inc/modules/product-swatches/admin/options.php:453, inc/modules/product-swatches/admin/options.php:564, inc/modules/product-swatches/admin/options.php:653, inc/modules/product-swatches/admin/options.php:744, inc/modules/scroll-to-top-button/admin/options.php:199
+#: inc/modules/floating-mini-cart/admin/options.php:80, inc/modules/product-swatches/admin/options.php:108, inc/modules/product-swatches/admin/options.php:169, inc/modules/product-swatches/admin/options.php:258, inc/modules/product-swatches/admin/options.php:349, inc/modules/product-swatches/admin/options.php:453, inc/modules/product-swatches/admin/options.php:564, inc/modules/product-swatches/admin/options.php:653, inc/modules/product-swatches/admin/options.php:744, inc/modules/quick-social-links/admin/options.php:74, inc/modules/scroll-to-top-button/admin/options.php:199
 msgid "Border radius"
 msgstr ""
 
@@ -1469,72 +2177,48 @@ msgstr ""
 msgid "Counter background color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:121
+#: inc/modules/floating-mini-cart/admin/options.php:121, inc/modules/slide-out-cart/admin/options.php:41
 msgid "Side Cart Settings"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:128
+#: inc/modules/floating-mini-cart/admin/options.php:128, inc/modules/slide-out-cart/admin/options.php:48
 msgid "Side cart width"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:146
+#: inc/modules/floating-mini-cart/admin/options.php:146, inc/modules/slide-out-cart/admin/options.php:66
 msgid "Title icon color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:153
+#: inc/modules/floating-mini-cart/admin/options.php:153, inc/modules/slide-out-cart/admin/options.php:73
 msgid "Title background color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:160, inc/modules/spending-goal/admin/options.php:149
+#: inc/modules/floating-mini-cart/admin/options.php:160, inc/modules/slide-out-cart/admin/options.php:80, inc/modules/spending-goal/admin/options.php:149
 msgid "Content text color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:167, inc/modules/free-gifts/admin/options.php:161, inc/modules/spending-goal/admin/options.php:142
+#: inc/modules/floating-mini-cart/admin/options.php:167, inc/modules/free-gifts/admin/options.php:161, inc/modules/slide-out-cart/admin/options.php:87, inc/modules/spending-goal/admin/options.php:142
 msgid "Content background color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:174
+#: inc/modules/floating-mini-cart/admin/options.php:174, inc/modules/slide-out-cart/admin/options.php:94
 msgid "Content (x) color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:181
+#: inc/modules/floating-mini-cart/admin/options.php:181, inc/modules/slide-out-cart/admin/options.php:101
 msgid "Content (x) background color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:188
+#: inc/modules/floating-mini-cart/admin/options.php:188, inc/modules/slide-out-cart/admin/options.php:108
 msgid "Total text color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:195
+#: inc/modules/floating-mini-cart/admin/options.php:195, inc/modules/slide-out-cart/admin/options.php:115
 msgid "Total background color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:209, inc/modules/login-popup/admin/options.php:146
+#: inc/modules/floating-mini-cart/admin/options.php:209, inc/modules/login-popup/admin/options.php:146, inc/modules/slide-out-cart/admin/options.php:129
 msgid "Button color hover"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:185
-msgid "Close the side mini cart"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:190
-msgid "Your Cart"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:197, inc/modules/floating-mini-cart/class-floating-mini-cart.php:209
-msgid "Product Sample Title"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:220
-msgid "Subtotal:"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:226
-msgid "View cart:"
-msgstr ""
-
-#: inc/modules/floating-mini-cart/class-floating-mini-cart.php:227
-msgid "Checkout:"
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:22
@@ -1577,24 +2261,12 @@ msgstr ""
 msgid "Spending text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:77, inc/modules/free-gifts/class-free-gifts.php:59
-msgid "Spend {amount} more to receive this free gift!"
-msgstr ""
-
 #: inc/modules/free-gifts/admin/options.php:83
 msgid "Free text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:84, inc/modules/free-gifts/class-free-gifts.php:60, templates/modules/free-gifts/widget-contents.php:48
-msgid "Free"
-msgstr ""
-
 #: inc/modules/free-gifts/admin/options.php:90
 msgid "Cart item title text"
-msgstr ""
-
-#: inc/modules/free-gifts/admin/options.php:91, inc/modules/free-gifts/class-free-gifts.php:61
-msgid "Free Gift"
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:92, inc/modules/free-gifts/admin/options.php:100, inc/modules/volume-discounts/admin/options.php:75, inc/modules/volume-discounts/admin/options.php:83
@@ -1603,10 +2275,6 @@ msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:98
 msgid "Cart item description text"
-msgstr ""
-
-#: inc/modules/free-gifts/admin/options.php:99, inc/modules/free-gifts/class-free-gifts.php:62
-msgid "This item was added as a free gift"
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:115
@@ -1649,7 +2317,7 @@ msgstr ""
 msgid "Free text color"
 msgstr ""
 
-#: inc/modules/frequently-bought-together/admin/options.php:23
+#: inc/modules/frequently-bought-together/admin/options.php:23, inc/modules/product-navigation-buttons/admin/options.php:36
 msgid "After product summary"
 msgstr ""
 
@@ -1665,20 +2333,12 @@ msgstr ""
 msgid "Price label"
 msgstr ""
 
-#: inc/modules/frequently-bought-together/admin/options.php:48, templates/modules/frequently-bought-together/single-product.php:65
-msgid "Bundle price"
-msgstr ""
-
 #: inc/modules/frequently-bought-together/admin/options.php:54
 msgid "You save label"
 msgstr ""
 
 #: inc/modules/frequently-bought-together/admin/options.php:55
 msgid "You save: {amount}"
-msgstr ""
-
-#: inc/modules/frequently-bought-together/admin/options.php:62, templates/modules/frequently-bought-together/single-product.php:81
-msgid "Add to cart"
 msgstr ""
 
 #: inc/modules/frequently-bought-together/admin/options.php:76
@@ -1705,20 +2365,12 @@ msgstr ""
 msgid "This message will be shown if there's no item in the cart when user switches to another tab"
 msgstr ""
 
-#: inc/modules/inactive-tab-message/admin/options.php:25, inc/modules/inactive-tab-message/class-inactive-tab-message.php:51
-msgid "✋ Don't forget this"
-msgstr ""
-
 #: inc/modules/inactive-tab-message/admin/options.php:31
 msgid "Abandoned cart message"
 msgstr ""
 
 #: inc/modules/inactive-tab-message/admin/options.php:32
 msgid "This message will be shown if the user left items in the cart when user switches to another tab"
-msgstr ""
-
-#: inc/modules/inactive-tab-message/admin/options.php:33, inc/modules/inactive-tab-message/class-inactive-tab-message.php:52
-msgid "✋ You left something in the cart"
 msgstr ""
 
 #: inc/modules/login-popup/admin/options.php:22
@@ -1737,10 +2389,6 @@ msgstr ""
 msgid "Only visible to logout users."
 msgstr ""
 
-#: inc/modules/login-popup/admin/options.php:32, inc/modules/login-popup/class-login-popup.php:51, inc/modules/login-popup/class-login-popup.php:198
-msgid "Login"
-msgstr ""
-
 #: inc/modules/login-popup/admin/options.php:38
 msgid "Show welcome message"
 msgstr ""
@@ -1755,11 +2403,6 @@ msgstr ""
 
 #: inc/modules/login-popup/admin/options.php:47
 msgid "You can use the following tags: {user_firstname}, {user_lastname}, {user_email}, {user_login}, {display_name}"
-msgstr ""
-
-#. translators: 1. Display name
-#: inc/modules/login-popup/admin/options.php:49, inc/modules/login-popup/class-login-popup.php:54
-msgid "Welcome %s"
 msgstr ""
 
 #: inc/modules/login-popup/admin/options.php:56
@@ -1810,18 +2453,6 @@ msgstr ""
 msgid "Footer background color"
 msgstr ""
 
-#: inc/modules/login-popup/class-login-popup.php:197
-msgid "Not a member?"
-msgstr ""
-
-#: inc/modules/login-popup/class-login-popup.php:197
-msgid "Register"
-msgstr ""
-
-#: inc/modules/login-popup/class-login-popup.php:198
-msgid "Already a member?"
-msgstr ""
-
 #: inc/modules/payment-logos/admin/options.php:23
 msgid "Select logos"
 msgstr ""
@@ -1834,19 +2465,15 @@ msgstr ""
 msgid "Text above the logos"
 msgstr ""
 
-#: inc/modules/payment-logos/admin/options.php:53, inc/modules/payment-logos/class-payment-logos.php:52
-msgid "🔒 Safe & Secure Checkout"
-msgstr ""
-
 #: inc/modules/payment-logos/admin/options.php:59, inc/modules/product-labels/admin/options.php:91, inc/modules/trust-badges/admin/options.php:59
 msgid "Font size"
 msgstr ""
 
-#: inc/modules/payment-logos/admin/options.php:77, inc/modules/product-brand-image/admin/options.php:34, inc/modules/trust-badges/admin/options.php:84
+#: inc/modules/payment-logos/admin/options.php:77, inc/modules/product-brand-image/admin/options.php:34, inc/modules/product-navigation-buttons/admin/options.php:101, inc/modules/trust-badges/admin/options.php:84
 msgid "Margin top"
 msgstr ""
 
-#: inc/modules/payment-logos/admin/options.php:88, inc/modules/product-brand-image/admin/options.php:45, inc/modules/trust-badges/admin/options.php:95
+#: inc/modules/payment-logos/admin/options.php:88, inc/modules/product-brand-image/admin/options.php:45, inc/modules/product-navigation-buttons/admin/options.php:112, inc/modules/trust-badges/admin/options.php:95
 msgid "Margin bottom"
 msgstr ""
 
@@ -1858,63 +2485,8 @@ msgstr ""
 msgid "Image max height"
 msgstr ""
 
-#: inc/modules/pre-orders/admin/options.php:24, inc/modules/pre-orders/class-pre-orders-main-functionality.php:387, inc/modules/pre-orders/class-pre-orders.php:59
-msgid "Pre Order Now!"
-msgstr ""
-
 #: inc/modules/pre-orders/admin/options.php:30
 msgid "Additional information"
-msgstr ""
-
-#: inc/modules/pre-orders/admin/options.php:31, inc/modules/pre-orders/class-pre-orders-main-functionality.php:408, inc/modules/pre-orders/class-pre-orders-main-functionality.php:455, inc/modules/pre-orders/class-pre-orders.php:60
-msgid "Ships in {date}."
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:91
-msgid "We detected that your cart has pre-order products. Please remove them before being able to add this product."
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:89
-msgid "We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding."
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:287
-msgid "Pre-Order Product - Set this product as pre-order"
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:296, inc/modules/pre-orders/class-pre-orders-main-functionality.php:323
-msgid "Pre-Order Shipping Date"
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:313
-msgid "Pre-Order Product"
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:314
-msgid "Set this product as pre-order"
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:471
-msgid "Pre Ordered"
-msgstr ""
-
-#. translators: %s: pre ordered product count
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:477
-msgid "Pre Ordered <span class=\"count\">(%s)</span>"
-msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
-
-#: inc/modules/pre-orders/class-pre-orders.php:182
-msgid "Tag Pre-Orders"
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders.php:188
-msgid "Pre-orders captured by Merchant are tagged with \"MerchantPreOrder\" and can be found in your WooCommerce Order Section."
-msgstr ""
-
-#: inc/modules/pre-orders/class-pre-orders.php:188
-msgid "View Pre-Orders"
 msgstr ""
 
 #: inc/modules/product-audio/admin/options.php:22, inc/modules/product-video/admin/options.php:23
@@ -1923,14 +2495,6 @@ msgstr ""
 
 #: inc/modules/product-audio/admin/options.php:23, inc/modules/product-video/admin/options.php:24
 msgid "Autoplay may cause usability issues for some users."
-msgstr ""
-
-#: inc/modules/product-audio/class-product-audio.php:107
-msgid "Once this module is enabled new options to upload audio files will appear under the admin product edit page. This means you have to edit and upload the audio file for each product in your store."
-msgstr ""
-
-#: inc/modules/product-audio/class-product-audio.php:107, inc/modules/product-brand-image/class-product-brand-image.php:117, inc/modules/product-video/class-product-video.php:109, inc/modules/size-chart/class-size-chart.php:133
-msgid "View All Products"
 msgstr ""
 
 #: inc/modules/product-brand-image/admin/options.php:22
@@ -1942,20 +2506,12 @@ msgstr ""
 msgid "Note: If you want to add a different brand image for each product, go to %1$sProducts%2$s, edit the desired product and upload a different image."
 msgstr ""
 
-#: inc/modules/product-brand-image/class-product-brand-image.php:117
-msgid "The product brand image can be either enabled globally to be displayed in all products or in specific products. If you want to display a different brand image for each product, that’s possible from the admin product edit page."
-msgstr ""
-
 #: inc/modules/product-labels/admin/options.php:21, inc/modules/size-chart/admin/options.php:30
 msgid "Label text"
 msgstr ""
 
 #: inc/modules/product-labels/admin/options.php:22
 msgid "Note: This label will be shown only on sales products."
-msgstr ""
-
-#: inc/modules/product-labels/admin/options.php:23, inc/modules/product-labels/class-product-labels.php:51
-msgid "Spring Special"
 msgstr ""
 
 #: inc/modules/product-labels/admin/options.php:29
@@ -1994,12 +2550,68 @@ msgstr ""
 msgid "Padding"
 msgstr ""
 
-#: inc/modules/product-labels/class-product-labels.php:181, inc/modules/quick-view/class-quick-view.php:261, inc/modules/recently-viewed-products/class-recently-viewed-products.php:167, inc/modules/recently-viewed-products/class-recently-viewed-products.php:174, inc/modules/recently-viewed-products/class-recently-viewed-products.php:181, inc/modules/wishlist/class-wishlist.php:160
-msgid "Product Title"
+#: inc/modules/product-navigation-buttons/admin/options.php:21
+msgid "Navigation text"
 msgstr ""
 
-#: inc/modules/product-labels/class-product-labels.php:182
-msgid "The product description normally goes here."
+#: inc/modules/product-navigation-buttons/admin/options.php:23
+msgid "Show product titles"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:24
+msgid "Show 'Previous' and 'Next' "
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:32
+msgid "Placement"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:34
+msgid "Bottom of the page"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:35
+msgid "Top of the page"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:44
+msgid "Hook priority"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:61
+msgid "Text decoration"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:64
+msgid "Underline"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:65
+msgid "Line-through"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:66
+msgid "Overline"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:82, inc/modules/product-swatches/admin/options.php:385, inc/modules/product-swatches/admin/options.php:487
+msgid "Text hover color"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:89
+msgid "Justify content"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:91
+msgid "Space between"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:92
+msgid "Space around"
+msgstr ""
+
+#: inc/modules/product-navigation-buttons/admin/options.php:93
+msgid "Space evenly"
 msgstr ""
 
 #: inc/modules/product-swatches/admin/options.php:25
@@ -2066,10 +2678,6 @@ msgstr ""
 msgid "'Button' Swatch Style"
 msgstr ""
 
-#: inc/modules/product-swatches/admin/options.php:385, inc/modules/product-swatches/admin/options.php:487
-msgid "Text hover color"
-msgstr ""
-
 #: inc/modules/product-swatches/admin/options.php:401, inc/modules/product-swatches/admin/options.php:505, inc/modules/product-swatches/admin/options.php:637, inc/modules/product-swatches/admin/options.php:726
 msgid "Border hover color"
 msgstr ""
@@ -2082,58 +2690,6 @@ msgstr ""
 msgid "'Image' Swatch Style"
 msgstr ""
 
-#: inc/modules/product-swatches/class-product-swatches.php:276
-msgid "Color"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:284, inc/modules/product-swatches/class-product-swatches.php:305
-msgid "Blue"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:291, inc/modules/product-swatches/class-product-swatches.php:306
-msgid "Red"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:298, inc/modules/product-swatches/class-product-swatches.php:307
-msgid "White"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:304, inc/modules/product-swatches/class-product-swatches.php:314, inc/modules/product-swatches/class-product-swatches.php:319, inc/modules/product-swatches/class-product-swatches.php:360, inc/modules/product-swatches/class-product-swatches.php:383
-msgid "Select"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:320
-msgid "Slim"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:321
-msgid "Wavy"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:328
-msgid "Image"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:335, inc/modules/product-swatches/class-product-swatches.php:337, inc/modules/product-swatches/class-product-swatches.php:361
-msgid "Image option 1"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:343, inc/modules/product-swatches/class-product-swatches.php:345, inc/modules/product-swatches/class-product-swatches.php:362
-msgid "Image option 2"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:351, inc/modules/product-swatches/class-product-swatches.php:354, inc/modules/product-swatches/class-product-swatches.php:363
-msgid "Image option 3"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:376, inc/modules/product-swatches/class-product-swatches.php:384
-msgid "Button option 1"
-msgstr ""
-
-#: inc/modules/product-swatches/class-product-swatches.php:379, inc/modules/product-swatches/class-product-swatches.php:385
-msgid "Button option 2"
-msgstr ""
-
 #: inc/modules/product-video/admin/options.php:32
 msgid "Aspect ratio"
 msgstr ""
@@ -2142,8 +2698,216 @@ msgstr ""
 msgid "The aspect ratio definition is the proportional relationship between the width and height of a video."
 msgstr ""
 
-#: inc/modules/product-video/class-product-video.php:106
-msgid "Once this module is enabled new options to upload video files will appear under admin product edit page. This means you have to edit and upload the video file for each product in your store."
+#: inc/modules/quick-social-links/admin/options.php:25, inc/modules/quick-view/admin/options.php:209, inc/modules/sticky-add-to-cart/admin/options.php:26
+msgid "Bottom"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:41, inc/modules/scroll-to-top-button/admin/options.php:97, inc/modules/sticky-add-to-cart/admin/options.php:92
+msgid "Visibility"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:43, inc/modules/scroll-to-top-button/admin/options.php:99, inc/modules/sticky-add-to-cart/admin/options.php:94
+msgid "Show on all devices"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:44, inc/modules/scroll-to-top-button/admin/options.php:100, inc/modules/sticky-add-to-cart/admin/options.php:95
+msgid "Desktop only"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:45
+msgid "Mobile/Tablet only"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:102
+msgid "Display Conditions"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:109, inc/modules/quick-social-links/admin/options.php:358, inc/modules/reasons-to-buy/admin/options.php:53
+msgid "Add new"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:112
+msgid "Display condition"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:116, inc/modules/quick-social-links/admin/options.php:272
+msgid "Inclusion"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:119, inc/modules/quick-social-links/admin/options.php:275
+msgid "Include"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:120, inc/modules/quick-social-links/admin/options.php:276
+msgid "Exclude"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:126, inc/modules/quick-social-links/admin/options.php:282
+msgid "Condition"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:135
+msgid "Entire Site"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:139
+msgid "Basic"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:143
+msgid "Singulars"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:147
+msgid "Archives"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:153
+msgid "Posts"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:157
+msgid "Single Post"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:161
+msgid "Post Archives"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:165
+msgid "Post Categories"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:169
+msgid "Post Tags"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:175
+msgid "Pages"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:179
+msgid "Single Page"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:185
+msgid "WooCommerce"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:189
+msgid "Cart"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:193
+msgid "Checkout"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:197
+msgid "Single Product"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:201
+msgid "Product Archives"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:205
+msgid "Product Categories"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:209
+msgid "Product Tags"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:213
+msgid "My Account"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:217
+msgid "Edit Account"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:221
+msgid "Order Received"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:225
+msgid "View Order"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:229
+msgid "Lost Password"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:239
+msgid "Front Page"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:243
+msgid "Blog"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:247
+msgid "Search"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:251
+msgid "404"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:255, inc/modules/quick-social-links/admin/options.php:314
+msgid "Author"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:259
+msgid "Privacy Policy Page"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:268
+msgid "User condition"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:291
+msgid "User Auth"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:295
+msgid "User Logged In"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:299
+msgid "User Logged Out"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:305
+msgid "User Roles"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:350
+msgid "Links"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:357
+msgid "Add a social link with an associated icon, or insert a custom link and upload your preferred image or SVG"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:361
+msgid "Social link"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:372, inc/modules/quick-social-links/admin/options.php:389
+msgid "URL"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:375
+msgid "After entering the complete URL, an associated icon will be automatically chosen."
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:380
+msgid "Custom link"
+msgstr ""
+
+#: inc/modules/quick-social-links/admin/options.php:385
+msgid "Select custom image or SVG"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:24
@@ -2226,10 +2990,6 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: inc/modules/quick-view/admin/options.php:209, inc/modules/sticky-add-to-cart/admin/options.php:26
-msgid "Bottom"
-msgstr ""
-
 #: inc/modules/quick-view/admin/options.php:217
 msgid "Description style"
 msgstr ""
@@ -2252,14 +3012,6 @@ msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:242
 msgid "Regular price color"
-msgstr ""
-
-#: inc/modules/quick-view/class-quick-view.php:262
-msgid "The product description normally is displayed here."
-msgstr ""
-
-#: inc/modules/quick-view/class-quick-view.php:443
-msgid "Close quick view modal"
 msgstr ""
 
 #: inc/modules/real-time-search/admin/options.php:21
@@ -2346,40 +3098,12 @@ msgstr ""
 msgid "Return search results based on either product name or SKU."
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:199, inc/modules/real-time-search/class-real-time-search.php:283, inc/modules/recently-viewed-products/admin/options.php:79
-msgid "Products"
-msgstr ""
-
-#: inc/modules/real-time-search/class-real-time-search.php:205
-msgid "Ultra Facial Moisturizing Cream"
-msgstr ""
-
-#: inc/modules/real-time-search/class-real-time-search.php:206, inc/modules/real-time-search/class-real-time-search.php:213
-msgid "Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor…"
-msgstr ""
-
-#: inc/modules/real-time-search/class-real-time-search.php:212
-msgid "Rare Earth Deep Pore Cleansing"
-msgstr ""
-
-#: inc/modules/real-time-search/class-real-time-search.php:313
-msgid "Categories"
-msgstr ""
-
-#: inc/modules/real-time-search/class-real-time-search.php:335
-msgid "No products found."
-msgstr ""
-
 #: inc/modules/reasons-to-buy/admin/options.php:26
 msgid "After short description"
 msgstr ""
 
 #: inc/modules/reasons-to-buy/admin/options.php:29
 msgid "Bottom of product summary"
-msgstr ""
-
-#: inc/modules/reasons-to-buy/admin/options.php:39, inc/modules/reasons-to-buy/class-reasons-to-buy.php:51
-msgid "Reasons to buy list"
 msgstr ""
 
 #: inc/modules/reasons-to-buy/admin/options.php:47
@@ -2389,22 +3113,6 @@ msgstr ""
 #. translators: 1. Link open tag 2. Link close tag
 #: inc/modules/reasons-to-buy/admin/options.php:49
 msgid "Note: If you want to add a different reasons for each product, go to %1$sProducts%2$s, edit the desired product, set the title and reasons inside the metabox."
-msgstr ""
-
-#: inc/modules/reasons-to-buy/admin/options.php:53
-msgid "Add new"
-msgstr ""
-
-#: inc/modules/reasons-to-buy/admin/options.php:55, inc/modules/reasons-to-buy/class-reasons-to-buy.php:53
-msgid "100% Polyester."
-msgstr ""
-
-#: inc/modules/reasons-to-buy/admin/options.php:56, inc/modules/reasons-to-buy/class-reasons-to-buy.php:54
-msgid "Recycled Polyamid."
-msgstr ""
-
-#: inc/modules/reasons-to-buy/admin/options.php:57, inc/modules/reasons-to-buy/class-reasons-to-buy.php:55
-msgid "GOTS-certified organic cotton."
 msgstr ""
 
 #: inc/modules/reasons-to-buy/admin/options.php:65
@@ -2421,10 +3129,6 @@ msgstr ""
 
 #: inc/modules/reasons-to-buy/admin/options.php:123
 msgid "List items Icon color"
-msgstr ""
-
-#: inc/modules/recently-viewed-products/admin/options.php:24, inc/modules/recently-viewed-products/class-recently-viewed-products.php:51
-msgid "Recently Viewed"
 msgstr ""
 
 #: inc/modules/recently-viewed-products/admin/options.php:49
@@ -2519,10 +3223,6 @@ msgstr ""
 msgid "Navigation color (hover)"
 msgstr ""
 
-#: inc/modules/recently-viewed-products/class-recently-viewed-products.php:168, inc/modules/recently-viewed-products/class-recently-viewed-products.php:175, inc/modules/recently-viewed-products/class-recently-viewed-products.php:182, inc/modules/wishlist/class-wishlist.php:161
-msgid "Product description normally goes here."
-msgstr ""
-
 #: inc/modules/scroll-to-top-button/admin/options.php:15
 msgid "Settings for Desktop"
 msgstr ""
@@ -2539,28 +3239,12 @@ msgstr ""
 msgid "Text + icon"
 msgstr ""
 
-#: inc/modules/scroll-to-top-button/admin/options.php:57, inc/modules/scroll-to-top-button/class-scroll-to-top-button.php:49
-msgid "Back to top"
-msgstr ""
-
 #: inc/modules/scroll-to-top-button/admin/options.php:75, inc/modules/scroll-to-top-button/admin/options.php:120
 msgid "Side offset"
 msgstr ""
 
 #: inc/modules/scroll-to-top-button/admin/options.php:86, inc/modules/scroll-to-top-button/admin/options.php:131
 msgid "Bottom offset"
-msgstr ""
-
-#: inc/modules/scroll-to-top-button/admin/options.php:97, inc/modules/sticky-add-to-cart/admin/options.php:92
-msgid "Visibility"
-msgstr ""
-
-#: inc/modules/scroll-to-top-button/admin/options.php:99, inc/modules/sticky-add-to-cart/admin/options.php:94
-msgid "Show on all devices"
-msgstr ""
-
-#: inc/modules/scroll-to-top-button/admin/options.php:100, inc/modules/sticky-add-to-cart/admin/options.php:95
-msgid "Desktop only"
 msgstr ""
 
 #: inc/modules/scroll-to-top-button/admin/options.php:101
@@ -2644,28 +3328,16 @@ msgstr ""
 msgid "Description link color hover"
 msgstr ""
 
-#: inc/modules/size-chart/class-size-chart.php:130
-msgid "You can have as many size charts you want and either specify in which product you want to add them or simply enable one globally to be displayed in all products. But if you want to display different size charts for each product, that's possible from admin product edit page."
+#: inc/modules/slide-out-cart/admin/options.php:20
+msgid "Display after adding a product to the cart on shop"
 msgstr ""
 
-#: inc/modules/size-chart/class-size-chart.php:211
-msgid "Size Chart Modal Title"
+#: inc/modules/slide-out-cart/admin/options.php:26
+msgid "Display after adding a product to the cart on single product page"
 msgstr ""
 
-#: inc/modules/size-chart/class-size-chart.php:217
-msgid "US"
-msgstr ""
-
-#: inc/modules/size-chart/class-size-chart.php:218
-msgid "EU"
-msgstr ""
-
-#: inc/modules/size-chart/class-size-chart.php:219
-msgid "UK"
-msgstr ""
-
-#: inc/modules/spending-goal/admin/options.php:22, inc/modules/spending-goal/admin/options.php:61, inc/modules/spending-goal/class-spending-goal.php:59
-msgid "Spending goal"
+#: inc/modules/slide-out-cart/admin/options.php:32
+msgid "Display on cart URL click"
 msgstr ""
 
 #: inc/modules/spending-goal/admin/options.php:29
@@ -2704,10 +3376,6 @@ msgstr ""
 msgid "When the goal target is at 0%"
 msgstr ""
 
-#: inc/modules/spending-goal/admin/options.php:79, inc/modules/spending-goal/class-spending-goal.php:60
-msgid "Spend {spending_goal} to get a {discount_amount} discount!"
-msgstr ""
-
 #: inc/modules/spending-goal/admin/options.php:80
 msgid "Default is: Spend {spending_goal} to get a {discount_amount} discount!"
 msgstr ""
@@ -2716,20 +3384,12 @@ msgstr ""
 msgid "When the goal target is between 1-99%"
 msgstr ""
 
-#: inc/modules/spending-goal/admin/options.php:87, inc/modules/spending-goal/class-spending-goal.php:61
-msgid "Spend {spending_goal} more to get a {discount_amount} discount"
-msgstr ""
-
 #: inc/modules/spending-goal/admin/options.php:88
 msgid "Default is: Spend {spending_goal} more to get a {discount_amount} discount"
 msgstr ""
 
 #: inc/modules/spending-goal/admin/options.php:94
 msgid "When the goal target is at 100%"
-msgstr ""
-
-#: inc/modules/spending-goal/admin/options.php:95, inc/modules/spending-goal/class-spending-goal.php:62
-msgid "Congratulations! You get a discount of {discount_amount} on this order!"
 msgstr ""
 
 #: inc/modules/spending-goal/admin/options.php:96
@@ -2788,24 +3448,12 @@ msgstr ""
 msgid "Content color"
 msgstr ""
 
-#: inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:200
-msgid "<h5>Product Title</h5>"
-msgstr ""
-
-#: inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:203
-msgid "<a href=\"#\" class=\"single_add_to_cart_button button\">Add to cart</a>"
-msgstr ""
-
 #: inc/modules/stock-scarcity/admin/options.php:32
 msgid "Show urgency box when variant inventory is below"
 msgstr ""
 
 #: inc/modules/stock-scarcity/admin/options.php:49
 msgid "Text when inventory is low"
-msgstr ""
-
-#: inc/modules/stock-scarcity/admin/options.php:50, inc/modules/stock-scarcity/class-stock-scarcity.php:62
-msgid "Hurry! Only {stock} units left in stock!"
 msgstr ""
 
 #: inc/modules/stock-scarcity/admin/options.php:66
@@ -2832,60 +3480,28 @@ msgstr ""
 msgid "Select badges"
 msgstr ""
 
-#: inc/modules/trust-badges/admin/options.php:53, inc/modules/trust-badges/class-trust-badges.php:53
-msgid "Product Quality Guaranteed!"
-msgstr ""
-
-#: inc/modules/volume-discounts/admin/options.php:39, inc/modules/volume-discounts/class-volume-discounts.php:61
-msgid "Buy more, save more!"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:45
 msgid "Save label"
-msgstr ""
-
-#: inc/modules/volume-discounts/admin/options.php:46, inc/modules/volume-discounts/class-volume-discounts.php:62
-msgid "Save {amount}"
 msgstr ""
 
 #: inc/modules/volume-discounts/admin/options.php:52
 msgid "Buy text"
 msgstr ""
 
-#: inc/modules/volume-discounts/admin/options.php:53, inc/modules/volume-discounts/class-volume-discounts.php:63
-msgid "Buy {amount} with {discount} discount each"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:59
 msgid "Item text"
-msgstr ""
-
-#: inc/modules/volume-discounts/admin/options.php:60, inc/modules/volume-discounts/class-volume-discounts.php:64
-msgid "Per item:"
 msgstr ""
 
 #: inc/modules/volume-discounts/admin/options.php:66
 msgid "Total text"
 msgstr ""
 
-#: inc/modules/volume-discounts/admin/options.php:67, inc/modules/volume-discounts/class-volume-discounts.php:65
-msgid "Total price:"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:73
 msgid "Cart item discount title"
 msgstr ""
 
-#: inc/modules/volume-discounts/admin/options.php:74, inc/modules/volume-discounts/class-volume-discounts.php:59, inc/modules/volume-discounts/class-volume-discounts.php:66
-msgid "Discount"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:81
 msgid "Cart item discount description"
-msgstr ""
-
-#: inc/modules/volume-discounts/admin/options.php:82, inc/modules/volume-discounts/class-volume-discounts.php:67
-msgid "A discount of {amount} is applied."
 msgstr ""
 
 #: inc/modules/volume-discounts/admin/options.php:128
@@ -2916,32 +3532,16 @@ msgstr ""
 msgid "Form title"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:23, inc/modules/wait-list/class-wait-list.php:55
-msgid "New stock on its way! Email when stock available"
-msgstr ""
-
 #: inc/modules/wait-list/admin/options.php:29
 msgid "Form email label"
-msgstr ""
-
-#: inc/modules/wait-list/admin/options.php:30, inc/modules/wait-list/class-wait-list.php:56
-msgid "Your Email Address"
 msgstr ""
 
 #: inc/modules/wait-list/admin/options.php:36
 msgid "Form button text"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:37, inc/modules/wait-list/class-wait-list.php:57
-msgid "Notify Me"
-msgstr ""
-
 #: inc/modules/wait-list/admin/options.php:43
 msgid "Form success message"
-msgstr ""
-
-#: inc/modules/wait-list/admin/options.php:44, inc/modules/wait-list/class-wait-list.php:58
-msgid "You have been successfully added to our wait list. As soon as new stock become available, we will notify you via email."
 msgstr ""
 
 #: inc/modules/wait-list/admin/options.php:45
@@ -2956,20 +3556,12 @@ msgstr ""
 msgid "Email new subscribers"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:59, inc/modules/wait-list/class-wait-list.php:59
-msgid "Hello subscriber, Thank you for subscribing to {product}. We will email you once product back in stock."
-msgstr ""
-
 #: inc/modules/wait-list/admin/options.php:60
 msgid "The message that will be sent to new subscribers."
 msgstr ""
 
 #: inc/modules/wait-list/admin/options.php:66
 msgid "Email in stock update"
-msgstr ""
-
-#: inc/modules/wait-list/admin/options.php:67, inc/modules/wait-list/class-wait-list.php:60
-msgid "Hello Subscriber, Thanks for your patience and finally the wait is over! Your Subscribed Product {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you'll get one, so hurry to be one of the lucky shoppers who do. Add this product {product} directly to your cart."
 msgstr ""
 
 #: inc/modules/wait-list/admin/options.php:69
@@ -3078,107 +3670,4 @@ msgstr ""
 
 #: inc/modules/wishlist/admin/options.php:226
 msgid "Table links color (hover)"
-msgstr ""
-
-#: inc/modules/wishlist/class-wishlist.php:63
-msgid "Add To Wishlist"
-msgstr ""
-
-#. translators: %s is average rating value
-#: templates/modules/advanced-reviews/reviews.php:65, templates/modules/advanced-reviews/reviews.php:321, templates/modules/advanced-reviews/reviews.php:252
-msgid "Rated %s out of 5 based on customer ratings."
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:80
-msgid "Be the first to leave a review."
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:77
-msgctxt "review count"
-msgid "%s Review"
-msgid_plural "%s Reviews"
-msgstr[0] ""
-msgstr[1] ""
-
-#: templates/modules/advanced-reviews/reviews.php:88
-msgid "5 Stars"
-msgstr ""
-
-#. translators: %s is stars quantity
-#: templates/modules/advanced-reviews/reviews.php:95, templates/modules/advanced-reviews/reviews.php:108, templates/modules/advanced-reviews/reviews.php:121, templates/modules/advanced-reviews/reviews.php:134, templates/modules/advanced-reviews/reviews.php:147
-msgid "(%s)"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:101
-msgid "4 Stars"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:114
-msgid "3 Stars"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:127
-msgid "2 Stars"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:140
-msgid "1 Star"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:157
-msgid "Write a Review"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:161
-msgid "Sort by:"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:352
-msgid "There are no reviews yet."
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:336, templates/modules/advanced-reviews/reviews.php:267
-msgid " — verified owner"
-msgstr ""
-
-#: templates/modules/advanced-reviews/reviews.php:341
-msgid "Your review is awaiting approval."
-msgstr ""
-
-#. translators: 1. quantity
-#: templates/modules/buy-x-get-y/single-product.php:32
-msgid "Buy %s"
-msgstr ""
-
-#. translators: 1. quantity 2. discount value
-#: templates/modules/buy-x-get-y/single-product.php:69
-msgid "Get %1$s with %2$s off"
-msgstr ""
-
-#. translators: 1. Attribute label
-#: templates/modules/buy-x-get-y/single-product.php:93, templates/modules/frequently-bought-together/single-product.php:46
-msgid "Select %s"
-msgstr ""
-
-#. translators: 1. Amount
-#: templates/modules/free-gifts/widget-contents.php:31
-msgid "Spend %s more to receive this free gift!"
-msgstr ""
-
-#. translators: 1. Total discount
-#: templates/modules/frequently-bought-together/single-product.php:76
-msgid "You save: %s"
-msgstr ""
-
-#: templates/modules/sticky-add-to-cart/content.php:70
-msgid "Add to Cart"
-msgstr ""
-
-#: templates/modules/sticky-add-to-cart/content.php:73
-msgid "Close"
-msgstr ""
-
-#. translators: 1. Quantity of units
-#: templates/modules/stock-scarcity/single-product.php:26
-msgid "Hurry! Only %s units left in stock!"
 msgstr ""

@@ -357,7 +357,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-navigation-buttons' ),
 					'title'        => esc_html__( 'Product Navigation Buttons', 'merchant' ),
 					'desc'         => esc_html__( 'Improve navigation by adding \'Next\' and \'Previous\' buttons for products', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-nvaigation-buttons/'
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-navigation-buttons/'
 				),
 
 				// Protect Store.
