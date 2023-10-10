@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Slide-out Cart
+ * Side Cart
  *
  * @package Merchant
  */
@@ -11,15 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Slide-out Cart Class.
+ * Side Cart Class.
  *
  */
-class Merchant_Slide_Out_Cart extends Merchant_Add_Module {
+class Merchant_Side_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Module ID.
 	 */
-	const MODULE_ID = 'slide-out-cart';
+	const MODULE_ID = 'side-cart';
 
 	/**
 	 * Is module preview.
@@ -236,5 +236,5 @@ class Merchant_Slide_Out_Cart extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	Merchant_Modules::create_module( new Merchant_Slide_Out_Cart() );
+	Merchant_Modules::create_module( new Merchant_Side_Cart() );
 } );
