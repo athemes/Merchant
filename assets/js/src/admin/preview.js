@@ -20,7 +20,7 @@
                         const input = $('[name="merchant[' + manipulators.css[key].setting + ']"]');
                         const inputType = input.attr('type');
 
-                        if( inputType === 'radio' ) {
+                        if (inputType === 'radio') {
                             value = $('[name="merchant[' + manipulators.css[key].setting + ']"]' + ':checked').val() + manipulators.css[key].unit;
                         }
 
@@ -101,7 +101,7 @@
             if (hasManipulators(manipulators.icons)) {
                 for (const key in manipulators.icons) {
                     if (manipulators.icons.hasOwnProperty(key)) {
-                        let radioElement = $('[name="merchant[' + manipulators.icons[key].setting + ']"]'+ ':checked');
+                        let radioElement = $('[name="merchant[' + manipulators.icons[key].setting + ']"]' + ':checked');
                         let iconSrc = radioElement.parent().find('figure img').attr('src');
                         let iconSelector = $(manipulators.icons[key].selector)
 
@@ -117,7 +117,7 @@
             if (hasManipulators(manipulators.svg_icons)) {
                 for (const key in manipulators.svg_icons) {
                     if (manipulators.svg_icons.hasOwnProperty(key)) {
-                        let radioElement = $('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]'+ ':checked');
+                        let radioElement = $('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]' + ':checked');
                         const iconsLib = manipulators.svg_icons[key].icons_lib;
                         let icon = iconsLib[radioElement.val()];
                         let iconSelector = $(manipulators.svg_icons[key].selector);
@@ -135,13 +135,13 @@
                 for (const key in manipulators.repeater_content) {
                     if (manipulators.repeater_content.hasOwnProperty(key)) {
                         const repeaterElement = $('[name="merchant[' + manipulators.repeater_content[key].setting + ']"]');
-                        const repeaterValue = repeaterElement.val() ? JSON.parse( repeaterElement.val() ) : [];
+                        const repeaterValue = repeaterElement.val() ? JSON.parse(repeaterElement.val()) : [];
                         const repeaterItemSelector = $(manipulators.repeater_content[key].selector);
 
                         if (repeaterValue.length) {
 
                             // Update content.
-                            for(const [index, repeaterItem] of repeaterValue.entries()) {
+                            for (const [index, repeaterItem] of repeaterValue.entries()) {
                                 if (repeaterItemSelector.length) {
                                     repeaterItemSelector.eq(index).html(repeaterItem);
                                 }
@@ -164,8 +164,79 @@
                     }
                 }
             }
+
+            if (hasManipulators(manipulators.flexible_content)) {
+                for (const key in manipulators.flexible_content) {
+                    const flexibleContentSelector = $(manipulators.flexible_content[key].selector);
+                    const flexibleContentItems = flexibleContentSelector.children();
+                    const flexibleContentTemplate = flexibleContentItems.eq(0);
+                    const flexibleContentSettings = $('.merchant-flexible-content-control[data-id=' + manipulators.flexible_content[key].setting + ']')
+                        .find('.merchant-flexible-content')
+                        .children()
+
+                    /**
+                     * We're going to remove all items in the selector except for the template
+                     * and regenerate the items based on the settings.
+                     */
+
+                    flexibleContentItems.each(function () {
+                        if (!$(this).hasClass('flexible-content-template')) {
+                            $(this).remove();
+                        }
+                    })
+
+                    flexibleContentSettings.each(function () {
+                        const item = flexibleContentTemplate.clone();
+                        const layout = $(this).data('type');
+
+                        for (const variable in manipulators.flexible_content[key].variables[layout]) {
+                            const setting = manipulators.flexible_content[key].variables[layout][variable];
+                            const field = $(this).find('.merchant-module-page-setting-field[data-id=' + setting + ']');
+                            const fieldType = field.data('type');
+                            const fieldInput = field.find('input').val()
+
+                            // Handle variable replacement for text fields
+                            if (fieldType === 'text') {
+                                item.html(item.html().replace(variable, fieldInput))
+                            }
+
+                            // Handle variable replacement for upload fields
+                            if (fieldType === 'upload') {
+                                const image = field.find('.merchant-upload-image img').prop('outerHTML')
+
+                                if (typeof image !== 'undefined') {
+                                    item.html(item.html().replace(variable, image))
+                                }
+                            }
+
+                            // Handle variable replacement for choices fields
+                            if (fieldType === 'choices') {
+                                const selectedChoice = field.find('input:checked');
+
+                                // If choices uses SVG then we want to replace  the variable with the selected SVG
+                                if (field.find('.merchant-svg').length) {
+                                    const SVG = selectedChoice
+                                        .parent()
+                                        .find('svg')
+                                        .prop('outerHTML')
+
+                                    if (typeof SVG !== 'undefined') {
+                                        item.html(item.html().replace(variable, SVG))
+                                    }
+                                }
+                            }
+
+                            // Append item to selector
+                            item.html(item.html().replace(variable, '')) // First remove variable if it's not replaced yet
+                                .removeClass('flexible-content-template') // Remove template class
+                                .appendTo(flexibleContentSelector) // Append
+                        }
+                    })
+
+                }
+            }
         }
-        const triggerElementsChange = (input) => {
+        const triggerChangeOnInput = (input) => {
             const inputType = input.attr('type');
 
             // Text inputs
@@ -195,48 +266,62 @@
             if (input.hasClass('merchant-sortable-repeater-input')) {
                 input.on('change', () => updateElements());
             }
-        }
 
+            // Upload input
+            if (input.hasClass('merchant-upload-input')) {
+                input.on('change', () => updateElements());
+            }
+        }
 
         if (typeof manipulators !== 'undefined') {
             if (hasManipulators(manipulators.css)) {
                 for (const key in manipulators.css) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.css[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.css[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.text)) {
                 for (const key in manipulators.text) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.text[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.text[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.attributes)) {
                 for (const key in manipulators.attributes) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.attributes[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.attributes[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.classes)) {
                 for (const key in manipulators.classes) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.classes[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.classes[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.icons)) {
                 for (const key in manipulators.icons) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.icons[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.icons[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.svg_icons)) {
                 for (const key in manipulators.svg_icons) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.svg_icons[key].setting + ']"]'))
                 }
             }
             if (hasManipulators(manipulators.repeater_content)) {
                 for (const key in manipulators.repeater_content) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.repeater_content[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.repeater_content[key].setting + ']"]'))
+                }
+            }
+            if (hasManipulators(manipulators.flexible_content)) {
+                for (const key in manipulators.flexible_content) {
+                    const field = $('.merchant-flexible-content-control[data-id=' + manipulators.flexible_content[key].setting + ']');
+
+                    triggerChangeOnInput(field.find('input'))
+
+                    field.find('.customize-control-flexible-content-delete').on('click', () => updateElements())
+                    field.on('merchant.sorted', () => updateElements())
                 }
             }
             if (hasManipulators(manipulators.update)) {
                 for (const key in manipulators.update) {
-                    triggerElementsChange($('[name="merchant[' + manipulators.update[key].setting + ']"]'))
+                    triggerChangeOnInput($('[name="merchant[' + manipulators.update[key].setting + ']"]'))
                 }
             }
 

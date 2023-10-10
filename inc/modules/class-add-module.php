@@ -8,46 +8,45 @@ class Merchant_Add_Module {
 
 	/**
 	 * WooCommerce only.
-	 * 
+	 *
 	 */
 	public $wc_only = false;
 
 	/**
 	 * Module section.
-	 * 
+	 *
 	 */
 	public $module_section = '';
 
 	/**
 	 * Module id.
-	 * 
+	 *
 	 */
 	public $module_id = '';
 
 	/**
 	 * Module default settings.
-	 * 
+	 *
 	 */
 	public $module_default_settings = array();
 
 	/**
 	 * Module data.
-	 * 
+	 *
 	 */
 	public $module_data = array();
 
 	/**
 	 * Module options.
-	 * 
+	 *
 	 */
 	public $module_options_path = '';
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct() {
-		
 		// Add and expose the module into the plugin dashboard.
 		add_filter( 'merchant_modules', array( $this, 'add_module' ) );
 
@@ -63,7 +62,7 @@ class Merchant_Add_Module {
 
 	/**
 	 * Active modules class handler.
-	 * 
+	 *
 	 */
 	public function add_module_activation_status_class( $classes ) {
 		if ( ! $this->is_module_settings_page() ) {
@@ -81,8 +80,9 @@ class Merchant_Add_Module {
 
 	/**
 	 * Modules list item class.
-	 * 
+	 *
 	 * @param string $class
+	 *
 	 * @return string
 	 */
 	public function modules_list_item_class( $class ) {
@@ -95,17 +95,17 @@ class Merchant_Add_Module {
 
 	/**
 	 * Is module settings page.
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_module_settings_page() {
-		return isset( $_GET[ 'page' ] ) && 'merchant' === $_GET[ 'page' ] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			&& isset( $_GET[ 'module' ] ) && $this->module_id === $_GET[ 'module' ]; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		return isset( $_GET['page'] ) && 'merchant' === $_GET['page'] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			   && isset( $_GET['module'] ) && $this->module_id === $_GET['module']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**
 	 * Get module settings.
-	 * 
+	 *
 	 */
 	public function get_module_settings() {
 		$settings = get_option( 'merchant' ) ? get_option( 'merchant' ) : array();
@@ -124,18 +124,67 @@ class Merchant_Add_Module {
 	}
 
 	/**
+	 * Get preview URL
+	 *
+	 * @param array $args
+	 *
+	 * @return string
+	 */
+	public function set_module_preview_url( $args = array() ) {
+		// Mount preview url.
+		$preview_url = site_url( '/' );
+
+		// Type based preview url
+		if ( isset( $args['type'] ) ) {
+			switch ( $args['type'] ) {
+				case 'shop':
+					if ( function_exists( 'wc_get_page_id' ) ) {
+						$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
+					}
+					break;
+
+				case 'product':
+					$query_args = array(
+						'post_type'      => 'product',
+						'posts_per_page' => 1,
+					);
+
+					if ( isset( $args['query'] ) ) {
+						$products = ( new WP_Query( wp_parse_args( $args['query'], $query_args ) ) )->get_posts();
+
+						// If no results can be found with the custom query,
+						// then use the default args
+						if ( empty( $products ) || ! isset( $products[0] ) ) {
+							$products = ( new WP_Query( $query_args ) )->get_posts();
+						}
+					} else {
+						$products = ( new WP_Query( $query_args ) )->get_posts();
+					}
+
+					if ( ! empty( $products ) && isset( $products[0] ) ) {
+						$preview_url = get_permalink( $products[0] );
+					}
+
+					break;
+			}
+		}
+
+		return $preview_url;
+	}
+
+	/**
 	 * Add module.
-	 * 
+	 *
 	 */
 	public function add_module( $modules ) {
-		$modules[ $this->module_section ][ 'modules' ][ $this->module_id ] = $this->module_data;
+		$modules[ $this->module_section ]['modules'][ $this->module_id ] = $this->module_data;
 
 		return $modules;
 	}
 
 	/**
 	 * Add module options.
-	 * 
+	 *
 	 */
 	public function add_module_options( $module_path, $merchant_module ) {
 		if ( $this->module_id === $merchant_module ) {

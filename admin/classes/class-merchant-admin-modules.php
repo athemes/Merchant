@@ -71,6 +71,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc'  => esc_html__( 'Add customizable labels on top of your product images', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/product-labels/'
 				),
+				'add-to-cart-text' => array(
+					'pro' => false,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-add-to-cart-text' ),
+					'title' => esc_html__( 'Add To Cart Text', 'merchant' ),
+					'desc' => esc_html__( 'Change your store’s ‘Add to Cart’ text for simple, variable, out of stock and individual products.', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-add-to-cart-text/'
+				),
 				'sticky-add-to-cart' => array(
 					'pro' => true,
 					'section' => 'convert-more',
@@ -150,7 +158,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-x-get-y' ),
 					'title' => esc_html__( 'Buy X, Get Y', 'merchant' ),
-					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y. ', 'merchant' ),
+					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y ', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/'
 				),
 				'volume-discounts' => array(
@@ -203,6 +211,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc'         => esc_html__( 'A cart icon will always be visible and a sliding cart when the customer clicks it', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-floating-mini-cart/'
 				),
+				'slide-out-cart' => array(
+					'pro' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-slide-out-cart' ),
+					'title'        => esc_html__( 'Slide-Out Cart', 'merchant' ),
+					'desc'         => esc_html__( 'Allow shoppers to see their shopping cart from any page on your online store', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-slide-out-cart/'
+				),
 				'cart-reserved-timer' => array(
 					'pro' => true,
 					'section' => 'reduce-abandonment',
@@ -236,6 +252,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Reasons To Buy List', 'merchant' ),
 					'desc' => esc_html__( 'Provide customers with a summary of the key features and benefits of your products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-reasons-to-buy/'
+				),
+				'quick-social-links' => array(
+					'pro' => true,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-quick-social-links' ),
+					'title' => esc_html__( 'Quick Social Links', 'merchant' ),
+					'desc' => esc_html__( 'Display floating social media icons to make it easier for your customers to connect with you', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-quick-social-links/'
 				),
 				'product-brand-image' => array(
 					'pro' => true,
@@ -323,9 +347,17 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'pro' => true,
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-swatches' ),
-					'title'        => esc_html__( 'Product Swatches', 'merchant' ),
+					'title'        => esc_html__( 'Variation Swatches', 'merchant' ),
 					'desc'         => esc_html__( 'Swatches make it easy for customers to view your product variants at a glance', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-swatches/'
+				),
+				'product-navigation-buttons' => array(
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-navigation-buttons' ),
+					'title'        => esc_html__( 'Product Navigation Buttons', 'merchant' ),
+					'desc'         => esc_html__( 'Improve navigation by adding \'Next\' and \'Previous\' buttons for products', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-nvaigation-buttons/'
 				),
 
 				// Protect Store.

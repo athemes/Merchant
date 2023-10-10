@@ -2,7 +2,7 @@
 
 /**
  * Floating Mini Cart
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Floating mini cart class.
- * 
+ *
  */
 class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
@@ -24,13 +24,13 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Is module preview.
-	 * 
+	 *
 	 */
 	public static $is_module_preview = false;
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct() {
 
@@ -53,16 +53,9 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 			'icon-position' => 'right'
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
-		}
-
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
+		$this->module_data['preview_url'] = $this->set_module_preview_url( array( 'type' => 'shop' ) );
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -89,14 +82,11 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Admin enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
+		if ( $this->is_module_settings_page()) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/floating-mini-cart.min.css', [], MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
@@ -104,7 +94,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Admin Enqueue scripts.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
@@ -144,7 +134,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Admin preview content.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_preview_content() {
@@ -185,7 +175,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 					<a href="#" class="merchant-floating-side-mini-cart-close-button merchant-floating-side-mini-cart-toggle" title="<?php echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
 						<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( [], false ) ); ?>
 					</a>
-					
+
 					<div class="merchant-floating-side-mini-cart-widget">
 						<div class="merchant-floating-side-mini-cart-widget-title"><?php echo esc_html__( 'Your Cart', 'merchant' ); ?></div>
 						<div class="widget_shopping_cart_content">
@@ -196,7 +186,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 										<span class="mrc-product-image"></span>
 										<?php echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
 									</a>
-									<span class="quantity">1 × 
+									<span class="quantity">1 ×
 										<span class="woocommerce-Price-amount amount">
 											<bdi><span class="woocommerce-Price-currencySymbol">$</span>12.00 </bdi>
 										</span>
@@ -208,7 +198,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 										<span class="mrc-product-image"></span>
 										<?php echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
 									</a>
-									<span class="quantity">1 × 
+									<span class="quantity">1 ×
 										<span class="woocommerce-Price-amount amount">
 											<bdi><span class="woocommerce-Price-currencySymbol">$</span>12.00 </bdi>
 										</span>
@@ -237,7 +227,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 	/**
 	 * Floating mini cart icon output.
 	 * TODO: Render the output through template files.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function floating_mini_cart_icon_output() {
@@ -247,7 +237,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 		// Get module settings.
 		$settings = $this->get_module_settings();
-		
+
 		?>
 
 		<a href="#" class="merchant-floating-mini-cart-icon merchant-floating-mini-cart-icon-position-<?php echo esc_attr( $settings[ 'icon-position' ] ); ?> merchant-floating-side-mini-cart-toggle" data-display="<?php echo esc_attr( $settings[ 'display' ] ); ?>">
@@ -256,16 +246,16 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 				<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>
 			</i>
 		</a>
-		
+
 		<?php
 	}
 
 	/**
 	 * Custom CSS.
-	 * 
+	 *
 	 * @return string
 	 */
-	public function get_module_custom_css() {
+	public static function get_module_custom_css() {
 		$css = '';
 
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'icon-size', 25, '.merchant-floating-mini-cart-icon', '--mrc-fmci-icon-size', 'px' );
@@ -298,12 +288,12 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 	/**
 	 * Admin custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
 	 * @return string $css The custom CSS.
 	 */
 	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css(); 
+		$css .= static::get_module_custom_css();
 
 		return $css;
 	}

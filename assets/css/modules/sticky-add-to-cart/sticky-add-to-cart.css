@@ -11,7 +11,7 @@
   visibility: hidden;
   -webkit-transition: ease opacity 300ms, ease bottom 300ms;
   transition: ease opacity 300ms, ease bottom 300ms;
-  z-index: 199;
+  z-index: 998;
 }
 
 .merchant-sticky-add-to-cart-wrapper.position-top {

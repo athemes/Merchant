@@ -156,11 +156,52 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				}
 			}
 
+			// Remove everything after ":"in case a selector like a:hover is used.
+			if ( ( $position = strpos( $selector, ':' ) ) !== false ) {
+				$selector = substr( $selector, 0, $position );
+			}
+
 			if ( class_exists( 'Merchant_Admin_Preview' ) ) {
 				Merchant_Admin_Preview::instance()->set_css( $setting, $selector, $variable, $unit );
 			}
 
 			return $selector . '{ ' . esc_attr( $variable ) . ':' . esc_attr( $value ) . esc_attr( $unit ) . '; }' . "\n";
+		}
+
+		/**
+		 * CSS (can pass css prop and unit)
+		 *
+		 * @param string $module Module name.
+		 * @param string $setting Setting name.
+		 * @param string $default Default value.
+		 * @param string $selector CSS selector.
+		 * @param string $css_prop CSS prop.
+		 * @param string $unit Unit value.
+		 * @param bool $important Important rule.
+		 * @param bool|string $variable Whether to auto-create a variable
+		 *
+		 * @return string
+		 */
+		public static function get_css( $module, $setting = '', $default = '', $selector = '', $css_prop = '', $unit = 'px', $important = false, $variable = false ) {
+			$css_output = '';
+
+			if ( $variable === false ) {
+				$css_value = self::get_option( $module, $setting, $default ) . ( isset( $css['unit'] ) ? $css['unit'] : '' );
+			} else {
+				$css_variable = is_string( $variable ) ? $variable : '--merchant-' . str_replace( '_', '-', sanitize_title( $setting ) );
+				$css_value = "var({$css_variable})";
+				$css_output  .= static::get_variable_css( $module, $setting, $default, $selector, $css_variable, $unit );
+			}
+
+			if( is_array( $css_prop ) ) {
+				foreach( $css_prop as $css ) {
+					$css_output .= $selector . '{ '. $css['prop'] .':' . esc_attr( $css_value  ) . ( $important ? '!important' : '' ) . ';}' . "\n";
+				}
+			} else {
+				$css_output .= $selector . '{ '. $css_prop .':' . esc_attr( $css_value  ) . ( $important ? '!important' : '' ) . ';}' . "\n";
+			}
+
+			return $css_output;
 		}
 
 		/**
@@ -171,22 +212,12 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		 * @param string $default Default value.
 		 * @param string $selector CSS selector.
 		 * @param bool $important Important rule.
-		 * @param bool $variable Whether to auto-create a variable
+		 * @param bool|string $variable Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
 		public static function get_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			if ( $variable === true ) {
-				$variable = '--merchant-' . sanitize_title( $setting );
-				$css      = static::get_variable_css( $module, $setting, $default, $selector, $variable );
-				$css      .= $selector . '{ color: var(' . esc_attr( $variable ) . ')' . ( $important ? '!important' : '' ) . ';}' . "\n";;
-
-				return $css;
-			} else {
-				$setting = self::get_option( $module, $setting, $default );
-
-				return $selector . '{ color:' . esc_attr( $setting ) . ( $important ? '!important' : '' ) . ';}' . "\n";
-			}
+			return self::get_css( $module, $setting, $default, $selector, 'color', '', $important, $variable );
 		}
 
 		/**
@@ -197,22 +228,12 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		 * @param string $default Default value.
 		 * @param string $selector CSS selector.
 		 * @param bool $important Important rule.
-		 * @param bool $variable Whether to auto-create a variable
+		 * @param bool|string $variable Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
 		public static function get_border_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			if ( $variable === true ) {
-				$variable = '--merchant-' . sanitize_title( $setting );
-				$css      = static::get_variable_css( $module, $setting, $default, $selector, $variable );
-				$css      .= $selector . '{ border-color: var(' . esc_attr( $variable ) . ')' . ( $important ? '!important' : '' ) . ';}' . "\n";;
-
-				return $css;
-			} else {
-				$setting = self::get_option( $module, $setting, $default );
-
-				return $selector . '{ border-color:' . esc_attr( $setting ) . ( $important ? '!important' : '' ) . ';}' . "\n";
-			}
+			return self::get_css( $module, $setting, $default, $selector, 'border-color', '', $important, $variable );
 		}
 
 		/**
@@ -223,28 +244,12 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		 * @param string $default Default value.
 		 * @param string $selector CSS selector.
 		 * @param bool $important Important rule.
-		 * @param bool $variable Whether to auto-create a variable
+		 * @param bool|string $variable Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
 		public static function get_background_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			if ( $variable === true ) {
-				$variable = '--merchant-' . sanitize_title( $setting );
-				$css      = static::get_variable_css( $module, $setting, $default, $selector, $variable );
-				$css      .= $selector . '{ background-color: var(' . esc_attr( $variable ) . ')' . ( $important ? '!important' : '' ) . ';}' . "\n";;
-
-				return $css;
-			} else {
-				$setting = self::get_option( $module, $setting, $default );
-				if ( ! $setting ) {
-					return '';
-				}
-				if ( $setting === 'background_color' && substr( $setting, 0, 1 ) !== '#' ) {
-					$setting = "#$setting";
-				}
-
-				return $selector . '{ background-color:' . esc_attr( $setting ) . ( $important ? '!important' : '' ) . ';}' . "\n";
-			}
+			return self::get_css( $module, $setting, $default, $selector, 'background-color', '', $important, $variable );
 		}
 
 		/**

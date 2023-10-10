@@ -1,3 +1,8 @@
+/**
+ * Buy X Get Y
+ *
+ */
+
 .merchant-bogo-title {
   margin: 0 0 10px;
   font-size: var(--merchant-font-size);
@@ -12,8 +17,11 @@
   > div {
     position: relative;
   }
-}
 
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
 
 .merchant-bogo-product {
   display: flex;
@@ -30,6 +38,13 @@
   img {
     max-height: 80px;
     max-width: 80px;
+  }
+}
+
+.merchant-bogo-product-price {
+  .error {
+    color: red;
+    font-size: 12px;
   }
 }
 
@@ -70,9 +85,6 @@
   z-index: 2;
 }
 
-.merchant-bogo-offer:not(:last-child) {
-  margin-bottom: 20px;
-}
 
 button.button.merchant-bogo-add-to-cart {
   font-size: 12px;
