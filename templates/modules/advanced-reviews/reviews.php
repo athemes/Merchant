@@ -283,7 +283,7 @@ $bars_data = $args['bars_data']; ?>
 												 * 
 												 * @since 1.0
 												 */
-												do_action( 'woocommerce_review_before_comment_text', $_comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+												do_action( 'woocommerce_review_before_comment_text', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
 												if ( isset( $args['comment_text'] ) ) {
 													echo wp_kses_post( $args['comment_text'] );
@@ -296,7 +296,7 @@ $bars_data = $args['bars_data']; ?>
 												 * 
 												 * @since 1.0
 												 */
-												do_action( 'woocommerce_review_after_comment_text', $_comment ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+												do_action( 'woocommerce_review_after_comment_text', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 												?>
 											</div>
 										</div>
