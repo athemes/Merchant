@@ -1,0 +1,47 @@
+/**
+ * Admin Preview
+ * Custom Labels
+ *
+ */
+
+.merchant-module-page-preview-browser-inner {
+  display: flex;
+  flex-grow: 0;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  padding: 50px 25px;
+  column-gap: 20px;
+}
+
+.merchant-preview-product {
+  width: 100%;
+  max-width: 200px;
+
+  .image-wrapper {
+	position: relative;
+	height: 11vw;
+	max-height: 180px;
+	background-color: #f5f5f5;
+  }
+}
+
+.merchant-preview-product-out-of-stock {
+  &:not(.display) {
+    display: none;
+  }
+}
+
+.merchant-preview-add-to-cart {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #212121;
+  color: white;
+  border: 3px solid #212121;
+  padding: 13px 24px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+}
+

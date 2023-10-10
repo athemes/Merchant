@@ -75,6 +75,11 @@
   font-size: 12px;
 }
 
+.merchant-frequently-bought-together-bundle-product-price .error {
+  color: red;
+  font-size: 14px;
+}
+
 .merchant-frequently-bought-together-bundle-product-plus {
   position: absolute;
   right: -30px;

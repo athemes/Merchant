@@ -68,6 +68,13 @@ const styles = [
 		destination: './assets/css/modules/buy-now/admin',
 	},
 
+	// Custom Labels
+	{
+		name: 'AddToCartTextAdminPreview',
+		src: './assets/sass/modules/add-to-cart-text/admin/preview.scss',
+		destination: './assets/css/modules/add-to-cart-text/admin',
+	},
+
 	// Animated Add To Cart.
 	{
 		name: 'animatedAddToCart',
@@ -90,6 +97,18 @@ const styles = [
 		name: 'quickViewAdmin',
 		src: './assets/sass/modules/quick-view/admin/preview.scss',
 		destination: './assets/css/modules/quick-view/admin',
+	},
+
+	// Quick Social Links
+	{
+		name: 'quickSocialLinks',
+		src: './assets/sass/modules/quick-social-links/quick-social-links.scss',
+		destination: './assets/css/modules/quick-social-links',
+	},
+	{
+		name: 'quickSocialLinksAdmin',
+		src: './assets/sass/modules/quick-social-links/admin/preview.scss',
+		destination: './assets/css/modules/quick-social-links/admin',
 	},
 
 	// Product Labels.
@@ -470,6 +489,13 @@ const styles = [
 		destination: './assets/css/modules/product-swatches/admin',
 	},
 
+	// Product navigation buttons
+	{
+		name: 'productNavigationButtonsAdminPreview',
+		src: './assets/sass/modules/product-navigation-buttons/admin/preview.scss',
+		destination: './assets/css/modules/product-navigation-buttons/admin',
+	},
+
 ];
 
 // Scripts to process.
@@ -632,6 +658,13 @@ const scripts = [
 		file: 'floating-mini-cart',
 		destination: './assets/js/modules/floating-mini-cart',
 	},
+	// Slide-out cart
+	{
+		name: 'slideOutCart',
+		src: './assets/js/src/modules/slide-out-cart/slide-out-cart.js',
+		file: 'slide-out-cart',
+		destination: './assets/js/modules/slide-out-cart',
+	},
 
 	// Login Popups.
 	{
@@ -661,6 +694,13 @@ const scripts = [
 		file: 'spending-goal',
 		destination: './assets/js/modules/spending-goal/',
 	},
+	// Quick social links
+	{
+		name: 'quickSocialLinksAdmin',
+		src: './assets/js/src/modules/quick-social-links/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/quick-social-links/admin',
+	},
 ];
 
 // Watch options.
@@ -673,37 +713,37 @@ const zipName        = 'merchant.zip';
 const zipDestination = './../';
 const zipIncludeGlob = ['../@(Merchant|merchant)/**/*'];
 const zipIgnoreGlob  = [
-	'!../@(Merchant|merchant)/**/*{node_modules,node_modules/**/*}',
-	'!../@(Merchant|merchant)/**/*.code-workspace',
-	'!../@(Merchant|merchant)/**/*.git',
-	'!../@(Merchant|merchant)/**/*.svn',
-	'!../@(Merchant|merchant)/**/*gulpfile.babel.js',
-	'!../@(Merchant|merchant)/**/*wpgulp.config.js',
-	'!../@(Merchant|merchant)/**/*.eslintrc.js',
-	'!../@(Merchant|merchant)/**/*.eslintignore',
-	'!../@(Merchant|merchant)/**/*.editorconfig',
-	'!../@(Merchant|merchant)/**/*phpcs.xml.dist',
-	'!../@(Merchant|merchant)/**/*vscode',
+	'!**/*{node_modules,node_modules/**/*}',
+	'!**/*.code-workspace',
+	'!**/*.git',
+	'!**/*.svn',
+	'!**/*gulpfile.babel.js',
+	'!**/*wpgulp.config.js',
+	'!**/*.eslintrc.js',
+	'!**/*.eslintignore',
+	'!**/*.editorconfig',
+	'!**/*phpcs.xml.dist',
+	'!**/*vscode',
 	'!../@(Merchant|merchant)/*.code-workspace',
-	'!../@(Merchant|merchant)/**/*package.json',
-	'!../@(Merchant|merchant)/**/*package-lock.json',
-	'!../@(Merchant|merchant)/**/*assets/img/raw/**/*',
-	'!../@(Merchant|merchant)/**/*assets/img/raw',
-	'!../@(Merchant|merchant)/**/*assets/js/src/**/*',
-	'!../@(Merchant|merchant)/**/*assets/js/src',
-	'!../@(Merchant|merchant)/**/*tests/**/*',
-	'!../@(Merchant|merchant)/**/*tests',
-	'!../@(Merchant|merchant)/**/*e2etests/**/*',
-	'!../@(Merchant|merchant)/**/*e2etests',
-	'!../@(Merchant|merchant)/**/*playwright-report/**/*',
-	'!../@(Merchant|merchant)/**/*playwright-report',
-	'!../@(Merchant|merchant)/**/*.wp-env.json',
-	'!../@(Merchant|merchant)/**/*playwright.config.js',
-	'!../@(Merchant|merchant)/**/*composer.json',
-	'!../@(Merchant|merchant)/**/*composer.lock',
-	'!../@(Merchant|merchant)/**/*yarn.lock',
-	'!../@(Merchant|merchant)/**/*phpcs.xml',
-	'!../@(Merchant|merchant)/{vendor,vendor/**/*}'
+	'!**/*package.json',
+	'!**/*package-lock.json',
+	'!**/*assets/img/raw/**/*',
+	'!**/*assets/img/raw',
+	'!**/*assets/js/src/**/*',
+	'!**/*assets/js/src',
+	'!**/*tests/**/*',
+	'!**/*tests',
+	'!**/*e2etests/**/*',
+	'!**/*e2etests',
+	'!**/*playwright-report/**/*',
+	'!**/*playwright-report',
+	'!**/*.wp-env.json',
+	'!**/*playwright.config.js',
+	'!**/*composer.json',
+	'!**/*composer.lock',
+	'!**/*yarn.lock',
+	'!**/*phpcs.xml',
+	'!{vendor,vendor/**/*}'
 ];
 
 // Translation options.

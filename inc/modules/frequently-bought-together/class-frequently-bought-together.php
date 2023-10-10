@@ -49,20 +49,28 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		// Module section.
 		$this->module_section = 'boost-revenue';
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+
+		// Module preview URL
+		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
+			'type'  => 'product',
+			'query' => array(
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key'     => '_merchant_frequently_bought_together_bundles',
+						'value'   => '',
+						'compare' => '!='
+					),
+					array(
+						'key'     => '_merchant_frequently_bought_together_bundles',
+						'value'   => 'a:0:{}',
+						'compare' => '!='
+					)
+				)
+			)
+		) );
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -105,11 +113,8 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( $module === self::MODULE_ID ) {
-			ob_start();
-			self::admin_preview_content();
-			$content = ob_get_clean();
 
-			$preview->set_html( $content );
+			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
 
 			$preview->set_text( 'title', '.merchant-frequently-bought-together-title' );
 			$preview->set_text( 'price_label', '.merchant-frequently-bought-together-bundle-total' );
@@ -134,42 +139,44 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	/**
 	 * Admin preview content.
 	 *
+	 * @param array $settings
+	 *
 	 * @return void
 	 */
-	public function admin_preview_content() {
-		$settings = $this->get_module_settings();
-
+	public function admin_preview_content( $settings ) {
 		echo wp_kses( merchant_get_template_part(
 			self::MODULE_TEMPLATES_PATH,
 			'single-product',
 			array(
 				'bundles'  => array(
-					array(
-						'discount_value'         => 20,
-						'products'               => array(
-							array(
-								'id'         => 97,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Eternal Sunset Collection Lip and Cheek',
-								'price_html' => wc_price( 12 ),
-								'price'      => 12,
-								'permalink'  => '#'
+					10 => array(
+						array(
+							'discount_value'         => 20,
+							'products'               => array(
+								array(
+									'id'         => 97,
+									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'title'      => 'Eternal Sunset Collection Lip and Cheek',
+									'price_html' => wc_price( 12 ),
+									'price'      => 12,
+									'permalink'  => '#'
+								),
+								array(
+									'id'         => 96,
+									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'title'      => 'Vinopure Pore Purifying Gel Cleanser',
+									'price_html' => wc_price( 14 ),
+									'price'      => 14,
+									'permalink'  => '#'
+								)
 							),
-							array(
-								'id'         => 96,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Vinopure Pore Purifying Gel Cleanser',
-								'price_html' => wc_price( 14 ),
-								'price'      => 14,
-								'permalink'  => '#'
-							)
-						),
-						'layout'                 => 'percentage_discount',
-						'total_products'         => 3,
-						'total_price'            => 47,
-						'total_discount'         => 12,
-						'total_product_discount' => 4,
-						'total_discounted_price' => 35
+							'layout'                 => 'percentage_discount',
+							'total_products'         => 3,
+							'total_price'            => 47,
+							'total_discount'         => 12,
+							'total_product_discount' => 4,
+							'total_discounted_price' => 35
+						)
 					)
 				),
 				'nonce'    => '',

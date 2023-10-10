@@ -67,20 +67,28 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 			'cart_description_text'    => esc_html__( 'A discount of {amount} is applied.', 'merchant' )
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+
+		// Module preview URL
+		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
+			'type'  => 'product',
+			'query' => array(
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key'     => '_merchant_volume_discounts',
+						'value'   => '',
+						'compare' => '!='
+					),
+					array(
+						'key'     => '_merchant_volume_discounts',
+						'value'   => 'a:0:{}',
+						'compare' => '!='
+					)
+				)
+			)
+		) );
 
 		// Module options path.
 		$this->module_options_path = self::MODULE_DIR . '/admin/options.php';

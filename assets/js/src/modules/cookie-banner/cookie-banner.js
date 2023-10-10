@@ -24,7 +24,7 @@ merchant.modules = merchant.modules || {};
 
 			if ( ! self.getCookie( 'merchant_cookie_banner' ) ) {
 
-				$('.merchant-cookie-banner-button').on('click', function( e ) {
+				$('.merchant-cookie-banner-button, .merchant-cookie-close-button').on('click', function( e ) {
 
 					e.preventDefault();
 
@@ -36,9 +36,6 @@ merchant.modules = merchant.modules || {};
 
 				$banner.addClass('merchant-show');
 
-				$('.merchant-cookie-close-button').on('click', function( e ) {
-					$banner.removeClass('merchant-show');
-				});
 
 			}
 

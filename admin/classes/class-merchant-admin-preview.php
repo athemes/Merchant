@@ -11,11 +11,15 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 	class Merchant_Admin_Preview {
 
 		/**
+		 * The preview HTML.
+		 *
 		 * @var string
 		 */
 		protected $html;
 
 		/**
+		 * Manipulators array.
+		 *
 		 * @var array
 		 */
 		protected $manipulators;
@@ -40,7 +44,6 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-
 			// Add admin preview class to body.
 			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ) );
 		}
@@ -59,11 +62,20 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		}
 
 		/**
-		 * @param $html
+		 * Set the HTML of the preview box.
+		 *
+		 * @param string|callable $html The HTML as a string or a callable that should echo the HTML.
+		 * @param mixed ...$args Optional args to use in the callback
 		 *
 		 * @return void
 		 */
-		public function set_html( $html ) {
+		public function set_html( $html, ...$args ) {
+			if ( is_callable( $html ) ) {
+				ob_start();
+				call_user_func( $html, ...$args );
+				$html = ob_get_clean();
+			}
+
 			$this->html = $html;
 		}
 
@@ -160,8 +172,8 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		public function set_svg_icon( $setting, $selector ) {
 			$manipulator = array(
 				'icons_lib' => Merchant_SVG_Icons::$svg_icons,
-				'setting'  	=> $setting,
-				'selector' 	=> $selector
+				'setting'   => $setting,
+				'selector'  => $selector
 			);
 
 			$this->manipulators['svg_icons'][] = $manipulator;
@@ -203,7 +215,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 * @param string $selector the selector
 		 * @param string $repeater_item_selector the repeater item selector
 		 * @param string $icon optional, the icon selector. Useful when the $list_item_selector contains
-		 * 					icon HTML markup inside his content.
+		 *                    icon HTML markup inside his content.
 		 *
 		 * @return void
 		 */
@@ -214,6 +226,27 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			);
 
 			$this->manipulators['repeater_content'][] = $manipulator;
+		}
+
+		/**
+		 * This will update the flexible content items inside a selector with the value from the settings field.
+		 *
+		 * @param string $setting the setting ID
+		 * @param string $selector the selector
+		 * @param array $variables the args to point {variables} with settings for each layout
+		 *
+		 * @example array('layout' => array('{variable}' => 'setting'))
+		 *
+		 * @return void
+		 */
+		public function set_flexible_content( $setting, $selector, $variables ) {
+			$manipulator = array(
+				'setting'   => $setting,
+				'selector'  => $selector,
+				'variables' => $variables
+			);
+
+			$this->manipulators['flexible_content'][] = $manipulator;
 		}
 
 		/**
@@ -229,6 +262,10 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 				'setting' => $setting
 			);
 		}
+
+		/*****************************************
+		 * Helpers
+		 *****************************************/
 
 		/***
 		 * Get price format to use in replacements.

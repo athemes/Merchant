@@ -226,7 +226,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			}
 
 			// Botiga theme compatibility:
-			// Do not render the metabox in the Botiga templates builder. 
+			// Do not render the metabox in the Botiga templates builder.
 			if ( class_exists( 'Botiga_Modules' ) && Botiga_Modules::is_module_active( 'templates' ) ) {
 				unset( $types['athemes_hf'] );
 			}
@@ -721,6 +721,8 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						'library' => 'image',
 					) );
 
+					$enable_thumb = isset( $field['enable_thumb'] ) && $field['enable_thumb'];
+
 					echo '<div class="merchant-metabox-field-uploads-content">';
 					$values     = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
 					$name       = 'video' === $field['library'] ? $field_id . '[0][src]' : $field_id . '[]';
@@ -729,7 +731,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '<ul class="merchant-metabox-field-uploads-list" data-library="' . esc_attr( $field['library'] ) . '">';
 					echo '<li class="merchant-metabox-field-uploads-list-item hidden">';
 
-					if ( 'video' === $field['library'] ) {
+					if ( 'video' === $field['library'] || $enable_thumb ) {
 						echo '<div class="merchant-metabox-field-uploads-thumbnail">';
 						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-remove dashicons dashicons-dismiss" style="display:none"></a>';
 						echo '<a href="#" class="merchant-metabox-field-uploads-thumbnail-upload"><span>+</span></a>';
@@ -744,11 +746,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '</li>';
 
 					foreach ( $values as $key => $value ) {
-						$item_name  = 'video' === $field['library'] ? str_replace( '0', $key, $name ) : $name;
+						$item_name  = 'video' === $field['library'] || $enable_thumb ? str_replace( '0', $key, $name ) : $name;
 						$item_value = is_array( $value ) ? ( isset( $value['src'] ) ? $value['src'] : '' ) : $value;
 
 						echo '<li class="merchant-metabox-field-uploads-list-item">';
-						if ( 'video' === $field['library'] ) {
+						if ( 'video' === $field['library'] || $enable_thumb ) {
 							$item_thumb      = is_array( $value ) && isset( $value['thumb'] ) ? $value['thumb'] : '';
 							$item_thumb_name = str_replace( '0', $key, $thumb_name );
 
@@ -952,11 +954,14 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						}
 
 						echo '</select>';
-						echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=shop_coupon' ) ) . '" target="_blank" style="margin-left: 10px;">' . esc_html__( 'Manage coupons', 'merchant' ) . '</a>';
+						echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=shop_coupon' ) ) . '" target="_blank" style="margin-left: 10px;">' . esc_html__( 'Manage coupons',
+								'merchant' ) . '</a>';
 					} else {
 						echo '<div style="color: red;">';
 						/* Translators: 1. Coupon admin url 2. Link target attribute value */
-						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ), admin_url( 'post-new.php?post_type=shop_coupon' ), '_blank' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							esc_url( admin_url( 'post-new.php?post_type=shop_coupon' ) ),
+							'_blank' );
 						echo '</div>';
 						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '" value="" />';
 					}

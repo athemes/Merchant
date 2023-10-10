@@ -1,9 +1,9 @@
 === Merchant ===
 Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quick view, buy now button, animated add to cart, payment logos, cart count favicon, inactive tab message, ajax real-time search, auto external links, code snippets, scroll to top button, agree to terms checkbox, cookie banner, accelerated checkout
 Requires at least: 5.5
-Tested up to: 6.3
+Tested up to: 6.3.1
 Requires PHP: 5.6
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -151,6 +151,11 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 16. Cookie Banner Module
 
 == Changelog ==
+= 1.5 =
+* Added - 4 Modules: Quick Social Links, Add To Cart Text, Slide-out cart and Product Navigation Buttons.
+* Changed - Renamed Product Swatches to Variation Swatches.
+* Fixed - Cookie Banner: In certain cases it was not possible to close the cookie banner.
+
 = 1.4 =
 * Changed - Added new previews & description changes.
 

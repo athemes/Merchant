@@ -10,7 +10,7 @@
 	opacity: 0;
 	visibility: hidden;
 	transition: ease opacity 300ms, ease bottom 300ms;
-	z-index: 199;
+	z-index: 998;
 	&.position-top {
 		position: fixed;
 		top: 0;
@@ -54,7 +54,7 @@
 			&.product-addtocart {
 				display: flex;
 				align-items: center;
-				
+
 				.stock {
 					margin-bottom: 0;
 					margin-right: 20px;
@@ -95,11 +95,11 @@
 					&::-webkit-scrollbar {
 						width: 7px;
 					}
-					 
+
 					&::-webkit-scrollbar-track {
 						background: #e2e2e2;
 					}
-					 
+
 					&::-webkit-scrollbar-thumb {
 					  background-color: #CCC;
 					}
@@ -149,7 +149,7 @@
 									position: relative;
 								}
 							}
-							
+
 							.label {
 								vertical-align: middle;
 								min-width: 64px;
@@ -289,14 +289,14 @@
 		border-color: var( --mrc-sticky-adtc-border-color, #e2e2e2 );
 	}
 
-	.price, 
+	.price,
 	.product-price,
-	.merchant-sticky-add-to-cart-wrapper-content .variations_form table.variations .label, 
-	.merchant-sticky-add-to-cart-wrapper select, 
-	.botiga-variations-wrapper .botiga-variation-type-button>a, 
-	.quantity .botiga-quantity-plus, 
-	.quantity .botiga-quantity-minus, 
-	.qty, 
+	.merchant-sticky-add-to-cart-wrapper-content .variations_form table.variations .label,
+	.merchant-sticky-add-to-cart-wrapper select,
+	.botiga-variations-wrapper .botiga-variation-type-button>a,
+	.quantity .botiga-quantity-plus,
+	.quantity .botiga-quantity-minus,
+	.qty,
 	table.variations .reset_variations {
 		color: var( --mrc-sticky-adtc-content-color, #212121 );
 	}
