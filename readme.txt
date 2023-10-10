@@ -152,9 +152,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 = 1.5 =
-* Added - 4 Modules: Quick Social Links, Add To Cart Text, Slide-out cart and Product Navigation Buttons
-* Changed - Renamed Product Swatches to Variation Swatches
-* Fixed - Cookie Banner: In certain cases it was not possible to close the cookie banner
+* Added - 4 Modules: Quick Social Links, Add To Cart Text, Slide-out cart and Product Navigation Buttons.
+* Changed - Renamed Product Swatches to Variation Swatches.
+* Fixed - Cookie Banner: In certain cases it was not possible to close the cookie banner.
 
 = 1.4 =
 * Changed - Added new previews & description changes.
