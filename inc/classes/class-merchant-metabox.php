@@ -384,9 +384,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							continue;
 						}
 
-						$value = ( isset( $_POST[ $field_id ] ) ) ? wp_unslash( $_POST[ $field_id ] ) : null; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-						$value = $this->sanitize( $field, $value );
+						$value = $this->sanitize( $field, $field_id, $_POST );
 
 						update_post_meta( $post_id, $field_id, $value );
 					}
@@ -398,7 +396,9 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		 * Sanitize.
 		 *
 		 */
-		public function sanitize( $field, $value ) {
+		public function sanitize( $field, $field_id, $post_data ) {
+			$value = isset( $post_data[ $field_id ] ) ? wp_unslash( $post_data[ $field_id ] ) : null;
+
 			switch ( $field['type'] ) {
 				case 'text':
 				case 'coupons':
@@ -451,7 +451,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				case 'flexible-content':
 					return is_array( $value ) && ! empty( $value ) ? array_map( function ( $sub_fields ) use ( $field ) {
 						foreach ( $sub_fields as $sub_field => $value ) {
-							$sub_fields[ $sub_field ] = $this->sanitize( $field['layouts'][ $sub_fields['type'] ]['fields'][ $sub_field ], $value );
+							$sub_fields[ $sub_field ] = $this->sanitize( $field['layouts'][ $sub_fields['type'] ]['fields'][ $sub_field ], $sub_field, $sub_fields );
 						}
 
 						return $sub_fields;
@@ -494,13 +494,13 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						if ( isset( $field['prepend'] ) ) {
 							echo '<div class="merchant-metabox-field-prepend">' . esc_attr( $field['prepend'] ) . '</div>';
 						}
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
 						if ( isset( $field['append'] ) ) {
 							echo '<div class="merchant-metabox-field-append">' . esc_attr( $field['append'] ) . '</div>';
 						}
 						echo '</div>';
 					} else {
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . $style . ' />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
 					}
 					break;
 
@@ -548,7 +548,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						$multiple = 'multiple';
 					}
 
-					echo '<select name="' . esc_attr( $field_id ) . '[]" ' . $multiple . ' data-source="' . esc_attr( $field['source'] ) . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo '<select name="' . esc_attr( $field_id ) . '[]" ' . esc_attr( $multiple ) . ' data-source="' . esc_attr( $field['source'] ) . '">';
 
 					if ( ! empty( $ids ) ) {
 						foreach ( $ids as $id ) {
@@ -958,10 +958,14 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 								'merchant' ) . '</a>';
 					} else {
 						echo '<div style="color: red;">';
-						/* Translators: 1. Coupon admin url 2. Link target attribute value */
-						echo sprintf( __( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							esc_url( admin_url( 'post-new.php?post_type=shop_coupon' ) ),
-							'_blank' );
+						echo wp_kses_post(  
+							sprintf( 
+								/* Translators: 1. Coupon admin url 2. Link target attribute value */
+								__( 'No coupons found! <a href="%1$s" target="%2$s">Create a new coupon</a>', 'merchant' ),
+								admin_url( 'post-new.php?post_type=shop_coupon' ),
+								'_blank' 
+							) 
+						);
 						echo '</div>';
 						echo '<input type="hidden" name="' . esc_attr( $field_id ) . '" value="" />';
 					}
@@ -1017,7 +1021,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '</li>';
 					$sub_fields = ob_get_clean();
 
-					echo str_replace( 'name=', 'data-name=', $sub_fields ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
+					echo wp_kses( str_replace( 'name=', 'data-name=', $sub_fields ), merchant_kses_allowed_tags( array( 'all' ) ) );
 
 					foreach ( $values as $value_key => $value ) {
 						echo '<li class="merchant-metabox-field-flexible-content-item">';

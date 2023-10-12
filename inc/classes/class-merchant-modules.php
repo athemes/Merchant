@@ -177,6 +177,11 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * Check if a specific module is activated
 		 */
 		public static function is_module_active( $module ) {
+			/**
+			 * Hook 'merchant_module_{$module}_deactivate'
+			 * 
+			 * @since 1.0
+			 */
 			if ( apply_filters( "merchant_module_{$module}_deactivate", false ) ) {
 				add_filter( "merchant_admin_module_{$module}_list_item_class", function( $class ) {
 					return $class . ' merchant-module-deactivated-by-bp';

@@ -197,11 +197,9 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 			'settings' => self::$module_settings,
 			'elements' => array(
 				'product_image' => '',
-				'product_title' => wp_kses_post( __( '<h5>Product Title</h5>', 'merchant' ) ),
-				'product_price' => wp_kses_post( wc_price( 199 ) ),
-				'add_to_cart'   => wp_kses_post(
-					__( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' )
-				)
+				'product_title' => __( '<h5>Product Title</h5>', 'merchant' ),
+				'product_price' => wc_price( 199 ),
+				'add_to_cart'   => __( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' )
 			)
 		) );
 

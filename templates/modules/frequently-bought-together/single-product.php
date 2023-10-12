@@ -34,7 +34,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                                             </a>
                                         </p>
                                         <div class="merchant-frequently-bought-together-bundle-product-price">
-                                            <?php echo $product['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                            <?php echo wp_kses( $product['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                                         </div>
                                         <?php if ( $product_key !== 0 && isset( $product['attributes'] ) && ! empty( $product['attributes'] ) ) : ?>
                                             <div class="merchant-frequently-bought-together-bundle-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
@@ -65,8 +65,8 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                                 <?php echo isset( $settings['price_label'] ) ? esc_html( $settings['price_label'] ) : esc_html__( 'Bundle price', 'merchant' ); ?>
                             </p>
                             <p class="merchant-frequently-bought-together-bundle-total-price price">
-                                <del aria-hidden="true"><?php echo wc_price( $bundle['total_price'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></del>
-                                <ins><?php echo wc_price( $bundle['total_discounted_price'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></ins>
+                                <del aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
+                                <ins><?php echo wp_kses( wc_price( $bundle['total_discounted_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
                             </p>
                             <p class="merchant-frequently-bought-together-bundle-save">
                                 <?php echo isset( $settings['save_label'] )

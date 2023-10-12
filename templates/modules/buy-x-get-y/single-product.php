@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+var_dump( $args );
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-bogo">
@@ -33,14 +33,14 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             ); ?>
                     </div>
                     <div class="merchant-bogo-product">
-						<?php echo wp_kses_post( $offer['product_x']['image'] ); ?>
+						<?php echo wp_kses_post( $offer['buy_product']['image'] ); ?>
                         <div class="merchant-bogo-product-contents">
                             <p class="woocommerce-loop-product__title">
-                                <a href="<?php echo esc_url( $offer['product_x']['permalink'] ); ?>" target="_blank">
-									<?php echo esc_html( $offer['product_x']['title'] ); ?>
+                                <a href="<?php echo esc_url( $offer['buy_product']['permalink'] ); ?>" target="_blank">
+									<?php echo esc_html( $offer['buy_product']['title'] ); ?>
                                 </a>
                             </p>
-							<?php echo $offer['product_x']['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped ?>
+							<?php echo wp_kses( $offer['buy_product']['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                         </div>
                     </div>
                     <div class="merchant-bogo-arrow">→</div>
@@ -79,7 +79,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                                     </a>
                                 </p>
                                 <div class="merchant-bogo-product-price">
-				                    <?php echo $offer['product']['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped ?>
+				                    <?php echo wp_kses( $offer['product']['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                                 </div>
                             </div>
                         </div>

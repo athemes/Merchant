@@ -23,7 +23,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'duration',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Count down duration minutes', 'merchant' ),
-			'default' => esc_html__( 10, 'merchant' ),
+			'default' => 10,
 		),
 
 		array(

@@ -78,7 +78,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 		}
 
-		$variableId				   = ( isset( $_POST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['variation_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$input_post_data = array(
+			'variation_id' => filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT)
+		);
+
+		$variableId				   = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
 		$is_variable_has_pre_order = $this->isPreOrder( $product_id, $variableId );
 
 		if ( empty( $products ) || ( $is_variable_has_pre_order && $has_pre_orders ) || ( false === $is_variable_has_pre_order && false === $has_pre_orders ) ) {
@@ -334,13 +338,18 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function custom_fields_for_variable_products_save( $post_id ) {
+		$input_post_data = array(
+			'_is_pre_order_by_post_id' => filter_input(INPUT_POST, '_is_pre_order_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+			'_pre_order_data_by_post_id' => filter_input(INPUT_POST, '_pre_order_date_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+		);
+		
 		$product = wc_get_product( $post_id );
 
-		$is_pre_order_variation = isset( $_POST[ '_is_pre_order_' . $post_id ] ) ? 'yes' : 'no'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$is_pre_order_variation = isset( $input_post_data[ '_is_pre_order_by_post_id' ] ) ? 'yes' : 'no';
 		$product->update_meta_data( '_is_pre_order', $is_pre_order_variation );
 
-		if ( 'yes' === $is_pre_order_variation && isset( $_POST[ '_pre_order_date_' . $post_id ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $_POST[ '_pre_order_date_' . $post_id ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( 'yes' === $is_pre_order_variation && isset( $input_post_data[ '_pre_order_data_by_post_id' ] ) ) {
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data[ '_pre_order_data_by_post_id' ] ) );
 			$product->update_meta_data( '_pre_order_date', $pre_order_date_value );
 		}
 
@@ -354,12 +363,17 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function custom_fields_for_simple_products_save( $post_id ) {
+		$input_post_data = array(
+			'_is_pre_order' => filter_input(INPUT_POST, '_is_pre_order', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+			'_pre_order_date' => filter_input(INPUT_POST, '_pre_order_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+		);
+
 		$product      = wc_get_product( $post_id );
-		$is_pre_order = isset( $_POST['_is_pre_order'] ) ? 'yes' : 'no'; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$is_pre_order = isset( $input_post_data['_is_pre_order'] ) ? 'yes' : 'no'; 
 		$product->update_meta_data( '_is_pre_order', $is_pre_order );
 
-		if ( 'yes' === $is_pre_order && isset( $_POST['_pre_order_date'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $_POST['_pre_order_date'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( 'yes' === $is_pre_order && isset( $input_post_data['_pre_order_date'] ) ) { 
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_date'] ) ); 
 			$product->update_meta_data( '_pre_order_date', esc_attr( $pre_order_date_value ) );
 		} else {
 			$product->update_meta_data( '_pre_order_date', '' );
@@ -375,12 +389,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string
 	 */
 	public function change_button_text( $text ) {
+		$input_post_data = array(
+			'product_id' => filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT),
+		);
+
 		global $post;
 		$_post = $post;
 
 		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $_POST[ 'product_id' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$_post = get_post( absint( $_POST[ 'product_id' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( ! $_post && isset( $input_post_data[ 'product_id' ] ) ) { 
+			$_post = get_post( absint( $input_post_data[ 'product_id' ] ) ); 
 		}
 
 		if ( 'yes' === get_post_meta( $_post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) > time() ) {
@@ -438,6 +456,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function maybe_render_additional_information() {
+		$input_post_data = array(
+			'product_id' => filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT),
+		);
+
 		global $post, $product;
 		
 		// Do not override globals.
@@ -445,8 +467,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$_product = $product;
 
 		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $_POST[ 'product_id' ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$_post 	  = get_post( absint( $_POST[ 'product_id' ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( ! $_post && isset( $input_post_data[ 'product_id' ] ) ) {
+			$_post 	  = get_post( absint( $input_post_data[ 'product_id' ] ) );
 			$_product = wc_get_product( $_post->ID );
 		}
 

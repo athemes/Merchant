@@ -249,6 +249,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				return;
 			}
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
 			$options = get_option( 'merchant', array() );
 
 			if ( ! empty( $save ) ) {
@@ -262,7 +266,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
-								$value = wp_unslash( $_POST['merchant'][ $field['id'] ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
 							} else {
 								if ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
 									$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
@@ -477,7 +481,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			self::field( $settings, $value );
 			$field = ob_get_clean();
 
-			echo str_replace( $search, $replace, $field ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Previously escaped
+			echo wp_kses( str_replace( $search, $replace, $field ), merchant_kses_allowed_tags( array( 'all' ) ) );
 		}
 
 		/**
@@ -523,7 +527,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function textarea_code( $settings, $value ) {
 			$value = ( $value ) ? $value : '';
 			?>
-			<textarea name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]"><?php echo wp_unslash( $value ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></textarea>
+			<textarea name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]"><?php echo wp_kses( $value, merchant_kses_allowed_tags_for_code_snippets() ); ?></textarea>
 			<?php
 		}
 

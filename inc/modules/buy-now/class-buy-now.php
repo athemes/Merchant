@@ -181,11 +181,16 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function buy_now_listener() {
-		$product_id = ( isset( $_POST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant-buy-now'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$input_post_data = array(
+			'merchant-buy-now' => sanitize_text_field( filter_input(INPUT_POST, 'merchant-buy-now', FILTER_SANITIZE_NUMBER_INT) ),
+			'variation_id' => sanitize_text_field( filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT) ),
+		);
+
+		$product_id = ( isset( $input_post_data['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['merchant-buy-now'] ) ) : '';
 
 		if ( $product_id ) {
 
-			$variation_id = ( isset( $_POST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_POST['variation_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$variation_id = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : '';
 			if ( $variation_id ) {
 				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
 			} else {

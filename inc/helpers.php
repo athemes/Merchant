@@ -149,6 +149,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 				'id'    => true,
 				'name'  => true,
 				'value' => true,
+				'data-name' => true
 			);
 		}
 
@@ -158,6 +159,28 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 				'class' => true,
 				'id'    => true,
 				'style' => true
+			);
+		}
+
+		// Include select2
+		if ( in_array( 'select2', $extra ) || in_array( 'all', $extra ) ) {
+			$allowed_tags[ 'select' ] = array(
+				'name' => true,
+				'class' => true,
+				'id'    => true,
+				'style' => true,
+				'data-name' => true,
+				'data-source' => true,
+				'multiple' => true
+			);
+
+			$allowed_tags[ 'option' ] = array(
+				'value' => true,
+				'selected' => true
+			);
+
+			$allowed_tags[ 'optgroup' ] = array(
+				'label' => true
 			);
 		}
 
@@ -199,7 +222,8 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'autocomplete' => true,
 					'required' => true,
 					'action' => true,
-					'method' => true
+					'method' => true,
+					'data-name' => true
 				);
 			}
 		}
@@ -210,5 +234,19 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		 * @since 1.2.5
 		 */
 		return apply_filters( 'merchant_kses_allowed_tags', $allowed_tags );
+	}
+}
+
+/**
+ * Allowed tags for scripts.
+ * 
+ */
+if ( ! function_exists( 'merchant_kses_allowed_tags_for_code_snippets' ) ) {
+	function merchant_kses_allowed_tags_for_code_snippets() {
+		return array(
+			'script' => array(
+				'type' => true
+			)
+		);
 	}
 }

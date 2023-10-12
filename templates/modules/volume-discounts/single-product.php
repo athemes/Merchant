@@ -26,40 +26,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$total_price      = intval( $discount_tier['quantity'] ) * $discounted_price; ?>
         <div class="merchant-volume-discounts-item">
             <div class="merchant-volume-discounts-buy-label">
-				<?php echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					array(
-						'{amount}',
-						'{discount}'
+				<?php echo wp_kses(  
+					str_replace(
+						array(
+							'{amount}',
+							'{discount}'
+						),
+						array(
+							'<strong>' . esc_attr( $discount_tier['quantity'] ) . '</strong>',
+							'<strong>' . wc_price( $discount ) . '</strong>'
+						),
+						esc_html( $args['settings']['buy_text'] )
 					),
-					array(
-						'<strong>' . esc_attr( $discount_tier['quantity'] ) . '</strong>',
-						'<strong>' . wc_price( $discount ) . '</strong>'
-					),
-					esc_html( $args['settings']['buy_text'] )
-				); ?>
+					merchant_kses_allowed_tags( array( 'bdi' ) )
+				);
+				?>
             </div>
             <ul>
                 <li>
                     <div></div>
                     <div>
-                        <del><?php echo wc_price( $args['product_price'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></del>
+                        <del><?php echo wp_kses( wc_price( $args['product_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
                     </div>
                 </li>
                 <li>
                     <div class="merchant-volume-discounts-item-text"><?php echo esc_html( $args['settings']['item_text'] ) ?></div>
-                    <div><strong><?php echo wc_price( $discounted_price ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong></div>
+                    <div><strong><?php echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                 </li>
                 <li>
                     <div class="merchant-volume-discounts-total-text"><?php echo esc_html( $args['settings']['total_text'] ) ?></div>
-                    <div><strong><?php echo wc_price( $total_price ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong></div>
+                    <div><strong><?php echo wp_kses( wc_price( $total_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                 </li>
             </ul>
             <div class="merchant-volume-discounts-item-label">
 			<span class="merchant-volume-discounts-save-label">
-				<?php echo str_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					'{amount}',
-					wc_price( $total_discount ),
-					esc_html( $args['settings']['save_label'] )
+				<?php echo wp_kses(  
+					str_replace(
+						'{amount}',
+						wc_price( $total_discount ),
+						esc_html( $args['settings']['save_label'] )
+					),
+					merchant_kses_allowed_tags( array( 'bdi' ) )
 				); ?>
 			</span>
             </div>

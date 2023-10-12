@@ -148,7 +148,7 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		$snippet = Merchant_Option::get( 'code-snippets', 'header_code_snippets', '' );
 	
 		if ( ! empty( $snippet ) ) {
-			echo wp_unslash( $snippet ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
 	
 	}
@@ -162,7 +162,7 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		$snippet = Merchant_Option::get( 'code-snippets', 'body_code_snippets', '' );
 	
 		if ( ! empty( $snippet ) ) {
-			echo wp_unslash( $snippet ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
 	
 	}
@@ -176,7 +176,7 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		$snippet = Merchant_Option::get( 'code-snippets', 'footer_code_snippets', '' );
 	
 		if ( ! empty( $snippet ) ) {
-			echo wp_unslash( $snippet ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
 	
 	}

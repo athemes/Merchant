@@ -30,7 +30,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'min_inventory',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Show urgency box when variant inventory is below', 'merchant' ),
-			'default' => esc_html__( 50, 'merchant' ),
+			'default' => 50,
 		),
 
 	),

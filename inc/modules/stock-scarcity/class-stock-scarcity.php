@@ -58,7 +58,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'single_product_placement' => 'after-cart-form',
-			'min_inventory'            => esc_html__( 50, 'merchant' ),
+			'min_inventory'            => 50,
 			'low_inventory_text'       => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' )
 		);
 
@@ -169,15 +169,14 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
                 <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
                 <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
 				<?php
-				echo merchant_get_template_part( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in template.
+				merchant_get_template_part(
 					self::MODULE_TEMPLATES_PATH,
 					'single-product',
 					array(
 						'settings'   => $settings,
 						'percentage' => 30,
 						'stock'      => 20
-					),
-					true
+					)
 				); ?>
                 <div class="mrc-preview-addtocart-placeholder"></div>
             </div>

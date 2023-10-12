@@ -104,7 +104,7 @@ $attributes = array_reverse( $attributes );
 			}
 
 			echo '<div class="merchant-sticky-add-to-cart-item ' . esc_attr( $class ) . '">';
-            echo $args['elements'][$element]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- previously escaped
+            echo wp_kses( $args['elements'][$element], merchant_kses_allowed_tags( array( 'bdi' ) ) );
 			echo '</div>';
 		} 
 		?>

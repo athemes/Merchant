@@ -214,7 +214,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
             </div>
         </div>
 
-		<?php echo merchant_get_template_part( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the template
+		<?php merchant_get_template_part(
 			self::MODULE_TEMPLATES_PATH,
 			'widget',
 			array(
@@ -230,8 +230,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 					),
 					sanitize_text_field( $settings['text_goal_started'] )
 				)
-			),
-			true
+			)
 		); ?>
 
 		<?php

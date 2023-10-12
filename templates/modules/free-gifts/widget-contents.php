@@ -42,7 +42,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                     </p>
                     <div class="merchant-free-gifts-widget-offer-product-price price">
                         <del>
-							<?php echo wc_price( $offer['product']['price'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                         </del>
                         <strong class="merchant-free-gifts-widget-offer-product-free">
 							<?php echo isset( $settings['free_text'] ) ? esc_html( $settings['free_text'] ) : esc_html__( 'Free', 'merchant' ) ?>
