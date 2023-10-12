@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-var_dump( $args );
+
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-bogo">
