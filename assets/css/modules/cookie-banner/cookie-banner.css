@@ -79,7 +79,7 @@
 
 .merchant-cookie-banner-floating {
   bottom: 35px;
-  z-index: 998;
+  z-index: 9999;
 }
 
 .merchant-cookie-banner-floating .merchant-cookie-banner-inner {

@@ -57,7 +57,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'button_text' => __( 'Pre Order Now!', 'merchant' ),
-			'additional_text' => __( 'Ships in {date}.', 'merchant' )
+			'additional_text' => __( 'Ships on {date}.', 'merchant' )
 		);
 
 		// Mount preview url.

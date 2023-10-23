@@ -423,7 +423,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 			$data['is_pre_order'] = true;
 
-			$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships in {date}.', 'merchant' ) );
+			$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
 			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $variation->get_id(), '_pre_order_date', true ) ) );
 			$text            = $this->replaceDateTxt( $additional_text, $time_format );
 
@@ -474,7 +474,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		if ( null !== $_product ) {
 			if ( 'yes' === get_post_meta( $_post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) > time() ) {
-				$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships in {date}.', 'merchant' ) );
+				$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
 				$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) );
 				$text            = $this->replaceDateTxt( $additional_text, $time_format );
 

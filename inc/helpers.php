@@ -201,7 +201,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 
 		// Include forms tags.
 		if ( in_array( 'forms', $extra ) || in_array( 'all', $extra ) ) {
-			$tags = array( 'form', 'input', 'textarea' );
+			$tags = array( 'form', 'input', 'select', 'option', 'textarea' );
 
 			foreach ( $tags as $tag ) {
 				$allowed_tags[ $tag ] = array(
@@ -213,6 +213,10 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'type'  => true,
 					'placeholder' => true,
 					'data'  => '*',
+					'data-product_id' => true,
+					'data-product_variations' => true,
+					'data-attribute_name' => true,
+					'data-show_option_none' => true,
 					'step'  => true,
 					'min'   => true,
 					'max'   => true,
@@ -223,7 +227,12 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'required' => true,
 					'action' => true,
 					'method' => true,
-					'data-name' => true
+					'data-name' => true,
+					'enctype' => true,
+					'size' => true,
+					'role' => true,
+					'inputmode' => true,
+					'aria-label' => true
 				);
 			}
 		}

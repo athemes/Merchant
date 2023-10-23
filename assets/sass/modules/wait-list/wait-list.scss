@@ -2,6 +2,11 @@
  * Wait list.
  *
  */
+.merchant-wait-list {
+	display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .merchant-wait-list-success {
 	color: green;

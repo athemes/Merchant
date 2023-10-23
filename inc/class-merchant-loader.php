@@ -269,8 +269,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
 
 				if ( 'on-page-load' === $trigger ) {
-					// wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
-
+					wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
 				}
 			}
 

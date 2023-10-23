@@ -153,7 +153,9 @@ class Merchant_Wait_List extends Merchant_Add_Module {
                 <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
                 <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
                 <div class="preview-merchant-wait-list">
-					<?php echo wp_kses( $this->get_html( $settings ), merchant_kses_allowed_tags( array( 'forms', 'nonce' ) ) ); ?>
+					<?php 
+					$preview_html = str_replace( 'required', '', $this->get_html( $settings ) );
+					echo wp_kses( $preview_html, merchant_kses_allowed_tags( array( 'forms', 'nonce' ) ) ); ?>
                 </div>
             </div>
         </div>
