@@ -68,7 +68,7 @@ merchant.modules = merchant.modules || {};
       $counter.text();
       jQuery.ajax({
         type: 'POST',
-        url: wc_add_to_cart_params.ajax_url,
+        url: merchant.setting.ajax_url,
         data: {
           'action': 'merchant_get_cart_count'
         },
