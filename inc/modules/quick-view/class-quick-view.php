@@ -350,7 +350,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 					
 					<div class="merchant-quick-view-column">
 
-						<div class="merchant-quick-view-summary">
+						<div class="merchant-quick-view-summary product-gallery-summary">
 
 							<div class="merchant-quick-view-product-title">
 								<h2 class="product_title entry-title"><?php echo esc_html( $product->get_title() ); ?></h2>
