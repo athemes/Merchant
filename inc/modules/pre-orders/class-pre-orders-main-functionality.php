@@ -284,7 +284,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function custom_fields_for_variable_products( $loop, $variation_data, $variation ) {
-		echo '<div class="options_group form-row form-row-full">';
+		echo '<div class="is_pre_order_meta_field form-row form-row-full" style="display: flex; align-items: center;">';
 			woocommerce_wp_checkbox(
 				[
 					'id'    => '_is_pre_order_' . $variation->ID,
@@ -293,6 +293,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 				]
 			);
 
+			echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
+		echo '</div>';
+		echo '<div class="form-row form-row-full">';
 			woocommerce_wp_text_input(
 				[
 					'type'  => 'date',
@@ -310,7 +313,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function custom_fields_for_simple_products() {
-		echo '<div class="options_group form-row form-row-full hide_if_variable">';
+		echo '<div class="is_pre_order_meta_field form-row form-row-full hide_if_variable" style="display: flex; align-items: center;">';
 			woocommerce_wp_checkbox(
 				[
 					'id'          => '_is_pre_order',
@@ -320,6 +323,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 				]
 			);
 
+			echo '<div style="margin-left: -20px">';
+				echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
+			echo '</div>';
+		echo '</div>';
+		echo '<div class="form-row form-row-full hide_if_variable">';
 			woocommerce_wp_text_input(
 				array(
 					'type'  => 'date',
@@ -329,6 +337,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 				)
 			);
 		echo '</div>';
+		
 	}
 
 	/**

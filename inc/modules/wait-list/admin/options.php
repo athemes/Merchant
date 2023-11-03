@@ -10,11 +10,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// Settings
+// Form Settings
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Form Settings', 'merchant' ),
 	'module' => Merchant_Wait_List::MODULE_ID,
 	'fields' => array(
+
+		array(
+			'id'        => 'display_on_backorders',
+			'type'      => 'switcher',
+			'title'     => esc_html__( 'Display on backorders?', 'merchant' ),
+		),
 
 		array(
 			'id'      => 'form_title',
