@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-10-12 18:50+0000\n"
+"POT-Creation-Date: 2023-11-03 19:14+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/admin/options.php:22, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:221, inc/modules/buy-now/class-buy-now.php:249
+#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/admin/options.php:22, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:215, inc/modules/buy-now/class-buy-now.php:243
 msgid "Buy Now"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgid "Wishlist"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:319
-msgid "Prevent cart abandonment by allowing customers to save products for later purchase"
+msgid "Allow customers to easily save products they are interested in for later"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:326
@@ -853,27 +853,27 @@ msgstr ""
 msgid "Out of stock"
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:137
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:141
 msgid "Simple product"
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:138, inc/modules/add-to-cart-text/class-add-to-cart-text.php:149, inc/modules/add-to-cart-text/class-add-to-cart-text.php:160, inc/modules/product-labels/class-product-labels.php:182
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:142, inc/modules/add-to-cart-text/class-add-to-cart-text.php:153, inc/modules/add-to-cart-text/class-add-to-cart-text.php:164, inc/modules/product-labels/class-product-labels.php:182
 msgid "The product description normally goes here."
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:141
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:145
 msgid "14.00"
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:148
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:152
 msgid "Variable product"
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:152, inc/modules/add-to-cart-text/class-add-to-cart-text.php:163
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:156, inc/modules/add-to-cart-text/class-add-to-cart-text.php:167
 msgid "20.00"
 msgstr ""
 
-#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:159
+#: inc/modules/add-to-cart-text/class-add-to-cart-text.php:163
 msgid "Out of stock product"
 msgstr ""
 
@@ -1967,7 +1967,7 @@ msgstr ""
 msgid "Image max height"
 msgstr ""
 
-#: inc/modules/pre-orders/admin/options.php:24, inc/modules/pre-orders/class-pre-orders-main-functionality.php:405, inc/modules/pre-orders/class-pre-orders.php:59
+#: inc/modules/pre-orders/admin/options.php:24, inc/modules/pre-orders/class-pre-orders-main-functionality.php:414, inc/modules/pre-orders/class-pre-orders.php:59
 msgid "Pre Order Now!"
 msgstr ""
 
@@ -1975,8 +1975,8 @@ msgstr ""
 msgid "Additional information"
 msgstr ""
 
-#: inc/modules/pre-orders/admin/options.php:31, inc/modules/pre-orders/class-pre-orders-main-functionality.php:426, inc/modules/pre-orders/class-pre-orders-main-functionality.php:477, inc/modules/pre-orders/class-pre-orders.php:60
-msgid "Ships in {date}."
+#: inc/modules/pre-orders/admin/options.php:31, inc/modules/pre-orders/class-pre-orders-main-functionality.php:435, inc/modules/pre-orders/class-pre-orders-main-functionality.php:486, inc/modules/pre-orders/class-pre-orders.php:60
+msgid "Ships on {date}."
 msgstr ""
 
 #: inc/modules/pre-orders/class-pre-orders-main-functionality.php:95
@@ -1991,24 +1991,28 @@ msgstr ""
 msgid "Pre-Order Product - Set this product as pre-order"
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:300, inc/modules/pre-orders/class-pre-orders-main-functionality.php:327
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:296, inc/modules/pre-orders/class-pre-orders-main-functionality.php:327
+msgid "Important: To pre-order out of stock products you must enable the 'Backorder' stock option."
+msgstr ""
+
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:303, inc/modules/pre-orders/class-pre-orders-main-functionality.php:335
 msgid "Pre-Order Shipping Date"
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:317
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:320
 msgid "Pre-Order Product"
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:318
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:321
 msgid "Set this product as pre-order"
 msgstr ""
 
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:493
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:502
 msgid "Pre Ordered"
 msgstr ""
 
 #. translators: %s: pre ordered product count
-#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:499
+#: inc/modules/pre-orders/class-pre-orders-main-functionality.php:508
 msgid "Pre Ordered <span class=\"count\">(%s)</span>"
 msgid_plural "Pre Ordered <span class=\"count\">(%s)</span>"
 msgstr[0] ""
@@ -3414,66 +3418,70 @@ msgid "Form Settings"
 msgstr ""
 
 #: inc/modules/wait-list/admin/options.php:22
+msgid "Display on backorders?"
+msgstr ""
+
+#: inc/modules/wait-list/admin/options.php:28
 msgid "Form title"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:23, inc/modules/wait-list/class-wait-list.php:55
+#: inc/modules/wait-list/admin/options.php:29, inc/modules/wait-list/class-wait-list.php:55
 msgid "New stock on its way! Email when stock available"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:29
+#: inc/modules/wait-list/admin/options.php:35
 msgid "Form email label"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:30, inc/modules/wait-list/class-wait-list.php:56
+#: inc/modules/wait-list/admin/options.php:36, inc/modules/wait-list/class-wait-list.php:56
 msgid "Your Email Address"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:36
+#: inc/modules/wait-list/admin/options.php:42
 msgid "Form button text"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:37, inc/modules/wait-list/class-wait-list.php:57
+#: inc/modules/wait-list/admin/options.php:43, inc/modules/wait-list/class-wait-list.php:57
 msgid "Notify Me"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:43
+#: inc/modules/wait-list/admin/options.php:49
 msgid "Form success message"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:44, inc/modules/wait-list/class-wait-list.php:58
+#: inc/modules/wait-list/admin/options.php:50, inc/modules/wait-list/class-wait-list.php:58
 msgid "You have been successfully added to our wait list. As soon as new stock become available, we will notify you via email."
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:45
+#: inc/modules/wait-list/admin/options.php:51
 msgid "The message that will show after form submission."
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:51
+#: inc/modules/wait-list/admin/options.php:57
 msgid "Email Settings"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:58
+#: inc/modules/wait-list/admin/options.php:64
 msgid "Email new subscribers"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:59, inc/modules/wait-list/class-wait-list.php:59
+#: inc/modules/wait-list/admin/options.php:65, inc/modules/wait-list/class-wait-list.php:59
 msgid "Hello subscriber, Thank you for subscribing to {product}. We will email you once product back in stock."
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:60
+#: inc/modules/wait-list/admin/options.php:66
 msgid "The message that will be sent to new subscribers."
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:66
+#: inc/modules/wait-list/admin/options.php:72
 msgid "Email in stock update"
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:67, inc/modules/wait-list/class-wait-list.php:60
+#: inc/modules/wait-list/admin/options.php:73, inc/modules/wait-list/class-wait-list.php:60
 msgid "Hello Subscriber, Thanks for your patience and finally the wait is over! Your Subscribed Product {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you'll get one, so hurry to be one of the lucky shoppers who do. Add this product {product} directly to your cart."
 msgstr ""
 
-#: inc/modules/wait-list/admin/options.php:69
+#: inc/modules/wait-list/admin/options.php:75
 msgid "The message that will be sent to subscribers when product is in stock."
 msgstr ""
 
