@@ -19,7 +19,7 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 		 * @return void
 		 */
 		public function styles() {
-			if ( ! $this->is_kadence_active() ) {
+			if ( ! merchant_is_kadence_active() ) {
 				return;
 			}
 
@@ -29,15 +29,6 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 				array(),
 				'1.0.0'
 			);
-		}
-
-		/**
-		 * Check if Kadence theme is installed and active.
-		 *
-		 * @return bool
-		 */
-		private function is_kadence_active() {
-			return class_exists( '\Kadence\Theme' );
 		}
 	}
 
