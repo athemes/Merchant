@@ -1,3 +1,8 @@
-.theme-kadence .merchant-pro-sc-product-name .variation-FreeGift{
+.theme-kadence .merchant-pro-sc-product-name .variation-FreeGift {
     margin-left: unset;
+}
+
+.theme-kadence .products li.product .merchant-quick-view-position-overlay {
+    transition: 300ms all !important;
+    padding: 0.4em 1em !important;
 }
