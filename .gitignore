@@ -2,3 +2,4 @@ node_modules
 vendor
 **.code-workspace
 .DS_Store
+.idea
