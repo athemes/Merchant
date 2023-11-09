@@ -66,6 +66,8 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
  *
  * @return bool
  */
-function merchant_is_kadence_active() {
-	return class_exists( '\Kadence\Theme' );
+if ( ! function_exists( 'merchant_is_kadence_active' ) ) {
+	function merchant_is_kadence_active() {
+		return class_exists( '\Kadence\Theme' );
+	}
 }
