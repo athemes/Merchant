@@ -2,8 +2,7 @@
 <ruleset name="WordPress Coding Standards">
 	<description>WooCommerce extension PHP_CodeSniffer ruleset.</description>
 
-	
-
+	<file>./</file>
 	<!-- Exclude paths -->
 	<exclude-pattern>tests/</exclude-pattern>
 	<exclude-pattern>woo-includes/woo-functions.php</exclude-pattern>

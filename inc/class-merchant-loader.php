@@ -117,6 +117,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				require_once MERCHANT_DIR . 'inc/modules/product-navigation-links/class-product-navigation-links.php';
 			}
 
+			// Compatibility Layer
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
+
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.
 			 *

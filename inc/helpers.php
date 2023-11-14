@@ -213,6 +213,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'type'  => true,
 					'placeholder' => true,
 					'data'  => '*',
+					'data-source' => true,
 					'data-product_id' => true,
 					'data-product_variations' => true,
 					'data-attribute_name' => true,

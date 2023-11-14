@@ -126,7 +126,11 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		} elseif ( 'after' === $button_position ) {
 			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
 		} elseif ( 'overlay' === $button_position ) {
-			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
+			if ( merchant_is_kadence_active() ) {
+				add_filter( 'kadence_archive_content_wrap_start', array( $this, 'add_quick_view_button' ) );
+			} else {
+				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
+			}
 		}
 
 		// Inject quick view modal output on footer.
@@ -135,6 +139,15 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+     * Concatenate the quick view button with the content start wrap.
+     *
+	 * @return string
+	 */
+	public function add_quick_view_button() {
+		return $this->quick_view_button() . '<div class="product-details content-bg entry-content-wrap">';
 	}
 
 	/**

@@ -60,3 +60,14 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 		}
 	}
 }
+
+/**
+ * Check if Kadence theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_kadence_active' ) ) {
+	function merchant_is_kadence_active() {
+		return class_exists( '\Kadence\Theme' );
+	}
+}
