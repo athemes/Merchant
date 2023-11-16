@@ -1,0 +1,8 @@
+.merchant-frequently-bought-together-bundle-total-price del {
+    text-decoration: none;
+}
+
+.merchant-frequently-bought-together-bundle-total-price del .woocommerce-Price-amount bdi {
+    font-size: 14px;
+    text-decoration: line-through;
+}
