@@ -119,6 +119,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Compatibility Layer
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.
