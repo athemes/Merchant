@@ -1,8 +1,8 @@
-.merchant-frequently-bought-together-bundle-total-price del {
+.theme-oceanwp .merchant-frequently-bought-together-bundle-total-price del {
     text-decoration: none;
 }
 
-.merchant-frequently-bought-together-bundle-total-price del .woocommerce-Price-amount bdi {
+.theme-oceanwp .merchant-frequently-bought-together-bundle-total-price del .woocommerce-Price-amount bdi {
     font-size: 14px;
     text-decoration: line-through;
 }
@@ -17,6 +17,34 @@
 
 .theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content {
     width: 75%;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content .quantity{
+    text-align: right;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content>div{
+    flex-direction: column;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content h3{
+    margin-bottom: 10px;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content .variation{
+    margin: 0 0 10px 0;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content .variation *{
+    display: inline;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content .variation p{
+    margin: 0;
+}
+
+.theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content .variation dd{
+    margin-bottom: 10px;
 }
 
 .theme-oceanwp .merchant-floating-side-mini-cart-widget .woocommerce-mini-cart-item .owp-grid.content a.remove {
