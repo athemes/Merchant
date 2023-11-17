@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $before_fields = array();
-if ( merchant_is_cart_block_layout() ) {
+if ( defined( 'MERCHANT_PRO_VERSION' ) && merchant_is_cart_block_layout() ) {
 	$before_fields = array(
 		'type'    => 'warning',
 		'content' => sprintf( 
