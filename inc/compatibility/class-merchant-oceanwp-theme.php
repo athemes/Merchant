@@ -39,5 +39,5 @@ if ( ! class_exists( 'Merchant_OceanWP_Theme' ) ) {
 	 * The class object can be accessed with "global $oceanWP_compatibility", to allow removing actions.
 	 * Improving Third-party integrations.
 	 */
-	$oceanWP_compatibility = new Merchant_OceanWP_Theme();
+	$merchant_oceanWP_compatibility = new Merchant_OceanWP_Theme();
 }
