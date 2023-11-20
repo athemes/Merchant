@@ -28,7 +28,7 @@ if ( ! class_exists( 'Merchant_OceanWP_Theme' ) ) {
 
 			wp_enqueue_style(
 				'merchant-oceanwp-compatibility',
-				MERCHANT_URI . 'assets/css/compatibility/oceanwp/style.css',
+				MERCHANT_URI . 'assets/css/compatibility/oceanwp/style.min.css',
 				array(),
 				'1.0.0'
 			);
