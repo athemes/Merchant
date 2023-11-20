@@ -1,0 +1,28 @@
+
+.theme-kadence {
+    .merchant-pro-sc-product-name {
+        .variation-FreeGift {
+            margin-left: unset;
+        }
+    }
+    .products {
+        li.product {
+            .merchant-quick-view-position-overlay {
+                transition: 300ms all !important;
+                padding: 0.4em 1em !important;
+            }
+        }
+    }
+    .merchant-floating-side-mini-cart-widget {
+        .product_list_widget {
+            span.quantity {
+                padding-left: 73px;
+            }
+            li {
+                dl.variation {
+                    padding-left: 73px;
+                }
+            }
+        }
+    }
+}
