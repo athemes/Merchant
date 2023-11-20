@@ -496,6 +496,17 @@ const styles = [
 		destination: './assets/css/modules/product-navigation-links/admin',
 	},
 
+	{
+		name: 'kadenceCompatibility',
+		src: './assets/sass/compatibility/kadence/style.scss',
+		destination: './assets/css/compatibility/kadence',
+	},
+
+	{
+		name: 'oceanwpCompatibility',
+		src: './assets/sass/compatibility/oceanwp/style.scss',
+		destination: './assets/css/compatibility/oceanwp',
+	},
 ];
 
 // Scripts to process.
