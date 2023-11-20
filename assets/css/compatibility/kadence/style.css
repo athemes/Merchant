@@ -1,13 +1,14 @@
 .theme-kadence .merchant-pro-sc-product-name .variation-FreeGift {
-    margin-left: unset;
+  margin-left: unset;
 }
-
 .theme-kadence .products li.product .merchant-quick-view-position-overlay {
-    transition: 300ms all !important;
-    padding: 0.4em 1em !important;
+  -webkit-transition: 300ms all !important;
+  transition: 300ms all !important;
+  padding: 0.4em 1em !important;
 }
-
-.theme-kadence .merchant-floating-side-mini-cart-widget .product_list_widget span.quantity,
-.theme-kadence .merchant-floating-side-mini-cart-widget .product_list_widget li dl.variation{
-    padding-left: 73px;
+.theme-kadence .merchant-floating-side-mini-cart-widget .product_list_widget span.quantity {
+  padding-left: 73px;
+}
+.theme-kadence .merchant-floating-side-mini-cart-widget .product_list_widget li dl.variation {
+  padding-left: 73px;
 }
