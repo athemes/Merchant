@@ -5,13 +5,11 @@
 .merchant-reasons-list {
   margin: 25px 0;
 }
-
 .merchant-reasons-list .merchant-reasons-list-title {
   display: block;
   margin-bottom: 15px;
   color: var(--mrc-rtb-title-color, #212121);
 }
-
 .merchant-reasons-list .merchant-reasons-list-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,28 +18,23 @@
   -ms-flex-align: start;
   align-items: flex-start;
 }
-
 .merchant-reasons-list .merchant-reasons-list-item .merchant-reasons-list-item-icon {
   display: none !important;
   margin-right: 0.5em;
 }
-
 .merchant-reasons-list .merchant-reasons-list-item .merchant-reasons-list-item-icon svg {
   width: 0.9em;
   height: 0.9em;
   margin-top: 0.4em;
   stroke: var(--mrc-rtb-items-icon-color, #777);
 }
-
 .merchant-reasons-list .merchant-reasons-list-item .merchant-reasons-list-item-text {
   color: var(--mrc-rtb-items-text-color, #777);
   margin: 0 !important;
 }
-
 .merchant-reasons-list .merchant-reasons-list-item + .merchant-reasons-list-item {
   margin-top: var(--mrc-rtb-items-spacing, 5px);
 }
-
 .merchant-reasons-list.show-icon .merchant-reasons-list-item .merchant-reasons-list-item-icon {
   display: block !important;
 }

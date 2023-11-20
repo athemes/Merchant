@@ -10,7 +10,6 @@
   width: 100%;
   display: none;
 }
-
 .merchant-cookie-banner.merchant-show {
   display: block;
 }
@@ -33,13 +32,11 @@
   background-color: var(--merchant-background, #000000);
   min-height: var(--merchant-modal-height, 50px);
 }
-
 .merchant-cookie-banner-inner a {
   margin-left: 2px;
   text-decoration: underline;
   color: var(--merchant-link-color, #aeaeae);
 }
-
 .merchant-cookie-banner-inner a:focus, .merchant-cookie-banner-inner a:hover, .merchant-cookie-banner-inner a:visited {
   color: var(--merchant-link-color, #aeaeae);
 }
@@ -63,14 +60,12 @@
   font-size: 18px;
   line-height: 1em;
   opacity: 0.5;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
-
 .merchant-cookie-close-button:hover {
   opacity: 1;
 }
-
 .merchant-cookie-close-button svg {
   width: 1em;
   height: 1em;
@@ -81,7 +76,6 @@
   bottom: 35px;
   z-index: 9999;
 }
-
 .merchant-cookie-banner-floating .merchant-cookie-banner-inner {
   margin: 0 auto;
   border-radius: 10px;

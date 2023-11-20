@@ -10,11 +10,9 @@
   top: 200px;
   z-index: 19999;
 }
-
 .merchant-free-gifts-widget.active {
   right: 0;
 }
-
 .merchant-free-gifts-widget.hide {
   display: none;
 }
@@ -43,17 +41,14 @@
   display: flex;
   padding: 10px 0;
 }
-
 .merchant-free-gifts-widget-offer-product img {
   width: 45px;
   height: 45px;
   margin-right: 10px;
 }
-
 .merchant-free-gifts-widget-offer-product p {
   margin: 0;
 }
-
 .merchant-free-gifts-widget-offer-product del,
 .merchant-free-gifts-widget-offer-product strong,
 .merchant-free-gifts-widget-offer-product p {
@@ -72,7 +67,6 @@
   height: 25px;
   margin: 0 auto;
 }
-
 .merchant-free-gifts-widget-icon svg {
   width: 25px;
   height: 25px;
@@ -101,7 +95,6 @@
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
-
 .merchant-free-gifts-widget-button:hover {
   background: var(--merchant-hover-bg-color);
 }
@@ -130,11 +123,9 @@
 .merchant-free-gifts-widget-offer-product-title {
   color: var(--merchant-text-color);
 }
-
 .merchant-free-gifts-widget-offer-product-title:visited {
   color: var(--merchant-text-color);
 }
-
 .merchant-free-gifts-widget-offer-product-title:hover {
   color: var(--merchant-text-hover-color);
 }

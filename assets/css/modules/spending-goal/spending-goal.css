@@ -19,7 +19,6 @@
   -webkit-transition: width 1s;
   transition: width 1s;
 }
-
 .merchant-spending-goal-widget-label svg {
   fill: white;
   width: 30px;
@@ -43,19 +42,15 @@
   border-radius: 10px;
   cursor: pointer;
 }
-
 .merchant-spending-goal-widget:hover {
   opacity: 0.6;
 }
-
 .merchant-spending-goal-widget.active {
   left: 0;
 }
-
 .merchant-spending-goal-widget.active .merchant-spending-goal-widget-label {
   width: 0;
 }
-
 .merchant-spending-goal-widget.active .merchant-spending-goal-widget-label-content {
   opacity: 0;
 }
@@ -115,12 +110,11 @@
           box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
   position: relative;
   background: var(--merchant-progress-bar);
-  -webkit-animation: merchant-spending-goal-progress-bar  1.5s;
-          animation: merchant-spending-goal-progress-bar  1.5s;
+  -webkit-animation: merchant-spending-goal-progress-bar 1.5s;
+          animation: merchant-spending-goal-progress-bar 1.5s;
 }
-
 .merchant-spending-goal-widget-progress-bar-filled:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -155,7 +149,6 @@
             transform: translateX(0);
   }
 }
-
 @-webkit-keyframes merchant-spending-goal-progress-bar-spin {
   0% {
     background-position: 0 0;
@@ -164,7 +157,6 @@
     background-position: 50px 50px;
   }
 }
-
 @keyframes merchant-spending-goal-progress-bar-spin {
   0% {
     background-position: 0 0;
