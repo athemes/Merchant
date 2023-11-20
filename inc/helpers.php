@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Allowed tags general.
  * Should be used to escape complex outputs like entire features html.
  * 
+ * @param array $extra
+ * @param bool $include_post_tags Whether to include post kses allowed tags or not. Default true.
+ * @return array $allowed_tags
  */
 if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 	function merchant_kses_allowed_tags( $extra = array(), $include_post_tags = true ) {
@@ -218,6 +221,8 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'data-product_variations' => true,
 					'data-attribute_name' => true,
 					'data-show_option_none' => true,
+					'data-name' => true,
+					'data-source' => true,
 					'step'  => true,
 					'min'   => true,
 					'max'   => true,
@@ -250,6 +255,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 /**
  * Allowed tags for scripts.
  * 
+ * @return array $allowed_tags
  */
 if ( ! function_exists( 'merchant_kses_allowed_tags_for_code_snippets' ) ) {
 	function merchant_kses_allowed_tags_for_code_snippets() {
@@ -258,5 +264,63 @@ if ( ! function_exists( 'merchant_kses_allowed_tags_for_code_snippets' ) ) {
 				'type' => true
 			)
 		);
+	}
+}
+
+/**
+ * Check if WooCommerce checkout page is being rendered by block.
+ * Since WooCommerce 8.3.0 the checkout page is rendered by block.
+ * 
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_checkout_block_layout' ) ) {
+	function merchant_is_checkout_block_layout() {
+		$checkout_page = wc_get_page_id( 'checkout' );
+
+		if ( empty( $checkout_page ) ) {
+			return false;
+		}
+
+		if ( function_exists( 'has_blocks' ) && has_blocks( $checkout_page ) ) {
+			$post   = get_post( $checkout_page );
+			$blocks = parse_blocks( $post->post_content );
+
+			foreach ( $blocks as $block ) {
+				if ( 'woocommerce/checkout' === $block['blockName'] ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+}
+
+/**
+ * Check if WooCommerce cart page is being rendered by block.
+ * Since WooCommerce 8.3.0 the cart page is rendered by block.
+ * 
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_cart_block_layout' ) ) {
+	function merchant_is_cart_block_layout() {
+		$cart_page = wc_get_page_id( 'cart' );
+
+		if ( empty( $cart_page ) ) {
+			return false;
+		}
+
+		if ( function_exists( 'has_blocks' ) && has_blocks( $cart_page ) ) {
+			$post   = get_post( $cart_page );
+			$blocks = parse_blocks( $post->post_content );
+
+			foreach ( $blocks as $block ) {
+				if ( 'woocommerce/cart' === $block['blockName'] ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

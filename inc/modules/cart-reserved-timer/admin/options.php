@@ -10,6 +10,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$before_fields = array();
+if ( defined( 'MERCHANT_PRO_VERSION' ) && merchant_is_cart_block_layout() ) {
+	$before_fields = array(
+		'type'    => 'warning',
+		'content' => sprintf( 
+			/* Translators: 1. docs link */
+			__( 'Your cart page is being rendered through the new WooCommerce cart block. You must edit the cart page to use the classic cart shortcode instead. Check <a href="%1$s" target="_blank">this documentation</a> to learn more.', 'merchant' ),
+			'https://docs.athemes.com/article/how-to-switch-cart-checkout-blocks-to-the-classic-shortcodes/'
+		),
+	);
+}
+
 // Variables
 $icon_path = MERCHANT_URI . 'assets/images/icons/' . Merchant_Cart_Reserved_timer::MODULE_ID;
 
@@ -18,6 +30,8 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Settings', 'merchant' ),
 	'module' => Merchant_Cart_Reserved_timer::MODULE_ID,
 	'fields' => array(
+
+		$before_fields,
 
 		array(
 			'id'      => 'duration',
