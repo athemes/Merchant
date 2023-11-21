@@ -59,6 +59,9 @@ class Merchant {
 	 */
 	public function __construct() {
 
+		// Translation.
+		add_action( 'init', array( $this, 'translation' ) );
+
 		// Declare WooCommerce HPOS Compatibility.
 		add_action( 'before_woocommerce_init', function() {
 			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
@@ -75,6 +78,14 @@ class Merchant {
 
 		// Load the plugin functionality.
 		$this->includes();
+	}
+
+	/**
+	 * Translation
+	 * 
+	 */
+	public function translation() {
+		load_plugin_textdomain( 'merchant', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 	}
 
 	/**
