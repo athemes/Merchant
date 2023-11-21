@@ -1067,13 +1067,19 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							<div class="layout-body">
 								<?php foreach ( $settings['layouts'][ $option['layout'] ]['fields'] as $sub_field ) :
 									$classes = array( 'layout-field' );
-
 									if ( isset( $sub_field['classes'] ) ) {
 										$classes = array_merge( $classes, $sub_field['classes'] );
 									} ?>
 									<div class="<?php echo esc_attr( implode( ' ', $classes ) ) ?>">
-										<?php static::replace_field( $sub_field,
-												$option[ $sub_field['id'] ],
+										<?php
+                                        $value = null;
+                                        if(isset($option[ $sub_field['id'] ])){
+                                            $value = $option[ $sub_field['id'] ];
+                                        }elseif (isset($sub_field['default'])) {
+	                                        $value = $sub_field['default'];
+                                        }
+                                        static::replace_field( $sub_field,
+	                                        $value,
 												"name=\"merchant[{$sub_field['id']}]",
 												"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]" ) ?>
 									</div>
