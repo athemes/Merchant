@@ -324,3 +324,23 @@ if ( ! function_exists( 'merchant_is_cart_block_layout' ) ) {
 		return false;
 	}
 }
+
+/**
+ * Get the product categories.
+ */
+if ( ! function_exists( 'merchant_get_product_categories' ) ) {
+	function merchant_get_product_categories() {
+		$product_categories = get_terms( array(
+			'taxonomy'   => 'product_cat',
+			'hide_empty' => false,
+		) );
+		$category_names     = array();
+		if ( ! empty( $product_categories ) && ! is_wp_error( $product_categories ) ) {
+			foreach ( $product_categories as $category ) {
+				$category_names[ $category->slug ] = $category->name;
+			}
+		}
+
+		return $category_names;
+	}
+}
