@@ -6,47 +6,6 @@
 
   var merchant = merchant || {};
   $(document).ready(function () {
-    $('.merchant-module-page-setting-field').each(function () {
-      var $field = $(this);
-      if ($field.data('condition') && $field.data('condition').length) {
-        var condition = $field.data('condition');
-        var $target = $('input[name="merchant[' + condition[0] + ']"],select[name="merchant[' + condition[0] + ']"]');
-        if ($target.length) {
-          $target.on('change merchant.change', function (e) {
-            var $element = $(this);
-            var passed = false;
-            switch (condition[1]) {
-              case '==':
-                if ($element.attr('type') === 'radio' || $element.attr('type') === 'checkbox') {
-                  if ($element.is(':checked') && $element.val() == condition[2]) {
-                    passed = true;
-                  }
-                }
-                if ($element.is('select') && $element.val() == condition[2]) {
-                  passed = true;
-                }
-                break;
-              case 'any':
-                if ($element.attr('type') === 'radio' || $element.attr('type') === 'checkbox') {
-                  if ($element.is(':checked') && condition[2].split('|').includes($element.val())) {
-                    passed = true;
-                  }
-                }
-                if ($element.is('select') && condition[2].split('|').includes($element.val())) {
-                  passed = true;
-                }
-                break;
-            }
-            if (passed) {
-              $field.removeClass('merchant-hide').addClass('merchant-show');
-            } else {
-              $field.removeClass('merchant-show').addClass('merchant-hide');
-            }
-          }).trigger('merchant.change');
-        }
-      }
-    });
-
     // AjaxSave
     var $ajaxForm = $('.merchant-module-page-ajax-form');
     var $ajaxHeader = $('.merchant-module-page-ajax-header');
@@ -172,84 +131,6 @@
         if ($rangeInput.hasClass('merchant-range-input')) {
           $rangeInput.val($(this).val()).trigger('merchant.range');
         }
-      });
-    });
-    $('.merchant-color').each(function () {
-      var $color = $(this);
-      var $picker = $color.find('.merchant-color-picker');
-      var $input = $color.find('.merchant-color-input');
-      var inited;
-      var pickr;
-      $picker.on('click', function () {
-        var $bodyHTML = $('body,html');
-        $bodyHTML.addClass('merchant-height-auto');
-        if (!inited) {
-          pickr = new Pickr({
-            el: $picker.get(0),
-            container: 'body',
-            theme: 'merchant',
-            appClass: 'merchant-pcr-app',
-            default: $input.val() || '#212121',
-            swatches: ['#000000', '#F44336', '#E91E63', '#673AB7', '#03A9F4', '#8BC34A', '#FFEB3B', '#FFC107', '#FFFFFF'],
-            sliders: 'h',
-            useAsButton: true,
-            components: {
-              hue: true,
-              preview: true,
-              opacity: true,
-              interaction: {
-                input: true,
-                clear: true
-              }
-            },
-            i18n: {
-              'btn:clear': 'Default'
-            }
-          });
-          pickr.on('change', function (color) {
-            var colorCode;
-            if (color.a === 1) {
-              pickr.setColorRepresentation('HEX');
-              colorCode = color.toHEXA().toString(0);
-            } else {
-              pickr.setColorRepresentation('RGBA');
-              colorCode = color.toRGBA().toString(0);
-            }
-            $picker.css({
-              'background-color': colorCode
-            });
-            if ($input.val() !== colorCode) {
-              $input.val(colorCode).trigger('change.merchant');
-            }
-          });
-          pickr.on('clear', function () {
-            var defaultColor = $picker.data('default-color');
-            if (defaultColor) {
-              pickr.setColor(defaultColor);
-            } else {
-              $picker.css({
-                'background-color': 'white'
-              });
-              $input.val('');
-            }
-          });
-          pickr.on('hide', function () {
-            $bodyHTML.removeClass('merchant-height-auto');
-          });
-          $picker.data('pickr', pickr);
-          setTimeout(function () {
-            pickr.show();
-          });
-          inited = true;
-        } else {
-          pickr.setColor($input.val());
-        }
-      });
-      $input.on('change keyup', function () {
-        var colorCode = $(this).val();
-        $picker.css({
-          'background-color': colorCode
-        });
       });
     });
 
@@ -453,6 +334,7 @@
           if ($layout.find('.merchant-module-page-setting-field-select_ajax').length) {
             initSelectAjax($layout.find('.merchant-module-page-setting-field-select_ajax'));
           }
+          $(document).trigger('merchant-flexible-content-added');
         });
         $('.customize-control-flexible-content-delete').click(function (event) {
           event.preventDefault();
@@ -489,6 +371,135 @@
 
     // Initialize Flexible Content.
     FlexibleContentField.init();
+    $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {
+      $('.merchant-module-page-setting-field').each(function () {
+        var $field = $(this);
+        if ($field.data('condition') && $field.data('condition').length) {
+          var condition = $field.data('condition');
+          var $target = $(this).closest('.layout-body').find('input[name*="' + condition[0] + '"],select[name*="' + condition[0] + '"]');
+          if (!$target.length) {
+            $target = $('input[name="merchant[' + condition[0] + ']"],select[name="merchant[' + condition[0] + ']"]');
+          }
+          if ($target.length) {
+            var passed = false;
+            switch (condition[1]) {
+              case '==':
+                if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
+                  if ($target.is(':checked') && $target.val() == condition[2]) {
+                    passed = true;
+                  }
+                }
+                if ($target.is('select') && $target.val() == condition[2]) {
+                  passed = true;
+                }
+                break;
+              case 'any':
+                if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
+                  if ($target.is(':checked') && condition[2].split('|').includes($target.val())) {
+                    passed = true;
+                  }
+                }
+                if ($target.is('select') && condition[2].split('|').includes($target.val())) {
+                  passed = true;
+                }
+                break;
+            }
+            if (passed) {
+              $field.removeClass('merchant-hide').addClass('merchant-show');
+            } else {
+              $field.removeClass('merchant-show').addClass('merchant-hide');
+            }
+          }
+        }
+      });
+    }).trigger('merchant.change');
+    $(document).on('change', '.merchant-module-page-setting-field', function () {
+      $(document).trigger('merchant-admin-check-fields');
+    }).trigger('merchant.change');
+    $(document).trigger('merchant-admin-check-fields');
+    $(document).on('merchant-admin-check-color-fields merchant-flexible-content-added', function () {
+      $('.merchant-color').each(function () {
+        var $color = $(this);
+        var $picker = $color.find('.merchant-color-picker');
+        var $input = $color.find('.merchant-color-input');
+        var inited = false;
+        var pickr;
+        $picker.off('click').on('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var $bodyHTML = $('body,html');
+          $bodyHTML.addClass('merchant-height-auto');
+          if (!inited) {
+            pickr = new Pickr({
+              el: $picker.get(0),
+              container: 'body',
+              theme: 'merchant',
+              appClass: 'merchant-pcr-app',
+              default: $input.val() || $picker.data('default-color') || '#212121',
+              swatches: ['#000000', '#F44336', '#E91E63', '#673AB7', '#03A9F4', '#8BC34A', '#FFEB3B', '#FFC107', '#FFFFFF'],
+              sliders: 'h',
+              useAsButton: true,
+              components: {
+                hue: true,
+                preview: true,
+                opacity: true,
+                interaction: {
+                  input: true,
+                  clear: true
+                }
+              },
+              i18n: {
+                'btn:clear': 'Default'
+              }
+            });
+            pickr.on('change', function (color) {
+              var colorCode;
+              if (color.a === 1) {
+                pickr.setColorRepresentation('HEX');
+                colorCode = color.toHEXA().toString(0);
+              } else {
+                pickr.setColorRepresentation('RGBA');
+                colorCode = color.toRGBA().toString(0);
+              }
+              $picker.css({
+                'background-color': colorCode
+              });
+              if ($input.val() !== colorCode) {
+                $input.val(colorCode).trigger('change.merchant');
+              }
+            });
+            pickr.on('clear', function () {
+              var defaultColor = $picker.data('default-color');
+              if (defaultColor) {
+                pickr.setColor(defaultColor);
+              } else {
+                $picker.css({
+                  'background-color': 'white'
+                });
+                $input.val('');
+              }
+            });
+            pickr.on('hide', function () {
+              $bodyHTML.removeClass('merchant-height-auto');
+            });
+            $picker.data('pickr', pickr);
+            setTimeout(function () {
+              pickr.show();
+            }, 200);
+            inited = true;
+          } else {
+            pickr.setColor($input.val());
+          }
+        });
+        $input.on('change keyup', function () {
+          var colorCode = $(this).val();
+          $picker.css({
+            'background-color': colorCode
+          });
+        });
+      });
+    });
+    $(document).trigger('merchant-admin-check-color-fields');
 
     // Create Page Control.
     var CreatePageControl = {
