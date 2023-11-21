@@ -99,8 +99,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Inject module content in the products.
-		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'product_label_output' ) );
-		add_action( 'woocommerce_product_thumbnails', array( $this, 'product_label_output' ) );
+		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
+		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
 		add_action( 'woostify_product_images_box_end', array( $this, 'product_label_output' ) );
 
 		// Custom CSS.
@@ -329,6 +329,176 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		return $css;
 	}
 
+    /**
+     * Single product output.
+     *
+     * @return void
+     */
+	public function single_product_output() {
+		global $product;
+
+		echo $this->get_labels( $product, 'single' );
+	}
+
+    /**
+     * Loop product output.
+     *
+     * @return void
+     */
+	public function loop_product_output() {
+		global $product;
+
+		echo $this->get_labels( $product, 'archive' );
+	}
+
+	/**
+     * Get labels group.
+     *
+	 * @param $product WC_Product product object.
+	 * @param $context string context archive or single.
+	 *
+	 * @return string product labels html.
+	 */
+	public function get_labels( $product, $context = 'both' ) {
+		$settings            = $this->get_module_settings();
+		$product_labels_html = '';
+		if ( isset( $settings['labels'] ) ) {
+			$labels = $settings['labels'];
+			foreach ( $labels as $label ) {
+				if ( ! isset( $label['pages_to_display'] ) ) {
+					continue;
+				}
+				if ( $label['pages_to_display'] !== 'both' ) {
+					if ( $label['pages_to_display'] === 'single' && $context !== 'single' ) {
+						continue;
+					}
+					if ( $label['pages_to_display'] === 'archive' && $context !== 'archive' ) {
+						continue;
+					}
+				}
+				if ( isset( $label['display_rules'] ) ) {
+					switch ( $label['display_rules'] ) {
+						case 'featured_products':
+							if ( $this->is_featured( $product ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
+                        case 'products_on_sale':
+                            // todo: set the percentage text
+							if ( $this->is_on_sale( $product ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
+						case 'by_category':
+							if ( isset( $label['product_cats'] ) && $this->is_in_category( $product, $label['product_cats'] ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
+						case 'out_of_stock':
+							if ( $this->is_out_of_stock( $product ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
+						case 'new_products':
+							if ( isset( $label['new_products_days'] ) && $this->is_new( $product, $label['new_products_days'] ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
+					}
+				}
+			}
+		} else {
+			// legacy mode goes here.
+		}
+
+		return $product_labels_html;
+	}
+
+	/**
+	 * Get label HTML.
+	 *
+	 * @return string
+	 */
+	public function label( $label_data ) {
+		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
+		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
+		$label          = '<span class="merchant-onsale merchant-onsale-' . esc_attr( $label_position ) . ' merchant-onsale-shape-' . esc_attr( $label_shape )
+		                  . '" style="background-color: ' . esc_attr( $label_data['background_color'] ) . '; color: '
+		                  . esc_attr( $label_data['text_color'] ) . ';">'
+		                  . esc_html( $label_data['label'] ) . '</span>';
+
+		return apply_filters( 'merchant_product_label', $label, $label_data );
+	}
+
+	/**
+	 * Get label data.
+	 *
+	 * @param $product WC_Product product object.
+	 *
+	 * @return bool
+	 */
+	private function is_on_sale( $product ) {
+		return $product !== null && $product->is_on_sale();
+	}
+
+	/**
+	 * Check if product is in category.
+	 *
+	 * @param $product WC_Product product object.
+	 * @param $slug    string category slug.
+	 *
+	 * @return bool
+	 */
+	private function is_in_category( $product, $slug ) {
+		$terms = get_the_terms( $product->get_id(), 'product_cat' );
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			foreach ( $terms as $term ) {
+				if ( $term->slug === $slug ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if product is out of stock.
+	 *
+	 * @param $product WC_Product product object.
+	 *
+	 * @return bool
+	 */
+	private function is_out_of_stock( $product ) {
+		return $product !== null && ! $product->is_in_stock();
+	}
+
+	/**
+	 * Check if product is featured.
+	 *
+	 * @param $product WC_Product product object.
+	 *
+	 * @return bool
+	 */
+	private function is_featured( $product ) {
+		return $product !== null && $product->is_featured();
+	}
+
+	/**
+	 * Check if the product is new.
+	 *
+	 * @param $product WC_Product product object.
+	 * @param $days    number of days to check.
+	 *
+	 * @return bool
+	 */
+	private function is_new( $product, $days ) {
+		$product_creation_date = get_the_date( 'Y-m-d', $product->get_id() );
+		$current_date          = date( 'Y-m-d' );
+		$days_difference       = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / ( $days * 60 * 24 );
+
+		return $days_difference <= 1;
+	}
 }
 
 // Initialize the module.
