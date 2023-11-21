@@ -3277,7 +3277,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   margin: 0;
   border-radius: 4px 0 0 4px;
   border: 1px solid #D6D6D6;
-  padding: 12px;
+  padding: 8px;
   line-height: 1.3em;
 }
 .merchant-flexible-content-control .sortable input[type=text]:focus {
