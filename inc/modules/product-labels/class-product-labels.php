@@ -436,6 +436,12 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		         . esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
 		         . trim( esc_html( $label_data['label'] ) ) . '</span>';
 
+		/**
+		 * Filter the single product label.
+		 *
+		 * @param string $label      The label HTML.
+		 * @param array  $label_data The label data.
+		 */
 		return apply_filters( 'merchant_product_label', $label, $label_data );
 	}
 
