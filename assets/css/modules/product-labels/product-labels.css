@@ -1,17 +1,32 @@
 /**
  * Product Labels.
- *
+ * Frontend view
  */
-.merchant-onsale {
+.merchant-product-labels {
   position: absolute;
-  z-index: 10;
   top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 10;
+  text-align: left;
+}
+.merchant-product-labels.position-top-left {
+  text-align: left;
+}
+.merchant-product-labels.position-top-left .merchant-label {
+  margin-right: 5px;
+}
+.merchant-product-labels.position-top-right {
+  text-align: right;
+}
+.merchant-product-labels.position-top-right .merchant-label {
+  margin-left: 5px;
+}
+.merchant-product-labels .merchant-label {
   font-size: var(--mrc-pl-font-size, 14px);
   line-height: 1em;
   padding: var(--mrc-pl-padding, 8px);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: inline;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -20,19 +35,14 @@
           justify-content: center;
   text-align: center;
   text-transform: var(--mrc-pl-text-transform, uppercase);
-  color: var(--mrc-pl-text-color, #ffffff);
-  background-color: var(--mrc-pl-background-color, #212121);
   border-radius: var(--mrc-pl-border-radius, 0px);
 }
-
-.merchant-onsale-top-left {
+.merchant-product-labels .merchant-label-top-left {
   left: 10px;
 }
-
-.merchant-onsale-top-right {
+.merchant-product-labels .merchant-label-top-right {
   right: 10px;
 }
-
-.merchant-onsale-shape-rounded {
+.merchant-product-labels .merchant-label-shape-rounded {
   border-radius: 4px;
 }
