@@ -712,6 +712,12 @@ const scripts = [
 		file: 'preview',
 		destination: './assets/js/modules/quick-social-links/admin',
 	},
+	{
+		name: 'productLabelsAdmin',
+		src: './assets/js/src/modules/product-labels/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/product-labels/admin/',
+	},
 ];
 
 // Watch options.

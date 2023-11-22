@@ -75,6 +75,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
@@ -117,6 +118,21 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-labels.min.css', [], MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
+		}
+	}
+
+	/**
+	 * Admin enqueue CSS.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
+			wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/product-labels/admin/preview.min.js', array( 'jquery', 'merchant-admin' ), '4.0.13',
+				true );
 		}
 	}
 
