@@ -427,7 +427,7 @@
                     if ($layout.find('.merchant-module-page-setting-field-select_ajax').length) {
                         initSelectAjax($layout.find('.merchant-module-page-setting-field-select_ajax'))
                     }
-                    $(document).trigger('merchant-flexible-content-added');
+                    $(document).trigger('merchant-flexible-content-added', [$layout]);
                 });
 
                 $('.customize-control-flexible-content-delete').click(function (event) {
@@ -444,6 +444,7 @@
                     }
 
                     self.refreshNumbers($content);
+                    $(document).trigger('merchant-flexible-content-deleted', [$item]);
                 });
             },
 
