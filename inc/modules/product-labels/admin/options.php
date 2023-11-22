@@ -18,6 +18,7 @@ Merchant_Admin_Options::create( array(
 			'id'           => 'labels',
 			'type'         => 'flexible_content',
 			'sorting'      => true,
+			'style'        => Merchant_Product_Labels::MODULE_ID . '-style default',
 			'button_label' => esc_html__( 'Add', 'merchant' ),
 			'layouts'      => array(
 				'single-label' => array(
