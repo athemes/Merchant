@@ -344,3 +344,17 @@ if ( ! function_exists( 'merchant_get_product_categories' ) ) {
 		return $category_names;
 	}
 }
+
+/**
+ * Convert array to css.
+ */
+if ( ! function_exists( 'merchant_array_to_css' ) ) {
+	function merchant_array_to_css( $array ) {
+		$css = '';
+		foreach ( $array as $key => $value ) {
+			$css .= $key . ':' . $value . ';';
+		}
+
+		return $css;
+	}
+}
