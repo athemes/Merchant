@@ -186,7 +186,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
         <div class="merchant-product-labels-preview">
             <div class="image-wrapper">
-                <span class="merchant-onsale merchant-onsale-<?php
+                <span class="merchant-label merchant-onsale-<?php
                 echo esc_attr( $settings['label_position'] ); ?> merchant-onsale-shape-<?php
                 echo esc_attr( $settings['label_shape'] ) ?>"><?php
 	                echo esc_html( $label_text ); ?></span>
@@ -426,10 +426,16 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function label( $label_data ) {
 		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
 		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
-		$label          = '<span class="merchant-onsale merchant-onsale-' . esc_attr( $label_position ) . ' merchant-onsale-shape-' . esc_attr( $label_shape )
-		                  . '" style="background-color: ' . esc_attr( $label_data['background_color'] ) . '; color: '
-		                  . esc_attr( $label_data['text_color'] ) . ';">'
-		                  . esc_html( $label_data['label'] ) . '</span>';
+		$styles         = array(
+			'background-color' => $label_data['background_color'],
+			'color'            => $label_data['text_color'],
+		);
+		if ( empty( trim( $label_data['label'] ) ) ) {
+			return '';
+		}
+		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
+		         . esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
+		         . trim( esc_html( $label_data['label'] ) ) . '</span>';
 
 		return apply_filters( 'merchant_product_label', $label, $label_data );
 	}
