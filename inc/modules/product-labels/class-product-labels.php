@@ -265,22 +265,17 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$css = '';
 
 		// Border Radius.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_shape', 0, '.merchant-onsale', '--mrc-pl-border-radius', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_shape', 0, '.merchant-label', '--mrc-pl-border-radius', 'px' );
 
 		// Text Transform.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_text_transform', 'uppercase', '.merchant-onsale', '--mrc-pl-text-transform' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_text_transform', 'uppercase', '.merchant-label', '--mrc-pl-text-transform' );
 
 		// Padding.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'padding', 8, '.merchant-onsale', '--mrc-pl-padding', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'padding', 8, '.merchant-label', '--mrc-pl-padding', 'px' );
 
 		// Font Size.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'font-size', 14, '.merchant-onsale', '--mrc-pl-font-size', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'font-size', 14, '.merchant-label', '--mrc-pl-font-size', 'px' );
 
-		// Text Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'text_color', '#ffffff', '.merchant-onsale', '--mrc-pl-text-color' );
-
-		// Background Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'background_color', '#212121', '.merchant-onsale', '--mrc-pl-background-color' );
 
 		return $css;
 	}
@@ -415,7 +410,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			// legacy mode goes here.
 		}
 
-		return $product_labels_html;
+		if ( $product_labels_html ) {
+			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '">' . $product_labels_html . '</div>';
+		}
+
+		return '';
 	}
 
 	/**
