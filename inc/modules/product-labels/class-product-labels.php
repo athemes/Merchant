@@ -340,6 +340,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			'div'  => array(
 				'class' => array(),
 			),
+			'strong' => array(),
 			'span' => array(
 				'class' => array(),
 				'style' => array(),
@@ -356,10 +357,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		global $product;
 
 		echo wp_kses( $this->get_labels( $product, 'archive' ), array(
-			'div'  => array(
+			'div'    => array(
 				'class' => array(),
 			),
-			'span' => array(
+			'strong' => array(),
+			'span'   => array(
 				'class' => array(),
 				'style' => array(),
 			),
@@ -457,8 +459,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		 *
 		 * @param string $label      The label HTML.
 		 * @param array  $label_data The label data.
-         *
-         * @since 1.6
+		 *
+		 * @since 1.6
 		 */
 		return apply_filters( 'merchant_product_label', $label, $label_data );
 	}
@@ -528,8 +530,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	private function is_new( $product, $days ) {
 		$product_creation_date = get_the_date( 'Y-m-d', $product->get_id() );
 
-		$current_date          = gmdate( 'Y-m-d' );
-		$days_difference       = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / DAY_IN_SECONDS;
+		$current_date    = gmdate( 'Y-m-d' );
+		$days_difference = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / DAY_IN_SECONDS;
+
 		return $days_difference <= $days;
 	}
 }
