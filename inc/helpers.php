@@ -351,6 +351,9 @@ if ( ! function_exists( 'merchant_get_product_categories' ) ) {
 if ( ! function_exists( 'merchant_array_to_css' ) ) {
 	function merchant_array_to_css( $array ) {
 		$css = '';
+		if ( empty( $array ) ) {
+			return $css;
+		}
 		foreach ( $array as $key => $value ) {
 			$css .= $key . ':' . $value . ';';
 		}
