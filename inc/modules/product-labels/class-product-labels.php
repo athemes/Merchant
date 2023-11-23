@@ -201,59 +201,53 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Product label output.
+	 * Calculate the percentage and display it replacing the label text.
 	 *
-	 * @return void
+	 * @return string label
 	 */
-	public function product_label_output() {
-		global $product;
+	public function percentage_label( $product, $label ) {
+		$label_text = isset( $label['label'] ) ? $label['label'] : '';
+		if ( ! empty( $label['percentage_text'] ) ) {
+			if ( $product->is_type( 'variable' ) ) {
+				$percentages = array();
+				$prices      = $product->get_variation_prices();
 
-		$settings = $this->get_module_settings();
-
-		if ( ! empty( $product ) && $product->is_on_sale() ) {
-			$label_text = $settings['label_text'];
-
-			if ( ! empty( $settings['display_percentage'] ) ) {
-				if ( $product->is_type( 'variable' ) ) {
-					$percentages = array();
-					$prices      = $product->get_variation_prices();
-
-					foreach ( $prices['price'] as $key => $price ) {
-						if ( $prices['regular_price'][ $key ] !== $price ) {
-							$percentages[] = round( 100 - ( floatval( $prices['sale_price'][ $key ] ) / floatval( $prices['regular_price'][ $key ] ) * 100 ) );
-						}
-					}
-
-					$percentage = max( $percentages );
-				} elseif ( $product->is_type( 'grouped' ) ) {
-					$percentages  = array();
-					$children_ids = $product->get_children();
-
-					foreach ( $children_ids as $child_id ) {
-						$child_product = wc_get_product( $child_id );
-						$regular_price = (float) $child_product->get_regular_price();
-						$sale_price    = (float) $child_product->get_sale_price();
-
-						if ( 0 != $sale_price || ! empty( $sale_price ) ) {
-							$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
-						}
-					}
-					$percentage = max( $percentages );
-				} else {
-					$regular_price = (float) $product->get_regular_price();
-					$sale_price    = (float) $product->get_sale_price();
-
-					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
-						$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+				foreach ( $prices['price'] as $key => $price ) {
+					if ( $prices['regular_price'][ $key ] !== $price ) {
+						$percentages[] = round( 100 - ( floatval( $prices['sale_price'][ $key ] ) / floatval( $prices['regular_price'][ $key ] ) * 100 ) );
 					}
 				}
 
-				$label_text = str_replace( '{value}', $percentage, $settings['percentage_text'] );
+				$percentage = max( $percentages );
+			} elseif ( $product->is_type( 'grouped' ) ) {
+				$percentages  = array();
+				$children_ids = $product->get_children();
+
+				foreach ( $children_ids as $child_id ) {
+					$child_product = wc_get_product( $child_id );
+					$regular_price = (float) $child_product->get_regular_price();
+					$sale_price    = (float) $child_product->get_sale_price();
+
+					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+						$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+					}
+				}
+				$percentage = max( $percentages );
+			} else {
+				$regular_price = (float) $product->get_regular_price();
+				$sale_price    = (float) $product->get_sale_price();
+
+				if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+					$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+				}
 			}
 
-			echo '<span class="merchant-onsale merchant-onsale-' . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '">'
-			     . esc_html( $label_text ) . '</span>';
+			$label_text = str_replace( '{value}', $percentage, $label['percentage_text'] );
 		}
+
+		$label['label'] = $label_text;
+
+		return $label;
 	}
 
 	/**
@@ -337,11 +331,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		global $product;
 
 		echo wp_kses( $this->get_labels( $product, 'single' ), array(
-			'div'  => array(
+			'div'    => array(
 				'class' => array(),
 			),
 			'strong' => array(),
-			'span' => array(
+			'span'   => array(
 				'class' => array(),
 				'style' => array(),
 			),
@@ -401,9 +395,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 							}
 							break;
 						case 'products_on_sale':
-							// todo: set the percentage text
 							if ( $this->is_on_sale( $product ) ) {
-								$product_labels_html .= $this->label( $label );
+								$product_labels_html .= $this->label( $this->percentage_label( $product, $label ) );
 							}
 							break;
 						case 'by_category':
