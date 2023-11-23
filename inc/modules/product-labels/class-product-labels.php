@@ -100,7 +100,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Inject module content in the products.
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
-		add_action( 'woostify_product_images_box_end', array( $this, 'product_label_output' ) );
+		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
