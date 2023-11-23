@@ -509,10 +509,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 */
 	private function is_new( $product, $days ) {
 		$product_creation_date = get_the_date( 'Y-m-d', $product->get_id() );
-		$current_date          = date( 'Y-m-d' );
-		$days_difference       = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / ( $days * 60 * 24 );
 
-		return $days_difference <= 1;
+		$current_date          = gmdate( 'Y-m-d' );
+		$days_difference       = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / DAY_IN_SECONDS;
+		return $days_difference <= $days;
 	}
 }
 
