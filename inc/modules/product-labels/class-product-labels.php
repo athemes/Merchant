@@ -436,11 +436,12 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function label( $label_data ) {
 		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
 		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
+		$styles = array();
 		if ( ! empty( $label_data['background_color'] ) ) {
 			$styles['background-color'] = $label_data['background_color'];
 		}
 		if ( ! empty( $label_data['text_color'] ) ) {
-            $styles['color'] = $label_data['text_color'];
+			$styles['color'] = $label_data['text_color'];
 		}
 		if ( empty( $label_data['label'] ) ) {
 			return '';
