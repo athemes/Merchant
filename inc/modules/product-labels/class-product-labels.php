@@ -336,7 +336,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function single_product_output() {
 		global $product;
 
-		echo $this->get_labels( $product, 'single' );
+		echo wp_kses( $this->get_labels( $product, 'single' ), array(
+			'div'  => array(
+				'class' => array(),
+			),
+			'span' => array(
+				'class' => array(),
+				'style' => array(),
+			),
+		) );
 	}
 
 	/**
@@ -347,7 +355,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function loop_product_output() {
 		global $product;
 
-		echo $this->get_labels( $product, 'archive' );
+		echo wp_kses( $this->get_labels( $product, 'archive' ), array(
+			'div'  => array(
+				'class' => array(),
+			),
+			'span' => array(
+				'class' => array(),
+				'style' => array(),
+			),
+		) );
 	}
 
 	/**
@@ -441,6 +457,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		 *
 		 * @param string $label      The label HTML.
 		 * @param array  $label_data The label data.
+         *
+         * @since 1.6
 		 */
 		return apply_filters( 'merchant_product_label', $label, $label_data );
 	}
