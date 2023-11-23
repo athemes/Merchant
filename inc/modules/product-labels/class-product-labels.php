@@ -418,11 +418,88 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 			}
 		} else {
-			// legacy mode goes here.
+			// legacy mode support.
+			return $this->legacy_product_label( $product );
 		}
 
 		if ( $product_labels_html ) {
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '">' . $product_labels_html . '</div>';
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Product label output.
+	 *
+	 * @return string legacy product label html.
+	 */
+	private function legacy_product_label($product) {
+		global $product;
+		$settings = $this->get_module_settings();
+		$styles  = array();
+
+		if ( ! empty( $product ) && $this->is_on_sale( $product ) ) {
+			$label_text = $settings['label_text'];
+			if ( ! empty( $settings['display_percentage'] ) ) {
+				if ( $product->is_type( 'variable' ) ) {
+					$percentages = array();
+					$prices      = $product->get_variation_prices();
+
+					foreach ( $prices['price'] as $key => $price ) {
+						if ( $prices['regular_price'][ $key ] !== $price ) {
+							$percentages[] = round( 100 - ( floatval( $prices['sale_price'][ $key ] ) / floatval( $prices['regular_price'][ $key ] ) * 100 ) );
+						}
+					}
+
+					$percentage = max( $percentages );
+				} elseif ( $product->is_type( 'grouped' ) ) {
+					$percentages  = array();
+					$children_ids = $product->get_children();
+
+					foreach ( $children_ids as $child_id ) {
+						$child_product = wc_get_product( $child_id );
+						$regular_price = (float) $child_product->get_regular_price();
+						$sale_price    = (float) $child_product->get_sale_price();
+
+						if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+							$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+						}
+					}
+					$percentage = max( $percentages );
+				} else {
+					$regular_price = (float) $product->get_regular_price();
+					$sale_price    = (float) $product->get_sale_price();
+
+					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+						$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+					}
+				}
+
+				$label_text = str_replace( '{value}', $percentage, $settings['percentage_text'] );
+			}
+
+			if ( ! empty( $settings['background_color'] ) ) {
+				$styles['background-color'] = $settings['background_color'];
+			}
+			if ( ! empty( $settings['text_color'] ) ) {
+				$styles['color'] = $settings['text_color'];
+			}
+			if ( ! empty( $settings['label_text_transform'] ) ) {
+				$styles['text-transform'] = $settings['label_text_transform'];
+			}
+			if ( ! empty( $settings['padding'] ) ) {
+				$styles['padding'] = $settings['padding'] . 'px';
+			}
+			if ( ! empty( $settings['font-size'] ) ) {
+				$styles['font-size'] = $settings['font-size'] . 'px';
+			}
+			if ( ! empty( $settings['label_shape'] ) ) {
+				$styles['border-radius'] = $settings['label_shape'] . 'px';
+			}
+
+			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-' . esc_attr( $settings[ 'label_position' ] ) . ' merchant-onsale-shape-' . esc_attr( $settings[ 'label_shape' ] ) . '" style="' . merchant_array_to_css( $styles ) . '">' . esc_html( $label_text ) . '</span></div>';
 		}
 
 		return '';
