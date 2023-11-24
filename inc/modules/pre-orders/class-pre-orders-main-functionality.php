@@ -174,7 +174,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		if ( count( $this->get_pre_order_products() ) > 0 ) {
 			$fields['preorder_date'] = [
-				'type'     => 'hidden',
+				'type'     => 'text',
 				'class'    => array( 'merchant-hidden' ),
 				'required' => true,
 				'default'  => $this->get_oldest_date(),
