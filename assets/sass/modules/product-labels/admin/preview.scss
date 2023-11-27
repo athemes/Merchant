@@ -56,4 +56,11 @@
             border-left: 3px solid #3858e9;
         }
     }
+
+    .layout-body{
+        grid-gap: unset;
+        .merchant-module-page-setting-field{
+            margin-bottom: 20px;
+        }
+    }
 }

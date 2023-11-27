@@ -59,3 +59,9 @@
 .merchant-flexible-content-control.product-labels-style .layout.active {
   border-left: 3px solid #3858e9;
 }
+.merchant-flexible-content-control.product-labels-style .layout-body {
+  grid-gap: unset;
+}
+.merchant-flexible-content-control.product-labels-style .layout-body .merchant-module-page-setting-field {
+  margin-bottom: 20px;
+}
