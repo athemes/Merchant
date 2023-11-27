@@ -13,7 +13,6 @@
                 letterCase = $('.merchant-module-page-setting-field-select[data-id=label_text_transform] select').val(),
                 position = $('.merchant-module-page-setting-field-select[data-id=label_position] select').val(),
                 labelPreview = $('.merchant-product-labels-preview .merchant-label');
-console.log(fontSize)
             labelPreview.css({
                 'background-color': backgroundColor,
                 'color': textColor,
