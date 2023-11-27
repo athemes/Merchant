@@ -435,10 +435,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 *
 	 * @return string legacy product label html.
 	 */
-	private function legacy_product_label($product) {
+	private function legacy_product_label( $product ) {
 		global $product;
 		$settings = $this->get_module_settings();
-		$styles  = array();
+		$styles   = array();
 
 		if ( ! empty( $product ) && $this->is_on_sale( $product ) ) {
 			$label_text = $settings['label_text'];
@@ -480,26 +480,16 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				$label_text = str_replace( '{value}', $percentage, $settings['percentage_text'] );
 			}
 
-			if ( ! empty( $settings['background_color'] ) ) {
-				$styles['background-color'] = $settings['background_color'];
-			}
-			if ( ! empty( $settings['text_color'] ) ) {
-				$styles['color'] = $settings['text_color'];
-			}
-			if ( ! empty( $settings['label_text_transform'] ) ) {
-				$styles['text-transform'] = $settings['label_text_transform'];
-			}
-			if ( ! empty( $settings['padding'] ) ) {
-				$styles['padding'] = $settings['padding'] . 'px';
-			}
-			if ( ! empty( $settings['font-size'] ) ) {
-				$styles['font-size'] = $settings['font-size'] . 'px';
-			}
-			if ( ! empty( $settings['label_shape'] ) ) {
-				$styles['border-radius'] = $settings['label_shape'] . 'px';
-			}
+			$styles['background-color'] = isset( $settings['background_color'] ) ? $settings['background_color'] : '#212121';
+			$styles['color']            = isset( $settings['text_color'] ) ? $settings['text_color'] : '#ffffff';
+			$styles['text-transform']   = isset( $settings['label_text_transform'] ) ? $settings['label_text_transform'] : 'uppercase';
+			$styles['padding']          = isset( $settings['padding'] ) ? $settings['padding'] . 'px' : 8 . 'px';
+			$styles['font-size']        = isset( $settings['font-size'] ) ? $settings['font-size'] . 'px' : 14 . 'px';
+			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 0 . 'px';
 
-			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-' . esc_attr( $settings[ 'label_position' ] ) . ' merchant-onsale-shape-' . esc_attr( $settings[ 'label_shape' ] ) . '" style="' . merchant_array_to_css( $styles ) . '">' . esc_html( $label_text ) . '</span></div>';
+			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
+			       . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
+			       . '">' . esc_html( $label_text ) . '</span></div>';
 		}
 
 		return '';
@@ -513,7 +503,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function label( $label_data ) {
 		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
 		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
-		$styles = array();
+		$styles         = array();
 		if ( ! empty( $label_data['background_color'] ) ) {
 			$styles['background-color'] = $label_data['background_color'];
 		}
