@@ -36,7 +36,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Pages to display', 'merchant' ),
 							'options' => array(
 								'both'    => esc_html__( 'Both', 'merchant' ),
-								'archive' => esc_html__( 'archive', 'merchant' ),
+								'archive' => esc_html__( 'Archive', 'merchant' ),
 								'single'  => esc_html__( 'Single', 'merchant' ),
 							),
 							'default' => 'both',
