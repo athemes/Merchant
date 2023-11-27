@@ -504,7 +504,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						}
 						echo '</div>';
 					} else {
-						echo '<input step="' . esc_attr( $step ) . '" type="number" '. $step .' name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
+						echo '<input step="' . esc_attr( $step ) . '" type="number" '.' name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
 					}
 					break;
 
