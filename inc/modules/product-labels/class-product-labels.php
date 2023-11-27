@@ -485,7 +485,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			$styles['text-transform']   = isset( $settings['label_text_transform'] ) ? $settings['label_text_transform'] : 'uppercase';
 			$styles['padding']          = isset( $settings['padding'] ) ? $settings['padding'] . 'px' : 8 . 'px';
 			$styles['font-size']        = isset( $settings['font-size'] ) ? $settings['font-size'] . 'px' : 14 . 'px';
-			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 0 . 'px';
+			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 8 . 'px';
 
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
 			       . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
