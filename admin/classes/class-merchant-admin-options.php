@@ -425,6 +425,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
+				if ( ! $value ) {
+					$value = $default;
+				}
 				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-id="'
 				     . esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
@@ -433,7 +436,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				echo '<div class="merchant-module-page-setting-field-inner">';
 				if ( method_exists( 'Merchant_Admin_Options', $type ) ) {
-					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value ?: $default );
+					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value );
 				} else {
 					esc_html_e( 'Field not found!', 'merchant' );
 				}
