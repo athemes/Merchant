@@ -507,6 +507,12 @@ const styles = [
 		src: './assets/sass/compatibility/oceanwp/style.scss',
 		destination: './assets/css/compatibility/oceanwp',
 	},
+
+	{
+		name: 'twentytwentyfourCompatibility',
+		src: './assets/sass/compatibility/twenty-twenty-four/style.scss',
+		destination: './assets/css/compatibility/twenty-twenty-four',
+	},
 ];
 
 // Scripts to process.
