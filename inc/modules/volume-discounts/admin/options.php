@@ -50,7 +50,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'buy_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Buy text', 'merchant' ),
-			'default' => esc_html__( 'Buy {amount} with {discount} discount each', 'merchant' ),
+			'default' => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
 		),
 
 		array(
@@ -79,7 +79,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'cart_description_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Cart item discount description', 'merchant' ),
-			'default' => esc_html__( 'A discount of {amount} is applied.', 'merchant' ),
+			'default' => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
 			'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
 		),
 	),

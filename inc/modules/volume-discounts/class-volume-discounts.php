@@ -60,11 +60,11 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 			'single_product_placement' => 'before-cart-form',
 			'table_title'              => __( 'Buy more, save more!', 'merchant' ),
 			'save_label'               => esc_html__( 'Save {amount}', 'merchant' ),
-			'buy_text'                 => esc_html__( 'Buy {amount} with {discount} discount each', 'merchant' ),
+			'buy_text'                 => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
 			'item_text'                => esc_html__( 'Per item:', 'merchant' ),
 			'total_text'               => esc_html__( 'Total price:', 'merchant' ),
 			'cart_title_text'          => esc_html__( 'Discount', 'merchant' ),
-			'cart_description_text'    => esc_html__( 'A discount of {amount} is applied.', 'merchant' )
+			'cart_description_text'    => esc_html__( 'A discount of {amount} has been applied.', 'merchant' )
 		);
 
 		// Module data.

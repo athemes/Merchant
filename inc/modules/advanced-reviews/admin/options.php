@@ -21,7 +21,7 @@ Merchant_Admin_Options::create( array(
 			'id'		=> 'title',
 			'type'	  => 'text',
 			'title'	 => __( 'Title', 'merchant' ),
-			'default'   => __( 'Why people love our products', 'merchant' )
+			'default'   => __( 'What our customers are saying', 'merchant' )
 		),
 
 		// Title HTML Tag.

@@ -57,7 +57,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 			// Module default settings.
 			$this->module_default_settings = array(
-				'title'            => __( 'Why people love our products', 'merchant' ),
+				'title'            => __( 'What our customers are saying', 'merchant' ),
 				'title_tag'        => 'h2',
 				'hide_title'       => 0,
 				'description'      => '',
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 						'comment_approved'     => '1',
 						'comment_ID'           => 1,
 						'comment_post_ID'      => 1,
-						'comment_author'       => 'John Doe',
+						'comment_author'       => 'Kendall Grey',
 						'comment_author_email' => 'johndoe@athemes.com',
 						'comment_author_url'   => 'https://athemes.com',
 						'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) )
