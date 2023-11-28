@@ -24,7 +24,6 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .merchant-cart-reserved-timer-icon img {
   min-width: 36px;
   max-width: 36px;
@@ -47,7 +46,6 @@
   line-height: normal;
   text-align: left;
 }
-
 .merchant-cart-reserved-timer-content-desc span {
-  color: red;
+  color: rgb(255, 0, 0);
 }

@@ -18,7 +18,6 @@
   margin-top: var(--mrc-plogos-margin-top, 20px) !important;
   margin-bottom: var(--mrc-plogos-margin-bottom, 20px) !important;
 }
-
 .merchant-payment-logos + .merchant-payment-logos {
   display: none;
 }
@@ -45,12 +44,10 @@
       -ms-flex-pack: var(--mrc-plogos-align, flex-start);
           justify-content: var(--mrc-plogos-align, flex-start);
 }
-
 .merchant-payment-logos-images img {
   max-width: var(--mrc-plogos-image-max-width, 80px) !important;
   max-height: var(--mrc-plogos-image-max-height, 100px) !important;
 }
-
 .merchant-payment-logos-images.is-placeholder img {
   width: 100%;
 }

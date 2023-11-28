@@ -4,30 +4,25 @@
 .merchant-product-has-audio {
   display: block !important;
 }
-
 .merchant-product-has-audio .merchant-product-audio {
   width: 100%;
   margin-bottom: 20px;
 }
-
 .merchant-product-has-audio .merchant-product-audio + .woocommerce-product-gallery__image,
 .merchant-product-has-audio .merchant-product-audio + .woocommerce-product-gallery {
   display: none !important;
 }
-
 .merchant-product-has-audio .product-loop-image-wrapper,
 .merchant-product-has-audio .image-wrap,
 .merchant-product-has-audio .loop-image-wrap,
 .merchant-product-has-audio .ct-image-container {
   display: none !important;
 }
-
 .merchant-product-has-audio audio {
   display: block;
   width: 100%;
   max-width: 100%;
 }
-
 .merchant-product-has-audio .onsale,
 .merchant-product-has-audio .merchant-onsale,
 .merchant-product-has-audio .woocommerce-product-gallery__trigger {
@@ -37,7 +32,6 @@
 .woocommerce-product-gallery__image.has-audio {
   position: relative;
 }
-
 .woocommerce-product-gallery__image.has-audio .merchant-product-audio {
   position: absolute;
   bottom: 50%;
@@ -55,11 +49,9 @@
           justify-content: center;
   z-index: 5;
 }
-
 .woocommerce-product-gallery__image.has-audio .merchant-product-audio audio {
   width: 90%;
 }
-
 .woocommerce-product-gallery__image.has-audio .merchant-product-audio-overlay {
   position: absolute;
   width: 100%;

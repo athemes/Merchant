@@ -71,3 +71,14 @@ if ( ! function_exists( 'merchant_is_kadence_active' ) ) {
 		return class_exists( '\Kadence\Theme' );
 	}
 }
+
+/**
+ * Check if OceanWP theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_oceanwp_active' ) ) {
+	function merchant_is_oceanwp_active() {
+		return class_exists( 'OCEANWP_Theme_Class' );
+	}
+}

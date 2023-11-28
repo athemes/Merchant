@@ -12,44 +12,38 @@
   -webkit-box-align: center !important;
       -ms-flex-align: center !important;
           align-items: center !important;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   text-decoration: none;
   -ms-flex-item-align: start;
       align-self: flex-start;
   color: var(--mrc-qv-button-text-color, #FFF) !important;
   border-color: var(--mrc-qv-button-border-color, #212121) !important;
   background-color: var(--mrc-qv-button-bg-color, #212121) !important;
-  transition: all .2s;
+  transition: all 0.2s;
 }
-
 .woocommerce .product .merchant-quick-view-button svg + span {
   display: inline-block;
   margin-left: 8px;
 }
-
 .woocommerce .product .merchant-quick-view-button svg {
   width: 1em;
   height: 1em;
   fill: var(--mrc-qv-button-icon-color, #FFF) !important;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
-
 .woocommerce .product .merchant-quick-view-button svg path {
   fill: var(--mrc-qv-button-icon-color, #FFF) !important;
 }
-
 .woocommerce .product .merchant-quick-view-button:hover {
   color: var(--mrc-qv-button-color-hover, #FFF) !important;
   border-color: var(--mrc-qv-button-border-color-hover, #414141) !important;
   background-color: var(--mrc-qv-button-bg-color-hover, #414141) !important;
 }
-
 .woocommerce .product .merchant-quick-view-button:hover svg {
   fill: var(--mrc-qv-button-icon-color-hover, #FFF) !important;
 }
-
 .woocommerce .product .merchant-quick-view-button:hover svg path {
   fill: var(--mrc-qv-button-icon-color-hover, #FFF) !important;
 }
@@ -57,7 +51,6 @@
 .products .product {
   position: relative;
 }
-
 .products .product .merchant-quick-view-position-overlay {
   position: absolute;
   z-index: 10;
@@ -68,10 +61,9 @@
   margin: 0;
   white-space: nowrap !important;
   opacity: 0;
-  -webkit-transition: all .2s;
-  transition: all .2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
-
 .products .product:hover .merchant-quick-view-position-overlay {
   opacity: 1;
 }
@@ -95,16 +87,14 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
-
 .merchant-quick-view-modal.merchant-show {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
-
 .merchant-quick-view-modal.merchant-loading .merchant-quick-view-loader {
   opacity: 1;
   visibility: visible;
@@ -127,12 +117,11 @@
   display: -ms-flexbox;
   display: flex;
   font-size: 26px;
-  -webkit-animation: merchant-fa-spin .75s linear infinite;
-          animation: merchant-fa-spin .75s linear infinite;
+  -webkit-animation: merchant-fa-spin 0.75s linear infinite;
+          animation: merchant-fa-spin 0.75s linear infinite;
   opacity: 0;
   visibility: hidden;
 }
-
 .merchant-quick-view-loader svg {
   width: 1em;
   height: 1em;
@@ -149,10 +138,9 @@
   background-color: #FFF;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity .3s ease, visibility .3s ease;
-  transition: opacity .3s ease, visibility .3s ease;
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
 .merchant-quick-view-inner.merchant-show {
   opacity: 1;
   visibility: visible;
@@ -176,7 +164,6 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-
 .merchant-quick-view-close-button svg {
   width: 1em;
   height: 1em;
@@ -204,7 +191,6 @@
             transform: rotate(1turn);
   }
 }
-
 .merchant-quick-view-row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -222,11 +208,9 @@
 .merchant-quick-view-product-gallery .woocommerce-product-gallery__image {
   max-height: calc(var(--mrc-qv-modal-height, 500px) - 70px);
 }
-
 .merchant-quick-view-product-gallery .woocommerce-product-gallery__image img {
   max-height: calc(var(--mrc-qv-modal-height, 500px) - 70px);
 }
-
 .merchant-quick-view-product-gallery .woocommerce-product-gallery {
   width: 100% !important;
   float: none !important;
@@ -236,21 +220,17 @@
 .merchant-quick-view-product-gallery .flex-control-thumbs::-webkit-scrollbar {
   width: 6px;
 }
-
 .merchant-quick-view-product-gallery .flex-control-thumbs::-webkit-scrollbar-track {
   background: #ddd;
   border-radius: 6px;
 }
-
 .merchant-quick-view-product-gallery .flex-control-thumbs::-webkit-scrollbar-thumb {
   background: #999;
   border-radius: 6px;
 }
-
 .merchant-quick-view-product-gallery .flex-control-thumbs::-webkit-scrollbar-thumb:hover {
   background: #000;
 }
-
 .merchant-quick-view-product-gallery .flex-control-thumbs li {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -258,7 +238,6 @@
   margin: 0 !important;
   width: auto !important;
 }
-
 .merchant-quick-view-product-gallery .flex-control-thumbs li img {
   width: 60px !important;
 }
@@ -273,7 +252,6 @@
       -ms-flex-direction: row-reverse !important;
           flex-direction: row-reverse !important;
 }
-
 .merchant-quick-view-thumbs-at-left .woocommerce-product-gallery .flex-control-thumbs {
   padding-right: 5px !important;
   -ms-flex-negative: 0 !important;
@@ -297,11 +275,9 @@
   display: flex !important;
   grid-gap: 5px !important;
 }
-
 .merchant-quick-view-thumbs-at-right .woocommerce-product-gallery .woocommerce-product-gallery__trigger {
   display: none !important;
 }
-
 .merchant-quick-view-thumbs-at-right .woocommerce-product-gallery .flex-control-thumbs {
   padding-right: 5px !important;
   -ms-flex-negative: 0 !important;
@@ -330,7 +306,6 @@
           flex-direction: column !important;
   max-height: calc(var(--mrc-qv-modal-height, 500px) - 70px) !important;
 }
-
 .merchant-quick-view-thumbs-at-bottom .woocommerce-product-gallery .flex-control-thumbs {
   -ms-flex-negative: 0 !important;
       flex-shrink: 0 !important;
@@ -357,24 +332,20 @@
   padding-right: 12px;
   scrollbar-color: #444 #ddd;
 }
-
 .merchant-quick-view-summary .woocommerce-variation-price,
 .merchant-quick-view-summary .merchant-quick-view-product-price {
   color: var(--mrc-qv-regular-price-color, #999999);
 }
-
 .merchant-quick-view-summary .woocommerce-variation-price del,
 .merchant-quick-view-summary .merchant-quick-view-product-price del {
   color: var(--mrc-qv-regular-price-color, #999999);
 }
-
 .merchant-quick-view-summary .woocommerce-variation-price ins,
 .merchant-quick-view-summary .merchant-quick-view-product-price ins {
   color: var(--mrc-qv-sale-price-color, #212121);
   margin: 0;
   font-size: 24px;
 }
-
 .merchant-quick-view-summary form.cart,
 .merchant-quick-view-summary .woocommerce-variation-add-to-cart {
   display: -webkit-box;
@@ -385,7 +356,6 @@
       flex-wrap: wrap;
   margin: 0 !important;
 }
-
 .merchant-quick-view-summary form.cart > *,
 .merchant-quick-view-summary .woocommerce-variation-add-to-cart > * {
   -ms-flex-item-align: inherit !important;
@@ -393,30 +363,24 @@
   justify-self: inherit !important;
   margin: 0 !important;
 }
-
 .merchant-quick-view-summary .quantity {
   margin: 0;
   width: auto;
 }
-
 .merchant-quick-view-summary > div:empty {
   display: none;
 }
-
 .merchant-quick-view-summary::-webkit-scrollbar {
   width: 6px;
 }
-
 .merchant-quick-view-summary::-webkit-scrollbar-track {
   background: #ddd;
   border-radius: 6px;
 }
-
 .merchant-quick-view-summary::-webkit-scrollbar-thumb {
   background: #999;
   border-radius: 6px;
 }
-
 .merchant-quick-view-summary::-webkit-scrollbar-thumb:hover {
   background: #000;
 }
@@ -442,15 +406,12 @@
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
-
 .merchant-quick-view-product-add-to-cart .button {
   text-decoration: none;
 }
-
 .merchant-quick-view-product-add-to-cart .button:hover {
   text-decoration: none;
 }
-
 .merchant-quick-view-product-add-to-cart .disabled {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -473,11 +434,9 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
-
 .merchant-quick-view-product-meta .product_meta span {
   font-weight: bold;
 }
-
 .merchant-quick-view-product-meta .product_meta span a,
 .merchant-quick-view-product-meta .product_meta span span {
   font-weight: normal;

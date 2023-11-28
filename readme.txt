@@ -151,6 +151,11 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 16. Cookie Banner Module
 
 == Changelog ==
+= 1.7 =
+* Added - Products labels: New option to add multiple product labels.
+* Added - Products labels: New option to display set each label display rule.
+* Fixed - Free gifts module doesn't support decimal numbers.
+
 = 1.6 =
 * Added - Cart and checkout related modules admin instructions regarding WooCommerce 8.3 new cart and checkout blocks.
 * Added - Pre-Orders: Admin product edit tooltip with instructions regarding out of stock products.

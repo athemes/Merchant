@@ -20,7 +20,6 @@
 .mrc-checkout-preview .mrc-checkout-preview-multi-step {
   display: none;
 }
-
 .mrc-checkout-preview .mrc-checkout-preview-one-step img,
 .mrc-checkout-preview .mrc-checkout-preview-shopify img,
 .mrc-checkout-preview .mrc-checkout-preview-multi-step img {
@@ -28,15 +27,12 @@
   height: auto;
   max-width: 100%;
 }
-
 .mrc-checkout-preview.layout-one-step .mrc-checkout-preview-one-step {
   display: block;
 }
-
 .mrc-checkout-preview.layout-shopify .mrc-checkout-preview-shopify {
   display: block;
 }
-
 .mrc-checkout-preview.layout-multi-step .mrc-checkout-preview-multi-step {
   display: block;
 }

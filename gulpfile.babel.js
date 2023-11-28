@@ -12,9 +12,8 @@ const config = require('./wpgulp.config.js');
  * Load Plugins.
  */
 const gulp = require('gulp');
-
 // CSS related plugins.
-const nodesass     = require('node-sass')
+const nodesass     = require('sass')
 const sass         = require('gulp-sass')(nodesass);
 const minifycss    = require('gulp-uglifycss');
 const autoprefixer = require('gulp-autoprefixer');

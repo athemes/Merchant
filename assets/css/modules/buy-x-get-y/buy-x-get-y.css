@@ -15,11 +15,9 @@
   display: flex;
   grid-gap: 20px;
 }
-
 .merchant-bogo-offer > div {
   position: relative;
 }
-
 .merchant-bogo-offer:not(:last-child) {
   margin-bottom: 20px;
 }
@@ -29,16 +27,13 @@
   display: -ms-flexbox;
   display: flex;
 }
-
 .merchant-bogo-product p {
   margin: 0 0 5px;
 }
-
 .merchant-bogo-product p,
 .merchant-bogo-product span {
   font-size: 13px;
 }
-
 .merchant-bogo-product img {
   max-height: 80px;
   max-width: 80px;
@@ -111,7 +106,6 @@ button.button.merchant-bogo-add-to-cart {
   grid-gap: 10px;
   margin-top: 10px;
 }
-
 .merchant-bogo-product-attributes select {
   min-height: inherit;
   height: inherit;
@@ -127,7 +121,6 @@ button.button.merchant-bogo-add-to-cart {
     width: 50%;
   }
 }
-
 @media (max-width: 469px) {
   .merchant-bogo-offer {
     -webkit-box-orient: vertical;

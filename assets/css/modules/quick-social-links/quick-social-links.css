@@ -11,7 +11,6 @@
   -webkit-transform: translate(-50%, 50%);
           transform: translate(-50%, 50%);
 }
-
 .merchant-quick-social-links .merchant-quick-social-links-inner {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,12 +22,10 @@
   -webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
           box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 }
-
 .merchant-quick-social-links .ql-image {
   text-align: center;
   height: 20px;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link {
   padding: 15px;
   -webkit-box-flex: 1;
@@ -42,32 +39,26 @@
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link:last-of-type {
   border-right: 0;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link a {
   color: #212121;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link a:hover {
   opacity: 0.5;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link svg,
 .merchant-quick-social-links .merchant-quick-social-link img {
   width: 20px;
   height: 20px;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link img {
   max-height: 30px;
   vertical-align: top;
 }
-
 .merchant-quick-social-links .merchant-quick-social-link svg {
   fill: var(--merchant-icon-color);
 }
@@ -106,7 +97,6 @@
     right: 0;
   }
 }
-
 @media (max-width: 991px) {
   .merchant-quick-social-links {
     bottom: 0;
