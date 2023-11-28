@@ -60,7 +60,7 @@ Merchant_Admin_Options::create( array(
 							'min'       => 0,
 							'step'      => 1,
 							'title'     => esc_html__( 'How long counts as new', 'merchant' ),
-							'desc'      => esc_html__( 'Set number of days the product will be marked as ‘New’ after the creation', 'merchant' ),
+							'desc'      => esc_html__( 'Set the number of days the product will be marked as ‘New’ after it has been created', 'merchant' ),
 							'default'   => 3,
 							'condition' => array( 'display_rules', '==', 'new_products' ),
 						),
