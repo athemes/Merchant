@@ -69,7 +69,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'text',
 							'title'     => esc_html__( 'Sale Percentage', 'merchant' ),
 							'default'   => '-{value}%',
-							'desc'      => esc_html__( 'You may use the {value} tag. E.g. <strong>{value}% OFF!</strong>', 'merchant' ),
+							'desc'      => esc_html__( 'You may use the {value} tag. E.g. {value}% OFF!', 'merchant' ),
 							'condition' => array( 'display_rules', '==', 'products_on_sale' ),
 						),
 						array(
