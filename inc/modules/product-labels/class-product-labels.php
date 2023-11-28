@@ -364,7 +364,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function loop_product_output() {
 		global $product;
 
-        echo 'zzz';
 		echo wp_kses( $this->get_labels( $product, 'archive' ), array(
 			'div'    => array(
 				'class' => array(),
