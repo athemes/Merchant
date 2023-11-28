@@ -56,6 +56,13 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'      => 'no_variations_message',
+			'type'    => 'text',
+			'title'   => esc_html__( 'No variation selected', 'merchant' ),
+			'default' => esc_html__( 'Please select an option to see your savings', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'button_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Button text', 'merchant' ),

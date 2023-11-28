@@ -17,7 +17,9 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
     <h3 class="merchant-frequently-bought-together-title">
 		<?php echo isset( $settings['title'] ) ? esc_html( $settings['title'] ) : esc_html__( 'Frequently Bought Together', 'merchant' ) ?>
     </h3>
-    <div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>">
+    <div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>"
+		 data-save-label="<?php echo isset($settings['save_label']) ? esc_attr( $settings['save_label'] ) : esc_html__( 'You save: {amount}', 'merchant' ) ?>"
+		 data-no-variations="<?php echo isset($settings['no_variations_message']) ? esc_html( $settings['no_variations_message'] ) : esc_html__( 'Please select an option to see your savings', 'merchant' ) ?>">
         <?php foreach($args['bundles'] as $parent_id => $bundles ) : ?>
             <?php foreach ( $bundles as $key => $bundle ) : ?>
                 <?php if ( empty( $bundle['products'] ) ) continue ?>
