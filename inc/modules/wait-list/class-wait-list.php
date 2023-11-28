@@ -52,12 +52,12 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'form_title'           => __( 'New stock on its way! Email when stock available', 'merchant' ),
+			'form_title'           => __( 'New stock is coming! Email me when this item is back in stock', 'merchant' ),
 			'form_email_label'     => __( 'Your Email Address', 'merchant' ),
 			'form_button_text'     => __( 'Notify Me', 'merchant' ),
-			'form_success_message' => __( 'You have been successfully added to our wait list. As soon as new stock become available, we will notify you via email.', 'merchant' ),
-			'email_new_subscriber' => __( 'Hello subscriber, Thank you for subscribing to {product}. We will email you once product back in stock.', 'merchant' ),
-			'email_update'         => __( 'Hello Subscriber, Thanks for your patience and finally the wait is over! Your Subscribed Product {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you\'ll get one, so hurry to be one of the lucky shoppers who do. Add this product {product} directly to your cart.',
+			'form_success_message' => __( 'You have been successfully added to our stock waitlist. As soon as new stock becomes available, we will notify you via email.', 'merchant' ),
+			'email_new_subscriber' => __( 'Hello, thank you for subscribing to the stock waitlist for {product}. We will email you once the product back in stock.', 'merchant' ),
+			'email_update'         => __( 'Hello, thanks for your patience and finally the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
 				'merchant' ),
 			'form_nonce_field'     => wp_nonce_field( 'merchant_wait_list_action', 'merchant_wait_list_action', true, false )
 		);

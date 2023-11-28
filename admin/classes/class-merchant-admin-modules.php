@@ -76,7 +76,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-add-to-cart-text' ),
 					'title' => esc_html__( 'Add To Cart Text', 'merchant' ),
-					'desc' => esc_html__( 'Change your store’s ‘Add to Cart’ text for simple, variable, out of stock and individual products', 'merchant' ),
+					'desc' => esc_html__( 'Change your store\'s \'Add to Cart\' text for various product types, as well as individual products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-add-to-cart-text/'
 				),
 				'sticky-add-to-cart' => array(
@@ -165,9 +165,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'pro' => true,
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
-					'title' => esc_html__( 'Volume Discounts', 'merchant' ),
+					'title' => esc_html__( 'Bulk Discounts', 'merchant' ),
 					'desc' => esc_html__( 'Offer discounts on larger quantity purchases to drive up average order value', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-volume-discounts/'
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/'
 				),
 				'spending-goal' => array(
 					'pro' => true,
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-free-gifts' ),
 					'title' => esc_html__( 'Free Gifts', 'merchant' ),
-					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target', 'merchant' ),
+					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target or apply a coupon', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/'
 				),
 
@@ -348,7 +348,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-swatches' ),
 					'title'        => esc_html__( 'Variation Swatches', 'merchant' ),
-					'desc'         => esc_html__( 'Swatches make it easy for customers to view your product variants at a glance', 'merchant' ),
+					'desc'         => esc_html__( 'Display variable product options as customizable color/image icons, buttons, or dropdowns', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-variation-swatches/'
 				),
 				'product-navigation-links' => array(
@@ -389,14 +389,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 
 			$modules = array(
 
-				'convert-more' => array(
-					'title' => esc_html__( 'Convert More', 'merchant' ),
-					'modules' => array()
-				),
-
 				'boost-revenue' => array(
 					'title' => esc_html__( 'Boost Revenue', 'merchant' ),
 					'modules' => array(),
+				),
+
+				'convert-more' => array(
+					'title' => esc_html__( 'Convert More', 'merchant' ),
+					'modules' => array()
 				),
 
 				'reduce-abandonment' => array(
