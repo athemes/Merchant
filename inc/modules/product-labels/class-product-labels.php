@@ -101,10 +101,24 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
 		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
+		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 10, 3 );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 	}
+
+	/**
+	 * Function for `woocommerce_blocks_product_grid_item_html` filter-hook.
+	 *
+	 * @param string      $html    Product grid item HTML.
+	 * @param array       $data    Product data passed to the template.
+	 * @param \WC_Product $product Product object.
+	 *
+	 * @return string
+	 */
+    public function products_block($html, $data, $product){
+	    return str_replace('</li>', $this->get_labels($product, 'archive') . '</li>', $html);
+    }
 
 	/**
 	 * Admin enqueue CSS.
@@ -350,6 +364,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function loop_product_output() {
 		global $product;
 
+        echo 'zzz';
 		echo wp_kses( $this->get_labels( $product, 'archive' ), array(
 			'div'    => array(
 				'class' => array(),
