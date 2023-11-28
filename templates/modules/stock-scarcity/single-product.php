@@ -23,7 +23,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 			) )
 			: esc_html( 
 				/* Translators: 1. Quantity of units */
-				sprintf( __( 'Hurry! Only %s units left in stock!', 'merchant' ), $args['stock'] )
+				sprintf( _n( 'Hurry! Only %s unit left in stock!', 'Hurry! Only %s units left in stock!', $args['stock'], 'merchant' ), $args['stock'] )
 			); ?>
     </div>
     <div class="merchant-stock-scarcity-content">
