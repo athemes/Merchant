@@ -15,12 +15,20 @@ if ( ! class_exists( 'Merchant_WPML_Support' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string The string to translate.
-		 * @param string $context The context of the string.
-		 * @param bool   $multiline Whether the string is multiline or not.
+		 * @param string $string    The string to translate.
+		 * @param string $context   The context of the string.
+		 * @param bool   $multiline Not used!.
 		 */
 		public function register_string( $string, $context, $multiline = false ) {
-			// TODO: Implement register_string() method.
+			/**
+			 * @see   https://wpml.org/wpml-hook/wpml_register_single_string/
+			 *
+			 * @param string $context The context of the string.
+			 * @param string $string  The string to translate.
+			 *
+			 * @since 1.8.0
+			 */
+			do_action( 'wpml_register_single_string', 'Merchant', $context, $string );
 		}
 
 		/**
@@ -31,6 +39,13 @@ if ( ! class_exists( 'Merchant_WPML_Support' ) ) {
 		 * @return string
 		 */
 		public function translate_string( $string ) {
+			/**
+			 * @see   https://wpml.org/wpml-hook/wpml_translate_single_string/
+			 *
+			 * @param string $string The string to translate.
+			 *
+			 * @since 1.8.0
+			 */
 			return apply_filters( 'wpml_translate_single_string', $string, 'Merchant', $string );
 		}
 	}
