@@ -69,6 +69,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
+		// Init translations.
+		$this->init_translations();
+
 		// Is module preview page.
 		if ( is_admin() && parent::is_module_settings_page() ) {
 			self::$is_module_preview = true;
@@ -107,6 +110,20 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 	}
 
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( isset( $settings['labels'] ) ) {
+			foreach ( $settings['labels'] as $label ) {
+				if ( isset( $label['label'] ) ) {
+					Merchant_Translator::register_string( $label['label'] );
+				}
+				if ( isset( $label['percentage_text'] ) ) {
+					Merchant_Translator::register_string( $label['percentage_text'] );
+				}
+			}
+		}
+	}
+
 	/**
 	 * Function for `woocommerce_blocks_product_grid_item_html` filter-hook.
 	 *
@@ -116,9 +133,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 *
 	 * @return string
 	 */
-    public function products_block($html, $data, $product){
-	    return str_replace('</li>', $this->get_labels($product, 'archive') . '</li>', $html);
-    }
+	public function products_block( $html, $data, $product ) {
+		return str_replace( '</li>', $this->get_labels( $product, 'archive' ) . '</li>', $html );
+	}
 
 	/**
 	 * Admin enqueue CSS.
@@ -256,7 +273,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 			}
 
-			$label_text = str_replace( '{value}', $percentage, $label['percentage_text'] );
+			$label_text = str_replace( '{value}', $percentage, Merchant_Translator::translate( $label['percentage_text'] ) );
 		}
 
 		$label['label'] = $label_text;
@@ -491,7 +508,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					}
 				}
 
-				$label_text = str_replace( '{value}', $percentage, $settings['percentage_text'] );
+				$label_text = str_replace( '{value}', $percentage, Merchant_Translator::translate( $settings['percentage_text'] ) );
 			}
 
 			$styles['background-color'] = isset( $settings['background_color'] ) ? $settings['background_color'] : '#212121';
@@ -503,7 +520,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
 			       . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
-			       . '">' . esc_html( $label_text ) . '</span></div>';
+			       . '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
 		}
 
 		return '';
@@ -529,7 +546,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
 		         . esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
-		         . trim( esc_html( $label_data['label'] ) ) . '</span>';
+		         . trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
 
 		/**
 		 * Filter the single product label.
