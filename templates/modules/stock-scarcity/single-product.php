@@ -15,11 +15,18 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-stock-scarcity">
     <div class="merchant-stock-scarcity-message">
-		<?php echo isset( $settings['low_inventory_text'] )
+		<?php 
+		$low_inventory_text = isset( $settings['low_inventory_text'] ) ? $settings['low_inventory_text'] : '';
+
+		if ( $args['stock'] > 1 ) {
+			$low_inventory_text = isset( $settings['low_inventory_text_plural'] ) ? $settings['low_inventory_text_plural'] : '';
+		}
+
+		echo ! empty( $low_inventory_text )
 			? esc_html( str_replace(
 				'{stock}',
 				$args['stock'],
-				$settings['low_inventory_text']
+				$low_inventory_text
 			) )
 			: esc_html( 
 				/* Translators: 1. Quantity of units */

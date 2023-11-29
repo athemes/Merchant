@@ -3,7 +3,8 @@ Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quic
 Requires at least: 5.5
 Tested up to: 6.4.1
 Requires PHP: 5.6
-Stable tag: 1.6
+Stable tag: 1.7
+Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -154,7 +155,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 = 1.7 =
 * Added - Products labels: New option to add multiple product labels.
 * Added - Products labels: New option to display set each label display rule.
-* Fixed - Free gifts module doesn't support decimal numbers.
+* Fixed - Quick View: Overlay option doesn't work on Kadence theme.
+* Fixed - Product search field in the admin metabox not working.
 
 = 1.6 =
 * Added - Cart and checkout related modules admin instructions regarding WooCommerce 8.3 new cart and checkout blocks.
