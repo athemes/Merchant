@@ -496,6 +496,23 @@ const styles = [
 		destination: './assets/css/modules/product-navigation-links/admin',
 	},
 
+	{
+		name: 'kadenceCompatibility',
+		src: './assets/sass/compatibility/kadence/style.scss',
+		destination: './assets/css/compatibility/kadence',
+	},
+
+	{
+		name: 'oceanwpCompatibility',
+		src: './assets/sass/compatibility/oceanwp/style.scss',
+		destination: './assets/css/compatibility/oceanwp',
+	},
+
+	{
+		name: 'twentytwentyfourCompatibility',
+		src: './assets/sass/compatibility/twenty-twenty-four/style.scss',
+		destination: './assets/css/compatibility/twenty-twenty-four',
+	},
 ];
 
 // Scripts to process.
@@ -700,6 +717,12 @@ const scripts = [
 		src: './assets/js/src/modules/quick-social-links/admin/preview.js',
 		file: 'preview',
 		destination: './assets/js/modules/quick-social-links/admin',
+	},
+	{
+		name: 'productLabelsAdmin',
+		src: './assets/js/src/modules/product-labels/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/product-labels/admin/',
 	},
 ];
 

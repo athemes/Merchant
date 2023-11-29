@@ -28,7 +28,7 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 
 			wp_enqueue_style(
 				'merchant-kadence-compatibility',
-				MERCHANT_URI . 'assets/css/compatibility/kadence/style.css',
+				MERCHANT_URI . 'assets/css/compatibility/kadence/style.min.css',
 				array(),
 				'1.0.0'
 			);
@@ -39,5 +39,5 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 	 * The class object can be accessed with "global $kadence_compatibility", to allow removing actions.
 	 * Improving Third-party integrations.
 	 */
-	$kadence_compatibility = new Merchant_Kadence_Theme();
+	$merchant_kadence_compatibility = new Merchant_Kadence_Theme();
 }

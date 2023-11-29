@@ -18,21 +18,18 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes merchant-bounce {
   to {
     -webkit-transform: scale(1.2);
             transform: scale(1.2);
   }
 }
-
 @keyframes merchant-bounce {
   to {
     -webkit-transform: scale(1.2);
             transform: scale(1.2);
   }
 }
-
 @-webkit-keyframes merchant-shake {
   33% {
     -webkit-transform: rotate(10deg);
@@ -47,7 +44,6 @@
             transform: rotate(10deg);
   }
 }
-
 @keyframes merchant-shake {
   33% {
     -webkit-transform: rotate(10deg);
@@ -62,7 +58,6 @@
             transform: rotate(10deg);
   }
 }
-
 @-webkit-keyframes merchant-pulse {
   0% {
     -webkit-animation-timing-function: ease-out;
@@ -97,7 +92,6 @@
             transform: scale(1);
   }
 }
-
 @keyframes merchant-pulse {
   0% {
     -webkit-animation-timing-function: ease-out;
@@ -132,7 +126,6 @@
             transform: scale(1);
   }
 }
-
 @-webkit-keyframes merchant-jello-shake {
   0% {
     -webkit-transform: scaleX(1);
@@ -163,7 +156,6 @@
             transform: scaleX(1);
   }
 }
-
 @keyframes merchant-jello-shake {
   0% {
     -webkit-transform: scaleX(1);
@@ -194,7 +186,6 @@
             transform: scaleX(1);
   }
 }
-
 @-webkit-keyframes merchant-wobble {
   0%, to {
     -webkit-transform: translateX(0);
@@ -223,7 +214,6 @@
             transform: translateX(-6px) rotate(-1.2deg);
   }
 }
-
 @keyframes merchant-wobble {
   0%, to {
     -webkit-transform: translateX(0);
@@ -252,7 +242,6 @@
             transform: translateX(-6px) rotate(-1.2deg);
   }
 }
-
 @-webkit-keyframes merchant-vibrate {
   0% {
     -webkit-transform: translate(0);
@@ -279,7 +268,6 @@
             transform: translate(0);
   }
 }
-
 @keyframes merchant-vibrate {
   0% {
     -webkit-transform: translate(0);
@@ -306,7 +294,6 @@
             transform: translate(0);
   }
 }
-
 @-webkit-keyframes merchant-swing {
   0% {
     -webkit-transform: rotate(0deg);
@@ -333,7 +320,6 @@
             transform: rotate(0deg);
   }
 }
-
 @keyframes merchant-swing {
   0% {
     -webkit-transform: rotate(0deg);
@@ -360,7 +346,6 @@
             transform: rotate(0deg);
   }
 }
-
 @-webkit-keyframes merchant-tada {
   0% {
     -webkit-transform: scaleX(1);
@@ -383,7 +368,6 @@
             transform: scaleX(1);
   }
 }
-
 @keyframes merchant-tada {
   0% {
     -webkit-transform: scaleX(1);

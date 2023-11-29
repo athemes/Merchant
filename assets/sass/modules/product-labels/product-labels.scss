@@ -1,33 +1,53 @@
 /**
  * Product Labels.
- *
+ * Frontend view
  */
+.merchant-product-labels {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  z-index: 10;
+  text-align: left;
 
-.merchant-onsale {
-	position: absolute;
-	z-index: 10;
-	top: 10px;
-	font-size: var(--mrc-pl-font-size, 14px);
-	line-height: 1em;
-	padding: var(--mrc-pl-padding, 8px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	text-transform: var(--mrc-pl-text-transform, uppercase);
-	color: var(--mrc-pl-text-color, #ffffff);
-	background-color: var(--mrc-pl-background-color, #212121);
-	border-radius: var(--mrc-pl-border-radius, 0px);
+  &.position-top-left {
+    text-align: left;
+    .merchant-label{
+      margin-right: 5px;
+    }
+  }
+
+  &.position-top-right {
+    text-align: right;
+    .merchant-label{
+      margin-left: 5px;
+    }
+  }
+
+  .merchant-label {
+    font-size: var(--mrc-pl-font-size, 14px);
+    line-height: 1em;
+    padding: var(--mrc-pl-padding, 8px);
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: var(--mrc-pl-text-transform, uppercase);
+    //color: var(--mrc-pl-text-color, #ffffff);
+    //background-color: var(--mrc-pl-background-color, #212121);
+    border-radius: var(--mrc-pl-border-radius, 0px);
+  }
+
+  .merchant-label-top-left {
+    left: 10px;
+  }
+
+  .merchant-label-top-right {
+    right: 10px;
+  }
+
+  .merchant-label-shape-rounded {
+    border-radius: 4px;
+  }
 }
 
-.merchant-onsale-top-left {
-	left: 10px;
-}
-
-.merchant-onsale-top-right {
-	right: 10px;
-}
-
-.merchant-onsale-shape-rounded {
-	border-radius: 4px;
-}

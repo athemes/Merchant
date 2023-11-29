@@ -29,7 +29,6 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 .merchant-frequently-bought-together-bundle form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -38,7 +37,6 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-
 .merchant-frequently-bought-together-bundle-products {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -48,7 +46,6 @@
       -ms-flex-align: start;
           align-items: flex-start;
 }
-
 .merchant-frequently-bought-together-bundle-product {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -61,25 +58,21 @@
   max-width: 200px;
   position: relative;
 }
-
 .merchant-frequently-bought-together-bundle-product-attributes {
   display: grid;
   grid-gap: 10px;
   margin-top: 10px;
 }
-
 .merchant-frequently-bought-together-bundle-product-attributes select {
   min-height: inherit;
   height: inherit;
   padding: 7px;
   font-size: 12px;
 }
-
 .merchant-frequently-bought-together-bundle-product-price .error {
   color: red;
   font-size: 14px;
 }
-
 .merchant-frequently-bought-together-bundle-product-plus {
   position: absolute;
   right: -30px;
@@ -102,28 +95,23 @@
           align-items: center;
   font-family: arial, serif;
 }
-
 .merchant-frequently-bought-together-bundle-product:not(:first-child) {
   border: 1px solid var(--merchant-border-color);
   border-radius: var(--merchant-border-radius);
   padding: 15px;
 }
-
 .merchant-frequently-bought-together-bundle-product:not(:first-child) img {
   width: 100px;
   height: 100px;
 }
-
 .merchant-frequently-bought-together-bundle-product p {
   margin: 0 0 10px;
 }
-
 .merchant-frequently-bought-together-bundle-product img {
   width: 125px;
   height: 125px;
   margin: 0 auto 20px;
 }
-
 .merchant-frequently-bought-together-bundle-offer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -133,20 +121,16 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
-
 .merchant-frequently-bought-together-bundle-total, .merchant-frequently-bought-together-bundle-total-price {
   margin: 0;
 }
-
 .merchant-frequently-bought-together-bundle-total-price ins {
   font-size: 21px;
 }
-
 .merchant-frequently-bought-together-bundle-save {
   margin-bottom: 15px;
   font-style: italic;
 }
-
 .merchant-frequently-bought-together-bundle-error {
   color: red;
   font-size: 14px;
@@ -163,7 +147,6 @@
     max-width: 200px;
   }
 }
-
 @media (max-width: 767px) {
   .merchant-frequently-bought-together-bundle-products {
     -webkit-box-orient: vertical;

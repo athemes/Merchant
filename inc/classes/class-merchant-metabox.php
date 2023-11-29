@@ -486,21 +486,25 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 				case 'number':
 					$style = '';
+					$step = 'any';
 					if ( isset( $field['style'] ) && ! empty( $field['style'] ) ) {
 						$style = 'style="' . esc_attr( str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) ) . '"';
+					}
+					if ( isset( $field['step'] ) && ! empty( $field['step'] ) ) {
+						$step = $field['step'];
 					}
 					if ( isset( $field['append'] ) || isset( $field['prepend'] ) ) {
 						echo '<div class="merchant-metabox-field-input-container">';
 						if ( isset( $field['prepend'] ) ) {
 							echo '<div class="merchant-metabox-field-prepend">' . esc_attr( $field['prepend'] ) . '</div>';
 						}
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
+						echo '<input step="' . esc_attr( $step ) . '" type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
 						if ( isset( $field['append'] ) ) {
 							echo '<div class="merchant-metabox-field-append">' . esc_attr( $field['append'] ) . '</div>';
 						}
 						echo '</div>';
 					} else {
-						echo '<input type="number" name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
+						echo '<input step="' . esc_attr( $step ) . '" type="number" '.' name="' . esc_attr( $field_id ) . '" value="' . esc_attr( $value ) . '" ' . wp_kses_post( $style ) . ' />';
 					}
 					break;
 
