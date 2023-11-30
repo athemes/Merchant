@@ -52,13 +52,5 @@ Merchant_Admin_Options::create( array(
 			'default' => get_privacy_policy_url(),
 		),
 
-		array(
-			'id'      => 'warning_text',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Checkbox warning text', 'merchant' ),
-			'default' => esc_html__( 'You must read and accept the terms and conditions to complete checkout.', 'merchant' ),
-			'desc'    => esc_html__( 'The error will be shown if the user tries to go to checkout without accepting the terms & conditions.', 'merchant' ),
-		),
-
 	),
 ) );

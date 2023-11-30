@@ -2,7 +2,7 @@
 
 /**
  * Agree To Terms Checkbox.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Agree To Terms Checkbox Class.
- * 
+ *
  */
 class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
@@ -24,16 +24,15 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 	/**
 	 * Is module preview.
-	 * 
+	 *
 	 */
 	public static $is_module_preview = false;
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct() {
-
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
@@ -48,10 +47,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'label' => __( 'I agree with the', 'merchant' ),
-			'text' => __( 'Terms & Conditions', 'merchant' ),
-			'link' => get_privacy_policy_url(),
-			'warning_text' => __( 'Obtain consent before customers start the checkout process', 'merchant' )
+			'label'        => __( 'I agree with the', 'merchant' ),
+			'text'         => __( 'Terms & Conditions', 'merchant' ),
+			'link'         => get_privacy_policy_url(),
+			'warning_text' => __( 'Obtain consent before customers start the checkout process', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -62,8 +61,8 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		}
 
 		// Module data.
-		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
+		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+		$this->module_data['preview_url'] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -81,7 +80,6 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-
 		}
 
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
@@ -90,26 +88,25 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return;
 		}
+
+		// Show the agree to terms when the module is active.
+		add_filter( 'woocommerce_checkout_show_terms', '__return_true' );
+
+		// Control the text from the module settings.
+		add_filter( 'woocommerce_get_terms_and_conditions_checkbox_text', array( $this, 'agree_to_terms_form_field' ) );
 
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
-		// Inject the module content into the checkout terms and conditions hook.
-		add_action( 'woocommerce_checkout_terms_and_conditions', array( $this, 'agree_to_terms_form_field' ), 99 );
-
-		// Hook into the checkout validation and include agree to terms rules.
-		add_action( 'woocommerce_after_checkout_validation', array( $this, 'agree_to_terms_field_validation' ), 10, 2 );
-
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
 	 * Admin enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
@@ -124,11 +121,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 	/**
 	 * Enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function enqueue_css() {
-
 		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/agree-to-terms-checkbox.min.css', array(), MERCHANT_VERSION );
 	}
@@ -137,14 +133,14 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( self::MODULE_ID === $module ) {
 			ob_start();
-			$this->agree_to_terms_form_field();
+			$this->admin_preview();
 			$content = ob_get_clean();
 
 			// HTML.
@@ -155,49 +151,46 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 			// Terms & Conditions Text.
 			$preview->set_text( 'text', '.mrc-attc-terms-text' );
-
 		}
 
 		return $preview;
 	}
 
 	/**
-	 * Agree to terms checkout form field.
-	 * 
+	 * Agree to terms checkout form field for admin preview.
+	 *
 	 * @return void
 	 */
-	public function agree_to_terms_form_field() {
+	public function admin_preview() {
 		$settings = $this->get_module_settings();
 
 		echo '<div class="merchant-agree-to-terms-checkbox">';
-			woocommerce_form_field( 'merchant_agree_to_terms', array(
-				'type'     => 'checkbox',
-				'label'    => sprintf( '<span class="mrc-attc-label-text">%s</span> <a href="%s" class="mrc-attc-terms-text" target="_blank">%s</a>', esc_html( $settings[ 'label' ] ), esc_url( $settings[ 'link' ] ), esc_html( $settings[ 'text' ] ) ),
-				'required' => true,
-			) );
+		woocommerce_form_field( 'merchant_agree_to_terms', array(
+			'type'     => 'checkbox',
+			'label'    => sprintf( '<span class="mrc-attc-label-text">%s</span> <a href="%s" class="mrc-attc-terms-text" target="_blank">%s</a>', esc_html( $settings[ 'label' ] ), esc_url( $settings[ 'link' ] ), esc_html( $settings[ 'text' ] ) ),
+			'required' => true,
+		) );
 		echo '</div>';
 	}
-	
-	/**
-	 * Validation.
-	 * 
-	 * @param array $fields The fields.
-	 * @param object $errors The errors.
-	 * @return void
-	 */
-	public function agree_to_terms_field_validation( $fields, $errors ) {
-		$agree_to_terms = sanitize_text_field( wp_unslash( filter_input( INPUT_POST, 'merchant_agree_to_terms', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) );
 
-		if ( empty( $agree_to_terms ) ) {
-			$settings = $this->get_module_settings();
-	
-			$errors->add( 'validation', $settings[ 'warning_text' ] );
+	/**
+	 * Agree to terms checkout form field.
+	 *
+	 * @return string
+	 */
+	public function agree_to_terms_form_field( $text = '' ) {
+		$settings = $this->get_module_settings();
+
+		if ( ! isset( $settings['text'] ) || empty( $settings['text'] ) ) {
+			return $text;
 		}
+
+		return sprintf( '%s <a href="%s" class=woocommerce-terms-and-conditions-link" target="_blank">%s</a>', esc_html( $settings['label'] ), esc_url( $settings['link'] ), esc_html( $settings['text'] ) );
 	}
 
 	/**
 	 * Custom CSS.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_module_custom_css() {
@@ -208,20 +201,22 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 	/**
 	 * Admin custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
+	 *
 	 * @return string $css The custom CSS.
 	 */
 	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css(); 
+		$css .= $this->get_module_custom_css();
 
 		return $css;
 	}
 
 	/**
 	 * Frontend custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
+	 *
 	 * @return string $css The custom CSS.
 	 */
 	public function frontend_custom_css( $css ) {
@@ -233,6 +228,6 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 }
 
 // Initialize the module.
-add_action( 'init', function() {
+add_action( 'init', function () {
 	new Merchant_Agree_To_Terms_Checkbox();
 } );
