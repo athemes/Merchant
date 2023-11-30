@@ -206,7 +206,11 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			return $text;
 		}
 
-		return sprintf( '%s <a href="%s" class=woocommerce-terms-and-conditions-link" target="_blank">%s</a>', esc_html( $settings['label'] ), esc_url( $settings['link'] ), esc_html( $settings['text'] ) );
+		return sprintf( '%s <a href="%s" class=woocommerce-terms-and-conditions-link" target="_blank">%s</a>',
+			esc_html( Merchant_Translator::translate( $settings['label'] ) ),
+			esc_url( Merchant_Translator::translate( $settings['link'] ) ),
+			esc_html( Merchant_Translator::translate( $settings['text'] ) )
+		);
 	}
 
 	/**
