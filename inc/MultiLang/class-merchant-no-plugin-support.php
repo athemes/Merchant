@@ -15,8 +15,8 @@ if ( ! class_exists( 'Merchant_No_Plugin_Support' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string The string to translate.
-		 * @param string $context The context of the string.
+		 * @param string $string    The string to translate.
+		 * @param string $context   The context of the string.
 		 * @param bool   $multiline Whether the string is multiline or not.
 		 */
 		public function register_string( $string, $context, $multiline = false ) {

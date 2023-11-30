@@ -15,12 +15,12 @@ if ( ! class_exists( 'Merchant_PolyLang_Support' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string The string to translate.
-		 * @param string $context The context of the string.
+		 * @param string $string    The string to translate.
+		 * @param string $context   The context of the string.
 		 * @param bool   $multiline Whether the string is multiline or not.
 		 */
 		public function register_string( $string, $context, $multiline = false ) {
-			pll_register_string( $string, $string, $context, $multiline );
+			pll_register_string( $context, $string, 'Merchant', $multiline );
 		}
 
 		/**
