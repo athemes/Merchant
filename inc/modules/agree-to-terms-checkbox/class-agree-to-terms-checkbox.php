@@ -108,6 +108,24 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['text'] ) ) {
+			Merchant_Translator::register_string( $settings['text'], esc_html__( 'Text in agree to terms module', 'merchant' ) );
+		}
+		if ( ! empty( $settings['label'] ) ) {
+			Merchant_Translator::register_string( $settings['label'], esc_html__( 'Link label in agree to terms module', 'merchant' ) );
+		}
+		if ( ! empty( $settings['link'] ) ) {
+			Merchant_Translator::register_string( $settings['link'], esc_html__( 'Link in agree to terms module (you can use different link for each language)', 'merchant' ) );
+		}
+	}
+
+	/**
 	 * Admin enqueue CSS.
 	 *
 	 * @return void
