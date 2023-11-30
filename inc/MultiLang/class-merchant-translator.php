@@ -73,7 +73,17 @@ if ( ! class_exists( 'Merchant_Translator' ) ) {
 		 */
 		public static function translate( $string ) {
 			self::set_language_strategy();
-			return self::$language_strategy->translate_string( $string );
+			$translated_string = self::$language_strategy->translate_string( $string );
+
+			/**
+			 * Filter the translated string.
+			 *
+			 * @param string $string            The string to translate.
+			 * @param string $translated_string The translated string.
+			 *
+			 * @since 1.7
+			 */
+			return apply_filters( 'merchant_multi_lang_translated_string', $translated_string, $string );
 		}
 	}
 }
