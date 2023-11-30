@@ -3,108 +3,144 @@ Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quic
 Requires at least: 5.5
 Tested up to: 6.4.1
 Requires PHP: 5.6
-Stable tag: 1.7
+Stable tag: trunk
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
+Merchant is a modular WooCommerce toolkit with a focus on conversions. Features include Buy Now buttons, Product Labels, Trust Badges, and more.
 
 == Description ==
 
-== ALL ESSENTIAL FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN ==
+== ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN ==
 
-Merchant is an all-in-one WooCommerce plugin designed to boost sales and grow your WooCommerce store. Packed with 15 modules, including **Pre-Orders, Buy Now Button, Product Labels, Trust Badge, Payment Logos, Quick View, Animated Add to Cart, Cart Count Favicon, Inactive Tab Message, Real-Time Search, Auto External Links, Scroll to Top Button, Agree to Terms Checkbox, Cookie Banner, Code Snippets,** and more to come.
+According to our estimates, on average, WooCommerce store owners rely on 20+ plugins to run their sites. The problem with this approach is threefold: it can get expensive, it can put a drag on performance, and compatibility issues between plugins are common. 
 
-Consolidate modern eCommerce features into a single, performance-optimized plugin. Save money and do more to grow your business.
+[Merchant](https://athemes.com/merchant/) aims to solve these problems by giving store owners everything their store needs to be successful in one plugin. 
 
-According to our estimates, on average, store owners rely on 20+ plugins to run their stores. We see three key issues with this approach:
+[TRY A FREE LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
-**1. It's expensive:** Purchasing multiple plugins can quickly add up and become costly. Most plugins operate on a subscription-based model, which means you need to factor in significant yearly renewal costs. These multiple subscriptions can put a substantial financial burden on store owners.
+### A QUICK LOOK AT ALL FREE MODULES (15 AND COUNTING)
 
-**2. Poor performance:** Unfortunately, many WooCommerce plugins lack a performance-first mindset. They often include excessive CSS and JavaScript files, resulting in significantly slower loading times for websites.
+Let's take a closer look at what each module offers, along with how it can improve your WooCommerce store.
 
-**3. Lack of compatibility:** Often, plugins don't play nicely together or with the underlying theme. This leads to spending a lot of time solving bugs and contacting different developers. Moreover, the support provided is often slow and unresponsive, further exacerbating store owners' frustrations.
+**1. BOOST REVENUE**
 
-So we created Merchant…
+**Pre-Orders**: Boost your revenue by giving customers the option to pre-order upcoming products and/or out-of-stock products.
 
-Combining all essential eCommerce features into a single solution. With 15 powerful modules and more to come, Merchant eliminates the need to purchase multiple separate plugins.
+**2. CONVERT MORE**
 
-Let's take a closer look at some of the modules that make Merchant the ultimate choice for WooCommerce store owners:
+**Product Labels**: Attract attention to products and drive sales by adding eye-catching labels to the product images on your shop pages. 
+**Buy Now**: As popularized by Amazon, this module lets you reduce friction in your store’s purchase process by skipping the cart page and sending shoppers straight from the product page to the checkout.
+**Quick View**: Make it easier for customers to view product details without leaving their current page by adding product quick view functionality to your store.
+**Animated Add to Cart**: Make your add to cart button stand out with subtle animations designed to increase customer engagement. Choose from 10+ different animations, as well as whether to activate the animation on mouseover or on page load.
+**Add To Cart Text:** Change the text on your store's 'Add to Cart' buttons for simple, variable, and out-of-stock products, as well as individual products.
 
-### BOOST REVENUE
-**Pre-Orders:** Generate more revenue by allowing visitors to pre-order products that are either out of stock or not yet released.
+**3. REDUCE CART ABANDONMENT**
 
-### BUILD TRUST
-**Trust Badge:** Enhance trust and boost conversion rates with premium, professionally-designed badges that match your store's look and feel.
+**Cart Count Favicon**: Re-capture shoppers’ attention and reduce cart abandonment by dynamically highlighting the number of cart items in the browser tab favicon.
+**Inactive Tab Message**: Minimize cart abandonment and encourage users to return to your store by dynamically modifying the browser tab title when users move to a different browser tab.
 
-**Payment Logos:** Build trust by displaying a wide assortment of payment method logos to let visitors know you accept various payment options.
+**4. BUILD TRUST**
 
-### CONVERT MORE
-**Buy Now:** Streamline the purchase process by directing customers straight to checkout instead of the cart.
+**Trust Badge**: According to Baymard, 18% of users who abandoned their carts cited trust issues as the reason, which made it the fourth-most common cart abandonment cause. Enhance trust with badges that match your store's look and feel.
+**Payment Logos**: Adding payment logos is a great way to reassure shoppers that you support a wide range of payment methods. Easily display the payment methods that you accept.
 
-**Animated Add to Cart:** Make your "Add to Cart" button stand out by adding a subtle animation on hover or at intervals.
+**5. IMPROVE EXPERIENCE**
 
-**Product Labels:** Increase conversion rates with sale tags displayed on top of your product images.
+**Real-Time Search**: Upgrade your WooCommerce product search with real-time predictive search results and frequently searched term suggestions.
+**Scroll to Top**: Let your shoppers easily navigate back to the top of your site’s pages, which can help create a smooth browsing experience for your store.
+**Auto External Links**: Eliminate the need to manually set external links to open in a new tab. Instead, the module will automatically configure all external links to open in a new tab.
+**Code Snippets**: Easily add custom code snippets to your store without needing to modify your theme’s files directly. Add snippets to the header, body, or footer of your site.
 
-**Quick View:** Allow users to quickly view product details without leaving the current page.
+**6. PROTECT STORE**
 
-### REDUCE ABANDONMENT
-**Cart Count Favicon:** Highlight the number of items in the cart on your store's browser tab favicon to capture attention.
+**Agree to Terms Checkbox**: This module lets you obtain agreement to your terms and conditions from your shoppers during the checkout process. 
+**Cookie Banner**: Inform visitors that your site uses cookies. Add a floating or fixed cookie consent banner, along with options to fully customize the style and behavior of the box.
 
-**Inactive Tab Message:** Minimize cart abandonment by dynamically modifying the browser tab's title when visitors navigate away from your store.
+With these 15 modules, you can boost your store’s sales, reduce cart abandonment, improve the shopping experience, and more. Best of all, you can do this while simplifying your store’s technology stack. 
 
-### IMPROVE EXPERIENCE
-**Auto External Links:** Open all external links on your store in a new browser tab to prevent visitors from navigating away.
+🏆 FEATURED ON WPTuts  
 
-**Real-Time Search:** Help visitors instantly find the products they're looking for by providing predictive search and displaying frequent search suggestions.
+> For me, the key selling point of either of these versions, whether it’s the free one or the Pro, is that it means I’ve only got one plugin to maintain and update (and purchase, if I go for the Pro version) over having multiple plugins to maintain, purchase and update. This just makes life a little easier.
+>
+[Edited slightly for grammar/readability] 
 
-**Code Snippets:** Add custom code snippets in WordPress without having to edit your theme's functions.php file.
+<iframe width="853" height="480" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**Scroll to Top:** Assist customers in easily returning to the top of the page where they can view product photos and purchase options.
+### MORE MODULES (25+) IN MERCHANT PRO
 
-### PROTECT YOUR BUSINESS
-**Agree to Terms Checkbox:** Display a checkbox with a link to your store’s terms and conditions
+Merchant Pro packs in all the must-have eCommerce features you need to run your store successfully. 
 
-**Cookie Banner:** Inform visitors that your site uses cookies.
+**1. BOOST REVENUE**
 
-Merchant is not simply a cost-effective solution; it also addresses the performance and compatibility issues often associated with using multiple WordPress plugins. By combining all these essential features into a single plugin, Merchant ensures seamless compatibility and optimized performance, resulting in faster loading times and a superior user experience.
+**Frequently Bought Together**: Create discounted product bundles with items that are frequently purchased together.
+**Buy X, Get Y**: When product X is purchased, give a discount on product Y.
+**Bulk Discounts**: Use bulk discounts to incentivize customers to buy larger quantities of your products in one go.
+**Spending Goal**: Motivate higher average order values by gamifying the shopping experience and offering customers discounts for reaching spending goals.
+**Free Gifts**: Increase average order value and boost customer satisfaction by rewarding shoppers with a gift for hitting a spending target or applying a coupon.
 
-Merchant has been meticulously designed and battle-tested to scale effortlessly on large catalogs and high-volume stores. With Merchant, store owners can access all necessary features from a single dashboard, saving time and frustration that comes with managing multiple plugins.
+**2. CONVERT MORE**
 
-Experience the power of Merchant and unlock the true potential of your WooCommerce store. Say goodbye to excessive costs, poor performance, and compatibility headaches. Install Merchant today and watch your sales soar while keeping more money in your pocket.
+**Sticky Add To Cart**: Display a sticky add to cart bar when visitors are scrolling on your product pages.
+**Countdown Timer**: Create a sense of urgency by displaying a countdown timer on your discounted products.
+**Stock Scarcity**: Let visitors know that stock is running low on products they are looking at.
+**Waitlist**: Build a waiting list for sold-out items and auto-notify potential customers when items are back in stock.
+**Checkouts**: Choose from three different checkout layouts: Shopify-style, Multi-step or One-page.
+**Recently Viewed Products**: Show recently viewed products on product pages and in the cart.
+**Advanced Reviews**: Let your customers run your marketing by collecting and displaying advanced reviews.
 
-##WOOCOMMERCE IS REQUIRED FOR SOME MODULES TO WORK##
+**3. REDUCE CART ABANDONMENT**
+
+**Floating Mini Cart**: A cart icon with item count will always be visible on all pages or only when the cart is not empty, and a sliding cart will be visible when the customer clicks it.
+**Cart Reserved Timer**: Create a sense of urgency by letting visitors know that the products added to their carts are only reserved for a limited period of time.
+**Side Cart**: Show a sliding cart whenever a customer adds a product to the cart.
+
+**4. BUILD TRUST**
+
+**Reasons To Buy List**: Provide customers with a summary of the key features and benefits of your products.
+**Brand Image**: Add brand images to products.
+**Quick Social Links**: Display floating social media icons to make it easier for your customers to connect with you.
+
+**5. IMPROVE EXPERIENCE**
+
+**Size Chart**: Reduce returns and increase sales by showing a size chart on specific products or all products.
+**Product Video**: Upload video to be viewed in product galleries and on archive pages.
+**Product Audio**: Upload audio to be listened to in product galleries and on archive pages.
+**Wishlist**: Allow customers to easily save products they are interested in for later.
+**Variation Swatches**: Display your variable product options as customizable color/image icons, buttons, or dropdowns.
+**Login Popup**: Allow users to login with a simple pop up.
+**Product Nav Links**: Enable easy navigation from one product to the next with next/previous links.
+
+Upgrade to Merchant Pro and gain access to these extra modules designed to enhance the functionality and user experience of your online store as well as premium support via email.
+
+> Merchant Pro has significantly enhanced my online commerce experience on WordPress. The user friendly interface and responsive support make this plugin a must-have choice. I highly recommend Merchant Pro!
+>
+Christian Laborde, Co-Founder of Zipangu 
+
+[UPGRADE TO **MERCHANT PRO**](https://athemes.com/merchant/#pricing) 
+
+Rest assured, Merchant Pro comes with a 30-day money-back guarantee. If you’re not completely satisfied, we’ll happily refund 100% of your money. 
+
+**[WOOCOMMERCE](https://wordpress.org/plugins/woocommerce/) IS REQUIRED FOR SOME MODULES TO WORK**
 
 **Looking for the most flexible theme?**
-Even though it will work with any theme, check Botiga, the best friend of WooCommerce and Merchant. Botiga is the fastest WooCommerce theme that comes with endless customization options. **And it's free.**
+Even though Merchant will work with any theme, if you combine it with a good WooCommerce theme, you can be confident that you are giving your shoppers the best experience possible. [Botiga](https://wordpress.org/themes/botiga/) is a fast WooCommerce theme with endless customization options that pairs perfectly with Merchant. Give them both a try - you won’t be disappointed! 
 
 **Backed by a trusted team**
-Merchant is brought to you by [aThemes](https://athemes.com/), a dedicated WordPress product company, trusted by 150K+ happy users.
+Merchant is brought to you by [aThemes](https://athemes.com/), a WordPress product company, trusted by more than 150K+ happy users.
 
 **Documentation and Support**
-
-- For documentation and tutorials go to our [Documentation.](https://docs.athemes.com/)
-- If you have any questions, visit our support on the Plugin’s Forum.
-- For more information about features, and FAQs check out our website.
+- To learn how to use Merchant you can check our [documentation](https://docs.athemes.com/documentation/merchant/).
+- If you have any questions, visit the support forum [here](https://wordpress.org/support/plugin/merchant/). To get direct support from our developers via email, consider upgrading to [Merchant Pro](https://athemes.com/merchant-upgrade/). We aim to answer all premium support requests within 24 hours.
+- To find out more about Merchant visit the [plugin page on our website](https://athemes.com/merchant/).
 
 **Happy user of Merchant?**
-
-- Join our [Facebook Group.](https://www.facebook.com/groups/athemes)
-- Learn from our tutorials on [YouTube.](https://www.youtube.com/@Athemes)
-- Or rate us on WordPress 🙂
+- Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/https://www.facebook.com/groups/athemes).
+- Or [rate us on WordPress](https://wordpress.org/support/plugin/merchant/reviews/) 🙂
 
 **NOTES**
-
-Merchant is an all-in-one conversion plugin to boost sales and grow WooCommerce stores.
-
-We aim to simplify WordPress and empower your site's growth with our [themes and plugins](https://athemes.com/).
-
-We believe you'll find Merchant invaluable for optimizing your online store.
-
-Thank you,
-
-Charlie
+We aim to simplify WordPress and empower your site's growth with our [themes and plugins](https://athemes.com/). With that in mind, we’re so excited to build [Merchant](https://athemes.com/merchant/). We believe you'll find Merchant invaluable for optimizing your online store.
 
 == Frequently Asked Questions ==
 
