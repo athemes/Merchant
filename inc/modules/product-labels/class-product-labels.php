@@ -120,10 +120,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( isset( $settings['labels'] ) ) {
 			foreach ( $settings['labels'] as $label ) {
 				if ( isset( $label['label'] ) ) {
-					Merchant_Translator::register_string( $label['label'], 'Product Labels' );
+					Merchant_Translator::register_string( $label['label'], esc_html__( 'Product Labels', 'merchant' ) );
 				}
 				if ( isset( $label['percentage_text'] ) ) {
-					Merchant_Translator::register_string( $label['percentage_text'], 'Percentage text in product labels' );
+					Merchant_Translator::register_string( $label['percentage_text'], esc_html__( 'Percentage text in product labels', 'merchant' ) );
 				}
 			}
 		}
