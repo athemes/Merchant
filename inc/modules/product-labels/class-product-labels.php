@@ -69,9 +69,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
-		// Init translations.
-		$this->init_translations();
-
 		// Is module preview page.
 		if ( is_admin() && parent::is_module_settings_page() ) {
 			self::$is_module_preview = true;
@@ -92,6 +89,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;
@@ -110,6 +110,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 	}
 
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
 		if ( isset( $settings['labels'] ) ) {
