@@ -36,7 +36,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                                         <div class="merchant-frequently-bought-together-bundle-product-price">
                                             <?php echo wp_kses( $product['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                                         </div>
-                                        <?php if ( $product_key !== 0 && isset( $product['attributes'] ) && ! empty( $product['attributes'] ) ) : ?>
+                                        <?php if ( isset( $product['attributes'] ) && ! empty( $product['attributes'] ) ) : ?>
                                             <div class="merchant-frequently-bought-together-bundle-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
                                                 <?php foreach ( $product['attributes'] as $key => $attribute ) : ?>
                                                     <select name="<?php echo esc_attr( $key ) ?>" required>
