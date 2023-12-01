@@ -45,12 +45,21 @@ if ( ! class_exists( 'Merchant_Translator' ) ) {
 		 */
 		public static function set_language_strategy() {
 			if ( self::is_polylang_active() ) {
-				self::$language_strategy = new Merchant_PolyLang_Support();
+				$translator_object = new Merchant_PolyLang_Support();
 			} elseif ( self::is_wpml_active() ) {
-				self::$language_strategy = new Merchant_WPML_Support();
+				$translator_object = new Merchant_WPML_Support();
 			} else {
-				self::$language_strategy = new Merchant_No_Plugin_Support();
+				$translator_object = new Merchant_No_Plugin_Support();
 			}
+
+			/**
+			 * Filter the translator class.
+			 *
+			 * @param Merchant_Language_Strategy $translator_object The translator class object.
+			 *
+			 * @since 1.7
+			 */
+			self::$language_strategy = apply_filters( 'merchant_translator_class_object', $translator_object );
 		}
 
 		/**
