@@ -39,14 +39,14 @@ $bars_data = $args['bars_data']; ?>
 			sprintf(
 				'<%1$s id="reviews-stars" class="merchant-adv-reviews-title">%2$s</%1$s>',
 				$title_tag,
-				esc_html( $args[ 'title' ] )
+				esc_html( Merchant_Translator::translate( $args[ 'title' ] ) )
 			)
 		);
 
 		?>
 
 		<p class="merchant-adv-reviews-desc">
-			<?php echo esc_html( $args[ 'description' ] ); ?>
+			<?php echo esc_html( Merchant_Translator::translate( $args[ 'description' ] ) ); ?>
 		</p>
 
 	<?php endif; ?>
