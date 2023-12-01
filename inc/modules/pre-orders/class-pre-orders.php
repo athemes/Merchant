@@ -2,7 +2,7 @@
 
 /**
  * Pre Orders.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Pre Orders Class.
- * 
+ *
  */
 class Merchant_Pre_Orders extends Merchant_Add_Module {
 
@@ -24,22 +24,22 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Is module preview.
-	 * 
+	 *
 	 */
 	public static $is_module_preview = false;
 
 	/**
 	 * Main functionality dependency.
-	 * 
+	 *
 	 */
 	public $main_func;
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct( Merchant_Pre_Orders_Main_Functionality $main_func ) {
-		
+
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
@@ -100,9 +100,12 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		// TODO: Refactor the 'Merchant_Pre_Orders_Main_Functionality' class to load admin things separated from frontend things.
 		$main_func->init();
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return;
 		}
 
 		// Enqueue styles.
@@ -113,15 +116,27 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 		// Localize script.
 		add_filter( 'merchant_localize_script', array( $this, 'localize_script' ) );
-		
+
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
 	}
 
 	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Pre orders button text', 'merchant' ) );
+		}
+	}
+
+	/**
 	 * Admin enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
@@ -136,7 +151,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function enqueue_css() {
@@ -147,7 +162,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Enqueue scripts.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function enqueue_scripts() {
@@ -158,7 +173,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Localize script with module settings.
-	 * 
+	 *
 	 * @param array $setting The merchant global object setting parameter.
 	 * @return array $setting The merchant global object setting parameter.
 	 */
@@ -166,14 +181,14 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		$module_settings = $this->get_module_settings();
 
 		$setting[ 'pre_orders' ]				  = true;
-		$setting[ 'pre_orders_add_button_title' ] = $module_settings[ 'button_text' ];
+		$setting[ 'pre_orders_add_button_title' ] = Merchant_Translator::translate( $module_settings[ 'button_text' ] );
 
 		return $setting;
 	}
 
 	/**
 	 * Render module essencial instructions.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_module_essencial_instructions() { ?>
@@ -207,7 +222,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public function render_admin_preview( $preview, $module ) {
 		if ( self::MODULE_ID === $module ) {
 			$settings = $this->get_module_settings();
-			
+
 			// Additional text.
 			$additional_text = $settings[ 'additional_text' ];
 			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( gmdate( 'Y-m-d', strtotime('+2 days') ) ) );
@@ -240,7 +255,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Admin preview content.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_preview_content( $settings, $text ) {
@@ -274,7 +289,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Custom CSS.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_module_custom_css() {
@@ -303,19 +318,19 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 	/**
 	 * Admin custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
 	 * @return string $css The custom CSS.
 	 */
 	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css(); 
+		$css .= $this->get_module_custom_css();
 
 		return $css;
 	}
 
 	/**
 	 * Frontend custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
 	 * @return string $css The custom CSS.
 	 */
