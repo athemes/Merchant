@@ -81,11 +81,38 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Customize add to cart text on the single product page.
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'customize_single_add_to_cart_text' ), 99 );
 
 		// Customize add to cart text on shop pages.
 		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'customize_shop_add_to_cart_text' ), 10, 2 );
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['simple_product_label'] ) ) {
+			Merchant_Translator::register_string( $settings['simple_product_label'], esc_html__( 'Add to cart text simple product label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['simple_product_shop_label'] ) ) {
+			Merchant_Translator::register_string( $settings['simple_product_shop_label'], esc_html__( 'Add to cart text simple product shop label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['variable_product_label'] ) ) {
+			Merchant_Translator::register_string( $settings['variable_product_label'], esc_html__( 'Add to cart text variable product label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['variable_product_shop_label'] ) ) {
+			Merchant_Translator::register_string( $settings['variable_product_shop_label'], esc_html__( 'Add to cart text variable product shop label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['out_of_stock_shop_label'] ) ) {
+			Merchant_Translator::register_string( $settings['out_of_stock_shop_label'], esc_html__( 'Add to cart text out of stock label', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -201,22 +228,22 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 		if ( is_single() ) {
 			// Simple products
 			if ( $settings['simple_product_custom_single_label'] && $product->is_type( 'simple' ) ) {
-				return $settings['simple_product_label'];
+				return esc_html( Merchant_Translator::translate( $settings['simple_product_label'] ) );
 			}
 
 			// Variable products.
 			if ( $settings['variable_product_custom_single_label'] && $product->is_type( 'variable' ) ) {
-				return $settings['variable_product_label'];
+				return esc_html( Merchant_Translator::translate( $settings['variable_product_label'] ) );
 			}
 		} else {
 			// Simple products
 			if ( $product->is_type( 'simple' ) ) {
-				return esc_html( $settings['simple_product_shop_label'] );
+				return esc_html( Merchant_Translator::translate( $settings['simple_product_shop_label'] ) );
 			}
 
 			// Variable products.
 			if ( $product->is_type( 'variable' ) ) {
-				return esc_html( $settings['variable_product_shop_label'] );
+				return esc_html( Merchant_Translator::translate( $settings['variable_product_shop_label'] ) );
 			}
 		}
 
@@ -236,7 +263,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 		$settings = $this->get_module_settings();
 
 		if ( ! $product->is_in_stock() && $settings['out_of_stock_custom_label'] ) {
-			return esc_html( $settings['out_of_stock_shop_label'] );
+			return esc_html( Merchant_Translator::translate( $settings['out_of_stock_shop_label'] ) );
 		}
 
 		/**
@@ -254,12 +281,12 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 
 		// Simple products
 		if ( $product->is_type( 'simple' ) ) {
-			return esc_html( $settings['simple_product_shop_label'] );
+			return esc_html( Merchant_Translator::translate( $settings['simple_product_shop_label'] ) );
 		}
 
 		// Variable products.
 		if ( $product->is_type( 'variable' ) ) {
-			return esc_html( $settings['variable_product_shop_label'] );
+			return esc_html( Merchant_Translator::translate( $settings['variable_product_shop_label'] ) );
 		}
 
 		return $default;
