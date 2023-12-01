@@ -144,7 +144,7 @@ Merchant_Admin_Options::create( array(
 			'id'		=> 'hook_order',
 			'type'	  	=> 'range',
 			'title'	 	=> __( 'Loading priority', 'merchant' ),
-			'desc'		=> __( 'Note: This is a developer level. The recently viewed product module is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
+			'desc'		=> __( 'Note: This is a developer level feature. The recently viewed product module is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 			'min'	   	=> 1,
 			'max'	   	=> 100,
 			'step'	  	=> 1,
