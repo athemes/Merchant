@@ -91,6 +91,9 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;	
@@ -105,6 +108,18 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['title'] ) ) {
+			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Trust badges text above logos', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -228,7 +243,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			<fieldset class="merchant-trust-badges">
 
 				<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
-					<legend class="merchant-trust-badges-title"><?php echo esc_html( $settings[ 'title' ] ); ?></legend>
+					<legend class="merchant-trust-badges-title"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></legend>
 				<?php endif; ?>
 
 				<?php if ( ! $is_placeholder ) : ?>
