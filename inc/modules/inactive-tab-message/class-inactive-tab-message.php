@@ -82,6 +82,9 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;	
@@ -96,6 +99,21 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 		// Add merchant selector and content to cart fragments.
 		add_filter( 'woocommerce_add_to_cart_fragments', array( $this, 'cart_count_fragment' ) );
 
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['message'] ) ) {
+			Merchant_Translator::register_string( $settings['message'], esc_html__( 'Inactive tab messages: message text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['abandoned_message'] ) ) {
+			Merchant_Translator::register_string( $settings['abandoned_message'], esc_html__( 'Inactive tab messages abandoned message', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -132,8 +150,8 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 	public function localize_script( $setting ) {
 		$module_settings = $this->get_module_settings();
 
-		$setting['inactive_tab_messsage']          = $module_settings[ 'message' ];
-		$setting['inactive_tab_abandoned_message'] = $module_settings[ 'abandoned_message' ];
+		$setting['inactive_tab_messsage']          = Merchant_Translator::translate( $module_settings[ 'message' ] );
+		$setting['inactive_tab_abandoned_message'] = Merchant_Translator::translate( $module_settings[ 'abandoned_message' ] );
 		$setting['inactive_tab_cart_count']        = '0';
 		
 		if ( function_exists( 'WC' ) ) {
@@ -186,7 +204,7 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 				</div>
 			</div>
 			<div class="mrc-inactive-tab-message-text">
-				<?php echo esc_html( $settings[ 'message' ] ); ?>
+				<?php echo esc_html( Merchant_Translator::translate( $settings[ 'message' ] ) ); ?>
 			</div>
 		</div>
 
