@@ -90,6 +90,9 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;	
@@ -104,6 +107,18 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['title'] ) ) {
+			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Payment logos text above logos', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -230,7 +245,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 			<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
 				<div class="merchant-payment-logos-title">
-					<strong><?php echo esc_html( $settings[ 'title' ] ); ?></strong>
+					<strong><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></strong>
 				</div>
 			<?php endif; ?>
 
