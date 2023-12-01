@@ -73,6 +73,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;
@@ -93,6 +96,18 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['button-text'] ) ) {
+			Merchant_Translator::register_string( $settings['button-text'], esc_html__( 'Buy now button text', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -216,7 +231,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		?>
 
-		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( $text ); ?></button>
+		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
 
 		<?php
 	}
@@ -244,7 +259,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		?>
 
-		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( $text ); ?></a>
+		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></a>
 
 		<?php
 	}
