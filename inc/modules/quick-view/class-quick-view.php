@@ -95,6 +95,9 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			return;
 		}
 
+		// Init translations.
+		$this->init_translations();
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() && ! defined( 'DOING_AJAX' ) ) {
 			return;	
@@ -139,6 +142,18 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Quick view button text', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -483,7 +498,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 	
 		if ( 'text' === $settings[ 'button_type' ] || 'icon-text' === $settings[ 'button_type' ] ) {
-			$button_text_html = '<span>' . $settings[ 'button_text' ] . '</span>';
+			$button_text_html = '<span>' . Merchant_Translator::translate( $settings[ 'button_text' ] ) . '</span>';
 		}
 	
 		?>
