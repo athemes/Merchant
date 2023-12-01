@@ -1,5 +1,5 @@
 === Merchant ===
-Tags: woocommerce, abandoned cart, pre-orders, product labels, trust badge, quick view, buy now button, animated add to cart, payment logos, cart count favicon, inactive tab message, ajax real-time search, auto external links, code snippets, scroll to top button, agree to terms checkbox, cookie banner, accelerated checkout
+Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
 Tested up to: 6.4.1
 Requires PHP: 5.6
@@ -8,15 +8,15 @@ Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Merchant is a modular WooCommerce toolkit with a focus on conversions. Features include Buy Now buttons, Product Labels, Trust Badges, and more.
+Merchant is a modular WooCommerce toolkit focused on conversions. Features include Buy Now buttons, Product Labels, Trust Badges, and more.
 
 == Description ==
 
 == ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN ==
 
-According to our estimates, on average, WooCommerce store owners rely on 20+ plugins to run their sites. The problem with this approach is threefold: it can get expensive, it can put a drag on performance, and compatibility issues between plugins are common. 
+On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
 
-[Merchant](https://athemes.com/merchant/) aims to solve these problems by giving store owners everything their store needs to be successful in one plugin. 
+[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one, performance-optimized plugin.
 
 [TRY A FREE LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
@@ -31,31 +31,41 @@ Let's take a closer look at what each module offers, along with how it can impro
 **2. CONVERT MORE**
 
 **Product Labels**: Attract attention to products and drive sales by adding eye-catching labels to the product images on your shop pages. 
+
 **Buy Now**: As popularized by Amazon, this module lets you reduce friction in your store’s purchase process by skipping the cart page and sending shoppers straight from the product page to the checkout.
+
 **Quick View**: Make it easier for customers to view product details without leaving their current page by adding product quick view functionality to your store.
+
 **Animated Add to Cart**: Make your add to cart button stand out with subtle animations designed to increase customer engagement. Choose from 10+ different animations, as well as whether to activate the animation on mouseover or on page load.
+
 **Add To Cart Text:** Change the text on your store's 'Add to Cart' buttons for simple, variable, and out-of-stock products, as well as individual products.
 
 **3. REDUCE CART ABANDONMENT**
 
 **Cart Count Favicon**: Re-capture shoppers’ attention and reduce cart abandonment by dynamically highlighting the number of cart items in the browser tab favicon.
+
 **Inactive Tab Message**: Minimize cart abandonment and encourage users to return to your store by dynamically modifying the browser tab title when users move to a different browser tab.
 
 **4. BUILD TRUST**
 
 **Trust Badge**: According to Baymard, 18% of users who abandoned their carts cited trust issues as the reason, which made it the fourth-most common cart abandonment cause. Enhance trust with badges that match your store's look and feel.
+
 **Payment Logos**: Adding payment logos is a great way to reassure shoppers that you support a wide range of payment methods. Easily display the payment methods that you accept.
 
 **5. IMPROVE EXPERIENCE**
 
 **Real-Time Search**: Upgrade your WooCommerce product search with real-time predictive search results and frequently searched term suggestions.
+
 **Scroll to Top**: Let your shoppers easily navigate back to the top of your site’s pages, which can help create a smooth browsing experience for your store.
+
 **Auto External Links**: Eliminate the need to manually set external links to open in a new tab. Instead, the module will automatically configure all external links to open in a new tab.
+
 **Code Snippets**: Easily add custom code snippets to your store without needing to modify your theme’s files directly. Add snippets to the header, body, or footer of your site.
 
 **6. PROTECT STORE**
 
 **Agree to Terms Checkbox**: This module lets you obtain agreement to your terms and conditions from your shoppers during the checkout process. 
+
 **Cookie Banner**: Inform visitors that your site uses cookies. Add a floating or fixed cookie consent banner, along with options to fully customize the style and behavior of the box.
 
 With these 15 modules, you can boost your store’s sales, reduce cart abandonment, improve the shopping experience, and more. Best of all, you can do this while simplifying your store’s technology stack. 
@@ -66,50 +76,70 @@ With these 15 modules, you can boost your store’s sales, reduce cart abandonme
 >
 [Edited slightly for grammar/readability] 
 
-<iframe width="853" height="480" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="853" height="330" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### MORE MODULES (25+) IN MERCHANT PRO
 
-Merchant Pro packs in all the must-have eCommerce features you need to run your store successfully. 
+[Merchant Pro](https://athemes.com/merchant/#pricing) packs in all the must-have eCommerce features you need to run your store successfully. 
 
 **1. BOOST REVENUE**
 
 **Frequently Bought Together**: Create discounted product bundles with items that are frequently purchased together.
+
 **Buy X, Get Y**: When product X is purchased, give a discount on product Y.
+
 **Bulk Discounts**: Use bulk discounts to incentivize customers to buy larger quantities of your products in one go.
+
 **Spending Goal**: Motivate higher average order values by gamifying the shopping experience and offering customers discounts for reaching spending goals.
+
 **Free Gifts**: Increase average order value and boost customer satisfaction by rewarding shoppers with a gift for hitting a spending target or applying a coupon.
 
 **2. CONVERT MORE**
 
 **Sticky Add To Cart**: Display a sticky add to cart bar when visitors are scrolling on your product pages.
+
 **Countdown Timer**: Create a sense of urgency by displaying a countdown timer on your discounted products.
+
 **Stock Scarcity**: Let visitors know that stock is running low on products they are looking at.
+
 **Waitlist**: Build a waiting list for sold-out items and auto-notify potential customers when items are back in stock.
+
 **Checkouts**: Choose from three different checkout layouts: Shopify-style, Multi-step or One-page.
+
 **Recently Viewed Products**: Show recently viewed products on product pages and in the cart.
+
 **Advanced Reviews**: Let your customers run your marketing by collecting and displaying advanced reviews.
 
 **3. REDUCE CART ABANDONMENT**
 
 **Floating Mini Cart**: A cart icon with item count will always be visible on all pages or only when the cart is not empty, and a sliding cart will be visible when the customer clicks it.
+
 **Cart Reserved Timer**: Create a sense of urgency by letting visitors know that the products added to their carts are only reserved for a limited period of time.
+
 **Side Cart**: Show a sliding cart whenever a customer adds a product to the cart.
 
 **4. BUILD TRUST**
 
 **Reasons To Buy List**: Provide customers with a summary of the key features and benefits of your products.
+
 **Brand Image**: Add brand images to products.
+
 **Quick Social Links**: Display floating social media icons to make it easier for your customers to connect with you.
 
 **5. IMPROVE EXPERIENCE**
 
 **Size Chart**: Reduce returns and increase sales by showing a size chart on specific products or all products.
+
 **Product Video**: Upload video to be viewed in product galleries and on archive pages.
+
 **Product Audio**: Upload audio to be listened to in product galleries and on archive pages.
+
 **Wishlist**: Allow customers to easily save products they are interested in for later.
+
 **Variation Swatches**: Display your variable product options as customizable color/image icons, buttons, or dropdowns.
+
 **Login Popup**: Allow users to login with a simple pop up.
+
 **Product Nav Links**: Enable easy navigation from one product to the next with next/previous links.
 
 Upgrade to Merchant Pro and gain access to these extra modules designed to enhance the functionality and user experience of your online store as well as premium support via email.
@@ -118,7 +148,7 @@ Upgrade to Merchant Pro and gain access to these extra modules designed to enhan
 >
 Christian Laborde, Co-Founder of Zipangu 
 
-[UPGRADE TO **MERCHANT PRO**](https://athemes.com/merchant/#pricing) 
+[UPGRADE TO MERCHANT PRO](https://athemes.com/merchant/#pricing) 
 
 Rest assured, Merchant Pro comes with a 30-day money-back guarantee. If you’re not completely satisfied, we’ll happily refund 100% of your money. 
 
@@ -170,22 +200,21 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Screenshots ==
 
-1. Overview of merchant
-2. Pre-Orders Module
-3. Product Trust Badge Module
-4. Payment Logos Module
-5. Cart Count Favicon Module
-6. Inactive Tab Message Module
-7. Buy Now Module
-8. Animated Add to Cart Module
-9. Quick View Module
-10. Product Labels Module
-11. Auto External Link Module
-12. Real-Time Search Module
-13. Code Snippet Module
-14. Scroll to Top Module
-15. Agree to Terms Checkbox Module
-16. Cookie Banner Module
+1. Pre-Orders Module
+2. Product Trust Badge Module
+3. Payment Logos Module
+4. Cart Count Favicon Module
+5. Inactive Tab Message Module
+6. Buy Now Module
+7. Animated Add to Cart Module
+8. Quick View Module
+9. Product Labels Module
+10. Auto External Link Module
+11. Real-Time Search Module
+12. Code Snippet Module
+13. Scroll to Top Module
+14. Agree to Terms Checkbox Module
+15. Cookie Banner Module
 
 == Changelog ==
 = 1.7 =
