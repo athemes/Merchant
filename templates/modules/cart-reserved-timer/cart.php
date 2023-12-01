@@ -18,8 +18,8 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
         <img src="<?php echo esc_url( $args['icon']["src"] ); ?>" alt="<?php echo esc_attr( $args['icon']["alt"] ); ?>">
         </div>
     <div class="merchant-cart-reserved-timer-content">
-        <p class="merchant-cart-reserved-timer-content-title"><?php echo esc_html( $args['reserved_message'] ); ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo wp_kses_post( $args['timer_message_minutes'] ); ?></p>
-        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo wp_kses_post( $args['timer_message_seconds'] ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-title"><?php echo esc_html( Merchant_Translator::translate( $args['reserved_message'] ) ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc minutes"><?php echo wp_kses_post( Merchant_Translator::translate( $args['timer_message_minutes'] ) ); ?></p>
+        <p class="merchant-cart-reserved-timer-content-desc seconds" style="display: none"><?php echo wp_kses_post( Merchant_Translator::translate( $args['timer_message_seconds'] ) ); ?></p>
         </div>
     </div>
