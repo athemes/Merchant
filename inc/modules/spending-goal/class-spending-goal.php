@@ -97,6 +97,32 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['discount_name'] ) ) {
+			Merchant_Translator::register_string( $settings['discount_name'], esc_html__( 'Spending Discount Goal: Discount name', 'merchant' ) );
+		}
+		if ( ! empty( $settings['text_goal_zero'] ) ) {
+			Merchant_Translator::register_string( $settings['text_goal_zero'], esc_html__( 'Spending Discount Goal: When the goal target is at 0%', 'merchant' ) );
+		}
+		if ( ! empty( $settings['text_goal_started'] ) ) {
+			Merchant_Translator::register_string( $settings['text_goal_started'], esc_html__( 'Spending Discount Goal: When the goal target is between 1-99%', 'merchant' ) );
+		}
+		if ( ! empty( $settings['text_goal_reached'] ) ) {
+			Merchant_Translator::register_string( $settings['text_goal_reached'], esc_html__( 'Spending Discount Goal: When the goal target is at 100%', 'merchant' ) );
+		}
 	}
 
 	/**
