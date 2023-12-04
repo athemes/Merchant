@@ -73,10 +73,9 @@ With these 15 modules, you can boost your store’s sales, reduce cart abandonme
 🏆 FEATURED ON WPTuts  
 
 > For me, the key selling point of either of these versions, whether it’s the free one or the Pro, is that it means I’ve only got one plugin to maintain and update (and purchase, if I go for the Pro version) over having multiple plugins to maintain, purchase and update. This just makes life a little easier.
->
-[Edited slightly for grammar/readability] 
+> 
 
-<iframe width="853" height="330" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="640" height="340" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### MORE MODULES (25+) IN MERCHANT PRO
 
