@@ -46,7 +46,7 @@ $wrapper_classes = apply_filters( 'merchant_reasons_to_buy_wrapper_class', array
 					?>
 				</div>
 				<p class="merchant-reasons-list-item-text">
-					<?php echo wp_kses_post( $reason ); ?>
+					<?php echo wp_kses_post( Merchant_Translator::translate( $reason ) ); ?>
 				</p>
 			</div>
 
