@@ -15,7 +15,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-frequently-bought-together <?php echo isset( $settings['single_product_placement'] ) ? esc_attr( $settings['single_product_placement'] ) : 'after-summary' ?>">
     <h3 class="merchant-frequently-bought-together-title">
-		<?php echo isset( $settings['title'] ) ? esc_html( $settings['title'] ) : esc_html__( 'Frequently Bought Together', 'merchant' ) ?>
+		<?php echo isset( $settings['title'] ) ? esc_html( Merchant_Translator::translate( $settings['title'] ) ) : esc_html__( 'Frequently Bought Together', 'merchant' ) ?>
     </h3>
     <div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>">
         <?php foreach($args['bundles'] as $parent_id => $bundles ) : ?>
@@ -62,7 +62,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                         </div>
                         <div class="merchant-frequently-bought-together-bundle-offer">
                             <p class="merchant-frequently-bought-together-bundle-total">
-                                <?php echo isset( $settings['price_label'] ) ? esc_html( $settings['price_label'] ) : esc_html__( 'Bundle price', 'merchant' ); ?>
+                                <?php echo isset( $settings['price_label'] ) ? esc_html( Merchant_Translator::translate( $settings['price_label'] ) ) : esc_html__( 'Bundle price', 'merchant' ); ?>
                             </p>
                             <p class="merchant-frequently-bought-together-bundle-total-price price">
                                 <del aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
@@ -70,7 +70,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             </p>
                             <p class="merchant-frequently-bought-together-bundle-save">
                                 <?php echo isset( $settings['save_label'] )
-                                    ? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), $settings['save_label'] ), merchant_kses_allowed_tags( ['bdi'] ) )
+                                    ? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), Merchant_Translator::translate( $settings['save_label'] ) ), merchant_kses_allowed_tags( ['bdi'] ) )
                                     : wp_kses(
                                         /* Translators: 1. Total discount */
                                         sprintf( __( 'You save: %s', 'merchant' ), wc_price( $bundle['total_discount'] ) ),
@@ -78,7 +78,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                                     ); ?>
                             </p>
                             <button type="submit" name="merchant-buy-bundle" value="97" class="button alt wp-element-button merchant-add-bundle-to-cart">
-                                <?php echo isset( $settings['button_text'] ) ? esc_html( $settings['button_text'] ) : esc_html__( 'Add to cart', 'merchant' ); ?>
+                                <?php echo isset( $settings['button_text'] ) ? esc_html( Merchant_Translator::translate( $settings['button_text'] ) ) : esc_html__( 'Add to cart', 'merchant' ); ?>
                             </button>
                             <div class="merchant-frequently-bought-together-bundle-error"></div>
                         </div>
