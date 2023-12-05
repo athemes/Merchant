@@ -168,7 +168,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-				<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+				<div class="mrc-preview-call-to-action">
+					<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+				</div>
 			</div>
 		</div>
 
@@ -258,22 +260,34 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css = '';
 
 		// Text Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'text-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-color' );
 
 		// Text Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'text-hover-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-hover-color' );
 
 		// Border Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-border-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-border-color' );
 
 		// Border Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-border-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-border-hover-color' );
 
 		// Background Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-background-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-background-color' );
 
 		// Background Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-background-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-background-hover-color' );
+
+		// Font Size.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font-size', 15, '.merchant-buy-now-button', '--mrc-buy-now-font-size', 'px' );
+
+		// Align.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'align', 'center', '.merchant-buy-now-button', '--mrc-buy-now-align' );
+
+		// Padding.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding', 20, '.merchant-buy-now-button', '--mrc-buy-now-padding', 'px' );
+
+		// Border radius.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-radius', 15, '.merchant-buy-now-button', '--mrc-buy-now-border-radius', 'px' );
 
 		return $css;
 	}

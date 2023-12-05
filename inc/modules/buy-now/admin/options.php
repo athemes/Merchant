@@ -64,5 +64,51 @@ Merchant_Admin_Options::create( array(
 			'default' => '#414141',
 		),
 
+		array(
+			'id'      => 'font-size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Font size', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 15,
+			'unit'    => 'px',
+		),
+
+		array(
+			'id'           => 'align',
+			'type'         => 'select',
+			'title'        => esc_html__( 'Align Button', 'merchant' ),
+			'options'      => array(
+				'flex-start' => esc_html__( 'Left', 'merchant' ),
+				'center'     => esc_html__( 'Center', 'merchant' ),
+				'flex-end'   => esc_html__( 'Right', 'merchant' ),
+				'stretch'    => esc_html__( 'Stretch', 'merchant' ),
+			),
+			'default'      => 'center',
+		),
+
+		array(
+			'id'      => 'padding',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Padding', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 20,
+			'unit'    => 'px',
+		),
+
+		array(
+			'id'      => 'border-radius',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Border radius', 'merchant' ),
+			'min'     => 1,
+			'max'     => 500,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 15,
+		),
+
 	),
 ) );

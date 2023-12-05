@@ -7,26 +7,29 @@
     color: var(--mrc-buy-now-text-color, #FFF) !important;
     border-color: var(--mrc-buy-now-border-color, #212121) !important;
     background-color: var(--mrc-buy-now-background-color, #212121) !important;
-    
+	align-self: var(--mrc-buy-now-align, center) !important;
+	padding: var(--mrc-buy-now-padding, 5px) !important;
+	font-size: var(--mrc-buy-now-font-size, 15px);
+	border-radius: var(--mrc-buy-now-border-radius) !important;
+	display: flex;
+	margin-top: 0.5rem !important;
+	width: auto !important;
+	text-align: center;
+	justify-content: center !important;
+
     &:hover {
         color: var(--mrc-buy-now-text-hover-color, #FFF) !important;
         border-color: var(--mrc-buy-now-border-hover-color, #414141) !important;
         background-color: var(--mrc-buy-now-background-hover-color, #414141) !important;
     }
-} 
-
-.products {
-	.product {
-		.merchant-buy-now-button {
-			align-self: flex-start;
-		}
-	}
 }
 
 .single-product {
 	.product {
 		.single_add_to_cart_button.merchant-buy-now-button {
+			margin-top: 0 !important;
 			margin-left: 5px;
+			align-self: center !important;
 		}
 	}
 }
