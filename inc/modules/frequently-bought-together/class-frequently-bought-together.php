@@ -75,7 +75,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
-		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
 		}

@@ -91,7 +91,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
 
-		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
 		}

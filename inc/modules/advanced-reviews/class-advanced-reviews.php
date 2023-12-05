@@ -85,8 +85,10 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			// Module options path.
 			$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
-			// Init translations.
-			$this->init_translations();
+			if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+				// Init translations.
+				$this->init_translations();
+			}
 
 			// Is module preview page.
 			if ( is_admin() && parent::is_module_settings_page() ) {

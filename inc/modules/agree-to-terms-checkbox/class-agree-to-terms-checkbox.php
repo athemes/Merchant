@@ -86,8 +86,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			return;
 		}
 
-		// Init translations.
-		$this->init_translations();
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {

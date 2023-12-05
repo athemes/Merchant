@@ -95,7 +95,7 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 
 		}
 
-		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
 		}

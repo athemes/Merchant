@@ -77,12 +77,14 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
 
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
 			return;
 		}
-
-		// Init translations.
-		$this->init_translations();
 
 		// Customize add to cart text on the single product page.
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'customize_single_add_to_cart_text' ), 99 );

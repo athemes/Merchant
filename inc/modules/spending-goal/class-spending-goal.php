@@ -98,7 +98,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 
-		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
 		}

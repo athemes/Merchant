@@ -85,12 +85,14 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
 			return;
 		}
-
-		// Init translations.
-		$this->init_translations();
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
