@@ -148,3 +148,25 @@ Merchant_Admin_Options::create( array(
 		),
 	),
 ) );
+
+// Shortcode
+$merchant_module_id = Merchant_Buy_X_Get_Y::MODULE_ID;
+Merchant_Admin_Options::create( array(
+	'module' => $merchant_module_id,
+	'title'  => esc_html__( 'Use shortcode', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'      => 'use_shortcode',
+			'type'    => 'switcher',
+			'title'   => __( 'Use shortcode', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'        => 'shortcode_text',
+			'type'      => 'text_readonly',
+			'title'     => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'   => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . ']',
+			'condition' => array( 'use_shortcode', '==', '1' ),
+		),
+	),
+) );
