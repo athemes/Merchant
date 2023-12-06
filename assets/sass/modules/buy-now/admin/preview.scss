@@ -27,11 +27,6 @@
     .mrc-preview-right-column {
         width: 70%;
         padding-top: 25px;
-
-		.mrc-preview-call-to-action {
-			margin-top: 1rem;
-			display: flex;
-		}
     }
 
     .mrc-preview-product-image-wrapper {
@@ -114,12 +109,5 @@
 		color: #FFF !important;
 		border-color: #414141 !important;
 		background-color: #414141 !important;
-	}
-}
-
-.display-newline {
-	.merchant-buy-now-button {
-		flex: 0 0 100%;
-		justify-content: center;
 	}
 }

@@ -164,10 +164,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings ) {
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
 		
 		?>
-		<div class="mrc-preview-single-product-elements <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
+		<div class="mrc-preview-single-product-elements">
 			<div class="mrc-preview-left-column">
 				<div class="mrc-preview-product-image-wrapper">
 					<div class="mrc-preview-product-image"></div>
@@ -183,9 +183,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-				<div class="mrc-preview-call-to-action">
-					<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
-				</div>
+				<a href="#" class="merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
 			</div>
 		</div>
 
