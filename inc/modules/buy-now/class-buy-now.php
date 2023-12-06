@@ -147,9 +147,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			// Button Text.
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
 
-			// Display Button in the Newline.
-			$preview->set_class( 'display-in-newline', '.merchant-buy-now-button-container', array(), 'display-newline' );
-
 			// Display Customizer.
 			$preview->set_class( 'customize-button', '.merchant-buy-now-button-container', array(), 'show-customizer' );
 
@@ -234,12 +231,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
 
 		?>
-		<div class="mrc-buy-now-container-call-to-action <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
-			<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( $text ); ?></button>
-		</div>
+		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
 		<?php
 	}
 
@@ -264,12 +259,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
 
 		?>
-		<div class="mrc-buy-now-container-call-to-action <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
-			<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( $text ); ?></a>
-		</div>
+		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></a>
 		<?php
 	}
 
@@ -343,12 +336,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function html_wrapper_class( $classes ) {
 		$settings = $this->get_module_settings();
 
-		if ( ! empty( $settings['display-in-newline'] ) ) {
-			$classes[] = 'display-newline';
-		}
-
 		if ( ! empty( $settings['customize-button'] ) ) {
-			$classes[] = 'show-customizer';
+			$classes[] = 'custom-buy-now-button';
 		}
 
 		return $classes;

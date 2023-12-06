@@ -22,20 +22,12 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'Buy Now', 'merchant' ),
 		),
 
-		// Display Button in the Newline.
-		array(
-			'id'      => 'display-in-newline',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Display Button in Full width', 'merchant' ),
-			'default' => 0
-		),
-
 		// Customize The Button or Inherit from Themes.
 		array(
 			'id'      => 'customize-button',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Customize Button', 'merchant' ),
-			'default' => 0
+			'default' => 1
 		),
 
 		array(
@@ -93,7 +85,7 @@ Merchant_Admin_Options::create( array(
 			'min'     => 1,
 			'max'     => 250,
 			'step'    => 1,
-			'default' => 15,
+			'default' => 16,
 			'unit'    => 'px',
 			'condition' => array( 'customize-button', '==', true )
 		),
@@ -105,7 +97,7 @@ Merchant_Admin_Options::create( array(
 			'min'     => 1,
 			'max'     => 250,
 			'step'    => 1,
-			'default' => 20,
+			'default' => 14,
 			'unit'    => 'px',
 			'condition' => array( 'customize-button', '==', true )
 		),
@@ -118,7 +110,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 500,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 15,
+			'default' => 5,
 			'condition' => array( 'customize-button', '==', true )
 		),
 
@@ -126,13 +118,13 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'hook-order',
 			'type'    => 'range',
-			'title'   => __( 'Hook order', 'merchant' ),
-			'desc'    => __( 'Controls the display order for Button Buy Now.', 'merchant' ),
+			'title'   => __( 'Loading priority on shop archive', 'merchant' ),
+			'desc'    => __( 'Note: This is a developer level feature. The buy now button module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => '',
-			'default' => 10
+			'default' => 20
 		),
 
 	),
