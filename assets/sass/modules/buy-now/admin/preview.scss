@@ -27,12 +27,12 @@
     .mrc-preview-right-column {
         width: 70%;
         padding-top: 25px;
-    }
 
-	.mrc-preview-call-to-action {
-		display: flex;
-		flex-direction: column;
-	}
+		.mrc-preview-call-to-action {
+			margin-top: 1rem;
+			display: flex;
+		}
+    }
 
     .mrc-preview-product-image-wrapper {
         .mrc-preview-product-image {
@@ -102,7 +102,24 @@
 
 // Buy Now Button.
 .merchant-buy-now-button {
-    display: inline-flex;
     text-decoration: none;
-    margin-top: 0.5rem;
+	padding: 14px;
+	font-size: 16px !important;
+
+	color: #FFF !important;
+	border-color: #212121 !important;
+	background-color: #212121 !important;
+
+	&:hover {
+		color: #FFF !important;
+		border-color: #414141 !important;
+		background-color: #414141 !important;
+	}
+}
+
+.display-newline {
+	.merchant-buy-now-button {
+		flex: 0 0 100%;
+		justify-content: center;
+	}
 }

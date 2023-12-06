@@ -85,7 +85,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			$hook_order = $settings['hook-order'];
 		}
 
-		// Enqueue styles.
+		// Enqueue styles.	
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
@@ -301,9 +301,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Font Size.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font-size', 15, '.merchant-buy-now-button', '--mrc-buy-now-font-size', 'px' );
-
-		// Align.
-		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'align', 'center', '.merchant-buy-now-button', '--mrc-buy-now-align' );
 
 		// Padding.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding', 20, '.merchant-buy-now-button', '--mrc-buy-now-padding', 'px' );

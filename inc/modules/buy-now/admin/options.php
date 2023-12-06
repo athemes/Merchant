@@ -26,29 +26,15 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display-in-newline',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Display Button in the New Line', 'merchant' ),
+			'title'   => esc_html__( 'Display Button in Full width', 'merchant' ),
 			'default' => 0
-		),
-
-		array(
-			'id'           => 'align',
-			'type'         => 'select',
-			'title'        => esc_html__( 'Align Button', 'merchant' ),
-			'options'      => array(
-				'flex-start' => esc_html__( 'Left', 'merchant' ),
-				'center'     => esc_html__( 'Center', 'merchant' ),
-				'flex-end'   => esc_html__( 'Right', 'merchant' ),
-				'stretch'    => esc_html__( 'Stretch', 'merchant' ),
-			),
-			'default'      => 'center',
-			'condition' => array( 'display-in-newline', '==', true )
 		),
 
 		// Customize The Button or Inherit from Themes.
 		array(
 			'id'      => 'customize-button',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Customize Button (otherwise Inherit from Themes)', 'merchant' ),
+			'title'   => esc_html__( 'Customize Button', 'merchant' ),
 			'default' => 0
 		),
 
