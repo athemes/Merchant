@@ -7,15 +7,14 @@
     color: var(--mrc-buy-now-text-color, #FFF) !important;
     border-color: var(--mrc-buy-now-border-color, #212121) !important;
     background-color: var(--mrc-buy-now-background-color, #212121) !important;
-	align-self: var(--mrc-buy-now-align, center) !important;
-	padding: var(--mrc-buy-now-padding, 5px) !important;
-	font-size: var(--mrc-buy-now-font-size, 15px);
-	border-radius: var(--mrc-buy-now-border-radius) !important;
-	display: flex;
+	align-self: stretch !important;
 	margin-top: 0.5rem !important;
-	width: auto !important;
 	text-align: center;
 	justify-content: center !important;
+	display: flex;
+	width: auto !important;
+	padding: 14px !important;
+	border-radius: none !important;
 
     &:hover {
         color: var(--mrc-buy-now-text-hover-color, #FFF) !important;
@@ -31,5 +30,24 @@
 			margin-left: 5px;
 			align-self: center !important;
 		}
+	}
+}
+
+.mrc-buy-now-container-call-to-action {
+	display: flex;
+	flex-direction: column;
+}
+
+.display-newline {
+	.merchant-buy-now-button {
+		align-self: var(--mrc-buy-now-align, center) !important;
+	}
+}
+
+.show-customizer {
+	.merchant-buy-now-button {
+		padding: var(--mrc-buy-now-padding, 5px) !important;
+		font-size: var(--mrc-buy-now-font-size, 15px) !important;
+		border-radius: var(--mrc-buy-now-border-radius) !important;
 	}
 }

@@ -85,13 +85,16 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
 
 		// Render buy now button on single product page.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
+		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ), 20 );
 
 		// Render buy now button on shop archive products.
 		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		// Module wrapper class.
+		add_filter( 'merchant_buy_now_wrapper_class', array( $this, 'html_wrapper_class' ) );
 
 	}
 
@@ -137,6 +140,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			// Button Text.
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
 
+			// Display Button in the Newline.
+			$preview->set_class( 'display-in-newline', '.merchant-buy-now-button-container', array(), 'display-newline' );
+
+			// Display Customizer.
+			$preview->set_class( 'customize-button', '.merchant-buy-now-button-container', array(), 'show-customizer' );
+
 		}
 
 		return $preview;
@@ -150,9 +159,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
-		?>
 
-		<div class="mrc-preview-single-product-elements">
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+		
+		?>
+		<div class="mrc-preview-single-product-elements <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
 			<div class="mrc-preview-left-column">
 				<div class="mrc-preview-product-image-wrapper">
 					<div class="mrc-preview-product-image"></div>
@@ -216,10 +227,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+
 		?>
-
-		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( $text ); ?></button>
-
+		<div class="mrc-buy-now-container-call-to-action <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
+			<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( $text ); ?></button>
+		</div>
 		<?php
 	}
 
@@ -244,10 +257,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'merchant-buy-now-button-container' ) );
+
 		?>
-
-		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( $text ); ?></a>
-
+		<div class="mrc-buy-now-container-call-to-action <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
+			<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( $text ); ?></a>
+		</div>
 		<?php
 	}
 
@@ -314,6 +329,25 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css .= $this->get_module_custom_css();
 
 		return $css;
+	}
+
+	/**
+	 * HTML wrapper class.
+	 *
+	 * @return array $classes The wrapper classes.
+	 */
+	public function html_wrapper_class( $classes ) {
+		$settings = $this->get_module_settings();
+
+		if ( ! empty( $settings['display-in-newline'] ) ) {
+			$classes[] = 'display-newline';
+		}
+
+		if ( ! empty( $settings['customize-button'] ) ) {
+			$classes[] = 'show-customizer';
+		}
+
+		return $classes;
 	}
 
 }

@@ -64,15 +64,12 @@ Merchant_Admin_Options::create( array(
 			'default' => '#414141',
 		),
 
+		// Display Button in the Newline.
 		array(
-			'id'      => 'font-size',
-			'type'    => 'range',
-			'title'   => esc_html__( 'Font size', 'merchant' ),
-			'min'     => 1,
-			'max'     => 250,
-			'step'    => 1,
-			'default' => 15,
-			'unit'    => 'px',
+			'id'      => 'display-in-newline',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Display Button in the New Line', 'merchant' ),
+			'default' => 0
 		),
 
 		array(
@@ -86,6 +83,27 @@ Merchant_Admin_Options::create( array(
 				'stretch'    => esc_html__( 'Stretch', 'merchant' ),
 			),
 			'default'      => 'center',
+			'condition' => array( 'display-in-newline', '==', true )
+		),
+
+		// Customize The Button or Inherit from Themes.
+		array(
+			'id'      => 'customize-button',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Customize Button (otherwise Inherit from Themes)', 'merchant' ),
+			'default' => 0
+		),
+
+		array(
+			'id'      => 'font-size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Font size', 'merchant' ),
+			'min'     => 1,
+			'max'     => 250,
+			'step'    => 1,
+			'default' => 15,
+			'unit'    => 'px',
+			'condition' => array( 'customize-button', '==', true )
 		),
 
 		array(
@@ -97,6 +115,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 20,
 			'unit'    => 'px',
+			'condition' => array( 'customize-button', '==', true )
 		),
 
 		array(
@@ -108,6 +127,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'unit'    => 'px',
 			'default' => 15,
+			'condition' => array( 'customize-button', '==', true )
 		),
 
 	),
