@@ -78,6 +78,13 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
+		$settings = $this->get_module_settings();
+
+		$hook_order = 10;
+		if ( ! empty( $settings['hook-order'] ) ) {
+			$hook_order = $settings['hook-order'];
+		}
+
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
@@ -85,10 +92,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
 
 		// Render buy now button on single product page.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ), 20 );
+		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
 
 		// Render buy now button on shop archive products.
-		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
+		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), $hook_order );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );

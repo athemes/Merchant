@@ -22,48 +22,6 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'Buy Now', 'merchant' ),
 		),
 
-		array(
-			'id'    => 'text-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button text color', 'merchant' ),
-			'default' => '#ffffff',
-		),
-
-		array(
-			'id'    => 'text-hover-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button text color hover', 'merchant' ),
-			'default' => '#ffffff',
-		),
-
-		array(
-			'id'    => 'border-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button border color', 'merchant' ),
-			'default' => '#212121',
-		),
-
-		array(
-			'id'    => 'border-hover-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button border color hover', 'merchant' ),
-			'default' => '#414141',
-		),
-
-		array(
-			'id'    => 'background-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button background color', 'merchant' ),
-			'default' => '#212121',
-		),
-
-		array(
-			'id'    => 'background-hover-color',
-			'type'  => 'color',
-			'title' => esc_html__( 'Button background color hover', 'merchant' ),
-			'default' => '#414141',
-		),
-
 		// Display Button in the Newline.
 		array(
 			'id'      => 'display-in-newline',
@@ -92,6 +50,54 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Customize Button (otherwise Inherit from Themes)', 'merchant' ),
 			'default' => 0
+		),
+
+		array(
+			'id'    => 'text-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button text color', 'merchant' ),
+			'default' => '#ffffff',
+			'condition' => array( 'customize-button', '==', true )
+		),
+
+		array(
+			'id'    => 'text-hover-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button text color hover', 'merchant' ),
+			'default' => '#ffffff',
+			'condition' => array( 'customize-button', '==', true )
+		),
+
+		array(
+			'id'    => 'border-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button border color', 'merchant' ),
+			'default' => '#212121',
+			'condition' => array( 'customize-button', '==', true )
+		),
+
+		array(
+			'id'    => 'border-hover-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button border color hover', 'merchant' ),
+			'default' => '#414141',
+			'condition' => array( 'customize-button', '==', true )
+		),
+
+		array(
+			'id'    => 'background-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button background color', 'merchant' ),
+			'default' => '#212121',
+			'condition' => array( 'customize-button', '==', true )
+		),
+
+		array(
+			'id'    => 'background-hover-color',
+			'type'  => 'color',
+			'title' => esc_html__( 'Button background color hover', 'merchant' ),
+			'default' => '#414141',
+			'condition' => array( 'customize-button', '==', true )
 		),
 
 		array(
@@ -128,6 +134,19 @@ Merchant_Admin_Options::create( array(
 			'unit'    => 'px',
 			'default' => 15,
 			'condition' => array( 'customize-button', '==', true )
+		),
+
+		// Hook Order.
+		array(
+			'id'      => 'hook-order',
+			'type'    => 'range',
+			'title'   => __( 'Hook order', 'merchant' ),
+			'desc'    => __( 'Controls the display order for Button Buy Now.', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'unit'    => '',
+			'default' => 10
 		),
 
 	),
