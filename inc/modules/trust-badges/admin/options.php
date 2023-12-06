@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Trust Badges', 'merchant' ),
-	'module' => 'trust-badges',
+	'module' => Merchant_Trust_Badges::MODULE_ID,
 	'fields' => array(
 
 		array(
@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
  */
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Settings', 'merchant' ),
-	'module' => 'trust-badges',
+	'module' => Merchant_Trust_Badges::MODULE_ID,
 	'fields' => array(
 
 		array(
@@ -122,5 +122,29 @@ Merchant_Admin_Options::create( array(
 			'unit'    => 'px',
 		),
 
+	),
+) );
+
+// Shortcode
+$merchant_module_id = Merchant_Trust_Badges::MODULE_ID;
+Merchant_Admin_Options::create( array(
+	'module' => $merchant_module_id,
+	'title'  => esc_html__( 'Use shortcode', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'      => 'use_shortcode',
+			'type'    => 'switcher',
+			'title'   => __( 'Use shortcode', 'merchant' ),
+			'default' => 0,
+			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+				'merchant' ),
+		),
+		array(
+			'id'        => 'shortcode_text',
+			'type'      => 'text_readonly',
+			'title'     => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'   => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . ']',
+			'condition' => array( 'use_shortcode', '==', '1' ),
+		),
 	),
 ) );
