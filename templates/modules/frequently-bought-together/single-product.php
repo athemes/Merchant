@@ -20,7 +20,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 	<div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>">
 		<?php foreach($args['bundles'] as $parent_id => $bundles ) : ?>
 			<?php foreach ( $bundles as $key => $bundle ) : 
-				$has_variable_product = false;
+				$bundle_has_variable_product = false;
 				$discount_type        = isset( $bundle['layout'] ) ? $bundle['layout'] : '';
 				$discount_value       = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
 
@@ -31,7 +31,11 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) : 
 								$is_variable_product  = isset( $product['type'] ) && 'variable' === $product['type'] ? true : false;
-								$has_variable_product = $is_variable_product ? true : false;
+
+								if( $is_variable_product ) {
+									$bundle_has_variable_product = true;
+								}
+
 								?>
 
 								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ); ?>">
@@ -56,7 +60,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 															); ?>
 														</option>
 														<?php foreach ( $attribute['terms'] as $_term ) : ?>
-															<option value="<?php echo esc_attr( $_term['slug'] ) ?>"><?php echo esc_html( $_term['name'] ) ?></option>
+															<option value="<?php echo esc_attr( $_term['slug'] ) ?>" <?php selected( $_term['selected'], true, true ); ?>><?php echo esc_html( $_term['name'] ) ?></option>
 														<?php endforeach; ?>
 													</select>
 												<?php endforeach; ?>
@@ -73,15 +77,15 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 							<p class="merchant-frequently-bought-together-bundle-total">
 								<?php echo isset( $settings['price_label'] ) ? esc_html( $settings['price_label'] ) : esc_html__( 'Bundle price', 'merchant' ); ?>
 							</p>
-							<?php if ( $has_variable_product ) : ?>
+							<?php if ( $bundle_has_variable_product ) : ?>
 								<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html__( 'Select an option to see your savings.', 'merchant' ); ?></p>
 							<?php endif; ?>
 							
-							<p class="merchant-frequently-bought-together-bundle-total-price price<?php echo $has_variable_product ? ' merchant-hidden' : ''; ?>">
+							<p class="merchant-frequently-bought-together-bundle-total-price price<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
 								<del aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
 								<ins><?php echo wp_kses( wc_price( $bundle['total_discounted_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
 							</p>
-							<p class="merchant-frequently-bought-together-bundle-save<?php echo $has_variable_product ? ' merchant-hidden' : ''; ?>">
+							<p class="merchant-frequently-bought-together-bundle-save<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
 								<?php echo isset( $settings['save_label'] )
 									? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), $settings['save_label'] ), merchant_kses_allowed_tags( ['bdi'] ) )
 									: wp_kses(

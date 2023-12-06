@@ -2,7 +2,7 @@
 Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
 Tested up to: 6.4.1
-Requires PHP: 5.6
+Requires PHP: 7.0
 Stable tag: trunk
 Contributors: aThemes
 License: GPLv3 or later
@@ -12,13 +12,13 @@ Merchant is a modular WooCommerce toolkit focused on conversions. Features inclu
 
 == Description ==
 
-== ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN ==
+**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN**
 
 On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
 
 [Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one, performance-optimized plugin.
 
-[TRY A FREE LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
+[TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
 ### A QUICK LOOK AT ALL FREE MODULES (15 AND COUNTING)
 

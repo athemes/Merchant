@@ -85,7 +85,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
 
 		// Render buy now button on single product page.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
+		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ), -9999 );
 
 		// Render buy now button on shop archive products.
 		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
