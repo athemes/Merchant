@@ -232,7 +232,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
 
 		?>
-		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
+		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
 		<?php
 	}
 

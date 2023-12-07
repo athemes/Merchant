@@ -6,6 +6,7 @@
   text-align: center !important;
   -ms-flex-item-align: center;
       align-self: center;
+  line-height: 1.2 !important;
 }
 .merchant-buy-now-button.custom-buy-now-button {
   display: -webkit-box;
