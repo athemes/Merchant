@@ -78,7 +78,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 								<?php echo isset( $settings['price_label'] ) ? esc_html( $settings['price_label'] ) : esc_html__( 'Bundle price', 'merchant' ); ?>
 							</p>
 							<?php if ( $bundle_has_variable_product ) : ?>
-								<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html__( 'Select an option to see your savings.', 'merchant' ); ?></p>
+								<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html( $settings['no_variation_selected_text'] ); ?></p>
 							<?php endif; ?>
 							
 							<p class="merchant-frequently-bought-together-bundle-total-price price<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
