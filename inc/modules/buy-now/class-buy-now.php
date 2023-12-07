@@ -148,7 +148,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
 
 			// Display Customizer.
-			$preview->set_class( 'customize-button', '.merchant-buy-now-button-container', array(), 'show-customizer' );
+			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'custom-buy-now-button' );
 
 		}
 
@@ -164,7 +164,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings ) {
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
 		
 		?>
 		<div class="mrc-preview-single-product-elements">
@@ -229,7 +229,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
 
 		?>
 		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
@@ -257,7 +257,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array( 'custom-buy-now-button' ) );
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
 
 		?>
 		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></a>
