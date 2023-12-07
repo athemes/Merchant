@@ -185,7 +185,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 					)
 				);
 
-				// Don't allow 'h2' value fro tag_title because it conflicts with wordpress notifications.
+				// Don't allow 'h2' value fro tag_title because it conflicts with WordPress notifications.
 				if ( 'h2' === $settings['title_tag'] ) {
 					$settings['title_tag'] = 'h3';
 				}
