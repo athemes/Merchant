@@ -80,7 +80,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$settings = $this->get_module_settings();
 
-		$hook_order = 10;
+		$hook_order = 15;
 		if ( ! empty( $settings['hook-order'] ) ) {
 			$hook_order = $settings['hook-order'];
 		}

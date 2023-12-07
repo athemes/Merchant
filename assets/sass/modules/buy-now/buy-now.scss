@@ -4,14 +4,18 @@
  */
 
 .merchant-buy-now-button {
-	display: flex !important;
-	justify-content: center;
+	display: inline-flex !important;
 	align-items: center;
 	line-height: 1.2 !important;
-	margin-top: 0.5rem;
-	margin-bottom: 1rem;
-
+	
 	&.custom-buy-now-button {
+		width: 100%;
+		max-width: none;
+		margin-top: 0.5rem !important;
+		margin-bottom: 1rem !important;
+		justify-content: center;
+		flex-direction: column;
+
 		padding: var(--mrc-buy-now-padding, 5px) !important;
 		font-size: var(--mrc-buy-now-font-size, 15px) !important;
 		border-radius: var(--mrc-buy-now-border-radius) !important;
@@ -25,18 +29,23 @@
 			border-color: var(--mrc-buy-now-border-hover-color, #414141) !important;
 			background-color: var(--mrc-buy-now-background-hover-color, #414141) !important;
 		}
+
+		&::before {
+			display: none;
+		}
 	}
 }
 
 .single-product {
 	.product {
 		.cart {
-			.single_add_to_cart_button.merchant-buy-now-button {
-				margin-top: 0 !important;
-				margin-left: 5px;
-
-				&.custom-buy-now-button {
-					width: fit-content;
+			.single_add_to_cart_button {
+				&.merchant-buy-now-button {
+					justify-content: center;
+					width: fit-content !important;
+					margin-top: 0 !important;
+					margin-bottom : 0 !important;
+					margin-left: 5px;
 				}
 			}
 		}
