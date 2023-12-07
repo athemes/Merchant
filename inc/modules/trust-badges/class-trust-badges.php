@@ -241,7 +241,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 							<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
 
-								<?php echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
+								<?php echo wp_kses_post( wp_get_attachment_image( $image_id ) ) ?>
 
 							<?php endif; ?>
 
