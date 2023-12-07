@@ -183,7 +183,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-				<a href="#" class="merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+				<a href="#" class="merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
 			</div>
 		</div>
 
@@ -232,7 +232,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
 
 		?>
-		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
+		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></button>
 		<?php
 	}
 
@@ -260,7 +260,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
 
 		?>
-		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></a>
+		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( $text ); ?></a>
 		<?php
 	}
 
