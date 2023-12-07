@@ -43,6 +43,13 @@ class Merchant_Add_Module {
 	public $module_options_path = '';
 
 	/**
+	 * Whether the module has a shortcode or not.
+	 *
+	 * @var bool
+	 */
+	public $has_shortcode = false;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -58,6 +65,10 @@ class Merchant_Add_Module {
 
 		// Handle modules list item class.
 		add_filter( "merchant_admin_module_{$this->module_id}_list_item_class", array( $this, 'modules_list_item_class' ) );
+
+		if ( $this->has_shortcode ) {
+			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
+		}
 	}
 
 	/**
@@ -192,5 +203,44 @@ class Merchant_Add_Module {
 		}
 
 		return $module_path;
+	}
+
+	/**
+	 * Display error message if the shortcode is placed in the wrong place.
+	 *
+	 * @return mixed|null
+	 */
+	public function shortcode_placement_error() {
+		/*
+		 * translators: %s: module id
+		 */
+		$message = __( 'The shortcode <strong>[merchant_module_%s]</strong> can only be used on single product pages.', 'merchant' );
+		$message = sprintf( $message, str_replace( '-', '_', $this->module_id ) );
+		$message = wp_kses( $message, array(
+			'strong' => array(),
+		) );
+
+		/**
+		 * Filter the shortcode error message html content.
+		 *
+		 * @param string $message_content
+		 * @param string $module_id
+		 *
+		 * @since 1.7
+		 */
+		return apply_filters( 'merchant_module_shortcode_error_message_html',
+			'<div class="merchant-shortcode-wrong-placement">' .
+			$message
+			. '</div>',
+			$this->module->module_id );
+	}
+
+	/**
+	 * Check if shortcode is enabled.
+	 *
+	 * @return bool
+	 */
+	public function is_shortcode_enabled() {
+		return Merchant_Admin_Options::get( $this->module_id, 'use_shortcode', false );
 	}
 }
