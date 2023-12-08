@@ -118,6 +118,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			}
 
 			// Compatibility Layer
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-botiga-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-twenty-twenty-four-theme.php';

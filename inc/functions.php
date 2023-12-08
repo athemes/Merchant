@@ -62,6 +62,17 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 }
 
 /**
+ * Check if Botiga theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_botiga_active' ) ) {
+	function merchant_is_botiga_active() {
+		return defined( 'BOTIGA_VERSION' );
+	}
+}
+
+/**
  * Check if Kadence theme is installed and active.
  *
  * @return bool
