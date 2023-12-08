@@ -93,7 +93,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 		 *
 		 * @param array $shortcodes modules shortcodes
 		 *
-		 * @since 1.7
+		 * @since 1.8
 		 */
 		$shortcodes = apply_filters( 'merchant_modules_shortcodes',
 			array(

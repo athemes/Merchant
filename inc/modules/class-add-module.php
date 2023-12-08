@@ -226,7 +226,7 @@ class Merchant_Add_Module {
 		 * @param string $message_content
 		 * @param string $module_id
 		 *
-		 * @since 1.7
+		 * @since 1.8
 		 */
 		return apply_filters( 'merchant_module_shortcode_error_message_html',
 			'<div class="merchant-shortcode-wrong-placement">' .

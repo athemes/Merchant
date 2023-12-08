@@ -197,7 +197,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		 * @param string $module_id         module id
 		 * @param int    $post_id           product id
 		 *
-		 * @since 1.7
+		 * @since 1.8
 		 */
 		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, $this->module->module_id, get_the_ID() );
 	}

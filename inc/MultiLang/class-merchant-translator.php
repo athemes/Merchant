@@ -57,7 +57,7 @@ if ( ! class_exists( 'Merchant_Translator' ) ) {
 			 *
 			 * @param Merchant_Language_Strategy $translator_object The translator class object.
 			 *
-			 * @since 1.7
+			 * @since 1.8
 			 */
 			self::$language_strategy = apply_filters( 'merchant_translator_class_object', $translator_object );
 		}
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Merchant_Translator' ) ) {
 			 * @param string $string            The string to translate.
 			 * @param string $translated_string The translated string.
 			 *
-			 * @since 1.7
+			 * @since 1.8
 			 */
 			return apply_filters( 'merchant_multi_lang_translated_string', $translated_string, $string );
 		}
