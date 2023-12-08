@@ -14,7 +14,7 @@
     }
   ],
   "scripts": {
-    "phpcs": "@php ./vendor/bin/phpcs --warning-severity=0",
+    "phpcs": "@php ./vendor/bin/phpcs",
     "phpcs:fix": "@php ./vendor/bin/phpcbf",
     "run-tests": [
       "@phpcs:fix",
