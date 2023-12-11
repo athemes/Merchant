@@ -90,6 +90,23 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['text'] ) ) {
+			Merchant_Translator::register_string( $settings['text'], esc_html__( 'Size chart: label text', 'merchant' ) );
+		}
 	}
 
 	/**

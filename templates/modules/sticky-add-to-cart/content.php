@@ -51,7 +51,7 @@ if( $settings[ 'hide_product_price' ] ) {
 // Visibility.
 if ( 'desktop' === $settings[ 'visibility' ] ) {
 	$classes[] = 'visible-desktop-only';
-} else if ( 'mobile' === $settings[ 'visibility' ] ) {
+} elseif ( 'mobile' === $settings[ 'visibility' ] ) {
 	$classes[] = 'visible-mobile-only';
 }
 

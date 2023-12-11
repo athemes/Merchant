@@ -90,6 +90,38 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['form_title'] ) ) {
+			Merchant_Translator::register_string( $settings['form_title'], esc_html__( 'Wait list: Form title', 'merchant' ) );
+		}
+		if ( ! empty( $settings['form_email_label'] ) ) {
+			Merchant_Translator::register_string( $settings['form_email_label'], esc_html__( 'Wait list: Form email label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['form_button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['form_button_text'], esc_html__( 'Wait list: Form button text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['form_success_message'] ) ) {
+			Merchant_Translator::register_string( $settings['form_success_message'], esc_html__( 'Wait list: Form success message', 'merchant' ) );
+		}
+		if ( ! empty( $settings['email_new_subscriber'] ) ) {
+			Merchant_Translator::register_string( $settings['email_new_subscriber'], esc_html__( 'Wait list: Email new subscriber', 'merchant' ) );
+		}
+		if ( ! empty( $settings['email_update'] ) ) {
+			Merchant_Translator::register_string( $settings['email_update'], esc_html__( 'Wait list: Email update', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -172,12 +204,12 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	 */
 	public function get_html( $settings ) {
 		$html = '<form id="merchant-wait-list" class="merchant-wait-list" method="post">';
-		$html .= '<p class="merchant-wait-list-title">' . $settings['form_title'] . '</p>';
+		$html .= '<p class="merchant-wait-list-title">' . Merchant_Translator::translate( $settings['form_title'] ) . '</p>';
 		$html .= '<div class="merchant-wait-list-email">';
-		$html .= '<label for="merchant-wait-list-email">' . $settings['form_email_label'] . ' <abbr class="required" title="required">*</abbr></label>';
-		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . $settings['form_email_label'] . '" required="">';
+		$html .= '<label for="merchant-wait-list-email">' . Merchant_Translator::translate( $settings['form_email_label'] ) . ' <abbr class="required" title="required">*</abbr></label>';
+		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . Merchant_Translator::translate( $settings['form_email_label'] ) . '" required="">';
 		$html .= '</div>';
-		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . $settings['form_button_text'] . '</button>';
+		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . Merchant_Translator::translate( $settings['form_button_text'] ) . '</button>';
 		$html .= $settings['form_nonce_field'];
 		$html .= '</form>';
 
