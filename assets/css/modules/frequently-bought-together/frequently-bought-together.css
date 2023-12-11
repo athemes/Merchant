@@ -46,6 +46,9 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
+.merchant-frequently-bought-together-bundle.has-no-discount .merchant-frequently-bought-together-bundle-total-price {
+  margin: 8px 0;
+}
 .merchant-frequently-bought-together-bundle-products {
   display: -webkit-box;
   display: -ms-flexbox;

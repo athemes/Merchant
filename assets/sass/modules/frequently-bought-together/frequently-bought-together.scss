@@ -37,6 +37,12 @@
 		grid-gap: 20px;
 		flex-wrap: wrap;
 	}
+
+	&.has-no-discount {
+		.merchant-frequently-bought-together-bundle-total-price {
+			margin: 8px 0;
+		}
+	}
 	
 	&-products {
 		display: flex;

@@ -23,10 +23,11 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 				$bundle_has_variable_product = false;
 				$discount_type        = isset( $bundle['layout'] ) ? $bundle['layout'] : '';
 				$discount_value       = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
+				$has_no_discount      = $discount_value <= 0;
 
 				?>
 				<?php if ( empty( $bundle['products'] ) ) continue ?>
-				<div class="merchant-frequently-bought-together-bundle">
+				<div class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>">
 					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) : 
@@ -78,22 +79,32 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 								<?php echo isset( $settings['price_label'] ) ? esc_html( $settings['price_label'] ) : esc_html__( 'Bundle price', 'merchant' ); ?>
 							</p>
 							<?php if ( $bundle_has_variable_product ) : ?>
-								<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html( $settings['no_variation_selected_text'] ); ?></p>
+								<?php if ( $has_no_discount ) : ?>
+									<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html( $settings['no_variation_selected_text_has_no_discount'] ); ?></p>
+								<?php else : ?>
+									<p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php echo esc_html( $settings['no_variation_selected_text'] ); ?></p>
+								<?php endif; ?>
 							<?php endif; ?>
 							
 							<p class="merchant-frequently-bought-together-bundle-total-price price<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
-								<del aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
-								<ins><?php echo wp_kses( wc_price( $bundle['total_discounted_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
+								<?php if ( $has_no_discount ) : ?>
+									<ins class="mrc-fbt-total-price"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
+								<?php else : ?>
+									<del class="mrc-fbt-total-price" aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
+									<ins class="mrc-fbt-total-discounted-price"><?php echo wp_kses( wc_price( $bundle['total_discounted_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
+								<?php endif; ?>
 							</p>
-							<p class="merchant-frequently-bought-together-bundle-save<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
-								<?php echo isset( $settings['save_label'] )
-									? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), $settings['save_label'] ), merchant_kses_allowed_tags( ['bdi'] ) )
-									: wp_kses(
-										/* Translators: 1. Total discount */
-										sprintf( __( 'You save: %s', 'merchant' ), wc_price( $bundle['total_discount'] ) ),
-										merchant_kses_allowed_tags( ['bdi'] )
-									); ?>
-							</p>
+							<?php if ( ! $has_no_discount ) : ?>
+								<p class="merchant-frequently-bought-together-bundle-save<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
+									<?php echo isset( $settings['save_label'] )
+										? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), $settings['save_label'] ), merchant_kses_allowed_tags( ['bdi'] ) )
+										: wp_kses(
+											/* Translators: 1. Total discount */
+											sprintf( __( 'You save: %s', 'merchant' ), wc_price( $bundle['total_discount'] ) ),
+											merchant_kses_allowed_tags( ['bdi'] )
+										); ?>
+								</p>
+							<?php endif; ?>
 							<button type="submit" name="merchant-buy-bundle" value="97" class="button alt wp-element-button merchant-add-bundle-to-cart">
 								<?php echo isset( $settings['button_text'] ) ? esc_html( $settings['button_text'] ) : esc_html__( 'Add to cart', 'merchant' ); ?>
 							</button>

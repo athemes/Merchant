@@ -45,6 +45,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
+			'no_variation_selected_text_has_no_discount' => __( 'Please select an option to see the total price.', 'merchant' ),
 			'no_variation_selected_text' => __( 'Please select an option to see your savings.', 'merchant' )
 		);
 
