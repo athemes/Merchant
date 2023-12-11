@@ -53,6 +53,13 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Helpers.
 			require_once MERCHANT_DIR . 'inc/helpers.php';
 
+			// Multi Language.
+			require_once MERCHANT_DIR . 'inc/MultiLang/interface-language-strategy.php';
+			require_once MERCHANT_DIR . 'inc/MultiLang/class-merchant-no-plugin-support.php';
+			require_once MERCHANT_DIR . 'inc/MultiLang/class-merchant-polylang-support.php';
+			require_once MERCHANT_DIR . 'inc/MultiLang/class-merchant-wpml-support.php';
+			require_once MERCHANT_DIR . 'inc/MultiLang/class-merchant-translator.php';
+
 			// Ajax callbacks.
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-ajax-callbacks.php';
 

@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </g>
     </svg>
     <div>
-        <span class="merchant-countdown-timer-text"><?php echo esc_html( $args['sale_ending_text'] ); ?> </span>
+        <span class="merchant-countdown-timer-text"><?php echo esc_html( Merchant_Translator::translate( $args['sale_ending_text'] ) ); ?> </span>
         <span class="merchant-countdown-timer-countdown" id="merchant-countdown-timer"></span>
     </div>
 </div>
