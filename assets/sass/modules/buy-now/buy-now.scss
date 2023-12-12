@@ -4,20 +4,22 @@
  */
 
 .merchant-buy-now-button {
-	&.custom-buy-now-button {
+	&.merchant-custom-buy-now-button {
 		display: inline-flex !important;
 		align-items: center;
 		line-height: 1.2 !important;
-		width: 100%;
 		max-width: none;
 		margin-top: 0.5rem !important;
 		margin-bottom: 1rem !important;
 		justify-content: center;
 		flex-direction: column;
 
-		padding: var(--mrc-buy-now-padding, 5px) !important;
-		font-size: var(--mrc-buy-now-font-size, 15px) !important;
-		border-radius: var(--mrc-buy-now-border-radius) !important;
+		padding-top: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+		padding-bottom: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+		padding-left: var(--mrc-buy-now-padding-left-right, 24px) !important;
+		padding-right: var(--mrc-buy-now-padding-left-right, 24px) !important;
+		font-size: var(--mrc-buy-now-font-size, 16px) !important;
+		border-radius: var(--mrc-buy-now-border-radius, 0px) !important;
 		
 		color: var(--mrc-buy-now-text-color, #FFF) !important;
 		border-color: var(--mrc-buy-now-border-color, #212121) !important;
@@ -35,6 +37,17 @@
 	}
 }
 
+// Products grid.
+.products .product,
+.wc-block-grid__products .wc-block-grid__product {
+	.merchant-buy-now-button {
+		&.merchant-custom-buy-now-button {
+			width: 100%;
+		}
+	}
+}
+
+// Single product.
 .single-product {
 	.product {
 		.cart {

@@ -1,7 +1,7 @@
 === Merchant ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
-Tested up to: 6.4.1
+Tested up to: 6.4.2
 Requires PHP: 7.0
 Stable tag: trunk
 Contributors: aThemes
@@ -220,8 +220,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 * Added - Compatibility with PolyLang plugin.
 * Added - Compatibility with WPML plugin.
 * Added - Shortcode for modules.
+* Added - Buy Now: New option to control rendering position from button.
+* Added - Buy Now: New 'customize' option to control the style of the button.
 * Changed - Terms and conditions module override WooCommerce core output.
-* Fixed - Cart reserved timer: clear cart not working.
+* Changed - Trust Badges: Render images from WordPress functions instead of hard code.
+* Changed - Payment Logos: Render images from WordPress functions instead of hard code.
+* Fixed - Admin option switcher field: When default value is '1', it keeps always enabled (even if you disable).
+* Fixed - Quick View: Generating horizontal scroll when the content is higher.
 
 = 1.7 =
 * Added - Products labels: New option to add multiple product labels.

@@ -101,8 +101,12 @@
 	align-items: center;
 	margin-top: 0.5rem !important;
     text-decoration: none;
-	padding: 14px;
-	font-size: 16px !important;
+	padding-top: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+    padding-bottom: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+    padding-left: var(--mrc-buy-now-padding-left-right, 24px) !important;
+    padding-right: var(--mrc-buy-now-padding-left-right, 24px) !important;
+    font-size: var(--mrc-buy-now-font-size, 16px);
+    border-radius: var(--mrc-buy-now-border-radius, 0px);
 
 	color: #FFF !important;
 	border-color: #212121 !important;

@@ -86,10 +86,14 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$settings = $this->get_module_settings();
 
-		$hook_order = 15;
-		if ( ! empty( $settings['hook-order'] ) ) {
-			$hook_order = $settings['hook-order'];
-		}
+		$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
+			'hook_name' => 'woocommerce_after_shop_loop_item',
+			'hook_priority' => 10,
+		);
+		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
+			'hook_name' => 'woocommerce_after_add_to_cart_button',
+			'hook_priority' => 10,
+		);
 
 		// Enqueue styles.	
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
@@ -98,10 +102,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
 
 		// Render buy now button on single product page.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
+		add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
 
 		// Render buy now button on shop archive products.
-		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), $hook_order );
+		add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -166,7 +170,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
 
 			// Display Customizer.
-			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'custom-buy-now-button' );
+			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'merchant-custom-buy-now-button' );
 
 		}
 
@@ -311,13 +315,16 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-background-hover-color' );
 
 		// Font Size.
-		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font-size', 15, '.merchant-buy-now-button', '--mrc-buy-now-font-size', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font-size', 16, '.merchant-buy-now-button', '--mrc-buy-now-font-size', 'px' );
 
-		// Padding.
-		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding', 20, '.merchant-buy-now-button', '--mrc-buy-now-padding', 'px' );
+		// Padding Top/Bottom.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding_top_bottom', 13, '.merchant-buy-now-button', '--mrc-buy-now-padding-top-bottom', 'px' );
+
+		// Padding Left/Right.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding_left_right', 24, '.merchant-buy-now-button', '--mrc-buy-now-padding-left-right', 'px' );
 
 		// Border radius.
-		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-radius', 15, '.merchant-buy-now-button', '--mrc-buy-now-border-radius', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-radius', 0, '.merchant-buy-now-button', '--mrc-buy-now-border-radius', 'px' );
 
 		return $css;
 	}
@@ -355,7 +362,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$settings = $this->get_module_settings();
 
 		if ( ! empty( $settings['customize-button'] ) ) {
-			$classes[] = 'custom-buy-now-button';
+			$classes[] = 'merchant-custom-buy-now-button';
 		}
 
 		return $classes;
