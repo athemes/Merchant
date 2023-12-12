@@ -1,15 +1,32 @@
 {
+  "name": "athemes/merchant",
+  "description": "All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.",
+  "license": "GPL-3.0+",
+  "homepage": "https://athemes.com/merchant",
+  "authors": [
+    {
+      "name": "Ahmad Wael",
+      "email": "dev.ahmedwael@gmail.com",
+      "homepage": "https://www.bbioon.com"
+    },
+    {
+      "name": "Rodrigo Teixeira"
+    }
+  ],
   "scripts": {
-	"phpcs": [
-	  "vendor/bin/phpcs --warning-severity=0 --extensions=php,html --standard=./phpcs.xml"
-	]
+    "phpcs": "@php ./vendor/bin/phpcs",
+    "phpcs:fix": "@php ./vendor/bin/phpcbf",
+    "run-tests": [
+      "@phpcs:fix",
+      "@phpcs"
+    ]
   },
   "require-dev": {
-	"woocommerce/woocommerce-sniffs": "^0.1.3"
+    "woocommerce/woocommerce-sniffs": "^0.1.3"
   },
   "config": {
-	"allow-plugins": {
-	  "dealerdirect/phpcodesniffer-composer-installer": true
-	}
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

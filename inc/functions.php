@@ -33,8 +33,7 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 		// Try to get it from the PRO dir if it exists.
 		if ( defined( 'MERCHANT_PRO_DIR' ) && file_exists( MERCHANT_PRO_DIR . "templates{$folder_path}{$name}.php" ) ) {
 			$template = MERCHANT_PRO_DIR . "templates{$folder_path}{$name}.php";
-
-		// Otherwise take it from the base dir.
+			// Otherwise take it from the base dir.
 		} elseif ( file_exists( MERCHANT_DIR . "templates{$folder_path}{$name}.php" ) ) {
 			$template = MERCHANT_DIR . "templates{$folder_path}{$name}.php";
 		}
@@ -93,3 +92,44 @@ if ( ! function_exists( 'merchant_is_oceanwp_active' ) ) {
 		return class_exists( 'OCEANWP_Theme_Class' );
 	}
 }
+
+/**
+ * Check if any shortcode starts with merchant.
+ * If the shortcode is not registered, register it with return null to guarantee it exists.
+ */
+if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
+	function merchant_modules_shortcode_exists() {
+		/**
+		 * Filter the shortcodes.
+		 *
+		 * @param array $shortcodes modules shortcodes
+		 *
+		 * @since 1.8
+		 */
+		$shortcodes = apply_filters( 'merchant_modules_shortcodes',
+			array(
+				'merchant_module_stock_scarcity',
+				'merchant_module_wait_list',
+				'merchant_module_volume_discounts',
+				'merchant_module_payment_logos',
+				'merchant_module_cart_reserved_timer',
+				'merchant_module_product_brand_image',
+				'merchant_module_size_chart',
+				'merchant_module_reasons_to_buy',
+				'merchant_module_recently_viewed_products',
+				'merchant_module_trust_badges',
+				'merchant_module_advanced_reviews',
+				'merchant_module_frequency_bought_together',
+				'merchant_module_buy_x_get_y',
+			)
+		);
+
+		// Loop through the shortcodes and register them if they don't exist.
+		array_map( static function ( $shortcode ) {
+			if ( ! shortcode_exists( $shortcode ) ) {
+				add_shortcode( $shortcode, '__return_null' );
+			}
+		}, $shortcodes );
+	}
+}
+add_action( 'init', 'merchant_modules_shortcode_exists' );

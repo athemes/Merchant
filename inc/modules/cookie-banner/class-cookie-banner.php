@@ -84,6 +84,11 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 
 		}
 
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
 			return;
 		}
@@ -102,6 +107,27 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		// Render cookie banner on footer.
 		add_action( 'wp_footer', array( $this, 'cookie_banner' ) );
 		
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['bar_text'] ) ) {
+			Merchant_Translator::register_string( $settings['bar_text'], esc_html__( 'Cookie banner bar text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['privacy_policy_text'] ) ) {
+			Merchant_Translator::register_string( $settings['privacy_policy_text'], esc_html__( 'Pre orders privacy policy text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['privacy_policy_url'] ) ) {
+			Merchant_Translator::register_string( $settings['privacy_policy_url'], esc_html__( 'Pre orders privacy policy URL', 'merchant' ) );
+		}
+		if ( ! empty( $settings['button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Cookie banner button text', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -224,12 +250,12 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 				<?php endif; ?>
 				<div class="merchant-cookie-banner-content">
 					<div class="merchant-cookie-banner-text">
-						<?php echo esc_html( $settings[ 'bar_text' ] ); ?>
+						<?php echo esc_html( Merchant_Translator::translate( $settings[ 'bar_text' ] ) ); ?>
 						<?php if ( ! empty( $settings[ 'privacy_policy_url' ] ) ) : ?>
-							<a href="<?php echo esc_url( $settings[ 'privacy_policy_url' ] ); ?>"><?php echo esc_html( $settings[ 'privacy_policy_text' ] ); ?></a>
+							<a href="<?php echo esc_url( Merchant_Translator::translate( $settings[ 'privacy_policy_url' ] ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'privacy_policy_text' ] ) ); ?></a>
 						<?php endif; ?>
 					</div>
-					<div class="merchant-cookie-banner-button"><?php echo esc_html( $settings[ 'button_text' ] ); ?></div>
+					<div class="merchant-cookie-banner-button"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'button_text' ] ) ); ?></div>
 				</div>
 			</div>
 		</div>

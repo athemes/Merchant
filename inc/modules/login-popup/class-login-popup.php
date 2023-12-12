@@ -82,6 +82,26 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['login_link_text'] ) ) {
+			Merchant_Translator::register_string( $settings['login_link_text'], esc_html__( 'Login popup: link text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['welcome_message_text'] ) ) {
+			Merchant_Translator::register_string( $settings['welcome_message_text'], esc_html__( 'Login popup: welcome message text', 'merchant' ) );
+		}
 	}
 
 	/**

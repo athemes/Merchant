@@ -216,6 +216,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.8 =
+* Added - Compatibility with PolyLang plugin.
+* Added - Compatibility with WPML plugin.
+* Added - Shortcode for modules.
+* Changed - Terms and conditions module override WooCommerce core output.
+* Fixed - Cart reserved timer: clear cart not working.
+
 = 1.7 =
 * Added - Products labels: New option to add multiple product labels.
 * Added - Products labels: New option to display set each label display rule.

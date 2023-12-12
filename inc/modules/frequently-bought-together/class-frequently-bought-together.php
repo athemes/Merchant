@@ -81,6 +81,11 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+
 		// Is module preview page.
 		if ( is_admin() && parent::is_module_settings_page() ) {
 			self::$is_module_preview = true;
@@ -94,6 +99,27 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['title'] ) ) {
+			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
+		}
+		if ( ! empty( $settings['price_label'] ) ) {
+			Merchant_Translator::register_string( $settings['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['save_label'] ) ) {
+			Merchant_Translator::register_string( $settings['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
 		}
 	}
 

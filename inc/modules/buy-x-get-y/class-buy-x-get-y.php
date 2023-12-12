@@ -77,6 +77,32 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'custom_css' ), 10, 2 );
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['title'] ) ) {
+			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
+		}
+		if ( ! empty( $settings['buy_label'] ) ) {
+			Merchant_Translator::register_string( $settings['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['get_label'] ) ) {
+			Merchant_Translator::register_string( $settings['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['button_text'] ) ) {
+			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+		}
 	}
 
 	/**

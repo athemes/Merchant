@@ -29,6 +29,13 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Whether the module has a shortcode or not.
+	 *
+	 * @var bool
+	 */
+	public $has_shortcode = true;
+
+	/**
 	 * Constructor.
 	 * 
 	 */
@@ -86,6 +93,11 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 		}
 
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
 			return;
 		}
@@ -104,6 +116,102 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
+	}
+
+	/**
+	 * Print shortcode content.
+	 *
+	 * @return string
+	 */
+	public function shortcode_handler() {
+		// Check if module is active.
+		if ( ! Merchant_Modules::is_module_active( $this->module_id ) ) {
+			return '';
+		}
+
+		// Check if shortcode is enabled.
+		if ( ! $this->is_shortcode_enabled() ) {
+			return '';
+		}
+
+		// Check if we are on a single product page.
+		if ( ! is_singular( 'product' ) ) {
+			// If user is admin, show error message.
+			if ( current_user_can( 'manage_options' ) ) {
+				return $this->shortcode_placement_error();
+			}
+
+			return '';
+		}
+		ob_start();
+
+		$settings       = $this->get_module_settings();
+		$is_placeholder = empty( $settings['logos'] ) ? true : false;
+		$logos          = $this->get_logos( $settings['logos'] );
+		?>
+        <div class="merchant-payment-logos">
+			<?php
+			if ( ! empty( $settings['title'] ) ) : ?>
+                <div class="merchant-payment-logos-title">
+                    <strong><?php
+						echo esc_html( Merchant_Translator::translate( $settings['title'] ) ); ?></strong>
+                </div>
+			<?php
+			endif; ?>
+			<?php
+			if ( ! $is_placeholder ) : ?>
+                <div class="merchant-payment-logos-images">
+					<?php
+					foreach ( $logos as $image_id ) : ?>
+						<?php
+						$imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
+						<?php
+						if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
+							<?php
+							echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
+						<?php
+						endif; ?>
+					<?php
+					endforeach; ?>
+                </div>
+			<?php
+			else : ?>
+                <div class="merchant-payment-logos-images is-placeholder">
+					<?php
+					foreach ( $logos as $logo_src ) : ?>
+                        <img src="<?php
+						echo esc_url( $logo_src ); ?>"/>
+					<?php
+					endforeach; ?>
+                </div>
+			<?php
+			endif; ?>
+        </div>
+		<?php
+		$shortcode_content = ob_get_clean();
+
+		/**
+		 * Filter the shortcode html content.
+		 *
+		 * @param string $shortcode_content shortcode html content
+		 * @param string $module_id         module id
+		 * @param int    $post_id           product id
+		 *
+		 * @since 1.8
+		 */
+		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, $this->module->module_id, get_the_ID() );
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['title'] ) ) {
+			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Payment logos text above logos', 'merchant' ) );
+		}
 	}
 
 	/**
@@ -215,6 +323,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function payment_logos_output() {
+		if ( $this->is_shortcode_enabled() ) {
+			return;
+		}
+
 		if ( is_archive() ) {
 			return;
 		}
@@ -230,7 +342,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 			<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
 				<div class="merchant-payment-logos-title">
-					<strong><?php echo esc_html( $settings[ 'title' ] ); ?></strong>
+					<strong><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></strong>
 				</div>
 			<?php endif; ?>
 

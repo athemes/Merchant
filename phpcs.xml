@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards">
+<ruleset name="WordPress Coding Standards" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
 	<description>WooCommerce extension PHP_CodeSniffer ruleset.</description>
 
 	<file>./</file>
@@ -10,11 +10,22 @@
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
+	<!-- Scan args -->
+	<arg value="sp"/><!-- Show sniff and progress -->
+	<arg name="colors"/><!-- Show results with colors -->
+	<arg name="parallel" value="50"/><!-- Enables parallel processing when available for faster results. -->
+	<arg name="extensions" value="php"/><!-- Limit to PHP files -->
+	<arg name="warning-severity" value="0"/><!-- Show warnings as errors -->
+
 	<!-- Configs -->
 	<config name="minimum_supported_wp_version" value="4.7" />
 	<config name="testVersion" value="7.0" />
 
 	<!-- Rules -->
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+	</rule>
+
 	<rule ref="WordPress-Extra">
 		<exclude name="Generic" />
 		<exclude name="Squiz" />
@@ -59,6 +70,23 @@
 			<property name="prefixes" type="array">
 				<element value="merchant"/>
 			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress-Docs">
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+	</rule>
+
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="merchant" />
 		</properties>
 	</rule>
 </ruleset>

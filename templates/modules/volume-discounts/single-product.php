@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="merchant-volume-discounts">
-    <div class="merchant-volume-discounts-title"><?php echo esc_html( $args['settings']['table_title'] ) ?></div>
+    <div class="merchant-volume-discounts-title"><?php echo esc_html( Merchant_Translator::translate( $args['settings']['table_title'] ) ) ?></div>
 	<?php foreach ( $args['discount_tiers'] as $discount_tier ) :
 		$discount = $discount_tier['layout'] === 'percentage_discount'
 			?  ( $args['product_price'] * $discount_tier['discount'] ) / 100
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'<strong>' . esc_attr( $discount_tier['quantity'] ) . '</strong>',
 							'<strong>' . wc_price( $discount ) . '</strong>'
 						),
-						esc_html( $args['settings']['buy_text'] )
+						esc_html( Merchant_Translator::translate( $args['settings']['buy_text'] ) )
 					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
 				);
@@ -50,11 +50,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </li>
                 <li>
-                    <div class="merchant-volume-discounts-item-text"><?php echo esc_html( $args['settings']['item_text'] ) ?></div>
+                    <div class="merchant-volume-discounts-item-text"><?php echo esc_html( Merchant_Translator::translate( $args['settings']['item_text'] ) ) ?></div>
                     <div><strong><?php echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                 </li>
                 <li>
-                    <div class="merchant-volume-discounts-total-text"><?php echo esc_html( $args['settings']['total_text'] ) ?></div>
+                    <div class="merchant-volume-discounts-total-text"><?php echo esc_html( Merchant_Translator::translate( $args['settings']['total_text'] ) ) ?></div>
                     <div><strong><?php echo wp_kses( wc_price( $total_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                 </li>
             </ul>
@@ -64,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					str_replace(
 						'{amount}',
 						wc_price( $total_discount ),
-						esc_html( $args['settings']['save_label'] )
+						esc_html( Merchant_Translator::translate( $args['settings']['save_label'] ) )
 					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
 				); ?>
