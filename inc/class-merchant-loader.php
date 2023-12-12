@@ -325,7 +325,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			wp_localize_script( 'merchant', 'merchant', array( 
 				'general' => array(
-					'wooCurrencySymbol' => html_entity_decode( get_woocommerce_currency_symbol() )
+					'wooCurrencySymbol' => class_exists( 'Woocommerce' ) ? html_entity_decode( get_woocommerce_currency_symbol() ) : ''
 				),
 				'setting' => $setting 
 			) );

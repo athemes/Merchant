@@ -111,7 +111,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
 		// Module wrapper class.
-		add_filter( 'merchant_buy_now_wrapper_class', array( $this, 'html_wrapper_class' ) );
+		add_filter( 'merchant_module_buy_now_wrapper_class', array( $this, 'html_wrapper_class' ) );
 
 	}
 
@@ -186,7 +186,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings ) {
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_class'
+		 * 
+		 * @since 1.8
+		 */
+		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
 		
 		?>
 		<div class="mrc-preview-single-product-elements">
@@ -251,7 +256,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_class'
+		 * 
+		 * @since 1.8
+		 */
+		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
 
 		?>
 
@@ -280,7 +290,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
-		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_class'
+		 * 
+		 * @since 1.8
+		 */
+		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
 
 		?>
 
