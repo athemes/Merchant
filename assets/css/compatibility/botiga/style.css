@@ -1,5 +1,6 @@
 .theme-botiga {
   /* Frequently Bought Together */
+  /* Sticky Add To Cart */
 }
 .theme-botiga .mrc-fbt-savings-total-mini-cart {
   color: var(--bt-color-heading-4, #212121);
@@ -14,4 +15,7 @@
 }
 .theme-botiga .mrc-fbt-savings-total-mini-cart .woocommerce-Price-amount {
   font-weight: 500;
+}
+.theme-botiga .merchant-sticky-add-to-cart-wrapper .merchant-sticky-add-to-cart-wrapper-content .merchant-sticky-add-to-cart-item.product-addtocart .quantity {
+  min-width: 100px;
 }

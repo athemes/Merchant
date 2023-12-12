@@ -17,4 +17,17 @@
 		}
 	}
 
+	/* Sticky Add To Cart */
+	.merchant-sticky-add-to-cart-wrapper {
+		.merchant-sticky-add-to-cart-wrapper-content {
+			.merchant-sticky-add-to-cart-item {
+				&.product-addtocart {
+					.quantity {
+						min-width: 100px;
+					}
+				}
+			}
+		}
+	}
+
 }
