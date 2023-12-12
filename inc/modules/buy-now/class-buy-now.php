@@ -251,7 +251,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		?>
 
-		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ), [] ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
 		<?php
 	}
 
