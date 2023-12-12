@@ -43,7 +43,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'button-text' => __( 'Buy Now', 'merchant' )
+			'button-text' => __( 'Buy Now', 'merchant' ),
+			'customize-button' => 1,
 		);
 
 		// Module data.
@@ -83,7 +84,14 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		// Enqueue styles.
+		$settings = $this->get_module_settings();
+
+		$hook_order = 15;
+		if ( ! empty( $settings['hook-order'] ) ) {
+			$hook_order = $settings['hook-order'];
+		}
+
+		// Enqueue styles.	
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
@@ -93,10 +101,13 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
 
 		// Render buy now button on shop archive products.
-		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
+		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), $hook_order );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		// Module wrapper class.
+		add_filter( 'merchant_buy_now_wrapper_class', array( $this, 'html_wrapper_class' ) );
 
 	}
 
@@ -154,6 +165,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			// Button Text.
 			$preview->set_text( 'button-text', '.merchant-buy-now-button' );
 
+			// Display Customizer.
+			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'custom-buy-now-button' );
+
 		}
 
 		return $preview;
@@ -167,8 +181,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
-		?>
 
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+		
+		?>
 		<div class="mrc-preview-single-product-elements">
 			<div class="mrc-preview-left-column">
 				<div class="mrc-preview-product-image-wrapper">
@@ -185,7 +201,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-				<a href="#" class="merchant-buy-now-button"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
+				<a href="#" class="merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( $settings[ 'button-text' ] ); ?></a>
 			</div>
 		</div>
 
@@ -231,10 +247,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+
 		?>
 
-		<button type="submit" name="merchant-buy-now" value="<?php echo esc_attr( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
-
+		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
 		<?php
 	}
 
@@ -259,10 +276,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
 
+		$wrapper_classes = apply_filters( 'merchant_buy_now_wrapper_class', array() );
+
 		?>
 
-		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></a>
-
+		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></a>
 		<?php
 	}
 
@@ -275,22 +293,31 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css = '';
 
 		// Text Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'text-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'text-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-color' );
 
 		// Text Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'text-hover-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'text-hover-color', '#ffffff', '.merchant-buy-now-button', '--mrc-buy-now-text-hover-color' );
 
 		// Border Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'border-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-border-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-border-color' );
 
 		// Border Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'border-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-border-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-border-hover-color' );
 
 		// Background Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'background-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-background-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background-color', '#212121', '.merchant-buy-now-button', '--mrc-buy-now-background-color' );
 
 		// Background Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'buy-now', 'background-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-background-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background-hover-color', '#414141', '.merchant-buy-now-button', '--mrc-buy-now-background-hover-color' );
+
+		// Font Size.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font-size', 15, '.merchant-buy-now-button', '--mrc-buy-now-font-size', 'px' );
+
+		// Padding.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding', 20, '.merchant-buy-now-button', '--mrc-buy-now-padding', 'px' );
+
+		// Border radius.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border-radius', 15, '.merchant-buy-now-button', '--mrc-buy-now-border-radius', 'px' );
 
 		return $css;
 	}
@@ -317,6 +344,21 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css .= $this->get_module_custom_css();
 
 		return $css;
+	}
+
+	/**
+	 * HTML wrapper class.
+	 *
+	 * @return array $classes The wrapper classes.
+	 */
+	public function html_wrapper_class( $classes ) {
+		$settings = $this->get_module_settings();
+
+		if ( ! empty( $settings['customize-button'] ) ) {
+			$classes[] = 'custom-buy-now-button';
+		}
+
+		return $classes;
 	}
 
 }
