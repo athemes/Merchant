@@ -4,10 +4,9 @@
  */
 
 .merchant-buy-now-button {
-	display: inline-flex !important;
-	align-items: center;
-	
 	&.custom-buy-now-button {
+		display: inline-flex !important;
+		align-items: center;
 		line-height: 1.2 !important;
 		width: 100%;
 		max-width: none;

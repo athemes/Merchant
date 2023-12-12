@@ -2,15 +2,13 @@
  * Buy Now.
  *
  */
-.merchant-buy-now-button {
+.merchant-buy-now-button.custom-buy-now-button {
   display: -webkit-inline-box !important;
   display: -ms-inline-flexbox !important;
   display: inline-flex !important;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-.merchant-buy-now-button.custom-buy-now-button {
   line-height: 1.2 !important;
   width: 100%;
   max-width: none;

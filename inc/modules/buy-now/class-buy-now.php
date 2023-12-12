@@ -43,7 +43,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'button-text' => __( 'Buy Now', 'merchant' )
+			'button-text' => __( 'Buy Now', 'merchant' ),
+			'customize-button' => 1,
 		);
 
 		// Module data.
