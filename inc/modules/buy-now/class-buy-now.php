@@ -88,12 +88,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Buy now listener.
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
-
-		// Render buy now button on single product page.
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
-
-		// Render buy now button on shop archive products.
-		add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
+		
+		// Add Display Conditions.
+		add_action( 'wp', array( $this, 'get_display_condition' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -317,6 +314,35 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$css .= $this->get_module_custom_css();
 
 		return $css;
+	}
+
+	/**
+	 * Get display condition.
+	 *
+	 * @param array $settings
+	 *
+	 * @return action
+	 */
+	public function get_display_condition() {
+		$settings = $this->get_module_settings();
+	
+		$is_display_archive = isset( $settings['display-archive'] ) && $settings['display-archive'] ? true : false;
+		$is_display_product = isset( $settings['display-product'] ) && $settings['display-product'] ? true : false;
+		$is_display_upsell_related = isset( $settings['display-upsell-related'] ) && $settings['display-upsell-related'] ? true : false;
+		
+		if ( class_exists( 'WooCommerce' ) ) {
+			if ( $is_display_product && is_product() ) {
+				// Render buy now button on single product page.
+				add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'single_product_buy_now_button' ) );
+			}
+
+			if ( 
+				$is_display_upsell_related && is_product() || 
+				$is_display_archive && ( is_shop() || is_product_tag() || is_product_category() ) ) {				
+				// Render buy now button on shop archive products, upsell and related product.
+				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'shop_archive_product_buy_now_button' ), 20 );
+			}
+		}
 	}
 
 }
