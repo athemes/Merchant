@@ -85,6 +85,11 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			// Module options path.
 			$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
+			if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+				// Init translations.
+				$this->init_translations();
+			}
+
 			// Is module preview page.
 			if ( is_admin() && parent::is_module_settings_page() ) {
 				self::$is_module_preview = true;
@@ -98,6 +103,22 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				// Custom CSS.
 				// The custom CSS should be added here as well due to ensure preview box works properly.
 				add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
+			}
+		}
+
+		/**
+		 * Init translations.
+		 *
+		 * @return void
+		 */
+		public function init_translations() {
+			$settings = $this->get_module_settings();
+			if ( ! empty( $settings['title'] ) ) {
+				Merchant_Translator::register_string( $settings['title'], esc_html__( 'Advanced reviews title', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['description'] ) ) {
+				Merchant_Translator::register_string( $settings['description'], esc_html__( 'Advanced reviews description', 'merchant' ) );
 			}
 		}
 
@@ -164,7 +185,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 					)
 				);
 
-				// Don't allow 'h2' value fro tag_title because it conflicts with wordpress notifications.
+				// Don't allow 'h2' value fro tag_title because it conflicts with WordPress notifications.
 				if ( 'h2' === $settings['title_tag'] ) {
 					$settings['title_tag'] = 'h3';
 				}

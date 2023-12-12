@@ -24,7 +24,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 					? wp_kses( str_replace(
 						'{amount}',
 						$amount,
-						sanitize_text_field( $settings['spending_text'] )
+						sanitize_text_field( Merchant_Translator::translate( $settings['spending_text'] ) )
                     ), merchant_kses_allowed_tags( ['bdi'] ) )
 					: wp_kses( 
                         /* Translators: 1. Amount */
@@ -45,7 +45,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                         </del>
                         <strong class="merchant-free-gifts-widget-offer-product-free">
-							<?php echo isset( $settings['free_text'] ) ? esc_html( $settings['free_text'] ) : esc_html__( 'Free', 'merchant' ) ?>
+							<?php echo isset( $settings['free_text'] ) ? esc_html( Merchant_Translator::translate( $settings['free_text'] ) ) : esc_html__( 'Free', 'merchant' ) ?>
                         </strong>
                     </div>
                 </div>

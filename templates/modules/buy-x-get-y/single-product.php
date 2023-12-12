@@ -15,7 +15,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 ?>
 <div class="merchant-bogo">
     <p class="merchant-bogo-title">
-		<?php echo isset( $settings['title'] ) ? esc_html( $settings['title'] ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
+		<?php echo isset( $settings['title'] ) ? esc_html( Merchant_Translator::translate( $settings['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
     </p>
     <div class="merchant-bogo-offers" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_url( wc_get_cart_url() ); ?>">
 		<?php foreach ( $args['offers'] as $key => $offer ): ?>
@@ -26,7 +26,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                 <div class="merchant-bogo-product-x">
                     <div class="merchant-bogo-product-label merchant-bogo-product-buy-label">
 						<?php echo isset( $settings['buy_label'] )
-							? esc_html( str_replace( '{quantity}', $offer['buy_quantity'], $settings['buy_label'] ) )
+							? esc_html( str_replace( '{quantity}', $offer['buy_quantity'], Merchant_Translator::translate( $settings['buy_label'] ) ) )
 							: esc_html( 
                                 /* Translators: 1. quantity */
                                 sprintf( __( 'Buy %s', 'merchant' ), $offer['buy_quantity'] ) 
@@ -62,7 +62,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 					                    $offer['quantity'],
 					                    $discount
 				                    ),
-				                    $settings['get_label'] 
+				                    Merchant_Translator::translate( $settings['get_label'] )
                                 ), merchant_kses_allowed_tags( ['bdi'] ) )
 			                    : wp_kses( 
                                     /* Translators: 1. quantity 2. discount value*/
@@ -101,7 +101,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             </div>
 	                    <?php endif; ?>
                         <button type="submit" name="merchant-bogo-add-to-cart" value="97" class="button alt wp-element-button merchant-bogo-add-to-cart">
-		                    <?php echo isset( $settings['button_text'] ) ? esc_html( $settings['button_text'] ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
+		                    <?php echo isset( $settings['button_text'] ) ? esc_html( Merchant_Translator::translate( $settings['button_text'] ) ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
                         </button>
                         <div class="merchant-bogo-offer-error"></div>
                     </form>

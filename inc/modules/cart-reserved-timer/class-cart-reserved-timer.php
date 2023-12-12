@@ -83,6 +83,29 @@ class Merchant_Cart_Reserved_Timer extends Merchant_Add_Module {
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'custom_css' ), 10, 2 );
 		}
+
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
+	}
+
+	/**
+	 * Init translations.
+	 *
+	 * @return void
+	 */
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['reserved_message'] ) ) {
+			Merchant_Translator::register_string( $settings['reserved_message'], esc_html__( 'Cart Reserved Timer: Cart reserved message', 'merchant' ) );
+		}
+		if ( ! empty( $settings['timer_message_minutes'] ) ) {
+			Merchant_Translator::register_string( $settings['timer_message_minutes'], esc_html__( 'Cart Reserved Timer: Timer message for > 1 min', 'merchant' ) );
+		}
+		if ( ! empty( $settings['timer_message_seconds'] ) ) {
+			Merchant_Translator::register_string( $settings['timer_message_seconds'], esc_html__( 'Cart Reserved Timer: Timer message for < 1 min', 'merchant' ) );
+		}
 	}
 
 	/**
