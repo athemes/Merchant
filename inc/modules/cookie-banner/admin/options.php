@@ -52,7 +52,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Button text', 'merchant' ),
-			'default' => esc_html__( 'I Understand', 'merchant' ),
+			'default' => esc_html__( 'I understand', 'merchant' ),
 		),
 
 		array(

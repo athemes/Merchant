@@ -497,6 +497,12 @@ const styles = [
 	},
 
 	{
+		name: 'botigaCompatibility',
+		src: './assets/sass/compatibility/botiga/style.scss',
+		destination: './assets/css/compatibility/botiga',
+	},
+
+	{
 		name: 'kadenceCompatibility',
 		src: './assets/sass/compatibility/kadence/style.scss',
 		destination: './assets/css/compatibility/kadence',

@@ -2,7 +2,7 @@
 Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
 Tested up to: 6.4.1
-Requires PHP: 5.6
+Requires PHP: 7.0
 Stable tag: trunk
 Contributors: aThemes
 License: GPLv3 or later
@@ -12,13 +12,13 @@ Merchant is a modular WooCommerce toolkit focused on conversions. Features inclu
 
 == Description ==
 
-== ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN ==
+**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN**
 
 On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
 
 [Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one, performance-optimized plugin.
 
-[TRY A FREE LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
+[TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
 ### A QUICK LOOK AT ALL FREE MODULES (15 AND COUNTING)
 
@@ -73,10 +73,9 @@ With these 15 modules, you can boost your store’s sales, reduce cart abandonme
 🏆 FEATURED ON WPTuts  
 
 > For me, the key selling point of either of these versions, whether it’s the free one or the Pro, is that it means I’ve only got one plugin to maintain and update (and purchase, if I go for the Pro version) over having multiple plugins to maintain, purchase and update. This just makes life a little easier.
->
-[Edited slightly for grammar/readability] 
+> 
 
-<iframe width="853" height="330" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="640" height="340" src="https://www.youtube.com/embed/nXMw-3g9l0o" title="The Ultimate WooCommerce Cleanup: Ditch 40 Plugins for Merchant (Free or Pro)!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### MORE MODULES (25+) IN MERCHANT PRO
 
