@@ -52,7 +52,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-labels' ),
 					'title' => esc_html__( 'Product Labels', 'merchant' ),
-					'desc'  => esc_html__( 'Add customizable labels on top of your product images', 'merchant' ),
+					'desc'  => esc_html__( 'Create customizable product labels with specific display conditions and color settings', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/product-labels/'
 				),
 				'animated-add-to-cart' => array(
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-frequently-bought-together' ),
 					'title' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-					'desc' => esc_html__( 'Create discounted product bundles with items that are frequently purchased together', 'merchant' ),
+					'desc' => esc_html__( 'Create bundles of related products and offer them at a discount or at the regular price', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-frequently-bought-together/'
 				),
 				'buy-x-get-y' => array(
