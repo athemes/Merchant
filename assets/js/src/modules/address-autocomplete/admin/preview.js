@@ -67,13 +67,13 @@
     /**
      * Reset the address input field
      */
-    function resetAddressField(){
+    function resetAddressField() {
         addressInput.val('');
         addressInput.css({
             'background-image': 'none',
         });
         addressInput.attr('disabled', false);
-        addressInput.attr('placeholder', 'Start typing an address...');
+        addressInput.attr('placeholder', merchant_admin_address_autocomplete.field_placeholder);
     }
 
 })(jQuery);
