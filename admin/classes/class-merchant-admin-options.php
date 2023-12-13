@@ -1056,7 +1056,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					foreach ( $value as $option_key ) :
 						$option_val = $settings['options'][ $option_key ];
 
-						if ( in_array( $option_key, $value ) ) :
+						if ( in_array( $option_key, $value, true ) ) :
 							?>
                             <li class="merchant-sortable-item" data-value="<?php
 							echo esc_attr( $option_key ); ?>">
@@ -1072,8 +1072,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 					<?php
 					foreach ( $settings['options'] as $option_key => $option_val ) :
-						if ( ! in_array( $option_key, $value ) ) :
-							$invisible = ! in_array( $option_key, $value ) ? ' invisible' : '';
+						if ( ! in_array( $option_key, $value, true ) ) :
+							$invisible = ! in_array( $option_key, $value, true ) ? ' invisible' : '';
 
 							?>
                             <li class="merchant-sortable-item<?php
@@ -1309,11 +1309,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			} else {
 				echo '<div class="merchant-create-page-control-create-message">';
 				echo wp_kses_post(
-					sprintf( /* translators: 1: page name */
-						__( '<p class="merchant-module-page-setting-field-desc mrc-mt-0">It looks like you haven\'t created a <strong>%1$s</strong> page yet. Click the below button to create the page.</p>',
+					'<p class="merchant-module-page-setting-field-desc mrc-mt-0">'.
+                        sprintf( /* translators: 1: page name */
+						__( 'It looks like you haven\'t created a <strong>%1$s</strong> page yet. Click the below button to create the page.',
 							'merchant' ),
 						$settings['page_title']
-					)
+					). '</p>'
 				);
 				echo '</div>';
 				echo '<div class="merchant-create-page-control-success-message" style="display: none;">';

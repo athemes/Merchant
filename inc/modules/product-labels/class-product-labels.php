@@ -266,7 +266,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					$regular_price = (float) $child_product->get_regular_price();
 					$sale_price    = (float) $child_product->get_sale_price();
 
-					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+					if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 						$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 					}
 				}
@@ -275,7 +275,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				$regular_price = (float) $product->get_regular_price();
 				$sale_price    = (float) $product->get_sale_price();
 
-				if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+				if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 					$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 				}
 			}
@@ -501,7 +501,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 						$regular_price = (float) $child_product->get_regular_price();
 						$sale_price    = (float) $child_product->get_sale_price();
 
-						if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+						if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 							$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 						}
 					}
@@ -510,7 +510,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					$regular_price = (float) $product->get_regular_price();
 					$sale_price    = (float) $product->get_sale_price();
 
-					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+					if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 						$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 					}
 				}

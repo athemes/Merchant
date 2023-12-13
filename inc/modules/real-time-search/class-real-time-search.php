@@ -244,7 +244,9 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		);
 	
 		if ( 'price' === $orderby ) {
+			// phpcs:disable
 			$args['meta_key'] = '_price';
+			// phpcs:enable
 			$args['orderby']  = 'meta_value_num';
 		}
 	
@@ -259,6 +261,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				'order'          => $order,
 				'orderby'        => $orderby,
 				'post_status'    => array( 'publish' ),
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query'     => array(
 					'relation' => 'OR',
 					array(
@@ -268,9 +271,11 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 					)
 				)
 			);
-	
+
 			if ( 'price' === $orderby ) {
+				// phpcs:disable
 				$args['meta_key'] = '_price';
+				// phpcs:enable
 				$args['orderby']  = 'meta_value_num';
 			}
 	

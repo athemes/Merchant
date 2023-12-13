@@ -157,11 +157,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		 *
 		 */
 		public function add_section( $id, $args ) {
-			if ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) {
+			if ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'], true ) ) {
 				return;
 			}
 
-			if ( ! empty( $args['exclude'] ) && in_array( get_post_type(), $args['exclude'] ) ) {
+			if ( ! empty( $args['exclude'] ) && in_array( get_post_type(), $args['exclude'], true ) ) {
 				return;
 			}
 
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		 *
 		 */
 		public function add_field( $id, $args ) {
-			if ( ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) || empty( self::$options[ $args['section'] ] ) ) {
+			if ( ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'], true ) ) || empty( self::$options[ $args['section'] ] ) ) {
 				return;
 			}
 
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				'public' => true,
 			) );
 
-			if ( ! in_array( $post_type, $types ) ) {
+			if ( ! in_array( $post_type, $types, true ) ) {
 				return;
 			}
 
@@ -380,7 +380,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			foreach ( $options as $option ) {
 				if ( ! empty( $option['fields'] ) ) {
 					foreach ( $option['fields'] as $field_id => $field ) {
-						if ( in_array( $field['type'], array( 'content' ) ) ) {
+						if ( $field['type'] === 'content' ) {
 							continue;
 						}
 
@@ -422,7 +422,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 				case 'select':
 				case 'choices':
-					return ( in_array( $value, array_keys( $field['options'] ) ) ) ? sanitize_key( $value ) : '';
+					return ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
 				case 'wc-attributes':
@@ -590,6 +590,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 						$attributes = array_replace( $selected_attributes, $attributes );
 						foreach ( $attributes as $attribute_id => $attribute_label ) {
+							// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 							$checked = ( in_array( $attribute_id, $values ) ) ? ' checked' : '';
 
 							echo '<li class="merchant-sortable-item">';

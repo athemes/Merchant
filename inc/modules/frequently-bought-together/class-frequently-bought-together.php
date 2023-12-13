@@ -56,6 +56,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
 			'type'  => 'product',
 			'query' => array(
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query' => array(
 					'relation' => 'AND',
 					array(

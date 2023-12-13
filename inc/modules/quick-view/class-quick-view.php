@@ -385,7 +385,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 							<div class="merchant-quick-view-product-title">
 								<h2 class="product_title entry-title"><?php echo esc_html( $product->get_title() ); ?></h2>
 							</div>
-							<?php if ( 0 != $product->get_average_rating() ) : ?>
+							<?php if ( 0 !== $product->get_average_rating() ) : ?>
 								<div class="merchant-quick-view-product-rating">
 									<div class="woocommerce-product-rating">
 										<?php echo wp_kses( wc_get_rating_html( $product->get_average_rating() ), merchant_kses_allowed_tags() ); ?>

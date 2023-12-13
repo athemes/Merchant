@@ -157,6 +157,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			}
 
 			// Remove everything after ":"in case a selector like a:hover is used.
+			// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found
 			if ( ( $position = strpos( $selector, ':' ) ) !== false ) {
 				$selector = substr( $selector, 0, $position );
 			}

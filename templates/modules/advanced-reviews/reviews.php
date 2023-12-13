@@ -210,13 +210,17 @@ $bars_data = $args['bars_data']; ?>
 				case 'top-rated':
 					$comments_args[ 'order' ]	= 'DESC';
 					$comments_args[ 'orderby' ]  = 'meta_value_num';
+					// phpcs:disable
 					$comments_args[ 'meta_key' ] = 'rating';
+					// phpcs:enable
 					break;
 				
 				case 'low-rated':
 					$comments_args[ 'order' ]	= 'ASC';
 					$comments_args[ 'orderby' ]  = 'meta_value_num';
+					// phpcs:disable
 					$comments_args[ 'meta_key' ] = 'rating';
+					// phpcs:enable
 					break;
 			}
 

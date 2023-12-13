@@ -170,7 +170,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * @return bool
 		 */
 		public static function is_module_created( $module_id ) {
-			return in_array( $module_id, static::instance()->container );
+			return in_array( $module_id, static::instance()->container, true );
 		}
 
 		/**

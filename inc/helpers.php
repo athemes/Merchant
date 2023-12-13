@@ -116,7 +116,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		);
 
 		// Include schema markup tags
-		if ( in_array( 'schema_markup', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'schema_markup', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$tags = array( 'meta', 'nav', 'ul', 'li', 'a', 'span' );
 
 			foreach ( $tags as $tag ) {
@@ -135,7 +135,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include iframe tags
-		if ( in_array( 'iframe', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'iframe', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['iframe'] = array(
 				'src'             => true,
 				'height'          => true,
@@ -146,7 +146,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include nonce tags
-		if ( in_array( 'nonce', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'nonce', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['input'] = array(
 				'type'      => true,
 				'id'        => true,
@@ -157,7 +157,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include bdi tag
-		if ( in_array( 'bdi', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'bdi', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['bdi'] = array(
 				'class' => true,
 				'id'    => true,
@@ -166,7 +166,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include select2
-		if ( in_array( 'select2', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'select2', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['select'] = array(
 				'name'        => true,
 				'class'       => true,
@@ -188,7 +188,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include dd, dt tags
-		if ( in_array( 'dd', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'dd', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['dd'] = array(
 				'class' => true,
 				'id'    => true,
@@ -203,7 +203,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 		}
 
 		// Include forms tags.
-		if ( in_array( 'forms', $extra ) || in_array( 'all', $extra ) ) {
+		if ( in_array( 'forms', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$tags = array( 'form', 'input', 'select', 'option', 'textarea' );
 
 			foreach ( $tags as $tag ) {

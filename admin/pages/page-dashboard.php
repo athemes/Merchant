@@ -229,7 +229,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 			<div class="merchant-modules-header-left">
 
-				<div class="merchant-modules-header-heading"><?php esc_html_e( 'Welcome To Merchant', 'merchant' ); ?> <img class="merchant-admin-hand-icon" src="<?php echo esc_url( MERCHANT_URI . '/assets/images/admin-hand-icon.png' ); ?>" alt="<?php echo esc_attr( 'Welcome To Merchant', 'merchant' ); ?>" /></div>
+				<div class="merchant-modules-header-heading"><?php esc_html_e( 'Welcome To Merchant', 'merchant' ); ?> <img class="merchant-admin-hand-icon" src="<?php echo esc_url( MERCHANT_URI . '/assets/images/admin-hand-icon.png' ); ?>" alt="<?php echo esc_attr__( 'Welcome To Merchant', 'merchant' ); ?>" /></div>
 				<div class="merchant-modules-header-subheading"><?php esc_html_e( 'We’re glad to see you :)', 'merchant' ); ?></div>
 				<div class="merchant-modules-header-image">
 					<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/dashboard-hero.svg" alt="Merchant" />
