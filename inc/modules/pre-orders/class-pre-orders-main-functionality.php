@@ -107,7 +107,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return boolean
 	 */
 	public function is_pre_order( $product_id ) {
-		return 'yes' === get_post_meta( $product_id, '_is_pre_order', true ) && new DateTime( get_post_meta( $product_id, '_pre_order_date', true ) ) > new DateTime();
+		return 'yes' === get_post_meta( $product_id, '_is_pre_order', true ) && strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) > time();
 	}
 
 	/**
@@ -189,7 +189,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		$pre_order_products = array_filter( $items, function ( $v ) {
-			return 'yes' === get_post_meta( $v['product_id'], '_is_pre_order', true ) && new DateTime( get_post_meta( $v['product_id'], '_pre_order_date', true ) ) > new DateTime() || 'yes' === get_post_meta( $v['variation_id'], '_is_pre_order', true ) && new DateTime( get_post_meta( $v['variation_id'], '_pre_order_date', true ) ) > new DateTime();
+			return $this->is_pre_order( $v['product_id'] ) || $this->is_pre_order( $v['variation_id'] );
 		} );
 
 		$this->set_pre_order_products( $pre_order_products );
@@ -403,7 +403,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$_post = get_post( absint( $input_post_data[ 'product_id' ] ) ); 
 		}
 
-		if ( 'yes' === get_post_meta( $_post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) > time() ) {
+		if ( $this->is_pre_order( $_post->ID ) ) {
 			$text = Merchant_Admin_Options::get( 'pre-orders', 'button_text', esc_html__( 'Pre Order Now!', 'merchant' ) );
 		}
 
@@ -421,7 +421,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function change_button_text_for_variable_products( $data, $product, $variation ) {
 		global $product;
 
-		if ( get_post_meta( $variation->get_id(), '_is_pre_order', true ) === 'yes' && strtotime( get_post_meta( $variation->get_id(), '_pre_order_date', true ) ) > time() ) {
+		if ( $this->is_pre_order( $variation->get_id() ) ) {
 
 			$data['is_pre_order'] = true;
 
@@ -475,7 +475,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		if ( null !== $_product ) {
-			if ( 'yes' === get_post_meta( $_post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) > time() ) {
+			if ( $this->is_pre_order( $_post->ID ) ) {
 				$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
 				$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) );
 				$text            = $this->replaceDateTxt( $additional_text, $time_format );
@@ -519,7 +519,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * 
 	 */
 	public function pre_orders_post_class( $classes, $product ) {
-		if ( 'yes' === get_post_meta( $product->get_id(), '_is_pre_order', true ) && strtotime( get_post_meta( $product->get_id(), '_pre_order_date', true ) ) > time() ) {
+		if ( $this->is_pre_order( $product->get_id() ) ) {
 			$classes[] = 'merchant-pre-ordered-product';
 		}
 
