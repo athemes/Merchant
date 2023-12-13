@@ -33,5 +33,14 @@ if ( ! class_exists( 'Merchant_No_Plugin_Support' ) ) {
 		public function translate_string( $string ) {
 			return $string;
 		}
+
+		/**
+		 * Get WordPress language code
+		 *
+		 * @return string
+		 */
+		public function get_current_lang() {
+			return get_locale();
+		}
 	}
 }

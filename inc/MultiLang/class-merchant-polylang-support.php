@@ -33,5 +33,14 @@ if ( ! class_exists( 'Merchant_PolyLang_Support' ) ) {
 		public function translate_string( $string ) {
 			return pll__( $string );
 		}
+
+		/**
+		 * Get Current language code
+		 *
+		 * @return string
+		 */
+		public function get_current_lang() {
+			return pll_current_language();
+		}
 	}
 }

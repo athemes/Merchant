@@ -27,5 +27,12 @@ if ( ! interface_exists( 'Merchant_Language_Strategy' ) ) {
 		 * @return string
 		 */
 		public function translate_string( $string );
+
+		/**
+		 * Get Current language code
+		 *
+		 * @return string
+		 */
+		public function get_current_lang();
 	}
 }

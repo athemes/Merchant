@@ -48,5 +48,19 @@ if ( ! class_exists( 'Merchant_WPML_Support' ) ) {
 			 */
 			return apply_filters( 'wpml_translate_single_string', $string, 'Merchant', $string );
 		}
+
+		/**
+		 * Get Current language code
+		 *
+		 * @return string
+		 */
+		public function get_current_lang() {
+			/**
+			 * @see   https://wpml.org/wpml-hook/wpml_current_language/
+			 *
+			 * @since 1.9.0
+			 */
+			return apply_filters( 'wpml_current_language', null );
+		}
 	}
 }
