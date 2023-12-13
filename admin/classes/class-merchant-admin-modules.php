@@ -359,6 +359,16 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Add code snippets in WordPress without having to edit your theme\'s functions.php file ', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/code-snippets/'
 				),
+
+				'address-autocomplete' => array(
+					// Todo: revisit this
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-size-chart' ),
+					'title'        => esc_html__( 'Google Address Autocomplete', 'merchant' ),
+					'desc'         => esc_html__( 'Autocomplete address field at checkout using Google places API.', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-size-chart/'
+				),
 				
 				// Protect Store.
 				'agree-to-terms-checkbox' => array(
