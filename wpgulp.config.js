@@ -75,6 +75,13 @@ const styles = [
 		destination: './assets/css/modules/add-to-cart-text/admin',
 	},
 
+	// Address autocomplete
+	{
+		name: 'AddressAutocompleteAdminPreview',
+		src: './assets/sass/modules/address-autocomplete/admin/preview.scss',
+		destination: './assets/css/modules/address-autocomplete/admin',
+	},
+
 	// Animated Add To Cart.
 	{
 		name: 'animatedAddToCart',
@@ -666,6 +673,14 @@ const scripts = [
 		src: './assets/js/src/modules/countdown-timer/admin/preview.js',
 		file: 'preview',
 		destination: './assets/js/modules/countdown-timer/admin',
+	},
+
+	// Address autocomplete
+	{
+		name: 'addressAutocompleteAdmin',
+		src: './assets/js/src/modules/address-autocomplete/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/address-autocomplete/admin',
 	},
 
 	// Floating Mini Cart.
