@@ -239,6 +239,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'role'                    => true,
 					'inputmode'               => true,
 					'aria-label'              => true,
+					'multiple'                => true,
 				);
 			}
 		}

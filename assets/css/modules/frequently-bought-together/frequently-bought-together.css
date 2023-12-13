@@ -2,10 +2,19 @@
  * Frequently Bought Together.
  *
  */
+/* Cart */
+.variation-BundleDiscount {
+  margin: 0;
+}
+
+/* Single Product */
 .merchant-frequently-bought-together-title {
   margin-bottom: 25px;
 }
 
+.merchant-frequently-bought-together {
+  margin: 30px 0;
+}
 .merchant-frequently-bought-together.after-tabs {
   padding-bottom: 40px;
 }
@@ -36,6 +45,9 @@
   grid-gap: 20px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+.merchant-frequently-bought-together-bundle.has-no-discount .merchant-frequently-bought-together-bundle-total-price {
+  margin: 8px 0;
 }
 .merchant-frequently-bought-together-bundle-products {
   display: -webkit-box;
@@ -191,4 +203,18 @@
   .merchant-frequently-bought-together-bundle-offer {
     width: 100%;
   }
+}
+/* Mini Cart */
+.mrc-fbt-savings-total-mini-cart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+  line-height: 1;
+}
+.mrc-fbt-savings-total-mini-cart strong {
+  font-weight: 500;
 }

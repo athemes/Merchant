@@ -43,6 +43,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		// WooCommerce only.
 		$this->wc_only = true;
 
+		// Module default settings.
+		$this->module_default_settings = array(
+			'no_variation_selected_text_has_no_discount' => __( 'Please select an option to see the total price.', 'merchant' ),
+			'no_variation_selected_text' => __( 'Please select an option to see your savings.', 'merchant' )
+		);
+
 		// Parent construct.
 		parent::__construct();
 
@@ -111,6 +117,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		}
 		if ( ! empty( $settings['save_label'] ) ) {
 			Merchant_Translator::register_string( $settings['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['no_variation_selected_text'] ) ) {
+			Merchant_Translator::register_string( $settings['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['no_variation_selected_text_has_no_discount'] ) ) {
+			Merchant_Translator::register_string( $settings['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
 		}
 		if ( ! empty( $settings['button_text'] ) ) {
 			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );

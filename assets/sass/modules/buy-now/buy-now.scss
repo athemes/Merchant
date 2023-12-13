@@ -4,29 +4,63 @@
  */
 
 .merchant-buy-now-button {
-    color: var(--mrc-buy-now-text-color, #FFF) !important;
-    border-color: var(--mrc-buy-now-border-color, #212121) !important;
-    background-color: var(--mrc-buy-now-background-color, #212121) !important;
-    
-    &:hover {
-        color: var(--mrc-buy-now-text-hover-color, #FFF) !important;
-        border-color: var(--mrc-buy-now-border-hover-color, #414141) !important;
-        background-color: var(--mrc-buy-now-background-hover-color, #414141) !important;
-    }
-} 
+	&.merchant-custom-buy-now-button {
+		display: inline-flex !important;
+		align-items: center;
+		line-height: 1.2 !important;
+		max-width: none;
+		margin-top: 0.5rem !important;
+		margin-bottom: 1rem !important;
+		justify-content: center;
+		flex-direction: column;
 
-.products {
-	.product {
-		.merchant-buy-now-button {
-			align-self: flex-start;
+		padding-top: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+		padding-bottom: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+		padding-left: var(--mrc-buy-now-padding-left-right, 24px) !important;
+		padding-right: var(--mrc-buy-now-padding-left-right, 24px) !important;
+		font-size: var(--mrc-buy-now-font-size, 16px) !important;
+		border-radius: var(--mrc-buy-now-border-radius, 0px) !important;
+		
+		color: var(--mrc-buy-now-text-color, #FFF) !important;
+		border-color: var(--mrc-buy-now-border-color, #212121) !important;
+		background-color: var(--mrc-buy-now-background-color, #212121) !important;
+	
+		&:hover {
+			color: var(--mrc-buy-now-text-hover-color, #FFF) !important;
+			border-color: var(--mrc-buy-now-border-hover-color, #414141) !important;
+			background-color: var(--mrc-buy-now-background-hover-color, #414141) !important;
+		}
+
+		&::before {
+			display: none;
 		}
 	}
 }
 
+// Products grid.
+.products .product,
+.wc-block-grid__products .wc-block-grid__product {
+	.merchant-buy-now-button {
+		&.merchant-custom-buy-now-button {
+			width: 100%;
+		}
+	}
+}
+
+// Single product.
 .single-product {
 	.product {
-		.single_add_to_cart_button.merchant-buy-now-button {
-			margin-left: 5px;
+		.cart {
+			.single_add_to_cart_button {
+				&.merchant-buy-now-button {
+					justify-content: center;
+					width: fit-content !important;
+					margin-top: 0 !important;
+					margin-bottom : 0 !important;
+					margin-left: 5px;
+				}
+			}
 		}
+		
 	}
 }

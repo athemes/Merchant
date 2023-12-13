@@ -70,7 +70,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'email_update',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
-			'default' => __( 'Hello, thanks for your patience and finally the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
+			'default' => __( 'Hello, thanks for your patience — finally, the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
 				'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to subscribers when product is in stock.', 'merchant' ),
 		),

@@ -167,8 +167,9 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 						$imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
 						<?php
 						if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
-							<?php
-							echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
+							<?php 
+								echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+							?>
 						<?php
 						endif; ?>
 					<?php
