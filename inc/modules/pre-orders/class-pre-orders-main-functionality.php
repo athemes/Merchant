@@ -72,8 +72,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$has_pre_orders = false;
 
 		foreach ( $products as $product ) {
-			$isPreOrder = $this->isPreOrder( $product['data']->get_id() );
-			if ( $isPreOrder ) {
+			$is_pre_order = $this->is_pre_order( $product['data']->get_id() );
+			if ( $is_pre_order ) {
 				$has_pre_orders = true;
 			}
 		}
@@ -83,7 +83,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		);
 
 		$variableId				   = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
-		$is_variable_has_pre_order = $this->isPreOrder( $product_id, $variableId );
+		$is_variable_has_pre_order = $this->is_pre_order( $product_id, $variableId );
 
 		if ( empty( $products ) || ( $is_variable_has_pre_order && $has_pre_orders ) || ( false === $is_variable_has_pre_order && false === $has_pre_orders ) ) {
 			$passed = true;
@@ -107,7 +107,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @param  integer $variableId
 	 * @return boolean
 	 */
-	public function isPreOrder( $product_id, $variableId = 0 ) {
+	public function is_pre_order( $product_id, $variableId = 0 ) {
 		if ( 'yes' === get_post_meta( $product_id, '_is_pre_order', true ) && new DateTime( get_post_meta( $product_id, '_pre_order_date', true ) ) > new DateTime() ) {
 			return true;
 		} elseif ( 'yes' === get_post_meta( $variableId, '_is_pre_order', true ) && new DateTime( get_post_meta( $variableId, '_pre_order_date', true ) ) > new DateTime() ) {
