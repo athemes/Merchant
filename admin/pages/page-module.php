@@ -25,7 +25,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                     <div class="merchant-module-page-ajax-notice"><?php esc_html_e( 'Your settings have been modified. Save?', 'merchant' ); ?></div>
                     <div class="merchant-module-page-ajax-buttons">
                         <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module ), 'admin.php' ) ); ?>"
-                           class="merchant-module-discard-button"><?php esc_html_e( 'Discard', 'merchant' ); ?></a>
+                            class="merchant-module-discard-button"><?php esc_html_e( 'Discard', 'merchant' ); ?></a>
                         <button type="submit" name="merchant_save" value="save" class="merchant-module-save-button"><span class="merchant-module-save-button-label"><?php esc_html_e( 'Save',
 									'merchant' ); ?></span><i class="dashicons dashicons-update-alt"></i></button>
                     </div>
@@ -70,14 +70,14 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                                         <div class="merchant-module-buy">
 
                                             <a href="https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" target="_blank"
-                                               class="merchant-module-page-button ">
+                                                class="merchant-module-page-button ">
 												<?php esc_html_e( 'Buy Pro', 'merchant' ); ?>
                                             </a>
 
                                         </div>
 									<?php else : ?>
                                         <div data-module="<?php echo esc_attr( $merchant_module ); ?>"
-                                             class="merchant-module-page-button merchant-module-activate merchant-module-page-button-action-activate">
+                                            class="merchant-module-page-button merchant-module-activate merchant-module-page-button-action-activate">
 											<?php esc_html_e( 'Enable', 'merchant' ); ?>
                                         </div>
                                         <div class="merchant-module-deactivate">
@@ -86,7 +86,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 												<?php esc_html_e( 'Enabled', 'merchant' ); ?>
                                                 <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.09832 3.98009e-07L0.901685 -1.43717e-07C0.15069 -2.09371e-07 -0.269991 0.75351 0.193991 1.2676L3.29231 4.70055C3.65265 5.09982 4.34735 5.09982 4.70769 4.70055L7.80601 1.2676C8.26999 0.753511 7.84931 4.63664e-07 7.09832 3.98009e-07Z"
-                                                          fill="#3858E9"/>
+                                                            fill="#3858E9"/>
                                                 </svg>
                                             </div>
 
@@ -175,7 +175,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                                             <span><?php echo esc_html__( 'Tutorial', 'merchant' ); ?></span>
                                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M11.4375 0H8.25C7.94531 0 7.66406 0.1875 7.54688 0.492188C7.42969 0.773438 7.5 1.10156 7.71094 1.3125L8.67188 2.27344L4.14844 6.79688C3.84375 7.07812 3.84375 7.57031 4.14844 7.85156C4.28906 7.99219 4.47656 8.0625 4.6875 8.0625C4.875 8.0625 5.0625 7.99219 5.20312 7.85156L9.72656 3.32812L10.6875 4.28906C10.8281 4.42969 11.0156 4.5 11.2266 4.5C11.3203 4.5 11.4141 4.5 11.5078 4.45312C11.8125 4.33594 12 4.05469 12 3.75V0.5625C12 0.257812 11.7422 0 11.4375 0ZM9.1875 7.5C8.85938 7.5 8.625 7.75781 8.625 8.0625V10.6875C8.625 10.8047 8.53125 10.875 8.4375 10.875H1.3125C1.19531 10.875 1.125 10.8047 1.125 10.6875V3.5625C1.125 3.46875 1.19531 3.375 1.3125 3.375H3.9375C4.24219 3.375 4.5 3.14062 4.5 2.8125C4.5 2.50781 4.24219 2.25 3.9375 2.25H1.3125C0.585938 2.25 0 2.85938 0 3.5625V10.6875C0 11.4141 0.585938 12 1.3125 12H8.4375C9.14062 12 9.75 11.4141 9.75 10.6875V8.0625C9.75 7.75781 9.49219 7.5 9.1875 7.5Z"
-                                                      fill="#3858E9"/>
+                                                        fill="#3858E9"/>
                                             </svg>
                                         </a>
 									<?php endif; ?>

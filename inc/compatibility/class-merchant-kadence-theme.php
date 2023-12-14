@@ -13,7 +13,7 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-			add_action( 'wp_enqueue_scripts', [ $this, 'styles' ] );
+			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 		}
 
 		/**

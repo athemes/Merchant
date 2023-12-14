@@ -52,10 +52,10 @@ class Merchant_Reasons_To_Buy extends Merchant_Add_Module {
 			'reasons'      => array(
 				esc_html__( '100% Polyester.', 'merchant' ),
 				esc_html__( 'Recycled Polyamid.', 'merchant' ),
-				esc_html__( 'GOTS-certified organic cotton.', 'merchant' )
+				esc_html__( 'GOTS-certified organic cotton.', 'merchant' ),
 			),
 			'display_icon' => 1,
-			'icon'         => 'check2'
+			'icon'         => 'check2',
 		);
 
 		// Mount preview url.
@@ -121,7 +121,7 @@ class Merchant_Reasons_To_Buy extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/reasons-to-buy.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/reasons-to-buy.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}

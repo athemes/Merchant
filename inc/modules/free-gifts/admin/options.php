@@ -26,7 +26,7 @@ Merchant_Admin_Options::create( array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
 			),
-			'default' => 'subtotal'
+			'default' => 'subtotal',
 		),
 	),
 ) );
@@ -41,25 +41,25 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'display_homepage',
 			'type'    => 'checkbox',
 			'title'   => __( 'Show on homepage', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 		array(
 			'id'      => 'display_shop',
 			'type'    => 'checkbox',
 			'title'   => __( 'Show on shop page', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 		array(
 			'id'      => 'display_product',
 			'type'    => 'checkbox',
 			'title'   => __( 'Show on product page', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 		array(
 			'id'      => 'display_cart',
 			'type'    => 'checkbox',
 			'title'   => __( 'Show on cart page', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 	),
 ) );
@@ -99,7 +99,7 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 			'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
 		),
-	)
+	),
 ) );
 
 
@@ -113,35 +113,35 @@ Merchant_Admin_Options::create( array(
 				'id'      => 'count_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Count background color', 'merchant' ),
-				'default' => '#000'
+				'default' => '#000',
 			),
 
 			array(
 				'id'      => 'count_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Count text color', 'merchant' ),
-				'default' => '#fff'
+				'default' => '#fff',
 			),
 
 			array(
 				'id'      => 'button_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Gift button background color', 'merchant' ),
-				'default' => '#362e94'
+				'default' => '#362e94',
 			),
 
 			array(
 				'id'      => 'button_hover_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Gift button Hover background color', 'merchant' ),
-				'default' => '#7167e1'
+				'default' => '#7167e1',
 			),
 
 			array(
 				'id'      => 'button_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Gift button Icon color', 'merchant' ),
-				'default' => '#fff'
+				'default' => '#fff',
 			),
 
 			array(
@@ -152,56 +152,56 @@ Merchant_Admin_Options::create( array(
 				'max'     => 600,
 				'step'    => 1,
 				'unit'    => 'px',
-				'default' => 300
+				'default' => 300,
 			),
 
 			array(
 				'id'      => 'content_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Content background color', 'merchant' ),
-				'default' => '#fff'
+				'default' => '#fff',
 			),
 
 			array(
 				'id'      => 'label_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Label background color', 'merchant' ),
-				'default' => '#f5f5f5'
+				'default' => '#f5f5f5',
 			),
 
 			array(
 				'id'      => 'label_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Label text color', 'merchant' ),
-				'default' => '#212121'
+				'default' => '#212121',
 			),
 
 			array(
 				'id'      => 'product_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Product text color', 'merchant' ),
-				'default' => '#212121'
+				'default' => '#212121',
 			),
 
 			array(
 				'id'      => 'product_text_hover_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Product hover text color', 'merchant' ),
-				'default' => '#757575'
+				'default' => '#757575',
 			),
 
 			array(
 				'id'      => 'product_price_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Product price text color', 'merchant' ),
-				'default' => '#999999'
+				'default' => '#999999',
 			),
 
 			array(
 				'id'      => 'free_text_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Free text color', 'merchant' ),
-				'default' => '#212121'
+				'default' => '#212121',
 			),
 		),
 	)

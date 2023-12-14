@@ -48,7 +48,7 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 			'icon' => 'arrow-1',
 			'text' => esc_html__( 'Back to top', 'merchant' ),
 			'position' => 'merchant-position-right',
-			'visibility' => 'all'
+			'visibility' => 'all',
 		);
 
 		// Mount preview url.
@@ -87,7 +87,7 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue styles.
@@ -101,7 +101,6 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
@@ -114,7 +113,7 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/scroll-to-top-button.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/scroll-to-top-button.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -280,7 +279,6 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Initialize the module.

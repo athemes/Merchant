@@ -64,7 +64,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				'title_desc_align' => 'left',
 				'default_sorting'  => 'newest',
 				'pagination_type'  => 'default',
-				'hook_order'       => 10
+				'hook_order'       => 10,
 			);
 
 			// Mount preview url.
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-				wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/advanced-reviews.min.css', [], MERCHANT_VERSION );
+				wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/advanced-reviews.min.css', array(), MERCHANT_VERSION );
 				wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 
 				wp_enqueue_style( 'merchant-grid', MERCHANT_URI . 'assets/css/grid.min.css', array(), MERCHANT_VERSION, 'all' );
@@ -181,7 +181,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				$settings = array_merge(
 					$settings,
 					array(
-						'product' => $product
+						'product' => $product,
 					)
 				);
 
@@ -228,8 +228,8 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 						'comment_author'       => 'Kendall Grey',
 						'comment_author_email' => 'johndoe@athemes.com',
 						'comment_author_url'   => 'https://athemes.com',
-						'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) )
-					)
+						'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) ),
+					),
 				),
 				'comment_rating'  => 3,
 				'comment_text'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis sagittis commodo, nisl elit ultricies diam, at',

@@ -22,7 +22,7 @@ Merchant_Admin_Options::create( array(
 				'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
 				'before-cart-form' => esc_html__( 'Before add to cart form', 'merchant' ),
 			),
-			'default' => 'before-cart-form'
+			'default' => 'before-cart-form',
 		),
 	),
 ) );
@@ -100,7 +100,7 @@ Merchant_Admin_Options::create( array(
 				'normal'  => esc_html__( 'Normal', 'merchant' ),
 				'bold' => esc_html__( 'Bold', 'merchant' ),
 			),
-			'default' => 'normal'
+			'default' => 'normal',
 		),
 
 		array(
@@ -111,14 +111,14 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 16
+			'default' => 16,
 		),
 
 		array(
 			'id'      => 'title_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Title text color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 
@@ -140,7 +140,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_item_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Choose text color', 'merchant' ),
-			'default' => '#3c434a'
+			'default' => '#3c434a',
 		),
 
 		array(

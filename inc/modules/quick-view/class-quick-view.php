@@ -58,7 +58,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			'show_quantity' => 1,
 			'place_product_description' => 'top',
 			'description_style' => 'short',
-			'place_product_image' => 'thumbs-at-left'
+			'place_product_image' => 'thumbs-at-left',
 		);
 
 		// Mount preview url.
@@ -102,7 +102,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() && ! defined( 'DOING_AJAX' ) ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue styles.
@@ -143,7 +143,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
@@ -177,7 +176,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/quick-view.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/quick-view.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -318,12 +317,12 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		<a href="#" class="merchant-quick-view-button <?php echo esc_attr( $settings[ 'button_type' ] ); ?>">
 			<span class="button-type button-type-icon">
 				<span class="quick-view-icon">
-					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>
+					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( array(), false ) ); ?>
 				</span>
 			</span>
 			<span class="button-type button-type-icon-text">
 				<span class="quick-view-icon">
-					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>
+					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( array(), false ) ); ?>
 				</span>
 				<span class="button-text"><?php echo esc_html( $settings[ 'button_text' ] ); ?></span>
 			</span>
@@ -349,7 +348,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 		
 		$args = array(
-			'product_id' => absint( $_POST['product_id'] )
+			'product_id' => absint( $_POST['product_id'] ),
 		);
 		
 		global $product;
@@ -361,7 +360,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			wp_send_json_error();
 		}
 		
-		$product_id	   = $product->get_id(); 
+		$product_id    = $product->get_id(); 
 		$hide_quantity = ( empty( $settings[ 'show_quantity' ] ) ) ? 'merchant-hide-quantity' : '';
 
 		ob_start();
@@ -448,7 +447,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		ob_get_clean();
 
 		wp_send_json_success( $content );
-
 	}
 
 	/**
@@ -489,7 +487,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	public function quick_view_button() {
 		global $product;
 
-		$settings   = $this->get_module_settings();	
+		$settings   = $this->get_module_settings(); 
 		$product_id = $product->get_id();
 	
 		$button_text_html = '';
@@ -504,9 +502,8 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 	
 		?>
-			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( [], false ) ) . wp_kses_post( $button_text_html ); ?></a>
+			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?></a>
 		<?php
-	
 	}
 	
 	/**
@@ -585,7 +582,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Initialize the module.

@@ -15,23 +15,23 @@ if ( ! class_exists( 'Merchant_No_Plugin_Support' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string    The string to translate.
-		 * @param string $context   The context of the string.
-		 * @param bool   $multiline Whether the string is multiline or not.
+		 * @param string $string_to_register The string to translate.
+		 * @param string $context            The context of the string.
+		 * @param bool   $multiline          Whether the string is multiline or not.
 		 */
-		public function register_string( $string, $context, $multiline = false ) {
+		public function register_string( $string_to_register, $context, $multiline = false ) {
 			// Do nothing.
 		}
 
 		/**
 		 * Translate a string.
 		 *
-		 * @param string $string The string to translate.
+		 * @param string $string_to_translate The string to translate.
 		 *
 		 * @return string
 		 */
-		public function translate_string( $string ) {
-			return $string;
+		public function translate_string( $string_to_translate ) {
+			return $string_to_translate;
 		}
 
 		/**

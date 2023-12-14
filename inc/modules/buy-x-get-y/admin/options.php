@@ -23,7 +23,7 @@ Merchant_Admin_Options::create( array(
 				'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
 				'before-cart-form' => esc_html__( 'Before add to cart form', 'merchant' ),
 			),
-			'default' => 'after-cart-form'
+			'default' => 'after-cart-form',
 		),
 	),
 ) );
@@ -61,7 +61,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Button text', 'merchant' ),
 			'default' => esc_html__( 'Add To Cart', 'merchant' ),
 		),
-	)
+	),
 ) );
 
 
@@ -79,7 +79,7 @@ Merchant_Admin_Options::create( array(
 				'normal'  => esc_html__( 'Normal', 'merchant' ),
 				'bold' => esc_html__( 'Bold', 'merchant' ),
 			),
-			'default' => 'normal'
+			'default' => 'normal',
 		),
 
 		array(
@@ -90,42 +90,42 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 16
+			'default' => 16,
 		),
 
 		array(
 			'id'      => 'title_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Title text color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'label_bg_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Label background color', 'merchant' ),
-			'default' => '#d61313'
+			'default' => '#d61313',
 		),
 
 		array(
 			'id'      => 'label_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Label text color', 'merchant' ),
-			'default' => '#fff'
+			'default' => '#fff',
 		),
 
 		array(
 			'id'      => 'arrow_bg_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Arrow background color', 'merchant' ),
-			'default' => '#d61313'
+			'default' => '#d61313',
 		),
 
 		array(
 			'id'      => 'arrow_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Arrow text color', 'merchant' ),
-			'default' => '#fff'
+			'default' => '#fff',
 		),
 
 
@@ -133,7 +133,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'offer_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Offer border color', 'merchant' ),
-			'default' => '#cccccc'
+			'default' => '#cccccc',
 		),
 
 		array(
@@ -144,7 +144,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 5
+			'default' => 5,
 		),
 	),
 ) );

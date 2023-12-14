@@ -49,7 +49,7 @@ class Merchant_Checkout extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'layout' => 'layout-shopify',
-			'sticky_totals_box' => 0
+			'sticky_totals_box' => 0,
 		);
 
 		// Mount preview url.
@@ -137,7 +137,6 @@ class Merchant_Checkout extends Merchant_Add_Module {
 		
 		<?php
 	}
-
 }
 
 // Initialize the module.

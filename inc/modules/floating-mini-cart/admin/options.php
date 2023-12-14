@@ -22,7 +22,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Display', 'merchant' ),
 			'options' => array(
 				'cart-not-empty' => esc_html__( 'When cart is not empty', 'merchant' ),
-				'always'         => esc_html__( 'Always', 'merchant' )
+				'always'         => esc_html__( 'Always', 'merchant' ),
 			),
 			'default' => 'always',
 		),
@@ -113,7 +113,7 @@ Merchant_Admin_Options::create( array(
 			'default' => '#757575',
 		),
 
-	)
+	),
 ) );
 
 // Side Cart Settings
@@ -238,5 +238,5 @@ Merchant_Admin_Options::create( array(
 			'default' => '#313131',
 		),
 
-	)
+	),
 ) );

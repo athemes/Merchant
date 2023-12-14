@@ -70,11 +70,11 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
                             </p>
                             <p class="merchant-frequently-bought-together-bundle-save">
                                 <?php echo isset( $settings['save_label'] )
-                                    ? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), Merchant_Translator::translate( $settings['save_label'] ) ), merchant_kses_allowed_tags( ['bdi'] ) )
+                                    ? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), Merchant_Translator::translate( $settings['save_label'] ) ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
                                     : wp_kses(
                                         /* Translators: 1. Total discount */
                                         sprintf( __( 'You save: %s', 'merchant' ), wc_price( $bundle['total_discount'] ) ),
-                                        merchant_kses_allowed_tags( ['bdi'] )
+                                        merchant_kses_allowed_tags( array( 'bdi' ) )
                                     ); ?>
                             </p>
                             <button type="submit" name="merchant-buy-bundle" value="97" class="button alt wp-element-button merchant-add-bundle-to-cart">

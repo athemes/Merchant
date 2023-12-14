@@ -222,7 +222,6 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'data-attribute_name'     => true,
 					'data-show_option_none'   => true,
 					'data-name'               => true,
-					'data-source'             => true,
 					'step'                    => true,
 					'min'                     => true,
 					'max'                     => true,
@@ -233,7 +232,6 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'required'                => true,
 					'action'                  => true,
 					'method'                  => true,
-					'data-name'               => true,
 					'enctype'                 => true,
 					'size'                    => true,
 					'role'                    => true,
@@ -349,12 +347,12 @@ if ( ! function_exists( 'merchant_get_product_categories' ) ) {
  * Convert array to css.
  */
 if ( ! function_exists( 'merchant_array_to_css' ) ) {
-	function merchant_array_to_css( $array ) {
+	function merchant_array_to_css( $css_array ) {
 		$css = '';
-		if ( empty( $array ) ) {
+		if ( empty( $css_array ) ) {
 			return $css;
 		}
-		foreach ( $array as $key => $value ) {
+		foreach ( $css_array as $key => $value ) {
 			$css .= $key . ':' . $value . ';';
 		}
 

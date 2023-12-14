@@ -61,7 +61,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					'type'       => 'text/html',
 					'codemirror' => array(
 						'indentUnit' => 2,
-						'tabSize'    => 2
+						'tabSize'    => 2,
 					),
 				) );
 
@@ -263,7 +263,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						$active = ( 0 === $num ) ? ' active' : '';
 						echo '<a href="#" class="merchant-metabox-tab' . esc_attr( $active ) . '">' . esc_html( $option['title'] ) . '</a>';
 
-						$num ++;
+						++$num;
 					}
 				}
 
@@ -343,7 +343,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 				echo '</div>';
 
-				$num ++;
+				++$num;
 			}
 
 			echo '</div>';
@@ -488,7 +488,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					$style = '';
 					$step = 'any';
 					if ( isset( $field['style'] ) && ! empty( $field['style'] ) ) {
-						$style = 'style="' . esc_attr( str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) ) . '"';
+						$style = 'style="' . esc_attr( str_replace( array( '&', '=' ), array( '; ', ': ' ), http_build_query( $field['style'] ) ) ) . '"';
 					}
 					if ( isset( $field['step'] ) && ! empty( $field['step'] ) ) {
 						$step = $field['step'];
@@ -884,7 +884,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					$posts   = get_posts( array(
 						'post_type'      => 'merchant_size_chart',
 						'posts_per_page' => - 1,
-						'post_status'    => 'publish'
+						'post_status'    => 'publish',
 					) );
 
 					if ( ! is_wp_error( $posts ) && ! empty( $posts ) ) {
@@ -1077,6 +1077,5 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					break;
 			}
 		}
-
 	}
 }

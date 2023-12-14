@@ -20,9 +20,9 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'autoplay',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Autoplay', 'merchant' ),
-			'desc'	  => esc_html__( 'Autoplay may cause usability issues for some users.', 'merchant' ),
-			'default' => false
+			'desc'    => esc_html__( 'Autoplay may cause usability issues for some users.', 'merchant' ),
+			'default' => false,
 		),
 
-	)
+	),
 ) );

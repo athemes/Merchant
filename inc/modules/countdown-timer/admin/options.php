@@ -19,7 +19,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'discount_products_only',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Display on discounted products only', 'merchant' ),
-			'default' => true
+			'default' => true,
 		),
 
 		array(
@@ -49,7 +49,7 @@ Merchant_Admin_Options::create( array(
 			'title'     => esc_html__( 'Cool off period (minutes)', 'merchant' ),
 			'default'   => 15,
 			'desc'      => esc_html__( 'Once the cool off period expires, the countdown timer will be shown again (individually for each customer on each product page).', 'merchant' ),
-			'condition' => array( 'end_date', '==', 'evergreen' )
+			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 
 		array(
@@ -57,7 +57,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'number',
 			'title'     => esc_html__( 'Minimum expiration deadline (hours)', 'merchant' ),
 			'default'   => 2,
-			'condition' => array( 'end_date', '==', 'evergreen' )
+			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 
 		array(
@@ -65,7 +65,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'number',
 			'title'     => esc_html__( 'Maximum expiration deadline (hours)', 'merchant' ),
 			'default'   => 26,
-			'condition' => array( 'end_date', '==', 'evergreen' )
+			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 
 	),
@@ -85,14 +85,14 @@ Merchant_Admin_Options::create( array(
 				'center' => esc_html__( 'Center', 'merchant' ),
 				'right'  => esc_html__( 'Right', 'merchant' ),
 			),
-			'default' => 'left'
+			'default' => 'left',
 		),
 
 		array(
 			'id'      => 'icon_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Icon color', 'merchant' ),
-			'default' => '#626262'
+			'default' => '#626262',
 		),
 
 		array(
@@ -106,7 +106,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'digits_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Color of the digits', 'merchant' ),
-			'default' => '#444444'
+			'default' => '#444444',
 		),
 
 	),

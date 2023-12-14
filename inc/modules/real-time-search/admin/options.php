@@ -32,7 +32,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Results description', 'merchant' ),
 			'options' => array(
 				'product-post-content'      => esc_html__( 'Product Description', 'merchant' ),
-				'product-short-description' => esc_html__( 'Product short description', 'merchant' )
+				'product-short-description' => esc_html__( 'Product short description', 'merchant' ),
 			),
 	  		'default' => 'product-short-description',
 		),
@@ -53,12 +53,12 @@ Merchant_Admin_Options::create( array(
 		'type'    => 'select',
 		'title'   => esc_html__( 'Results order by', 'merchant' ),
 		'options' => array(
-			'none' 		 => esc_html__( 'None', 'merchant' ),
-			'title'		 => esc_html__( 'Product name', 'merchant' ),
-			'date'		 => esc_html__( 'Published date', 'merchant' ),
+			'none'       => esc_html__( 'None', 'merchant' ),
+			'title'      => esc_html__( 'Product name', 'merchant' ),
+			'date'       => esc_html__( 'Published date', 'merchant' ),
 			'modified' => esc_html__( 'Modified date', 'merchant' ),
-			'rand'		 => esc_html__( 'Random', 'merchant' ),
-			'price'		 => esc_html__( 'Product price', 'merchant' )
+			'rand'       => esc_html__( 'Random', 'merchant' ),
+			'price'      => esc_html__( 'Product price', 'merchant' ),
 		),
 		'default' => 'title',
 	),
@@ -68,10 +68,10 @@ Merchant_Admin_Options::create( array(
 		'type'    => 'select',
 		'title'   => esc_html__( 'Results order', 'merchant' ),
 		'options' => array(
-			'asc' 	=> esc_html__( 'Ascendant', 'merchant' ),
-			'desc' 	=> esc_html__( 'Descendant', 'merchant' )
+			'asc'   => esc_html__( 'Ascendant', 'merchant' ),
+			'desc'  => esc_html__( 'Descendant', 'merchant' ),
 		),
-	  'default' => 'asc',
+		'default' => 'asc',
 	),
 
 	array(
@@ -90,7 +90,7 @@ Merchant_Admin_Options::create( array(
 		'type'  => 'checkbox',
 		'label' => esc_html__( 'Display categories', 'merchant' ),
 		'desc'  => esc_html__( 'Display product categories in the results if the searched term matches with category name.', 'merchant' ),
-        'default' => false
+        'default' => false,
 	),
 	
 	array(
@@ -98,8 +98,8 @@ Merchant_Admin_Options::create( array(
 		'type'  => 'checkbox',
 		'label' => esc_html__( 'Enable search by SKU', 'merchant' ),
 		'desc'  => esc_html__( 'Return search results based on either product name or SKU.', 'merchant' ),
-        'default' => false
+        'default' => false,
 	),
 	
-  ),
+    ),
 ) );

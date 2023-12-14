@@ -26,7 +26,7 @@ if ( class_exists( 'Merchant_Metabox' ) ) {
 		public function add_metabox_options() {
 			$this->add_section( Merchant_Add_To_Cart_Text::MODULE_ID, array(
 				'post_type' => array( 'product' ),
-				'title'     => esc_html__( 'Add To Cart Text', 'merchant' )
+				'title'     => esc_html__( 'Add To Cart Text', 'merchant' ),
 			) );
 
 			$this->add_field( '_merchant_add_to_cart_text_single_label', array(
@@ -35,7 +35,7 @@ if ( class_exists( 'Merchant_Metabox' ) ) {
 				'title'     => esc_html__( 'Label on single product page', 'merchant' ),
 				'default' => '',
 				'desc' =>  esc_html__( 'Leave empty to use global settings.', 'merchant' ),
-				'separator' => 'none'
+				'separator' => 'none',
 			) );
 
 			$this->add_field( '_merchant_add_to_cart_text_shop_label', array(
@@ -46,9 +46,7 @@ if ( class_exists( 'Merchant_Metabox' ) ) {
 				'desc' =>  esc_html__( 'Leave empty to use global settings.', 'merchant' ),
 				'separator' => 'none',
 			) );
-
 		}
-
 	}
 
 	// Init.

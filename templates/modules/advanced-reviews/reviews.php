@@ -16,17 +16,17 @@ if ( ! isset( $args[ 'product' ] ) ) {
 	return;
 }
 
-$product 		= $args[ 'product' ];
-$product_id	 	= $product->get_id();
-$review_count	= $product->get_review_count();
-$average		= $product->get_average_rating();
+$product        = $args[ 'product' ];
+$product_id     = $product->get_id();
+$review_count   = $product->get_review_count();
+$average        = $product->get_average_rating();
 
 // Title tag
 $title_tag = $args[ 'title_tag' ];
 
 // Dropdown sort
-$default_sorting	= $args[ 'default_sorting' ];
-$sort_orderby		= isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$default_sorting    = $args[ 'default_sorting' ];
+$sort_orderby       = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 // Reviews bars rating
 $bars_data = $args['bars_data']; ?>
@@ -177,7 +177,7 @@ $bars_data = $args['bars_data']; ?>
 			// Get comments args
 			$comments_args = array(
 				'post_id'  => $product_id,
-				'number'   => get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : ''
+				'number'   => get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : '',
 			);
 
 			// Pagination?
@@ -187,7 +187,7 @@ $bars_data = $args['bars_data']; ?>
 
 				$cpages = count( get_comments( array(
 					'post_id' => $product_id,
-					'fields' => 'ids'
+					'fields' => 'ids',
 				) ) );
 
 				$cpages = $cpages / get_option( 'comments_per_page' );
@@ -208,7 +208,7 @@ $bars_data = $args['bars_data']; ?>
 					break;
 
 				case 'top-rated':
-					$comments_args[ 'order' ]	= 'DESC';
+					$comments_args[ 'order' ]   = 'DESC';
 					$comments_args[ 'orderby' ]  = 'meta_value_num';
 					// phpcs:disable
 					$comments_args[ 'meta_key' ] = 'rating';
@@ -216,7 +216,7 @@ $bars_data = $args['bars_data']; ?>
 					break;
 				
 				case 'low-rated':
-					$comments_args[ 'order' ]	= 'ASC';
+					$comments_args[ 'order' ]   = 'ASC';
 					$comments_args[ 'orderby' ]  = 'meta_value_num';
 					// phpcs:disable
 					$comments_args[ 'meta_key' ] = 'rating';
@@ -372,10 +372,10 @@ $bars_data = $args['bars_data']; ?>
 							'pagination_args' => array(
 								'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
 								'next_text' => is_rtl() ? '&larr;' : '&rarr;',
-								'type'		=> 'list'
+								'type'      => 'list',
 							),
-							'cpages' 	 => $cpages,
-							'product_id' => $product_id
+							'cpages'     => $cpages,
+							'product_id' => $product_id,
 						)
 					) );
 

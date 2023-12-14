@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
-	  'id'      => 'modal_width',
+		'id'      => 'modal_width',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Modal width', 'merchant' ),
 			'min'     => 1,
@@ -171,7 +171,7 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-	  'id'      => 'modal_height',
+		'id'      => 'modal_height',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Modal height', 'merchant' ),
 			'min'     => 1,

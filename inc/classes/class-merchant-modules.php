@@ -44,7 +44,6 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			add_action( 'wp_ajax_merchant_module_activate', array( $this, 'activate_module' ) );
 			add_action( 'wp_ajax_merchant_module_deactivate', array( $this, 'deactivate_module' ) );
 			add_action( 'wp_ajax_merchant_module_feedback', array( $this, 'feedback_module' ) );
-
 		}
 
 		/**
@@ -72,7 +71,6 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			}
 			
 			wp_send_json_error();
-
 		}
 
 		/**
@@ -100,7 +98,6 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			}
 			
 			wp_send_json_error();
-
 		}
 
 		/**
@@ -125,7 +122,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 						'from'    => $from,
 						'subject' => $subject,
 						'message' => $message,
-						'module'  => $module
+						'module'  => $module,
 					),
 				) );
 
@@ -137,7 +134,6 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			}
 			
 			wp_send_json_error();
-
 		}
 
 		/**
@@ -183,8 +179,8 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			 * @since 1.0
 			 */
 			if ( apply_filters( "merchant_module_{$module}_deactivate", false ) ) {
-				add_filter( "merchant_admin_module_{$module}_list_item_class", function( $class ) {
-					return $class . ' merchant-module-deactivated-by-bp';
+				add_filter( "merchant_admin_module_{$module}_list_item_class", static function( $class_name ) {
+					return $class_name . ' merchant-module-deactivated-by-bp';
 				} );
 
 				return false;

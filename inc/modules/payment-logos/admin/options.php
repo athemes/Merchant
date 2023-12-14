@@ -20,7 +20,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'    => 'logos',
 			'type'  => 'gallery',
-			'label' => esc_html__( 'Select logos', 'merchant' )
+			'label' => esc_html__( 'Select logos', 'merchant' ),
 		),
 
 	),

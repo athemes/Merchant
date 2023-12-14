@@ -154,10 +154,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Get option.
 		 */
-		public static function get( $module, $setting, $default ) {
+		public static function get( $module, $setting, $default_val ) {
 			$options = get_option( 'merchant', array() );
 
-			$value = $default;
+			$value = $default_val;
 
 			if ( isset( $options[ $module ] ) && isset( $options[ $module ][ $setting ] ) ) {
 				$value = $options[ $module ][ $setting ];
@@ -273,12 +273,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
 								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
-							} else {
-								if ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
+							} elseif ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
 									$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
 								} else {
 									$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
-								}
 							}
 						}
 
@@ -429,9 +427,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = $default;
 				}
 				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-id="'
-				     . esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
+					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
-					echo sprintf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
+					printf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
 				}
 
 				echo '<div class="merchant-module-page-setting-field-inner">';
@@ -443,7 +441,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo '</div>';
 
 				if ( ! empty( $settings['desc'] ) ) {
-					echo sprintf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['desc'] ) );
+					printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['desc'] ) );
 				}
 
 				echo '</div>';
@@ -580,7 +578,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo esc_attr( $settings['id'] ); ?>" name="merchant[<?php
 				echo esc_attr( $settings['id'] ); ?>]" value="1" <?php
 				checked( $value, 1, true ); ?>
-                       class="toggle-switch-checkbox"/>
+                        class="toggle-switch-checkbox"/>
                 <label class="toggle-switch-label" for="<?php
 				echo esc_attr( $settings['id'] ); ?>">
                     <span class="toggle-switch-inner"></span>
@@ -781,7 +779,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 							foreach ( $option['options'] as $child_option ) {
 								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $child_option['id'], $value ) . '>' . esc_html( $child_option['text'] )
-								     . '</option>';
+									. '</option>';
 							}
 
 							echo '</optgroup>';
@@ -903,14 +901,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 <input type="range" class="merchant-range-input" name="" min="<?php
 				echo esc_attr( $settings['min'] ); ?>" max="<?php
 				echo esc_attr( $settings['max'] ); ?>"
-                       step="<?php
-				       echo esc_attr( $settings['step'] ); ?>" value="<?php
+                        step="<?php
+						echo esc_attr( $settings['step'] ); ?>" value="<?php
 				echo esc_attr( $value ); ?>"/>
                 <input type="number" class="merchant-range-number-input" name="merchant[<?php
 				echo esc_attr( $settings['id'] ); ?>]" min="<?php
 				echo esc_attr( $settings['min'] ); ?>"
-                       max="<?php
-				       echo esc_attr( $settings['max'] ); ?>" step="<?php
+                        max="<?php
+						echo esc_attr( $settings['max'] ); ?>" step="<?php
 				echo esc_attr( $settings['step'] ); ?>" value="<?php
 				echo esc_attr( $value ); ?>"/>
 				<?php
@@ -964,11 +962,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 					if ( ! empty( $image ) && ! empty( $image[0] ) ) :
 
-						echo sprintf( '<div class="merchant-gallery-image" data-item-id="%s">', esc_attr( $image_id ) );
+						printf( '<div class="merchant-gallery-image" data-item-id="%s">', esc_attr( $image_id ) );
 
 						echo '<i class="merchant-gallery-remove dashicons dashicons-no-alt"></i>';
 
-						echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
+						printf( '<img src="%s" />', esc_url( $image[0] ) );
 
 						echo '</div>';
 
@@ -1007,7 +1005,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 					echo '<div class="merchant-upload-image">';
 					echo '<i class="merchant-upload-remove dashicons dashicons-no-alt"></i>';
-					echo sprintf( '<img src="%s" />', esc_url( $image[0] ) );
+					printf( '<img src="%s" />', esc_url( $image[0] ) );
 					echo '</div>';
 
 				endif;
@@ -1107,7 +1105,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 <div class="merchant-sortable-repeater sortable regular-field">
                     <div class="repeater">
                         <input type="text" value="" class="repeater-input"/><span class="dashicons dashicons-menu"></span><a class="customize-control-sortable-repeater-delete"
-                                                                                                                             href="#"><span
+                                                                                                                            href="#"><span
                                     class="dashicons dashicons-no-alt"></span></a>
                     </div>
                 </div>
@@ -1148,8 +1146,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
             <div class="<?php
 			echo esc_attr( implode( ' ', $classes ) ); ?>"
-                 data-id="<?php
-			     echo esc_attr( $settings['id'] ) ?>">
+                data-id="<?php
+				echo esc_attr( $settings['id'] ) ?>">
 
                 <div class="layouts" data-id="<?php
 				echo esc_attr( $settings['id'] ) ?>">
@@ -1256,8 +1254,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                 <input type="hidden" name="merchant[<?php
 								echo esc_attr( $settings['id'] ) ?>][<?php
 								echo absint( $option_key ) ?>][layout]"
-                                       value="<?php
-								       echo esc_attr( $option['layout'] ) ?>">
+                                        value="<?php
+										echo esc_attr( $option['layout'] ) ?>">
                             </div>
                         </div>
 
@@ -1271,11 +1269,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						<?php
 						foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
                             <a href="#"
-                               class="customize-control-flexible-content-add"
-                               data-id="<?php
-							   echo esc_attr( $settings['id'] ) ?>"
-                               data-layout="<?php
-							   echo esc_attr( $layout_type ) ?>">
+                                class="customize-control-flexible-content-add"
+                                data-id="<?php
+								echo esc_attr( $settings['id'] ) ?>"
+                                data-layout="<?php
+								echo esc_attr( $layout_type ) ?>">
 								<?php
 								echo esc_attr( $layout['title'] ) ?>
                             </a>
@@ -1391,12 +1389,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                         <input id="merchant-<?php
 						echo esc_attr( $settings['id'] ); ?>-<?php
 						echo esc_attr( $dimension ) ?>"
-                               type="number"
-                               name="merchant[<?php
-						       echo esc_attr( $settings['id'] ); ?>][<?php
-						       echo esc_attr( $dimension ) ?>]"
-                               value="<?php
-						       echo esc_attr( $value[ $dimension ] ); ?>"/>
+                                type="number"
+                                name="merchant[<?php
+								echo esc_attr( $settings['id'] ); ?>][<?php
+								echo esc_attr( $dimension ) ?>]"
+                                value="<?php
+								echo esc_attr( $value[ $dimension ] ); ?>"/>
                         <label for="merchant-<?php
 						echo esc_attr( $settings['id'] ); ?>-<?php
 						echo esc_attr( $dimension ) ?>">
@@ -1487,13 +1485,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									echo esc_attr( $settings['id'] ); ?>-<?php
 									echo esc_attr( $device ) ?>-<?php
 									echo esc_attr( $dimension ) ?>"
-                                           type="number"
-                                           name="merchant[<?php
-									       echo esc_attr( $settings['id'] ); ?>][<?php
-									       echo esc_attr( $device ) ?>][<?php
-									       echo esc_attr( $dimension ) ?>]"
-                                           value="<?php
-									       echo esc_attr( $value[ $device ][ $dimension ] ); ?>"/>
+                                            type="number"
+                                            name="merchant[<?php
+											echo esc_attr( $settings['id'] ); ?>][<?php
+											echo esc_attr( $device ) ?>][<?php
+											echo esc_attr( $dimension ) ?>]"
+                                            value="<?php
+											echo esc_attr( $value[ $device ][ $dimension ] ); ?>"/>
                                     <label for="merchant-<?php
 									echo esc_attr( $settings['id'] ); ?>-<?php
 									echo esc_attr( $device ) ?>-<?php
@@ -1527,7 +1525,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			return false;
 		}
-
 	}
 
 	Merchant_Admin_Options::instance();

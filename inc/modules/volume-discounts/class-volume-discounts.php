@@ -64,7 +64,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 			'item_text'                => esc_html__( 'Per item:', 'merchant' ),
 			'total_text'               => esc_html__( 'Total price:', 'merchant' ),
 			'cart_title_text'          => esc_html__( 'Discount', 'merchant' ),
-			'cart_description_text'    => esc_html__( 'A discount of {amount} has been applied.', 'merchant' )
+			'cart_description_text'    => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
 		);
 
 		// Module data.
@@ -85,10 +85,10 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					array(
 						'key'     => '_merchant_volume_discounts',
 						'value'   => 'a:0:{}',
-						'compare' => '!='
-					)
-				)
-			)
+						'compare' => '!=',
+					),
+				),
+			),
 		) );
 
 		// Module options path.
@@ -184,19 +184,19 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 				),
 				array(
 					wc_price( 10 ),
-				)
+				),
 			) );
 
 			// Buy Text
 			$preview->set_text( 'buy_text', '.merchant-volume-discounts-buy-label', array(
 				array(
 					'{amount}',
-					'{discount}'
+					'{discount}',
 				),
 				array(
 					'<strong>10</strong>',
-					'<strong>' . wc_price( 2 ) . '</strong>'
-				)
+					'<strong>' . wc_price( 2 ) . '</strong>',
+				),
 			) );
 
 			// Item Text
@@ -262,9 +262,9 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 						'settings'       => $settings,
 						'discount_tiers' => array(
 							array( 'quantity' => 10, 'discount' => 5, 'layout' => 'percentage_discount' ),
-							array( 'quantity' => 20, 'discount' => 10, 'layout' => 'percentage_discount' )
+							array( 'quantity' => 20, 'discount' => 10, 'layout' => 'percentage_discount' ),
 						),
-						'product_price'  => 20
+						'product_price'  => 20,
 					)
 				);
 				?>

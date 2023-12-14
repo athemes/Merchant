@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
 				'pos-right'  => array(
 					'image' => '%s/qlr.svg',
 					'label' => esc_html__( 'Right', 'merchant' ),
-				)
+				),
 			),
 			'default' => 'pos-bottom',
 		),
@@ -42,7 +42,7 @@ Merchant_Admin_Options::create( array(
 			'options' => array(
 				'visibility-all'     => esc_html__( 'Show on all devices', 'merchant' ),
 				'visibility-desktop' => esc_html__( 'Desktop only', 'merchant' ),
-				'visibility-mobile'  => esc_html__( 'Mobile/Tablet only', 'merchant' )
+				'visibility-mobile'  => esc_html__( 'Mobile/Tablet only', 'merchant' ),
 			),
 			'default' => 'visibility-all',
 		),
@@ -58,14 +58,14 @@ Merchant_Admin_Options::create( array(
 				'id'      => 'icon_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Icon color', 'merchant' ),
-				'default' => '#212121'
+				'default' => '#212121',
 			),
 
 			array(
 				'id'      => 'bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Background color', 'merchant' ),
-				'default' => '#ffffff'
+				'default' => '#ffffff',
 			),
 
 			array(
@@ -78,7 +78,7 @@ Merchant_Admin_Options::create( array(
 				'unit'    => 'px',
 				'default' => 15,
 			),
-		)
+		),
 	)
 );
 
@@ -118,7 +118,7 @@ Merchant_Admin_Options::create( array(
 							'options' => array(
 								'include' => esc_html__( 'Include', 'merchant' ),
 								'exclude' => esc_html__( 'Exclude', 'merchant' ),
-							)
+							),
 						),
 						array(
 							'id'       => 'condition',
@@ -127,7 +127,7 @@ Merchant_Admin_Options::create( array(
 							'source'   => 'options',
 							'multiple' => false,
 							'classes'  => array(
-								'flex-grow'
+								'flex-grow',
 							),
 							'options'  => array(
 								array(
@@ -146,7 +146,7 @@ Merchant_Admin_Options::create( array(
 											'id'   => 'archive',
 											'text' => esc_html__( 'Archives', 'merchant' ),
 										),
-									)
+									),
 								),
 								array(
 									'id'      => 'posts',
@@ -227,7 +227,7 @@ Merchant_Admin_Options::create( array(
 										array(
 											'id'   => 'lost-password-page',
 											'text' => esc_html__( 'Lost Password', 'merchant' ),
-										)
+										),
 									),
 								),
 								array(
@@ -259,10 +259,10 @@ Merchant_Admin_Options::create( array(
 											'text' => esc_html__( 'Privacy Policy Page', 'merchant' ),
 										),
 									),
-								)
-							)
+								),
+							),
 						),
-					)
+					),
 				),
 				'user'    => array(
 					'title'  => esc_html__( 'User condition', 'merchant' ),
@@ -274,7 +274,7 @@ Merchant_Admin_Options::create( array(
 							'options' => array(
 								'include' => esc_html__( 'Include', 'merchant' ),
 								'exclude' => esc_html__( 'Exclude', 'merchant' ),
-							)
+							),
 						),
 						array(
 							'id'       => 'condition',
@@ -283,7 +283,7 @@ Merchant_Admin_Options::create( array(
 							'source'   => 'options',
 							'multiple' => false,
 							'classes'  => array(
-								'flex-grow'
+								'flex-grow',
 							),
 							'options'  => array(
 								array(
@@ -318,18 +318,18 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
-					)
+					),
 				),
 			),
 			'default'      => array(
 				array(
 					'layout'    => 'display',
 					'condition' => 'all',
-					'type'      => 'include'
-				)
-			)
+					'type'      => 'include',
+				),
+			),
 		),
-	)
+	),
 ) );
 
 
@@ -374,7 +374,7 @@ Merchant_Admin_Options::create( array(
 							'default' => 'https://',
 							'desc'    => esc_html__( 'After entering the complete URL, an associated icon will be automatically chosen.', 'merchant' ),
 						),
-					)
+					),
 				),
 				'custom' => array(
 					'title'  => esc_html__( 'Custom link', 'merchant' ),
@@ -388,28 +388,28 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'url',
 							'title'   => esc_html__( 'URL', 'merchant' ),
 							'type'    => 'text',
-							'default' => 'https://'
+							'default' => 'https://',
 						),
-					)
+					),
 				),
 			),
 			'default'      => array(
 				array(
 					'layout' => 'social',
 					'icon'   => 'facebook',
-					'url'    => esc_html__( 'https://www.facebook.com', 'merchant' )
+					'url'    => esc_html__( 'https://www.facebook.com', 'merchant' ),
 				),
 				array(
 					'layout' => 'social',
 					'icon'   => 'instagram',
-					'url'    => esc_html__( 'https://www.instagram.com', 'merchant' )
+					'url'    => esc_html__( 'https://www.instagram.com', 'merchant' ),
 				),
 				array(
 					'layout' => 'social',
 					'icon'   => 'twitter',
-					'url'    => esc_html__( 'https://www.twitter.com', 'merchant' )
+					'url'    => esc_html__( 'https://www.twitter.com', 'merchant' ),
 				),
-			)
+			),
 		),
-	)
+	),
 ) );

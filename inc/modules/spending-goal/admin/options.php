@@ -33,7 +33,7 @@ Merchant_Admin_Options::create( array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
 			),
-			'default' => 'subtotal'
+			'default' => 'subtotal',
 		),
 
 		array(
@@ -44,7 +44,7 @@ Merchant_Admin_Options::create( array(
 				'percent' => esc_html__( 'Percent', 'merchant' ),
 				'fixed'   => esc_html__( 'Fixed amount', 'merchant' ),
 			),
-			'default' => 'percent'
+			'default' => 'percent',
 		),
 
 		array(
@@ -62,7 +62,7 @@ Merchant_Admin_Options::create( array(
 			'desc'    => esc_html__( 'This will be the name of the applied discount on the cart page.', 'merchant' ),
 		),
 
-	)
+	),
 
 ) );
 
@@ -95,7 +95,7 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'Congratulations! You get a discount of {discount_amount} on this order!', 'merchant' ),
 			'desc'    => esc_html__( 'Default: Congratulations! You get a discount of {discount_amount} on this order!', 'merchant' ),
 		),
-	)
+	),
 ) );
 
 // Style Settings
@@ -108,21 +108,21 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'gradient_start',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Gradient start', 'merchant' ),
-			'default' => '#5e5e5e'
+			'default' => '#5e5e5e',
 		),
 
 		array(
 			'id'      => 'gradient_end',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Gradient end', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'progress_bar',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Progress bar color', 'merchant' ),
-			'default' => '#d83a3b'
+			'default' => '#d83a3b',
 		),
 
 		array(
@@ -133,21 +133,21 @@ Merchant_Admin_Options::create( array(
 			'max'     => 600,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 300
+			'default' => 300,
 		),
 
 		array(
 			'id'      => 'content_bg_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Content background color', 'merchant' ),
-			'default' => '#f9f9f9'
+			'default' => '#f9f9f9',
 		),
 
 		array(
 			'id'      => 'content_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Content text color', 'merchant' ),
-			'default' => '#3c434a'
+			'default' => '#3c434a',
 		),
 	),
 ) );

@@ -50,7 +50,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 			'display' => 'always',
 			'icon' => 'cart-icon-1',
-			'icon-position' => 'right'
+			'icon-position' => 'right',
 		);
 
 		// Module data.
@@ -87,7 +87,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( $this->is_module_settings_page()) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/floating-mini-cart.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/floating-mini-cart.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -173,7 +173,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 			<div class="merchant-floating-side-mini-cart">
 				<div class="merchant-floating-side-mini-cart-body">
 					<a href="#" class="merchant-floating-side-mini-cart-close-button merchant-floating-side-mini-cart-toggle" title="<?php echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
-						<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( [], false ) ); ?>
+						<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( array(), false ) ); ?>
 					</a>
 
 					<div class="merchant-floating-side-mini-cart-widget">
@@ -243,7 +243,7 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 		<a href="#" class="merchant-floating-mini-cart-icon merchant-floating-mini-cart-icon-position-<?php echo esc_attr( $settings[ 'icon-position' ] ); ?> merchant-floating-side-mini-cart-toggle" data-display="<?php echo esc_attr( $settings[ 'display' ] ); ?>">
 			<span class="merchant-floating-mini-cart-icon-counter">0</span>
 			<i class="merchant-floating-mini-cart-icon-icon">
-				<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>
+				<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'icon' ] ), merchant_kses_allowed_tags( array(), false ) ); ?>
 			</i>
 		</a>
 

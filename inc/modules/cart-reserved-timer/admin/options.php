@@ -69,7 +69,7 @@ Merchant_Admin_Options::create( array(
 				'hide-timer' => esc_html__( 'Hide timer', 'merchant' ),
 				'clear-cart' => esc_html__( 'Clear cart', 'merchant' ),
 			),
-			'default' => 'clear-cart'
+			'default' => 'clear-cart',
 		),
 
 		array(
@@ -83,7 +83,7 @@ Merchant_Admin_Options::create( array(
 				'clock'      => $icon_path . '/clock.svg',
 				'hour-glass' => $icon_path . '/hour-glass.svg',
 			),
-			'default' => 'fire'
+			'default' => 'fire',
 		),
 
 		array(

@@ -43,7 +43,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'button-text' => __( 'Buy Now', 'merchant' )
+			'button-text' => __( 'Buy Now', 'merchant' ),
 		);
 
 		// Module data.
@@ -97,7 +97,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
@@ -125,7 +124,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -253,7 +252,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		global $post, $product;
 
 		if ( ! $product->is_type( 'simple' ) ) {
-		  return;
+			return;
 		}
 
 		if ( ! empty( $product ) ) {
@@ -323,7 +322,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Initialize the module.

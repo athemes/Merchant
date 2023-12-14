@@ -57,7 +57,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 			'badges' => '',
 			'align' => 'center',
-			'title' => __( 'Product Quality Guaranteed!', 'merchant' )
+			'title' => __( 'Product Quality Guaranteed!', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -105,7 +105,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue styles.
@@ -116,7 +116,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
@@ -146,9 +145,9 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		}
 		ob_start();
 
-		$settings 		= $this->get_module_settings();
+		$settings       = $this->get_module_settings();
 		$is_placeholder = empty( $settings[ 'badges' ] ) ? true : false;
-		$badges			= $this->get_badges( $settings[ 'badges' ] );
+		$badges         = $this->get_badges( $settings[ 'badges' ] );
 		?>
         <fieldset class="merchant-trust-badges">
 			<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
@@ -159,7 +158,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 					<?php foreach ( $badges as $image_id ) : ?>
 						<?php $imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
 						<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
-							<?php echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
+							<?php printf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
 						<?php endif; ?>
 					<?php endforeach; ?>
                 </div>
@@ -208,7 +207,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/trust-badges.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/trust-badges.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -295,7 +294,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			: array(
 				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge1.svg',
 				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge2.svg',
-				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge3.svg'
+				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge3.svg',
 			);
 	}
 
@@ -314,9 +313,9 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 		
-		$settings 		= $this->get_module_settings();
+		$settings       = $this->get_module_settings();
 		$is_placeholder = empty( $settings[ 'badges' ] ) ? true : false;
-		$badges			= $this->get_badges( $settings[ 'badges' ] );
+		$badges         = $this->get_badges( $settings[ 'badges' ] );
 
 		?>
 
@@ -336,7 +335,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 							<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
 
-								<?php echo sprintf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
+								<?php printf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
 
 							<?php endif; ?>
 
@@ -357,7 +356,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			</fieldset>
 			
 		<?php 
-		
 	}
 
 	/**
@@ -422,7 +420,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Initialize the module.

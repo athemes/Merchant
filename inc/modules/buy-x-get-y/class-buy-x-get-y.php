@@ -154,7 +154,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 								'title'      => 'Vinopure Pore Purifying Gel Cleanser',
 								'price_html' => wc_price( 14 ),
 								'price'      => 14,
-								'permalink'  => '#'
+								'permalink'  => '#',
 							),
 							'quantity'       => 2,
 							'discount_value' => 10,
@@ -165,13 +165,13 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 								'title'      => 'Eternal Sunset Collection Lip and Cheek',
 								'price_html' => wc_price( 12 ),
 								'price'      => 12,
-								'permalink'  => '#'
+								'permalink'  => '#',
 							),
-							'total_discount' => 2.8
-						)
+							'total_discount' => 2.8,
+						),
 					),
 					'nonce'    => '',
-					'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID )
+					'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
 				),
 				true
 			) );
@@ -182,23 +182,23 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 			// Buy Label Text ({quantity} gets replaced with a dummy "2" text)
 			$preview->set_text( 'buy_label', '.merchant-bogo-product-buy-label', array(
 				array(
-					'{quantity}'
+					'{quantity}',
 				),
 				array(
-					'2'
-				)
+					'2',
+				),
 			) );
 
 			// Get Label Text ({quantity} gets replaced with a dummy "2" text and {discount} gets replaced with dummy "10%" text)
 			$preview->set_text( 'get_label', '.merchant-bogo-product-get-label', array(
 				array(
 					'{quantity}',
-					'{discount}'
+					'{discount}',
 				),
 				array(
 					'2',
-					'10%'
-				)
+					'10%',
+				),
 			) );
 
 			// Button Text

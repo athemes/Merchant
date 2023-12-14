@@ -24,7 +24,7 @@ Merchant_Admin_Options::create( array(
 				'after-tabs'    => esc_html__( 'After product tabs', 'merchant' ),
 				'bottom'        => esc_html__( 'At the bottom', 'merchant' ),
 			),
-			'default' => 'after-summary'
+			'default' => 'after-summary',
 		),
 	),
 ) );
@@ -61,7 +61,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Button text', 'merchant' ),
 			'default' => esc_html__( 'Add to cart', 'merchant' ),
 		),
-	)
+	),
 ) );
 
 // Style Settings
@@ -74,21 +74,21 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'plus_bg_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Plus sign background color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'plus_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Plus sign text color', 'merchant' ),
-			'default' => '#fff'
+			'default' => '#fff',
 		),
 
 		array(
 			'id'      => 'bundle_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Bundle border color', 'merchant' ),
-			'default' => '#f9f9f9'
+			'default' => '#f9f9f9',
 		),
 
 		array(
@@ -99,7 +99,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 5
+			'default' => 5,
 		),
 	),
 ) );

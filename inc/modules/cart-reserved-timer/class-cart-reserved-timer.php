@@ -171,7 +171,7 @@ class Merchant_Cart_Reserved_Timer extends Merchant_Add_Module {
 		// Get the icon attributes.
 		$settings['icon'] = array(
 			'src' => $this->get_icon( $settings['icon'] ),
-			'alt' => __( 'Cart Reserved Timer Icon', 'merchant' )
+			'alt' => __( 'Cart Reserved Timer Icon', 'merchant' ),
 		);
 
 		return $settings;

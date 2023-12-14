@@ -51,7 +51,7 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			'login_link_text' => esc_html__( 'Login', 'merchant' ),
 			'show_welcome_message' => true,
 			/* Translators: 1. Display name */
-			'welcome_message_text' => sprintf( esc_html__( 'Welcome %s', 'merchant' ), '{display_name}' )
+			'welcome_message_text' => sprintf( esc_html__( 'Welcome %s', 'merchant' ), '{display_name}' ),
 		);
 
 		// Mount preview url.
@@ -111,7 +111,7 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/login-popup.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/login-popup.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -145,11 +145,11 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 
 			$preview->set_text( 'welcome_message_text', '.merchant-login-popup-button', array(
 					array(
-						'{display_name}'
+						'{display_name}',
 					),
 					array(
-						'Bob Jansen'
-					)
+						'Bob Jansen',
+					),
 				)
 			);
 			$preview->set_css( 'login-text-color', '.merchant-login-popup-dropdown', '--merchant-login-text-color' );
@@ -191,8 +191,8 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 
 		$welcome_text = $settings[ 'welcome_message_text' ];
 		$welcome_text = str_replace(
-			array('{user_firstname}', '{user_lastname}', '{user_email}', '{user_login}', '{display_name}'),
-			array('Bob', 'Jansen', 'bob@gmail.com', 'Bob Jansen', 'Bob Jansen'),
+			array( '{user_firstname}', '{user_lastname}', '{user_email}', '{user_login}', '{display_name}' ),
+			array( 'Bob', 'Jansen', 'bob@gmail.com', 'Bob Jansen', 'Bob Jansen' ),
 			$welcome_text
 		);
 
@@ -204,7 +204,7 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			<div class="merchant-login-popup-overlay merchant-login-popup-toggle"></div>
 			<div class="merchant-login-popup-body">
 				<a href="#" class="merchant-login-popup-close merchant-login-popup-toggle">
-					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( [], false ) ); ?>
+					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( array(), false ) ); ?>
 				</a>
 				<div class="merchant-login-popup-content">
 					<?php if ( function_exists( 'wc_get_template' ) ) : ?>

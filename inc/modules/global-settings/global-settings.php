@@ -16,7 +16,6 @@ function merchant_head_custom_js_first() {
 	if ( ! empty( $custom_js_first ) ) {
 		wp_add_inline_script( 'merchant', wp_kses( $custom_js_first, array() ), 'before' );
 	}
-
 }
 add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_first', 11 );
 
@@ -32,7 +31,6 @@ function merchant_head_custom_js() {
 	if ( ! empty( $custom_js ) ) {
 		wp_add_inline_script( 'merchant', wp_kses( $custom_js, array() ), 'after' );
 	}
-
 }
 add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js', 12 );
 
@@ -48,6 +46,5 @@ function merchant_head_custom_js_later() {
 	if ( ! empty( $custom_js_last ) ) {
 		wp_add_inline_script( 'merchant', wp_kses( $custom_js_last, array() ), 'after' );
 	}
-
 }
 add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_later', 13 );

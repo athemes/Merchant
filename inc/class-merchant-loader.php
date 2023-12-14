@@ -165,7 +165,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'src'    => 'assets/css/grid.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
-					'media'  => 'all'
+					'media'  => 'all',
 				),
 
 				// Utilities.
@@ -174,7 +174,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'src'    => 'assets/css/utilities.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
-					'media'  => 'all'
+					'media'  => 'all',
 				),
 
 				// Carousel.
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'src'    => 'assets/css/carousel.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
-					'media'  => 'all'
+					'media'  => 'all',
 				),
 
 				// Pagination.
@@ -192,8 +192,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'src'    => 'assets/css/pagination.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
-					'media'  => 'all'
-				)
+					'media'  => 'all',
+				),
 
 			);
 
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'handle'    => 'merchant-scroll-direction',
 					'src'       => 'assets/js/scroll-direction.min.js',
 					'dep'       => array(),
-					'in_footer' => true
+					'in_footer' => true,
 				),
 
 				// Toggle Class
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'handle'    => 'merchant-toggle-class',
 					'src'       => 'assets/js/toggle-class.min.js',
 					'dep'       => array(),
-					'in_footer' => true
+					'in_footer' => true,
 				),
 
 				// Custom Add To Cart Button
@@ -225,7 +225,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'handle'    => 'merchant-custom-addtocart-button',
 					'src'       => 'assets/js/custom-addtocart-button.min.js',
 					'dep'       => array(),
-					'in_footer' => true
+					'in_footer' => true,
 				),
 
 				// Carousel
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'handle'    => 'merchant-carousel',
 					'src'       => 'assets/js/carousel.min.js',
 					'dep'       => array(),
-					'in_footer' => true
+					'in_footer' => true,
 				),
 
 				// Pagination
@@ -241,8 +241,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'handle'    => 'merchant-pagination',
 					'src'       => 'assets/js/pagination.min.js',
 					'dep'       => array(),
-					'in_footer' => true
-				)
+					'in_footer' => true,
+				),
 			);
 
 			foreach ( $scripts as $script ) {
@@ -325,7 +325,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			wp_localize_script( 'merchant', 'merchant', array( 'setting' => $setting ) );
 		}
-
 	}
 
 	Merchant_Loader::instance();

@@ -50,7 +50,7 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'title',
 			'type'  => 'text',
 			'title' => esc_html__( 'Text above the logos', 'merchant' ),
-			'default' => esc_html__( 'Product Quality Guaranteed!', 'merchant' )
+			'default' => esc_html__( 'Product Quality Guaranteed!', 'merchant' ),
 		),
 
 		array(

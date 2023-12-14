@@ -96,14 +96,9 @@ class Merchant {
 		require_once MERCHANT_DIR . 'admin/class-merchant-admin-loader.php';
 		require_once MERCHANT_DIR . 'inc/class-merchant-loader.php';
 	}
-
 }
 
 /**
- * Function works with the Merchant class instance
- *
+ * Run the plugin.
  */
-function merchant() {
-	return Merchant::instance();
-}
-merchant();
+Merchant::instance();

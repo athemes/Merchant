@@ -37,7 +37,7 @@ Merchant_Admin_Options::create( array(
 			'options' => array(
 				'layout-shopify' => esc_html__( 'Shopify multi step', 'merchant' ),
 				'layout-one-step' => esc_html__( 'One step', 'merchant' ),
-				'layout-multi-step' => esc_html__( 'Multi step', 'merchant' )
+				'layout-multi-step' => esc_html__( 'Multi step', 'merchant' ),
 			),
 			'default' => 'layout-shopify',
 		),
@@ -49,5 +49,5 @@ Merchant_Admin_Options::create( array(
 			'condition' => array( 'layout', 'any', 'layout-shopify|layout-one-step' ),
 		),
 
-	)
+	),
 ) );
