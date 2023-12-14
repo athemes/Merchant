@@ -55,6 +55,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_available_variation', array( $this, 'change_button_text_for_variable_products' ), 10, 3 );
 		add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'maybe_render_additional_information' ), 10 );
 
+		// Cart
+		add_filter( 'woocommerce_cart_item_name', array( $this, 'cart_item_name' ), 10, 2 );
+		add_filter( 'woocommerce_order_item_name', array( $this, 'order_item_name' ), 10, 2 );
+
 		$this->register_pre_orders_order_status();
 		add_filter( 'wc_order_statuses', array( $this, 'add_pre_orders_order_statuses' ) );
 		add_filter( 'woocommerce_post_class', array( $this, 'pre_orders_post_class' ), 10, 3 );
@@ -526,4 +530,50 @@ class Merchant_Pre_Orders_Main_Functionality {
 		return $classes;
 	}
 
+	/**
+	 * filter name: woocommerce_cart_item_name
+	 * Adds pre order additional text to the cart item name
+	 *
+	 * @param string $text Original cart item name string.
+	 * @param array  $item Item array data.
+	 * @return string
+	 */
+	public function cart_item_name( $text, $item ) {
+		return $text . $this->get_pre_order_additional_text( $item['product_id'] );
+	}
+
+	/**
+	 * filter name: woocommerce_order_item_name
+	 * Adds pre order additional text to the order item name
+	 *
+	 * @param string                 $text Original order item name string.
+	 * @param \WC_Order_Item_Product $item Item array data.
+	 * @return string
+	 */
+	public function order_item_name( $text, $item ) {
+		return $text . $this->get_pre_order_additional_text( $item->get_product()->get_id() );
+	}
+
+	/**
+	 * Get pre order additional text string by Product ID. Returns empty string for non-pre-order items.
+	 *
+	 * @param int   $product_id Product ID.
+	 * @param array $classes    Wrapper class array for styling.
+	 * @return string
+	 */
+	private function get_pre_order_additional_text( $product_id, $classes = array( 'merchant-pre-orders-mark' ) ) {
+		if ( $this->is_pre_order( $product_id ) ) {
+			$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
+			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
+			$text            = $this->replaceDateTxt( $additional_text, $time_format );
+
+			return sprintf(
+				'<span class="%s" title="%s"></span>',
+				esc_attr( join( ' ', $classes ) ),
+				esc_html( $text )
+			);
+		}
+
+		return '';
+	}
 }

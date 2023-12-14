@@ -21,3 +21,16 @@
   border-color: var(--mrc-po-border-hover-color, #414141) !important;
   background-color: var(--mrc-po-background-hover-color, #414141) !important;
 }
+
+.merchant-pre-orders-mark {
+  padding-left: 0.25em;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.25 ease-in-out;
+  transition: opacity 0.25 ease-in-out;
+}
+.merchant-pre-orders-mark::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='14' width='14' viewBox='0 0 512 512'%3E%3Cpath opacity='1' fill='currentColor' d='M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z'/%3E%3C/svg%3E");
+}
+.merchant-pre-orders-mark:hover {
+  opacity: 1;
+}
