@@ -112,7 +112,10 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 			Merchant_Translator::register_string( $settings['low_inventory_text'], esc_html__( 'Stock Scarcity: Text when inventory is low', 'merchant' ) );
 		}
 		if ( ! empty( $settings['low_inventory_text_plural'] ) ) {
-			Merchant_Translator::register_string( $settings['low_inventory_text'], esc_html__( 'Stock Scarcity: Text when inventory is low (plural)', 'merchant' ) );
+			Merchant_Translator::register_string( $settings['low_inventory_text_plural'], esc_html__( 'Stock Scarcity: Text when inventory is low (plural)', 'merchant' ) );
+		}
+		if ( ! empty( $settings['low_inventory_text_simple'] ) ) {
+			Merchant_Translator::register_string( $settings['low_inventory_text_simple'], esc_html__( 'Stock Scarcity: Text when inventory is low (simple - used for product variation)', 'merchant' ) );
 		}
 	}
 

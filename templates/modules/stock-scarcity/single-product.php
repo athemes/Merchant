@@ -16,10 +16,12 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 <div class="merchant-stock-scarcity">
     <div class="merchant-stock-scarcity-message">
 		<?php 
-		$low_inventory_text = isset( $settings['low_inventory_text'] ) ? Merchant_Translator::translate( $settings['low_inventory_text'] ) : '';
-
-		if ( $args['stock'] > 1 ) {
+		if ( ! empty( $args['is_simple'] ) ) {
+			$low_inventory_text = isset( $settings['low_inventory_text_simple'] ) ? Merchant_Translator::translate( $settings['low_inventory_text_simple'] ) : esc_html__( 'Hurry, low stock.', 'merchant' );
+		} elseif ( $args['stock'] > 1 ) {
 			$low_inventory_text = isset( $settings['low_inventory_text_plural'] ) ? Merchant_Translator::translate( $settings['low_inventory_text_plural'] ) : '';
+		} else {
+			$low_inventory_text = isset( $settings['low_inventory_text'] ) ? Merchant_Translator::translate( $settings['low_inventory_text'] ) : '';
 		}
 
 		echo ! empty( $low_inventory_text )

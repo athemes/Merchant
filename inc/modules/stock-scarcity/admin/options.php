@@ -56,6 +56,13 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Text when inventory is low (plural)', 'merchant' ),
 			'default' => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' ),
 		),
+
+		array(
+			'id'      => 'low_inventory_text_simple',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Text when inventory is low (simple - used for product variation)', 'merchant' ),
+			'default' => esc_html__( 'Hurry, low stock.', 'merchant' ),
+		),
 	)
 ) );
 
