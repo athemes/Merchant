@@ -3,3 +3,4 @@ vendor
 **.code-workspace
 .DS_Store
 .idea
+composer.lock
