@@ -56,8 +56,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'maybe_render_additional_information' ), 10 );
 
 		// Cart
-		add_filter( 'woocommerce_cart_item_name', array( $this, 'cart_item_name' ), 10, 2 );
-		add_filter( 'woocommerce_order_item_name', array( $this, 'order_item_name' ), 10, 2 );
+		add_filter( 'woocommerce_get_item_data', array( $this, 'cart_message_handler' ), 10, 2 );
+
+		add_action( 'woocommerce_order_item_meta_end', array( $this, 'order_item_meta_end' ), 10, 4 );
+		add_action( 'woocommerce_shop_loop_item_title', array( $this, 'shop_loop_item_title' ) );
 
 		$this->register_pre_orders_order_status();
 		add_filter( 'wc_order_statuses', array( $this, 'add_pre_orders_order_statuses' ) );
@@ -531,49 +533,70 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * filter name: woocommerce_cart_item_name
-	 * Adds pre order additional text to the cart item name
+	 * Filters cart item data to display cart.
 	 *
-	 * @param string $text Original cart item name string.
-	 * @param array  $item Item array data.
-	 * @return string
-	 */
-	public function cart_item_name( $text, $item ) {
-		return $text . $this->get_pre_order_additional_text( $item['product_id'] );
-	}
-
-	/**
-	 * filter name: woocommerce_order_item_name
-	 * Adds pre order additional text to the order item name
+	 * @param array $item_data Cart item data.
+	 * @param array $cart_item Cart item array.
 	 *
-	 * @param string                 $text Original order item name string.
-	 * @param \WC_Order_Item_Product $item Item array data.
-	 * @return string
-	 */
-	public function order_item_name( $text, $item ) {
-		return $text . $this->get_pre_order_additional_text( $item->get_product()->get_id() );
-	}
-
-	/**
-	 * Get pre order additional text string by Product ID. Returns empty string for non-pre-order items.
+	 * @return array
 	 *
-	 * @param int   $product_id Product ID.
-	 * @param array $classes    Wrapper class array for styling.
-	 * @return string
+	 * @see wc_get_formatted_cart_item_data for filter usage.
 	 */
-	private function get_pre_order_additional_text( $product_id, $classes = array( 'merchant-pre-orders-mark' ) ) {
+	public function cart_message_handler( $item_data, $cart_item ) {
+		$product_id = $cart_item['product_id'];
 		if ( $this->is_pre_order( $product_id ) ) {
-			$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
-			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
-			$text            = $this->replaceDateTxt( $additional_text, $time_format );
+			$label_text     = Merchant_Admin_Options::get( 'pre-orders', 'cart_label_text', esc_html__( 'Ships on', 'merchant' ) );
+			$pre_order_date = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
 
-			return sprintf(
-				'<span class="%s" title="%s"></span>',
-				esc_attr( join( ' ', $classes ) ),
-				esc_html( $text )
+			$item_data[] = array(
+				'key'     => $label_text,
+				'value'   => $pre_order_date,
+				'display' => '',
 			);
 		}
 
-		return '';
+		return $item_data;
+	}
+
+	/**
+	 * filter name: woocommerce_order_item_meta_end
+	 * Adds pre order additional text to the order item name
+	 *
+	 * @param int                    $item_id    Product ID.
+	 * @param \WC_Order_Item_Product $item       Item array data.
+	 * @param \WC_Order              $order      Order data.
+	 * @param bool                   $plain_text Is plain text or not.
+	 * @return string
+	 */
+	public function order_item_meta_end( $item_id, $item, $order, $plain_text ) {
+		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text );
+	}
+
+	/**
+	 * Render pre order text.
+	 */
+	public function shop_loop_item_title() {
+		echo $this->get_pre_order_text( get_the_ID() );
+	}
+
+	/**
+	 * Get pre order text by product ID.
+	 *
+	 * @param int  $product_id
+	 * @param bool $plain_text Is plain text or not.
+	 * @return string
+	 */
+	private function get_pre_order_text( $product_id, $plain_text = false ) {
+		if ( ! $this->is_pre_order( $product_id ) ) {
+			return '';
+		}
+
+		$label_text     = Merchant_Admin_Options::get( 'pre-orders', 'cart_label_text', __( 'Ships on', 'merchant' ) );
+		$pre_order_date = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
+		if ( $plain_text ) {
+			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
+		} else {
+			return sprintf( '<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>', esc_html( $label_text ), $pre_order_date );
+		}
 	}
 }
