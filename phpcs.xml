@@ -24,7 +24,6 @@
     <arg name="colors"/><!-- Show results with colors -->
     <arg name="parallel" value="50"/><!-- Enables parallel processing when available for faster results. -->
     <arg name="extensions" value="php"/><!-- Limit to PHP files -->
-    <arg name="warning-severity" value="5"/><!-- Show warnings as errors -->
 
     <!-- Configs -->
     <rule ref="PHPCompatibility">
