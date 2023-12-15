@@ -46,7 +46,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 			'bar_text' => esc_html__( '🍪 We\'re using cookies to give you the best experience on our site.', 'merchant' ),
 			'privacy_policy_text' => esc_html__( 'Learn More', 'merchant' ),
 			'privacy_policy_url' => get_privacy_policy_url(),
-			'button_text' => esc_html__( 'I Understand', 'merchant' ),
+			'button_text' => esc_html__( 'I understand', 'merchant' ),
 			'cookie_duration' => '365',
 			'close_button' => 1,
 		);

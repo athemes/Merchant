@@ -1,0 +1,33 @@
+
+.theme-botiga {
+
+	/* Frequently Bought Together */
+	.mrc-fbt-savings-total-mini-cart {
+		color: var(--bt-color-heading-4, #212121);
+		background-color: var(--bt-color-content-cards-bg, #f5f5f5);
+		padding: .9rem 1.9rem;
+		order: 11;
+
+		strong {
+			font-weight: 400;
+		}
+
+		.woocommerce-Price-amount {
+			font-weight: 500;
+		}
+	}
+
+	/* Sticky Add To Cart */
+	.merchant-sticky-add-to-cart-wrapper {
+		.merchant-sticky-add-to-cart-wrapper-content {
+			.merchant-sticky-add-to-cart-item {
+				&.product-addtocart {
+					.quantity {
+						min-width: 100px;
+					}
+				}
+			}
+		}
+	}
+
+}

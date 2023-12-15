@@ -97,9 +97,24 @@
 
 // Buy Now Button.
 .merchant-buy-now-button {
-    display: inline-block;
-    font-size: 1rem;
-    padding: 13px 20px;
+	display: inline-flex;
+	align-items: center;
+	margin-top: 0.5rem !important;
     text-decoration: none;
-    margin-top: 30px;
+	padding-top: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+    padding-bottom: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
+    padding-left: var(--mrc-buy-now-padding-left-right, 24px) !important;
+    padding-right: var(--mrc-buy-now-padding-left-right, 24px) !important;
+    font-size: var(--mrc-buy-now-font-size, 16px);
+    border-radius: var(--mrc-buy-now-border-radius, 0px);
+
+	color: #FFF !important;
+	border-color: #212121 !important;
+	background-color: #212121 !important;
+
+	&:hover {
+		color: #FFF !important;
+		border-color: #414141 !important;
+		background-color: #414141 !important;
+	}
 }

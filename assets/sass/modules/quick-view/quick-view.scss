@@ -306,6 +306,7 @@
 
 .merchant-quick-view-summary {
 	display: flex;
+	flex-wrap: nowrap;
 	grid-gap: 10px;
 	flex-direction: column;
 	max-height: calc(var(--mrc-qv-modal-height, 500px) - 70px);

@@ -2904,6 +2904,19 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   height: 43px !important;
 }
 
+.merchant-module-page-setting-field-hook_select .merchant-module-page-setting-field-hook_select-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 15px;
+}
+.merchant-module-page-setting-field-hook_select .merchant-module-page-setting-field-hook_select-wrapper .merchant-module-page-setting-field-select {
+  width: 100%;
+}
+.merchant-module-page-setting-field-hook_select .merchant-module-page-setting-field-hook_select-wrapper .merchant-module-page-setting-field-number {
+  width: 100px;
+}
+
 .merchant-module-page-setting-field-choices input {
   display: none;
 }

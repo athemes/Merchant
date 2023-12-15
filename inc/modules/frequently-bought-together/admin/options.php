@@ -12,17 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Settings
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Settings', 'merchant' ),
+	'title'  => __( 'Settings', 'merchant' ),
 	'module' => Merchant_Frequently_Bought_Together::MODULE_ID,
 	'fields' => array(
 		array(
 			'id'      => 'single_product_placement',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+			'title'   => __( 'Placement on product page', 'merchant' ),
 			'options' => array(
-				'after-summary' => esc_html__( 'After product summary', 'merchant' ),
-				'after-tabs'    => esc_html__( 'After product tabs', 'merchant' ),
-				'bottom'        => esc_html__( 'At the bottom', 'merchant' ),
+				'after-summary' => __( 'After product summary', 'merchant' ),
+				'after-tabs'    => __( 'After product tabs', 'merchant' ),
+				'bottom'        => __( 'At the bottom', 'merchant' ),
 			),
 			'default' => 'after-summary',
 		),
@@ -31,35 +31,50 @@ Merchant_Admin_Options::create( array(
 
 // Text Formatting Settings
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Text Formatting Settings', 'merchant' ),
+	'title'  => __( 'Text Formatting Settings', 'merchant' ),
 	'module' => Merchant_Frequently_Bought_Together::MODULE_ID,
 	'fields' => array(
 		array(
 			'id'      => 'title',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Title', 'merchant' ),
-			'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+			'title'   => __( 'Title', 'merchant' ),
+			'default' => __( 'Frequently Bought Together', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'price_label',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Price label', 'merchant' ),
-			'default' => esc_html__( 'Bundle price', 'merchant' ),
+			'title'   => __( 'Price label', 'merchant' ),
+			'default' => __( 'Bundle price', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'save_label',
 			'type'    => 'text',
-			'title'   => esc_html__( 'You save label', 'merchant' ),
-			'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+			'title'   => __( 'You save label', 'merchant' ),
+			'default' => __( 'You save: {amount}', 'merchant' ),
+		),
+
+		array(
+			'id'      => 'no_variation_selected_text',
+			'type'    => 'text',
+			'title'   => __( 'No variation selected text', 'merchant' ),
+			'default' => __( 'Please select an option to see your savings.', 'merchant' ),
+		),
+
+		array(
+			'id'      => 'no_variation_selected_text_has_no_discount',
+			'type'    => 'text',
+			'title'   => __( 'No variation selected text (no discount)', 'merchant' ),
+			'desc'    => __( 'This text will be displayed whether the bundle has 0% discount and contains a variable product.', 'merchant' ),
+			'default' => __( 'Please select an option to see the total price.', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'button_text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Button text', 'merchant' ),
-			'default' => esc_html__( 'Add to cart', 'merchant' ),
+			'title'   => __( 'Button text', 'merchant' ),
+			'default' => __( 'Add to cart', 'merchant' ),
 		),
 	),
 ) );
@@ -67,7 +82,7 @@ Merchant_Admin_Options::create( array(
 // Style Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Frequently_Bought_Together::MODULE_ID,
-	'title'  => esc_html__( 'Style Settings', 'merchant' ),
+	'title'  => __( 'Style Settings', 'merchant' ),
 	'fields' => array(
 
 		array(
@@ -94,7 +109,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundle_border_radius',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Bundle border radius', 'merchant' ),
+			'title'   => __( 'Bundle border radius', 'merchant' ),
 			'min'     => 0,
 			'max'     => 100,
 			'step'    => 1,

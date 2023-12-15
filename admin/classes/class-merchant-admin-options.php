@@ -343,6 +343,19 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
+				case 'hook_select':
+					$value = is_array( $value ) ? $value : array();
+
+					foreach ( $value as $key => $val ) {
+						if ( $key === 'hook_name' ) {
+							$value[ $key ] = in_array( $val, array_keys( $field['options'] ), true ) ? sanitize_key( $val ) : '';
+						} else {
+							$value[ $key ] = (int) $val;
+						}
+					}
+
+					break;
+
 				case 'code-editor':
 					$value = wp_kses_post( $value );
 					break;
@@ -423,9 +436,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
-				if ( ! $value ) {
+
+				if ( ! $value && 0 !== $value ) {
 					$value = $default;
 				}
+
 				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-id="'
 					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
@@ -726,6 +741,48 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 </select>
 			<?php
 			endif; ?>
+			<?php
+		}
+
+		/**
+		 * Field: Hook Select
+		 */
+		public static function hook_select( $settings, $value ) {
+			$hook_name     = isset( $value['hook_name'] ) ? $value['hook_name'] : '';
+			$hook_priority = isset( $value['hook_priority'] ) ? $value['hook_priority'] : '';
+
+			?>
+			<div class="merchant-module-page-setting-field-hook_select-wrapper">
+				<div class="merchant-module-page-setting-field-select">
+					<select name="merchant[<?php
+					echo esc_attr( $settings['id'] ); ?>][hook_name]">
+						<?php
+						if ( ! empty( $settings['options'] ) ) : ?>
+							<?php
+							foreach ( $settings['options'] as $key => $option ) : ?>
+								<option value="<?php
+								echo esc_attr( $key ); ?>" <?php
+								selected( $hook_name, $key, true ); ?>><?php
+									echo esc_html( $option ); ?></option>
+							<?php
+							endforeach; ?>
+						<?php
+						endif; ?>
+					</select>
+				</div>
+				<?php
+
+				if ( isset( $settings['order'] ) && true === $settings['order'] ) {
+					?>
+					<div class="merchant-module-page-setting-field-number">
+						<input type="number" name="merchant[<?php
+						echo esc_attr( $settings['id'] ); ?>][hook_priority]" value="<?php
+						echo esc_attr( $hook_priority ); ?>"/>
+					</div>
+					<?php
+				} ?>
+			</div>
+
 			<?php
 		}
 

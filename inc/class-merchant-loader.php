@@ -126,6 +126,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			}
 
 			// Compatibility Layer
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-botiga-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-twenty-twenty-four-theme.php';
@@ -323,7 +324,12 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			 */
 			$setting = apply_filters( 'merchant_localize_script', $setting );
 
-			wp_localize_script( 'merchant', 'merchant', array( 'setting' => $setting ) );
+			wp_localize_script( 'merchant', 'merchant', array( 
+				'general' => array(
+					'wooCurrencySymbol' => class_exists( 'Woocommerce' ) ? html_entity_decode( get_woocommerce_currency_symbol() ) : ''
+				),
+				'setting' => $setting 
+			) );
 		}
 	}
 
