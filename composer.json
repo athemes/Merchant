@@ -1,7 +1,7 @@
 {
   "name": "athemes/merchant",
   "description": "All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.",
-  "license": "GPL-3.0+",
+  "license": "GPL-3.0-or-later",
   "homepage": "https://athemes.com/merchant",
   "authors": [
     {
