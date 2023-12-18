@@ -61,6 +61,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_action( 'woocommerce_order_item_meta_end', array( $this, 'order_item_meta_end' ), 10, 4 );
 		add_action( 'woocommerce_shop_loop_item_title', array( $this, 'shop_loop_item_title' ) );
 
+		add_filter( 'render_block_context', array( $this, 'add_block_title_filter' ), 10, 1 );
+
 		$this->register_pre_orders_order_status();
 		add_filter( 'wc_order_statuses', array( $this, 'add_pre_orders_order_statuses' ) );
 		add_filter( 'woocommerce_post_class', array( $this, 'pre_orders_post_class' ), 10, 3 );
@@ -409,7 +411,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$_post = get_post( absint( $input_post_data[ 'product_id' ] ) ); 
 		}
 
-		if ( $this->is_pre_order( $_post->ID ) ) {
+		if ( $_post && $this->is_pre_order( $_post->ID ) ) {
 			$text = Merchant_Admin_Options::get( 'pre-orders', 'button_text', esc_html__( 'Pre Order Now!', 'merchant' ) );
 		}
 
@@ -569,34 +571,76 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string
 	 */
 	public function order_item_meta_end( $item_id, $item, $order, $plain_text ) {
-		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text );
+		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text ? '' : 'dl' );
 	}
 
 	/**
 	 * Render pre order text.
 	 */
 	public function shop_loop_item_title() {
-		echo $this->get_pre_order_text( get_the_ID() );
+		echo $this->get_pre_order_text( get_the_ID(), 'span' );
+	}
+
+	/**
+	 * Add the_title filter for block rendering.
+	 * @param array $context      Default context.
+	 * @return array
+	 */
+	public function add_block_title_filter( $context ) {
+		if ( ! empty( $context['postType'] ) && 'product' === $context['postType'] ) {
+			add_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10, 2 );
+			add_filter( 'render_block', array( $this, 'block_remove_the_title_filter' ), 10, 3 );
+		}
+		return $context;
+	}
+
+	/**
+	 * Adds pre order info to post_title.
+	 *
+	 * @param string $title   Title.
+	 * @param int    $post_id Post ID.
+	 * @return string
+	 */
+	public function block_add_the_title_filter( $title, $post_id ) {
+		return $title . $this->get_pre_order_text( $post_id, 'span' );
+	}
+
+	/**
+	 * Remove the_title filter when block rendering finished.
+	 *
+	 * @param string   $block_content The block content.
+	 * @param array    $parsed_block  The full block, including name and attributes.
+	 * @param WP_Block $block         The block instance.
+	 *
+	 * @return string
+	 */
+	public function block_remove_the_title_filter( $block_content, $parsed_block, $block ) {
+		if ( ! empty( $block->context['postType'] ) && 'product' === $block->context['postType'] ) {
+			remove_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10 );
+		}
+		return $block_content;
 	}
 
 	/**
 	 * Get pre order text by product ID.
 	 *
-	 * @param int  $product_id
-	 * @param bool $plain_text Is plain text or not.
+	 * @param int    $product_id
+	 * @param string $render_type Render template type string. 'span', 'dl', ''. Default ''.
 	 * @return string
 	 */
-	private function get_pre_order_text( $product_id, $plain_text = false ) {
+	private function get_pre_order_text( $product_id, $render_type = '' ) {
 		if ( ! $this->is_pre_order( $product_id ) ) {
 			return '';
 		}
 
 		$label_text     = Merchant_Admin_Options::get( 'pre-orders', 'cart_label_text', __( 'Ships on', 'merchant' ) );
 		$pre_order_date = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
-		if ( $plain_text ) {
-			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
-		} else {
+		if ( 'span' === $render_type ) {
+			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ), $pre_order_date );
+		} elseif ( 'dl' === $render_type ) {
 			return sprintf( '<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>', esc_html( $label_text ), $pre_order_date );
+		} else {
+			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
 		}
 	}
 }

@@ -43,3 +43,11 @@ dl.merchant-pre-orders-note {
 		margin: 0;
 	}
 }
+span.merchant-pre-orders-note {
+	display: block;
+	font-size: 0.7em;
+	opacity: 0.7;
+	.merchant-pre-orders-label {
+		padding-right: 0.2em;
+	}
+}
