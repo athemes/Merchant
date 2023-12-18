@@ -212,13 +212,13 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 					</svg>
 				</div></div>';
 		$html .= '<form id="merchant-wait-list" class="merchant-wait-list" method="post">';
-		$html .= '<p class="merchant-wait-list-title">' . Merchant_Translator::translate( $settings[ 'form_title' ] ) . '</p>';
+		$html .= '<p class="merchant-wait-list-title">' . esc_html( Merchant_Translator::translate( $settings[ 'form_title' ] ) ) . '</p>';
 		$html .= '<div class="merchant-wait-list-email">';
-		$html .= '<label for="merchant-wait-list-email">' . Merchant_Translator::translate( $settings[ 'form_email_label' ] ) . ' <abbr class="required" title="required">*</abbr></label>';
-		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . Merchant_Translator::translate( $settings[ 'form_email_label' ] ) . '" required="">';
+		$html .= '<label for="merchant-wait-list-email">' . esc_html( Merchant_Translator::translate( $settings[ 'form_email_label' ] ) ) . ' <abbr class="required" title="required">*</abbr></label>';
+		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . esc_attr( Merchant_Translator::translate( $settings[ 'form_email_label' ] ) ) . '" required="">';
 		$html .= '</div>';
-		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . Merchant_Translator::translate( $settings[ 'form_button_text' ] ) . '</button>';
-		$html .= $settings['form_nonce_field'];
+		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . esc_html( Merchant_Translator::translate( $settings[ 'form_button_text' ] ) ) . '</button>';
+		$html .= wp_kses( $settings['form_nonce_field'], merchant_kses_allowed_tags( array( 'forms', 'nonce' ) ) );
 		$html .= '<input type="hidden" name="merchant-wait-list-product-id" id="merchant-wait-list-product-id" value="' . $product_id . '" >';
 		$html .= '</form>';
 		$html .= '</div>';
