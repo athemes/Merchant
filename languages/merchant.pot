@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-12-12 19:15+0000\n"
+"POT-Creation-Date: 2023-12-13 17:23+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "to discuss about the product and ask for support or help the community."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/admin/options.php:22, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:252, inc/modules/buy-now/class-buy-now.php:281
+#: admin/classes/class-merchant-admin-modules.php:46, inc/modules/buy-now/admin/options.php:22, inc/modules/buy-now/class-buy-now.php:46, inc/modules/buy-now/class-buy-now.php:257, inc/modules/buy-now/class-buy-now.php:291
 msgid "Buy Now"
 msgstr ""
 
