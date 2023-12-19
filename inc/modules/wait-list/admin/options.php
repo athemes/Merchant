@@ -50,6 +50,13 @@ Merchant_Admin_Options::create( array(
 			'default' => __( 'You have been successfully added to our stock waitlist. As soon as new stock becomes available, we will notify you via email.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will show after form submission.', 'merchant' ),
 		),
+		array(
+			'id'      => 'form_unsubscribe_message',
+			'type'    => 'textarea',
+			'title'   => esc_html__( 'Form unsubscribe message', 'merchant' ),
+			'default' => __( 'You have been successfully unsubscribed from our stock waitlist.', 'merchant' ),
+			'desc'    => esc_html__( 'The message that will show after clicking on unsubscribe link.', 'merchant' ),
+		),
 	),
 ) );
 
