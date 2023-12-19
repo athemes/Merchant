@@ -62,20 +62,21 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
 			'type'  => 'product',
 			'query' => array(
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query' => array(
 					'relation' => 'AND',
 					array(
 						'key'     => '_merchant_frequently_bought_together_bundles',
 						'value'   => '',
-						'compare' => '!='
+						'compare' => '!=',
 					),
 					array(
 						'key'     => '_merchant_frequently_bought_together_bundles',
 						'value'   => 'a:0:{}',
-						'compare' => '!='
-					)
-				)
-			)
+						'compare' => '!=',
+					),
+				),
+			),
 		) );
 
 		// Module options path.
@@ -136,7 +137,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/frequently-bought-together.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/frequently-bought-together.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -158,11 +159,11 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			$preview->set_text( 'price_label', '.merchant-frequently-bought-together-bundle-total' );
 			$preview->set_text( 'save_label', '.merchant-frequently-bought-together-bundle-save', array(
 				array(
-					'{amount}'
+					'{amount}',
 				),
 				array(
-					wc_price( 12 )
-				)
+					wc_price( 12 ),
+				),
 			) );
 			$preview->set_text( 'button_text', '.merchant-add-bundle-to-cart' );
 			$preview->set_css( 'plus_bg_color', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-bg-color' );
@@ -197,7 +198,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 									'title'      => 'Eternal Sunset Collection Lip and Cheek',
 									'price_html' => wc_price( 12 ),
 									'price'      => 12,
-									'permalink'  => '#'
+									'permalink'  => '#',
 								),
 								array(
 									'id'         => 96,
@@ -205,20 +206,20 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 									'title'      => 'Vinopure Pore Purifying Gel Cleanser',
 									'price_html' => wc_price( 14 ),
 									'price'      => 14,
-									'permalink'  => '#'
-								)
+									'permalink'  => '#',
+								),
 							),
 							'layout'                 => 'percentage_discount',
 							'total_products'         => 3,
 							'total_price'            => 47,
 							'total_discount'         => 12,
 							'total_product_discount' => 4,
-							'total_discounted_price' => 35
-						)
-					)
+							'total_discounted_price' => 35,
+						),
+					),
 				),
 				'nonce'    => '',
-				'settings' => $settings
+				'settings' => $settings,
 			),
 			true
 		),

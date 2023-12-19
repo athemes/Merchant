@@ -65,34 +65,34 @@ if ( ! class_exists( 'Merchant_Translator' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string  The string to translate.
-		 * @param string $context The context of the string.
+		 * @param string $string_to_register The string to translate.
+		 * @param string $context            The context of the string.
 		 */
-		public static function register_string( $string, $context = 'merchant' ) {
+		public static function register_string( $string_to_register, $context = 'merchant' ) {
 			self::set_language_strategy();
-			self::$language_strategy->register_string( $string, $context );
+			self::$language_strategy->register_string( $string_to_register, $context );
 		}
 
 		/**
 		 * Translate a string.
 		 *
-		 * @param string $string The string to translate.
+		 * @param string $string_to_translate The string to translate.
 		 *
 		 * @return string
 		 */
-		public static function translate( $string ) {
+		public static function translate( $string_to_translate ) {
 			self::set_language_strategy();
-			$translated_string = self::$language_strategy->translate_string( $string );
+			$translated_string = self::$language_strategy->translate_string( $string_to_translate );
 
 			/**
 			 * Filter the translated string.
 			 *
-			 * @param string $string            The string to translate.
-			 * @param string $translated_string The translated string.
+			 * @param string $string_to_translate The string to translate.
+			 * @param string $translated_string   The translated string.
 			 *
 			 * @since 1.8
 			 */
-			return apply_filters( 'merchant_multi_lang_translated_string', $translated_string, $string );
+			return apply_filters( 'merchant_multi_lang_translated_string', $translated_string, $string_to_translate );
 		}
 	}
 }

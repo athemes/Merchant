@@ -58,7 +58,6 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
-
 		}
 
 		/**
@@ -78,7 +77,6 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				MERCHANT_URI . 'assets/images/merchant-logo.svg',
 				$this->priority
 			);
-
 		}
 
 		/**
@@ -131,7 +129,6 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			}
 
 			return true;
-
 		}
 
 		/**
@@ -150,13 +147,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			update_user_meta( get_current_user_id(), 'merchant_dashboard_notifications_latest_read', $latest_notification_date );
 
 			wp_send_json_success();
-
 		}
 
 		public function page_dashboard() {
 			require_once MERCHANT_DIR . 'admin/pages/page-dashboard.php';
 		}
-
 	}
 
 	Merchant_Admin_Menu::instance();

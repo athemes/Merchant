@@ -48,7 +48,7 @@ class Merchant_Product_Brand_Image extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'global-brand-image' => ''
+			'global-brand-image' => '',
 		);
 
 		// Mount preview url.
@@ -96,7 +96,7 @@ class Merchant_Product_Brand_Image extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-brand-image.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-brand-image.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -114,7 +114,7 @@ class Merchant_Product_Brand_Image extends Merchant_Add_Module {
 						<div class="merchant-module-page-setting-field-inner">
 							<div class="merchant-tag-pre-orders">
 								<i class="dashicons dashicons-info"></i>
-								<p><?php echo esc_html__( 'The product brand image can be either enabled globally to be displayed in all products or in specific products. If you want to display a different brand image for each product, that’s possible from the admin product edit page.', 'merchant' ); ?> <?php echo sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=product' ) ), esc_html__( 'View All Products', 'merchant' ) ); ?></p>
+								<p><?php echo esc_html__( 'The product brand image can be either enabled globally to be displayed in all products or in specific products. If you want to display a different brand image for each product, that’s possible from the admin product edit page.', 'merchant' ); ?> <?php printf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=product' ) ), esc_html__( 'View All Products', 'merchant' ) ); ?></p>
 							</div>
 						</div>
 					</div>

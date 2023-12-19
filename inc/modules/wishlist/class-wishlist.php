@@ -62,7 +62,7 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 			'tooltip' => 1,
 			'tooltip_text' => __( 'Add To Wishlist', 'merchant' ),
 			'tooltip_border_radius' => 4,
-			'hide_page_title' => 0
+			'hide_page_title' => 0,
 		);
 
 		// Mount preview url.
@@ -105,7 +105,7 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/wishlist-button.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/wishlist-button.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -131,7 +131,7 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 			$preview->set_svg_icon( 'button_icon', '.merchant-wishlist-button' );
 
 			// Dislplay Tooltip.
-			$preview->set_class( 'tooltip', '.merchant-wishlist-button', array(), 'merchant-wishlist-button-tooltip' );		
+			$preview->set_class( 'tooltip', '.merchant-wishlist-button', array(), 'merchant-wishlist-button-tooltip' );     
 
 			// Tooltip Text.
 			$preview->set_attribute( 'tooltip_text', '.merchant-wishlist-button', 'data-merchant-wishlist-tooltip' );
@@ -154,7 +154,7 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 		<div class="merchant-wishlist-product-preview">
 			<div class="image-wrapper">
 				<a href="#" class="merchant-wishlist-button<?php echo ( $settings[ 'tooltip' ] ) ? ' merchant-wishlist-button-tooltip' : ''; ?>" data-type="add" data-wishlist-link="#" data-merchant-wishlist-tooltip="<?php echo esc_attr( $settings[ 'tooltip_text' ] ); ?>">
-					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( [], false ) ); ?>
+					<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] ), merchant_kses_allowed_tags( array(), false ) ); ?>
 				</a>
 			</div>
 			<h3><?php echo esc_html__( 'Product Title', 'merchant' ); ?></h3>

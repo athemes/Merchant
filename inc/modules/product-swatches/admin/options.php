@@ -23,7 +23,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'on_shop_catalog',
 			'type'    => 'switcher',
 			'title'   => __( 'Enable on shop catalog', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['on_shop_catalog']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['on_shop_catalog'],
 		),
 
 		// Enable mouseover
@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'mouseover',
 			'type'    => 'switcher',
 			'title'   => __( 'Enable mouseover', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['mouseover']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['mouseover'],
 		),
 
 		// Enable tooltip
@@ -39,7 +39,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'tooltip',
 			'type'    => 'switcher',
 			'title'   => __( 'Enable tooltip', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['tooltip']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['tooltip'],
 		),
 
 		// Variation name on product title
@@ -47,7 +47,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'display_variation_name_on_product_title',
 			'type'    => 'switcher',
 			'title'   => __( 'Variation name on product title', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['display_variation_name_on_product_title']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['display_variation_name_on_product_title'],
 		),
 	),
 ) );
@@ -74,7 +74,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_text_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_text_color'],
 		),
 
 		// Border color
@@ -82,7 +82,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_color'],
 		),
 
 		// Background color
@@ -90,7 +90,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_background_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Background color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_background_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_background_color'],
 		),
 
 		// Padding
@@ -98,7 +98,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_padding',
 			'type'    => 'responsive_dimensions',
 			'title'   => esc_html__( 'Padding', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_padding']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_padding'],
 		),
 
 		// Border radius
@@ -106,7 +106,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_border_radius',
 			'type'    => 'dimensions',
 			'title'   => esc_html__( 'Border radius', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_radius']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_radius'],
 		),
 
 		/**
@@ -123,7 +123,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'select_custom_style_shop_archive',
 			'type'    => 'switcher',
 			'title'   => __( 'Don\'t inherit style from single product ', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_custom_style_shop_archive']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_custom_style_shop_archive'],
 		),
 
 		// Shop archive text color.
@@ -132,7 +132,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Text color', 'merchant' ),
 			'condition' => array( 'select_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_text_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_text_color_shop_archive'],
 		),
 
 		// Shop archive border color
@@ -141,7 +141,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'condition' => array( 'select_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_color_shop_archive'],
 		),
 
 		// Shop archive background color
@@ -150,7 +150,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Background color', 'merchant' ),
 			'condition' => array( 'select_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_background_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_background_color_shop_archive'],
 		),
 
 		// Shop archive padding
@@ -159,7 +159,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'responsive_dimensions',
 			'title'     => esc_html__( 'Padding', 'merchant' ),
 			'condition' => array( 'select_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_padding_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_padding_shop_archive'],
 		),
 
 		// Shop archive border radius
@@ -168,7 +168,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'dimensions',
 			'title'     => esc_html__( 'Border radius', 'merchant' ),
 			'condition' => array( 'select_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_radius_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['select_border_radius_shop_archive'],
 		),
 
 	),
@@ -200,7 +200,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 250,
 			'step'    => 1,
 			'unit'    => '',
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_width']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_width'],
 		),
 
 		// Color height
@@ -212,7 +212,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 250,
 			'step'    => 1,
 			'unit'    => '',
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_height']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_height'],
 		),
 
 		// Spacing
@@ -224,7 +224,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => '',
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_spacing']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_spacing'],
 		),
 
 		// Border color
@@ -232,7 +232,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'color_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_color'],
 		),
 
 		// Border hover color
@@ -240,7 +240,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'color_border_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border Hover Color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_hover_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_hover_color'],
 		),
 
 		// Border width
@@ -248,7 +248,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'color_border_width',
 			'type'    => 'responsive_dimensions',
 			'title'   => esc_html__( 'Border width', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_width']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_width'],
 		),
 
 		// Border radius
@@ -256,7 +256,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'color_border_radius',
 			'type'    => 'dimensions',
 			'title'   => esc_html__( 'Border radius', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_radius']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_radius'],
 		),
 
 		/**
@@ -273,7 +273,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'color_custom_style_shop_archive',
 			'type'    => 'switcher',
 			'title'   => __( 'Don\'t inherit style from single product ', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_custom_style_shop_archive']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_custom_style_shop_archive'],
 		),
 
 		// Color width
@@ -286,7 +286,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_width_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_width_shop_archive'],
 		),
 
 		// Color height
@@ -299,7 +299,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_height_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_height_shop_archive'],
 		),
 
 		// Spacing
@@ -312,7 +312,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_spacing_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_spacing_shop_archive'],
 		),
 
 		// Border color
@@ -321,7 +321,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_color_shop_archive'],
 		),
 
 		// Border hover color
@@ -330,7 +330,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border Hover Color', 'merchant' ),
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_hover_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_hover_color_shop_archive'],
 		),
 
 		// Border radius
@@ -339,7 +339,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'responsive_dimensions',
 			'title'     => esc_html__( 'Border width', 'merchant' ),
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_width_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_width_shop_archive'],
 		),
 
 		// Border radius
@@ -348,7 +348,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'dimensions',
 			'title'     => esc_html__( 'Border radius', 'merchant' ),
 			'condition' => array( 'color_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_radius_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['color_border_radius_shop_archive'],
 		),
 	),
 ) );
@@ -375,7 +375,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_color'],
 		),
 
 		// Text hover color.
@@ -383,7 +383,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_text_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text hover color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_hover_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_hover_color'],
 		),
 
 		// Border color
@@ -391,7 +391,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_color'],
 		),
 
 		// Border hover color
@@ -399,7 +399,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_border_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border hover color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_hover_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_hover_color'],
 		),
 
 		// Background color
@@ -407,7 +407,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_background_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Background color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_color'],
 		),
 
 		// Background color
@@ -415,7 +415,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_background_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Background hover color', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_hover_color']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_hover_color'],
 		),
 
 		// Padding
@@ -423,7 +423,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_padding',
 			'type'    => 'responsive_dimensions',
 			'title'   => esc_html__( 'Padding', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_padding']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_padding'],
 		),
 
 		// Spacing
@@ -435,7 +435,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => '',
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_spacing']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_spacing'],
 		),
 
 		// Border width
@@ -443,7 +443,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_border_width',
 			'type'    => 'responsive_dimensions',
 			'title'   => esc_html__( 'Border width', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_width']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_width'],
 		),
 
 		// Border radius
@@ -451,7 +451,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_border_radius',
 			'type'    => 'dimensions',
 			'title'   => esc_html__( 'Border radius', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_radius']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_radius'],
 		),
 
 		/**
@@ -468,7 +468,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_custom_style_shop_archive',
 			'type'    => 'switcher',
 			'title'   => __( 'Don\'t inherit style from single product ', 'merchant' ),
-			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_custom_style_shop_archive']
+			'default' => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_custom_style_shop_archive'],
 		),
 
 		// Text color.
@@ -477,7 +477,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Text color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_color_shop_archive'],
 		),
 
 		// Text hover color.
@@ -486,7 +486,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Text hover color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_hover_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_text_hover_color_shop_archive'],
 		),
 
 		// Border color
@@ -495,7 +495,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_color_shop_archive'],
 		),
 
 		// Border hover color
@@ -504,7 +504,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border hover color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_hover_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_hover_color_shop_archive'],
 		),
 
 		// Background color
@@ -513,7 +513,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Background color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_color_shop_archive'],
 		),
 
 		// Background color
@@ -522,7 +522,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Background hover color', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_hover_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_background_hover_color_shop_archive'],
 		),
 
 
@@ -532,7 +532,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'responsive_dimensions',
 			'title'     => esc_html__( 'Padding', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_padding_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_padding_shop_archive'],
 		),
 
 		// Spacing
@@ -545,7 +545,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_spacing_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_spacing_shop_archive'],
 		),
 
 		// Border width
@@ -554,7 +554,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'responsive_dimensions',
 			'title'     => esc_html__( 'Border width', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_width_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_width_shop_archive'],
 		),
 
 		// Border radius
@@ -563,7 +563,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'dimensions',
 			'title'     => esc_html__( 'Border radius', 'merchant' ),
 			'condition' => array( 'button_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_radius_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['button_border_radius_shop_archive'],
 		),
 	),
 ) );
@@ -595,7 +595,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 250,
 			'step'    => 1,
 			'unit'    => '',
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_width']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_width'],
 		),
 
 		// Height
@@ -607,7 +607,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 250,
 			'step'    => 1,
 			'unit'    => '',
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_height']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_height'],
 		),
 
 		// Spacing
@@ -619,7 +619,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => '',
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_spacing']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_spacing'],
 		),
 
 		// Border color
@@ -627,7 +627,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'image_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border color', 'merchant' ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_color']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_color'],
 		),
 
 		// Border hover color
@@ -635,7 +635,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'image_border_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border hover color', 'merchant' ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_hover_color']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_hover_color'],
 		),
 
 		// Border width
@@ -643,7 +643,7 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'image_border_width',
 			'type'  => 'responsive_dimensions',
 			'title' => esc_html__( 'Border width', 'merchant' ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_width']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_width'],
 		),
 
 		// Border radius
@@ -651,7 +651,7 @@ Merchant_Admin_Options::create( array(
 			'id'    => 'image_border_radius',
 			'type'  => 'dimensions',
 			'title' => esc_html__( 'Border radius', 'merchant' ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_radius']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_radius'],
 		),
 
 		/**
@@ -668,7 +668,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'image_custom_style_shop_archive',
 			'type'    => 'switcher',
 			'title'   => __( 'Don\'t inherit style from single product ', 'merchant' ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_custom_style_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_custom_style_shop_archive'],
 		),
 
 		// Width
@@ -681,7 +681,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_width_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_width_shop_archive'],
 		),
 
 		// Height
@@ -694,7 +694,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_height_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_height_shop_archive'],
 		),
 
 		// Spacing
@@ -707,7 +707,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => '',
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_spacing_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_spacing_shop_archive'],
 		),
 
 		// Border color
@@ -716,7 +716,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_color_shop_archive'],
 		),
 
 		// Border hover color
@@ -725,7 +725,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Border hover color', 'merchant' ),
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_hover_color_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_hover_color_shop_archive'],
 		),
 
 		// Border width
@@ -734,7 +734,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'responsive_dimensions',
 			'title'     => esc_html__( 'Border width', 'merchant' ),
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_width_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_width_shop_archive'],
 		),
 
 		// Border radius
@@ -743,7 +743,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'dimensions',
 			'title'     => esc_html__( 'Border radius', 'merchant' ),
 			'condition' => array( 'image_custom_style_shop_archive', '==', true ),
-			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_radius_shop_archive']
+			'default'   => Merchant_Product_Swatches::MODULE_DEFAULT_SETTINGS['image_border_radius_shop_archive'],
 		),
 	),
 ) );

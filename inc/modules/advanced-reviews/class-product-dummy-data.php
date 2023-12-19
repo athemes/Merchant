@@ -39,5 +39,4 @@ class Merchant_Product_Dummy {
 	public function get_average_rating() {
 		return 3.50;
 	}
-
 }

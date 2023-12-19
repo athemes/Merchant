@@ -53,7 +53,7 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 			'background_color' => '#ff0101',
 			'text_color' => '#FFF',
 			'animation' => 'slide',
-			'delay' => '0s'
+			'delay' => '0s',
 		);
 
 		// Mount preview url.
@@ -92,7 +92,7 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue scripts.
@@ -103,7 +103,6 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 
 		// Add merchant selector and content to cart fragments.
 		add_filter( 'woocommerce_add_to_cart_fragments', array( $this, 'cart_count_fragment' ) );
-
 	}
 
 	/**
@@ -143,14 +142,14 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 	public function localize_script( $setting ) {
 		$module_settings = $this->get_module_settings();
 
-		$setting['cart_count_favicon']				  	= true;
-		$setting['cart_count_favicon_shape']			= $module_settings[ 'shape' ];
-		$setting['cart_count_favicon_position']		 	= $module_settings[ 'position' ];
+		$setting['cart_count_favicon']                  = true;
+		$setting['cart_count_favicon_shape']            = $module_settings[ 'shape' ];
+		$setting['cart_count_favicon_position']         = $module_settings[ 'position' ];
 		$setting['cart_count_favicon_background_color'] = $module_settings[ 'background_color' ];
-		$setting['cart_count_favicon_text_color']		= $module_settings[ 'text_color' ];
-		$setting['cart_count_favicon_delay']			= $module_settings[ 'delay' ];
-		$setting['cart_count_favicon_animation']		= $module_settings[ 'animation' ];
-		$setting['cart_count_favicon_count']			= '0';
+		$setting['cart_count_favicon_text_color']       = $module_settings[ 'text_color' ];
+		$setting['cart_count_favicon_delay']            = $module_settings[ 'delay' ];
+		$setting['cart_count_favicon_animation']        = $module_settings[ 'animation' ];
+		$setting['cart_count_favicon_count']            = '0';
 		
 		if ( function_exists( 'WC' ) ) {
 			$setting['cart_count_favicon_count'] = WC()->cart->get_cart_contents_count();
@@ -193,7 +192,7 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$settings 	 = $this->get_module_settings();
+		$settings    = $this->get_module_settings();
 		$favicon_url = get_site_icon_url() ? get_site_icon_url( 512 ) : MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/wplogo.svg';
 
 		?>
@@ -254,7 +253,6 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Initialize the module.

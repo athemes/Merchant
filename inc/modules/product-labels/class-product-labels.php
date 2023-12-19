@@ -266,7 +266,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					$regular_price = (float) $child_product->get_regular_price();
 					$sale_price    = (float) $child_product->get_sale_price();
 
-					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+					if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 						$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 					}
 				}
@@ -275,7 +275,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				$regular_price = (float) $product->get_regular_price();
 				$sale_price    = (float) $product->get_sale_price();
 
-				if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+				if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 					$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 				}
 			}
@@ -501,7 +501,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 						$regular_price = (float) $child_product->get_regular_price();
 						$sale_price    = (float) $child_product->get_sale_price();
 
-						if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+						if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 							$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 						}
 					}
@@ -510,7 +510,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					$regular_price = (float) $product->get_regular_price();
 					$sale_price    = (float) $product->get_sale_price();
 
-					if ( 0 != $sale_price || ! empty( $sale_price ) ) {
+					if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 						$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
 					}
 				}
@@ -526,8 +526,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 8 . 'px';
 
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
-			       . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
-			       . '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
+					. esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
+					. '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
 		}
 
 		return '';
@@ -552,8 +552,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return '';
 		}
 		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
-		         . esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
-		         . trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
+				. esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
+				. trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
 
 		/**
 		 * Filter the single product label.

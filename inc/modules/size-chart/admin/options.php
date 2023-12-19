@@ -83,7 +83,7 @@ Merchant_Admin_Options::create( array(
 			'title' => esc_html__( 'Icon color hover', 'merchant' ),
 		),
 
-	)
+	),
 ) );
 
 // Design
@@ -194,7 +194,7 @@ Merchant_Admin_Options::create( array(
 			'default' => '#757575',
 		),
 
-	)
+	),
 ) );
 
 // Shortcode

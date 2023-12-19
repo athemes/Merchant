@@ -48,7 +48,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 			'privacy_policy_url' => get_privacy_policy_url(),
 			'button_text' => esc_html__( 'I understand', 'merchant' ),
 			'cookie_duration' => '365',
-			'close_button' => 1
+			'close_button' => 1,
 		);
 
 		// Mount preview url.
@@ -95,7 +95,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue styles.
@@ -106,7 +106,6 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 
 		// Render cookie banner on footer.
 		add_action( 'wp_footer', array( $this, 'cookie_banner' ) );
-		
 	}
 
 	/**
@@ -140,7 +139,7 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/cookie-banner.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/cookie-banner.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -271,7 +270,6 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 	public function cookie_banner() {
 		echo wp_kses( $this->get_cookie_banner(), merchant_kses_allowed_tags() );
 	}
-
 }
 
 // Initialize the module.

@@ -59,7 +59,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 			'email_new_subscriber' => __( 'Hello, thank you for subscribing to the stock waitlist for {product}. We will email you once the product back in stock.', 'merchant' ),
 			'email_update'         => __( 'Hello, thanks for your patience and finally the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
 				'merchant' ),
-			'form_nonce_field'     => wp_nonce_field( 'merchant_wait_list_action', 'merchant_wait_list_action', true, false )
+			'form_nonce_field'     => wp_nonce_field( 'merchant_wait_list_action', 'merchant_wait_list_action', true, false ),
 		);
 
 		// Mount preview url.
@@ -131,7 +131,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/wait-list.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/wait-list.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}

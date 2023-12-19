@@ -74,14 +74,14 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		array(
 			'id'      => 'text_hover_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text hover color', 'merchant' ),
-			'default' => '#757575'
+			'default' => '#757575',
 		),
 
 		array(

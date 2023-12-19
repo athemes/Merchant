@@ -18,14 +18,14 @@ Merchant_Admin_Options::create( array(
 
 		// Position.
 		array(
-			'id'		=> 'position',
-			'type'		=> 'select',
-			'title'		=> __( 'Position', 'merchant' ),
-			'options'	=> array(
-				'position-top'	   => __( 'Top', 'merchant' ),
+			'id'        => 'position',
+			'type'      => 'select',
+			'title'     => __( 'Position', 'merchant' ),
+			'options'   => array(
+				'position-top'     => __( 'Top', 'merchant' ),
 				'position-bottom' => __( 'Bottom', 'merchant' ),
 			),
-			'default'	=> 'position-bottom'
+			'default'   => 'position-bottom',
 		),
 
 		// Display after x amount of pixels.
@@ -33,12 +33,12 @@ Merchant_Admin_Options::create( array(
 			'id'        => 'display_after_amount',
 			'type'      => 'range',
 			'title'     => __( 'Display after amount of scroll', 'merchant' ),
-			'desc'	    => __( 'Start the sticky effect when the specified amount of pixels is scrolled.', 'merchant' ),
+			'desc'      => __( 'Start the sticky effect when the specified amount of pixels is scrolled.', 'merchant' ),
 			'min'       => 0,
 			'max'       => 1500,
 			'step'      => 1,
 			'unit'      => 'px',
-			'default'   => 100
+			'default'   => 100,
 		),
 
 		// Hide Product Image.
@@ -46,7 +46,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hide_product_image',
 			'type'    => 'switcher',
 			'title'   => __( 'Hide product image', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		// Hide Product Title.
@@ -54,7 +54,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hide_product_title',
 			'type'    => 'switcher',
 			'title'   => __( 'Hide product title', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		// Hide Product Price.
@@ -62,7 +62,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hide_product_price',
 			'type'    => 'switcher',
 			'title'   => __( 'Hide product price', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		// Elements spacing.
@@ -74,7 +74,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 80,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 35
+			'default' => 35,
 		),
 
 		// Hide when scroll to top.
@@ -82,20 +82,20 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'scroll_hide',
 			'type'    => 'switcher',
 			'title'   => __( 'Hide when scroll to top', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		// Visibility.
 		array(
-			'id'		=> 'visibility',
-			'type'		=> 'select',
-			'title'		=> __( 'Visibility', 'merchant' ),
-			'options'	=> array(
-				'all'	  => __( 'Show on all devices', 'merchant' ),
+			'id'        => 'visibility',
+			'type'      => 'select',
+			'title'     => __( 'Visibility', 'merchant' ),
+			'options'   => array(
+				'all'     => __( 'Show on all devices', 'merchant' ),
 				'desktop' => __( 'Desktop only', 'merchant' ),
-				'mobile'  => __( 'Mobile/tablet only', 'merchant' )
+				'mobile'  => __( 'Mobile/tablet only', 'merchant' ),
 			),
-			'default'	=> 'desktop'
+			'default'   => 'desktop',
 		),
 
 		// Allow 3rd party plugins hook.
@@ -103,11 +103,11 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'allow_third_party_plugins',
 			'type'    => 'switcher',
 			'title'   => __( 'Allow third-party plugin content', 'merchant' ),
-			'desc'	  => __( 'Control whether third-party plugin content should be rendered in the sticky add to cart content area.', 'merchant' ),
-			'default' => 0
+			'desc'    => __( 'Control whether third-party plugin content should be rendered in the sticky add to cart content area.', 'merchant' ),
+			'default' => 0,
 		),
 
-	)
+	),
 ) );
 
 // Style Settings
@@ -121,7 +121,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'border_color',
 			'type'    => 'color',
 			'title'   => __( 'Border color', 'merchant' ),
-			'default' => '#E2E2E2'
+			'default' => '#E2E2E2',
 		),
 
 		// Background color.
@@ -129,7 +129,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'background_color',
 			'type'    => 'color',
 			'title'   => __( 'Background color', 'merchant' ),
-			'default' => '#FFFFFF'
+			'default' => '#FFFFFF',
 		),
 		
 		// Content color.
@@ -137,7 +137,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'content_color',
 			'type'    => 'color',
 			'title'   => __( 'Content color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Title color.
@@ -145,7 +145,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'title_color',
 			'type'    => 'color',
 			'title'   => __( 'Title color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Button Background color.
@@ -153,7 +153,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_bg_color',
 			'type'    => 'color',
 			'title'   => __( 'Button background color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Button Background color (hover).
@@ -161,7 +161,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_bg_color_hover',
 			'type'    => 'color',
 			'title'   => __( 'Button background color (hover)', 'merchant' ),
-			'default' => '#757575'
+			'default' => '#757575',
 		),
 
 		// Button color.
@@ -169,7 +169,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_color',
 			'type'    => 'color',
 			'title'   => __( 'Button color', 'merchant' ),
-			'default' => '#FFF'
+			'default' => '#FFF',
 		),
 
 		// Buton color (hover).
@@ -177,8 +177,8 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'button_color_hover',
 			'type'    => 'color',
 			'title'   => __( 'Button color (hover)', 'merchant' ),
-			'default' => '#FFF'
-		)
+			'default' => '#FFF',
+		),
 
 	),
 ) );

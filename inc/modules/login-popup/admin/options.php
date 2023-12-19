@@ -85,7 +85,7 @@ Merchant_Admin_Options::create( array(
 			'default' => '#ffffff',
 		),
 
-	)
+	),
 ) );
 
 // Popup Settings
@@ -217,5 +217,5 @@ Merchant_Admin_Options::create( array(
 			'default' => '#f5f5f5',
 		),
 
-	)
+	),
 ) );

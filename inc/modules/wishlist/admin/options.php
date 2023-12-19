@@ -22,7 +22,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Display on shop archive', 'merchant' ),
 			'desc'    => __( 'Display the wishlist button in the products grid from shop catalog pages.', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 
 		// Display on single product pages.
@@ -31,10 +31,10 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Display on single product', 'merchant' ),
 			'desc'    => __( 'Display the wishlist button in the single product pages.', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 
-	)
+	),
 ) );
 
 // Add To Wishlist Button Settings
@@ -49,10 +49,10 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'choices',
 			'title'     => __( 'Select an icon', 'merchant' ),
 			'options'   => array(
-				'heart1'	=> MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart1.svg',
-				'heart2'	=> MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart2.svg'
+				'heart1'    => MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart1.svg',
+				'heart2'    => MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart2.svg',
 			),
-			'default'   => 'heart1'
+			'default'   => 'heart1',
 		),
 
 		// Button position top.
@@ -64,7 +64,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 80,
 			'step'    => 1,
 			'default' => 20,
-			'unit'    => 'px'
+			'unit'    => 'px',
 		),
 
 		// Button position left.
@@ -76,7 +76,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 80,
 			'step'    => 1,
 			'default' => 20,
-			'unit'    => 'px'
+			'unit'    => 'px',
 		),
 
 		// Tooltip.
@@ -84,7 +84,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'tooltip',
 			'type'    => 'switcher',
 			'title'   => __( 'Display tooltip', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 
 		// Tooltip text.
@@ -93,7 +93,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'text',
 			'title'     => __( 'Tooltip text', 'merchant' ),
 			'default'   => __( 'Add to wishlist', 'merchant' ),
-			'condition' => array( 'tooltip', '==', true )
+			'condition' => array( 'tooltip', '==', true ),
 		),
 
 		// Tooltip border radius.
@@ -106,7 +106,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 4,
 			'unit'    => 'px',
-			'condition' => array( 'tooltip', '==', true )
+			'condition' => array( 'tooltip', '==', true ),
 		),
 
 		// Colors.
@@ -116,7 +116,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'icon_stroke_color',
 			'type'    => 'color',
 			'title'   => __( 'Icon stroke color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Icon stroke color (hover).
@@ -124,7 +124,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'icon_stroke_color_hover',
 			'type'    => 'color',
 			'title'   => __( 'Icon stroke color (hover)', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Icon fill color.
@@ -132,7 +132,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'icon_fill_color',
 			'type'    => 'color',
 			'title'   => __( 'Icon fill color', 'merchant' ),
-			'default' => 'transparent'
+			'default' => 'transparent',
 		),
 
 		// Icon fill color (hover).
@@ -140,7 +140,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'icon_fill_color_hover',
 			'type'    => 'color',
 			'title'   => __( 'Icon fill color (hover)', 'merchant' ),
-			'default' => '#f04c4c'
+			'default' => '#f04c4c',
 		),
 
 		// Tooltip text color.
@@ -148,7 +148,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'tooltip_text_color',
 			'type'    => 'color',
 			'title'   => __( 'Tooltip text color', 'merchant' ),
-			'default' => '#FFF'
+			'default' => '#FFF',
 		),
 
 		// Tooltip background color.
@@ -156,10 +156,10 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'tooltip_background_color',
 			'type'    => 'color',
 			'title'   => __( 'Tooltip background color', 'merchant' ),
-			'default' => '#212121'
-		)
+			'default' => '#212121',
+		),
 
-	)
+	),
 ) );
 
 // Wishlist Page Settings
@@ -170,13 +170,13 @@ Merchant_Admin_Options::create( array(
 
 		// Create Wishlist Page.
 		array(
-			'id'			  => 'create_page',
-			'type'			  => 'create_page',
-			'title'			  => __( 'Wishlist page', 'merchant' ),
-			'page_title'	  => __( 'My Wishlist', 'merchant' ),
+			'id'              => 'create_page',
+			'type'            => 'create_page',
+			'title'           => __( 'Wishlist page', 'merchant' ),
+			'page_title'      => __( 'My Wishlist', 'merchant' ),
 			'page_meta_key'   => '_wp_page_template',
 			'page_meta_value' => 'modules/wishlist/page-template-wishlist.php',
-			'option_name'	  => 'merchant_wishlist_page_id',
+			'option_name'     => 'merchant_wishlist_page_id',
 		),
 
 		// Hide page title.
@@ -184,7 +184,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hide_page_title',
 			'type'    => 'switcher',
 			'title'   => __( 'Hide page title', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 		
 		// Table heading background color.
@@ -192,7 +192,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_heading_background_color',
 			'type'    => 'color',
 			'title'   => __( 'Table heading background color', 'merchant' ),
-			'default' => '#f8f8f8'
+			'default' => '#f8f8f8',
 		),
 
 		// Table body background color.
@@ -200,7 +200,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_body_background_color',
 			'type'    => 'color',
 			'title'   => __( 'Table body background color', 'merchant' ),
-			'default' => '#fdfdfd'
+			'default' => '#fdfdfd',
 		),
 
 		// Table text color.
@@ -208,7 +208,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_text_color',
 			'type'    => 'color',
 			'title'   => __( 'Table text color', 'merchant' ),
-			'default' => '#777'
+			'default' => '#777',
 		),
 
 		// Table links color.
@@ -216,7 +216,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_links_color',
 			'type'    => 'color',
 			'title'   => __( 'Table links color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// Table links color (hover).
@@ -224,8 +224,8 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_links_color_hover',
 			'type'    => 'color',
 			'title'   => __( 'Table links color (hover)', 'merchant' ),
-			'default' => '#757575'
-		)
+			'default' => '#757575',
+		),
 
-	)
+	),
 ) );

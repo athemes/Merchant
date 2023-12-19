@@ -49,7 +49,7 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'message' => __( '✋ Don\'t forget this', 'merchant' ),
-			'abandoned_message' => __( '✋ You left something in the cart', 'merchant' )
+			'abandoned_message' => __( '✋ You left something in the cart', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -89,7 +89,7 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue scripts.
@@ -100,7 +100,6 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 
 		// Add merchant selector and content to cart fragments.
 		add_filter( 'woocommerce_add_to_cart_fragments', array( $this, 'cart_count_fragment' ) );
-
 	}
 
 	/**
@@ -194,7 +193,7 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$settings 	 = $this->get_module_settings();
+		$settings    = $this->get_module_settings();
 		$favicon_url = get_site_icon_url() ? get_site_icon_url( 512 ) : MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/wplogo.svg';
 
 		?>
@@ -226,7 +225,6 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 		
 		return $fragments;
 	}
-
 }
 
 // Initialize the module.

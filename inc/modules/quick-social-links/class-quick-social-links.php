@@ -52,26 +52,26 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 						array(
 								'layout'    => 'display',
 								'condition' => 'all',
-								'type'      => 'include'
-						)
+								'type'      => 'include',
+						),
 				),
 				'links'           => array(
 						array(
 								'layout' => 'social',
 								'icon'   => 'facebook',
-								'url'    => esc_html__( 'https://www.facebook.com', 'merchant' )
+								'url'    => esc_html__( 'https://www.facebook.com', 'merchant' ),
 						),
 						array(
 								'layout' => 'social',
 								'icon'   => 'instagram',
-								'url'    => esc_html__( 'https://www.instagram.com', 'merchant' )
+								'url'    => esc_html__( 'https://www.instagram.com', 'merchant' ),
 						),
 						array(
 								'layout' => 'social',
 								'icon'   => 'twitter',
-								'url'    => esc_html__( 'https://www.twitter.com', 'merchant' )
+								'url'    => esc_html__( 'https://www.twitter.com', 'merchant' ),
 						),
-				)
+				),
 		);
 
 		// Module data.
@@ -110,7 +110,7 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( $this->is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/quick-social-links.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/quick-social-links.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -143,20 +143,20 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 			$preview->set_class( 'layout', '.merchant-quick-social-links', array(
 					'pos-bottom',
 					'pos-left',
-					'pos-right'
+					'pos-right',
 			) );
 
 			// Layout visibility
 			$preview->set_class( 'layout', '.merchant-quick-social-links', array(
 					'visibility-all',
 					'pos-left',
-					'pos-right'
+					'pos-right',
 			) );
 
 			// Links
 			$preview->set_flexible_content( 'links', '.merchant-quick-social-links-inner', array(
 							'social' => array( '{url}' => 'url', '{icon}' => 'icon' ),
-							'custom' => array( '{url}' => 'url', '{icon}' => 'image' )
+							'custom' => array( '{url}' => 'url', '{icon}' => 'image' ),
 					)
 			);
 
@@ -178,7 +178,7 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 		$classes = array(
 				'merchant-quick-social-links',
 				$settings['layout'],
-				$settings['visibility']
+				$settings['visibility'],
 		);
 		?>
 

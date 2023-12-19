@@ -64,7 +64,7 @@ Merchant_Admin_Options::create( array(
 				'slide'    => esc_html__( 'Slide', 'merchant' ),
 				'fade'   => esc_html__( 'Fade', 'merchant' ),
 				'pop'  => esc_html__( 'Pop', 'merchant' ),
-				'popFade' => esc_html__( 'popFade', 'merchant' )
+				'popFade' => esc_html__( 'popFade', 'merchant' ),
 			),
 			'default' => 'slide',
 		),
@@ -80,7 +80,7 @@ Merchant_Admin_Options::create( array(
 				'5s' => esc_html__( '5 seconds', 'merchant' ),
 				'0s' => esc_html__( 'Never', 'merchant' ),
 			),
-			'default' => '0s'
+			'default' => '0s',
 		),
 
 	),

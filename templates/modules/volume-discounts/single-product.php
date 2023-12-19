@@ -30,11 +30,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 					str_replace(
 						array(
 							'{amount}',
-							'{discount}'
+							'{discount}',
 						),
 						array(
 							'<strong>' . esc_attr( $discount_tier['quantity'] ) . '</strong>',
-							'<strong>' . wc_price( $discount ) . '</strong>'
+							'<strong>' . wc_price( $discount ) . '</strong>',
 						),
 						esc_html( Merchant_Translator::translate( $args['settings']['buy_text'] ) )
 					),

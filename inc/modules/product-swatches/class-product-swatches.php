@@ -186,14 +186,15 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
 			'type'  => 'product',
 			'query' => array(
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				'tax_query' => array(
 					array(
 						'taxonomy' => 'product_type',
 						'field'    => 'slug',
 						'terms'    => 'variable',
 					),
-				)
-			)
+				),
+			),
 		) );
 
 		// Module options path.
@@ -343,7 +344,7 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
                                         <a href="#" role="button" class="merchant-variation-item" data-stock-status="instock" value="image-option-1">
                             <span class="merchant-variation-text">
                                 <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg' ); ?>" alt="<?php echo esc_html__( 'Image option 1', 'merchant' ) ?>"
-                                     loading="lazy">
+                                    loading="lazy">
 								<?php if ( $settings['tooltip'] ) : ?>
                                     <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Image option 1', 'merchant' ) ?></span>
 								<?php endif; ?>
@@ -360,7 +361,7 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
                                         <a href="#" role="button" class="merchant-variation-item" data-stock-status="instock" value="image-option-3">
                             <span class="merchant-variation-text">
                                 <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/dummy/Glamifiedviola.jpeg' ); ?>" alt="<?php echo esc_html__( 'Image option 3', 'merchant' ) ?>"
-                                     loading="lazy">
+                                    loading="lazy">
 									<?php if ( $settings['tooltip'] ) : ?>
                                         <span class="merchant-variation-tooltip"><?php echo esc_html__( 'Image option 3', 'merchant' ) ?></span>
 									<?php endif; ?>

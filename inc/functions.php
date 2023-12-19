@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Get template part.
  *
  */
-function merchant_get_template_part( $folder_path = '', $name = '', $args = array(), $return = false ) {
+function merchant_get_template_part( $folder_path = '', $name = '', $args = array(), $return_results = false ) {
 	if ( ! empty( $args ) && is_array( $args ) ) {
 		extract( $args );
 	}
@@ -49,14 +49,14 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 
 	if ( $template ) {
 		// Whether to return template HTML as string or to echo it
-		if ( $return ) {
+		if ( $return_results ) {
 			ob_start();
 			include( $template );
 
 			return ob_get_clean();
-		} else {
-			return include( $template );
 		}
+
+		return include( $template );
 	}
 }
 

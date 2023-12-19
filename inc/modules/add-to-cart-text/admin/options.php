@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'simple_product_custom_single_label',
 			'type'    => 'switcher',
 			'title'   => __( 'Customize label on single product page', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		array(
@@ -66,7 +66,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'variable_product_custom_single_label',
 			'type'    => 'switcher',
 			'title'   => __( 'Customize label on single product page', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 
 		array(
@@ -76,7 +76,7 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'Add to cart', 'merchant' ),
 			'condition' => array( 'variable_product_custom_single_label', '==', true ),
 		),
-	)
+	),
 ) );
 
 Merchant_Admin_Options::create( array(
@@ -87,7 +87,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'out_of_stock_custom_label',
 			'type'    => 'switcher',
 			'title'   => __( 'Alter the label text when the product is out of stock', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 		array(
 			'id'      => 'out_of_stock_shop_label',

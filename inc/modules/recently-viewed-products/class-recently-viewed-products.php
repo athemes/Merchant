@@ -58,7 +58,7 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 			'columns_gap' => 15,
 			'orderby' => 'rand',
 			'order' => 'desc',
-			'hook_order' => 20
+			'hook_order' => 20,
 		);
 
 		// Mount preview url.
@@ -123,7 +123,7 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/recently-viewed-products.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/recently-viewed-products.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 
 			wp_enqueue_style( 'merchant-grid', MERCHANT_URI . 'assets/css/grid.min.css', array(), MERCHANT_VERSION, 'all' );
@@ -151,13 +151,13 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 			$preview->set_text( 'title', '.merchant-recently-viewed-products-section .section-title' );
 
 			// Hide Title.
-			$preview->set_class( 'hide_title', '.merchant-recently-viewed-products-section', array(), 'hide-title' );			
+			$preview->set_class( 'hide_title', '.merchant-recently-viewed-products-section', array(), 'hide-title' );           
 
 			// Slider Style.
-			$preview->set_class( 'slider', '.merchant-recently-viewed-products-section', array(), 'slider-style-preview' );	
+			$preview->set_class( 'slider', '.merchant-recently-viewed-products-section', array(), 'slider-style-preview' ); 
 
 			// Slider Navigation.
-			$preview->set_class( 'slider_nav', '.merchant-recently-viewed-products-section', array( 'always-show', 'on-hover' ) );	
+			$preview->set_class( 'slider_nav', '.merchant-recently-viewed-products-section', array( 'always-show', 'on-hover' ) );  
 
 		}
 

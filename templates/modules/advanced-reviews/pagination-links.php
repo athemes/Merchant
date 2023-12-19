@@ -26,12 +26,12 @@ if ( ! $_page ) {
 
 $max_page = ceil( $args[ 'cpages' ] );
 $defaults = array(
-	'base'		 => add_query_arg( 'cpage', '%#%' ),
-	'format'	   => '',
-	'total'		=> $max_page,
-	'current'	  => $_page,
-	'echo'		 => true,
-	'type'		 => 'plain',
+	'base'       => add_query_arg( 'cpage', '%#%' ),
+	'format'       => '',
+	'total'     => $max_page,
+	'current'     => $_page,
+	'echo'       => true,
+	'type'       => 'plain',
 	'add_fragment' => '#comments',
 );
 if ( $wp_rewrite->using_permalinks() ) {
@@ -39,6 +39,6 @@ if ( $wp_rewrite->using_permalinks() ) {
 }
 
 $pagination_args = wp_parse_args( $args[ 'pagination_args' ], $defaults );
-$page_links		 = paginate_links( $pagination_args );
+$page_links      = paginate_links( $pagination_args );
 
 echo wp_kses_post( $page_links );

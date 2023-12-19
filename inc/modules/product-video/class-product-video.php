@@ -85,7 +85,7 @@ class Merchant_Product_Video extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-video.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-video.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -104,7 +104,7 @@ class Merchant_Product_Video extends Merchant_Add_Module {
                             <div class="merchant-tag-pre-orders">
                                 <i class="dashicons dashicons-info"></i>
                                 <p><?php echo esc_html__( 'Once this module is enabled new options to upload video files will appear under admin product edit page. This means you have to edit and upload the video file for each product in your store.',
-										'merchant' ); ?><?php echo sprintf( '<a href="%s" target="_blank">%s</a>',
+										'merchant' ); ?><?php printf( '<a href="%s" target="_blank">%s</a>',
 										esc_url( admin_url( 'edit.php?post_type=product' ) ),
 										esc_html__( 'View All Products', 'merchant' ) ); ?></p>
                             </div>

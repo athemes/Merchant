@@ -18,19 +18,19 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'show_after_add_to_cart',
 			'type'    => 'switcher',
 			'title'   => __( 'Display after adding a product to the cart on shop', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 		array(
 			'id'      => 'show_after_add_to_cart_single_product',
 			'type'    => 'switcher',
 			'title'   => __( 'Display after adding a product to the cart on single product page', 'merchant' ),
-			'default' => 0
+			'default' => 0,
 		),
 		array(
 			'id'      => 'show_on_cart_url_click',
 			'type'    => 'switcher',
 			'title'   => __( 'Display on cart URL click', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 	),
 ) );
@@ -158,5 +158,5 @@ Merchant_Admin_Options::create( array(
 			'default' => '#313131',
 		),
 
-	)
+	),
 ) );

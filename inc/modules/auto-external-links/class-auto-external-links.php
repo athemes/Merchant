@@ -75,7 +75,7 @@ class Merchant_Auto_External_Links extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue scripts.
@@ -143,7 +143,6 @@ class Merchant_Auto_External_Links extends Merchant_Add_Module {
 
 		<?php
 	}
-
 }
 
 // Initialize the module.

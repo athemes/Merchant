@@ -49,7 +49,7 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 			'global_size_chart' => '',
 			'text'              => __( 'Size Chart', 'merchant' ),
-			'icon'              => 'icon-size-chart'
+			'icon'              => 'icon-size-chart',
 		);
 
 		// Mount preview url.
@@ -116,7 +116,7 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page()  ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/size-chart.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/size-chart.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -145,7 +145,7 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
                             <div class="merchant-tag-pre-orders">
                                 <i class="dashicons dashicons-info"></i>
                                 <p><?php echo esc_html__( 'You can have as many size charts you want and either specify in which product you want to add them or simply enable one globally to be displayed in all products. But if you want to display different size charts for each product, that\'s possible from admin product edit page.',
-										'merchant' ); ?><?php echo sprintf( '<a href="%s" target="_blank">%s</a>',
+										'merchant' ); ?><?php printf( '<a href="%s" target="_blank">%s</a>',
 										esc_url( admin_url( 'edit.php?post_type=product' ) ),
 										esc_html__( 'View All Products', 'merchant' ) ); ?></p>
                             </div>
@@ -214,7 +214,7 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
                     <div class="merchant-product-size-chart-button">
                         <a href="#">
                             <div class="size-chart-icon">
-								<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings['icon'] ), merchant_kses_allowed_tags( [], false ) ); ?>
+								<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings['icon'] ), merchant_kses_allowed_tags( array(), false ) ); ?>
                             </div>
                             <span><?php echo esc_html( $settings['text'] ); ?></span>
                         </a>
@@ -222,7 +222,7 @@ class Merchant_Size_Chart extends Merchant_Add_Module {
                     <div class="merchant-product-size-chart-modal">
                         <div class="merchant-product-size-chart-modal-inner">
                             <div class="merchant-product-size-chart-modal-close">
-								<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-close' ), merchant_kses_allowed_tags( [], false ) ); ?>
+								<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-close' ), merchant_kses_allowed_tags( array(), false ) ); ?>
                             </div>
                             <div class="merchant-product-size-chart-modal-title">
 								<?php echo esc_html__( 'Size Chart Modal Title', 'merchant' ); ?>

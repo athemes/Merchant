@@ -37,7 +37,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );
 			add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ), 999 );
 			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ), 999 );
-
 		}
 
 		/**
@@ -51,7 +50,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-preview.php';
-
 		}
 
 		/**
@@ -88,7 +86,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 					wp_enqueue_script( 'merchant-admin-preview', MERCHANT_URI . 'assets/js/admin/merchant-preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				}
 			}
-
 		}
 
 		/**
@@ -103,7 +100,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			);
 
 			return array_merge( $action_links, $links );
-
 		}
 
 		/**
@@ -127,13 +123,12 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			}
 			
 			return $text;
-			
 		}
 		
 		/**
 		 * Add admin body class.
 		 */
-		public function add_admin_body_class( $classes ) {			
+		public function add_admin_body_class( $classes ) {          
 			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
@@ -152,9 +147,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			}
 
 			return $classes;
-
 		}
-
 	}
 
 	Merchant_Admin_Loader::instance();
