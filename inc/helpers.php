@@ -145,6 +145,28 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 			);
 		}
 
+		if ( in_array( 'wc_email', $extra, true ) || in_array( 'all', $extra, true ) ) {
+			$allowed_tags['body'] = array(
+				'class' => true,
+				'style' => true,
+				'leftmargin' => true,
+				'marginwidth' => true,
+				'topmargin' => true,
+				'marginheight' => true,
+				'offset' => true,
+			);
+
+			$allowed_tags['html'] = array(
+				'lang' => true,
+			);
+
+			$allowed_tags['style'] = array(
+				'type' => true,
+			);
+			$allowed_tags['head'] = array();
+			$allowed_tags['meta']['http-equiv'] = true;
+		}
+
 		// Include nonce tags
 		if ( in_array( 'nonce', $extra, true ) || in_array( 'all', $extra, true ) ) {
 			$allowed_tags['input'] = array(
