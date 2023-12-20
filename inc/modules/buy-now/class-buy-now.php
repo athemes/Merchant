@@ -84,28 +84,16 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		$settings = $this->get_module_settings();
-
-		$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
-			'hook_name' => 'woocommerce_after_shop_loop_item',
-			'hook_priority' => 10,
-		);
-		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
-			'hook_name' => 'woocommerce_after_add_to_cart_button',
-			'hook_priority' => 10,
-		);
-
 		// Enqueue styles.	
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
+		
+		// Add Display Conditions.
+		add_action( 'wp', array( $this, 'get_display_condition' ) );
 
-		// Render buy now button on single product page.
-		add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
-
-		// Render buy now button on shop archive products.
-		add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
+		
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -385,6 +373,43 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Get display condition.
+	 *
+	 * @param array $settings
+	 *
+	 * @return action
+	 */
+	public function get_display_condition() {
+		$settings = $this->get_module_settings();
+	
+		$is_display_archive = isset( $settings['display-archive'] ) && $settings['display-archive'] ? true : false;
+		$is_display_product = isset( $settings['display-product'] ) && $settings['display-product'] ? true : false;
+		$is_display_upsell_related = isset( $settings['display-upsell-related'] ) && $settings['display-upsell-related'] ? true : false;
+		
+		if ( class_exists( 'WooCommerce' ) ) {
+			if ( $is_display_product && is_product() ) {
+				// Render buy now button on single product page.
+				$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
+					'hook_name' => 'woocommerce_after_add_to_cart_button',
+					'hook_priority' => 10,
+				);
+				add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
+			}
+
+			if ( 
+				$is_display_upsell_related && is_product() || 
+				$is_display_archive && ( is_shop() || is_product_tag() || is_product_category() ) ) {
+				// Render buy now button on shop archive products.
+				$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
+					'hook_name' => 'woocommerce_after_shop_loop_item',
+					'hook_priority' => 10,
+				);
+				add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
+			}
+		}
 	}
 
 }
