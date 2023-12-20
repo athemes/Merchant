@@ -216,9 +216,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
-= 1.9 =
-* Added - New module for google address auto-complete.
-* Fixed - Required optional checkout field on shopify checkout.
+= 1.8.1 =
+* Added - Buy Now: New options to control which pages the button should be displayed.
 
 = 1.8 =
 * Added - Compatibility with PolyLang plugin.
