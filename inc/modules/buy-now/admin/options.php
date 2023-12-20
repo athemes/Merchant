@@ -27,7 +27,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'customize-button',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Customize Button', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 
 		array(
@@ -35,7 +35,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button text color', 'merchant' ),
 			'default' => '#ffffff',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -43,7 +43,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button text color hover', 'merchant' ),
 			'default' => '#ffffff',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -51,7 +51,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button border color', 'merchant' ),
 			'default' => '#212121',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -59,7 +59,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button border color hover', 'merchant' ),
 			'default' => '#414141',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -67,7 +67,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button background color', 'merchant' ),
 			'default' => '#212121',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -75,7 +75,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button background color hover', 'merchant' ),
 			'default' => '#414141',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -87,7 +87,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 16,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -99,7 +99,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 12,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -111,7 +111,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 24,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		array(
@@ -123,7 +123,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'unit'    => 'px',
 			'default' => 0,
-			'condition' => array( 'customize-button', '==', true )
+			'condition' => array( 'customize-button', '==', true ),
 		),
 
 		// Loading position/priority on shop archive.
@@ -146,7 +146,7 @@ Merchant_Admin_Options::create( array(
 			'order' => true,
 			'default' => array(
 				'hook_name'     => 'woocommerce_after_shop_loop_item',
-				'hook_priority' => 10
+				'hook_priority' => 10,
 			),
 		),
 
@@ -169,7 +169,7 @@ Merchant_Admin_Options::create( array(
 			'order' => true,
 			'default' => array(
 				'hook_name'     => 'woocommerce_after_add_to_cart_button',
-				'hook_priority' => 10
+				'hook_priority' => 10,
 			),
 		),
 

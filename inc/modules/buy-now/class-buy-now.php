@@ -95,7 +95,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			'hook_priority' => 10,
 		);
 
-		// Enqueue styles.	
+		// Enqueue styles.  
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
@@ -386,7 +386,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		return $classes;
 	}
-
 }
 
 // Initialize the module.
