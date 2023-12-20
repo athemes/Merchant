@@ -17,9 +17,9 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
-			'id'        => 'display_on_backorders',
-			'type'      => 'switcher',
-			'title'     => esc_html__( 'Display on backorders?', 'merchant' ),
+			'id'    => 'display_on_backorders',
+			'type'  => 'switcher',
+			'title' => esc_html__( 'Display on backorders?', 'merchant' ),
 		),
 
 		array(
@@ -74,6 +74,23 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'type'    => 'info',
+			'content' => sprintf(
+			/* Translators: 1. docs link */
+				__( 'Click <a href="%1$s" target="_blank">here</a> to preview the new subscriber email.', 'merchant' ),
+				esc_url(
+					add_query_arg(
+						array(
+							'action' => 'merchant_pro_preview_new_subscriber_email',
+							'nonce'  => wp_create_nonce( 'merchant_pro_wait_list_mailer_preview' ),
+						),
+						admin_url( 'admin-post.php' )
+					)
+				)
+			),
+		),
+
+		array(
 			'id'      => 'email_update',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
@@ -81,7 +98,22 @@ Merchant_Admin_Options::create( array(
 				'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to subscribers when product is in stock.', 'merchant' ),
 		),
-
+		array(
+			'type'    => 'info',
+			'content' => sprintf(
+			/* Translators: 1. docs link */
+				__( 'Click <a href="%1$s" target="_blank">here</a> to preview the stock update email.', 'merchant' ),
+				esc_url(
+					add_query_arg(
+						array(
+							'action' => 'merchant_pro_preview_stock_update_email',
+							'nonce'  => wp_create_nonce( 'merchant_pro_wait_list_mailer_preview' ),
+						),
+						admin_url( 'admin-post.php' )
+					)
+				)
+			),
+		),
 	),
 ) );
 
@@ -96,7 +128,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
 				'merchant' ),
 		),
 		array(
