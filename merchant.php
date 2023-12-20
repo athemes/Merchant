@@ -29,6 +29,7 @@ define( 'MERCHANT_FILE', __FILE__ );
 define( 'MERCHANT_BASE', trailingslashit( plugin_basename( MERCHANT_FILE ) ) );
 define( 'MERCHANT_DIR', trailingslashit( plugin_dir_path( MERCHANT_FILE ) ) );
 define( 'MERCHANT_URI', trailingslashit( plugins_url( '/', MERCHANT_FILE ) ) );
+define( 'MERCHANT_REVIEW_URL', 'https://wordpress.org/support/plugin/merchant/reviews/#new-post' );
 
 /**
  * Merchant class.
