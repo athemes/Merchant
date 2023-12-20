@@ -104,6 +104,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		
 		if ( ! empty( $settings['form_title'] ) ) {
 			Merchant_Translator::register_string( $settings['form_title'], esc_html__( 'Wait list: Form title', 'merchant' ) );
 		}

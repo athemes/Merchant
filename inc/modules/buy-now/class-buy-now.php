@@ -89,11 +89,20 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Buy now listener.
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
-		
-		// Add Display Conditions.
-		add_action( 'wp', array( $this, 'get_display_condition' ) );
 
-		
+		// Single product buy now button.
+		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
+			'hook_name' => 'woocommerce_after_add_to_cart_button',
+			'hook_priority' => 10,
+		);
+		add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
+
+		// Shop archive buy now button.
+		$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
+			'hook_name' => 'woocommerce_after_shop_loop_item',
+			'hook_priority' => 10,
+		);
+		add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -240,6 +249,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function single_product_buy_now_button() {
 		global $post, $product;
 
+		$settings = $this->get_module_settings();
+
+		if( isset( $settings['display-product'] ) && ! $settings['display-product'] ) {
+			return;
+		}
+
 		if ( ! empty( $product ) ) {
 			if ( 'yes' === get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
 				return;
@@ -269,6 +284,16 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function shop_archive_product_buy_now_button() {
 		global $post, $product;
+
+		$settings = $this->get_module_settings();
+
+		if ( ! is_product() && isset( $settings['display-archive'] ) && ! $settings['display-archive'] ) {
+			return;
+		}
+
+		if ( is_product() && isset( $settings['display-upsell-related'] ) && ! $settings['display-upsell-related'] ) {
+			return;
+		}
 
 		if ( ! $product->is_type( 'simple' ) ) {
 			return;
@@ -374,44 +399,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		return $classes;
 	}
-
-	/**
-	 * Get display condition.
-	 *
-	 * @param array $settings
-	 *
-	 * @return action
-	 */
-	public function get_display_condition() {
-		$settings = $this->get_module_settings();
-	
-		$is_display_archive = isset( $settings['display-archive'] ) && $settings['display-archive'] ? true : false;
-		$is_display_product = isset( $settings['display-product'] ) && $settings['display-product'] ? true : false;
-		$is_display_upsell_related = isset( $settings['display-upsell-related'] ) && $settings['display-upsell-related'] ? true : false;
-		
-		if ( class_exists( 'WooCommerce' ) ) {
-			if ( $is_display_product && is_product() ) {
-				// Render buy now button on single product page.
-				$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
-					'hook_name' => 'woocommerce_after_add_to_cart_button',
-					'hook_priority' => 10,
-				);
-				add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
-			}
-
-			if ( 
-				$is_display_upsell_related && is_product() || 
-				$is_display_archive && ( is_shop() || is_product_tag() || is_product_category() ) ) {
-				// Render buy now button on shop archive products.
-				$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
-					'hook_name' => 'woocommerce_after_shop_loop_item',
-					'hook_priority' => 10,
-				);
-				add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
-			}
-		}
-	}
-
 }
 
 // Initialize the module.
