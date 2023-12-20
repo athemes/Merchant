@@ -1088,6 +1088,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Warning
+		 */
+		public static function info( $settings ) {
+			echo wp_kses_post( $settings['content'] );
+		}
+
+		/**
 		 * Field: Divider
 		 */
 		public static function divider() {
