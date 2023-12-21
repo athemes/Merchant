@@ -25,7 +25,7 @@ class Merchant_Notice {
 		'index.php', 
 		'plugins.php', 
 		'edit.php', 
-		'plugin-install.php' 
+		'plugin-install.php', 
 	);
 
 	/**
@@ -126,5 +126,4 @@ class Merchant_Notice {
 			add_user_meta( get_current_user_id(), $this->id . '_dismiss', 'true', true );
 		}
 	}
-
 }

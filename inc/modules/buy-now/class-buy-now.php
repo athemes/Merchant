@@ -84,7 +84,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		// Enqueue styles.	
+		// Enqueue styles.  
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
