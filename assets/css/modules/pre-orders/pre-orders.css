@@ -39,7 +39,7 @@ dl.merchant-pre-orders-note dd {
 
 span.merchant-pre-orders-note {
   display: block;
-  font-size: 0.7em;
+  font-size: max(12px, 0.7em);
   opacity: 0.7;
 }
 span.merchant-pre-orders-note .merchant-pre-orders-label {

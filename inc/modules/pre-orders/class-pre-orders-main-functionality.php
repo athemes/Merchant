@@ -61,7 +61,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_action( 'woocommerce_order_item_meta_end', array( $this, 'order_item_meta_end' ), 10, 4 );
 		add_action( 'woocommerce_shop_loop_item_title', array( $this, 'shop_loop_item_title' ) );
 
+		// Products block.
 		add_filter( 'render_block_context', array( $this, 'add_block_title_filter' ), 10, 1 );
+		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'override_product_grid_block' ), PHP_INT_MAX, 3 );
 
 		$this->register_pre_orders_order_status();
 		add_filter( 'wc_order_statuses', array( $this, 'add_pre_orders_order_statuses' ) );
@@ -592,6 +594,22 @@ class Merchant_Pre_Orders_Main_Functionality {
 			add_filter( 'render_block', array( $this, 'block_remove_the_title_filter' ), 10, 3 );
 		}
 		return $context;
+	}
+
+	/**
+	 * Add pre order info to product grid block.
+	 *
+	 * @param string      $html    Product grid item HTML.
+	 * @param object      $data    Product data passed to the template.
+	 * @param \WC_Product $product Product object.
+	 * @return string     Updated product grid item HTML.
+	 */
+	public function override_product_grid_block( $html, $data, $product ) {
+		$pre_order_text = $this->get_pre_order_text( $product->get_id(), 'span' );
+		if ( $pre_order_text ) {
+			$html = str_replace( $data->title, $data->title . $pre_order_text, $html );
+		}
+		return $html;
 	}
 
 	/**
