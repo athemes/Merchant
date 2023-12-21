@@ -68,16 +68,16 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'use_automatic_emails',
 			'type'    => 'switcher',
-			'title'   => __( 'Send emails automatically.', 'merchant' ),
+			'title'   => __( 'Send emails automatically', 'merchant' ),
 			'default' => 0,
-			'desc'    => esc_html__( 'When product stock updates, send emails automatically to subscribers.', 'merchant' ),
+			'desc'    => esc_html__( 'When products are back in stock, send emails automatically to subscribers to let them know.', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'email_new_subscriber',
 			'type'    => 'textarea_multiline',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),
-			'default' => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you once the product is back in stock.', 'merchant' ),
+			'default' => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you when the product is back in stock.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to new subscribers.', 'merchant' ),
 		),
 
@@ -104,7 +104,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
 			'default' => __( 'Hello, we’re pleased to let you know that {product} is now back in stock.',
 				'merchant' ),
-			'desc'    => esc_html__( 'The message that will be sent to subscribers when product is in stock.', 'merchant' ),
+			'desc'    => esc_html__( 'The message that will be sent to subscribers when a product is back in stock.', 'merchant' ),
 		),
 		array(
 			'type'    => 'info',
