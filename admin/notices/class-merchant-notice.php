@@ -92,14 +92,16 @@ class Merchant_Notice {
 		// Display Conditions
 		global $hook_suffix;
 		
-		if( ! in_array( $hook_suffix, $this->display_conditions ) ) {
+		if( ! in_array( $hook_suffix, $this->display_conditions, true ) ) {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if( $hook_suffix === 'edit.php' && ! isset( $_GET[ 'post_type' ] ) ) {
 			return;
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if( $hook_suffix === 'edit.php' && ( isset( $_GET[ 'post_type' ] ) && $_GET[ 'post_type' ] !== 'product' ) ) {
 			return;
 		}
@@ -119,7 +121,8 @@ class Merchant_Notice {
 	 * @return void
 	 */
 	public function dimiss_notice() {
-		if ( isset( $_GET[$this->id . '_dismiss'] ) && '1' == $_GET[$this->id . '_dismiss'] ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET[$this->id . '_dismiss'] ) && '1' === $_GET[$this->id . '_dismiss'] ) {
 			add_user_meta( get_current_user_id(), $this->id . '_dismiss', 'true', true );
 		}
 	}

@@ -291,7 +291,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 					</li>
 
 					<li class="merchant-modules-header-shortlinks-leave-review">
-						<a href="<?php echo esc_url( MERCHANT_REVIEW_URL ); ?>" title="<?php echo esc_attr( 'Leave a review', 'merchant' ); ?>" target="_blank">
+						<a href="<?php echo esc_url( MERCHANT_REVIEW_URL ); ?>" title="<?php echo esc_attr__( 'Leave a review', 'merchant' ); ?>" target="_blank">
 
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M12 7L13.2747 9.35645L16 9.73445L14 11.4545L14.6667 14L12 12.5682L9.33333 14L10 11.4545L8 9.73445L10.8 9.35645L12 7Z" fill="#787C82"/>

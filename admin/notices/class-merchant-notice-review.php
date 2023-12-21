@@ -37,6 +37,7 @@ class Merchant_Notice_Review extends Merchant_Notice {
 	 * Disable review notice permanently
 	 */
 	public function ignore_plugin_review_notice() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['nag_' . $this->id] ) && '0' === $_GET['nag_' . $this->id] ) {
 			add_user_meta( get_current_user_id(), 'nag_' . $this->id, 'true', true );
 		}
@@ -46,6 +47,7 @@ class Merchant_Notice_Review extends Merchant_Notice {
 	 * Delay review notice
 	 */
 	public function ignore_plugin_review_notice_partially() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['delay_' . $this->id . '_partially'] ) && '0' === $_GET['delay_' . $this->id . '_partially'] ) {
 			update_user_meta( get_current_user_id(), 'delay_' . $this->id . '_partially', time() );
 		}
