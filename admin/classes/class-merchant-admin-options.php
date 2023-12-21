@@ -273,10 +273,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
 								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
+							} elseif ( 'textarea_multiline' === $field['type'] ) {
+								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
 							} elseif ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
-									$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
-								} else {
-									$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
+								$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
+							} else {
+								$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
 							}
 						}
 
@@ -542,6 +544,18 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Field: Textarea
 		 */
 		public static function textarea( $settings, $value ) {
+			$value = ( $value ) ? $value : '';
+			?>
+            <textarea name="merchant[<?php
+			echo esc_attr( $settings['id'] ); ?>]"><?php
+				echo wp_kses_post( $value ); ?></textarea>
+			<?php
+		}
+
+		/**
+		 * Field: Textarea
+		 */
+		public static function textarea_multiline( $settings, $value ) {
 			$value = ( $value ) ? $value : '';
 			?>
             <textarea name="merchant[<?php

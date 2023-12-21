@@ -2598,6 +2598,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   border-color: #3858E9;
 }
 
+.merchant-module-page-setting-field-textarea_multiline textarea,
 .merchant-module-page-setting-field-textarea textarea,
 .merchant-module-page-setting-field-textarea_code textarea {
   padding: 12px;
@@ -2607,6 +2608,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   min-height: 120px;
   border: 1px solid #D6D6D6;
 }
+.merchant-module-page-setting-field-textarea_multiline textarea:focus,
 .merchant-module-page-setting-field-textarea textarea:focus,
 .merchant-module-page-setting-field-textarea_code textarea:focus {
   outline: none;

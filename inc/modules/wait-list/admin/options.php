@@ -75,7 +75,7 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'email_new_subscriber',
-			'type'    => 'textarea',
+			'type'    => 'textarea_multiline',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),
 			'default' => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you once the product is back in stock.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to new subscribers.', 'merchant' ),
@@ -100,7 +100,7 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'email_update',
-			'type'    => 'textarea',
+			'type'    => 'textarea_multiline',
 			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
 			'default' => __( 'Hello, we’re pleased to let you know that {product} is now back in stock.',
 				'merchant' ),
