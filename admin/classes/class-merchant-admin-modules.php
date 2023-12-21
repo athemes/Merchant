@@ -365,7 +365,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'google-autocomplete' ),
 					'title'        => esc_html__( 'Google Address Autocomplete', 'merchant' ),
-					'desc'         => esc_html__( 'Autocomplete the address fields at checkout using the Google Places API.', 'merchant' ),
+					'desc'         => esc_html__( 'Streamline your checkout process and prevent user errors by autocompleting the address fields', 'merchant' ),
 					'tutorial_url' => '',
 				),
 				
