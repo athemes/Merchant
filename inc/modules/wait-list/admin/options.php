@@ -66,6 +66,14 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
+			'id'      => 'use_automatic_emails',
+			'type'    => 'switcher',
+			'title'   => __( 'Send emails automatically.', 'merchant' ),
+			'default' => 0,
+			'desc'    => esc_html__( 'When product stock updates, send emails automatically to subscribers.', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'email_new_subscriber',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),
