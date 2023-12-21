@@ -26,7 +26,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'form_title',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Form title', 'merchant' ),
-			'default' => __( 'New stock is coming! Email me when this item is back in stock', 'merchant' ),
+			'default' => __( 'Email me when this item is back in stock.', 'merchant' ),
 		),
 
 		array(
@@ -47,7 +47,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'form_success_message',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Form success message', 'merchant' ),
-			'default' => __( 'You have been successfully added to our stock waitlist. As soon as new stock becomes available, we will notify you via email.', 'merchant' ),
+			'default' => __( 'You are now subscribed to our stock notification list for this product. When stock becomes available, we will let you know you via email.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will show after form submission.', 'merchant' ),
 		),
 		array(
@@ -69,7 +69,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'email_new_subscriber',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),
-			'default' => __( 'Hello, thank you for subscribing to the stock waitlist for {product}. We will email you once the product back in stock.', 'merchant' ),
+			'default' => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you once the product is back in stock.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to new subscribers.', 'merchant' ),
 		),
 
@@ -94,7 +94,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'email_update',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
-			'default' => __( 'Hello, thanks for your patience — finally, the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
+			'default' => __( 'Hello, we’re pleased to let you know that {product} is now back in stock.',
 				'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to subscribers when product is in stock.', 'merchant' ),
 		),
