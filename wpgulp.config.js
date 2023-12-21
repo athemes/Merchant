@@ -28,6 +28,13 @@ const styles = [
 		destination: './assets/css/admin',
 	},
 
+	// Admin Notices.
+	{
+		name: 'adminNotices',
+		src: './assets/sass/admin/notices.scss',
+		destination: './assets/css/admin',
+	},
+
 	// Metabox.
 	{
 		name: 'metabox',

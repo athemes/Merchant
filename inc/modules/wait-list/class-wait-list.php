@@ -107,6 +107,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		
 		if ( ! empty( $settings['form_title'] ) ) {
 			Merchant_Translator::register_string( $settings['form_title'], esc_html__( 'Wait list: Form title', 'merchant' ) );
 		}
@@ -206,15 +207,24 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function get_html( $settings ) {
-		$html = '<form id="merchant-wait-list" class="merchant-wait-list" method="post">';
-		$html .= '<p class="merchant-wait-list-title">' . Merchant_Translator::translate( $settings['form_title'] ) . '</p>';
-		$html .= '<div class="merchant-wait-list-email">';
-		$html .= '<label for="merchant-wait-list-email">' . Merchant_Translator::translate( $settings['form_email_label'] ) . ' <abbr class="required" title="required">*</abbr></label>';
-		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . Merchant_Translator::translate( $settings['form_email_label'] ) . '" required="">';
+		$product_id = isset( $settings[ 'product_id' ] ) ? absint( $settings[ 'product_id' ] ) : 0;
+		$html = '<div class="merchant-wait-list-container">';
+		$html .= '<div class="merchant-cover">';
+		$html .= '<div class="merchant-wait-list-loader">';
+		$html .= '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path opacity="0.4" d="M478.71 364.58zm-22 6.11l-27.83-15.9a15.92 15.92 0 0 1-6.94-19.2A184 184 0 1 1 256 72c5.89 0 11.71.29 17.46.83-.74-.07-1.48-.15-2.23-.21-8.49-.69-15.23-7.31-15.23-15.83v-32a16 16 0 0 1 15.34-16C266.24 8.46 261.18 8 256 8 119 8 8 119 8 256s111 248 248 248c98 0 182.42-56.95 222.71-139.42-4.13 7.86-14.23 10.55-22 6.11z" /><path d="M271.23 72.62c-8.49-.69-15.23-7.31-15.23-15.83V24.73c0-9.11 7.67-16.78 16.77-16.17C401.92 17.18 504 124.67 504 256a246 246 0 0 1-25 108.24c-4 8.17-14.37 11-22.26 6.45l-27.84-15.9c-7.41-4.23-9.83-13.35-6.2-21.07A182.53 182.53 0 0 0 440 256c0-96.49-74.27-175.63-168.77-183.38z" /></svg>';
 		$html .= '</div>';
-		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . Merchant_Translator::translate( $settings['form_button_text'] ) . '</button>';
+		$html .= '</div>';
+		$html .= '<form id="merchant-wait-list" class="merchant-wait-list" method="post">';
+		$html .= '<p class="merchant-wait-list-title">' . Merchant_Translator::translate( $settings[ 'form_title' ] ) . '</p>';
+		$html .= '<div class="merchant-wait-list-email">';
+		$html .= '<label for="merchant-wait-list-email">' . Merchant_Translator::translate( $settings[ 'form_email_label' ] ) . ' <abbr class="required" title="required">*</abbr></label>';
+		$html .= '<input type="email" name="merchant-wait-list-email" id="merchant-wait-list-email" value="" autocomplete="email" placeholder="' . Merchant_Translator::translate( $settings[ 'form_email_label' ] ) . '" required="">';
+		$html .= '</div>';
+		$html .= '<button class="merchant-wait-list-submit" type="submit" name="subscribe">' . Merchant_Translator::translate( $settings[ 'form_button_text' ] ) . '</button>';
 		$html .= $settings['form_nonce_field'];
+		$html .= '<input type="hidden" name="merchant-wait-list-product-id" id="merchant-wait-list-product-id" value="' . $product_id . '" >';
 		$html .= '</form>';
+		$html .= '</div>';
 
 		return $html;
 	}

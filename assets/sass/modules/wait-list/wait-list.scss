@@ -6,6 +6,7 @@
 	display: flex;
     flex-direction: column;
     gap: 15px;
+	transition: ease opacity 200ms;
 }
 
 .merchant-wait-list-success {
@@ -32,4 +33,56 @@
 
 #merchant-wait-list button {
 	width: 100%;
+}
+
+.merchant-wait-list-container {
+	position: relative;
+	margin-bottom: 1rem;
+
+	&.merchant-loading {
+		.merchant-cover {
+			visibility: visible;
+		}
+
+		.merchant-wait-list {
+			opacity: 0.2;
+		}
+
+		.merchant-wait-list-loader {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		button:focus {
+			outline: none;
+		}
+	}
+
+	.merchant-cover {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		visibility: hidden;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		opacity: 0.5;
+		cursor: progress;
+	}
+}
+
+.merchant-wait-list-loader {
+	position: absolute;
+	z-index: 2;
+	display: block;
+	font-size: 26px;
+	animation: merchant-fa-spin .75s linear infinite;
+	opacity: 0;
+	visibility: hidden;
+	
+	svg {
+		width: 1em;
+		height: 1em;
+		fill: #212121;
+	}
 }

@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge, payme
 Requires at least: 5.5
 Tested up to: 6.4.2
 Requires PHP: 7.0
-Stable tag: 1.8
+Stable tag: 1.8.1
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,9 +216,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
-= 1.9 =
-* Added - New module for google address auto-complete.
-* Fixed - Required optional checkout field on shopify checkout.
+= 1.8.1 =
+* Added - Buy Now: New options to control which pages the button should be displayed.
 
 = 1.8 =
 * Added - Compatibility with PolyLang plugin.

@@ -328,7 +328,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				'general' => array(
 					'wooCurrencySymbol' => class_exists( 'Woocommerce' ) ? html_entity_decode( get_woocommerce_currency_symbol() ) : '',
 				),
-				'setting' => $setting, 
+				'setting' => $setting,
 			) );
 		}
 	}

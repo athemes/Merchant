@@ -126,6 +126,34 @@ Merchant_Admin_Options::create( array(
 			'condition' => array( 'customize-button', '==', true ),
 		),
 
+	),
+) );
+
+// Display Settings
+Merchant_Admin_Options::create( array(
+	'module' => 'buy-now',
+	'title'  => esc_html__( 'Display Settings', 'merchant' ),
+	'fields' => array(
+
+		array(
+			'id'      => 'display-archive',
+			'type'    => 'checkbox',
+			'title'   => __( 'Show on product archive', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'      => 'display-product',
+			'type'    => 'checkbox',
+			'title'   => __( 'Show on single product page', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'      => 'display-upsell-related',
+			'type'    => 'checkbox',
+			'title'   => __( 'Show on upsell and related products', 'merchant' ),
+			'default' => 1,
+		),
+
 		// Loading position/priority on shop archive.
 		array(
 			'id'      => 'hook-order-shop-archive',
@@ -172,6 +200,5 @@ Merchant_Admin_Options::create( array(
 				'hook_priority' => 10,
 			),
 		),
-
 	),
 ) );

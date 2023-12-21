@@ -199,7 +199,7 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 				'product_image' => '',
 				'product_title' => '<h5>' . esc_html__( 'Product Title', 'merchant' ) . '</h5>',
 				'product_price' => wc_price( 199 ),
-				'add_to_cart'   => esc_html__( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' ),
+				'add_to_cart'   => __( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' ),
 			),
 		) );
 
