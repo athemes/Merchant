@@ -104,6 +104,10 @@
 .preview-merchant-wait-list {
 	max-width: 310px;
 	pointer-events: none;
+
+	.merchant-cover {
+		display: none;
+	}
 	
 	button {
 		width: 100%;

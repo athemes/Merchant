@@ -93,6 +93,9 @@
   max-width: 310px;
   pointer-events: none;
 }
+.preview-merchant-wait-list .merchant-cover {
+  display: none;
+}
 .preview-merchant-wait-list button {
   width: 100%;
   margin-top: 10px;

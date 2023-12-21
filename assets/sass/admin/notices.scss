@@ -1,0 +1,106 @@
+.merchant-notice {
+	background-color: #FFF;
+	border-color: #DDE2E7;
+	border-left-color: #3858E9;
+	padding: 15px 60px 20px 20px !important;
+	color: #6D7175;
+	
+	.merchant-btn {
+		display: inline-flex;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 8px 16px;
+		border: 1px solid #757575;
+		border-radius: 4px;
+		text-decoration: none;
+		transition: ease color 300ms, ease background-color 300ms, ease border-color 300ms;
+		
+		& + .merchant-btn {
+			margin-left: 20px;
+		}
+	}
+	
+	.merchant-btn-primary {
+		background-color: #3858E9;
+		border-color: #3858E9;
+		color: #FFF;
+		
+		&:hover {
+			background-color: #4d6aee;
+			border-color: #4d6aee;
+		}
+	}
+	
+	.merchant-btn-secondary {
+		background-color: #FFF;
+		border-color: #3858E9;
+		color: #3858E9;
+		
+		&:hover {
+			background-color: #f5f5f5;
+			border-color: #4d6aee;
+			color: #4d6aee;
+		}
+	}
+	
+	.merchant-btn-link {
+		border: none !important;
+		background-color: transparent !important;
+		color: #4d6aee;
+		padding: 0;
+		text-decoration: underline;
+		&:hover {
+			color: #4d6aee;
+		}
+	}
+	
+	h3 {
+		font-size: 20px;
+		line-height: 30px;
+		margin: 0;
+		& + p {
+			margin-top: 10px;
+		}
+	}
+	
+	p {
+		font-size: 13px;
+		line-height: 20px;
+		margin: 0;
+		padding: 0;
+		& + .merchant-btn {
+			margin-top: 15px;
+		}
+	}
+	
+	strong {
+		color: #212121;
+	}
+	
+	.notice-dismiss {
+		padding: 14px;
+		&:before {
+			content: "\f335";
+			font-size: 19px;
+			color: #757575;
+			transition: ease color 300ms;
+		}
+		
+		&:active,
+		&:focus,
+		&:hover {
+			&:before {
+				color: #212121;
+			}
+		}
+		
+	}
+	
+	&.merchant-notice-with-thumbnail {
+		background-image: url(../../images/admin/notice-thumbnail.png);
+		background-repeat: no-repeat;
+		background-position: 20px 20px;
+		background-size: 89px;
+		padding-left: 135px !important;
+	}
+}

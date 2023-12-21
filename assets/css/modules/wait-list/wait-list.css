@@ -11,6 +11,8 @@
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 15px;
+  -webkit-transition: ease opacity 200ms;
+  transition: ease opacity 200ms;
 }
 
 .merchant-wait-list-success {
@@ -37,4 +39,55 @@
 
 #merchant-wait-list button {
   width: 100%;
+}
+
+.merchant-wait-list-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.merchant-wait-list-container.merchant-loading .merchant-cover {
+  visibility: visible;
+}
+.merchant-wait-list-container.merchant-loading .merchant-wait-list {
+  opacity: 0.2;
+}
+.merchant-wait-list-container.merchant-loading .merchant-wait-list-loader {
+  opacity: 1;
+  visibility: visible;
+}
+.merchant-wait-list-container.merchant-loading button:focus {
+  outline: none;
+}
+.merchant-wait-list-container .merchant-cover {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.merchant-wait-list-loader {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  font-size: 26px;
+  -webkit-animation: merchant-fa-spin 0.75s linear infinite;
+          animation: merchant-fa-spin 0.75s linear infinite;
+  opacity: 0;
+  visibility: hidden;
+}
+.merchant-wait-list-loader svg {
+  width: 1em;
+  height: 1em;
+  fill: #212121;
 }
