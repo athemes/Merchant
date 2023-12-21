@@ -28,7 +28,7 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
      */
     public function notice_markup() { ?>
         <div class="merchant-notice merchant-notice-with-thumbnail notice" style="position:relative;">
-			<h3><?php echo esc_html__( 'Earn More with Your Store and Merchant! 💰', 'merchant' ); ?></h3>
+			<h3><?php echo esc_html__( 'Earn More with Your Store and Merchant Pro! 💰', 'merchant' ); ?></h3>
 
 			<p>
 				<?php

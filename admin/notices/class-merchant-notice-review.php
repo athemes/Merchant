@@ -65,7 +65,7 @@ class Merchant_Notice_Review extends Merchant_Notice {
 		}
 
 		?>
-		<div class="merchant-notice merchant-notice-with-thumbnail notice" style="position:relative;">
+		<div class="merchant-notice notice" style="position:relative;">
 			<p>
 				<?php
 				printf(

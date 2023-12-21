@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2023-12-20 20:41+0000\n"
+"POT-Creation-Date: 2023-12-21 14:22+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -346,7 +346,7 @@ msgid "Google Address Autocomplete"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:368
-msgid "Autocomplete the address fields at checkout using the Google Places API."
+msgid "Streamline your checkout process and prevent user errors by autocompleting the address fields"
 msgstr ""
 
 #: admin/classes/class-merchant-admin-modules.php:377
@@ -437,24 +437,24 @@ msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page i
 msgstr ""
 
 #. translators: %1$s current user display name.
-#: admin/notices/class-merchant-notice-review.php:71
+#: admin/notices/class-merchant-notice-review.php:73
 msgid "Hi %1$s, it's so exciting to see that you've made significant progress in building your website. We have a small request that would mean the world to us. Could you please take a moment to write a review for Merchant on WordPress.org? Your support will not only fuel our motivation but also help other users feel confident in choosing our plugin. Thank you!"
 msgstr ""
 
-#: admin/notices/class-merchant-notice-review.php:80
+#: admin/notices/class-merchant-notice-review.php:82
 msgid "Ok, you deserve it"
 msgstr ""
 
-#: admin/notices/class-merchant-notice-review.php:81
+#: admin/notices/class-merchant-notice-review.php:83
 msgid "Nope, maybe later"
 msgstr ""
 
-#: admin/notices/class-merchant-notice-review.php:82
+#: admin/notices/class-merchant-notice-review.php:84
 msgid "I already rated it"
 msgstr ""
 
 #: admin/notices/class-merchant-notice-upsell.php:31
-msgid "Earn More with Your Store and Merchant! 💰"
+msgid "Earn More with Your Store and Merchant Pro! 💰"
 msgstr ""
 
 #: admin/notices/class-merchant-notice-upsell.php:35
@@ -546,6 +546,10 @@ msgstr ""
 
 #: admin/pages/page-dashboard.php:284
 msgid "Merchant settings"
+msgstr ""
+
+#: admin/pages/page-dashboard.php:294
+msgid "Leave a review"
 msgstr ""
 
 #: admin/pages/page-dashboard.php:301

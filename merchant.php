@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 6.0
- * WC tested up to: 8.3
+ * WC tested up to: 8.4
  *
  * @package Merchant
  * @since 1.0
