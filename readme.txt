@@ -218,6 +218,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 == Changelog ==
 = 1.8.1 =
 * Added - Buy Now: New options to control which pages the button should be displayed.
+* Added - Waitlist automatic emails.
+* Added - Waitlist emails preview.
+* Changed - Waitlist default messages.
 
 = 1.8 =
 * Added - Compatibility with PolyLang plugin.
