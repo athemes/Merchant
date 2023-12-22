@@ -57,7 +57,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'button_text' => __( 'Pre Order Now!', 'merchant' ),
-			'additional_text' => __( 'Ships on {date}.', 'merchant' )
+			'additional_text' => __( 'Ships on {date}.', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -121,7 +121,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
 	}
 
 	/**
@@ -146,7 +145,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/pre-orders.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/pre-orders.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -182,7 +181,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public function localize_script( $setting ) {
 		$module_settings = $this->get_module_settings();
 
-		$setting[ 'pre_orders' ]				  = true;
+		$setting[ 'pre_orders' ]                  = true;
 		$setting[ 'pre_orders_add_button_title' ] = Merchant_Translator::translate( $module_settings[ 'button_text' ] );
 
 		return $setting;
@@ -202,7 +201,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 						<div class="merchant-module-page-setting-field-inner">
 							<div class="merchant-tag-pre-orders">
 								<i class="dashicons dashicons-info"></i>
-								<p><?php echo esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.', 'merchant' ); ?> <?php echo sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ), esc_html__( 'View Pre-Orders', 'merchant' ) ); ?></p>
+								<p><?php echo esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.', 'merchant' ); ?> <?php printf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ), esc_html__( 'View Pre-Orders', 'merchant' ) ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -243,11 +242,11 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			// Additional Text.
 			$preview->set_text( 'additional_text', '.merchant-pre-orders-date', array(
 				array(
-					'{date}'
+					'{date}',
 				),
 				array(
-					$time_format
-				)
+					$time_format,
+				),
 			) );
 
 		}
@@ -280,7 +279,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 				<div class="mrc-preview-text-placeholder mrc-mw-40 mrc-hide-on-smaller-screens"></div>
 				<div class="mrc-preview-text-placeholder mrc-mw-30 mrc-hide-on-smaller-screens"></div>
 				<div class="merchant-pre-ordered-product">
-					<div class="merchant-pre-orders-date"><?php echo sprintf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) ); ?></div>
+					<div class="merchant-pre-orders-date"><?php printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) ); ?></div>
 					<a href="#" class="add_to_cart_button"><?php echo esc_html( $settings[ 'button_text' ] ); ?></a>
 				</div>
 			</div>
@@ -341,7 +340,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 		return $css;
 	}
-
 }
 
 // Main functionality.

@@ -59,7 +59,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 			'single_product_placement' => 'after-cart-form',
 			'min_inventory'            => 50,
-			'low_inventory_text'       => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' )
+			'low_inventory_text'       => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -126,7 +126,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/stock-scarcity.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/stock-scarcity.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -149,11 +149,11 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 
 			$preview->set_text( 'low_inventory_text', '.merchant-stock-scarcity-message', array(
 				array(
-					'{stock}'
+					'{stock}',
 				),
 				array(
-					'20'
-				)
+					'20',
+				),
 			) );
 			$preview->set_css( 'text_font_size', '.merchant-stock-scarcity-message', '--merchant-font-size', 'px' );
 			$preview->set_css( 'text_font_weight', '.merchant-stock-scarcity-message', '--merchant-font-weight' );
@@ -198,7 +198,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 					array(
 						'settings'   => $settings,
 						'percentage' => 30,
-						'stock'      => 20
+						'stock'      => 20,
 					)
 				); ?>
                 <div class="mrc-preview-addtocart-placeholder"></div>

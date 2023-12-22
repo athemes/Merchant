@@ -39,20 +39,18 @@ if ( ! class_exists( 'Merchant_Option' ) ) {
 		/**
 		 * Get option.
 		 */
-		public static function get( $module, $setting, $default = null ) {
+		public static function get( $module, $setting, $default_val = null ) {
 
 			$options = get_option( 'merchant', array() );
 
-			$value = $default;
+			$value = $default_val;
 
 			if ( isset( $options[ $module ] ) && isset( $options[ $module ][ $setting ] ) ) {
 				$value = $options[ $module ][ $setting ];
 			}
 
 			return $value;
-
 		}
-
 	}
 
 }

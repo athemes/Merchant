@@ -35,9 +35,8 @@ if ( ! function_exists( 'merchant_get_svg_args' ) ) {
 			),
 			'path'      => array(
 				'fill'    => true,
-				'd'       => true
+				'd'       => true,
 			),
 		);
-
 	}
 }

@@ -24,7 +24,7 @@ Merchant_Admin_Options::create( array(
 				'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
 				'before-cart-form' => esc_html__( 'Before add to cart form', 'merchant' ),
 			),
-			'default' => 'after-cart-form'
+			'default' => 'after-cart-form',
 		),
 		array(
 			'id'      => 'min_inventory',
@@ -63,7 +63,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Text when inventory is low (simple - used for product variation)', 'merchant' ),
 			'default' => esc_html__( 'Hurry, low stock.', 'merchant' ),
 		),
-	)
+	),
 ) );
 
 
@@ -78,21 +78,21 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'gradient_start',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Progress bar gradient start', 'merchant' ),
-			'default' => '#ffc108'
+			'default' => '#ffc108',
 		),
 
 		array(
 			'id'      => 'gradient_end',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Progress bar gradient end', 'merchant' ),
-			'default' => '#d61313'
+			'default' => '#d61313',
 		),
 
 		array(
 			'id'      => 'progress_bar_bg',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Progress bar background color', 'merchant' ),
-			'default' => '#e1e1e1'
+			'default' => '#e1e1e1',
 		),
 
 		array(
@@ -104,7 +104,7 @@ Merchant_Admin_Options::create( array(
 				'normal'  => esc_html__( 'Normal', 'merchant' ),
 				'bold' => esc_html__( 'Bold', 'merchant' ),
 			),
-			'default' => 'normal'
+			'default' => 'normal',
 		),
 
 		array(
@@ -115,14 +115,14 @@ Merchant_Admin_Options::create( array(
 			'max'     => 100,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 16
+			'default' => 16,
 		),
 
 		array(
 			'id'      => 'text_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text text color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 	),

@@ -99,7 +99,7 @@
 .merchant-buy-now-button {
 	display: inline-flex;
 	align-items: center;
-	margin-top: 0.5rem !important;
+	margin-top: 1.3rem !important;
     text-decoration: none;
 	padding-top: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
     padding-bottom: var(--mrc-buy-now-padding-top-bottom, 13px) !important;
@@ -117,4 +117,8 @@
 		border-color: #414141 !important;
 		background-color: #414141 !important;
 	}
+
+    &.merchant-custom-buy-now-button {
+        margin-top: 1.3rem !important;
+    }
 }

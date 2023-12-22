@@ -45,7 +45,7 @@ class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 				'placement'  => 'bottom',
 				'text'       => 'titles',
-				'text_color' => '#212121'
+				'text_color' => '#212121',
 		);
 
 		// Module data.

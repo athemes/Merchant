@@ -28,7 +28,7 @@ Merchant_Admin_Options::create( array(
 				'after-cart-form'         => esc_html__( 'After add to cart form', 'merchant' ),
 				'bottom-product-summary'  => esc_html__( 'Bottom of product summary', 'merchant' ),
 			),
-			'default' => 'bottom-product-summary'
+			'default' => 'bottom-product-summary',
 		),
 
 		// Title.
@@ -36,7 +36,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'title',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Title', 'merchant' ),
-			'default' => __( 'Reasons to buy list', 'merchant' )
+			'default' => __( 'Reasons to buy list', 'merchant' ),
 		),
 
 		// Reasons.
@@ -54,8 +54,8 @@ Merchant_Admin_Options::create( array(
 			'default'      => array(
 				esc_html__( '100% Polyester.', 'merchant' ),
 				esc_html__( 'Recycled Polyamid.', 'merchant' ),
-				esc_html__( 'GOTS-certified organic cotton.', 'merchant' )
-			)
+				esc_html__( 'GOTS-certified organic cotton.', 'merchant' ),
+			),
 		),
 
 		// Display Icon.
@@ -63,7 +63,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'display_icon',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Display icon', 'merchant' ),
-			'default' => 1
+			'default' => 1,
 		),
 
 		// List items Icon.
@@ -73,10 +73,10 @@ Merchant_Admin_Options::create( array(
 			'title'     => esc_html__( 'Select an icon', 'merchant' ),
 			'options'   => array(
 				'check2' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check2.svg',
-				'check3' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check3.svg'
+				'check3' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check3.svg',
 			),
 			'default'   => 'check2',
-			'condition' => array( 'display_icon', '==', true )
+			'condition' => array( 'display_icon', '==', true ),
 		),
 
 		// List items Spacing.
@@ -88,10 +88,10 @@ Merchant_Admin_Options::create( array(
 			'max'     => 80,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 5
-		)
+			'default' => 5,
+		),
 
-	)
+	),
 ) );
 
 // Style Settings
@@ -105,7 +105,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'title_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Title color', 'merchant' ),
-			'default' => '#212121'
+			'default' => '#212121',
 		),
 
 		// List items color.
@@ -113,7 +113,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'list_items_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'List items color', 'merchant' ),
-			'default' => '#777'
+			'default' => '#777',
 		),
 
 		// List items Icon color.
@@ -121,10 +121,10 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'list_items_icon_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'List items Icon color', 'merchant' ),
-			'default' => '#212121'
-		)
+			'default' => '#212121',
+		),
 
-	)
+	),
 ) );
 
 // Shortcode

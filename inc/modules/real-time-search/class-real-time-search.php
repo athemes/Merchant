@@ -54,7 +54,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			'results_order' => 'asc',
 			'results_box_width' => 500,
 			'display_categories' => false,
-			'enable_search_by_sku' => false
+			'enable_search_by_sku' => false,
 		);
 
 		// Mount preview url.
@@ -92,7 +92,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Enqueue styles.
@@ -100,7 +100,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 
 		// Enqueue scripts.
 		add_action( 'merchant_enqueue_after_main_css_js', array( $this, 'enqueue_scripts' ) );
-		
 	}
 
 	/**
@@ -113,7 +112,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/real-time-search.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/real-time-search.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -240,11 +239,13 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			's'              => $search_term,
 			'order'          => $order,
 			'orderby'        => $orderby,
-			'post_status'    => array( 'publish' )
+			'post_status'    => array( 'publish' ),
 		);
 	
 		if ( 'price' === $orderby ) {
+			// phpcs:disable
 			$args['meta_key'] = '_price';
+			// phpcs:enable
 			$args['orderby']  = 'meta_value_num';
 		}
 	
@@ -259,18 +260,21 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				'order'          => $order,
 				'orderby'        => $orderby,
 				'post_status'    => array( 'publish' ),
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query'     => array(
 					'relation' => 'OR',
 					array(
 						'key'     => '_sku',
 						'value'   => $search_term,
-						'compare' => 'LIKE'
-					)
-				)
+						'compare' => 'LIKE',
+					),
+				),
 			);
-	
+
 			if ( 'price' === $orderby ) {
+				// phpcs:disable
 				$args['meta_key'] = '_price';
+				// phpcs:enable
 				$args['orderby']  = 'meta_value_num';
 			}
 	
@@ -291,7 +295,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	
 				$args = array(
 					'post_id' => $post->ID,
-					'type'    => 'product'
+					'type'    => 'product',
 				);
 	
 				$output .= self::get_ajax_search_item( $args );
@@ -305,7 +309,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		if ( $display_categories ) {
 			$args = array(
 				'taxonomy'  => 'product_cat',
-				'name-like' => $search_term
+				'name-like' => $search_term,
 			);
 			$cats = get_terms( $args );
 	
@@ -317,7 +321,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				foreach ( $cats as $category ) {
 					$args   = array(
 						'term_id' => $category->term_id,
-						'type'    => 'category'
+						'type'    => 'category',
 					);
 					$output .= self::get_ajax_search_item( $args );
 				}
@@ -329,7 +333,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		if ( $output ) {
 			wp_send_json( array(
 				'status' => 'success',
-				'output' => wp_kses_post( $output )
+				'output' => wp_kses_post( $output ),
 			) );
 		} else {
 			$output = '<p class="merchant-ajax-search-no-results">' . esc_html__( 'No products found.', 'merchant' ) . '</p>';
@@ -337,7 +341,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			wp_send_json( array(
 				'status' => 'success',
 				'type'   => 'no-results',
-				'output' => wp_kses_post( $output )
+				'output' => wp_kses_post( $output ),
 			) );
 		}
 	}
@@ -396,7 +400,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	
 		return ob_get_clean();
 	}
-
 }
 
 // Initialize the module.

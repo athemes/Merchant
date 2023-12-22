@@ -50,7 +50,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 				'variable_product_shop_label'          => esc_html__( 'Select options', 'merchant' ),
 				'variable_product_custom_single_label' => 0,
 				'out_of_stock_shop_label'              => esc_html__( 'Out of stock', 'merchant' ),
-				'out_of_stock_custom_label'            => 0
+				'out_of_stock_custom_label'            => 0,
 		);
 
 		// Mount preview url.
@@ -205,11 +205,11 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 	/**
 	 * Customize add to cart text the single product page.
 	 *
-	 * @param string $default
+	 * @param string $default_val
 	 *
 	 * @return string
 	 */
-	public function customize_single_add_to_cart_text( $default ) {
+	public function customize_single_add_to_cart_text( $default_val ) {
 		global $product;
 
 		/**
@@ -249,18 +249,18 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			}
 		}
 
-		return $default;
+		return $default_val;
 	}
 
 	/**
 	 *  Customize add to cart text on shop pages.
 	 *
-	 * @param string $default
+	 * @param string     $default_val
 	 * @param WC_Product $product
 	 *
 	 * @return string
 	 */
-	public function customize_shop_add_to_cart_text( $default, WC_Product $product ) {
+	public function customize_shop_add_to_cart_text( $default_val, WC_Product $product ) {
 		// Module settings
 		$settings = $this->get_module_settings();
 
@@ -291,7 +291,7 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 			return esc_html( Merchant_Translator::translate( $settings['variable_product_shop_label'] ) );
 		}
 
-		return $default;
+		return $default_val;
 	}
 }
 

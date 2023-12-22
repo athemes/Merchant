@@ -94,7 +94,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 				'setting'  => $setting,
 				'selector' => $selector,
 				'variable' => $variable,
-				'unit'     => $unit
+				'unit'     => $unit,
 			);
 		}
 
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			$manipulator = array(
 				'icons_lib' => Merchant_SVG_Icons::$svg_icons,
 				'setting'   => $setting,
-				'selector'  => $selector
+				'selector'  => $selector,
 			);
 
 			$this->manipulators['svg_icons'][] = $manipulator;
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		public function set_repeater_content( $setting, $selector ) {
 			$manipulator = array(
 				'setting'  => $setting,
-				'selector' => $selector
+				'selector' => $selector,
 			);
 
 			$this->manipulators['repeater_content'][] = $manipulator;
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 			$manipulator = array(
 				'setting'   => $setting,
 				'selector'  => $selector,
-				'variables' => $variables
+				'variables' => $variables,
 			);
 
 			$this->manipulators['flexible_content'][] = $manipulator;
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Merchant_Admin_Preview' ) ) {
 		 */
 		public function trigger_update( $setting ) {
 			$this->manipulators['update'][] = array(
-				'setting' => $setting
+				'setting' => $setting,
 			);
 		}
 

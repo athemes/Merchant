@@ -75,7 +75,7 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return;	
+			return; 
 		}
 
 		// Snippets on head.
@@ -150,7 +150,6 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		if ( ! empty( $snippet ) ) {
 			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
-	
 	}
 
 	/**
@@ -164,7 +163,6 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		if ( ! empty( $snippet ) ) {
 			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
-	
 	}
 
 	/**
@@ -178,9 +176,7 @@ class Merchant_Code_Snippets extends Merchant_Add_Module {
 		if ( ! empty( $snippet ) ) {
 			echo wp_kses( $snippet, merchant_kses_allowed_tags_for_code_snippets() );
 		}
-	
 	}
-
 }
 
 // Initialize the module.

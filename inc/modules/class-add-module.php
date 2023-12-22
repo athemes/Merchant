@@ -92,16 +92,16 @@ class Merchant_Add_Module {
 	/**
 	 * Modules list item class.
 	 *
-	 * @param string $class
+	 * @param string $module_class
 	 *
 	 * @return string
 	 */
-	public function modules_list_item_class( $class ) {
+	public function modules_list_item_class( $module_class ) {
 		if ( $this->wc_only && ! class_exists( 'Woocommerce' ) ) {
-			$class = $class . ' merchant-module-wc-only';
+			$module_class = $module_class . ' merchant-module-wc-only';
 		}
 
-		return $class;
+		return $module_class;
 	}
 
 	/**
@@ -111,7 +111,7 @@ class Merchant_Add_Module {
 	 */
 	public function is_module_settings_page() {
 		return isset( $_GET['page'] ) && 'merchant' === $_GET['page'] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			   && isset( $_GET['module'] ) && $this->module_id === $_GET['module']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				&& isset( $_GET['module'] ) && $this->module_id === $_GET['module']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**

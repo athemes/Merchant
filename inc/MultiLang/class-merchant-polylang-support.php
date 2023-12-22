@@ -15,23 +15,32 @@ if ( ! class_exists( 'Merchant_PolyLang_Support' ) ) {
 		/**
 		 * Register a string for translation.
 		 *
-		 * @param string $string    The string to translate.
-		 * @param string $context   The context of the string.
-		 * @param bool   $multiline Whether the string is multiline or not.
+		 * @param string $string_to_register The string to translate.
+		 * @param string $context            The context of the string.
+		 * @param bool   $multiline          Whether the string is multiline or not.
 		 */
-		public function register_string( $string, $context, $multiline = false ) {
-			pll_register_string( $context, $string, 'Merchant', $multiline );
+		public function register_string( $string_to_register, $context, $multiline = false ) {
+			pll_register_string( $context, $string_to_register, 'Merchant', $multiline );
 		}
 
 		/**
 		 * Translate a string.
 		 *
-		 * @param string $string The string to translate.
+		 * @param string $string_to_translate The string to translate.
 		 *
 		 * @return string
 		 */
-		public function translate_string( $string ) {
-			return pll__( $string );
+		public function translate_string( $string_to_translate ) {
+			return pll__( $string_to_translate );
+		}
+
+		/**
+		 * Get Current language code
+		 *
+		 * @return string
+		 */
+		public function get_current_lang() {
+			return pll_current_language();
 		}
 	}
 }

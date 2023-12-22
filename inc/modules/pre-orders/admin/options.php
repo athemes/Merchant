@@ -78,7 +78,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button background color hover', 'merchant' ),
 			'default' => '#414141',
-		)
+		),
 
 	),
 ) );

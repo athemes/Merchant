@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$icon 			 = Merchant_SVG_Icons::get_svg_icon( $args[ 'icon' ] );
+$icon            = Merchant_SVG_Icons::get_svg_icon( $args[ 'icon' ] );
 
 /**
  * Hook 'merchant_reasons_to_buy_wrapper_class'
@@ -23,7 +23,7 @@ $wrapper_classes = apply_filters( 'merchant_reasons_to_buy_wrapper_class', array
 
 ?>
 
-<div class="<?php echo wp_kses( implode( ' ', $wrapper_classes ), [] ); ?>">
+<div class="<?php echo wp_kses( implode( ' ', $wrapper_classes ), array() ); ?>">
 	<?php if ( ! empty( $args[ 'title' ] ) ) : ?>
 		<strong class="merchant-reasons-list-title"><?php echo esc_html( $args[ 'title' ] ); ?></strong>
 	<?php endif; ?>

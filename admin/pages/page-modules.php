@@ -39,10 +39,10 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 							if ( ! empty( $merchant_data['modules'] ) ) {
 								foreach ( $merchant_data['modules'] as $merchant_module_id => $merchant_module ) {
 									if ( ! empty( $merchant_option_modules[ $merchant_module_id ] ) ) {
-										$merchant_active_modules++;
+										++$merchant_active_modules;
 									}
 
-									$merchant_count++;
+									++$merchant_count;
 								}
 							}
 						}

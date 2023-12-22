@@ -10,7 +10,7 @@ if ( ! class_exists( 'Merchant_Twenty_Twenty_Four_Theme' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-			add_action( 'wp_enqueue_scripts', [ $this, 'styles' ] );
+			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 		}
 
 		/**

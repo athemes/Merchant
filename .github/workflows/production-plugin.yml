@@ -1,0 +1,43 @@
+# GitHub Actions Workflow for bundling production plugin zip file.
+
+name: Create WP production plugin zip file
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-plugin-zip-asset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP 8.0
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-dev --ignore-platform-reqs --prefer-dist --no-scripts --optimize-autoloader
+
+      - name: Clean unneeded files
+        run: rm -r .gitattributes .github .git .gitignore phpcs.xml yarn.lock wpgulp.config.js gulpfile.babel.js composer.json composer.lock package.json package-lock.json
+
+      - name: Create Artifact
+        run: |
+          zip -qq -r "merchant-${{ github.ref_name }}.zip" .
+
+      - name: "Upload release attachment"
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: merchant-${{ github.ref_name }}.zip
+          tag: ${{ github.ref_name }}
+          overwrite: true
+          body: |
+            # ${{ env.TAG_NAME }}
+            Full WordPress plugin in `merchant-${{ github.ref_name }}.zip`.

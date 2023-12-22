@@ -84,35 +84,31 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		$settings = $this->get_module_settings();
-
-		$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
-			'hook_name' => 'woocommerce_after_shop_loop_item',
-			'hook_priority' => 10,
-		);
-		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
-			'hook_name' => 'woocommerce_after_add_to_cart_button',
-			'hook_priority' => 10,
-		);
-
-		// Enqueue styles.	
+		// Enqueue styles.  
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
 		add_action( 'wp', array( $this, 'buy_now_listener' ) );
 
-		// Render buy now button on single product page.
+		// Single product buy now button.
+		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
+			'hook_name' => 'woocommerce_after_add_to_cart_button',
+			'hook_priority' => 10,
+		);
 		add_action( $single_product_hook['hook_name'], array( $this, 'single_product_buy_now_button' ), $single_product_hook['hook_priority'] );
 
-		// Render buy now button on shop archive products.
+		// Shop archive buy now button.
+		$shop_archive_hook = ! empty( $settings['hook-order-shop-archive'] ) ? $settings['hook-order-shop-archive'] : array(
+			'hook_name' => 'woocommerce_after_shop_loop_item',
+			'hook_priority' => 10,
+		);
 		add_action( $shop_archive_hook['hook_name'], array( $this, 'shop_archive_product_buy_now_button' ), $shop_archive_hook['hook_priority'] );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-
+    
 		// Module wrapper class.
 		add_filter( 'merchant_module_buy_now_wrapper_class', array( $this, 'html_wrapper_class' ) );
-
 	}
 
 	/**
@@ -133,11 +129,14 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -223,10 +222,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function buy_now_listener() {
-		$product_id = ( isset( $_REQUEST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$product_id = ( isset( $_REQUEST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ) ) : '';
 
 		if ( $product_id ) {
-			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : '';
 			if ( $variation_id ) {
 				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
 			} else {
@@ -248,8 +249,14 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function single_product_buy_now_button() {
 		global $post, $product;
 
+		$settings = $this->get_module_settings();
+
+		if( isset( $settings['display-product'] ) && ! $settings['display-product'] ) {
+			return;
+		}
+
 		if ( ! empty( $product ) ) {
-			if ( 'yes' == get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
+			if ( 'yes' === get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
 				return;
 			}
 		}
@@ -278,12 +285,22 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function shop_archive_product_buy_now_button() {
 		global $post, $product;
 
+		$settings = $this->get_module_settings();
+
+		if ( ! is_product() && isset( $settings['display-archive'] ) && ! $settings['display-archive'] ) {
+			return;
+		}
+
+		if ( is_product() && isset( $settings['display-upsell-related'] ) && ! $settings['display-upsell-related'] ) {
+			return;
+		}
+
 		if ( ! $product->is_type( 'simple' ) ) {
-		  return;
+			return;
 		}
 
 		if ( ! empty( $product ) ) {
-			if ( 'yes' == get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
+			if ( 'yes' === get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
 				return;
 			}
 		}
@@ -367,7 +384,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		return $css;
 	}
-
+  
 	/**
 	 * HTML wrapper class.
 	 *
@@ -382,7 +399,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		return $classes;
 	}
-
 }
 
 // Initialize the module.

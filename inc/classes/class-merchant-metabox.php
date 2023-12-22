@@ -61,7 +61,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					'type'       => 'text/html',
 					'codemirror' => array(
 						'indentUnit' => 2,
-						'tabSize'    => 2
+						'tabSize'    => 2,
 					),
 				) );
 
@@ -157,11 +157,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		 *
 		 */
 		public function add_section( $id, $args ) {
-			if ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) {
+			if ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'], true ) ) {
 				return;
 			}
 
-			if ( ! empty( $args['exclude'] ) && in_array( get_post_type(), $args['exclude'] ) ) {
+			if ( ! empty( $args['exclude'] ) && in_array( get_post_type(), $args['exclude'], true ) ) {
 				return;
 			}
 
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 		 *
 		 */
 		public function add_field( $id, $args ) {
-			if ( ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'] ) ) || empty( self::$options[ $args['section'] ] ) ) {
+			if ( ( ! empty( $args['post_type'] ) && ! in_array( get_post_type(), $args['post_type'], true ) ) || empty( self::$options[ $args['section'] ] ) ) {
 				return;
 			}
 
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				'public' => true,
 			) );
 
-			if ( ! in_array( $post_type, $types ) ) {
+			if ( ! in_array( $post_type, $types, true ) ) {
 				return;
 			}
 
@@ -263,7 +263,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 						$active = ( 0 === $num ) ? ' active' : '';
 						echo '<a href="#" class="merchant-metabox-tab' . esc_attr( $active ) . '">' . esc_html( $option['title'] ) . '</a>';
 
-						$num ++;
+						++$num;
 					}
 				}
 
@@ -343,7 +343,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 				echo '</div>';
 
-				$num ++;
+				++$num;
 			}
 
 			echo '</div>';
@@ -380,7 +380,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 			foreach ( $options as $option ) {
 				if ( ! empty( $option['fields'] ) ) {
 					foreach ( $option['fields'] as $field_id => $field ) {
-						if ( in_array( $field['type'], array( 'content' ) ) ) {
+						if ( $field['type'] === 'content' ) {
 							continue;
 						}
 
@@ -422,7 +422,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 				case 'select':
 				case 'choices':
-					return ( in_array( $value, array_keys( $field['options'] ) ) ) ? sanitize_key( $value ) : '';
+					return ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
 				case 'wc-attributes':
@@ -488,7 +488,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					$style = '';
 					$step = 'any';
 					if ( isset( $field['style'] ) && ! empty( $field['style'] ) ) {
-						$style = 'style="' . esc_attr( str_replace( [ '&', '=' ], [ '; ', ': ' ], http_build_query( $field['style'] ) ) ) . '"';
+						$style = 'style="' . esc_attr( str_replace( array( '&', '=' ), array( '; ', ': ' ), http_build_query( $field['style'] ) ) ) . '"';
 					}
 					if ( isset( $field['step'] ) && ! empty( $field['step'] ) ) {
 						$step = $field['step'];
@@ -590,6 +590,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 
 						$attributes = array_replace( $selected_attributes, $attributes );
 						foreach ( $attributes as $attribute_id => $attribute_label ) {
+							// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 							$checked = ( in_array( $attribute_id, $values ) ) ? ' checked' : '';
 
 							echo '<li class="merchant-sortable-item">';
@@ -883,7 +884,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					$posts   = get_posts( array(
 						'post_type'      => 'merchant_size_chart',
 						'posts_per_page' => - 1,
-						'post_status'    => 'publish'
+						'post_status'    => 'publish',
 					) );
 
 					if ( ! is_wp_error( $posts ) && ! empty( $posts ) ) {
@@ -1076,6 +1077,5 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					break;
 			}
 		}
-
 	}
 }

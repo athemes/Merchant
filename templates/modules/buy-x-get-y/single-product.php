@@ -22,7 +22,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 			<?php if ( isset( $offer['product']['is_purchasable'] ) && ! $offer['product']['is_purchasable'] ) {
 				continue;
 			} ?>
-            <div class="merchant-bogo-offer" data-product="<?php echo get_the_ID() ?>" data-offer="<?php echo esc_attr( $key ); ?>">
+            <div class="merchant-bogo-offer" data-product="<?php echo esc_attr( get_the_ID() ) ?>" data-offer="<?php echo esc_attr( $key ); ?>">
                 <div class="merchant-bogo-product-x">
                     <div class="merchant-bogo-product-label merchant-bogo-product-buy-label">
 						<?php echo isset( $settings['buy_label'] )
@@ -56,18 +56,18 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 			                    ? wp_kses( str_replace(
 				                    array(
 					                    '{quantity}',
-					                    '{discount}'
+					                    '{discount}',
 				                    ),
 				                    array(
 					                    $offer['quantity'],
-					                    $discount
+					                    $discount,
 				                    ),
 				                    Merchant_Translator::translate( $settings['get_label'] )
-                                ), merchant_kses_allowed_tags( ['bdi'] ) )
+                                ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
 			                    : wp_kses( 
                                     /* Translators: 1. quantity 2. discount value*/
                                     sprintf( __( 'Get %1$s with %2$s off', 'merchant' ), $offer['quantity'], $discount ),
-                                    merchant_kses_allowed_tags( ['bdi'] )
+                                    merchant_kses_allowed_tags( array( 'bdi' ) )
                                 ); ?>
                         </div>
                         <div class="merchant-bogo-product">

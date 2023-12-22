@@ -59,7 +59,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 			'discount_name'     => esc_html__( 'Spending goal', 'merchant' ),
 			'text_goal_zero'    => esc_html__( 'Spend {spending_goal} to get a {discount_amount} discount!', 'merchant' ),
 			'text_goal_started' => esc_html__( 'Spend {spending_goal} more to get a {discount_amount} discount', 'merchant' ),
-			'text_goal_reached' => esc_html__( 'Congratulations! You get a discount of {discount_amount} on this order!', 'merchant' )
+			'text_goal_reached' => esc_html__( 'Congratulations! You get a discount of {discount_amount} on this order!', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -132,7 +132,7 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/spending-goal.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/spending-goal.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -145,9 +145,9 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 	public function admin_enqueue_scripts() {
 		// Register and enqueue the main module script.
 		wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array(), MERCHANT_VERSION, true );
-		wp_localize_script( 'merchant-admin-' . self::MODULE_ID, 'merchantSpendingGoal', [
-			'currencySymbol' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency_symbol() : '$'
-		] );
+		wp_localize_script( 'merchant-admin-' . self::MODULE_ID, 'merchantSpendingGoal', array(
+			'currencySymbol' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency_symbol() : '$',
+		) );
 	}
 
 	/**
@@ -177,12 +177,12 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 			$preview->set_text( 'text_goal_zero', '.merchant-spending-goal-widget-text', array(
 				array(
 					'{spending_goal}',
-					'{discount_amount}'
+					'{discount_amount}',
 				),
 				array(
 					array(
 						'setting' => 'spending_goal',
-						'format'  => $preview->get_price_format()
+						'format'  => $preview->get_price_format(),
 					),
 					array(
 						'setting'    => 'discount_type',
@@ -193,10 +193,10 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 							),
 							'fixed'   => array(
 								'setting' => 'discount_amount',
-								'format'  => '<strong>' . $preview->get_price_format() . '</strong>'
-							)
-						)
-					)
+								'format'  => '<strong>' . $preview->get_price_format() . '</strong>',
+							),
+						),
+					),
 				),
 			) );
 			$preview->trigger_update( 'spending_goal' );
@@ -248,14 +248,14 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 				'content'  => str_replace(
 					array(
 						'{spending_goal}',
-						'{discount_amount}'
+						'{discount_amount}',
 					),
 					array(
 						wc_price( $settings['spending_goal'] ),
-						'<strong>' . $discount_amount_formatted . '</strong>'
+						'<strong>' . $discount_amount_formatted . '</strong>',
 					),
 					sanitize_text_field( $settings['text_goal_started'] )
-				)
+				),
 			)
 		); ?>
 

@@ -25,7 +25,7 @@ Merchant_Admin_Options::create( array(
 				'on-mouse-hover' => esc_html__( 'On mouse hover', 'merchant' ),
 				'on-page-load'   => esc_html__( 'On page load', 'merchant' ),
 			),
-			'default' => 'on-mouse-hover'
+			'default' => 'on-mouse-hover',
 		),
 
 	),

@@ -59,7 +59,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'spending_text'         => esc_html__( 'Spend {amount} more to receive this free gift!', 'merchant' ),
 			'free_text'             => esc_html__( 'Free', 'merchant' ),
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
-			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' )
+			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 		);
 
 		// Mount preview url.
@@ -125,7 +125,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/free-gifts.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/free-gifts.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -163,11 +163,11 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			$preview->set_text( 'free_text', '.merchant-free-gifts-widget-offer-product-free' );
 			$preview->set_text( 'spending_text', '.merchant-free-gifts-widget-offer-label', array(
 				array(
-					'{amount}'
+					'{amount}',
 				),
 				array(
-					wc_price( 50 )
-				)
+					wc_price( 50 ),
+				),
 			) );
 		}
 
@@ -217,9 +217,9 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 									'title'      => 'Eternal Sunset Collection Lip and Cheek',
 									'price_html' => wc_price( 12 ),
 									'price'      => 12,
-									'permalink'  => '#'
+									'permalink'  => '#',
 								),
-								'amount'  => 50
+								'amount'  => 50,
 							),
 							1 => array(
 								'product' => array(
@@ -228,17 +228,17 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 									'title'      => 'Vinopure Pore Purifying Gel Cleanser',
 									'price_html' => wc_price( 14 ),
 									'price'      => 14,
-									'permalink'  => '#'
+									'permalink'  => '#',
 								),
-								'amount'  => 40
-							)
+								'amount'  => 40,
+							),
 						),
 						'count'      => 2,
-						'cart_total' => 0
+						'cart_total' => 0,
 					),
 					true
 				),
-				merchant_kses_allowed_tags( ['bdi'] ) );
+				merchant_kses_allowed_tags( array( 'bdi' ) ) );
 				wp_add_inline_script(
                         'merchant-admin-preview',
                         "jQuery('.merchant-free-gifts-widget-button').on('click', function(){ jQuery('#merchant-free-gifts-widget').toggleClass('active') })"

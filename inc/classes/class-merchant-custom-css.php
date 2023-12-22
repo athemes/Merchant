@@ -129,17 +129,17 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		/**
 		 * Get variable CSS
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param string $variable CSS variable.
-		 * @param string $unit CSS unit.
-		 * @param string $condition CSS condition.
+		 * @param string $module      Module name.
+		 * @param string $setting     Setting name.
+		 * @param string $default_val Default value.
+		 * @param string $selector    CSS selector.
+		 * @param string $variable    CSS variable.
+		 * @param string $unit        CSS unit.
+		 * @param string $condition   CSS condition.
 		 *
 		 */
-		public static function get_variable_css( $module, $setting = '', $default = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
-			$value = self::get_option( $module, $setting, $default );
+		public static function get_variable_css( $module, $setting = '', $default_val = null, $selector = '', $variable = '', $unit = '', $condition = '' ) {
+			$value = self::get_option( $module, $setting, $default_val );
 
 			if ( '' === $value || null === $value ) {
 				return '';
@@ -157,6 +157,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			}
 
 			// Remove everything after ":"in case a selector like a:hover is used.
+			// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found
 			if ( ( $position = strpos( $selector, ':' ) ) !== false ) {
 				$selector = substr( $selector, 0, $position );
 			}
@@ -171,26 +172,26 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		/**
 		 * CSS (can pass css prop and unit)
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param string $css_prop CSS prop.
-		 * @param string $unit Unit value.
-		 * @param bool $important Important rule.
-		 * @param bool|string $variable Whether to auto-create a variable
+		 * @param string      $module      Module name.
+		 * @param string      $setting     Setting name.
+		 * @param string      $default_val Default value.
+		 * @param string      $selector    CSS selector.
+		 * @param string      $css_prop    CSS prop.
+		 * @param string      $unit        Unit value.
+		 * @param bool        $important   Important rule.
+		 * @param bool|string $variable    Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
-		public static function get_css( $module, $setting = '', $default = '', $selector = '', $css_prop = '', $unit = 'px', $important = false, $variable = false ) {
+		public static function get_css( $module, $setting = '', $default_val = '', $selector = '', $css_prop = '', $unit = 'px', $important = false, $variable = false ) {
 			$css_output = '';
 
 			if ( $variable === false ) {
-				$css_value = self::get_option( $module, $setting, $default ) . ( isset( $css['unit'] ) ? $css['unit'] : '' );
+				$css_value = self::get_option( $module, $setting, $default_val ) . ( isset( $css['unit'] ) ? $css['unit'] : '' );
 			} else {
 				$css_variable = is_string( $variable ) ? $variable : '--merchant-' . str_replace( '_', '-', sanitize_title( $setting ) );
 				$css_value = "var({$css_variable})";
-				$css_output  .= static::get_variable_css( $module, $setting, $default, $selector, $css_variable, $unit );
+				$css_output  .= static::get_variable_css( $module, $setting, $default_val, $selector, $css_variable, $unit );
 			}
 
 			if( is_array( $css_prop ) ) {
@@ -207,49 +208,49 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		/**
 		 * Get color CSS
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param bool $important Important rule.
-		 * @param bool|string $variable Whether to auto-create a variable
+		 * @param string      $module      Module name.
+		 * @param string      $setting     Setting name.
+		 * @param string      $default_val Default value.
+		 * @param string      $selector    CSS selector.
+		 * @param bool        $important   Important rule.
+		 * @param bool|string $variable    Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
-		public static function get_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			return self::get_css( $module, $setting, $default, $selector, 'color', '', $important, $variable );
+		public static function get_color_css( $module, $setting = '', $default_val = '', $selector = '', $important = false, $variable = false ) {
+			return self::get_css( $module, $setting, $default_val, $selector, 'color', '', $important, $variable );
 		}
 
 		/**
 		 * Get border color CSS
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param bool $important Important rule.
-		 * @param bool|string $variable Whether to auto-create a variable
+		 * @param string      $module      Module name.
+		 * @param string      $setting     Setting name.
+		 * @param string      $default_val Default value.
+		 * @param string      $selector    CSS selector.
+		 * @param bool        $important   Important rule.
+		 * @param bool|string $variable    Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
-		public static function get_border_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			return self::get_css( $module, $setting, $default, $selector, 'border-color', '', $important, $variable );
+		public static function get_border_color_css( $module, $setting = '', $default_val = '', $selector = '', $important = false, $variable = false ) {
+			return self::get_css( $module, $setting, $default_val, $selector, 'border-color', '', $important, $variable );
 		}
 
 		/**
 		 * Get background color CSS
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param bool $important Important rule.
-		 * @param bool|string $variable Whether to auto-create a variable
+		 * @param string      $module      Module name.
+		 * @param string      $setting     Setting name.
+		 * @param string      $default_val Default value.
+		 * @param string      $selector    CSS selector.
+		 * @param bool        $important   Important rule.
+		 * @param bool|string $variable    Whether to auto-create a variable
 		 *
 		 * @return string
 		 */
-		public static function get_background_color_css( $module, $setting = '', $default = '', $selector = '', $important = false, $variable = false ) {
-			return self::get_css( $module, $setting, $default, $selector, 'background-color', '', $important, $variable );
+		public static function get_background_color_css( $module, $setting = '', $default_val = '', $selector = '', $important = false, $variable = false ) {
+			return self::get_css( $module, $setting, $default_val, $selector, 'background-color', '', $important, $variable );
 		}
 
 		/**
@@ -268,7 +269,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			$devices = array(
 				'desktop' => '@media (min-width: 992px)',
 				'tablet'  => '@media (min-width: 576px) and (max-width:  991px)',
-				'mobile'  => '@media (max-width: 575px)'
+				'mobile'  => '@media (max-width: 575px)',
 			);
 
 			$css = '';
@@ -291,17 +292,17 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		/**
 		 * Dimensions
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param string $default Default value.
-		 * @param string $selector CSS selector.
-		 * @param string $css_prop CSS prop.
-		 * @param bool $important Important rule.
+		 * @param string $module      Module name.
+		 * @param string $setting     Setting name.
+		 * @param string $default_val Default value.
+		 * @param string $selector    CSS selector.
+		 * @param string $css_prop    CSS prop.
+		 * @param bool   $important   Important rule.
 		 *
 		 * @return string
 		 */
-		public static function get_dimensions_css( $module, $setting = '', $default = '', $selector = '', $css_prop = '', $important = false ) {
-			$value = self::get_option( $module, $setting, $default );
+		public static function get_dimensions_css( $module, $setting = '', $default_val = '', $selector = '', $css_prop = '', $important = false ) {
+			$value = self::get_option( $module, $setting, $default_val );
 
 			$value['top']    = ! isset( $value['top'] ) || $value['top'] === '' ? 0 : $value['top'];
 			$value['right']  = ! isset( $value['right'] ) || $value['right'] === '' ? 0 : $value['right'];
@@ -340,7 +341,7 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 			$devices = array(
 				'desktop' => '@media (min-width: 992px)',
 				'tablet'  => '@media (min-width: 576px) and (max-width:  991px)',
-				'mobile'  => '@media (max-width: 575px)'
+				'mobile'  => '@media (max-width: 575px)',
 			);
 
 			$css = '';
@@ -374,16 +375,16 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 		/**
 		 * Get option
 		 *
-		 * @param string $module Module name.
-		 * @param string $setting Setting name.
-		 * @param mixed $default Default value.
+		 * @param string $module      Module name.
+		 * @param string $setting     Setting name.
+		 * @param mixed  $default_val Default value.
 		 *
 		 * @return mixed
 		 */
-		public static function get_option( $module, $setting, $default ) {
+		public static function get_option( $module, $setting, $default_val ) {
 			$options = get_option( 'merchant', array() );
 
-			$value = $default;
+			$value = $default_val;
 
 			if ( isset( $options[ $module ] ) && isset( $options[ $module ][ $setting ] ) ) {
 				$value = $options[ $module ][ $setting ];
@@ -405,7 +406,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 
 			return trim( $css );
 		}
-
 	}
 
 	Merchant_Custom_CSS::instance();

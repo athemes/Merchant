@@ -20,7 +20,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * Pre order products.
 	 * 
 	 */
-	private $pre_order_products = [];
+	private $pre_order_products = array();
 
 	/**
 	 * Init.
@@ -31,7 +31,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'allow_one_type_only' ), 99, 2 );
 
 		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'manage_pre_orders' ), 10, 2 );
-		add_filter( 'woocommerce_thankyou', array( $this, 'set_pre_order_status'), 10 );
+		add_filter( 'woocommerce_thankyou', array( $this, 'set_pre_order_status' ), 10 );
 		add_filter( 'woocommerce_billing_fields', array( $this, 'add_shipping_date_field' ) );
 
 		// Cronjob.
@@ -89,7 +89,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		$input_post_data = array(
-			'variation_id' => filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT)
+			'variation_id' => filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT),
 		);
 
 		$variable_id			   = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
@@ -176,12 +176,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$this->check_pre_order_products( $woocommerce->cart->get_cart() );
 
 		if ( count( $this->get_pre_order_products() ) > 0 ) {
-			$fields['preorder_date'] = [
+			$fields['preorder_date'] = array(
 				'type'     => 'text',
 				'class'    => array( 'merchant-hidden' ),
 				'required' => true,
 				'default'  => $this->get_oldest_date(),
-			];
+			);
 		}
 
 		return $fields;
@@ -251,9 +251,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function check_for_pre_orders_and_maybe_update_status() {
-		$args = [
+		$args = array(
 			'status' => 'wc-pre-ordered',
-		];
+		);
 
 		$pre_ordered_orders = wc_get_orders( $args );
 
@@ -269,10 +269,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 					if ( $parent_order->get_status() === 'completed' ) {
 						$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
 					}
-				} else {
-					if ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
+				} elseif ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
 						$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
-					}
 				}
 			}
 		}
@@ -289,23 +287,23 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function custom_fields_for_variable_products( $loop, $variation_data, $variation ) {
 		echo '<div class="is_pre_order_meta_field form-row form-row-full" style="display: flex; align-items: center;">';
 			woocommerce_wp_checkbox(
-				[
+				array(
 					'id'    => '_is_pre_order_' . $variation->ID,
 					'label' => '&nbsp;' . esc_html__( 'Pre-Order Product - Set this product as pre-order', 'merchant' ),
 					'value' => get_post_meta( $variation->ID, '_is_pre_order', true ),
-				]
+				)
 			);
 
 			echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
 		echo '</div>';
 		echo '<div class="form-row form-row-full">';
 			woocommerce_wp_text_input(
-				[
+				array(
 					'type'  => 'date',
 					'id'    => '_pre_order_date_' . $variation->ID,
 					'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
 					'value' => get_post_meta( $variation->ID, '_pre_order_date', true ),
-				]
+				)
 			);
 		echo '</div>';
 	}
@@ -318,12 +316,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function custom_fields_for_simple_products() {
 		echo '<div class="is_pre_order_meta_field form-row form-row-full hide_if_variable" style="display: flex; align-items: center;">';
 			woocommerce_wp_checkbox(
-				[
+				array(
 					'id'          => '_is_pre_order',
 					'label'       => esc_html__( 'Pre-Order Product', 'merchant' ),
 					'description' => esc_html__( 'Set this product as pre-order', 'merchant' ),
 					'value'       => get_post_meta( get_the_ID(), '_is_pre_order', true ),
-				]
+				)
 			);
 
 			echo '<div style="margin-left: -20px">';
@@ -340,7 +338,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 				)
 			);
 		echo '</div>';
-		
 	}
 
 	/**
@@ -440,15 +437,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 	/**
 	 * Replace {date} markup with new text.
 	 * 
-	 * @param  string $string
+	 * @param  string $string_contains_date_tag
 	 * @param  string $time_format
+	 *
 	 * @return string
 	 */
-	public function replaceDateTxt( $string, $time_format ) {
+	public function replaceDateTxt( $string_contains_date_tag, $time_format ) {
 		$from = array( '{date}' );
 		$to   = array( $time_format );
 
-		return str_replace( $from, $to, $string );
+		return str_replace( $from, $to, $string_contains_date_tag );
 	}
 
 	/**
@@ -469,7 +467,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		// In some cases the $post might be null. e.g inside quick view popup.
 		if ( ! $_post && isset( $input_post_data[ 'product_id' ] ) ) {
-			$_post 	  = get_post( absint( $input_post_data[ 'product_id' ] ) );
+			$_post    = get_post( absint( $input_post_data[ 'product_id' ] ) );
 			$_product = wc_get_product( $_post->ID );
 		}
 
@@ -479,7 +477,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 				$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) );
 				$text            = $this->replaceDateTxt( $additional_text, $time_format );
 
-				echo sprintf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
+				printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
 			}
 		}
 	}
@@ -497,7 +495,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			'show_in_admin_all_list'    => true,
 			'exclude_from_search'       => false,
 			/* translators: %s: pre ordered product count */
-			'label_count'               => _n_noop( 'Pre Ordered <span class="count">(%s)</span>', 'Pre Ordered <span class="count">(%s)</span>', 'merchant' )
+			'label_count'               => _n_noop( 'Pre Ordered <span class="count">(%s)</span>', 'Pre Ordered <span class="count">(%s)</span>', 'merchant' ),
 		) );
 	}
 

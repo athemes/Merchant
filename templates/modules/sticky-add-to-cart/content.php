@@ -19,7 +19,7 @@ $settings = $args['settings'];
 $attributes = array();
 
 // Wrapper class.
-$classes 	= array( 'merchant-sticky-add-to-cart-wrapper' );
+$classes    = array( 'merchant-sticky-add-to-cart-wrapper' );
 
 // Position.
 $classes[] = 'position-bottom' === $settings[ 'position' ] ? 'position-bottom' : 'position-top';

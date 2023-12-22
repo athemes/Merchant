@@ -86,7 +86,7 @@ class Merchant_Product_Audio extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page()) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-audio.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-audio.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -104,7 +104,7 @@ class Merchant_Product_Audio extends Merchant_Add_Module {
 						<div class="merchant-module-page-setting-field-inner">
 							<div class="merchant-tag-pre-orders">
 								<i class="dashicons dashicons-info"></i>
-								<p><?php echo esc_html__( 'Once this module is enabled new options to upload audio files will appear under the admin product edit page. This means you have to edit and upload the audio file for each product in your store.', 'merchant' ); ?> <?php echo sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=product' ) ), esc_html__( 'View All Products', 'merchant' ) ); ?></p>
+								<p><?php echo esc_html__( 'Once this module is enabled new options to upload audio files will appear under the admin product edit page. This means you have to edit and upload the audio file for each product in your store.', 'merchant' ); ?> <?php printf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=product' ) ), esc_html__( 'View All Products', 'merchant' ) ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -144,12 +144,11 @@ class Merchant_Product_Audio extends Merchant_Add_Module {
 	public function admin_preview_content() { ?>
 
 		<div class="mrc-product-audio-preview">
-			<img src="<?php echo esc_url( MERCHANT_URI . 'inc/modules/product-audio/admin/images/preview-product-audio.png' ); ?>" />
+			<img alt="product audio" src="<?php echo esc_url( MERCHANT_URI . 'inc/modules/product-audio/admin/images/preview-product-audio.png' ); ?>" />
 		</div>
 
 		<?php
 	}
-
 }
 
 // Initialize the module.

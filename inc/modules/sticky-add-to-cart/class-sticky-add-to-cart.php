@@ -61,7 +61,7 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 			'elements_spacing'          => 35,
 			'scroll_hide'               => 0,
 			'visibility'                => 'desktop',
-			'allow_third_party_plugins' => 0
+			'allow_third_party_plugins' => 0,
 		);
 
 		// Mount preview url.
@@ -108,7 +108,7 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/sticky-add-to-cart.min.css', [], MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/sticky-add-to-cart.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -197,10 +197,10 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 			'settings' => self::$module_settings,
 			'elements' => array(
 				'product_image' => '',
-				'product_title' => __( '<h5>Product Title</h5>', 'merchant' ),
+				'product_title' => '<h5>' . esc_html__( 'Product Title', 'merchant' ) . '</h5>',
 				'product_price' => wc_price( 199 ),
-				'add_to_cart'   => __( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' )
-			)
+				'add_to_cart'   => __( '<a href="#" class="single_add_to_cart_button button">Add to cart</a>', 'merchant' ),
+			),
 		) );
 
 		merchant_get_template_part( 'modules/sticky-add-to-cart', 'content', $args );

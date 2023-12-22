@@ -25,11 +25,11 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 						'{amount}',
 						$amount,
 						sanitize_text_field( Merchant_Translator::translate( $settings['spending_text'] ) )
-                    ), merchant_kses_allowed_tags( ['bdi'] ) )
+                    ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
 					: wp_kses( 
                         /* Translators: 1. Amount */
                         sprintf( __( 'Spend %s more to receive this free gift!', 'merchant' ), $amount ),
-                        merchant_kses_allowed_tags( ['bdi'] )
+                        merchant_kses_allowed_tags( array( 'bdi' ) )
                     ); ?>
             </div>
             <div class="merchant-free-gifts-widget-offer-product">

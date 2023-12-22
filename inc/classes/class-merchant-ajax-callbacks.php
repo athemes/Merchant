@@ -20,7 +20,6 @@ if ( ! class_exists( 'Merchant_Ajax_Callbacks' ) ) {
 			// Custom Add To Cart Button.
 			add_action( 'wp_ajax_merchant_custom_addtocart', array( $this, 'custom_addtocart_button' ) );
 			add_action( 'wp_ajax_nopriv_merchant_custom_addtocart', array( $this, 'custom_addtocart_button' ) );
-
 		}
 
 		/**
@@ -38,7 +37,6 @@ if ( ! class_exists( 'Merchant_Ajax_Callbacks' ) ) {
 		
 			wp_die();
 		}
-
 	}
 
 	new Merchant_Ajax_Callbacks();
