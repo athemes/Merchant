@@ -397,23 +397,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	/**
 	 * Change pre-order button text.
 	 * 
-	 * @param  string $text
+	 * @param string     $text
+	 * @param WC_Product $product
 	 * @return string
 	 */
-	public function change_button_text( $text ) {
-		$input_post_data = array(
-			'product_id' => filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT),
-		);
-
-		global $post;
-		$_post = $post;
-
-		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $input_post_data[ 'product_id' ] ) ) { 
-			$_post = get_post( absint( $input_post_data[ 'product_id' ] ) ); 
-		}
-
-		if ( $_post && $this->is_pre_order( $_post->ID ) ) {
+	public function change_button_text( $text, $product ) {
+		if ( $product && $this->is_pre_order( $product->get_id() ) ) {
 			$text = Merchant_Admin_Options::get( 'pre-orders', 'button_text', esc_html__( 'Pre Order Now!', 'merchant' ) );
 		}
 
