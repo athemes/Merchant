@@ -92,7 +92,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			'variation_id' => filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT),
 		);
 
-		$variable_id			   = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
+		$variable_id               = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
 		$is_variable_has_pre_order = $this->is_pre_order( $product_id ) || $this->is_pre_order( $variable_id );
 
 		if ( empty( $products ) || ( $is_variable_has_pre_order && $has_pre_orders ) || ( false === $is_variable_has_pre_order && false === $has_pre_orders ) ) {
@@ -560,14 +560,14 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string
 	 */
 	public function order_item_meta_end( $item_id, $item, $order, $plain_text ) {
-		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text ? '' : 'dl' );
+		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text ? '' : 'dl' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
 	 * Render pre order text.
 	 */
 	public function shop_loop_item_title() {
-		echo $this->get_pre_order_text( get_the_ID(), 'span' );
+		echo $this->get_pre_order_text( get_the_ID(), 'span' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
