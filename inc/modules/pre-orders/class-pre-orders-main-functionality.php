@@ -23,6 +23,13 @@ class Merchant_Pre_Orders_Main_Functionality {
 	private $pre_order_products = array();
 
 	/**
+	 * Flag if the_title filter is added or not.
+	 *
+	 * @var bool
+	 */
+	private $is_pre_order_filter_on = false;
+
+	/**
 	 * Init.
 	 * 
 	 * @return void
@@ -576,7 +583,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return array
 	 */
 	public function add_block_title_filter( $context ) {
-		if ( ! empty( $context['postType'] ) && 'product' === $context['postType'] ) {
+		if ( ! empty( $context['postType'] ) && 'product' === $context['postType'] && ! $this->is_pre_order_filter_on ) {
+			$this->is_pre_order_filter_on = true;
 			add_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10, 2 );
 			add_filter( 'render_block', array( $this, 'block_remove_the_title_filter' ), 10, 3 );
 		}
@@ -620,8 +628,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string
 	 */
 	public function block_remove_the_title_filter( $block_content, $parsed_block, $block ) {
-		if ( ! empty( $block->context['postType'] ) && 'product' === $block->context['postType'] ) {
+		if ( $this->is_pre_order_filter_on ) {
 			remove_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10 );
+			$this->is_pre_order_filter_on = false;
 		}
 		return $block_content;
 	}
