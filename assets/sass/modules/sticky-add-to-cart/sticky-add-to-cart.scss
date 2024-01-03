@@ -246,6 +246,12 @@
 				}
 			}
 		}
+
+		.stock {
+			&.out-of-stock {
+				margin: 0;
+			}
+		}
 	}
 
 	// Hide Product Image

@@ -70,7 +70,7 @@ $attributes = array_reverse( $attributes );
 	<div class="merchant-sticky-add-to-cart-wrapper-content-mobile">
 		
 		<?php if ( ! is_admin() && ( 'variable' === $product->get_type() || 'variable-subscription' === $product->get_type() ) ) : ?>	
-			<a href="#" class="button merchant-mobile-sticky-addtocart-button" data-merchant-scroll-to="#product-<?php echo absint( $product->get_id() ); ?> .variations_form" data-merchant-scroll-to-offset="150">
+			<a href="#" class="button merchant-mobile-sticky-addtocart-button" data-merchant-scroll-to=".single-product.postid-<?php echo absint( $product->get_id() ); ?> .variations_form" data-merchant-scroll-to-offset="150">
 				<?php echo ! empty( $product ) ? esc_html( $product->add_to_cart_text() ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
 			</a>
 		<?php else : ?>
