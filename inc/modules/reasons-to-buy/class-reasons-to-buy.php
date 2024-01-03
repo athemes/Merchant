@@ -47,7 +47,7 @@ class Merchant_Reasons_To_Buy extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'placement'    => 'after-short description',
+			'placement'    => 'after-short-description',
 			'title'        => __( 'Reasons to buy list', 'merchant' ),
 			'reasons'      => array(
 				esc_html__( '100% Polyester.', 'merchant' ),

@@ -17,16 +17,16 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
-			'id'        => 'display_on_backorders',
-			'type'      => 'switcher',
-			'title'     => esc_html__( 'Display on backorders?', 'merchant' ),
+			'id'    => 'display_on_backorders',
+			'type'  => 'switcher',
+			'title' => esc_html__( 'Display on backorders?', 'merchant' ),
 		),
 
 		array(
 			'id'      => 'form_title',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Form title', 'merchant' ),
-			'default' => __( 'New stock is coming! Email me when this item is back in stock', 'merchant' ),
+			'default' => __( 'Email me when this item is back in stock.', 'merchant' ),
 		),
 
 		array(
@@ -47,8 +47,15 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'form_success_message',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Form success message', 'merchant' ),
-			'default' => __( 'You have been successfully added to our stock waitlist. As soon as new stock becomes available, we will notify you via email.', 'merchant' ),
+			'default' => __( 'You are now subscribed to our stock notification list for this product. When stock becomes available, we will let you know you via email.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will show after form submission.', 'merchant' ),
+		),
+		array(
+			'id'      => 'form_unsubscribe_message',
+			'type'    => 'textarea',
+			'title'   => esc_html__( 'Form unsubscribe message', 'merchant' ),
+			'default' => __( 'You have been successfully unsubscribed from our stock waitlist.', 'merchant' ),
+			'desc'    => esc_html__( 'The message that will show after clicking on unsubscribe link.', 'merchant' ),
 		),
 	),
 ) );
@@ -59,22 +66,62 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
+			'id'      => 'use_automatic_emails',
+			'type'    => 'switcher',
+			'title'   => __( 'Send emails automatically', 'merchant' ),
+			'default' => 0,
+			'desc'    => esc_html__( 'When products are back in stock, send emails automatically to subscribers to let them know.', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'email_new_subscriber',
-			'type'    => 'textarea',
+			'type'    => 'textarea_multiline',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),
-			'default' => __( 'Hello, thank you for subscribing to the stock waitlist for {product}. We will email you once the product back in stock.', 'merchant' ),
+			'default' => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you when the product is back in stock.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will be sent to new subscribers.', 'merchant' ),
 		),
 
 		array(
-			'id'      => 'email_update',
-			'type'    => 'textarea',
-			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
-			'default' => __( 'Hello, thanks for your patience — finally, the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
-				'merchant' ),
-			'desc'    => esc_html__( 'The message that will be sent to subscribers when product is in stock.', 'merchant' ),
+			'type'    => 'info',
+			'content' => sprintf(
+			/* Translators: 1. docs link */
+				__( 'Click <a href="%1$s" target="_blank">here</a> to preview the new subscriber email.', 'merchant' ),
+				esc_url(
+					add_query_arg(
+						array(
+							'action' => 'merchant_pro_preview_new_subscriber_email',
+							'nonce'  => wp_create_nonce( 'merchant_pro_wait_list_mailer_preview' ),
+						),
+						admin_url( 'admin-post.php' )
+					)
+				)
+			),
 		),
 
+		array(
+			'id'      => 'email_update',
+			'type'    => 'textarea_multiline',
+			'title'   => esc_html__( 'Email in stock update', 'merchant' ),
+			'default' => __( 'Hello, we’re pleased to let you know that {product} is now back in stock.',
+				'merchant' ),
+			'desc'    => esc_html__( 'The message that will be sent to subscribers when a product is back in stock.', 'merchant' ),
+		),
+		array(
+			'type'    => 'info',
+			'content' => sprintf(
+			/* Translators: 1. docs link */
+				__( 'Click <a href="%1$s" target="_blank">here</a> to preview the stock update email.', 'merchant' ),
+				esc_url(
+					add_query_arg(
+						array(
+							'action' => 'merchant_pro_preview_stock_update_email',
+							'nonce'  => wp_create_nonce( 'merchant_pro_wait_list_mailer_preview' ),
+						),
+						admin_url( 'admin-post.php' )
+					)
+				)
+			),
+		),
 	),
 ) );
 
@@ -89,7 +136,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
 				'merchant' ),
 		),
 		array(

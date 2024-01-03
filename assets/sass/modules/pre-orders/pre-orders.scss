@@ -27,3 +27,27 @@
 		}
 	}
 }
+
+dl.merchant-pre-orders-note {
+	list-style: none outside;
+	margin-bottom: 0;
+	dt {
+		float: left;
+		clear: both;
+		margin: 0;
+		margin-right: 0.25em;
+		list-style: none outside;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+span.merchant-pre-orders-note {
+	display: block;
+	font-size: max(12px, 0.7em);
+	opacity: 0.7;
+	.merchant-pre-orders-label {
+		padding-right: 0.2em;
+	}
+}

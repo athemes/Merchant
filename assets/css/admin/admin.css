@@ -2599,6 +2599,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   border-color: #3858E9;
 }
 
+.merchant-module-page-setting-field-textarea_multiline textarea,
 .merchant-module-page-setting-field-textarea textarea,
 .merchant-module-page-setting-field-textarea_code textarea {
   padding: 12px;
@@ -2608,6 +2609,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   min-height: 120px;
   border: 1px solid #D6D6D6;
 }
+.merchant-module-page-setting-field-textarea_multiline textarea:focus,
 .merchant-module-page-setting-field-textarea textarea:focus,
 .merchant-module-page-setting-field-textarea_code textarea:focus {
   outline: none;
@@ -3767,6 +3769,16 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   border-radius: 4px;
   border: 1px solid #D72C0D;
   background-color: #FFF4F4;
+}
+
+.merchant-module-page-setting-field-info {
+  padding: 8px 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1D2327;
+  border-radius: 4px;
+  border: 1px solid #0d65d7;
+  background-color: #e6effa;
 }
 
 .merchant-module-page-setting-field-divider {

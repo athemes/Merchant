@@ -23,7 +23,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 			'options' => array(
-				'after-short description' => esc_html__( 'After short description', 'merchant' ),
+				'after-short-description' => esc_html__( 'After short description', 'merchant' ),
 				'before-cart-form'        => esc_html__( 'Before add to cart form', 'merchant' ),
 				'after-cart-form'         => esc_html__( 'After add to cart form', 'merchant' ),
 				'bottom-product-summary'  => esc_html__( 'Bottom of product summary', 'merchant' ),

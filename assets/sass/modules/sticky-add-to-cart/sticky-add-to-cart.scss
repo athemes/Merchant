@@ -246,6 +246,12 @@
 				}
 			}
 		}
+
+		.stock {
+			&.out-of-stock {
+				margin: 0;
+			}
+		}
 	}
 
 	// Hide Product Image
@@ -379,9 +385,9 @@
 		&.merchant-sticky-addtocart-mobile-active {
 			position: fixed;
 			top: 0 !important;
+			left: 0;
 			width: 100%;
-			padding-top: 0;
-			transition: ease all 300ms;
+			padding: 20px;
 			&.position-top {
 				bottom: 0;
 			}
@@ -532,6 +538,12 @@ body {
 		}
 	}
 
+}
+
+@media(max-width: 1025px) {
+	.merchant-sticky-add-to-cart-wrapper {
+		--mrc-sticky-adtc-elements-spacing: 15px !important;
+	}
 }
 
 /* Compatibility */
