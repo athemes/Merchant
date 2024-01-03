@@ -32,6 +32,13 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'      => 'cart_label_text',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Label text on cart', 'merchant' ),
+			'default' => esc_html__( 'Ships on', 'merchant' ),
+		),
+
+		array(
 			'id'    => 'text-color',
 			'type'  => 'color',
 			'title' => esc_html__( 'Button text color', 'merchant' ),
