@@ -1496,6 +1496,7 @@ body.merchant-module-disabled {
 	}
 }
 
+.merchant-module-page-setting-field-textarea_multiline,
 .merchant-module-page-setting-field-textarea,
 .merchant-module-page-setting-field-textarea_code {
 	
@@ -2643,6 +2644,16 @@ body.merchant-module-disabled {
 	border-radius: 4px;
 	border: 1px solid #D72C0D;
 	background-color: #FFF4F4;
+}
+
+.merchant-module-page-setting-field-info {
+	padding: 8px 10px;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #1D2327;
+	border-radius: 4px;
+	border: 1px solid #0d65d7;
+	background-color: #e6effa;
 }
 
 .merchant-module-page-setting-field-divider {
