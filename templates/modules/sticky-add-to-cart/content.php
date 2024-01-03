@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $product;
+
 // Settings.
 $settings = $args['settings'];
 
@@ -66,9 +68,16 @@ $attributes = array_reverse( $attributes );
 
 <div <?php echo wp_kses( implode( ' ', $attributes ), array() ); ?>>
 	<div class="merchant-sticky-add-to-cart-wrapper-content-mobile">
-		<a href="#" class="button merchant-mobile-sticky-addtocart-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
-			<?php echo esc_html__( 'Add to Cart', 'merchant' ); ?>
-		</a>
+		
+		<?php if ( ! is_admin() && ( 'variable' === $product->get_type() || 'variable-subscription' === $product->get_type() ) ) : ?>	
+			<a href="#" class="button merchant-mobile-sticky-addtocart-button" data-merchant-scroll-to="#product-<?php echo absint( $product->get_id() ); ?> .variations_form" data-merchant-scroll-to-offset="150">
+				<?php echo ! empty( $product ) ? esc_html( $product->add_to_cart_text() ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
+			</a>
+		<?php else : ?>
+			<a href="#" class="button merchant-mobile-sticky-addtocart-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
+				<?php echo ! empty( $product ) ? esc_html( $product->add_to_cart_text() ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
+			</a>
+		<?php endif; ?>
 		<a href="#" class="button merchant-mobile-sticky-close-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
 			<?php echo esc_html__( 'Close', 'merchant' ); ?>
 		</a>

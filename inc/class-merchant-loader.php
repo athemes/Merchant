@@ -221,6 +221,14 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'in_footer' => true,
 				),
 
+				// Scroll To
+				array(
+					'handle'    => 'merchant-scroll-to',
+					'src'       => 'assets/js/scroll-to.min.js',
+					'dep'       => array(),
+					'in_footer' => true,
+				),
+
 				// Custom Add To Cart Button
 				array(
 					'handle'    => 'merchant-custom-addtocart-button',

@@ -602,6 +602,14 @@ const scripts = [
 		file: 'toggle-class',
 	},
 
+	// Scroll To.
+	{
+		name: 'scrollTo',
+		src: './assets/js/src/scroll-to.js',
+		destination: './assets/js',
+		file: 'scroll-to',
+	},
+
 	// Custom Add To Cart Button.
 	{
 		name: 'customAddToCartButton',
