@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge, payme
 Requires at least: 5.5
 Tested up to: 6.4.2
 Requires PHP: 7.0
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,11 +216,14 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.8.2 =
+* Added - Waitlist: Automatic emails.
+* Added - Waitlist: Emails preview.
+* Changed - Waitlist: Default messages.
+* Changed - Pre-Orders: Display the shipping date on product grids, cart, checkout, review order and my account pages.
+
 = 1.8.1 =
 * Added - Buy Now: New options to control which pages the button should be displayed.
-* Added - Waitlist automatic emails.
-* Added - Waitlist emails preview.
-* Changed - Waitlist default messages.
 
 = 1.8 =
 * Added - Compatibility with PolyLang plugin.
