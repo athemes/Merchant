@@ -260,6 +260,9 @@
 .merchant-sticky-add-to-cart-wrapper .merchant-sticky-add-to-cart-wrapper-content .variations_form .single_variation_wrap .quantity {
   max-height: 51px;
 }
+.merchant-sticky-add-to-cart-wrapper .merchant-sticky-add-to-cart-wrapper-content .stock.out-of-stock {
+  margin: 0;
+}
 .merchant-sticky-add-to-cart-wrapper.hide-product-image .product-image {
   display: none;
 }

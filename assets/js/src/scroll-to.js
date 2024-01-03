@@ -45,10 +45,24 @@ merchant.scrollTo = {
 		const elClientRect   = document.querySelector( scrollToSelector ).getBoundingClientRect();
 		const scrollPosition = parseInt( ( elClientRect.top + window.pageYOffset ) - scrollToOffset );
 
+		window.dispatchEvent( new Event( 'mrc-scrollto.before.scrolling' ), {
+			eventData: {
+				context: el,
+			}
+		} );
+
 		window.scrollTo( {
 			top: scrollPosition,
 			behavior: 'smooth'
 		} );
+
+		setTimeout(function(){
+			window.dispatchEvent( new Event( 'mrc-scrollto.after.scrolling', {
+				eventData: {
+					context: el,
+				}
+			} ) );
+		}, 500);
 	}
 }
 
