@@ -228,6 +228,78 @@
 			margin-left: auto;
 			white-space: nowrap;
 		}
+
+		@at-root {
+			.merchant-quantity-wrap {
+				display: none;
+			}
+		}
+
+		.merchant-quantity {
+			&-wrap {
+				display: block;
+
+				> div {
+					display: flex;
+					justify-content: flex-end;
+					margin-bottom: 5px;
+					height: auto;
+					border: none;
+				}
+
+				a {
+					display: none !important;
+				}
+			}
+
+			&-plus,
+			&-minus,
+			&-input {
+				color: #777777;
+				background: none;
+				border: 1px solid #dbdbdb;
+				box-shadow: none;
+				height: 35px;
+				padding: 0;
+				text-align: center;
+
+				&:focus {
+					outline: none;
+					box-shadow: none;
+				}
+			}
+
+			&-plus,
+			&-minus {
+				width: 35px;
+				border-radius: 1px;
+				cursor: pointer;
+
+				&:hover {
+					color: #1a1a1a;
+				}
+			}
+
+			&-input {
+				color: #757575;
+				width: 50px;
+				padding: 5px;
+				margin: 0 -1px;
+				border-left: none;
+				border-right: none;
+				-moz-appearance: textfield;
+
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
+
+				&:focus {
+					outline: none;
+				}
+			}
+		}
 	}
 
 	.woocommerce-mini-cart__empty-message {
