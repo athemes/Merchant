@@ -33,8 +33,6 @@ jQuery(document).ready(function($) {
 
   // Update Product quantity in Side Cart
   if ( merchant.setting.hasOwnProperty('add_to_cart_slide_out') ) {
-    let debounceTimer;
-
     // Update quantity on plus/minus click
     $( document ).on( 'click', '.js-merchant-quantity-btn', function ( e ) {
       e.preventDefault();
@@ -70,6 +68,7 @@ jQuery(document).ready(function($) {
     } );
 
     // Update quantity helper
+    let debounceTimer;
     function merchant_update_side_cart_quantity( $input ) {
       const { ajax_url, side_cart_nonce } = merchant.setting || {};
 

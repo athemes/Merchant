@@ -34,7 +34,6 @@ jQuery(document).ready(function ($) {
 
   // Update Product quantity in Side Cart
   if (merchant.setting.hasOwnProperty('add_to_cart_slide_out')) {
-    // Update quantity helper
     var merchant_update_side_cart_quantity = function merchant_update_side_cart_quantity($input) {
       var _ref = merchant.setting || {},
         ajax_url = _ref.ajax_url,
@@ -86,8 +85,6 @@ jQuery(document).ready(function ($) {
         });
       }, 350);
     };
-    var debounceTimer;
-
     // Update quantity on plus/minus click
     $(document).on('click', '.js-merchant-quantity-btn', function (e) {
       e.preventDefault();
@@ -116,5 +113,8 @@ jQuery(document).ready(function ($) {
       e.preventDefault();
       merchant_update_side_cart_quantity($(this));
     });
+
+    // Update quantity helper
+    var debounceTimer;
   }
 });
