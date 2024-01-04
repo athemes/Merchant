@@ -108,7 +108,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wait-list' ),
 					'title' => esc_html__( 'Waitlist', 'merchant' ),
-					'desc' => esc_html__( 'Build a waiting list for sold-out items and auto-notify potential customers when stock’s back', 'merchant' ),
+					'desc' => esc_html__( 'Build waitlists for sold-out items and auto-notify potential customers when items are restocked', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/',
 				),
 				'checkout' => array(
@@ -365,7 +365,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'google-autocomplete' ),
 					'title'        => esc_html__( 'Google Address Autocomplete', 'merchant' ),
-					'desc'         => esc_html__( 'Streamline your checkout process and prevent user errors by autocompleting the address fields', 'merchant' ),
+					'desc'         => esc_html__( 'Streamline your checkout process and reduce user errors by autocompleting the address fields', 'merchant' ),
 					'tutorial_url' => '',
 				),
 				
