@@ -263,6 +263,10 @@
 				}
 			}
 
+			&-cart-name {
+				flex-grow: 1;
+			}
+
 			&-cart-price .amount,
 			&-cart-subtotal {
 				font-weight: 600;

@@ -279,6 +279,11 @@
 .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .merchant-cart-item-name {
   display: block;
 }
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-name {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
 .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-price .amount, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-subtotal {
   font-weight: 600;
   font-size: 14px;
