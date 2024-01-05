@@ -230,8 +230,12 @@
 		}
 
 		@at-root {
-			.merchant-quantity-wrap {
-				display: none; // Hide on other places
+			.merchant-quantity {
+				&-wrap,
+				&-plus,
+				&-minus {
+					display: none; // Hide on other places
+				}
 			}
 		}
 
@@ -271,6 +275,7 @@
 
 			&-plus,
 			&-minus {
+				display: block; // Show on Side cart only
 				width: 35px;
 				border-radius: 1px;
 				cursor: pointer;

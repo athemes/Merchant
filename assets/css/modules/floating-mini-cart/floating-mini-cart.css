@@ -252,7 +252,7 @@
   margin-left: auto;
   white-space: nowrap;
 }
-.merchant-quantity-wrap {
+.merchant-quantity-wrap, .merchant-quantity-plus, .merchant-quantity-minus {
   display: none;
 }
 
@@ -289,6 +289,7 @@
           box-shadow: none;
 }
 .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-plus, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-minus {
+  display: block;
   width: 35px;
   border-radius: 1px;
   cursor: pointer;
