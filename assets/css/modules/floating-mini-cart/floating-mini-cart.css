@@ -252,26 +252,95 @@
   margin-left: auto;
   white-space: nowrap;
 }
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-side-cart-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-side-cart-item > a:not(.remove) {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-side-cart-item-sold-individually .merchant-quantity-inner,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-side-cart-item .variation,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-side-cart-item .merchant-cart-item-name {
+  display: none;
+}
 .merchant-quantity-wrap, .merchant-quantity-plus, .merchant-quantity-minus {
   display: none;
 }
 
-.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-wrap {
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-name .variation,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-name .merchant-cart-item-name, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .merchant-cart-item-name {
   display: block;
 }
-.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-wrap > div {
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-price .amount, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-subtotal {
+  font-weight: 600;
+  font-size: 14px;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  margin-bottom: 5px;
-  height: auto;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
   border: none;
 }
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation:before, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation:after {
+  content: none;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation p,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation dd,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-cart-meta .variation dt {
+  margin: 0;
+  padding: 0;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  gap: 10px;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-wrap + span.quantity,
 .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-wrap a {
   display: none !important;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-inner {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 7px;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-inner,
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-inner > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-inner > div {
+  width: auto;
+  height: auto;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-plus, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-minus, .merchant-floating-side-mini-cart-widget .product_list_widget .merchant-quantity-input {
   color: #777777;

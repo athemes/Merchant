@@ -229,6 +229,21 @@
 			white-space: nowrap;
 		}
 
+		.merchant-side-cart-item {
+			display: flex;
+			align-items: flex-start;
+
+			> a:not(.remove) {
+				flex: 0 0 auto;
+			}
+
+			&-sold-individually .merchant-quantity-inner,
+			.variation,
+			.merchant-cart-item-name {
+				display: none;
+			}
+		}
+
 		@at-root {
 			.merchant-quantity {
 				&-wrap,
@@ -240,19 +255,71 @@
 		}
 
 		.merchant-quantity {
-			&-wrap {
-				display: block; // Show on Side cart only
-
-				> div {
-					display: flex;
-					justify-content: flex-end;
-					margin-bottom: 5px;
-					height: auto;
-					border: none;
+			&-cart-name,
+			&-cart-meta {
+				.variation,
+				.merchant-cart-item-name {
+					display: block;
 				}
+			}
 
+			&-cart-price .amount,
+			&-cart-subtotal {
+				font-weight: 600;
+				font-size: 14px;
+			}
+
+			&-cart-meta {
+				.variation {
+					display: flex;
+					gap: 5px;
+					margin: 0;
+					padding: 0;
+					border: none;
+
+					&:before,
+					&:after {
+						content: none;
+					}
+
+					p,
+					dd,
+					dt {
+						margin: 0;
+						padding: 0;
+					}
+				}
+			}
+
+			&-wrap {
+				display: flex; // Show on Side cart only
+				flex-direction: column;
+				align-self: stretch;
+				flex: 1 1 auto;
+				gap: 10px;
+
+				+ span.quantity,
 				a {
 					display: none !important;
+				}
+			}
+
+			&-inner {
+				justify-content: space-between;
+				gap: 7px;
+
+				&,
+				> div {
+					display: flex;
+					align-items: center;
+				}
+
+				> div {
+					width: auto;
+					height: auto;
+					border: none;
+					margin: 0;
+					padding: 0;
 				}
 			}
 
