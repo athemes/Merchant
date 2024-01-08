@@ -25,6 +25,17 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'          => 'global_size_chart_categories',
+			'type'        => 'select_ajax',
+			'title'       => esc_html__( 'Categories', 'merchant' ),
+			'source'      => 'options',
+			'multiple'    => true,
+			'options'     => merchant_get_category_select2_choices(),
+			'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+			'desc'        => esc_html__( 'Global size chart will only appear on the products under selected categories. If none selected, Size chart will appear on all products.', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label text', 'merchant' ),
