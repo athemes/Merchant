@@ -32,7 +32,7 @@ Merchant_Admin_Options::create( array(
 			'multiple'    => true,
 			'options'     => merchant_get_category_select2_choices(),
 			'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-			'desc'        => esc_html__( 'Global size chart will only appear on the products under selected categories. If none selected, Size chart will appear on all products.', 'merchant' ),
+			'desc'        => esc_html__( 'The global size chart will appear only on products within the selected categories. If no categories are selected, the size chart will be displayed on all products.', 'merchant' ),
 		),
 
 		array(
