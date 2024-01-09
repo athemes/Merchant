@@ -1608,6 +1608,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			return false;
 		}
+
+		/**
+         * Get category choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_category_select2_choices() {
+			$choices = array();
+			$cats    = merchant_get_product_categories();
+
+			if ( is_array( $cats ) && ! empty( $cats ) ) {
+				foreach ( $cats as $slug => $name ) {
+					$choices[] = array(
+						'id'   => esc_attr( $slug ),
+						'text' => esc_html( $name ),
+					);
+				}
+			}
+
+			return $choices;
+		}
 	}
 
 	Merchant_Admin_Options::instance();

@@ -382,24 +382,3 @@ if ( ! function_exists( 'merchant_array_to_css' ) ) {
 		return $css;
 	}
 }
-
-/**
- * Generate category choices for select2
- */
-if ( ! function_exists( 'merchant_get_categories_select2_choices' ) ) {
-	function merchant_get_category_select2_choices() {
-		$choices = array();
-		$cats    = merchant_get_product_categories();
-
-		if ( is_array( $cats ) && ! empty( $cats ) ) {
-			foreach ( $cats as $slug => $name ) {
-				$choices[] = array(
-					'id'   => esc_attr( $slug ),
-					'text' => esc_html( $name ),
-				);
-			}
-		}
-
-		return $choices;
-	}
-}
