@@ -74,6 +74,11 @@ const styles = [
 		src: './assets/sass/modules/buy-now/admin/preview.scss',
 		destination: './assets/css/modules/buy-now/admin',
 	},
+	{
+		name: 'productBundlesPreview',
+		src: './assets/sass/modules/product-bundles/admin/preview.scss',
+		destination: './assets/css/modules/product-bundles/admin',
+	},
 
 	// Custom Labels
 	{
@@ -702,6 +707,13 @@ const scripts = [
 		src: './assets/js/src/modules/address-autocomplete/admin/preview.js',
 		file: 'preview',
 		destination: './assets/js/modules/address-autocomplete/admin',
+	},
+
+	{
+		name: 'productBundlesPreview',
+		src: './assets/js/src/modules/product-bundles/admin/preview.js',
+		file: 'preview',
+		destination: './assets/js/modules/product-bundles/admin',
 	},
 
 	// Floating Mini Cart.
