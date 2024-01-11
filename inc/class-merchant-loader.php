@@ -94,6 +94,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
 			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
 			require_once MERCHANT_DIR . 'inc/modules/address-autocomplete/class-address-autocomplete.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-bundles/class-product-bundles.php';
 
 			// Pro modules;
 			if ( ! defined( 'MERCHANT_PRO_VERSION' )

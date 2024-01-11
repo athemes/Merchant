@@ -136,6 +136,15 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/',
 				),
 
+				'product-bundles' => array(
+					'pro' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'title' => esc_html__( 'Product bundles', 'merchant' ),
+					'desc' => esc_html__( 'Provide a new way to bundle products with a good discount', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/',
+				),
+
 				// Boost Revenue.
 				'frequently-bought-together' => array(
 					'pro' => true,
