@@ -83,7 +83,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_description',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled products description', 'merchant' ),
+			'title'   => __( 'Display descriptions of bundled products', 'merchant' ),
 			'default' => 0,
 		),
 
