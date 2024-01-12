@@ -58,10 +58,10 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'hide_bundled',
 			'type'    => 'select',
-			'title'   => __( 'Bundled products style in cart', 'merchant' ),
+			'title'   => __( 'Bundled products text style in cart', 'merchant' ),
 			'options' => array(
-				'text' => __( 'Show as text under main bundle product', 'merchant' ),
-				'list' => __( 'Show bundled products list below main bundle product', 'merchant' ),
+				'text' => __( 'Show bundled products list inline', 'merchant' ),
+				'list' => __( 'Show bundled products in a bulleted list', 'merchant' ),
 			),
 			'default' => 'text',
 		),
