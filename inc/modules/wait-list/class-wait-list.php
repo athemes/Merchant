@@ -48,7 +48,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'convert-more';
+		$this->module_section = 'boost-revenue';
 
 		// Module default settings.
 		$this->module_default_settings = array(

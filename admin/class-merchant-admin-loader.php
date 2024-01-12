@@ -31,12 +31,23 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 */
 		public function __construct() {
 
+			$this->includes_not_hooked();
+
 			add_action( 'init', array( $this, 'includes' ) );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );
 			add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ), 999 );
 			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ), 999 );
+		}
+
+		/**
+		 * No hooked includes.
+		 * These files are included without any WordPress hook.
+		 */
+		public function includes_not_hooked() {
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-svg-icons.php';
+			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-modules.php';
 		}
 
 		/**
@@ -49,9 +60,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/notices/class-merchant-notice-review.php';
 			require_once MERCHANT_DIR . 'admin/notices/class-merchant-notice-upsell.php';
 
-			require_once MERCHANT_DIR . 'inc/classes/class-merchant-svg-icons.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-menu.php';
-			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-modules.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-preview.php';
