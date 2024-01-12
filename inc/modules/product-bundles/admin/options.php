@@ -109,7 +109,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_price_from',
 			'type'    => 'select',
-			'title'   => __( 'Calculate the prices of bundled products price based on', 'merchant' ),
+			'title'   => __( 'Calculate the prices of bundled products based on', 'merchant' ),
 			'options' => array(
 				'regular_price' => __( 'Regular price', 'merchant' ),
 				'sale_price'    => __( 'Sale Price', 'merchant' ),
