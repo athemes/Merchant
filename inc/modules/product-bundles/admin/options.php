@@ -97,7 +97,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_price',
 			'type'    => 'select',
-			'title'   => __( 'Show bundled product price', 'merchant' ),
+			'title'   => __( 'Display the prices of bundled products', 'merchant' ),
 			'options' => array(
 				'price'    => __( 'Price per unit', 'merchant' ),
 				'subtotal' => __( 'Subtotal', 'merchant' ),
@@ -109,7 +109,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_price_from',
 			'type'    => 'select',
-			'title'   => __( 'Calculate bundled product price based on', 'merchant' ),
+			'title'   => __( 'Calculate the prices of bundled products price based on', 'merchant' ),
 			'options' => array(
 				'regular_price' => __( 'Regular price', 'merchant' ),
 				'sale_price'    => __( 'Sale Price', 'merchant' ),
@@ -120,10 +120,10 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'placement',
 			'type'    => 'select',
-			'title'   => __( 'Display bundled product price', 'merchant' ),
+			'title'   => __( 'Where to display the bundle products', 'merchant' ),
 			'options' => array(
-				'woocommerce_before_add_to_cart_form' => __( 'Before add to cart form', 'merchant' ),
-				'woocommerce_after_add_to_cart_form'  => __( 'After add to cart form', 'merchant' ),
+				'woocommerce_before_add_to_cart_form' => __( 'Before add to cart section', 'merchant' ),
+				'woocommerce_after_add_to_cart_form'  => __( 'After add to cart section', 'merchant' ),
 			),
 			'default' => 'before_form',
 		),
@@ -141,7 +141,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
 				'merchant' ),
 		),
 		array(
