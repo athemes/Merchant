@@ -136,15 +136,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/',
 				),
 
-				'product-bundles' => array(
-					'pro' => true,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
-					'title' => esc_html__( 'Product bundles', 'merchant' ),
-					'desc' => esc_html__( 'Provide a new way to bundle products with a good discount', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/',
-				),
-
 				// Boost Revenue.
 				'frequently-bought-together' => array(
 					'pro' => true,
@@ -154,6 +145,16 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Create bundles of related products and offer them at a discount or at the regular price', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-frequently-bought-together/',
 				),
+
+				'product-bundles' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'title' => esc_html__( 'Product bundles', 'merchant' ),
+					'desc' => esc_html__( 'Create product bundles to sell at discounted or regular prices.', 'merchant' ),
+					'tutorial_url' => '',
+				),
+
 				'buy-x-get-y' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
