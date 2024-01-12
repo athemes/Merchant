@@ -76,7 +76,7 @@
 }
 
 .mrc-preview-addtocart-placeholder {
-  background-color: #e5e5e5;
+  background-color: #f5f5f5;
   width: 140px;
   height: 30px;
 }
@@ -101,7 +101,7 @@
   margin-bottom: 15px;
 }
 .mrc-preview-bundle-wrapper .mrc-preview-bundle-product .mrc-preview-bundle-product-image {
-  background-color: #f5f5f5;
+  background-color: #e5e5e5;
   height: 60px; /* Adjust height as needed */
   width: 20%;
   margin-right: 10px; /* Add margin to create space between image and info */
@@ -110,17 +110,17 @@
   width: 60%;
 }
 .mrc-preview-bundle-wrapper .mrc-preview-bundle-product .mrc-preview-bundle-product-info .mrc-preview-bundle-product-title {
-  background-color: #f5f5f5;
+  background-color: #e5e5e5;
   height: 13px;
   margin-bottom: 10px;
 }
 .mrc-preview-bundle-wrapper .mrc-preview-bundle-product .mrc-preview-bundle-product-info .mrc-preview-bundle-product-description {
-  background-color: #f5f5f5;
+  background-color: #e5e5e5;
   height: 13px;
   margin-bottom: 10px;
 }
 .mrc-preview-bundle-wrapper .mrc-preview-bundle-product .mrc-preview-bundle-product-info .mrc-preview-bundle-product-price {
-  background-color: #f5f5f5;
+  background-color: #e5e5e5;
   height: 13px;
 }
 
