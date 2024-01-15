@@ -94,6 +94,17 @@ if ( ! function_exists( 'merchant_is_oceanwp_active' ) ) {
 }
 
 /**
+ * Check if Blocksy theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_blocksy_active' ) ) {
+	function merchant_is_blocksy_active() {
+		return class_exists( 'Blocksy_Manager' );
+	}
+}
+
+/**
  * Check if any shortcode starts with merchant.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */
