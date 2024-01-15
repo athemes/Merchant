@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Botiga theme compatibility layer
+ * Blocksy theme compatibility layer
  */
 if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 	class Merchant_Blocksy_Theme {
@@ -58,8 +58,8 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 	}
 
 	/**
-	 * The class object can be accessed with "global $botiga_compatibility", to allow removing actions.
+	 * The class object can be accessed with "global $blocksy_compatibility", to allow removing actions.
 	 * Improving Third-party integrations.
 	 */
-	$merchant_botiga_compatibility = new Merchant_Blocksy_Theme();
+	$merchant_blocksy_compatibility = new Merchant_Blocksy_Theme();
 }
