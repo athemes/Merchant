@@ -32,7 +32,7 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
 
 			<p>
 				<?php
-					echo esc_html__( 'Merchant Pro packs in all the must-have eCommerce features you need to run your store successfully. With 41+ powerful modules and more to come, Merchant Pro will level up your store and save you from buying lots of different plugins.', 'merchant' );
+					echo esc_html__( 'Merchant Pro packs in all the must-have eCommerce features you need to run your store successfully. With 40+ powerful modules and more to come, Merchant Pro will level up your store and save you the hassle of managing multiple plugins.', 'merchant' );
 				?>
 			</p>
 
