@@ -14,6 +14,7 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 		 */
 		public function __construct() {
 			add_action( 'init', array( $this, 'product_video_module' ) );
+			add_action( 'init', array( $this, 'product_audio_module' ) );
 		}
 
 		/**
@@ -40,6 +41,46 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 
 				$has_featured_video = get_post_meta( $post->ID, '_merchant_enable_featured_video', true );
 				if ( ! $has_featured_video ) {
+					return $mod_settings;
+				}
+
+				foreach( $mod_settings as $index => $setting ) {
+					if ( isset( $setting['id'] ) && $setting['id'] === 'product_image' ) {
+						$mod_settings[$index]['enabled'] = false;
+					}
+				}
+
+				return $mod_settings;
+			} );
+
+			// Replaces the theme's default image gallery with the default from WooCommerce. 
+			add_filter( 'blocksy:woocommerce:product-view:use-default', '__return_true' );
+		}
+
+		/**
+		 * Handle with all required compatibility with 'Product Audio' module.
+		 * 
+		 * @return void
+		 */
+		public function product_audio_module() {
+			if ( ! merchant_is_blocksy_active() ) {
+				return;
+			}
+
+			if ( ! Merchant_Modules::is_module_active( 'product-audio' ) ) {
+				return;
+			}
+
+			// Removes the theme's default product image on archive pages.
+			add_filter( 'theme_mod_woo_card_layout', function($mod_settings){
+				global $post;
+
+				if ( ! isset( $post ) ) {
+					return $mod_settings;
+				}
+
+				$has_featured_audio = get_post_meta( $post->ID, '_merchant_enable_featured_audio', true );
+				if ( ! $has_featured_audio ) {
 					return $mod_settings;
 				}
 
