@@ -1,6 +1,6 @@
 <?php
 /**
- * Review notice.
+ * Merchant Pro upsell notice.
  * 
  */
 
@@ -19,6 +19,19 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
         $this->only_free = true;
 
 		parent::__construct();
+
+		add_action( 'admin_init', array( $this, 'set_plugin_installed_time' ), 0 );
+	}
+
+	/**
+	 * Set plugin installed time in database.
+	 * 
+	 * @return void
+	 */
+	public function set_plugin_installed_time() {
+		if ( ! get_option( 'merchant_plugin_installed_time' ) ) {
+			update_option( 'merchant_plugin_installed_time', time() );
+		}
 	}
 
     /**
@@ -26,7 +39,12 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
      * 
      * @return void
      */
-    public function notice_markup() { ?>
+    public function notice_markup() { 
+		if ( ( get_option( 'merchant_plugin_installed_time' ) > strtotime( '-3 day' ) ) ) {
+			return;
+		}
+
+		?>
         <div class="merchant-notice merchant-notice-with-thumbnail notice" style="position:relative;">
 			<h3><?php echo esc_html__( 'Earn More with Your Store and Merchant Pro! 💰', 'merchant' ); ?></h3>
 
