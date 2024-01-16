@@ -51,6 +51,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'class'     => true,
 					'clip-path' => true,
 					'style'     => true,
+					'transform' => true,
 				),
 				'path'     => array(
 					'fill'            => true,
