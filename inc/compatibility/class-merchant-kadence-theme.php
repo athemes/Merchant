@@ -30,7 +30,7 @@ if ( ! class_exists( 'Merchant_Kadence_Theme' ) ) {
 				'merchant-kadence-compatibility',
 				MERCHANT_URI . 'assets/css/compatibility/kadence/style.min.css',
 				array(),
-				'1.0.0'
+				MERCHANT_VERSION
 			);
 		}
 	}

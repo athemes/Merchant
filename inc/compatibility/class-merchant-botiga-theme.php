@@ -30,7 +30,7 @@ if ( ! class_exists( 'Merchant_Botiga_Theme' ) ) {
 				'merchant-botiga-compatibility',
 				MERCHANT_URI . 'assets/css/compatibility/botiga/style.min.css',
 				array(),
-				'1.0.0'
+				MERCHANT_VERSION
 			);
 		}
 	}

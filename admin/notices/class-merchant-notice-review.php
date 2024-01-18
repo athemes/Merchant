@@ -26,6 +26,8 @@ class Merchant_Notice_Review extends Merchant_Notice {
 
 	/**
 	 * Set plugin installed time in database.
+	 * 
+	 * @return void
 	 */
 	public function set_plugin_installed_time() {
 		if ( ! get_option( 'merchant_plugin_installed_time' ) ) {
@@ -35,6 +37,8 @@ class Merchant_Notice_Review extends Merchant_Notice {
 
 	/**
 	 * Disable review notice permanently
+	 * 
+	 * @return void
 	 */
 	public function ignore_plugin_review_notice() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -45,6 +49,8 @@ class Merchant_Notice_Review extends Merchant_Notice {
 
 	/**
 	 * Delay review notice
+	 * 
+	 * @return void
 	 */
 	public function ignore_plugin_review_notice_partially() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -53,6 +59,11 @@ class Merchant_Notice_Review extends Merchant_Notice {
 		}
 	}
 
+	/**
+	 * The notice markup/output.
+	 * 
+	 * @return void
+	 */
 	public function notice_markup() { 
 		$user_id                  = get_current_user_id();
 		$current_user             = wp_get_current_user();

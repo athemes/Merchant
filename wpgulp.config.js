@@ -56,6 +56,20 @@ const styles = [
 		destination: './assets/css',
 	},
 
+	// Modal.
+	{
+		name: 'modal',
+		src: './assets/sass/modal.scss',
+		destination: './assets/css',
+	},
+
+	// Tooltip.
+	{
+		name: 'tooltip',
+		src: './assets/sass/tooltip.scss',
+		destination: './assets/css',
+	},
+
 	// Pagination.
 	{
 		name: 'pagination',
@@ -576,6 +590,22 @@ const scripts = [
 		src: './assets/js/src/carousel.js',
 		destination: './assets/js',
 		file: 'carousel',
+	},
+
+	// Modal.
+	{
+		name: 'modal',
+		src: './assets/js/src/modal.js',
+		destination: './assets/js',
+		file: 'modal',
+	},
+
+	// Copy To Clipboard.
+	{
+		name: 'copyToClipboard',
+		src: './assets/js/src/copy-to-clipboard.js',
+		destination: './assets/js',
+		file: 'copy-to-clipboard',
 	},
 
 	// Pagination.

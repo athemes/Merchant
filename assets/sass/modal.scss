@@ -1,0 +1,70 @@
+.merchant-modal-opened {
+	overflow: hidden;
+}
+
+.merchant-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 25px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 99999;
+	transition: ease opacity 300ms;
+
+	&:before {
+		content: '';
+		display: block;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: rgba(0,0,0,.5);
+		z-index: -1;
+	}
+
+	&.show {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.merchant-modal-body {
+		position: relative;
+		width: 100%;
+		max-width: 600px;
+		background-color: #FFF;
+		padding: 25px;
+		border-radius: 4px;
+	}
+}
+
+[data-merchant-modal-close] {
+	position: absolute;
+	z-index: 1;
+    right: 25px;
+    top: 25px;
+    width: 17px;
+    height: 17px;
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.6;
+	transition: ease opacity 300ms;
+
+	svg {
+		width: 1em;
+		height: 1em;
+		fill: #212121;
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+}

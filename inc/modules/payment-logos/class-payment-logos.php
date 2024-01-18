@@ -324,10 +324,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( is_archive() ) {
+		if ( is_archive() || is_page() ) {
 			return;
 		}
-		
+
 		$settings       = $this->get_module_settings();
 		$is_placeholder = empty( $settings[ 'logos' ] ) ? true : false;
 

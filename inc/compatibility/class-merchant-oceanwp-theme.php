@@ -30,7 +30,7 @@ if ( ! class_exists( 'Merchant_OceanWP_Theme' ) ) {
 				'merchant-oceanwp-compatibility',
 				MERCHANT_URI . 'assets/css/compatibility/oceanwp/style.min.css',
 				array(),
-				'1.0.0'
+				MERCHANT_VERSION
 			);
 		}
 	}

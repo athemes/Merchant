@@ -75,61 +75,26 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// The main class for adding modules.
 			require_once MERCHANT_DIR . 'inc/modules/class-add-module.php';
 
-			// Modules.
+			// Modules global settings.
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
-			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
-			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
-			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
-			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
-			require_once MERCHANT_DIR . 'inc/modules/add-to-cart-text/class-add-to-cart-text.php';
-			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
-			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
-			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
-			require_once MERCHANT_DIR . 'inc/modules/payment-logos/class-payment-logos.php';
-			require_once MERCHANT_DIR . 'inc/modules/trust-badges/class-trust-badges.php';
-			require_once MERCHANT_DIR . 'inc/modules/auto-external-links/class-auto-external-links.php';
-			require_once MERCHANT_DIR . 'inc/modules/real-time-search/class-real-time-search.php';
-			require_once MERCHANT_DIR . 'inc/modules/code-snippets/class-code-snippets.php';
-			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/class-scroll-to-top-button.php';
-			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
-			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
-			require_once MERCHANT_DIR . 'inc/modules/address-autocomplete/class-address-autocomplete.php';
 
-			// Pro modules;
-			if ( ! defined( 'MERCHANT_PRO_VERSION' )
-				|| defined( 'MERCHANT_PRO_VERSION' ) && (float) MERCHANT_PRO_VERSION > 1.2 ) {
-				require_once MERCHANT_DIR . 'inc/modules/cart-reserved-timer/class-cart-reserved-timer.php';
-				require_once MERCHANT_DIR . 'inc/modules/buy-x-get-y/class-buy-x-get-y.php';
-				require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/class-advanced-reviews.php';
-				require_once MERCHANT_DIR . 'inc/modules/checkout/class-checkout.php';
-				require_once MERCHANT_DIR . 'inc/modules/countdown-timer/class-countdown-timer.php';
-				require_once MERCHANT_DIR . 'inc/modules/floating-mini-cart/class-floating-mini-cart.php';
-				require_once MERCHANT_DIR . 'inc/modules/free-gifts/class-free-gifts.php';
-				require_once MERCHANT_DIR . 'inc/modules/frequently-bought-together/class-frequently-bought-together.php';
-				require_once MERCHANT_DIR . 'inc/modules/login-popup/class-login-popup.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-audio/class-product-audio.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-brand-image/class-product-brand-image.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-video/class-product-video.php';
-				require_once MERCHANT_DIR . 'inc/modules/reasons-to-buy/class-reasons-to-buy.php';
-				require_once MERCHANT_DIR . 'inc/modules/recently-viewed-products/class-recently-viewed-products.php';
-				require_once MERCHANT_DIR . 'inc/modules/size-chart/class-size-chart.php';
-				require_once MERCHANT_DIR . 'inc/modules/spending-goal/class-spending-goal.php';
-				require_once MERCHANT_DIR . 'inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php';
-				require_once MERCHANT_DIR . 'inc/modules/stock-scarcity/class-stock-scarcity.php';
-				require_once MERCHANT_DIR . 'inc/modules/volume-discounts/class-volume-discounts.php';
-				require_once MERCHANT_DIR . 'inc/modules/wait-list/class-wait-list.php';
-				require_once MERCHANT_DIR . 'inc/modules/wishlist/class-wishlist.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-swatches/class-product-swatches.php';
-				require_once MERCHANT_DIR . 'inc/modules/side-cart/class-side-cart.php';
-				require_once MERCHANT_DIR . 'inc/modules/quick-social-links/class-quick-social-links.php';
-				require_once MERCHANT_DIR . 'inc/modules/product-navigation-links/class-product-navigation-links.php';
+			// Modules (free and pro).
+			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
+				if ( defined( 'MERCHANT_PRO_VERSION' ) && (float) MERCHANT_PRO_VERSION < 1.3 && isset( $module_data['pro'] ) && $module_data['pro'] ) {
+					continue;
+				}
+
+				require_once MERCHANT_DIR . 'inc/modules/' . $module_id . '/class-' . $module_id . '.php';
 			}
 
 			// Compatibility Layer
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-botiga-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-divi-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-avada-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-twenty-twenty-four-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-blocksy-theme.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.
@@ -182,6 +147,24 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				array(
 					'handle' => 'merchant-carousel',
 					'src'    => 'assets/css/carousel.min.css',
+					'dep'    => array(),
+					'ver'    => MERCHANT_VERSION,
+					'media'  => 'all',
+				),
+
+				// Modal.
+				array(
+					'handle' => 'merchant-modal',
+					'src'    => 'assets/css/modal.min.css',
+					'dep'    => array(),
+					'ver'    => MERCHANT_VERSION,
+					'media'  => 'all',
+				),
+
+				// Tooltip.
+				array(
+					'handle' => 'merchant-tooltip',
+					'src'    => 'assets/css/tooltip.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
 					'media'  => 'all',
@@ -245,6 +228,30 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'in_footer' => true,
 				),
 
+				// Modal
+				array(
+					'handle'    => 'merchant-modal',
+					'src'       => 'assets/js/modal.min.js',
+					'dep'       => array(),
+					'in_footer' => true,
+				),
+
+				// Copy To Clipboard
+				array(
+					'handle'          => 'merchant-copy-to-clipboard',
+					'src'             => 'assets/js/copy-to-clipboard.min.js',
+					'dep'             => array(),
+					'in_footer'       => true,
+					'localize_script' => array(
+						'object' => 'merchantCopyToClipboard',
+						'data'   => array(
+							'i18n' => array(
+								'copied' => esc_html__( 'Copied!', 'merchant' ),
+							),
+						),
+					),
+				),
+
 				// Pagination
 				array(
 					'handle'    => 'merchant-pagination',
@@ -256,6 +263,10 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			foreach ( $scripts as $script ) {
 				wp_register_script( $script['handle'], MERCHANT_URI . $script['src'], $script['dep'], MERCHANT_VERSION, $script['in_footer'] );
+
+				if ( isset( $script['localize_script'] ) ) {
+					wp_localize_script( $script['handle'], $script['localize_script']['object'], $script['localize_script']['data'] );
+				}
 			}
 		}
 

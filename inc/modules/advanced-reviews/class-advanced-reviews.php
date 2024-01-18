@@ -53,7 +53,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$this->dummy_product = $dummy_product;
 
 			// Module section.
-			$this->module_section = 'convert-more';
+			$this->module_section = 'build-trust';
 
 			// Module default settings.
 			$this->module_default_settings = array(

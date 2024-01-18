@@ -63,6 +63,22 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 			'tooltip_text' => __( 'Add To Wishlist', 'merchant' ),
 			'tooltip_border_radius' => 4,
 			'hide_page_title' => 0,
+			'enable_sharing' => 1,
+			'sharing_links' => array(
+				array(
+					'layout' => 'social',
+					'social_network'    => 'facebook',
+				),
+				array(
+					'layout' => 'social',
+					'social_network'    => 'twitter',
+				),
+				array(
+					'layout' => 'social',
+					'social_network'    => 'linkedin',
+				),
+			),
+			'display_copy_to_clipboard' => 1,
 		);
 
 		// Mount preview url.
@@ -219,6 +235,18 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 
 		// Table links color (hover).
 		$css .= Merchant_Custom_CSS::get_variable_css( 'wishlist', 'table_links_color_hover', '#757575', '.is-merchant-wishlist-page', '--mrc-wl-table-links-color-hover' );
+
+		// Buttons color.
+		$css .= Merchant_Custom_CSS::get_variable_css( 'wishlist', 'buttons_color', '#FFF', '.is-merchant-wishlist-page', '--mrc-wl-buttons-color' );
+		
+		// Buttons color (hover).
+		$css .= Merchant_Custom_CSS::get_variable_css( 'wishlist', 'buttons_color_hover', '#FFF', '.is-merchant-wishlist-page', '--mrc-wl-buttons-color-hover' );
+
+		// Buttons background color.
+		$css .= Merchant_Custom_CSS::get_variable_css( 'wishlist', 'buttons_background_color', '#212121', '.is-merchant-wishlist-page', '--mrc-wl-buttons-bg-color' );
+		
+		// Buttons color (hover).
+		$css .= Merchant_Custom_CSS::get_variable_css( 'wishlist', 'buttons_background_color_hover', '#757575', '.is-merchant-wishlist-page', '--mrc-wl-buttons-bg-color-hover' );
 
 		return $css;
 	}
