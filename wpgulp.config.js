@@ -531,6 +531,18 @@ const styles = [
 	},
 
 	{
+		name: 'blocksyCompatibility',
+		src: './assets/sass/compatibility/blocksy/style.scss',
+		destination: './assets/css/compatibility/blocksy',
+	},
+
+	{
+		name: 'avadaCompatibility',
+		src: './assets/sass/compatibility/avada/style.scss',
+		destination: './assets/css/compatibility/avada',
+	},
+
+	{
 		name: 'kadenceCompatibility',
 		src: './assets/sass/compatibility/kadence/style.scss',
 		destination: './assets/css/compatibility/kadence',
