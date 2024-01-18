@@ -13,8 +13,27 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 			add_action( 'init', array( $this, 'product_video_module' ) );
 			add_action( 'init', array( $this, 'product_audio_module' ) );
+		}
+
+		/**
+		 * Load compatibility styles if the Blocksy theme is installed and active.
+		 *
+		 * @return void
+		 */
+		public function styles() {
+			if ( ! merchant_is_blocksy_active() ) {
+				return;
+			}
+
+			wp_enqueue_style(
+				'merchant-blocksy-compatibility',
+				MERCHANT_URI . 'assets/css/compatibility/blocksy/style.min.css',
+				array(),
+				MERCHANT_VERSION
+			);
 		}
 
 		/**

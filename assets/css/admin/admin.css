@@ -2895,6 +2895,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
 .merchant-module-page-setting-field-select_ajax .select2-container .select2-selection--single,
 .merchant-module-page-setting-field-select_size_chart .select2-container .select2-selection--single {
   height: 44px !important;
+  border: solid #d6d6d6 1px;
 }
 .merchant-module-page-setting-field-select .select2-container .select2-selection--single .select2-selection__rendered,
 .merchant-module-page-setting-field-select_ajax .select2-container .select2-selection--single .select2-selection__rendered,
@@ -2910,6 +2911,7 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border: solid #d6d6d6 1px;
 }
 .merchant-module-page-setting-field-select .select2-container .select2-selection--multiple .select2-selection__rendered,
 .merchant-module-page-setting-field-select_ajax .select2-container .select2-selection--multiple .select2-selection__rendered,
@@ -2933,6 +2935,14 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
 .merchant-module-page-setting-field-select_ajax .select2-container .select2-selection--multiple .select2-search__field,
 .merchant-module-page-setting-field-select_size_chart .select2-container .select2-selection--multiple .select2-search__field {
   min-height: 0;
+}
+.merchant-module-page-setting-field-select .select2-container.select2-container--focus .select2-selection--single,
+.merchant-module-page-setting-field-select .select2-container.select2-container--focus .select2-selection--multiple,
+.merchant-module-page-setting-field-select_ajax .select2-container.select2-container--focus .select2-selection--single,
+.merchant-module-page-setting-field-select_ajax .select2-container.select2-container--focus .select2-selection--multiple,
+.merchant-module-page-setting-field-select_size_chart .select2-container.select2-container--focus .select2-selection--single,
+.merchant-module-page-setting-field-select_size_chart .select2-container.select2-container--focus .select2-selection--multiple {
+  border-color: #3858E9;
 }
 .merchant-module-page-setting-field-select .select2-selection__arrow,
 .merchant-module-page-setting-field-select_ajax .select2-selection__arrow,

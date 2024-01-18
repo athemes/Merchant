@@ -13,7 +13,25 @@ if ( ! class_exists( 'Merchant_Avada_Theme' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-			// Nothing for now.
+			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
+		}
+
+		/**
+		 * Load compatibility styles if the Avada theme is installed and active.
+		 *
+		 * @return void
+		 */
+		public function styles() {
+			if ( ! merchant_is_avada_active() ) {
+				return;
+			}
+
+			wp_enqueue_style(
+				'merchant-avada-compatibility',
+				MERCHANT_URI . 'assets/css/compatibility/avada/style.min.css',
+				array(),
+				MERCHANT_VERSION
+			);
 		}
 	}
 
