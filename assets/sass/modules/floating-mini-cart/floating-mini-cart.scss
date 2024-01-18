@@ -168,10 +168,14 @@
 			}
 
 			img {
+				position: relative !important;
+				top: 0 !important;
+				left: 0 !important;
 				width: 81px !important;
 				max-height: 98px;
 				object-fit: cover;
 				object-position: center;
+				transform: none !important;
 			}
 
 			a {
