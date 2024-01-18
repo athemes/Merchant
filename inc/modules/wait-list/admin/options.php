@@ -69,7 +69,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'use_automatic_emails',
 			'type'    => 'switcher',
 			'title'   => __( 'Send emails automatically', 'merchant' ),
-			'default' => 0,
+			'default' => 1,
 			'desc'    => esc_html__( 'When products are back in stock, send emails automatically to subscribers to let them know.', 'merchant' ),
 		),
 

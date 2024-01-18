@@ -27,7 +27,7 @@ if ( ! class_exists( 'Merchant_Twenty_Twenty_Four_Theme' ) ) {
 				'merchant-twenty-twenty-four-compatibility',
 				MERCHANT_URI . 'assets/css/compatibility/twenty-twenty-four/style.css',
 				array(),
-				'1.0.0'
+				MERCHANT_VERSION
 			);
 		}
 

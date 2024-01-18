@@ -192,7 +192,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'table_heading_background_color',
 			'type'    => 'color',
 			'title'   => __( 'Table heading background color', 'merchant' ),
-			'default' => '#f8f8f8',
+			'default' => '#FFF',
 		),
 
 		// Table body background color.
@@ -227,5 +227,114 @@ Merchant_Admin_Options::create( array(
 			'default' => '#757575',
 		),
 
+		// Buttons color.
+		array(
+			'id'      => 'buttons_color',
+			'type'    => 'color',
+			'title'   => __( 'Buttons color', 'merchant' ),
+			'default' => '#FFF',
+		),
+		
+		// Buttons color (hover).
+		array(
+			'id'      => 'buttons_color_hover',
+			'type'    => 'color',
+			'title'   => __( 'Buttons color (hover)', 'merchant' ),
+			'default' => '#FFF',
+		),
+
+		// Buttons background color.
+		array(
+			'id'      => 'buttons_background_color',
+			'type'    => 'color',
+			'title'   => __( 'Buttons background color', 'merchant' ),
+			'default' => '#212121',
+		),
+		
+		// Buttons color (hover).
+		array(
+			'id'      => 'buttons_background_color_hover',
+			'type'    => 'color',
+			'title'   => __( 'Buttons background color (hover)', 'merchant' ),
+			'default' => '#757575',
+		),
+
+	),
+) );
+
+// Wishlist Sharing Settings
+Merchant_Admin_Options::create( array(
+	'module' => Merchant_Wishlist::MODULE_ID,
+	'title'  => esc_html__( 'Wishlist Sharing Settings', 'merchant' ),
+	'fields' => array(
+
+		// Enable.
+		array(
+			'id'      => 'enable_sharing',
+			'type'    => 'switcher',
+			'title'   => __( 'Enable', 'merchant' ),
+			'desc'    => __( 'Allow users to share the wishlist.', 'merchant' ),
+			'default' => 1,
+		),
+
+		// Sharing Links.
+		array(
+			'id'           => 'sharing_links',
+			'type'         => 'flexible_content',
+			'sorting'      => true,
+			'title'   => __( 'Social links', 'merchant' ),
+			'desc'         => esc_html__( 'Add the available social links to share the wishlist.', 'merchant' ),
+			'button_label' => esc_html__( 'Add new', 'merchant' ),
+			'layouts'      => array(
+				'social' => array(
+					'title'  => esc_html__( 'Social link', 'merchant' ),
+					'fields' => array(
+						array(
+							'id'      => 'social_network',
+							'title'   => esc_html__( 'Social Network', 'merchant' ),
+							'type'    => 'select',
+							'options' => array(
+								'facebook'          => esc_html__( 'Facebook', 'merchant' ),
+								'twitter'           => esc_html__( 'Twitter', 'merchant' ),
+								'linkedin'          => esc_html__( 'Linkedin', 'merchant' ),
+								'pinterest'         => esc_html__( 'Pinterest', 'merchant' ),
+								'whatsapp'          => esc_html__( 'Whatsapp', 'merchant' ),
+								'telegram'          => esc_html__( 'Telegram', 'merchant' ),
+								'vk'                => esc_html__( 'VK', 'merchant' ),
+								'weibo'             => esc_html__( 'Weibo', 'merchant' ),
+								'reddit'            => esc_html__( 'Reddit', 'merchant' ),
+								'ok'                => esc_html__( 'Ok', 'merchant' ),
+								'xing'              => esc_html__( 'Xing', 'merchant' ),
+								'mail'              => esc_html__( 'Mail', 'merchant' ),
+							),
+							'default' => 'facebook',
+						),
+					),
+				),
+			),
+			'default'      => array(
+				array(
+					'layout' => 'social',
+					'social_network'    => 'facebook',
+				),
+				array(
+					'layout' => 'social',
+					'social_network'    => 'twitter',
+				),
+				array(
+					'layout' => 'social',
+					'social_network'    => 'linkedin',
+				),
+			),
+		),
+
+		// Dislay Copy To Clipboard.
+		array(
+			'id'      => 'display_copy_to_clipboard',
+			'type'    => 'switcher',
+			'title'   => __( 'Display copy to clipboard', 'merchant' ),
+			'desc'    => __( 'Displays a copy to clipboard field after the social links.', 'merchant' ),
+			'default' => 1,
+		),
 	),
 ) );

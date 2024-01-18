@@ -309,7 +309,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( is_archive() ) {
+		if ( is_archive() || is_page() ) {
 			return;
 		}
 		

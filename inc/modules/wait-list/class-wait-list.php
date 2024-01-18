@@ -48,11 +48,11 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'convert-more';
+		$this->module_section = 'boost-revenue';
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'form_title'               => __( 'New stock is coming! Email me when this item is back in stock', 'merchant' ),
+			'form_title'               => __( 'Email me when this item is back in stock.', 'merchant' ),
 			'form_email_label'         => __( 'Your Email Address', 'merchant' ),
 			'form_button_text'         => __( 'Notify Me', 'merchant' ),
 			'form_success_message'     => __( 'You have been successfully added to our stock waitlist. As soon as new stock becomes available, we will notify you via email.',

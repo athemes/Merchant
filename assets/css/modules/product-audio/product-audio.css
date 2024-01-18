@@ -1,6 +1,6 @@
 /**
- * Product Video
- */
+* Product Video
+*/
 .merchant-product-has-audio {
   display: block !important;
 }
@@ -49,9 +49,6 @@
           justify-content: center;
   z-index: 5;
 }
-.woocommerce-product-gallery__image.has-audio .merchant-product-audio audio {
-  width: 90%;
-}
 .woocommerce-product-gallery__image.has-audio .merchant-product-audio-overlay {
   position: absolute;
   width: 100%;
@@ -59,4 +56,8 @@
   background: black;
   opacity: 0.5;
   z-index: 4;
+}
+
+.merchant-product-audio audio {
+  width: 100%;
 }

@@ -72,6 +72,28 @@ if ( ! function_exists( 'merchant_is_botiga_active' ) ) {
 }
 
 /**
+ * Check if Divi theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_divi_active' ) ) {
+	function merchant_is_divi_active() {
+		return defined( 'ET_CORE_VERSION' );
+	}
+}
+
+/**
+ * Check if Avada theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_avada_active' ) ) {
+	function merchant_is_avada_active() {
+		return defined( 'AVADA_VERSION' );
+	}
+}
+
+/**
  * Check if Kadence theme is installed and active.
  *
  * @return bool
@@ -90,6 +112,17 @@ if ( ! function_exists( 'merchant_is_kadence_active' ) ) {
 if ( ! function_exists( 'merchant_is_oceanwp_active' ) ) {
 	function merchant_is_oceanwp_active() {
 		return class_exists( 'OCEANWP_Theme_Class' );
+	}
+}
+
+/**
+ * Check if Blocksy theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_blocksy_active' ) ) {
+	function merchant_is_blocksy_active() {
+		return class_exists( 'Blocksy_Manager' );
 	}
 }
 

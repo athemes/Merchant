@@ -359,6 +359,7 @@
   display: flex;
 }
 
+/* Visibility */
 .merchant-hidden {
   display: none;
 }
