@@ -51,6 +51,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'class'     => true,
 					'clip-path' => true,
 					'style'     => true,
+					'transform' => true,
 				),
 				'path'     => array(
 					'fill'            => true,
@@ -102,6 +103,22 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'fill'         => true,
 					'stroke'       => true,
 					'stroke-width' => true,
+					'stroke-linecap'  => true,
+					'stroke-linejoin' => true,
+				),
+				'line'   => array(
+					'x1'           => true,
+					'y1'           => true,
+					'x2'           => true,
+					'y2'           => true,
+					'width'        => true,
+					'height'       => true,
+					'transform'    => true,
+					'fill'         => true,
+					'stroke'       => true,
+					'stroke-width' => true,
+					'stroke-linecap'  => true,
+					'stroke-linejoin' => true,
 				),
 				'clipPath' => array(
 					'id'    => true,
@@ -380,5 +397,105 @@ if ( ! function_exists( 'merchant_array_to_css' ) ) {
 		}
 
 		return $css;
+	}
+}
+
+/**
+ * Get the share link data structure.
+ * 
+ * @return array 
+ */
+if ( ! function_exists( 'merchant_get_share_link_data' ) ) {
+	function merchant_get_share_link_data() {
+		return array(
+			'facebook'  => array(
+				'url'       => 'https://www.facebook.com/sharer.php?u={{url}}',
+				'title'     => __( 'Facebook', 'merchant' ),
+			),
+			'twitter'   => array(
+				'url'       => 'https://twitter.com/intent/tweet?url={{url}}&text={{title}}',
+				'title'     => __( 'X', 'merchant' ),
+			),
+			'linkedin'  => array(
+				'url'       => 'https://www.linkedin.com/sharing/share-offsite/?url={{url}}',
+				'title'     => __( 'LinkedIn', 'merchant' ),
+			),
+			'reddit'    => array(
+				'url'       => 'https://reddit.com/submit?url={{url}}&title={{title}}',
+				'title'     => __( 'Reddit', 'merchant' ),
+			),
+			'whatsapp'  => array(
+				'url'       => 'https://api.whatsapp.com/send/?text={{url}}',
+				'title'     => __( 'WhatsApp', 'merchant' ),
+			),
+			'pinterest'     => array(
+				'url'       => 'http://pinterest.com/pin/create/link/?url={{url}}',
+				'title'     => __( 'Pinterest', 'merchant' ),
+			),
+			'telegram'  => array(
+				'url'       => 'https://t.me/share/url?url={{url}}&text={{title}}',
+				'title'     => __( 'Telegram', 'merchant' ),
+			),
+			'weibo'     => array(
+				'url'       => 'http://service.weibo.com/share/share.php?url={{url}}&appkey=&title={{title}}&pic=&ralateUid=',
+				'title'     => __( 'Weibo', 'merchant' ),
+			),
+			'vk'    => array(
+				'url'       => 'http://vk.com/share.php?url={{url}}&title={{title}}&comment={text}',
+				'title'     => __( 'VK', 'merchant' ),
+			),
+			'ok'    => array(
+				'url'       => 'https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&st.shareUrl={{url}}',
+				'title'     => __( 'OK', 'merchant' ),
+			),      
+			'xing'  => array(
+				'url'       => 'https://www.xing.com/spi/shares/new?url={{url}}',
+				'title'     => __( 'Xing', 'merchant' ),
+			),      
+			'mail'  => array(
+				'url'       => 'mailto:?subject={{title}}&body={{url}}',
+				'title'     => __( 'Mail', 'merchant' ),
+			),
+		);
+	}
+}
+
+/**
+ * Get the share link url.
+ * 
+ * @param string $social_network
+ * 
+ * @return string 
+ */
+if ( ! function_exists( 'merchant_get_share_link_url' ) ) {
+	function merchant_get_share_link_url( $social_network, $url_to_share, $title_to_share = '' ) {
+		$share_link_data = merchant_get_share_link_data();
+
+		if ( ! isset( $share_link_data[ $social_network ] ) ) {
+			return '';
+		}
+
+		$share_link_url = str_replace( 
+			array( '{{url}}', '{{title}}' ),
+			array( $url_to_share, $title_to_share ),
+			$share_link_data[ $social_network ]['url']
+		);
+
+		return $share_link_url;
+	}
+}
+
+/**
+ * Get the share link title.
+ * 
+ * @param string $social_network
+ * 
+ * @return string
+ */
+if ( ! function_exists( 'merchant_get_share_link_title' ) ) {
+	function merchant_get_share_link_title( $social_network ) {
+		$share_link_data = merchant_get_share_link_data();
+
+		return isset( $share_link_data[ $social_network ] ) ? $share_link_data[ $social_network ]['title'] : '';
 	}
 }

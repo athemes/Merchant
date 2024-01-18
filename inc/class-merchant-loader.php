@@ -89,6 +89,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Compatibility Layer
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-botiga-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-divi-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-avada-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-twenty-twenty-four-theme.php';
@@ -145,6 +147,24 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				array(
 					'handle' => 'merchant-carousel',
 					'src'    => 'assets/css/carousel.min.css',
+					'dep'    => array(),
+					'ver'    => MERCHANT_VERSION,
+					'media'  => 'all',
+				),
+
+				// Modal.
+				array(
+					'handle' => 'merchant-modal',
+					'src'    => 'assets/css/modal.min.css',
+					'dep'    => array(),
+					'ver'    => MERCHANT_VERSION,
+					'media'  => 'all',
+				),
+
+				// Tooltip.
+				array(
+					'handle' => 'merchant-tooltip',
+					'src'    => 'assets/css/tooltip.min.css',
 					'dep'    => array(),
 					'ver'    => MERCHANT_VERSION,
 					'media'  => 'all',
@@ -208,6 +228,30 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 					'in_footer' => true,
 				),
 
+				// Modal
+				array(
+					'handle'    => 'merchant-modal',
+					'src'       => 'assets/js/modal.min.js',
+					'dep'       => array(),
+					'in_footer' => true,
+				),
+
+				// Copy To Clipboard
+				array(
+					'handle'          => 'merchant-copy-to-clipboard',
+					'src'             => 'assets/js/copy-to-clipboard.min.js',
+					'dep'             => array(),
+					'in_footer'       => true,
+					'localize_script' => array(
+						'object' => 'merchantCopyToClipboard',
+						'data'   => array(
+							'i18n' => array(
+								'copied' => esc_html__( 'Copied!', 'merchant' ),
+							),
+						),
+					),
+				),
+
 				// Pagination
 				array(
 					'handle'    => 'merchant-pagination',
@@ -219,6 +263,10 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			foreach ( $scripts as $script ) {
 				wp_register_script( $script['handle'], MERCHANT_URI . $script['src'], $script['dep'], MERCHANT_VERSION, $script['in_footer'] );
+
+				if ( isset( $script['localize_script'] ) ) {
+					wp_localize_script( $script['handle'], $script['localize_script']['object'], $script['localize_script']['data'] );
+				}
 			}
 		}
 

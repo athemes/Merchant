@@ -72,6 +72,28 @@ if ( ! function_exists( 'merchant_is_botiga_active' ) ) {
 }
 
 /**
+ * Check if Divi theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_divi_active' ) ) {
+	function merchant_is_divi_active() {
+		return defined( 'ET_CORE_VERSION' );
+	}
+}
+
+/**
+ * Check if Avada theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_avada_active' ) ) {
+	function merchant_is_avada_active() {
+		return defined( 'AVADA_VERSION' );
+	}
+}
+
+/**
  * Check if Kadence theme is installed and active.
  *
  * @return bool
