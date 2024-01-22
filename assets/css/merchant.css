@@ -1,33 +1,3 @@
-.merchant-theme-botiga .botiga-add-to-cart-button-layout3 .add_to_cart_button:hover,
-.merchant-theme-botiga .botiga-add-to-cart-button-layout3 .product_type_grouped:hover,
-.merchant-theme-botiga .botiga-add-to-cart-button-layout3 .single_add_to_cart_button:hover {
-  -webkit-animation: none;
-          animation: none;
-}
-.merchant-theme-botiga ul.products.columns-4 li.product .button,
-.merchant-theme-botiga ul.products.columns-5 li.product .button,
-.merchant-theme-botiga ul.products.columns-6 li.product .button,
-.merchant-theme-botiga ul.wc-block-grid__products.columns-4 li.product .button,
-.merchant-theme-botiga ul.wc-block-grid__products.columns-5 li.product .button,
-.merchant-theme-botiga ul.wc-block-grid__products.columns-6 li.product .button {
-  width: 100%;
-}
-.merchant-theme-botiga .products .product a.merchant_buy_now_button {
-  display: inline-block;
-}
-.merchant-theme-botiga .product .single_add_to_cart_button.merchant_buy_now_button {
-  margin-left: 0;
-}
-.merchant-theme-botiga .product .button-layout2 + .merchant_buy_now_button {
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-.merchant-theme-botiga .botiga-sc-payment-methods + #merchant_agree_to_terms_field {
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-
 .merchant-theme-kadence .products .product .product-action-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
