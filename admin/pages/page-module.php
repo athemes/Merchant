@@ -266,7 +266,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
     </div>
 
     <div class="merchant-module-footer-text">
-		<?php esc_html_e( 'Copyright © aThemes 2023. All Rights Reserved.', 'merchant' ); ?>
+		<?php esc_html_e( 'Copyright © aThemes 2024. All Rights Reserved.', 'merchant' ); ?>
     </div>
 
 <?php else : ?>
