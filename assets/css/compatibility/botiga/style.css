@@ -3,6 +3,7 @@
   /* Shopify checkout */
   /* Frequently Bought Together */
   /* Sticky Add To Cart */
+  /* Wishlist */
 }
 .merchant-theme-botiga .botiga-add-to-cart-button-layout3 .add_to_cart_button:hover,
 .merchant-theme-botiga .botiga-add-to-cart-button-layout3 .product_type_grouped:hover,
@@ -49,4 +50,7 @@
 }
 .merchant-theme-botiga .merchant-sticky-add-to-cart-wrapper .merchant-sticky-add-to-cart-wrapper-content .merchant-sticky-add-to-cart-item.product-addtocart .quantity {
   min-width: 100px;
+}
+.merchant-theme-botiga.page-template-wishlist .mrc-container {
+  padding: 0;
 }
