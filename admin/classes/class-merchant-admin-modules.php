@@ -149,9 +149,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				'product-bundles' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
 					'title' => esc_html__( 'Product bundles', 'merchant' ),
-					'desc' => esc_html__( 'Create product bundles to sell at discounted or regular prices.', 'merchant' ),
+					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
 					'tutorial_url' => '',
 				),
 
