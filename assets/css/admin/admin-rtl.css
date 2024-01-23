@@ -13,11 +13,7 @@
   margin-left: 0;
 }
 
-.merchant-flexible-content-control {
-  .layout {
-    .layout-count {
-      margin-left: 10px;
-      margin-right: 0;
-    }
-  }
+.merchant-flexible-content-control .layout .layout-count {
+  margin-left: 10px;
+  margin-right: 0;
 }

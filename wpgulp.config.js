@@ -28,6 +28,12 @@ const styles = [
 		destination: './assets/css/admin',
 	},
 
+	{
+		name: 'adminRtl',
+		src: './assets/sass/admin/admin-rtl.scss',
+		destination: './assets/css/admin',
+	},
+
 	// Admin Notices.
 	{
 		name: 'adminNotices',

@@ -83,6 +83,10 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 				wp_enqueue_style( 'merchant-admin', MERCHANT_URI . 'assets/css/admin/admin.min.css', array(), MERCHANT_VERSION );
 
+				if ( is_rtl() ) {
+					wp_enqueue_style( 'merchant-admin-rtl', MERCHANT_URI . 'assets/css/admin/admin-rtl.min.css', array(), MERCHANT_VERSION );
+				}
+
 				wp_enqueue_script( 'merchant-jquery-form', MERCHANT_URI . 'assets/vendor/jquery-form/jquery.form.min.js', array( 'jquery' ), '4.3.0', true );
 
 				wp_enqueue_script( 'merchant-pickr', MERCHANT_URI . 'assets/vendor/pickr/pickr.min.js', array( 'jquery' ), '1.8.2', true );
