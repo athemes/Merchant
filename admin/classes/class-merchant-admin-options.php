@@ -820,11 +820,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			} else {
 				$multiple = 'multiple';
 			}
+
+            $placeholder = $settings['placeholder'] ?? '';
 			?>
-            <select name="merchant[<?php
-			echo esc_attr( $settings['id'] ); ?>]" <?php
-			echo esc_attr( $multiple ) ?> data-source="<?php
-			echo esc_attr( $settings['source'] ) ?>">
+            <select
+                name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]<?php echo esc_attr( $multiple ? '[]' : '' ); ?>"
+                <?php echo esc_attr( $multiple ); ?>
+                data-source="<?php echo esc_attr( $settings['source'] ); ?>"
+                data-placeholder="<?php echo esc_attr( $placeholder ); ?>">
 				<?php
 				if ( ! empty( $ids ) ) {
 					foreach ( $ids as $id ) {
@@ -849,13 +852,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							echo '<optgroup label="' . esc_attr( $option['text'] ) . '">';
 
 							foreach ( $option['options'] as $child_option ) {
-								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $child_option['id'], $value ) . '>' . esc_html( $child_option['text'] )
+								$selected_value = is_array( $value ) ? in_array( $child_option['id'], $value, true ) : $child_option['id'];
+								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $child_option['text'] )
 									. '</option>';
 							}
 
 							echo '</optgroup>';
 						} else {
-							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $option['id'], $value ) . '>' . esc_html( $option['text'] ) . '</option>';
+							$selected_value = is_array( $value ) ? in_array( $option['id'], $value, true ) : $option['id'];
+							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $option['text'] ) . '</option>';
 						}
 					}
 				} ?>
@@ -1602,6 +1607,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+         * Get category choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_category_select2_choices() {
+			$choices = array();
+			$cats    = merchant_get_product_categories();
+
+			if ( is_array( $cats ) && ! empty( $cats ) ) {
+				foreach ( $cats as $slug => $name ) {
+					$choices[] = array(
+						'id'   => esc_attr( $slug ),
+						'text' => esc_html( $name ),
+					);
+				}
+			}
+
+			return $choices;
 		}
 	}
 

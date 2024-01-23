@@ -111,7 +111,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Add payment logos after add to cart form on single product pages.
-		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'payment_logos_output' ) );
+		add_action( 'woocommerce_single_product_summary', array( $this, 'payment_logos_output' ), 30 );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -324,10 +324,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( is_archive() ) {
+		if ( is_archive() || is_page() ) {
 			return;
 		}
-		
+
 		$settings       = $this->get_module_settings();
 		$is_placeholder = empty( $settings[ 'logos' ] ) ? true : false;
 

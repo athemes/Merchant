@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge, payme
 Requires at least: 5.5
 Tested up to: 6.4.2
 Requires PHP: 7.0
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,6 +216,11 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.8.3 =
+* Changed - Google Autocomplete: Tutorial link.
+* Changed - Delay first display from pro upsell notice for 3 days.
+* Fixed - Waitlist: Mismatch between preview text and form title.
+
 = 1.8.2 =
 * Added - Waitlist: Automatic emails.
 * Added - Waitlist: Emails preview.

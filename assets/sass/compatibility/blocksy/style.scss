@@ -1,0 +1,14 @@
+
+.merchant-theme-blocksy {
+
+	/* Floating Mini Cart & Side Cart */
+	.merchant-floating-side-mini-cart-widget {
+		.quantity {
+			.ct-increase,
+			.ct-decrease {
+				display: none !important;
+			}
+		}
+	}
+
+}

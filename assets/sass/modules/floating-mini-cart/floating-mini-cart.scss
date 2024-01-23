@@ -116,8 +116,8 @@
 
 	.product_list_widget {
 		flex: 1;
-		margin: 0;
-		padding: 40px;
+		margin: 0 !important;
+		padding: 40px !important;
 		box-shadow: none;
 		max-width: 100%;
 		overflow-y: auto;
@@ -137,9 +137,9 @@
 
 		li {
 			list-style: none;
-			align-items: flex-start;
-			padding: 20px 0;
-			background: transparent;
+			align-items: flex-start !important;
+			padding: 20px 0 !important;
+			background: transparent !important;
 			position: relative;
 			max-width: 100%;
 
@@ -168,10 +168,14 @@
 			}
 
 			img {
-				width: 81px;
+				position: relative !important;
+				top: 0 !important;
+				left: 0 !important;
+				width: 81px !important;
 				max-height: 98px;
 				object-fit: cover;
 				object-position: center;
+				transform: none !important;
 			}
 
 			a {
@@ -182,6 +186,7 @@
 				display: flex;
 				align-items: flex-start;
 				grid-gap: 15px;
+				width: auto;
 				color: var(--mrc-fmci-side-cart-content-text-color, #212121);
 				margin-right: 20px;
 			}
@@ -201,8 +206,8 @@
 				left: -8px;
 				transition: ease transform 300ms;
 				z-index: 11;
-				color: var(--mrc-fmci-side-cart-content-remove-color, #ffffff);
-				background-color: var(--mrc-fmci-side-cart-content-remove-background-color, #212121);
+				color: var(--mrc-fmci-side-cart-content-remove-color, #ffffff) !important;
+				background-color: var(--mrc-fmci-side-cart-content-remove-background-color, #212121) !important;
 
 				&:hover {
 					transform: scale(1.1);
@@ -227,6 +232,161 @@
 			justify-content: flex-end;
 			margin-left: auto;
 			white-space: nowrap;
+		}
+
+		.merchant-side-cart-item {
+			display: flex;
+			align-items: flex-start;
+			overflow: visible;
+
+			> a:not(.remove) {
+				flex: 0 0 auto;
+			}
+
+			&-sold-individually .merchant-quantity-inner,
+			.variation,
+			.merchant-cart-item-name {
+				display: none;
+			}
+		}
+
+		@at-root {
+			.merchant-quantity {
+				&-wrap,
+				&-plus,
+				&-minus {
+					display: none; // Hide on other places
+				}
+			}
+		}
+
+		.merchant-quantity {
+			&-cart-name,
+			&-cart-meta {
+				.variation,
+				.merchant-cart-item-name {
+					display: block;
+				}
+			}
+
+			&-cart-name {
+				flex-grow: 1;
+			}
+
+			&-cart-price .amount,
+			&-cart-subtotal {
+				font-weight: 600;
+				font-size: 14px;
+			}
+
+			&-cart-meta {
+				.variation {
+					display: flex;
+					gap: 5px;
+					margin: 0;
+					padding: 0;
+					border: none;
+
+					&:before,
+					&:after {
+						content: none;
+					}
+
+					p,
+					dd,
+					dt {
+						margin: 0;
+						padding: 0;
+					}
+				}
+			}
+
+			&-wrap {
+				display: flex; // Show on Side cart only
+				flex-direction: column;
+				align-self: stretch;
+				flex: 1 1 auto;
+				gap: 10px;
+
+				+ span.quantity,
+				a {
+					display: none !important;
+				}
+			}
+
+			&-inner {
+				justify-content: space-between;
+				gap: 7px;
+
+				&,
+				> div {
+					display: flex !important;
+					align-items: center !important;
+				}
+
+				> div {
+					width: auto;
+					height: auto;
+					border: none;
+					margin: 0 !important;
+					padding: 0 !important;
+				}
+			}
+
+			&-plus,
+			&-minus {
+				color: #777777;
+				background: none;
+				border: 1px solid #dbdbdb;
+				box-shadow: none;
+				height: 35px;
+				padding: 0;
+				text-align: center;
+
+				&:focus {
+					outline: none;
+					box-shadow: none;
+				}
+			}
+
+			&-plus,
+			&-minus {
+				display: block; // Show on Side cart only
+				width: 35px;
+				border-radius: 1px;
+				cursor: pointer;
+
+				&:hover {
+					color: #1a1a1a;
+				}
+			}
+
+			&-input {
+				width: 50px !important;
+				height: 35px !important;
+				color: #757575 !important;
+				background: none !important;
+				box-shadow: none !important;
+				text-align: center !important;
+				padding: 5px !important;
+				margin: 0 -1px !important;
+				border: 1px solid #dbdbdb !important;
+				border-left: 0 !important;
+				border-right: 0 !important;
+				-moz-appearance: textfield !important;
+				appearance: textfield !important;
+
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					-webkit-appearance: none !important;
+					margin: 0 !important;
+				}
+
+				&:focus {
+					outline: none !important;
+					box-shadow: none !important;
+				}
+			}
 		}
 	}
 
@@ -294,11 +454,10 @@
 		}
 
 		a.button:not(.checkout)  {
-	    margin: 0 auto !important;
-	    text-decoration: underline !important;
+			margin: 0 auto !important;
 			border: none !important;
-	    padding: 0 !important;
-	    background: transparent !important;
+			padding: 0 !important;
+			background: transparent !important;
 			color: var(--mrc-fmci-side-cart-total-text-color, #212121) !important;
 		}
 	}

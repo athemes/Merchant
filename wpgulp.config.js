@@ -56,6 +56,20 @@ const styles = [
 		destination: './assets/css',
 	},
 
+	// Modal.
+	{
+		name: 'modal',
+		src: './assets/sass/modal.scss',
+		destination: './assets/css',
+	},
+
+	// Tooltip.
+	{
+		name: 'tooltip',
+		src: './assets/sass/tooltip.scss',
+		destination: './assets/css',
+	},
+
 	// Pagination.
 	{
 		name: 'pagination',
@@ -522,6 +536,18 @@ const styles = [
 	},
 
 	{
+		name: 'blocksyCompatibility',
+		src: './assets/sass/compatibility/blocksy/style.scss',
+		destination: './assets/css/compatibility/blocksy',
+	},
+
+	{
+		name: 'avadaCompatibility',
+		src: './assets/sass/compatibility/avada/style.scss',
+		destination: './assets/css/compatibility/avada',
+	},
+
+	{
 		name: 'kadenceCompatibility',
 		src: './assets/sass/compatibility/kadence/style.scss',
 		destination: './assets/css/compatibility/kadence',
@@ -581,6 +607,22 @@ const scripts = [
 		src: './assets/js/src/carousel.js',
 		destination: './assets/js',
 		file: 'carousel',
+	},
+
+	// Modal.
+	{
+		name: 'modal',
+		src: './assets/js/src/modal.js',
+		destination: './assets/js',
+		file: 'modal',
+	},
+
+	// Copy To Clipboard.
+	{
+		name: 'copyToClipboard',
+		src: './assets/js/src/copy-to-clipboard.js',
+		destination: './assets/js',
+		file: 'copy-to-clipboard',
 	},
 
 	// Pagination.

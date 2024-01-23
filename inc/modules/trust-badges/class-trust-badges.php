@@ -112,7 +112,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Add trust badges after add to cart form on single product pages.
-		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'trust_badges_output' ) );
+		add_action( 'woocommerce_single_product_summary', array( $this, 'trust_badges_output' ), 30 );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -309,7 +309,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( is_archive() ) {
+		if ( is_archive() || is_page() ) {
 			return;
 		}
 		
