@@ -179,15 +179,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 				// Boost Revenue.
-				'frequently-bought-together' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-frequently-bought-together' ),
-					'title' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-					'desc' => esc_html__( 'Create bundles of related products and offer them at a discount or at the regular price', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-frequently-bought-together/',
-				),
-
 				'product-bundles' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -196,40 +187,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
 				),
-
-				'buy-x-get-y' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-x-get-y' ),
-					'title' => esc_html__( 'Buy X, Get Y', 'merchant' ),
-					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y ', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/',
-				),
-				'volume-discounts' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
-					'title' => esc_html__( 'Bulk Discounts', 'merchant' ),
-					'desc' => esc_html__( 'Offer discounts on larger quantity purchases to drive up average order value', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/',
-				),
-				'spending-goal' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-spending-goal' ),
-					'title' => esc_html__( 'Spending Discount Goal', 'merchant' ),
-					'desc' => esc_html__( 'Motivate higher order values by offering customers discounts for reaching spending goals', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-spending-goal/',
-				),
-				'free-gifts' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-free-gifts' ),
-					'title' => esc_html__( 'Free Gifts', 'merchant' ),
-					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target or apply a coupon', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/',
-				),
-				'pre-orders' => array(
 				// Reduce Cart Abandonment.
 				'cart-count-favicon' => array(
 					'pro' => false,
@@ -437,7 +394,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Inform your visitors that the site uses cookies via a dismissable banner', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cookie-banner/',
 				),
-
 			);
 		}
 
