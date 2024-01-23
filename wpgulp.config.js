@@ -739,87 +739,86 @@ const scripts = [
 	{
 		name: 'countdownTimer',
 		src: './assets/js/src/modules/countdown-timer/countdown-timer.js',
-		file: 'countdown-timer',
 		destination: './assets/js/modules/countdown-timer',
 	},
 	{
 		name: 'countdownTimerAdmin',
 		src: './assets/js/src/modules/countdown-timer/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/countdown-timer/admin',
+		file: 'preview'
 	},
 
 	// Address autocomplete
 	{
 		name: 'addressAutocompleteAdmin',
 		src: './assets/js/src/modules/address-autocomplete/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/address-autocomplete/admin',
+		file: 'preview'
 	},
 
 	{
 		name: 'productBundlesPreview',
 		src: './assets/js/src/modules/product-bundles/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/product-bundles/admin',
+		file: 'preview'
 	},
 
 	// Floating Mini Cart.
 	{
 		name: 'floatingMiniCart',
 		src: './assets/js/src/modules/floating-mini-cart/floating-mini-cart.js',
-		file: 'floating-mini-cart',
 		destination: './assets/js/modules/floating-mini-cart',
+		file: 'floating-mini-cart'
 	},
 	// Side cart
 	{
 		name: 'sideCart',
 		src: './assets/js/src/modules/side-cart/side-cart.js',
-		file: 'side-cart',
 		destination: './assets/js/modules/side-cart',
+		file: 'side-cart'
 	},
 
 	// Login Popups.
 	{
 		name: 'loginPopups',
 		src: './assets/js/src/modules/login-popup/login-popup.js',
-		file: 'login-popup',
 		destination: './assets/js/modules/login-popup',
+		file: 'login-popup'
 	},
 
 	// Size Chart.
 	{
 		name: 'sizeChart',
 		src: './assets/js/src/modules/size-chart/size-chart.js',
-		file: 'size-chart',
 		destination: './assets/js/modules/size-chart',
+		file: 'size-chart'
 	},
 	// Spending goal.
 	{
 		name: 'spendingGoalAdmin',
 		src: './assets/js/src/modules/spending-goal/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/spending-goal/admin',
+		file: 'preview'
 	},
 	{
 		name: 'spendingGoal',
 		src: './assets/js/src/modules/spending-goal/spending-goal.js',
-		file: 'spending-goal',
 		destination: './assets/js/modules/spending-goal/',
+		file: 'spending-goal'
 	},
 	// Quick social links
 	{
 		name: 'quickSocialLinksAdmin',
 		src: './assets/js/src/modules/quick-social-links/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/quick-social-links/admin',
+		file: 'preview'
 	},
 	{
 		name: 'productLabelsAdmin',
 		src: './assets/js/src/modules/product-labels/admin/preview.js',
-		file: 'preview',
 		destination: './assets/js/modules/product-labels/admin/',
-	},
+		file: 'preview'
+	}
 ];
 
 // Watch options.
