@@ -508,3 +508,12 @@ body:not(.merchant-pagination-load-more) .merchant-pagination-wrapper {
   color: var(--mrc-adv-reviews-button-color-hover, #FFF) !important;
   background-color: var(--mrc-adv-reviews-button-bg-color-hover, #757575) !important;
 }
+
+.rtl .merchant-adv-reviews-modal .merchant-adv-reviews-modal-body .merchant-adv-reviews-modal-content .modal-product-info {
+  margin-left: 0;
+  margin-right: 25px;
+}
+.rtl .merchant-adv-reviews-modal .merchant-adv-reviews-modal-body .merchant-adv-reviews-modal-close {
+  left: 30px;
+  right: unset;
+}
