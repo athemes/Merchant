@@ -1,3 +1,7 @@
+.rtl .merchant-module-page-setting-box .merchant-module-page-setting-title {
+  padding-right: unset;
+  padding-left: 50px;
+}
 .rtl .merchant-modules-list-item-badge-wrapper {
   right: unset;
   left: 20px;
@@ -23,4 +27,31 @@
 .rtl .merchant-module-page-setting-field-range .merchant-range-unit {
   right: unset;
   left: 10px;
+}
+.rtl .merchant-flexible-content-control:not(.table-style) .layout {
+  border-right: 3px solid #838383;
+  border-left: 1px solid #c3c4c7;
+}
+.rtl .merchant-flexible-content-control:not(.table-style) .layout.active {
+  border-right: 3px solid #3858e9;
+  border-left: 1px solid #c3c4c7;
+}
+.rtl .merchant-flexible-content-control .customize-control-flexible-content-add-list {
+  padding: 3px 5px 3px 3px;
+}
+.rtl .merchant-flexible-content-control .customize-control-flexible-content-add-list.active {
+  border-left: 1px solid #c3c4c7;
+  border-right: 3px solid #3858e9;
+}
+.rtl .merchant-sortable-repeater-control input[type=text] {
+  border-radius: 0 4px 4px 0;
+}
+.rtl .merchant-sortable-repeater-control .customize-control-sortable-repeater-delete {
+  border-radius: 4px 0 0 4px;
+  border-right: 0;
+}
+.rtl .merchant-module-page-setting-field-select select,
+.rtl .merchant-module-page-setting-field-select_ajax select,
+.rtl .merchant-module-page-setting-field-select_size_chart select {
+  padding: 12px 12px 12px 20px;
 }
