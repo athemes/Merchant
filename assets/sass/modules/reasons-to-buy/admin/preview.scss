@@ -110,3 +110,10 @@
 		font-size: 1rem;
 	}
 }
+
+.rtl{
+    .merchant-reasons-list .merchant-reasons-list-item .merchant-reasons-list-item-icon{
+        margin-right: unset;
+        margin-left: 0.5em;
+    }
+}

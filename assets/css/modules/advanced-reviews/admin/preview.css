@@ -167,3 +167,30 @@ p.stars.selected a:not(.active)::before {
   color: #FFA441;
   opacity: 1;
 }
+
+.rtl .merchant-adv-reviews .merchant-adv-reviews-header .mrc-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+.rtl .merchant-adv-reviews .merchant-adv-reviews-header .mrc-right-col {
+  -webkit-box-align: self-start;
+      -ms-flex-align: self-start;
+          align-items: self-start;
+}
+.rtl .merchant-adv-reviews .merchant-adv-reviews-header .merchant-adv-reviews-rating-wrapper .star-rating {
+  margin-left: unset !important;
+  margin-right: 16px !important;
+}
+.rtl .merchant-adv-reviews .merchant-star-rating-bars {
+  text-align: right;
+}
+.rtl .merchant-adv-reviews .merchant-star-rating-bars .merchant-star-rating-bar-item .item-bar .item-bar-inner {
+  left: unset;
+  right: 0;
+}
+.rtl .merchant-adv-reviews .merchant-reviews-list-wrapper .merchant-reviews-list-item .star-rating + .merchant-review-author {
+  margin-right: 20px;
+  margin-left: unset;
+}

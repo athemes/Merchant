@@ -122,3 +122,10 @@
 .merchant-preview-dynamic-layout.bottom-product-summary .merchant-product-navigation.bottom {
   display: none;
 }
+
+.rtl .merchant-product-navigation {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}

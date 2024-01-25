@@ -136,3 +136,8 @@
 [data-id=links] .merchant-module-page-setting-field-choices {
   display: none;
 }
+
+.rtl .merchant-quick-social-links .merchant-quick-social-link {
+  border-right: unset;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
