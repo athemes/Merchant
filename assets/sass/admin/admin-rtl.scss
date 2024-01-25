@@ -1,4 +1,37 @@
 .rtl {
+  .merchant-top-bar {
+    margin: 0 0 30px 0px;
+  }
+
+  .merchant-notifications-sidebar {
+    left: 0;
+    right: unset;
+    transform: translate3d(-100%, 0, 0);
+
+    &.opened {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .merchant-notifications-sidebar-close {
+      left: 15px;
+      right: unset;
+    }
+
+    .merchant-notifications-sidebar-body {
+      direction: ltr;
+    }
+  }
+
+  .merchant-modules-header-shortlinks {
+    li {
+      a {
+        svg:last-child {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
   .merchant-module-page-setting-box {
     .merchant-module-page-setting-title {
       padding-right: unset;
@@ -84,4 +117,11 @@
   .merchant-module-page-setting-field-select_size_chart select {
     padding: 12px 12px 12px 20px;
   }
+
+  .merchant-admin-footer-text-link {
+    padding-left: 5px;
+    padding-right: unset;
+  }
 }
+
+
