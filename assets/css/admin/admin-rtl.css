@@ -83,3 +83,8 @@
   padding-left: 5px;
   padding-right: unset;
 }
+.rtl .merchant-module-deactivate-dropdown,
+.rtl .merchant-module-dropdown {
+  left: unset;
+  right: 0;
+}
