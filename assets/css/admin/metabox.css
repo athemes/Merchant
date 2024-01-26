@@ -1082,3 +1082,22 @@ body:not(.block-editor-page) #merchant_metabox .inside {
     width: 100%;
   }
 }
+.rtl .merchant-metabox-tabs {
+  margin-left: unset;
+  margin-right: -20px;
+}
+.rtl .merchant-metabox-tabs a:before {
+  right: 0;
+  left: unset;
+}
+.rtl .merchant-metabox-field-append {
+  border-radius: 5px;
+}
+.rtl .merchant-metabox-contents .merchant-metabox-field-flexible-content-item {
+  border-left: 1px solid #c3c4c7;
+  border-right: 3px solid #3858e9;
+}
+.rtl .merchant-metabox-contents .merchant-metabox-field-flexible-content-item-title {
+  margin-left: unset;
+  margin-right: 10px;
+}
