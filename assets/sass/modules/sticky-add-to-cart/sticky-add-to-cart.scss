@@ -548,3 +548,12 @@ body {
 
 /* Compatibility */
 @import "compatibility/botiga";
+
+.rtl{
+	.merchant-sticky-add-to-cart-item{
+		.single_add_to_cart_button{
+			margin-left: unset;
+			margin-right: 15px;
+		}
+	}
+}
