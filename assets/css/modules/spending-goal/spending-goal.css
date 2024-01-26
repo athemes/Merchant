@@ -165,3 +165,11 @@
     background-position: 50px 50px;
   }
 }
+.rtl .merchant-spending-goal-widget {
+  left: unset;
+  right: calc(var(--merchant-content-width) * -1);
+}
+.rtl .merchant-spending-goal-widget.active {
+  right: 0;
+  left: unset;
+}
