@@ -531,3 +531,16 @@
   -webkit-transform: none;
           transform: none;
 }
+
+.rtl .merchant-floating-side-mini-cart .merchant-floating-side-mini-cart-close-button {
+  left: 30px;
+  right: auto;
+}
+.rtl .merchant-floating-side-mini-cart .woocommerce-mini-cart-item img {
+  margin-left: 8px;
+  margin-right: unset;
+}
+.rtl .merchant-floating-side-mini-cart li > a:not(.remove) {
+  margin-right: unset;
+  margin-left: 20px;
+}
