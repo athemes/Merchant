@@ -137,3 +137,8 @@
 .merchant-free-gifts-widget-offer-product-free {
   color: var(--merchant-text-color);
 }
+
+.rtl .merchant-free-gifts-widget-offer-product img {
+  margin-right: 0;
+  margin-left: 10px;
+}
