@@ -55,3 +55,8 @@
   margin-bottom: 0 !important;
   margin-left: 5px;
 }
+
+.rtl.single-product .merchant-buy-now-button {
+  margin-left: 0;
+  margin-right: 5px;
+}

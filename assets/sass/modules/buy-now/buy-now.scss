@@ -64,3 +64,12 @@
 		
 	}
 }
+
+.rtl{
+	&.single-product{
+		.merchant-buy-now-button{
+			margin-left: 0;
+			margin-right: 5px;
+		}
+	}
+}
