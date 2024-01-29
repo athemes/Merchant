@@ -216,6 +216,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.0 =
+* Added - Product bundle module.
+* Fixed - Layout issues in RTL mode.
+
 = 1.8.3 =
 * Changed - Google Autocomplete: Tutorial link.
 * Changed - Delay first display from pro upsell notice for 3 days.

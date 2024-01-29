@@ -140,3 +140,10 @@
     padding: 0;
   }
 }
+.rtl .merchant-quick-social-link {
+  border-right: 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.rtl .merchant-quick-social-link:last-of-type {
+  border-left: 0;
+}

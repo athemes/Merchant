@@ -552,3 +552,20 @@ body {
 		}
 	}
 }
+
+.rtl{
+	.merchant-adv-reviews-modal .merchant-adv-reviews-modal-body {
+		.merchant-adv-reviews-modal-content{
+			.modal-product-info{
+				margin-left: 0;
+				margin-right: 25px;
+			}
+		}
+
+		.merchant-adv-reviews-modal-close{
+			left: 30px;
+			right: unset;
+		}
+	}
+}
+

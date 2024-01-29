@@ -104,3 +104,10 @@
 	max-width: 350px;
 	margin: 0 !important;
 }
+
+.rtl{
+	.merchant-volume-discounts-item-label>span{
+		margin-right: 10px;
+		margin-left: unset;
+	}
+}

@@ -521,3 +521,8 @@ body.merchant-scrolling-down .merchant-sticky-add-to-cart-wrapper.hide-when-scro
   display: -ms-flexbox;
   display: flex;
 }
+
+.rtl .merchant-sticky-add-to-cart-item .single_add_to_cart_button {
+  margin-left: unset;
+  margin-right: 15px;
+}

@@ -5,218 +5,258 @@
  */
 
 .merchant-module-page-preview-browser-inner {
-	display: flex;
-	flex-grow: 0;
-	max-width: 600px;
-	margin: auto;
-    padding: 25px;
+  display: flex;
+  flex-grow: 0;
+  max-width: 600px;
+  margin: auto;
+  padding: 25px;
 }
 
 .merchant-adv-reviews {
 
-    .merchant-adv-reviews-title {
-        margin-top: 25px;
-        margin-bottom: 0 !important;
+  .merchant-adv-reviews-title {
+    margin-top: 25px;
+    margin-bottom: 0 !important;
+  }
+
+  .merchant-adv-reviews-desc {
+    margin-bottom: 0 !important;
+  }
+
+  .merchant-adv-reviews-header {
+    margin-top: 20px !important;
+
+    .merchant-adv-reviews-total {
+      margin-bottom: 15px !important;
     }
 
+    .mrc-right-col {
+      margin-left: 50px;
+    }
+  }
+
+  .merchant-adv-review-write-button {
+    margin-bottom: auto;
+  }
+
+  .merchant-reviews-orderby {
+    pointer-events: none;
+  }
+
+  .merchant-adv-reviews-body {
+    margin-bottom: 30px !important;
+  }
+
+  .merchant-adv-reviews-footer {
+    display: none;
+  }
+
+  &.hide-title {
+    .merchant-adv-reviews-title,
     .merchant-adv-reviews-desc {
-        margin-bottom: 0 !important;
+      display: none;
     }
-
-    .merchant-adv-reviews-header {
-        margin-top: 20px !important;
-        
-        .merchant-adv-reviews-total {
-            margin-bottom: 15px !important;
-        }
-
-        .mrc-right-col {
-            margin-left: 50px;
-        }
-    }
-
-    .merchant-adv-review-write-button {
-        margin-bottom: auto;
-    }
-
-	.merchant-reviews-orderby {
-		pointer-events: none;
-	}
-
-    .merchant-adv-reviews-body {
-        margin-bottom: 30px !important;
-    }
-
-    .merchant-adv-reviews-footer {
-        display: none;
-    }
-
-    &.hide-title {
-        .merchant-adv-reviews-title,
-        .merchant-adv-reviews-desc {
-            display: none;
-        }
-    }
+  }
 
 }
 
 .merchant-reviews-list-wrapper {
-    margin-top: 25px;
+  margin-top: 25px;
 
-    .merchant-reviews-list-item {
-        padding: 15px 0;
+  .merchant-reviews-list-item {
+    padding: 15px 0;
 
-        .merchant-review-date {
-            top: 6px;
-            position: relative;
-            font-size: 0.8rem;
-        }
-
-        .merchant-review-content {
-            margin-top: 5px;
-        }
+    .merchant-review-date {
+      top: 6px;
+      position: relative;
+      font-size: 0.8rem;
     }
+
+    .merchant-review-content {
+      margin-top: 5px;
+    }
+  }
 }
 
 .merchant-star-rating-bars {
-    .merchant-star-rating-bar-item {
-        max-width: 230px;
+  .merchant-star-rating-bar-item {
+    max-width: 230px;
 
-        .item-bar {
-            min-width: 130px;
-        }
+    .item-bar {
+      min-width: 130px;
     }
+  }
 }
 
 @media(min-width: 1300px) {
-    .merchant-star-rating-bars {
-        .merchant-star-rating-bar-item {
-            max-width: 300px;
-    
-            .item-bar {
-                min-width: 200px;
-            }
-        }
+  .merchant-star-rating-bars {
+    .merchant-star-rating-bar-item {
+      max-width: 300px;
+
+      .item-bar {
+        min-width: 200px;
+      }
     }
+  }
 }
 
 /**
  * Star rating
  */
 .star-rating {
-	overflow: hidden;
-	position: relative;
-	height: 1.618em;
-	line-height: 1.618;
-	width: 5.3em;
-	font-family: star;
-	font-weight: 400;
-	margin-left: auto;
-	margin-right: auto;
-	letter-spacing: 0;
-	color: #FFA441;
+  overflow: hidden;
+  position: relative;
+  height: 1.618em;
+  line-height: 1.618;
+  width: 5.3em;
+  font-family: star;
+  font-weight: 400;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0;
+  color: #FFA441;
 
-	&::before {
-		content: "\53\53\53\53\53";
-		opacity: 0.25;
-		float: left;
-		top: 0;
-		left: 0;
-		position: absolute;
-	}
+  &::before {
+    content: "\53\53\53\53\53";
+    opacity: 0.25;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
 
-	span {
-		overflow: hidden;
-		float: left;
-		top: 0;
-		left: 0;
-		position: absolute;
-		padding-top: 1.5em;
-	}
+  span {
+    overflow: hidden;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding-top: 1.5em;
+  }
 
-	span::before {
-		content: "\53\53\53\53\53";
-		top: 0;
-		position: absolute;
-		left: 0;
-		color: #FFA441;
-	}
+  span::before {
+    content: "\53\53\53\53\53";
+    top: 0;
+    position: absolute;
+    left: 0;
+    color: #FFA441;
+  }
 }
 
 p.stars {
 
-	a {
-		position: relative;
-		height: 1em;
-		width: 1em;
-		text-indent: -999em;
-		display: inline-block;
-		text-decoration: none;
-		margin-right: 1px;
-		font-weight: 400;
+  a {
+    position: relative;
+    height: 1em;
+    width: 1em;
+    text-indent: -999em;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 1px;
+    font-weight: 400;
 
-		&::before {
+    &::before {
 
-			display: block;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 1em;
-			height: 1em;
-			line-height: 1;
-			font-family: star;
-			content: "\53";
-			color: #212121;
-			text-indent: 0;
-			opacity: 0.25;
-		}
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      font-family: star;
+      content: "\53";
+      color: #212121;
+      text-indent: 0;
+      opacity: 0.25;
+    }
 
-		&:hover {
+    &:hover {
 
-			~ a::before {
-				content: "\53";
-				color: #212121;
-				opacity: 0.25;
-			}
-		}
-	}
+      ~ a::before {
+        content: "\53";
+        color: #212121;
+        opacity: 0.25;
+      }
+    }
+  }
 
-	&:hover {
+  &:hover {
 
-		a {
+    a {
 
-			&::before {
-				content: "\53";
-				color: #FFA441;
-				opacity: 1;
-			}
-		}
-	}
+      &::before {
+        content: "\53";
+        color: #FFA441;
+        opacity: 1;
+      }
+    }
+  }
 
-	&.selected {
+  &.selected {
 
-		a.active {
+    a.active {
 
-			&::before {
-				content: "\53";
-				color: #FFA441;
-				opacity: 1;
-			}
+      &::before {
+        content: "\53";
+        color: #FFA441;
+        opacity: 1;
+      }
 
-			~ a::before {
-				content: "\53";
-				color: #212121;
-				opacity: 0.25;
-			}
-		}
+      ~ a::before {
+        content: "\53";
+        color: #212121;
+        opacity: 0.25;
+      }
+    }
 
-		a:not(.active) {
+    a:not(.active) {
 
-			&::before {
-				content: "\53";
-				color: #FFA441;
-				opacity: 1;
-			}
-		}
-	}
+      &::before {
+        content: "\53";
+        color: #FFA441;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.rtl {
+  .merchant-adv-reviews {
+    .merchant-adv-reviews-header {
+      .mrc-row {
+        flex-direction: row-reverse;
+      }
+
+      .mrc-right-col{
+        align-items: self-start;
+      }
+
+      .merchant-adv-reviews-rating-wrapper{
+        .star-rating{
+          margin-left: unset !important;
+          margin-right: 16px !important;
+        }
+      }
+    }
+
+    .merchant-star-rating-bars {
+      text-align: right;
+
+      .merchant-star-rating-bar-item {
+        .item-bar {
+          .item-bar-inner {
+            left: unset;
+            right: 0;
+          }
+        }
+      }
+    }
+
+    .merchant-reviews-list-wrapper .merchant-reviews-list-item .star-rating+.merchant-review-author{
+      margin-right: 20px;
+      margin-left: unset;
+    }
+
+  }
 }

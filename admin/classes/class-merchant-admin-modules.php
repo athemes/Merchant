@@ -178,6 +178,15 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-recently-viewed-products/',
 				),
 
+				// Boost Revenue.
+				'product-bundles' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
+					'title' => esc_html__( 'Product Bundles', 'merchant' ),
+					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
+				),
 				// Reduce Cart Abandonment.
 				'cart-count-favicon' => array(
 					'pro' => false,
@@ -385,7 +394,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Inform your visitors that the site uses cookies via a dismissable banner', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/cookie-banner/',
 				),
-
 			);
 		}
 

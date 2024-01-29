@@ -1,0 +1,133 @@
+.rtl {
+  .merchant-top-bar {
+    margin: 0 0 30px 0px;
+  }
+
+  .merchant-notifications-sidebar {
+    left: 0;
+    right: unset;
+    transform: translate3d(-100%, 0, 0);
+
+    &.opened {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .merchant-notifications-sidebar-close {
+      left: 15px;
+      right: unset;
+    }
+
+    .merchant-notifications-sidebar-body {
+      direction: ltr;
+    }
+  }
+
+  .merchant-modules-header-shortlinks {
+    li {
+      a {
+        svg:last-child {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .merchant-module-page-setting-box {
+    .merchant-module-page-setting-title {
+      padding-right: unset;
+      padding-left: 50px;
+    }
+  }
+
+  .merchant-modules-list-item-badge-wrapper {
+    right: unset;
+    left: 20px;
+  }
+
+  .merchant-module-page-ajax-header {
+    right: 160px;
+    left: 0;
+  }
+
+  .merchant-module-page-preview-browser-top-circle {
+    margin-right: 7px;
+    margin-left: 0;
+  }
+
+  .merchant-flexible-content-control {
+    .layout {
+      .layout-count {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .merchant-module-page-setting-field-before-input {
+    border-radius: 0 5px 5px 0;
+  }
+
+  .merchant-module-page-setting-field-range {
+    input[type=number] {
+      padding: 12px 10px 12px 25px;
+    }
+
+    .merchant-range-unit {
+      right: unset;
+      left: 10px;
+    }
+  }
+
+  .merchant-flexible-content-control {
+    &:not(.table-style) {
+      .layout {
+        border-right: 3px solid #838383;
+        border-left: 1px solid #c3c4c7;
+
+        &.active {
+          border-right: 3px solid #3858e9;
+          border-left: 1px solid #c3c4c7;
+        }
+      }
+    }
+
+    .customize-control-flexible-content-add-list {
+      padding: 3px 5px 3px 3px;
+
+      &.active {
+        border-left: 1px solid #c3c4c7;
+        border-right: 3px solid #3858e9;
+      }
+    }
+  }
+
+  .merchant-sortable-repeater-control {
+    input[type=text] {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .customize-control-sortable-repeater-delete {
+      border-radius: 4px 0 0 4px;
+      border-right: 0;
+    }
+  }
+
+  .merchant-module-page-setting-field-select select,
+  .merchant-module-page-setting-field-select_ajax select,
+  .merchant-module-page-setting-field-select_size_chart select {
+    padding: 12px 12px 12px 20px;
+  }
+
+  .merchant-admin-footer-text-link {
+    padding-left: 5px;
+    padding-right: unset;
+  }
+
+  .merchant-module-deactivate-dropdown,
+  .merchant-module-dropdown {
+    left: unset;
+    right: 0;
+  }
+}
+
+

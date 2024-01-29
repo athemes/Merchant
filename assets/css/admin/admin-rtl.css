@@ -1,0 +1,90 @@
+.rtl .merchant-top-bar {
+  margin: 0 0 30px 0px;
+}
+.rtl .merchant-notifications-sidebar {
+  left: 0;
+  right: unset;
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+.rtl .merchant-notifications-sidebar.opened {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.rtl .merchant-notifications-sidebar .merchant-notifications-sidebar-close {
+  left: 15px;
+  right: unset;
+}
+.rtl .merchant-notifications-sidebar .merchant-notifications-sidebar-body {
+  direction: ltr;
+}
+.rtl .merchant-modules-header-shortlinks li a svg:last-child {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.rtl .merchant-module-page-setting-box .merchant-module-page-setting-title {
+  padding-right: unset;
+  padding-left: 50px;
+}
+.rtl .merchant-modules-list-item-badge-wrapper {
+  right: unset;
+  left: 20px;
+}
+.rtl .merchant-module-page-ajax-header {
+  right: 160px;
+  left: 0;
+}
+.rtl .merchant-module-page-preview-browser-top-circle {
+  margin-right: 7px;
+  margin-left: 0;
+}
+.rtl .merchant-flexible-content-control .layout .layout-count {
+  margin-left: 10px;
+  margin-right: 0;
+}
+.rtl .merchant-module-page-setting-field-before-input {
+  border-radius: 0 5px 5px 0;
+}
+.rtl .merchant-module-page-setting-field-range input[type=number] {
+  padding: 12px 10px 12px 25px;
+}
+.rtl .merchant-module-page-setting-field-range .merchant-range-unit {
+  right: unset;
+  left: 10px;
+}
+.rtl .merchant-flexible-content-control:not(.table-style) .layout {
+  border-right: 3px solid #838383;
+  border-left: 1px solid #c3c4c7;
+}
+.rtl .merchant-flexible-content-control:not(.table-style) .layout.active {
+  border-right: 3px solid #3858e9;
+  border-left: 1px solid #c3c4c7;
+}
+.rtl .merchant-flexible-content-control .customize-control-flexible-content-add-list {
+  padding: 3px 5px 3px 3px;
+}
+.rtl .merchant-flexible-content-control .customize-control-flexible-content-add-list.active {
+  border-left: 1px solid #c3c4c7;
+  border-right: 3px solid #3858e9;
+}
+.rtl .merchant-sortable-repeater-control input[type=text] {
+  border-radius: 0 4px 4px 0;
+}
+.rtl .merchant-sortable-repeater-control .customize-control-sortable-repeater-delete {
+  border-radius: 4px 0 0 4px;
+  border-right: 0;
+}
+.rtl .merchant-module-page-setting-field-select select,
+.rtl .merchant-module-page-setting-field-select_ajax select,
+.rtl .merchant-module-page-setting-field-select_size_chart select {
+  padding: 12px 12px 12px 20px;
+}
+.rtl .merchant-admin-footer-text-link {
+  padding-left: 5px;
+  padding-right: unset;
+}
+.rtl .merchant-module-deactivate-dropdown,
+.rtl .merchant-module-dropdown {
+  left: unset;
+  right: 0;
+}
