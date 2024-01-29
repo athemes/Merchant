@@ -30,12 +30,12 @@ Merchant_Admin_Options::create( array(
 			'default' => 0,
 		),
 
-		array(
-			'id'      => '_woopq_decimal',
-			'type'    => 'switcher',
-			'title'   => __( 'Allow decimal product quantity', 'merchant' ),
-			'default' => 0,
-		),
+//      array(
+//          'id'      => '_woopq_decimal',
+//          'type'    => 'switcher',
+//          'title'   => __( 'Allow decimal product quantity', 'merchant' ),
+//          'default' => 0,
+//      ),
 
 		array(
 			'id'      => 'bundled_link',
