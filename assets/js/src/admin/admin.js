@@ -177,9 +177,15 @@
                 var min = $range.attr('min') || 0;
                 var max = $range.attr('max') || 1;
                 var percentage = (((value - min) / (max - min)) * 100);
-
-                $range.css({'background': 'linear-gradient(to right, #3858E9 0%, #3858E9 ' + percentage + '%, #ddd ' + percentage + '%, #ddd 100%)'});
-
+                if($('body').hasClass('rtl')) {
+                    $range.css({
+                        'background': 'linear-gradient(to left, #3858E9 0%, #3858E9 ' + percentage + '%, #ddd ' + percentage + '%, #ddd 100%)'
+                    });
+                } else {
+                    $range.css({
+                        'background': 'linear-gradient(to right, #3858E9 0%, #3858E9 ' + percentage + '%, #ddd ' + percentage + '%, #ddd 100%)'
+                    });
+                }
                 $rangeInput.val(value);
                 $numberInput.val(value);
 

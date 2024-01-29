@@ -30,3 +30,12 @@
 	color: var(--merchant-digits-color);
 	font-weight: bold;
 }
+
+.rtl{
+	.merchant-countdown-timer{
+		svg{
+			margin-right: unset;
+			margin-left: 5px;
+		}
+	}
+}

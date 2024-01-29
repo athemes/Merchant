@@ -63,12 +63,12 @@
 }
 
 
-
 @media (min-width: 1025px) {
   .merchant-quick-social-links {
     &.visibility-mobile {
       display: none;
     }
+
     &.pos-right,
     &.pos-left {
       left: 0;
@@ -157,6 +157,17 @@
     .container {
       width: 100%;
       padding: 0;
+    }
+  }
+}
+
+.rtl {
+  .merchant-quick-social-link {
+    border-right: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:last-of-type {
+      border-left: 0;
     }
   }
 }

@@ -15,3 +15,14 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.rtl .merchant-bogo-arrow {
+  right: unset;
+  left: -30px;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.rtl .merchant-bogo-product-contents {
+  padding-left: unset;
+  padding-right: 10px;
+}

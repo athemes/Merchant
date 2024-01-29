@@ -77,6 +77,24 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Modules global settings.
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
+			require_once MERCHANT_DIR . 'inc/modules/buy-now/class-buy-now.php';
+			require_once MERCHANT_DIR . 'inc/modules/animated-add-to-cart/class-animated-add-to-cart.php';
+			require_once MERCHANT_DIR . 'inc/modules/quick-view/class-quick-view.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-labels/class-product-labels.php';
+			require_once MERCHANT_DIR . 'inc/modules/add-to-cart-text/class-add-to-cart-text.php';
+			require_once MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders.php';
+			require_once MERCHANT_DIR . 'inc/modules/cart-count-favicon/class-cart-count-favicon.php';
+			require_once MERCHANT_DIR . 'inc/modules/inactive-tab-message/class-inactive-tab-message.php';
+			require_once MERCHANT_DIR . 'inc/modules/payment-logos/class-payment-logos.php';
+			require_once MERCHANT_DIR . 'inc/modules/trust-badges/class-trust-badges.php';
+			require_once MERCHANT_DIR . 'inc/modules/auto-external-links/class-auto-external-links.php';
+			require_once MERCHANT_DIR . 'inc/modules/real-time-search/class-real-time-search.php';
+			require_once MERCHANT_DIR . 'inc/modules/code-snippets/class-code-snippets.php';
+			require_once MERCHANT_DIR . 'inc/modules/scroll-to-top-button/class-scroll-to-top-button.php';
+			require_once MERCHANT_DIR . 'inc/modules/agree-to-terms-checkbox/class-agree-to-terms-checkbox.php';
+			require_once MERCHANT_DIR . 'inc/modules/cookie-banner/class-cookie-banner.php';
+			require_once MERCHANT_DIR . 'inc/modules/address-autocomplete/class-address-autocomplete.php';
+			require_once MERCHANT_DIR . 'inc/modules/product-bundles/class-product-bundles.php';
 
 			// Modules (free and pro).
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {

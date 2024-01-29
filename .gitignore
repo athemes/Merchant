@@ -4,3 +4,5 @@ vendor
 .DS_Store
 .idea
 composer.lock
+yarn.lock
+package-lock.json

@@ -100,3 +100,10 @@
         }
     }
 }
+
+.rtl{
+    .merchant-countdown-timer svg{
+        margin-left: 5px;
+        margin-right: unset;
+    }
+}
