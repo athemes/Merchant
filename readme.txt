@@ -219,7 +219,6 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 = 1.9.0 =
 * Added - Product bundle module.
 * Fixed - Layout issues in RTL mode.
-* Fixed - Cookie banner not working properly on mobile devices.
 
 = 1.8.3 =
 * Changed - Google Autocomplete: Tutorial link.
