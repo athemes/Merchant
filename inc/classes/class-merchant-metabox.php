@@ -210,6 +210,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				return;
 			}
 
+			$options   = $this->metabox_options();
+			if ( empty( $options ) ) {
+				return;
+			}
+
 			$metabox_title = esc_html__( 'Merchant Options', 'merchant' );
 			switch ( $post_type ) {
 				case 'post':
