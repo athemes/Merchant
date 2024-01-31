@@ -210,6 +210,11 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				return;
 			}
 
+			$options   = $this->metabox_options();
+			if ( empty( $options ) ) {
+				return;
+			}
+
 			$metabox_title = esc_html__( 'Merchant Options', 'merchant' );
 			switch ( $post_type ) {
 				case 'post':
@@ -796,7 +801,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 					echo '<tr>';
 					echo '<td colspan="100%">';
 					echo '<label>';
-					echo '<strong>' . esc_html__( 'Size Name', 'merchant' ) . ':</strong>';
+					echo '<strong>' . esc_html__( 'Chart Name', 'merchant' ) . ':</strong>';
 					echo '<input type="text" value="" data-name="' . esc_attr( $field_id ) . '[0][name]" />';
 					echo '</label>';
 					echo '</td>';
@@ -838,7 +843,7 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 							echo '<tr>';
 							echo '<td colspan="100%">';
 							echo '<label>';
-							echo '<strong>' . esc_html__( 'Size Name', 'merchant' ) . ':</strong>';
+							echo '<strong>' . esc_html__( 'Chart Name', 'merchant' ) . ':</strong>';
 							echo '<input type="text" value="' . esc_attr( $name ) . '" name="' . esc_attr( $field_id . '[' . $tab_key . '][name]' ) . '" />';
 							echo '</label>';
 							echo '</td>';
