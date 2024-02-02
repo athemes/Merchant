@@ -4358,3 +4358,134 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
     width: 100%;
   }
 }
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area {
+  margin-bottom: 15px;
+  position: relative;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-searching {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-style: italic;
+  font-size: 11px;
+  display: none;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-searching.active {
+  display: inline;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-selections-products-preview {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0;
+  margin: 0;
+  height: 190px;
+  overflow-y: scroll;
+  display: none;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-selections-products-preview li {
+  cursor: pointer;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-selected-products-preview {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-height: 52px;
+  display: inline-block;
+  padding: 0 3px;
+  border-radius: 4px;
+  border: 1px solid #8c8f94;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul {
+  padding: 0;
+  margin: 0;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li {
+  padding: 5px 10px;
+  margin: 0 -3px;
+  min-height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px dotted #eee;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li:hover {
+  background-color: #f1f1f1;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li > span {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li span.img {
+  width: 30px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li span.img img {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: block;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li span.data {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li span.type {
+  font-size: 10px;
+  color: #999;
+  min-width: 40px;
+  text-decoration: none;
+  text-align: end;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li del .amount {
+  text-decoration: line-through;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li span.info {
+  font-size: 12px;
+  font-style: italic;
+  height: 18px;
+  line-height: 18px;
+  color: #999;
+  background-color: #f1f1f1;
+  text-decoration: none;
+  padding: 0 6px;
+  border-radius: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container ul li .remove {
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  font-size: 15px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #f6f3f3;
+  cursor: pointer;
+}

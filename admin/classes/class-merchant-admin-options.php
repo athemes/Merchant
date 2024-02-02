@@ -36,6 +36,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			// Ajax callbacks.
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
+			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
 		}
 
 		/**
@@ -866,6 +867,265 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				} ?>
             </select>
 			<?php
+		}
+
+		/**
+		 * Field: Products Selector
+		 *
+		 * @param $settings
+		 * @param $value
+		 *
+		 * @return void
+		 */
+		public static function products_selector( $settings, $value ) {
+			if ( ! class_exists( 'WooCommerce' ) ) {
+				echo '<p class="merchant-notice">' . esc_html__( 'WooCommerce is not installed or activated.', 'merchant' ) . '</p>';
+
+				return;
+			}
+
+			$ids = $value ? explode( ',', $value ) : array();
+
+			if ( isset( $settings['multiple'] ) ) {
+				$multiple = $settings['multiple'] === true ? 'multiple' : '';
+			} else {
+				$multiple = 'multiple';
+			}
+			?>
+
+            <div class="merchant-products-search-container" data-multiple="<?php
+			echo esc_attr( $multiple ); ?>">
+                <div class="merchant-search-area">
+                    <label><?php
+						esc_html_e( 'Search', 'merchant' ); ?><span class="merchant-searching"><?php
+							esc_html_e( 'Searching...', 'merchant' ); ?></span></label>
+                    <input type="text" name="merchant-search-field" placeholder="<?php
+					esc_attr_e( 'Type search keyword...', 'merchant' ); ?>" class="merchant-search-field">
+                    <div class="merchant-selections-products-preview"></div>
+                </div>
+                <div class="merchant-selected-products-preview">
+                    <ul>
+						<?php
+						if ( ! empty( $ids ) ) {
+							foreach ( $ids as $product_id ) {
+								$product = wc_get_product( $product_id );
+								if ( $product ) {
+									self::product_data_li( $product );
+								}
+							}
+						}
+						?>
+                    </ul>
+                </div>
+                <input type="hidden" name="merchant[<?php
+				echo esc_attr( $settings['id'] ); ?>]" class="merchant-selected-products" value="<?php
+				echo esc_attr( $value ) ?>">
+            </div>
+			<?php
+		}
+
+		public static function product_data_li( $product, $search = false ) {
+			$product_id   = $product->get_id();
+			$product_sku  = $product->get_sku();
+			$product_name = $product->get_name();
+			$edit_link    = get_edit_post_link( $product_id );
+			/**
+			 * Filter product image.
+			 *
+			 * @since 1.9.1
+			 */
+			$product_image = apply_filters(
+				'merchant_product_item_product_image',
+				'<span class="img">' . $product->get_image( array( 30, 30 ) ) . '</span>',
+				$product
+			);
+
+			$price = $product->get_price();
+			$key   = $product_id . '_' . $product_sku;
+
+			/**
+			 * Filter the product bundle item product info.
+			 *
+			 * @param string     $product_info The product bundle item product info.
+			 * @param WC_Product $product      The product object.
+			 *
+			 * @since 1.9.0
+			 */
+			$product_info = apply_filters( 'merchant_pro_product_bundle_item_product_info', $product->get_type() . '<br/>#' . $product_id, $product );
+			if ( $search ) {
+				$remove_btn = '<span class="remove hint--left" aria-label="' . esc_html__( 'Add', 'merchant' ) . '">+</span>';
+			} else {
+				$remove_btn = '<span class="remove hint--left" aria-label="' . esc_html__( 'Remove', 'merchant' ) . '">×</span>';
+			}
+
+			echo '<li class="product-item" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
+			     . esc_attr( $product_sku ) . '" data-id="' . esc_attr( $product_id ) . '" data-price="' . esc_attr( $price ) . '">'
+			     . wp_kses( $product_image, array(
+					'span' => array(
+						'class' => true,
+					),
+					'img'  => array(
+						'src'      => true,
+						'alt'      => true,
+						'decoding' => true,
+						'srcset'   => true,
+						'loading'  => true,
+						'sizes'    => true,
+						'class'    => true,
+						'width'    => true,
+						'height'   => true,
+					),
+				) ) . '<span class="data">'
+			     . '<span class="name">' . esc_html( $product_name ) . '</span><span class="info">' . wp_kses( $product->get_price_html(), array(
+					'span' => array(
+						'class' => true,
+					),
+					'del'  => array(
+						'aria-hidden' => true,
+					),
+					'ins'  => array(),
+					'bdi'  => array(),
+
+				) ) . '</span> ' . ( $product->is_sold_individually()
+					? '<span class="info">' . esc_html__( 'sold individually', 'merchant' ) . '</span> ' : '' ) . '</span>'
+			     . '<span class="type"><a href="' . esc_url( $edit_link ) . '" target="_blank">' . wp_kses_post( $product_info ) . '</a></span> ' . wp_kses( $remove_btn, array(
+					'span' => array(
+						'class'      => true,
+						'aria-label' => true,
+					),
+				) );
+
+			echo '</li>';
+		}
+
+		public function products_search() {
+			check_ajax_referer( 'merchant_admin_options', 'nonce' );
+
+			if ( ! isset( $_POST['keyword'] ) || empty( $_POST['keyword'] ) ) {
+				exit();
+			}
+			$types     = array( 'simple', 'variable' ); // limit search to product types
+			$added_ids = isset( $_POST['ids'] ) ? explode( ',', sanitize_text_field( $_POST['ids'] ) ) : array();
+			$keyword   = sanitize_text_field( $_POST['keyword'] );
+			if ( is_numeric( $keyword ) ) {
+				// search by id
+				$query_args = array(
+					'p'         => absint( $keyword ),
+					'post_type' => 'product',
+				);
+			} else {
+				$query_args = array(
+					'post_type'      => 'product',
+					'post_status'    => array( 'publish', 'private' ),
+					's'              => $keyword,
+					'posts_per_page' => 10,
+				);
+
+				if ( ! empty( $types ) && ! in_array( 'all', $types, true ) ) {
+					$product_types = $types;
+
+					if ( in_array( 'variation', $types, true ) ) {
+						$product_types[] = 'variable';
+					}
+
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					$query_args['tax_query'] = array(
+						array(
+							'taxonomy' => 'product_type',
+							'field'    => 'slug',
+							'terms'    => $product_types,
+						),
+					);
+				}
+
+				$query_args['post__not_in'] = array_map( 'absint', $added_ids );
+			}
+
+			$query = new WP_Query( $query_args );
+
+			if ( $query->have_posts() ) {
+				echo '<ul>';
+
+				while ( $query->have_posts() ) {
+					$query->the_post();
+					$_product = wc_get_product( get_the_ID() );
+
+					if ( ! $_product ) {
+						continue;
+					}
+
+					if (
+						! $_product->is_type( 'variable' )
+						|| in_array( 'variable', $types, true )
+						|| in_array( 'all', $types, true )
+					) {
+						self::product_data_li( $_product, array( 'qty' => 1 ), true );
+					}
+
+					if (
+						$_product->is_type( 'variable' )
+						&& (
+							empty( $types )
+							|| in_array( 'all', $types, true )
+							|| in_array( 'variation', $types, true )
+						)
+					) {
+						// show all children
+						$children = $_product->get_children();
+
+						if ( is_array( $children ) && count( $children ) > 0 ) {
+							foreach ( $children as $child ) {
+								$child_product = wc_get_product( $child );
+								/**
+								 * @var WC_Product_Variation $child_product
+								 */
+								if ( ! $this->are_variation_attributes_set( $child_product ) ) {
+									// Don't display variations that don't have all attributes set.
+									continue;
+								}
+								self::product_data_li( $child_product, true );
+							}
+						}
+					}
+				}
+
+				echo '</ul>';
+				wp_reset_postdata();
+			} else {
+				// translators: %s is the search keyword
+				echo wp_kses( '<ul><span>' . sprintf( esc_html__( 'No results found for "%s"', 'merchant' ), $keyword ) . '</span></ul>', array(
+					'ul'   => array(),
+					'span' => array(),
+				) );
+			}
+
+			exit;
+		}
+
+		/**
+		 * Check if all variation attributes are set.
+		 *
+		 * @param $variation WC_Product_Variation variation product object
+		 *
+		 * @return bool
+		 */
+		public function are_variation_attributes_set( $variation ) {
+			// Check if the product is a variation and has attributes
+			if ( $variation && $variation->is_type( 'variation' ) ) {
+				// Get the variation attributes
+				$variation_attributes = $variation->get_variation_attributes();
+
+				// Check if all variation attributes are set
+				foreach ( $variation_attributes as $attribute => $value ) {
+					if ( empty( $value ) ) {
+						return false; // At least one attribute is not set
+					}
+				}
+
+				return true; // All variation attributes are set
+			}
+
+			return false; // Not a valid variation product
 		}
 
 		/**

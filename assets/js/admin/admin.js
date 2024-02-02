@@ -378,6 +378,69 @@
 
     // Initialize Flexible Content.
     FlexibleContentField.init();
+
+    // Products selector.
+    // Handle click/touch event for the search results
+    $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
+      var parent = $(this).closest('.merchant-products-search-container'),
+        valueField = parent.find('.merchant-selected-products'),
+        multiple = parent.data('multiple') === 'multiple';
+      if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
+        // replace the first item
+        parent.find('.merchant-selected-products-preview ul li').remove();
+        valueField.val('');
+      }
+      $(this).children('.remove').attr('aria-label', 'Remove').html('×');
+      parent.find('.merchant-selected-products-preview ul').append($(this));
+      parent.find('.merchant-selections-products-preview').html('').hide();
+      parent.find('.merchant-search-field').val('');
+      if (valueField.val() === '') {
+        valueField.val($(this).data('id'));
+      } else {
+        valueField.val(valueField.val() + ',' + $(this).data('id'));
+      }
+    });
+
+    // Handle keyup event for the search input
+    $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
+      var parent = $(this).closest('.merchant-products-search-container');
+      if ($(this).val() !== '') {
+        parent.find('.merchant-searching').addClass('active');
+        var data = {
+          action: 'merchant_admin_products_search',
+          nonce: merchant_admin_options.ajaxnonce,
+          keyword: $(this).val(),
+          ids: parent.find('.merchant-selected-products').val()
+        };
+        $.post(merchant_admin_options.ajaxurl, data, function (response) {
+          var results = parent.find('.merchant-selections-products-preview');
+          results.show();
+          results.html(response);
+          parent.find('.merchant-searching').removeClass('active');
+        });
+      } else {
+        parent.find('.merchant-selections-products-preview').html('').hide();
+      }
+    });
+
+    // actions on selected items
+    $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
+      var parent = $(this).closest('.merchant-products-search-container'),
+        valueField = parent.find('.merchant-selected-products'),
+        id = $(this).parent().data('id');
+      $(this).parent().remove();
+      $ajaxHeader.addClass('merchant-show');
+      // Remove the leading comma if it exists
+      var currentValue = valueField.val().replace(/^,/, ''),
+        // Create a regular expression pattern for the ID and surrounding commas
+        idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
+        // Replace the ID and handle surrounding commas
+        newValue = currentValue.replace(idPattern, '');
+      // Remove trailing comma if it exists
+      newValue = newValue.replace(/,$/, '');
+      // Update the valueField
+      valueField.val(newValue);
+    });
     $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {
       $('.merchant-module-page-setting-field').each(function () {
         var $field = $(this);
