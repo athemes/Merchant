@@ -10,6 +10,107 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+Merchant_Admin_Options::create( array(
+	'module' => Merchant_Buy_X_Get_Y::MODULE_ID,
+	'title'  => esc_html__( 'Rules', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'           => 'rules',
+			'type'         => 'flexible_content',
+			'sorting'      => true,
+			'style'        => Merchant_Product_Labels::MODULE_ID . '-style default',
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'layouts'      => array(
+				'single-label' => array(
+					'title'  => esc_html__( 'Bundle rules', 'merchant' ),
+					'fields' => array(
+						array(
+							'id'      => 'rules_to_display',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Display On', 'merchant' ),
+							'options' => array(
+								'products'   => esc_html__( 'Selected products', 'merchant' ),
+								'categories' => esc_html__( 'Products from categories', 'merchant' ),
+							),
+							'default' => 'products',
+						),
+						array(
+							'id'          => 'product_ids',
+							'type'        => 'products_selector',
+							'title'       => esc_html__( 'Products', 'merchant' ),
+							'multiple'    => true,
+							'desc'        => esc_html__( 'Select products that will contain the bundle.',
+								'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'products' ),
+						),
+						array(
+							'id'          => 'category_ids',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select product categories that will contain the bundle.', 'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'      => 'min_quantity',
+							'type'    => 'number',
+							'min'     => 0,
+							'step'    => 1,
+							'title'   => esc_html__( 'Customer Buys Quantity', 'merchant' ),
+							'desc'        => esc_html__( 'The minimum quantity that the customers should purchase to get the bundle.', 'merchant' ),
+							'default' => 1,
+						),
+						array(
+							'id'      => 'discount_type',
+							'type'    => 'radio',
+							'title'   => esc_html__( 'Discount Type', 'merchant' ),
+							'options' => array(
+								'percentage'   => esc_html__( 'Percentage Discount', 'merchant' ),
+								'fixed' => esc_html__( 'Fixed Discount', 'merchant' ),
+							),
+							'default' => 'fixed',
+						),
+						array(
+							'id'      => 'discount',
+							'type'    => 'number',
+							'min'     => 0,
+							'step'    => 1,
+							'title'   => esc_html__( 'Discount Value', 'merchant' ),
+							'default' => 1,
+						),
+						array(
+							'id'          => 'customer_get_product_ids',
+							'type'        => 'products_selector',
+							'title'       => esc_html__( 'Customer Gets', 'merchant' ),
+							'multiple'    => false,
+							'desc'        => esc_html__( 'Select products that will customer gets when they purchase quantity.',
+								'merchant' ),
+						),
+						array(
+							'id'      => 'quantity',
+							'type'    => 'number',
+							'min'     => 0,
+							'step'    => 1,
+							'title'   => esc_html__( 'Customer Gets Quantity', 'merchant' ),
+							'default' => 3,
+						),
+					),
+				),
+			),
+			'default'      => array(
+				array(
+					'layout' => 'single-label',
+					'label'  => esc_html__( 'Buy 1 Get 1', 'merchant' ),
+				),
+			),
+
+		),
+	),
+) );
+
 // Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Buy_X_Get_Y::MODULE_ID,
