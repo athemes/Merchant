@@ -147,31 +147,19 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				array(
 					'offers'   => array(
 						array(
-							'buy_quantity'   => 2,
-							'product'        => array(
-								'id'         => 31,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Vinopure Pore Purifying Gel Cleanser',
-								'price_html' => wc_price( 14 ),
-								'price'      => 14,
-								'permalink'  => '#',
-							),
-							'quantity'       => 2,
-							'discount_value' => 10,
-							'layout'         => 'percentage_discount',
-							'buy_product'    => array(
-								'id'         => 97,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Eternal Sunset Collection Lip and Cheek',
-								'price_html' => wc_price( 12 ),
-								'price'      => 12,
-								'permalink'  => '#',
-							),
-							'total_discount' => 2.8,
+							'rules_to_display'         => 'products',
+							'min_quantity'             => 2,
+							'product_ids'              => '26',
+							'quantity'                 => 2,
+							'discount'                 => 10,
+							'discount_type'            => 'percentage',
+							'customer_get_product_ids' => '25',
+							'total_discount'           => 2.8,
 						),
 					),
 					'nonce'    => '',
 					'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
+					'product'  => '26',
 				),
 				true
 			) );
