@@ -17,6 +17,9 @@
     }
   };
   $(document).ready(function () {
+    $('.js-merchant-spending-goal-widget').on('click', function () {
+      $(this).toggleClass('active');
+    });
     $(spendingGoalInputSelector).before('<span class="merchant-module-page-setting-field-before-input">' + merchantSpendingGoal.currencySymbol + '</span>');
     $(discountInputSelector).before('<span class="merchant-module-page-setting-field-before-input"></span>');
     setDiscountType();
