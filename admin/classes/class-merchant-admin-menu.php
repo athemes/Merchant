@@ -55,6 +55,9 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			if ( defined( 'MERCHANT_AWL_ACTIVE' ) ) {
+				return;
+			}
 
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
