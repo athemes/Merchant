@@ -167,6 +167,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			return $value;
 		}
 
+        /**
+         * Set option.
+         */
+		public static function set( $module, $setting, $value ) {
+			$options = get_option( 'merchant', array() );
+			$options[ $module ][ $setting ] = $value;
+			update_option( 'merchant', $options );
+		}
+
+        /**
+         * Delete option.
+         */
+        public static function delete( $module, $setting ) {
+            $options = get_option( 'merchant', array() );
+            unset( $options[ $module ][ $setting ] );
+            update_option( 'merchant', $options );
+        }
+
 		/**
 		 * Get all options.
 		 */
