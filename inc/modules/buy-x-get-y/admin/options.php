@@ -21,7 +21,7 @@ Merchant_Admin_Options::create( array(
 			'style'        => Merchant_Product_Labels::MODULE_ID . '-style default',
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
-				'single-label' => array(
+				'offer-details' => array(
 					'title'  => esc_html__( 'Bundle rules', 'merchant' ),
 					'fields' => array(
 						array(
@@ -102,7 +102,7 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'      => array(
 				array(
-					'layout' => 'single-label',
+					'layout' => 'offer-details',
 					'label'  => esc_html__( 'Buy 1 Get 1', 'merchant' ),
 				),
 			),
