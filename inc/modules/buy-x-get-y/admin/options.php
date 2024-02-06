@@ -44,7 +44,7 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
-							'id'          => 'category_ids',
+							'id'          => 'category_slugs',
 							'type'        => 'select_ajax',
 							'title'       => esc_html__( 'Categories', 'merchant' ),
 							'source'      => 'options',
