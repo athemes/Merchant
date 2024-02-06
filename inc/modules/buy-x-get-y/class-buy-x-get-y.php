@@ -134,36 +134,48 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( $module === self::MODULE_ID ) {
-			// HTML.
-			$preview->set_html( merchant_get_template_part(
-				self::MODULE_TEMPLATES,
-				'single-product',
+			// get 2 simple wc products ids
+			$product_ids = wc_get_products(
 				array(
-					'offers'   => array(
-						array(
-							'rules_to_display'         => 'products',
-							'min_quantity'             => 2,
-							'product_ids'              => '26',
-							'quantity'                 => 2,
-							'discount'                 => 10,
-							'discount_type'            => 'percentage',
-							'customer_get_product_ids' => '25',
-							'total_discount'           => 2.8,
+					'limit'   => 2,
+					'type'    => 'simple',
+					'orderby' => 'rand',
+					'return'  => 'ids',
+				)
+			);
+			// HTML.
+			if ( ! empty( $product_ids ) ) {
+				$preview->set_html( merchant_get_template_part(
+					self::MODULE_TEMPLATES,
+					'single-product',
+					array(
+						'offers'   => array(
+							array(
+								'rules_to_display'         => 'products',
+								'min_quantity'             => 2,
+								'product_ids'              => $product_ids[0],
+								'quantity'                 => 1,
+								'discount'                 => 10,
+								'discount_type'            => 'percentage',
+								'customer_get_product_ids' => $product_ids[1],
+								'total_discount'           => 2.8,
+							),
 						),
+						'nonce'    => '',
+						'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
+						'product'  => $product_ids[0],
 					),
-					'nonce'    => '',
-					'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
-					'product'  => '26',
-				),
-				true
-			) );
-
+					true
+				) );
+			} else {
+				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
+			}
 			// Title Text.
 			$preview->set_text( 'title', '.merchant-bogo-title' );
 
@@ -226,7 +238,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	/**
 	 * Custom CSS.
 	 *
-	 * @param string $css
+	 * @param string              $css
 	 * @param Merchant_Custom_CSS $custom_css
 	 *
 	 * @return string
