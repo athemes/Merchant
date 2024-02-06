@@ -366,7 +366,7 @@
           });
         });
         $content.find('.layout').each(function (index) {
-          // We've added *refreshed* tp the attribute name in the prior loop as refreshing the numbers in the attribute can cause
+          // We've added *refreshed* to the attribute name in the prior loop as refreshing the numbers in the attribute can cause
           // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
           $(this).find('input, select').each(function () {
             $(this).attr('name', $(this).attr('name').replace('*refreshed*', ''));
