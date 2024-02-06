@@ -29,8 +29,8 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Display On', 'merchant' ),
 							'options' => array(
-								'products'   => esc_html__( 'Selected products', 'merchant' ),
-								'categories' => esc_html__( 'Products from categories', 'merchant' ),
+								'products'   => esc_html__( 'Specific products', 'merchant' ),
+								'categories' => esc_html__( 'Product categories', 'merchant' ),
 							),
 							'default' => 'products',
 						),
