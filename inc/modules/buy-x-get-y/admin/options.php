@@ -22,7 +22,7 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
 				'offer-details' => array(
-					'title'  => esc_html__( 'Bundle rules', 'merchant' ),
+					'title'  => esc_html__( 'Offer rules', 'merchant' ),
 					'fields' => array(
 						array(
 							'id'      => 'rules_to_display',
@@ -39,8 +39,7 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'products_selector',
 							'title'       => esc_html__( 'Products', 'merchant' ),
 							'multiple'    => true,
-							'desc'        => esc_html__( 'Select products that will contain the bundle.',
-								'merchant' ),
+							'desc'        => esc_html__( 'Select the products that will show the offer', 'merchant' ),
 							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
@@ -51,7 +50,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select product categories that will contain the bundle.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
 							'condition' => array( 'rules_to_display', '==', 'categories' ),
 						),
 						array(
@@ -60,7 +59,7 @@ Merchant_Admin_Options::create( array(
 							'min'     => 0,
 							'step'    => 1,
 							'title'   => esc_html__( 'Customer Buys Quantity', 'merchant' ),
-							'desc'        => esc_html__( 'The minimum quantity that the customers should purchase to get the bundle.', 'merchant' ),
+							'desc'        => esc_html__( 'The minimum quantity that customers should purchase to get the offer', 'merchant' ),
 							'default' => 1,
 						),
 						array(
@@ -86,7 +85,7 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'products_selector',
 							'title'       => esc_html__( 'Customer Gets', 'merchant' ),
 							'multiple'    => false,
-							'desc'        => esc_html__( 'Select products that will customer gets when they purchase quantity.',
+							'desc'        => esc_html__( 'Select the products that the customer will get when they purchase the minimum required quantity.',
 								'merchant' ),
 						),
 						array(
