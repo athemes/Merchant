@@ -47,7 +47,7 @@
 
           // Open widget immediately if open, else with slight delay for slide-in effect
           if (enable_auto_slide_in) {
-            isVisible ? showWidget() : setTimeout(showWidget, 100);
+            isVisible ? showWidget() : setTimeout(showWidget, 66);
           }
         },
         error: function error(_error) {
