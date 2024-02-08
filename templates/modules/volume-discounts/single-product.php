@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="merchant-volume-discounts">
     <div class="merchant-volume-discounts-title"><?php echo esc_html( Merchant_Translator::translate( $args['settings']['table_title'] ) ) ?></div>
 	<?php foreach ( $args['discount_tiers'] as $discount_tier ) :
-		$discount = $discount_tier['layout'] === 'percentage_discount'
+		$discount = $discount_tier['discount_type'] === 'percentage_discount'
 			?  ( $args['product_price'] * $discount_tier['discount'] ) / 100
 			: $discount_tier['discount'];
 
