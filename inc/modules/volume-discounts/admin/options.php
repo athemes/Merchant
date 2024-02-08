@@ -28,6 +28,86 @@ Merchant_Admin_Options::create( array(
 ) );
 
 Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Offer', 'merchant' ),
+	'module' => Merchant_Volume_Discounts::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'           => 'offers',
+			'type'         => 'flexible_content',
+			'button_label' => esc_html__( 'Add New Tier', 'merchant' ),
+			'sorting'      => false,
+			'layouts'      => array(
+				'offer-details' => array(
+					'title'  => esc_html__( 'Create Discount Tiers', 'merchant' ),
+					'fields' => array(
+						array(
+							'id'      => 'rules_to_display',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Apply On', 'merchant' ),
+							'options' => array(
+								'products'   => esc_html__( 'Specific product', 'merchant' ),
+								'categories' => esc_html__( 'Product categories', 'merchant' ),
+							),
+							'default' => 'products',
+						),
+						array(
+							'id'        => 'product_id',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Select product', 'merchant' ),
+							'multiple'  => false,
+							'desc'      => esc_html__( 'Select the product that the customer will get a discount on when they purchase the minimum required quantity.',
+								'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'products' ),
+						),
+						array(
+							'id'          => 'category_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'      => 'quantity',
+							'type'    => 'number',
+							'title'   => esc_html__( 'Quantity', 'merchant' ),
+							'default' => 2,
+						),
+						array(
+							'id'      => 'discount',
+							'type'    => 'number',
+							'title'   => esc_html__( 'Discount', 'merchant' ),
+							'default' => 10,
+						),
+						array(
+							'id'      => 'discount_type',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Discount type', 'merchant' ),
+							'options' => array(
+								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
+								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
+							),
+							'default' => 'percentage',
+						),
+					),
+				),
+			),
+			'default'      => array(
+				array(
+					'layout'        => 'offer-details',
+					'min_quantity'  => 2,
+					'discount'      => 10,
+					'discount_type' => 'percentage_discount',
+				),
+			),
+		),
+	),
+) );
+
+Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Text Formatting Settings', 'merchant' ),
 	'module' => Merchant_Volume_Discounts::MODULE_ID,
 	'fields' => array(
@@ -98,7 +178,7 @@ Merchant_Admin_Options::create( array(
 			'options' => array(
 				'lighter' => esc_html__( 'Light', 'merchant' ),
 				'normal'  => esc_html__( 'Normal', 'merchant' ),
-				'bold' => esc_html__( 'Bold', 'merchant' ),
+				'bold'    => esc_html__( 'Bold', 'merchant' ),
 			),
 			'default' => 'normal',
 		),
@@ -171,7 +251,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
 				'merchant' ),
 		),
 		array(
