@@ -5,40 +5,59 @@
 
 'use strict';
 
-var merchant = merchant || {};
+const merchant = merchant || {};
 
 merchant.modules = merchant.modules || {};
 
-(function($) {
+( function( $ ) {
 
 	merchant.modules.inactiveTabMessage = {
 
 		init: function() {
+			const { setting } = merchant;
 
-		  var count = window.merchant.setting.inactive_tab_cart_count;
+			const {
+				inactive_tab_message: noItemsMessage,
+				inactive_tab_abandoned_message: itemsInCartMessage,
+				inactive_tab_enable_blink: shouldBlink,
+			} = setting || {}
 
-			$( document.body ).on('added_to_cart removed_from_cart', function( event, data ) {
+			let { inactive_tab_cart_count: cartCount } = setting || {};
+
+			$( document.body ).on( 'added_to_cart removed_from_cart updated_wc_div', function( event, data ) {
 				if ( data && data['.merchant_cart_count'] !== undefined ) {
-					count = data['.merchant_cart_count'];
-				}
-			});
-			
-			var initial = document.title;
-			var message;
-
-			document.addEventListener('visibilitychange', function() {
-				if ( document.hidden ) {
-					var message    = ( count ) ? window.merchant.setting.inactive_tab_abandoned_message : window.merchant.setting.inactive_tab_messsage;
-					document.title = message.replace("&#039;", "'");
+					cartCount = data['.merchant_cart_count'];
 				} else {
-					document.title = initial;
+					// Cart page
+					cartCount = $( '.woocommerce-cart-form tr.cart_item' ).length
 				}
-			});
+			} );
 
+			const defaultTitle = document.title;
+			let blinkTimeout;
+
+			document.addEventListener( 'visibilitychange', () => {
+				const modifiedTitle = cartCount ? itemsInCartMessage : noItemsMessage;
+				if ( ! modifiedTitle ) {
+					return;
+				}
+
+				const isTabActive = ! document.hidden;
+
+				// Change the title.
+				document.title = isTabActive ? defaultTitle : modifiedTitle.replaceAll( '&#039;', "'" );
+
+				// Blink the title when tab is inactive.
+				if ( shouldBlink && ! isTabActive ) {
+					blinkTimeout = setInterval( () => {
+						document.title = document.title === modifiedTitle ? defaultTitle : modifiedTitle;
+					}, 500 );
+				} else {
+					clearInterval( blinkTimeout );
+				}
+			} );
 		},
-
 	};
 
 	merchant.modules.inactiveTabMessage.init();
-
-}(jQuery));
+}( jQuery ) );

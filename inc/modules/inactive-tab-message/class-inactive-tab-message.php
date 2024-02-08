@@ -151,13 +151,18 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 	public function localize_script( $setting ) {
 		$module_settings = $this->get_module_settings();
 
-		$setting['inactive_tab_messsage']          = Merchant_Translator::translate( $module_settings[ 'message' ] );
+		$setting['inactive_tab_message']           = Merchant_Translator::translate( $module_settings[ 'message' ] );
 		$setting['inactive_tab_abandoned_message'] = Merchant_Translator::translate( $module_settings[ 'abandoned_message' ] );
 		$setting['inactive_tab_cart_count']        = '0';
-		
+
 		if ( function_exists( 'WC' ) ) {
 			$setting['inactive_tab_cart_count'] = WC()->cart->get_cart_contents_count();
 		}
+
+		$enable_blink = Merchant_Translator::translate( $module_settings[ 'enable_blink' ] );
+		$enable_blink = is_null( $enable_blink ) ? true : $enable_blink;
+
+		$setting['inactive_tab_enable_blink'] = (bool) $enable_blink;
 		
 		return $setting;
 	}
