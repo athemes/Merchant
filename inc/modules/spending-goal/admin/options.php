@@ -64,7 +64,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'enable_auto_slide_in',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Enable Auto Slide in', 'merchant' ),
+			'title'   => esc_html__( 'Enable Auto Slide In', 'merchant' ),
 			'desc'    => esc_html__( 'This will make the widget slide in after a product is added to the cart.', 'merchant' ),
 			'default' => 1,
 		),
