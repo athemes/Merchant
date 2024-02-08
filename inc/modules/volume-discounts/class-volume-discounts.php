@@ -261,8 +261,8 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					array(
 						'settings'       => $settings,
 						'discount_tiers' => array(
-							array( 'quantity' => 10, 'discount' => 5, 'layout' => 'percentage_discount' ),
-							array( 'quantity' => 20, 'discount' => 10, 'layout' => 'percentage_discount' ),
+							array( 'quantity' => 10, 'discount' => 5, 'discount_type' => 'percentage_discount' ),
+							array( 'quantity' => 20, 'discount' => 10, 'discount_type' => 'percentage_discount' ),
 						),
 						'product_price'  => 20,
 					)
