@@ -33,12 +33,5 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( '✋ You left something in the cart', 'merchant' ),
 		),
 
-		array(
-			'id'      => 'enable_blink',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Enable Blinking', 'merchant' ),
-			'desc'    => esc_html__( 'This will make the title toggle between the specified message and the default one, increasing user attention.', 'merchant' ),
-			'default' => 1,
-		),
 	),
 ) );

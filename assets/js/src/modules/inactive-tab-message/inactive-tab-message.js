@@ -16,11 +16,7 @@ merchant.modules = merchant.modules || {};
 		init: function() {
 			const { setting } = merchant;
 
-			const {
-				inactive_tab_message: noItemsMessage,
-				inactive_tab_abandoned_message: itemsInCartMessage,
-				inactive_tab_enable_blink: shouldBlink,
-			} = setting || {}
+			const { inactive_tab_message: noItemsMessage, inactive_tab_abandoned_message: hasItemsMessage } = setting || {}
 
 			let { inactive_tab_cart_count: cartCount } = setting || {};
 
@@ -34,27 +30,15 @@ merchant.modules = merchant.modules || {};
 			} );
 
 			const defaultTitle = document.title;
-			let blinkTimeout;
 
 			document.addEventListener( 'visibilitychange', () => {
-				const modifiedTitle = cartCount ? itemsInCartMessage : noItemsMessage;
+				const modifiedTitle = cartCount ? hasItemsMessage : noItemsMessage;
 				if ( ! modifiedTitle ) {
 					return;
 				}
 
-				const isTabActive = ! document.hidden;
-
 				// Change the title.
-				document.title = isTabActive ? defaultTitle : modifiedTitle.replaceAll( '&#039;', "'" );
-
-				// Blink the title when tab is inactive.
-				if ( shouldBlink && ! isTabActive ) {
-					blinkTimeout = setInterval( () => {
-						document.title = document.title === modifiedTitle ? defaultTitle : modifiedTitle;
-					}, 500 );
-				} else {
-					clearInterval( blinkTimeout );
-				}
+				document.title = document.hidden ? modifiedTitle.replaceAll( '&#039;', "'" ) : defaultTitle;
 			} );
 		},
 	};
