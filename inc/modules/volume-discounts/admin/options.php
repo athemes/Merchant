@@ -47,6 +47,7 @@ Merchant_Admin_Options::create( array(
 							'options' => array(
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
 								'categories' => esc_html__( 'Product categories', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
 							),
 							'default' => 'products',
 						),
