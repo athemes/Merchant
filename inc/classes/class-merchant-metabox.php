@@ -215,18 +215,18 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				return;
 			}
 
-			$metabox_title = esc_html__( 'Merchant Options', 'merchant' );
+			$metabox_title = esc_html__( 'Options', 'merchant' );
 			switch ( $post_type ) {
 				case 'post':
-					$metabox_title = esc_html__( 'Merchant Post Options', 'merchant' );
+					$metabox_title = esc_html__( 'Post Options', 'merchant' );
 					break;
 
 				case 'page':
-					$metabox_title = esc_html__( 'Merchant Page Options', 'merchant' );
+					$metabox_title = esc_html__( 'Page Options', 'merchant' );
 					break;
 
 				case 'product':
-					$metabox_title = esc_html__( 'Merchant Product Options', 'merchant' );
+					$metabox_title = esc_html__( 'Product Options', 'merchant' );
 					break;
 			}
 
@@ -236,12 +236,14 @@ if ( ! class_exists( 'Merchant_Metabox' ) ) {
 				unset( $types['athemes_hf'] );
 			}
 
+			$title_prefix = ! defined( 'MERCHANT_AWL_ACTIVE' ) ? esc_html__( 'Merchant ', 'merchant' ) : '';
+
 			/**
 			 * Hook: merchant_metabox_title
 			 *
 			 * @since 1.0
 			 */
-			$metabox_title = apply_filters( 'merchant_metabox_title', $metabox_title, $post_type );
+			$metabox_title = apply_filters( 'merchant_metabox_title', $title_prefix . $metabox_title, $post_type );
 
 			add_meta_box( 'merchant_metabox', $metabox_title, array( $this, 'render_metabox_content' ), $types, 'normal', 'low' );
 		}

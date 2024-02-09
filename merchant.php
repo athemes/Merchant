@@ -60,7 +60,7 @@ class Merchant {
 	 */
 	public function __construct() {
 
-		// aThemes White Label Compatibility
+		// aThemes White Label Compatibility.
 		if ( function_exists( 'athemes_wl_get_data' ) ) {
 			$merchant_awl_data = athemes_wl_get_data();
 
