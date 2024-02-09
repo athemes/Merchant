@@ -196,8 +196,8 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 */
 		public function footer_internal_scripts() {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : ''; 
-			$items_href  = array(
+			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : ''; 
+			$nth_child_map  = array(
 				'admin.php?page=merchant' => 3,
 				'admin.php?page=merchant&section=modules' => 4,
 				'admin.php?page=merchant&section=settings' => 5,
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					display: none;
 				}
 
-				#adminmenu .toplevel_page_merchant .wp-submenu li:nth-child(<?php echo absint( $items_href[ $request_uri ] ); ?>) a {
+				#adminmenu .toplevel_page_merchant .wp-submenu li:nth-child(<?php echo absint( $nth_child_map[ $request_uri ] ); ?>) a {
 					color: #FFF;
 				}
 				
