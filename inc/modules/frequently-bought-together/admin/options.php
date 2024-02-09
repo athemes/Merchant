@@ -66,7 +66,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'no_variation_selected_text_has_no_discount',
 			'type'    => 'text',
 			'title'   => __( 'No variation selected text (no discount)', 'merchant' ),
-			'desc'    => __( 'This text will be displayed whether the bundle has 0% discount and contains a variable product.', 'merchant' ),
+			'desc'    => __( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
 			'default' => __( 'Please select an option to see the total price.', 'merchant' ),
 		),
 
