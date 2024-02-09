@@ -158,7 +158,7 @@ class Merchant_Inactive_Tab_Message extends Merchant_Add_Module {
 		if ( function_exists( 'WC' ) ) {
 			$setting['inactive_tab_cart_count'] = WC()->cart->get_cart_contents_count();
 		}
-		
+
 		return $setting;
 	}
 
