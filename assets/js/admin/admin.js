@@ -325,9 +325,22 @@
             });
           }
         });
-
+        this.updateLayoutTitle();
         // Events.
         this.events();
+      },
+      updateLayoutTitle: function updateLayoutTitle() {
+        // Update the title for all layout header.
+        $('.merchant-flexible-content .layout').each(function () {
+          var title = $(this).find('.layout-title[data-title-field]');
+          if (title.length) {
+            var input = $(this).find('.layout-body .merchant-field-' + title.data('title-field') + ' input');
+            input.on('change keyup', function () {
+              title.text($(this).val());
+            });
+            title.text(input.val());
+          }
+        });
       },
       events: function events() {
         var self = this;
@@ -366,6 +379,7 @@
             parentDiv.find('.merchant-flexible-content').accordion("refresh");
           }
           $(document).trigger('merchant-flexible-content-added', [$layout]);
+          self.updateLayoutTitle();
         });
         $('.customize-control-flexible-content-delete').click(function (event) {
           event.preventDefault();

@@ -409,9 +409,23 @@
                     }
 
                 });
-
+                this.updateLayoutTitle();
                 // Events.
                 this.events();
+            },
+
+            updateLayoutTitle: function () {
+                // Update the title for all layout header.
+                $('.merchant-flexible-content .layout').each(function () {
+                    let title = $(this).find('.layout-title[data-title-field]');
+                    if (title.length) {
+                        let input = $(this).find('.layout-body .merchant-field-' + title.data('title-field') + ' input');
+                        input.on('change keyup', function () {
+                            title.text($(this).val());
+                        });
+                        title.text(input.val());
+                    }
+                });
             },
 
             events: function () {
@@ -462,6 +476,8 @@
                     }
 
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
+
+                    self.updateLayoutTitle()
                 });
 
                 $('.customize-control-flexible-content-delete').click(function (event) {

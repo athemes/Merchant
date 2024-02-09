@@ -468,7 +468,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					printf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
 				}
 
-				echo '<div class="merchant-module-page-setting-field-inner">';
+				echo '<div class="merchant-module-page-setting-field-inner merchant-field-' . esc_attr( $id ) . '">';
 				if ( method_exists( 'Merchant_Admin_Options', $type ) ) {
 					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value );
 				} else {
@@ -1524,7 +1524,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						echo esc_attr( $layout_type ) ?>">
                             <div class="layout-header">
                                 <div class="layout-count">1</div>
-                                <div class="layout-title">
+                                <div class="layout-title"<?php
+	                            if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
+		                            echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+	                            } ?>>
 									<?php
 									echo esc_html( $layout['title'] ) ?>
                                 </div>
@@ -1582,7 +1585,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                             <div class="layout-header">
                                 <div class="layout-count"><?php
 									echo absint( $option_key + 1 ) ?></div>
-                                <div class="layout-title">
+                                <div class="layout-title"<?php
+                                if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
+	                                echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+                                } ?>>
 									<?php
 									echo esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) ?>
                                 </div>
