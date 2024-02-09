@@ -23,8 +23,16 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
 				'offer-details' => array(
-					'title'  => esc_html__( 'Offer rules', 'merchant' ),
-					'fields' => array(
+					'title'       => esc_html__( 'Offer rules', 'merchant' ),
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
+					'fields'      => array(
+						array(
+							'id'      => 'offer-title',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Offer title', 'merchant' ),
+							'desc'    => esc_html__( 'Set a name for the offer', 'merchant' ),
+							'default' => esc_html__( 'Offer rules', 'merchant' ),
+						),
 						array(
 							'id'      => 'rules_to_display',
 							'type'    => 'select',
