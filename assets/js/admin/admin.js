@@ -293,17 +293,37 @@
 
         // Update the values for all our input fields and initialise the sortable repeater.
         $('.merchant-flexible-content-control').each(function () {
-          var $content = $(this).find('.merchant-flexible-content');
-          $content.sortable({
-            axis: 'y',
-            cursor: 'move',
-            helper: 'original',
-            handle: '.customize-control-flexible-content-move',
-            stop: function stop(event, ui) {
-              $content.trigger('merchant.sorted');
-              self.refreshNumbers($content);
-            }
-          });
+          var hasAccordion = $(this).hasClass('has-accordion'),
+            $content = $(this).find('.merchant-flexible-content');
+          if (hasAccordion) {
+            $content.accordion({
+              collapsible: true,
+              header: "> div > .layout-header",
+              heightStyle: "content"
+            }).sortable({
+              axis: 'y',
+              cursor: 'move',
+              helper: 'original',
+              handle: '.customize-control-flexible-content-move',
+              stop: function stop(event, ui) {
+                $content.trigger('merchant.sorted');
+                self.refreshNumbers($content);
+                $content.accordion("refresh");
+              }
+            });
+          } else {
+            $content.sortable({
+              axis: 'y',
+              cursor: 'move',
+              helper: 'original',
+              handle: '.customize-control-flexible-content-move',
+              stop: function stop(event, ui) {
+                $content.trigger('merchant.sorted');
+                self.refreshNumbers($content);
+                $content.accordion("refresh");
+              }
+            });
+          }
         });
 
         // Events.
@@ -340,6 +360,11 @@
           if ($layout.find('.merchant-module-page-setting-field-select_ajax').length) {
             initSelectAjax($layout.find('.merchant-module-page-setting-field-select_ajax'));
           }
+          var parentDiv = $(this).closest('.merchant-flexible-content-control'),
+            hasAccordion = parentDiv.hasClass('has-accordion');
+          if (hasAccordion) {
+            parentDiv.find('.merchant-flexible-content').accordion("refresh");
+          }
           $(document).trigger('merchant-flexible-content-added', [$layout]);
         });
         $('.customize-control-flexible-content-delete').click(function (event) {
@@ -352,6 +377,11 @@
           }
           self.refreshNumbers($content);
           $(document).trigger('merchant-flexible-content-deleted', [$item]);
+          var parentDiv = $(this).closest('.merchant-flexible-content-control'),
+            hasAccordion = parentDiv.hasClass('has-accordion');
+          if (hasAccordion) {
+            parentDiv.find('.merchant-flexible-content').accordion("refresh");
+          }
         });
       },
       refreshNumbers: function refreshNumbers($content) {
@@ -367,6 +397,8 @@
         });
         $content.find('.layout').each(function (index) {
           $(this).find('input, select').each(function () {
+            // We've added *refreshed* to the attribute name in the prior loop as refreshing the numbers in the attribute can cause
+            // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
             var nameAttr = $(this).attr('name');
             if (nameAttr) {
               // Check if name attribute exists

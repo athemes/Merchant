@@ -375,18 +375,39 @@
 
                 // Update the values for all our input fields and initialise the sortable repeater.
                 $('.merchant-flexible-content-control').each(function () {
-                    var $content = $(this).find('.merchant-flexible-content');
+                    let hasAccordion = $(this).hasClass('has-accordion'),
+                        $content = $(this).find('.merchant-flexible-content');
 
-                    $content.sortable({
-                        axis: 'y',
-                        cursor: 'move',
-                        helper: 'original',
-                        handle: '.customize-control-flexible-content-move',
-                        stop: function (event, ui) {
-                            $content.trigger('merchant.sorted')
-                            self.refreshNumbers($content);
-                        }
-                    });
+                    if (hasAccordion) {
+                        $content.accordion({
+                            collapsible: true,
+                            header: "> div > .layout-header",
+                            heightStyle: "content"
+                        }).sortable({
+                            axis: 'y',
+                            cursor: 'move',
+                            helper: 'original',
+                            handle: '.customize-control-flexible-content-move',
+                            stop: function (event, ui) {
+                                $content.trigger('merchant.sorted')
+                                self.refreshNumbers($content);
+                                $content.accordion("refresh");
+                            }
+                        });
+                    } else {
+                        $content.sortable({
+                            axis: 'y',
+                            cursor: 'move',
+                            helper: 'original',
+                            handle: '.customize-control-flexible-content-move',
+                            stop: function (event, ui) {
+                                $content.trigger('merchant.sorted')
+                                self.refreshNumbers($content);
+                                $content.accordion("refresh");
+                            }
+                        });
+                    }
+
                 });
 
                 // Events.
@@ -433,6 +454,13 @@
                     if ($layout.find('.merchant-module-page-setting-field-select_ajax').length) {
                         initSelectAjax($layout.find('.merchant-module-page-setting-field-select_ajax'))
                     }
+
+                    let parentDiv = $(this).closest('.merchant-flexible-content-control'),
+                        hasAccordion = parentDiv.hasClass('has-accordion')
+                    if (hasAccordion) {
+                        parentDiv.find('.merchant-flexible-content').accordion("refresh");
+                    }
+
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
                 });
 
@@ -451,6 +479,12 @@
 
                     self.refreshNumbers($content);
                     $(document).trigger('merchant-flexible-content-deleted', [$item]);
+
+                    let parentDiv = $(this).closest('.merchant-flexible-content-control'),
+                        hasAccordion = parentDiv.hasClass('has-accordion')
+                    if (hasAccordion) {
+                        parentDiv.find('.merchant-flexible-content').accordion("refresh");
+                    }
                 });
             },
 

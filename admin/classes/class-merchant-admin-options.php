@@ -1504,6 +1504,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( $settings['sorting'] === false ) {
 				$classes[] = 'disable-sorting';
 			}
+
+			if ( $settings['accordion'] === true ) {
+				$classes[] = 'has-accordion';
+			}
 			?>
             <div class="<?php
 			echo esc_attr( implode( ' ', $classes ) ); ?>"

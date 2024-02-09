@@ -2308,6 +2308,12 @@ body.merchant-module-disabled {
     }
   }
 
+  &.has-accordion{
+    .layout-header{
+      cursor: pointer;
+    }
+  }
+
   .layouts {
     display: none;
   }

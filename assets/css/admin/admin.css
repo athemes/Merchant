@@ -3426,6 +3426,9 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
 .merchant-flexible-content-control.table-style .layout .layout-body .merchant-module-page-setting-field-title {
   display: none;
 }
+.merchant-flexible-content-control.has-accordion .layout-header {
+  cursor: pointer;
+}
 .merchant-flexible-content-control .layouts {
   display: none;
 }
