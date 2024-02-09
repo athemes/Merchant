@@ -36,6 +36,7 @@ Merchant_Admin_Options::create( array(
 			'type'         => 'flexible_content',
 			'button_label' => esc_html__( 'Add New Tier', 'merchant' ),
 			'sorting'      => false,
+			'accordion'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'  => esc_html__( 'Create Discount Tiers', 'merchant' ),

@@ -18,6 +18,7 @@ Merchant_Admin_Options::create( array(
 			'id'           => 'rules',
 			'type'         => 'flexible_content',
 			'sorting'      => true,
+			'accordion'    => true,
 			'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
