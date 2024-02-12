@@ -91,17 +91,24 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['title'] ) ) {
-			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['buy_label'] ) ) {
-			Merchant_Translator::register_string( $settings['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['get_label'] ) ) {
-			Merchant_Translator::register_string( $settings['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['button_text'] ) ) {
-			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+		if ( ! empty( $settings['rules'] ) ) {
+			foreach ( $settings['rules'] as $rule ) {
+				if ( ! empty( $rule['offer-title'] ) ) {
+					Merchant_Translator::register_string( $rule['offer-title'], esc_html__( 'Campaign title', 'merchant' ) );
+				}
+				if ( ! empty( $rule['title'] ) ) {
+					Merchant_Translator::register_string( $rule['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
+				}
+				if ( ! empty( $rule['buy_label'] ) ) {
+					Merchant_Translator::register_string( $rule['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
+				}
+				if ( ! empty( $rule['get_label'] ) ) {
+					Merchant_Translator::register_string( $rule['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
+				}
+				if ( ! empty( $rule['button_text'] ) ) {
+					Merchant_Translator::register_string( $rule['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+				}
+			}
 		}
 	}
 
@@ -110,7 +117,8 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 *
 	 * @return void
 	 */
-	public function enqueue_admin_styles() {
+	public
+	function enqueue_admin_styles() {
 		if ( $this->is_module_settings_page() ) {
 			// Module styling.
 			wp_enqueue_style(
@@ -138,7 +146,11 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
-	public function render_admin_preview( $preview, $module ) {
+	public
+	function render_admin_preview(
+		$preview,
+		$module
+	) {
 		if ( $module === self::MODULE_ID ) {
 			// get 2 simple wc products ids
 			$product_ids = wc_get_products(
@@ -243,7 +255,11 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 *
 	 * @return string
 	 */
-	public function custom_css( $css, $custom_css ) {
+	public
+	function custom_css(
+		$css,
+		$custom_css
+	) {
 		// Title Font Size.
 		$css .= $custom_css->get_variable_css( $this->module_id, 'title_font_size', 16, '.merchant-bogo-title', '--merchant-font-size', 'px' );
 

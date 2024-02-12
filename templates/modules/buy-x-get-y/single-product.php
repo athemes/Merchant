@@ -15,15 +15,18 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 $product  = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( wc_get_product( $args['product'] ) ) : wc_get_product();
 ?>
 <div class="merchant-bogo">
-    <p class="merchant-bogo-title">
-		<?php
-		echo isset( $settings['title'] ) ? esc_html( Merchant_Translator::translate( $settings['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
-    </p>
     <div class="merchant-bogo-offers" data-nonce="<?php
 	echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php
 	echo esc_url( wc_get_cart_url() ); ?>">
 		<?php
 		foreach ( $args['offers'] as $key => $offer ): ?>
+            <p class="merchant-bogo-title" style="<?php
+            echo isset( $offer['title_font_weight'] ) ? esc_attr( 'font-weight: ' . $offer['title_font_weight'] . ';' ) : '';
+            echo isset( $offer['title_font_size'] ) ? esc_attr( 'font-size: ' . $offer['title_font_size'] . 'px;' ) : '';
+            echo isset( $offer['title_text_color'] ) ? esc_attr( 'color: ' . $offer['title_text_color'] . ';' ) : '';?>">
+				<?php
+				echo isset( $offer['title'] ) ? esc_html( Merchant_Translator::translate( $offer['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
+            </p>
 			<?php
 			$buy_product = $offer['customer_get_product_ids'] ? Merchant_Pro_Buy_X_Get_Y::product_args( wc_get_product( $offer['customer_get_product_ids'] ) ) : null;
 			if ( isset( $product['is_purchasable'] ) && ! $product['is_purchasable'] ) {
@@ -33,10 +36,12 @@ $product  = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( 
 			echo esc_attr( $product['id'] ) ?>" data-offer="<?php
 			echo esc_attr( $key ); ?>">
                 <div class="merchant-bogo-product-x">
-                    <div class="merchant-bogo-product-label merchant-bogo-product-buy-label">
+                    <div class="merchant-bogo-product-label merchant-bogo-product-buy-label" style="<?php
+					echo isset( $offer['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['label_bg_color'] . ';' ) : '';
+                    echo isset( $offer['label_text_color'] ) ? esc_attr( 'color: ' . $offer['label_text_color'] . ';' ) : '';?>">
 						<?php
-						echo isset( $settings['buy_label'] )
-							? esc_html( str_replace( '{quantity}', $offer['min_quantity'], Merchant_Translator::translate( $settings['buy_label'] ) ) )
+						echo isset( $offer['buy_label'] )
+							? esc_html( str_replace( '{quantity}', $offer['min_quantity'], Merchant_Translator::translate( $offer['buy_label'] ) ) )
 							: esc_html(
 							/* Translators: 1. quantity */
 								sprintf( __( 'Buy %s', 'merchant' ), $offer['min_quantity'] )
@@ -57,17 +62,23 @@ $product  = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( 
 							echo wp_kses( $product['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                         </div>
                     </div>
-                    <div class="merchant-bogo-arrow">→</div>
+                    <div class="merchant-bogo-arrow" style="<?php
+                    echo isset( $offer['arrow_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['arrow_bg_color'] . ';' ) : '';
+                    echo isset( $offer['arrow_text_color'] ) ? esc_attr( 'color: ' . $offer['arrow_text_color'] . ';' ) : '';?>">→</div>
                 </div>
-                <div class="merchant-bogo-product-y">
+                <div class="merchant-bogo-product-y" style="<?php
+                echo isset( $offer['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['offer_border_color'] . ';' ) : '';
+                echo isset( $offer['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['offer_border_radius'] . 'px;' ) : '';?>"">
                     <form class="merchant-bogo-form" data-product="<?php
 					echo esc_attr( $buy_product['id'] ); ?>">
-                        <div class="merchant-bogo-product-label merchant-bogo-product-get-label">
+                        <div class="merchant-bogo-product-label merchant-bogo-product-get-label" style="<?php
+                        echo isset( $offer['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['label_bg_color'] . ';' ) : '';
+                        echo isset( $offer['label_text_color'] ) ? esc_attr( 'color: ' . $offer['label_text_color'] . ';' ) : '';?>">
 							<?php
 							$discount = $offer['discount_type'] === 'percentage'
 								? $offer['discount'] . '%'
 								: wc_price( $offer['discount'] );
-							echo isset( $settings['get_label'] )
+							echo isset( $offer['get_label'] )
 								? wp_kses( str_replace(
 									array(
 										'{quantity}',
@@ -77,7 +88,7 @@ $product  = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( 
 										$offer['quantity'],
 										$discount,
 									),
-									Merchant_Translator::translate( $settings['get_label'] )
+									Merchant_Translator::translate( $offer['get_label'] )
 								), merchant_kses_allowed_tags( array( 'bdi' ) ) )
 								: wp_kses(
 								/* Translators: 1. quantity 2. discount value*/
@@ -135,7 +146,7 @@ $product  = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( 
 							endif; ?>
                             <button type="submit" name="merchant-bogo-add-to-cart" value="97" class="button alt wp-element-button merchant-bogo-add-to-cart">
 								<?php
-								echo isset( $settings['button_text'] ) ? esc_html( Merchant_Translator::translate( $settings['button_text'] ) )
+								echo isset( $offer['button_text'] ) ? esc_html( Merchant_Translator::translate( $offer['button_text'] ) )
 									: esc_html__( 'Add To Cart', 'merchant' ); ?>
                             </button>
                             <div class="merchant-bogo-offer-error"></div>
