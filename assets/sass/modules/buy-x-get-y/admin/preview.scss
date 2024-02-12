@@ -9,6 +9,16 @@
   margin: 0 auto;
 }
 
+.merchant-flexible-content-control.buy-x-get-y-style {
+  .layout:not(.active) {
+    border-color: #5c5f62;
+  }
+}
+
+.merchant-bogo-product-y{
+  border: 1px solid;
+}
+
 .rtl {
   .merchant-bogo-arrow {
     right: unset;

@@ -756,6 +756,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// buy x get y
+	{
+		name: 'buyXGetYAdminPreview',
+		src: './assets/js/src/modules/buy-x-get-y/admin/preview.js',
+		destination: './assets/js/modules/buy-x-get-y/admin',
+		file: 'preview'
+	},
+
 	{
 		name: 'productBundlesPreview',
 		src: './assets/js/src/modules/product-bundles/admin/preview.js',

@@ -135,6 +135,14 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				array(),
 				MERCHANT_VERSION
 			);
+
+			wp_enqueue_script(
+				'merchant-preview-' . self::MODULE_ID,
+				MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js',
+				array(),
+				MERCHANT_VERSION,
+				true
+			);
 		}
 	}
 
