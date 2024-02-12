@@ -56,7 +56,7 @@
       $('.merchant-module-question-thank-you-dropdown').addClass('merchant-show');
       window.wp.ajax.post('merchant_module_feedback', {
         subject: $disableModuleTextField.attr('data-subject'),
-        message: $disableModuleTextField.val(),
+        message: message,
         module: $button.closest('.merchant-module-action').find('.merchant-module-page-button-action-activate').data('module'),
         nonce: window.merchant.nonce
       });
