@@ -72,12 +72,6 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		// Add preview box
 		add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
-		// only applies if module is active or module is not active but admin only
-		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() || Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
-			// Custom CSS.
-			add_filter( 'merchant_custom_css', array( $this, 'custom_css' ), 10, 2 );
-		}
-
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
@@ -223,80 +217,11 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 
 			// Button Text
 			$preview->set_text( 'button_text', '.merchant-bogo-add-to-cart' );
-
-			// Title Font Size
-			$preview->set_css( 'title_font_size', '.merchant-bogo-title', '--merchant-font-size', 'px' );
-
-			// Title Font Weight
-			$preview->set_css( 'title_font_weight', '.merchant-bogo-title', '--merchant-font-weight' );
-
-			// Title Text Color
-			$preview->set_css( 'title_text_color', '.merchant-bogo-title', '--merchant-text-color' );
-
-			// Label Background Color
-			$preview->set_css( 'label_bg_color', '.merchant-bogo-product-label', '--merchant-bg-color' );
-
-			// Label Text Color
-			$preview->set_css( 'label_text_color', '.merchant-bogo-product-label', '--merchant-text-color' );
-
-			// Arrow Background Color
-			$preview->set_css( 'arrow_bg_color', '.merchant-bogo-arrow', '--merchant-bg-color' );
-
-			// Arrow Text Color
-			$preview->set_css( 'arrow_text_color', '.merchant-bogo-arrow', '--merchant-text-color' );
-
-			// Offer Border Color
-			$preview->set_css( 'offer_border_color', '.merchant-bogo-product-y', '--merchant-border-color' );
-
-			// Offer Border Radius
-			$preview->set_css( 'offer_border_radius', '.merchant-bogo-product-y', '--merchant-border-radius', 'px' );
 		}
 
 		return $preview;
 	}
 
-	/**
-	 * Custom CSS.
-	 *
-	 * @param string              $css
-	 * @param Merchant_Custom_CSS $custom_css
-	 *
-	 * @return string
-	 */
-	public
-	function custom_css(
-		$css,
-		$custom_css
-	) {
-		// Title Font Size.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_font_size', 16, '.merchant-bogo-title', '--merchant-font-size', 'px' );
-
-		// Title Font Weight.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_font_weight', 'normal', '.merchant-bogo-title', '--merchant-font-weight' );
-
-		// Title Text Color.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_text_color', '#212121', '.merchant-bogo-title', '--merchant-text-color' );
-
-		// Label Background Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'label_bg_color', '#d61313', '.merchant-bogo-product-label', '--merchant-bg-color' );
-
-		// Label Text Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'label_text_color', '#fff', '.merchant-bogo-product-label', '--merchant-text-color' );
-
-		// Arrow Background Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'arrow_bg_color', '#d61313', '.merchant-bogo-arrow', '--merchant-bg-color' );
-
-		// Arrow Text Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'arrow_text_color', '#fff', '.merchant-bogo-arrow', '--merchant-text-color' );
-
-		// Offer Border Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'offer_border_color', '#cccccc', '.merchant-bogo-product-y', '--merchant-border-color' );
-
-		// Offer Border Radius
-		$css .= $custom_css->get_variable_css( $this->module_id, 'offer_border_radius', 5, '.merchant-bogo-product-y', '--merchant-border-radius', 'px' );
-
-		return $css;
-	}
 }
 
 // Initialize the module.

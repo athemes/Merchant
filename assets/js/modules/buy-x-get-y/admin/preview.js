@@ -22,7 +22,6 @@
       arrowTextColor = layout.find('.merchant-field-arrow_text_color input').val(),
       offerBorderColor = layout.find('.merchant-field-offer_border_color input').val(),
       offerBorderRadius = layout.find('.merchant-field-offer_border_radius input.merchant-range-number-input').val();
-    // console.log(layout)
     $('.merchant-bogo-title').css('color', titleTextColor);
     $('.merchant-bogo-product-label').css({
       'background-color': labelBgColor,
@@ -37,9 +36,5 @@
       'border-radius': offerBorderRadius + 'px'
     });
   }
-  setTimeout(function () {
-    // $('.merchant-flexible-content-control .layout').get(0).addClass('active');
-    // console.log( $('.merchant-flexible-content-control .layout:first'))
-  }, 50);
   $('.merchant-flexible-content-control .layout:first-child').addClass('active').trigger('click');
 })(jQuery);
