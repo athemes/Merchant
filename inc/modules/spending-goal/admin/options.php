@@ -27,8 +27,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Based on', 'merchant' ),
-			'desc'    => esc_html__( 'To which the spending goal should be based on. "Cart Subtotal" does not include additional calculated discounts, whereas the "Cart Total" does.',
-				'merchant' ),
+			'desc'    => esc_html__( 'Choose the basis for the spending goal. “Cart Subtotal” excludes additional calculated discounts, whereas “Cart Total” includes them.', 'merchant' ),
 			'options' => array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
@@ -62,8 +61,14 @@ Merchant_Admin_Options::create( array(
 			'desc'    => esc_html__( 'This will be the name of the applied discount on the cart page.', 'merchant' ),
 		),
 
+		array(
+			'id'      => 'enable_auto_slide_in',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Enable Auto Slide In', 'merchant' ),
+			'desc'    => esc_html__( 'This will make the widget slide in after a product is added to the cart.', 'merchant' ),
+			'default' => 1,
+		),
 	),
-
 ) );
 
 // Text Formatting Settings

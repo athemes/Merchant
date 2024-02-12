@@ -128,8 +128,9 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 		public function add_body_class( $classes ) {
 			$theme = wp_get_theme();
 			$theme = ( get_template_directory() !== get_stylesheet_directory() && $theme->parent() ) ? $theme->parent() : $theme;
+			$theme_name = str_replace( ' ', '-', $theme->name );
 
-			$classes[] = 'merchant-theme-' . strtolower( esc_attr( $theme->name ) );
+			$classes[] = 'merchant-theme-' . strtolower( esc_attr( $theme_name ) );
 
 			return $classes;
 		}

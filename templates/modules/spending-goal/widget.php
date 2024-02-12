@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div id="merchant-spending-goal-widget" class="merchant-spending-goal-widget" onclick="document.getElementById('merchant-spending-goal-widget').classList.toggle('active');">
+<div id="merchant-spending-goal-widget" class="merchant-spending-goal-widget js-merchant-spending-goal-widget">
     <div class="merchant-spending-goal-widget-content">
         <div class="merchant-spending-goal-widget-text"><?php echo wp_kses( $args['content'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></div>
         <div class="merchant-spending-goal-widget-progress-bar">
