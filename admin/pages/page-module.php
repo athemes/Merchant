@@ -149,7 +149,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 
                                         <div class="merchant-module-question-answer-form">
                                             <textarea class="merchant-module-question-answer-textarea" data-subject=""></textarea>
-                                            <button class="merchant-module-page-button merchant-module-question-answer-button"><?php esc_html_e( 'Submit', 'merchant' ); ?></button>
+                                            <button class="merchant-module-page-button merchant-module-question-answer-button" disabled><?php esc_html_e( 'Submit', 'merchant' ); ?></button>
                                         </div>
 
                                     </div>

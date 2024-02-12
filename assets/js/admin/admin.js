@@ -39,15 +39,24 @@
         }
       }
     });
-    $('.merchant-module-question-answer-button').on('click', function (e) {
+    var $disableModuleSubmitBtn = $('.merchant-module-question-answer-button');
+    var $disableModuleTextField = $('.merchant-module-question-answer-textarea');
+    $disableModuleTextField.on('input', function () {
+      $disableModuleSubmitBtn.prop('disabled', $(this).val().trim() === '');
+    });
+    $disableModuleSubmitBtn.on('click', function (e) {
       e.preventDefault();
+      var message = $disableModuleTextField.val();
+      if (!message.trim()) {
+        alert('Please provide the required information.');
+        return;
+      }
       var $button = $(this);
-      var $textarea = $('.merchant-module-question-answer-textarea');
       $('.merchant-module-question-answer-dropdown').removeClass('merchant-show');
       $('.merchant-module-question-thank-you-dropdown').addClass('merchant-show');
       window.wp.ajax.post('merchant_module_feedback', {
-        subject: $textarea.data('subject'),
-        message: $textarea.val(),
+        subject: $disableModuleTextField.attr('data-subject'),
+        message: $disableModuleTextField.val(),
         module: $button.closest('.merchant-module-action').find('.merchant-module-page-button-action-activate').data('module'),
         nonce: window.merchant.nonce
       });
@@ -80,6 +89,7 @@
       });
     });
     $('.merchant-module-question-list-dropdown li').on('click', function (e) {
+      $disableModuleSubmitBtn.prop('disabled', $disableModuleTextField.val().trim() === '');
       var $question = $(this);
       var target = $question.data('answer-target');
       var $answer = $('[data-answer-title="' + target + '"]');
