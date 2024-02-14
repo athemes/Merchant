@@ -37,9 +37,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Offered product(s)', 'merchant' ),
 							'options' => array(
+								'all'        => esc_html__( 'Any product', 'merchant' ),
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
 								'categories' => esc_html__( 'Product categories', 'merchant' ),
-								'all'        => esc_html__( 'All products', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -71,7 +71,7 @@ Merchant_Admin_Options::create( array(
 						),
 						array(
 							'id'      => 'discount_type',
-							'type'    => 'select',
+							'type'    => 'radio',
 							'title'   => esc_html__( 'Discount', 'merchant' ),
 							'options' => array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
