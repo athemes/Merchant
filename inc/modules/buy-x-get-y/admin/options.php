@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Buy_X_Get_Y::MODULE_ID,
-	'title'  => esc_html__( 'Rules', 'merchant' ),
+	'title'  => esc_html__( 'BOGO Offers', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'           => 'rules',
@@ -20,7 +20,7 @@ Merchant_Admin_Options::create( array(
 			'sorting'      => true,
 			'accordion'    => true,
 			'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
-			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'button_label' => esc_html__( 'Add New Campaign', 'merchant' ),
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Campaign', 'merchant' ),
@@ -29,14 +29,13 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'offer-title',
 							'type'    => 'text',
-							'title'   => esc_html__( 'Offer title', 'merchant' ),
-							'desc'    => esc_html__( 'Set a name for the offer', 'merchant' ),
+							'title'   => esc_html__( 'Offer name', 'merchant' ),
 							'default' => esc_html__( 'Campaign', 'merchant' ),
 						),
 						array(
 							'id'      => 'rules_to_display',
 							'type'    => 'select',
-							'title'   => esc_html__( 'Display On', 'merchant' ),
+							'title'   => esc_html__( 'Trigger', 'merchant' ),
 							'options' => array(
 								'all'        => esc_html__( 'Any product', 'merchant' ),
 								'products'   => esc_html__( 'Specific products', 'merchant' ),
@@ -103,12 +102,12 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'number',
 							'min'     => 0,
 							'step'    => 1,
-							'title'   => esc_html__( 'Discount Value', 'merchant' ),
+							//'title'   => esc_html__( 'Discount Value', 'merchant' ),
 							'default' => 1,
 						),
 						array(
 							'id'      => 'single_product_placement',
-							'type'    => 'select',
+							'type'    => 'radio',
 							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 							'options' => array(
 								'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
@@ -121,7 +120,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'title',
 							'type'    => 'text',
-							'title'   => esc_html__( 'Title', 'merchant' ),
+							'title'   => esc_html__( 'Offer title', 'merchant' ),
 							'default' => esc_html__( 'Buy One Get One', 'merchant' ),
 						),
 
@@ -150,7 +149,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'title_font_weight',
 							'type'    => 'select',
-							'title'   => esc_html__( 'Title font weight', 'merchant' ),
+							'title'   => esc_html__( 'Font weight', 'merchant' ),
 							'options' => array(
 								'lighter' => esc_html__( 'Light', 'merchant' ),
 								'normal'  => esc_html__( 'Normal', 'merchant' ),
@@ -162,7 +161,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'title_font_size',
 							'type'    => 'range',
-							'title'   => esc_html__( 'Title font size', 'merchant' ),
+							'title'   => esc_html__( 'Font size', 'merchant' ),
 							'min'     => 0,
 							'max'     => 100,
 							'step'    => 1,
