@@ -357,6 +357,11 @@
         $('.customize-control-flexible-content-add-button').click(function (event) {
           event.preventDefault();
           event.stopImmediatePropagation();
+          if ($(this).parent().find('.customize-control-flexible-content-add-list a').length === 1) {
+            // If there is only one layout, trigger click on it.
+            $(this).parent().find('.customize-control-flexible-content-add-list a').trigger('click');
+            return;
+          }
           $(this).parent().find('.customize-control-flexible-content-add-list').toggleClass('active');
         });
         $('.customize-control-flexible-content-add').click(function (event) {
