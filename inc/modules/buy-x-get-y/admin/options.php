@@ -110,8 +110,8 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 							'options' => array(
-								'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
-								'before-cart-form' => esc_html__( 'Before add to cart form', 'merchant' ),
+								'after-cart-form'  => esc_html__( 'After add to cart', 'merchant' ),
+								'before-cart-form' => esc_html__( 'Before add to cart', 'merchant' ),
 							),
 							'default' => 'after-cart-form',
 						),
