@@ -84,7 +84,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'number',
 							'min'     => 0,
 							'step'    => 1,
-							'title'   => esc_html__( 'Customer Gets Quantity', 'merchant' ),
+							'title'   => esc_html__( 'Quantity', 'merchant' ),
 							'default' => 3,
 						),
 						array(
