@@ -3213,6 +3213,23 @@ body.merchant-module-disabled {
     .merchant-search-area {
       margin-bottom: 15px;
       position: relative;
+
+      .merchant-search-field {
+        background-color: #F0F0F0;
+        border: none;
+        border-radius: 3px;
+        padding: 13px 0 13px 40px;
+
+        &::placeholder {
+          font-size: 12px;
+        }
+      }
+
+      .merchant-search-icon {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+      }
     }
 
     .merchant-searching {
@@ -3220,6 +3237,10 @@ body.merchant-module-disabled {
       margin-right: 10px;
       font-style: italic;
       font-size: 11px;
+      position: absolute;
+      top: 13px;
+      right: 0;
+      color: #9d9d9d;
       display: none;
 
       &.active {
@@ -3252,7 +3273,6 @@ body.merchant-module-disabled {
       width: 100%;
       max-width: 100%;
       display: inline-block;
-      padding: 0 3px;
 
       ul li {
         border-radius: 4px;

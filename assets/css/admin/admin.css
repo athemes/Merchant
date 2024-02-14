@@ -4365,11 +4365,41 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   margin-bottom: 15px;
   position: relative;
 }
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field {
+  background-color: #F0F0F0;
+  border: none;
+  border-radius: 3px;
+  padding: 13px 0 13px 40px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field::-webkit-input-placeholder {
+  font-size: 12px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field::-moz-placeholder {
+  font-size: 12px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field:-ms-input-placeholder {
+  font-size: 12px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field::-ms-input-placeholder {
+  font-size: 12px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-field::placeholder {
+  font-size: 12px;
+}
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-search-area .merchant-search-icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
 .merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-searching {
   margin-left: 10px;
   margin-right: 10px;
   font-style: italic;
   font-size: 11px;
+  position: absolute;
+  top: 13px;
+  right: 0;
+  color: #9d9d9d;
   display: none;
 }
 .merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-searching.active {
@@ -4398,7 +4428,6 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   width: 100%;
   max-width: 100%;
   display: inline-block;
-  padding: 0 3px;
 }
 .merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-selected-products-preview ul li {
   border-radius: 4px;
