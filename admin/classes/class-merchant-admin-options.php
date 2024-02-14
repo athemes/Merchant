@@ -914,11 +914,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
             <div class="merchant-products-search-container" data-multiple="<?php
 			echo esc_attr( $multiple ); ?>">
                 <div class="merchant-search-area">
-                    <label><?php
-						esc_html_e( 'Search', 'merchant' ); ?><span class="merchant-searching"><?php
-							esc_html_e( 'Searching...', 'merchant' ); ?></span></label>
                     <input type="text" name="merchant-search-field" placeholder="<?php
-					esc_attr_e( 'Type search keyword...', 'merchant' ); ?>" class="merchant-search-field">
+					esc_attr_e( 'Search products', 'merchant' ); ?>" class="merchant-search-field">
+                    <span class="merchant-searching"><?php
+		                esc_html_e( 'Searching...', 'merchant' ); ?></span>
+                    <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/products-search-icon.svg' ); ?>" class="merchant-search-icon"
+                        alt="<?php esc_attr_e( 'Search icon', 'merchant' ); ?>">
                     <div class="merchant-selections-products-preview"></div>
                 </div>
                 <div class="merchant-selected-products-preview">
@@ -977,8 +978,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			}
 
 			echo '<li class="product-item" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
-			     . esc_attr( $product_sku ) . '" data-id="' . esc_attr( $product_id ) . '" data-price="' . esc_attr( $price ) . '">'
-			     . wp_kses( $product_image, array(
+				. esc_attr( $product_sku ) . '" data-id="' . esc_attr( $product_id ) . '" data-price="' . esc_attr( $price ) . '">'
+				. wp_kses( $product_image, array(
 					'span' => array(
 						'class' => true,
 					),
@@ -994,7 +995,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						'height'   => true,
 					),
 				) ) . '<span class="data">'
-			     . '<span class="name">' . esc_html( $product_name ) . '</span><span class="info">' . wp_kses( $product->get_price_html(), array(
+				. '<span class="name">' . esc_html( $product_name ) . '</span><span class="info">' . wp_kses( $product->get_price_html(), array(
 					'span' => array(
 						'class' => true,
 					),
@@ -1006,7 +1007,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				) ) . '</span> ' . ( $product->is_sold_individually()
 					? '<span class="info">' . esc_html__( 'sold individually', 'merchant' ) . '</span> ' : '' ) . '</span>'
-			     . '<span class="type"><a href="' . esc_url( $edit_link ) . '" target="_blank">' . wp_kses_post( $product_info ) . '</a></span> ' . wp_kses( $remove_btn, array(
+				. '<span class="type"><a href="' . esc_url( $edit_link ) . '" target="_blank">' . wp_kses_post( $product_info ) . '</a></span> ' . wp_kses( $remove_btn, array(
 					'span' => array(
 						'class'      => true,
 						'aria-label' => true,
@@ -1494,6 +1495,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			$settings = wp_parse_args( $settings, array(
 				'sorting' => false,
 				'style'   => 'default',
+                'accordion' => false,
 			) );
 
 			$classes = array(
