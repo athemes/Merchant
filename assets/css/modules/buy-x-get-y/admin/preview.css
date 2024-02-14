@@ -26,6 +26,9 @@
 .merchant-flexible-content-control.buy-x-get-y-style .layout .layout-body .merchant-module-page-setting-field {
   margin-bottom: 20px;
 }
+.merchant-flexible-content-control.buy-x-get-y-style .layout .layout-body .merchant-module-page-setting-field-text input {
+  padding: 12px 8px;
+}
 
 .merchant-bogo-product-y {
   border: 1px solid;
