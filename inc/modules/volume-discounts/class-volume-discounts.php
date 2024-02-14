@@ -267,8 +267,16 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					array(
 						'settings'       => $settings,
 						'discount_tiers' => array(
-							array( 'quantity' => 10, 'discount' => 5, 'discount_type' => 'percentage_discount' ),
-							array( 'quantity' => 20, 'discount' => 10, 'discount_type' => 'percentage_discount' ),
+							array(
+								'quantity'      => 10,
+								'discount'      => 5,
+								'discount_type' => 'percentage_discount',
+								'save_label'    => esc_html__( 'Save {amount}', 'merchant' ),
+								'item_text'     => esc_html__( 'Per item:', 'merchant' ),
+								'total_text'    => esc_html__( 'Total price:', 'merchant' ),
+								'buy_text'      => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
+								'table_title'   => esc_html__( 'Buy more, save more!', 'merchant' ),
+							),
 						),
 						'product_price'  => 20,
 					)
