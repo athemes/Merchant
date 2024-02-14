@@ -103,10 +103,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 
 			// Add preview box
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
-
-			// Admin custom CSS.
-			// The custom CSS should be added here as well due to ensure preview box works properly.
-			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -167,7 +163,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
@@ -204,36 +200,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					'<strong>' . wc_price( 2 ) . '</strong>',
 				),
 			) );
-
-			// Item Text
-			$preview->set_text( 'item_text', '.merchant-volume-discounts-item-text' );
-
-			// Total Text
-			$preview->set_text( 'total_text', '.merchant-volume-discounts-total-text' );
-
-			// Title Font Size
-			$preview->set_css( 'title_font_size', '.merchant-volume-discounts-title', '--merchant-font-size', 'px' );
-
-			// Title Font Weight
-			$preview->set_css( 'title_font_weight', '.merchant-volume-discounts-title', '--merchant-font-weight' );
-
-			// Title Text Color
-			$preview->set_css( 'title_text_color', '.merchant-volume-discounts-title', '--merchant-text-color' );
-
-			// Table Item Background Color
-			$preview->set_css( 'table_item_bg_color', '.merchant-volume-discounts-item', '--merchant-table-item-bg-color' );
-
-			// Table Item Text Color
-			$preview->set_css( 'table_item_text_color', '.merchant-volume-discounts-item', '--merchant-table-item-text-color' );
-
-			// Table Item Border Color
-			$preview->set_css( 'table_item_border_color', '.merchant-volume-discounts-item', '--merchant-table-item-border-color' );
-
-			// Table Label Background Color
-			$preview->set_css( 'table_label_bg_color', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-bg-color' );
-
-			// Table label Text Color
-			$preview->set_css( 'table_label_text_color', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-text-color' );
 		}
 
 		return $preview;
@@ -286,54 +252,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
         </div>
 
 		<?php
-	}
-
-	/**
-	 * Custom CSS.
-	 *
-	 * @return string
-	 */
-	public function get_module_custom_css() {
-		$css = '';
-
-		// Title Font Size
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_font_size', 16, '.merchant-volume-discounts-title', '--merchant-font-size', 'px' );
-
-		// Title Font Weight
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_font_weight', 'normal', '.merchant-volume-discounts-title', '--merchant-font-weight' );
-
-		// Title Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_text_color', '#212121', '.merchant-volume-discounts-title', '--merchant-text-color' );
-
-		// Table Item Background Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_bg_color', '#fcf0f1', '.merchant-volume-discounts-item', '--merchant-table-item-bg-color' );
-
-		// Table Item Border Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_border_color', '#d83b3b', '.merchant-volume-discounts-item', '--merchant-table-item-border-color' );
-
-		// Table Item Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_text_color', 'inherit', '.merchant-volume-discounts-item', '--merchant-table-item-text-color' );
-
-		// Table Label Background Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_label_bg_color', '#d83b3b', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-bg-color' );
-
-		// Table Label Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_label_text_color', '#ffffff', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-text-color' );
-
-		return $css;
-	}
-
-	/**
-	 * Admin custom CSS.
-	 *
-	 * @param string $css The custom CSS.
-	 *
-	 * @return string $css The custom CSS.
-	 */
-	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css();
-
-		return $css;
 	}
 }
 
