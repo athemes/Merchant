@@ -76,7 +76,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_thumb',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled products thumb', 'merchant' ),
+			'title'   => __( 'Display bundled products thumbnails', 'merchant' ),
 			'default' => 0,
 		),
 
@@ -90,7 +90,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_qty',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled products quantity', 'merchant' ),
+			'title'   => __( 'Display the quantity of bundled products', 'merchant' ),
 			'default' => 0,
 		),
 
@@ -120,7 +120,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'placement',
 			'type'    => 'select',
-			'title'   => __( 'Where to display the bundle products', 'merchant' ),
+			'title'   => __( 'Where to display the bundled products', 'merchant' ),
 			'options' => array(
 				'woocommerce_before_add_to_cart_form' => __( 'Before add to cart section', 'merchant' ),
 				'woocommerce_after_add_to_cart_form'  => __( 'After add to cart section', 'merchant' ),

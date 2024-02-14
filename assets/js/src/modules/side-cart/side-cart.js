@@ -5,10 +5,14 @@
 
 jQuery(document).ready(function($) {
 
-  if (merchant.setting.hasOwnProperty('show_after_add_to_cart_single_product')) {
-    if ($('body.single-product') && $('.woocommerce-notices-wrapper').is(':visible')) {
-      $('body').toggleClass('merchant-floating-side-mini-cart-show');
-      $(window).trigger('merchant.floating-mini-cart-resize');
+  if ( merchant.setting.hasOwnProperty('show_after_add_to_cart_single_product' ) ) {
+    const isSingleProductPage   = $( 'body.single-product' ).length;
+    const isNoticeVisible      = $( '.woocommerce-notices-wrapper' ).is( ':visible' ) && ! $( '.woocommerce-notices-wrapper' ).is( ':empty' )
+    const isBlockNoticeVisible = $( '.wc-block-components-notice-banner' ).is( ':visible' ) && ! $( '.wc-block-components-notice-banner' ).is( ':empty' )
+
+    if ( isSingleProductPage && ( isNoticeVisible || isBlockNoticeVisible ) ) {
+      $( 'body' ).toggleClass( 'merchant-floating-side-mini-cart-show' );
+      $( window ).trigger( 'merchant.floating-mini-cart-resize' );
     }
   }
 

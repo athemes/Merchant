@@ -833,34 +833,43 @@ body.merchant-has-admin-preview {
 }
 
 .merchant-module-page-button {
-  cursor: pointer;
-  display: flex;
-  grid-gap: 7px;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 25px;
-  font-size: 16px;
-  line-height: 1em;
-  font-weight: 500;
-  user-select: none;
-  text-decoration: none;
-  border-radius: 4px;
-  border: none;
-  color: #fff;
-  border: 1px solid transparent;
-  background-color: #3858E9;
+    cursor: pointer;
+	display: flex;
+	grid-gap: 7px;
+	justify-content: center;
+	align-items: center;
+	padding: 14px 25px;
+	font-size: 16px;
+	line-height: 1em;
+	font-weight: 500;
+	user-select: none;
+	text-decoration: none;
+	border-radius: 4px;
+	border: none;
 
-  &:focus,
-  &:hover {
-    outline: none;
-    box-shadow: none;
-    color: #fff;
-  }
+	&:not(:disabled) {
+		cursor: pointer;
+		color: #fff;
+		border: 1px solid transparent;
+		background-color: #3858E9;
 
-  svg {
-    width: 8px;
-    height: 8px;
-  }
+		&:focus,
+		&:hover {
+			outline: none;
+			box-shadow: none;
+			color: #fff;
+		}
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		border: 1px solid rgba(195, 195, 195, 0.3);
+	}
+	
+	svg {
+		width: 8px;
+		height: 8px;
+	}
 }
 
 .merchant-module-deactivate {
@@ -3207,6 +3216,7 @@ body.merchant-module-disabled {
     width: 100%;
   }
 }
+
 
 .merchant-module-page-setting-field-products_selector {
   .merchant-products-search-container {
