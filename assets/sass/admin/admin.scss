@@ -3288,6 +3288,10 @@ body.merchant-module-disabled {
         border-radius: 4px;
         margin: 0 0 15px;
         border: 1px solid #dfe1e1;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
 

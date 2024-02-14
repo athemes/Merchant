@@ -4441,6 +4441,9 @@ body.merchant-module-disabled .merchant-module-page-link-preview svg path {
   margin: 0 0 15px;
   border: 1px solid #dfe1e1;
 }
+.merchant-module-page-setting-field-products_selector .merchant-products-search-container .merchant-selected-products-preview ul li:last-child {
+  margin-bottom: 0;
+}
 .merchant-module-page-setting-field-products_selector .merchant-products-search-container ul {
   padding: 0;
   margin: 0;
