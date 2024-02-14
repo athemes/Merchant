@@ -4,8 +4,8 @@
   'use strict';
 
   $(document).on('click', '.merchant-flexible-content-control.volume-discounts-style .layout', function () {
-    var $this = $(this);
-    var $parent = $this.closest('.merchant-flexible-content-control.volume-discounts-style');
+    var $this = $(this),
+      $parent = $this.closest('.merchant-flexible-content-control.volume-discounts-style');
     $parent.find('.layout').removeClass('active');
     $this.addClass('active');
     initPreview();
@@ -15,7 +15,7 @@
   });
   function initPreview() {
     var layout = $('.merchant-flexible-content-control.volume-discounts-style').find('.layout.active'),
-      titleText = layout.find('.merchant-module-page-setting-field-text input').val(),
+      titleText = layout.find('.merchant-field-table_title input').val(),
       titleTextColor = layout.find('.merchant-field-title_text_color input').val(),
       titleTextFontSize = layout.find('.merchant-field-title_font_size input').val(),
       titleTextFontWeight = layout.find('.merchant-field-title_font_weight select').val(),
