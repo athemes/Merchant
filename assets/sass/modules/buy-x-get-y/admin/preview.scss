@@ -13,9 +13,20 @@
   .layout:not(.active) {
     border-color: #5c5f62;
   }
+
+  .layout {
+    .layout-body {
+      padding: 15px;
+      grid-gap: unset;
+
+      .merchant-module-page-setting-field {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
 
-.merchant-bogo-product-y{
+.merchant-bogo-product-y {
   border: 1px solid;
 }
 
@@ -26,7 +37,7 @@
     transform: rotate(180deg);
   }
 
-  .merchant-bogo-product-contents{
+  .merchant-bogo-product-contents {
     padding-left: unset;
     padding-right: 10px;
   }
