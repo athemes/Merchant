@@ -671,6 +671,14 @@ const scripts = [
 		file: 'custom-addtocart-button',
 	},
 
+	// volume discounts
+	{
+		name: 'volumeDiscountsAdminPreview',
+		src: './assets/js/src/modules/volume-discounts/admin/preview.js',
+		destination: './assets/js/modules/volume-discounts/admin',
+		file: 'preview'
+	},
+
 	// Quick View.
 	{
 		name: 'quickView',

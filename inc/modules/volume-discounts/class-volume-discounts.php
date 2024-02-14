@@ -154,6 +154,8 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 		if ( $this->is_module_settings_page() ) {
 			wp_enqueue_style( "merchant-admin-{$this->module_id}", MERCHANT_URI . "assets/css/modules/volume-discounts/admin/preview.min.css", array(), MERCHANT_VERSION );
 			wp_enqueue_style( "merchant-{$this->module_id}", MERCHANT_URI . "assets/css/modules/{$this->module_id}/{$this->module_id}.min.css", array(), MERCHANT_VERSION );
+			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION,
+				true );
 		}
 	}
 
