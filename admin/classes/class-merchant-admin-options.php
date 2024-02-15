@@ -905,7 +905,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			$ids = $value ? explode( ',', $value ) : array();
 
 			if ( isset( $settings['multiple'] ) ) {
-				$multiple = $settings['multiple'] === true ? 'multiple' : '';
+				$multiple = $settings['multiple'] === true ? 'multiple' : 'false';
 			} else {
 				$multiple = 'multiple';
 			}

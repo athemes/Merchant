@@ -3221,7 +3221,7 @@ body.merchant-module-disabled {
 .merchant-module-page-setting-field-products_selector {
   .merchant-products-search-container {
     .merchant-search-area {
-      margin-bottom: 15px;
+      margin-bottom: 0px;
       position: relative;
 
       .merchant-search-field {
@@ -3278,15 +3278,10 @@ body.merchant-module-disabled {
     }
 
     .merchant-selected-products-preview {
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 100%;
-      display: inline-block;
 
       ul li {
         border-radius: 4px;
-        margin: 0 0 15px;
+        margin: 15px 0 15px;
         border: 1px solid #dfe1e1;
 
         &:last-child {
