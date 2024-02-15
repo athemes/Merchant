@@ -486,16 +486,16 @@ const styles = [
 		destination: './assets/css/modules/stock-scarcity',
 	},
 
-	// Volume discounts.
+	// Bulk discounts.
 	{
-		name: 'volumeDiscountsAdmin',
-		src: './assets/sass/modules/volume-discounts/admin/preview.scss',
-		destination: './assets/css/modules/volume-discounts/admin',
+		name: 'bulkDiscountsAdmin',
+		src: './assets/sass/modules/bulk-discounts/admin/preview.scss',
+		destination: './assets/css/modules/bulk-discounts/admin',
 	},
 	{
-		name: 'volumeDiscounts',
-		src: './assets/sass/modules/volume-discounts/volume-discounts.scss',
-		destination: './assets/css/modules/volume-discounts',
+		name: 'bulkDiscounts',
+		src: './assets/sass/modules/bulk-discounts/bulk-discounts.scss',
+		destination: './assets/css/modules/bulk-discounts',
 	},
 
 	// Wait list.
@@ -671,11 +671,11 @@ const scripts = [
 		file: 'custom-addtocart-button',
 	},
 
-	// volume discounts
+	// Bulk discounts
 	{
-		name: 'volumeDiscountsAdminPreview',
-		src: './assets/js/src/modules/volume-discounts/admin/preview.js',
-		destination: './assets/js/modules/volume-discounts/admin',
+		name: 'bulkDiscountsAdminPreview',
+		src: './assets/js/src/modules/bulk-discounts/admin/preview.js',
+		destination: './assets/js/modules/bulk-discounts/admin',
 		file: 'preview'
 	},
 

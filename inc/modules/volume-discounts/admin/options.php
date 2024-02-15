@@ -12,13 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Offer', 'merchant' ),
-	'module' => Merchant_Volume_Discounts::MODULE_ID,
+	'module' => Merchant_Bulk_Discounts::MODULE_ID,
 	'fields' => array(
 		array(
 			'id'           => 'offers',
 			'type'         => 'flexible_content',
 			'button_label' => esc_html__( 'Add New Tier', 'merchant' ),
-			'style'        => Merchant_Volume_Discounts::MODULE_ID . '-style default',
+			'style'        => Merchant_Bulk_Discounts::MODULE_ID . '-style default',
 			'sorting'      => false,
 			'accordion'    => true,
 			'layouts'      => array(
@@ -230,7 +230,7 @@ Merchant_Admin_Options::create( array(
 ) );
 
 // Shortcode
-$merchant_module_id = Merchant_Volume_Discounts::MODULE_ID;
+$merchant_module_id = Merchant_Bulk_Discounts::MODULE_ID;
 Merchant_Admin_Options::create( array(
 	'module' => $merchant_module_id,
 	'title'  => esc_html__( 'Use shortcode', 'merchant' ),

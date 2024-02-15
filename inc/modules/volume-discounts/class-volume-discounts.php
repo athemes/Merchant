@@ -11,10 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Volume discounts class.
+ * Bulk discounts module class.
  *
  */
-class Merchant_Volume_Discounts extends Merchant_Add_Module {
+class Merchant_Bulk_Discounts extends Merchant_Add_Module {
 
 	/**
 	 * Module ID.
@@ -152,9 +152,9 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( $this->is_module_settings_page() ) {
-			wp_enqueue_style( "merchant-admin-{$this->module_id}", MERCHANT_URI . "assets/css/modules/volume-discounts/admin/preview.min.css", array(), MERCHANT_VERSION );
-			wp_enqueue_style( "merchant-{$this->module_id}", MERCHANT_URI . "assets/css/modules/{$this->module_id}/{$this->module_id}.min.css", array(), MERCHANT_VERSION );
-			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION,
+			wp_enqueue_style( "merchant-admin-bulk-discounts", MERCHANT_URI . "assets/css/modules/bulk-discounts/admin/preview.min.css", array(), MERCHANT_VERSION );
+			wp_enqueue_style( "merchant-bulk-discounts", MERCHANT_URI . "assets/css/modules/bulk-discounts/bulk-discounts.min.css", array(), MERCHANT_VERSION );
+			wp_enqueue_script( "merchant-bulk-discounts", MERCHANT_URI . "assets/js/modules/bulk-discounts/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION,
 				true );
 		}
 	}
@@ -228,7 +228,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
             <div class="mrc-preview-right-column">
 				<?php
 				merchant_get_template_part(
-					Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
+					Merchant_Bulk_Discounts::MODULE_TEMPLATES_PATH,
 					'single-product',
 					array(
 						'settings'       => $settings,
@@ -258,5 +258,5 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	Merchant_Modules::create_module( new Merchant_Volume_Discounts() );
+	Merchant_Modules::create_module( new Merchant_Bulk_Discounts() );
 } );
