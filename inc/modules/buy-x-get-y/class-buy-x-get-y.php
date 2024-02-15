@@ -221,7 +221,6 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 
 		return $preview;
 	}
-
 }
 
 // Initialize the module.
