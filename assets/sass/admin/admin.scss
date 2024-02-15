@@ -2279,6 +2279,30 @@ body.merchant-module-disabled {
     }
   }
 
+  .customize-control-flexible-content-accordion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 40px;
+    height: auto;
+    font-size: 1.5em;
+    line-height: 34px;
+    color: #50575e;
+    background: #fff;
+    padding: 0;
+    vertical-align: top;
+    cursor: pointer;
+    transition: 300ms;
+    transform: rotate(180deg);
+  }
+
+  .layout-header.ui-accordion-header-collapsed {
+    .customize-control-flexible-content-accordion {
+      transform: rotate(0deg);
+    }
+  }
+
   .merchant-flexible-content.empty {
     border: 2px dashed #dcdcde;
     min-height: 100px;

@@ -1539,6 +1539,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     <a class="customize-control-flexible-content-delete" href="#">
                                         <span class="dashicons dashicons-no-alt"></span>
                                     </a>
+	                                <?php
+	                                if ( $settings['accordion'] === true ) { ?>
+                                        <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
+	                                <?php
+	                                } ?>
                                 </div>
                             </div>
                             <div class="layout-body">
@@ -1600,6 +1605,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     <a class="customize-control-flexible-content-delete" href="#">
                                         <span class="dashicons dashicons-no-alt"></span>
                                     </a>
+	                                <?php
+	                                if ( $settings['accordion'] === true ) { ?>
+                                        <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
+		                                <?php
+	                                } ?>
                                 </div>
                             </div>
                             <div class="layout-body">
