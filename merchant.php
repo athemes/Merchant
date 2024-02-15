@@ -60,6 +60,15 @@ class Merchant {
 	 */
 	public function __construct() {
 
+		// aThemes White Label Compatibility.
+		if ( function_exists( 'athemes_wl_get_data' ) ) {
+			$merchant_awl_data = athemes_wl_get_data();
+
+			if ( ! empty( $merchant_awl_data[ 'activate_white_label' ] ) ) {
+				define( 'MERCHANT_AWL_ACTIVE', true );
+			}
+		}
+
 		// Translation.
 		add_action( 'init', array( $this, 'translation' ) );
 
