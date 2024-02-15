@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2024-02-15 20:40+0000\n"
+"POT-Creation-Date: 2024-02-15 21:49+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -515,33 +515,33 @@ msgid "Select Image"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:1686
+#: admin/classes/class-merchant-admin-options.php:1696
 msgid "It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page."
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:1695
+#: admin/classes/class-merchant-admin-options.php:1705
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:1704
+#: admin/classes/class-merchant-admin-options.php:1714
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1706
+#: admin/classes/class-merchant-admin-options.php:1716
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1712
+#: admin/classes/class-merchant-admin-options.php:1722
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1713
+#: admin/classes/class-merchant-admin-options.php:1723
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1675
+#: admin/classes/class-merchant-admin-options.php:1685
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
@@ -2287,8 +2287,8 @@ msgstr ""
 msgid "After add to cart quantity"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:15
-msgid "BOGO Offers"
+#: inc/modules/buy-x-get-y/admin/options.php:15, inc/modules/volume-discounts/admin/options.php:14
+msgid "Offers"
 msgstr ""
 
 #: inc/modules/buy-x-get-y/admin/options.php:23
@@ -4267,12 +4267,8 @@ msgstr ""
 msgid "Select badges"
 msgstr ""
 
-#: inc/modules/volume-discounts/admin/options.php:14
-msgid "Offer"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:20
-msgid "Add New Tier"
+msgid "Add New Offer"
 msgstr ""
 
 #: inc/modules/volume-discounts/admin/options.php:26

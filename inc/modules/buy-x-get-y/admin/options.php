@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Buy_X_Get_Y::MODULE_ID,
-	'title'  => esc_html__( 'BOGO Offers', 'merchant' ),
+	'title'  => esc_html__( 'Offers', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'           => 'rules',

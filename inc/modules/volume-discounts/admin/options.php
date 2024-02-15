@@ -11,13 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Offer', 'merchant' ),
+	'title'  => esc_html__( 'Offers', 'merchant' ),
 	'module' => Merchant_Bulk_Discounts::MODULE_ID,
 	'fields' => array(
 		array(
 			'id'           => 'offers',
 			'type'         => 'flexible_content',
-			'button_label' => esc_html__( 'Add New Tier', 'merchant' ),
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'style'        => Merchant_Bulk_Discounts::MODULE_ID . '-style default',
 			'sorting'      => false,
 			'accordion'    => true,
