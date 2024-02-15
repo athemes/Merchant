@@ -19,7 +19,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Instance.
-		 * 
+		 *
 		 */
 		public static function instance() {
 			if ( is_null( self::$instance ) ) {
@@ -30,9 +30,13 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Constructor.
-		 * 
+		 *
 		 */
 		public function __construct() {
+			if ( defined( 'MERCHANT_AWL_ACTIVE' ) ) {
+				return;
+			}
+
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
 			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
@@ -40,7 +44,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Include required classes.
-		 * 
+		 *
 		 * @return void
 		 */
 		public function add_admin_menu() {
@@ -106,7 +110,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Get Notifications
-		 * 
+		 *
 		 * @return array
 		 */
 		public function get_notifications() {
@@ -134,7 +138,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Check if the latest notification is read
-		 * 
+		 *
 		 * @return bool
 		 */
 		public function is_latest_notification_read() {
@@ -162,7 +166,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Ajax notifications.
-		 * 
+		 *
 		 * @return void
 		 */
 		public function ajax_notifications_read() {
@@ -182,7 +186,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Include Page dashboard
-		 * 
+		 *
 		 * @return void
 		 */
 		public function page_dashboard() {
@@ -191,12 +195,12 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Footer internal scripts
-		 * 
+		 *
 		 * @return void
 		 */
 		public function footer_internal_scripts() {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : ''; 
+			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : '';
 			$nth_child_map  = array(
 				'admin.php?page=merchant' => 3,
 				'admin.php?page=merchant&section=modules' => 4,
@@ -213,7 +217,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				#adminmenu .toplevel_page_merchant .wp-submenu li:nth-child(<?php echo absint( $nth_child_map[ $request_uri ] ); ?>) a {
 					color: #FFF;
 				}
-				
+
 				#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"] {
 					background-color: green;
 					color: #FFF;
