@@ -833,6 +833,7 @@ body.merchant-has-admin-preview {
 }
 
 .merchant-module-page-button {
+	cursor: pointer;
 	display: flex;
 	grid-gap: 7px;
 	justify-content: center;
@@ -844,27 +845,24 @@ body.merchant-has-admin-preview {
 	user-select: none;
 	text-decoration: none;
 	border-radius: 4px;
-	border: none;
+	color: #fff;
+	border: 1px solid transparent;
+	background-color: #3858E9;
 
-	&:not(:disabled) {
-		cursor: pointer;
-		color: #fff;
-		border: 1px solid transparent;
-		background-color: #3858E9;
-
-		&:focus,
-		&:hover {
-			outline: none;
-			box-shadow: none;
-			color: #fff;
-		}
-	}
-
-	&:disabled {
+	&.merchant-module-question-answer-button:disabled {
 		cursor: not-allowed;
+		background: rgba(239, 239, 239, 0.3);
+		color: rgba(16, 16, 16, 0.3);
 		border: 1px solid rgba(195, 195, 195, 0.3);
 	}
-	
+
+	&:focus,
+	&:hover {
+		outline: none;
+		box-shadow: none;
+		color: #fff;
+	}
+
 	svg {
 		width: 8px;
 		height: 8px;
