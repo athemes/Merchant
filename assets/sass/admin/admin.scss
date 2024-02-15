@@ -507,7 +507,7 @@
   transition: all .2s;
 
   &.merchant-module-deactivated-by-bp {
-    text-transform: uppsercase;
+    text-transform: uppercase;
 
     .merchant-modules-list-item-icon,
     .merchant-modules-list-item-content {
@@ -833,43 +833,40 @@ body.merchant-has-admin-preview {
 }
 
 .merchant-module-page-button {
-    cursor: pointer;
-	display: flex;
-	grid-gap: 7px;
-	justify-content: center;
-	align-items: center;
-	padding: 14px 25px;
-	font-size: 16px;
-	line-height: 1em;
-	font-weight: 500;
-	user-select: none;
-	text-decoration: none;
-	border-radius: 4px;
-	border: none;
+  cursor: pointer;
+  display: flex;
+  grid-gap: 7px;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 25px;
+  font-size: 16px;
+  line-height: 1em;
+  font-weight: 500;
+  user-select: none;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #fff;
+  border: 1px solid transparent;
+  background-color: #3858E9;
 
-	&:not(:disabled) {
-		cursor: pointer;
-		color: #fff;
-		border: 1px solid transparent;
-		background-color: #3858E9;
+  &.merchant-module-question-answer-button:disabled {
+    cursor: not-allowed;
+    background: rgba(239, 239, 239, 0.3);
+    color: rgba(16, 16, 16, 0.3);
+    border: 1px solid rgba(195, 195, 195, 0.3);
+  }
 
-		&:focus,
-		&:hover {
-			outline: none;
-			box-shadow: none;
-			color: #fff;
-		}
-	}
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: none;
+    color: #fff;
+  }
 
-	&:disabled {
-		cursor: not-allowed;
-		border: 1px solid rgba(195, 195, 195, 0.3);
-	}
-	
-	svg {
-		width: 8px;
-		height: 8px;
-	}
+  svg {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 .merchant-module-deactivate {
@@ -931,7 +928,7 @@ body.merchant-has-admin-preview {
   opacity: 0;
   pointer-events: none;
   transition: all .1s;
-  z-index: 1;
+  z-index: 99;
 
   &.merchant-show {
     opacity: 1;
@@ -950,7 +947,6 @@ body.merchant-has-admin-preview {
       cursor: pointer;
       position: relative;
       margin: 0;
-      padding: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -994,6 +990,12 @@ body.merchant-has-admin-preview {
         }
       }
     }
+  }
+
+  &.merchant-show {
+    opacity: 1;
+    pointer-events: auto;
+    margin-top: 10px;
   }
 }
 

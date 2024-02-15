@@ -1480,7 +1480,7 @@
   transition: all 0.2s;
 }
 .merchant-modules-list-item.merchant-module-deactivated-by-bp {
-  text-transform: uppsercase;
+  text-transform: uppercase;
 }
 .merchant-modules-list-item.merchant-module-deactivated-by-bp .merchant-modules-list-item-icon,
 .merchant-modules-list-item.merchant-module-deactivated-by-bp .merchant-modules-list-item-content {
@@ -1870,23 +1870,21 @@ body.merchant-has-admin-preview .merchant-module-page-desc {
           user-select: none;
   text-decoration: none;
   border-radius: 4px;
-  border: none;
-}
-.merchant-module-page-button:not(:disabled) {
-  cursor: pointer;
   color: #fff;
   border: 1px solid transparent;
   background-color: #3858E9;
 }
-.merchant-module-page-button:not(:disabled):focus, .merchant-module-page-button:not(:disabled):hover {
+.merchant-module-page-button.merchant-module-question-answer-button:disabled {
+  cursor: not-allowed;
+  background: rgba(239, 239, 239, 0.3);
+  color: rgba(16, 16, 16, 0.3);
+  border: 1px solid rgba(195, 195, 195, 0.3);
+}
+.merchant-module-page-button:focus, .merchant-module-page-button:hover {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #fff;
-}
-.merchant-module-page-button:disabled {
-  cursor: not-allowed;
-  border: 1px solid rgba(195, 195, 195, 0.3);
 }
 .merchant-module-page-button svg {
   width: 8px;
@@ -1950,7 +1948,7 @@ body.merchant-has-admin-preview .merchant-module-page-desc {
   pointer-events: none;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
-  z-index: 1;
+  z-index: 99;
 }
 .merchant-module-dropdown.merchant-show {
   opacity: 1;
@@ -1973,7 +1971,6 @@ body.merchant-has-admin-preview .merchant-module-page-desc {
   cursor: pointer;
   position: relative;
   margin: 0;
-  padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2016,6 +2013,11 @@ body.merchant-has-admin-preview .merchant-module-page-desc {
 }
 .merchant-module-dropdown ul li:last-child span {
   border-bottom: none;
+}
+.merchant-module-dropdown.merchant-show {
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 10px;
 }
 
 .merchant-module-dropdown-close {
