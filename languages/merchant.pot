@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2024-02-15 17:48+0000\n"
+"POT-Creation-Date: 2024-02-15 20:40+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -461,83 +461,87 @@ msgstr ""
 msgid "Protect Store"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:475
+#: admin/classes/class-merchant-admin-options.php:56
+msgid "Are you sure you want to remove this product?"
+msgstr ""
+
+#: admin/classes/class-merchant-admin-options.php:476
 msgid "Field not found!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:900
+#: admin/classes/class-merchant-admin-options.php:901
 msgid "WooCommerce is not installed or activated."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:918
+#: admin/classes/class-merchant-admin-options.php:919
 msgid "Search products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:920
+#: admin/classes/class-merchant-admin-options.php:921
 msgid "Searching..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:922
+#: admin/classes/class-merchant-admin-options.php:923
 msgid "Search icon"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:977, inc/classes/class-merchant-metabox.php:831, inc/classes/class-merchant-metabox.php:875
+#: admin/classes/class-merchant-admin-options.php:978, inc/classes/class-merchant-metabox.php:831, inc/classes/class-merchant-metabox.php:875
 msgid "Remove"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:975, inc/modules/product-labels/admin/options.php:22
+#: admin/classes/class-merchant-admin-options.php:976, inc/modules/product-labels/admin/options.php:22
 msgid "Add"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1009
+#: admin/classes/class-merchant-admin-options.php:1010
 msgid "sold individually"
 msgstr ""
 
 #. translators: %s is the search keyword
-#: admin/classes/class-merchant-admin-options.php:1115
+#: admin/classes/class-merchant-admin-options.php:1116
 msgid "No results found for \"%s\""
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1155, inc/classes/class-merchant-metabox.php:924, inc/modules/advanced-reviews/admin/options.php:99
+#: admin/classes/class-merchant-admin-options.php:1156, inc/classes/class-merchant-metabox.php:924, inc/modules/advanced-reviews/admin/options.php:99
 msgid "Default"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1304
+#: admin/classes/class-merchant-admin-options.php:1305
 msgid "Select Images"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1350
+#: admin/classes/class-merchant-admin-options.php:1351
 msgid "Select Image"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:1685
+#: admin/classes/class-merchant-admin-options.php:1686
 msgid "It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page."
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:1694
+#: admin/classes/class-merchant-admin-options.php:1695
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:1703
+#: admin/classes/class-merchant-admin-options.php:1704
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1705
+#: admin/classes/class-merchant-admin-options.php:1706
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1711
+#: admin/classes/class-merchant-admin-options.php:1712
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1712
+#: admin/classes/class-merchant-admin-options.php:1713
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1674
+#: admin/classes/class-merchant-admin-options.php:1675
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 

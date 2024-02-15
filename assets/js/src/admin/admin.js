@@ -599,23 +599,29 @@
 
         // actions on selected items
         $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
-            let parent = $(this).closest('.merchant-products-search-container'),
-                valueField = parent.find('.merchant-selected-products'),
-                id = $(this).parent().data('id');
+            // Store a reference to the remove button
+            let removeButton = $(this);
+            // Ask for confirmation before removing the product
+            if (confirm(merchant_admin_options.product_delete_confirmation_message)) {
+                let parent = removeButton.closest('.merchant-products-search-container'),
+                    valueField = parent.find('.merchant-selected-products'),
+                    id = removeButton.parent().data('id');
 
-            $(this).parent().remove();
-            $ajaxHeader.addClass('merchant-show');
-            // Remove the leading comma if it exists
-            let currentValue = valueField.val().replace(/^,/, ''),
-                // Create a regular expression pattern for the ID and surrounding commas
-                idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
-                // Replace the ID and handle surrounding commas
-                newValue = currentValue.replace(idPattern, '');
-            // Remove trailing comma if it exists
-            newValue = newValue.replace(/,$/, '');
-            // Update the valueField
-            valueField.val(newValue);
+                removeButton.parent().remove();
+                $ajaxHeader.addClass('merchant-show');
+                // Remove the leading comma if it exists
+                let currentValue = valueField.val().replace(/^,/, ''),
+                    // Create a regular expression pattern for the ID and surrounding commas
+                    idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
+                    // Replace the ID and handle surrounding commas
+                    newValue = currentValue.replace(idPattern, '');
+                // Remove trailing comma if it exists
+                newValue = newValue.replace(/,$/, '');
+                // Update the valueField
+                valueField.val(newValue);
+            }
         });
+
 
 
         $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {

@@ -488,21 +488,26 @@
 
     // actions on selected items
     $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
-      var parent = $(this).closest('.merchant-products-search-container'),
-        valueField = parent.find('.merchant-selected-products'),
-        id = $(this).parent().data('id');
-      $(this).parent().remove();
-      $ajaxHeader.addClass('merchant-show');
-      // Remove the leading comma if it exists
-      var currentValue = valueField.val().replace(/^,/, ''),
-        // Create a regular expression pattern for the ID and surrounding commas
-        idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
-        // Replace the ID and handle surrounding commas
-        newValue = currentValue.replace(idPattern, '');
-      // Remove trailing comma if it exists
-      newValue = newValue.replace(/,$/, '');
-      // Update the valueField
-      valueField.val(newValue);
+      // Store a reference to the remove button
+      var removeButton = $(this);
+      // Ask for confirmation before removing the product
+      if (confirm(merchant_admin_options.product_delete_confirmation_message)) {
+        var parent = removeButton.closest('.merchant-products-search-container'),
+          valueField = parent.find('.merchant-selected-products'),
+          id = removeButton.parent().data('id');
+        removeButton.parent().remove();
+        $ajaxHeader.addClass('merchant-show');
+        // Remove the leading comma if it exists
+        var currentValue = valueField.val().replace(/^,/, ''),
+          // Create a regular expression pattern for the ID and surrounding commas
+          idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
+          // Replace the ID and handle surrounding commas
+          newValue = currentValue.replace(idPattern, '');
+        // Remove trailing comma if it exists
+        newValue = newValue.replace(/,$/, '');
+        // Update the valueField
+        valueField.val(newValue);
+      }
     });
     $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {
       $('.merchant-module-page-setting-field').each(function () {

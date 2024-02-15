@@ -216,6 +216,24 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.2 =
+* Fixed - wait list module not submitting with variable products.
+* Added - New framework field products search.
+* Updated - flexible content now supports accordion style.
+* Changed - flexible content field add button now add new fields without display the balloon to select layout of only one layout.
+* Updated - flexible content now supports title change based on a text field inside each group.
+* Updated - Buy X get Y module now able to edit all offers from module settings.
+* Updated - Buy X get Y module now able to assign styles and texts to each offer.
+* Updated - Buy X get Y module now able to set each offer placement.
+* Updated - Buy X get Y module now click on each offer settings to preview color settings.
+* Added - Buy X get Y module backward compatibility to recover all module metabox settings into the module settings page.
+* Updated - Bulk discounts module now able to edit all offers from module settings.
+* Updated - Bulk discounts module now able to assign styles and texts to each offer.
+* Updated - Bulk discounts module now able to set each offer placement.
+* Updated - Bulk discounts module now click on each offer settings to preview color settings.
+* Added - Bulk discounts module backward compatibility to recover all module metabox settings into the module settings page.
+* Changed - Volume discount class and files are renamed to bulk discount.
+
 = 1.9.1 =
 * Fixed - Metabox showing even if no modules are enabled.
 * Fixed - Typo on size chart module metabox.

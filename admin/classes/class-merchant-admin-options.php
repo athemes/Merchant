@@ -51,8 +51,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				wp_enqueue_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13', 'all' );
 
 				wp_localize_script( 'merchant-select2', 'merchant_admin_options', array(
-					'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-					'ajaxnonce' => wp_create_nonce( 'merchant_admin_options' ),
+					'ajaxurl'                             => admin_url( 'admin-ajax.php' ),
+					'ajaxnonce'                           => wp_create_nonce( 'merchant_admin_options' ),
+					'product_delete_confirmation_message' => esc_html__( 'Are you sure you want to remove this product?', 'merchant' ),
 				) );
 			}
 		}
