@@ -488,14 +488,14 @@ const styles = [
 
 	// Bulk discounts.
 	{
-		name: 'bulkDiscountsAdmin',
-		src: './assets/sass/modules/bulk-discounts/admin/preview.scss',
-		destination: './assets/css/modules/bulk-discounts/admin',
+		name: 'volumeDiscountsAdmin',
+		src: './assets/sass/modules/volume-discounts/admin/preview.scss',
+		destination: './assets/css/modules/volume-discounts/admin',
 	},
 	{
-		name: 'bulkDiscounts',
-		src: './assets/sass/modules/bulk-discounts/bulk-discounts.scss',
-		destination: './assets/css/modules/bulk-discounts',
+		name: 'volumeDiscounts',
+		src: './assets/sass/modules/volume-discounts/volume-discounts.scss',
+		destination: './assets/css/modules/volume-discounts',
 	},
 
 	// Wait list.
@@ -673,9 +673,9 @@ const scripts = [
 
 	// Bulk discounts
 	{
-		name: 'bulkDiscountsAdminPreview',
-		src: './assets/js/src/modules/bulk-discounts/admin/preview.js',
-		destination: './assets/js/modules/bulk-discounts/admin',
+		name: 'volumeDiscountsAdminPreview',
+		src: './assets/js/src/modules/volume-discounts/admin/preview.js',
+		destination: './assets/js/modules/volume-discounts/admin',
 		file: 'preview'
 	},
 
