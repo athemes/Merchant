@@ -1948,7 +1948,7 @@ body.merchant-has-admin-preview .merchant-module-page-desc {
   pointer-events: none;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
-  z-index: 1;
+  z-index: 99;
 }
 .merchant-module-dropdown.merchant-show {
   opacity: 1;

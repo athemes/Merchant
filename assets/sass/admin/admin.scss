@@ -928,7 +928,7 @@ body.merchant-has-admin-preview {
 	opacity: 0;
 	pointer-events: none;
 	transition: all .1s;
-	z-index: 1;
+	z-index: 99;
 	
 	&.merchant-show {
 		opacity: 1;
