@@ -3,20 +3,21 @@
 }
 
 .merchant-volume-discounts-title {
-  font-size: var(--merchant-font-size);
-  font-weight: var(--merchant-font-weight);
-  color: var(--merchant-text-color);
+  font-size: 16px;
+  font-weight: normal;
+  color: #212121;
 }
 
 .merchant-volume-discounts-item {
   display: block;
   position: relative;
-  border: 1px solid var(--merchant-table-item-border-color);
+  border: 1px solid #d83b3b;
   margin-top: 25px;
+  margin-bottom: 25px;
   padding: 20px 20px 10px;
-  background: var(--merchant-table-item-bg-color);
+  background-color: #fcf0f1;
   border-radius: 5px;
-  color: var(--merchant-table-item-text-color);
+  color: #3c434a;
 }
 
 .merchant-volume-discounts-item ul {
@@ -38,8 +39,8 @@
 }
 
 .merchant-volume-discounts-item-label > span {
-  background: var(--merchant-table-label-bg-color);
-  color: var(--merchant-table-label-text-color);
+  background-color: #d83b3b;
+  color: #ffffff;
   padding: 4px 12px;
   font-weight: bold;
   border-radius: 5px;

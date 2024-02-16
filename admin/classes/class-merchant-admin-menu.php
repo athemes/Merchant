@@ -223,18 +223,20 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					color: #FFF;
 				}
 			</style>
-			<script type="text/javascript">
-				document.addEventListener("DOMContentLoaded", function() {
-					const merchantUpsellMenuItem = document.querySelector( '#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"]' );
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function () {
+                    const merchantUpsellMenuItem = document.querySelector('#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"]');
 
-					merchantUpsellMenuItem.addEventListener( 'click', function( e ){
-						e.preventDefault();
+                    if (merchantUpsellMenuItem) {
+                        merchantUpsellMenuItem.addEventListener('click', function (e) {
+                            e.preventDefault();
 
-						const href = this.getAttribute( 'href' );
-						window.open( href, '_blank' );
-					} );
-				});
-			</script>
+                            const href = this.getAttribute('href');
+                            window.open(href, '_blank');
+                        });
+                    }
+                });
+            </script>
 			<?php
 		}
 	}

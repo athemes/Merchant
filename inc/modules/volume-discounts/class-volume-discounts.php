@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Volume discounts class.
+ * Bulk discounts module class.
  *
  */
 class Merchant_Volume_Discounts extends Merchant_Add_Module {
@@ -103,10 +103,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 
 			// Add preview box
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
-
-			// Admin custom CSS.
-			// The custom CSS should be added here as well due to ensure preview box works properly.
-			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -122,26 +118,30 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['table_title'] ) ) {
-			Merchant_Translator::register_string( $settings['table_title'], esc_html__( 'Bulk discount: title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['save_label'] ) ) {
-			Merchant_Translator::register_string( $settings['save_label'], esc_html__( 'Bulk discount: save label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['buy_text'] ) ) {
-			Merchant_Translator::register_string( $settings['buy_text'], esc_html__( 'Bulk discount: buy text', 'merchant' ) );
-		}
-		if ( ! empty( $settings['item_text'] ) ) {
-			Merchant_Translator::register_string( $settings['item_text'], esc_html__( 'Bulk discount: item text', 'merchant' ) );
-		}
-		if ( ! empty( $settings['total_text'] ) ) {
-			Merchant_Translator::register_string( $settings['total_text'], esc_html__( 'Bulk discount: total text', 'merchant' ) );
-		}
-		if ( ! empty( $settings['cart_title_text'] ) ) {
-			Merchant_Translator::register_string( $settings['cart_title_text'], esc_html__( 'Bulk discount: cart item discount title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['cart_description_text'] ) ) {
-			Merchant_Translator::register_string( $settings['cart_description_text'], esc_html__( 'Bulk discount: Cart item discount description', 'merchant' ) );
+		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
+			foreach ( $settings['offers'] as $offer ) {
+				if ( ! empty( $offer['table_title'] ) ) {
+					Merchant_Translator::register_string( $offer['table_title'], esc_html__( 'Bulk discount: title', 'merchant' ) );
+				}
+				if ( ! empty( $offer['save_label'] ) ) {
+					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Bulk discount: save label', 'merchant' ) );
+				}
+				if ( ! empty( $offer['buy_text'] ) ) {
+					Merchant_Translator::register_string( $offer['buy_text'], esc_html__( 'Bulk discount: buy text', 'merchant' ) );
+				}
+				if ( ! empty( $offer['item_text'] ) ) {
+					Merchant_Translator::register_string( $offer['item_text'], esc_html__( 'Bulk discount: item text', 'merchant' ) );
+				}
+				if ( ! empty( $offer['total_text'] ) ) {
+					Merchant_Translator::register_string( $offer['total_text'], esc_html__( 'Bulk discount: total text', 'merchant' ) );
+				}
+				if ( ! empty( $offer['cart_title_text'] ) ) {
+					Merchant_Translator::register_string( $offer['cart_title_text'], esc_html__( 'Bulk discount: cart item discount title', 'merchant' ) );
+				}
+				if ( ! empty( $offer['cart_description_text'] ) ) {
+					Merchant_Translator::register_string( $offer['cart_description_text'], esc_html__( 'Bulk discount: Cart item discount description', 'merchant' ) );
+				}
+			}
 		}
 	}
 
@@ -154,6 +154,8 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 		if ( $this->is_module_settings_page() ) {
 			wp_enqueue_style( "merchant-admin-{$this->module_id}", MERCHANT_URI . "assets/css/modules/volume-discounts/admin/preview.min.css", array(), MERCHANT_VERSION );
 			wp_enqueue_style( "merchant-{$this->module_id}", MERCHANT_URI . "assets/css/modules/{$this->module_id}/{$this->module_id}.min.css", array(), MERCHANT_VERSION );
+			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION,
+				true );
 		}
 	}
 
@@ -161,7 +163,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
@@ -198,36 +200,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					'<strong>' . wc_price( 2 ) . '</strong>',
 				),
 			) );
-
-			// Item Text
-			$preview->set_text( 'item_text', '.merchant-volume-discounts-item-text' );
-
-			// Total Text
-			$preview->set_text( 'total_text', '.merchant-volume-discounts-total-text' );
-
-			// Title Font Size
-			$preview->set_css( 'title_font_size', '.merchant-volume-discounts-title', '--merchant-font-size', 'px' );
-
-			// Title Font Weight
-			$preview->set_css( 'title_font_weight', '.merchant-volume-discounts-title', '--merchant-font-weight' );
-
-			// Title Text Color
-			$preview->set_css( 'title_text_color', '.merchant-volume-discounts-title', '--merchant-text-color' );
-
-			// Table Item Background Color
-			$preview->set_css( 'table_item_bg_color', '.merchant-volume-discounts-item', '--merchant-table-item-bg-color' );
-
-			// Table Item Text Color
-			$preview->set_css( 'table_item_text_color', '.merchant-volume-discounts-item', '--merchant-table-item-text-color' );
-
-			// Table Item Border Color
-			$preview->set_css( 'table_item_border_color', '.merchant-volume-discounts-item', '--merchant-table-item-border-color' );
-
-			// Table Label Background Color
-			$preview->set_css( 'table_label_bg_color', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-bg-color' );
-
-			// Table label Text Color
-			$preview->set_css( 'table_label_text_color', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-text-color' );
 		}
 
 		return $preview;
@@ -261,8 +233,16 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					array(
 						'settings'       => $settings,
 						'discount_tiers' => array(
-							array( 'quantity' => 10, 'discount' => 5, 'layout' => 'percentage_discount' ),
-							array( 'quantity' => 20, 'discount' => 10, 'layout' => 'percentage_discount' ),
+							array(
+								'quantity'      => 10,
+								'discount'      => 5,
+								'discount_type' => 'percentage_discount',
+								'save_label'    => esc_html__( 'Save {amount}', 'merchant' ),
+								'item_text'     => esc_html__( 'Per item:', 'merchant' ),
+								'total_text'    => esc_html__( 'Total price:', 'merchant' ),
+								'buy_text'      => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
+								'table_title'   => esc_html__( 'Buy more, save more!', 'merchant' ),
+							),
 						),
 						'product_price'  => 20,
 					)
@@ -275,52 +255,13 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Custom CSS.
-	 *
-	 * @return string
+     * Add this function for backward compatibility purpose.
+	 * @return void
 	 */
-	public function get_module_custom_css() {
-		$css = '';
-
-		// Title Font Size
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_font_size', 16, '.merchant-volume-discounts-title', '--merchant-font-size', 'px' );
-
-		// Title Font Weight
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_font_weight', 'normal', '.merchant-volume-discounts-title', '--merchant-font-weight' );
-
-		// Title Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'title_text_color', '#212121', '.merchant-volume-discounts-title', '--merchant-text-color' );
-
-		// Table Item Background Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_bg_color', '#fcf0f1', '.merchant-volume-discounts-item', '--merchant-table-item-bg-color' );
-
-		// Table Item Border Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_border_color', '#d83b3b', '.merchant-volume-discounts-item', '--merchant-table-item-border-color' );
-
-		// Table Item Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_item_text_color', 'inherit', '.merchant-volume-discounts-item', '--merchant-table-item-text-color' );
-
-		// Table Label Background Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_label_bg_color', '#d83b3b', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-bg-color' );
-
-		// Table Label Text Color
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'table_label_text_color', '#ffffff', '.merchant-volume-discounts-item-label > span', '--merchant-table-label-text-color' );
-
-		return $css;
-	}
-
-	/**
-	 * Admin custom CSS.
-	 *
-	 * @param string $css The custom CSS.
-	 *
-	 * @return string $css The custom CSS.
-	 */
-	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css();
-
-		return $css;
-	}
+    public function get_module_custom_css() {
+        // No implementation needed.
+        return;
+    }
 }
 
 

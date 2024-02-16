@@ -486,7 +486,7 @@ const styles = [
 		destination: './assets/css/modules/stock-scarcity',
 	},
 
-	// Volume discounts.
+	// Bulk discounts.
 	{
 		name: 'volumeDiscountsAdmin',
 		src: './assets/sass/modules/volume-discounts/admin/preview.scss',
@@ -671,6 +671,14 @@ const scripts = [
 		file: 'custom-addtocart-button',
 	},
 
+	// Bulk discounts
+	{
+		name: 'volumeDiscountsAdminPreview',
+		src: './assets/js/src/modules/volume-discounts/admin/preview.js',
+		destination: './assets/js/modules/volume-discounts/admin',
+		file: 'preview'
+	},
+
 	// Quick View.
 	{
 		name: 'quickView',
@@ -753,6 +761,14 @@ const scripts = [
 		name: 'addressAutocompleteAdmin',
 		src: './assets/js/src/modules/address-autocomplete/admin/preview.js',
 		destination: './assets/js/modules/address-autocomplete/admin',
+		file: 'preview'
+	},
+
+	// buy x get y
+	{
+		name: 'buyXGetYAdminPreview',
+		src: './assets/js/src/modules/buy-x-get-y/admin/preview.js',
+		destination: './assets/js/modules/buy-x-get-y/admin',
 		file: 'preview'
 	},
 

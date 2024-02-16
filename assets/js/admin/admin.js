@@ -303,27 +303,65 @@
 
         // Update the values for all our input fields and initialise the sortable repeater.
         $('.merchant-flexible-content-control').each(function () {
-          var $content = $(this).find('.merchant-flexible-content');
-          $content.sortable({
-            axis: 'y',
-            cursor: 'move',
-            helper: 'original',
-            handle: '.customize-control-flexible-content-move',
-            stop: function stop(event, ui) {
-              $content.trigger('merchant.sorted');
-              self.refreshNumbers($content);
-            }
-          });
+          var hasAccordion = $(this).hasClass('has-accordion'),
+            $content = $(this).find('.merchant-flexible-content');
+          if (hasAccordion) {
+            $content.accordion({
+              collapsible: true,
+              header: "> div > .layout-header",
+              heightStyle: "content"
+            }).sortable({
+              axis: 'y',
+              cursor: 'move',
+              helper: 'original',
+              handle: '.customize-control-flexible-content-move',
+              stop: function stop(event, ui) {
+                $content.trigger('merchant.sorted');
+                self.refreshNumbers($content);
+                $content.accordion("refresh");
+              }
+            });
+          } else {
+            $content.sortable({
+              axis: 'y',
+              cursor: 'move',
+              helper: 'original',
+              handle: '.customize-control-flexible-content-move',
+              stop: function stop(event, ui) {
+                $content.trigger('merchant.sorted');
+                self.refreshNumbers($content);
+                $content.accordion("refresh");
+              }
+            });
+          }
         });
-
+        this.updateLayoutTitle();
         // Events.
         this.events();
+      },
+      updateLayoutTitle: function updateLayoutTitle() {
+        // Update the title for all layout header.
+        $('.merchant-flexible-content .layout').each(function () {
+          var title = $(this).find('.layout-title[data-title-field]');
+          if (title.length) {
+            var input = $(this).find('.layout-body .merchant-field-' + title.data('title-field') + ' input');
+            input.on('change keyup', function () {
+              title.text($(this).val());
+            });
+            title.text(input.val());
+          }
+        });
       },
       events: function events() {
         var self = this;
         $('.customize-control-flexible-content-add-button').click(function (event) {
           event.preventDefault();
           event.stopImmediatePropagation();
+          if ($(this).parent().find('.customize-control-flexible-content-add-list a').length === 1) {
+            // If there is only one layout, trigger click on it.
+            $(this).parent().find('.customize-control-flexible-content-add-list a').trigger('click');
+            return;
+          }
           $(this).parent().find('.customize-control-flexible-content-add-list').toggleClass('active');
         });
         $('.customize-control-flexible-content-add').click(function (event) {
@@ -350,7 +388,13 @@
           if ($layout.find('.merchant-module-page-setting-field-select_ajax').length) {
             initSelectAjax($layout.find('.merchant-module-page-setting-field-select_ajax'));
           }
+          var parentDiv = $(this).closest('.merchant-flexible-content-control'),
+            hasAccordion = parentDiv.hasClass('has-accordion');
+          if (hasAccordion) {
+            parentDiv.find('.merchant-flexible-content').accordion("refresh");
+          }
           $(document).trigger('merchant-flexible-content-added', [$layout]);
+          self.updateLayoutTitle();
         });
         $('.customize-control-flexible-content-delete').click(function (event) {
           event.preventDefault();
@@ -362,6 +406,11 @@
           }
           self.refreshNumbers($content);
           $(document).trigger('merchant-flexible-content-deleted', [$item]);
+          var parentDiv = $(this).closest('.merchant-flexible-content-control'),
+            hasAccordion = parentDiv.hasClass('has-accordion');
+          if (hasAccordion) {
+            parentDiv.find('.merchant-flexible-content').accordion("refresh");
+          }
         });
       },
       refreshNumbers: function refreshNumbers($content) {
@@ -376,10 +425,14 @@
           });
         });
         $content.find('.layout').each(function (index) {
-          // We've added *refreshed* tp the attribute name in the prior loop as refreshing the numbers in the attribute can cause
-          // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
           $(this).find('input, select').each(function () {
-            $(this).attr('name', $(this).attr('name').replace('*refreshed*', ''));
+            // We've added *refreshed* to the attribute name in the prior loop as refreshing the numbers in the attribute can cause
+            // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
+            var nameAttr = $(this).attr('name');
+            if (nameAttr) {
+              // Check if name attribute exists
+              $(this).attr('name', nameAttr.replace('*refreshed*', ''));
+            }
           });
         });
         $content.parent().find('input').trigger('change.merchant');
@@ -388,6 +441,74 @@
 
     // Initialize Flexible Content.
     FlexibleContentField.init();
+
+    // Products selector.
+    // Handle click/touch event for the search results
+    $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
+      var parent = $(this).closest('.merchant-products-search-container'),
+        valueField = parent.find('.merchant-selected-products'),
+        multiple = parent.data('multiple') === 'multiple';
+      if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
+        // replace the first item
+        parent.find('.merchant-selected-products-preview ul li').remove();
+        valueField.val('');
+      }
+      $(this).children('.remove').attr('aria-label', 'Remove').html('×');
+      parent.find('.merchant-selected-products-preview ul').append($(this));
+      parent.find('.merchant-selections-products-preview').html('').hide();
+      parent.find('.merchant-search-field').val('');
+      if (valueField.val() === '') {
+        valueField.val($(this).data('id'));
+      } else {
+        valueField.val(valueField.val() + ',' + $(this).data('id'));
+      }
+    });
+
+    // Handle keyup event for the search input
+    $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
+      var parent = $(this).closest('.merchant-products-search-container');
+      if ($(this).val() !== '') {
+        parent.find('.merchant-searching').addClass('active');
+        var data = {
+          action: 'merchant_admin_products_search',
+          nonce: merchant_admin_options.ajaxnonce,
+          keyword: $(this).val(),
+          ids: parent.find('.merchant-selected-products').val()
+        };
+        $.post(merchant_admin_options.ajaxurl, data, function (response) {
+          var results = parent.find('.merchant-selections-products-preview');
+          results.show();
+          results.html(response);
+          parent.find('.merchant-searching').removeClass('active');
+        });
+      } else {
+        parent.find('.merchant-selections-products-preview').html('').hide();
+      }
+    });
+
+    // actions on selected items
+    $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
+      // Store a reference to the remove button
+      var removeButton = $(this);
+      // Ask for confirmation before removing the product
+      if (confirm(merchant_admin_options.product_delete_confirmation_message)) {
+        var parent = removeButton.closest('.merchant-products-search-container'),
+          valueField = parent.find('.merchant-selected-products'),
+          id = removeButton.parent().data('id');
+        removeButton.parent().remove();
+        $ajaxHeader.addClass('merchant-show');
+        // Remove the leading comma if it exists
+        var currentValue = valueField.val().replace(/^,/, ''),
+          // Create a regular expression pattern for the ID and surrounding commas
+          idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
+          // Replace the ID and handle surrounding commas
+          newValue = currentValue.replace(idPattern, '');
+        // Remove trailing comma if it exists
+        newValue = newValue.replace(/,$/, '');
+        // Update the valueField
+        valueField.val(newValue);
+      }
+    });
     $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {
       $('.merchant-module-page-setting-field').each(function () {
         var $field = $(this);
