@@ -10,39 +10,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 	class Merchant_Admin_Menu {
-
-		/**
-		 * Page title.
-		 */
-		public $page_title = 'Merchant';
-
-		/**
-		 * Plugin slug.
-		 */
-		public $plugin_slug = 'merchant';
-
-		/**
-		 * Plugin capability.
-		 */
-		public $capability = 'manage_options';
-
-		/**
-		 * Plugin priority.
-		 */
-		public $priority = 58;
-
-		/**
-		 * Plugin notifications.
-		 */
-		public $notifications = array();
-
-		/**
-		 * The single class instance.
-		 */
+		public $page_title       = 'Merchant';
+		public $plugin_slug      = 'merchant';
+		public $capability       = 'manage_options';
+		public $priority         = 58;
+		public $notifications    = array();
 		private static $instance = null;
 
 		/**
 		 * Instance.
+		 *
 		 */
 		public static function instance() {
 			if ( is_null( self::$instance ) ) {
@@ -53,21 +30,27 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Constructor.
+		 *
 		 */
 		public function __construct() {
+			if ( defined( 'MERCHANT_AWL_ACTIVE' ) ) {
+				return;
+			}
 
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
+			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
 		}
 
 		/**
 		 * Include required classes.
+		 *
+		 * @return void
 		 */
 		public function add_admin_menu() {
-
 			global $submenu;
 
-			// Dashboard
+			// Dashboard.
 			add_menu_page(
 				$this->page_title,
 				$this->page_title,
@@ -77,10 +60,58 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				MERCHANT_URI . 'assets/images/merchant-logo.svg',
 				$this->priority
 			);
+
+			// Dashboard Sub Item.
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Dashboard', 'merchant'),
+				esc_html__('Dashboard', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant',
+				'',
+				1
+			);
+
+			// Enabled Modules.
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Enabled Modules', 'merchant'),
+				esc_html__('Enabled Modules', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=modules',
+				'',
+				2
+			);
+
+			// Settings.
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Settings', 'merchant'),
+				esc_html__('Settings', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=settings',
+				'',
+				3
+			);
+
+			// Add 'Upgrade' link.
+			if( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+				add_submenu_page(
+					$this->plugin_slug,
+					esc_html__('Upgrade to Pro', 'merchant'),
+					esc_html__('Upgrade to Pro', 'merchant'),
+					'manage_options',
+					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
+					'',
+					4
+				);
+			}
 		}
 
 		/**
 		 * Get Notifications
+		 *
+		 * @return array
 		 */
 		public function get_notifications() {
 			$notifications = get_transient( 'merchant_notifications' );
@@ -107,6 +138,8 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Check if the latest notification is read
+		 *
+		 * @return bool
 		 */
 		public function is_latest_notification_read() {
 
@@ -133,6 +166,8 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 
 		/**
 		 * Ajax notifications.
+		 *
+		 * @return void
 		 */
 		public function ajax_notifications_read() {
 			check_ajax_referer( 'merchant', 'nonce' );
@@ -149,8 +184,60 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			wp_send_json_success();
 		}
 
+		/**
+		 * Include Page dashboard
+		 *
+		 * @return void
+		 */
 		public function page_dashboard() {
 			require_once MERCHANT_DIR . 'admin/pages/page-dashboard.php';
+		}
+
+		/**
+		 * Footer internal scripts
+		 *
+		 * @return void
+		 */
+		public function footer_internal_scripts() {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : '';
+			$nth_child_map  = array(
+				'admin.php?page=merchant' => 3,
+				'admin.php?page=merchant&section=modules' => 4,
+				'admin.php?page=merchant&section=settings' => 5,
+			);
+
+			?>
+
+			<style>
+				#adminmenu .toplevel_page_merchant .wp-submenu a[href="admin.php?page=merchant"].wp-first-item {
+					display: none;
+				}
+
+				#adminmenu .toplevel_page_merchant .wp-submenu li:nth-child(<?php echo absint( $nth_child_map[ $request_uri ] ); ?>) a {
+					color: #FFF;
+				}
+
+				#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"] {
+					background-color: green;
+					color: #FFF;
+				}
+			</style>
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function () {
+                    const merchantUpsellMenuItem = document.querySelector('#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"]');
+
+                    if (merchantUpsellMenuItem) {
+                        merchantUpsellMenuItem.addEventListener('click', function (e) {
+                            e.preventDefault();
+
+                            const href = this.getAttribute('href');
+                            window.open(href, '_blank');
+                        });
+                    }
+                });
+            </script>
+			<?php
 		}
 	}
 

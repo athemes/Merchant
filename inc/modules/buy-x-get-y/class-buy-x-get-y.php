@@ -72,12 +72,6 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		// Add preview box
 		add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
-		// only applies if module is active or module is not active but admin only
-		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() || Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
-			// Custom CSS.
-			add_filter( 'merchant_custom_css', array( $this, 'custom_css' ), 10, 2 );
-		}
-
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
@@ -91,17 +85,24 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['title'] ) ) {
-			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['buy_label'] ) ) {
-			Merchant_Translator::register_string( $settings['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['get_label'] ) ) {
-			Merchant_Translator::register_string( $settings['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['button_text'] ) ) {
-			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+		if ( ! empty( $settings['rules'] ) ) {
+			foreach ( $settings['rules'] as $rule ) {
+				if ( ! empty( $rule['offer-title'] ) ) {
+					Merchant_Translator::register_string( $rule['offer-title'], esc_html__( 'Campaign title', 'merchant' ) );
+				}
+				if ( ! empty( $rule['title'] ) ) {
+					Merchant_Translator::register_string( $rule['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
+				}
+				if ( ! empty( $rule['buy_label'] ) ) {
+					Merchant_Translator::register_string( $rule['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
+				}
+				if ( ! empty( $rule['get_label'] ) ) {
+					Merchant_Translator::register_string( $rule['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
+				}
+				if ( ! empty( $rule['button_text'] ) ) {
+					Merchant_Translator::register_string( $rule['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+				}
+			}
 		}
 	}
 
@@ -110,7 +111,8 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 *
 	 * @return void
 	 */
-	public function enqueue_admin_styles() {
+	public
+	function enqueue_admin_styles() {
 		if ( $this->is_module_settings_page() ) {
 			// Module styling.
 			wp_enqueue_style(
@@ -127,6 +129,14 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				array(),
 				MERCHANT_VERSION
 			);
+
+			wp_enqueue_script(
+				'merchant-preview-' . self::MODULE_ID,
+				MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js',
+				array(),
+				MERCHANT_VERSION,
+				true
+			);
 		}
 	}
 
@@ -134,48 +144,52 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
-	public function render_admin_preview( $preview, $module ) {
+	public
+	function render_admin_preview(
+		$preview,
+		$module
+	) {
 		if ( $module === self::MODULE_ID ) {
-			// HTML.
-			$preview->set_html( merchant_get_template_part(
-				self::MODULE_TEMPLATES,
-				'single-product',
+			// get 2 simple wc products ids
+			$product_ids = wc_get_products(
 				array(
-					'offers'   => array(
-						array(
-							'buy_quantity'   => 2,
-							'product'        => array(
-								'id'         => 31,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Vinopure Pore Purifying Gel Cleanser',
-								'price_html' => wc_price( 14 ),
-								'price'      => 14,
-								'permalink'  => '#',
+					'limit'   => 2,
+					'type'    => 'simple',
+					'orderby' => 'rand',
+					'return'  => 'ids',
+				)
+			);
+			// HTML.
+			if ( ! empty( $product_ids ) ) {
+				$preview->set_html( merchant_get_template_part(
+					self::MODULE_TEMPLATES,
+					'single-product',
+					array(
+						'offers'   => array(
+							array(
+								'rules_to_display'         => 'products',
+								'min_quantity'             => 2,
+								'product_ids'              => $product_ids[0],
+								'quantity'                 => 1,
+								'discount'                 => 10,
+								'discount_type'            => 'percentage',
+								'customer_get_product_ids' => $product_ids[1],
+								'total_discount'           => 2.8,
 							),
-							'quantity'       => 2,
-							'discount_value' => 10,
-							'layout'         => 'percentage_discount',
-							'buy_product'    => array(
-								'id'         => 97,
-								'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
-								'title'      => 'Eternal Sunset Collection Lip and Cheek',
-								'price_html' => wc_price( 12 ),
-								'price'      => 12,
-								'permalink'  => '#',
-							),
-							'total_discount' => 2.8,
 						),
+						'nonce'    => '',
+						'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
+						'product'  => $product_ids[0],
 					),
-					'nonce'    => '',
-					'settings' => Merchant_Admin_Options::get_all( self::MODULE_ID ),
-				),
-				true
-			) );
-
+					true
+				) );
+			} else {
+				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
+			}
 			// Title Text.
 			$preview->set_text( 'title', '.merchant-bogo-title' );
 
@@ -203,75 +217,9 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 
 			// Button Text
 			$preview->set_text( 'button_text', '.merchant-bogo-add-to-cart' );
-
-			// Title Font Size
-			$preview->set_css( 'title_font_size', '.merchant-bogo-title', '--merchant-font-size', 'px' );
-
-			// Title Font Weight
-			$preview->set_css( 'title_font_weight', '.merchant-bogo-title', '--merchant-font-weight' );
-
-			// Title Text Color
-			$preview->set_css( 'title_text_color', '.merchant-bogo-title', '--merchant-text-color' );
-
-			// Label Background Color
-			$preview->set_css( 'label_bg_color', '.merchant-bogo-product-label', '--merchant-bg-color' );
-
-			// Label Text Color
-			$preview->set_css( 'label_text_color', '.merchant-bogo-product-label', '--merchant-text-color' );
-
-			// Arrow Background Color
-			$preview->set_css( 'arrow_bg_color', '.merchant-bogo-arrow', '--merchant-bg-color' );
-
-			// Arrow Text Color
-			$preview->set_css( 'arrow_text_color', '.merchant-bogo-arrow', '--merchant-text-color' );
-
-			// Offer Border Color
-			$preview->set_css( 'offer_border_color', '.merchant-bogo-product-y', '--merchant-border-color' );
-
-			// Offer Border Radius
-			$preview->set_css( 'offer_border_radius', '.merchant-bogo-product-y', '--merchant-border-radius', 'px' );
 		}
 
 		return $preview;
-	}
-
-	/**
-	 * Custom CSS.
-	 *
-	 * @param string $css
-	 * @param Merchant_Custom_CSS $custom_css
-	 *
-	 * @return string
-	 */
-	public function custom_css( $css, $custom_css ) {
-		// Title Font Size.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_font_size', 16, '.merchant-bogo-title', '--merchant-font-size', 'px' );
-
-		// Title Font Weight.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_font_weight', 'normal', '.merchant-bogo-title', '--merchant-font-weight' );
-
-		// Title Text Color.
-		$css .= $custom_css->get_variable_css( $this->module_id, 'title_text_color', '#212121', '.merchant-bogo-title', '--merchant-text-color' );
-
-		// Label Background Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'label_bg_color', '#d61313', '.merchant-bogo-product-label', '--merchant-bg-color' );
-
-		// Label Text Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'label_text_color', '#fff', '.merchant-bogo-product-label', '--merchant-text-color' );
-
-		// Arrow Background Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'arrow_bg_color', '#d61313', '.merchant-bogo-arrow', '--merchant-bg-color' );
-
-		// Arrow Text Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'arrow_text_color', '#fff', '.merchant-bogo-arrow', '--merchant-text-color' );
-
-		// Offer Border Color
-		$css .= $custom_css->get_variable_css( $this->module_id, 'offer_border_color', '#cccccc', '.merchant-bogo-product-y', '--merchant-border-color' );
-
-		// Offer Border Radius
-		$css .= $custom_css->get_variable_css( $this->module_id, 'offer_border_radius', 5, '.merchant-bogo-product-y', '--merchant-border-radius', 'px' );
-
-		return $css;
 	}
 }
 

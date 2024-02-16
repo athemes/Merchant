@@ -16,6 +16,24 @@
   margin: 0 auto;
 }
 
+.merchant-flexible-content-control.buy-x-get-y-style .layout:not(.active) {
+  border-color: #5c5f62;
+}
+.merchant-flexible-content-control.buy-x-get-y-style .layout .layout-body {
+  padding: 15px;
+  grid-gap: unset;
+}
+.merchant-flexible-content-control.buy-x-get-y-style .layout .layout-body .merchant-module-page-setting-field {
+  margin-bottom: 20px;
+}
+.merchant-flexible-content-control.buy-x-get-y-style .layout .layout-body .merchant-module-page-setting-field-text input {
+  padding: 12px 8px;
+}
+
+.merchant-bogo-product-y {
+  border: 1px solid;
+}
+
 .rtl .merchant-bogo-arrow {
   right: unset;
   left: -30px;

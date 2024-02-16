@@ -3,6 +3,20 @@
 * Volume Discounts
 *
 */
+.merchant-flexible-content-control.volume-discounts-style .layout:not(.active) {
+  border-color: #5c5f62;
+}
+.merchant-flexible-content-control.volume-discounts-style .layout .layout-body {
+  padding: 15px;
+  grid-gap: unset;
+}
+.merchant-flexible-content-control.volume-discounts-style .layout .layout-body .merchant-module-page-setting-field {
+  margin-bottom: 20px;
+}
+.merchant-flexible-content-control.volume-discounts-style .layout .layout-body .merchant-module-page-setting-field-text input {
+  padding: 12px 8px;
+}
+
 .merchant-module-page-preview-browser-inner {
   display: -webkit-box;
   display: -ms-flexbox;

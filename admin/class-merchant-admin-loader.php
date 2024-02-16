@@ -91,7 +91,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 				wp_enqueue_script( 'merchant-pickr', MERCHANT_URI . 'assets/vendor/pickr/pickr.min.js', array( 'jquery' ), '1.8.2', true );
 
-				wp_enqueue_script( 'merchant-admin', MERCHANT_URI . 'assets/js/admin/admin.min.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-core', 'wp-util' ), MERCHANT_VERSION, true );
+				wp_enqueue_script( 'merchant-admin', MERCHANT_URI . 'assets/js/admin/admin.min.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-util' ), MERCHANT_VERSION, true );
 
 				wp_localize_script( 'merchant-admin', 'merchant', array(
 					'nonce'    => wp_create_nonce( 'merchant' ),
