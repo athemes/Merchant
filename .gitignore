@@ -11,6 +11,8 @@ assets/js/admin
 assets/js/modules
 assets/js/carousel.js
 assets/js/carousel.min.js
+assets/js/copy-to-clipboard.js
+assets/js/copy-to-clipboard.min.js
 assets/js/custom-addtocart-button.js
 assets/js/custom-addtocart-button.min.js
 assets/js/merchant.js
