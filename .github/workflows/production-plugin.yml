@@ -35,6 +35,9 @@ jobs:
       - name: Generate production build
         run: npm run production
 
+      - name: Generate translation files
+        run: npm run translate
+
       - name: Clean unneeded files
         run: |
           [ -f .gitattributes ] && rm .gitattributes
