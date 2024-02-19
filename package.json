@@ -40,6 +40,7 @@
   "scripts": {
     "start": "gulp",
     "zip": "gulp zip",
+    "production": "gulp production",
     "styles": "gulp styles",
     "styles-rtl": "gulp stylesRTL",
     "translate": "gulp translate",
