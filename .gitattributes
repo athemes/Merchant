@@ -15,3 +15,4 @@ README.md export-ignore
 Explanation.md export-ignore
 phpunit.xml.dist export-ignore
 phpcs.xml.dist export-ignore
+readme.md export-ignore
