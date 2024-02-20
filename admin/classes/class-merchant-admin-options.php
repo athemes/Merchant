@@ -311,6 +311,16 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			}
 
 			update_option( 'merchant', $options );
+
+			/**
+			 * Hook: merchant_options_saved, fired after saving module options.
+			 *
+			 * @param string $module  module ID.
+			 * @param array  $options module options.
+			 *
+			 * @since 1.9.3
+			 */
+			do_action( 'merchant_options_saved', $settings['module'], $options[ $settings['module'] ] );
 		}
 
 		/**
