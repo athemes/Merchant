@@ -165,7 +165,18 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$value = $options[ $module ][ $setting ];
 			}
 
-			return $value;
+			/**
+			 * Hook: merchant_get_option filter.
+			 * Fires after getting module option.
+			 *
+			 * @param mixed  $value       Option value.
+			 * @param string $module      Module ID.
+			 * @param string $setting     Setting ID.
+			 * @param mixed  $default_val Default value.
+             *
+             * @since 1.9.3
+			 */
+			return apply_filters( 'merchant_get_option', $value, $module, $setting, $default_val );
 		}
 
         /**
