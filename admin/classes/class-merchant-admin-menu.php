@@ -208,12 +208,10 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
                     font-weight: 400;
                 }
 
-                <?php //phpcs:disable ?>
-				#adminmenu .toplevel_page_merchant .wp-submenu li a[href="<?php echo $request_uri; ?>"] {
+				#adminmenu .toplevel_page_merchant .wp-submenu li a[href="<?php echo $request_uri; //phpcs:ignore ?>"] {
 					color: #fff;
                     font-weight: 600;
 				}
-                <?php //phpcs:enable ?>
 
 				#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"] {
 					background-color: green;
