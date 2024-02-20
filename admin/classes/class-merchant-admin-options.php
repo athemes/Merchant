@@ -161,7 +161,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			$value = $default_val;
 
-			if ( isset( $options[ $module ] ) && isset( $options[ $module ][ $setting ] ) ) {
+			if ( isset( $options[ $module ][ $setting ] ) ) {
 				$value = $options[ $module ][ $setting ];
 			}
 
@@ -332,6 +332,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			 * @since 1.9.3
 			 */
 			do_action( 'merchant_options_saved', $settings['module'], $options[ $settings['module'] ] );
+
+			/**
+			 * Hook: merchant_options_saved, fired after saving specific module options.
+			 *
+			 * @param array $options module options.
+			 *
+			 * @since 1.9.3
+			 */
+			do_action( "merchant_options_saved_{$settings['module']}", $options[ $settings['module'] ] );
 		}
 
 		/**
