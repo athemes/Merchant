@@ -86,6 +86,7 @@ merchant.modules = merchant.modules || {};
 			
 						}
 
+						window.dispatchEvent( new Event( 'merchant.quickview.ajax.loaded' ) );
 					}).fail( function( xhr, textStatus ) {
 
 						$content.html(textStatus);
