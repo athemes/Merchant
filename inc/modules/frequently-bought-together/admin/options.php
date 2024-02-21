@@ -44,9 +44,9 @@ Merchant_Admin_Options::create( array(
 							'default' => 'products',
 						),
 						array(
-							'id'        => 'products',
+							'id'        => 'product_to_display',
 							'type'      => 'products_selector',
-							'multiple'  => true,
+							'multiple'  => false,
 							'desc'      => esc_html__( 'Select the products that will contain the bundle.',
 								'merchant' ),
 							'condition' => array( 'rules_to_display', '==', 'products' ),
@@ -63,6 +63,20 @@ Merchant_Admin_Options::create( array(
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
 						array(
+							'id'       => 'products',
+							'title'    => esc_html__( 'Offered product(s)', 'merchant' ),
+							'type'     => 'products_selector',
+							'multiple' => true,
+							'desc'     => esc_html__( 'Select the products that will be included the bundle.', 'merchant' ),
+						),
+						array(
+							'id'      => 'external',
+							'title'   => __( 'Display the offer on all products in the bundle', 'merchant' ),
+							'type'    => 'checkbox',
+							'default' => 0,
+							'condition'   => array( 'rules_to_display', '==', 'products' ),
+						),
+						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Discount', 'merchant' ),
@@ -76,12 +90,6 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'discount_value',
 							'type'    => 'number',
 							'default' => 10,
-						),
-						array(
-							'id'      => 'external',
-							'title'   => __( 'Display discount on all products in the bundle', 'merchant' ),
-							'type'    => 'checkbox',
-							'default' => 0,
 						),
 						array(
 							'id'      => 'single_product_placement',
