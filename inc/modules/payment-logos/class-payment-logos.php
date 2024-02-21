@@ -372,7 +372,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 				<div class="merchant-payment-logos-images is-placeholder">
 					<?php foreach ( $logos as $logo_src ) : 
 						$logo_basename = basename( $logo_src );
-						$logo_alt      = ! empty( $placeholder_logos_alt[ $logo_basename ] ) ? $placeholder_logos_alt[ $logo_basename ] : '';
+						$logo_alt      = isset( $placeholder_logos_alt[ $logo_basename ] ) ? $placeholder_logos_alt[ $logo_basename ] : '';
 						?>
 						<img src="<?php echo esc_url( $logo_src ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" />
 					<?php endforeach; ?>

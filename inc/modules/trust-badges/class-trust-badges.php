@@ -354,7 +354,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 						<div class="merchant-trust-badges-images is-placeholder">
 							<?php foreach ( $badges as $badge_src ) : 
 								$image_basename = basename( $badge_src );
-								$image_alt      = ! empty( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
+								$image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
 								?>
 								<img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
 							<?php endforeach; ?>
