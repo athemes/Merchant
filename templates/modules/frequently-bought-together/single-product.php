@@ -21,7 +21,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 		<?php foreach($args['bundles'] as $parent_id => $bundles ) : ?>
 			<?php foreach ( $bundles as $key => $bundle ) : 
 				$bundle_has_variable_product = false;
-				$discount_type        = isset( $bundle['layout'] ) ? $bundle['layout'] : '';
+				$discount_type        = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
 				$discount_value       = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
 				$has_no_discount      = $discount_value <= 0;
 
