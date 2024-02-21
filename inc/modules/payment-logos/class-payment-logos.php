@@ -314,6 +314,19 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Get placeholder logos alternative descriptions.
+	 * 
+	 * @return array $logos_alt Array of logos alternative descriptions.
+	 */
+	public function get_placeholder_logos_alt_map() {
+		return array(
+			'visa.svg'   => __( 'Visa', 'merchant' ),
+			'master.svg' => __( 'Mastercard', 'merchant' ),
+			'pp.svg'     => __( 'PayPal', 'merchant' ),
+		);
+	}
+
+	/**
 	 * Render payment logos.
 	 * TODO: Render through template files.
 	 * 
@@ -331,7 +344,8 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		$settings       = $this->get_module_settings();
 		$is_placeholder = empty( $settings[ 'logos' ] ) ? true : false;
 
-		$logos  = $this->get_logos( $settings[ 'logos' ] );
+		$logos                 = $this->get_logos( $settings[ 'logos' ] );
+		$placeholder_logos_alt = $this->get_placeholder_logos_alt_map();
 
 		?>
 
@@ -347,25 +361,20 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 				<div class="merchant-payment-logos-images">
 
-					<?php foreach ( $logos as $image_id ) : ?>
-
-						<?php $imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
-
-						<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
-
-							<?php printf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
-
-						<?php endif; ?>
-
-					<?php endforeach; ?>
+					<?php foreach ( $logos as $image_id ) {
+						echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+					} ?>
 
 				</div>
 
 			<?php else : ?>
 
 				<div class="merchant-payment-logos-images is-placeholder">
-					<?php foreach ( $logos as $logo_src ) : ?>
-						<img src="<?php echo esc_url( $logo_src ); ?>" />
+					<?php foreach ( $logos as $logo_src ) : 
+						$logo_basename = basename( $logo_src );
+						$logo_alt      = ! empty( $placeholder_logos_alt[ $logo_basename ] ) ? $placeholder_logos_alt[ $logo_basename ] : '';
+						?>
+						<img src="<?php echo esc_url( $logo_src ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" />
 					<?php endforeach; ?>
 				</div>
 

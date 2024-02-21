@@ -299,6 +299,19 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Get placeholder badges alternative descriptions.
+	 * 
+	 * @return array $logos_alt Array of badges alternative descriptions.
+	 */
+	public function get_placeholder_badges_alt_map() {
+		return array(
+			'badge1.svg' => __( 'Original', 'merchant' ),
+			'badge2.svg' => __( '24/7 Support', 'merchant' ),
+			'badge3.svg' => __( 'Satisfaction', 'merchant' ),
+		);
+	}
+
+	/**
 	 * Render trust badges.
 	 * TODO: Render through template files.
 	 * 
@@ -313,9 +326,10 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 		
-		$settings       = $this->get_module_settings();
-		$is_placeholder = empty( $settings[ 'badges' ] ) ? true : false;
-		$badges         = $this->get_badges( $settings[ 'badges' ] );
+		$settings               = $this->get_module_settings();
+		$is_placeholder         = empty( $settings[ 'badges' ] ) ? true : false;
+		$badges                 = $this->get_badges( $settings[ 'badges' ] );
+		$placeholder_badges_alt = $this->get_placeholder_badges_alt_map();
 
 		?>
 
@@ -329,25 +343,20 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 					<div class="merchant-trust-badges-images">
 
-						<?php foreach ( $badges as $image_id ) : ?>
-
-							<?php $imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
-
-							<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
-
-								<?php echo wp_kses_post( wp_get_attachment_image( $image_id ) ) ?>
-
-							<?php endif; ?>
-
-						<?php endforeach; ?>
+						<?php foreach ( $badges as $image_id ) {
+							echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+						} ?>
 
 					</div>
 
 					<?php else : ?>
 
 						<div class="merchant-trust-badges-images is-placeholder">
-							<?php foreach ( $badges as $badge_src ) : ?>
-								<img src="<?php echo esc_url( $badge_src ); ?>" />
+							<?php foreach ( $badges as $badge_src ) : 
+								$image_basename = basename( $badge_src );
+								$image_alt      = ! empty( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
+								?>
+								<img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
 							<?php endforeach; ?>
 						</div>
 
