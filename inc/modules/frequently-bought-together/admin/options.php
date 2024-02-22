@@ -96,9 +96,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 							'options' => array(
-								'after-summary' => __( 'After product summary', 'merchant' ),
-								'after-tabs'    => __( 'After product tabs', 'merchant' ),
-								'bottom'        => __( 'At the bottom', 'merchant' ),
+								'after-summary' => esc_html__( 'After product summary', 'merchant' ),
+								'after-tabs'    => esc_html__( 'After product tabs', 'merchant' ),
+								'bottom'        => esc_html__( 'At the bottom', 'merchant' ),
 							),
 							'default' => 'after-summary',
 						),
@@ -107,44 +107,44 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'title',
 							'type'    => 'text',
-							'title'   => __( 'Title', 'merchant' ),
-							'default' => __( 'Frequently Bought Together', 'merchant' ),
+							'title'   => esc_html__( 'Title', 'merchant' ),
+							'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
 						),
 
 						array(
 							'id'      => 'price_label',
 							'type'    => 'text',
-							'title'   => __( 'Price label', 'merchant' ),
-							'default' => __( 'Bundle price', 'merchant' ),
+							'title'   => esc_html__( 'Price label', 'merchant' ),
+							'default' => esc_html__( 'Bundle price', 'merchant' ),
 						),
 
 						array(
 							'id'      => 'save_label',
 							'type'    => 'text',
-							'title'   => __( 'You save label', 'merchant' ),
-							'default' => __( 'You save: {amount}', 'merchant' ),
+							'title'   => esc_html__( 'You save label', 'merchant' ),
+							'default' => esc_html__( 'You save: {amount}', 'merchant' ),
 						),
 
 						array(
 							'id'      => 'no_variation_selected_text',
 							'type'    => 'text',
-							'title'   => __( 'No variation selected text', 'merchant' ),
-							'default' => __( 'Please select an option to see your savings.', 'merchant' ),
+							'title'   => esc_html__( 'No variation selected text', 'merchant' ),
+							'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
 						),
 
 						array(
 							'id'      => 'no_variation_selected_text_has_no_discount',
 							'type'    => 'text',
-							'title'   => __( 'No variation selected text (no discount)', 'merchant' ),
-							'desc'    => __( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
-							'default' => __( 'Please select an option to see the total price.', 'merchant' ),
+							'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
+							'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
+							'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
 						),
 
 						array(
 							'id'      => 'button_text',
 							'type'    => 'text',
-							'title'   => __( 'Button text', 'merchant' ),
-							'default' => __( 'Add to cart', 'merchant' ),
+							'title'   => esc_html__( 'Button text', 'merchant' ),
+							'default' => esc_html__( 'Add to cart', 'merchant' ),
 						),
 
 						// style settings
@@ -172,7 +172,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'bundle_border_radius',
 							'type'    => 'range',
-							'title'   => __( 'Bundle border radius', 'merchant' ),
+							'title'   => esc_html__( 'Bundle border radius', 'merchant' ),
 							'min'     => 0,
 							'max'     => 100,
 							'step'    => 1,
