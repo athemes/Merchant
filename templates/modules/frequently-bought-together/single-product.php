@@ -28,7 +28,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 				?>
 				<?php if ( empty( $bundle['products'] ) ) continue ?>
 				<div class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>">
-					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
+					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) : 
 								$is_variable_product  = isset( $product['type'] ) && 'variable' === $product['type'] ? true : false;
