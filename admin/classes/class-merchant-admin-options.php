@@ -1628,7 +1628,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 	                                echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
                                 } ?>>
 									<?php
-									echo esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) ?>
+									echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
                                 </div>
                                 <div class="layout-actions">
                                     <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
