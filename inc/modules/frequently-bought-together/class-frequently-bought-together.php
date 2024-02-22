@@ -110,23 +110,27 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['title'] ) ) {
-			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['price_label'] ) ) {
-			Merchant_Translator::register_string( $settings['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['save_label'] ) ) {
-			Merchant_Translator::register_string( $settings['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['no_variation_selected_text'] ) ) {
-			Merchant_Translator::register_string( $settings['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
-		}
-		if ( ! empty( $settings['no_variation_selected_text_has_no_discount'] ) ) {
-			Merchant_Translator::register_string( $settings['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
-		}
-		if ( ! empty( $settings['button_text'] ) ) {
-			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
+		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
+			foreach ( $settings['offers'] as $offer ) {
+				if ( ! empty( $offer['title'] ) ) {
+					Merchant_Translator::register_string( $offer['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
+				}
+				if ( ! empty( $offer['price_label'] ) ) {
+					Merchant_Translator::register_string( $offer['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
+				}
+				if ( ! empty( $offer['save_label'] ) ) {
+					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
+				}
+				if ( ! empty( $offer['no_variation_selected_text'] ) ) {
+					Merchant_Translator::register_string( $offer['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
+				}
+				if ( ! empty( $offer['no_variation_selected_text_has_no_discount'] ) ) {
+					Merchant_Translator::register_string( $offer['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
+				}
+				if ( ! empty( $offer['button_text'] ) ) {
+					Merchant_Translator::register_string( $offer['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
+				}
+			}
 		}
 	}
 
