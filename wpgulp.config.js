@@ -834,7 +834,15 @@ const scripts = [
 		src: './assets/js/src/modules/product-labels/admin/preview.js',
 		destination: './assets/js/modules/product-labels/admin/',
 		file: 'preview'
-	}
+	},
+
+	// frequently bought together
+	{
+		name: 'frequentlyBoughtTogetherAdmin',
+		src: './assets/js/src/modules/frequently-bought-together/admin/preview.js',
+		destination: './assets/js/modules/frequently-bought-together/admin/',
+		file: 'preview'
+	},
 ];
 
 // Watch options.
