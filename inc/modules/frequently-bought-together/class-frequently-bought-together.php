@@ -96,10 +96,6 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
-
-			// Custom CSS.
-			// The custom CSS should be added here as well due to ensure preview box works properly.
-			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 	}
 
@@ -239,27 +235,9 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function get_module_custom_css() {
-		$css = '';
+		// For backward compatibility, no implementation is needed.
 
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'plus_bg_color', '#212121', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-bg-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'plus_text_color', '#fff', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-text-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'bundle_border_color', '#ededed', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'bundle_border_radius', 5, '.merchant-frequently-bought-together-bundle-product', '--merchant-border-radius', 'px' );
-
-		return $css;
-	}
-
-	/**
-	 * Admin custom CSS.
-	 *
-	 * @param string $css The custom CSS.
-	 *
-	 * @return string $css The custom CSS.
-	 */
-	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css();
-
-		return $css;
+		return '';
 	}
 }
 
