@@ -191,10 +191,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 					10 => array(
 						array(
 							'discount_value'         => 20,
+							'product_to_display'     => 97,
 							'products'               => array(
 								array(
 									'id'         => 97,
-									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'image'      => '<img src="' . MERCHANT_URI
+									                . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
 									'title'      => 'Eternal Sunset Collection Lip and Cheek',
 									'price_html' => wc_price( 12 ),
 									'price'      => 12,
@@ -202,14 +204,15 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 								),
 								array(
 									'id'         => 96,
-									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'image'      => '<img src="' . MERCHANT_URI
+									                . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
 									'title'      => 'Vinopure Pore Purifying Gel Cleanser',
 									'price_html' => wc_price( 14 ),
 									'price'      => 14,
 									'permalink'  => '#',
 								),
 							),
-							'layout'                 => 'percentage_discount',
+							'discount_type'          => 'percentage_discount',
 							'total_products'         => 3,
 							'total_price'            => 47,
 							'total_discount'         => 12,
