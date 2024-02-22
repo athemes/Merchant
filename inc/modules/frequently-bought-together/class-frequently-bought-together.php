@@ -154,22 +154,6 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		if ( $module === self::MODULE_ID ) {
 
 			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
-
-			$preview->set_text( 'title', '.merchant-frequently-bought-together-title' );
-			$preview->set_text( 'price_label', '.merchant-frequently-bought-together-bundle-total' );
-			$preview->set_text( 'save_label', '.merchant-frequently-bought-together-bundle-save', array(
-				array(
-					'{amount}',
-				),
-				array(
-					wc_price( 12 ),
-				),
-			) );
-			$preview->set_text( 'button_text', '.merchant-add-bundle-to-cart' );
-			$preview->set_css( 'plus_bg_color', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-bg-color' );
-			$preview->set_css( 'plus_text_color', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-text-color' );
-			$preview->set_css( 'bundle_border_color', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-color' );
-			$preview->set_css( 'bundle_border_radius', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-radius', 'px' );
 		}
 
 		return $preview;
