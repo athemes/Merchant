@@ -10,6 +10,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$user_condition_options = array();
+$user_roles             = get_editable_roles();
+
+if ( ! empty( $user_roles ) ) {
+	foreach ( $user_roles as $role_id => $role_data ) {
+		$user_condition_options[] = array(
+			'id'   => $role_id,
+			'text' => $role_data['name'],
+		);
+	}
+}
+
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Offers', 'merchant' ),
 	'module' => Merchant_Volume_Discounts::MODULE_ID,
@@ -146,6 +158,40 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Cart item discount description', 'merchant' ),
 							'default' => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
 							'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
+						),
+
+						array(
+							'id'       => 'user_condition',
+							'type'     => 'select_ajax',
+							'title'    => esc_html__( 'User Condition', 'merchant' ),
+							'desc'     => esc_html__( 'This will limit the offer to selected user roles. Leave empty for all.', 'merchant' ),
+							'source'   => 'options',
+							'multiple' => true,
+							'classes'  => array(
+								'flex-grow',
+								'js-user-condition',
+							),
+							'options'  => array(
+								array(
+									'id'      => 'user-auth',
+									'text'    => esc_html__( 'User Auth', 'merchant' ),
+									'options' => array(
+										array(
+											'id'   => 'logged-in',
+											'text' => esc_html__( 'Logged In', 'merchant' ),
+										),
+										array(
+											'id'   => 'logged-out',
+											'text' => esc_html__( 'Logged Out', 'merchant' ),
+										),
+									),
+								),
+								array(
+									'id'      => 'user-roles',
+									'text'    => esc_html__( 'User Roles', 'merchant' ),
+									'options' => $user_condition_options,
+								),
+							),
 						),
 
 						// style settings
