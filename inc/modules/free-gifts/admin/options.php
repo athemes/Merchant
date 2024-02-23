@@ -11,6 +11,82 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Offers', 'merchant' ),
+	'module' => Merchant_Free_Gifts::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'           => 'offers',
+			'type'         => 'flexible_content',
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'style'        => Merchant_Free_Gifts::MODULE_ID . '-style default',
+			'sorting'      => true,
+			'accordion'    => false,
+			'layouts'      => array(
+				'spending' => array(
+					'title'  => esc_html__( 'Spending Based', 'merchant' ),
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
+					'fields'      => array(
+						array(
+							'id'      => 'offer-title',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Offer name', 'merchant' ),
+							'default' => esc_html__( 'Campaign', 'merchant' ),
+						),
+						array(
+							'id'       => 'product',
+							'type'     => 'products_selector',
+							'title'    => esc_html__( 'Product', 'merchant' ),
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the products that will contain the bundle.',
+								'merchant' ),
+						),
+						'amount' => array(
+							'id'     => 'amount',
+							'title'  => esc_html__( 'Spending Goal To Receive This Product For Free', 'merchant' ),
+							'type'   => 'number',
+							'append' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
+						),
+					),
+				),
+				'coupon'   => array(
+					'title'  => esc_html__( 'Coupon Based', 'merchant' ),
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
+					'fields'      => array(
+						array(
+							'id'      => 'offer-title',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Offer name', 'merchant' ),
+							'default' => esc_html__( 'Campaign', 'merchant' ),
+						),
+						array(
+							'id'       => 'product',
+							'type'     => 'products_selector',
+							'title'    => esc_html__( 'Product', 'merchant' ),
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the products that will contain the bundle.',
+								'merchant' ),
+						),
+						'coupon' => array(
+							'id'    => 'coupon',
+							'title' => esc_html__( 'Use Coupon To Receive This Product For Free', 'merchant' ),
+							'type'  => 'wc_coupons',
+						),
+					),
+				),
+			),
+			'default'      => array(
+				array(
+					'layout'        => 'spending',
+					'min_quantity'  => 2,
+					'discount'      => 10,
+					'discount_type' => 'percentage_discount',
+				),
+			),
+		),
+	),
+) );
+
 // Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Free_Gifts::MODULE_ID,
