@@ -507,8 +507,6 @@
   transition: all .2s;
 
   &.merchant-module-deactivated-by-bp {
-    text-transform: uppercase;
-
     .merchant-modules-list-item-icon,
     .merchant-modules-list-item-content {
       opacity: 0.5;
