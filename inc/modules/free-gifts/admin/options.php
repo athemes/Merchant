@@ -21,7 +21,7 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'style'        => Merchant_Free_Gifts::MODULE_ID . '-style default',
 			'sorting'      => true,
-			'accordion'    => false,
+			'accordion'    => true,
 			'layouts'      => array(
 				'spending' => array(
 					'title'  => esc_html__( 'Spending Based', 'merchant' ),
