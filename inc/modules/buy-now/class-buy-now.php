@@ -88,7 +88,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
-		add_action( 'wp', array( $this, 'buy_now_listener' ) );
+		add_action( 'wp_loaded', array( $this, 'buy_now_listener' ) );
 
 		// Single product buy now button.
 		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
@@ -228,10 +228,13 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		if ( $product_id ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : '';
-			if ( $variation_id ) {
-				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
+
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $quantity = (int) sanitize_text_field( $_REQUEST['quantity'] ?? 1 );
+            if ( $variation_id ) {
+				WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
 			} else {
-				WC()->cart->add_to_cart( $product_id, 1 );
+				WC()->cart->add_to_cart( $product_id, $quantity );
 			}
 
 			wp_safe_redirect( wc_get_checkout_url() );
