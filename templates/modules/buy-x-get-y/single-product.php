@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 
 if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
-	$product = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( wc_get_product( $args['product'] ) ) : wc_get_product();
+	$product = Merchant_Pro_Buy_X_Get_Y::product_args( isset( $args['product'] ) ? wc_get_product( $args['product'] ) : wc_get_product() );
 } else {
-	$product = wc_get_product();
+	return;
 }
 ?>
 <div class="merchant-bogo">
