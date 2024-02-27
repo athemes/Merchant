@@ -78,8 +78,7 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
 			echo isset( $offer['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['offer_border_color'] . ';' ) : '';
 			echo isset( $offer['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['offer_border_radius'] . 'px;' ) : ''; ?>"
             ">
-            <form class="merchant-bogo-form" data-product="<?php
-			echo esc_attr( $buy_product['id'] ); ?>">
+            <form class="merchant-bogo-form" data-product="<?php echo isset( $buy_product['id'] ) ? esc_attr( $buy_product['id'] ) : ''; ?>">
                 <div class="merchant-bogo-product-label merchant-bogo-product-get-label" style="<?php
 				echo isset( $offer['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['label_bg_color'] . ';' ) : '';
 				echo isset( $offer['label_text_color'] ) ? esc_attr( 'color: ' . $offer['label_text_color'] . ';' ) : ''; ?>">
