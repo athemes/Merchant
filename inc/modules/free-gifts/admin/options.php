@@ -24,7 +24,7 @@ Merchant_Admin_Options::create( array(
 			'accordion'    => true,
 			'layouts'      => array(
 				'spending' => array(
-					'title'  => esc_html__( 'Spending Based', 'merchant' ),
+					'title'       => esc_html__( 'Spending Based', 'merchant' ),
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
@@ -38,8 +38,7 @@ Merchant_Admin_Options::create( array(
 							'type'     => 'products_selector',
 							'title'    => esc_html__( 'Product', 'merchant' ),
 							'multiple' => false,
-							'desc'     => esc_html__( 'Select the products that will contain the bundle.',
-								'merchant' ),
+							'desc'     => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
 						),
 						'amount' => array(
 							'id'     => 'amount',
@@ -50,7 +49,7 @@ Merchant_Admin_Options::create( array(
 					),
 				),
 				'coupon'   => array(
-					'title'  => esc_html__( 'Coupon Based', 'merchant' ),
+					'title'       => esc_html__( 'Coupon Based', 'merchant' ),
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(

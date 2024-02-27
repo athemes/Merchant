@@ -37,7 +37,7 @@ Merchant_Admin_Options::create( array(
 							'type'     => 'products_selector',
 							'title'    => esc_html__( 'Product', 'merchant' ),
 							'multiple' => false,
-							'desc'     => esc_html__( 'Select the products that will contain the bundle.',
+							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.',
 								'merchant' ),
 						),
 						array(
