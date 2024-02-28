@@ -11,13 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Offers', 'merchant' ),
+	'title'  => esc_html__( 'Bundle Offers', 'merchant' ),
 	'module' => Merchant_Frequently_Bought_Together::MODULE_ID,
 	'fields' => array(
 		array(
 			'id'           => 'offers',
 			'type'         => 'flexible_content',
-			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'button_label' => esc_html__( 'Add New Bundle', 'merchant' ),
 			'style'        => Merchant_Frequently_Bought_Together::MODULE_ID . '-style default',
 			'sorting'      => true,
 			'accordion'    => true,
@@ -46,10 +46,10 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'       => 'product_to_display',
 							'type'     => 'products_selector',
-							'title'    => esc_html__( 'Product', 'merchant' ),
+							'title'    => esc_html__( 'Select a product', 'merchant' ),
 							'multiple' => false,
-							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.',
-								'merchant' ),
+							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
 							'id'          => 'category_slugs',
@@ -64,7 +64,7 @@ Merchant_Admin_Options::create( array(
 						),
 						array(
 							'id'       => 'products',
-							'title'    => esc_html__( 'Offered product(s)', 'merchant' ),
+							'title'    => esc_html__( 'Products to offer', 'merchant' ),
 							'type'     => 'products_selector',
 							'multiple' => true,
 							'desc'     => esc_html__( 'Select the products that will be included the bundle.', 'merchant' ),
@@ -104,9 +104,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 							'options' => array(
-								'after-summary' => esc_html__( 'After product summary', 'merchant' ),
-								'after-tabs'    => esc_html__( 'After product tabs', 'merchant' ),
-								'bottom'        => esc_html__( 'At the bottom', 'merchant' ),
+								'after-summary' => esc_html__( 'After Product Summary', 'merchant' ),
+								'after-tabs'    => esc_html__( 'After Product Tabs', 'merchant' ),
+								'bottom'        => esc_html__( 'At the Bottom', 'merchant' ),
 							),
 							'default' => 'after-summary',
 						),
@@ -115,7 +115,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'title',
 							'type'    => 'text',
-							'title'   => esc_html__( 'Title', 'merchant' ),
+							'title'   => esc_html__( 'Bundle title', 'merchant' ),
 							'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
 						),
 
