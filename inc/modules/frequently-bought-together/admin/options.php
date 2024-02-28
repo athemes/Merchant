@@ -33,23 +33,23 @@ Merchant_Admin_Options::create( array(
 							'default' => esc_html__( 'Campaign', 'merchant' ),
 						),
 						array(
-							'id'       => 'product_to_display',
-							'type'     => 'products_selector',
-							'title'    => esc_html__( 'Product', 'merchant' ),
-							'multiple' => false,
-							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.',
-								'merchant' ),
-						),
-						array(
 							'id'      => 'rules_to_display',
 							'type'    => 'select',
-							'title'   => esc_html__( 'Show on', 'merchant' ),
+							'title'   => esc_html__( 'Trigger', 'merchant' ),
 							'options' => array(
 								'all'        => esc_html__( 'Any product', 'merchant' ),
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
 								'categories' => esc_html__( 'Product categories', 'merchant' ),
 							),
 							'default' => 'products',
+						),
+						array(
+							'id'       => 'product_to_display',
+							'type'     => 'products_selector',
+							'title'    => esc_html__( 'Product', 'merchant' ),
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.',
+								'merchant' ),
 						),
 						array(
 							'id'          => 'category_slugs',
