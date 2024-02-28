@@ -10,18 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$user_condition_options = array();
-$user_roles             = get_editable_roles();
-
-if ( ! empty( $user_roles ) ) {
-	foreach ( $user_roles as $role_id => $role_data ) {
-		$user_condition_options[] = array(
-			'id'   => $role_id,
-			'text' => $role_data['name'],
-		);
-	}
-}
-
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Offers', 'merchant' ),
 	'module' => Merchant_Volume_Discounts::MODULE_ID,
@@ -161,37 +149,40 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'       => 'user_condition',
-							'type'     => 'select_ajax',
-							'title'    => esc_html__( 'User Condition', 'merchant' ),
-							'desc'     => esc_html__( 'This will limit the offer to selected user roles. Leave empty for all.', 'merchant' ),
-							'source'   => 'options',
-							'multiple' => true,
-							'classes'  => array(
-								'flex-grow',
-								'js-user-condition',
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'logged-in' => esc_html__( 'Logged in Users', 'merchant' ),
+								'roles'     => esc_html__( 'Specific Roles', 'merchant' ),
+								'customers' => esc_html__( 'Specific Customers', 'merchant' ),
 							),
-							'options'  => array(
-								array(
-									'id'      => 'user-auth',
-									'text'    => esc_html__( 'User Auth', 'merchant' ),
-									'options' => array(
-										array(
-											'id'   => 'logged-in',
-											'text' => esc_html__( 'Logged In', 'merchant' ),
-										),
-										array(
-											'id'   => 'logged-out',
-											'text' => esc_html__( 'Logged Out', 'merchant' ),
-										),
-									),
-								),
-								array(
-									'id'      => 'user-roles',
-									'text'    => esc_html__( 'User Roles', 'merchant' ),
-									'options' => $user_condition_options,
-								),
-							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the users of selected roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Customer', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_customers_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'customers' ),
 						),
 
 						// style settings

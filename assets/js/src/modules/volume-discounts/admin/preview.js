@@ -42,43 +42,4 @@
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
-
-    // User Condition Select2
-    const $userConditionSelect = $( '.js-user-condition select' );
-
-    $userConditionSelect.on( 'select2:opening', function ( e ) {
-        const selectedValues = $( this ).val();
-
-        if ( selectedValues.includes( 'logged-out' ) ) {
-            $( this ).find( 'option' ).prop( 'disabled', true );
-        } else {
-            if ( selectedValues.length ) {
-                $( this ).find( 'option[value="logged-out"]' ).prop( 'disabled', true );
-            }
-        }
-    } );
-
-    $userConditionSelect.on( 'select2:select', function ( e ) {
-        const selectedValue = e.params.data.id;
-
-        if ( selectedValue !== 'logged-out' ) {
-            $( this ).find( 'option[value="logged-out"]' ).prop( 'disabled', true );
-        } else {
-            $( this ).find( 'option' ).prop( 'disabled', true );
-        }
-    } );
-
-    $userConditionSelect.on('select2:unselect', function ( e ) {
-        const unSelectedValue = e.params.data.id;
-
-        if ( unSelectedValue === 'logged-out' ) {
-            $( this ).find( 'option' ).prop( 'disabled', false );
-        }
-
-        const selectedValues = $( this ).val();
-        if ( ! selectedValues.length ) {
-            $( this ).find( 'option[value="logged-out"]' ).prop( 'disabled', false );
-        }
-    } );
-
 })(jQuery);

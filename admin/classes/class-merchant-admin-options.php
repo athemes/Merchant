@@ -37,6 +37,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
+
+            // Todo
+            add_action( 'woocommerce_created_customer', array( $this, 'clear_customer_choices_cache' ) );
+            add_action( 'woocommerce_delete_customer', array( $this, 'clear_customer_choices_cache' ) );
 		}
 
 		/**
@@ -1930,6 +1934,75 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			return $choices;
 		}
+
+		/**
+         * Get User Roles choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_user_roles_select2_choices() {
+			$choices    = array();
+			$user_roles = get_editable_roles();
+
+			if ( ! empty( $user_roles ) ) {
+				foreach ( $user_roles as $role_id => $role_data ) {
+					$choices[] = array(
+						'id'   => $role_id,
+						'text' => $role_data['name'],
+					);
+				}
+			}
+
+			return $choices;
+		}
+
+		/**
+         * Get Customers choices for select2.
+         *
+		 * @return array
+		 */
+        public static function get_customers_select2_choices() {
+	        $cache_key = 'customers_select2_choices';
+	        $choices   = get_transient( $cache_key );
+
+            if ( ! empty( $choices ) && is_array( $choices ) ) {
+	            return $choices;
+            }
+
+	        // Get users with the 'customer' role
+	        $customer_users = get_users(
+		        array(
+			        'role'   => 'customer',
+			        'fields' => array( 'ID', 'display_name' ),
+		        )
+            );
+
+	        $choices = array();
+	        if ( ! empty( $customer_users ) ) {
+		        foreach ( $customer_users as $user ) {
+			        $choices[] = array(
+				        'id'   => $user->ID,
+				        'text' => $user->display_name,
+			        );
+		        }
+	        }
+
+	        // Cache the choices with no expiration. Will be cleared using `clear_customer_choices_cache`
+	        set_transient( $cache_key, $choices );
+
+	        return $choices;
+		}
+
+		/**
+         * Clear customers cache.
+         *
+		 * @param $customer_id
+		 *
+		 * @return void
+		 */
+		public function clear_customer_choices_cache( $customer_id ) {
+			delete_transient( 'customers_select2_choices' );
+        }
 	}
 
 	Merchant_Admin_Options::instance();
