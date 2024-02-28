@@ -77,6 +77,12 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
+							'id'      => 'enable_discount',
+							'type'    => 'switcher',
+							'title'   => __( 'Do you want to offer a discount on this field?', 'merchant' ),
+							'default' => 0,
+						),
+						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Discount', 'merchant' ),
@@ -85,11 +91,13 @@ Merchant_Admin_Options::create( array(
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
 							'default' => 'percentage',
+							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 						array(
 							'id'      => 'discount_value',
 							'type'    => 'number',
 							'default' => 10,
+							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 						array(
 							'id'      => 'single_product_placement',
