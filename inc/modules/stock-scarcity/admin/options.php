@@ -19,7 +19,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'single_product_placement',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+			'title'   => esc_html__( 'Placement on product', 'merchant' ),
 			'options' => array(
 				'after-cart-form'  => esc_html__( 'After add to cart form', 'merchant' ),
 				'before-cart-form' => esc_html__( 'Before add to cart form', 'merchant' ),
@@ -33,6 +33,28 @@ Merchant_Admin_Options::create( array(
 			'default' => 50,
 		),
 
+	),
+) );
+
+
+// Display Settings
+Merchant_Admin_Options::create( array(
+	'module' => Merchant_Stock_Scarcity::MODULE_ID,
+	'title'  => esc_html__( 'Display Settings', 'merchant' ),
+	'fields' => array(
+				
+		array(
+			'id'      => 'display-catalog',
+			'type'    => 'switcher',
+			'title'   => __( 'Show on product catalog', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'      => 'display-product',
+			'type'    => 'switcher',
+			'title'   => __( 'Show on single product page', 'merchant' ),
+			'default' => 1,
+		),
 	),
 ) );
 
