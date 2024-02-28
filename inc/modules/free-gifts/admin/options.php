@@ -74,7 +74,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'spending_text',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Spending text', 'merchant' ),
-			'default' => esc_html__( 'Spend {amount} more to receive this free gift!', 'merchant' ),
+			'default' => esc_html__( 'Spend {amount} more to receive this gift!', 'merchant' ),
 		),
 
 		array(
