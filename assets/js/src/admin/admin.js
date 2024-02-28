@@ -212,6 +212,21 @@
 
         });
 
+        // Add support for toggle field inside flexible content.
+        const flexibleToggleField = {
+            init: function (field) {
+                this.events();
+            },
+
+            events: function () {
+                $(document).on('click', '.merchant-flexible-content .merchant-toggle-switch .toggle-switch-label span', function () {
+                    let checkBox = $(this).closest('.merchant-toggle-switch').find('.toggle-switch-checkbox');
+                    console.log(checkBox)
+                    checkBox.prop('checked', !checkBox.prop('checked'));
+                }).trigger('merchant.change');
+            }
+        }
+
         // Sortable.
         const SortableField = {
             init: function (field) {
@@ -270,6 +285,7 @@
 
         // Intialize Sortable.
         SortableField.init();
+        flexibleToggleField.init();
 
         // Sortable Repeater.
         const SortableRepeaterField = {
@@ -621,7 +637,6 @@
                 valueField.val(newValue);
             }
         });
-
 
 
         $(document).on('merchant-admin-check-fields merchant-flexible-content-added', function () {
