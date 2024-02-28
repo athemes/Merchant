@@ -506,6 +506,8 @@
                         hasAccordion = parentDiv.hasClass('has-accordion')
                     if (hasAccordion) {
                         parentDiv.find('.merchant-flexible-content').accordion("refresh");
+                        // Expand the accordion last added
+                        parentDiv.find('.merchant-flexible-content').accordion("option", "active", -1);
                     }
 
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
