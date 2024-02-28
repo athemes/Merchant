@@ -20,7 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$discount_type        = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
 				$discount_value       = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
 				$has_no_discount      = $discount_value <= 0;
-
+				if ( ! isset( $bundle['enable_discount'] ) ) {
+					$has_no_discount = true;
+					$bundle['discount_value'] = 0;
+				}
 				?>
 				<?php if ( empty( $bundle['products'] ) ) continue ?>
                 <h3 class="merchant-frequently-bought-together-title">
