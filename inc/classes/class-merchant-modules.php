@@ -40,7 +40,6 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-
 			add_action( 'wp_ajax_merchant_module_activate', array( $this, 'activate_module' ) );
 			add_action( 'wp_ajax_merchant_module_deactivate', array( $this, 'deactivate_module' ) );
 			add_action( 'wp_ajax_merchant_module_feedback', array( $this, 'feedback_module' ) );
@@ -65,6 +64,13 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 				$modules[ $module ] = true;
 
 				update_option( self::$option, $modules );
+
+				/**
+				 * Hook 'merchant_admin_module_activated'
+				 * 
+				 * @since 1.9.3
+				 */
+				do_action( 'merchant_admin_module_activated', $module );
 
 				wp_send_json_success();
 
@@ -92,6 +98,13 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 				$modules[ $module ] = false;
 
 				update_option( self::$option, $modules );
+
+				/**
+				 * Hook 'merchant_admin_module_deactivated'
+				 * 
+				 * @since 1.9.3
+				 */
+				do_action( 'merchant_admin_module_deactivated', $module );
 
 				wp_send_json_success();
 
