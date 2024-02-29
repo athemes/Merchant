@@ -1,0 +1,34 @@
+.merchant-theme-flatsome {
+
+	/* Sticky Add To Cart */
+	.merchant-sticky-add-to-cart-wrapper {
+		.merchant-sticky-add-to-cart-wrapper-content {
+			.merchant-sticky-add-to-cart-item.product-addtocart {
+				form.cart {
+					margin-bottom: 0;
+
+					.ux-quantity__button.ux-quantity__button--minus,
+					.ux-quantity__button.ux-quantity__button--plus {
+						margin: 0;
+					}
+
+					.input-text.qty {
+						height: auto;
+					}
+					
+					.single_add_to_cart_button {
+						margin-bottom: 0;
+					}
+					
+				}
+			}
+		}
+	}
+
+	.merchant-sticky-add-to-cart-wrapper-content-mobile {
+		.button.merchant-mobile-sticky-addtocart-button {
+			margin-bottom: 0;
+		}
+	}
+		
+}
