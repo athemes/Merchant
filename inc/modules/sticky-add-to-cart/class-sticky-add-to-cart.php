@@ -60,7 +60,7 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 			'hide_product_price'        => false,
 			'elements_spacing'          => 35,
 			'scroll_hide'               => 0,
-			'visibility'                => 'desktop',
+			'visibility'                => 'all',
 			'allow_third_party_plugins' => 0,
 		);
 
