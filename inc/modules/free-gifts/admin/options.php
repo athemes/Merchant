@@ -34,6 +34,23 @@ Merchant_Admin_Options::create( array(
 							'default' => esc_html__( 'Campaign', 'merchant' ),
 						),
 						array(
+							'id'      => 'rules_to_display',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
+							'options' => array(
+								'all'        => esc_html__( 'Any product', 'merchant' ),
+								'product'   => esc_html__( 'Specific product', 'merchant' ),
+							),
+							'default' => 'products',
+						),
+						array(
+							'id'       => 'product_to_purchase',
+							'type'     => 'products_selector',
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the product that must be purchased to claim the gift.', 'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'product' ),
+						),
+						array(
 							'id'       => 'product',
 							'type'     => 'products_selector',
 							'title'    => esc_html__( 'Product', 'merchant' ),
@@ -45,6 +62,7 @@ Merchant_Admin_Options::create( array(
 							'title'  => esc_html__( 'Spending Goal To Receive This Product For Free', 'merchant' ),
 							'type'   => 'number',
 							'append' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'all' ),
 						),
 					),
 				),
