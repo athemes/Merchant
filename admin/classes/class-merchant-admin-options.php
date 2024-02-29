@@ -38,9 +38,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
 
-            // Todo
-            add_action( 'woocommerce_created_customer', array( $this, 'clear_customer_choices_cache' ) );
-            add_action( 'woocommerce_delete_customer', array( $this, 'clear_customer_choices_cache' ) );
+            add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
 		}
 
 		/**
@@ -1994,14 +1992,18 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
-         * Clear customers cache.
+         * Clear customers cache when a customer is created/deleted/updated.
          *
-		 * @param $customer_id
+		 * @param $user_id
+		 * @param $user
 		 *
 		 * @return void
 		 */
-		public function clear_customer_choices_cache( $customer_id ) {
-			delete_transient( 'customers_select2_choices' );
+		public function clear_customer_choices_cache( $user_id, $user ) {
+            $user_roles = $user->roles ?? array();
+			if ( in_array( 'customer', $user_roles, true ) ) {
+				delete_transient( 'customers_select2_choices' );
+            }
         }
 	}
 
