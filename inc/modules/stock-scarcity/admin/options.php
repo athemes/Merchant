@@ -46,13 +46,13 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display-catalog',
 			'type'    => 'switcher',
-			'title'   => __( 'Show on product catalog', 'merchant' ),
+			'title'   => esc_html__( 'Show on product catalog', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'display-product',
 			'type'    => 'switcher',
-			'title'   => __( 'Show on single product page', 'merchant' ),
+			'title'   => esc_html__( 'Show on single product page', 'merchant' ),
 			'default' => 1,
 		),
 	),
