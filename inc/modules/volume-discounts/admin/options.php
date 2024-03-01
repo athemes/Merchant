@@ -69,6 +69,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Quantity', 'merchant' ),
 							'default' => 2,
 						),
+
 						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
@@ -83,6 +84,43 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'discount',
 							'type'    => 'number',
 							'default' => 10,
+						),
+
+						array(
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'logged-in' => esc_html__( 'Logged In Users', 'merchant' ),
+								'customers' => esc_html__( 'Selected Users', 'merchant' ),
+								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to users with these roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Customer', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_customers_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'customers' ),
 						),
 
 						array(
