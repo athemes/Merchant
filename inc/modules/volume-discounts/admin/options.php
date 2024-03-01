@@ -71,6 +71,22 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'      => 'discount_type',
+							'type'    => 'radio',
+							'title'   => esc_html__( 'Discount', 'merchant' ),
+							'options' => array(
+								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
+								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
+							),
+							'default' => 'percentage',
+						),
+						array(
+							'id'      => 'discount',
+							'type'    => 'number',
+							'default' => 10,
+						),
+
+						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
 							'title'   => esc_html__( 'User Condition', 'merchant' ),
@@ -105,22 +121,6 @@ Merchant_Admin_Options::create( array(
 							'classes'   => array( 'flex-grow' ),
 							'options'   => Merchant_Admin_Options::get_customers_select2_choices(),
 							'condition' => array( 'user_condition', '==', 'customers' ),
-						),
-
-						array(
-							'id'      => 'discount_type',
-							'type'    => 'radio',
-							'title'   => esc_html__( 'Discount', 'merchant' ),
-							'options' => array(
-								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
-								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
-							),
-							'default' => 'percentage',
-						),
-						array(
-							'id'      => 'discount',
-							'type'    => 'number',
-							'default' => 10,
 						),
 
 						array(
