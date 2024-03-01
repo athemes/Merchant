@@ -79,7 +79,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'enable_discount',
 							'type'    => 'switcher',
-							'title'   => __( 'Do you want to offer a discount on this bundle?', 'merchant' ),
+							'title'   => __( 'Offer a discount on this bundle', 'merchant' ),
 							'default' => 0,
 						),
 						array(
