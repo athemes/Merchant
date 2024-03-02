@@ -1535,7 +1535,8 @@ body.merchant-module-disabled {
 
 .merchant-module-page-setting-field-radio,
 .merchant-module-page-setting-field-radio_alt,
-.merchant-module-page-setting-field-checkbox {
+.merchant-module-page-setting-field-checkbox,
+.merchant-module-page-setting-field-checkbox_multiple {
 
   div {
     display: flex;
@@ -1625,6 +1626,19 @@ body.merchant-module-disabled {
     border-radius: 12px;
     background-color: #3858E9;
   }
+}
+
+.merchant-module-page-setting-field-checkbox_multiple {
+
+  div {
+    grid-gap: 0;
+  }
+  .merchant-module-page-setting-field-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
 }
 
 @media(max-width: 1300px) {
