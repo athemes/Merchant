@@ -343,6 +343,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					break;
 
 				case 'checkbox':
+				case 'checkbox_multiple':
+					if ( is_array( $value ) && ! empty( $value ) ) {
+						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
+					} else {
+						$value = array();
+					}
+					break;
 				case 'switcher':
 					$value = ( '1' === $value ) ? 1 : 0;
 					break;
@@ -464,7 +471,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
 				if ( ! $value && 0 !== $value ) {
-					$value = $default;
+					if ( $type === 'checkbox_multiple' ) {
+						$value = array();
+					} else {
+						$value = $default;
+					}
 				}
 
 				$wrapper_classes = array( 'merchant-module-page-setting-field' );
@@ -643,6 +654,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 </label>
             </div>
 			<?php
+		}
+
+		/**
+		 * Field: Checkbox multiple
+		 */
+		public static function checkbox_multiple( $settings, $value ) {
+			if ( ! empty( $settings['options'] ) ) : ?>
+				<?php
+				foreach ( $settings['options'] as $key => $option ) : ?>
+                    <label>
+                        <input 
+							type="checkbox" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>][]" 
+							value="<?php echo esc_attr( $key ); ?>" 
+							<?php checked( in_array( $key, $value, true ), true ); ?>
+						/>
+                        <span><?php echo esc_html( $option ); ?></span>
+                    </label>
+				<?php
+				endforeach; ?>
+			<?php
+			endif; 
 		}
 
 		/**
