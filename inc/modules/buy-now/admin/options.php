@@ -177,7 +177,7 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type'    => 'warning',
+			'type'    => 'info',
 			'content' => esc_html__( 'This is a developer level feature. The buy now button module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 		),
 
@@ -203,7 +203,7 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type'    => 'warning',
+			'type'    => 'info',
 			'content' => esc_html__( 'This is a developer level feature. The buy now button module is "hooked" into a specific location on the single product pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 		),
 	),
