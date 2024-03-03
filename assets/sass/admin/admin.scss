@@ -1538,7 +1538,7 @@ body.merchant-module-disabled {
 .merchant-module-page-setting-field-checkbox,
 .merchant-module-page-setting-field-checkbox_multiple {
 
-  div {
+  div:not(.merchant-module-page-setting-field-desc) {
     display: flex;
     grid-gap: 30px;
   }

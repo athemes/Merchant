@@ -42,6 +42,4 @@
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
-
-
 })(jQuery);

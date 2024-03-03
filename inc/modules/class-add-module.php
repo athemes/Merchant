@@ -241,6 +241,12 @@ class Merchant_Add_Module {
 	 * @return bool
 	 */
 	public function is_shortcode_enabled() {
-		return Merchant_Admin_Options::get( $this->module_id, 'use_shortcode', false );
+
+		/**
+		 * Hook 'merchant_{$this->module_id}_is_shortcode_enabled'
+		 * 
+		 * @since 1.9.3
+		 */
+		return apply_filters( "merchant_{$this->module_id}_is_shortcode_enabled", Merchant_Admin_Options::get( $this->module_id, 'use_shortcode', false ) );
 	}
 }

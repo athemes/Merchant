@@ -272,10 +272,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
-
 		?>
-
-		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+        <!-- Don't define type="submit" because it creates issue with block themes. The button is inside the form, so by default the type is already "submit". -->
+		<button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
 		<?php
 	}
 
