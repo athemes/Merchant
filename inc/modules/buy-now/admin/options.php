@@ -159,7 +159,6 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hook-order-shop-archive',
 			'type'    => 'hook_select',
 			'title'   => __( 'Loading position and priority on shop archive', 'merchant' ),
-			'desc'    => __( 'Note: This is a developer level feature. The buy now button module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 			'options' => array(
 				'woocommerce_before_shop_loop_item' => __( 'Before shop loop item', 'merchant' ),
 				'woocommerce_before_shop_loop_item_title' => __( 'Before shop loop item title', 'merchant' ),
@@ -177,13 +176,16 @@ Merchant_Admin_Options::create( array(
 				'hook_priority' => 10,
 			),
 		),
+		array(
+			'type'    => 'warning',
+			'content' => esc_html__( 'This is a developer level feature. The buy now button module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
+		),
 
 		// Loading position/priority on single product.
 		array(
 			'id'      => 'hook-order-single-product',
 			'type'    => 'hook_select',
 			'title'   => __( 'Loading position and priority on single product', 'merchant' ),
-			'desc'    => __( 'Note: This is a developer level feature. The buy now button module is "hooked" into a specific location on the single product pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 			'options' => array(
 				'woocommerce_before_add_to_cart_button' => __( 'Before add to cart button', 'merchant' ),
 				'woocommerce_after_add_to_cart_button' => __( 'After add to cart button', 'merchant' ),
@@ -199,6 +201,10 @@ Merchant_Admin_Options::create( array(
 				'hook_name'     => 'woocommerce_after_add_to_cart_button',
 				'hook_priority' => 10,
 			),
+		),
+		array(
+			'type'    => 'warning',
+			'content' => esc_html__( 'This is a developer level feature. The buy now button module is "hooked" into a specific location on the single product pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 		),
 	),
 ) );

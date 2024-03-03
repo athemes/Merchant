@@ -42,9 +42,12 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'priority',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Loading priority', 'merchant' ),
-			'desc'   => esc_html__( 'Note: This is a developer level feature. The product navigation links module is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 			'default' => 30,
 		),
+		array(
+			'type'    => 'warning',
+			'content' => esc_html__( 'This is a developer level feature. The product navigation links module is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
+		),      
 
 	),
 ) );

@@ -56,7 +56,7 @@ Merchant_Admin_Options::create(array(
 		),
 		array(
 			'type'    => 'warning',
-			'content'    => esc_html__('This is a developer level feature. The Stock Scarcity module is "hooked" into a specific location on the single product pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant'),
+			'content' => esc_html__('This is a developer level feature. The Stock Scarcity module is "hooked" into a specific location on the single product pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant'),
 		),
 
 		// Loading position/priority on shop archive.
@@ -83,7 +83,7 @@ Merchant_Admin_Options::create(array(
 		),
 		array(
 			'type'    => 'warning',
-			'content'    => esc_html__('This is a developer level feature. The Stock Scarcity module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant'),
+			'content' => esc_html__('This is a developer level feature. The Stock Scarcity module is "hooked" into a specific location on the shop archive pages. Themes and other plugins might also add additional elements to the same location. By modifying the loading postiion and priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant'),
 		),
 	),
 ));
@@ -194,7 +194,7 @@ Merchant_Admin_Options::create(array(
 		),
 		array(
 			'type'    => 'warning',
-			'content'    => esc_html__(
+			'content' => esc_html__(
 				'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
 				'merchant'
 			),

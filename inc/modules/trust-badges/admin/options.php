@@ -136,8 +136,10 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'      => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
-				'merchant' ),
+		),
+		array(
+			'type'    => 'warning',
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
 		),
 		array(
 			'id'        => 'shortcode_text',
