@@ -184,21 +184,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 		?>
 
         <div class="mrc-preview-single-product-elements">
-            <div class="mrc-preview-left-column">
-                <div class="mrc-preview-product-image-wrapper">
-                    <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="mrc-preview-right-column">
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
+            <div class="mrc-preview-content">
 				<?php
 				merchant_get_template_part(
 					self::MODULE_TEMPLATES_PATH,
@@ -209,7 +195,6 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 						'stock'      => 20,
 					)
 				); ?>
-                <div class="mrc-preview-addtocart-placeholder"></div>
             </div>
         </div>
 
