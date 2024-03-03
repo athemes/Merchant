@@ -57,17 +57,9 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'min_inventory'             => 50,
-			'display-pages'             => array( 'archive', 'product' ),
-			'hook-order-shop-archive'   => array(
-				'hook_name'     => 'woocommerce_after_shop_loop_item',
-				'hook_priority' => 10,
-			),
-			'hook-order-single-product' => array(
-				'hook_name'     => 'woocommerce_after_add_to_cart_button',
-				'hook_priority' => 10,
-			),
-			'low_inventory_text'        => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' ),
+			'min_inventory'      => 50,
+			'display-pages'      => array( 'product', 'archive' ),          
+			'low_inventory_text' => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' ),
 		);
 
 		// Mount preview url.

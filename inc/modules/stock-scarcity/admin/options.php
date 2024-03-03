@@ -30,7 +30,7 @@ Merchant_Admin_Options::create(array(
 				'product'  => esc_html__( 'Product Page', 'merchant' ),
 				'archive'   => esc_html__( 'Product Archive', 'merchant' ),
 			),
-			'default' => array( 'archive', 'product' ),
+			'default' => array( 'product', 'archive' ),
 		),
 
 		// Loading position/priority on single product.
@@ -117,7 +117,6 @@ Merchant_Admin_Options::create(array(
 		),
 	),
 ));
-
 
 
 // Style
