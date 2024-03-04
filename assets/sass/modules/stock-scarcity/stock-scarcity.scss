@@ -12,7 +12,15 @@
 }
 
 .merchant-stock-scarcity {
+	margin-top: 15px;
 	margin-bottom: 15px;
+	width: 100%;
+}
+
+.single-product {
+	.merchant-stock-scarcity {
+		margin-top: 0;
+	}
 }
 
 .merchant-stock-scarcity-progress-bar {

@@ -58,7 +58,7 @@ class Merchant_Stock_Scarcity extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'min_inventory'      => 50,
-			'display-pages'      => array( 'product', 'archive' ),          
+			'display-pages'      => array( 'product' ),          
 			'low_inventory_text' => esc_html__( 'Hurry! Only {stock} units left in stock!', 'merchant' ),
 		);
 

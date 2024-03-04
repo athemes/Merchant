@@ -1636,7 +1636,7 @@ body.merchant-module-disabled {
   .merchant-module-page-setting-field-inner {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 15px !important;
   }
 
 }
