@@ -18,6 +18,23 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
 } else {
 	$product = wc_get_product();
 }
+
+if ( $product instanceof WC_Product ) {
+	$is_purchasable     = $product->is_purchasable();
+	$product_id         = $product->get_id();
+	$product_image      = $product->get_image( 'woocommerce_gallery_thumbnail' );
+	$product_permalink  = $product->get_permalink();
+	$product_title      = $product->get_title();
+	$product_price_html = $product->get_price_html();
+	$product_price      = ! empty( $product->get_price() ) ? $product->get_price() : 0;
+} else {
+	$is_purchasable     = $product['is_purchasable'] ?? false;
+	$product_id         = $product['id'] ?? 0;
+	$product_image      = $product['image'] ?? '';
+	$product_permalink  = $product['permalink'] ?? '';
+	$product_title      = $product['title'] ?? '';
+	$product_price_html = $product['price_html'] ?? '';
+}
 ?>
 <div class="merchant-bogo">
     <div class="merchant-bogo-offers" data-nonce="<?php
@@ -36,11 +53,11 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
 			echo isset( $offer['title'] ) ? esc_html( Merchant_Translator::translate( $offer['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
         </p>
 		<?php
-		if ( isset( $product['is_purchasable'] ) && ! $product['is_purchasable'] ) {
+		if ( ! $is_purchasable ) {
 			continue;
 		} ?>
         <div class="merchant-bogo-offer" data-product="<?php
-		echo esc_attr( $product['id'] ) ?>" data-offer="<?php
+		echo esc_attr( $product_id ) ?>" data-offer="<?php
 		echo esc_attr( $key ); ?>">
             <div class="merchant-bogo-product-x">
                 <div class="merchant-bogo-product-label merchant-bogo-product-buy-label" style="<?php
@@ -56,17 +73,17 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
                 </div>
                 <div class="merchant-bogo-product">
 					<?php
-					echo wp_kses_post( $product['image'] ); ?>
+					echo wp_kses_post( $product_image ); ?>
                     <div class="merchant-bogo-product-contents">
                         <p class="woocommerce-loop-product__title">
                             <a href="<?php
-							echo esc_url( $product['permalink'] ); ?>" target="_blank">
+							echo esc_url( $product_permalink ); ?>" target="_blank">
 								<?php
-								echo esc_html( $product['title'] ); ?>
+								echo esc_html( $product_title ); ?>
                             </a>
                         </p>
 						<?php
-						echo wp_kses( $product['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+						echo wp_kses( $product_price_html, merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                     </div>
                 </div>
                 <div class="merchant-bogo-arrow" style="<?php
