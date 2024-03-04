@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Offers', 'merchant' ),
+	'title'  => esc_html__( 'Floating Gift Widget', 'merchant' ),
 	'module' => Merchant_Free_Gifts::MODULE_ID,
 	'fields' => array(
 		array(
@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'offer-title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer name', 'merchant' ),
-							'default' => esc_html__( 'Campaign', 'merchant' ),
+							'default' => esc_html__( 'Free Gift Campaign', 'merchant' ),
 						),
 						array(
 							'id'      => 'rules_to_apply',
@@ -42,12 +42,11 @@ Merchant_Admin_Options::create( array(
 								'product'    => esc_html__( 'Specific product', 'merchant' ),
 								'categories' => esc_html__( 'Product categories', 'merchant' ),
 							),
-							'default' => 'products',
+							'default' => 'all',
 						),
 						array(
 							'id'          => 'category_slugs',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Categories', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
@@ -62,19 +61,17 @@ Merchant_Admin_Options::create( array(
 							'desc'     => esc_html__( 'Select the product that must be purchased to claim the gift.', 'merchant' ),
 							'condition' => array( 'rules_to_apply', '==', 'product' ),
 						),
+						'amount' => array(
+							'id'     => 'amount',
+							'title'  => esc_html__( 'Spending goal', 'merchant' ),
+							'type'   => 'number',
+							'append' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
+						),
 						array(
 							'id'       => 'product',
 							'type'     => 'products_selector',
-							'title'    => esc_html__( 'Product', 'merchant' ),
+							'title'    => esc_html__( 'Product rewarded as a gift', 'merchant' ),
 							'multiple' => false,
-							'desc'     => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
-						),
-						'amount' => array(
-							'id'     => 'amount',
-							'title'  => esc_html__( 'Spending Goal To Receive This Product For Free', 'merchant' ),
-							'type'   => 'number',
-							'append' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
-							'condition' => array( 'rules_to_apply', '==', 'all' ),
 						),
 					),
 				),
@@ -133,15 +130,6 @@ Merchant_Admin_Options::create( array(
 			),
 			'default' => 'subtotal',
 		),
-	),
-) );
-
-// Display Settings
-Merchant_Admin_Options::create( array(
-	'module' => Merchant_Free_Gifts::MODULE_ID,
-	'title'  => esc_html__( 'Display Settings', 'merchant' ),
-	'fields' => array(
-
 		array(
 			'id'      => 'display_homepage',
 			'type'    => 'checkbox',
@@ -171,7 +159,7 @@ Merchant_Admin_Options::create( array(
 
 // Text Formatting Settings
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Text Formatting Settings', 'merchant' ),
+	'title'  => esc_html__( 'Text Formatting', 'merchant' ),
 	'module' => Merchant_Free_Gifts::MODULE_ID,
 	'fields' => array(
 
@@ -211,7 +199,7 @@ Merchant_Admin_Options::create( array(
 // Style Settings
 Merchant_Admin_Options::create( array(
 		'module' => Merchant_Free_Gifts::MODULE_ID,
-		'title'  => esc_html__( 'Style Settings', 'merchant' ),
+		'title'  => esc_html__( 'Look and Feel', 'merchant' ),
 		'fields' => array(
 
 			array(
