@@ -419,6 +419,10 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		$settings = $this->get_module_settings();
 
 		$css = '
+		    .merchant-product-swatches .merchant-bogo,
+		    .merchant-product-swatches .merchant-volume-discounts {
+                display: none;
+            }
 			.merchant-variations-wrapper select {
 			    display: none!important;
 			}
