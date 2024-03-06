@@ -18,6 +18,10 @@
   justify-content: center;
 }
 
+.merchant-cart-reserved-timer-content-desc.seconds{
+  display: none;
+}
+
 .rtl{
   .merchant-cart-reserved-timer-icon{
     margin-left: 14px;
