@@ -37,6 +37,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
+
+            add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
 		}
 
 		/**
@@ -215,6 +217,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Create options.
 		 */
 		public static function create( $settings ) {
+			$module_id = ( isset( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 			/**
 			 * Hook: merchant_module_settings
 			 *
@@ -262,7 +266,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								if ( ( $module_info && $module_info['pro'] ) && ! defined( 'MERCHANT_PRO_DIR' ) ) {
 									self::disabled_field( $field, $value );
 								} else {
-									self::field( $field, $value );
+									self::field( $field, $value, $module_id );
 								}
 							}
 						}
@@ -369,6 +373,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					break;
 
 				case 'checkbox':
+				case 'checkbox_multiple':
+					if ( is_array( $value ) && ! empty( $value ) ) {
+						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
+					} else {
+						$value = array();
+					}
+					break;
 				case 'switcher':
 					$value = ( '1' === $value ) ? 1 : 0;
 					break;
@@ -480,7 +491,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field
 		 */
-		public static function field( $settings, $value ) {
+		public static function field( $settings, $value, $module_id = '') {
 			if ( ! empty( $settings['type'] ) ) {
 				$type = $settings['type'];
 
@@ -490,10 +501,28 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
 				if ( ! $value && 0 !== $value ) {
-					$value = $default;
+					if ( $type === 'checkbox_multiple' ) {
+						$value = array();
+					} else {
+						$value = $default;
+					}
 				}
 
-				echo '<div class="merchant-module-page-setting-field merchant-module-page-setting-field-' . esc_attr( $type ) . '' . esc_attr( $class ) . '" data-id="'
+				$wrapper_classes = array( 'merchant-module-page-setting-field' );
+				$wrapper_classes[] = 'merchant-module-page-setting-field-' . $type;
+
+				if ( ! empty( $class ) ) {
+					$wrapper_classes[] = $class;
+				}
+
+				/**
+				 * Hook 'merchant_admin_module_field_wrapper_classes'
+				 * 
+				 * @since 1.9.3
+				 */
+				$wrapper_classes = apply_filters( 'merchant_admin_module_field_wrapper_classes', $wrapper_classes, $settings, $value, $module_id );
+
+				echo '<div class="'. esc_attr( implode( ' ', $wrapper_classes ) ) .'" data-id="'
 					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
 					printf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
@@ -501,14 +530,23 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				echo '<div class="merchant-module-page-setting-field-inner merchant-field-' . esc_attr( $id ) . '">';
 				if ( method_exists( 'Merchant_Admin_Options', $type ) ) {
-					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value );
+					call_user_func( array( 'Merchant_Admin_Options', $type ), $settings, $value, $module_id );
 				} else {
 					esc_html_e( 'Field not found!', 'merchant' );
 				}
 				echo '</div>';
 
-				if ( ! empty( $settings['desc'] ) ) {
-					printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['desc'] ) );
+				$desc = ( ! empty( $settings['desc'] ) ) ? $settings['desc'] : '';
+
+				/**
+				 * Hook 'merchant_admin_module_field_description'
+				 * 
+				 * @since 1.9.3
+				 */
+				$desc = apply_filters( 'merchant_admin_module_field_description', $desc, $settings, $value, $module_id );
+
+				if ( ! empty( $desc ) ) {
+					printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $desc ) );
 				}
 
 				echo '</div>';
@@ -523,7 +561,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function disabled_field( $settings, $value ) {
+		public static function disabled_field( $settings, $value, $module_id = '') {
 			static::replace_field(
 				$settings,
 				$value,
@@ -536,7 +574,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					'<input disabled ',
 					'<select disabled ',
 					'merchant-module-page-setting-field-inner disabled',
-				)
+				),
+				$module_id
 			);
 		}
 
@@ -550,9 +589,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function replace_field( $settings, $value, $search, $replace ) {
+		public static function replace_field( $settings, $value, $search, $replace, $module_id = '') {
 			ob_start();
-			self::field( $settings, $value );
+			self::field( $settings, $value, $module_id );
 			$field = ob_get_clean();
 
 			echo wp_kses( str_replace( $search, $replace, $field ), merchant_kses_allowed_tags( array( 'all' ) ) );
@@ -561,7 +600,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Text
 		 */
-		public static function text( $settings, $value ) {
+		public static function text( $settings, $value, $module_id = '' ) {
 			?>
             <input type="text" name="merchant[<?php
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
@@ -572,7 +611,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Text (readonly)
 		 */
-		public static function text_readonly( $settings, $value ) {
+		public static function text_readonly( $settings, $value, $module_id = '' ) {
 			?>
             <input type="text" value="<?php
 			echo esc_attr( $value ); ?>" readonly/>
@@ -582,7 +621,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Number
 		 */
-		public static function number( $settings, $value ) {
+		public static function number( $settings, $value, $module_id = '' ) {
 			?>
             <input type="number" name="merchant[<?php
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
@@ -593,7 +632,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Textarea
 		 */
-		public static function textarea( $settings, $value ) {
+		public static function textarea( $settings, $value, $module_id = '' ) {
 			$value = ( $value ) ? $value : '';
 			?>
             <textarea name="merchant[<?php
@@ -605,7 +644,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Textarea
 		 */
-		public static function textarea_multiline( $settings, $value ) {
+		public static function textarea_multiline( $settings, $value, $module_id = '' ) {
 			$value = ( $value ) ? $value : '';
 			?>
             <textarea name="merchant[<?php
@@ -617,7 +656,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Textarea Code Snippet.
 		 */
-		public static function textarea_code( $settings, $value ) {
+		public static function textarea_code( $settings, $value, $module_id = '' ) {
 			$value = ( $value ) ? $value : '';
 			?>
             <textarea name="merchant[<?php
@@ -629,7 +668,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Checkbox
 		 */
-		public static function checkbox( $settings, $value ) {
+		public static function checkbox( $settings, $value, $module_id = '' ) {
 			?>
             <div>
                 <label>
@@ -648,9 +687,30 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Checkbox multiple
+		 */
+		public static function checkbox_multiple( $settings, $value ) {
+			if ( ! empty( $settings['options'] ) ) : ?>
+				<?php
+				foreach ( $settings['options'] as $key => $option ) : ?>
+                    <label>
+                        <input 
+							type="checkbox" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>][]" 
+							value="<?php echo esc_attr( $key ); ?>" 
+							<?php checked( in_array( $key, $value, true ), true ); ?>
+						/>
+                        <span><?php echo esc_html( $option ); ?></span>
+                    </label>
+				<?php
+				endforeach; ?>
+			<?php
+			endif; 
+		}
+
+		/**
 		 * Field: Switcher
 		 */
-		public static function switcher( $settings, $value ) {
+		public static function switcher( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-toggle-switch">
                 <input type="checkbox" id="<?php
@@ -676,7 +736,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Radio
 		 */
-		public static function radio( $settings, $value ) {
+		public static function radio( $settings, $value, $module_id = '' ) {
 			?>
 			<?php
 			if ( ! empty( $settings['options'] ) ) : ?>
@@ -700,7 +760,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Radio Alt
 		 */
-		public static function radio_alt( $settings, $value ) {
+		public static function radio_alt( $settings, $value, $module_id = '' ) {
 			?>
 			<?php
 			if ( ! empty( $settings['options'] ) ) : ?>
@@ -728,7 +788,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Choices
 		 */
-		public static function choices( $settings, $value ) {
+		public static function choices( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-choices merchant-choices-<?php
 			echo esc_attr( $settings['id'] ) ?>">
@@ -788,7 +848,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Select
 		 */
-		public static function select( $settings, $value ) {
+		public static function select( $settings, $value, $module_id = '' ) {
 			?>
 			<?php
 			if ( ! empty( $settings['options'] ) ) : ?>
@@ -811,7 +871,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Hook Select
 		 */
-		public static function hook_select( $settings, $value ) {
+		public static function hook_select( $settings, $value, $module_id = '' ) {
 			$hook_name     = isset( $value['hook_name'] ) ? $value['hook_name'] : '';
 			$hook_priority = isset( $value['hook_priority'] ) ? $value['hook_priority'] : '';
 
@@ -858,7 +918,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function select_ajax( $settings, $value ) {
+		public static function select_ajax( $settings, $value, $module_id = '' ) {
 			$settings = wp_parse_args( $settings, array(
 				'source' => 'post',
 			) );
@@ -926,7 +986,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function products_selector( $settings, $value ) {
+		public static function products_selector( $settings, $value, $module_id = '' ) {
 			if ( ! class_exists( 'WooCommerce' ) ) {
 				echo '<p class="merchant-notice">' . esc_html__( 'WooCommerce is not installed or activated.', 'merchant' ) . '</p>';
 
@@ -1181,7 +1241,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Select Size Chart
 		 */
-		public static function select_size_chart( $settings, $value ) {
+		public static function select_size_chart( $settings, $value, $module_id = '' ) {
 			$options = array(
 				'' => esc_html__( 'Default', 'merchant' ),
 			);
@@ -1220,7 +1280,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Buttons
 		 */
-		public static function buttons( $settings, $value ) {
+		public static function buttons( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-buttons">
 				<?php
@@ -1247,7 +1307,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Buttons Alt
 		 */
-		public static function buttons_alt( $settings, $value ) {
+		public static function buttons_alt( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-buttons">
 				<?php
@@ -1274,7 +1334,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Range
 		 */
-		public static function range( $settings, $value ) {
+		public static function range( $settings, $value, $module_id = '' ) {
 			$settings = wp_parse_args( $settings, array(
 				'min'  => '',
 				'max'  => '',
@@ -1310,7 +1370,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Color
 		 */
-		public static function color( $settings, $value ) {
+		public static function color( $settings, $value, $module_id = '' ) {
 			$settings = wp_parse_args( $settings, array(
 				'default' => '#212121',
 			) );
@@ -1330,7 +1390,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Gallery
 		 */
-		public static function gallery( $settings, $value ) {
+		public static function gallery( $settings, $value, $module_id = '' ) {
 			$settings = wp_parse_args( $settings, array(
 				'label' => esc_html__( 'Select Images', 'merchant' ),
 			) );
@@ -1376,7 +1436,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Upload
 		 */
-		public static function upload( $settings, $value ) {
+		public static function upload( $settings, $value, $module_id = '' ) {
 			$settings = wp_parse_args( $settings, array(
 				'label' => esc_html__( 'Select Image', 'merchant' ),
 			) );
@@ -1439,7 +1499,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Sortable
 		 */
-		public static function sortable( $settings, $value ) {
+		public static function sortable( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-sortable">
                 <ul class="merchant-sortable-list ui-sortable">
@@ -1491,7 +1551,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Sortable Repeater.
 		 */
-		public static function sortable_repeater( $settings, $value ) {
+		public static function sortable_repeater( $settings, $value, $module_id = '' ) {
 			?>
             <div class="merchant-sortable-repeater-control<?php
 			echo isset( $settings['sorting'] ) && false === $settings['sorting'] ? ' disable-sorting' : ''; ?>">
@@ -1564,7 +1624,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function flexible_content( $settings, $value ) {
+		public static function flexible_content( $settings, $value, $module_id = '' ) {
 			$values = ( is_array( $value ) && ! empty( $value ) ) ? $value : array();
 			$empty  = empty( $values ) ? 'empty' : '';
 
@@ -1643,7 +1703,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 												"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
 												'merchant-module-page-setting-field-upload template',
 												'merchant-module-page-setting-field-select_ajax template',
-											) ) ?>
+											),
+											$module_id ); ?>
                                     </div>
 								<?php
 								endforeach; ?>
@@ -1706,7 +1767,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 										static::replace_field( $sub_field,
 											$value,
 											"name=\"merchant[{$sub_field['id']}]",
-											"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]" ) ?>
+											"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]",
+											$module_id ); ?>
                                     </div>
 								<?php
 								endforeach; ?>
@@ -1749,7 +1811,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Create Page.
 		 */
-		public static function create_page( $settings, $value ) {
+		public static function create_page( $settings, $value, $module_id = '' ) {
 			$page_id = get_option( $settings['option_name'] );
 
 			echo '<div class="merchant-create-page-control">';
@@ -1803,7 +1865,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo '</div>';
 		}
 
-		public static function dimensions( $settings, $value ) {
+		public static function dimensions( $settings, $value, $module_id = '' ) {
 			$settings      = wp_parse_args( $settings, array(
 				'units'      => array(
 					'px'  => 'px',
@@ -1867,7 +1929,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			<?php
 		}
 
-		public static function responsive_dimensions( $settings, $value ) {
+		public static function responsive_dimensions( $settings, $value, $module_id = '' ) {
 			$settings       = wp_parse_args( $settings, array(
 				'units'      => array(
 					'px'  => 'px',
@@ -1973,7 +2035,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Custom callback.
 		 */
-		public static function custom_callback( $settings, $value ) {
+		public static function custom_callback( $settings, $value, $module_id = '' ) {
 			if ( ! empty( $settings['class_name'] ) && ! empty( $settings['callback_name'] ) ) {
 				return call_user_func( array( $settings['class_name'], $settings['callback_name'] ), $settings, $value );
 			}
@@ -2005,6 +2067,79 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			return $choices;
 		}
+
+		/**
+         * Get User Roles choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_user_roles_select2_choices() {
+			$choices    = array();
+			$user_roles = get_editable_roles();
+
+			if ( ! empty( $user_roles ) ) {
+				foreach ( $user_roles as $role_id => $role_data ) {
+					$choices[] = array(
+						'id'   => $role_id,
+						'text' => $role_data['name'],
+					);
+				}
+			}
+
+			return $choices;
+		}
+
+		/**
+         * Get Customers choices for select2.
+         *
+		 * @return array
+		 */
+        public static function get_customers_select2_choices() {
+	        $cache_key = 'customers_select2_choices';
+	        $choices   = get_transient( $cache_key );
+
+            if ( ! empty( $choices ) && is_array( $choices ) ) {
+	            return $choices;
+            }
+
+	        // Get users with the 'customer' role
+	        $customer_users = get_users(
+		        array(
+			        'role'   => 'customer',
+			        'fields' => array( 'ID', 'display_name' ),
+		        )
+            );
+
+	        $choices = array();
+	        if ( ! empty( $customer_users ) ) {
+		        foreach ( $customer_users as $user ) {
+			        $choices[] = array(
+				        'id'   => $user->ID,
+				        'text' => $user->display_name,
+			        );
+		        }
+	        }
+
+	        // Cache the choices with no expiration. Will be cleared using `clear_customer_choices_cache`
+	        set_transient( $cache_key, $choices );
+
+	        return $choices;
+		}
+
+		/**
+         * Clear customers cache when a customer is created/deleted/updated.
+         *
+		 * @param $user_id
+		 * @param $user
+		 *
+		 * @return void
+		 */
+		public function clear_customer_choices_cache( $user_id, $user ) {
+            $user_roles = $user->roles ?? array();
+			if ( in_array( 'customer', $user_roles, true ) ) {
+				delete_transient( 'customers_select2_choices' );
+            }
+        }
 	}
 
 	Merchant_Admin_Options::instance();

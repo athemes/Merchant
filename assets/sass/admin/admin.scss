@@ -507,8 +507,6 @@
   transition: all .2s;
 
   &.merchant-module-deactivated-by-bp {
-    text-transform: uppercase;
-
     .merchant-modules-list-item-icon,
     .merchant-modules-list-item-content {
       opacity: 0.5;
@@ -1537,9 +1535,10 @@ body.merchant-module-disabled {
 
 .merchant-module-page-setting-field-radio,
 .merchant-module-page-setting-field-radio_alt,
-.merchant-module-page-setting-field-checkbox {
+.merchant-module-page-setting-field-checkbox,
+.merchant-module-page-setting-field-checkbox_multiple {
 
-  div {
+  div:not(.merchant-module-page-setting-field-desc) {
     display: flex;
     grid-gap: 30px;
   }
@@ -1627,6 +1626,19 @@ body.merchant-module-disabled {
     border-radius: 12px;
     background-color: #3858E9;
   }
+}
+
+.merchant-module-page-setting-field-checkbox_multiple {
+
+  div {
+    grid-gap: 0;
+  }
+  .merchant-module-page-setting-field-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 15px !important;
+  }
+
 }
 
 @media(max-width: 1300px) {

@@ -570,6 +570,12 @@ const styles = [
 		src: './assets/sass/compatibility/twenty-twenty-four/style.scss',
 		destination: './assets/css/compatibility/twenty-twenty-four',
 	},
+
+	{
+		name: 'flatsomeCompatibility',
+		src: './assets/sass/compatibility/flatsome/style.scss',
+		destination: './assets/css/compatibility/flatsome',
+	},
 ];
 
 // Scripts to process.
@@ -846,15 +852,15 @@ const scripts = [
 ];
 
 // Watch options.
-const watchStyles  = './assets/sass/**/*.scss';
+const watchStyles = './assets/sass/**/*.scss';
 const watchScripts = './assets/js/src/**/*.js';
-const watchPhp     = './**/*.php';
+const watchPhp = './**/*.php';
 
 // Zip options.
-const zipName        = 'merchant.zip';
+const zipName = 'merchant.zip';
 const zipDestination = './../';
 const zipIncludeGlob = ['../@(Merchant|merchant)/**/*'];
-const zipIgnoreGlob  = [
+const zipIgnoreGlob = [
 	'!../@(Merchant|merchant)/**/*{node_modules,node_modules/**/*}',
 	'!../@(Merchant|merchant)/**/*.code-workspace',
 	'!../@(Merchant|merchant)/**/*.git',
@@ -889,16 +895,16 @@ const zipIgnoreGlob  = [
 ];
 
 // Translation options.
-const textDomain             = 'merchant';
-const translationFile        = 'merchant.pot';
+const textDomain = 'merchant';
+const translationFile = 'merchant.pot';
 const translationDestination = './languages';
 
 // Others.
-const packageName    = 'merchant';
-const bugReport      = 'https://athemes.com/contact/';
+const packageName = 'merchant';
+const bugReport = 'https://athemes.com/contact/';
 const lastTranslator = 'aThemes <team@athemes.com>';
-const team           = 'aThemes <team@athemes.com>';
-const BROWSERS_LIST  = ['last 2 version', '> 1%'];
+const team = 'aThemes <team@athemes.com>';
+const BROWSERS_LIST = ['last 2 version', '> 1%'];
 
 // Export.
 module.exports = {

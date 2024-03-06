@@ -88,7 +88,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Buy now listener.
-		add_action( 'wp', array( $this, 'buy_now_listener' ) );
+		add_action( 'wp_loaded', array( $this, 'buy_now_listener' ) );
 
 		// Single product buy now button.
 		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
@@ -228,10 +228,13 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		if ( $product_id ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : '';
-			if ( $variation_id ) {
-				WC()->cart->add_to_cart( $product_id, 1, $variation_id );
+
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $quantity = (int) sanitize_text_field( $_REQUEST['quantity'] ?? 1 );
+            if ( $variation_id ) {
+				WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
 			} else {
-				WC()->cart->add_to_cart( $product_id, 1 );
+				WC()->cart->add_to_cart( $product_id, $quantity );
 			}
 
 			wp_safe_redirect( wc_get_checkout_url() );
@@ -269,10 +272,9 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
-
 		?>
-
-		<button type="submit" name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+        <!-- Don't define type="submit" because it creates issue with block themes. The button is inside the form, so by default the type is already "submit". -->
+		<button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="single_add_to_cart_button button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
 		<?php
 	}
 
