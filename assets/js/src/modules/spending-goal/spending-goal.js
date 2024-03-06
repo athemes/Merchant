@@ -6,18 +6,21 @@
 			return;
 		}
 
-		const { enable_auto_slide_in, spending_goal_nonce, ajax_url } = merchant.setting || {};
+		const {
+			is_added_to_cart,
+			enable_auto_slide_in,
+			spending_goal_nonce,
+			ajax_url,
+		} = merchant.setting || {};
 
 		// Show/Hide widget when clicking on it.
 		$( document ).on( 'click', spendingWidgetSelector, function () {
 			showWidget( true );
 		} );
 
-		// Auto open after a product is added to the Cart on Product Single Page.
-		if ( enable_auto_slide_in ) {
-			if ( $( 'body.single-product' ).length && $( '.woocommerce-notices-wrapper' ).is( ':visible' ) && ! $( '.woocommerce-notices-wrapper' ).is( ':empty' ) ) {
-				showWidget();
-			}
+		// Auto open after a product is added to the Cart on Product Single Page; no AJAX.
+		if ( enable_auto_slide_in && is_added_to_cart && $( 'body.single-product' ).length ) {
+			showWidget();
 		}
 
 		// Update the widget and Auto slide when a product is Added/Removed to cart via AJAX.

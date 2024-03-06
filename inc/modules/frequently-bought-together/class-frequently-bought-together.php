@@ -96,10 +96,6 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
-
-			// Custom CSS.
-			// The custom CSS should be added here as well due to ensure preview box works properly.
-			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 	}
 
@@ -110,23 +106,27 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['title'] ) ) {
-			Merchant_Translator::register_string( $settings['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
-		}
-		if ( ! empty( $settings['price_label'] ) ) {
-			Merchant_Translator::register_string( $settings['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['save_label'] ) ) {
-			Merchant_Translator::register_string( $settings['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
-		}
-		if ( ! empty( $settings['no_variation_selected_text'] ) ) {
-			Merchant_Translator::register_string( $settings['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
-		}
-		if ( ! empty( $settings['no_variation_selected_text_has_no_discount'] ) ) {
-			Merchant_Translator::register_string( $settings['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
-		}
-		if ( ! empty( $settings['button_text'] ) ) {
-			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
+		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
+			foreach ( $settings['offers'] as $offer ) {
+				if ( ! empty( $offer['title'] ) ) {
+					Merchant_Translator::register_string( $offer['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
+				}
+				if ( ! empty( $offer['price_label'] ) ) {
+					Merchant_Translator::register_string( $offer['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
+				}
+				if ( ! empty( $offer['save_label'] ) ) {
+					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
+				}
+				if ( ! empty( $offer['no_variation_selected_text'] ) ) {
+					Merchant_Translator::register_string( $offer['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
+				}
+				if ( ! empty( $offer['no_variation_selected_text_has_no_discount'] ) ) {
+					Merchant_Translator::register_string( $offer['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
+				}
+				if ( ! empty( $offer['button_text'] ) ) {
+					Merchant_Translator::register_string( $offer['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
+				}
+			}
 		}
 	}
 
@@ -139,6 +139,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		if ( parent::is_module_settings_page() ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/frequently-bought-together.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
+			wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 		}
 	}
 
@@ -154,22 +155,6 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		if ( $module === self::MODULE_ID ) {
 
 			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
-
-			$preview->set_text( 'title', '.merchant-frequently-bought-together-title' );
-			$preview->set_text( 'price_label', '.merchant-frequently-bought-together-bundle-total' );
-			$preview->set_text( 'save_label', '.merchant-frequently-bought-together-bundle-save', array(
-				array(
-					'{amount}',
-				),
-				array(
-					wc_price( 12 ),
-				),
-			) );
-			$preview->set_text( 'button_text', '.merchant-add-bundle-to-cart' );
-			$preview->set_css( 'plus_bg_color', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-bg-color' );
-			$preview->set_css( 'plus_text_color', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-text-color' );
-			$preview->set_css( 'bundle_border_color', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-color' );
-			$preview->set_css( 'bundle_border_radius', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-radius', 'px' );
 		}
 
 		return $preview;
@@ -191,10 +176,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 					10 => array(
 						array(
 							'discount_value'         => 20,
+							'product_to_display'     => 97,
 							'products'               => array(
 								array(
 									'id'         => 97,
-									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'image'      => '<img src="' . MERCHANT_URI
+									                . 'assets/images/dummy/Glamifiedpeach.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
 									'title'      => 'Eternal Sunset Collection Lip and Cheek',
 									'price_html' => wc_price( 12 ),
 									'price'      => 12,
@@ -202,14 +189,15 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 								),
 								array(
 									'id'         => 96,
-									'image'      => '<img src="' . MERCHANT_URI . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
+									'image'      => '<img src="' . MERCHANT_URI
+									                . 'assets/images/dummy/Pearlville.jpeg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="">',
 									'title'      => 'Vinopure Pore Purifying Gel Cleanser',
 									'price_html' => wc_price( 14 ),
 									'price'      => 14,
 									'permalink'  => '#',
 								),
 							),
-							'layout'                 => 'percentage_discount',
+							'discount_type'          => 'percentage_discount',
 							'total_products'         => 3,
 							'total_price'            => 47,
 							'total_discount'         => 12,
@@ -232,27 +220,9 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function get_module_custom_css() {
-		$css = '';
+		// For backward compatibility, no implementation is needed.
 
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'plus_bg_color', '#212121', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-bg-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'plus_text_color', '#fff', '.merchant-frequently-bought-together-bundle-product-plus', '--merchant-text-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'bundle_border_color', '#ededed', '.merchant-frequently-bought-together-bundle-product', '--merchant-border-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'bundle_border_radius', 5, '.merchant-frequently-bought-together-bundle-product', '--merchant-border-radius', 'px' );
-
-		return $css;
-	}
-
-	/**
-	 * Admin custom CSS.
-	 *
-	 * @param string $css The custom CSS.
-	 *
-	 * @return string $css The custom CSS.
-	 */
-	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css();
-
-		return $css;
+		return '';
 	}
 }
 

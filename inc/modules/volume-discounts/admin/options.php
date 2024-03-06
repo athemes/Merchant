@@ -69,6 +69,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Quantity', 'merchant' ),
 							'default' => 2,
 						),
+
 						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
@@ -83,6 +84,43 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'discount',
 							'type'    => 'number',
 							'default' => 10,
+						),
+
+						array(
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'logged-in' => esc_html__( 'Logged In Users', 'merchant' ),
+								'customers' => esc_html__( 'Selected Users', 'merchant' ),
+								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to users with these roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Customer', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_customers_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'customers' ),
 						),
 
 						array(
@@ -240,8 +278,11 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
-				'merchant' ),
+		),
+		array(
+			'type'    => 'info',
+			'id'      => 'shortcode_info',
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
 		),
 		array(
 			'id'        => 'shortcode_text',

@@ -20,7 +20,7 @@ Merchant_Admin_Options::create( array(
 			'sorting'      => true,
 			'accordion'    => true,
 			'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
-			'button_label' => esc_html__( 'Add New Campaign', 'merchant' ),
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Campaign', 'merchant' ),
@@ -246,8 +246,11 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Use shortcode', 'merchant' ),
 			'default' => 0,
-			'desc'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
-				'merchant' ),
+		),
+		array(
+			'type'    => 'info',
+			'id'      => 'shortcode_info',
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
 		),
 		array(
 			'id'        => 'shortcode_text',

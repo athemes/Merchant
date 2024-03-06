@@ -84,8 +84,8 @@
 			right: -30px;
 			top: 50px;
 			font-size: 25px;
-			background: var(--merchant-bg-color);
-			color:  var(--merchant-text-color);
+			background-color: #212121;
+			color:  #fff;
 			border-radius: 50%;
 			width: 35px;
 			height: 35px;
@@ -97,8 +97,8 @@
 		}
 		
 		&:not(:first-child) {
-			border: 1px solid var(--merchant-border-color);
-			border-radius: var(--merchant-border-radius);
+			border: 1px solid #f9f9f9;
+			border-radius: 5px;
 			padding: 15px;
 			
 			img {

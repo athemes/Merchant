@@ -256,3 +256,10 @@ gulp.task(
 
 	})
 );
+
+/**
+ * Production Tasks.
+ *
+ * Compile all assets files and exit.
+ */
+gulp.task( 'production', gulp.parallel( ...styleTasks, ...styleMinTasks, ...scriptTasks ) );

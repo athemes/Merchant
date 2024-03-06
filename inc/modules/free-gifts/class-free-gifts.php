@@ -56,7 +56,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'display_shop'          => 1,
 			'display_product'       => 1,
 			'display_cart'          => 1,
-			'spending_text'         => esc_html__( 'Spend {amount} more to receive this free gift!', 'merchant' ),
+			'spending_text'         => esc_html__( 'Spend {amount} more to receive this gift!', 'merchant' ),
 			'free_text'             => esc_html__( 'Free', 'merchant' ),
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
 			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),

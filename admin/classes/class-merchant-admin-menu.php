@@ -67,7 +67,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				esc_html__('Dashboard', 'merchant'),
 				esc_html__('Dashboard', 'merchant'),
 				'manage_options',
-				'admin.php?page=merchant',
+				$this->plugin_slug,
 				'',
 				1
 			);
@@ -200,22 +200,17 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		 */
 		public function footer_internal_scripts() {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$request_uri    = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : '';
-			$nth_child_map  = array(
-				'admin.php?page=merchant' => 3,
-				'admin.php?page=merchant&section=modules' => 4,
-				'admin.php?page=merchant&section=settings' => 5,
-			);
-
+			$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? str_replace( '/wp-admin/', '', $_SERVER['REQUEST_URI'] ) : '';
 			?>
-
 			<style>
-				#adminmenu .toplevel_page_merchant .wp-submenu a[href="admin.php?page=merchant"].wp-first-item {
-					display: none;
-				}
+				#adminmenu .toplevel_page_merchant .wp-submenu li.current a {
+                    color: rgba(240, 246, 252, 0.7);
+                    font-weight: 400;
+                }
 
-				#adminmenu .toplevel_page_merchant .wp-submenu li:nth-child(<?php echo absint( $nth_child_map[ $request_uri ] ); ?>) a {
-					color: #FFF;
+				#adminmenu .toplevel_page_merchant .wp-submenu li a[href="<?php echo $request_uri; //phpcs:ignore ?>"] {
+					color: #fff;
+                    font-weight: 600;
 				}
 
 				#adminmenu .toplevel_page_merchant .wp-submenu a[href="https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant"] {

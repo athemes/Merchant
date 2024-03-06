@@ -1,9 +1,9 @@
 === Merchant ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Requires PHP: 7.0
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,6 +216,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.3 =
+* Fixed - The "Buy Now" button for variable products now correctly adds the selected quantity to the basket instead of two items.
+* Fixed - The "Buy Now" button no longer shows incorrect label themes on Block themes.
+
 = 1.9.2 =
 * Fixed - Inactive tab message module no longer shows a URL if the field is left blank, streamlining the user interface.
 
