@@ -3,6 +3,26 @@
 * Frequently Bought Together
 *
 */
+.merchant-flexible-content-control.frequently-bought-together-style {
+	.layout:not(.active) {
+		border-color: #5c5f62;
+	}
+
+	.layout {
+		.layout-body {
+			padding: 15px;
+			grid-gap: unset;
+
+			.merchant-module-page-setting-field {
+				margin-bottom: 20px;
+			}
+
+			.merchant-module-page-setting-field-text input{
+				padding: 12px 8px;
+			}
+		}
+	}
+}
 
 // Canvas.
 .merchant-module-page-preview-browser-inner {
@@ -102,6 +122,10 @@
 
 .merchant-frequently-bought-together-bundle-product {
 	max-width: 140px;
+}
+
+.merchant-frequently-bought-together-bundle-product:not(:first-child){
+	border: 1px solid;
 }
 
 @media(max-width: 1300px) {

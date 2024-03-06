@@ -14,9 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 
 if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
-	$product = isset( $args['product'] ) ? Merchant_Pro_Buy_X_Get_Y::product_args( wc_get_product( $args['product'] ) ) : wc_get_product();
+	$product = Merchant_Pro_Buy_X_Get_Y::product_args( isset( $args['product'] ) ? wc_get_product( $args['product'] ) : wc_get_product() );
 } else {
-	$product = wc_get_product();
+	return;
 }
 
 if ( $product instanceof WC_Product ) {
@@ -95,8 +95,7 @@ if ( $product instanceof WC_Product ) {
 			echo isset( $offer['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['offer_border_color'] . ';' ) : '';
 			echo isset( $offer['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['offer_border_radius'] . 'px;' ) : ''; ?>"
             ">
-            <form class="merchant-bogo-form" data-product="<?php
-			echo esc_attr( $buy_product['id'] ); ?>">
+            <form class="merchant-bogo-form" data-product="<?php echo isset( $buy_product['id'] ) ? esc_attr( $buy_product['id'] ) : ''; ?>">
                 <div class="merchant-bogo-product-label merchant-bogo-product-get-label" style="<?php
 				echo isset( $offer['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['label_bg_color'] . ';' ) : '';
 				echo isset( $offer['label_text_color'] ) ? esc_attr( 'color: ' . $offer['label_text_color'] . ';' ) : ''; ?>">

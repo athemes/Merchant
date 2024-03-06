@@ -11,6 +11,108 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Floating Gift Widget', 'merchant' ),
+	'module' => Merchant_Free_Gifts::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'           => 'offers',
+			'type'         => 'flexible_content',
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'style'        => Merchant_Free_Gifts::MODULE_ID . '-style default',
+			'sorting'      => true,
+			'accordion'    => true,
+			'layouts'      => array(
+				'spending' => array(
+					'title'       => esc_html__( 'Spending Based', 'merchant' ),
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
+					'fields'      => array(
+						array(
+							'id'      => 'offer-title',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Offer name', 'merchant' ),
+							'default' => esc_html__( 'Free Gift Campaign', 'merchant' ),
+						),
+						array(
+							'id'      => 'rules_to_apply',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
+							'options' => array(
+								'all'        => esc_html__( 'Any product', 'merchant' ),
+								'product'    => esc_html__( 'Specific product', 'merchant' ),
+								'categories' => esc_html__( 'Product categories', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+						array(
+							'id'          => 'category_slugs',
+							'type'        => 'select_ajax',
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+							'condition'   => array( 'rules_to_apply', '==', 'categories' ),
+						),
+						array(
+							'id'       => 'product_to_purchase',
+							'type'     => 'products_selector',
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the product that must be purchased to claim the gift.', 'merchant' ),
+							'condition' => array( 'rules_to_apply', '==', 'product' ),
+						),
+						'amount' => array(
+							'id'     => 'amount',
+							'title'  => esc_html__( 'Spending goal', 'merchant' ),
+							'type'   => 'number',
+							'append' => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
+						),
+						array(
+							'id'       => 'product',
+							'type'     => 'products_selector',
+							'title'    => esc_html__( 'Product rewarded as a gift', 'merchant' ),
+							'multiple' => false,
+						),
+					),
+				),
+				'coupon'   => array(
+					'title'       => esc_html__( 'Coupon Based', 'merchant' ),
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
+					'fields'      => array(
+						array(
+							'id'      => 'offer-title',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Offer name', 'merchant' ),
+							'default' => esc_html__( 'Campaign', 'merchant' ),
+						),
+						array(
+							'id'       => 'product',
+							'type'     => 'products_selector',
+							'title'    => esc_html__( 'Product', 'merchant' ),
+							'multiple' => false,
+							'desc'     => esc_html__( 'Select the products that will contain the bundle.',
+								'merchant' ),
+						),
+						'coupon' => array(
+							'id'    => 'coupon',
+							'title' => esc_html__( 'Use Coupon To Receive This Product For Free', 'merchant' ),
+							'type'  => 'wc_coupons',
+						),
+					),
+				),
+			),
+			'default'      => array(
+				array(
+					'layout'        => 'spending',
+					'min_quantity'  => 2,
+					'discount'      => 10,
+					'discount_type' => 'percentage_discount',
+				),
+			),
+		),
+	),
+) );
+
 // Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Free_Gifts::MODULE_ID,
@@ -28,15 +130,6 @@ Merchant_Admin_Options::create( array(
 			),
 			'default' => 'subtotal',
 		),
-	),
-) );
-
-// Display Settings
-Merchant_Admin_Options::create( array(
-	'module' => Merchant_Free_Gifts::MODULE_ID,
-	'title'  => esc_html__( 'Display Settings', 'merchant' ),
-	'fields' => array(
-
 		array(
 			'id'      => 'display_homepage',
 			'type'    => 'checkbox',
@@ -66,7 +159,7 @@ Merchant_Admin_Options::create( array(
 
 // Text Formatting Settings
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Text Formatting Settings', 'merchant' ),
+	'title'  => esc_html__( 'Text Formatting', 'merchant' ),
 	'module' => Merchant_Free_Gifts::MODULE_ID,
 	'fields' => array(
 
@@ -106,7 +199,7 @@ Merchant_Admin_Options::create( array(
 // Style Settings
 Merchant_Admin_Options::create( array(
 		'module' => Merchant_Free_Gifts::MODULE_ID,
-		'title'  => esc_html__( 'Style Settings', 'merchant' ),
+		'title'  => esc_html__( 'Look and Feel', 'merchant' ),
 		'fields' => array(
 
 			array(

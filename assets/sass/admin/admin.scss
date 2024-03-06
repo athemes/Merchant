@@ -2675,6 +2675,18 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-module-page-setting-field-wc_coupons{
+  .merchant-wc-coupon-selector select{
+    width: 300px;
+    min-height: auto;
+    border: 1px solid #D6D6D6;
+    padding: 12px;
+    line-height: 1.3em;
+    border-radius: 6px;
+    color: #2F2F2F;
+    border: 1px solid #D6D6D6;
+  }
+}
 
 .merchant-module-page-settings-unit {
   margin-bottom: 10px;
