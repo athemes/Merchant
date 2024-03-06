@@ -45,6 +45,7 @@ Merchant_Admin_Options::create( array(
 			'default' => 30,
 		),
 		array(
+			'id'      => 'priority_info',
 			'type'    => 'info',
 			'content' => esc_html__( 'This is a developer level feature. The product navigation links module is "hooked" into a specific location on the page. Themes and other plugins might also add additional elements to the same location. By modifying the hook priority, you have the ability to customize the placement of this element on that particular location. A lower number = a higher priority, so the module will appear higher on the page.', 'merchant' ),
 		),      
