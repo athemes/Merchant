@@ -20,7 +20,7 @@ Merchant_Admin_Options::create( array(
 			'sorting'      => true,
 			'accordion'    => true,
 			'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
-			'button_label' => esc_html__( 'Add New Campaign', 'merchant' ),
+			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Campaign', 'merchant' ),
