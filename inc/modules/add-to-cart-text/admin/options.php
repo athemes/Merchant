@@ -20,8 +20,12 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label', 'merchant' ),
 			'default' => esc_html__( 'Add to cart', 'merchant' ),
+			
+		),
+		array(
+			'type'    => 'info',
 			/* Translators: 1. Link open tag 2. Link close tag */
-			'desc'         => sprintf( esc_html__( 'Note: If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',
+			'content' => sprintf( esc_html__( 'If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',
 				'merchant' ),
 				'<a href="' . esc_url( admin_url( 'edit.php?post_type=product' ) ) . '">',
 				'</a>' ),
@@ -55,8 +59,12 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label', 'merchant' ),
 			'default' => esc_html__( 'Select options', 'merchant' ),
+			
+		),
+		array(
+			'type'    => 'info',
 			/* Translators: 1. Link open tag 2. Link close tag */
-			'desc'         => sprintf( esc_html__( 'Note: If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',
+			'content' => sprintf( esc_html__( 'If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',
 				'merchant' ),
 				'<a href="' . esc_url( admin_url( 'edit.php?post_type=product' ) ) . '">',
 				'</a>' ),

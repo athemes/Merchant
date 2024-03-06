@@ -127,6 +127,17 @@ if ( ! function_exists( 'merchant_is_blocksy_active' ) ) {
 }
 
 /**
+ * Check if Flatsome theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_flatsome_active' ) ) {
+    function merchant_is_flatsome_active() {
+        return class_exists( 'Flatsome' );
+    }
+}
+
+/**
  * Check if any shortcode starts with merchant.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */
