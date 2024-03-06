@@ -217,17 +217,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 = 1.9.3 =
-* Fixed - variation swatch not changing images on mouseover when mouseover is enabled.
-* Added - Variation swatch in the quick view module for variable products.
-* Fixed - Merchant submenu flashes on page load.
-* Fixed - Auto slide doesn't work by default. It needs to disable and enable the toggle again to make it work.
-* Fixed - Incorrect titles and links for the Recently viewed products.
-* Fixed - Currently viewed product is showing in the Recently viewed products.
-* Fixed - The "Buy Now" button for variable products adding two items to the basket instead of the selected quantity.
-* Fixed - The Buy Now button showing incorrect label themes on Block themes.
-* Fixed - Selected "Choose label text color" setting does not apply to the numerical amount.
-* Fixed - Sales Countdown Timer not showing for Variable Products.
-* Fixed - Sticky add to cart compatibility with Flatsome theme.
+* Fixed - The "Buy Now" button for variable products now correctly adds the selected quantity to the basket instead of two items.
+* Fixed - The "Buy Now" button no longer shows incorrect label themes on Block themes.
 
 = 1.9.2 =
 * Fixed - Inactive tab message module no longer shows a URL if the field is left blank, streamlining the user interface.
