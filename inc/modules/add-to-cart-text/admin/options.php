@@ -23,6 +23,7 @@ Merchant_Admin_Options::create( array(
 			
 		),
 		array(
+			'id'      => 'simple_product_shop_label_info',
 			'type'    => 'info',
 			/* Translators: 1. Link open tag 2. Link close tag */
 			'content' => sprintf( esc_html__( 'If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',
@@ -62,6 +63,7 @@ Merchant_Admin_Options::create( array(
 			
 		),
 		array(
+			'id'      => 'variable_product_shop_label_info',
 			'type'    => 'info',
 			/* Translators: 1. Link open tag 2. Link close tag */
 			'content' => sprintf( esc_html__( 'If you want to add a different label for each product, go to %1$sProducts%2$s, edit the desired product, set the label inside the metabox.',

@@ -372,7 +372,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = $value;
 					break;
 
-				case 'checkbox':
 				case 'checkbox_multiple':
 					if ( is_array( $value ) && ! empty( $value ) ) {
 						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
@@ -380,6 +379,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						$value = array();
 					}
 					break;
+
+				case 'checkbox':
 				case 'switcher':
 					$value = ( '1' === $value ) ? 1 : 0;
 					break;

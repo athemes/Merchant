@@ -1,7 +1,7 @@
 === Merchant ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
 Requires at least: 5.5
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Requires PHP: 7.0
 Stable tag: 1.9.3
 Contributors: aThemes
