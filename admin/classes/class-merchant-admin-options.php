@@ -57,6 +57,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					'ajaxnonce'                           => wp_create_nonce( 'merchant_admin_options' ),
 					'product_delete_confirmation_message' => esc_html__( 'Are you sure you want to remove this product?', 'merchant' ),
 				) );
+
+				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
+				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
 			}
 		}
 
