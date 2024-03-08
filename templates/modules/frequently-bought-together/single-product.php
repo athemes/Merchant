@@ -40,18 +40,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 								}
 
 								?>
-								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ); ?>" style="<?php
+								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ?? 0 ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ?? 0 ); ?>" style="<?php
 								echo isset( $bundle['bundle_border_radius'] ) ? esc_attr( 'border-radius: ' . $bundle['bundle_border_radius'] . 'px;' ) : '';
 								echo isset( $bundle['bundle_border_color'] ) ? esc_attr( 'border-color: ' . $bundle['bundle_border_color'] . ';' ) : ''; ?>">
-									<?php echo wp_kses_post( $product['image'] ); ?>
+									<?php echo wp_kses_post( $product['image'] ?? '' ); ?>
 									<div class="merchant-frequently-bought-together-bundle-product-contents">
 										<p class="woocommerce-loop-product__title">
-											<a href="<?php echo esc_url( $product['permalink'] ); ?>" target="_blank">
-												<?php echo esc_html( $product['title'] ); ?>
+											<a href="<?php echo esc_url( $product['permalink'] ?? '' ); ?>" target="_blank">
+												<?php echo esc_html( $product['title'] ?? '' ); ?>
 											</a>
 										</p>
 										<div class="merchant-frequently-bought-together-bundle-product-price">
-											<?php echo wp_kses( $product['price_html'], merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+											<?php echo wp_kses( $product['price_html'] ?? '', merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
 										</div>
 										<?php if ( isset( $product['attributes'] ) && ! empty( $product['attributes'] ) ) : ?>
 											<div class="merchant-frequently-bought-together-bundle-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
@@ -63,9 +63,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 																sprintf( __( 'Select %s', 'merchant' ), $attribute['label'] )
 															); ?>
 														</option>
-														<?php foreach ( $attribute['terms'] as $_term ) : ?>
-															<option value="<?php echo esc_attr( $_term['slug'] ) ?>" <?php selected( $_term['selected'], true, true ); ?>><?php echo esc_html( $_term['name'] ) ?></option>
-														<?php endforeach; ?>
+                                                        <?php if ( isset( $attribute['terms'] ) && is_array( $attribute['terms'] ) ) : ?>
+                                                            <?php foreach ( $attribute['terms'] as $_term ) : ?>
+                                                                <option value="<?php echo esc_attr( $_term['slug'] ) ?>" <?php selected( $_term['selected'], true, true ); ?>><?php echo esc_html( $_term['name'] ) ?></option>
+														    <?php endforeach; ?>
+                                                        <?php endif; ?>
 													</select>
 												<?php endforeach; ?>
 											</div>
