@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge, payme
 Requires at least: 5.5
 Tested up to: 6.4.3
 Requires PHP: 7.0
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,6 +216,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.4 =
+* Added - Code improvements for enhanced support of third-party integration.
+* Fixed - Improved product labels compatibility with the Botiga theme.
+
 = 1.9.3 =
 * Fixed - The "Buy Now" button for variable products now correctly adds the selected quantity to the basket instead of two items.
 * Fixed - The "Buy Now" button no longer shows incorrect label themes on Block themes.
