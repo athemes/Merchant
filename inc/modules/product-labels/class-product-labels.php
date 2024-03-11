@@ -343,7 +343,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// All themes.
 		$css .= '
-			.woocommerce .onsale { 
+			.woocommerce .onsale,
+			.wc-block-grid__product .onsale { 
 				display: none !important; 
 			}
 		';

@@ -373,7 +373,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 								?>
 
-								<a href="<?php echo esc_url( $module_link ); ?>" class="<?php echo esc_attr( $module_list_item_class ) ?>" target="<?php echo esc_attr( $link_target ); ?>">
+								<a href="<?php echo esc_url( $module_link ); ?>" class="<?php echo esc_attr( $module_list_item_class ) ?>" target="<?php echo esc_attr( $link_target ); ?>" data-module-id="<?php echo esc_attr( $merchant_module_id ); ?>">
 									<?php if( $has_bp_deactivated_class ) : ?>
 										<div class="merchant-modules-list-item-badge-wrapper merchant-modules-list-item-removed-by-bp">
 											<span class="merchant-pro-badge merchant-pro-tooltip" data-tooltip-message="<?php echo esc_attr__( 'Botiga module is taking precedence', 'merchant' ); ?>">
