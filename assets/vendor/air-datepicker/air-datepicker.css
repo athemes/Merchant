@@ -54,8 +54,17 @@
 }
 
 .air-datepicker-cell.-current- {
-    color: var(--adp-color-current-date);
-    background-color: #3858E9;
+    position: relative;
+}
+
+.air-datepicker-cell.-current-:after{
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: blue;
+    bottom: 5px;
 }
 
 .air-datepicker-cell.-current-.-focus- {

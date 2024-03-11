@@ -221,11 +221,53 @@
             events: function () {
                 $(document).on('click', '.merchant-flexible-content .merchant-toggle-switch .toggle-switch-label span', function () {
                     let checkBox = $(this).closest('.merchant-toggle-switch').find('.toggle-switch-checkbox');
-                    console.log(checkBox)
                     checkBox.prop('checked', !checkBox.prop('checked'));
                 }).trigger('merchant.change');
             }
         }
+
+        const dateTimePickerField = {
+            init: function () {
+                this.initiate_datepicker();
+                this.events();
+            },
+
+            initiate_datepicker: function () {
+                let elements = $('.merchant-module-page-setting-field .merchant-datetime-field');
+                if (elements.length === 0) {
+                    return;
+                }
+                elements.each(function () {
+                    let input = $(this).find('input'),
+                        options = {
+                            locale: JSON.parse(merchant_datepicker_locale),
+                            selectedDates: [input.val() ? new Date(input.val()) : new Date()],
+                            onSelect: ({date, formattedDate, datepicker}) => {
+                                input.trigger('change.merchant')
+                            }
+                        },
+                        fieldOptions = $(this).data('options');
+
+                    if (fieldOptions) {
+                        if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
+                            fieldOptions.minDate = new Date();
+                        }
+                        options = Object.assign(options, fieldOptions);
+                    }
+                    new AirDatepicker(input.getPath(), options);
+                    input.attr('readonly', true);
+                });
+            },
+
+            events: function () {
+                const self = this;
+                $(document).on('merchant-flexible-content-added', function () {
+                    self.initiate_datepicker();
+                });
+            }
+        }
+
+        dateTimePickerField.init();
 
         // Sortable.
         const SortableField = {

@@ -1485,6 +1485,7 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-datetime-field,
 .merchant-module-page-setting-field-text,
 .merchant-module-page-setting-field-number,
 .merchant-module-page-setting-field-text_readonly {
@@ -2519,6 +2520,23 @@ body.merchant-module-disabled {
   &.disable-sorting {
     .dashicons-menu {
       display: none;
+    }
+  }
+
+  .merchant-datetime-field{
+    input{
+      padding: 12px !important;
+      line-height: 1.3em;
+      width: 100%;
+      max-width: 100%;
+      min-height: auto;
+      border: 1px solid #d6d6d6;
+      border-radius: 4px !important;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: #3858E9;
+      }
     }
   }
 }
