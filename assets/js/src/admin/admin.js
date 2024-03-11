@@ -580,6 +580,7 @@
                     if (hasAccordion) {
                         parentDiv.find('.merchant-flexible-content').accordion("refresh");
                     }
+                    $(document).trigger('change.merchant');
                 });
             },
 
