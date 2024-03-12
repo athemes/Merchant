@@ -9,11 +9,13 @@
         var $ajaxHeader = $('.merchant-module-page-ajax-header');
         var $ajaxSaveBtn = $('.merchant-module-save-button');
 
-        $('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea):not(.merchant-license-code-input)', function () {
-            if (!merchant.show_save) {
-                $ajaxHeader.addClass('merchant-show');
-                $ajaxHeader.removeClass('merchant-saving');
-                merchant.show_save = true;
+        $('.merchant-module-page-content').on('change keypress change.merchant', function () {
+            if (!$(this).is('.merchant-module-question-answer-textarea, .merchant-license-code-input')) {
+                if (!merchant.show_save) {
+                    $ajaxHeader.addClass('merchant-show');
+                    $ajaxHeader.removeClass('merchant-saving');
+                    merchant.show_save = true;
+                }
             }
         });
 
@@ -221,11 +223,53 @@
             events: function () {
                 $(document).on('click', '.merchant-flexible-content .merchant-toggle-switch .toggle-switch-label span', function () {
                     let checkBox = $(this).closest('.merchant-toggle-switch').find('.toggle-switch-checkbox');
-                    console.log(checkBox)
                     checkBox.prop('checked', !checkBox.prop('checked'));
                 }).trigger('merchant.change');
             }
         }
+
+        const dateTimePickerField = {
+            init: function () {
+                this.initiate_datepicker();
+                this.events();
+            },
+
+            initiate_datepicker: function () {
+                let elements = $('.merchant-module-page-setting-field .merchant-datetime-field');
+                if (elements.length === 0) {
+                    return;
+                }
+                elements.each(function () {
+                    let input = $(this).find('input'),
+                        options = {
+                            locale: JSON.parse(merchant_datepicker_locale),
+                            selectedDates: [input.val() ? new Date(input.val()) : new Date()],
+                            onSelect: ({date, formattedDate, datepicker}) => {
+                                input.trigger('change.merchant')
+                            }
+                        },
+                        fieldOptions = $(this).data('options');
+
+                    if (fieldOptions) {
+                        if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
+                            fieldOptions.minDate = new Date();
+                        }
+                        options = Object.assign(options, fieldOptions);
+                    }
+                    new AirDatepicker(input.getPath(), options);
+                    input.attr('readonly', true);
+                });
+            },
+
+            events: function () {
+                const self = this;
+                $(document).on('merchant-flexible-content-added', function () {
+                    self.initiate_datepicker();
+                });
+            }
+        }
+
+        dateTimePickerField.init();
 
         // Sortable.
         const SortableField = {
@@ -536,6 +580,7 @@
                     if (hasAccordion) {
                         parentDiv.find('.merchant-flexible-content').accordion("refresh");
                     }
+                    $(document).trigger('change.merchant');
                 });
             },
 
@@ -1265,3 +1310,39 @@
     });
 
 })(jQuery, window, document);
+
+// Extend jQuery to add getPath func to get accurate dynamic selector to an element.
+jQuery.fn.extend({
+    getPath: function() {
+        var pathes = [];
+
+        this.each(function(index, element) {
+            var path, $node = jQuery(element);
+
+            while ($node.length) {
+                var realNode = $node.get(0), name = realNode.localName;
+                if (!name) { break; }
+
+                name = name.toLowerCase();
+                var parent = $node.parent();
+                var sameTagSiblings = parent.children(name);
+
+                if (sameTagSiblings.length > 1)
+                {
+                    var allSiblings = parent.children();
+                    var index = allSiblings.index(realNode) + 1;
+                    if (index > 0) {
+                        name += ':nth-child(' + index + ')';
+                    }
+                }
+
+                path = name + (path ? ' > ' + path : '');
+                $node = parent;
+            }
+
+            pathes.push(path);
+        });
+
+        return pathes.join(',');
+    }
+});

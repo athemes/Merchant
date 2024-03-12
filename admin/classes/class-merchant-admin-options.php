@@ -57,7 +57,71 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					'ajaxnonce'                           => wp_create_nonce( 'merchant_admin_options' ),
 					'product_delete_confirmation_message' => esc_html__( 'Are you sure you want to remove this product?', 'merchant' ),
 				) );
-			}
+
+				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
+				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				wp_localize_script( 'date-picker', 'merchant_datepicker_locale', array(
+					wp_json_encode(
+						array(
+							'days'        => array(
+								esc_html__( 'Sunday', 'merchant' ),
+								esc_html__( 'Monday', 'merchant' ),
+								esc_html__( 'Tuesday', 'merchant' ),
+								esc_html__( 'Wednesday', 'merchant' ),
+								esc_html__( 'Thursday', 'merchant' ),
+								esc_html__( 'Friday', 'merchant' ),
+								esc_html__( 'Saturday', 'merchant' ),
+							),
+							'daysShort'   => array(
+								esc_html__( 'Sun', 'merchant' ),
+								esc_html__( 'Mon', 'merchant' ),
+								esc_html__( 'Tue', 'merchant' ),
+								esc_html__( 'Wed', 'merchant' ),
+								esc_html__( 'Thu', 'merchant' ),
+								esc_html__( 'Fri', 'merchant' ),
+								esc_html__( 'Sat', 'merchant' ),
+							),
+							'daysMin'     => array(
+								esc_html__( 'Su', 'merchant' ),
+								esc_html__( 'Mo', 'merchant' ),
+								esc_html__( 'Tu', 'merchant' ),
+								esc_html__( 'We', 'merchant' ),
+								esc_html__( 'Th', 'merchant' ),
+								esc_html__( 'Fr', 'merchant' ),
+								esc_html__( 'Sa', 'merchant' ),
+							),
+							'months'      => array(
+								esc_html__( 'January', 'merchant' ),
+								esc_html__( 'February', 'merchant' ),
+								esc_html__( 'March', 'merchant' ),
+								esc_html__( 'April', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'June', 'merchant' ),
+								esc_html__( 'July', 'merchant' ),
+								esc_html__( 'August', 'merchant' ),
+								esc_html__( 'September', 'merchant' ),
+								esc_html__( 'October', 'merchant' ),
+								esc_html__( 'November', 'merchant' ),
+								esc_html__( 'December', 'merchant' ),
+							),
+							'monthsShort' => array(
+								esc_html__( 'Jan', 'merchant' ),
+								esc_html__( 'Feb', 'merchant' ),
+								esc_html__( 'Mar', 'merchant' ),
+								esc_html__( 'Apr', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'Jun', 'merchant' ),
+								esc_html__( 'Jul', 'merchant' ),
+								esc_html__( 'Aug', 'merchant' ),
+								esc_html__( 'Sep', 'merchant' ),
+								esc_html__( 'Oct', 'merchant' ),
+								esc_html__( 'Nov', 'merchant' ),
+								esc_html__( 'Dec', 'merchant' ),
+							),
+						)
+					),
+				) );
+            }
 		}
 
 		/**
@@ -1616,6 +1680,37 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				echo '<input type="hidden" name="merchant[' . esc_attr( $settings['id'] ) . ']" value="" />';
 			}
 		}
+
+		/**
+         * Field: Date Time.
+         *
+		 * @param $settings array field settings.
+		 * @param $value string field value.
+		 * @param $module_id string module id.
+		 *
+		 * @return void
+		 */
+        public static function date_time( $settings, $value, $module_id = '' ) {
+            // All options are documented here: https://air-datepicker.com/docs
+	        $options = array(
+		        'dateFormat' => 'MM-dd-yyyy',
+		        'timepicker' => true,
+		        'timeFormat' => 'hh:mm AA',
+		        'minDate'    => 'today',
+	        );
+	        if ( isset( $settings['options'] ) ) {
+		        $settings['options'] = wp_parse_args( $settings['options'], $options );
+	        } else {
+		        $settings['options'] = $options;
+	        }
+	        ?>
+            <div class="merchant-datetime-field" data-options="<?php echo esc_attr( wp_json_encode( $settings['options'] ) ); ?>">
+                <input type="text" name="merchant[<?php
+	            echo esc_attr( $settings['id'] ); ?>]" value="<?php
+	            echo esc_attr( $value ); ?>"/>
+            </div>
+	        <?php
+        }
 
 		/**
 		 * Field: Flexible Content.
