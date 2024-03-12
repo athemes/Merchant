@@ -51,6 +51,7 @@ Merchant_Admin_Options::create( array(
 								'new_products'      => esc_html__( 'New Products', 'merchant' ),
 								'out_of_stock'      => esc_html__( 'Out of Stock', 'merchant' ),
 								'by_category'       => esc_html__( 'By Product Category', 'merchant' ),
+								'specific_products' => esc_html__( 'Specific products', 'merchant' ),
 							),
 							'default' => 'featured_products',
 						),
@@ -78,6 +79,13 @@ Merchant_Admin_Options::create( array(
 							'title'     => esc_html__( 'Product Categories', 'merchant' ),
 							'options'   => merchant_get_product_categories(),
 							'condition' => array( 'display_rules', '==', 'by_category' ),
+						),
+						array(
+							'id'        => 'product_ids',
+							'type'      => 'products_selector',
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Select the products that will show the label.', 'merchant' ),
+							'condition' => array( 'display_rules', '==', 'specific_products' ),
 						),
 						array(
 							'id'      => 'background_color',
