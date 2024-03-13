@@ -211,6 +211,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 
 						break;
+
+                    case 'user':
+                        $query = new WP_User_Query( array(
+                            'search'         => '*' . $term . '*',
+                            'search_columns' => array( 'user_login', 'user_nicename', 'user_email', 'user_url' ),
+                            'number'         => 25,
+                        ) );
+
+                        if ( ! empty( $query->results ) ) {
+                            foreach ( $query->results as $user ) {
+                                $options[] = array(
+                                    'id'   => $user->ID,
+                                    'text' => $user->display_name,
+                                );
+                            }
+                        }
+
+                        break;
 				}
 
 				wp_send_json_success( $options );
@@ -1015,6 +1033,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									echo '<option value="' . esc_attr( $post->ID ) . '" selected>' . esc_html( $post->post_title ) . '</option>';
 								}
 								break;
+							case 'user':
+                                $user = get_user_by( 'ID', $id );
+                                if( $user ) {
+                                    echo '<option value="' . esc_attr( $user->ID ) . '" selected>' . esc_html( $user->display_name ) . '</option>';
+                                }
+                                break;
 							case 'options':
 						}
 					}
