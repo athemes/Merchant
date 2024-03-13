@@ -1068,6 +1068,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Info Block
+		 *
+		 * @return void
+		 */
+		public static function info_block( $settings, $value, $module_id = '' ) {
+			?>
+            <div class="merchant-info-block">
+                <i class="dashicons dashicons-info"></i>
+                <p><?php
+					echo ! empty( $settings['description'] ) ? esc_html( $settings['description'] ) : ''; ?><?php
+					if ( ! empty( $settings['button_text'] ) && ! empty( $settings['button_link'] ) ) {
+						printf( '<a href="%s" target="_blank">%s</a>', esc_url( $settings['button_link'] ), esc_html( $settings['button_text'] ) );
+					} ?></p>
+            </div>
+			<?php
+		}
+
+		/**
 		 * Field: Products Selector
 		 *
 		 * @param $settings
