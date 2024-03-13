@@ -1094,7 +1094,7 @@
                 width: '100%',
             }
 
-            if ($source === 'post' || $source === 'product') {
+            if ($source === 'post' || $source === 'product' || $source === 'user') {
                 $object.minimumInputLength = 1;
                 $object.ajax = {
                     url: $config.ajaxurl,
