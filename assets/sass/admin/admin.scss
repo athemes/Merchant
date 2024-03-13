@@ -1701,6 +1701,7 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-info-block,
 .merchant-tag-pre-orders {
   display: flex;
   grid-gap: 16px;
@@ -1743,6 +1744,12 @@ body.merchant-module-disabled {
       flex-shrink: 0;
     }
   }
+}
+
+.merchant-info-block{
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #BABFC3;
 }
 
 .merchant-module-page-setting-field-select,
