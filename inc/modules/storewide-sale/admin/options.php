@@ -135,13 +135,6 @@ Merchant_Admin_Options::create( array(
 							'title'     => esc_html__( 'Ends at', 'merchant' ),
 							'condition' => array( 'availability', '==', 'specific' ),
 						),
-						array(
-							'id'          => 'instructions',
-							'type'        => 'info_block',
-							'description' => esc_html__( 'You can display a sale badge on products eligible for this discount by using Merchant’s Product Labels module.', 'merchant'),
-							'button_text' => esc_html__( 'View Product Labels', 'merchant'),
-							'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=product-labels' ) ),
-						),
 					),
 				),
 			),
@@ -155,6 +148,13 @@ Merchant_Admin_Options::create( array(
 					'user_condition' => 'all',
 				),
 			),
+		),
+		array(
+			'id'          => 'helping_instructions',
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display a sale badge on products eligible for this discount by using Merchant’s Product Labels module.', 'merchant'),
+			'button_text' => esc_html__( 'View Product Labels', 'merchant'),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=product-labels' ) ),
 		),
 	),
 ) );
