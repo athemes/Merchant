@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Bundle Offers', 'merchant' ),
+	'title'  => esc_html__( 'Simple Discount', 'merchant' ),
 	'module' => Merchant_Storewide_Sale::MODULE_ID,
 	'fields' => array(
 		array(
@@ -128,12 +128,14 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'date_time',
 							'title'     => esc_html__( 'Start at', 'merchant' ),
 							'condition' => array( 'availability', '==', 'specific' ),
+							// todo: add description
 						),
 						array(
 							'id'        => 'end_date',
 							'type'      => 'date_time',
 							'title'     => esc_html__( 'Ends at', 'merchant' ),
 							'condition' => array( 'availability', '==', 'specific' ),
+							// todo: add description
 						),
 					),
 				),
