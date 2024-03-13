@@ -700,7 +700,8 @@
                         switch (condition[1]) {
                             case '==':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && $target.val() == condition[2]) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && checked.val() === condition[2]) {
                                         passed = true;
                                     }
                                 }
@@ -710,7 +711,8 @@
                                 break;
                             case 'any':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && condition[2].split('|').includes($target.val())) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && condition[2].split('|').includes(checked.val())) {
                                         passed = true;
                                     }
                                 }
