@@ -63,6 +63,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y ', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/',
 				),
+				'storewide-sale' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
+					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
+					'desc' => esc_html__( 'Reduces the price by a straightforward percentage or fixed amount.', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/',
+				),
 				'volume-discounts' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
