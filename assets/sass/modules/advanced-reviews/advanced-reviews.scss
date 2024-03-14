@@ -197,6 +197,7 @@ body {
 		align-items: center;
 		justify-content: space-between;
 		max-width: 410px;
+		cursor: pointer;
 
 		.item-rating {
 			min-width: 55px;
@@ -232,6 +233,18 @@ body {
 
 		& + .merchant-star-rating-bar-item {
 			margin-top: 10px;
+		}
+
+		&:hover {
+			.item-rating, .item-qty {
+				color: var(--mrc-adv-reviews-desc-color);
+			}
+
+			.item-bar {
+				.item-bar-inner {
+					background: var(--mrc-adv-reviews-desc-color);
+				}
+			}
 		}
 	}
 

@@ -27,6 +27,7 @@ $title_tag = $args[ 'title_tag' ];
 // Dropdown sort
 $default_sorting    = $args[ 'default_sorting' ];
 $sort_orderby       = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$rating_count       = isset( $_GET['rating-count'] ) ? sanitize_text_field( wp_unslash( $_GET['rating-count'] ) ) : 0;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 // Reviews bars rating
 $bars_data = $args['bars_data']; ?>
@@ -84,7 +85,7 @@ $bars_data = $args['bars_data']; ?>
 
 				<?php if ( $args['ratings_enabled'] && $bars_data[ 'total' ] > 0 ) : ?>
 				<div class="merchant-star-rating-bars">
-					<div class="merchant-star-rating-bar-item">
+					<div class="merchant-star-rating-bar-item" data-count="5">
 						<p class="item-rating"><?php echo esc_html__( '5 Stars', 'merchant' ); ?></p>
 						<div class="item-bar">
 							<div class="item-bar-inner" style="width: <?php echo esc_attr( $bars_data[ '5-stars-percent' ] ); ?>%;"></div>
@@ -97,7 +98,7 @@ $bars_data = $args['bars_data']; ?>
 							?>
 						</p>
 					</div>
-					<div class="merchant-star-rating-bar-item">
+					<div class="merchant-star-rating-bar-item" data-count="4">
 						<p class="item-rating"><?php echo esc_html__( '4 Stars', 'merchant' ); ?></p>
 						<div class="item-bar">
 							<div class="item-bar-inner" style="width: <?php echo esc_attr( $bars_data[ '4-stars-percent' ] ); ?>%;"></div>
@@ -110,7 +111,7 @@ $bars_data = $args['bars_data']; ?>
 							?>
 						</p>  
 					</div>
-					<div class="merchant-star-rating-bar-item">
+					<div class="merchant-star-rating-bar-item" data-count="3">
 						<p class="item-rating"><?php echo esc_html__( '3 Stars', 'merchant' ); ?></p>
 						<div class="item-bar">
 							<div class="item-bar-inner" style="width: <?php echo esc_attr( $bars_data[ '3-stars-percent' ] ); ?>%;"></div>
@@ -123,7 +124,7 @@ $bars_data = $args['bars_data']; ?>
 							?>
 						</p>  
 					</div>
-					<div class="merchant-star-rating-bar-item">
+					<div class="merchant-star-rating-bar-item" data-count="2">
 						<p class="item-rating"><?php echo esc_html__( '2 Stars', 'merchant' ); ?></p>
 						<div class="item-bar">
 							<div class="item-bar-inner" style="width: <?php echo esc_attr( $bars_data[ '2-stars-percent' ] ); ?>%;"></div>
@@ -136,7 +137,7 @@ $bars_data = $args['bars_data']; ?>
 							?>
 						</p>  
 					</div>
-					<div class="merchant-star-rating-bar-item">
+					<div class="merchant-star-rating-bar-item" data-count="1">
 						<p class="item-rating"><?php echo esc_html__( '1 Star', 'merchant' ); ?></p>
 						<div class="item-bar">
 							<div class="item-bar-inner" style="width: <?php echo esc_attr( $bars_data[ '1-stars-percent' ] ); ?>%;"></div>
@@ -165,6 +166,8 @@ $bars_data = $args['bars_data']; ?>
 						<option value="top-rated"<?php echo selected( $sort_orderby, 'top-rated' ); ?>><?php echo esc_html__( 'Top rated', 'merchant' ); ?></option>
 						<option value="low-rated"<?php echo selected( $sort_orderby, 'low-rated' ); ?>><?php echo esc_html__( 'Low rated', 'merchant' ); ?></option>
 					</select>
+
+					<input type="hidden" class="merchant-reviews-filter-by-rating-count" name="rating-count" value="0" />
 				</form>
 				<?php endif; ?>
 			</div>
@@ -193,6 +196,12 @@ $bars_data = $args['bars_data']; ?>
 				$cpages = $cpages / get_option( 'comments_per_page' );
 
 				$comments_args[ 'paged' ] = empty( $cpaged ) ? 1 : $cpaged;
+			}
+
+			// Rating arguments.
+			if($rating_count > 0) {
+				$comments_args[ 'meta_key' ] = 'rating';
+				$comments_args[ 'meta_value' ] = $rating_count;
 			}
 
 			// Orderby
