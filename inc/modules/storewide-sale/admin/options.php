@@ -63,6 +63,14 @@ Merchant_Admin_Options::create( array(
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
 						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'    => esc_html__( 'Exclude products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
+						),
+						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Discount', 'merchant' ),
