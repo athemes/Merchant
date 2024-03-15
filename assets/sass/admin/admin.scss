@@ -1362,7 +1362,7 @@ body.merchant-module-disabled {
 
 .merchant-module-page-setting-fields {
   display: flex;
-  grid-gap: 24px;
+  //grid-gap: 24px;
   flex-direction: column;
   width: 60%;
   padding: 30px;
@@ -1375,6 +1375,7 @@ body.merchant-module-disabled {
   display: flex;
   grid-gap: 10px;
   flex-direction: column;
+  margin-bottom: 24px;
 
   &.merchant-show {
     display: flex;
@@ -2114,7 +2115,7 @@ body.merchant-module-disabled {
 /* Sortable Repeater Field */
 
 .merchant-module-page-setting-field-flexible_content .merchant-module-page-setting-field-title {
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 }
 
 .merchant-sortable-repeater-control {
@@ -2130,7 +2131,7 @@ body.merchant-module-disabled {
       margin: 0;
       border-radius: 4px 0 0 4px;
       border: 1px solid #D6D6D6;
-      padding: 12px;
+      padding: 12px 8px;
       line-height: 1.3em;
 
       &:focus {
@@ -2412,7 +2413,7 @@ body.merchant-module-disabled {
     .layout-body {
       display: flex;
       flex-direction: column;
-      grid-gap: 20px;
+      //grid-gap: 20px;
     }
 
     .layout-field {
