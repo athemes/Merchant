@@ -46,7 +46,7 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'no_variation_selected_text_has_no_discount' => __( 'Please select an option to see the total price.', 'merchant' ),
-			'no_variation_selected_text' => __( 'Please select an option to see your savings.', 'merchant' ),
+			'no_variation_selected_text'                 => __( 'Please select an option to see your savings.', 'merchant' ),
 		);
 
 		// Parent construct.
@@ -94,7 +94,7 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( parent::is_module_settings_page() ) {
-			//todo to be implemented.
+			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
 
@@ -102,14 +102,13 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
 	public function render_admin_preview( $preview, $module ) {
 		if ( $module === self::MODULE_ID ) {
-			// todo: to be implemented.
-			$preview->set_html( 'Preview goes here...', $this->get_module_settings() );
+			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
 		}
 
 		return $preview;
@@ -123,7 +122,52 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
-		//todo to be implemented.
+		?>
+        <div class="mrc-preview-single-product-elements">
+            <div class="mrc-preview-left-column">
+                <div class="mrc-preview-product-image-wrapper">
+                    <div class="mrc-preview-product-image"></div>
+                    <div class="mrc-preview-product-image-thumbs">
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mrc-preview-right-column">
+                <div class="mrc-preview-text-placeholder"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+                <p class="price">
+                    <del aria-hidden="true">
+                        <span class="woocommerce-Price-amount amount">
+                            <bdi>
+                                <span class="woocommerce-Price-currencySymbol"><?php
+                                    echo esc_html( get_woocommerce_currency_symbol() )
+                                    ?></span>240.00
+                            </bdi>
+                        </span>
+                    </del>
+                    <ins>
+                        <span class="woocommerce-Price-amount amount">
+                            <bdi>
+                                <span class="woocommerce-Price-currencySymbol"><?php
+				                    echo esc_html( get_woocommerce_currency_symbol() )
+				                    ?></span>200.00
+                            </bdi>
+                        </span>
+                    </ins>
+                </p>
+                <div class="mrc-preview-text-placeholder smaller mrc-mw-70"></div>
+                <div class="mrc-preview-text-placeholder smaller mrc-mw-40"></div>
+                <br>
+                <br>
+                <div class="mrc-preview-addtocart-placeholder">
+                    <input type="number" disabled readonly value="1">
+                    <button disabled type="button" class="single_add_to_cart_button"></button>
+                </div>
+            </div>
+        </div>
+		<?php
 	}
 
 	/**
