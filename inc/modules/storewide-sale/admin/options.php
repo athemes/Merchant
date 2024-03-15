@@ -65,7 +65,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'        => 'excluded_products',
 							'type'      => 'products_selector',
-							'title'    => esc_html__( 'Exclude products', 'merchant' ),
+							'title'     => esc_html__( 'Exclude products', 'merchant' ),
 							'multiple'  => true,
 							'desc'      => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
 							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
@@ -143,7 +143,17 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'date_time',
 							'title'     => esc_html__( 'Ends at', 'merchant' ),
 							'condition' => array( 'availability', '==', 'specific' ),
-							// todo: add description
+							'desc'      => sprintf(
+							/*
+							 * translators:
+							 * %1$s: time zone
+							 * %2$s WordPress setting link
+							*/
+								esc_html__( 'Leave it empty if you don’t want to have an end date. The times set above are in the %1$s timezone, according to your settings from %2$s.',
+									'merchant' ),
+								'<strong>' . get_option( 'timezone_string' ) . '</strong>',
+								'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '" target="_blank">' . esc_html__( 'WordPress Settings', 'merchant' ) . '</a>'
+							),
 						),
 					),
 				),
@@ -162,8 +172,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'          => 'helping_instructions',
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display a sale badge on products eligible for this discount by using Merchant’s Product Labels module.', 'merchant'),
-			'button_text' => esc_html__( 'View Product Labels', 'merchant'),
+			'description' => esc_html__( 'You can display a sale badge on products eligible for this discount by using Merchant’s Product Labels module.', 'merchant' ),
+			'button_text' => esc_html__( 'View Product Labels', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=product-labels' ) ),
 		),
 	),
