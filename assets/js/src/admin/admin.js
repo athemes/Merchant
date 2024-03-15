@@ -243,9 +243,13 @@
                     let input = $(this).find('input'),
                         options = {
                             locale: JSON.parse(merchant_datepicker_locale),
-                            selectedDates: [input.val() ? new Date(input.val()) : new Date()],
+                            selectedDates: [input.val() ? new Date(input.val()) : ''],
                             onSelect: ({date, formattedDate, datepicker}) => {
-                                input.trigger('change.merchant')
+                                if (typeof (formattedDate) === "undefined") {
+                                    // allow removing date
+                                    input.attr('value', '');
+                                }
+                                input.trigger('change.merchant');
                             }
                         },
                         fieldOptions = $(this).data('options');
