@@ -2164,6 +2164,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			return $choices;
 		}
 
+        /**
+         * Get category choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_tag_select2_choices() {
+			$choices = array();
+			$tags    = merchant_get_product_tags();
+
+			if ( is_array( $tags ) && ! empty( $tags ) ) {
+				foreach ( $tags as $slug => $name ) {
+					$choices[] = array(
+						'id'   => esc_attr( $slug ),
+						'text' => esc_html( $name ),
+					);
+				}
+			}
+
+			return $choices;
+		}
+
 		/**
          * Get User Roles choices for select2
          *
