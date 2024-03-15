@@ -247,7 +247,7 @@
                             onSelect: ({date, formattedDate, datepicker}) => {
                                 if (typeof (formattedDate) === "undefined") {
                                     // allow removing date
-                                    input.attr('value', '');
+                                    input.val('');
                                 }
                                 input.trigger('change.merchant');
                             }
