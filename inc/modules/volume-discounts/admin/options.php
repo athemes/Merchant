@@ -100,6 +100,13 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'      => 'exclude_coupon',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Exclude coupon', 'merchant' ),
+							'default' => false,
+						),
+
+						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
 							'title'   => esc_html__( 'User Condition', 'merchant' ),
