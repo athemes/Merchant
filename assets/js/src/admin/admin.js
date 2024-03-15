@@ -502,6 +502,18 @@
             events: function () {
                 const self = this;
 
+                // Update "selected" attribute on select. It's Required for cloning feature.
+                $( document ).on( 'change', 'select', function() {
+                    const selectedValue = $( this ).val();
+                    const isMultiple    = $( this ).prop( 'multiple' );
+
+                    $( this ).find( 'option' ).each( function() {
+                        const currentValue = $( this ).val();
+                        const isSelected = isMultiple ? selectedValue.includes( currentValue ) : currentValue === selectedValue;
+                        $( this ).attr( 'selected', isSelected );
+                    } );
+                } );
+
                 $('.customize-control-flexible-content-add-button').click(function (event) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
@@ -515,6 +527,7 @@
                     $(this).parent().find('.customize-control-flexible-content-add-list').toggleClass('active');
                 });
 
+                // Add new item
                 $('.customize-control-flexible-content-add').click(function (event) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
@@ -526,7 +539,7 @@
                     var $content = $field.find('.merchant-flexible-content');
                     var $items = $content.find('.layout')
 
-                    $layout.find('input, select').each(function () {
+                    $layout.find('input, select, textarea').each(function () {
                         if ($(this).data('name')) {
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
@@ -559,6 +572,95 @@
                     self.updateLayoutTitle()
                 });
 
+                // Duplicate item
+                $( document ).on( 'click', '.customize-control-flexible-content-duplicate', function( event ) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+
+                    const $duplicateBtn = $( this );
+
+                    const $flexibleContentWrapper = $duplicateBtn.closest( '.merchant-flexible-content-control[data-id=' + $duplicateBtn.data( 'id' ) + ']' );
+                    const $flexibleContent        = $flexibleContentWrapper?.find( '.merchant-flexible-content' );
+
+                    if ( ! $flexibleContentWrapper.length || ! $flexibleContent.length ) {
+                        return;
+                    }
+
+                    const $dataLayout = $duplicateBtn.data( 'layout' );
+
+                    const $sourceLayout = $duplicateBtn.closest( '.layout[data-type=' + $dataLayout + ']' );
+                    if ( ! $sourceLayout.length ) {
+                        return;
+                    }
+
+                    // Clone the layout without data & events.
+                    const $clonedLayout = $sourceLayout.clone();
+                    const $items = $flexibleContent.find('.layout');
+
+                    const index = $sourceLayout.find('.layout-count').text();
+
+                    $clonedLayout.find( 'input, select, textarea' ).each( function () {
+                        const $input = $( this );
+                        const inputName = $input.attr( 'name' );
+
+                        if ( inputName ) {
+                            const prefix    = inputName.split( '[' )[0];
+                            const indexPart = inputName.match( /\[(.*?)\]/g );
+
+                            if ( indexPart && indexPart.length > 1 ) {
+                                indexPart[1]           = '['+ index +']';
+                                const newName = `${ prefix }${ indexPart.join( '' ) }`;
+                                $input.attr( 'name', newName );
+                            }
+                        }
+                    } );
+
+                    // Find select2, Remove and Re-init again. select.select2('destroy') doesn't work.
+                    $clonedLayout.find( 'select' ).each( function () {
+                        if ( $( this ).hasClass( 'select2-hidden-accessible' ) ) {
+                            $( this )
+                                .removeClass( 'select2-hidden-accessible' )
+                                .removeAttr('data-live-search')
+                                .removeAttr('data-select2-id')
+                                .removeAttr('aria-hidden')
+                                .removeAttr('tabindex');
+
+                            // Remove the existing dropdown
+                            $( this ).nextAll( '.select2-container' ).remove();
+
+                            // Re-init
+                            $( this ).select2();
+                        }
+                    } );
+
+                    // Removing copied style to make the accordion work properly.
+                    $clonedLayout.find( '.layout-body' ).removeAttr( 'style' );
+
+                    // Append the cloned layout right after the source one with fadeIn effect.
+                    $clonedLayout.hide();
+                    $clonedLayout.insertAfter( $sourceLayout );
+                    $clonedLayout.fadeIn();
+
+                    if ( $clonedLayout.find( '.merchant-module-page-setting-field-upload').length ) {
+                        initUploadField( $clonedLayout.find( '.merchant-module-page-setting-field-upload' ) );
+                    }
+
+                    if ( $clonedLayout.find( '.merchant-module-page-setting-field-select_ajax' ).length ) {
+                        initSelectAjax( $clonedLayout.find( '.merchant-module-page-setting-field-select_ajax' ) );
+                    }
+
+                    self.refreshNumbers( $flexibleContent );
+
+                    $( document ).trigger( 'merchant-flexible-content-added', [ $clonedLayout ] );
+
+                    if ( $flexibleContentWrapper.hasClass( 'has-accordion' ) ) {
+                        $flexibleContent.accordion( 'refresh' );
+                    }
+
+                    self.updateLayoutTitle();
+                } );
+
+                // Delete item
                 $('.customize-control-flexible-content-delete').click(function (event) {
                     event.preventDefault();
 
@@ -592,14 +694,14 @@
 
                     $(this).find('.layout-count').text(index + 1);
 
-                    $(this).find('input, select').each(function () {
+                    $(this).find('input, select, textarea').each(function () {
                         if ($(this).attr('name')) {
                             $(this).attr('name', $(this).attr('name').replace('[' + $inputIndex + ']', '[*refreshed*' + (index) + ']'))
                         }
                     })
                 })
                 $content.find('.layout').each(function (index) {
-                    $(this).find('input, select').each(function () {
+                    $(this).find('input, select, textarea').each(function () {
                         // We've added *refreshed* to the attribute name in the prior loop as refreshing the numbers in the attribute can cause
                         // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
                         let nameAttr = $(this).attr('name');

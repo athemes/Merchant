@@ -21,6 +21,7 @@ Merchant_Admin_Options::create( array(
 			'style'        => Merchant_Volume_Discounts::MODULE_ID . '-style default',
 			'sorting'      => false,
 			'accordion'    => true,
+			'duplicate'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Create Discount Tiers', 'merchant' ),

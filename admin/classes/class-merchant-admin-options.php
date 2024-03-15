@@ -1028,14 +1028,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 							foreach ( $option['options'] as $child_option ) {
 								$selected_value = is_array( $value ) ? in_array( $child_option['id'], $value, true ) : $child_option['id'];
-								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $child_option['text'] )
+								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $child_option['text'] )
 									. '</option>';
 							}
 
 							echo '</optgroup>';
 						} else {
 							$selected_value = is_array( $value ) ? in_array( $option['id'], $value, true ) : $option['id'];
-							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $option['text'] ) . '</option>';
+							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $option['text'] ) . '</option>';
 						}
 					}
 				} ?>
@@ -1739,8 +1739,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$classes[] = 'disable-sorting';
 			}
 
-			if ( $settings['accordion'] === true ) {
+			$has_accordion = (bool) ( $settings['accordion'] ?? false );
+			if ( $has_accordion ) {
 				$classes[] = 'has-accordion';
+			}
+
+			$has_duplicate = (bool) ( $settings['duplicate'] ?? false );
+			if ( $has_duplicate ) {
+				$classes[] = 'has-duplicate';
 			}
 			?>
             <div class="<?php
@@ -1754,8 +1760,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<?php
 					foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
 
-                        <div class="layout" data-type="<?php
-						echo esc_attr( $layout_type ) ?>">
+                        <div class="layout" data-type="<?php echo esc_attr( $layout_type ) ?>">
                             <div class="layout-header">
                                 <div class="layout-count">1</div>
                                 <div class="layout-title"<?php
@@ -1765,16 +1770,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									<?php
 									echo esc_html( $layout['title'] ) ?>
                                 </div>
-                                <div class="layout-actions">
-                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                    <a class="customize-control-flexible-content-delete" href="#">
-                                        <span class="dashicons dashicons-no-alt"></span>
-                                    </a>
-	                                <?php
-	                                if ( $settings['accordion'] === true ) { ?>
+                                <div class="layout-toggle">
+	                                <?php if ( $has_accordion ) : ?>
                                         <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-	                                <?php
-	                                } ?>
+	                                <?php endif; ?>
                                 </div>
                             </div>
                             <div class="layout-body">
@@ -1808,6 +1807,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
 								echo esc_attr( $layout_type ) ?>">
                             </div>
+
+                            <div class="layout-actions">
+                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                <a class="customize-control-flexible-content-delete" href="#">
+                                    <span class="dashicons dashicons-no-alt"></span>
+                                </a>
+		                        <?php if ( $has_duplicate ) : ?>
+                                    <a
+                                        href="#"
+                                        class="customize-control-flexible-content-duplicate"
+                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
+                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
+                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16">
+                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
+                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                                        </svg>
+                                    </a>
+		                        <?php endif; ?>
+                            </div>
                         </div>
 
 					<?php
@@ -1820,8 +1839,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 					<?php
 					foreach ( $values as $option_key => $option ) : ?>
-                        <div class="layout" data-type="<?php
-						echo esc_attr( $option['layout'] ) ?>">
+                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>">
                             <div class="layout-header">
                                 <div class="layout-count"><?php
 									echo absint( $option_key + 1 ) ?></div>
@@ -1832,16 +1850,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									<?php
 									echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
                                 </div>
-                                <div class="layout-actions">
-                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                    <a class="customize-control-flexible-content-delete" href="#">
-                                        <span class="dashicons dashicons-no-alt"></span>
-                                    </a>
-	                                <?php
-	                                if ( $settings['accordion'] === true ) { ?>
+                                <div class="layout-toggle">
+	                                <?php if ( $has_accordion ) : ?>
                                         <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-		                                <?php
-	                                } ?>
+	                                <?php endif; ?>
                                 </div>
                             </div>
                             <div class="layout-body">
@@ -1873,6 +1885,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								echo absint( $option_key ) ?>][layout]"
                                         value="<?php
 										echo esc_attr( $option['layout'] ) ?>">
+                            </div>
+
+                            <div class="layout-actions">
+                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                <a class="customize-control-flexible-content-delete" href="#">
+                                    <span class="dashicons dashicons-no-alt"></span>
+                                </a>
+	                            <?php if ( $has_duplicate ) : ?>
+                                    <a
+                                        href="#"
+                                        class="customize-control-flexible-content-duplicate"
+                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
+                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
+                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16">
+                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
+                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                                        </svg>
+                                    </a>
+	                            <?php endif; ?>
                             </div>
                         </div>
 
