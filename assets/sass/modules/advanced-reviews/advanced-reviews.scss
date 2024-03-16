@@ -190,6 +190,128 @@ body {
 	}
 }
 
+// Photo slider component
+.merchant-review-photos {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 15px;
+
+	.merchant-review-photo {
+		margin-right: 10px;
+		width: 150px;
+		height: 150px;
+		overflow: hidden;
+		border: 2px solid #dedede;
+		position: relative;
+		z-index: 0;
+		transition: 0.3s ease;
+		transform: scale(1);
+
+		&:hover {
+			transform: scale(1.05);
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+			object-fit: cover;
+			transition: all 0.3s ease-in-out 0s;
+			transform: scale(1);
+			overflow-wrap: break-word;
+
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+	}
+}
+
+// Photo slider popup
+.merchant-adv-photo-reviews-popup {
+	position: fixed;
+    inset: 0px;
+    display: none;
+    overflow: hidden;
+    padding: 80px;
+    opacity: 1;
+    z-index: 9999999;
+    background: rgba(0, 0, 0, 0.8);
+    max-height: 100vh;
+
+	&.show {
+		display: flex !important;
+		-webkit-box-align: center;
+		align-items: center;
+		-webkit-box-pack: center;
+		justify-content: center;
+	}
+	
+	.merchant-adv-photo-reviews-popup-body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #fff;
+		position: relative;
+		width: 100%;
+		max-width: 960px;
+
+		.merchant-adv-photo-review-left {
+			width: 50%;
+
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+
+				li {
+					margin: 0;
+					padding: 0;
+					display: none;
+
+					&.merchant-adv-photo-reviews-popup-item-active {
+						display: block;
+					}
+					
+					img {
+						width: 100%;
+					}
+				}
+			}
+
+		}
+
+		.merchant-adv-photo-review-right {
+			width: 50%;
+			padding: 40px;
+
+			button.merchant-adv-photo-reviews-popup-close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				background: #000;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: none;
+				padding: 10px;
+				border-radius: 50%;
+
+				&:hover {
+					background: #595757;
+				}
+			}
+
+		}
+	}
+}
+
 // Star rating bars component
 .merchant-star-rating-bars {
 	.merchant-star-rating-bar-item {
