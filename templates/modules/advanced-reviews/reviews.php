@@ -52,6 +52,24 @@ $bars_data = $args['bars_data']; ?>
 
 	<?php endif; ?>
 
+	<?php
+		$photo_slider_args = array(
+			'post_id' => $product_id,
+			'meta_query' => array(
+				array(
+					'key' => 'photos',
+					'compare' => 'EXISTS'
+				),
+			),
+			'number' => 50
+		);
+		
+		// Create a new comment query
+		$comments_query = new WP_Comment_Query;
+		$comments = $comments_query->query( $photo_slider_args );
+
+		if(!empty($comments) && is_array($comments)):
+	?>
 	<div class="merchant-adv-review-photo-slider-wrap">
 		<div class="merchant-adv-review-photo-slider-nav">
 			<button class="merchant-adv-review-photo-slider-nav-item merchant-adv-review-photo-slider-nav-item-left">
@@ -63,81 +81,66 @@ $bars_data = $args['bars_data']; ?>
 		</div>
 		<div class="merchant-adv-review-photo-slider-items merchant-review-photos">
 			<?php
-			$photo_slider_args = array(
-				'meta_query' => array(
-					array(
-						'key' => 'photos',
-						'compare' => 'EXISTS'
-					),
-				),
-				'number' => 50
-			);
 			
-			// Create a new comment query
-			$comments_query = new WP_Comment_Query;
-			$comments = $comments_query->query( $photo_slider_args );
-			
+			$count = 1;
 			// Loop through the comments
-			if ( $comments ) {
-				$count = 1;
-				foreach ( $comments as $comment ) {
-					$comment_id = $comment->comment_ID;
+			foreach ( $comments as $comment ) {
+				$comment_id = $comment->comment_ID;
 
-					$photos = get_comment_meta($comment_id, 'photos', true);
+				$photos = get_comment_meta($comment_id, 'photos', true);
 
-					if(empty($photos)) {
-						continue;
-					}
-					
-					/**
-					 * Hook 'woocommerce_review_before_photo_slider'
-					 * 
-					 * @since 1.0
-					 */
-					do_action( 'woocommerce_review_before_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
-					
-					// define photo upload directory.
-					$upload_dir = wp_upload_dir();
-					$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
-
-					$photos = unserialize($photos);
-
-					$photo_url = $upload_dir_url. $photos[0];
-
-					//rating value.
-					$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $comment_id, 'rating', true );
-
-					//review date.
-					$review_date = strtotime($comment->comment_date);
-					$review_date = date('Y-m-d H:i:s',$review_date);
-
-					$info = [
-						'product_title' => $product->get_name(),
-						'photos' => $photos,
-						'rating' => $comment_rating_value,
-						'photo_dir_url' => $upload_dir_url,
-						'author' => $comment->comment_author,
-						'review_content' => $comment->comment_content,
-						'review_date' => $review_date,
-					];
-					$info = htmlspecialchars(json_encode($info));
-
-					echo sprintf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $comment_id, $info, $count);
-					
-					/**
-					 * Hook 'woocommerce_review_after_photo_slider'
-					 * 
-					 * @since 1.0
-					 */
-					do_action( 'woocommerce_review_after_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
-				
-					$count++;
+				if(empty($photos)) {
+					continue;
 				}
-			}
+				
+				/**
+				 * Hook 'woocommerce_review_before_photo_slider'
+				 * 
+				 * @since 1.0
+				 */
+				do_action( 'woocommerce_review_before_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+				
+				// define photo upload directory.
+				$upload_dir = wp_upload_dir();
+				$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
 
+				$photos = unserialize($photos);
+
+				$photo_url = $upload_dir_url. $photos[0];
+
+				//rating value.
+				$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $comment_id, 'rating', true );
+
+				//review date.
+				$review_date = strtotime($comment->comment_date);
+				$review_date = date('Y-m-d H:i:s',$review_date);
+
+				$info = [
+					'product_title' => $product->get_name(),
+					'photos' => $photos,
+					'rating' => $comment_rating_value,
+					'photo_dir_url' => $upload_dir_url,
+					'author' => $comment->comment_author,
+					'review_content' => $comment->comment_content,
+					'review_date' => $review_date,
+				];
+				$info = htmlspecialchars(json_encode($info));
+
+				echo sprintf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $comment_id, $info, $count);
+				
+				/**
+				 * Hook 'woocommerce_review_after_photo_slider'
+				 * 
+				 * @since 1.0
+				 */
+				do_action( 'woocommerce_review_after_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+			
+				$count++;
+			}
 			?>
 		</div>
 	</div>
+	<?php endif; ?>
 	
 	<div class="merchant-adv-reviews-header">
 		<div class="mrc-row mrc-columns-no-gutter">
