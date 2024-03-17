@@ -32,7 +32,35 @@ $sort_orderby       = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslas
 $bars_data = $args['bars_data']; ?>
 
 <section id="reviews" class="merchant-adv-reviews products<?php echo ( $args[ 'hide_title' ] ) ? ' hide-title' : ''; ?>">
+	
+	<?php
+	if ( ! $args[ 'hide_title' ] ) :
+	
+		echo wp_kses_post(
+			sprintf(
+				'<%1$s id="reviews-stars" class="merchant-adv-reviews-title">%2$s</%1$s>',
+				$title_tag,
+				esc_html( Merchant_Translator::translate( $args[ 'title' ] ) )
+			)
+		);
+
+		?>
+
+		<p class="merchant-adv-reviews-desc">
+			<?php echo esc_html( Merchant_Translator::translate( $args[ 'description' ] ) ); ?>
+		</p>
+
+	<?php endif; ?>
+
 	<div class="merchant-adv-review-photo-slider-wrap">
+		<div class="merchant-adv-review-photo-slider-nav">
+			<button class="merchant-adv-review-photo-slider-nav-item merchant-adv-review-photo-slider-nav-item-left">
+				<span class="dashicons dashicons-arrow-left-alt2"></span>
+			</button>
+			<button class="merchant-adv-review-photo-slider-nav-item merchant-adv-review-photo-slider-nav-item-right">
+				<span class="dashicons dashicons-arrow-right-alt2"></span>
+			</button>
+		</div>
 		<div class="merchant-adv-review-photo-slider-items merchant-review-photos">
 			<?php
 			$photo_slider_args = array(
@@ -51,6 +79,7 @@ $bars_data = $args['bars_data']; ?>
 			
 			// Loop through the comments
 			if ( $comments ) {
+				$count = 1;
 				foreach ( $comments as $comment ) {
 					$comment_id = $comment->comment_ID;
 
@@ -93,7 +122,7 @@ $bars_data = $args['bars_data']; ?>
 					];
 					$info = htmlspecialchars(json_encode($info));
 
-					echo sprintf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s"><img src="%1$s" /></div>', $photo_url, $comment_id, $info);
+					echo sprintf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $comment_id, $info, $count);
 					
 					/**
 					 * Hook 'woocommerce_review_after_photo_slider'
@@ -101,31 +130,14 @@ $bars_data = $args['bars_data']; ?>
 					 * @since 1.0
 					 */
 					do_action( 'woocommerce_review_after_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+				
+					$count++;
 				}
 			}
 
 			?>
 		</div>
 	</div>
-	
-	<?php
-	if ( ! $args[ 'hide_title' ] ) :
-	
-		echo wp_kses_post(
-			sprintf(
-				'<%1$s id="reviews-stars" class="merchant-adv-reviews-title">%2$s</%1$s>',
-				$title_tag,
-				esc_html( Merchant_Translator::translate( $args[ 'title' ] ) )
-			)
-		);
-
-		?>
-
-		<p class="merchant-adv-reviews-desc">
-			<?php echo esc_html( Merchant_Translator::translate( $args[ 'description' ] ) ); ?>
-		</p>
-
-	<?php endif; ?>
 	
 	<div class="merchant-adv-reviews-header">
 		<div class="mrc-row mrc-columns-no-gutter">
@@ -418,11 +430,14 @@ $bars_data = $args['bars_data']; ?>
 													$info = htmlspecialchars(json_encode($info));
 
 													if(is_array($comment_photos)) {
+														$count = 1;
 														foreach($comment_photos as $comment_photo_name) {
 															// define photo full url.
 															$photo_url = $upload_dir_url . $comment_photo_name;
 
-															echo sprintf('<div class="merchant-review-photo" data-comment_id="%2$s" data-info="%3$s"><img src="%1$s" /></div>', $photo_url, $_comment->comment_ID, $info);
+															echo sprintf('<div class="merchant-review-photo" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $_comment->comment_ID, $info, $count);
+															
+															$count++;
 														}
 													}
 
