@@ -22,6 +22,7 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
 if ( $product instanceof WC_Product ) {
 	$is_purchasable     = $product->is_purchasable();
 	$product_id         = $product->get_id();
+	$product_id         = $product->get_type();
 	$product_image      = $product->get_image( 'woocommerce_gallery_thumbnail' );
 	$product_permalink  = $product->get_permalink();
 	$product_title      = $product->get_title();
@@ -30,6 +31,7 @@ if ( $product instanceof WC_Product ) {
 } else {
 	$is_purchasable     = $product['is_purchasable'] ?? false;
 	$product_id         = $product['id'] ?? 0;
+	$product_type       = $product['type'] ?? 'simple';
 	$product_image      = $product['image'] ?? '';
 	$product_permalink  = $product['permalink'] ?? '';
 	$product_title      = $product['title'] ?? '';
@@ -59,7 +61,7 @@ if ( $product instanceof WC_Product ) {
         <div class="merchant-bogo-offer" data-product="<?php
 		echo esc_attr( $product_id ) ?>" data-offer="<?php
 		echo esc_attr( $key ); ?>">
-            <div class="merchant-bogo-product-x">
+            <div class="merchant-bogo-product-x is-<?php echo esc_attr( $product_type ); ?>">
                 <div class="merchant-bogo-product-label merchant-bogo-product-buy-label" style="<?php
 				echo isset( $offer['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['label_bg_color'] . ';' ) : '';
 				echo isset( $offer['label_text_color'] ) ? esc_attr( 'color: ' . $offer['label_text_color'] . ';' ) : ''; ?>">
@@ -91,7 +93,7 @@ if ( $product instanceof WC_Product ) {
 				echo isset( $offer['arrow_text_color'] ) ? esc_attr( 'color: ' . $offer['arrow_text_color'] . ';' ) : ''; ?>">→
                 </div>
             </div>
-            <div class="merchant-bogo-product-y" style="<?php
+            <div class="merchant-bogo-product-y is-<?php echo esc_attr( $product_type ); ?>" style="<?php
 			echo isset( $offer['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['offer_border_color'] . ';' ) : '';
 			echo isset( $offer['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['offer_border_radius'] . 'px;' ) : ''; ?>"
             ">
