@@ -149,6 +149,7 @@ button.button.merchant-bogo-add-to-cart {
 
   &:before {
     font-weight: 400;
+    text-transform: none;
     content: attr(data-error);
     background: #f8d7da;
     width: max-content;
@@ -160,11 +161,11 @@ button.button.merchant-bogo-add-to-cart {
   }
 
   &:after {
-    color: #f8d7da;
-    font-size: 26px;
-    line-height: 1;
     font-family: "dashicons";
     content: "\f140";
+    font-size: 26px;
+    color: #f8d7da;
+    line-height: 1;
     bottom: calc(100% - 5px);
     left: 5px;
   }
