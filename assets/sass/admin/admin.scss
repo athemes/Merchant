@@ -1369,6 +1369,10 @@ body.merchant-module-disabled {
   border-radius: 4px;
   border: 2px solid #F0F0F1;
   background-color: #fff;
+
+  >.merchant-module-page-setting-field:last-of-type{
+    margin-bottom: 0;
+  }
 }
 
 .merchant-module-page-setting-field {
@@ -2420,6 +2424,12 @@ body.merchant-module-disabled {
       &.flex-grow {
         flex-grow: 1;
       }
+
+      &:last-of-type{
+        .merchant-module-page-setting-field{
+            margin-bottom: 0;
+        }
+      }
     }
 
     .dashicons-menu {
@@ -2513,7 +2523,7 @@ body.merchant-module-disabled {
     color: #3858E9;
     border-color: #3858E9;
     background-color: transparent;
-    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 4px 19px;
 
     &:hover,
