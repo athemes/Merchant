@@ -136,3 +136,36 @@ button.button.merchant-bogo-add-to-cart {
     transform: rotate(90deg);
   }
 }
+
+.select-error-tooltip {
+  position: relative;
+  color: #58151c;
+
+  &:after,
+  &:before {
+    position: absolute;
+    z-index: 99;
+  }
+
+  &:before {
+    font-weight: 400;
+    content: attr(data-error);
+    background: #f8d7da;
+    width: max-content;
+    color: #58151c;
+    padding: 5px 10px;
+    border-radius: 5px;
+    bottom: calc(100% + 10px);
+    left: 0;
+  }
+
+  &:after {
+    color: #f8d7da;
+    font-size: 26px;
+    line-height: 1;
+    font-family: "dashicons";
+    content: "\f140";
+    bottom: calc(100% - 5px);
+    left: 5px;
+  }
+}
