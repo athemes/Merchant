@@ -200,8 +200,8 @@ $bars_data = $args['bars_data']; ?>
 
 			// Rating arguments.
 			if($rating_count > 0) {
-				$comments_args[ 'meta_key' ] = 'rating';
-				$comments_args[ 'meta_value' ] = $rating_count;
+				$comments_args[ 'meta_key' ] = 'rating'; // phpcs:disable
+				$comments_args[ 'meta_value' ] = $rating_count; // phpcs:disable
 			}
 
 			// Orderby
