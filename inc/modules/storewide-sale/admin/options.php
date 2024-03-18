@@ -31,6 +31,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer name', 'merchant' ),
 							'default' => esc_html__( 'Storewide Discount Campaign', 'merchant' ),
+							'desc'    => esc_html__( 'Internal campaign name. This is not visible to customers.', 'merchant' ),
 						),
 						array(
 							'id'      => 'rules_to_display',
@@ -59,7 +60,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product category(s) that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
 						array(
@@ -67,7 +68,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'products_selector',
 							'title'     => esc_html__( 'Exclude products', 'merchant' ),
 							'multiple'  => true,
-							'desc'      => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+							'desc'      => esc_html__( 'Exclude product(s) from this discount campaign.', 'merchant' ),
 							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
 						),
 						array(
@@ -132,18 +133,19 @@ Merchant_Admin_Options::create( array(
 							'default' => 'always',
 						),
 						array(
-							'id'        => 'start_date',
-							'type'      => 'date_time',
-							'title'     => esc_html__( 'Start at', 'merchant' ),
-							'condition' => array( 'availability', '==', 'specific' ),
-							// todo: add description
+							'id'          => 'start_date',
+							'type'        => 'date_time',
+							'title'       => esc_html__( 'Start at', 'merchant' ),
+							'condition'   => array( 'availability', '==', 'specific' ),
+							'placeholder' => esc_html__( 'mm/dd/yy, --:-- --', 'merchant' ),
 						),
 						array(
-							'id'        => 'end_date',
-							'type'      => 'date_time',
-							'title'     => esc_html__( 'Ends at', 'merchant' ),
-							'condition' => array( 'availability', '==', 'specific' ),
-							'desc'      => sprintf(
+							'id'          => 'end_date',
+							'type'        => 'date_time',
+							'title'       => esc_html__( 'Ends at', 'merchant' ),
+							'condition'   => array( 'availability', '==', 'specific' ),
+							'placeholder' => esc_html__( 'mm/dd/yy, --:-- --', 'merchant' ),
+							'desc'        => sprintf(
 							/*
 							 * translators:
 							 * %1$s: time zone
@@ -151,7 +153,7 @@ Merchant_Admin_Options::create( array(
 							*/
 								esc_html__( 'Leave it empty if you don’t want to have an end date. The times set above are in the %1$s timezone, according to your settings from %2$s.',
 									'merchant' ),
-								'<strong>' . get_option( 'timezone_string' ) . '</strong>',
+								'<strong>' . wp_timezone_string() . '</strong>',
 								'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '" target="_blank">' . esc_html__( 'WordPress Settings', 'merchant' ) . '</a>'
 							),
 						),
