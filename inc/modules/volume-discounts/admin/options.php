@@ -103,6 +103,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'exclude_coupon',
 							'type'    => 'switcher',
 							'title'   => esc_html__( 'Exclude coupon', 'merchant' ),
+							'desc'    => esc_html__( 'If discount type is "Fixed product discount", discount will be remove from the cart completely. If discount type is "Fixed cart discount" or "Percentage discount", the discount amount will be remove from the Bulk discount products only.', 'merchant' ),
 							'default' => false,
 						),
 
