@@ -167,7 +167,7 @@ $bars_data = $args['bars_data']; ?>
 						<option value="low-rated"<?php echo selected( $sort_orderby, 'low-rated' ); ?>><?php echo esc_html__( 'Low rated', 'merchant' ); ?></option>
 					</select>
 
-					<input type="hidden" class="merchant-reviews-filter-by-rating-count" name="rating-count" value="<?php esc_html_e($rating_count); ?>" />
+					<input type="hidden" class="merchant-reviews-filter-by-rating-count" name="rating-count" value="<?php echo esc_html($rating_count); ?>" />
 				</form>
 				<?php endif; ?>
 			</div>
