@@ -80,6 +80,7 @@ Merchant_Admin_Options::create( array(
 				'oldest'     => __( 'Oldest', 'merchant' ),
 				'top-rated'  => __( 'Top rated', 'merchant' ),
 				'low-rated'  => __( 'Low rated', 'merchant' ),
+				'photo-first'  => __( 'Photo First', 'merchant' ),
 			),
 			'default'   => 'newest',
 		),

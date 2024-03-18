@@ -68,7 +68,8 @@ $bars_data = $args['bars_data']; ?>
 		$comments_query = new WP_Comment_Query;
 		$comments = $comments_query->query( $photo_slider_args );
 
-		if(!empty($comments) && is_array($comments)):
+		// Here, is_admin is used not to preview the slider section in settings review preview.
+		if(!is_admin() && !empty($comments) && is_array($comments)):
 	?>
 	<div class="merchant-adv-review-photo-slider-wrap">
 		<div class="merchant-adv-review-photo-slider-nav">
@@ -255,6 +256,7 @@ $bars_data = $args['bars_data']; ?>
 						<option value="oldest"<?php echo selected( $sort_orderby, 'oldest' ); ?>><?php echo esc_html__( 'Oldest', 'merchant' ); ?></option>
 						<option value="top-rated"<?php echo selected( $sort_orderby, 'top-rated' ); ?>><?php echo esc_html__( 'Top rated', 'merchant' ); ?></option>
 						<option value="low-rated"<?php echo selected( $sort_orderby, 'low-rated' ); ?>><?php echo esc_html__( 'Low rated', 'merchant' ); ?></option>
+						<option value="photo-first"<?php echo selected( $sort_orderby, 'photo-first' ); ?>><?php echo esc_html__( 'Photo first', 'merchant' ); ?></option>
 					</select>
 				</form>
 				<?php endif; ?>
@@ -313,7 +315,30 @@ $bars_data = $args['bars_data']; ?>
 					$comments_args[ 'meta_key' ] = 'rating';
 					// phpcs:enable
 					break;
+				
+				case 'photo-first':
+					$comments_args[ 'order' ]   = 'ASC';
+					//$comments_args[ 'orderby' ]  = 'meta_value title';
+					// phpcs:disable
+					$comments_args[ 'meta_key' ] = 'photos';
+					$comments_args[ 'meta_query' ] = array(
+						'relation' => 'OR',
+						array(
+							'key' => 'photos',
+							'compare' => 'EXISTS',
+						),
+						array(
+							'key' => 'photos',
+							'compare' => 'NOT EXISTS',
+						),
+					);
+					// phpcs:enable
+					break;
 			}
+
+			echo "<pre>";
+			print_r($comments_args);
+			die();
 
 			/**
 			 * Hook 'merchant_wc_reviews_advanced_sorting_args'

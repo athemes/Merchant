@@ -213,6 +213,7 @@ body {
 		z-index: 0;
 		transition: 0.3s ease;
 		transform: scale(1);
+		margin-bottom: 10px;
 
 		@media (max-width: 786px) {
 			width: 100px;
@@ -290,6 +291,10 @@ body {
 		transform: translateX(var(--merchant-photo-slider-trans-value));
 		transition: 0.35s ease-in-out 0s;
 		flex-wrap: nowrap;
+
+		.merchant-review-photo {
+			margin-bottom: 0;
+		}
 	}
 }
 
