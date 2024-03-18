@@ -59,18 +59,18 @@ $bars_data = $args['bars_data']; ?>
 		'meta_query' => array(
 			array(
 				'key' => 'photos',
-				'compare' => 'EXISTS'
+				'compare' => 'EXISTS',
 			),
 		),
-		'number' => 50
+		'number' => 50,
 	);
 	
 	// Create a new comment query
-	$comments_query = new WP_Comment_Query;
-	$comments = $comments_query->query( $photo_slider_args );
+	$comments_query = new WP_Comment_Query();
+	$comment_data   = $comments_query->query( $photo_slider_args );
 
 	// Here, is_admin is used not to preview the slider section in settings review preview.
-	if(!is_admin() && !empty($comments) && is_array($comments)):
+	if(!is_admin() && !empty($comment_data) && is_array($comment_data)):
 	?>
 		<div class="merchant-adv-review-photo-slider-wrap">
 			<div class="merchant-adv-review-photo-slider-nav">
@@ -86,8 +86,8 @@ $bars_data = $args['bars_data']; ?>
 				
 				$count = 1;
 				// Loop through the comments
-				foreach ( $comments as $comment ) {
-					$comment_id = $comment->comment_ID;
+				foreach ( $comment_data as $photo_comment ) {
+					$comment_id = $photo_comment->comment_ID;
 
 					$photos = get_comment_meta($comment_id, 'photos', true);
 
@@ -100,7 +100,7 @@ $bars_data = $args['bars_data']; ?>
 					 * 
 					 * @since 1.0
 					 */
-					do_action( 'woocommerce_review_before_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+					do_action( 'woocommerce_review_before_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 					
 					// define photo upload directory.
 					$upload_dir = wp_upload_dir();
@@ -114,30 +114,30 @@ $bars_data = $args['bars_data']; ?>
 					$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $comment_id, 'rating', true );
 
 					//review date.
-					$review_date = strtotime($comment->comment_date);
-					$review_date = date('Y-m-d H:i:s',$review_date);
+					$review_date = strtotime($photo_comment->comment_date);
+					$review_date = date('Y-m-d H:i:s',$review_date); //phpcs:ignore
 
-					$info = [
+					$info = array(
 						'product_title' => $product->get_name(),
 						'photos' => $photos,
 						'rating' => $comment_rating_value,
 						'photo_dir_url' => $upload_dir_url,
-						'author' => $comment->comment_author,
-						'review_content' => $comment->comment_content,
+						'author' => $photo_comment->comment_author,
+						'review_content' => $photo_comment->comment_content,
 						'review_date' => $review_date,
-					];
+					);
 					$info = htmlspecialchars(json_encode($info));
 
-					echo sprintf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $comment_id, $info, $count);
+					printf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', esc_url($photo_url), esc_attr($comment_id), esc_attr($info), esc_attr($count));
 					
 					/**
 					 * Hook 'woocommerce_review_after_photo_slider'
 					 * 
 					 * @since 1.0
 					 */
-					do_action( 'woocommerce_review_after_photo_slider', $comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+					do_action( 'woocommerce_review_after_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 				
-					$count++;
+					++$count;
 				}
 				?>
 			</div>
@@ -423,10 +423,10 @@ $bars_data = $args['bars_data']; ?>
 													$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
 
 													//review date.
-													$review_date = strtotime($comment->comment_date);
-													$review_date = date('Y-m-d H:i:s',$review_date);
+													$review_date = strtotime($photo_comment->comment_date);
+													$review_date = date('Y-m-d H:i:s',$review_date); //phpcs:ignore
 
-													$info = [
+													$info = array(
 														'product_title' => $product->get_name(),
 														'photos' => $comment_photos,
 														'rating' => $comment_rating_value,
@@ -434,7 +434,7 @@ $bars_data = $args['bars_data']; ?>
 														'author' => $_comment->comment_author,
 														'review_content' => $_comment->comment_content,
 														'review_date' => $review_date,
-													];
+													);
 													$info = htmlspecialchars(json_encode($info));
 
 													if(is_array($comment_photos)) {
@@ -443,9 +443,9 @@ $bars_data = $args['bars_data']; ?>
 															// define photo full url.
 															$photo_url = $upload_dir_url . $comment_photo_name;
 
-															echo sprintf('<div class="merchant-review-photo" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', $photo_url, $_comment->comment_ID, $info, $count);
+															printf('<div class="merchant-review-photo" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', esc_url($photo_url), esc_attr($_comment->comment_ID), esc_attr($info), esc_attr($count));
 															
-															$count++;
+															++$count;
 														}
 													}
 
@@ -516,7 +516,7 @@ $bars_data = $args['bars_data']; ?>
 		<?php endif; ?>
 
 	</div>
-	<?php if ( isset( $comments ) && count( $comments ) > 0 ) {
+	<?php if ( isset( $comment_data ) && count( $comment_data ) > 0 ) {
 		echo '<div class="merchant-adv-reviews-footer">';
 
 			if ( $cpages > 1 && get_option( 'page_comments' ) ) {

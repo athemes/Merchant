@@ -92,8 +92,8 @@ Merchant_Admin_Options::create( array(
 			'title'     => __( 'Review submission option', 'merchant' ),
 			'options'   => array(
 				'image_and_text'    => __( 'Image + Text', 'merchant' ),
-				'image'     		=> __( 'Image only', 'merchant' ),
-				'text'  			=> __( 'Text only', 'merchant' ),
+				'image'             => __( 'Image only', 'merchant' ),
+				'text'              => __( 'Text only', 'merchant' ),
 			),
 			'default'   => 'image_and_text',
 		),
