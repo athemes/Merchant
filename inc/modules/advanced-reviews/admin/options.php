@@ -84,6 +84,19 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'   => 'newest',
 		),
+		
+		// Review Submission Option.
+		array(
+			'id'        => 'review_submission_option',
+			'type'      => 'select',
+			'title'     => __( 'Review submission option', 'merchant' ),
+			'options'   => array(
+				'image_and_text'    => __( 'Image + Text', 'merchant' ),
+				'image'     		=> __( 'Image only', 'merchant' ),
+				'text'  			=> __( 'Text only', 'merchant' ),
+			),
+			'default'   => 'image_and_text',
+		),
 
 		// Maximum Photo Upload Capability.
 		array(
