@@ -66,7 +66,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				'storewide-sale' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-volume-discounts' ),
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
 					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
 					'desc' => esc_html__( 'Reduces the price by a straightforward percentage or fixed amount.', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/',
