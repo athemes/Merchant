@@ -453,6 +453,16 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 								$product_labels_html .= $this->label( $label );
 							}
 							break;
+
+                        case 'specific_products':
+                            $product_ids = $label['product_ids'] ?? array();
+	                        $product_ids = ! is_array( $product_ids ) ? explode( ',',  $product_ids ) : $product_ids;
+	                        $product_ids = array_map( 'intval', $product_ids );
+
+                            if ( in_array( $product->get_id(), $product_ids, true ) ) {
+		                        $product_labels_html .= $this->label( $label );
+	                        }
+	                        break;
 					}
 				}
 			}
