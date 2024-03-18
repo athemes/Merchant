@@ -85,6 +85,19 @@ Merchant_Admin_Options::create( array(
 			'default'   => 'newest',
 		),
 
+		// Maximum Photo Upload Capability.
+		array(
+			'id'        => 'max_photo_upload',
+			'type'      => 'range',
+			'title'     => __( 'Maximum photo upload', 'merchant' ),
+			'desc'      => __( 'Set max photo upload number for photo review modal. User can not upload maximum photo above this value.', 'merchant' ),
+			'min'       => 1,
+			'max'       => 100,
+			'step'      => 1,
+			'unit'      => '',
+			'default'   => 6,
+		),
+
 		// Pagination Type.
 		array(
 			'id'        => 'pagination_type',

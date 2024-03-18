@@ -64,6 +64,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				'title_desc_align' => 'left',
 				'default_sorting'  => 'newest',
 				'pagination_type'  => 'default',
+				'max_photo_upload' => 6,
 				'hook_order'       => 10,
 			);
 
