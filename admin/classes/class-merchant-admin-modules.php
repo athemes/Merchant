@@ -69,7 +69,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
 					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
 					'desc' => esc_html__( 'Reduces the price by a straightforward percentage or fixed amount.', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/',
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/', //todo: update tutorial url
 				),
 				'volume-discounts' => array(
 					'pro' => true,
