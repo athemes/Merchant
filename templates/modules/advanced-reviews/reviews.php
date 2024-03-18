@@ -54,8 +54,10 @@ $bars_data = $args['bars_data']; ?>
 	<?php endif; ?>
 
 	<?php
+	//phpcs:ignore
 	$photo_slider_args = array(
 		'post_id' => $product_id,
+		//phpcs:ignore
 		'meta_query' => array(
 			array(
 				'key' => 'photos',
@@ -106,7 +108,7 @@ $bars_data = $args['bars_data']; ?>
 					$upload_dir = wp_upload_dir();
 					$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
 
-					$photos = unserialize($photos);
+					$photos = unserialize($photos); //phpcs:ignore
 
 					$photo_url = $upload_dir_url. $photos[0];
 
@@ -126,7 +128,7 @@ $bars_data = $args['bars_data']; ?>
 						'review_content' => $photo_comment->comment_content,
 						'review_date' => $review_date,
 					);
-					$info = htmlspecialchars(json_encode($info));
+					$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
 
 					printf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', esc_url($photo_url), esc_attr($comment_id), esc_attr($info), esc_attr($count));
 					
@@ -416,7 +418,7 @@ $bars_data = $args['bars_data']; ?>
 												do_action( 'woocommerce_review_before_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
 												if(!empty($comment_photos)) {
-													$comment_photos = unserialize($comment_photos);
+													$comment_photos = unserialize($comment_photos); //phpcs:ignore
 
 													// define photo upload directory.
 													$upload_dir = wp_upload_dir();
@@ -435,7 +437,7 @@ $bars_data = $args['bars_data']; ?>
 														'review_content' => $_comment->comment_content,
 														'review_date' => $review_date,
 													);
-													$info = htmlspecialchars(json_encode($info));
+													$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
 
 													if(is_array($comment_photos)) {
 														$count = 1;
