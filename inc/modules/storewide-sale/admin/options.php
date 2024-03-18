@@ -38,7 +38,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Trigger', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
 								'products'   => esc_html__( 'Specific products', 'merchant' ),
 								'categories' => esc_html__( 'Product categories', 'merchant' ),
 							),
