@@ -44,7 +44,7 @@ Merchant_Admin_Options::create( array(
 							'default' => 'all',
 						),
 						array(
-							'id'        => 'product_to_display',
+							'id'        => 'products_to_display',
 							'type'      => 'products_selector',
 							//'title'    => esc_html__( 'Select a product', 'merchant' ),
 							'multiple'  => true,
