@@ -128,7 +128,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Availability', 'merchant' ),
 							'options' => array(
 								'always'   => esc_html__( 'Always available', 'merchant' ),
-								'specific' => esc_html__( 'Specific date', 'merchant' ),
+								'specific' => esc_html__( 'Specific dates', 'merchant' ),
 							),
 							'default' => 'always',
 						),
