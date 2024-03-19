@@ -167,7 +167,7 @@ $bars_data = $args['bars_data']; ?>
 						<option value="low-rated"<?php echo selected( $sort_orderby, 'low-rated' ); ?>><?php echo esc_html__( 'Low rated', 'merchant' ); ?></option>
 					</select>
 
-					<input type="hidden" class="merchant-reviews-filter-by-rating-count" name="rating-count" value="<?php echo esc_html($rating_count); ?>" />
+					<input type="hidden" class="merchant-reviews-filter-by-rating-count" name="rating-count" value="<?php echo esc_attr($rating_count); ?>" />
 				</form>
 				<?php endif; ?>
 			</div>
@@ -200,8 +200,8 @@ $bars_data = $args['bars_data']; ?>
 
 			// Rating arguments.
 			if($rating_count > 0) {
-				$comments_args[ 'meta_key' ] = 'rating'; // phpcs:disable
-				$comments_args[ 'meta_value' ] = $rating_count; // phpcs:disable
+				$comments_args[ 'meta_key' ] = 'rating'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				$comments_args[ 'meta_value' ] = $rating_count; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			}
 
 			// Orderby
