@@ -26,7 +26,6 @@ $title_tag = $args[ 'title_tag' ];
 
 // Dropdown sort
 $default_sorting    = $args[ 'default_sorting' ];
-$max_photo_upload   = $args[ 'max_photo_upload' ];
 $sort_orderby       = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 // Reviews bars rating
@@ -53,7 +52,7 @@ $bars_data = $args['bars_data']; ?>
 
 	<?php 
 	endif;
-	
+
 	$photo_slider_args = array(
 		'post_id' => $product_id,
 		//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
@@ -242,7 +241,6 @@ $bars_data = $args['bars_data']; ?>
 			</div>
 			<div class="mrc-col mrc-right-col">
 				<a href="#" class="merchant-adv-review-write-button"><?php echo esc_html__( 'Write a Review', 'merchant' ); ?></a>
-				<span class="merchant-max-photo-upload-count" style="display: none;" data-max="<?php echo esc_attr($max_photo_upload); ?>"></span>
 
 				<?php if ( $review_count > 0 ) : ?>
 				<form class="merchant-reviews-orderby-form" method="get" action="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>#reviews-stars">
@@ -332,7 +330,7 @@ $bars_data = $args['bars_data']; ?>
 								$comment_photos = get_comment_meta($_comment->comment_ID, 'merchant_review_photos', true);
 							?>
 
-								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item <?php echo $sort_orderby === 'photo-first' && !empty($comment_photos) ? esc_attr('merchant-review-list-item-has-photo') : ''; ?>">
+								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item <?php echo $sort_orderby === 'photo-first' && !empty($comment_photos) ? 'merchant-review-list-item-has-photo' : ''; ?>">
 									<div class="mrc-row mrc-columns-no-gutter">
 										<div class="mrc-col">
 											<div class="merchant-reviews-author-wrapper">
