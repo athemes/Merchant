@@ -3,11 +3,15 @@
  *
  */
 
-.merchant-bogo-title {
-  margin: 0 0 10px;
-  font-size: var(--merchant-font-size);
-  font-weight: var(--merchant-font-weight);
-  color: var(--merchant-text-color);
+.merchant-bogo {
+  margin-block: 20px;
+
+  &-title {
+    margin: 0 0 10px;
+    font-size: var(--merchant-font-size);
+    font-weight: var(--merchant-font-weight);
+    color: var(--merchant-text-color);
+  }
 }
 
 .merchant-bogo-offer {
