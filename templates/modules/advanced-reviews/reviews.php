@@ -51,13 +51,12 @@ $bars_data = $args['bars_data']; ?>
 			<?php echo esc_html( Merchant_Translator::translate( $args[ 'description' ] ) ); ?>
 		</p>
 
-	<?php endif; ?>
-
-	<?php
-	//phpcs:ignore
+	<?php 
+	endif;
+	
 	$photo_slider_args = array(
 		'post_id' => $product_id,
-		//phpcs:ignore
+		//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		'meta_query' => array(
 			array(
 				'key' => 'merchant_review_photos',
@@ -98,11 +97,11 @@ $bars_data = $args['bars_data']; ?>
 					}
 					
 					/**
-					 * Hook 'woocommerce_review_before_photo_slider'
+					 * Hook 'merchant_review_before_photo_slider'
 					 * 
 					 * @since 1.0
 					 */
-					do_action( 'woocommerce_review_before_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+					do_action( 'merchant_review_before_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 					
 					// define photo upload directory.
 					$upload_dir = wp_upload_dir();
@@ -121,16 +120,16 @@ $bars_data = $args['bars_data']; ?>
 						'author' => $photo_comment->comment_author,
 						'review_content' => $photo_comment->comment_content,
 					);
-					$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
+					$info = wp_json_encode($info);
 
 					printf('<div class="merchant-review-photo merchant-adv-review-photo-slider-item" data-comment_id="%2$s" data-info="%3$s" data-count="%4$s"><img src="%1$s" /></div>', esc_url($photo_url), esc_attr($comment_id), esc_attr($info), esc_attr($count));
 					
 					/**
-					 * Hook 'woocommerce_review_after_photo_slider'
+					 * Hook 'merchant_review_after_photo_slider'
 					 * 
 					 * @since 1.0
 					 */
-					do_action( 'woocommerce_review_after_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+					do_action( 'merchant_review_after_photo_slider', $photo_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 				
 					++$count;
 				}
@@ -404,11 +403,11 @@ $bars_data = $args['bars_data']; ?>
 												<?php
 												
 												/**
-												 * Hook 'woocommerce_review_before_comment_photos'
+												 * Hook 'merchant_review_before_comment_photos'
 												 * 
 												 * @since 1.0
 												 */
-												do_action( 'woocommerce_review_before_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+												do_action( 'merchant_review_before_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
 												if(!empty($comment_photos)) {
 													// define photo upload directory.
@@ -423,7 +422,7 @@ $bars_data = $args['bars_data']; ?>
 														'author' => $_comment->comment_author,
 														'review_content' => $_comment->comment_content,
 													);
-													$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
+													$info = wp_json_encode($info);
 
 													if(is_array($comment_photos)) {
 														$count = 1;
@@ -440,11 +439,11 @@ $bars_data = $args['bars_data']; ?>
 												}
 
 												/**
-												 * Hook 'woocommerce_review_after_comment_photos'
+												 * Hook 'merchant_review_after_comment_photos'
 												 * 
 												 * @since 1.0
 												 */
-												do_action( 'woocommerce_review_after_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+												do_action( 'merchant_review_after_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 												?>
 											</div>
 										</div>

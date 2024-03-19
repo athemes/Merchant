@@ -95,7 +95,7 @@ Merchant_Admin_Options::create( array(
 				'image'             => __( 'Image only', 'merchant' ),
 				'text'              => __( 'Text only', 'merchant' ),
 			),
-			'default'   => 'image_and_text',
+			'default'   => 'text',
 		),
 
 		// Maximum Photo Upload Capability.
