@@ -60,7 +60,7 @@ $bars_data = $args['bars_data']; ?>
 		//phpcs:ignore
 		'meta_query' => array(
 			array(
-				'key' => 'photos',
+				'key' => 'merchant_review_photos',
 				'compare' => 'EXISTS',
 			),
 		),
@@ -91,7 +91,7 @@ $bars_data = $args['bars_data']; ?>
 				foreach ( $comment_data as $photo_comment ) {
 					$comment_id = $photo_comment->comment_ID;
 
-					$photos = get_comment_meta($comment_id, 'photos', true);
+					$photos = get_comment_meta($comment_id, 'merchant_review_photos', true);
 
 					if(empty($photos)) {
 						continue;
@@ -108,16 +108,10 @@ $bars_data = $args['bars_data']; ?>
 					$upload_dir = wp_upload_dir();
 					$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
 
-					$photos = unserialize($photos); //phpcs:ignore
-
 					$photo_url = $upload_dir_url. $photos[0];
 
 					//rating value.
 					$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $comment_id, 'rating', true );
-
-					//review date.
-					$review_date = strtotime($photo_comment->comment_date);
-					$review_date = date('Y-m-d H:i:s',$review_date); //phpcs:ignore
 
 					$info = array(
 						'product_title' => $product->get_name(),
@@ -126,7 +120,6 @@ $bars_data = $args['bars_data']; ?>
 						'photo_dir_url' => $upload_dir_url,
 						'author' => $photo_comment->comment_author,
 						'review_content' => $photo_comment->comment_content,
-						'review_date' => $review_date,
 					);
 					$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
 
@@ -337,7 +330,7 @@ $bars_data = $args['bars_data']; ?>
 						foreach ( $_comments as $_comment ) :
 							if ( '1' === $_comment->comment_approved ) : 
 
-								$comment_photos = get_comment_meta($_comment->comment_ID, 'photos', true);
+								$comment_photos = get_comment_meta($_comment->comment_ID, 'merchant_review_photos', true);
 							?>
 
 								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item <?php echo $sort_orderby === 'photo-first' && !empty($comment_photos) ? esc_attr('merchant-review-list-item-has-photo') : ''; ?>">
@@ -418,15 +411,9 @@ $bars_data = $args['bars_data']; ?>
 												do_action( 'woocommerce_review_before_comment_photos', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
 												if(!empty($comment_photos)) {
-													$comment_photos = unserialize($comment_photos); //phpcs:ignore
-
 													// define photo upload directory.
 													$upload_dir = wp_upload_dir();
 													$upload_dir_url = $upload_dir['baseurl'] . '/merchant/photo-review/';
-
-													//review date.
-													$review_date = strtotime($photo_comment->comment_date);
-													$review_date = date('Y-m-d H:i:s',$review_date); //phpcs:ignore
 
 													$info = array(
 														'product_title' => $product->get_name(),
@@ -435,7 +422,6 @@ $bars_data = $args['bars_data']; ?>
 														'photo_dir_url' => $upload_dir_url,
 														'author' => $_comment->comment_author,
 														'review_content' => $_comment->comment_content,
-														'review_date' => $review_date,
 													);
 													$info = htmlspecialchars(json_encode($info)); //phpcs:ignore
 

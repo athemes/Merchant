@@ -262,7 +262,7 @@ body {
 		
 		button {
 			position: relative;
-			z-index: 99999;
+			z-index: 9999;
 			width: 40px;
     		height: 40px;
 			padding: 0;
@@ -775,6 +775,14 @@ body {
 
 				.modal-title {
 					display: block !important;
+				}
+			}
+
+			.comment-form-comment {
+				.merchant-form-message {
+					display: none;
+					margin-top: 10px;
+					color: #f86c6c;
 				}
 			}
 
