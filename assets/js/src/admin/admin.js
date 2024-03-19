@@ -528,7 +528,7 @@
                 });
 
                 // Add new item
-                $('.customize-control-flexible-content-add').click(function (event) {
+                $( document ).on( 'click', '.customize-control-flexible-content-add', function (event) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
 
@@ -661,9 +661,8 @@
                 } );
 
                 // Delete item
-                $('.customize-control-flexible-content-delete').click(function (event) {
+                $( document ).on( 'click', '.customize-control-flexible-content-delete', function (event) {
                     event.preventDefault();
-
 
                     var $item = $(this).closest('.layout');
                     var $content = $item.parent();
