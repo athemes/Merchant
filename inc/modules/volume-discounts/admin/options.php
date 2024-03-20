@@ -37,9 +37,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Offered product(s)', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
-								'products'   => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Product categories', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
+								'products'   => esc_html__( 'Specific products', 'merchant' ),
+								'categories' => esc_html__( 'Specific categories', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -62,6 +62,14 @@ Merchant_Admin_Options::create( array(
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this campaign.', 'merchant' ),
+							'condition' => array( 'rules_to_display', 'any', 'all|categories|tags' ),
 						),
 						array(
 							'id'      => 'quantity',
