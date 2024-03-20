@@ -100,7 +100,6 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'User Condition', 'merchant' ),
 							'options' => array(
 								'all'       => esc_html__( 'All Users', 'merchant' ),
-								'logged-in' => esc_html__( 'Logged In Users', 'merchant' ),
 								'customers' => esc_html__( 'Selected Users', 'merchant' ),
 								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
 							),
