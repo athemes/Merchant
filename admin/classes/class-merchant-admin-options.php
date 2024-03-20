@@ -601,6 +601,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				}
 				echo '</div>';
 
+				$hidden_desc = $settings['hidden_desc'] ?? '';
+
+				/**
+				 * Hook 'merchant_admin_module_field_hidden_description'
+				 *
+				 * @since 1.9.3
+				 */
+				$hidden_desc = apply_filters( 'merchant_admin_module_field_hidden_description', $hidden_desc, $settings, $value, $module_id );
+
 				$desc = ( ! empty( $settings['desc'] ) ) ? $settings['desc'] : '';
 
 				/**
@@ -611,8 +620,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$desc = apply_filters( 'merchant_admin_module_field_description', $desc, $settings, $value, $module_id );
 
 				if ( ! empty( $desc ) ) {
-					printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $desc ) );
-				}
+					$hidden_desc_html = ! empty( $hidden_desc ) ? '<div class="merchant-module-page-setting-field-hidden-desc-trigger" data-show-text="' . esc_html__( 'Show more', 'merchant' ) . '" data-hidden-text="' . esc_html__( 'Show less', 'merchant' ) . '">' . esc_html__( 'Show more', 'merchant' ) . '</div>' : '';
+
+					printf( '<div class="merchant-module-page-setting-field-desc' . esc_attr( $hidden_desc ? ' merchant-module-page-setting-field-desc-has-hidden-desc' : '' ) .'">%s%s</div>', wp_kses_post( $desc ), wp_kses_post( $hidden_desc_html ) );
+                }
+
+				if ( ! empty( $hidden_desc ) ) {
+					printf( '<div class="merchant-module-page-setting-field-hidden-desc">%s</div>', wp_kses_post( nl2br( $hidden_desc ) ) );
+                }
 
 				echo '</div>';
 			}

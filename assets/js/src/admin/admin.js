@@ -214,6 +214,19 @@
 
         });
 
+        $( document ).on( 'click', '.merchant-module-page-setting-field-hidden-desc-trigger', function() {
+            const $trigger = $( this );
+
+            $trigger.toggleClass( 'expanded' );
+
+            const showText = $trigger.attr( 'data-show-text' );
+            const hiddenText = $trigger.attr( 'data-hidden-text' );
+
+            $(this).text( $trigger.text() === showText ? hiddenText : showText );
+
+            $( this ).closest( '.layout-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
+        } );
+
         // Add support for toggle field inside flexible content.
         const flexibleToggleField = {
             init: function (field) {

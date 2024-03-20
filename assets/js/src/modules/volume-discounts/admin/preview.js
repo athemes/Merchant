@@ -42,4 +42,34 @@
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
+
+    $( document ).on( 'change', 'input[type="radio"]', function() {
+        const value = $( this ).val();
+        if ( value !== 'percentage_discount' && value !== 'fixed_discount' ) {
+            return;
+        }
+
+        const $layout = $( this ).closest( '.layout' );
+
+        $layout.find( 'input[type="text"], textarea').each( function() {
+            // Define the replacement string based on the radio button value
+            let replacement = value === 'percentage_discount' ? '{percent}' : '{amount}';
+
+            const currentValue = $( this ).val();
+
+            /**
+             * Previously wrong variable `{amount}` was used for this field. Correct one is `{quantity}`.
+             * So fix it as soon as Discount type is changed.
+             * Keep it for backward compatibility
+             */
+            if ( $( this ).attr('name').includes( 'buy_text' ) ) {
+                replacement = '{quantity}';
+            }
+
+            // Replace occurrences of {amount} or {percent} with the appropriate replacement
+            const newValue = currentValue.replace( /{amount}|{percent}/g, replacement );
+            $( this ).val( newValue );
+        } );
+    } );
+
 })(jQuery);

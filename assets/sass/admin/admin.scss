@@ -1396,11 +1396,40 @@ body.merchant-module-disabled {
   font-weight: 400;
   color: #777;
 
+  &-has-hidden-desc {
+    display: flex;
+    gap: 5px;
+  }
+
   a {
     color: #3858E9;
 
     &:focus {
       box-shadow: none;
+    }
+  }
+}
+
+.merchant-module-page-setting-field-hidden-desc {
+  display: none;
+
+  &-trigger {
+    color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+    font-weight: 500;
+    display: flex;
+    cursor: pointer;
+
+    &:after {
+      content: '\f347';
+      font-family: 'dashicons';
+      margin-top: 1px;
+    }
+
+    &.expanded {
+      &:after {
+        content: '\f343';
+        margin-top: 0;
+      }
     }
   }
 }
