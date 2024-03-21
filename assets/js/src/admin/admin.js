@@ -377,21 +377,14 @@
             events: function () {
                 const self = this;
 
-                // Remove item starting from it's parent element
+                // Remove item starting from its parent element
                 $('.merchant-sortable-repeater.sortable').on('click', '.customize-control-sortable-repeater-delete', function (event) {
                     event.preventDefault();
-                    var numItems = $(this).parent().parent().find('.repeater').length;
-
-                    if (numItems > 1) {
-                        $(this).parent().slideUp('fast', function () {
-                            var parentContainer = $(this).parent().parent();
-                            $(this).remove();
-                            self.getAllInputs(parentContainer);
-                        })
-                    } else {
-                        // $(this).parent().find('.repeater-input').val('');
-                        self.getAllInputs($(this).parent().parent().parent());
-                    }
+                    $(this).parent().slideUp('fast', function () {
+                        var parentContainer = $(this).parent().parent();
+                        $(this).remove();
+                        self.getAllInputs(parentContainer);
+                    })
                 });
 
                 // Add new item
@@ -432,6 +425,11 @@
                 var inputValues = $element.find('.repeater-input').map(function () {
                     return $(this).val();
                 }).toArray();
+
+                // Keep one empty item if all deleted.
+                if ( ! inputValues.length ) {
+                    inputValues.push( '' );
+                }
 
                 // Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
                 $element.find('.merchant-sortable-repeater-input').val(JSON.stringify(inputValues));
