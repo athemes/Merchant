@@ -225,7 +225,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
                     </div>
                 </div>
             </div>
-            <div class="mrc-preview-right-column">
+            <div class="mrc-preview-right-column" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
 				<?php
 				merchant_get_template_part(
 					Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,

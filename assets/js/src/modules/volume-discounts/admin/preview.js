@@ -23,7 +23,12 @@
             borderColor = layout.find('.merchant-field-table_item_border_color input').val(),
             textColor = layout.find('.merchant-field-table_item_text_color input').val(),
             labelBgColor = layout.find('.merchant-field-table_label_bg_color input').val(),
-            labelTextColor = layout.find('.merchant-field-table_label_text_color input').val();
+            labelTextColor = layout.find('.merchant-field-table_label_text_color input').val(),
+            discountType = layout.find('.merchant-field-discount_type input:checked').val(),
+            discountAmount = +layout.find('.merchant-field-discount input').val(),
+            saveLabelValue = layout.find('.merchant-field-save_label input').val(),
+            buyLabelValue = layout.find('.merchant-field-buy_text input').val(),
+            quantityValue = +layout.find('.merchant-field-quantity input').val();
 
         $('.merchant-volume-discounts-title').css({
             'color': titleTextColor,
@@ -35,10 +40,28 @@
             'background-color': bgColor,
             'color': textColor
         });
-        $('.merchant-volume-discounts-item-label > span').css({
+
+        const $saveLabelPreview = $( '.merchant-volume-discounts-item-label' );
+        const $buyLabelPreview = $( '.merchant-volume-discounts-buy-label' );
+
+        $saveLabelPreview.find( 'span:first' ).css({
             'background-color': labelBgColor,
             'color': labelTextColor
         });
+
+        const currency = $saveLabelPreview.closest( '.mrc-preview-right-column' ).attr( 'data-currency' );
+        const discountEach = discountType === 'fixed_discount' ? `${currency}${ discountAmount }` : `${discountAmount}%`;
+        const discountTotal = discountType === 'fixed_discount' ? `${currency}${ discountAmount * quantityValue }` : `${discountAmount}%`;
+
+        // Update Save label content
+        saveLabelValue = saveLabelValue.replace( /{amount}|{percent}/g, discountTotal );
+        $saveLabelPreview.find( 'span:first' ).text( saveLabelValue );
+
+        // Update Tier format text content
+        buyLabelValue = buyLabelValue
+            .replace( /{discount}|{percent}/g, `<strong>${ discountEach }</strong>` )
+            .replace( /{quantity}/g, `<strong>${ quantityValue }</strong>` );
+        $buyLabelPreview.html( buyLabelValue );
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
