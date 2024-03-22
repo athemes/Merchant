@@ -16,7 +16,27 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 			add_action( 'init', array( $this, 'product_video_module' ) );
 			add_action( 'init', array( $this, 'product_audio_module' ) );
-			add_filter('theme_mod_woo_card_layout', array( $this, 'remove_theme_default_add_to_cart' ), 1000 );
+			add_filter('theme_mod_woo_card_layout', array( $this, 'remove_theme_default_add_to_cart' ) );
+			add_filter('merchant_product_swatch_shop_catalog_add_to_cart_button_html', array( $this, 'add_to_cart' ) );
+			add_filter('woocommerce_loop_add_to_cart_link', array( $this, 'fix_add_to_cart_button_structure' ) );
+		}
+
+		/**
+		 * Add a div to wrap the add to cart button.
+		 *
+		 * @param $button_html string add to cart button html.
+		 *
+		 * @return string The add to cart button html.
+		 */
+		public function fix_add_to_cart_button_structure( $button_html ) {
+			if ( ! merchant_is_blocksy_active() ) {
+				return $button_html;
+			}
+			if ( ! Merchant_Modules::is_module_active( 'product-swatches' ) ) {
+				return $button_html;
+			}
+
+			return '<div class="ct-woo-card-actions">' . $button_html . '</div>';
 		}
 
 		/**
