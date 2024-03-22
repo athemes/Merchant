@@ -79,8 +79,11 @@
         });
 
         $('.merchant-module-page-button-action-activate').on('click', function (e) {
-
             e.preventDefault();
+
+            if ( $(this).hasClass( 'merchant-module-deactivated-by-bp' ) ) {
+                return false;
+            }
 
             $('.merchant-module-question-list-dropdown').removeClass('merchant-show');
             $('.merchant-module-question-answer-dropdown').removeClass('merchant-show');
