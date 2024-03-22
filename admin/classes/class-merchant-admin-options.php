@@ -1185,7 +1185,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				exit();
 			}
 
-			$types     = array( 'all' ); // limit search to product types
+			$types     = array( 'simple', 'variable' ); // limit search to product types
 
 			if ( isset( $_POST['product_types'] ) || ! empty( $_POST['product_types'] ) ) {
 				$types = explode( ',', sanitize_text_field( $_POST['product_types'] ) );
