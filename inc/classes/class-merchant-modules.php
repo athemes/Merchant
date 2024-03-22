@@ -196,6 +196,16 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 					return $class_name . ' merchant-module-deactivated-by-bp';
 				} );
 
+				if ( isset( $_GET['module'] ) && $_GET['module'] === $module ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					add_filter( "merchant_admin_module_{$module}_activate_button_class", static function( $class_name ) {
+						if ( strpos( $class_name, 'merchant-module-deactivated-by-bp' ) !== false ) {
+							return $class_name;
+						}
+
+						return $class_name . ' merchant-module-deactivated-by-bp';
+					} );
+				}
+
 				return false;
 			}
 
