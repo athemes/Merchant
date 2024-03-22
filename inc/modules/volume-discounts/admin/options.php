@@ -19,7 +19,7 @@ Merchant_Admin_Options::create( array(
 			'type'         => 'flexible_content',
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'style'        => Merchant_Volume_Discounts::MODULE_ID . '-style default',
-			'sorting'      => false,
+			'sorting'      => true,
 			'accordion'    => true,
 			'duplicate'    => true,
 			'layouts'      => array(
