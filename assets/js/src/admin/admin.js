@@ -614,27 +614,6 @@
         FlexibleContentField.init();
 
         // Products selector.
-        // Handle click/touch event for the search results
-        $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
-            let parent = $(this).closest('.merchant-products-search-container'),
-                valueField = parent.find('.merchant-selected-products'),
-                multiple = parent.data('multiple') === 'multiple';
-            if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
-                // replace the first item
-                parent.find('.merchant-selected-products-preview ul li').remove();
-                valueField.val('');
-            }
-            $(this).children('.remove').attr('aria-label', 'Remove').html('×');
-            parent.find('.merchant-selected-products-preview ul').append($(this));
-            parent.find('.merchant-selections-products-preview').html('').hide();
-            parent.find('.merchant-search-field').val('');
-            if (valueField.val() === '') {
-                valueField.val($(this).data('id'));
-            } else {
-                valueField.val(valueField.val() + ',' + $(this).data('id'));
-            }
-        });
-
         // Handle keyup event for the search input
         $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
             let parent = $(this).closest('.merchant-products-search-container');
@@ -659,7 +638,33 @@
             }
         });
 
-        // actions on selected items
+        // Products selector.
+        // Handle click/touch event for the search results
+        $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
+            let parent = $(this).closest('.merchant-products-search-container'),
+                valueField = parent.find('.merchant-selected-products'),
+                oldValue = valueField.val(),
+                multiple = parent.data('multiple') === 'multiple';
+            if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
+                // replace the first item
+                parent.find('.merchant-selected-products-preview ul li').remove();
+                valueField.val('');
+            }
+            $(this).children('.remove').attr('aria-label', 'Remove').html('×');
+            parent.find('.merchant-selected-products-preview ul').append($(this));
+            parent.find('.merchant-selections-products-preview').html('').hide();
+            parent.find('.merchant-search-field').val('');
+            if (oldValue === '') {
+                valueField.val($(this).data('id'));
+            } else {
+                let newValue = oldValue.split(',');
+                newValue.push($(this).data('id'));
+                valueField.val(newValue.join(','));
+            }
+        });
+
+        // Products selector.
+        // Handle click/touch event for the remove button.
         $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
             // Store a reference to the remove button
             let removeButton = $(this);
@@ -668,19 +673,17 @@
                 let parent = removeButton.closest('.merchant-products-search-container'),
                     valueField = parent.find('.merchant-selected-products'),
                     id = removeButton.parent().data('id');
-
                 removeButton.parent().remove();
                 $ajaxHeader.addClass('merchant-show');
-                // Remove the leading comma if it exists
-                let currentValue = valueField.val().replace(/^,/, ''),
-                    // Create a regular expression pattern for the ID and surrounding commas
-                    idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
-                    // Replace the ID and handle surrounding commas
-                    newValue = currentValue.replace(idPattern, '');
-                // Remove trailing comma if it exists
-                newValue = newValue.replace(/,$/, '');
-                // Update the valueField
-                valueField.val(newValue);
+                let currentValue = valueField.val().split(',');
+                if (currentValue.length > 0) {
+                    for (var key in currentValue) {
+                        if (parseInt(currentValue[key]) === parseInt(id)) {
+                            currentValue.splice(key, 1);
+                        }
+                    }
+                }
+                valueField.val(currentValue.join(','));
             }
         });
 
