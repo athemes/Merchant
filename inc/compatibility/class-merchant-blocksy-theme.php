@@ -17,7 +17,7 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 			add_action( 'init', array( $this, 'product_video_module' ) );
 			add_action( 'init', array( $this, 'product_audio_module' ) );
 			add_filter('theme_mod_woo_card_layout', array( $this, 'remove_theme_default_add_to_cart' ) );
-			add_filter('merchant_product_swatch_shop_catalog_add_to_cart_button_html', array( $this, 'add_to_cart' ) );
+			add_filter('merchant_product_swatch_shop_catalog_add_to_cart_button_html', array( $this, 'fix_add_to_cart_button_structure' ) );
 			add_filter('woocommerce_loop_add_to_cart_link', array( $this, 'fix_add_to_cart_button_structure' ) );
 		}
 
