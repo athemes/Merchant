@@ -60,7 +60,7 @@
         // Update Tier format text content
         buyLabelValue = buyLabelValue
             .replace( /{discount}|{percent}/g, `<strong>${ discountEach }</strong>` )
-            .replace( /{quantity}/g, `<strong>${ quantityValue }</strong>` );
+            .replace( /{quantity}|{amount}/g, `<strong>${ quantityValue }</strong>` );
         $buyLabelPreview.html( buyLabelValue );
     }
 

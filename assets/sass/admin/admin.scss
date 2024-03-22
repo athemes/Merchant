@@ -1414,21 +1414,19 @@ body.merchant-module-disabled {
   display: none;
 
   &-trigger {
-    color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+    color: #3858E9;
     font-weight: 500;
     display: flex;
     cursor: pointer;
+    gap: 3px;
 
-    &:after {
-      content: '\f347';
-      font-family: 'dashicons';
-      margin-top: 1px;
+    img {
+      margin-top: 2px;
     }
 
     &.expanded {
-      &:after {
-        content: '\f343';
-        margin-top: 0;
+      img {
+        transform: rotate(180deg);
       }
     }
   }

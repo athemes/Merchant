@@ -156,7 +156,6 @@ Merchant_Admin_Options::create( array(
 						),
 
 						// text formatting
-						// `hidden_desc` depends on `desc`
 						array(
 							'id'      => 'table_title',
 							'type'    => 'text',
@@ -164,13 +163,19 @@ Merchant_Admin_Options::create( array(
 							'default' => __( 'Buy more, save more!', 'merchant' ),
 						),
 
+						// `hidden_desc` depends on `desc`
 						array(
 							'id'          => 'save_label',
 							'type'        => 'text',
 							'title'       => esc_html__( 'Save label', 'merchant' ),
 							'default'     => esc_html__( 'Save {amount}', 'merchant' ),
-							'desc'        => __( 'You can use these codes in the content: ', 'merchant' ),
-							'hidden_desc' => __( "<strong>{amount}:</strong>: To show total discount amount.\n<strong>{percent}:</strong> To show discount percentage.", 'merchant' ),
+							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
+								__( '<strong>%1$s:</strong> To show total discount amount.<br><strong>%2$s:</strong> To show discount percentage.', 'merchant' ),
+								'{amount}',
+								'{percent}'
+							),
 						),
 
 						array(
@@ -178,8 +183,14 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'text',
 							'title'       => esc_html__( 'Tier format text', 'merchant' ),
 							'default'     => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
-							'desc'        => __( 'You can use these codes in the content: ', 'merchant' ),
-							'hidden_desc' => __( "<strong>{percent}:</strong> To show discount percentage.\n<strong>{quantity}:</strong> To show number of items need to buy to get the discount.\n<strong>{discount}:</strong> To show discount amount of each item.", 'merchant' ),
+							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount percentage, %2$s: Quantity, %3$s: Discount amount */
+								__( '<strong>%1$s:</strong> To show discount percentage.<br><strong>%2$s:</strong> To show the number of items needed to buy to get the discount.<br><strong>%3$s:</strong> To show the discount amount of each item.', 'merchant' ),
+								'{percent}',
+								'{quantity}',
+								'{discount}'
+							),
 						),
 
 						array(
@@ -209,8 +220,13 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'text',
 							'title'       => esc_html__( 'Cart item discount description', 'merchant' ),
 							'default'     => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
-							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the content: ', 'merchant' ),
-							'hidden_desc' => __( "<strong>{amount}:</strong>: To show total discount amount.\n<strong>{percent}:</strong> To show discount percentage.", 'merchant' ),
+							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
+								__( '<strong>%1$s:</strong> To show total discount amount.<br><strong>%2$s:</strong> To show discount percentage.', 'merchant' ),
+								'{amount}',
+								'{percent}'
+							),
 						),
 
 						// style settings
@@ -243,7 +259,6 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Title text color', 'merchant' ),
 							'default' => '#212121',
 						),
-
 
 						array(
 							'id'      => 'table_item_bg_color',

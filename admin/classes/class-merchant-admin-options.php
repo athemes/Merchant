@@ -620,7 +620,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$desc = apply_filters( 'merchant_admin_module_field_description', $desc, $settings, $value, $module_id );
 
 				if ( ! empty( $desc ) ) {
-					$hidden_desc_html = ! empty( $hidden_desc ) ? '<div class="merchant-module-page-setting-field-hidden-desc-trigger" data-show-text="' . esc_html__( 'Show more', 'merchant' ) . '" data-hidden-text="' . esc_html__( 'Show less', 'merchant' ) . '">' . esc_html__( 'Show more', 'merchant' ) . '</div>' : '';
+					$hidden_desc_html = '';
+                    if ( ! empty( $hidden_desc ) ) {
+	                    $hidden_desc_html  = '<div class="merchant-module-page-setting-field-hidden-desc-trigger" data-show-text="' . esc_html__( 'Show more', 'merchant' ) . '" data-hidden-text="' . esc_html__( 'Show less', 'merchant' ) . '"><span>' . esc_html__( 'Show more', 'merchant' ) . '</span>';
+	                    $hidden_desc_html .= '<img src="' . esc_url( MERCHANT_URI . '/assets/images/arrow-down.svg' ) . '" alt="Merchant" />';
+	                    $hidden_desc_html .= '</div>';
+                    }
 
 					printf( '<div class="merchant-module-page-setting-field-desc' . esc_attr( $hidden_desc ? ' merchant-module-page-setting-field-desc-has-hidden-desc' : '' ) .'">%s%s</div>', wp_kses_post( $desc ), wp_kses_post( $hidden_desc_html ) );
                 }
