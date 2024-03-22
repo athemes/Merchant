@@ -1065,12 +1065,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			} else {
 				$multiple = 'multiple';
 			}
+
+			if ( ! isset( $settings['allowed_types'] ) ) {
+				$settings['allowed_types'] = array( 'all' );
+			}
 			?>
 
             <div class="merchant-products-search-container" data-multiple="<?php
 			echo esc_attr( $multiple ); ?>">
                 <div class="merchant-search-area">
-                    <input type="text" name="merchant-search-field" placeholder="<?php
+                    <input type="text" name="merchant-search-field" data-allowed-types="<?php
+                    echo esc_attr( implode( ',', $settings['allowed_types'] ) ) ?>" placeholder="<?php
 					esc_attr_e( 'Search products', 'merchant' ); ?>" class="merchant-search-field">
                     <span class="merchant-searching"><?php
 		                esc_html_e( 'Searching...', 'merchant' ); ?></span>
@@ -1179,7 +1184,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( ! isset( $_POST['keyword'] ) || empty( $_POST['keyword'] ) ) {
 				exit();
 			}
-			$types     = array( 'simple', 'variable' ); // limit search to product types
+
+			$types     = array( 'all' ); // limit search to product types
+
+			if ( isset( $_POST['product_types'] ) || ! empty( $_POST['product_types'] ) ) {
+				$types = explode( ',', sanitize_text_field( $_POST['product_types'] ) );
+			}
+
 			$added_ids = isset( $_POST['ids'] ) ? explode( ',', sanitize_text_field( $_POST['ids'] ) ) : array();
 			$keyword   = sanitize_text_field( $_POST['keyword'] );
 			if ( is_numeric( $keyword ) ) {

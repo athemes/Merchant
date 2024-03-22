@@ -644,6 +644,7 @@
                     action: 'merchant_admin_products_search',
                     nonce: merchant_admin_options.ajaxnonce,
                     keyword: $(this).val(),
+                    product_types: $(this).data('allowed-types'),
                     ids: parent.find('.merchant-selected-products').val(),
                 };
 
