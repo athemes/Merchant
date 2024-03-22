@@ -674,7 +674,6 @@
                     valueField = parent.find('.merchant-selected-products'),
                     id = removeButton.parent().data('id');
                 removeButton.parent().remove();
-                $ajaxHeader.addClass('merchant-show');
                 let currentValue = valueField.val().split(',');
                 if (currentValue.length > 0) {
                     for (var key in currentValue) {
@@ -684,6 +683,7 @@
                     }
                 }
                 valueField.val(currentValue.join(','));
+                valueField.trigger('change.merchant');
             }
         });
 
