@@ -22,7 +22,7 @@ if ( method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
 if ( $product instanceof WC_Product ) {
 	$is_purchasable     = $product->is_purchasable();
 	$product_id         = $product->get_id();
-	$product_id         = $product->get_type();
+	$product_type       = $product->get_type();
 	$product_image      = $product->get_image( 'woocommerce_gallery_thumbnail' );
 	$product_permalink  = $product->get_permalink();
 	$product_title      = $product->get_title();
