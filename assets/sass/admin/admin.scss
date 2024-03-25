@@ -3342,6 +3342,20 @@ body.merchant-module-disabled {
 
       li {
         cursor: pointer;
+
+        &.hierarchy-style{
+          padding-left: 15px;
+
+          &:before{
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #d1d1d1;
+            margin-right: 7px;
+          }
+        }
       }
     }
 

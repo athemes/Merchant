@@ -1104,11 +1104,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			<?php
 		}
 
-		public static function product_data_li( $product, $search = false ) {
+		public static function product_data_li( $product, $search = false, $hierarchy = false ) {
 			$product_id   = $product->get_id();
 			$product_sku  = $product->get_sku();
 			$product_name = $product->get_name();
 			$edit_link    = get_edit_post_link( $product_id );
+			if ( $product->is_type( 'variation' ) ) {
+				$edit_link = get_edit_post_link( $product->get_parent_id() );
+			}
+
 			/**
 			 * Filter product image.
 			 *
@@ -1138,7 +1142,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$remove_btn = '<span class="remove hint--left" aria-label="' . esc_html__( 'Remove', 'merchant' ) . '">×</span>';
 			}
 
-			echo '<li class="product-item" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
+            $item_class = 'product-item';
+            if( $hierarchy && $product->is_type( 'variation' ) ) {
+                $item_class .= ' hierarchy-style';
+            }
+
+			echo '<li class="' . esc_attr( $item_class ) . '" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
 				. esc_attr( $product_sku ) . '" data-id="' . esc_attr( $product_id ) . '" data-price="' . esc_attr( $price ) . '">'
 				. wp_kses( $product_image, array(
 					'span' => array(
@@ -1189,6 +1198,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			if ( isset( $_POST['product_types'] ) || ! empty( $_POST['product_types'] ) ) {
 				$types = explode( ',', sanitize_text_field( $_POST['product_types'] ) );
+			}
+
+			$hierarchy = false;
+			if (
+				in_array( 'all', $types, true )
+				|| ( in_array( 'variation', $types, true ) && in_array( 'variable', $types, true ) )
+			) {
+				$hierarchy = true;
 			}
 
 			$added_ids = isset( $_POST['ids'] ) ? explode( ',', sanitize_text_field( $_POST['ids'] ) ) : array();
@@ -1245,7 +1262,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						|| in_array( 'variable', $types, true )
 						|| in_array( 'all', $types, true )
 					) {
-						self::product_data_li( $_product, array( 'qty' => 1 ), true );
+						self::product_data_li( $_product, array( 'qty' => 1 ), true, $hierarchy );
 					}
 
 					if (
@@ -1269,7 +1286,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									// Don't display variations that don't have all attributes set.
 									continue;
 								}
-								self::product_data_li( $child_product, true );
+								self::product_data_li( $child_product, true, $hierarchy );
 							}
 						}
 					}
