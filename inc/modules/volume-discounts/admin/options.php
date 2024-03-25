@@ -38,10 +38,10 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Offered product(s)', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
-								'products'   => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Product categories', 'merchant' ),
-								'tags'       => esc_html__( 'Product tags', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
+								'products'   => esc_html__( 'Specific products', 'merchant' ),
+								'categories' => esc_html__( 'Specific categories', 'merchant' ),
+								'tags'       => esc_html__( 'Specific tags', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -75,6 +75,14 @@ Merchant_Admin_Options::create( array(
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
 							'desc'        => esc_html__( 'Select the product tags that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'tags' ),
+						),
+						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this campaign.', 'merchant' ),
+							'condition' => array( 'rules_to_display', 'any', 'all|categories|tags' ),
 						),
 						array(
 							'id'      => 'quantity',
@@ -113,7 +121,6 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'User Condition', 'merchant' ),
 							'options' => array(
 								'all'       => esc_html__( 'All Users', 'merchant' ),
-								'logged-in' => esc_html__( 'Logged In Users', 'merchant' ),
 								'customers' => esc_html__( 'Selected Users', 'merchant' ),
 								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
 							),
