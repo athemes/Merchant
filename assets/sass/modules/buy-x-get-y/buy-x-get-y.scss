@@ -3,11 +3,15 @@
  *
  */
 
-.merchant-bogo-title {
-  margin: 0 0 10px;
-  font-size: var(--merchant-font-size);
-  font-weight: var(--merchant-font-weight);
-  color: var(--merchant-text-color);
+.merchant-bogo {
+  margin-block: 20px;
+
+  &-title {
+    margin: 0 0 10px;
+    font-size: var(--merchant-font-size);
+    font-weight: var(--merchant-font-weight);
+    color: var(--merchant-text-color);
+  }
 }
 
 .merchant-bogo-offer {
@@ -134,5 +138,39 @@ button.button.merchant-bogo-add-to-cart {
     bottom: -30px;
     top: inherit;
     transform: rotate(90deg);
+  }
+}
+
+.select-error-tooltip {
+  position: relative;
+  color: #58151c;
+
+  &:after,
+  &:before {
+    position: absolute;
+    z-index: 99;
+  }
+
+  &:before {
+    font-weight: 400;
+    text-transform: none;
+    content: attr(data-error);
+    background: #f8d7da;
+    width: max-content;
+    color: #58151c;
+    padding: 5px 10px;
+    border-radius: 5px;
+    bottom: calc(100% + 10px);
+    left: 0;
+  }
+
+  &:after {
+    font-family: "dashicons";
+    content: "\f140";
+    font-size: 26px;
+    color: #f8d7da;
+    line-height: 1;
+    bottom: calc(100% - 5px);
+    left: 5px;
   }
 }

@@ -75,9 +75,19 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                                             </a>
 
                                         </div>
-									<?php else : ?>
+									<?php else : 
+                                        /**
+                                         * Hook 'merchant_admin_module_{module_id}_activate_button_class'
+                                         * Filters the class name for the activate button.
+                                         * 
+                                         * @param string $button_activate_class The class name for the activate button.
+                                         * @since 1.0
+                                         */
+                                        $button_activate_class = apply_filters( "merchant_admin_module_{$merchant_module}_activate_button_class", 'merchant-module-page-button merchant-module-activate merchant-module-page-button-action-activate' );
+                                        ?>
+
                                         <div data-module="<?php echo esc_attr( $merchant_module ); ?>"
-                                            class="merchant-module-page-button merchant-module-activate merchant-module-page-button-action-activate">
+                                            class="<?php echo esc_attr( $button_activate_class ); ?>">
 											<?php esc_html_e( 'Enable', 'merchant' ); ?>
                                         </div>
                                         <div class="merchant-module-deactivate">

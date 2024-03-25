@@ -19,8 +19,9 @@ Merchant_Admin_Options::create( array(
 			'type'         => 'flexible_content',
 			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
 			'style'        => Merchant_Volume_Discounts::MODULE_ID . '-style default',
-			'sorting'      => false,
+			'sorting'      => true,
 			'accordion'    => true,
+			'duplicate'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Create Discount Tiers', 'merchant' ),
@@ -40,6 +41,7 @@ Merchant_Admin_Options::create( array(
 								'all'        => esc_html__( 'All products', 'merchant' ),
 								'products'   => esc_html__( 'Specific products', 'merchant' ),
 								'categories' => esc_html__( 'Specific categories', 'merchant' ),
+								'tags'       => esc_html__( 'Specific tags', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -47,7 +49,7 @@ Merchant_Admin_Options::create( array(
 							'id'        => 'product_id',
 							'type'      => 'products_selector',
 							//'title'     => esc_html__( 'Select product', 'merchant' ),
-							'multiple'  => false,
+							'multiple'  => true,
 							'desc'      => esc_html__( 'Select the product that the customer will get a discount on when they purchase the minimum required quantity.',
 								'merchant' ),
 							'condition' => array( 'rules_to_display', '==', 'products' ),
@@ -62,6 +64,17 @@ Merchant_Admin_Options::create( array(
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'          => 'tag_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that will show the offer.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'tags' ),
 						),
 						array(
 							'id'        => 'excluded_products',
@@ -86,12 +99,20 @@ Merchant_Admin_Options::create( array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default' => 'percentage',
+							'default' => 'fixed_discount',
 						),
 						array(
 							'id'      => 'discount',
 							'type'    => 'number',
 							'default' => 10,
+						),
+
+						array(
+							'id'      => 'exclude_coupon',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Exclude coupon', 'merchant' ),
+							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer campaign.', 'merchant' ),
+							'default' => false,
 						),
 
 						array(
@@ -149,18 +170,34 @@ Merchant_Admin_Options::create( array(
 							'default' => __( 'Buy more, save more!', 'merchant' ),
 						),
 
+						// `hidden_desc` depends on `desc`
 						array(
-							'id'      => 'save_label',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Save label', 'merchant' ),
-							'default' => esc_html__( 'Save {amount}', 'merchant' ),
+							'id'          => 'save_label',
+							'type'        => 'text',
+							'title'       => esc_html__( 'Save label', 'merchant' ),
+							'default'     => esc_html__( 'Save {amount}', 'merchant' ),
+							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
+								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),
+								'{amount}',
+								'{percent}'
+							),
 						),
 
 						array(
-							'id'      => 'buy_text',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Tier format text', 'merchant' ),
-							'default' => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
+							'id'          => 'buy_text',
+							'type'        => 'text',
+							'title'       => esc_html__( 'Tier format text', 'merchant' ),
+							'default'     => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
+							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount percentage, %2$s: Quantity, %3$s: Discount amount */
+								__( '<strong>%1$s:</strong> to show discount percentage<br><strong>%2$s:</strong> to show the number of items needed to buy to get the discount<br><strong>%3$s:</strong> to show discount amount on each item', 'merchant' ),
+								'{percent}',
+								'{quantity}',
+								'{discount}'
+							),
 						),
 
 						array(
@@ -186,11 +223,17 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'cart_description_text',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Cart item discount description', 'merchant' ),
-							'default' => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
-							'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
+							'id'          => 'cart_description_text',
+							'type'        => 'text',
+							'title'       => esc_html__( 'Cart item discount description', 'merchant' ),
+							'default'     => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
+							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the contents.', 'merchant' ),
+							'hidden_desc' => sprintf(
+								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
+								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),
+								'{amount}',
+								'{percent}'
+							),
 						),
 
 						// style settings
@@ -223,7 +266,6 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Title text color', 'merchant' ),
 							'default' => '#212121',
 						),
-
 
 						array(
 							'id'      => 'table_item_bg_color',

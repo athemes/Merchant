@@ -423,7 +423,8 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		    .merchant-product-swatches .merchant-volume-discounts {
                 display: none;
             }
-			.merchant-variations-wrapper select {
+			.merchant-variations-wrapper select,
+			 .merchant-variations-wrapper .theme-select {
 			    display: none!important;
 			}
 			.merchant-variations-wrapper .merchant-variation-type-image,

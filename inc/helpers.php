@@ -384,6 +384,28 @@ if ( ! function_exists( 'merchant_get_product_categories' ) ) {
 }
 
 /**
+ * Get the product tags.
+ */
+if ( ! function_exists( 'merchant_get_product_tags' ) ) {
+	function merchant_get_product_tags() {
+		$product_tags = get_terms( array(
+			'taxonomy'   => 'product_tag',
+			'hide_empty' => false,
+		) );
+
+		$tag_names = array();
+
+		if ( ! empty( $product_tags ) && ! is_wp_error( $product_tags ) ) {
+			foreach ( $product_tags as $tag ) {
+				$tag_names[ $tag->slug ] = $tag->name;
+			}
+		}
+
+		return $tag_names;
+	}
+}
+
+/**
  * Convert array to css.
  */
 if ( ! function_exists( 'merchant_array_to_css' ) ) {
