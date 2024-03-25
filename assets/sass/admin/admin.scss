@@ -1396,11 +1396,38 @@ body.merchant-module-disabled {
   font-weight: 400;
   color: #777;
 
+  &-has-hidden-desc {
+    display: flex;
+    gap: 5px;
+  }
+
   a {
     color: #3858E9;
 
     &:focus {
       box-shadow: none;
+    }
+  }
+}
+
+.merchant-module-page-setting-field-hidden-desc {
+  display: none;
+
+  &-trigger {
+    color: #3858E9;
+    font-weight: 500;
+    display: flex;
+    cursor: pointer;
+    gap: 3px;
+
+    img {
+      margin-top: 2px;
+    }
+
+    &.expanded {
+      img {
+        transform: rotate(180deg);
+      }
     }
   }
 }
@@ -2229,6 +2256,10 @@ body.merchant-module-disabled {
 .merchant-flexible-content-control {
   max-width: 100%;
 
+  .layout {
+    position: relative;
+  }
+
   .sortable {
     list-style-type: none;
     margin: 0;
@@ -2254,7 +2285,8 @@ body.merchant-module-disabled {
     cursor: grab;
   }
 
-  .customize-control-flexible-content-delete {
+  .customize-control-flexible-content-delete,
+  .customize-control-flexible-content-duplicate {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2288,6 +2320,10 @@ body.merchant-module-disabled {
 
       .dashicons-no-alt {
         color: #a7a7a7;
+      }
+
+      svg {
+        fill: #a7a7a7;
       }
     }
   }
@@ -2394,6 +2430,7 @@ body.merchant-module-disabled {
       font-weight: bold;
     }
 
+    .layout-toggle,
     .layout-actions {
       display: flex;
       margin: 0;
@@ -2406,6 +2443,12 @@ body.merchant-module-disabled {
       display: flex;
       flex-direction: column;
       grid-gap: 20px;
+    }
+
+    .layout-actions {
+      position: absolute;
+      top: 9px;
+      right: 55px;
     }
 
     .layout-field {
