@@ -79,7 +79,7 @@ Merchant_Admin_Options::create( array(
 						),
 						array(
 							'id'        => 'external',
-							'title'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
+							'label'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
 							'type'      => 'checkbox',
 							'default'   => 0,
 							'condition' => array( 'rules_to_display', '==', 'products' ),

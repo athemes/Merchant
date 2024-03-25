@@ -1362,19 +1362,24 @@ body.merchant-module-disabled {
 
 .merchant-module-page-setting-fields {
   display: flex;
-  grid-gap: 24px;
+  //grid-gap: 24px;
   flex-direction: column;
   width: 60%;
   padding: 30px;
   border-radius: 4px;
   border: 2px solid #F0F0F1;
   background-color: #fff;
+
+  >.merchant-module-page-setting-field:last-of-type{
+    margin-bottom: 0;
+  }
 }
 
 .merchant-module-page-setting-field {
   display: flex;
   grid-gap: 10px;
   flex-direction: column;
+  margin-bottom: 24px;
 
   &.merchant-show {
     display: flex;
@@ -1728,6 +1733,7 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-info-block,
 .merchant-tag-pre-orders {
   display: flex;
   grid-gap: 16px;
@@ -1770,6 +1776,12 @@ body.merchant-module-disabled {
       flex-shrink: 0;
     }
   }
+}
+
+.merchant-info-block{
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #BABFC3;
 }
 
 .merchant-module-page-setting-field-select,
@@ -2134,7 +2146,7 @@ body.merchant-module-disabled {
 /* Sortable Repeater Field */
 
 .merchant-module-page-setting-field-flexible_content .merchant-module-page-setting-field-title {
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 }
 
 .merchant-sortable-repeater-control {
@@ -2150,7 +2162,7 @@ body.merchant-module-disabled {
       margin: 0;
       border-radius: 4px 0 0 4px;
       border: 1px solid #D6D6D6;
-      padding: 12px;
+      padding: 12px 8px;
       line-height: 1.3em;
 
       &:focus {
@@ -2442,7 +2454,7 @@ body.merchant-module-disabled {
     .layout-body {
       display: flex;
       flex-direction: column;
-      grid-gap: 20px;
+      //grid-gap: 20px;
     }
 
     .layout-actions {
@@ -2454,6 +2466,12 @@ body.merchant-module-disabled {
     .layout-field {
       &.flex-grow {
         flex-grow: 1;
+      }
+
+      &:last-of-type{
+        .merchant-module-page-setting-field{
+            margin-bottom: 0;
+        }
       }
     }
 
@@ -2548,7 +2566,7 @@ body.merchant-module-disabled {
     color: #3858E9;
     border-color: #3858E9;
     background-color: transparent;
-    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 4px 19px;
 
     &:hover,

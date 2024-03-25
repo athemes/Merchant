@@ -89,6 +89,13 @@ const styles = [
 		src: './assets/sass/modules/buy-now/buy-now.scss',
 		destination: './assets/css/modules/buy-now',
 	},
+	// storewide sale preview
+	{
+		name: 'storewideSaleAdminPreview',
+		src: './assets/sass/modules/storewide-sale/admin/preview.scss',
+		destination: './assets/css/modules/storewide-sale/admin',
+	},
+
 	{
 		name: 'buyNowAdmin',
 		src: './assets/sass/modules/buy-now/admin/preview.scss',

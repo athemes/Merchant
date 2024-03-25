@@ -138,19 +138,19 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display-archive',
 			'type'    => 'checkbox',
-			'title'   => __( 'Show on product archive', 'merchant' ),
+			'label'   => __( 'Show on product archive', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'display-product',
 			'type'    => 'checkbox',
-			'title'   => __( 'Show on single product page', 'merchant' ),
+			'label'   => __( 'Show on single product page', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'display-upsell-related',
 			'type'    => 'checkbox',
-			'title'   => __( 'Show on upsell and related products', 'merchant' ),
+			'label'   => __( 'Show on upsell and related products', 'merchant' ),
 			'default' => 1,
 		),
 

@@ -259,9 +259,13 @@
                     let input = $(this).find('input'),
                         options = {
                             locale: JSON.parse(merchant_datepicker_locale),
-                            selectedDates: [input.val() ? new Date(input.val()) : new Date()],
+                            selectedDates: [input.val() ? new Date(input.val()) : ''],
                             onSelect: ({date, formattedDate, datepicker}) => {
-                                input.trigger('change.merchant')
+                                if (typeof (formattedDate) === "undefined") {
+                                    // allow removing date
+                                    input.val('');
+                                }
+                                input.trigger('change.merchant');
                             }
                         },
                         fieldOptions = $(this).data('options');
@@ -815,7 +819,8 @@
                         switch (condition[1]) {
                             case '==':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && $target.val() == condition[2]) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && checked.val() === condition[2]) {
                                         passed = true;
                                     }
                                 }
@@ -825,7 +830,8 @@
                                 break;
                             case 'any':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && condition[2].split('|').includes($target.val())) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && condition[2].split('|').includes(checked.val())) {
                                         passed = true;
                                     }
                                 }
@@ -1207,7 +1213,7 @@
                 width: '100%',
             }
 
-            if ($source === 'post' || $source === 'product') {
+            if ($source === 'post' || $source === 'product' || $source === 'user') {
                 $object.minimumInputLength = 1;
                 $object.ajax = {
                     url: $config.ajaxurl,

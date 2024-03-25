@@ -211,6 +211,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 
 						break;
+
+                    case 'user':
+                        $query = new WP_User_Query( array(
+                            'search'         => '*' . $term . '*',
+                            'search_columns' => array( 'user_login', 'user_nicename', 'user_email', 'user_url' ),
+                            'number'         => 25,
+                        ) );
+
+                        if ( ! empty( $query->results ) ) {
+                            foreach ( $query->results as $user ) {
+                                $options[] = array(
+                                    'id'   => $user->ID,
+                                    'text' => $user->display_name,
+                                );
+                            }
+                        }
+
+                        break;
 				}
 
 				wp_send_json_success( $options );
@@ -1035,6 +1053,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									echo '<option value="' . esc_attr( $post->ID ) . '" selected>' . esc_html( $post->post_title ) . '</option>';
 								}
 								break;
+							case 'user':
+                                $user = get_user_by( 'ID', $id );
+                                if( $user ) {
+                                    echo '<option value="' . esc_attr( $user->ID ) . '" selected>' . esc_html( $user->display_name ) . '</option>';
+                                }
+                                break;
 							case 'options':
 						}
 					}
@@ -1060,6 +1084,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					}
 				} ?>
             </select>
+			<?php
+		}
+
+		/**
+		 * Field: Info Block
+		 *
+		 * @return void
+		 */
+		public static function info_block( $settings, $value, $module_id = '' ) {
+			?>
+            <div class="merchant-info-block">
+                <i class="dashicons dashicons-info"></i>
+                <p><?php
+					echo ! empty( $settings['description'] ) ? esc_html( $settings['description'] ) : ''; ?><?php
+					if ( ! empty( $settings['button_text'] ) && ! empty( $settings['button_link'] ) ) {
+						printf( '<a href="%s" target="_blank">%s</a>', esc_url( $settings['button_link'] ), esc_html( $settings['button_text'] ) );
+					} ?></p>
+            </div>
 			<?php
 		}
 
@@ -1726,8 +1768,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 	        ?>
             <div class="merchant-datetime-field" data-options="<?php echo esc_attr( wp_json_encode( $settings['options'] ) ); ?>">
                 <input type="text" name="merchant[<?php
-	            echo esc_attr( $settings['id'] ); ?>]" value="<?php
-	            echo esc_attr( $value ); ?>"/>
+		        echo esc_attr( $settings['id'] ); ?>]" value="<?php
+		        echo esc_attr( $value ); ?>" placeholder="<?php
+		        echo isset( $settings['placeholder'] ) ? esc_attr( $settings['placeholder'] ) : ''; ?>"/>
             </div>
 	        <?php
         }
