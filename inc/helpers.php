@@ -261,6 +261,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'data-attribute_name'     => true,
 					'data-show_option_none'   => true,
 					'data-name'               => true,
+					'data-allowed-types'      => true,
 					'step'                    => true,
 					'min'                     => true,
 					'max'                     => true,
