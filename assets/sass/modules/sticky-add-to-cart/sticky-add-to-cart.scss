@@ -71,9 +71,12 @@
 					max-height: 51px;
 				}
 
-				form.cart {
+				form.cart,
+				form.cart .botiga-single-addtocart-wrapper,
+				form.cart .sydney-single-addtocart-wrapper {
 					display: flex;
 					flex-wrap: nowrap !important;
+					margin-block: 0;
 
 					.qty {
 						max-height: 100%;
