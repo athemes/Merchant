@@ -515,7 +515,7 @@
             events: function () {
                 const self = this;
 
-                // Update "selected" attribute on select. It's Required for cloning feature.
+                // Update "selected" attribute on select. It's Required for duplicating layouts.
                 $( document ).on( 'change', 'select', function() {
                     const selectedValue = $( this ).val();
                     const isMultiple    = $( this ).prop( 'multiple' );

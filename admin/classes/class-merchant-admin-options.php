@@ -2217,7 +2217,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
         /**
-         * Get category choices for select2
+         * Get Tag choices for select2
          *
 		 * @return array
 		 */
