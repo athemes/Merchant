@@ -76,6 +76,6 @@ jobs:
 
 
           _Dive deeper into the changes: ${{ github.event.pull_request.html_url }} _"
-          -F channels=${{ secrets.SLACK_RELEASES_CHANNEL_ID }}
+          -F channels=${{ secrets.SLACK_CHANNEL_ID }}
           -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
           https://slack.com/api/files.upload
