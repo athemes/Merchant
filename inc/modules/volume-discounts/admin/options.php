@@ -103,7 +103,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'exclude_coupon',
 							'type'    => 'switcher',
 							'title'   => esc_html__( 'Exclude coupon', 'merchant' ),
-							'desc'    => esc_html__( 'If discount type is "Fixed product discount", discount will be remove from the cart completely. If discount type is "Fixed cart discount" or "Percentage discount", the discount amount will be remove from the Bulk discount products only.', 'merchant' ),
+							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer campaign.', 'merchant' ),
 							'default' => false,
 						),
 
@@ -172,7 +172,7 @@ Merchant_Admin_Options::create( array(
 							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
-								__( '<strong>%1$s:</strong> To show total discount amount.<br><strong>%2$s:</strong> To show discount percentage.', 'merchant' ),
+								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),
 								'{amount}',
 								'{percent}'
 							),
@@ -186,7 +186,7 @@ Merchant_Admin_Options::create( array(
 							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount percentage, %2$s: Quantity, %3$s: Discount amount */
-								__( '<strong>%1$s:</strong> To show discount percentage.<br><strong>%2$s:</strong> To show the number of items needed to buy to get the discount.<br><strong>%3$s:</strong> To show the discount amount of each item.', 'merchant' ),
+								__( '<strong>%1$s:</strong> to show discount percentage<br><strong>%2$s:</strong> to show the number of items needed to buy to get the discount<br><strong>%3$s:</strong> to show discount amount on each item', 'merchant' ),
 								'{percent}',
 								'{quantity}',
 								'{discount}'
@@ -223,7 +223,7 @@ Merchant_Admin_Options::create( array(
 							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the contents.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
-								__( '<strong>%1$s:</strong> To show total discount amount.<br><strong>%2$s:</strong> To show discount percentage.', 'merchant' ),
+								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),
 								'{amount}',
 								'{percent}'
 							),
