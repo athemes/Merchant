@@ -142,12 +142,11 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'        => 'user_condition_users',
 							'type'      => 'select_ajax',
-							'title'     => esc_html__( 'Customer', 'merchant' ),
+							'title'     => esc_html__( 'Users', 'merchant' ),
 							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
-							'source'    => 'options',
+							'source'    => 'user',
 							'multiple'  => true,
 							'classes'   => array( 'flex-grow' ),
-							'options'   => Merchant_Admin_Options::get_customers_select2_choices(),
 							'condition' => array( 'user_condition', '==', 'customers' ),
 						),
 
