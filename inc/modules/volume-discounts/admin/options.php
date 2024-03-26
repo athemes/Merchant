@@ -110,7 +110,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'exclude_coupon',
 							'type'    => 'switcher',
-							'title'   => esc_html__( 'Exclude coupon', 'merchant' ),
+							'title'   => esc_html__( 'Exclude coupons', 'merchant' ),
 							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer campaign.', 'merchant' ),
 							'default' => false,
 						),
@@ -175,7 +175,7 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'text',
 							'title'       => esc_html__( 'Save label', 'merchant' ),
 							'default'     => esc_html__( 'Save {amount}', 'merchant' ),
-							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
 								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),
@@ -189,7 +189,7 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'text',
 							'title'       => esc_html__( 'Tier format text', 'merchant' ),
 							'default'     => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
-							'desc'        => __( 'You can use these codes in the contents.', 'merchant' ),
+							'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount percentage, %2$s: Quantity, %3$s: Discount amount */
 								__( '<strong>%1$s:</strong> to show discount percentage<br><strong>%2$s:</strong> to show the number of items needed to buy to get the discount<br><strong>%3$s:</strong> to show discount amount on each item', 'merchant' ),
@@ -226,7 +226,7 @@ Merchant_Admin_Options::create( array(
 							'type'        => 'text',
 							'title'       => esc_html__( 'Cart item discount description', 'merchant' ),
 							'default'     => esc_html__( 'A discount of {amount} has been applied.', 'merchant' ),
-							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the contents.', 'merchant' ),
+							'desc'        => __( 'This is displayed on the cart page. You can use these codes in the content.', 'merchant' ),
 							'hidden_desc' => sprintf(
 								/* Translators: %1$s: Discount amount, %2$s: Discount percentage */
 								__( '<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show discount percentage', 'merchant' ),

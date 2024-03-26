@@ -149,6 +149,9 @@ if ( $product instanceof WC_Product ) {
 						echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
 							<?php
 							foreach ( $buy_product['attributes'] as $buy_product_key => $attribute ) : ?>
+                                <?php
+                                $terms = $attribute['terms'] ?? array();
+                                ?>
                                 <select class="merchant-bogo-select-attribute" name="<?php
 								echo esc_attr( $buy_product_key ) ?>" required>
                                     <option value="">
@@ -158,13 +161,13 @@ if ( $product instanceof WC_Product ) {
 											sprintf( __( 'Select %s', 'merchant' ), $attribute['label'] )
 										); ?>
                                     </option>
-									<?php
-									foreach ( $attribute['terms'] as $_term ) : ?>
-                                        <option value="<?php
-										echo esc_attr( $_term['slug'] ) ?>"><?php
-											echo esc_html( $_term['name'] ) ?></option>
-									<?php
-									endforeach; ?>
+									<?php if ( is_array( $terms ) && ! empty( $terms ) ) : ?>
+                                        <?php foreach ( $terms as $_term ) : ?>
+                                            <option value="<?php
+                                            echo esc_attr( $_term['slug'] ) ?>"><?php
+                                                echo esc_html( $_term['name'] ) ?></option>
+                                        <?php endforeach; ?>
+									<?php endif; ?>
                                 </select>
 							<?php
 							endforeach; ?>
