@@ -161,7 +161,7 @@ if ( $product instanceof WC_Product ) {
 											sprintf( __( 'Select %s', 'merchant' ), $attribute['label'] )
 										); ?>
                                     </option>
-									<?php if ( is_array( $terms ) ) : ?>
+									<?php if ( is_array( $terms ) && ! empty( $terms ) ) : ?>
                                         <?php foreach ( $terms as $_term ) : ?>
                                             <option value="<?php
                                             echo esc_attr( $_term['slug'] ) ?>"><?php
