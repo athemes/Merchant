@@ -728,7 +728,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
             <input type="number" name="merchant[<?php
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
-			echo esc_attr( $value ); ?>"/>
+			echo esc_attr( $value ); ?>"<?php
+            echo isset( $settings['step'] ) ? ' step="' . esc_attr( $settings['step'] ) . '"' : '';
+            echo isset( $settings['max'] ) ? ' max="' . esc_attr( $settings['max'] ) . '"' : '';
+            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>/>
 			<?php
 		}
 
