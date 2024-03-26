@@ -778,9 +778,13 @@
             if (oldValue === '') {
                 valueField.val($(this).data('id'));
             } else {
-                let newValue = oldValue.split(',');
-                newValue.push($(this).data('id'));
-                valueField.val(newValue.join(','));
+                if (!multiple) {
+                    valueField.val($(this).data('id'));
+                } else {
+                    let newValue = oldValue.split(',');
+                    newValue.push($(this).data('id'));
+                    valueField.val(newValue.join(','));
+                }
             }
         });
 
