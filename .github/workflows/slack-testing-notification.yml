@@ -3,14 +3,13 @@
 name: Deploy Testing Plugin Zip to Slack
 
 on:
-  push:
-    branches:
-      - develop
+  pull_request:
+    types: [closed]
 
 jobs:
-  build-plugin-zip-asset:
+  notify-slack-channel:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'develop'
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -67,7 +66,9 @@ jobs:
       - name: Upload file to Slack
         run: >
           curl -F file=@merchant.zip
-          -F "initial_comment=🎉 Hey Team! A new testing version of merchant free has been written by ${{ github.actor }} in <https://github.com/${{ github.repository }}|${{ github.repository }}>.
+          -F "initial_comment=🎉 Hey Team! 
+          
+          A new testing version of *Merchant Free* has been written by *${{ github.actor }}* in <https://github.com/${{ github.repository }}|${{ github.repository }}>.
 
           *Here's what's included:* :rocket:
 
@@ -75,6 +76,6 @@ jobs:
 
 
           _Dive deeper into the changes: ${{ github.event.pull_request.html_url }} _"
-          -F channels=${{ secrets.SLACK_RELEASES_CHANNEL_ID }}
+          -F channels=${{ secrets.SLACK_CHANNEL_ID }}
           -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
           https://slack.com/api/files.upload
