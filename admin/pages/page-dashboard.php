@@ -367,8 +367,6 @@ $merchant_notification_read = $this->is_latest_notification_read();
 									} else {
 										$module_link = '#';
 									}
-								} else {
-									$module_link = $has_bp_deactivated_class ? '#' : $module_link;
 								}
 
 								?>
@@ -377,7 +375,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 									<?php if( $has_bp_deactivated_class ) : ?>
 										<div class="merchant-modules-list-item-badge-wrapper merchant-modules-list-item-removed-by-bp">
 											<span class="merchant-pro-badge merchant-pro-tooltip" data-tooltip-message="<?php echo esc_attr__( 'Botiga module is taking precedence', 'merchant' ); ?>">
-												<?php echo esc_html__( 'Disabled', 'merchant' ); ?>
+												<?php echo esc_html__( 'In use', 'merchant' ); ?>
 											</span>
 										</div>
 									<?php endif; ?>

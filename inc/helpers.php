@@ -261,6 +261,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'data-attribute_name'     => true,
 					'data-show_option_none'   => true,
 					'data-name'               => true,
+					'data-allowed-types'      => true,
 					'step'                    => true,
 					'min'                     => true,
 					'max'                     => true,
@@ -380,6 +381,28 @@ if ( ! function_exists( 'merchant_get_product_categories' ) ) {
 		}
 
 		return $category_names;
+	}
+}
+
+/**
+ * Get the product tags.
+ */
+if ( ! function_exists( 'merchant_get_product_tags' ) ) {
+	function merchant_get_product_tags() {
+		$product_tags = get_terms( array(
+			'taxonomy'   => 'product_tag',
+			'hide_empty' => false,
+		) );
+
+		$tag_names = array();
+
+		if ( ! empty( $product_tags ) && ! is_wp_error( $product_tags ) ) {
+			foreach ( $product_tags as $tag ) {
+				$tag_names[ $tag->slug ] = $tag->name;
+			}
+		}
+
+		return $tag_names;
 	}
 }
 

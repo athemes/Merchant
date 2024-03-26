@@ -37,9 +37,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Trigger', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Product categories', 'merchant' ),
+								'categories' => esc_html__( 'Specific categories', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -63,6 +63,14 @@ Merchant_Admin_Options::create( array(
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
 						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this campaign.', 'merchant' ),
+							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
+						),
+						array(
 							'id'       => 'products',
 							'title'    => esc_html__( 'Products to offer', 'merchant' ),
 							'type'     => 'products_selector',
@@ -71,7 +79,7 @@ Merchant_Admin_Options::create( array(
 						),
 						array(
 							'id'        => 'external',
-							'title'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
+							'label'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
 							'type'      => 'checkbox',
 							'default'   => 0,
 							'condition' => array( 'rules_to_display', '==', 'products' ),

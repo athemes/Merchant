@@ -98,7 +98,11 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Modules (free and pro).
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
-				if ( defined( 'MERCHANT_PRO_VERSION' ) && (float) MERCHANT_PRO_VERSION < 1.3 && isset( $module_data['pro'] ) && $module_data['pro'] ) {
+				if (
+					defined( 'MERCHANT_PRO_VERSION' )
+					&& version_compare( MERCHANT_PRO_VERSION, '1.3', '<' )
+					&& isset( $module_data['pro'] ) && $module_data['pro']
+				) {
 					continue;
 				}
 
@@ -109,6 +113,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-botiga-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-divi-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-avada-theme.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-astra-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-kadence-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-oceanwp-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-twenty-twenty-four-theme.php';

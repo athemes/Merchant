@@ -57,7 +57,71 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					'ajaxnonce'                           => wp_create_nonce( 'merchant_admin_options' ),
 					'product_delete_confirmation_message' => esc_html__( 'Are you sure you want to remove this product?', 'merchant' ),
 				) );
-			}
+
+				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
+				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				wp_localize_script( 'date-picker', 'merchant_datepicker_locale', array(
+					wp_json_encode(
+						array(
+							'days'        => array(
+								esc_html__( 'Sunday', 'merchant' ),
+								esc_html__( 'Monday', 'merchant' ),
+								esc_html__( 'Tuesday', 'merchant' ),
+								esc_html__( 'Wednesday', 'merchant' ),
+								esc_html__( 'Thursday', 'merchant' ),
+								esc_html__( 'Friday', 'merchant' ),
+								esc_html__( 'Saturday', 'merchant' ),
+							),
+							'daysShort'   => array(
+								esc_html__( 'Sun', 'merchant' ),
+								esc_html__( 'Mon', 'merchant' ),
+								esc_html__( 'Tue', 'merchant' ),
+								esc_html__( 'Wed', 'merchant' ),
+								esc_html__( 'Thu', 'merchant' ),
+								esc_html__( 'Fri', 'merchant' ),
+								esc_html__( 'Sat', 'merchant' ),
+							),
+							'daysMin'     => array(
+								esc_html__( 'Su', 'merchant' ),
+								esc_html__( 'Mo', 'merchant' ),
+								esc_html__( 'Tu', 'merchant' ),
+								esc_html__( 'We', 'merchant' ),
+								esc_html__( 'Th', 'merchant' ),
+								esc_html__( 'Fr', 'merchant' ),
+								esc_html__( 'Sa', 'merchant' ),
+							),
+							'months'      => array(
+								esc_html__( 'January', 'merchant' ),
+								esc_html__( 'February', 'merchant' ),
+								esc_html__( 'March', 'merchant' ),
+								esc_html__( 'April', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'June', 'merchant' ),
+								esc_html__( 'July', 'merchant' ),
+								esc_html__( 'August', 'merchant' ),
+								esc_html__( 'September', 'merchant' ),
+								esc_html__( 'October', 'merchant' ),
+								esc_html__( 'November', 'merchant' ),
+								esc_html__( 'December', 'merchant' ),
+							),
+							'monthsShort' => array(
+								esc_html__( 'Jan', 'merchant' ),
+								esc_html__( 'Feb', 'merchant' ),
+								esc_html__( 'Mar', 'merchant' ),
+								esc_html__( 'Apr', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'Jun', 'merchant' ),
+								esc_html__( 'Jul', 'merchant' ),
+								esc_html__( 'Aug', 'merchant' ),
+								esc_html__( 'Sep', 'merchant' ),
+								esc_html__( 'Oct', 'merchant' ),
+								esc_html__( 'Nov', 'merchant' ),
+								esc_html__( 'Dec', 'merchant' ),
+							),
+						)
+					),
+				) );
+            }
 		}
 
 		/**
@@ -147,6 +211,24 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 
 						break;
+
+                    case 'user':
+                        $query = new WP_User_Query( array(
+                            'search'         => '*' . $term . '*',
+                            'search_columns' => array( 'user_login', 'user_nicename', 'user_email', 'user_url' ),
+                            'number'         => 25,
+                        ) );
+
+                        if ( ! empty( $query->results ) ) {
+                            foreach ( $query->results as $user ) {
+                                $options[] = array(
+                                    'id'   => $user->ID,
+                                    'text' => $user->display_name,
+                                );
+                            }
+                        }
+
+                        break;
 				}
 
 				wp_send_json_success( $options );
@@ -537,6 +619,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				}
 				echo '</div>';
 
+				$hidden_desc = $settings['hidden_desc'] ?? '';
+
+				/**
+				 * Hook 'merchant_admin_module_field_hidden_description'
+				 *
+				 * @since 1.9.3
+				 */
+				$hidden_desc = apply_filters( 'merchant_admin_module_field_hidden_description', $hidden_desc, $settings, $value, $module_id );
+
 				$desc = ( ! empty( $settings['desc'] ) ) ? $settings['desc'] : '';
 
 				/**
@@ -547,8 +638,19 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$desc = apply_filters( 'merchant_admin_module_field_description', $desc, $settings, $value, $module_id );
 
 				if ( ! empty( $desc ) ) {
-					printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $desc ) );
-				}
+					$hidden_desc_html = '';
+                    if ( ! empty( $hidden_desc ) ) {
+	                    $hidden_desc_html  = '<div class="merchant-module-page-setting-field-hidden-desc-trigger" data-show-text="' . esc_html__( 'Show more', 'merchant' ) . '" data-hidden-text="' . esc_html__( 'Show less', 'merchant' ) . '"><span>' . esc_html__( 'Show more', 'merchant' ) . '</span>';
+	                    $hidden_desc_html .= '<img src="' . esc_url( MERCHANT_URI . '/assets/images/arrow-down.svg' ) . '" alt="Merchant" />';
+	                    $hidden_desc_html .= '</div>';
+                    }
+
+					printf( '<div class="merchant-module-page-setting-field-desc' . esc_attr( $hidden_desc ? ' merchant-module-page-setting-field-desc-has-hidden-desc' : '' ) .'">%s%s</div>', wp_kses_post( $desc ), wp_kses_post( $hidden_desc_html ) );
+                }
+
+				if ( ! empty( $hidden_desc ) ) {
+					printf( '<div class="merchant-module-page-setting-field-hidden-desc">%s</div>', wp_kses_post( nl2br( $hidden_desc ) ) );
+                }
 
 				echo '</div>';
 			}
@@ -626,7 +728,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
             <input type="number" name="merchant[<?php
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
-			echo esc_attr( $value ); ?>"/>
+			echo esc_attr( $value ); ?>"<?php
+            echo isset( $settings['step'] ) ? ' step="' . esc_attr( $settings['step'] ) . '"' : '';
+            echo isset( $settings['max'] ) ? ' max="' . esc_attr( $settings['max'] ) . '"' : '';
+            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>/>
 			<?php
 		}
 
@@ -951,6 +1056,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									echo '<option value="' . esc_attr( $post->ID ) . '" selected>' . esc_html( $post->post_title ) . '</option>';
 								}
 								break;
+							case 'user':
+                                $user = get_user_by( 'ID', $id );
+                                if( $user ) {
+                                    echo '<option value="' . esc_attr( $user->ID ) . '" selected>' . esc_html( $user->display_name ) . '</option>';
+                                }
+                                break;
 							case 'options':
 						}
 					}
@@ -964,18 +1075,36 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 							foreach ( $option['options'] as $child_option ) {
 								$selected_value = is_array( $value ) ? in_array( $child_option['id'], $value, true ) : $child_option['id'];
-								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $child_option['text'] )
+								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $child_option['text'] )
 									. '</option>';
 							}
 
 							echo '</optgroup>';
 						} else {
 							$selected_value = is_array( $value ) ? in_array( $option['id'], $value, true ) : $option['id'];
-							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value ) . '>' . esc_html( $option['text'] ) . '</option>';
+							echo '<option value="' . esc_attr( $option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $option['text'] ) . '</option>';
 						}
 					}
 				} ?>
             </select>
+			<?php
+		}
+
+		/**
+		 * Field: Info Block
+		 *
+		 * @return void
+		 */
+		public static function info_block( $settings, $value, $module_id = '' ) {
+			?>
+            <div class="merchant-info-block">
+                <i class="dashicons dashicons-info"></i>
+                <p><?php
+					echo ! empty( $settings['description'] ) ? esc_html( $settings['description'] ) : ''; ?><?php
+					if ( ! empty( $settings['button_text'] ) && ! empty( $settings['button_link'] ) ) {
+						printf( '<a href="%s" target="_blank">%s</a>', esc_url( $settings['button_link'] ), esc_html( $settings['button_text'] ) );
+					} ?></p>
+            </div>
 			<?php
 		}
 
@@ -1001,12 +1130,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			} else {
 				$multiple = 'multiple';
 			}
+
+			if ( ! isset( $settings['allowed_types'] ) ) {
+				$settings['allowed_types'] = array( 'all' );
+			}
 			?>
 
             <div class="merchant-products-search-container" data-multiple="<?php
 			echo esc_attr( $multiple ); ?>">
                 <div class="merchant-search-area">
-                    <input type="text" name="merchant-search-field" placeholder="<?php
+                    <input type="text" name="merchant-search-field" data-allowed-types="<?php
+                    echo esc_attr( implode( ',', $settings['allowed_types'] ) ) ?>" placeholder="<?php
 					esc_attr_e( 'Search products', 'merchant' ); ?>" class="merchant-search-field">
                     <span class="merchant-searching"><?php
 		                esc_html_e( 'Searching...', 'merchant' ); ?></span>
@@ -1035,11 +1169,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			<?php
 		}
 
-		public static function product_data_li( $product, $search = false ) {
+		public static function product_data_li( $product, $search = false, $hierarchy = false ) {
 			$product_id   = $product->get_id();
 			$product_sku  = $product->get_sku();
 			$product_name = $product->get_name();
 			$edit_link    = get_edit_post_link( $product_id );
+			if ( $product->is_type( 'variation' ) ) {
+				$edit_link = get_edit_post_link( $product->get_parent_id() );
+			}
+
 			/**
 			 * Filter product image.
 			 *
@@ -1069,7 +1207,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$remove_btn = '<span class="remove hint--left" aria-label="' . esc_html__( 'Remove', 'merchant' ) . '">×</span>';
 			}
 
-			echo '<li class="product-item" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
+            $item_class = 'product-item';
+            if( $hierarchy && $product->is_type( 'variation' ) ) {
+                $item_class .= ' hierarchy-style';
+            }
+
+			echo '<li class="' . esc_attr( $item_class ) . '" data-key="' . esc_attr( $key ) . '" data-name="' . esc_attr( $product_name ) . '" data-sku="'
 				. esc_attr( $product_sku ) . '" data-id="' . esc_attr( $product_id ) . '" data-price="' . esc_attr( $price ) . '">'
 				. wp_kses( $product_image, array(
 					'span' => array(
@@ -1115,7 +1258,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( ! isset( $_POST['keyword'] ) || empty( $_POST['keyword'] ) ) {
 				exit();
 			}
+
 			$types     = array( 'simple', 'variable' ); // limit search to product types
+
+			if ( isset( $_POST['product_types'] ) || ! empty( $_POST['product_types'] ) ) {
+				$types = explode( ',', sanitize_text_field( $_POST['product_types'] ) );
+			}
+
+			$hierarchy = false;
+			if (
+				in_array( 'all', $types, true )
+				|| ( in_array( 'variation', $types, true ) && in_array( 'variable', $types, true ) )
+			) {
+				$hierarchy = true;
+			}
+
 			$added_ids = isset( $_POST['ids'] ) ? explode( ',', sanitize_text_field( $_POST['ids'] ) ) : array();
 			$keyword   = sanitize_text_field( $_POST['keyword'] );
 			if ( is_numeric( $keyword ) ) {
@@ -1170,7 +1327,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						|| in_array( 'variable', $types, true )
 						|| in_array( 'all', $types, true )
 					) {
-						self::product_data_li( $_product, array( 'qty' => 1 ), true );
+						self::product_data_li( $_product, array( 'qty' => 1 ), true, $hierarchy );
 					}
 
 					if (
@@ -1194,7 +1351,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									// Don't display variations that don't have all attributes set.
 									continue;
 								}
-								self::product_data_li( $child_product, true );
+								self::product_data_li( $child_product, true, $hierarchy );
 							}
 						}
 					}
@@ -1618,6 +1775,38 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+         * Field: Date Time.
+         *
+		 * @param $settings array field settings.
+		 * @param $value string field value.
+		 * @param $module_id string module id.
+		 *
+		 * @return void
+		 */
+        public static function date_time( $settings, $value, $module_id = '' ) {
+            // All options are documented here: https://air-datepicker.com/docs
+	        $options = array(
+		        'dateFormat' => 'MM-dd-yyyy',
+		        'timepicker' => true,
+		        'timeFormat' => 'hh:mm AA',
+		        'minDate'    => 'today',
+	        );
+	        if ( isset( $settings['options'] ) ) {
+		        $settings['options'] = wp_parse_args( $settings['options'], $options );
+	        } else {
+		        $settings['options'] = $options;
+	        }
+	        ?>
+            <div class="merchant-datetime-field" data-options="<?php echo esc_attr( wp_json_encode( $settings['options'] ) ); ?>">
+                <input type="text" name="merchant[<?php
+		        echo esc_attr( $settings['id'] ); ?>]" value="<?php
+		        echo esc_attr( $value ); ?>" placeholder="<?php
+		        echo isset( $settings['placeholder'] ) ? esc_attr( $settings['placeholder'] ) : ''; ?>"/>
+            </div>
+	        <?php
+        }
+
+		/**
 		 * Field: Flexible Content.
 		 *
 		 * @param array $settings
@@ -1644,8 +1833,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$classes[] = 'disable-sorting';
 			}
 
-			if ( $settings['accordion'] === true ) {
+			$has_accordion = (bool) ( $settings['accordion'] ?? false );
+			if ( $has_accordion ) {
 				$classes[] = 'has-accordion';
+			}
+
+			$has_duplicate = (bool) ( $settings['duplicate'] ?? false );
+			if ( $has_duplicate ) {
+				$classes[] = 'has-duplicate';
 			}
 			?>
             <div class="<?php
@@ -1659,8 +1854,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<?php
 					foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
 
-                        <div class="layout" data-type="<?php
-						echo esc_attr( $layout_type ) ?>">
+                        <div class="layout" data-type="<?php echo esc_attr( $layout_type ) ?>">
                             <div class="layout-header">
                                 <div class="layout-count">1</div>
                                 <div class="layout-title"<?php
@@ -1670,16 +1864,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									<?php
 									echo esc_html( $layout['title'] ) ?>
                                 </div>
-                                <div class="layout-actions">
-                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                    <a class="customize-control-flexible-content-delete" href="#">
-                                        <span class="dashicons dashicons-no-alt"></span>
-                                    </a>
-	                                <?php
-	                                if ( $settings['accordion'] === true ) { ?>
+                                <div class="layout-toggle">
+	                                <?php if ( $has_accordion ) : ?>
                                         <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-	                                <?php
-	                                } ?>
+	                                <?php endif; ?>
                                 </div>
                             </div>
                             <div class="layout-body">
@@ -1713,6 +1901,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
 								echo esc_attr( $layout_type ) ?>">
                             </div>
+
+                            <div class="layout-actions">
+                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                <a class="customize-control-flexible-content-delete" href="#">
+                                    <span class="dashicons dashicons-no-alt"></span>
+                                </a>
+		                        <?php if ( $has_duplicate ) : ?>
+                                    <a
+                                        href="#"
+                                        class="customize-control-flexible-content-duplicate"
+                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
+                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
+                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16" fill="#50575e">
+                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
+                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                                        </svg>
+                                    </a>
+		                        <?php endif; ?>
+                            </div>
                         </div>
 
 					<?php
@@ -1725,8 +1933,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 					<?php
 					foreach ( $values as $option_key => $option ) : ?>
-                        <div class="layout" data-type="<?php
-						echo esc_attr( $option['layout'] ) ?>">
+                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>">
                             <div class="layout-header">
                                 <div class="layout-count"><?php
 									echo absint( $option_key + 1 ) ?></div>
@@ -1737,16 +1944,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									<?php
 									echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
                                 </div>
-                                <div class="layout-actions">
-                                    <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                    <a class="customize-control-flexible-content-delete" href="#">
-                                        <span class="dashicons dashicons-no-alt"></span>
-                                    </a>
-	                                <?php
-	                                if ( $settings['accordion'] === true ) { ?>
+                                <div class="layout-toggle">
+	                                <?php if ( $has_accordion ) : ?>
                                         <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-		                                <?php
-	                                } ?>
+	                                <?php endif; ?>
                                 </div>
                             </div>
                             <div class="layout-body">
@@ -1778,6 +1979,26 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								echo absint( $option_key ) ?>][layout]"
                                         value="<?php
 										echo esc_attr( $option['layout'] ) ?>">
+                            </div>
+
+                            <div class="layout-actions">
+                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
+                                <a class="customize-control-flexible-content-delete" href="#">
+                                    <span class="dashicons dashicons-no-alt"></span>
+                                </a>
+	                            <?php if ( $has_duplicate ) : ?>
+                                    <a
+                                        href="#"
+                                        class="customize-control-flexible-content-duplicate"
+                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
+                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
+                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16" fill="#50575e">
+                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
+                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                                        </svg>
+                                    </a>
+	                            <?php endif; ?>
                             </div>
                         </div>
 
@@ -2059,6 +2280,27 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			if ( is_array( $cats ) && ! empty( $cats ) ) {
 				foreach ( $cats as $slug => $name ) {
+					$choices[] = array(
+						'id'   => esc_attr( $slug ),
+						'text' => esc_html( $name ),
+					);
+				}
+			}
+
+			return $choices;
+		}
+
+        /**
+         * Get Tag choices for select2
+         *
+		 * @return array
+		 */
+		public static function get_tag_select2_choices() {
+			$choices = array();
+			$tags    = merchant_get_product_tags();
+
+			if ( is_array( $tags ) && ! empty( $tags ) ) {
+				foreach ( $tags as $slug => $name ) {
 					$choices[] = array(
 						'id'   => esc_attr( $slug ),
 						'text' => esc_html( $name ),

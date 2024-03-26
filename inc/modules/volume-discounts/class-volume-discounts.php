@@ -60,7 +60,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 			'single_product_placement' => 'before-cart-form',
 			'table_title'              => __( 'Buy more, save more!', 'merchant' ),
 			'save_label'               => esc_html__( 'Save {amount}', 'merchant' ),
-			'buy_text'                 => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
+			'buy_text'                 => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
 			'item_text'                => esc_html__( 'Per item:', 'merchant' ),
 			'total_text'               => esc_html__( 'Total price:', 'merchant' ),
 			'cart_title_text'          => esc_html__( 'Discount', 'merchant' ),
@@ -225,7 +225,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
                     </div>
                 </div>
             </div>
-            <div class="mrc-preview-right-column">
+            <div class="mrc-preview-right-column" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
 				<?php
 				merchant_get_template_part(
 					Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
@@ -240,7 +240,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 								'save_label'    => esc_html__( 'Save {amount}', 'merchant' ),
 								'item_text'     => esc_html__( 'Per item:', 'merchant' ),
 								'total_text'    => esc_html__( 'Total price:', 'merchant' ),
-								'buy_text'      => esc_html__( 'Buy {amount}, get {discount} off each', 'merchant' ),
+								'buy_text'      => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
 								'table_title'   => esc_html__( 'Buy more, save more!', 'merchant' ),
 							),
 						),

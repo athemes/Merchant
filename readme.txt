@@ -1,9 +1,9 @@
 === Merchant ===
-Tags: pre-orders, buy now button, product labels, quick view, trust badge, payment logo, animated add to cart, direct checkout, add to cart text, scroll to top, cart count favicon, inactive tab message
+Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.4.3
 Requires PHP: 7.0
-Stable tag: 1.9.4
+Stable tag: 1.9.5
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,6 +216,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.5 =
+* Added - Product Labels: A specific product option within the "Pages to Display" allows adding labels to specific products.
+
 = 1.9.4 =
 * Added - Code improvements for enhanced support of third-party integration.
 * Fixed - Improved product labels compatibility with the Botiga theme.

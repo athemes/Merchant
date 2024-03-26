@@ -250,6 +250,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function single_product_buy_now_button() {
+		// Don't include on Sticky Add to Cart
+		if ( did_filter( 'merchant_sticky_add_to_cart_template_args' ) ) {
+			return;
+		}
+
 		global $post, $product;
 
 		$settings = $this->get_module_settings();

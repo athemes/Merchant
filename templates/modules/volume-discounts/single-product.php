@@ -22,9 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				? ( $args['product_price'] * $discount_tier['discount'] ) / 100
 				: $discount_tier['discount'];
 
+            $discount_percent = ( $discount_tier['discount'] ?? 0 ) . '%';
+            $discount_qty     = (int) ( $discount_tier['quantity'] ?? 1 );
+
 			$discounted_price = $args['product_price'] - $discount;
-			$total_discount   = intval( $discount_tier['quantity'] ) * $discount;
-			$total_price      = intval( $discount_tier['quantity'] ) * $discounted_price; ?>
+			$total_discount   = intval( $discount_qty ) * $discount;
+			$total_price      = intval( $discount_qty ) * $discounted_price;
+            ?>
 			<?php
 			if ( isset( $discount_tier['table_title'] ) && ! empty( $discount_tier['table_title'] ) ): ?>
                 <div class="merchant-volume-discounts-title" style="<?php
@@ -40,15 +44,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			echo isset( $discount_tier['table_item_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['table_item_text_color'] . ';' ) : ''; ?>">
                 <div class="merchant-volume-discounts-buy-label">
 					<?php
+					/**
+					 * Previously wrong variable `{amount}` was used for this field. Correct one should be `{quantity}`.
+                     * Still keeping the wrong one `{amount}` for backward compatibility.
+					 */
 					echo wp_kses(
 						str_replace(
 							array(
 								'{amount}',
+								'{quantity}',
 								'{discount}',
+								'{percent}',
 							),
 							array(
-								'<strong>' . esc_attr( $discount_tier['quantity'] ) . '</strong>',
+								'<strong>' . esc_html( $discount_qty ) . '</strong>',
+								'<strong>' . esc_html( $discount_qty ) . '</strong>',
 								'<strong>' . wc_price( $discount ) . '</strong>',
+								'<strong>' . esc_html( $discount_percent ) . '</strong>',
 							),
 							esc_html( Merchant_Translator::translate( $discount_tier['buy_text'] ) )
 						),
@@ -78,19 +90,25 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </li>
                 </ul>
                 <div class="merchant-volume-discounts-item-label">
-			<span class="merchant-volume-discounts-save-label" style="<?php
-			echo isset( $discount_tier['table_label_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['table_label_bg_color'] . ';' ) : '';
-			echo isset( $discount_tier['table_label_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['table_label_text_color'] . ';' ) : ''; ?>">
-				<?php
-				echo wp_kses(
-					str_replace(
-						'{amount}',
-						wc_price( $total_discount ),
-						esc_html( Merchant_Translator::translate( $discount_tier['save_label'] ) )
-					),
-					merchant_kses_allowed_tags( array( 'bdi' ) )
-				); ?>
-			</span>
+                    <span class="merchant-volume-discounts-save-label" style="<?php
+                    echo isset( $discount_tier['table_label_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['table_label_bg_color'] . ';' ) : '';
+                    echo isset( $discount_tier['table_label_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['table_label_text_color'] . ';' ) : ''; ?>">
+                        <?php
+                        echo wp_kses(
+                            str_replace(
+                                array(
+                                    '{amount}',
+                                    '{percent}',
+                                ),
+                                array(
+                                    wc_price( $total_discount ),
+                                    esc_html( $discount_percent ),
+                                ),
+                                esc_html( Merchant_Translator::translate( $discount_tier['save_label'] ) )
+                            ),
+                            merchant_kses_allowed_tags( array( 'bdi' ) )
+                        ); ?>
+                    </span>
                 </div>
             </div>
 			<?php

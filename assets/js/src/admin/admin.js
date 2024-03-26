@@ -9,11 +9,13 @@
         var $ajaxHeader = $('.merchant-module-page-ajax-header');
         var $ajaxSaveBtn = $('.merchant-module-save-button');
 
-        $('.merchant-module-page-content').on('change keypress change.merchant', ':input:not(.merchant-module-question-answer-textarea):not(.merchant-license-code-input)', function () {
-            if (!merchant.show_save) {
-                $ajaxHeader.addClass('merchant-show');
-                $ajaxHeader.removeClass('merchant-saving');
-                merchant.show_save = true;
+        $('.merchant-module-page-content').on('change keypress change.merchant', function () {
+            if (!$(this).is('.merchant-module-question-answer-textarea, .merchant-license-code-input')) {
+                if (!merchant.show_save) {
+                    $ajaxHeader.addClass('merchant-show');
+                    $ajaxHeader.removeClass('merchant-saving');
+                    merchant.show_save = true;
+                }
             }
         });
 
@@ -77,8 +79,11 @@
         });
 
         $('.merchant-module-page-button-action-activate').on('click', function (e) {
-
             e.preventDefault();
+
+            if ( $(this).hasClass( 'merchant-module-deactivated-by-bp' ) ) {
+                return false;
+            }
 
             $('.merchant-module-question-list-dropdown').removeClass('merchant-show');
             $('.merchant-module-question-answer-dropdown').removeClass('merchant-show');
@@ -212,6 +217,19 @@
 
         });
 
+        $( document ).on( 'click', '.merchant-module-page-setting-field-hidden-desc-trigger', function() {
+            const $trigger = $( this );
+
+            $trigger.toggleClass( 'expanded' );
+
+            const showText = $trigger.attr( 'data-show-text' );
+            const hiddenText = $trigger.attr( 'data-hidden-text' );
+
+            $( this ).find( 'span:first' ).text( $trigger.text() === showText ? hiddenText : showText );
+
+            $( this ).closest( '.layout-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
+        } );
+
         // Add support for toggle field inside flexible content.
         const flexibleToggleField = {
             init: function (field) {
@@ -221,11 +239,57 @@
             events: function () {
                 $(document).on('click', '.merchant-flexible-content .merchant-toggle-switch .toggle-switch-label span', function () {
                     let checkBox = $(this).closest('.merchant-toggle-switch').find('.toggle-switch-checkbox');
-                    console.log(checkBox)
                     checkBox.prop('checked', !checkBox.prop('checked'));
                 }).trigger('merchant.change');
             }
         }
+
+        const dateTimePickerField = {
+            init: function () {
+                this.initiate_datepicker();
+                this.events();
+            },
+
+            initiate_datepicker: function () {
+                let elements = $('.merchant-module-page-setting-field .merchant-datetime-field');
+                if (elements.length === 0) {
+                    return;
+                }
+                elements.each(function () {
+                    let input = $(this).find('input'),
+                        options = {
+                            locale: JSON.parse(merchant_datepicker_locale),
+                            selectedDates: [input.val() ? new Date(input.val()) : ''],
+                            onSelect: ({date, formattedDate, datepicker}) => {
+                                if (typeof (formattedDate) === "undefined") {
+                                    // allow removing date
+                                    input.val('');
+                                }
+                                input.trigger('change.merchant');
+                            }
+                        },
+                        fieldOptions = $(this).data('options');
+
+                    if (fieldOptions) {
+                        if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
+                            fieldOptions.minDate = new Date();
+                        }
+                        options = Object.assign(options, fieldOptions);
+                    }
+                    new AirDatepicker(input.getPath(), options);
+                    input.attr('readonly', true);
+                });
+            },
+
+            events: function () {
+                const self = this;
+                $(document).on('merchant-flexible-content-added', function () {
+                    self.initiate_datepicker();
+                });
+            }
+        }
+
+        dateTimePickerField.init();
 
         // Sortable.
         const SortableField = {
@@ -329,21 +393,14 @@
             events: function () {
                 const self = this;
 
-                // Remove item starting from it's parent element
+                // Remove item starting from its parent element
                 $('.merchant-sortable-repeater.sortable').on('click', '.customize-control-sortable-repeater-delete', function (event) {
                     event.preventDefault();
-                    var numItems = $(this).parent().parent().find('.repeater').length;
-
-                    if (numItems > 1) {
-                        $(this).parent().slideUp('fast', function () {
-                            var parentContainer = $(this).parent().parent();
-                            $(this).remove();
-                            self.getAllInputs(parentContainer);
-                        })
-                    } else {
-                        // $(this).parent().find('.repeater-input').val('');
-                        self.getAllInputs($(this).parent().parent().parent());
-                    }
+                    $(this).parent().slideUp('fast', function () {
+                        var parentContainer = $(this).parent().parent();
+                        $(this).remove();
+                        self.getAllInputs(parentContainer);
+                    })
                 });
 
                 // Add new item
@@ -384,6 +441,11 @@
                 var inputValues = $element.find('.repeater-input').map(function () {
                     return $(this).val();
                 }).toArray();
+
+                // Keep one empty item if all deleted.
+                if ( ! inputValues.length ) {
+                    inputValues.push( '' );
+                }
 
                 // Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
                 $element.find('.merchant-sortable-repeater-input').val(JSON.stringify(inputValues));
@@ -458,6 +520,18 @@
             events: function () {
                 const self = this;
 
+                // Update "selected" attribute on select. It's Required for duplicating layouts.
+                $( document ).on( 'change', 'select', function() {
+                    const selectedValue = $( this ).val();
+                    const isMultiple    = $( this ).prop( 'multiple' );
+
+                    $( this ).find( 'option' ).each( function() {
+                        const currentValue = $( this ).val();
+                        const isSelected = isMultiple ? selectedValue.includes( currentValue ) : currentValue === selectedValue;
+                        $( this ).attr( 'selected', isSelected );
+                    } );
+                } );
+
                 $('.customize-control-flexible-content-add-button').click(function (event) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
@@ -471,7 +545,8 @@
                     $(this).parent().find('.customize-control-flexible-content-add-list').toggleClass('active');
                 });
 
-                $('.customize-control-flexible-content-add').click(function (event) {
+                // Add new item
+                $( document ).on( 'click', '.customize-control-flexible-content-add', function (event) {
                     event.preventDefault();
                     event.stopImmediatePropagation();
 
@@ -482,7 +557,7 @@
                     var $content = $field.find('.merchant-flexible-content');
                     var $items = $content.find('.layout')
 
-                    $layout.find('input, select').each(function () {
+                    $layout.find('input, select, textarea').each(function () {
                         if ($(this).data('name')) {
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
@@ -515,9 +590,97 @@
                     self.updateLayoutTitle()
                 });
 
-                $('.customize-control-flexible-content-delete').click(function (event) {
+                // Duplicate item
+                $( document ).on( 'click', '.customize-control-flexible-content-duplicate', function( event ) {
                     event.preventDefault();
+                    event.stopImmediatePropagation();
 
+                    const $duplicateBtn = $( this );
+
+                    const $flexibleContentWrapper = $duplicateBtn.closest( '.merchant-flexible-content-control[data-id=' + $duplicateBtn.data( 'id' ) + ']' );
+                    const $flexibleContent        = $flexibleContentWrapper?.find( '.merchant-flexible-content' );
+
+                    if ( ! $flexibleContentWrapper.length || ! $flexibleContent.length ) {
+                        return;
+                    }
+
+                    const $dataLayout = $duplicateBtn.data( 'layout' );
+
+                    const $sourceLayout = $duplicateBtn.closest( '.layout[data-type=' + $dataLayout + ']' );
+                    if ( ! $sourceLayout.length ) {
+                        return;
+                    }
+
+                    // Clone the layout without data & events.
+                    const $clonedLayout = $sourceLayout.clone();
+                    const $items = $flexibleContent.find('.layout');
+
+                    const index = $sourceLayout.find('.layout-count').text();
+
+                    $clonedLayout.find( 'input, select, textarea' ).each( function () {
+                        const $input = $( this );
+                        const inputName = $input.attr( 'name' );
+
+                        if ( inputName ) {
+                            const prefix    = inputName.split( '[' )[0];
+                            const indexPart = inputName.match( /\[(.*?)\]/g );
+
+                            if ( indexPart && indexPart.length > 1 ) {
+                                indexPart[1]           = '['+ index +']';
+                                const newName = `${ prefix }${ indexPart.join( '' ) }`;
+                                $input.attr( 'name', newName );
+                            }
+                        }
+                    } );
+
+                    // Find select2, Remove and Re-init again. select.select2('destroy') doesn't work.
+                    $clonedLayout.find( 'select' ).each( function () {
+                        if ( $( this ).hasClass( 'select2-hidden-accessible' ) ) {
+                            $( this )
+                                .removeClass( 'select2-hidden-accessible' )
+                                .removeAttr('data-live-search')
+                                .removeAttr('data-select2-id')
+                                .removeAttr('aria-hidden')
+                                .removeAttr('tabindex');
+
+                            // Remove the existing dropdown
+                            $( this ).nextAll( '.select2-container' ).remove();
+
+                            // Re-init
+                            $( this ).select2();
+                        }
+                    } );
+
+                    // Removing copied style to make the accordion work properly.
+                    $clonedLayout.find( '.layout-body' ).removeAttr( 'style' );
+
+                    // Append the cloned layout right after the source one with fadeIn effect.
+                    $clonedLayout.hide();
+                    $clonedLayout.insertAfter( $sourceLayout );
+                    $clonedLayout.fadeIn();
+
+                    if ( $clonedLayout.find( '.merchant-module-page-setting-field-upload').length ) {
+                        initUploadField( $clonedLayout.find( '.merchant-module-page-setting-field-upload' ) );
+                    }
+
+                    if ( $clonedLayout.find( '.merchant-module-page-setting-field-select_ajax' ).length ) {
+                        initSelectAjax( $clonedLayout.find( '.merchant-module-page-setting-field-select_ajax' ) );
+                    }
+
+                    self.refreshNumbers( $flexibleContent );
+
+                    $( document ).trigger( 'merchant-flexible-content-added', [ $clonedLayout ] );
+
+                    if ( $flexibleContentWrapper.hasClass( 'has-accordion' ) ) {
+                        $flexibleContent.accordion( 'refresh' );
+                    }
+
+                    self.updateLayoutTitle();
+                } );
+
+                // Delete item
+                $( document ).on( 'click', '.customize-control-flexible-content-delete', function (event) {
+                    event.preventDefault();
 
                     var $item = $(this).closest('.layout');
                     var $content = $item.parent();
@@ -536,6 +699,7 @@
                     if (hasAccordion) {
                         parentDiv.find('.merchant-flexible-content').accordion("refresh");
                     }
+                    $(document).trigger('change.merchant');
                 });
             },
 
@@ -547,14 +711,14 @@
 
                     $(this).find('.layout-count').text(index + 1);
 
-                    $(this).find('input, select').each(function () {
+                    $(this).find('input, select, textarea').each(function () {
                         if ($(this).attr('name')) {
                             $(this).attr('name', $(this).attr('name').replace('[' + $inputIndex + ']', '[*refreshed*' + (index) + ']'))
                         }
                     })
                 })
                 $content.find('.layout').each(function (index) {
-                    $(this).find('input, select').each(function () {
+                    $(this).find('input, select, textarea').each(function () {
                         // We've added *refreshed* to the attribute name in the prior loop as refreshing the numbers in the attribute can cause
                         // checked boxes to be unchecked due to similar attribute names during the change while sorting, within this loop we remove them
                         let nameAttr = $(this).attr('name');
@@ -571,27 +735,6 @@
         FlexibleContentField.init();
 
         // Products selector.
-        // Handle click/touch event for the search results
-        $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
-            let parent = $(this).closest('.merchant-products-search-container'),
-                valueField = parent.find('.merchant-selected-products'),
-                multiple = parent.data('multiple') === 'multiple';
-            if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
-                // replace the first item
-                parent.find('.merchant-selected-products-preview ul li').remove();
-                valueField.val('');
-            }
-            $(this).children('.remove').attr('aria-label', 'Remove').html('×');
-            parent.find('.merchant-selected-products-preview ul').append($(this));
-            parent.find('.merchant-selections-products-preview').html('').hide();
-            parent.find('.merchant-search-field').val('');
-            if (valueField.val() === '') {
-                valueField.val($(this).data('id'));
-            } else {
-                valueField.val(valueField.val() + ',' + $(this).data('id'));
-            }
-        });
-
         // Handle keyup event for the search input
         $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
             let parent = $(this).closest('.merchant-products-search-container');
@@ -601,6 +744,7 @@
                     action: 'merchant_admin_products_search',
                     nonce: merchant_admin_options.ajaxnonce,
                     keyword: $(this).val(),
+                    product_types: $(this).data('allowed-types'),
                     ids: parent.find('.merchant-selected-products').val(),
                 };
 
@@ -615,7 +759,37 @@
             }
         });
 
-        // actions on selected items
+        // Products selector.
+        // Handle click/touch event for the search results
+        $(document).on('click touch', '.merchant-module-page-setting-field-products_selector .merchant-selections-products-preview li', function () {
+            let parent = $(this).closest('.merchant-products-search-container'),
+                valueField = parent.find('.merchant-selected-products'),
+                oldValue = valueField.val(),
+                multiple = parent.data('multiple') === 'multiple';
+            if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
+                // replace the first item
+                parent.find('.merchant-selected-products-preview ul li').remove();
+                valueField.val('');
+            }
+            $(this).children('.remove').attr('aria-label', 'Remove').html('×');
+            parent.find('.merchant-selected-products-preview ul').append($(this));
+            parent.find('.merchant-selections-products-preview').html('').hide();
+            parent.find('.merchant-search-field').val('');
+            if (oldValue === '') {
+                valueField.val($(this).data('id'));
+            } else {
+                if (!multiple) {
+                    valueField.val($(this).data('id'));
+                } else {
+                    let newValue = oldValue.split(',');
+                    newValue.push($(this).data('id'));
+                    valueField.val(newValue.join(','));
+                }
+            }
+        });
+
+        // Products selector.
+        // Handle click/touch event for the remove button.
         $(document).on('click touch', '.merchant-selected-products-preview .remove', function () {
             // Store a reference to the remove button
             let removeButton = $(this);
@@ -624,19 +798,17 @@
                 let parent = removeButton.closest('.merchant-products-search-container'),
                     valueField = parent.find('.merchant-selected-products'),
                     id = removeButton.parent().data('id');
-
                 removeButton.parent().remove();
-                $ajaxHeader.addClass('merchant-show');
-                // Remove the leading comma if it exists
-                let currentValue = valueField.val().replace(/^,/, ''),
-                    // Create a regular expression pattern for the ID and surrounding commas
-                    idPattern = new RegExp('(,|^)' + id + '(,|$)', 'g'),
-                    // Replace the ID and handle surrounding commas
-                    newValue = currentValue.replace(idPattern, '');
-                // Remove trailing comma if it exists
-                newValue = newValue.replace(/,$/, '');
-                // Update the valueField
-                valueField.val(newValue);
+                let currentValue = valueField.val().split(',');
+                if (currentValue.length > 0) {
+                    for (var key in currentValue) {
+                        if (parseInt(currentValue[key]) === parseInt(id)) {
+                            currentValue.splice(key, 1);
+                        }
+                    }
+                }
+                valueField.val(currentValue.join(','));
+                valueField.trigger('change.merchant');
             }
         });
 
@@ -655,7 +827,8 @@
                         switch (condition[1]) {
                             case '==':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && $target.val() == condition[2]) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && checked.val() === condition[2]) {
                                         passed = true;
                                     }
                                 }
@@ -665,7 +838,8 @@
                                 break;
                             case 'any':
                                 if ($target.attr('type') === 'radio' || $target.attr('type') === 'checkbox') {
-                                    if ($target.is(':checked') && condition[2].split('|').includes($target.val())) {
+                                    let checked = $target.parent().find('input:checked');
+                                    if (checked.length && condition[2].split('|').includes(checked.val())) {
                                         passed = true;
                                     }
                                 }
@@ -1047,7 +1221,7 @@
                 width: '100%',
             }
 
-            if ($source === 'post' || $source === 'product') {
+            if ($source === 'post' || $source === 'product' || $source === 'user') {
                 $object.minimumInputLength = 1;
                 $object.ajax = {
                     url: $config.ajaxurl,
@@ -1265,3 +1439,39 @@
     });
 
 })(jQuery, window, document);
+
+// Extend jQuery to add getPath func to get accurate dynamic selector to an element.
+jQuery.fn.extend({
+    getPath: function() {
+        var pathes = [];
+
+        this.each(function(index, element) {
+            var path, $node = jQuery(element);
+
+            while ($node.length) {
+                var realNode = $node.get(0), name = realNode.localName;
+                if (!name) { break; }
+
+                name = name.toLowerCase();
+                var parent = $node.parent();
+                var sameTagSiblings = parent.children(name);
+
+                if (sameTagSiblings.length > 1)
+                {
+                    var allSiblings = parent.children();
+                    var index = allSiblings.index(realNode) + 1;
+                    if (index > 0) {
+                        name += ':nth-child(' + index + ')';
+                    }
+                }
+
+                path = name + (path ? ' > ' + path : '');
+                $node = parent;
+            }
+
+            pathes.push(path);
+        });
+
+        return pathes.join(',');
+    }
+});

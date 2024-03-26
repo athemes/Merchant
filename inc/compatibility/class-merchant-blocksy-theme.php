@@ -16,6 +16,56 @@ if ( ! class_exists( 'Merchant_Blocksy_Theme' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ) );
 			add_action( 'init', array( $this, 'product_video_module' ) );
 			add_action( 'init', array( $this, 'product_audio_module' ) );
+			add_filter('theme_mod_woo_card_layout', array( $this, 'remove_theme_default_add_to_cart' ) );
+			add_filter('merchant_product_swatch_shop_catalog_add_to_cart_button_html', array( $this, 'fix_add_to_cart_button_structure' ) );
+			add_filter('woocommerce_loop_add_to_cart_link', array( $this, 'fix_add_to_cart_button_structure' ) );
+		}
+
+		/**
+		 * Add a div to wrap the add to cart button.
+		 *
+		 * @param $button_html string add to cart button html.
+		 *
+		 * @return string The add to cart button html.
+		 */
+		public function fix_add_to_cart_button_structure( $button_html ) {
+			if ( ! merchant_is_blocksy_active() ) {
+				return $button_html;
+			}
+			if ( ! Merchant_Modules::is_module_active( 'product-swatches' ) ) {
+				return $button_html;
+			}
+
+			return '<div class="ct-woo-card-actions">' . $button_html . '</div>';
+		}
+
+		/**
+		 * Disable the theme's add to cart button in the shop loop while product swatches module is active.
+		 *
+		 * @param $layout_values array The layout values.
+		 *
+		 * @see https://developer.wordpress.org/reference/hooks/theme_mod_name/
+		 *
+		 * @return array The layout values after disable the add to cart button.
+		 */
+		public function remove_theme_default_add_to_cart( $layout_values ) {
+			if ( ! merchant_is_blocksy_active() ) {
+				return $layout_values;
+			}
+			if ( ! Merchant_Modules::is_module_active( 'product-swatches' ) ) {
+				return $layout_values;
+			}
+
+			if ( ! empty( $layout_values ) ) {
+
+				foreach ( $layout_values as $key => $value ) {
+					if ( $value['id'] === 'product_add_to_cart' ) {
+						$layout_values[ $key ]['enabled'] = false;
+					}
+				}
+			}
+
+			return $layout_values;
 		}
 
 		/**

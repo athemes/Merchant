@@ -1362,19 +1362,24 @@ body.merchant-module-disabled {
 
 .merchant-module-page-setting-fields {
   display: flex;
-  grid-gap: 24px;
+  //grid-gap: 24px;
   flex-direction: column;
   width: 60%;
   padding: 30px;
   border-radius: 4px;
   border: 2px solid #F0F0F1;
   background-color: #fff;
+
+  >.merchant-module-page-setting-field:last-of-type{
+    margin-bottom: 0;
+  }
 }
 
 .merchant-module-page-setting-field {
   display: flex;
   grid-gap: 10px;
   flex-direction: column;
+  margin-bottom: 24px;
 
   &.merchant-show {
     display: flex;
@@ -1396,11 +1401,38 @@ body.merchant-module-disabled {
   font-weight: 400;
   color: #777;
 
+  &-has-hidden-desc {
+    display: flex;
+    gap: 5px;
+  }
+
   a {
     color: #3858E9;
 
     &:focus {
       box-shadow: none;
+    }
+  }
+}
+
+.merchant-module-page-setting-field-hidden-desc {
+  display: none;
+
+  &-trigger {
+    color: #3858E9;
+    font-weight: 500;
+    display: flex;
+    cursor: pointer;
+    gap: 3px;
+
+    img {
+      margin-top: 2px;
+    }
+
+    &.expanded {
+      img {
+        transform: rotate(180deg);
+      }
     }
   }
 }
@@ -1485,6 +1517,7 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-datetime-field,
 .merchant-module-page-setting-field-text,
 .merchant-module-page-setting-field-number,
 .merchant-module-page-setting-field-text_readonly {
@@ -1700,6 +1733,7 @@ body.merchant-module-disabled {
   }
 }
 
+.merchant-info-block,
 .merchant-tag-pre-orders {
   display: flex;
   grid-gap: 16px;
@@ -1742,6 +1776,12 @@ body.merchant-module-disabled {
       flex-shrink: 0;
     }
   }
+}
+
+.merchant-info-block{
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #BABFC3;
 }
 
 .merchant-module-page-setting-field-select,
@@ -2106,7 +2146,7 @@ body.merchant-module-disabled {
 /* Sortable Repeater Field */
 
 .merchant-module-page-setting-field-flexible_content .merchant-module-page-setting-field-title {
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 }
 
 .merchant-sortable-repeater-control {
@@ -2122,7 +2162,7 @@ body.merchant-module-disabled {
       margin: 0;
       border-radius: 4px 0 0 4px;
       border: 1px solid #D6D6D6;
-      padding: 12px;
+      padding: 12px 8px;
       line-height: 1.3em;
 
       &:focus {
@@ -2228,6 +2268,10 @@ body.merchant-module-disabled {
 .merchant-flexible-content-control {
   max-width: 100%;
 
+  .layout {
+    position: relative;
+  }
+
   .sortable {
     list-style-type: none;
     margin: 0;
@@ -2253,7 +2297,8 @@ body.merchant-module-disabled {
     cursor: grab;
   }
 
-  .customize-control-flexible-content-delete {
+  .customize-control-flexible-content-delete,
+  .customize-control-flexible-content-duplicate {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2287,6 +2332,10 @@ body.merchant-module-disabled {
 
       .dashicons-no-alt {
         color: #a7a7a7;
+      }
+
+      svg {
+        fill: #a7a7a7;
       }
     }
   }
@@ -2393,6 +2442,7 @@ body.merchant-module-disabled {
       font-weight: bold;
     }
 
+    .layout-toggle,
     .layout-actions {
       display: flex;
       margin: 0;
@@ -2404,12 +2454,24 @@ body.merchant-module-disabled {
     .layout-body {
       display: flex;
       flex-direction: column;
-      grid-gap: 20px;
+      //grid-gap: 20px;
+    }
+
+    .layout-actions {
+      position: absolute;
+      top: 9px;
+      right: 55px;
     }
 
     .layout-field {
       &.flex-grow {
         flex-grow: 1;
+      }
+
+      &:last-of-type{
+        .merchant-module-page-setting-field{
+            margin-bottom: 0;
+        }
       }
     }
 
@@ -2504,7 +2566,7 @@ body.merchant-module-disabled {
     color: #3858E9;
     border-color: #3858E9;
     background-color: transparent;
-    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 4px 19px;
 
     &:hover,
@@ -2519,6 +2581,23 @@ body.merchant-module-disabled {
   &.disable-sorting {
     .dashicons-menu {
       display: none;
+    }
+  }
+
+  .merchant-datetime-field{
+    input{
+      padding: 12px !important;
+      line-height: 1.3em;
+      width: 100%;
+      max-width: 100%;
+      min-height: auto;
+      border: 1px solid #d6d6d6;
+      border-radius: 4px !important;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: #3858E9;
+      }
     }
   }
 }
@@ -3324,6 +3403,20 @@ body.merchant-module-disabled {
 
       li {
         cursor: pointer;
+
+        &.hierarchy-style{
+          padding-left: 15px;
+
+          &:before{
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #d1d1d1;
+            margin-right: 7px;
+          }
+        }
       }
     }
 
