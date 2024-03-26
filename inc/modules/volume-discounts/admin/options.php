@@ -308,7 +308,7 @@ Merchant_Admin_Options::create( array(
 					'layout'        => 'offer-details',
 					'min_quantity'  => 2,
 					'discount'      => 10,
-					'discount_type' => 'percentage_discount',
+					'discount_type' => 'fixed_discount',
 				),
 			),
 		),
