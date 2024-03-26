@@ -100,7 +100,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
 				if (
 					defined( 'MERCHANT_PRO_VERSION' )
-					&& ( version_compare( MERCHANT_PRO_VERSION, '1.3', '<' ) )
+					&& version_compare( MERCHANT_PRO_VERSION, '1.3', '<' )
 					&& isset( $module_data['pro'] ) && $module_data['pro']
 				) {
 					continue;
