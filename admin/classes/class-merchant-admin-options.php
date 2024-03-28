@@ -581,6 +581,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$id        = ( ! empty( $settings['id'] ) ) ? $settings['id'] : '';
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
+				$conditions = ( ! empty( $settings['conditions'] ) ) ? $settings['conditions'] : ''; //Docs here: https://github.com/athemes/Merchant/pull/133
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
 				if ( ! $value && 0 !== $value ) {
@@ -606,7 +607,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$wrapper_classes = apply_filters( 'merchant_admin_module_field_wrapper_classes', $wrapper_classes, $settings, $value, $module_id );
 
 				echo '<div class="'. esc_attr( implode( ' ', $wrapper_classes ) ) .'" data-id="'
-					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
+					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) .
+                    '" data-conditions="' . ( $conditions ? esc_attr( wp_json_encode( $conditions ) ) : "" ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
 					printf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
 				}
