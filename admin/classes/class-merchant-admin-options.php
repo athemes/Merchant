@@ -581,7 +581,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$id        = ( ! empty( $settings['id'] ) ) ? $settings['id'] : '';
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
-				$conditions = ( ! empty( $settings['conditions'] ) ) ? $settings['conditions'] : '';
+				$conditions = ( ! empty( $settings['conditions'] ) ) ? $settings['conditions'] : ''; //Docs here: https://github.com/athemes/Merchant/pull/133
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
 				if ( ! $value && 0 !== $value ) {
