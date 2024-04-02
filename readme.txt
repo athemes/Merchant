@@ -165,7 +165,7 @@ Merchant is brought to you by [aThemes](https://athemes.com/), a WordPress prod
 - To find out more about Merchant visit the [plugin page on our website](https://athemes.com/merchant/).
 
 **Happy user of Merchant?**
-- Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/https://www.facebook.com/groups/athemes).
+- Join our [Facebook Group](https://www.facebook.com/groups/athemes).
 - Or [rate us on WordPress](https://wordpress.org/support/plugin/merchant/reviews/) 🙂
 
 **NOTES**
