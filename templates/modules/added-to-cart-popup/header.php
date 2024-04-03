@@ -19,6 +19,7 @@ if ( isset( $args['settings']['show_devices'] ) && is_array( $args['settings']['
 	}
 }
 ?>
+<div class="merchant-added-to-cart-popup-container">
 <div class="merchant-added-to-cart-popup<?php
 echo esc_attr( $device_visibility_classes ) ?>">
 	<div class="overlay"></div>
