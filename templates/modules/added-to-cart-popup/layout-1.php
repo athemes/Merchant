@@ -132,8 +132,6 @@ echo esc_attr( $device_visibility_classes ) ?>">
                     </a>
 					<?php
 				} ?>
-                <a href="#" class="merchant-button buy-now"><?php
-					esc_html_e( 'Buy Now', 'merchant' ); ?></a>
             </div>
 			<?php
 			if (
