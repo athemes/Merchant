@@ -16,24 +16,14 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Popup Settings', 'merchant' ),
 	'fields' => array(
 		array(
-			'id'      => 'popup_width',
+			'id'      => 'popup_size',
 			'type'    => 'range',
 			'min'     => '0',
-			'max'     => '100',
+			'max'     => '1300',
 			'step'    => '1',
-			'unit'    => '%',
-			'default' => '70',
-			'title'   => esc_html__( 'Popup width', 'merchant' ),
-		),
-		array(
-			'id'      => 'popup_height',
-			'type'    => 'range',
-			'min'     => '0',
-			'max'     => '100',
-			'step'    => '1',
-			'unit'    => '%',
-			'default' => '70',
-			'title'   => esc_html__( 'Popup height', 'merchant' ),
+			'unit'    => 'PX',
+			'default' => '800',
+			'title'   => esc_html__( 'Popup size', 'merchant' ),
 		),
 		array(
 			'id'    => 'mobile_sizes',
@@ -59,53 +49,10 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'         => 'mobile_popup_height',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '100',
-			'step'       => '1',
-			'unit'       => '%',
-			'title'      => esc_html__( 'Mobile popup height', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'mobile_sizes', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
 			'id'      => 'popup_message',
 			'type'    => 'text',
 			'default' => esc_html__( 'Product has been successfully added to your cart', 'merchant' ),
 			'title'   => esc_html__( 'Popup message', 'merchant' ),
-		),
-		array(
-			'id'      => 'show_product_thumb',
-			'type'    => 'checkbox',
-			'title'   => esc_html__( 'Show thumbnail', 'merchant' ),
-			'label'   => esc_html__( 'Choose to show the thumbnail in the cart popup', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'         => 'thumbnail_size',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '100',
-			'step'       => '1',
-			'unit'       => 'PX',
-			'title'      => esc_html__( 'Thumbnail size', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_product_thumb', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 
 		array(
