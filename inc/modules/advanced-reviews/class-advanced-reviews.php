@@ -64,6 +64,8 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				'title_desc_align' => 'left',
 				'default_sorting'  => 'newest',
 				'pagination_type'  => 'default',
+				'photos_limit'     => 6,
+				'review_options' => 'image_and_text',
 				'hook_order'       => 10,
 			);
 
@@ -204,36 +206,39 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$settings = $this->get_settings_with_product_object();
 
 			// Template arguments
-			$args = array_merge( $settings, array(
-				'bars_data'       => array(
-					'1-stars'         => 1,
-					'2-stars'         => 2,
-					'3-stars'         => 3,
-					'4-stars'         => 4,
-					'5-stars'         => 5,
-					'total'           => 15,
-					'1-stars-percent' => 10,
-					'2-stars-percent' => 20,
-					'3-stars-percent' => 30,
-					'4-stars-percent' => 40,
-					'5-stars-percent' => 50,
-				),
-				'ratings_enabled' => true,
-				'comments_open'   => true,
-				'comments'        => array(
-					(object) array(
-						'comment_approved'     => '1',
-						'comment_ID'           => 1,
-						'comment_post_ID'      => 1,
-						'comment_author'       => 'Kendall Grey',
-						'comment_author_email' => 'johndoe@athemes.com',
-						'comment_author_url'   => 'https://athemes.com',
-						'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) ),
+			$args = array_merge(
+				$settings,
+				array(
+					'bars_data'       => array(
+						'1-stars'         => 1,
+						'2-stars'         => 2,
+						'3-stars'         => 3,
+						'4-stars'         => 4,
+						'5-stars'         => 5,
+						'total'           => 15,
+						'1-stars-percent' => 10,
+						'2-stars-percent' => 20,
+						'3-stars-percent' => 30,
+						'4-stars-percent' => 40,
+						'5-stars-percent' => 50,
 					),
-				),
-				'comment_rating'  => 3,
-				'comment_text'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis sagittis commodo, nisl elit ultricies diam, at',
-			) );
+					'ratings_enabled' => true,
+					'comments_open'   => true,
+					'comments'        => array(
+						(object) array(
+							'comment_approved'     => '1',
+							'comment_ID'           => 1,
+							'comment_post_ID'      => 1,
+							'comment_author'       => 'Kendall Grey',
+							'comment_author_email' => 'johndoe@athemes.com',
+							'comment_author_url'   => 'https://athemes.com',
+							'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) ),
+						),
+					),
+					'comment_rating'  => 3,
+					'comment_text'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis sagittis commodo, nisl elit ultricies diam, at',
+				)
+			);
 
 			return merchant_get_template_part( 'modules/' . self::MODULE_ID, 'reviews', $args, true );
 		}
@@ -259,11 +264,13 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'stars_color', '#FFA441', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-stars-color' );
 
 			// Stars Background Color.
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'stars_background_color',
 				'#757575',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-stars-bg-color' );
+				'--mrc-adv-reviews-stars-bg-color'
+			);
 
 			// Progress Bar Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'progress_bar_color', '#212121', '.merchant-adv-reviews', '--mrc-adv-reviews-bar-color' );
@@ -278,31 +285,37 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'button_color', '#FFF', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-button-color' );
 
 			// Button Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'button_color_hover',
 				'#FFF',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-button-color-hover' );
+				'--mrc-adv-reviews-button-color-hover'
+			);
 
 			// Button Background Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'button_bg_color', '#212121', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-button-bg-color' );
 
 			// Button Background Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'button_bg_color_hover',
 				'#757575',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-button-bg-color-hover' );
+				'--mrc-adv-reviews-button-bg-color-hover'
+			);
 
 			// Modal Close Icon Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'modal_close_icon_color', '#212121', '.merchant-adv-reviews-modal', '--mrc-adv-reviews-modal-close-icon-color' );
 
 			// Modal Close Icon Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'modal_close_icon_color_hover',
 				'#757575',
 				'.merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-modal-close-icon-color-hover' );
+				'--mrc-adv-reviews-modal-close-icon-color-hover'
+			);
 
 			// Modal Title Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'modal_title_color', '#212121', '.merchant-adv-reviews-modal', '--mrc-adv-reviews-modal-title-color' );
@@ -336,11 +349,14 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		}
 	}
 
-// Dummy content.
+	// Dummy content.
 	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-product-dummy-data.php';
 
-// Initialize the module.
-	add_action( 'init', function () {
-		Merchant_Modules::create_module( new Merchant_Advanced_Reviews( new Merchant_Product_Dummy() ) );
-	} );
+	// Initialize the module.
+	add_action(
+		'init',
+		function () {
+			Merchant_Modules::create_module( new Merchant_Advanced_Reviews( new Merchant_Product_Dummy() ) );
+		}
+	);
 }

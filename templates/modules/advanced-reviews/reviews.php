@@ -164,6 +164,7 @@ $bars_data = $args['bars_data']; ?>
 						<option value="oldest"<?php echo selected( $sort_orderby, 'oldest' ); ?>><?php echo esc_html__( 'Oldest', 'merchant' ); ?></option>
 						<option value="top-rated"<?php echo selected( $sort_orderby, 'top-rated' ); ?>><?php echo esc_html__( 'Top rated', 'merchant' ); ?></option>
 						<option value="low-rated"<?php echo selected( $sort_orderby, 'low-rated' ); ?>><?php echo esc_html__( 'Low rated', 'merchant' ); ?></option>
+						<option value="photo-first"<?php echo selected( $sort_orderby, 'photo-first' ); ?>><?php echo esc_html__( 'Photo first', 'merchant' ); ?></option>
 					</select>
 				</form>
 				<?php endif; ?>
@@ -222,6 +223,26 @@ $bars_data = $args['bars_data']; ?>
 					$comments_args[ 'meta_key' ] = 'rating';
 					// phpcs:enable
 					break;
+
+				case 'photo-first':
+					// phpcs:disable
+					$comments_args[ 'meta_query' ] = array(
+						'relation' => 'OR',
+						array(
+							'key'     => 'review_images',
+							'compare' => 'EXISTS',
+						),
+						array(
+							'key'     => 'review_images',
+							'compare' => 'NOT EXISTS',
+						),
+					);
+					// phpcs:disable
+					$comments_args[ 'orderby' ] = array(
+						'meta_value' => 'DESC',
+						'comment_date'   => 'DESC',
+					);
+					break;
 			}
 
 			/**
@@ -229,7 +250,8 @@ $bars_data = $args['bars_data']; ?>
 			 * 
 			 * @since 1.0
 			 */
-			$_comments = isset($args['comments']) ? $args['comments'] : get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args',$comments_args ) ); ?>
+			$_comments = isset($args['comments']) ? $args['comments'] : get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args',$comments_args ) );
+			?>
 
 			<div id="comments">
 				<?php if ( count( $_comments ) > 0 ) : ?>
@@ -237,7 +259,9 @@ $bars_data = $args['bars_data']; ?>
 						
 						<?php 
 						foreach ( $_comments as $_comment ) :
-							if ( '1' === $_comment->comment_approved ) : 
+							if ( '1' === $_comment->comment_approved ) :
+								// Get review images
+								$review_images = get_comment_meta( $_comment->comment_ID, 'review_images', true ); 
 							?>
 
 								<div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item">
@@ -301,6 +325,28 @@ $bars_data = $args['bars_data']; ?>
 												 * @since 1.0
 												 */
 												do_action( 'woocommerce_review_after_comment_text', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+
+												// Get the review images from meta and display it
+								
+												if ( $review_images ) { ?>
+													<div class="merchant-review-images">
+														<?php
+														foreach ( $review_images as $image_id ) { ?>
+														<div class="merchant-review-image" data-merchant-modal-trigger="merchant-review-image-<?php echo esc_attr( $image_id ); ?>" data-merchant-modal="merchant-review-image-<?php echo esc_attr( $image_id ); ?>">
+															<div class="merchant-review-image-overlay"></div>
+															<?php
+															echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
+															</div>
+															<div class="merchant-modal" data-merchant-modal="merchant-review-image-<?php echo esc_attr( $image_id ); ?>">
+																<div class="merchant-modal-body">
+																	<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
+																</div>
+															</div>
+														<?php }
+														?>
+													</div>
+													<?php
+												} 
 												?>
 											</div>
 										</div>
