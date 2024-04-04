@@ -866,6 +866,42 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Image picker
+		 */
+		public static function image_picker( $settings, $value, $module_id = '' ) {
+			?>
+            <div class="merchant-image-picker">
+				<?php
+				if ( ! empty( $settings['options'] ) ) : ?>
+					<?php
+					foreach ( $settings['options'] as $key => $option ) : ?>
+                        <label>
+                            <input type="radio" name="merchant[<?php
+	                        echo esc_attr( $settings['id'] ); ?>]" value="<?php
+	                        echo esc_attr( $key ); ?>" <?php
+	                        checked( $value, $key, true ); ?>/>
+	                        <?php
+	                        if ( isset( $option['image'] ) ) { ?>
+                                <img src="<?php
+		                        echo esc_url( $option['image'] ) ?>" alt="">
+		                        <?php
+	                        } ?>
+	                        <?php
+	                        if ( isset( $option['title'] ) ) { ?>
+                                <span class="tool-tip-text"><?php
+			                        echo esc_html( $option['title'] ) ?></span>
+		                        <?php
+	                        } ?>
+                        </label>
+					<?php
+					endforeach; ?>
+				<?php
+				endif; ?>
+            </div>
+			<?php
+		}
+
+		/**
 		 * Field: Radio Alt
 		 */
 		public static function radio_alt( $settings, $value, $module_id = '' ) {
