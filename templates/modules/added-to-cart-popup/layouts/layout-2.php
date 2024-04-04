@@ -46,10 +46,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			&& $args['settings']['show_suggested_products']
 			&& ! empty( $args['recently_viewed_products'] )
 		) {
-			merchant_get_template_part( 'modules/added-to-cart-popup', 'recently-viewed-products', $args );
-		} ?>
-		<?php
-		merchant_get_template_part( 'modules/added-to-cart-popup', 'action-buttons', $args );
+			merchant_get_template_part( 'modules/added-to-cart-popup/common', 'recently-viewed-products', $args );
+		}
+		merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args );
 		?>
     </div>
 </div>
