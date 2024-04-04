@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="popup layout-1">
+<div class="popup layout-2">
     <div class="popup-header">
         <h3 class="popup-header-title"><?php
 			echo ! empty( $args['settings']['popup_message'] )
@@ -36,8 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
     <div class="popup-body">
 		<?php
-        merchant_get_template_part( 'modules/added-to-cart-popup/common', 'added-product', $args );
-	    merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args );
+		merchant_get_template_part( 'modules/added-to-cart-popup/common', 'added-product', $args );
 		if (
 			isset(
 				$args['settings']['show_suggested_products'],
@@ -47,7 +46,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			&& $args['settings']['show_suggested_products']
 			&& ! empty( $args['recently_viewed_products'] )
 		) {
-            merchant_get_template_part( 'modules/added-to-cart-popup/common', 'recently-viewed-products', $args );
+			merchant_get_template_part( 'modules/added-to-cart-popup', 'recently-viewed-products', $args );
 		} ?>
+		<?php
+		merchant_get_template_part( 'modules/added-to-cart-popup', 'action-buttons', $args );
+		?>
     </div>
 </div>
