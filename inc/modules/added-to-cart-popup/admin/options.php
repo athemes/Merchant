@@ -16,6 +16,25 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Popup Settings', 'merchant' ),
 	'fields' => array(
 		array(
+			'id'      => 'layout',
+			'type'    => 'image_picker',
+			'title'   => esc_html__( 'Select layout', 'merchant' ),
+			'options' => array(
+				'layout-1' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/added-to-cart-popup/admin/layout-1.png',
+					'title' => esc_html__( 'Layout 1', 'merchant' ),
+				),
+				'layout-2' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/added-to-cart-popup/admin/layout-2.png',
+					'title' => esc_html__( 'Layout 2', 'merchant' ),
+				),
+				'layout-3' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/added-to-cart-popup/admin/layout-3.png',
+					'title' => esc_html__( 'Layout 3', 'merchant' ),
+				),
+			),
+		),
+		array(
 			'id'      => 'popup_size',
 			'type'    => 'range',
 			'min'     => '0',
