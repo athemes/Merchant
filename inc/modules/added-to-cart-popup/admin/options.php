@@ -248,7 +248,7 @@ Merchant_Admin_Options::create( array(
 			'default' => false,
 		),
 		array(
-			'id'         => 'suggested_products_type',
+			'id'         => 'exclusion_type',
 			'type'       => 'select',
 			'title'      => esc_html__( 'Trigger', 'merchant' ),
 			'options'    => array(
@@ -266,7 +266,7 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'            => 'products_to_display',
+			'id'            => 'exclude_specific_products',
 			'type'          => 'products_selector',
 			'multiple'      => true,
 			'desc'          => esc_html__( 'Popup will not be displayed for selected products.', 'merchant' ),
@@ -280,7 +280,7 @@ Merchant_Admin_Options::create( array(
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
-						'field'    => 'suggested_products_type', // field ID
+						'field'    => 'exclusion_type', // field ID
 						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
 						'value'    => 'specific_products', // can be a single value or an array of string/number/int
 					),
@@ -288,7 +288,7 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'          => 'category_slugs',
+			'id'          => 'exclude_specific_categories',
 			'type'        => 'select_ajax',
 			'title'       => esc_html__( 'Categories', 'merchant' ),
 			'source'      => 'options',
@@ -305,7 +305,7 @@ Merchant_Admin_Options::create( array(
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
-						'field'    => 'suggested_products_type', // field ID
+						'field'    => 'exclusion_type', // field ID
 						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
 						'value'    => 'specific_categories', // can be a single value or an array of string/number/int
 					),
