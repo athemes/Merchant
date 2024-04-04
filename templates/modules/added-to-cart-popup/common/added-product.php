@@ -51,9 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		) { ?>
             <div class="popup-product-price">{{product_price}}</div>
 			<?php
-		} ?>
-        <div class="popup-product-rating">{{product_rating}}</div>
-		<?php
+		}
 		if ( isset( $args['settings']['show_cart_total'] ) && $args['settings']['show_cart_total'] ) { ?>
             <div class="popup-cart-info">
                 <span class="cart-subtotal"><?php
