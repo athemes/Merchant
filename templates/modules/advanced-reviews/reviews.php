@@ -19,7 +19,7 @@ if ( ! isset( $args[ 'product' ] ) ) {
 $product        = $args[ 'product' ];
 $product_id     = $product->get_id();
 $review_count   = $product->get_review_count();
-$average        = $product->get_average_rating();®
+$average        = $product->get_average_rating();
 
 // Title tag
 $title_tag = $args[ 'title_tag' ];
