@@ -35,7 +35,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button text color', 'merchant' ),
 			'default' => '#ffffff',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -43,7 +43,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button text color hover', 'merchant' ),
 			'default' => '#ffffff',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -51,7 +51,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button border color', 'merchant' ),
 			'default' => '#212121',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -59,7 +59,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button border color hover', 'merchant' ),
 			'default' => '#414141',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -67,7 +67,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button background color', 'merchant' ),
 			'default' => '#212121',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -75,7 +75,7 @@ Merchant_Admin_Options::create( array(
 			'type'  => 'color',
 			'title' => esc_html__( 'Button background color hover', 'merchant' ),
 			'default' => '#414141',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -87,7 +87,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 16,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -99,7 +99,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 12,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -111,7 +111,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 24,
 			'unit'    => 'px',
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 		array(
@@ -123,7 +123,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'unit'    => 'px',
 			'default' => 0,
-			'condition' => array( 'customize-button', '==', true ),
+			'condition' => array( 'customize-button', '==', '1' ),
 		),
 
 	),

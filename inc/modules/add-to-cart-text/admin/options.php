@@ -44,7 +44,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label on single product page', 'merchant' ),
 			'default' => esc_html__( 'Add to cart', 'merchant' ),
-			'condition' => array( 'simple_product_custom_single_label', '==', true ),
+			'condition' => array( 'simple_product_custom_single_label', '==', '1' ),
 		),
 	),
 ) );
@@ -84,7 +84,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label on single product page', 'merchant' ),
 			'default' => esc_html__( 'Add to cart', 'merchant' ),
-			'condition' => array( 'variable_product_custom_single_label', '==', true ),
+			'condition' => array( 'variable_product_custom_single_label', '==', '1' ),
 		),
 	),
 ) );
@@ -104,7 +104,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'title'   => esc_html__( 'Label', 'merchant' ),
 			'default' => esc_html__( 'Out of stock', 'merchant' ),
-			'condition' => array( 'out_of_stock_custom_label', '==', true ),
+			'condition' => array( 'out_of_stock_custom_label', '==', '1' ),
 		),
 	),
 ) );
