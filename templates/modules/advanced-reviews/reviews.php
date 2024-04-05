@@ -29,7 +29,33 @@ $default_sorting    = $args[ 'default_sorting' ];
 $sort_orderby       = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 // Reviews bars rating
-$bars_data = $args['bars_data']; ?>
+$bars_data = $args['bars_data'];
+
+// Carousel images
+if( isset( $args['carousel_images_data'] ) ) {
+	$carousel_images_data = $args['carousel_images_data'];
+} else {
+	$carousel_images_data = array();
+}
+
+if( $args['review_images_carousel'] && $carousel_images_data ) { ?>
+	<section class="merchant-adv-reviews-media-carousel">
+		<?php if( $args['carousel_title'] ) { ?>
+			<h3 class="section-title"><?php echo esc_html( $args['carousel_title'] ); ?></h3>
+		<?php } ?>
+		<div class="merchant-carousel" data-per-page="" data-loop="true">
+			 <div class="merchant-carousel-wrapper">
+    			<div class="merchant-carousel-stage">
+			<?php foreach( $carousel_images_data as $image_id ) { ?>
+				<div class="item">
+					<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
+				</div>
+			<?php } ?>
+			</div>
+			</div>
+		</div>
+	</section>
+<?php } ?>
 
 <section id="reviews" class="merchant-adv-reviews products<?php echo ( $args[ 'hide_title' ] ) ? ' hide-title' : ''; ?>">
 	<?php
@@ -326,8 +352,7 @@ $bars_data = $args['bars_data']; ?>
 												 */
 												do_action( 'woocommerce_review_after_comment_text', $_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
 
-												// Get the review images from meta and display it
-								
+												// Display review images
 												if ( $review_images ) { ?>
 													<div class="merchant-review-images">
 														<?php

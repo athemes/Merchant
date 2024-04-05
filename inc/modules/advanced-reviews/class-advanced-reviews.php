@@ -65,7 +65,9 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				'default_sorting'  => 'newest',
 				'pagination_type'  => 'default',
 				'photos_limit'     => 6,
-				'review_options' => 'image_and_text',
+				'review_options'   => 'image_and_text',
+				'carousel_images'  => 1,
+				'carousel_title'   => __( 'Customer Images', 'merchant' ),
 				'hook_order'       => 10,
 			);
 

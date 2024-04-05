@@ -129,6 +129,23 @@ Merchant_Admin_Options::create(
 				'default' => 6,
 			),
 
+			// Review images carousel.
+			array(
+				'id'      => 'review_images_carousel',
+				'type'    => 'switcher',
+				'title'   => __( 'Review images carousel', 'merchant' ),
+				'desc'    => __( 'Display first image from each review as carousel to captivate and assist shoppers in their decision-making process.', 'merchant' ),
+				'default' => 1,
+			),
+
+			// Carousel Tite.
+			array(
+				'id'      => 'carousel_title',
+				'type'    => 'text',
+				'title'   => __( 'Carousel Title', 'merchant' ),
+				'default' => __( 'Customer Images', 'merchant' ),
+			),
+
 			// Hook Order.
 			array(
 				'id'      => 'hook_order',
