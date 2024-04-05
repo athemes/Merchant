@@ -19,7 +19,7 @@ if ( ! isset( $args[ 'product' ] ) ) {
 $product        = $args[ 'product' ];
 $product_id     = $product->get_id();
 $review_count   = $product->get_review_count();
-$average        = $product->get_average_rating();
+$average        = $product->get_average_rating();®
 
 // Title tag
 $title_tag = $args[ 'title_tag' ];
@@ -44,7 +44,7 @@ if( $args['review_images_carousel'] && $carousel_images_data ) { ?>
 			<h3 class="section-title"><?php echo esc_html( $args['carousel_title'] ); ?></h3>
 		<?php } ?>
 		<div class="merchant-carousel" data-per-page="" data-loop="true">
-			 <div class="merchant-carousel-wrapper">
+			<div class="merchant-carousel-wrapper">
     			<div class="merchant-carousel-stage">
 			<?php foreach( $carousel_images_data as $image_id ) { ?>
 				<div class="item">
