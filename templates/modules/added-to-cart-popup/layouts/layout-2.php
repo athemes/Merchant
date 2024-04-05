@@ -37,6 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="popup-body">
 		<?php
 		merchant_get_template_part( 'modules/added-to-cart-popup/common', 'added-product', $args );
+        ?>
+        <div class="merchant-hide-computer">
+		    <?php merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args ); ?>
+        </div>
+        <?php
 		if (
 			isset(
 				$args['settings']['show_suggested_products'],
@@ -48,7 +53,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		) {
 			merchant_get_template_part( 'modules/added-to-cart-popup/common', 'recently-viewed-products', $args );
 		}
-		merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args );
 		?>
+        <div class="merchant-hide-mobile">
+            <?php merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args ); ?>
+        </div>
     </div>
 </div>
