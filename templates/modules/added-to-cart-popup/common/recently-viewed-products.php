@@ -37,12 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 							echo esc_html( $product->get_name() ); ?></h3></a>
 					<div class="product-price"><?php
 						echo wp_kses_post( $product->get_price_html() ); ?></div>
-					<?php
-					if ( $product->get_average_rating() ) { ?>
-						<div class="product-rating"><?php
-							echo wp_kses_post( wc_get_rating_html( $product->get_average_rating() ) ); ?></div>
-						<?php
-					} ?>
 				</div>
 			</li>
 			<?php
