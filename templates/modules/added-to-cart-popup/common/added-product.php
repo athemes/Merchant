@@ -54,9 +54,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 		if ( isset( $args['settings']['show_cart_total'] ) && $args['settings']['show_cart_total'] ) { ?>
             <div class="popup-cart-info">
-                <span class="cart-subtotal"><?php
-                    esc_html_e( 'Cart subtotal:', 'merchant' ); ?> {{cart_subtotal}}</span>
-                <span class="cart-items">({{cart_quantity}})</span>
+                <div class="info-item">
+                    <span class="info-label"><?php
+						esc_html_e( 'Shipping Cost', 'merchant' ); ?></span>
+                    <span class="info-value">{{cart_shipping_cost}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label"><?php
+	                    esc_html_e( 'Tax amount', 'merchant' ); ?></span>
+                    <span class="info-value">{{cart_tax_amount}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label"><?php
+	                    esc_html_e( 'Cart Total', 'merchant' ); ?></span>
+                    <span class="info-value">{{cart_subtotal}}</span>
+                </div>
             </div>
 			<?php
 		} ?>
