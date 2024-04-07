@@ -584,7 +584,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$conditions = ( ! empty( $settings['conditions'] ) ) ? $settings['conditions'] : ''; //Docs here: https://github.com/athemes/Merchant/pull/133
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
-				if ( ! $value && 0 !== $value ) {
+				if ( ! $value && ( 0 !== $value && '0' !== $value ) ) {
 					if ( $type === 'checkbox_multiple' ) {
 						$value = array();
 					} else {
@@ -733,7 +733,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo esc_attr( $value ); ?>"<?php
             echo isset( $settings['step'] ) ? ' step="' . esc_attr( $settings['step'] ) . '"' : '';
             echo isset( $settings['max'] ) ? ' max="' . esc_attr( $settings['max'] ) . '"' : '';
-            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>/>
+            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>
+            placeholder="<?php echo esc_attr( $settings['placeholder'] ?? '' ); ?>"/>
 			<?php
 		}
 
@@ -925,10 +926,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							<?php
 							else : ?>
                                 <figure>
-									<?php
-									if ( ! empty( $option['image'] ) ) : ?>
-                                        <img src="<?php
-										echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>"/>
+									<?php if ( ! empty( $option['image'] ) ) :
+										$title = $option['title'] ?? '';
+                                        ?>
+                                        <img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>" alt="<?php echo esc_attr( $title ); ?>" title="<?php echo esc_attr( $title ); ?>"/>
 									<?php
 									else : ?>
                                         <img src="<?php

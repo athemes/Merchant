@@ -3,6 +3,9 @@
 
     var merchant = merchant || {};
 
+    const params = new URLSearchParams( window.location.search );
+    const currentModule = params.get( 'module' );
+
     $(document).ready(function () {
         // AjaxSave
         var $ajaxForm = $('.merchant-module-page-ajax-form');
@@ -47,6 +50,7 @@
 
                 }
 
+                $( document ).trigger( 'save.merchant', [ currentModule ] );
             }
         });
         const $disableModuleSubmitBtn = $('.merchant-module-question-answer-button');
@@ -266,6 +270,7 @@
                                     input.val('');
                                 }
                                 input.trigger('change.merchant');
+                                input.trigger('change.merchant-datepicker', [ formattedDate, input ]);
                             }
                         },
                         fieldOptions = $(this).data('options');
