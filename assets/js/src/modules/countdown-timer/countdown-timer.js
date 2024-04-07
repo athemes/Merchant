@@ -41,10 +41,10 @@ const defaultStyles = {
         digitsColor: '#000',
         digitsBackground: '#fff',
         borderColor: '#000000',
-        fontSizeDigits: 30,
+        fontSizeDigits: 28,
         fontSizeLabels: 12,
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
     },
     minimalist: {
         labelsColor: '#7C7C7C',
@@ -93,6 +93,8 @@ class CountDownTimer {
         this.minutes;
         this.seconds;
 
+        this.currentTimeInitial = this.getCurrentTime();
+
         this.theme     = this.countDownWrapper.attr( 'data-theme' );
         this.timerType = this.countDownWrapper.attr( 'data-countdown-type' );
 
@@ -110,6 +112,7 @@ class CountDownTimer {
         this.timerOffPeriodCookie = 'merchant_countdown_timer_off_period';
 
         this.variationsDates = this.countDownWrapper.attr( 'data-variations-dates' );
+
         this.variationsDates = this.variationsDates ? JSON.parse( this.variationsDates ) : [];
 
         this.flipTimerKeys = {
@@ -117,6 +120,12 @@ class CountDownTimer {
             hours: { value: '', currentValue: '' },
             minutes: { value: '', currentValue: '' },
             seconds: { value: '', currentValue: '' },
+        }
+
+        // Clear cookie page load on admin
+        if ( merchant?.is_admin ) {
+            this.deleteCookie( this.timerCookie );
+            this.deleteCookie( this.timerOffPeriodCookie );
         }
 
         this.init();
@@ -274,21 +283,21 @@ class CountDownTimer {
             const cookieTimer     = this.getCookie( this.timerCookie );
             const cookieOffPeriod = this.getCookie( this.timerOffPeriodCookie );
 
-            // If off-period found in cookie but not timer, means countdown was finished and now it's off-period time.
+            // If off-period found in cookie but not the timer, means countdown was finished and now it's off-period time.
             // So don't start the countdown now.
             const startCountDown = ! ( ! cookieTimer && cookieOffPeriod );
+
+            const randomTimeInSeconds = this.getRandomValueForCountDown( this.minExpiration, this.maxExpiration );
+            const timeInMilliseconds = randomTimeInSeconds * 1000;
+
+            const futureTime = this.getCurrentTime() + timeInMilliseconds;
+            const futureDate = new Date( futureTime );
+
+            const offPeriodMilliseconds = futureTime + ( this.offPeriod * 1000 );
 
             // If no countdown started yet or off-period is finishes, start the countdown
             if ( startCountDown ) {
                 if ( ! cookieTimer ) {
-                    const randomTimeInSeconds = this.getRandomValueForCountDown( this.minExpiration, this.maxExpiration );
-                    const timeInMilliseconds = randomTimeInSeconds * 1000;
-
-                    const futureTime = this.getCurrentTime() + timeInMilliseconds;
-                    const futureDate = new Date( futureTime );
-
-                    const offPeriodMilliseconds = futureTime + ( this.offPeriod * 1000 );
-
                     this.setCookie( this.timerCookie, futureDate, futureTime );
                     this.setCookie( this.timerOffPeriodCookie, this.offPeriod, offPeriodMilliseconds );
 
@@ -296,32 +305,16 @@ class CountDownTimer {
                 } else {
                     // If cookie found
                     this.endTime = new Date( cookieTimer ).getTime();
+
+                    if ( ! cookieOffPeriod ) {
+                        this.setCookie( this.timerOffPeriodCookie, this.offPeriod, offPeriodMilliseconds );
+                    }
                 }
             } else {
                 this.endTime = 0;
                 this.displayTimer( 0 );
             }
         }
-
-        const timeLeft = this.getRemainingTime();
-
-        // this.days = Math.floor( timeLeft / ( 1000 * 60 * 60 * 24 ) );
-        // this.hours = Math.floor( ( timeLeft % ( 1000 * 60 * 60 * 24 ) ) / ( 1000 * 60 * 60 ) ).toString().padStart( 2, '0' );
-        // this.minutes = Math.floor( ( timeLeft % ( 1000 * 60 * 60)) / ( 1000 * 60 ) ).toString().padStart( 2, '0' );
-        // this.seconds = Math.floor( ( timeLeft % ( 1000 * 60 ) ) / 1000 ).toString().padStart( 2, '0' );
-
-        //this.flipTimer.seconds.currentValue = this.seconds;
-        //this.flipTimer.seconds.currentValue = 10;
-        // const $card = jQuery( '.cd-flip-card.cd-seconds' );
-        // const top = $card.find('.cd-flip-card-top');
-        // const bottom = $card.find('.cd-flip-card-bottom');
-        // const back = $card.find('.cd-flip-card-back');
-        // const backBottom = $card.find('.cd-flip-card-back .cd-flip-card-bottom');
-
-        // top.html( this.seconds )
-        // back.attr( 'data-time', this.seconds );
-        // bottom.attr( 'data-time', this.seconds );
-        // backBottom.attr( 'data-time', this.seconds );
     }
 
     startTimer() {
@@ -367,7 +360,6 @@ class CountDownTimer {
         } else {
             this.countDownWrapper.show();
             setTimeout( this.startTimer.bind( this ), 1000 );
-            //setTimeout( this.startTimer.bind( this ), 500 );
         }
     }
 
@@ -376,7 +368,7 @@ class CountDownTimer {
         merchant?.is_admin ? this.countDownWrapper.show() : this.countDownWrapper.hide();
 
         this.displayTimer( 0 );
-        this.deleteCookie( this.timerCookie )
+        this.deleteCookie( this.timerCookie );
     }
 
     updateVariationTimer() {
@@ -402,6 +394,7 @@ class CountDownTimer {
                 self.startTime = startDate ? new Date( startDate ).getTime() : 0;
                 self.endTime   = endDate ? new Date( endDate ).getTime() : 0;
 
+                self.displayTimer( 0 );
                 self.startTimer();
             }
         } );
@@ -441,7 +434,9 @@ class CountDownTimer {
                 backBottom.attr( 'data-time', newVal );
 
                 $card.removeClass( 'cd-flipped' );
+
                 void $card[0].offsetWidth;
+
                 $card.addClass( 'cd-flipped' );
             }
         } );
@@ -465,7 +460,8 @@ class CountDownTimer {
     progressBar() {
         const currentTime= this.getCurrentTime();
 
-        this.startTime = this.startTime || currentTime;
+        // Set start time to current time when page loads if not already defined.
+        this.startTime = this.startTime || this.currentTimeInitial;
 
         this.total = this.endTime - this.startTime;
         const passedTime = currentTime - this.startTime;
@@ -561,7 +557,6 @@ class CountDownTimer {
         // On save
         $( document ).on( 'save.merchant', function ( e, module ) {
             if ( module === 'countdown-timer' ) {
-                self.deleteCookie( self.timerCookie )
                 self.deleteCookie( self.timerOffPeriodCookie );
             }
         } );
@@ -600,6 +595,8 @@ class CountDownTimer {
                 return;
             }
 
+            self.displayTimer( 0 );
+
             const name = input?.attr( 'name' );
 
             // Update timer data
@@ -622,47 +619,59 @@ class CountDownTimer {
         } );
 
         // On evergreen fields change
+        let timer = null;
         $( document ).on( 'input', '.merchant-countdown-evergreen-field input', function() {
-            let minDays = 0;
-            let maxDays = 0
-            let minHours = 2;
-            let maxHours = 26;
-            let minMinutes = 0;
-            let maxMinutes = 0;
+            self.displayTimer( 0 );
 
-            self.deleteCookie( self.timerCookie );
-            self.deleteCookie( self.timerOffPeriodCookie );
+            clearTimeout( timer );
 
-            $( '.merchant-countdown-evergreen-field input' ).each( function() {
-                const name = $( this ).attr( 'name' );
-                const value = +$( this ).val();
+            timer = setTimeout( () => {
+                let minDays = 0;
+                let maxDays = 0
+                let minHours = 2;
+                let maxHours = 26;
+                let minMinutes = 0;
+                let maxMinutes = 0;
 
-                switch ( name ) {
-                    case 'merchant[min_expiration_deadline_days]':
-                        minDays = value;
-                        break;
-                    case 'merchant[max_expiration_deadline_days]':
-                        maxDays = value;
-                        break;
-                    case 'merchant[min_expiration_deadline]':
-                        minHours = value;
-                        break;
-                    case 'merchant[max_expiration_deadline]':
-                        maxHours = value;
-                        break;
-                    case 'merchant[min_expiration_deadline_minutes]':
-                        minMinutes = value;
-                        break;
-                    case 'merchant[max_expiration_deadline_minutes]':
-                        maxMinutes = value;
-                        break;
-                }
-            } );
+                self.deleteCookie( self.timerCookie );
+                self.deleteCookie( self.timerOffPeriodCookie );
 
-            self.minExpiration = minDays * 24 * 60 * 60 + minHours * 60 * 60 + minMinutes * 60;
-            self.maxExpiration = maxDays * 24 * 60 * 60 + maxHours * 60 * 60 + maxMinutes * 60;
+                $( '.merchant-countdown-evergreen-field input' ).each( function() {
+                    const name = $( this ).attr( 'name' );
+                    const value = +$( this ).val();
 
-            self.init();
+                    switch ( name ) {
+                        case 'merchant[min_expiration_deadline_days]':
+                            minDays = value;
+                            break;
+                        case 'merchant[max_expiration_deadline_days]':
+                            maxDays = value;
+                            break;
+                        case 'merchant[min_expiration_deadline]':
+                            minHours = value;
+                            break;
+                        case 'merchant[max_expiration_deadline]':
+                            maxHours = value;
+                            break;
+                        case 'merchant[min_expiration_deadline_minutes]':
+                            minMinutes = value;
+                            break;
+                        case 'merchant[max_expiration_deadline_minutes]':
+                            maxMinutes = value;
+                            break;
+                    }
+                } );
+
+                self.minExpiration = minDays * 24 * 60 * 60 + minHours * 60 * 60 + minMinutes * 60;
+                self.maxExpiration = maxDays * 24 * 60 * 60 + maxHours * 60 * 60 + maxMinutes * 60;
+
+                self.setTimerData();
+                self.startTimer();
+            }, 500 );
+        } );
+
+        $( document ).on( 'input', '.merchant-field-cool_off_period input', function() {
+            self.clearOffPeriodCookie = true;
         } );
 
         // On alignment change
@@ -676,88 +685,29 @@ class CountDownTimer {
     }
 
     updateStyles() {
-        const labelsFontSize = defaultStyles[ this.theme ]?.fontSizeLabels;
-        const digitsFontSize = defaultStyles[ this.theme ]?.fontSizeDigits;
-        const labelsColor = defaultStyles[ this.theme ]?.labelsColor;
-        const digitsColor = defaultStyles[ this.theme ]?.digitsColor;
-        const digitsBackground = defaultStyles[ this.theme ]?.digitsBackground;
-        const progressColor = defaultStyles[ this.theme ]?.progressColor;
-        const borderColor = defaultStyles[ this.theme ]?.borderColor;
-        const digitsWidth = defaultStyles[ this.theme ]?.width;
-        const digitsHeight = defaultStyles[ this.theme ]?.height;
-
         const $ = jQuery;
 
-        if ( digitsFontSize ) {
-            $( 'input[name="merchant[digits_font_size]"]' )
-                .val( digitsFontSize )
-                .attr( 'value', digitsFontSize )
-                .trigger( 'change' )
-                .trigger( 'input' );
-        }
+        const properties = {
+            'digits_font_size': 'fontSizeDigits',
+            'labels_font_size': 'fontSizeLabels',
+            'labels_color': 'labelsColor',
+            'digits_color': 'digitsColor',
+            'digits_background': 'digitsBackground',
+            'progress_color': 'progressColor',
+            'digits_border': 'borderColor',
+            'digits_width': 'width',
+            'digits_height': 'height'
+        };
 
-        if ( labelsFontSize ) {
-            $( 'input[name="merchant[labels_font_size]"]' )
-                .val( labelsFontSize )
-                .attr( 'value', labelsFontSize )
-                .trigger( 'change' )
-                .trigger( 'input' );
-        }
-
-        if ( labelsColor ) {
-            $( 'input[name="merchant[labels_color]"]' )
-                .val( labelsColor )
-                .attr( 'value', labelsColor )
-                .trigger( 'change' )
-                .trigger( 'input' );
-        }
-
-        if ( digitsColor ) {
-            $( 'input[name="merchant[digits_color]"]' )
-                .val( digitsColor )
-                .attr( 'value', digitsColor )
-                .trigger( 'change' )
-                .trigger( 'input' );
-        }
-
-        if ( digitsBackground ) {
-            $( 'input[name="merchant[digits_background]"]' )
-                .val( digitsBackground )
-                .attr( 'value', digitsBackground )
-                .trigger( 'input' )
-                .trigger( 'change' );
-        }
-
-        if ( progressColor ) {
-            $( 'input[name="merchant[progress_color]"]' )
-                .val( progressColor )
-                .attr( 'value', progressColor )
-                .trigger( 'input' )
-                .trigger( 'change' );
-        }
-
-        if ( borderColor ) {
-            $( 'input[name="merchant[digits_border]"]' )
-                .val( borderColor )
-                .attr( 'value', borderColor )
-                .trigger( 'input' )
-                .trigger( 'change' );
-        }
-
-        if ( digitsWidth ) {
-            $( 'input[name="merchant[digits_width]"]' )
-                .val( digitsWidth )
-                .attr( 'value', digitsWidth )
-                .trigger( 'input' )
-                .trigger( 'change' );
-        }
-
-        if ( digitsHeight ) {
-            $( 'input[name="merchant[digits_height]"]' )
-                .val( digitsHeight )
-                .attr( 'value', digitsHeight )
-                .trigger( 'input' )
-                .trigger( 'change' );
+        for ( const [ inputName, propertyName ] of Object.entries( properties ) ) {
+            const value = defaultStyles[ this.theme ]?.[ propertyName ];
+            if ( value ) {
+                $(`input[name="merchant[${inputName}]"]`)
+                    .val(value)
+                    .attr('value', value)
+                    .trigger('input')
+                    .trigger('change');
+            }
         }
     }
 }
