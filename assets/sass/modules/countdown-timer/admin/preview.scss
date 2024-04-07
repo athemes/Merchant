@@ -107,3 +107,33 @@
         margin-right: unset;
     }
 }
+
+.merchant-choices {
+    flex-wrap: wrap;
+
+    &-theme {
+        label {
+            flex: 0 1 23.5%;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+    }
+}
+
+.merchant-countdown-timer {
+    &-progress,
+    &-circles,
+    &-squares,
+    &-cards,
+    &-modern,
+    &-minimalist {
+        .merchant-countdown-timer-inner > svg {
+            display: none;
+        }
+    }
+}
