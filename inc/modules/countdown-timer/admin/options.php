@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'theme',
-			'type'    => 'choices',
+			'type'    => 'image_picker',
 			'title'   => esc_html__( 'Select layout', 'merchant' ),
 			'options' => array(
 				'classic'      => array(
@@ -201,7 +201,6 @@ Merchant_Admin_Options::create( array(
 			'title'     => esc_html__( 'Sale ending message', 'merchant' ),
 			'default'   => esc_html__( 'Sale ends in', 'merchant' ),
 			'desc'      => esc_html__( 'The message that shows up above the countdown timer.', 'merchant' ),
-			'condition' => array( 'theme', 'any', 'classic|progress' ),
 		),
 
 		array(

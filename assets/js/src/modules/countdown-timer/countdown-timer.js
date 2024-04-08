@@ -572,10 +572,10 @@ class CountDownTimer {
         } );
 
         // On theme select
-        $( document ).on( 'change', '.merchant-choices-theme input', function () {
-            self.theme = $( '.merchant-choices-theme input:checked' ).val();
+        $( document ).on( 'change', '.merchant-field-theme input', function () {
+            self.theme = $( '.merchant-field-theme input:checked' ).val();
 
-            $( '.merchant-choices-theme input' ).each( function() {
+            $( '.merchant-field-theme input' ).each( function() {
                 self.countDownWrapper.removeClass( 'merchant-countdown-timer-' + $( this ).val() );
             } );
 

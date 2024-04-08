@@ -213,12 +213,14 @@
     margin-bottom: 6px;
 }
 
-.merchant-choices {
-    flex-wrap: wrap;
+.merchant-field-theme {
+    .merchant-image-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
 
-    &-theme {
         label {
-            flex: 0 1 23.5%;
+            flex: 0 1 calc(25% - 10px);
             margin: 0;
             padding: 0;
             cursor: pointer;
