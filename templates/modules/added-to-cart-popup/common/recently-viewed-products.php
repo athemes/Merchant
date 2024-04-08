@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="recently-viewed-products">
 	<h3 class="section-title"><?php
 		esc_html_e( 'Recently Viewed Products', 'merchant' ); ?></h3>
-	<ul class="products columns-4">
+	<ul class="viewed-products">
 		<?php
 		foreach ( $args['recently_viewed_products'] as $product ) {
 			/**
