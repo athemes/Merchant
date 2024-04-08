@@ -38,11 +38,26 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="top-area">
             <div class="product-component">
 				<?php
-				merchant_get_template_part( 'modules/added-to-cart-popup/common', 'added-product', $args ); ?>
+				/**
+				 * Product info.
+				 *
+                 * @param array $args template args
+                 *
+				 * @since 1.9.7
+				 */
+				do_action( 'merchant_added_to_cart_popup_product_info', $args );
+				?>
             </div>
             <div class="actions-component">
 				<?php
-				merchant_get_template_part( 'modules/added-to-cart-popup/common', 'action-buttons', $args );
+				/**
+				 * Product info.
+				 *
+				 * @param array $args template args
+				 *
+				 * @since 1.9.7
+				 */
+				do_action( 'merchant_added_to_cart_popup_action_buttons', $args );
 				?>
             </div>
         </div>
@@ -56,7 +71,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			&& $args['settings']['show_suggested_products']
 			&& ! empty( $args['recently_viewed_products'] )
 		) {
-			merchant_get_template_part( 'modules/added-to-cart-popup/common', 'recently-viewed-products', $args );
+			/**
+			 * Recently viewed products module.
+			 *
+             * @param array $args template args
+             *
+			 * @since 1.9.7
+			 */
+			do_action( 'merchant_added_to_cart_popup_recently_viewed_products', $args );
 		} ?>
     </div>
 </div>
