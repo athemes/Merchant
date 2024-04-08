@@ -31,7 +31,7 @@ $max_total_seconds = $max_expiration_deadline_days * 24 * 60 * 60;
 $max_total_seconds += $max_expiration_deadline_hours * 60 * 60;
 $max_total_seconds += $max_expiration_deadline_minutes * 60;
 
-$cool_off_period = (int) ( ( $args['cool_off_period'] ?? 0 ) * 60 );
+$cool_off_period =  (int) ( $args['cool_off_period'] ?? 0 ) * 60;
 $countdown_type  = $args['end_date'] ?? 'sale-dates';
 
 $sale_start_date = $args['sale_start_date'] ?? '';
