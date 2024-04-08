@@ -345,8 +345,8 @@ li .merchant-countdown-timer {
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					height: var(--merchant-digits-height, 100px);
-					width: var(--merchant-digits-width, 85px);
+					height: var(--merchant-digits-height, 95px);
+					width: var(--merchant-digits-width, 80px);
 					color: var(--merchant-digits-color, #fff);
 					background: var(--merchant-digits-background, #180B40);
 					border-radius: 5px;
@@ -384,10 +384,10 @@ li .merchant-countdown-timer {
 				&-card-back::before,
 				&-card-back::after {
 					display: block;
-					font-size: var(--merchant-digits-font-size, 40px);
+					font-size: var(--merchant-digits-font-size, 36px);
 					font-weight: 700;
 					line-height: 1;
-					width: var(--merchant-digits-width, 85px);
+					width: var(--merchant-digits-width, 80px);
 					color: var(--merchant-digits-color, #fff);
 					background: var(--merchant-digits-background, #180B40);
 					backface-visibility: hidden;

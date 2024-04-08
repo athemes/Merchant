@@ -126,7 +126,6 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
 		if ( $this->is_module_settings_page() ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/countdown-timer.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
-			wp_enqueue_style( 'merchant-frontend-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/countdown-timer.min.css', array(), MERCHANT_VERSION );
 		}
 	}
 
@@ -232,7 +231,7 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
                 <div class="merchant-preview-add-to-cart-inner">
                     <div class="merchant-preview-qty">
                         <button><?php echo esc_html( '+' ); ?></button>
-                        <input type="text" value="1">
+                        <input type="text" value="<?php echo esc_attr( '1' ); ?>">
                         <button><?php echo esc_html( '-' ); ?></button>
                     </div>
                     <div class="merchant-preview-add-to-cart"><?php echo esc_html__( 'Add to cart', 'merchant' ); ?></div>

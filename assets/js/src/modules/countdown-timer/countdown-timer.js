@@ -71,10 +71,10 @@ const defaultStyles = {
         digitsColor: '#fff',
         digitsBackground: '#180B40',
         borderColor: '',
-        fontSizeDigits: 40,
+        fontSizeDigits: 36,
         fontSizeLabels: 12,
-        width: 85,
-        height: 100,
+        width: 80,
+        height: 95,
     },
 }
 
@@ -283,10 +283,6 @@ class CountDownTimer {
             const cookieTimer     = this.getCookie( this.timerCookie );
             const cookieOffPeriod = this.getCookie( this.timerOffPeriodCookie );
 
-            // If off-period found in cookie but not the timer, means countdown was finished and now it's off-period time.
-            // So don't start the countdown now.
-            const startCountDown = ! ( ! cookieTimer && cookieOffPeriod );
-
             const randomTimeInSeconds = this.getRandomValueForCountDown( this.minExpiration, this.maxExpiration );
             const timeInMilliseconds = randomTimeInSeconds * 1000;
 
@@ -294,6 +290,10 @@ class CountDownTimer {
             const futureDate = new Date( futureTime );
 
             const offPeriodMilliseconds = futureTime + ( this.offPeriod * 1000 );
+
+            // If off-period found in cookie but not the timer, means countdown was finished and now it's off-period time.
+            // So don't start the countdown now.
+            const startCountDown = ! ( ! cookieTimer && cookieOffPeriod );
 
             // If no countdown started yet or off-period is finishes, start the countdown
             if ( startCountDown ) {
@@ -702,11 +702,11 @@ class CountDownTimer {
         for ( const [ inputName, propertyName ] of Object.entries( properties ) ) {
             const value = defaultStyles[ this.theme ]?.[ propertyName ];
             if ( value ) {
-                $(`input[name="merchant[${inputName}]"]`)
-                    .val(value)
-                    .attr('value', value)
-                    .trigger('input')
-                    .trigger('change');
+                $( `input[name="merchant[${inputName}]"]` )
+                    .val( value )
+                    .attr( 'value', value )
+                    .trigger( 'input' )
+                    .trigger( 'change' );
             }
         }
     }
