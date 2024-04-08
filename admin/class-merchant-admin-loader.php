@@ -93,10 +93,19 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 				wp_enqueue_script( 'merchant-admin', MERCHANT_URI . 'assets/js/admin/admin.min.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-core', 'jquery-ui-accordion', 'wp-util' ), MERCHANT_VERSION, true );
 
-				wp_localize_script( 'merchant-admin', 'merchant', array(
+				$localized_data = array(
 					'nonce'    => wp_create_nonce( 'merchant' ),
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
-				) );
+				);
+
+				/**
+				 * Hook 'merchant_admin_localize_script'
+				 *
+				 * @since 1.9.6
+				 */
+				$localized_data = apply_filters( 'merchant_admin_localize_script', $localized_data );
+
+				wp_localize_script( 'merchant-admin', 'merchant', $localized_data );
 
 				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 

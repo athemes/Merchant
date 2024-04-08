@@ -88,6 +88,9 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
 			// Enqueue admin scripts.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
@@ -137,6 +140,15 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $data ) {
+		$data['is_admin'] = is_admin();
+
+		return $data;
+	}
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -153,11 +165,31 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
 			// HTML.
 			$preview->set_html( $content );
 
+			// Font size
+			$preview->set_css( 'digits_font_size', '.merchant-countdown-timer-countdown', '--merchant-digits-font-size', 'px' );
+			$preview->set_css( 'labels_font_size', '.merchant-countdown-timer-countdown', '--merchant-labels-font-size', 'px' );
+
 			// Sale Ending Color
 			$preview->set_css( 'sale_ending_color', '.merchant-countdown-timer-text', '--merchant-sale-ending-color' );
 
 			// Digits Color
 			$preview->set_css( 'digits_color', '.merchant-countdown-timer-countdown', '--merchant-digits-color' );
+
+			// Digits Background Color
+			$preview->set_css( 'digits_background', '.merchant-countdown-timer-countdown', '--merchant-digits-background' );
+
+			// Progress Color
+			$preview->set_css( 'progress_color', '.merchant-countdown-timer-countdown', '--merchant-progress-color' );
+
+			// Labels Color
+			$preview->set_css( 'labels_color', '.merchant-countdown-timer-countdown', '--merchant-labels-color' );
+
+			// Border Color
+			$preview->set_css( 'digits_border', '.merchant-countdown-timer-countdown', '--merchant-digits-border' );
+
+			// Digits width & height
+			$preview->set_css( 'digits_width', '.merchant-countdown-timer-countdown', '--merchant-digits-width', 'px' );
+			$preview->set_css( 'digits_height', '.merchant-countdown-timer-countdown', '--merchant-digits-height', 'px' );
 
 			// Icon Color.
 			$preview->set_css( 'icon_color', '.merchant-countdown-timer svg', '--merchant-icon-color' );
@@ -182,20 +214,28 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
             <div class="mrc-preview-left-column">
                 <div class="mrc-preview-product-image-wrapper">
                     <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                    </div>
                 </div>
             </div>
             <div class="mrc-preview-right-column">
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
+                <h3 style="margin-top: 0;"><?php echo esc_html__( 'Your Product Name', 'merchant' ); ?></h3>
+                <div class="mrc-preview-rating">
+                    <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated 3.00 out of 5">
+                        <span style="width: 80%"></span>
+                    </div>
+                    <span style="color: #969696;"><?php echo esc_html__( 'reviews', 'merchant' ); ?></span>
+                </div>
+                <h3><?php echo esc_html__( '$49', 'merchant' ); ?></h3>
+                <p><?php echo esc_html__( "An amazing product people can't refuse. What’s the next moment of value-realization when using your product? Tell the biggest use case. Briefly expand your product benefits on how this will help customers.", 'merchant' ); ?></p>
 				<?php echo wp_kses( merchant_get_template_part( self::MODULE_TEMPLATES, 'single-product', $settings, true ), merchant_kses_allowed_tags() ); ?>
-                <div class="mrc-preview-addtocart-placeholder"></div>
+
+                <div class="merchant-preview-add-to-cart-inner">
+                    <div class="merchant-preview-qty">
+                        <button><?php echo esc_html( '+' ); ?></button>
+                        <input type="text" value="<?php echo esc_attr( '1' ); ?>">
+                        <button><?php echo esc_html( '-' ); ?></button>
+                    </div>
+                    <div class="merchant-preview-add-to-cart"><?php echo esc_html__( 'Add to cart', 'merchant' ); ?></div>
+                </div>
             </div>
         </div>
 
@@ -210,11 +250,31 @@ class Merchant_Countdown_Timer extends Merchant_Add_Module {
 	public function get_module_custom_css() {
 		$css = '';
 
+		// Font sizes
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_font_size', 16, '.merchant-countdown-timer-countdown', '--merchant-digits-font-size', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'labels_font_size', 16, '.merchant-countdown-timer-countdown', '--merchant-labels-font-size', 'px' );
+
 		// Sale Ending Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'sale_ending_color', '#626262', '.merchant-countdown-timer-text', '--merchant-sale-ending-color' );
 
 		// Digits Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_color', '#444444', '.merchant-countdown-timer-countdown', '--merchant-digits-color' );
+
+		// Digits Background Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_background', '#fff', '.merchant-countdown-timer-countdown', '--merchant-digits-background' );
+
+		// Progress Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'progress_color', '#3858E9', 'body', '--merchant-progress-color' );
+
+		// Labels Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'labels_color', '#444444', '.merchant-countdown-timer-countdown', '--merchant-labels-color' );
+
+		// Border Color.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_border', '#444444', '.merchant-countdown-timer-countdown', '--merchant-digits-border' );
+
+		// Digits width & height
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_width', 80, '.merchant-countdown-timer-countdown', '--merchant-digits-width', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'digits_height', 80, '.merchant-countdown-timer-countdown', '--merchant-digits-height', 'px' );
 
 		// Icon Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'icon_color', '#626262', '.merchant-countdown-timer svg', '--merchant-icon-color' );

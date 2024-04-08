@@ -128,6 +128,12 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 				'defs'     => array(
 					'id' => true,
 				),
+				'progress'     => array(
+					'id'    => true,
+					'class' => true,
+					'value' => true,
+					'max'   => true,
+				),
 			),
 			$include_post_tags ? wp_kses_allowed_html( 'post' ) : array()
 		);

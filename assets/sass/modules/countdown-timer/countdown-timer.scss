@@ -3,39 +3,476 @@
  *
  */
 
+// Todo check if possible to hide using php
+li .merchant-countdown-timer {
+	display: none !important;
+}
+
 .merchant-countdown-timer {
-	display: flex;
-	align-items: center;
-	margin: 25px 0;
-} 
+	margin-block: 25px;
 
-.merchant-countdown-timer.center {
-	justify-content: center;
-}
+	&,
+	&-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 
-.merchant-countdown-timer.right {
-	justify-content: right;
-}
+	&--left {
+		align-items: flex-start;
+	}
 
-.merchant-countdown-timer svg {
-	margin-right: 5px;
-	fill: var(--merchant-icon-color);
-}
+	&--center {
+		&,
+		.merchant-countdown-timer-inner {
+			align-items: center;
+		}
+	}
 
-.merchant-countdown-timer-text {
-	color: var(--merchant-sale-ending-color);
-}
+	&--right {
+		&,
+		.merchant-countdown-timer-inner {
+			align-items: flex-end;
+		}
+	}
 
-.merchant-countdown-timer-countdown {
-	color: var(--merchant-digits-color);
-	font-weight: bold;
+	&-text {
+		color: var(--merchant-sale-ending-color);
+	}
+
+	&-countdown {
+		color: var(--merchant-digits-color);
+		font-weight: bold;
+	}
+
+	.cd-value {
+		font-size: var(--merchant-digits-font-size, 16px);
+		font-weight: 500;
+	}
+
+	.cd-label {
+		font-size: var(--merchant-labels-font-size, 16px);
+		color: var(--merchant-labels-color, #444444);
+		font-weight: 300;
+	}
+
+	// Combined themes
+	&-circles,
+	&-squares,
+	&-cards,
+	&-modern,
+	&-minimalist {
+		.merchant-countdown-timer-countdown {
+			display: flex;
+			text-align: center;
+			text-transform: uppercase;
+			line-height: 1;
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				gap: 10px;
+			}
+		}
+	}
+
+	// Theme Classic
+	&-classic {
+		.merchant-countdown-timer {
+			&-countdown {
+				font-size: var(--merchant-digits-font-size, 16px);
+			}
+
+			&-inner {
+				align-items: center;
+				flex-direction: row;
+				gap: 5px;
+			}
+
+			svg {
+				fill: var( --merchant-icon-color, #626262 );
+			}
+		}
+	}
+
+	// Theme Progress
+	&-progress {
+		.merchant-countdown-timer {
+			&-countdown {
+				font-size: var(--merchant-digits-font-size, 16px);
+			}
+
+			&-inner {
+				gap: 15px;
+				width: 100%;
+				flex: 1;
+			}
+		}
+
+		// Style the progress bar
+		progress {
+			background-color: #cccccc;
+			width: 70%;
+			height: 10px;
+			border: none;
+			border-radius: 5px;
+			overflow: hidden;
+			appearance: none; // Remove default styling
+
+			// Style the active part
+			&::-webkit-progress-value {
+				background-color: var(--merchant-progress-color, #3858e9);
+				border-radius: 5px;
+			}
+
+			&::-moz-progress-bar {
+				background-color: var(--merchant-progress-color, #3858e9);
+				border-radius: 5px;
+			}
+
+			// Style the inactive part
+			&::-webkit-progress-bar {
+				background-color: #cccccc;
+				border-radius: 5px;
+			}
+		}
+	}
+
+	// Theme Circle
+	&-circles {
+		.merchant-countdown-timer-countdown {
+			gap: 10px;
+
+			> div  {
+				width: var(--merchant-digits-width,  80px);
+				height: var(--merchant-digits-height, 80px);
+				position: relative;
+
+				> div {
+					position: absolute;
+					inset: 0;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					gap: 5px;
+				}
+			}
+
+			.cd-value {
+				font-size: var(--merchant-digits-font-size, 22px);
+				font-weight: 400;
+			}
+
+			.cd-label {
+				font-size: var(--merchant-labels-font-size, 10px);
+				font-weight: 400;
+			}
+
+			.cd-svg {
+				fill: none;
+				width: var(--merchant-digits-width,  80px);
+				height: var(--merchant-digits-height, 80px);
+				transform: rotate(-90deg);
+
+				circle {
+					&.circle-static {
+						stroke: var(--merchant-digits-border, #444);
+						stroke-linecap: round;
+						stroke-width: 1px;
+						fill: var(--merchant-digits-background, none);
+						font-size: 0;
+						line-height: 1;
+					}
+
+					&.circle-dynamic {
+						stroke: var(--merchant-progress-color, #3858E9);
+						stroke-linecap: round;
+						stroke-width: 4px;
+						fill: none;
+						stroke-dashoffset: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// Theme Squares
+	&-squares {
+		&.merchant-countdown-timer {
+			&--left .merchant-countdown-timer-countdown {
+				margin-left: 3%;
+			}
+
+			&--right .merchant-countdown-timer-countdown {
+				margin-right: 3%;
+			}
+		}
+
+		.merchant-countdown-timer-inner {
+			gap: 25px;
+		}
+
+		.merchant-countdown-timer-countdown {
+			gap: 35px;
+
+			> div {
+				gap: 30px;
+				width: var(--merchant-digits-width,  65px);
+				height: auto;
+			}
+
+			.cd-value {
+				position: relative;
+				transform: rotate(45deg);
+				height: var(--merchant-digits-height, 65px);
+				background: var(--merchant-digits-background, #fff);
+				border: 2px solid var(--merchant-digits-border, #000000);
+				border-radius: 5px;
+				font-size: 0;
+
+				&:after {
+					content: attr(data-time);
+					font-size: var(--merchant-digits-font-size, 28px);
+					transform: rotate(-45deg);
+					position: absolute;
+					inset: 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			}
+
+			.cd-label {
+				font-size: var(--merchant-labels-font-size, 12px);
+			}
+		}
+	}
+
+	// Theme Minimalist
+	&-minimalist {
+		.merchant-countdown-timer-countdown {
+			background: var(--merchant-digits-background, #F6F7F7);
+			border-radius: 10px;
+			box-shadow: 0 0 10px #dddddd96;
+			gap: 15px;
+			padding: 10px;
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				width: var(--merchant-digits-width,  80px);
+				height: var(--merchant-digits-height, 80px);
+
+				&:not(.cd-seconds) {
+					.cd-value {
+						position: relative;
+
+						&:after {
+							content: ':';
+							position: absolute;
+							top: -2px;
+							right: -12px;
+						}
+					}
+				}
+			}
+
+			.cd-value {
+				font-size: var(--merchant-digits-font-size, 40px);
+			}
+
+			.cd-label {
+				font-size: var(--merchant-labels-font-size, 12px);
+			}
+		}
+	}
+
+	// Theme Cards
+	&-cards {
+		.merchant-countdown-timer-countdown {
+			gap: 10px;
+
+			> div {
+				width: var(--merchant-digits-width,  80px);
+				height: auto;
+				gap: 3px;
+			}
+
+			.cd-value,
+			.cd-label {
+				background: var(--merchant-digits-background, #E0E2EC);
+				border-radius: 1px;
+			}
+
+			.cd-value {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: var(--merchant-digits-font-size, 40px);
+				height: var(--merchant-digits-height, 80px);
+				padding: 10px;
+			}
+
+			.cd-label {
+				font-size: var(--merchant-labels-font-size, 12px);
+				font-weight: 500;
+				padding: 8px;
+			}
+		}
+	}
+
+	// Theme Modern
+	&-modern {
+		.merchant-countdown-timer-countdown {
+
+			> div {
+				width: auto;
+				height: auto;
+			}
+
+			.cd-flip {
+				perspective: 400px;
+				flex-direction: row;
+
+				&-card {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+				}
+
+				&-card-wrapper {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: var(--merchant-digits-height, 95px);
+					width: var(--merchant-digits-width, 80px);
+					color: var(--merchant-digits-color, #fff);
+					background: var(--merchant-digits-background, #180B40);
+					border-radius: 5px;
+				}
+
+				&-card-inner {
+					position: relative;
+					font-size: var(--merchant-digits-font-size, 40px);
+					overflow: hidden;
+
+					&:after,
+					&:before {
+						content: '';
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+						width: 6px;
+						height: 5px;
+						background: #fff;
+						border-radius: 20px;
+						z-index: 9;
+					}
+
+					&:after {
+						right: -3px;
+					}
+
+					&:before {
+						left: -3px;
+					}
+				}
+
+				&-card-top,
+				&-card-bottom,
+				&-card-back::before,
+				&-card-back::after {
+					display: block;
+					font-size: var(--merchant-digits-font-size, 36px);
+					font-weight: 700;
+					line-height: 1;
+					width: var(--merchant-digits-width, 80px);
+					color: var(--merchant-digits-color, #fff);
+					background: var(--merchant-digits-background, #180B40);
+					backface-visibility: hidden;
+					transform-style: preserve-3d;
+					transform: translateZ(0);
+				}
+
+				&-card-back {
+					position: absolute;
+					top: 0;
+					height: 100%;
+					left: 0;
+					pointer-events: none;
+
+					&:before {
+						content: attr(data-time);
+						position: relative;
+						z-index: -1;
+						overflow: hidden;
+					}
+				}
+			}
+
+			.cd-flipped {
+				.cd-flip-card-back {
+					&:before {
+						animation: flipTop 0.3s ease-in;
+						animation-fill-mode: both;
+						transform-origin: center bottom;
+					}
+
+					.cd-flip-card-bottom {
+						animation: flipBottom 0.6s ease-out;
+						animation-fill-mode: both;
+						transform-origin: center top;
+					}
+				}
+			}
+
+			.cd-label {
+				font-size: var(--merchant-labels-font-size, 12px);
+				font-weight: 500;
+			}
+		}
+	}
 }
 
 .rtl{
-	.merchant-countdown-timer{
-		svg{
+	.merchant-countdown-timer {
+		svg {
 			margin-right: unset;
 			margin-left: 5px;
 		}
+	}
+}
+
+@keyframes flipTop {
+	0% {
+		transform: rotateX(0deg);
+		z-index: 2;
+	}
+	0%,
+	99% {
+		opacity: 0.99;
+	}
+	100% {
+		transform: rotateX(-90deg);
+		opacity: 0;
+	}
+}
+
+@keyframes flipBottom {
+	0%,
+	50% {
+		z-index: -1;
+		transform: rotateX(90deg);
+		opacity: 0;
+	}
+	51% {
+		opacity: 0.99;
+	}
+	100% {
+		opacity: 0.99;
+		transform: rotateX(0deg);
+		z-index: 5;
 	}
 }

@@ -21,6 +21,13 @@
 	.merchant-stock-scarcity {
 		margin-top: 0;
 	}
+
+	ul.products li.product, 
+	.wc-block-grid__products .wc-block-grid__product {
+		.merchant-stock-scarcity {
+			margin-top: 15px;
+		}
+	}
 }
 
 .merchant-stock-scarcity-progress-bar {
