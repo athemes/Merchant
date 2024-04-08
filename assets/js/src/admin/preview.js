@@ -241,12 +241,12 @@
 
             // Text inputs
             if (inputType === 'text' || input.prop('tagName') === 'TEXTAREA') {
-                input.on('keyup', () => updateElements());
+                input.on('keyup input', () => updateElements());
             }
 
             // Number + range inputs
             if (inputType === 'number') {
-                input.on('keyup', () => updateElements());
+                input.on('keyup input', () => updateElements());
 
                 if (input.parent().find('input[type=range]').length) {
                     input.parent().find('input[type=range]').on('input change', () => updateElements());

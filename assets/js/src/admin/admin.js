@@ -3,6 +3,9 @@
 
     var merchant = merchant || {};
 
+    const params = new URLSearchParams( window.location.search );
+    const currentModule = params.get( 'module' );
+
     $(document).ready(function () {
         // AjaxSave
         var $ajaxForm = $('.merchant-module-page-ajax-form');
@@ -47,6 +50,7 @@
 
                 }
 
+                $( document ).trigger( 'save.merchant', [ currentModule ] );
             }
         });
         const $disableModuleSubmitBtn = $('.merchant-module-question-answer-button');
@@ -266,6 +270,7 @@
                                     input.val('');
                                 }
                                 input.trigger('change.merchant');
+                                input.trigger('change.merchant-datepicker', [ formattedDate, input ]);
                             }
                         },
                         fieldOptions = $(this).data('options');
@@ -857,6 +862,22 @@
                 }
             });
         }).trigger('merchant.change');
+
+        $(document).on('merchant-admin-check-fields merchant-flexible-content-added keyup', function () {
+            $('.merchant-module-page-setting-field').each(function () {
+                let $field = $(this);
+                if ($field.data('conditions')) {
+                    let conditions = $field.data('conditions'),
+                        passed = evaluateConditions(conditions, $field);
+                    if (passed) {
+                        $field.removeClass('merchant-hide').addClass('merchant-show');
+                    } else {
+                        $field.removeClass('merchant-show').addClass('merchant-hide');
+                    }
+                }
+            });
+        }).trigger('merchant.change');
+
         $(document).on('change', '.merchant-module-page-setting-field', function () {
             $(document).trigger('merchant-admin-check-fields');
         }).trigger('merchant.change');
@@ -1437,6 +1458,110 @@
         }
 
     });
+
+    /**
+     * Check if a string is numeric.
+     *
+     * @param str the string to check
+     *
+     * @returns {boolean} true if numeric, false otherwise
+     */
+    function isNumeric(str) {
+        if (typeof str != "string") return false // we only process strings!
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+    }
+
+    /**
+     * Evaluate conditional fields.
+     *
+     * @param conditions the array of conditions
+     * @param field the field that is being evaluated
+     *
+     * @returns {boolean}
+     */
+    function evaluateConditions(conditions, field = false) {
+        let passed = false;
+
+        if ('relation' in conditions) {
+            //loop through terms
+            let relation = conditions.relation.toUpperCase();
+            // lowercase relation
+            if (relation === 'OR') {
+                for (let i = 0; i < conditions.terms.length; i++) {
+                    let term = conditions.terms[i];
+                    passed = evaluateConditions(term, field);
+                    if (passed) {
+                        return true;
+                    }
+                }
+            } else if (relation === 'AND') {
+                let n = 0;
+                for (let i = 0; i < conditions.terms.length; i++) {
+                    // check if inner terms are passed
+                    let term = conditions.terms[i];
+                    if (evaluateConditions(term, field)) {
+                        n++;
+                    }
+                }
+                if (n === conditions.terms.length) {
+                    passed = true;
+                }
+            }
+        } else {
+            let condition = '';
+            if ('terms' in conditions) {
+                condition = conditions.terms[0];
+            } else {
+                condition = conditions;
+            }
+            let $target = $('input[name="merchant[' + condition.field + ']"],select[name="merchant[' + condition.field + ']"]');
+            if (!$target.length) {
+                // check if inside flexible content
+                let flexibleContentParent = field.closest('.layout-body');
+                if (flexibleContentParent.length > 0) {
+                    $target = flexibleContentParent.find('.merchant-field-' + condition.field).find('input, select');
+                }
+            }
+            let value = $target.val();
+            if ($target.attr('type') === 'checkbox' || $target.attr('type') === 'radio') {
+                value = $target.is(':checked');
+            }
+            // cast value as string if numeric
+            if (isNumeric(value)) {
+                value = Number(value);
+            }
+
+            // check if is array condition.value
+            if (Array.isArray(condition.value)) {
+                condition.value = condition.value.map(function (item) {
+                    if (isNumeric(item)) {
+                        return Number(item);
+                    }
+                    return item;
+                });
+            }
+            if (condition.operator === '===' && value === condition.value) {
+                passed = true;
+            } else if (condition.operator === '!==' && value !== condition.value) {
+                passed = true;
+            } else if (condition.operator === '>' && value > condition.value) {
+                passed = true;
+            } else if (condition.operator === '<' && value < condition.value) {
+                passed = true;
+            } else if (condition.operator === '>=' && value >= condition.value) {
+                passed = true;
+            } else if (condition.operator === '<=' && value <= condition.value) {
+                passed = true;
+            } else if (condition.operator === 'in' && condition.value.includes(value)) {
+                passed = true;
+            } else if (condition.operator === '!in' && !condition.value.includes(value)) {
+                passed = true;
+            }
+        }
+
+        return passed;
+    }
 
 })(jQuery, window, document);
 

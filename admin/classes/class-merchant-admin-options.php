@@ -581,9 +581,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$id        = ( ! empty( $settings['id'] ) ) ? $settings['id'] : '';
 				$class     = ( ! empty( $settings['class'] ) ) ? ' ' . $settings['class'] : '';
 				$condition = ( ! empty( $settings['condition'] ) ) ? $settings['condition'] : array();
+				$conditions = ( ! empty( $settings['conditions'] ) ) ? $settings['conditions'] : ''; //Docs here: https://github.com/athemes/Merchant/pull/133
 				$default   = ( ! empty( $settings['default'] ) ) ? $settings['default'] : null;
 
-				if ( ! $value && 0 !== $value ) {
+				if ( ! $value && ( 0 !== $value && '0' !== $value ) ) {
 					if ( $type === 'checkbox_multiple' ) {
 						$value = array();
 					} else {
@@ -606,7 +607,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$wrapper_classes = apply_filters( 'merchant_admin_module_field_wrapper_classes', $wrapper_classes, $settings, $value, $module_id );
 
 				echo '<div class="'. esc_attr( implode( ' ', $wrapper_classes ) ) .'" data-id="'
-					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) . '">';
+					. esc_attr( $id ) . '" data-type="' . esc_attr( $type ) . '" data-condition="' . esc_attr( wp_json_encode( $condition ) ) .
+                    '" data-conditions="' . ( $conditions ? esc_attr( wp_json_encode( $conditions ) ) : "" ) . '">';
 				if ( ! empty( $settings['title'] ) ) {
 					printf( '<div class="merchant-module-page-setting-field-title">%s</div>', esc_html( $settings['title'] ) );
 				}
@@ -731,7 +733,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo esc_attr( $value ); ?>"<?php
             echo isset( $settings['step'] ) ? ' step="' . esc_attr( $settings['step'] ) . '"' : '';
             echo isset( $settings['max'] ) ? ' max="' . esc_attr( $settings['max'] ) . '"' : '';
-            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>/>
+            echo isset( $settings['min'] ) ? ' min="' . esc_attr( $settings['min'] ) . '"' : '' ?>
+            placeholder="<?php echo esc_attr( $settings['placeholder'] ?? '' ); ?>"/>
 			<?php
 		}
 
@@ -864,6 +867,42 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Field: Image picker
+		 */
+		public static function image_picker( $settings, $value, $module_id = '' ) {
+			?>
+            <div class="merchant-image-picker">
+				<?php
+				if ( ! empty( $settings['options'] ) ) : ?>
+					<?php
+					foreach ( $settings['options'] as $key => $option ) : ?>
+                        <label>
+                            <input type="radio" name="merchant[<?php
+							echo esc_attr( $settings['id'] ); ?>]" value="<?php
+							echo esc_attr( $key ); ?>" <?php
+							checked( $value, $key, true ); ?>/>
+							<?php
+							if ( isset( $option['image'] ) ) { ?>
+                                <img src="<?php
+								echo esc_url( $option['image'] ) ?>" alt="">
+								<?php
+							} ?>
+							<?php
+							if ( isset( $option['title'] ) ) { ?>
+                                <span class="tool-tip-text"><?php
+									echo esc_html( $option['title'] ) ?></span>
+								<?php
+							} ?>
+                        </label>
+					<?php
+					endforeach; ?>
+				<?php
+				endif; ?>
+            </div>
+			<?php
+		}
+
+		/**
 		 * Field: Radio Alt
 		 */
 		public static function radio_alt( $settings, $value, $module_id = '' ) {
@@ -923,10 +962,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							<?php
 							else : ?>
                                 <figure>
-									<?php
-									if ( ! empty( $option['image'] ) ) : ?>
-                                        <img src="<?php
-										echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>"/>
+									<?php if ( ! empty( $option['image'] ) ) :
+										$title = $option['title'] ?? '';
+                                        ?>
+                                        <img src="<?php echo esc_url( sprintf( $option['image'], MERCHANT_URI . 'assets/images' ) ); ?>" alt="<?php echo esc_attr( $title ); ?>" title="<?php echo esc_attr( $title ); ?>"/>
 									<?php
 									else : ?>
                                         <img src="<?php

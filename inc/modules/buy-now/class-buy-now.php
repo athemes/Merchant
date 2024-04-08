@@ -306,10 +306,12 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( ! empty( $product ) ) {
-			if ( 'yes' === get_post_meta( $post->ID, '_is_pre_order', true ) && strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() ) {
-				return;
-			}
+		if ( ! empty( $product )
+			&& Merchant_Modules::is_module_active( 'pre-orders' ) 
+			&& 'yes' === get_post_meta( $post->ID, '_is_pre_order', true ) 
+			&& strtotime( get_post_meta( $post->ID, '_pre_order_date', true ) ) > time() 
+		) {
+			return;
 		}
 
 		$text = Merchant_Admin_Options::get( 'buy-now', 'button-text', esc_html__( 'Buy Now', 'merchant' ) );

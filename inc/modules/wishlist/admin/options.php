@@ -93,7 +93,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'text',
 			'title'     => __( 'Tooltip text', 'merchant' ),
 			'default'   => __( 'Add to wishlist', 'merchant' ),
-			'condition' => array( 'tooltip', '==', true ),
+			'condition' => array( 'tooltip', '==', '1' ),
 		),
 
 		// Tooltip border radius.
@@ -106,7 +106,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => 1,
 			'default' => 4,
 			'unit'    => 'px',
-			'condition' => array( 'tooltip', '==', true ),
+			'condition' => array( 'tooltip', '==', '1' ),
 		),
 
 		// Colors.
