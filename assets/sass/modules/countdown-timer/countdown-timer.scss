@@ -353,6 +353,7 @@ li .merchant-countdown-timer {
 				&-card-inner {
 					position: relative;
 					font-size: var(--merchant-digits-font-size, 40px);
+					overflow: hidden;
 
 					&:after,
 					&:before {
