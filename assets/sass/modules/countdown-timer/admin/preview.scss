@@ -17,22 +17,31 @@
 .mrc-preview-single-product-elements {
     width: 100%;
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: 30px;
+
+    p {
+        //font-size: 12px;
+    }
 
     .mrc-preview-left-column {
-        width: 30%;
-        min-width: 30%;
+        width:  38%;
+        min-width: 38%;
+        height: 450px;
+
+        > div {
+            height: 100%;
+        }
     }
 
     .mrc-preview-right-column {
-        width: 70%;
-        padding-top: 25px;
+        width: 55%;
     }
 
     .mrc-preview-product-image-wrapper {
         .mrc-preview-product-image {
             background-color: #f5f5f5;
-            height: 12vw;
+            height: 100%;
         }
 
         .mrc-preview-product-image-thumbs {
@@ -47,6 +56,102 @@
                 background-color: #f5f5f5;
                 margin-top: 10px;
             }
+        }
+    }
+
+    .merchant-preview-add-to-cart-inner {
+        display: flex;
+        gap: 15px;
+        pointer-events: none;
+    }
+
+    .merchant-preview-add-to-cart {
+        flex: 1;
+        background-color: #E5E5E5;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .merchant-preview-qty {
+        border: 1px solid #E5E5E5;
+        display: flex;
+        gap: 0;
+        width: auto;
+    }
+
+    .merchant-preview-qty button,
+    .merchant-preview-qty input {
+        border: none;
+        background: none;
+        outline: none;
+        width: 20px;
+        flex: 1;
+        color: #E5E5E5;
+        text-align: center;
+    }
+
+    .merchant-preview-qty input {
+        padding: 0;
+        margin: 0;
+    }
+
+    .merchant-preview-qty button {
+        width: 30px;
+        padding: 5px;
+    }
+
+    .merchant-countdown-timer {
+        margin-block: 30px 40px;
+    }
+
+    /**
+     * Star rating
+     */
+    .mrc-preview-rating {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .star-rating {
+        overflow: hidden;
+        position: relative;
+        height: 1.618em;
+        line-height: 1.618;
+        width: 5.3em;
+        font-family: star;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: #969696;
+
+        &::before {
+            content: "\53\53\53\53\53";
+            opacity: 0.25;
+            float: left;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+
+        span {
+            overflow: hidden;
+            float: left;
+            top: 0;
+            left: 0;
+            position: absolute;
+            padding-top: 1.5em;
+        }
+
+        span::before {
+            content: "\53\53\53\53\53";
+            top: 0;
+            position: absolute;
+            left: 0;
+            color: #FFA441;
         }
     }
 }
@@ -106,6 +211,10 @@
         margin-left: 5px;
         margin-right: unset;
     }
+}
+
+.merchant-countdown-evergreen-content-field {
+    margin-bottom: 6px;
 }
 
 .merchant-choices {

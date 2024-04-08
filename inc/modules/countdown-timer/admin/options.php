@@ -64,6 +64,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'content',
 			'title'     => esc_html__( 'Minimum expiration deadline', 'merchant' ),
 			'content'   => '',
+			'class'     => 'merchant-countdown-evergreen-content-field',
 			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 		array(
@@ -106,6 +107,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'content',
 			'title'     => esc_html__( 'Maximum expiration deadline', 'merchant' ),
 			'content'   => '',
+			'class'     => 'merchant-countdown-evergreen-content-field',
 			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 		array(
@@ -159,7 +161,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'theme',
 			'type'    => 'choices',
-			'title'   => esc_html__( 'Theme', 'merchant' ),
+			'title'   => esc_html__( 'Select layout', 'merchant' ),
 			'options' => array(
 				'classic'      => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/classic.png',
@@ -171,7 +173,7 @@ Merchant_Admin_Options::create( array(
 				),
 				'circles'      => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/circles.png',
-					'title' => esc_html__( 'Progress circles', 'merchant' ),
+					'title' => esc_html__( 'Circles', 'merchant' ),
 				),
 				'squares'      => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/squares.png',
@@ -190,7 +192,7 @@ Merchant_Admin_Options::create( array(
 					'title' => esc_html__( 'modern', 'merchant' ),
 				),
 			),
-			'default' => 'basic',
+			'default' => 'classic',
 		),
 
 		array(
@@ -223,7 +225,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'digits_font_size',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Font size of the digits', 'merchant' ),
+			'title'   => esc_html__( 'Digits\' font size', 'merchant' ),
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,
@@ -234,7 +236,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'labels_font_size',
 			'type'      => 'range',
-			'title'     => esc_html__( 'Font size of the labels', 'merchant' ),
+			'title'     => esc_html__( 'Label font size', 'merchant' ),
 			'min'       => 1,
 			'max'       => 100,
 			'step'      => 1,
@@ -262,14 +264,14 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'digits_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Color of the digits', 'merchant' ),
+			'title'   => esc_html__( 'Digits\' color', 'merchant' ),
 			'default' => '#444444',
 		),
 
 		array(
 			'id'        => 'labels_color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Color of the labels', 'merchant' ),
+			'title'     => esc_html__( 'Label color', 'merchant' ),
 			'default'   => '#444444',
 			'condition' => array( 'theme', 'any', 'minimalist|cards|modern|squares|circles' ),
 		),
@@ -277,7 +279,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'digits_background',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Background Color of the digits', 'merchant' ),
+			'title'     => esc_html__( 'Digit background color', 'merchant' ),
 			'default'   => '#fff',
 			'condition' => array( 'theme', 'any', 'minimalist|cards|modern|squares|circles' ),
 		),
@@ -285,7 +287,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'digits_border',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Border Color', 'merchant' ),
+			'title'     => esc_html__( 'Border color', 'merchant' ),
 			'default'   => '#444',
 			'condition' => array( 'theme', 'any', 'squares|circles' ),
 		),
@@ -293,7 +295,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'progress_color',
 			'type'      => 'color',
-			'title'     => esc_html__( 'Color of the progress', 'merchant' ),
+			'title'     => esc_html__( 'Progress Bar color', 'merchant' ),
 			'default'   => '#3858E9',
 			'condition' => array( 'theme', 'any', 'progress|circles' ),
 		),
@@ -301,7 +303,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'digits_width',
 			'type'      => 'range',
-			'title'     => esc_html__( 'Cards width', 'merchant' ),
+			'title'     => esc_html__( 'Width', 'merchant' ),
 			'min'       => 1,
 			'max'       => 250,
 			'step'      => 1,
@@ -313,7 +315,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'digits_height',
 			'type'      => 'range',
-			'title'     => esc_html__( 'Cards height', 'merchant' ),
+			'title'     => esc_html__( 'Height', 'merchant' ),
 			'min'       => 1,
 			'max'       => 250,
 			'step'      => 1,

@@ -85,6 +85,7 @@ li .merchant-countdown-timer {
 			}
 
 			&-inner {
+				align-items: center;
 				flex-direction: row;
 				gap: 5px;
 			}
@@ -103,6 +104,7 @@ li .merchant-countdown-timer {
 			}
 
 			&-inner {
+				gap: 15px;
 				width: 100%;
 				flex: 1;
 			}
@@ -212,18 +214,18 @@ li .merchant-countdown-timer {
 		}
 
 		.merchant-countdown-timer-countdown {
-			gap: 40px;
+			gap: 35px;
 
 			> div {
 				gap: 30px;
-				width: var(--merchant-digits-width,  70px);
+				width: var(--merchant-digits-width,  65px);
 				height: auto;
 			}
 
 			.cd-value {
 				position: relative;
 				transform: rotate(45deg);
-				height: var(--merchant-digits-height, 70px);
+				height: var(--merchant-digits-height, 65px);
 				background: var(--merchant-digits-background, #fff);
 				border: 2px solid var(--merchant-digits-border, #000000);
 				border-radius: 5px;

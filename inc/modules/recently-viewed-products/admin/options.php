@@ -119,7 +119,7 @@ Merchant_Admin_Options::create( array(
 			'options'   => array(
 				'id'         => __( 'ID', 'merchant' ),
 				'rand'       => __( 'Random', 'merchant' ),
-				'title'      => __( 'TItle', 'merchant' ),
+				'title'      => __( 'Title', 'merchant' ),
 				'date'       => __( 'Date', 'merchant' ),
 				'modified'   => __( 'Modified date', 'merchant' ),
 				'menu_order' => __( 'Menu order', 'merchant' ),

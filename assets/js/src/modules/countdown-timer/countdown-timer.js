@@ -43,8 +43,8 @@ const defaultStyles = {
         borderColor: '#000000',
         fontSizeDigits: 28,
         fontSizeLabels: 12,
-        width: 70,
-        height: 70,
+        width: 65,
+        height: 65,
     },
     minimalist: {
         labelsColor: '#7C7C7C',
@@ -345,7 +345,7 @@ class CountDownTimer {
         this.seconds = Math.floor( ( timeLeftInMilliseconds % ( 1000 * 60 ) ) / 1000 ).toString().padStart( 2, '0' );
 
         if ( classicOrProgress ) {
-            this.countDownTimer.find( 'span' ).html( `${this.days} <span>days</span> ${this.hours}:${this.minutes}:${this.seconds}` );
+            this.countDownTimer.find( 'span' ).html( `${this.days} <span>days ${ this.theme === 'progress' ? ' : ' : '' } </span> ${this.hours}:${this.minutes}:${this.seconds}` );
         } else if ( this.theme === 'modern' ) {
             this.flipTimer();
         } else {
