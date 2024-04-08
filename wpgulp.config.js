@@ -761,6 +761,7 @@ const scripts = [
 		name: 'countdownTimer',
 		src: './assets/js/src/modules/countdown-timer/countdown-timer.js',
 		destination: './assets/js/modules/countdown-timer',
+		file: 'countdown-timer'
 	},
 	{
 		name: 'countdownTimerAdmin',
