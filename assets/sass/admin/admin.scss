@@ -1724,6 +1724,10 @@ body.merchant-module-disabled {
 .merchant-module-page-setting-field-content {
   max-width: 60vw;
 
+  .merchant-module-page-setting-field-inner{
+    display: none;
+  }
+
   a {
     color: #3858E9;
 

@@ -23,7 +23,8 @@ Merchant_Admin_Options::create( array(
 				'sale-dates' => esc_html__( 'Sale price dates', 'merchant' ),
 			),
 			'default' => 'sale-dates',
-			'desc'    => esc_html__( 'Using "Evergreen", a unique expiration date will be randomly generated for each visitor and product based on the set minimum expiration. If "Sale price dates" is selected, it will follow the sale dates specified in the sale schedule on the product editing page.', 'merchant' ),
+			'desc'    => esc_html__( '"Sale Price Dates" will countdown to a specified end-date and time. "Evergreen" generates a unique expiration date for each visitor and product, within set minimum and maximum deadlines',
+				'merchant' ),
 		),
 
 		array(
@@ -54,7 +55,8 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'number',
 			'title'     => esc_html__( 'Cool off period (minutes)', 'merchant' ),
 			'default'   => 15,
-			'desc'      => esc_html__( 'Once the cool off period expires, the countdown timer will be shown again (individually for each customer on each product page).', 'merchant' ),
+			'desc'      => esc_html__( 'Once the cool off period expires, the countdown timer will be shown again (individually for each customer on each product page).',
+				'merchant' ),
 			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 
@@ -64,6 +66,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'content',
 			'title'     => esc_html__( 'Minimum expiration deadline', 'merchant' ),
 			'content'   => '',
+			'desc'      => esc_html__( 'Sets the time before the end date (set by the Maximum expiration deadline option) when the timer will disappear.', 'merchant' ),
 			'class'     => 'merchant-countdown-evergreen-content-field',
 			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
@@ -107,19 +110,20 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'content',
 			'title'     => esc_html__( 'Maximum expiration deadline', 'merchant' ),
 			'content'   => '',
+			'desc'      => esc_html__( 'Defines the final countdown end date, when the timer hits 00:00:00.', 'merchant' ),
 			'class'     => 'merchant-countdown-evergreen-content-field',
 			'condition' => array( 'end_date', '==', 'evergreen' ),
 		),
 		array(
-			'id'        => 'max_expiration_deadline_days',
-			'type'      => 'number',
-			'title'     => esc_html__( 'Days', 'merchant' ),
-			'default'   => 0,
-			'min'       => 0,
-			'step'      => 1,
+			'id'          => 'max_expiration_deadline_days',
+			'type'        => 'number',
+			'title'       => esc_html__( 'Days', 'merchant' ),
+			'default'     => 0,
+			'min'         => 0,
+			'step'        => 1,
 			'placeholder' => esc_html__( 'Days', 'merchant' ),
 			'class'       => 'merchant-countdown-evergreen-field',
-			'condition' => array( 'end_date', '==', 'evergreen' ),
+			'condition'   => array( 'end_date', '==', 'evergreen' ),
 		),
 		array(
 			'id'          => 'max_expiration_deadline',
@@ -163,31 +167,31 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'image_picker',
 			'title'   => esc_html__( 'Select layout', 'merchant' ),
 			'options' => array(
-				'classic'      => array(
+				'classic'    => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/classic.png',
 					'title' => esc_html__( 'Classic', 'merchant' ),
 				),
-				'progress' => array(
+				'progress'   => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/progress.png',
 					'title' => esc_html__( 'Progress bar', 'merchant' ),
 				),
-				'circles'      => array(
+				'circles'    => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/circles.png',
 					'title' => esc_html__( 'Circles', 'merchant' ),
 				),
-				'squares'      => array(
+				'squares'    => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/squares.png',
 					'title' => esc_html__( 'Squares', 'merchant' ),
 				),
-				'minimalist'   => array(
+				'minimalist' => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/minimalist.png',
 					'title' => esc_html__( 'Minimalist', 'merchant' ),
 				),
-				'cards'        => array(
+				'cards'      => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/cards.png',
 					'title' => esc_html__( 'Cards', 'merchant' ),
 				),
-				'modern'       => array(
+				'modern'     => array(
 					'image' => MERCHANT_URI . 'assets/images/icons/countdown-timer/admin/modern.png',
 					'title' => esc_html__( 'modern', 'merchant' ),
 				),
@@ -196,11 +200,11 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'        => 'sale_ending_text',
-			'type'      => 'text',
-			'title'     => esc_html__( 'Sale ending message', 'merchant' ),
-			'default'   => esc_html__( 'Sale ends in', 'merchant' ),
-			'desc'      => esc_html__( 'The message that shows up above the countdown timer.', 'merchant' ),
+			'id'      => 'sale_ending_text',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Sale ending message', 'merchant' ),
+			'default' => esc_html__( 'Sale ends in', 'merchant' ),
+			'desc'    => esc_html__( 'The message that shows up above the countdown timer.', 'merchant' ),
 		),
 
 		array(
