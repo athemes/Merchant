@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 
 		array(
 			'id'      => 'theme',
-			'type'    => 'choices',
+			'type'    => 'image_picker',
 			'title'   => esc_html__( 'Select layout', 'merchant' ),
 			'options' => array(
 				'classic'      => array(
