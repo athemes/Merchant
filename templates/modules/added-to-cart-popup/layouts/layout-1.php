@@ -54,23 +54,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		 */
 		do_action( 'merchant_added_to_cart_popup_action_buttons', $args );
 
-		if (
-			isset(
-				$args['settings']['show_suggested_products'],
-				$args['settings']['suggested_products_module']
-			)
-			&& $args['settings']['suggested_products_module'] === 'recently_viewed_products'
-			&& $args['settings']['show_suggested_products']
-			&& ! empty( $args['recently_viewed_products'] )
-		) {
-			/**
-			 * Recently viewed products module.
-			 *
-			 * @param array $args template args
-			 *
-			 * @since 1.9.7
-			 */
-			do_action( 'merchant_added_to_cart_popup_recently_viewed_products', $args );
-		} ?>
+		/**
+		 * Modules content.
+		 *
+		 * @param array $args template args
+		 *
+		 * @since 1.9.7
+		 */
+		do_action( 'merchant_added_to_cart_popup_modules_content', $args );
+		?>
     </div>
 </div>

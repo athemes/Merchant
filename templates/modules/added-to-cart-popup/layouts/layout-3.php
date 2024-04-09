@@ -41,8 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				/**
 				 * Product info.
 				 *
-                 * @param array $args template args
-                 *
+				 * @param array $args template args
+				 *
 				 * @since 1.9.7
 				 */
 				do_action( 'merchant_added_to_cart_popup_product_info', $args );
@@ -62,23 +62,14 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 		<?php
-		if (
-			isset(
-				$args['settings']['show_suggested_products'],
-				$args['settings']['suggested_products_module']
-			)
-			&& $args['settings']['suggested_products_module'] === 'recently_viewed_products'
-			&& $args['settings']['show_suggested_products']
-			&& ! empty( $args['recently_viewed_products'] )
-		) {
-			/**
-			 * Recently viewed products module.
-			 *
-             * @param array $args template args
-             *
-			 * @since 1.9.7
-			 */
-			do_action( 'merchant_added_to_cart_popup_recently_viewed_products', $args );
-		} ?>
+		/**
+		 * Modules content.
+		 *
+		 * @param array $args template args
+		 *
+		 * @since 1.9.7
+		 */
+		do_action( 'merchant_added_to_cart_popup_modules_content', $args );
+		?>
     </div>
 </div>
