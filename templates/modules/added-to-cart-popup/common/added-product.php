@@ -52,23 +52,48 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="popup-product-price">{{product_price}}</div>
 			<?php
 		}
-		if ( isset( $args['settings']['show_cart_total'] ) && $args['settings']['show_cart_total'] ) { ?>
+		if (
+			isset( $args['settings']['show_cart_details'] )
+			&& is_array( $args['settings']['show_cart_details'] )
+			&& array_intersect(
+				array(
+					'cart_total',
+					'shipping_cost',
+					'tax_amount',
+				),
+				$args['settings']['show_cart_details']
+			)
+		) { ?>
             <div class="popup-cart-info">
-                <div class="info-item">
+				<?php
+				if ( in_array( 'shipping_cost', $args['settings']['show_cart_details'], true ) ) {
+					?>
+                    <div class="info-item">
                     <span class="info-label"><?php
-						esc_html_e( 'Shipping Cost', 'merchant' ); ?></span>
-                    <span class="info-value">{{cart_shipping_cost}}</span>
-                </div>
-                <div class="info-item">
+	                    esc_html_e( 'Shipping Cost', 'merchant' ); ?></span>
+                        <span class="info-value">{{cart_shipping_cost}}</span>
+                    </div>
+					<?php
+				}
+				if ( in_array( 'tax_amount', $args['settings']['show_cart_details'], true ) ) {
+					?>
+                    <div class="info-item">
                     <span class="info-label"><?php
 	                    esc_html_e( 'Tax amount', 'merchant' ); ?></span>
-                    <span class="info-value">{{cart_tax_amount}}</span>
-                </div>
-                <div class="info-item">
+                        <span class="info-value">{{cart_tax_amount}}</span>
+                    </div>
+					<?php
+				}
+				if ( in_array( 'cart_total', $args['settings']['show_cart_details'], true ) ) {
+					?>
+                    <div class="info-item">
                     <span class="info-label"><?php
 	                    esc_html_e( 'Cart Total', 'merchant' ); ?></span>
-                    <span class="info-value">{{cart_subtotal}}</span>
-                </div>
+                        <span class="info-value">{{cart_subtotal}}</span>
+                    </div>
+					<?php
+				}
+				?>
             </div>
 			<?php
 		} ?>
