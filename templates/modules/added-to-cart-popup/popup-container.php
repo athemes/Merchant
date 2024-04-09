@@ -4,7 +4,7 @@
  *
  * @var $args array template args
  *
- * @since 1.9.5
+ * @since 1.9.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
