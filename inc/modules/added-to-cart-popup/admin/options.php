@@ -156,7 +156,6 @@ Merchant_Admin_Options::create( array(
 				'recently_viewed_products'   => esc_html__( 'Recently Viewed Products', 'merchant' ),
 				'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
 				'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
-				'bulk_discounts'             => esc_html__( 'Bulk Discounts', 'merchant' ),
 			),
 			'conditions' => array(
 				'terms' => array(
@@ -233,29 +232,6 @@ Merchant_Admin_Options::create( array(
 						'field'    => 'suggested_products_module', // field ID
 						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
 						'value'    => 'buy_x_get_y', // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
-			'id'          => 'suggested_products_instructions_bulk_discounts',
-			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display offers like Frequently Bought Together, Buy X Get Y, Bulk Discount, Recently Viewed Product enabling Merchant’s module.',
-				'merchant' ),
-			'button_text' => esc_html__( 'View Bulk Discounts', 'merchant' ),
-			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=volume-discounts' ) ),
-			'conditions'  => array(
-				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-				'terms'    => array(
-					array(
-						'field'    => 'show_suggested_products', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-					array(
-						'field'    => 'suggested_products_module', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
-						'value'    => 'bulk_discounts', // can be a single value or an array of string/number/int
 					),
 				),
 			),
