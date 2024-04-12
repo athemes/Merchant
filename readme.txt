@@ -216,6 +216,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.7 =
+* Fixed - Some modules settings information empty in the admin.
+* Fixed - Product Labels: Style messed when there's a high number of lables to the same product.
+
 = 1.9.6 =
 * Fixed - Conditional logic was broken in some modules settings page.
 
