@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		esc_html_e( 'Recently Viewed Products', 'merchant' ); ?></h3>
 	<ul class="viewed-products">
 		<?php
-		foreach ( $args['recently_viewed_products'] as $product ) {
+		foreach ( $args['product_offers'] as $product ) {
 			/**
 			 * @var WC_Product $product
 			 */
