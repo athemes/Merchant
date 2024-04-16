@@ -15,7 +15,7 @@ if ( empty( $args['product_offers'] ) ) {
 }
 foreach ( $args['product_offers'] as $offer ) {
 	?>
-    <div class="frequently-bought-together-popup">
+    <div class="frequently-bought-together-popup<?php echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] < 800 ? ' force-mobile-view' : ' '?>">
         <h3 class="section-title"><?php
 			echo esc_html( Merchant_Translator::translate( $offer['title'] ) ); ?></h3>
         <div class="offer-products">
@@ -43,35 +43,39 @@ foreach ( $args['product_offers'] as $offer ) {
                     <span class="plus-icon">+</span>
                 </div>
             </div>
-            <div class="offer-column slider-area computer-only">
-                <div class="products-slider-container">
-                    <div class="products-slider<?php
-					echo count( $offer['products'] ) > 1 ? esc_attr( ' multiple-slides' ) : ''; ?>">
-						<?php
-						foreach ( $offer['products'] as $product_data ) { ?>
-                            <div class="offer-product">
-                                <div class="image-wrapper">
-                                    <a href="<?php
-									echo esc_url( $product_data['permalink'] ); ?>">
-										<?php
-										echo wp_kses_post( $product_data['image_big'] ); ?>
-                                    </a>
-                                </div>
-                                <div class="product-summary">
-                                    <a href="<?php
-									echo esc_url( $product_data['permalink'] ); ?>">
-                                        <h3><?php
-											echo esc_html( $product_data['title'] ); ?></h3></a>
-                                    <div class="product-price"><?php
-										echo wp_kses_post( $product_data['price_html'] ); ?></div>
-                                </div>
-                            </div>
+			<?php
+			if ( isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] >= 800 ) { ?>
+                <div class="offer-column slider-area computer-only">
+                    <div class="products-slider-container">
+                        <div class="products-slider<?php
+						echo count( $offer['products'] ) > 1 ? esc_attr( ' multiple-slides' ) : ''; ?>">
 							<?php
-						} ?>
+							foreach ( $offer['products'] as $product_data ) { ?>
+                                <div class="offer-product">
+                                    <div class="image-wrapper">
+                                        <a href="<?php
+										echo esc_url( $product_data['permalink'] ); ?>">
+											<?php
+											echo wp_kses_post( $product_data['image_big'] ); ?>
+                                        </a>
+                                    </div>
+                                    <div class="product-summary">
+                                        <a href="<?php
+										echo esc_url( $product_data['permalink'] ); ?>">
+                                            <h3><?php
+												echo esc_html( $product_data['title'] ); ?></h3></a>
+                                        <div class="product-price"><?php
+											echo wp_kses_post( $product_data['price_html'] ); ?></div>
+                                    </div>
+                                </div>
+								<?php
+							} ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="offer-column mobile-only">
+			<?php
+			} ?>
+            <div class="offer-column<?php echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] >= 800 ? ' mobile-only' : ''?>">
                 <div class="offer-products">
 					<?php
 					foreach ( $offer['products'] as $product_data ) { ?>
