@@ -37,11 +37,11 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'popup_size',
 			'type'    => 'range',
-			'min'     => '0',
+			'min'     => '700',
 			'max'     => '1300',
 			'step'    => '1',
 			'unit'    => 'PX',
-			'default' => '800',
+			'default' => '1000',
 			'title'   => esc_html__( 'Popup size', 'merchant' ),
 		),
 		array(
