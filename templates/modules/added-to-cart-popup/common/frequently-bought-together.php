@@ -15,7 +15,7 @@ if ( empty( $args['product_offers'] ) ) {
 }
 foreach ( $args['product_offers'] as $offer ) {
 	?>
-    <div class="buy-x-get-y">
+    <div class="frequently-bought-together-popup">
         <h3 class="section-title"><?php
 			echo esc_html( Merchant_Translator::translate( $offer['title'] ) ); ?></h3>
         <div class="offer-products">
