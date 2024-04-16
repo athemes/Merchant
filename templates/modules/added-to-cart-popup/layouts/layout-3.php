@@ -12,7 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="popup layout-3">
+<div class="popup layout-3" style="<?php
+echo isset( $args['settings']['popup_size'] ) ? esc_attr( 'max-width: ' . $args['settings']['popup_size'] . 'px;' ) : 'max-width: 1000px;';
+?>">
     <div class="popup-header">
         <h3 class="popup-header-title"><?php
 			echo ! empty( $args['settings']['popup_message'] )
