@@ -44,29 +44,29 @@ Merchant_Admin_Options::create( array(
 			'default' => '1000',
 			'title'   => esc_html__( 'Popup size', 'merchant' ),
 		),
-//		array(
-//			'id'    => 'mobile_sizes',
-//			'type'  => 'switcher',
-//			'title' => esc_html__( 'Set different size on mobile', 'merchant' ),
-//		),
-//		array(
-//			'id'         => 'mobile_popup_width',
-//			'type'       => 'range',
-//			'min'        => '0',
-//			'max'        => '100',
-//			'step'       => '1',
-//			'unit'       => '%',
-//			'title'      => esc_html__( 'Mobile popup width', 'merchant' ),
-//			'conditions' => array(
-//				'terms' => array(
-//					array(
-//						'field'    => 'mobile_sizes', // field ID
-//						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
-//						'value'    => true, // can be a single value or an array of string/number/int
-//					),
-//				),
-//			),
-//		),
+//      array(
+//          'id'    => 'mobile_sizes',
+//          'type'  => 'switcher',
+//          'title' => esc_html__( 'Set different size on mobile', 'merchant' ),
+//      ),
+//      array(
+//          'id'         => 'mobile_popup_width',
+//          'type'       => 'range',
+//          'min'        => '0',
+//          'max'        => '100',
+//          'step'       => '1',
+//          'unit'       => '%',
+//          'title'      => esc_html__( 'Mobile popup width', 'merchant' ),
+//          'conditions' => array(
+//              'terms' => array(
+//                  array(
+//                      'field'    => 'mobile_sizes', // field ID
+//                      'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+//                      'value'    => true, // can be a single value or an array of string/number/int
+//                  ),
+//              ),
+//          ),
+//      ),
 		array(
 			'id'      => 'popup_message',
 			'type'    => 'text',
