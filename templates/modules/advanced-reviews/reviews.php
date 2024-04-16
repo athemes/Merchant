@@ -263,11 +263,11 @@ if( $args['review_images_carousel'] && $carousel_images_data ) { ?>
 							'compare' => 'NOT EXISTS',
 						),
 					);
-					// phpcs:disable
 					$comments_args[ 'orderby' ] = array(
 						'meta_value' => 'DESC',
 						'comment_date'   => 'DESC',
 					);
+					// phpcs:enable
 					break;
 			}
 
