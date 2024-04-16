@@ -125,6 +125,6 @@ foreach ( $args['product_offers'] as $offer ) {
 //echo '<pre>';
 //print_r( $args['popup_data'] );
 //echo '</pre>';
-echo '<pre>';
-print_r( $args['product_offers'] );
-echo '</pre>';
+//echo '<pre>';
+//print_r( $args['product_offers'] );
+//echo '</pre>';
