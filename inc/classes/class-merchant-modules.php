@@ -220,7 +220,7 @@ if ( ! class_exists( 'Merchant_Modules' ) ) {
 			$operation_mode = Merchant_Option::get( 'global-settings', 'operating_mode', 'active' );
 
 			if ( ! function_exists( 'wp_get_current_user' ) ) {
-				include( ABSPATH . 'wp-includes/pluggable.php' );
+				include ABSPATH . 'wp-includes/pluggable.php';
 			}
 
 			if ( 'inactive' === $operation_mode ) {
