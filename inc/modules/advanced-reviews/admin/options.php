@@ -135,7 +135,7 @@ Merchant_Admin_Options::create(
 				'type'    => 'switcher',
 				'title'   => __( 'Review images carousel', 'merchant' ),
 				'desc'    => __( 'Display first image from each review as carousel to captivate and assist shoppers in their decision-making process.', 'merchant' ),
-				'default' => 1,
+				'default' => 0,
 			),
 
 			// Carousel Tite.
