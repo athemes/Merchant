@@ -120,9 +120,13 @@ class Merchant_Added_To_Cart_Popup extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
-		?>
-        Preview HTML goes here...
-		<?php
+		merchant_get_template_part(
+			'modules/' . self::MODULE_ID . '/admin',
+			'layouts',
+			array(
+				'settings' => $settings,
+			)
+		);
 	}
 }
 

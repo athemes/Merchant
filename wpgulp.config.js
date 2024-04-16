@@ -89,6 +89,13 @@ const styles = [
 		src: './assets/sass/modules/buy-now/buy-now.scss',
 		destination: './assets/css/modules/buy-now',
 	},
+	// added to cart popup admin preview
+	{
+		name: 'addedToCartPopupAdminPreview',
+		src: './assets/sass/modules/added-to-cart-popup/admin/preview.scss',
+		destination: './assets/css/modules/added-to-cart-popup/admin',
+	},
+
 	// storewide sale preview
 	{
 		name: 'storewideSaleAdminPreview',
@@ -689,6 +696,14 @@ const scripts = [
 		name: 'volumeDiscountsAdminPreview',
 		src: './assets/js/src/modules/volume-discounts/admin/preview.js',
 		destination: './assets/js/modules/volume-discounts/admin',
+		file: 'preview'
+	},
+
+	// added to cart popup admin preview
+	{
+		name: 'addedToCartPopupAdminPreview',
+		src: './assets/js/src/modules/added-to-cart-popup/admin/preview.js',
+		destination: './assets/js/modules/added-to-cart-popup/admin',
 		file: 'preview'
 	},
 
