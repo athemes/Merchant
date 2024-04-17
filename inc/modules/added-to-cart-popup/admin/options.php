@@ -132,7 +132,7 @@ Merchant_Admin_Options::create( array(
 				'terms' => array(
 					array(
 						'field'    => 'show_view_cart_button', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
@@ -152,7 +152,7 @@ Merchant_Admin_Options::create( array(
 				'terms' => array(
 					array(
 						'field'    => 'show_view_continue_shopping_button', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
@@ -182,7 +182,7 @@ Merchant_Admin_Options::create( array(
 				'terms' => array(
 					array(
 						'field'    => 'show_suggested_products', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
@@ -200,12 +200,12 @@ Merchant_Admin_Options::create( array(
 				'terms'    => array(
 					array(
 						'field'    => 'show_suggested_products', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
 						'field'    => 'suggested_products_module', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => 'frequently_bought_together', // can be a single value or an array of string/number/int
 					),
 				),
@@ -223,12 +223,12 @@ Merchant_Admin_Options::create( array(
 				'terms'    => array(
 					array(
 						'field'    => 'show_suggested_products', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
 						'field'    => 'suggested_products_module', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => 'recently_viewed_products', // can be a single value or an array of string/number/int
 					),
 				),
@@ -246,12 +246,12 @@ Merchant_Admin_Options::create( array(
 				'terms'    => array(
 					array(
 						'field'    => 'show_suggested_products', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
 						'field'    => 'suggested_products_module', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => 'buy_x_get_y', // can be a single value or an array of string/number/int
 					),
 				),
@@ -275,7 +275,7 @@ Merchant_Admin_Options::create( array(
 				'terms' => array(
 					array(
 						'field'    => 'exclusion_list', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
@@ -292,12 +292,12 @@ Merchant_Admin_Options::create( array(
 				'terms'    => array(
 					array(
 						'field'    => 'exclusion_list', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
 						'field'    => 'exclusion_type', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => 'specific_products', // can be a single value or an array of string/number/int
 					),
 				),
@@ -317,12 +317,12 @@ Merchant_Admin_Options::create( array(
 				'terms'    => array(
 					array(
 						'field'    => 'exclusion_list', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => true, // can be a single value or an array of string/number/int
 					),
 					array(
 						'field'    => 'exclusion_type', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 						'value'    => 'specific_categories', // can be a single value or an array of string/number/int
 					),
 				),
