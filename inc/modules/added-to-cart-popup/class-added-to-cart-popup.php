@@ -81,8 +81,14 @@ class Merchant_Added_To_Cart_Popup extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['simple_product_label'] ) ) {
-			Merchant_Translator::register_string( $settings['simple_product_label'], esc_html__( 'Add to cart text simple product label', 'merchant' ) );
+		if ( ! empty( $settings['popup_message'] ) ) {
+			Merchant_Translator::register_string( $settings['popup_message'], esc_html__( 'Add to cart popup: header message text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['view_cart_button_label'] ) ) {
+			Merchant_Translator::register_string( $settings['view_cart_button_label'], esc_html__( 'Add to cart popup: view cart button label', 'merchant' ) );
+		}
+		if ( ! empty( $settings['view_continue_shopping_button_label'] ) ) {
+			Merchant_Translator::register_string( $settings['view_continue_shopping_button_label'], esc_html__( 'Add to cart popup: continue shopping button label', 'merchant' ) );
 		}
 	}
 
