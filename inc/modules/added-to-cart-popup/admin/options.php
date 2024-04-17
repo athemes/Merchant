@@ -87,6 +87,26 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'         => 'description_length',
+			'type'       => 'range',
+			'min'        => '5',
+			'max'        => '60',
+			'step'       => '1',
+			'unit'       => esc_html__( 'Words', 'merchant' ),
+			'default'    => '15',
+			'title'      => esc_html__( 'Description length', 'merchant' ),
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_product_info', // field ID
+						'operator' => 'contains', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'description', // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+
+		array(
 			'id'      => 'show_cart_details',
 			'type'    => 'checkbox_multiple',
 			'title'   => esc_html__( 'Show cart details', 'merchant' ),
