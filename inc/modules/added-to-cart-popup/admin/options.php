@@ -311,7 +311,7 @@ Merchant_Admin_Options::create( array(
 			'multiple'    => true,
 			'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 			'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-			'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+			'desc'        => esc_html__( 'Popup will not be displayed for selected categories.', 'merchant' ),
 			'conditions'  => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
