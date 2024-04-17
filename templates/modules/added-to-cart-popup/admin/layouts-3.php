@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						                    echo esc_html( get_woocommerce_currency_symbol() ); ?></span>20.00</span></span>
                             </div>
                             <div class="info-item tax-amount">
-                                <span class="info-label">Tax amount</span>
+                                <span class="info-label">Tax Amount</span>
                                 <span class="info-value"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
 						                    echo esc_html( get_woocommerce_currency_symbol() ); ?></span>2.00</span></span>
                             </div>
