@@ -70,8 +70,9 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'popup_message',
 			'type'    => 'text',
-			'default' => esc_html__( 'Product has been successfully added to your cart', 'merchant' ),
+			'default' => esc_html__( 'Added to cart', 'merchant' ),
 			'title'   => esc_html__( 'Popup message', 'merchant' ),
+			'desc'    => esc_html__( 'This message will be shown on top of the popup cart', 'merchant' ),
 		),
 
 		array(
