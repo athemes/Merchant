@@ -857,6 +857,14 @@ const scripts = [
 		destination: './assets/js/modules/frequently-bought-together/admin/',
 		file: 'preview'
 	},
+
+	// Buy now
+	{
+		name: 'buyNow',
+		src: './assets/js/src/modules/buy-now/buy-now.js',
+		destination: './assets/js/modules/buy-now/',
+		file: 'buy-now'
+	},
 ];
 
 // Watch options.

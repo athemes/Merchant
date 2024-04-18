@@ -138,6 +138,23 @@ if ( ! function_exists( 'merchant_is_flatsome_active' ) ) {
 }
 
 /**
+ * Check if Astra theme or its Pro version is installed and active.
+ *
+ * @param $is_pro_active
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_astra_active' ) ) {
+	function merchant_is_astra_active( $is_pro_active = false ) {
+		if ( $is_pro_active ) {
+			return function_exists( 'astra_has_pro_woocommerce_addon' ) && astra_has_pro_woocommerce_addon();
+		}
+
+		return defined( 'ASTRA_THEME_VERSION' );
+	}
+}
+
+/**
  * Check if any shortcode starts with merchant.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */
