@@ -13,6 +13,7 @@
 			this.updatePopupColorsStyles();
 			this.updateTitlePriceVisibility();
 			this.updateCartDetailsVisibility();
+			this.updateProductThumbVisibility();
 			this.updateActionButtonsVisibility();
 			this.updateProductDescriptionVisibility();
 		},
@@ -60,6 +61,20 @@
 		updateActionButtonsText: function () {
 			$('.popup-actions .view-cart').text($('.merchant-field-view_cart_button_label input').val());
 			$('.popup-actions .continue-shopping').text($('.merchant-field-view_continue_shopping_button_label input').val());
+		},
+
+		/**
+		 * Update product thumbnail visibility
+		 */
+		updateProductThumbVisibility: function () {
+			let thumbnailToggle = $('.merchant-field-show_product_info input[value="thumbnail"]'),
+				thumbnailWrapper = $('.popup-product-image');
+
+			if (!thumbnailToggle.is(':checked')) {
+				thumbnailWrapper.hide();
+			} else {
+				thumbnailWrapper.show();
+			}
 		},
 
 		/**
@@ -355,6 +370,7 @@
 			// Update product title, description and price visibility
 			$(document).on('change', '.merchant-field-show_product_info input', function (e) {
 				self.updateTitlePriceVisibility();
+				self.updateProductThumbVisibility();
 				self.updateProductDescriptionVisibility();
 			});
 
