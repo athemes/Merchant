@@ -25,7 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                                 d="M10.333 1.43359L1.73047 10.0361M1.73047 1.43359L10.333 10.0361"
-                                stroke="black"
+                                stroke="<?php
+		                        echo esc_attr( isset( $args['settings']['close_btn_color'] ) ? $args['settings']['close_btn_color'] : '#000000' ); ?>"
                                 stroke-width="1.5"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
