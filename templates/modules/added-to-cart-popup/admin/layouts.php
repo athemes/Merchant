@@ -11,6 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layouts-1' );
-merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layouts-2' );
-merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layouts-3' );
+merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layout-1' );
+merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layout-2' );
+merchant_get_template_part( 'modules/added-to-cart-popup/admin', 'layout-3' );
