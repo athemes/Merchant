@@ -940,7 +940,7 @@
                             if ($input.val() !== colorCode) {
                                 $input.val(colorCode).trigger('change.merchant');
                             }
-
+                            $(document).trigger('merchant-color-picker-updated', [colorCode, $input]);
                         });
 
                         pickr.on('clear', function () {
