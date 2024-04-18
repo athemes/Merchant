@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="popup layout-3">
     <div class="popup-header">
-        <h3 class="popup-header-title">Product has been successfully added to your cart </h3>
+        <h3 class="popup-header-title">Added to cart</h3>
         <div class="popup-close">
                 <span class="close-button popup-close-js" title="Close">
                     <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                     <div class="popup-product-content">
                         <div class="popup-product-name">
-                            <a href="#" target="_blank">Album</a>
+                            <a href="#" target="_blank">Your Product’s Name</a>
                         </div>
                         <p class="popup-product-description">An amazing product you can't refuse. Briefly expand your benefits.</p>
                         <div class="popup-product-price"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">£</span>15.00</span></div>
@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Logo Collection</h3></a>
+                                <h3>Your Product’s Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
@@ -100,7 +100,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Logo Collection</h3></a>
+                                <h3>Your Product’s Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Logo Collection</h3></a>
+                                <h3>Your Product’s Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
@@ -138,7 +138,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Logo Collection</h3></a>
+                                <h3>Your Product’s Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
@@ -157,7 +157,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Logo Collection</h3></a>
+                                <h3>Your Product’s Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
