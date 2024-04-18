@@ -15,7 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="added-product">
 	<?php
 	if (
-		isset( $args['settings']['show_product_thumb'] ) && $args['settings']['show_product_thumb']
+		isset( $args['settings']['show_product_info'] )
+		&& is_array( $args['settings']['show_product_info'] )
+		&& in_array( 'thumbnail', $args['settings']['show_product_info'], true )
 	) { ?>
         <div class="popup-product-image">
             <a href="{{product_url}}" target="_blank" title="{{product_name}}">{{product_image_large}}</a>
