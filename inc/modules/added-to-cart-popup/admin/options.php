@@ -80,10 +80,11 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'checkbox_multiple',
 			'title'   => esc_html__( 'Show product info', 'merchant' ),
 			'options' => array(
+				'thumbnail'       => esc_html__( 'Product thumbnail', 'merchant' ),
 				'title_and_price' => esc_html__( 'Product title and price', 'merchant' ),
 				'description'     => esc_html__( 'Product description', 'merchant' ),
 			),
-			'default' => array( 'title_and_price', 'description' ),
+			'default' => array( 'title_and_price', 'description', 'thumbnail' ),
 		),
 
 		array(
