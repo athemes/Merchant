@@ -10,6 +10,7 @@
 			this.activateLayout();
 			this.updatePopupHeader();
 			this.updateActionButtonsText();
+			this.updatePopupColorsStyles();
 			this.updateTitlePriceVisibility();
 			this.updateCartDetailsVisibility();
 			this.updateActionButtonsVisibility();
@@ -186,6 +187,134 @@
 		},
 
 		/**
+		 * Update popup colors & styles
+		 */
+		updatePopupColorsStyles: function () {
+			let popupBgColor = $('.merchant-field-popup_background_color input').val(),
+				popupCornerRadius = $('.merchant-field-popup_corner_radius input').val(),
+				closeBtnColor = $('.merchant-field-close_btn_color input').val(),
+				messageTextColor = $('.merchant-field-popup_message_text_color input').val(),
+				productTitleColor = $('.merchant-field-product_title_color input').val(),
+				productDescriptionColor = $('.merchant-field-product_description_color input').val(),
+				productPriceColor = $('.merchant-field-product_price_color input').val(),
+				productPriceFontSize = $('.merchant-field-product_price_font_size input').val(),
+				productPriceFontWeight = $('.merchant-field-product_price_font_weight input:checked').val(),
+				cartDetailsTextColor = $('.merchant-field-cart_details_color input').val(),
+				buttonsMainColor = $('.merchant-field-cart_main_color input').val(),
+				buttonsAlternateColor = $('.merchant-field-cart_alternate_color input').val(),
+				buttonsCornerRadius = $('.merchant-field-buttons_corner_radius input').val(),
+				suggestedProductsSectionTitleColor = $('.merchant-field-suggested_products_section_title_color input').val(),
+				suggestedProductNameColor = $('.merchant-field-suggested_product_name_color input').val(),
+				suggestedProductPriceColor = $('.merchant-field-suggested_product_price_color input').val(),
+				borderColor = $('.merchant-field-border_color input').val();
+
+			$('.popup').css({
+				'background-color': popupBgColor,
+				'border-radius': popupCornerRadius + 'px',
+			});
+
+			$('.popup-close .close-button svg path').attr('stroke', closeBtnColor);
+
+			$('.popup .popup-header .popup-header-title').css({
+				'color': messageTextColor
+			});
+
+			$('.popup .popup-body .added-product .popup-product-name a').css({
+				'color': productTitleColor
+			});
+
+			$('.popup .popup-body .added-product .popup-product-description').css({
+				'color': productDescriptionColor
+			});
+
+			$('.popup .popup-body .added-product .popup-product-price').css({
+				'color': productPriceColor,
+				'font-size': productPriceFontSize + 'px',
+				'font-weight': productPriceFontWeight
+			});
+
+			$('.popup-cart-info span').css({
+				'color': cartDetailsTextColor
+			});
+
+			$('.popup-actions .merchant-button').css({
+				'color': buttonsMainColor,
+				'border-color': buttonsMainColor,
+				'background-color': buttonsAlternateColor,
+				'border-radius': buttonsCornerRadius + 'px'
+			});
+
+			$('.popup-actions .merchant-button .button-filled,.popup-actions .merchant-button:first-of-type').css({
+				'background-color': buttonsMainColor,
+				'color': buttonsAlternateColor
+			});
+
+			$('.popup .popup-body .popup-actions .merchant-button').hover(
+				function() { // Mouse enter
+					$(this).not(':first-of-type').css({
+						'color': buttonsAlternateColor,
+						//'border-color': buttonsAlternateColor,
+						'background-color': buttonsMainColor
+					});
+					$(this).not(':first-of-type').find('.button-filled').css({
+						'background-color': buttonsAlternateColor,
+						'color': buttonsMainColor
+					});
+					if ($(this).is(':first-of-type')) {
+						$(this).css({
+							'color': buttonsMainColor,
+							//'border-color': buttonsMainColor,
+							'background-color': buttonsAlternateColor
+						});
+						$(this).find('.button-filled').css({
+							'background-color': buttonsMainColor,
+							'color': buttonsAlternateColor
+						});
+					}
+				},
+				function() { // Mouse leave
+					$(this).not(':first-of-type').css({
+						'color': buttonsMainColor,
+						//'border-color': buttonsMainColor,
+						'background-color': buttonsAlternateColor
+					});
+					$(this).not(':first-of-type').find('.button-filled').css({
+						'background-color': buttonsMainColor,
+						'color': buttonsAlternateColor
+					});
+					if ($(this).is(':first-of-type')) {
+						$(this).css({
+							'color': buttonsAlternateColor,
+							//'border-color': buttonsAlternateColor,
+							'background-color': buttonsMainColor
+						});
+						$(this).find('.button-filled').css({
+							'background-color': buttonsAlternateColor,
+							//'border-color': buttonsMainColor,
+							'color': buttonsMainColor
+						});
+					}
+				}
+			);
+
+			$('.popup .popup-body .recently-viewed-products .section-title').css({
+				'color': suggestedProductsSectionTitleColor
+			});
+
+			$('.popup .popup-body .recently-viewed-products .viewed-products .product h3').css({
+				'color': suggestedProductNameColor
+			});
+
+			$('.popup .popup-body .recently-viewed-products .viewed-products .product .product-price').css({
+				'color': suggestedProductPriceColor
+			});
+
+			$('.popup .added-product .popup-cart-info, .popup .popup-body .added-product, .popup.layout-3 .top-area').css({
+				'border-color': borderColor,
+			});
+		},
+
+		/**
 		 * Events
 		 */
 		events: function () {
@@ -232,6 +361,10 @@
 			// Update suggested products visibility
 			$(document).on('change', '.merchant-field-show_suggested_products input', function (e) {
 				self.updateSuggestedProductsVisibility();
+			});
+
+			$(document).on('merchant-color-picker-updated change', function (e) {
+				self.updatePopupColorsStyles();
 			});
 		}
 	};
