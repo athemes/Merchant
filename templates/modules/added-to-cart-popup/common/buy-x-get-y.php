@@ -17,10 +17,7 @@ if ( empty( $args['product_offers'] ) ) {
 foreach ( $args['product_offers'] as $offer ) {
 	?>
     <div class="buy-x-get-y">
-        <h3 class="section-title" style="<?php
-		echo isset( $offer['title_text_color'] ) ? esc_attr( 'color: ' . $offer['title_text_color'] . ';' ) : '';
-		echo isset( $offer['title_font_size'] ) ? esc_attr( 'font-size: ' . $offer['title_font_size'] . ';' ) : '';
-		?>"><?php
+        <h3 class="section-title"><?php
 			echo esc_html( Merchant_Translator::translate( $offer['title'] ) ); ?></h3>
         <div class="offer-products">
             <div class="offer-column">
