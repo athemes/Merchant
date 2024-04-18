@@ -44,29 +44,6 @@ Merchant_Admin_Options::create( array(
 			'default' => '1000',
 			'title'   => esc_html__( 'Popup size', 'merchant' ),
 		),
-		//      array(
-		//          'id'    => 'mobile_sizes',
-		//          'type'  => 'switcher',
-		//          'title' => esc_html__( 'Set different size on mobile', 'merchant' ),
-		//      ),
-		//      array(
-		//          'id'         => 'mobile_popup_width',
-		//          'type'       => 'range',
-		//          'min'        => '0',
-		//          'max'        => '100',
-		//          'step'       => '1',
-		//          'unit'       => '%',
-		//          'title'      => esc_html__( 'Mobile popup width', 'merchant' ),
-		//          'conditions' => array(
-		//              'terms' => array(
-		//                  array(
-		//                      'field'    => 'mobile_sizes', // field ID
-		//                      'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-		//                      'value'    => true, // can be a single value or an array of string/number/int
-		//                  ),
-		//              ),
-		//          ),
-		//      ),
 		array(
 			'id'      => 'popup_message',
 			'type'    => 'text',
@@ -74,7 +51,6 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Popup message', 'merchant' ),
 			'desc'    => esc_html__( 'This message will be shown on top of the popup cart', 'merchant' ),
 		),
-
 		array(
 			'id'      => 'show_product_info',
 			'type'    => 'checkbox_multiple',
@@ -86,7 +62,6 @@ Merchant_Admin_Options::create( array(
 			),
 			'default' => array( 'title_and_price', 'description', 'thumbnail' ),
 		),
-
 		array(
 			'id'         => 'description_length',
 			'type'       => 'range',
@@ -95,7 +70,7 @@ Merchant_Admin_Options::create( array(
 			'step'       => '1',
 			'unit'       => esc_html__( 'Words', 'merchant' ),
 			'default'    => '15',
-			'title'      => esc_html__( 'Description length', 'merchant' ),
+			'title'      => esc_html__( 'Maximum product description length', 'merchant' ),
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -332,7 +307,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'show_pages',
 			'type'    => 'checkbox_multiple',
-			'title'   => esc_html__( 'Show on devices', 'merchant' ),
+			'title'   => esc_html__( 'Show on pages', 'merchant' ),
 			'options' => array(
 				'homepage'        => esc_html__( 'Homepage', 'merchant' ),
 				'product_single'  => esc_html__( 'Product Single', 'merchant' ),
