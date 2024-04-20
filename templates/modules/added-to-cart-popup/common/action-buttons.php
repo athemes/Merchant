@@ -33,14 +33,6 @@ if (
 		<?php
 	} ?>
 	<?php
-	// Checkout button.
-	if ( isset( $args['settings']['show_checkout_button'] ) && $args['settings']['show_checkout_button'] ) { ?>
-        <a href="<?php
-		echo esc_url( wc_get_checkout_url() ); ?>" class="merchant-button checkout"><?php
-			esc_html_e( 'Checkout', 'merchant' ); ?></a>
-		<?php
-	} ?>
-	<?php
 	// Continue shopping button.
 	if ( isset( $args['settings']['show_view_continue_shopping_button'] ) && $args['settings']['show_view_continue_shopping_button'] ) { ?>
         <a href="#" class="merchant-button continue-shopping popup-close-js">
@@ -49,6 +41,14 @@ if (
 				? esc_html( Merchant_Translator::translate( $args['settings']['view_continue_shopping_button_label'] ) )
 				: esc_html__( 'Continue Shopping', 'merchant' ); ?>
         </a>
+		<?php
+	} ?>
+	<?php
+	// Checkout button.
+	if ( isset( $args['settings']['show_checkout_button'] ) && $args['settings']['show_checkout_button'] ) { ?>
+        <a href="<?php
+		echo esc_url( wc_get_checkout_url() ); ?>" class="merchant-button checkout"><?php
+			esc_html_e( 'Checkout', 'merchant' ); ?></a>
 		<?php
 	} ?>
 </div>
