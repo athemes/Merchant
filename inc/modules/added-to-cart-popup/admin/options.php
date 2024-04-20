@@ -155,6 +155,7 @@ Merchant_Admin_Options::create( array(
 				'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
 				'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
 			),
+			'default'    => 'recently_viewed_products',
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -248,6 +249,7 @@ Merchant_Admin_Options::create( array(
 				'specific_products'   => esc_html__( 'Specific Products', 'merchant' ),
 				'specific_categories' => esc_html__( 'Specific Categories', 'merchant' ),
 			),
+			'default'    => 'specific_products',
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -404,16 +406,6 @@ Merchant_Admin_Options::create( array(
 			'unit'    => 'PX',
 			'default' => '18',
 			'title'   => esc_html__( 'Product price font size', 'merchant' ),
-		),
-		array(
-			'id'      => 'product_price_font_weight',
-			'type'    => 'radio',
-			'title'   => esc_html__( 'Product price font weight', 'merchant' ),
-			'default' => 'normal',
-			'options' => array(
-				'normal' => esc_html__( 'Normal', 'merchant' ),
-				'bold'   => esc_html__( 'Bold', 'merchant' ),
-			),
 		),
 		array(
 			'id'      => 'cart_details_color',
