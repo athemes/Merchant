@@ -33,6 +33,7 @@ Merchant_Admin_Options::create( array(
 					'title' => esc_html__( 'Layout 3', 'merchant' ),
 				),
 			),
+			'default' => 'layout-1',
 		),
 		array(
 			'id'      => 'popup_size',
