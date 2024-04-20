@@ -60,9 +60,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="popup-actions">
             <a href="#" class="merchant-button button-filled view-cart">
                 View Cart </a>
-            <a href="#" class="merchant-button checkout">Checkout</a>
             <a href="#" class="merchant-button continue-shopping popup-close-js">
                 Continue Shopping </a>
+            <a href="#" class="merchant-button checkout">Checkout</a>
         </div>
         <div class="suggested-products">
             <div class="recently-viewed-products">
@@ -76,14 +76,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Your Product’s Name</h3></a>
+                                <h3>Product Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
                                     <?php
                                     echo esc_html( get_woocommerce_currency_symbol() ); ?>
-                                </span>18.00</span> – <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
-										echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
+                                </span>33.00</span>
                             </div>
                         </div>
                     </li>
@@ -95,14 +94,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Your Product’s Name</h3></a>
+                                <h3>Product Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
                                     <?php
                                     echo esc_html( get_woocommerce_currency_symbol() ); ?>
                                 </span>18.00</span> – <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
-										echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
+							            echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
                             </div>
                         </div>
                     </li>
@@ -114,14 +113,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Your Product’s Name</h3></a>
+                                <h3>Product Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
                                     <?php
                                     echo esc_html( get_woocommerce_currency_symbol() ); ?>
-                                </span>18.00</span> – <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
-										echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
+                                </span>11.00</span>
                             </div>
                         </div>
                     </li>
@@ -133,14 +131,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Your Product’s Name</h3></a>
+                                <h3>Product Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
                                     <?php
                                     echo esc_html( get_woocommerce_currency_symbol() ); ?>
-                                </span>18.00</span> – <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
-										echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
+                                </span>45.00</span>
                             </div>
                         </div>
                     </li>
@@ -152,14 +149,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                         <div class="product-summary">
                             <a href="#" tabindex="-1">
-                                <h3>Your Product’s Name</h3></a>
+                                <h3>Product Name</h3></a>
                             <div class="product-price">
                             <span class="woocommerce-Price-amount amount">
                                 <span class="woocommerce-Price-currencySymbol">
                                     <?php
                                     echo esc_html( get_woocommerce_currency_symbol() ); ?>
-                                </span>18.00</span> – <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?php
-										echo esc_html( get_woocommerce_currency_symbol() ); ?></span>45.00</span>
+                                </span>37.00</span>
                             </div>
                         </div>
                     </li>
