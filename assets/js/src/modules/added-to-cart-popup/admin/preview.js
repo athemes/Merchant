@@ -213,7 +213,6 @@
 				productDescriptionColor = $('.merchant-field-product_description_color input').val(),
 				productPriceColor = $('.merchant-field-product_price_color input').val(),
 				productPriceFontSize = $('.merchant-field-product_price_font_size input').val(),
-				productPriceFontWeight = $('.merchant-field-product_price_font_weight input:checked').val(),
 				cartDetailsTextColor = $('.merchant-field-cart_details_color input').val(),
 				buttonsMainColor = $('.merchant-field-cart_main_color input').val(),
 				buttonsAlternateColor = $('.merchant-field-cart_alternate_color input').val(),
@@ -244,8 +243,7 @@
 
 			$('.popup .popup-body .added-product .popup-product-price').css({
 				'color': productPriceColor,
-				'font-size': productPriceFontSize + 'px',
-				'font-weight': productPriceFontWeight
+				'font-size': productPriceFontSize + 'px'
 			});
 
 			$('.popup-cart-info span').css({
