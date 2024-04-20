@@ -1,3 +1,10 @@
+.merchant-field-description_length{
+	input[type=number]{
+		padding: 12px 45px 12px 10px;
+		max-width: 96px;
+	}
+}
+
 .grey_background {
 	background-color: #E5E5E5;
 }
@@ -55,8 +62,8 @@
 
 		.added-product {
 			margin-bottom: 20px;
-			border-bottom: 1px solid #D9D9D9;
-			padding-bottom: 15px;
+			//border-bottom: 1px solid #D9D9D9;
+			//padding-bottom: 15px;
 
 			.popup-product-image {
 				margin-right: 30px;
@@ -641,8 +648,8 @@
 			display: flex;
 			margin: 0 0 30px;
 			flex-wrap: wrap;
-			padding-bottom: 30px;
-			border-bottom: 1px solid #D9D9D9;
+			//padding-bottom: 30px;
+			//border-bottom: 1px solid #D9D9D9;
 
 			.product-component {
 				flex: 2;
