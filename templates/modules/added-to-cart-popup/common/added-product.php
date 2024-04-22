@@ -11,14 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$product_info = Merchant_Admin_Options::get( 'added-to-cart-popup', 'show_product_info', array( 'thumbnail', 'title_and_price', 'description' ) );
+$cart_details = Merchant_Admin_Options::get( 'added-to-cart-popup', 'show_cart_details', array( 'cart_total', 'shipping_cost', 'tax_amount' ) );
 ?>
 <div class="added-product">
 	<?php
-	if (
-		isset( $args['settings']['show_product_info'] )
-		&& is_array( $args['settings']['show_product_info'] )
-		&& in_array( 'thumbnail', $args['settings']['show_product_info'], true )
-	) { ?>
+	if ( in_array( 'thumbnail', $product_info, true ) ) { ?>
         <div class="popup-product-image">
             <a href="{{product_url}}" target="_blank" title="{{product_name}}">{{product_image_large}}</a>
         </div>
@@ -26,49 +24,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 	} ?>
     <div class="popup-product-content">
 		<?php
-		if (
-			isset( $args['settings']['show_product_info'] )
-			&& is_array( $args['settings']['show_product_info'] )
-			&& in_array( 'title_and_price', $args['settings']['show_product_info'], true )
-		) { ?>
+		if ( in_array( 'title_and_price', $product_info, true ) ) { ?>
             <div class="popup-product-name">
                 <a href="{{product_url}}" target="_blank">{{product_name}}</a>
             </div>
 			<?php
 		} ?>
 		<?php
-		if (
-			isset( $args['settings']['show_product_info'] )
-			&& is_array( $args['settings']['show_product_info'] )
-			&& in_array( 'description', $args['settings']['show_product_info'], true )
-		) { ?>
+		if ( in_array( 'description', $product_info, true ) ) { ?>
             <p class="popup-product-description">{{product_description}}</p>
 			<?php
 		} ?>
 		<?php
-		if (
-			isset( $args['settings']['show_product_info'] )
-			&& is_array( $args['settings']['show_product_info'] )
-			&& in_array( 'title_and_price', $args['settings']['show_product_info'], true )
-		) { ?>
+		if ( in_array( 'title_and_price', $product_info, true ) ) { ?>
             <div class="popup-product-price">{{product_price}}</div>
 			<?php
 		}
 		if (
-			isset( $args['settings']['show_cart_details'] )
-			&& is_array( $args['settings']['show_cart_details'] )
+			is_array( $cart_details )
 			&& array_intersect(
 				array(
 					'cart_total',
 					'shipping_cost',
 					'tax_amount',
 				),
-				$args['settings']['show_cart_details']
+				$cart_details
 			)
 		) { ?>
             <div class="popup-cart-info">
 				<?php
-				if ( in_array( 'shipping_cost', $args['settings']['show_cart_details'], true ) ) {
+				if ( in_array( 'shipping_cost', $cart_details, true ) ) {
 					?>
                     <div class="info-item">
                     <span class="info-label"><?php
@@ -77,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
 					<?php
 				}
-				if ( in_array( 'tax_amount', $args['settings']['show_cart_details'], true ) ) {
+				if ( in_array( 'tax_amount', $cart_details, true ) ) {
 					?>
                     <div class="info-item">
                     <span class="info-label"><?php
@@ -86,7 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
 					<?php
 				}
-				if ( in_array( 'cart_total', $args['settings']['show_cart_details'], true ) ) {
+				if ( in_array( 'cart_total', $cart_details, true ) ) {
 					?>
                     <div class="info-item">
                     <span class="info-label"><?php
