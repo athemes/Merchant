@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<div class="recently-viewed-products">
+<div class="recently-viewed-products-section">
 	<h3 class="section-title"><?php
 		esc_html_e( 'Recently Viewed Products', 'merchant' ); ?></h3>
 	<ul class="viewed-products">
