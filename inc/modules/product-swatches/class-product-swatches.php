@@ -423,6 +423,8 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		    .merchant-product-swatches .merchant-volume-discounts {
                 display: none;
             }
+
+            .wp-block-product-new .wc-block-grid__product .merchant-product-swatches .single_variation_wrap,
 			.merchant-variations-wrapper select,
 			 .merchant-variations-wrapper .theme-select {
 			    display: none!important;
@@ -489,10 +491,15 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 			    -webkit-transition: ease all 300ms;
 			    transition: ease all 300ms;
 		        border-style: solid;
-		        text-decoration: none;
 			}
 			.merchant-variations-wrapper .merchant-variation-type-image img {
 		        vertical-align: inherit;
+			}
+			
+			.merchant-variations-wrapper .merchant-variation-type-button > a,
+			.merchant-variations-wrapper .merchant-variation-type-select > a,
+			.merchant-product-swatches .merchant-add-to-cart-button {
+			    text-decoration: none !important;
 			}
 		';
 
@@ -563,8 +570,9 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 
 		// Swatches Wrapper Selectors
 		$selectors = array(
-			'.single-product'        => '',
-			'ul.products li.product' => '_shop_archive',
+			'.single-product'                                      => '',
+			'ul.products li.product'                               => '_shop_archive',
+			'ul.wc-block-grid__products li.wc-block-grid__product' => '_shop_archive',
 		);
 
 		// Swatches Styling (Select)

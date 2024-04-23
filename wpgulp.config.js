@@ -761,6 +761,7 @@ const scripts = [
 		name: 'countdownTimer',
 		src: './assets/js/src/modules/countdown-timer/countdown-timer.js',
 		destination: './assets/js/modules/countdown-timer',
+		file: 'countdown-timer'
 	},
 	{
 		name: 'countdownTimerAdmin',
@@ -855,6 +856,14 @@ const scripts = [
 		src: './assets/js/src/modules/frequently-bought-together/admin/preview.js',
 		destination: './assets/js/modules/frequently-bought-together/admin/',
 		file: 'preview'
+	},
+
+	// Buy now
+	{
+		name: 'buyNow',
+		src: './assets/js/src/modules/buy-now/buy-now.js',
+		destination: './assets/js/modules/buy-now/',
+		file: 'buy-now'
 	},
 ];
 

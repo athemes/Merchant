@@ -1,9 +1,9 @@
 === Merchant ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
-Tested up to: 6.4.3
+Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.5
+Stable tag: 1.9.7
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -165,7 +165,7 @@ Merchant is brought to you by [aThemes](https://athemes.com/), a WordPress prod
 - To find out more about Merchant visit the [plugin page on our website](https://athemes.com/merchant/).
 
 **Happy user of Merchant?**
-- Join our [Facebook Group](https://www.facebook.com/groups/essentialaddons/https://www.facebook.com/groups/athemes).
+- Join our [Facebook Group](https://www.facebook.com/groups/athemes).
 - Or [rate us on WordPress](https://wordpress.org/support/plugin/merchant/reviews/) 🙂
 
 **NOTES**
@@ -216,6 +216,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.7 =
+* Fixed - Some modules settings information empty in the admin.
+* Fixed - Product Labels: Style messed when there's a high number of lables to the same product.
+
+= 1.9.6 =
+* Fixed - Conditional logic was broken in some modules settings page.
+
 = 1.9.5 =
 * Added - Product Labels: A specific product option within the "Pages to Display" allows adding labels to specific products.
 

@@ -76,7 +76,7 @@ Merchant_Admin_Options::create( array(
 				'check3' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check3.svg',
 			),
 			'default'   => 'check2',
-			'condition' => array( 'display_icon', '==', true ),
+			'condition' => array( 'display_icon', '==', '1' ),
 		),
 
 		// List items Spacing.
