@@ -170,7 +170,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'          => 'suggested_products_instructions_frequently_bought_together',
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display offers like Frequently Bought Together, Buy X Get Y, Bulk Discount, Recently Viewed Product enabling Merchant’s module.',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules from Merchant (like Recently Viewed Products) or you can use the default Related Products.',
 				'merchant' ),
 			'button_text' => esc_html__( 'View Frequently Bought Together', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=frequently-bought-together' ) ),
@@ -193,7 +193,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'          => 'suggested_products_instructions_recently_viewed_products',
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display offers like Frequently Bought Together, Buy X Get Y, Bulk Discount, Recently Viewed Product enabling Merchant’s module.',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules from Merchant (like Recently Viewed Products) or you can use the default Related Products.',
 				'merchant' ),
 			'button_text' => esc_html__( 'View Recently Viewed Products', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=recently-viewed-products' ) ),
@@ -216,7 +216,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'          => 'suggested_products_instructions_buy_x_get_y',
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display offers like Frequently Bought Together, Buy X Get Y, Bulk Discount, Recently Viewed Product enabling Merchant’s module.',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules from Merchant (like Recently Viewed Products) or you can use the default Related Products.',
 				'merchant' ),
 			'button_text' => esc_html__( 'View Buy X Get Y', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=buy-x-get-y' ) ),
