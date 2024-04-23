@@ -13,32 +13,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="recently-viewed-products-section">
-	<h3 class="section-title"><?php
+    <h3 class="section-title"><?php
 		esc_html_e( 'Recently Viewed Products', 'merchant' ); ?></h3>
-	<ul class="viewed-products">
+    <ul class="products-list">
 		<?php
 		foreach ( $args['product_offers'] as $product ) {
 			/**
 			 * @var WC_Product $product
 			 */
 			?>
-			<li class="product">
-				<div class="image-wrapper">
-					<a href="<?php
+            <li class="product">
+                <div class="image-wrapper">
+                    <a href="<?php
 					echo esc_url( $product->get_permalink() ); ?>">
 						<?php
 						echo wp_kses_post( $product->get_image() ); ?>
-					</a>
-				</div>
-				<div class="product-summary">
-					<a href="<?php
+                    </a>
+                </div>
+                <div class="product-summary">
+                    <a href="<?php
 					echo esc_url( $product->get_permalink() ); ?>">
-						<h3><?php
+                        <h3><?php
 							echo esc_html( $product->get_name() ); ?></h3></a>
-					<div class="product-price"><?php
+                    <div class="product-price"><?php
 						echo wp_kses_post( $product->get_price_html() ); ?></div>
-				</div>
-			</li>
+                </div>
+            </li>
 			<?php
 		} ?>
+    </ul>
 </div>

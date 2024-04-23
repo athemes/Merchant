@@ -151,11 +151,12 @@ Merchant_Admin_Options::create( array(
 			'id'         => 'suggested_products_module',
 			'type'       => 'select',
 			'options'    => array(
+				'related_products'           => esc_html__( 'Related Products', 'merchant' ),
 				'recently_viewed_products'   => esc_html__( 'Recently Viewed Products', 'merchant' ),
 				'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
 				'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
 			),
-			'default'    => 'recently_viewed_products',
+			'default'    => 'related_products',
 			'conditions' => array(
 				'terms' => array(
 					array(
