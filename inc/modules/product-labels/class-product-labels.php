@@ -280,6 +280,17 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 			}
 
+			/**
+			 * Filter the product discount price.
+			 *
+			 * @param int        $percentage The product discount percentage.
+			 * @param WC_Product $product    The product object.
+			 * @param array      $label      The label data.
+			 *
+			 * @since 1.9.7
+			 */
+			$percentage = apply_filters( 'merchant_product_labels_product_discount_percentage', $percentage, $product, $label );
+
 			$label_text = str_replace( '{value}', $percentage, Merchant_Translator::translate( $label['percentage_text'] ) );
 		}
 
@@ -454,15 +465,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 							}
 							break;
 
-                        case 'specific_products':
-                            $product_ids = $label['product_ids'] ?? array();
-	                        $product_ids = ! is_array( $product_ids ) ? explode( ',',  $product_ids ) : $product_ids;
-	                        $product_ids = array_map( 'intval', $product_ids );
+						case 'specific_products':
+							$product_ids = $label['product_ids'] ?? array();
+							$product_ids = ! is_array( $product_ids ) ? explode( ',', $product_ids ) : $product_ids;
+							$product_ids = array_map( 'intval', $product_ids );
 
-                            if ( in_array( $product->get_id(), $product_ids, true ) ) {
-		                        $product_labels_html .= $this->label( $label );
-	                        }
-	                        break;
+							if ( in_array( $product->get_id(), $product_ids, true ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
 					}
 				}
 			}
@@ -537,8 +548,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 8 . 'px';
 
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
-					. esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
-					. '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
+			       . esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
+			       . '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
 		}
 
 		return '';
@@ -563,8 +574,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return '';
 		}
 		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
-				. esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
-				. trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
+		         . esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
+		         . trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
 
 		/**
 		 * Filter the single product label.
