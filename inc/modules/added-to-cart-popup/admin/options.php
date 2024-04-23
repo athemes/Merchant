@@ -144,7 +144,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'show_suggested_products',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Show suggested product', 'merchant' ),
+			'title'   => esc_html__( 'Show suggested products', 'merchant' ),
 			'default' => 1,
 		),
 		array(
