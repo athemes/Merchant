@@ -39,6 +39,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 			self::$modules_data = array(
 
 				// Boost Revenue.
+				'added-to-cart-popup' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
+					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
+					'desc' => esc_html__( 'Display a dynamic popup with product recommendations when items are added to the cart', 'merchant' ),
+					'tutorial_url' => '',
+				),
 				'pre-orders' => array(
 					'pro' => false,
 					'section' => 'boost-revenue',
@@ -112,14 +120,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Buy Now', 'merchant' ),
 					'desc' => esc_html__( 'Send your customers directly to checkout instead of the cart with Buy Now buttons', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-				),
-				'added-to-cart-popup' => array(
-					'pro' => true,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-now' ),
-					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
-					'desc' => esc_html__( 'Display a popup when a product is added to cart to increase average cart value', 'merchant' ),
-					'tutorial_url' => '',
 				),
 				'product-labels' => array(
 					'pro' => false,
