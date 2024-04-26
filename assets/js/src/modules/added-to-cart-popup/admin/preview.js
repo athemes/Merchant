@@ -28,21 +28,26 @@
 				arrowIcon = '<svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.19824 1.14453L4.03516 3.98242L1.19824 6.81934" stroke="#E5E5E5"/></svg>';
 			allPopups.removeClass('show');
 			activePopup.addClass('show');
-			activePopup.find('.recently-viewed-products .viewed-products').slick({
-				// 4 products per slide
-				slidesToShow: 3,
-				prevArrow: '<button type="button" class="slick-prev">' + arrowIcon + '</button>',
-				nextArrow: '<button type="button" class="slick-next">' + arrowIcon + '</button>',
-				responsive: [
-					{
-						breakpoint: 768,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 2,
-							arrows: false,
+			activePopup.find('.recently-viewed-products .viewed-products').each(function () {
+				if ($(this).hasClass('slick-initialized')) {
+					$(this).slick('unslick');
+				}
+				$(this).slick({
+					// 4 products per slide
+					slidesToShow: 3,
+					prevArrow: '<button type="button" class="slick-prev">' + arrowIcon + '</button>',
+					nextArrow: '<button type="button" class="slick-next">' + arrowIcon + '</button>',
+					responsive: [
+						{
+							breakpoint: 768,
+							settings: {
+								slidesToShow: 2,
+								slidesToScroll: 2,
+								arrows: false,
+							}
 						}
-					}
-				]
+					]
+				})
 			});
 		},
 
@@ -263,7 +268,7 @@
 			});
 
 			$('.popup .popup-body .popup-actions .merchant-button').hover(
-				function() { // Mouse enter
+				function () { // Mouse enter
 					$(this).not(':first-of-type').css({
 						'color': buttonsAlternateColor,
 						//'border-color': buttonsAlternateColor,
@@ -285,7 +290,7 @@
 						});
 					}
 				},
-				function() { // Mouse leave
+				function () { // Mouse leave
 					$(this).not(':first-of-type').css({
 						'color': buttonsMainColor,
 						//'border-color': buttonsMainColor,
