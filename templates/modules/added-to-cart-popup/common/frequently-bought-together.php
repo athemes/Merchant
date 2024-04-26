@@ -15,7 +15,8 @@ if ( empty( $args['product_offers'] ) ) {
 }
 foreach ( $args['product_offers'] as $offer ) {
 	?>
-    <div class="frequently-bought-together-popup<?php echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] < 800 ? ' force-mobile-view' : ' '?>">
+    <div class="frequently-bought-together-popup<?php
+	echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] < 800 ? ' force-mobile-view' : ' ' ?>">
         <h3 class="section-title"><?php
 			echo esc_html( Merchant_Translator::translate( $offer['title'] ) ); ?></h3>
         <div class="offer-products">
@@ -63,7 +64,27 @@ foreach ( $args['product_offers'] as $offer ) {
                                         <a href="<?php
 										echo esc_url( $product_data['permalink'] ); ?>">
                                             <h3><?php
-												echo esc_html( $product_data['title'] ); ?></h3></a>
+												echo esc_html( wp_trim_words(
+													$product_data['title'],
+													/**
+													 * Product title words count.
+													 *
+													 * @param int   $words        Words count.
+													 * @param Array $product_data Product data.
+													 *
+													 * @since 1.9.7
+													 */
+													apply_filters( 'merchant_popup_fbt_product_title_words', 10, $product_data ),
+													/**
+													 * Product title suffix.
+													 *
+													 * @param string $suffix       Suffix.
+													 * @param Array  $product_data Product data.
+													 *
+													 * @since 1.9.7
+													 */
+													apply_filters( 'merchant_popup_fbt_product_title_suffix', '...', $product_data )
+												) ); ?></h3></a>
                                         <div class="product-price"><?php
 											echo wp_kses_post( $product_data['price_html'] ); ?></div>
                                     </div>
@@ -73,9 +94,10 @@ foreach ( $args['product_offers'] as $offer ) {
                         </div>
                     </div>
                 </div>
-			<?php
+				<?php
 			} ?>
-            <div class="offer-column<?php echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] >= 800 ? ' mobile-only' : ''?>">
+            <div class="offer-column<?php
+			echo isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] >= 800 ? ' mobile-only' : '' ?>">
                 <div class="offer-products">
 					<?php
 					foreach ( $offer['products'] as $product_data ) { ?>
@@ -94,7 +116,27 @@ foreach ( $args['product_offers'] as $offer ) {
                                 <a href="<?php
 								echo esc_url( $product_data['permalink'] ); ?>">
                                     <h3><?php
-										echo esc_html( $product_data['title'] ); ?></h3></a>
+										echo esc_html( wp_trim_words(
+											$product_data['title'],
+											/**
+											 * Product title words count.
+											 *
+											 * @param int   $words        Words count.
+											 * @param Array $product_data Product data.
+											 *
+											 * @since 1.9.7
+											 */
+											apply_filters( 'merchant_fbt_product_title_words', 10, $product_data ),
+											/**
+											 * Product title suffix.
+											 *
+											 * @param string $suffix       Suffix.
+											 * @param Array  $product_data Product data.
+											 *
+											 * @since 1.9.7
+											 */
+											apply_filters( 'merchant_fbt_product_title_suffix', '...', $product_data )
+										) ); ?></h3></a>
                                 <div class="product-price"><?php
 									echo wp_kses_post( $product_data['price_html'] ); ?></div>
                             </div>

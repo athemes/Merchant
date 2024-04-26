@@ -34,7 +34,27 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <a href="<?php
 					echo esc_url( $product->get_permalink() ); ?>">
                         <h3><?php
-							echo esc_html( $product->get_name() ); ?></h3></a>
+							echo esc_html( wp_trim_words(
+								$product->get_name(),
+								/**
+								 * Product title words count.
+								 *
+								 * @param int        $words   Words count.
+								 * @param WC_Product $product Product object.
+								 *
+								 * @since 1.9.7
+								 */
+								apply_filters( 'merchant_popup_recently_viewed_products_product_title_words', 10, $product ),
+								/**
+								 * Product title suffix.
+								 *
+								 * @param string     $suffix  Suffix.
+								 * @param WC_Product $product Product object.
+								 *
+								 * @since 1.9.7
+								 */
+								apply_filters( 'merchant_popup_recently_viewed_products_product_title_suffix', '...', $product )
+							) ); ?></h3></a>
                     <div class="product-price"><?php
 						echo wp_kses_post( $product->get_price_html() ); ?></div>
                 </div>
