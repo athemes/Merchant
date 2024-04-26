@@ -40,7 +40,7 @@ foreach ( $args['product_offers'] as $offer ) {
             </div>
             <div class="offer-column half-width computer-only">
                 <div class="offer-icon">
-                    <span class="plus-icon">+</span>
+                    <span class="plus-icon"></span>
                 </div>
             </div>
 			<?php
@@ -81,7 +81,7 @@ foreach ( $args['product_offers'] as $offer ) {
 					foreach ( $offer['products'] as $product_data ) { ?>
                         <div class="offer-product other-products">
                             <div class="offer-icon">
-                                <span class="plus-icon">+</span>
+                                <span class="plus-icon"></span>
                             </div>
                             <div class="image-wrapper">
                                 <a href="<?php
