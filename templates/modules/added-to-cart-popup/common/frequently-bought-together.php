@@ -45,6 +45,7 @@ foreach ( $args['product_offers'] as $offer ) {
                 </div>
             </div>
 			<?php
+			unset( $offer['products'][0] ); // Prevent the main product from being displayed in the slider
 			if ( isset( $args['settings']['popup_size'] ) && $args['settings']['popup_size'] >= 800 ) { ?>
                 <div class="offer-column slider-area computer-only">
                     <div class="products-slider-container">
