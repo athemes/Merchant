@@ -29,13 +29,13 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="product-component">
                 <div class="added-product">
                     <div class="popup-product-image">
-                        <a href="#" target="_blank" title="Album">
+                        <a href="#" title="Album">
                             <div class="grey_background" style="width: 200px; height: 200px;"></div>
                         </a>
                     </div>
                     <div class="popup-product-content">
                         <div class="popup-product-name">
-                            <a href="#" target="_blank">Your Product’s Name</a>
+                            <a href="#">Your Product’s Name</a>
                         </div>
                         <p class="popup-product-description">An amazing product you can't refuse. Briefly expand your benefits.</p>
                         <div class="popup-product-price"><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">£</span>15.00</span></div>
