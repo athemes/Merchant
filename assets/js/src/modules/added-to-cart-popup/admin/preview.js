@@ -15,6 +15,7 @@
 			this.updateCartDetailsVisibility();
 			this.updateProductThumbVisibility();
 			this.updateActionButtonsVisibility();
+			this.updateSuggestedProductsVisibility();
 			this.updateProductDescriptionVisibility();
 		},
 
@@ -24,11 +25,20 @@
 		activateLayout: function () {
 			let layout = $('.merchant-image-picker').find('input:checked').val(),
 				allPopups = $('.popup'),
-				activePopup = $('.popup.' + layout),
-				arrowIcon = '<svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.19824 1.14453L4.03516 3.98242L1.19824 6.81934" stroke="#E5E5E5"/></svg>';
+				activePopup = $('.popup.' + layout);
 			allPopups.removeClass('show');
 			activePopup.addClass('show');
-			activePopup.find('.recently-viewed-products .viewed-products').each(function () {
+			this.refreshSlickSlider();
+		},
+
+		/**
+		 * Refresh slick slider
+		 */
+		refreshSlickSlider: function () {
+			let layout = $('.merchant-image-picker').find('input:checked').val(),
+				activePopup = $('.popup.' + layout),
+				arrowIcon = '<svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.19824 1.14453L4.03516 3.98242L1.19824 6.81934" stroke="#E5E5E5"/></svg>';
+			activePopup.find('.slider-products .products-list').each(function () {
 				if ($(this).hasClass('slick-initialized')) {
 					$(this).slick('unslick');
 				}
@@ -196,10 +206,27 @@
 		},
 
 		/**
-		 * Update suggested products visibility
+		 * Update suggested products visibility and content
 		 */
 		updateSuggestedProductsVisibility: function () {
 			if ($('.merchant-field-show_suggested_products input:checked').length) {
+				let suggestedProductsType = $('.merchant-field-suggested_products_module select').val(),
+					allSuggestedProductsTypes = $('.suggested-products-content'),
+					recentlyViewedProducts = $('.recently-viewed-products'),
+					frequentlyBoughtTogether = $('.frequently-bought-together-popup'),
+					relatedProducts = $('.related-products'),
+					buyXGetY = $('.buy-x-get-y');
+				allSuggestedProductsTypes.addClass('hidden');
+				if (suggestedProductsType === 'recently_viewed_products') {
+					recentlyViewedProducts.removeClass('hidden');
+				} else if (suggestedProductsType === 'frequently_bought_together') {
+					frequentlyBoughtTogether.removeClass('hidden');
+				} else if (suggestedProductsType === 'related_products') {
+					relatedProducts.removeClass('hidden');
+				} else if (suggestedProductsType === 'buy_x_get_y') {
+					buyXGetY.removeClass('hidden');
+				}
+				this.refreshSlickSlider();
 				$('.suggested-products').show();
 			} else {
 				$('.suggested-products').hide();
@@ -377,8 +404,8 @@
 				self.updateProductDescriptionVisibility();
 			});
 
-			// Update suggested products visibility
-			$(document).on('change', '.merchant-field-show_suggested_products input', function (e) {
+			// Update suggested products visibility and content
+			$(document).on('change', '.merchant-field-show_suggested_products input, .merchant-field-suggested_products_module select', function (e) {
 				self.updateSuggestedProductsVisibility();
 			});
 

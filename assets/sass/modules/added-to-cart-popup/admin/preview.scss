@@ -1,5 +1,5 @@
-.merchant-field-description_length{
-	input[type=number]{
+.merchant-field-description_length {
+	input[type=number] {
 		padding: 12px 45px 12px 10px;
 		max-width: 96px;
 	}
@@ -21,6 +21,7 @@
 		display: block;
 	}
 
+	ins,
 	a {
 		text-decoration: none;
 	}
@@ -181,23 +182,14 @@
 			}
 		}
 
-		.star-rating {
-			float: left;
-
-			&:before,
-			span {
-				color: #FEBE10;
-			}
-		}
-
-		.recently-viewed-products {
+		.slider-products {
 			.section-title {
 				font-size: 20px;
 				font-weight: bold;
 				margin-bottom: 20px;
 			}
 
-			.viewed-products {
+			.products-list {
 				margin: 0 -15px;
 				padding: 0;
 				list-style: none outside;
@@ -318,6 +310,11 @@
 				.product-summary,
 				.image-wrapper {
 					flex: 1;
+
+					img{
+						max-width: 100%;
+						height: auto;
+					}
 				}
 
 				.offer-title {
@@ -363,7 +360,7 @@
 					height: 50px;
 					border-radius: 50%;
 					border: 3px solid #fff;
-					padding: 11px 8px;
+					padding: 15px 8px 11px;
 					z-index: 2;
 
 					svg {
@@ -396,53 +393,10 @@
 				display: flex;
 
 				.offer-column {
-					width: 35%;
+					width: 30%;
 
 					&.half-width {
 						flex: 0 0 12%;
-					}
-				}
-
-				.products-slider-container {
-					.products-slider {
-						position: relative;
-
-						&.multiple-slides {
-							padding: 0 37px;
-						}
-
-						.slick-prev {
-							position: absolute;
-							top: 50%;
-							left: -10px;
-							transform: translateY(-50%) rotate(180deg);
-						}
-
-						.slick-next {
-							position: absolute;
-							top: 50%;
-							right: -10px;
-							transform: translateY(-50%);
-						}
-
-						.slick-next,
-						.slick-prev {
-							background-color: #fff;
-							border: 2px solid #E5E5E5;
-							border-radius: 50%;
-							color: #E5E5E5;
-							cursor: pointer;
-							width: 40px;
-							height: 40px;
-							text-align: center;
-							z-index: 2;
-							padding: unset;
-
-							svg {
-								width: 20px;
-								height: 20px;
-							}
-						}
 					}
 				}
 
@@ -456,6 +410,11 @@
 
 					.image-wrapper {
 						margin-bottom: 10px;
+
+						img {
+							max-width: 100%;
+							height: auto;
+						}
 					}
 
 					h3 {
@@ -491,9 +450,20 @@
 						background-color: #3858E9;
 						color: #fff;
 						border-radius: 50%;
-						font-size: 30px;
-						line-height: 45px;
 						text-align: center;
+						position: relative;
+
+						&:before {
+							content: '\002B';
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							font-size: 30px;
+							width: 18px;
+							height: 18px;
+							line-height: 14px;
+						}
 					}
 				}
 
@@ -521,6 +491,7 @@
 					ins {
 						color: #8E8E8E;
 						font-size: 20px;
+						background-color: unset;
 					}
 				}
 			}
