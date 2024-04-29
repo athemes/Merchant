@@ -39,6 +39,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 			self::$modules_data = array(
 
 				// Boost Revenue.
+				'added-to-cart-popup' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
+					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
+					'desc' => esc_html__( 'Display a dynamic popup with product recommendations when items are added to the cart', 'merchant' ),
+					'tutorial_url' => '',
+				),
 				'pre-orders' => array(
 					'pro' => false,
 					'section' => 'boost-revenue',
