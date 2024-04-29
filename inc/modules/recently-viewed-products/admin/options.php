@@ -117,14 +117,14 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => __( 'Order by', 'merchant' ),
 			'options'   => array(
-				'id'         => __( 'ID', 'merchant' ),
-				'rand'       => __( 'Random', 'merchant' ),
-				'title'      => __( 'Title', 'merchant' ),
-				'date'       => __( 'Date', 'merchant' ),
-				'modified'   => __( 'Modified date', 'merchant' ),
-				'menu_order' => __( 'Menu order', 'merchant' ),
+				'none'     => __( 'Last viewed', 'merchant' ),
+				'id'       => __( 'ID', 'merchant' ),
+				'rand'     => __( 'Random', 'merchant' ),
+				'title'    => __( 'Title', 'merchant' ),
+				'date'     => __( 'Date', 'merchant' ),
+				'modified' => __( 'Modified date', 'merchant' ),
 			),
-			'default'   => 'rand',
+			'default'   => 'none',
 		),
 
 		// Order.
@@ -133,10 +133,11 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => __( 'Order', 'merchant' ),
 			'options'   => array(
-				'asc'        => __( 'Asc', 'merchant' ),
-				'desc'       => __( 'Desc', 'merchant' ),
+				'asc'  => __( 'Asc', 'merchant' ),
+				'desc' => __( 'Desc', 'merchant' ),
 			),
 			'default'   => 'desc',
+			'condition' => array( 'orderby', 'any', 'id|rand|title|date|modified' ),
 		),
 
 		// Hook Order.
