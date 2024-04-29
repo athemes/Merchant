@@ -217,7 +217,8 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 
 == Changelog ==
 = 1.9.8 =
-
+* Fixed - Product Label: Resolved an issue where storewide sales and product labels displayed incorrect discount percentages.
+* Fixed - Buy Now: Fixed a bug where the Buy Now button wouldn't redirect to the checkout page when "Real Time Add To Cart" was enabled in Astra & Astra PRO.
 
 = 1.9.7 =
 * Fixed - Some modules settings information empty in the admin.
