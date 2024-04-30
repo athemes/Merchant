@@ -89,6 +89,13 @@ const styles = [
 		src: './assets/sass/modules/buy-now/buy-now.scss',
 		destination: './assets/css/modules/buy-now',
 	},
+	// added to cart popup admin preview
+	{
+		name: 'addedToCartPopupAdminPreview',
+		src: './assets/sass/modules/added-to-cart-popup/admin/preview.scss',
+		destination: './assets/css/modules/added-to-cart-popup/admin',
+	},
+
 	// storewide sale preview
 	{
 		name: 'storewideSaleAdminPreview',
@@ -692,6 +699,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// added to cart popup admin preview
+	{
+		name: 'addedToCartPopupAdminPreview',
+		src: './assets/js/src/modules/added-to-cart-popup/admin/preview.js',
+		destination: './assets/js/modules/added-to-cart-popup/admin',
+		file: 'preview'
+	},
+
 	// Quick View.
 	{
 		name: 'quickView',
@@ -856,6 +871,14 @@ const scripts = [
 		src: './assets/js/src/modules/frequently-bought-together/admin/preview.js',
 		destination: './assets/js/modules/frequently-bought-together/admin/',
 		file: 'preview'
+	},
+
+	// Buy now
+	{
+		name: 'buyNow',
+		src: './assets/js/src/modules/buy-now/buy-now.js',
+		destination: './assets/js/modules/buy-now/',
+		file: 'buy-now'
 	},
 ];
 

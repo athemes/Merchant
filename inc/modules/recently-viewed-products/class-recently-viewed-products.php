@@ -48,17 +48,17 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'title' => __( 'Recently Viewed', 'merchant' ),
-			'title_tag' => 'h2',
-			'hide_title' => 0,
-			'slider' => 0,
-			'slider_nav' => 'on-hover',
+			'title'          => __( 'Recently Viewed', 'merchant' ),
+			'title_tag'      => 'h2',
+			'hide_title'     => 0,
+			'slider'         => 0,
+			'slider_nav'     => 'on-hover',
 			'posts_per_page' => 10,
-			'columns' => 3,
-			'columns_gap' => 15,
-			'orderby' => 'rand',
-			'order' => 'desc',
-			'hook_order' => 20,
+			'columns'        => 3,
+			'columns_gap'    => 15,
+			'orderby'        => 'none',
+			'order'          => 'desc',
+			'hook_order'     => 20,
 		);
 
 		// Mount preview url.

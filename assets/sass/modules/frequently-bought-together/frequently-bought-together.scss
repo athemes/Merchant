@@ -57,6 +57,7 @@
 		text-align: center;
 		max-width: 200px;
 		position: relative;
+		padding: 15px;
 
 		&-attributes {
 			display: grid;
@@ -99,7 +100,6 @@
 		&:not(:first-child) {
 			border: 1px solid #f9f9f9;
 			border-radius: 5px;
-			padding: 15px;
 			
 			img {
 				width: 100px;
@@ -183,8 +183,9 @@
 			&-plus {
 				right: 50%;
 				left: 50%;
-				bottom: -20px;
+				bottom: -28px;
 				top: inherit;
+				transform: translate(-50%);
 			}
 			
 			&-contents {

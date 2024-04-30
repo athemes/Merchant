@@ -280,6 +280,17 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 			}
 
+			/**
+			 * Filter the product discount price.
+			 *
+			 * @param int        $percentage The product discount percentage.
+			 * @param WC_Product $product    The product object.
+			 * @param array      $label      The label data.
+			 *
+			 * @since 1.9.7
+			 */
+			$percentage = apply_filters( 'merchant_product_labels_product_discount_percentage', $percentage, $product, $label );
+
 			$label_text = str_replace( '{value}', $percentage, Merchant_Translator::translate( $label['percentage_text'] ) );
 		}
 
@@ -454,15 +465,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 							}
 							break;
 
-                        case 'specific_products':
-                            $product_ids = $label['product_ids'] ?? array();
-	                        $product_ids = ! is_array( $product_ids ) ? explode( ',',  $product_ids ) : $product_ids;
-	                        $product_ids = array_map( 'intval', $product_ids );
+						case 'specific_products':
+							$product_ids = $label['product_ids'] ?? array();
+							$product_ids = ! is_array( $product_ids ) ? explode( ',', $product_ids ) : $product_ids;
+							$product_ids = array_map( 'intval', $product_ids );
 
-                            if ( in_array( $product->get_id(), $product_ids, true ) ) {
-		                        $product_labels_html .= $this->label( $label );
-	                        }
-	                        break;
+							if ( in_array( $product->get_id(), $product_ids, true ) ) {
+								$product_labels_html .= $this->label( $label );
+							}
+							break;
 					}
 				}
 			}

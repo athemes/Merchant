@@ -51,14 +51,13 @@
 .single-product {
 	.product {
 		.cart {
-			.single_add_to_cart_button {
-				&.merchant-buy-now-button {
-					justify-content: center;
-					width: fit-content !important;
-					margin-top: 0 !important;
-					margin-bottom : 0 !important;
-					margin-left: 5px;
-				}
+			.merchant-buy-now-button {
+				justify-content: center;
+				width: fit-content !important;
+				margin-top: 0 !important;
+				margin-bottom : 0 !important;
+				margin-left: 5px;
+				float: none !important;
 			}
 		}
 		
