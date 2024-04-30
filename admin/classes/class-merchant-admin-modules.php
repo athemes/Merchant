@@ -117,7 +117,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
 					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
 					'desc' => esc_html__( 'Display a dynamic popup with product recommendations when items are added to the cart', 'merchant' ),
-					'tutorial_url' => '',
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-added-to-cart-popup/',
 				),
 				// Increase Conversion Rates (Convert More).
 				'buy-now' => array(
