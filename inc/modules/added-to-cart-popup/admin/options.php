@@ -50,7 +50,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'text',
 			'default' => esc_html__( 'Added to cart', 'merchant' ),
 			'title'   => esc_html__( 'Popup message', 'merchant' ),
-			'desc'    => esc_html__( 'This message will be shown on top of the popup cart', 'merchant' ),
+			'desc'    => esc_html__( 'This message will be shown at the top of the popup', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_product_info',
