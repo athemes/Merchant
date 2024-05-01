@@ -56,7 +56,8 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'display_shop'          => 1,
 			'display_product'       => 1,
 			'display_cart'          => 1,
-			'spending_text'         => esc_html__( 'Spend {amount} more to receive this gift!', 'merchant' ),
+			'position'              => 'top_right',
+			'distance'              => 250,
 			'free_text'             => esc_html__( 'Free', 'merchant' ),
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
 			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),
@@ -82,6 +83,12 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
+
+			// Enqueue admin scripts.
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
+
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
@@ -128,6 +135,42 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/free-gifts.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
+	}
+
+	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		if ( parent::is_module_settings_page() ) {
+			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION, true );
+		}
+	}
+
+	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $data ) {
+        $data['spending_texts'] = array(
+	        'all'        => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on any product to receive this gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} on any product to receive this gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+	        'product'    => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on {productName} receive this free gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more on {productName} receive this free gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+	        'categories' => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} in the {categories} to receive this free gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more in the {categories} to receive this free gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+        );
+
+		return $data;
 	}
 
 	/**
@@ -273,6 +316,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'product_text_hover_color', '#757575', '.merchant-free-gifts-widget-offer-product-title', '--merchant-text-hover-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'product_price_text_color', '#999999', '.merchant-free-gifts-widget-offer-product-price del', '--merchant-text-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'free_text_color', '#212121', '.merchant-free-gifts-widget-offer-product-free', '--merchant-text-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'distance', 250, '.merchant-free-gifts-widget', '--merchant-free-gifts-distance', 'px' );
 
 		return $css;
 	}

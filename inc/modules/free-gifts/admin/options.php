@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
 Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Floating Gift Widget', 'merchant' ),
 	'module' => Merchant_Free_Gifts::MODULE_ID,
@@ -74,7 +73,44 @@ Merchant_Admin_Options::create( array(
 							'type'          => 'products_selector',
 							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
 							'multiple'      => false,
-							'allowed_types' => array( 'simple', 'variation' ),
+							'allowed_types' => array( 'simple', 'variable', 'variation' ),
+						),
+
+						array(
+							'id'        => 'spending_goal_target',
+							'type'      => 'content',
+							'title'     => esc_html__( 'Spending goal target', 'merchant' ),
+							'content'   => '',
+							'desc'      => esc_html__( 'Configure the 4 states of the Gift offer. Personalize the text to maximize the conversion.', 'merchant' ),
+						),
+
+						array(
+							'id'      => 'spending_text_0',
+							'type'    => 'text',
+							'title'   => esc_html__( 'At 0%', 'merchant' ),
+							'default' => sprintf(
+								/* Translators: 1. goal amount */
+								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								'{goalAmount}' // existing one is {amount}
+							),
+						),
+
+						array(
+							'id'      => 'spending_text_1_to_99',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Between 1 - 99%', 'merchant' ),
+							'default' => sprintf(
+								/* Translators: 1. more amount */
+								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								'{amountMore}'
+							),
+						),
+
+						array(
+							'id'      => 'spending_text_100',
+							'type'    => 'text',
+							'title'   => esc_html__( 'At 100%', 'merchant' ),
+							'default' => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
 						),
 					),
 				),
@@ -133,46 +169,6 @@ Merchant_Admin_Options::create( array(
 			),
 			'default' => 'subtotal',
 		),
-		array(
-			'id'      => 'display_homepage',
-			'type'    => 'checkbox',
-			'title'   => __( 'Show on pages', 'merchant' ),
-			'label'   => __( 'Homepage', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'      => 'display_shop',
-			'type'    => 'checkbox',
-			'label'   => __( 'Shop page', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'      => 'display_product',
-			'type'    => 'checkbox',
-			'label'   => __( 'Product page', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'      => 'display_cart',
-			'type'    => 'checkbox',
-			'label'   => __( 'Cart page', 'merchant' ),
-			'default' => 1,
-		),
-	),
-) );
-
-// Text Formatting Settings
-Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Text Formatting', 'merchant' ),
-	'module' => Merchant_Free_Gifts::MODULE_ID,
-	'fields' => array(
-
-		array(
-			'id'      => 'spending_text',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Spending text', 'merchant' ),
-			'default' => esc_html__( 'Spend {amount} more to receive this gift!', 'merchant' ),
-		),
 
 		array(
 			'id'      => 'free_text',
@@ -199,6 +195,79 @@ Merchant_Admin_Options::create( array(
 	),
 ) );
 
+// Gift Widget Settings
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Gift Widget', 'merchant' ),
+	'module' => Merchant_Free_Gifts::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'icon',
+			'type'    => 'choices',
+			'title'   => esc_html__( 'Widget icon', 'merchant' ),
+			'options' => array(
+				'gifts-icon-1' => MERCHANT_URI . 'assets/images/icons/free-gifts/icon-1.svg',
+				'gifts-icon-2' => MERCHANT_URI . 'assets/images/icons/free-gifts/icon-2.svg',
+				'gifts-icon-3' => MERCHANT_URI . 'assets/images/icons/free-gifts/icon-3.svg',
+				'gifts-icon-4' => MERCHANT_URI . 'assets/images/icons/free-gifts/icon-4.svg',
+				'gifts-icon-5' => MERCHANT_URI . 'assets/images/icons/free-gifts/icon-5.svg',
+			),
+			'default' => 'gifts-icon-1',
+		),
+
+		array(
+			'id'      => 'position',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Position', 'merchant' ),
+			'options' => array(
+				'top_right'    => esc_html__( 'Top Right', 'merchant' ),
+				'top_left'     => esc_html__( 'Top Left', 'merchant' ),
+				'bottom_right' => esc_html__( 'Bottom Right', 'merchant' ),
+				'bottom_left'  => esc_html__( 'Bottom Left', 'merchant' ),
+			),
+			'default' => 'top_right',
+		),
+
+		array(
+			'id'      => 'distance',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Distance', 'merchant' ),
+			'min'     => 0,
+			'max'     => 999,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 250,
+		),
+
+		array(
+			'id'      => 'display_homepage',
+			'type'    => 'checkbox',
+			'title'   => esc_html__( 'Show on pages', 'merchant' ),
+			'label'   => esc_html__( 'Homepage', 'merchant' ),
+			'default' => 1,
+		),
+
+		array(
+			'id'      => 'display_shop',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Shop page', 'merchant' ),
+			'default' => 1,
+		),
+
+		array(
+			'id'      => 'display_product',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Product page', 'merchant' ),
+			'default' => 1,
+		),
+
+		array(
+			'id'      => 'display_cart',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Cart page', 'merchant' ),
+			'default' => 1,
+		),
+	),
+) );
 
 // Style Settings
 Merchant_Admin_Options::create( array(

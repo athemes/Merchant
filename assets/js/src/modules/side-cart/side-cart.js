@@ -19,8 +19,8 @@ jQuery(document).ready(function($) {
   // Add to cart AJAX event.
   if (merchant.setting.hasOwnProperty('add_to_cart_slide_out')) {
     $(document.body).on('added_to_cart', function(event, fragments, cart_hash, $button, $context) {
-      if ( $context !== 'side-cart' ) {
-        $('body').toggleClass('merchant-floating-side-mini-cart-show')
+      if ( $context !== 'side-cart' && $context !== 'free-gifts' ) {
+        $('body').toggleClass('merchant-floating-side-mini-cart-show');
       }
       $(window).trigger('merchant.floating-mini-cart-resize');
     });
