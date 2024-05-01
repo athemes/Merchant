@@ -865,6 +865,14 @@ const scripts = [
 		destination: './assets/js/modules/buy-now/',
 		file: 'buy-now'
 	},
+
+	// free-gifts
+	{
+		name: 'freeGiftsAdmin',
+		src: './assets/js/src/modules/free-gifts/admin/preview.js',
+		destination: './assets/js/modules/free-gifts/admin/',
+		file: 'preview'
+	},
 ];
 
 // Watch options.
