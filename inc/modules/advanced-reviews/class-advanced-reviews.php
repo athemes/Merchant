@@ -24,6 +24,11 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		const MODULE_ID = 'advanced-reviews';
 
 		/**
+		 * Module template path.
+		 */
+		const MODULE_TEMPLATES_PATH = 'modules/' . self::MODULE_ID;
+
+		/**
 		 * Is module preview.
 		 *
 		 */
@@ -189,7 +194,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 					)
 				);
 
-				// Don't allow 'h2' value fro tag_title because it conflicts with WordPress notifications.
+				// Don't allow 'h2' value for tag_title because it conflicts with WordPress notifications.
 				if ( 'h2' === $settings['title_tag'] ) {
 					$settings['title_tag'] = 'h3';
 				}
@@ -212,17 +217,34 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				$settings,
 				array(
 					'bars_data'       => array(
-						'1-stars'         => 1,
-						'2-stars'         => 2,
-						'3-stars'         => 3,
-						'4-stars'         => 4,
-						'5-stars'         => 5,
-						'total'           => 15,
-						'1-stars-percent' => 10,
-						'2-stars-percent' => 20,
-						'3-stars-percent' => 30,
-						'4-stars-percent' => 40,
-						'5-stars-percent' => 50,
+						'ratings' => array(
+							'5-star' => array(
+								'label'   => esc_html__( '5 Stars', 'merchant' ),
+								'value'   => 5,
+								'percent' => 50,
+							),
+							'4-star' => array(
+								'label'   => esc_html__( '4 Stars', 'merchant' ),
+								'value'   => 4,
+								'percent' => 40,
+							),
+							'3-star' => array(
+								'label'   => esc_html__( '3 Stars', 'merchant' ),
+								'value'   => 3,
+								'percent' => 30,
+							),
+							'2-star' => array(
+								'label'   => esc_html__( '2 Stars', 'merchant' ),
+								'value'   => 2,
+								'percent' => 20,
+							),
+							'1-star' => array(
+								'label'   => esc_html__( '1 Star', 'merchant' ),
+								'value'   => 1,
+								'percent' => 10,
+							),
+						),
+						'total'   => 15,
 					),
 					'ratings_enabled' => true,
 					'comments_open'   => true,
@@ -353,6 +375,9 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 	// Dummy content.
 	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-product-dummy-data.php';
+
+	// Reviews List Table
+	require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/admin/class-reviews-table.php';
 
 	// Initialize the module.
 	add_action(

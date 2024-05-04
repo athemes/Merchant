@@ -26,12 +26,12 @@ if ( ! $_page ) {
 
 $max_page = ceil( $args[ 'cpages' ] );
 $defaults = array(
-	'base'       => add_query_arg( 'cpage', '%#%' ),
+	'base'         => add_query_arg( 'cpage', '%#%' ),
 	'format'       => '',
-	'total'     => $max_page,
-	'current'     => $_page,
-	'echo'       => true,
-	'type'       => 'plain',
+	'total'        => $max_page,
+	'current'      => $_page,
+	'echo'         => true,
+	'type'         => 'plain',
 	'add_fragment' => '#comments',
 );
 if ( $wp_rewrite->using_permalinks() ) {
