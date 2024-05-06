@@ -245,7 +245,9 @@
 
       &-sold-individually .merchant-quantity-inner,
       .variation,
-      .merchant-cart-item-name {
+      .merchant-cart-item-name,
+      .action.plus,
+      .action.minus {
         display: none;
       }
     }

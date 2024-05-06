@@ -69,7 +69,7 @@ Merchant_Admin_Options::create( array(
 				'on-hover'     => __( 'Show On Hover', 'merchant' ),
 			),
 			'default' => 'on-hover',
-			'condition' => array( 'slider', '==', true ),
+			'condition' => array( 'slider', '==', '1' ),
 		),
 
 		// Number of Products.
@@ -117,14 +117,14 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => __( 'Order by', 'merchant' ),
 			'options'   => array(
-				'id'         => __( 'ID', 'merchant' ),
-				'rand'       => __( 'Random', 'merchant' ),
-				'title'      => __( 'TItle', 'merchant' ),
-				'date'       => __( 'Date', 'merchant' ),
-				'modified'   => __( 'Modified date', 'merchant' ),
-				'menu_order' => __( 'Menu order', 'merchant' ),
+				'none'     => __( 'Last viewed', 'merchant' ),
+				'id'       => __( 'ID', 'merchant' ),
+				'rand'     => __( 'Random', 'merchant' ),
+				'title'    => __( 'Title', 'merchant' ),
+				'date'     => __( 'Date', 'merchant' ),
+				'modified' => __( 'Modified date', 'merchant' ),
 			),
-			'default'   => 'rand',
+			'default'   => 'none',
 		),
 
 		// Order.
@@ -133,10 +133,11 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => __( 'Order', 'merchant' ),
 			'options'   => array(
-				'asc'        => __( 'Asc', 'merchant' ),
-				'desc'       => __( 'Desc', 'merchant' ),
+				'asc'  => __( 'Asc', 'merchant' ),
+				'desc' => __( 'Desc', 'merchant' ),
 			),
 			'default'   => 'desc',
+			'condition' => array( 'orderby', 'any', 'id|rand|title|date|modified' ),
 		),
 
 		// Hook Order.
@@ -172,7 +173,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => __( 'Navigation icon color', 'merchant' ),
 			'default' => '#FFF',
-			'condition' => array( 'slider', '==', true ),
+			'condition' => array( 'slider', '==', '1' ),
 		),
 
 		// Naviation color.
@@ -181,7 +182,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => __( 'Navigation color', 'merchant' ),
 			'default' => '#212121',
-			'condition' => array( 'slider', '==', true ),
+			'condition' => array( 'slider', '==', '1' ),
 		),
 
 		// Naviation color (hover).
@@ -190,7 +191,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => __( 'Navigation color (hover)', 'merchant' ),
 			'default' => '#757575',
-			'condition' => array( 'slider', '==', true ),
+			'condition' => array( 'slider', '==', '1' ),
 		),
 
 	),

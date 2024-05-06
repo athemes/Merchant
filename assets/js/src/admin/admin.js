@@ -3,6 +3,9 @@
 
     var merchant = merchant || {};
 
+    const params = new URLSearchParams( window.location.search );
+    const currentModule = params.get( 'module' );
+
     $(document).ready(function () {
         // AjaxSave
         var $ajaxForm = $('.merchant-module-page-ajax-form');
@@ -47,6 +50,7 @@
 
                 }
 
+                $( document ).trigger( 'save.merchant', [ currentModule ] );
             }
         });
         const $disableModuleSubmitBtn = $('.merchant-module-question-answer-button');
@@ -266,6 +270,7 @@
                                     input.val('');
                                 }
                                 input.trigger('change.merchant');
+                                input.trigger('change.merchant-datepicker', [ formattedDate, input ]);
                             }
                         },
                         fieldOptions = $(this).data('options');
@@ -935,7 +940,7 @@
                             if ($input.val() !== colorCode) {
                                 $input.val(colorCode).trigger('change.merchant');
                             }
-
+                            $(document).trigger('merchant-color-picker-updated', [colorCode, $input]);
                         });
 
                         pickr.on('clear', function () {
@@ -1518,10 +1523,27 @@
                     $target = flexibleContentParent.find('.merchant-field-' + condition.field).find('input, select');
                 }
             }
+
+	        if (!$target.length) {
+				// Maybe the field is a multiple field
+		        $target = $('input[name="merchant[' + condition.field + '][]"],select[name="merchant[' + condition.field + '][]"]')
+	        }
+
             let value = $target.val();
             if ($target.attr('type') === 'checkbox' || $target.attr('type') === 'radio') {
                 value = $target.is(':checked');
             }
+
+	        // check if the field is multiple checkbox
+	        if ($target.attr('type') === 'checkbox' && $target.length > 1) {
+		        value = [];
+		        $target.each(function () {
+			        if ($(this).is(':checked')) {
+				        value.push($(this).val());
+			        }
+		        });
+	        }
+
             // cast value as string if numeric
             if (isNumeric(value)) {
                 value = Number(value);
@@ -1552,6 +1574,10 @@
                 passed = true;
             } else if (condition.operator === '!in' && !condition.value.includes(value)) {
                 passed = true;
+            } else if (condition.operator === 'contains' && Array.isArray(value) && value.includes(condition.value)) {
+	            passed = true;
+            } else if (condition.operator === '!contains' && Array.isArray(value) && !value.includes(condition.value)) {
+	            passed = true;
             }
         }
 

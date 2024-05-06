@@ -3358,6 +3358,7 @@ body.merchant-module-disabled {
         border: none;
         border-radius: 3px;
         padding: 13px 0 13px 40px;
+        width: 100%;
 
         &::placeholder {
           font-size: 12px;
@@ -3366,8 +3367,9 @@ body.merchant-module-disabled {
 
       .merchant-search-icon {
         position: absolute;
-        top: 15px;
+        top: 50%;
         left: 15px;
+        transform: translateY(-50%);
       }
     }
 
@@ -3526,5 +3528,64 @@ body.merchant-module-disabled {
         }
       }
     }
+  }
+}
+
+.merchant-image-picker {
+  label {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 5px;
+
+    .tool-tip-text {
+      visibility: hidden;
+      opacity: 0;
+      width: 120px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      top: -35px;
+      left: 50%;
+      margin-left: -60px;
+      transition: opacity 300ms;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+      }
+    }
+
+    &:hover .tool-tip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+    clear: both;
+  }
+
+  img {
+    border: 2px solid #F0F0F1;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 7px 3px;
+    transition: 300ms;
+  }
+
+  input[type="radio"]:checked + img {
+    border: 2px solid #3858E9;
   }
 }
