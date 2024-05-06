@@ -37,7 +37,19 @@
 					}
 				}
 			}
+		}
 
+		.merchant-carousel-nav {
+			&:hover {
+				opacity: .7;
+			}
+
+			&:focus,
+			&:active {
+				border: none;
+				box-shadow: none;
+				outline: none;
+			}
 		}
 
 		.merchant-carousel-nav-next {

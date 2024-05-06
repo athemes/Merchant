@@ -100,7 +100,7 @@ Merchant_Admin_Options::create(
 					'default'   => __( 'Default', 'merchant' ),
 					'load-more' => __( 'Load more button', 'merchant' ),
 				),
-				'default' => 'default',
+				'default' => 'load-more',
 			),
 
 			// Review options.
@@ -109,9 +109,9 @@ Merchant_Admin_Options::create(
 				'type'    => 'radio',
 				'title'   => __( 'Review options', 'merchant' ),
 				'options' => array(
-					'image_and_text'   => __( 'Image and text', 'merchant' ),
-					'image' => __( 'Image only', 'merchant' ),
-					'text'  => __( 'Text only', 'merchant' ),
+					'image_and_text' => __( 'Image and text', 'merchant' ),
+					'image'          => __( 'Image only', 'merchant' ),
+					'text'           => __( 'Text only', 'merchant' ),
 				),
 				'default' => 'image_and_text',
 			),
@@ -138,7 +138,34 @@ Merchant_Admin_Options::create(
 				'default' => 0,
 			),
 
-			// Carousel Tite.
+			// Number of Images per page.
+			array(
+				'id'        => 'review_images_carousel_total',
+				'type'      => 'range',
+				'title'     => __( 'Total images', 'merchant' ),
+				'desc'      => __( 'Controls the number of images to be displayed in the slider.', 'merchant' ),
+				'min'       => 1,
+				'step'      => 1,
+				'unit'      => '',
+				'default'   => 12,
+				'condition' => array( 'review_images_carousel', '==', '1' ),
+			),
+
+			// Number of Columns.
+			array(
+				'id'        => 'review_images_carousel_per_page',
+				'type'      => 'range',
+				'title'     => __( 'Columns', 'merchant' ),
+				'desc'      => __( 'Controls the number of images to be displayed per slide.', 'merchant' ),
+				'min'       => 1,
+				'max'       => 6,
+				'step'      => 1,
+				'unit'      => '',
+				'default'   => 3,
+				'condition' => array( 'review_images_carousel', '==', '1' ),
+			),
+
+			// Carousel Title.
 			array(
 				'id'      => 'carousel_title',
 				'type'    => 'text',

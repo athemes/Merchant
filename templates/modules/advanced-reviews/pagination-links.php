@@ -24,6 +24,7 @@ if ( ! $_page ) {
 	$_page = 1;
 }
 
+
 $max_page = ceil( $args[ 'cpages' ] );
 $defaults = array(
 	'base'         => add_query_arg( 'cpage', '%#%' ),

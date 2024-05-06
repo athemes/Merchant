@@ -117,21 +117,25 @@ $ratings       = $bars_data['ratings'] ?? array();
 $total_ratings = $bars_data['total'] ?? 0;
 
 // Carousel images
+$is_carousel_on       = (bool) ( $args['review_images_carousel'] ?? false );
 $carousel_images_data = $args['carousel_images_data'] ?? array();
 
-if ( is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?>
+if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?>
+    <?php
+	wp_enqueue_style( 'merchant-carousel' );
+	wp_enqueue_script( 'merchant-carousel' );
+    ?>
 	<section class="merchant-adv-reviews-media-carousel">
-		<?php if ( isset( $args['carousel_title'] ) && $args['carousel_title'] ) : ?>
+		<?php if ( ! empty( $args['carousel_title'] ) ) : ?>
 			<h3 class="section-title"><?php echo esc_html( $args['carousel_title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="merchant-carousel" data-per-page="" data-loop="true">
+		<div class="merchant-carousel" data-per-page="<?php echo esc_attr( $args['review_images_carousel_per_page'] ?? 3 ); ?>" data-loop="true">
 			<div class="merchant-carousel-wrapper">
     			<div class="merchant-carousel-stage">
                     <?php foreach( $carousel_images_data as $image_id ) : ?>
                         <div class="item">
-                            <?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
-                        </div>
+                            <?php echo wp_get_attachment_image( $image_id, 'woocommerce_single' ); ?></div>
                     <?php endforeach; ?>
 			    </div>
 			</div>
@@ -190,11 +194,13 @@ if ( is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?
                         <?php if ( is_array( $ratings ) && ! empty( $ratings ) ) : ?>
                             <?php foreach ( $ratings as $key => $rating ) : ?>
                                 <div class="merchant-star-rating-bar-item" tabindex="0" role="button" data-rating="<?php echo esc_attr( substr( $key, 0, strpos( $key, '-' ) ) ); ?>">
-                                    <p class="item-rating"><?php echo esc_html( $rating['label'] ?? '' ); ?></p>
-                                    <div class="item-bar">
-                                        <div class="item-bar-inner" style="width: <?php echo esc_attr( $rating[ 'percent' ] ); ?>%;"></div>
+                                    <div class="merchant-star-rating-bar-item-inner">
+                                        <p class="item-rating"><?php echo esc_html( $rating['label'] ?? '' ); ?></p>
+                                        <div class="item-bar">
+                                            <div class="item-bar-inner" style="width: <?php echo esc_attr( $rating[ 'percent' ] ); ?>%;"></div>
+                                        </div>
+                                        <p class="item-qty">(<?php echo esc_html( $rating['value'] ?? '0' ); ?>)</p>
                                     </div>
-                                    <p class="item-qty">(<?php echo esc_html( $rating['value'] ?? '0' ); ?>)</p>
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -229,7 +235,8 @@ if ( is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?
     if ( count( $_comments ) > 0 ) :
 		echo '<div class="merchant-adv-reviews-footer">';
 			if ( $comment_pages > 1 && get_option( 'page_comments' ) ) {
-				echo '<nav class="woocommerce-pagination merchant-pagination merchant-adv-reviews-pagination">';
+				if ( $args['pagination_type'] === 'default' ) {
+					echo '<nav class="woocommerce-pagination merchant-pagination merchant-adv-reviews-pagination">';
 					merchant_get_template_part( 'modules/advanced-reviews', 'pagination-links', array_merge(
 						$args,
 						array(
@@ -242,7 +249,8 @@ if ( is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?
 							'product_id' => $product_id,
 						)
 					) );
-				echo '</nav>';
+					echo '</nav>';
+                }
 
 				/**
 				 * Hook 'merchant_after_shop_reviews_adv_pagination'

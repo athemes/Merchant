@@ -62,18 +62,20 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 			// Module default settings.
 			$this->module_default_settings = array(
-				'title'            => __( 'What our customers are saying', 'merchant' ),
-				'title_tag'        => 'h2',
-				'hide_title'       => 0,
-				'description'      => '',
-				'title_desc_align' => 'left',
-				'default_sorting'  => 'newest',
-				'pagination_type'  => 'default',
-				'photos_limit'     => 6,
-				'review_options'   => 'image_and_text',
-				'review_images_carousel'  => 0,
-				'carousel_title'   => __( 'Customer Images', 'merchant' ),
-				'hook_order'       => 10,
+				'title'                           => esc_html__( 'What our customers are saying', 'merchant' ),
+				'title_tag'                       => 'h2',
+				'hide_title'                      => 0,
+				'description'                     => '',
+				'title_desc_align'                => 'left',
+				'default_sorting'                 => 'newest',
+				'pagination_type'                 => 'load-more',
+				'photos_limit'                    => 6,
+				'review_options'                  => 'image_and_text',
+				'review_images_carousel'          => 0,
+				'carousel_title'                  => esc_html__( 'Customer Images', 'merchant' ),
+				'hook_order'                      => 10,
+				'review_images_carousel_total'    => 12,
+				'review_images_carousel_per_page' => 3,
 			);
 
 			// Mount preview url.

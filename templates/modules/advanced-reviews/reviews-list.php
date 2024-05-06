@@ -87,11 +87,6 @@ $_comments = $args['comments'] ?? array();
                                                     <div class="merchant-review-image-overlay"></div>
 													<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
                                                 </div>
-                                                <div class="merchant-modal" data-merchant-modal="merchant-review-image-<?php echo esc_attr( $image_id ); ?>">
-                                                    <div class="merchant-modal-body">
-														<?php echo wp_get_attachment_image( $image_id, 'full' ); ?>
-                                                    </div>
-                                                </div>
 											<?php endforeach; ?>
                                         </div>
 									<?php
@@ -101,6 +96,7 @@ $_comments = $args['comments'] ?? array();
                             </div>
                         </div>
                     </div>
+
 
 				<?php elseif( isset( $_GET['unapproved'] ) && $_comment->comment_ID === $_GET['unapproved'] ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                     <div id="comment-<?php echo esc_attr( $_comment->comment_ID ); ?>" class="merchant-reviews-list-item">

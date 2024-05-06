@@ -774,6 +774,7 @@ class Siema {
 let merchant = merchant || {};
 
 merchant.carousel = {
+
     domReady: function( fn ) {
 		if ( typeof fn !== 'function' ) {
 			return;
@@ -782,8 +783,12 @@ merchant.carousel = {
 		if ( document.readyState === 'interactive' || document.readyState === 'complete' ) {
 			return fn();
 		}
+
+        const that = this;
 	
-		document.addEventListener( 'DOMContentLoaded', fn, false );
+		document.addEventListener( 'DOMContentLoaded', function () {
+            that.init(); // Required for some themes
+        } );
 	},
 	init: function() {
 		this.build();
@@ -851,11 +856,21 @@ merchant.carousel = {
 					// autoplay: true, TO DO
 					margin: margin,
 					onInit: function() {
-						window.dispatchEvent( new Event( 'merchant.carousel.initialized' ) );
+                        window.dispatchEvent( new Event( 'merchant.carousel.initialized' ) );
+
+                        // Fix for theme that has lazy-load but not working
+                        this?.innerElements?.forEach( item => {
+                           const img = item.querySelector( 'img' );
+                           const src = img.getAttribute( 'src' );
+
+                           if ( src.startsWith( 'data' ) ) {
+                               console.log('Cool')
+                               img.src = img.getAttribute( 'data-src' )
+                           }
+                       } );
 					}
 				});
 			}
-
 		}
 	},
 	events: function() {
@@ -889,5 +904,5 @@ merchant.carousel = {
 
 // Initialize.
 merchant.carousel.domReady( function(){
-    merchant.carousel.init();
+    merchant?.carousel?.init();
 } );

@@ -23,6 +23,12 @@ body {
 		margin-top: 0;
 	}
 
+	&-media-carousel {
+		.section-title {
+			margin-bottom: 20px;
+		}
+	}
+
 	.merchant-adv-reviews-title,
 	.merchant-adv-reviews-desc {
 		text-align: var( --mrc-adv-reviews-title-desc-align, left );
@@ -81,7 +87,6 @@ body {
 
 			@media screen and (min-width: 445px) and (max-width: 767px) {
 				flex-direction: row;
-				align-items: center;
 				gap: 30px;
 				justify-content: space-between;
 				align-items: self-start;
@@ -193,19 +198,43 @@ body {
 
 // Star rating bars component
 .merchant-star-rating-bars {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
 	.merchant-star-rating-bar-item {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		max-width: 410px;
 		cursor: pointer;
 
-		&:hover {
+		&:hover > div {
 			opacity: .7;
 		}
 
+		&.rating-active > div {
+			opacity: .6;
+		}
+
+		svg {
+			cursor: pointer;
+			margin-left: 5px;
+		}
+	}
+
+	.merchant-star-rating-bar-item-inner {
+		display: flex;
+		align-items: center;
+		//justify-content: space-between;
+		width: 410px;
+		//max-width: 100%;
+		position: relative;
+
+		@media(max-width: 768px) {
+			width: 300px;
+		}
+
 		.item-rating {
-			min-width: 55px;
+			width: 60px;
 			margin: 0 !important;
 			padding: 0 !important;
 			color: var( --mrc-adv-reviews-title-color, #212121 );
@@ -213,10 +242,10 @@ body {
 
 		.item-bar {
 			position: relative;
-			margin-left: 24px;
+			margin-left: 20px;
 			background-color: var( --mrc-adv-reviews-bar-bg-color, #f5f5f5 );
 			height: 10px;
-			min-width: 300px;
+			width: 300px;
 			border-radius: 10px;
 			overflow: hidden;
 			.item-bar-inner {
@@ -235,14 +264,10 @@ body {
 			margin: 0 0 0 10px !important;
 			color: var( --mrc-adv-reviews-title-color, #212121 );
 		}
-
-		& + .merchant-star-rating-bar-item {
-			margin-top: 10px;
-		}
 	}
 
 	@media screen and (max-width: 767px) {
-		.merchant-star-rating-bar-item {
+		.merchant-star-rating-bar-item-inner {
 			.item-rating {
 				white-space: nowrap;
 			}
