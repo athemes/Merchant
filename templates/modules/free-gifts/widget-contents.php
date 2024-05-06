@@ -14,11 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 
 $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
-
-// Different text based on cart total
-$spending_text_0       = $settings['spending_text'] ?? '';
-$spending_text_1_to_99 = $settings['spending_text_1_to_99'] ?? '';
-$spending_text_100     = $settings['spending_text_100'] ?? '';
 ?>
 
 <?php foreach ( $args['offers'] as $offer ): ?>
@@ -31,10 +26,14 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 	$spending_text_1_to_99 = $offer['spending_text_1_to_99'] ?? '';
 	$spending_text_100     = $offer['spending_text_100'] ?? '';
 
-	if ( isset( $offer['rules_to_apply'], $offer['category_slugs'] )
-		&& 'categories' === $offer['rules_to_apply']
-		&& ! merchant_is_already_in_cart( $offer['product']['id'] )
-	) :
+	$goal_amount = $offer['amount'] ?? 0;
+	$amount_more = $offer['amount_more'] ?? $goal_amount;
+	$price_html  = wc_price( $amount_more );
+
+    $merchant_hash = $offer['merchant_hash'] ?? '';
+
+    // Offer for Categories
+	if ( isset( $offer['rules_to_apply'], $offer['category_slugs'] ) && 'categories' === $offer['rules_to_apply'] ) :
 		$categories = array();
 		foreach ( $offer['category_slugs'] as $category_slug ) {
 			$category_data = get_term_by( 'slug', $category_slug, 'product_cat' );
@@ -46,14 +45,22 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 		if ( empty( $categories ) ) {
 			continue;
 		}
+
+        $cart_total_category = $offer['cart_total_category'] ?? 0;
+
+		if ( $cart_total_category >= $goal_amount ) {
+			$spending_text = $spending_text_100;
+		} elseif ( $cart_total_category > 0 ) {
+			$spending_text = $spending_text_1_to_99;
+		} else {
+			$spending_text = $spending_text_0;
+		}
 		?>
 		<div class="merchant-free-gifts-widget-offer">
 			<div class="merchant-free-gifts-widget-offer-label">
 				<?php
-                $price = wc_price( 30 ); // Todo: Get cart price for product under `$categories`
-
                 $category_text = sprintf(
-                    /* Translators: 1. Term */
+                    /* Translators: 1. Term Name */
 	                _n( '%s category', '%s categories', count( $categories ), 'merchant' ),
 	                implode( ', ', $categories )
                 );
@@ -67,12 +74,12 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 							'{categories}',
 						),
 						array(
-							$price,
-							$price,
-							$price,
+							$price_html,
+							$price_html,
+							$price_html,
 							$category_text,
 						),
-						sanitize_text_field( Merchant_Translator::translate( $spending_text_0 ) )
+						sanitize_text_field( Merchant_Translator::translate( $spending_text ) )
 					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
 				);
@@ -88,10 +95,12 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 					</p>
                     <div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
-						echo wp_kses(
-							Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0 ),
-							merchant_kses_allowed_tags( array( 'forms' ) )
-						);
+						if ( ( $cart_total_category >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
+							echo wp_kses(
+								Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
+								merchant_kses_allowed_tags( array( 'forms' ) )
+							);
+						}
 						?>
                     </div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
@@ -105,21 +114,43 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 				</div>
 			</div>
 		</div>
-			<?php
-	elseif ( isset( $offer['rules_to_apply'], $offer['product_to_purchase'] )
-		&& 'product' === $offer['rules_to_apply']
-		&& ! merchant_is_already_in_cart( $offer['product_to_purchase'] )
-	) :
-		$product = wc_get_product( $offer['product_to_purchase'] );
 
+	<?php
+    // Offer for Specific Product
+	elseif ( isset( $offer['rules_to_apply'], $offer['product_to_purchase'] ) && 'product' === $offer['rules_to_apply'] ) :
+		$product            = wc_get_product( $offer['product_to_purchase'] );
+		$cart_total_product = $offer['cart_total_product'] ?? 0;
+
+		if ( $cart_total_product >= $goal_amount ) {
+			$spending_text = $spending_text_100;
+		} elseif ( $cart_total_product > 0 ) {
+			$spending_text = $spending_text_1_to_99;
+		} else {
+			$spending_text = $spending_text_0;
+		}
 		?>
 		<div class="merchant-free-gifts-widget-offer">
 			<div class="merchant-free-gifts-widget-offer-label">
-				<?php echo wp_kses(
-				/* Translators: 1. Amount */
-					sprintf( __( 'Buy %s to receive this free gift!', 'merchant' ), $product->get_title() ),
+				<?php
+				echo wp_kses(
+					str_replace(
+						array(
+							'{amount}',
+							'{goalAmount}',
+							'{amountMore}',
+							'{productName}',
+						),
+						array(
+							$price_html,
+							$price_html,
+							$price_html,
+							$product->get_title(),
+						),
+						sanitize_text_field( Merchant_Translator::translate( $spending_text ) )
+					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
-				); ?>
+				);
+                ?>
 			</div>
 			<div class="merchant-free-gifts-widget-offer-product">
 				<?php echo wp_kses_post( $offer['product']['image'] ); ?>
@@ -131,10 +162,12 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 					</p>
                     <div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
-						echo wp_kses(
-							Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0 ),
-							merchant_kses_allowed_tags( array( 'forms' ) )
-						);
+						if ( ( $cart_total_product >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
+							echo wp_kses(
+								Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
+								merchant_kses_allowed_tags( array( 'forms' ) )
+							);
+						}
 						?>
                     </div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
@@ -148,22 +181,21 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 				</div>
 			</div>
 		</div>
-	<?php elseif ( isset( $offer['amount'], $args['cart_total'] ) ) : ?>
+
+	<?php
+    // Offer for Any product
+    elseif ( isset( $offer['amount'] ) ) :
+        if ( $cart_total >= $goal_amount ) {
+            $spending_text = $spending_text_100;
+        } elseif ( $cart_total > 0 ) {
+            $spending_text = $spending_text_1_to_99;
+        } else {
+            $spending_text = $spending_text_0;
+        }
+    ?>
 		<div class="merchant-free-gifts-widget-offer">
 			<div class="merchant-free-gifts-widget-offer-label">
 				<?php
-				$goal_amount = $offer['amount'] ?? 0;
-				$amount_more = max( 0, $goal_amount - $cart_total );
-				$price_html  = wc_price( $amount_more );
-
-				if ( $cart_total >= $goal_amount ) {
-					$spending_text = $spending_text_100;
-				} elseif ( $cart_total > 0 ) {
-					$spending_text = $spending_text_1_to_99;
-				} else {
-					$spending_text = $spending_text_0;
-				}
-
 				echo wp_kses(
 					str_replace(
 						array(
@@ -192,10 +224,12 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
 					</p>
                     <div class="merchant-free-gifts-widget-offer-product-attributes">
 	                    <?php
-	                    echo wp_kses(
-		                    Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0 ),
-		                    merchant_kses_allowed_tags( array( 'forms' ) )
-	                    );
+	                    if ( ( $cart_total >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
+		                    echo wp_kses(
+			                    Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
+			                    merchant_kses_allowed_tags( array( 'forms' ) )
+		                    );
+	                    }
 	                    ?>
                     </div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
@@ -240,7 +274,7 @@ $spending_text_100     = $settings['spending_text_100'] ?? '';
                     <div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
 						echo wp_kses(
-							Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0 ),
+							Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
 							merchant_kses_allowed_tags( array( 'forms' ) )
 						);
 						?>
