@@ -24,6 +24,11 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		const MODULE_ID = 'advanced-reviews';
 
 		/**
+		 * Module template path.
+		 */
+		const MODULE_TEMPLATES_PATH = 'modules/' . self::MODULE_ID;
+
+		/**
 		 * Is module preview.
 		 *
 		 */
@@ -57,14 +62,20 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 			// Module default settings.
 			$this->module_default_settings = array(
-				'title'            => __( 'What our customers are saying', 'merchant' ),
-				'title_tag'        => 'h2',
-				'hide_title'       => 0,
-				'description'      => '',
-				'title_desc_align' => 'left',
-				'default_sorting'  => 'newest',
-				'pagination_type'  => 'default',
-				'hook_order'       => 10,
+				'title'                           => esc_html__( 'What our customers are saying', 'merchant' ),
+				'title_tag'                       => 'h2',
+				'hide_title'                      => 0,
+				'description'                     => '',
+				'title_desc_align'                => 'left',
+				'default_sorting'                 => 'newest',
+				'pagination_type'                 => 'load-more',
+				'photos_limit'                    => 6,
+				'review_options'                  => 'image_and_text',
+				'review_images_carousel'          => 0,
+				'carousel_title'                  => esc_html__( 'Customer Images', 'merchant' ),
+				'hook_order'                      => 10,
+				'review_images_carousel_total'    => 12,
+				'review_images_carousel_per_page' => 3,
 			);
 
 			// Mount preview url.
@@ -185,7 +196,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 					)
 				);
 
-				// Don't allow 'h2' value fro tag_title because it conflicts with WordPress notifications.
+				// Don't allow 'h2' value for tag_title because it conflicts with WordPress notifications.
 				if ( 'h2' === $settings['title_tag'] ) {
 					$settings['title_tag'] = 'h3';
 				}
@@ -204,36 +215,56 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$settings = $this->get_settings_with_product_object();
 
 			// Template arguments
-			$args = array_merge( $settings, array(
-				'bars_data'       => array(
-					'1-stars'         => 1,
-					'2-stars'         => 2,
-					'3-stars'         => 3,
-					'4-stars'         => 4,
-					'5-stars'         => 5,
-					'total'           => 15,
-					'1-stars-percent' => 10,
-					'2-stars-percent' => 20,
-					'3-stars-percent' => 30,
-					'4-stars-percent' => 40,
-					'5-stars-percent' => 50,
-				),
-				'ratings_enabled' => true,
-				'comments_open'   => true,
-				'comments'        => array(
-					(object) array(
-						'comment_approved'     => '1',
-						'comment_ID'           => 1,
-						'comment_post_ID'      => 1,
-						'comment_author'       => 'Kendall Grey',
-						'comment_author_email' => 'johndoe@athemes.com',
-						'comment_author_url'   => 'https://athemes.com',
-						'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) ),
+			$args = array_merge(
+				$settings,
+				array(
+					'bars_data'       => array(
+						'ratings' => array(
+							'5-star' => array(
+								'label'   => esc_html__( '5 Stars', 'merchant' ),
+								'value'   => 5,
+								'percent' => 50,
+							),
+							'4-star' => array(
+								'label'   => esc_html__( '4 Stars', 'merchant' ),
+								'value'   => 4,
+								'percent' => 40,
+							),
+							'3-star' => array(
+								'label'   => esc_html__( '3 Stars', 'merchant' ),
+								'value'   => 3,
+								'percent' => 30,
+							),
+							'2-star' => array(
+								'label'   => esc_html__( '2 Stars', 'merchant' ),
+								'value'   => 2,
+								'percent' => 20,
+							),
+							'1-star' => array(
+								'label'   => esc_html__( '1 Star', 'merchant' ),
+								'value'   => 1,
+								'percent' => 10,
+							),
+						),
+						'total'   => 15,
 					),
-				),
-				'comment_rating'  => 3,
-				'comment_text'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis sagittis commodo, nisl elit ultricies diam, at',
-			) );
+					'ratings_enabled' => true,
+					'comments_open'   => true,
+					'comments'        => array(
+						(object) array(
+							'comment_approved'     => '1',
+							'comment_ID'           => 1,
+							'comment_post_ID'      => 1,
+							'comment_author'       => 'Kendall Grey',
+							'comment_author_email' => 'johndoe@athemes.com',
+							'comment_author_url'   => 'https://athemes.com',
+							'comment_date'         => gmdate( 'Y-m-d H:i:s', strtotime( '-1 day' ) ),
+						),
+					),
+					'comment_rating'  => 3,
+					'comment_text'    => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, elit quis sagittis commodo, nisl elit ultricies diam, at',
+				)
+			);
 
 			return merchant_get_template_part( 'modules/' . self::MODULE_ID, 'reviews', $args, true );
 		}
@@ -259,11 +290,13 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'stars_color', '#FFA441', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-stars-color' );
 
 			// Stars Background Color.
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'stars_background_color',
 				'#757575',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-stars-bg-color' );
+				'--mrc-adv-reviews-stars-bg-color'
+			);
 
 			// Progress Bar Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'progress_bar_color', '#212121', '.merchant-adv-reviews', '--mrc-adv-reviews-bar-color' );
@@ -278,31 +311,37 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'button_color', '#FFF', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-button-color' );
 
 			// Button Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'button_color_hover',
 				'#FFF',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-button-color-hover' );
+				'--mrc-adv-reviews-button-color-hover'
+			);
 
 			// Button Background Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'button_bg_color', '#212121', '.merchant-adv-reviews, .merchant-adv-reviews-modal', '--mrc-adv-reviews-button-bg-color' );
 
 			// Button Background Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'button_bg_color_hover',
 				'#757575',
 				'.merchant-adv-reviews, .merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-button-bg-color-hover' );
+				'--mrc-adv-reviews-button-bg-color-hover'
+			);
 
 			// Modal Close Icon Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'modal_close_icon_color', '#212121', '.merchant-adv-reviews-modal', '--mrc-adv-reviews-modal-close-icon-color' );
 
 			// Modal Close Icon Color (hover).
-			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID,
+			$css .= Merchant_Custom_CSS::get_variable_css(
+				self::MODULE_ID,
 				'modal_close_icon_color_hover',
 				'#757575',
 				'.merchant-adv-reviews-modal',
-				'--mrc-adv-reviews-modal-close-icon-color-hover' );
+				'--mrc-adv-reviews-modal-close-icon-color-hover'
+			);
 
 			// Modal Title Color.
 			$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'modal_title_color', '#212121', '.merchant-adv-reviews-modal', '--mrc-adv-reviews-modal-title-color' );
@@ -336,11 +375,17 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		}
 	}
 
-// Dummy content.
+	// Dummy content.
 	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-product-dummy-data.php';
 
-// Initialize the module.
-	add_action( 'init', function () {
-		Merchant_Modules::create_module( new Merchant_Advanced_Reviews( new Merchant_Product_Dummy() ) );
-	} );
+	// Reviews List Table
+	// require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/admin/class-reviews-table.php';
+
+	// Initialize the module.
+	add_action(
+		'init',
+		function () {
+			Merchant_Modules::create_module( new Merchant_Advanced_Reviews( new Merchant_Product_Dummy() ) );
+		}
+	);
 }
