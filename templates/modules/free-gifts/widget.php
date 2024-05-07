@@ -15,9 +15,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 
 $fg_classes  = 'merchant-free-gifts-widget';
 $fg_classes .= ' merchant-free-gifts-widget--' . ( $settings['position'] ?? 'top_right' );
-//$fg_classes .= isset( $args['hide'] ) && $args['hide'] === true ? ' hide' : '';
 ?>
-
 <div id="merchant-free-gifts-widget" class="<?php echo esc_attr( $fg_classes ); ?>">
     <div class="merchant-free-gifts-widget-inner">
         <div class="merchant-free-gifts-widget-button" onclick="document.getElementById('merchant-free-gifts-widget').classList.toggle('active');">
