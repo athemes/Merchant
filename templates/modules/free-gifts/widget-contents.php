@@ -30,9 +30,9 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 	$amount_more = $offer['amount_more'] ?? $goal_amount;
 	$price_html  = wc_price( $amount_more );
 
-    $merchant_hash = $offer['merchant_hash'] ?? '';
+	$merchant_hash = $offer['merchant_hash'] ?? '';
 
-    // Offer for Categories
+	// Offer for Categories
 	if ( isset( $offer['rules_to_apply'], $offer['category_slugs'] ) && 'categories' === $offer['rules_to_apply'] ) :
 		$categories = array();
 		foreach ( $offer['category_slugs'] as $category_slug ) {
@@ -46,7 +46,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 			continue;
 		}
 
-        $cart_total_category = $offer['cart_total_category'] ?? 0;
+		$cart_total_category = $offer['cart_total_category'] ?? 0;
 
 		if ( $cart_total_category >= $goal_amount ) {
 			$spending_text = $spending_text_100;
@@ -59,13 +59,13 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 		<div class="merchant-free-gifts-widget-offer">
 			<div class="merchant-free-gifts-widget-offer-label">
 				<?php
-                $category_text = sprintf(
-                    /* Translators: 1. Term Name */
-	                _n( '%s category', '%s categories', count( $categories ), 'merchant' ),
-	                implode( ', ', $categories )
-                );
+				$category_text = sprintf(
+					/* Translators: 1. Term Name */
+					_n( '%s category', '%s categories', count( $categories ), 'merchant' ),
+					implode( ', ', $categories )
+				);
 
-                echo wp_kses(
+				echo wp_kses(
 					str_replace(
 						array(
 							'{amount}',
@@ -83,7 +83,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
 				);
-                ?>
+				?>
 			</div>
 			<div class="merchant-free-gifts-widget-offer-product">
 				<?php echo wp_kses_post( $offer['product']['image'] ); ?>
@@ -93,7 +93,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							<?php echo esc_html( $offer['product']['title'] ); ?>
 						</a>
 					</p>
-                    <div class="merchant-free-gifts-widget-offer-product-attributes">
+					<div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
 						if ( ( $cart_total_category >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
 							echo wp_kses(
@@ -102,7 +102,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							);
 						}
 						?>
-                    </div>
+					</div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
 						<del>
 							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
@@ -116,7 +116,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 		</div>
 
 	<?php
-    // Offer for Specific Product
+	// Offer for Specific Product
 	elseif ( isset( $offer['rules_to_apply'], $offer['product_to_purchase'] ) && 'product' === $offer['rules_to_apply'] ) :
 		$product            = wc_get_product( $offer['product_to_purchase'] );
 		$cart_total_product = $offer['cart_total_product'] ?? 0;
@@ -150,7 +150,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 					),
 					merchant_kses_allowed_tags( array( 'bdi' ) )
 				);
-                ?>
+				?>
 			</div>
 			<div class="merchant-free-gifts-widget-offer-product">
 				<?php echo wp_kses_post( $offer['product']['image'] ); ?>
@@ -160,7 +160,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							<?php echo esc_html( $offer['product']['title'] ); ?>
 						</a>
 					</p>
-                    <div class="merchant-free-gifts-widget-offer-product-attributes">
+					<div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
 						if ( ( $cart_total_product >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
 							echo wp_kses(
@@ -169,7 +169,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							);
 						}
 						?>
-                    </div>
+					</div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
 						<del>
 							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
@@ -183,16 +183,16 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 		</div>
 
 	<?php
-    // Offer for Any product
-    elseif ( isset( $offer['amount'] ) ) :
-        if ( $cart_total >= $goal_amount ) {
-            $spending_text = $spending_text_100;
-        } elseif ( $cart_total > 0 ) {
-            $spending_text = $spending_text_1_to_99;
-        } else {
-            $spending_text = $spending_text_0;
-        }
-    ?>
+	// Offer for Any product
+	elseif ( isset( $offer['amount'] ) ) :
+		if ( $cart_total >= $goal_amount ) {
+			$spending_text = $spending_text_100;
+		} elseif ( $cart_total > 0 ) {
+			$spending_text = $spending_text_1_to_99;
+		} else {
+			$spending_text = $spending_text_0;
+		}
+	?>
 		<div class="merchant-free-gifts-widget-offer">
 			<div class="merchant-free-gifts-widget-offer-label">
 				<?php
@@ -214,6 +214,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 				);
 				?>
 			</div>
+
 			<div class="merchant-free-gifts-widget-offer-product">
 				<?php echo wp_kses_post( $offer['product']['image'] ); ?>
 				<div class="merchant-free-gifts-widget-offer-product-contents">
@@ -222,16 +223,16 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							<?php echo esc_html( $offer['product']['title'] ); ?>
 						</a>
 					</p>
-                    <div class="merchant-free-gifts-widget-offer-product-attributes">
-	                    <?php
-	                    if ( ( $cart_total >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
-		                    echo wp_kses(
-			                    Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
-			                    merchant_kses_allowed_tags( array( 'forms' ) )
-		                    );
-	                    }
-	                    ?>
-                    </div>
+					<div class="merchant-free-gifts-widget-offer-product-attributes">
+						<?php
+						if ( ( $cart_total >= $goal_amount ) && empty( $offer['is_gift_claimed'] ) ) {
+							echo wp_kses(
+								Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
+								merchant_kses_allowed_tags( array( 'forms' ) )
+							);
+						}
+						?>
+					</div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
 						<del>
 							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
@@ -243,6 +244,7 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 				</div>
 			</div>
 		</div>
+
 	<?php else:
 		if ( isset( $offer['coupon'] ) && ! empty( $offer['coupon'] ) ) {
 			$coupon = $offer['coupon'];
@@ -261,8 +263,10 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 					/* Translators: 1. Amount */
 						sprintf( __( 'Use %s coupon to get this product', 'merchant' ), $coupon ),
 						merchant_kses_allowed_tags( array( 'bdi' ) )
-					); ?>
+					);
+                ?>
 			</div>
+
 			<div class="merchant-free-gifts-widget-offer-product">
 				<?php echo wp_kses_post( $offer['product']['image'] ); ?>
 				<div class="merchant-free-gifts-widget-offer-product-contents">
@@ -271,14 +275,14 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 							<?php echo esc_html( $offer['product']['title'] ); ?>
 						</a>
 					</p>
-                    <div class="merchant-free-gifts-widget-offer-product-attributes">
+					<div class="merchant-free-gifts-widget-offer-product-attributes">
 						<?php
 						echo wp_kses(
 							Merchant_Pro_Free_Gifts::get_variations_select_html( $offer['product']['id'] ?? 0, $merchant_hash ),
 							merchant_kses_allowed_tags( array( 'forms' ) )
 						);
 						?>
-                    </div>
+					</div>
 					<div class="merchant-free-gifts-widget-offer-product-price price">
 						<del>
 							<?php echo wp_kses( wc_price( $offer['product']['price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
@@ -291,4 +295,4 @@ $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 			</div>
 		</div>
 	<?php endif; ?>
-<?php endforeach; ?>
+<?php endforeach;

@@ -159,8 +159,8 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
 	        ),
 	        'product'    => array(
-		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on {productName} receive this free gift!', 'merchant' ),
-		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more on {productName} receive this free gift!', 'merchant' ),
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on {productName} to receive this free gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more on {productName} to receive this free gift!', 'merchant' ),
 		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
 	        ),
 	        'categories' => array(

@@ -29,12 +29,13 @@
 
         if ( rule === 'product' ) {
             productName = layout.find( '.merchant-field-product_to_purchase .product-item' ).attr( 'data-name' );
+            productName = productName || 'Selected product';
         } else if ( rule === 'categories' ) {
             const productNames = [];
             layout.find( '.merchant-field-category_slugs .select2-selection__choice' ).each( function() {
                 productNames.push( $(this).attr( 'title' ) )
-                productName = productNames.join( ', ' );
-            } )
+            } );
+            productName = productNames.length ? productNames.join( ', ' ) : 'Selected categories';
         }
 
         spendingText = spendingText?.replace( /{amount}|{goalAmount}/g, spendingGoal );
