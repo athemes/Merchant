@@ -812,7 +812,7 @@ body {
 .merchant-carousel {
 	padding: 0 !important;
 }
-// Photo slider
+
 .merchant-adv-reviews-modal-photo-slider {
 
 	.merchant-carousel {
@@ -838,6 +838,8 @@ body {
 	}
 
 	.merchant-adv-reviews-modal-body {
+		z-index: 99;
+
 		@media (max-width: 768px) {
 			max-width: calc(100vw - 100px);
 		}
