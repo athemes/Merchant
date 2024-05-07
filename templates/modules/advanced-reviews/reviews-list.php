@@ -83,8 +83,7 @@ $_comments = $args['comments'] ?? array();
 									if ( $review_images ) : ?>
                                         <div class="merchant-review-images">
 											<?php foreach ( $review_images as $image_id ) : ?>
-                                                <div class="merchant-review-image" data-merchant-modal-trigger="merchant-review-image-<?php echo esc_attr( $image_id ); ?>" data-merchant-modal="merchant-review-image-<?php echo esc_attr( $image_id ); ?>">
-                                                    <div class="merchant-review-image-overlay"></div>
+                                                <div class="merchant-review-image js-photo-slider-item" role="button" data-comment-id="<?php echo esc_attr( $_comment->comment_ID ); ?>">
 													<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
                                                 </div>
 											<?php endforeach; ?>

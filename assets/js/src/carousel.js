@@ -236,8 +236,8 @@ class Siema {
     buildSliderFrame() {
         if( this.innerElements.length <= this.perPage ) {
             this.parentSelector.classList.add( 'no-nav' );
-            this.parentSelector.querySelector( '.merchant-carousel-nav-next' ).remove();
-            this.parentSelector.querySelector( '.merchant-carousel-nav-prev' ).remove();
+            this.parentSelector.querySelector( '.merchant-carousel-nav-next' )?.remove();
+            this.parentSelector.querySelector( '.merchant-carousel-nav-prev' )?.remove();
             return false;
         }
     
@@ -789,6 +789,10 @@ merchant.carousel = {
 		document.addEventListener( 'DOMContentLoaded', function () {
             that.init(); // Required for some themes
         } );
+
+        jQuery( document ).on( 'photoSliderTriggered', function() {
+            that.init();
+        } )
 	},
 	init: function() {
 		this.build();
@@ -817,6 +821,9 @@ merchant.carousel = {
 						}
 					});
 				}
+
+                let loop = carouselEl.getAttribute( 'data-loop' ) !== '0';
+
 				
 				// Mount carousel wrapper
 				var	wrapper = document.createElement('div'),
@@ -829,7 +836,7 @@ merchant.carousel = {
 				carouselEl.append( wrapper );
 
 				// Margin
-				var margin = 30;
+				let margin = 30;
 				if( typeof merchant_carousel !== 'undefined' ) {
 					margin = parseInt( merchant_carousel.margin_desktop );
 				} else if( carouselEl.closest( '.merchant-woocommerce-mini-cart__cross-sell' ) !== null ) {
@@ -851,7 +858,7 @@ merchant.carousel = {
 					draggable: true,
 					multipleDrag: false,
 					threshold: 20,
-					loop: true,
+					loop,
 					rtl: false,
 					// autoplay: true, TO DO
 					margin: margin,
@@ -861,11 +868,10 @@ merchant.carousel = {
                         // Fix for theme that has lazy-load but not working
                         this?.innerElements?.forEach( item => {
                            const img = item.querySelector( 'img' );
-                           const src = img.getAttribute( 'src' );
+                           const src = img?.getAttribute( 'src' );
 
-                           if ( src.startsWith( 'data' ) ) {
-                               console.log('Cool')
-                               img.src = img.getAttribute( 'data-src' )
+                           if ( src?.startsWith( 'data' ) ) {
+                               img.src = img?.getAttribute( 'data-src' )
                            }
                        } );
 					}
@@ -906,3 +912,7 @@ merchant.carousel = {
 merchant.carousel.domReady( function(){
     merchant?.carousel?.init();
 } );
+
+jQuery( document ).on( 'photoSliderTriggered', function() {
+    merchant?.carousel?.init();
+} )
