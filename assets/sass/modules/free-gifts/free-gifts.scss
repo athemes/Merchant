@@ -242,6 +242,12 @@ body .merchant-free-gifts-claim-form {
 	color: var(--merchant-text-color);
 }
 
+.merchant-free-gifts-disabled-proceed-checkout {
+	+ .merchant-free-gifts-disabled-proceed-checkout {
+		display: none !important;
+	}
+}
+
 .rtl{
 	.merchant-free-gifts-widget-offer-product{
 		img{
