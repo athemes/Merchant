@@ -637,6 +637,12 @@ body {
 							margin-bottom: 10px;
 							color: var( --mrc-adv-reviews-modal-title-color, #212121 ) !important;
 						}
+
+						textarea {
+							max-height: none !important;
+							height: 110px;
+						}
+
 						textarea,
 						input {
 							max-height: 50px;
@@ -733,7 +739,8 @@ body {
 						margin-bottom: 15px;
 
 						> div {
-							flex: 0 0 105px;
+							flex: 0 0 100px;
+							height: 90px;
 							position: relative;
 
 							&:after {
@@ -924,7 +931,9 @@ body {
 			}
 
 			&-review-title {
-				margin-bottom: 0;
+				margin-block: 0;
+				font-size: 24px;
+				line-height: 1.4;
 			}
 
 			.merchant-review-content {

@@ -44,15 +44,15 @@ wp_enqueue_script( 'merchant-carousel' );
             </div>
             <div class="merchant-adv-reviews-modal-column">
                 <div class="merchant-adv-reviews-modal-column-review">
-                    <h2 class="merchant-adv-reviews-modal-column-review-title"><?php echo esc_html( get_the_title( $_comment->comment_post_ID ) ); ?></h2>
+                    <h3 class="merchant-adv-reviews-modal-column-review-title"><?php echo esc_html( get_the_title( $_comment->comment_post_ID ) ); ?></h3>
 	                <?php if ( wc_review_ratings_enabled() ) : ?>
                         <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated <?php echo esc_attr( $comment_rating_value ); ?>.00 out of 5">
-                        <span style="width: <?php echo esc_attr( ( ( $comment_rating_value / 5 ) * 100 ) ); ?>%;">
-                            <?php
-                            /* translators: %s is average rating value */
-                            $comment_rating_text = sprintf( __( 'Rated %s out of 5 based on customer ratings.', 'merchant' ), $comment_rating_value );
-                            echo esc_html( $comment_rating_text ); ?>
-                        </span>
+                            <span style="width: <?php echo esc_attr( ( ( $comment_rating_value / 5 ) * 100 ) ); ?>%;">
+                                <?php
+                                /* translators: %s is average rating value */
+                                $comment_rating_text = sprintf( __( 'Rated %s out of 5 based on customer ratings.', 'merchant' ), $comment_rating_value );
+                                echo esc_html( $comment_rating_text ); ?>
+                            </span>
                         </div>
 	                <?php endif; ?>
                     <strong class="merchant-review-author">
