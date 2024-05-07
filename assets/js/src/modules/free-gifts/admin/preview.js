@@ -29,13 +29,13 @@
 
         if ( rule === 'product' ) {
             productName = layout.find( '.merchant-field-product_to_purchase .product-item' ).attr( 'data-name' );
-            productName = productName || 'Selected product';
+            productName = productName || 'Specific product';
         } else if ( rule === 'categories' ) {
             const productNames = [];
             layout.find( '.merchant-field-category_slugs .select2-selection__choice' ).each( function() {
                 productNames.push( $(this).attr( 'title' ) )
             } );
-            productName = productNames.length ? productNames.join( ', ' ) : 'Selected categories';
+            productName = productNames.length ? productNames.join( ', ' ) : 'Categories';
         }
 
         spendingText = spendingText?.replace( /{amount}|{goalAmount}/g, spendingGoal );
