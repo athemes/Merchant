@@ -47,6 +47,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
+				'product-bundles' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
+					'title' => esc_html__( 'Product Bundles', 'merchant' ),
+					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
+				),
 				'frequently-bought-together' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -103,7 +111,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target or apply a coupon', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/',
 				),
-
+				'added-to-cart-popup' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
+					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
+					'desc' => esc_html__( 'Display a dynamic popup with product suggestion when items are added to the cart', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-added-to-cart-popup/',
+				),
 				// Increase Conversion Rates (Convert More).
 				'buy-now' => array(
 					'pro' => false,
@@ -187,14 +202,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 				// Boost Revenue.
-				'product-bundles' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
-					'title' => esc_html__( 'Product Bundles', 'merchant' ),
-					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
-				),
+
 				// Reduce Cart Abandonment.
 				'cart-count-favicon' => array(
 					'pro' => false,

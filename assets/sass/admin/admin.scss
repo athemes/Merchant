@@ -3358,6 +3358,7 @@ body.merchant-module-disabled {
         border: none;
         border-radius: 3px;
         padding: 13px 0 13px 40px;
+        width: 100%;
 
         &::placeholder {
           font-size: 12px;
@@ -3366,8 +3367,9 @@ body.merchant-module-disabled {
 
       .merchant-search-icon {
         position: absolute;
-        top: 15px;
+        top: 50%;
         left: 15px;
+        transform: translateY(-50%);
       }
     }
 
