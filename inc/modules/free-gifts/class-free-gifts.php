@@ -56,7 +56,8 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'display_shop'          => 1,
 			'display_product'       => 1,
 			'display_cart'          => 1,
-			'spending_text'         => esc_html__( 'Spend {amount} more to receive this gift!', 'merchant' ),
+			'position'              => 'top_right',
+			'distance'              => 250,
 			'free_text'             => esc_html__( 'Free', 'merchant' ),
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
 			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),
@@ -82,6 +83,12 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
+
+			// Enqueue admin scripts.
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
+
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
@@ -128,6 +135,50 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/free-gifts.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
+	}
+
+	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		if ( parent::is_module_settings_page() ) {
+			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION, true );
+		}
+	}
+
+	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $data ) {
+        $data['spending_texts'] = array(
+	        'all'        => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on any product to receive this gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} on any product to receive this gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+	        'product'    => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on {productName} to receive this free gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more on {productName} to receive this free gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+	        'categories' => array(
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} in the {categories} to receive this free gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more in the {categories} to receive this free gift!', 'merchant' ),
+		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+	        ),
+        );
+
+		$data['gifts_icons'] = array(
+            'gifts-icon-1' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-1' ),
+            'gifts-icon-2' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-2' ),
+            'gifts-icon-3' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-3' ),
+            'gifts-icon-4' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-4' ),
+            'gifts-icon-5' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-5' ),
+        );
+
+		return $data;
 	}
 
 	/**
@@ -181,29 +232,34 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content() {
 		$settings = $this->get_module_settings();
-
 		?>
 
         <div class="mrc-preview-single-product-elements">
             <div class="mrc-preview-left-column">
                 <div class="mrc-preview-product-image-wrapper">
                     <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                    </div>
                 </div>
             </div>
             <div class="mrc-preview-right-column">
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-addtocart-placeholder"></div>
+                <h3 style="margin-top: 0;"><?php echo esc_html__( 'Your Product Name', 'merchant' ); ?></h3>
+                <div class="mrc-preview-rating">
+                    <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated 3.00 out of 5">
+                        <span style="width: 80%"></span>
+                    </div>
+                    <span style="color: #969696;"><?php echo esc_html__( 'reviews', 'merchant' ); ?></span>
+                </div>
+                <h3><?php echo esc_html__( '$49', 'merchant' ); ?></h3>
+                <p><?php echo esc_html__( "An amazing product people can't refuse. What’s the next moment of value-realization when using your product? Tell the biggest use case. Briefly expand your product benefits on how this will help customers.", 'merchant' ); ?></p>
 
-				<?php
+                <div class="merchant-preview-add-to-cart-inner">
+                    <div class="merchant-preview-qty">
+                        <button><?php echo esc_html( '+' ); ?></button>
+                        <input type="text" value="<?php echo esc_attr( '1' ); ?>">
+                        <button><?php echo esc_html( '-' ); ?></button>
+                    </div>
+                    <div class="merchant-preview-add-to-cart"><?php echo esc_html__( 'Add to cart', 'merchant' ); ?></div>
+                </div>
+                <?php
 				echo wp_kses( merchant_get_template_part(
 					Merchant_Free_Gifts::MODULE_TEMPLATES_PATH,
 					'widget',
@@ -273,6 +329,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'product_text_hover_color', '#757575', '.merchant-free-gifts-widget-offer-product-title', '--merchant-text-hover-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'product_price_text_color', '#999999', '.merchant-free-gifts-widget-offer-product-price del', '--merchant-text-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'free_text_color', '#212121', '.merchant-free-gifts-widget-offer-product-free', '--merchant-text-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'distance', 250, '.merchant-free-gifts-widget', '--merchant-free-gifts-distance', 'px' );
 
 		return $css;
 	}
