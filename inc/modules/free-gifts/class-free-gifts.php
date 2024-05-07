@@ -232,29 +232,34 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content() {
 		$settings = $this->get_module_settings();
-
 		?>
 
         <div class="mrc-preview-single-product-elements">
             <div class="mrc-preview-left-column">
                 <div class="mrc-preview-product-image-wrapper">
                     <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                    </div>
                 </div>
             </div>
             <div class="mrc-preview-right-column">
-                <div class="mrc-preview-text-placeholder"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-                <div class="mrc-preview-addtocart-placeholder"></div>
+                <h3 style="margin-top: 0;"><?php echo esc_html__( 'Your Product Name', 'merchant' ); ?></h3>
+                <div class="mrc-preview-rating">
+                    <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated 3.00 out of 5">
+                        <span style="width: 80%"></span>
+                    </div>
+                    <span style="color: #969696;"><?php echo esc_html__( 'reviews', 'merchant' ); ?></span>
+                </div>
+                <h3><?php echo esc_html__( '$49', 'merchant' ); ?></h3>
+                <p><?php echo esc_html__( "An amazing product people can't refuse. What’s the next moment of value-realization when using your product? Tell the biggest use case. Briefly expand your product benefits on how this will help customers.", 'merchant' ); ?></p>
 
-				<?php
+                <div class="merchant-preview-add-to-cart-inner">
+                    <div class="merchant-preview-qty">
+                        <button><?php echo esc_html( '+' ); ?></button>
+                        <input type="text" value="<?php echo esc_attr( '1' ); ?>">
+                        <button><?php echo esc_html( '-' ); ?></button>
+                    </div>
+                    <div class="merchant-preview-add-to-cart"><?php echo esc_html__( 'Add to cart', 'merchant' ); ?></div>
+                </div>
+                <?php
 				echo wp_kses( merchant_get_template_part(
 					Merchant_Free_Gifts::MODULE_TEMPLATES_PATH,
 					'widget',
