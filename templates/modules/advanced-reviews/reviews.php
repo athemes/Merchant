@@ -129,7 +129,7 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
     ?>
 	<section class="merchant-adv-reviews-media-carousel">
 		<?php if ( ! empty( $args['carousel_title'] ) ) : ?>
-			<h3 class="section-title"><?php echo esc_html( $args['carousel_title'] ); ?></h3>
+			<h3 class="section-title"><?php echo esc_html( Merchant_Translator::translate( $args['carousel_title'] ) ); ?></h3>
 		<?php endif; ?>
 
 		<div class="merchant-carousel <?php echo esc_attr( $images_per_page >= count( $carousel_images_data ) ? ' no-carousel' : '' ); ?>" data-per-page="<?php echo esc_attr( $images_per_page ); ?>">
