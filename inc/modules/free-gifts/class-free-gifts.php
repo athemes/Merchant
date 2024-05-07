@@ -170,6 +170,14 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 	        ),
         );
 
+		$data['gifts_icons'] = array(
+            'gifts-icon-1' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-1' ),
+            'gifts-icon-2' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-2' ),
+            'gifts-icon-3' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-3' ),
+            'gifts-icon-4' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-4' ),
+            'gifts-icon-5' => Merchant_SVG_Icons::get_svg_icon( 'gifts-icon-5' ),
+        );
+
 		return $data;
 	}
 
