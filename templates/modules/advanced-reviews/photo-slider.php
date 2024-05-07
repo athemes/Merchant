@@ -18,12 +18,12 @@ $comment_rating_value = get_comment_meta( $comment_id, 'rating', true );
 wp_enqueue_style( 'merchant-carousel' );
 wp_enqueue_script( 'merchant-carousel' );
 ?>
-    <button class="merchant-adv-reviews-modal-next-prev merchant-adv-reviews-modal-prev">
-        <svg width="18" height="18" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-based"><path d="M8.5 1.33301L1.83333 7.99967L8.5 14.6663" stroke="#fff" stroke-width="1.5"></path></svg>
-    </button>
-    <button class="merchant-adv-reviews-modal-next-prev merchant-adv-reviews-modal-next">
-        <svg width="18" height="18" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-based"><path d="M1.5 14.667L8.16667 8.00033L1.5 1.33366" stroke="#fff" stroke-width="1.5"></path></svg>
-    </button>
+<button class="merchant-adv-reviews-modal-next-prev merchant-adv-reviews-modal-prev" data-nav="prev">
+    <svg width="18" height="18" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-based"><path d="M8.5 1.33301L1.83333 7.99967L8.5 14.6663" stroke="#fff" stroke-width="1.5"></path></svg>
+</button>
+<button class="merchant-adv-reviews-modal-next-prev merchant-adv-reviews-modal-next" data-nav="next">
+    <svg width="18" height="18" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-based"><path d="M1.5 14.667L8.16667 8.00033L1.5 1.33366" stroke="#fff" stroke-width="1.5"></path></svg>
+</button>
 <div class="merchant-adv-reviews-modal-body">
         <a href="#" class="merchant-adv-reviews-modal-close" title="<?php echo esc_attr__( 'Close popup', 'merchant' ); ?>">
             <i class="ws-svg-icon icon-cancel">

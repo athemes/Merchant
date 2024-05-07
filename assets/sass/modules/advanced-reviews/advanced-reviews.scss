@@ -18,6 +18,25 @@ body {
 	}
 
 	&-media-carousel {
+		.no-carousel {
+			@media (min-width: 1025px) {
+				margin-top: 30px;
+
+				.merchant-carousel-stage {
+					margin: 0 !important;
+				}
+
+				.merchant-carousel-stage > .item {
+					flex: 0 0 32%;
+					margin-right: 15px;
+
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+
 		.section-title {
 			margin-bottom: 20px;
 		}
@@ -783,9 +802,18 @@ body {
 	}
 }
 
-
+.merchant-carousel {
+	padding: 0 !important;
+}
 // Photo slider
 .merchant-adv-reviews-modal-photo-slider {
+
+	.merchant-carousel {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+	}
 
 	&.show {
 		background: rgba(0,0,0,.9);
@@ -802,20 +830,22 @@ body {
 		animation: spin 1s ease-in-out infinite;
 	}
 
-	.merchant-adv-reviews-modal-body .merchant-adv-reviews-modal-content {
-		width: 960px;
-		max-width: 100%;
-		margin-right: 0;
-		padding-right: 0;
-		overflow: hidden;
+	.merchant-adv-reviews-modal-body {
+		@media (max-width: 768px) {
+			max-width: calc(100vw - 100px);
+		}
+
+		.merchant-adv-reviews-modal-content {
+			width: 960px;
+			max-width: 100%;
+			margin-right: 0;
+			padding-right: 0;
+			overflow: hidden;
+		}
 	}
 
 	.merchant-adv-reviews-modal-close {
 		z-index: 999;
-	}
-
-	.merchant-carousel-stage > div > div {
-		//margin-right: 0 !important;
 	}
 
 	.merchant-carousel-wrapper {
@@ -833,11 +863,11 @@ body {
 		}
 
 		.merchant-carousel-nav {
-			top: 50%;
+			top: 50% !important;
 			width: 28px;
 			height: 34px;
 			line-height: 40px;
-			transform: translateY(-50%);
+			transform: translateY(-50%) !important;
 			background: rgb(255, 255, 255, .7);
 			text-align: center;
 
@@ -846,14 +876,15 @@ body {
 			}
 
 			&-prev {
-				left: 0;
-				right: auto;
+				left: 0 !important;
+				right: auto !important;
 				border-radius: 0 5px 5px 0;
 			}
 
 			&-next {
 				border-radius: 5px 0 0 5px;
-				right: 0;
+				right: 0 !important;
+				left: auto !important;
 				//right: 15px;
 			}
 		}
@@ -912,7 +943,7 @@ body {
 	}
 }
 
-button.merchant-adv-reviews-modal-next-prev {
+.merchant-adv-reviews-modal-next-prev {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -921,6 +952,8 @@ button.merchant-adv-reviews-modal-next-prev {
 	border: none;
 	box-shadow: none;
 	outline: none;
+	padding: 15px;
+	margin: 0;
 }
 
 .merchant-adv-reviews-modal-next {

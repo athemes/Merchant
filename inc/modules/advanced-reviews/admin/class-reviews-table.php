@@ -17,13 +17,6 @@ if ( ! class_exists( 'Merchant_Reviews_Table' ) ) {
 			//add_filter( 'manage_product_page_product-reviews_columns', array( $this, 'add_photos_columns' ) );
 
 			//add_filter( 'manage_product_page_product-reviews_sortable_columns', array( $this, 'add_photos_sortable_columns' ) );
-
-			//add_action( 'restrict_manage_page_product-reviews', array( $this, 'photos_filters' ) );
-			//add_action( 'manage_product-reviews_extra_tablenav', array( $this, 'photos_filters' ), 1 );
-		}
-
-		public function photos_filters() {
-			//
 		}
 
 		/**

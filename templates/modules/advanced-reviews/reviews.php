@@ -120,9 +120,10 @@ $total_ratings = $bars_data['total'] ?? 0;
 $is_carousel_on       = (bool) ( $args['review_images_carousel'] ?? false );
 $carousel_images_data = $args['carousel_images_data'] ?? array();
 
-
 if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_images_data ) ) : ?>
     <?php
+    $images_per_page = $args['review_images_carousel_per_page'] ?? 3;
+
 	wp_enqueue_style( 'merchant-carousel' );
 	wp_enqueue_script( 'merchant-carousel' );
     ?>
@@ -131,7 +132,7 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
 			<h3 class="section-title"><?php echo esc_html( $args['carousel_title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="merchant-carousel" data-per-page="<?php echo esc_attr( $args['review_images_carousel_per_page'] ?? 3 ); ?>">
+		<div class="merchant-carousel <?php echo esc_attr( $images_per_page >= count( $carousel_images_data ) ? ' no-carousel' : '' ); ?>" data-per-page="<?php echo esc_attr( $images_per_page ); ?>">
             <div class="merchant-carousel-stage">
                 <?php foreach( $carousel_images_data as $data ) :
                     ?>
@@ -274,4 +275,3 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
  * @since 1.0
  */
 do_action( 'merchant_after_adv_reviews_section' );
-?>

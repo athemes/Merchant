@@ -379,7 +379,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-product-dummy-data.php';
 
 	// Reviews List Table
-	require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/admin/class-reviews-table.php';
+	// require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/admin/class-reviews-table.php';
 
 	// Initialize the module.
 	add_action(
