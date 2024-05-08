@@ -88,10 +88,14 @@
   }
 }
 
+.merchant-star-rating-bars .merchant-star-rating-bar-item-inner .item-bar {
+  width: auto;
+}
+
 @media(min-width: 1300px) {
   .merchant-star-rating-bars {
     .merchant-star-rating-bar-item {
-      max-width: 300px;
+      max-width: 200px;
 
       .item-bar {
         min-width: 200px;
