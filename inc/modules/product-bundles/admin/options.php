@@ -19,34 +19,34 @@ do_action( 'merchant_admin_before_include_modules_options', Merchant_Product_Bun
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Product_Bundles::MODULE_ID,
-	'title'  => esc_html__( 'Product Page Settings', 'merchant' ),
+	'title'  => esc_html__( 'Product page settings', 'merchant' ),
 	'fields' => array(
 
 		array(
 			'id'      => 'bundled_thumb',
 			'type'    => 'switcher',
-			'title'   => __( 'Display Thumbnails', 'merchant' ),
+			'title'   => __( 'Display bundled product thumbnails', 'merchant' ),
 			'default' => '1',
 		),
 
 		array(
 			'id'      => 'bundled_description',
 			'type'    => 'switcher',
-			'title'   => __( 'Display Descriptions', 'merchant' ),
+			'title'   => __( 'Display bundled product descriptions', 'merchant' ),
 			'default' => 0,
 		),
 
 		array(
 			'id'      => 'bundled_qty',
 			'type'    => 'switcher',
-			'title'   => __( 'Display the Quantity', 'merchant' ),
+			'title'   => __( 'Display bundled product quantities', 'merchant' ),
 			'default' => '1',
 		),
 
 		array(
 			'id'      => 'bundled_link_single',
 			'type'    => 'switcher',
-			'title'   => __( 'Display Link on Product Page', 'merchant' ),
+			'title'   => __( 'Make bundled product thumbnails and titles clickable', 'merchant' ),
 			'default' => '1',
 		),
 
@@ -89,19 +89,19 @@ Merchant_Admin_Options::create( array(
 // Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Product_Bundles::MODULE_ID,
-	'title'  => esc_html__( 'Cart Settings', 'merchant' ),
+	'title'  => esc_html__( 'Cart settings', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'      => 'hide_bundled_cart',
 			'type'    => 'switcher',
-			'title'   => __( 'Hide in Cart', 'merchant' ),
+			'title'   => __( 'Hide bundled products in cart', 'merchant' ),
 			'default' => 0,
 		),
 
 		array(
 			'id'      => 'hide_bundled_mini_cart',
 			'type'    => 'switcher',
-			'title'   => __( 'Hide in Mini Cart', 'merchant' ),
+			'title'   => __( 'Hide bundled products in mini cart', 'merchant' ),
 			'default' => 0,
 		),
 
@@ -115,7 +115,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'bundled_link',
 			'type'    => 'switcher',
-			'title'   => __( 'Display Link on Cart Page', 'merchant' ),
+			'title'   => __( 'Include links to bundled products on cart page', 'merchant' ),
 			'default' => '1',
 		),
 
@@ -133,7 +133,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'hide_bundled',
 			'type'    => 'radio',
-			'title'   => __( 'Show bundle products', 'merchant' ),
+			'title'   => __( 'Show bundled products', 'merchant' ),
 			'options' => array(
 				'text' => __( 'List inline', 'merchant' ),
 				'list' => __( 'Bulleted list', 'merchant' ),
