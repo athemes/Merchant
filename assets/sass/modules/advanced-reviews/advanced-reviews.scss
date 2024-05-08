@@ -965,6 +965,11 @@ body {
 	outline: none;
 	padding: 15px;
 	margin: 0;
+
+	&:focus,
+	&:active {
+		outline: none;
+	}
 }
 
 .merchant-adv-reviews-modal-photo-slider-single-review .merchant-adv-reviews-modal-next-prev {
