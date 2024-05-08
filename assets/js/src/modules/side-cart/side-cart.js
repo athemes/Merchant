@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
   }
 
   // Update Product quantity in Side Cart
-  if ( merchant.setting.hasOwnProperty('add_to_cart_slide_out') ) {
+  if ( merchant.setting.hasOwnProperty( 'add_to_cart_slide_out' ) || merchant.setting.hasOwnProperty( 'floating_mini_cart_count' ) ) {
     // Update quantity on plus/minus click
     $( document ).on( 'click', '.js-merchant-quantity-btn', function ( e ) {
       e.preventDefault();
