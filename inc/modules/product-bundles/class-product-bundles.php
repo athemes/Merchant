@@ -64,6 +64,39 @@ class Merchant_Product_Bundles extends Merchant_Add_Module {
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
+
+		add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
+	}
+
+    /**
+     * Help banner.
+     *
+     * @return void
+     */
+	public function help_banner() {
+		?>
+        <div class="merchant-module-page-setting-fields">
+            <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+                <div class="merchant-module-page-setting-field-inner">
+                    <div class="merchant-tag-pre-orders">
+                        <i class="dashicons dashicons-info"></i>
+                        <p>
+						<?php
+						echo esc_html__(
+							'To create a new product bundle (simple or variable), go to Products > Add New menu in the left sidebar of your WordPress admin area.',
+							'merchant'
+						);
+						printf(
+							'<a href="%1s" target="_blank">%2s</a>',
+							esc_url( admin_url( 'post-new.php?post_type=product' ) ),
+							esc_html__( 'Add New Bundle', 'merchant' )
+						);
+						?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<?php
 	}
 
 	/**
@@ -115,23 +148,23 @@ class Merchant_Product_Bundles extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings ) {
 		?>
-		<div class="mrc-preview-single-product-elements">
-			<div class="mrc-preview-left-column">
-				<div class="mrc-preview-product-image-wrapper">
-					<div class="mrc-preview-product-image"></div>
-					<div class="mrc-preview-product-image-thumbs">
-						<div class="mrc-preview-product-image-thumb"></div>
-						<div class="mrc-preview-product-image-thumb"></div>
-						<div class="mrc-preview-product-image-thumb"></div>
-					</div>
-				</div>
-			</div>
-			<div class="mrc-preview-right-column">
-				<div class="mrc-preview-text-placeholder"></div>
-				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-				<div class="mrc-preview-text-placeholder mrc-mw-30"></div>
-				<div class="mrc-preview-text-placeholder mrc-mw-40"></div>
-				<div class="mrc-preview-bundle-wrapper mrc-mw-60">
+        <div class="mrc-preview-single-product-elements">
+            <div class="mrc-preview-left-column">
+                <div class="mrc-preview-product-image-wrapper">
+                    <div class="mrc-preview-product-image"></div>
+                    <div class="mrc-preview-product-image-thumbs">
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mrc-preview-right-column">
+                <div class="mrc-preview-text-placeholder"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-30"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-40"></div>
+                <div class="mrc-preview-bundle-wrapper mrc-mw-60">
                     <div class="mrc-preview-bundle-product">
                         <div class="mrc-preview-bundle-product-image"></div>
                         <div class="mrc-preview-bundle-product-info">
@@ -157,9 +190,9 @@ class Merchant_Product_Bundles extends Merchant_Add_Module {
                         </div>
                     </div>
                 </div>
-				<div class="mrc-preview-addtocart-placeholder"></div>
-			</div>
-		</div>
+                <div class="mrc-preview-addtocart-placeholder"></div>
+            </div>
+        </div>
 		<?php
 	}
 }
