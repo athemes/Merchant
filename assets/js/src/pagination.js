@@ -164,6 +164,7 @@ merchant.pagination = {
 		ajax.send();
 	},
 
+
 	updateNextURL: function() {
 		let
 			nextPage = this.defaults.currentPage < this.defaults.totalPages ? this.defaults.currentPage + 1 : this.defaults.currentPage,
