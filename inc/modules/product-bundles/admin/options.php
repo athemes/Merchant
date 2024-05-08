@@ -10,44 +10,88 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-/**
- * Hook functionality before including modules options.
- *
- * @since 1.9.8
- */
-do_action( 'merchant_admin_before_include_modules_options', Merchant_Product_Bundles::MODULE_ID );
+
+// Settings
+Merchant_Admin_Options::create( array(
+	'module' => Merchant_Product_Bundles::MODULE_ID,
+	'title'  => esc_html__( 'General settings', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'      => 'hide_bundled_cart',
+			'type'    => 'switcher',
+			'title'   => __( 'Hide bundled products in cart', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'      => 'hide_bundled_mini_cart',
+			'type'    => 'switcher',
+			'title'   => __( 'Hide bundled products in mini cart', 'merchant' ),
+			'default' => 0,
+		),
+
+//      array(
+//          'id'      => '_woopq_decimal',
+//          'type'    => 'switcher',
+//          'title'   => __( 'Allow decimal product quantity', 'merchant' ),
+//          'default' => 0,
+//      ),
+
+		array(
+			'id'      => 'bundled_link',
+			'type'    => 'switcher',
+			'title'   => __( 'Display link for each bundled product on cart page', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'      => 'cart_contents_count',
+			'type'    => 'select',
+			'title'   => __( 'Cart contents count will include', 'merchant' ),
+			'options' => array(
+				'bundle' => __( 'The bundle as one product', 'merchant' ),
+				'both'   => __( 'Both bundle and bundled products', 'merchant' ),
+			),
+			'default' => 'bundle',
+		),
+
+		array(
+			'id'      => 'hide_bundled',
+			'type'    => 'select',
+			'title'   => __( 'Bundled products text style in cart', 'merchant' ),
+			'options' => array(
+				'text' => __( 'Show bundled products list inline', 'merchant' ),
+				'list' => __( 'Show bundled products in a bulleted list', 'merchant' ),
+			),
+			'default' => 'text',
+		),
+	),
+) );
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Product_Bundles::MODULE_ID,
-	'title'  => esc_html__( 'Product page settings', 'merchant' ),
+	'title'  => esc_html__( 'Product single page', 'merchant' ),
 	'fields' => array(
 
 		array(
 			'id'      => 'bundled_thumb',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled product thumbnails', 'merchant' ),
-			'default' => '1',
+			'title'   => __( 'Display bundled products thumbnails', 'merchant' ),
+			'default' => 0,
 		),
 
 		array(
 			'id'      => 'bundled_description',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled product descriptions', 'merchant' ),
+			'title'   => __( 'Display descriptions of bundled products', 'merchant' ),
 			'default' => 0,
 		),
 
 		array(
 			'id'      => 'bundled_qty',
 			'type'    => 'switcher',
-			'title'   => __( 'Display bundled product quantities', 'merchant' ),
-			'default' => '1',
-		),
-
-		array(
-			'id'      => 'bundled_link_single',
-			'type'    => 'switcher',
-			'title'   => __( 'Make bundled product thumbnails and titles clickable', 'merchant' ),
-			'default' => '1',
+			'title'   => __( 'Display the quantity of bundled products', 'merchant' ),
+			'default' => 0,
 		),
 
 		array(
@@ -86,63 +130,6 @@ Merchant_Admin_Options::create( array(
 	),
 ) );
 
-// Settings
-Merchant_Admin_Options::create( array(
-	'module' => Merchant_Product_Bundles::MODULE_ID,
-	'title'  => esc_html__( 'Cart settings', 'merchant' ),
-	'fields' => array(
-		array(
-			'id'      => 'hide_bundled_cart',
-			'type'    => 'switcher',
-			'title'   => __( 'Hide bundled products in cart', 'merchant' ),
-			'default' => 0,
-		),
-
-		array(
-			'id'      => 'hide_bundled_mini_cart',
-			'type'    => 'switcher',
-			'title'   => __( 'Hide bundled products in mini cart', 'merchant' ),
-			'default' => 0,
-		),
-
-//      array(
-//          'id'      => '_woopq_decimal',
-//          'type'    => 'switcher',
-//          'title'   => __( 'Allow decimal product quantity', 'merchant' ),
-//          'default' => 0,
-//      ),
-
-		array(
-			'id'      => 'bundled_link',
-			'type'    => 'switcher',
-			'title'   => __( 'Include links to bundled products on cart page', 'merchant' ),
-			'default' => '1',
-		),
-
-		array(
-			'id'      => 'cart_contents_count',
-			'type'    => 'select',
-			'title'   => __( 'Cart contents count will include', 'merchant' ),
-			'options' => array(
-				'bundle' => __( 'The bundle as one product', 'merchant' ),
-				'both'   => __( 'Both bundle and bundled products', 'merchant' ),
-			),
-			'default' => 'bundle',
-		),
-
-		array(
-			'id'      => 'hide_bundled',
-			'type'    => 'radio',
-			'title'   => __( 'Show bundled products', 'merchant' ),
-			'options' => array(
-				'text' => __( 'List inline', 'merchant' ),
-				'list' => __( 'Bulleted list', 'merchant' ),
-			),
-			'default' => 'text',
-		),
-	),
-) );
-
 
 // Shortcode
 Merchant_Admin_Options::create( array(
@@ -158,8 +145,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'type'    => 'info',
 			'id'      => 'shortcode_info',
-			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
-				'merchant' ),
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
 		),
 		array(
 			'id'        => 'shortcode_text',
