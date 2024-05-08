@@ -180,7 +180,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_recently_viewed_products',
 				'merchant_module_trust_badges',
 				'merchant_module_advanced_reviews',
-				'merchant_module_frequently_bought_together',
+				'merchant_module_frequency_bought_together',
 				'merchant_module_buy_x_get_y',
 				'merchant_module_product_bundles',
 			)

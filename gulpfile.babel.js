@@ -51,7 +51,7 @@ const errorHandler = r => {
  * Helper function to allow browser reload with Gulp 4.
  */
 const reload = done => {
-	//browserSync.reload();
+	browserSync.reload();
 	done();
 };
 
@@ -238,24 +238,23 @@ gulp.task(
 		...styleTasks,
 		...styleMinTasks,
 		...scriptTasks,
-		() => {
+		browsersync, () => {
 
-			// Global.
-			gulp.watch(config.watchPhp, reload);
-
-			// Styles.
-			for (const style of config.styles) {
-				gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleTask'));
-				gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleMinTask'));
-			}
-
-			// Scripts.
-			for (const script of config.scripts) {
-				gulp.watch(config.watchScripts, gulp.series(script.name + 'ScriptTask', reload));
-			}
-
+		// Global.
+		gulp.watch(config.watchPhp, reload);
+		
+		// Styles.
+		for (const style of config.styles) {
+			gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleTask'));
+			gulp.watch(config.watchStyles, gulp.parallel(style.name + 'StyleMinTask'));
 		}
-	)
+
+		// Scripts.
+		for (const script of config.scripts) {
+			gulp.watch(config.watchScripts, gulp.series(script.name + 'ScriptTask', reload));
+		}
+
+	})
 );
 
 /**
