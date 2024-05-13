@@ -130,7 +130,7 @@ Merchant_Admin_Options::create( array(
 							'title'         => esc_html__( 'Product', 'merchant' ),
 							'multiple'      => false,
 							'desc'          => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
-							'allowed_types' => array( 'simple', 'variation' ),
+							'allowed_types' => array( 'simple', 'variable', 'variation' ),
 						),
 						'coupon' => array(
 							'id'    => 'coupon',
