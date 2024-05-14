@@ -27,7 +27,7 @@ $classes    = array( 'merchant-sticky-add-to-cart-wrapper' );
 $classes[] = 'position-bottom' === $settings[ 'position' ] ? 'position-bottom' : 'position-top';
 
 // Display after amount of scroll.
-$attributes[] = 'data-merchant-scroll-toggle-class="merchant-sticky-addtocart-active"';
+//$attributes[] = 'data-merchant-scroll-toggle-class="merchant-sticky-addtocart-active"';
 $attributes[] = 'data-merchant-scroll-toggle-class-offset="' . $settings[ 'display_after_amount' ] . '"';
 
 // Hide when scroll.
