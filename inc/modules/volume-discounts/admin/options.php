@@ -52,6 +52,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'  => true,
 							'desc'      => esc_html__( 'Select the product that the customer will get a discount on when they purchase the minimum required quantity.',
 								'merchant' ),
+							'allowed_types' => array( 'simple', 'variable' ),
 							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
