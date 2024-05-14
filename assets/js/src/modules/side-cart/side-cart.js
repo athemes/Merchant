@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
   if (merchant.setting.hasOwnProperty('add_to_cart_slide_out')) {
     $(document.body).on('added_to_cart', function(event, fragments, cart_hash, $button, $context) {
       if ( $context !== 'side-cart' ) {
-        $('body').toggleClass('merchant-floating-side-mini-cart-show')
+        $('body').toggleClass('merchant-floating-side-mini-cart-show');
       }
       $(window).trigger('merchant.floating-mini-cart-resize');
     });
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
   }
 
   // Update Product quantity in Side Cart
-  if ( merchant.setting.hasOwnProperty('add_to_cart_slide_out') ) {
+  if ( merchant.setting.hasOwnProperty( 'add_to_cart_slide_out' ) || merchant.setting.hasOwnProperty( 'floating_mini_cart_count' ) ) {
     // Update quantity on plus/minus click
     $( document ).on( 'click', '.js-merchant-quantity-btn', function ( e ) {
       e.preventDefault();

@@ -52,7 +52,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
 					'title' => esc_html__( 'Product Bundles', 'merchant' ),
-					'desc' => esc_html__( 'Combine multiple products into bundles to sell at discounted or regular prices', 'merchant' ),
+					'desc' => esc_html__( 'Create bundles of products to be sold together', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
 				),
 				'frequently-bought-together' => array(
