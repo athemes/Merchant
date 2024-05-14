@@ -304,9 +304,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			/**
 			 * Hook: merchant_module_settings
 			 *
+			 * @param array  $settings  Module settings.
+			 * @param string $module_id Module ID.
+			 *
 			 * @since 1.0
 			 */
-			$settings = apply_filters( 'merchant_module_settings', $settings );
+			$settings = apply_filters( 'merchant_module_settings', $settings, $module_id );
 
 			self::save_options( $settings );
 
