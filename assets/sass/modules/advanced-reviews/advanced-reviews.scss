@@ -436,6 +436,9 @@ body {
  * Pagination (colors only)
  */
 .merchant-adv-reviews-pagination {
+	display: flex;
+	justify-content: center;
+
 	&.woocommerce-pagination {
 		ul {
 			li {
