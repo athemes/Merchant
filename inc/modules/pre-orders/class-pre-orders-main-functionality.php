@@ -612,7 +612,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function change_button_text( $text, $product ) {
 		if ( $product && $this->is_pre_order( $product->get_id() ) ) {
-			$text = self::available_product_rule( $product->get_id() )['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
+			$pre_order_rule = self::available_product_rule( $product->get_id() );
+			$text = $pre_order_rule['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
 		}
 
 		return $text;
@@ -627,8 +628,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return array
 	 */
 	public function change_button_text_for_variable_products( $data, $product, $variation ) {
-		global $product;
-
 		if ( $this->is_pre_order( $variation->get_id() ) ) {
 			$pre_order_rule = self::available_product_rule( $variation->get_id() );
 			$data['is_pre_order'] = true;
