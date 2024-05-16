@@ -49,6 +49,7 @@ Merchant_Admin_Options::create(
 								'id'        => 'product_ids',
 								'type'      => 'products_selector',
 								'multiple'  => true,
+								'allowed_types' => array( 'simple', 'variable', 'variation' ),
 								'desc'      => esc_html__( 'Select the product(s) included in this pre-order.', 'merchant' ),
 								'condition' => array( 'trigger_on', '==', 'product' ),
 							),
@@ -113,45 +114,6 @@ Merchant_Admin_Options::create(
 										'merchant' ),
 									'<strong>' . wp_timezone_string() . '</strong>',
 									'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '" target="_blank">' . esc_html__( 'WordPress Settings', 'merchant' ) . '</a>'
-								),
-							),
-							array(
-								'id'      => 'partial_payment_toggle',
-								'type'    => 'switcher',
-								'title'   => __( 'Do you want to take a partial payment?', 'merchant' ),
-								'default' => 0,
-							),
-							array(
-								'id'         => 'partial_payment_type',
-								'type'       => 'radio',
-								'title'      => esc_html__( 'Payment amount', 'merchant' ),
-								'options'    => array(
-									'percentage' => esc_html__( 'Percentage', 'merchant' ),
-									'fixed'      => esc_html__( 'Fixed', 'merchant' ),
-								),
-								'default'    => 'percentage',
-								'conditions' => array(
-									'terms' => array(
-										array(
-											'field'    => 'partial_payment_toggle', // field ID
-											'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-											'value'    => true, // can be a single value or an array of string/number/int
-										),
-									),
-								),
-							),
-							array(
-								'id'         => 'partial_payment_amount',
-								'type'       => 'text',
-								'default'    => 50,
-								'conditions' => array(
-									'terms' => array(
-										array(
-											'field'    => 'partial_payment_toggle', // field ID
-											'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-											'value'    => true, // can be a single value or an array of string/number/int
-										),
-									),
 								),
 							),
 							array(

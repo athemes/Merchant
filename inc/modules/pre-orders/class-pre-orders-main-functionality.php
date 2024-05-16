@@ -2,7 +2,7 @@
 
 /**
  * Pre Orders.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Pre Orders Class.
- * 
+ *
  */
 class Merchant_Pre_Orders_Main_Functionality {
 
@@ -84,8 +84,200 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'override_product_grid_block' ), PHP_INT_MAX, 3 );
 
 		$this->register_pre_orders_order_status();
+
 		add_filter( 'wc_order_statuses', array( $this, 'add_pre_orders_order_statuses' ) );
 		add_filter( 'woocommerce_post_class', array( $this, 'pre_orders_post_class' ), 10, 3 );
+
+		add_filter( 'woocommerce_get_price_html', array( $this, 'dynamic_discount_price_html' ), 10, 2 );
+		add_action( 'woocommerce_before_calculate_totals', array( $this, 'dynamic_discount_cart_price' ) );
+	}
+
+	/**
+	 * Update the product price html based on the offer.
+	 *
+	 * @return string The price html.
+	 */
+	public function dynamic_discount_price_html( $html_price, $product ) {
+		/**
+		 * Disable the sale price change.
+		 *
+		 * @param bool       $disable_sale_price The sale price change status.
+		 * @param string     $html_price         The price.
+		 * @param WC_Product $product            The product object.
+		 *
+		 * @since 1.9.9
+		 */
+		if ( apply_filters( 'merchant_pre_order_disable_sale_price_html', false, $html_price, $product ) ) {
+			return $html_price;
+		}
+
+		if ( ! is_admin() && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
+			if ( '' === $product->get_price() ) {
+				return $html_price;
+			}
+
+			$offer = self::available_product_rule( $product->get_id() );
+			if ( empty( $offer ) && $product->is_type( 'variation' ) ) {
+				$offer = self::available_product_rule( $product->get_parent_id() );
+			}
+
+			if ( $product->is_type( 'variable' ) ) {
+				$html_price = $this->variable_product_price_html( $product );
+			} else {
+				$html_price = $this->simple_product_price_html( $product, $offer, $html_price );
+			}
+		}
+
+		return $html_price;
+	}
+
+	/**
+	 * Variable product price html.
+	 *
+	 * @param WC_Product $product The product object.
+	 *
+	 * @return string The price html.
+	 */
+	private function variable_product_price_html( $product ) {
+		$prices     = array();
+		$variations = $product->get_children();
+		foreach ( $variations as $variation_id ) {
+			$variation       = wc_get_product( $variation_id );
+			$variation_offer = self::available_product_rule( $variation_id );
+			$regular_price = $variation->get_regular_price();
+			if ( empty( $variation_offer ) ) {
+				if ( $variation->is_on_sale() ) {
+					$sale_price = $variation->get_sale_price();
+				} else {
+					$sale_price = $regular_price;
+				}
+				$prices[] = $sale_price;
+				continue;
+			}
+			$sale_price    = $this->calculate_discounted_price( $regular_price, $variation_offer, $variation );
+			if ( $sale_price <= 0 ) {
+				// If the price is less than 0, set it to the regular/sale price
+				if ( $variation->is_on_sale() ) {
+					$sale_price = $variation->get_sale_price();
+				} else {
+					$sale_price = $regular_price;
+				}
+			}
+			$prices[] = $sale_price;
+		}
+
+		$min_price = min( $prices );
+		$max_price = max( $prices );
+		if ( $min_price !== $max_price ) {
+			return wc_format_price_range( $min_price, $max_price );
+		}
+
+		return wc_price( $min_price );
+	}
+
+	/**
+	 * Simple product price html.
+	 *
+	 * @param WC_Product $product The product object.
+	 * @param array      $offer   The offer details.
+	 *
+	 * @return string The price html.
+	 */
+	private function simple_product_price_html( $product, $offer, $html_price ) {
+		$sale = self::get_rule_sale( $offer );
+		if ( ! $sale ) {
+			return $html_price;
+		}
+		$regular_price    = $product->get_regular_price();
+		$discounted_price = $this->calculate_discounted_price( $regular_price, $offer, $product );
+
+		return wc_format_sale_price( $regular_price, $discounted_price );
+	}
+
+	/**
+	 * Calculate the offer discount for certain price.
+	 *
+	 * @param float      $price   The price.
+	 * @param array      $offer   The offer.
+	 * @param WC_Product $product The product object (only supplied to the filter).
+	 *
+	 * @return float The discounted price.
+	 */
+	public function calculate_discounted_price( $price, $offer, $product = null ) {
+		$sale          = self::get_rule_sale( $offer );
+		$discount_type = $discount_value = '';
+		if ( $sale ) {
+			$discount_type  = $offer['discount_type'];
+			$discount_value = $offer['discount_amount'];
+			if ( 'percentage' === $discount_type ) {
+				$price = (float) $price - ( (float) $price * ( (float) $discount_value / 100 ) );
+			} else {
+				$price = (float) $price - (float) $discount_value;
+			}
+		}
+
+		/**
+		 * Filter the discounted price.
+		 *
+		 * @param float      $price          The price.
+		 * @param array      $offer          The offer.
+		 * @param string     $discount_type  The discount type.
+		 * @param float      $discount_value The discount value.
+		 * @param WC_Product $product        The product object.
+		 *
+		 * @since 1.9.5
+		 */
+		return apply_filters(
+			'merchant_pre_order_sale_calculate_discounted_price',
+			$price,
+			$offer,
+			$discount_type,
+			$discount_value,
+			$product
+		);
+	}
+
+	/**
+	 * Set the discounted cart price for the product.
+	 *
+	 * @param $cart_object array The cart object.
+	 *
+	 * @return void
+	 */
+	public function dynamic_discount_cart_price() {
+		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			/**
+			 * Disable the cart price change.
+			 *
+			 * @param bool   $disable_cart_price The cart price change status.
+			 * @param array  $cart_item          The cart item.
+			 * @param string $cart_item_key      The cart item key.
+			 *
+			 * @since 1.9.7
+			 */
+			if ( apply_filters( 'merchant_pre_order_sale_disable_cart_price', false, $cart_item, $cart_item_key ) ) {
+				continue;
+			}
+			$product_id = $cart_item['data']->get_id();
+			$product    = wc_get_product( $product_id );
+			if ( ! is_admin() && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
+				$offer = self::available_product_rule( $product->get_id() );
+				if ( $product->is_type( 'variable' ) ) {
+					$product_id = $cart_item['variation_id'];
+					$product    = wc_get_product( $product_id );
+					// check if the variation has an offer
+					$offer = self::available_product_rule( $product_id );
+				}
+				if ( empty( $offer ) ) {
+					continue;
+				}
+
+				$regular_price = $product->get_regular_price();
+				$sale_price    = $this->calculate_discounted_price( $regular_price, $offer, $product );
+				$cart_item['data']->set_price( $sale_price );
+				$cart_item['data']->set_meta_data( array( '_merchant_pre_order_sale' => $offer ) );
+			}
+		}
 	}
 
 	/**
@@ -677,6 +869,56 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
+	 * Get the product types that are allowed to have storewide sale.
+	 *
+	 * @return array The allowed product types.
+	 */
+	public function allowed_product_types() {
+		/**
+		 * Filter the product types that are allowed to have storewide sale.
+		 *
+		 * @param array $product_types
+		 *
+		 * @since 1.9.5
+		 */
+		return apply_filters( 'merchant_pre_order_allowed_product_types', array(
+			'simple',
+			'variation',
+			'variable',
+		) );
+	}
+
+	/**
+	 * Get the pre order rules.
+	 *
+	 * @param array $rule The rule to get.
+	 *
+	 * @return array|false The pre order rules or false if there are no rule sale.
+	 */
+	private static function get_rule_sale( $rule ) {
+		$sale = false;
+		if ( isset( $rule['discount_toggle'] ) && $rule['discount_toggle'] ) {
+			$discount_type   = $rule['discount_type'];
+			$discount_amount = $rule['discount_amount'];
+
+			$sale = array(
+				'discount_type'   => $discount_type,
+				'discount_amount' => $discount_amount,
+			);
+		}
+
+		/**
+		 * Filter the pre order sale.
+		 *
+		 * @param array $sale The pre order sale.
+		 * @param array $rule The pre order rule.
+		 *
+		 * @since 1.9.9
+		 */
+		return apply_filters( 'merchant_pre_order_rule_sale', $sale, $rule );
+	}
+
+	/**
 	 * Get the pre order rules.
 	 *
 	 * @return array The pre order rules.
@@ -785,7 +1027,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public static function available_product_rule( $product_id ) {
 		$available_rule = array();
 		$rules          = self::pre_order_rules();
-		$current_time = merchant_get_current_timestamp();
+		$current_time   = merchant_get_current_timestamp();
 		foreach ( $rules as $rule ) {
 			if ( self::is_valid_rule( $rule ) ) {
 				$rule = self::prepare_rule( $rule );
