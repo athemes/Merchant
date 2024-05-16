@@ -24,6 +24,8 @@ $product      = $args[ 'product' ];
 $product_id   = $product->get_id();
 $review_count = $product->get_review_count();
 $average      = $product->get_average_rating();
+$average      = floor( $average ) === ceil( $average ) ? intval( $average ) : number_format( $average, 1 );
+
 
 // Title tag
 $title_tag = $args[ 'title_tag' ] ?? 'h2';
