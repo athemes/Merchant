@@ -1028,6 +1028,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$available_rule = array();
 		$rules          = self::pre_order_rules();
 		$current_time   = merchant_get_current_timestamp();
+		$current_user   = wp_get_current_user();
 		foreach ( $rules as $rule ) {
 			if ( self::is_valid_rule( $rule ) ) {
 				$rule = self::prepare_rule( $rule );
@@ -1040,6 +1041,23 @@ class Merchant_Pre_Orders_Main_Functionality {
 				// check if pre-order end date is set and if it is in the past
 				if ( ! empty( $rule['pre_order_end'] ) && $rule['pre_order_end'] < $current_time ) {
 					continue;
+				}
+
+				if ( 'roles' === $rule['user_condition'] ) {
+					$allowed_roles = $rule['user_condition_roles'];
+					$user_roles    = $current_user->roles;
+					$intersect     = array_intersect( $allowed_roles, $user_roles );
+					if ( empty( $intersect ) ) {
+						continue;
+					}
+				}
+
+				if ( 'customers' === $rule['user_condition'] ) {
+					$allowed_users = $rule['user_condition_users'];
+					$current_user_id = $current_user->ID;
+					if ( ! in_array( $current_user_id, $allowed_users, true ) ) {
+						continue;
+					}
 				}
 
 				if ( 'product' === $rule['trigger_on'] && in_array( $product_id, $rule['product_ids'], true ) ) {
