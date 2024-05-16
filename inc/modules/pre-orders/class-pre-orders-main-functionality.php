@@ -17,6 +17,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
+	 * Module ID.
+	 *
+	 */
+	const MODULE_ID = 'pre-orders';
+
+	/**
+	 * @var string Date time format
+	 */
+	public const DATE_TIME_FORMAT = 'm-d-Y h:i A';
+
+	/**
 	 * Pre order products.
 	 * 
 	 */
@@ -124,7 +135,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return boolean
 	 */
 	public function is_pre_order( $product_id ) {
-		return 'yes' === get_post_meta( $product_id, '_is_pre_order', true ) && strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) > time();
+		$available_pre_order = self::available_product_rule( $product_id );
+
+		return ! empty( $available_pre_order );
 	}
 
 	/**
@@ -407,7 +420,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function change_button_text( $text, $product ) {
 		if ( $product && $this->is_pre_order( $product->get_id() ) ) {
-			$text = Merchant_Admin_Options::get( 'pre-orders', 'button_text', esc_html__( 'Pre Order Now!', 'merchant' ) );
+			$text = self::available_product_rule( $product->get_id() )['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
 		}
 
 		return $text;
@@ -425,11 +438,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 		global $product;
 
 		if ( $this->is_pre_order( $variation->get_id() ) ) {
-
+			$pre_order_rule = self::available_product_rule( $variation->get_id() );
 			$data['is_pre_order'] = true;
 
-			$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
-			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $variation->get_id(), '_pre_order_date', true ) ) );
+			$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
+			$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 			$text            = $this->replaceDateTxt( $additional_text, $time_format );
 
 			if ( ! empty( $text ) ) {
@@ -463,28 +476,31 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function maybe_render_additional_information() {
 		$input_post_data = array(
-			'product_id' => filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT),
+			'product_id' => filter_input( INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT ),
 		);
 
 		global $post, $product;
-		
+
 		// Do not override globals.
-		$_post = $post;
+		$_post    = $post;
 		$_product = $product;
 
 		// In some cases the $post might be null. e.g inside quick view popup.
-		if ( ! $_post && isset( $input_post_data[ 'product_id' ] ) ) {
-			$_post    = get_post( absint( $input_post_data[ 'product_id' ] ) );
+		if ( ! $_post && isset( $input_post_data['product_id'] ) ) {
+			$_post    = get_post( absint( $input_post_data['product_id'] ) );
 			$_product = wc_get_product( $_post->ID );
 		}
 
-		if ( null !== $_product ) {
-			if ( $this->is_pre_order( $_post->ID ) ) {
-				$additional_text = Merchant_Admin_Options::get( 'pre-orders', 'additional_text', esc_html__( 'Ships on {date}.', 'merchant' ) );
-				$time_format     = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $_post->ID, '_pre_order_date', true ) ) );
-				$text            = $this->replaceDateTxt( $additional_text, $time_format );
+		$pre_order_rule = self::available_product_rule( $_product->get_id() );
+		if ( ! empty( $pre_order_rule ) ) {
+			if ( null !== $_product ) {
+				if ( $this->is_pre_order( $_post->ID ) ) {
+					$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
+					$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
+					$text            = $this->replaceDateTxt( $additional_text, $time_format );
 
-				printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
+					printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
+				}
 			}
 		}
 	}
@@ -543,8 +559,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function cart_message_handler( $item_data, $cart_item ) {
 		$product_id = $cart_item['product_id'];
 		if ( $this->is_pre_order( $product_id ) ) {
-			$label_text     = Merchant_Admin_Options::get( 'pre-orders', 'cart_label_text', esc_html__( 'Ships on', 'merchant' ) );
-			$pre_order_date = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
+			$pre_order_rule = self::available_product_rule( $product_id );
+			$label_text  = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+			$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 
 			$item_data[] = array(
 				'key'     => $label_text,
@@ -647,8 +664,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return '';
 		}
 
-		$label_text     = Merchant_Admin_Options::get( 'pre-orders', 'cart_label_text', __( 'Ships on', 'merchant' ) );
-		$pre_order_date = date_i18n( get_option( 'date_format' ), strtotime( get_post_meta( $product_id, '_pre_order_date', true ) ) );
+		$pre_order_rule = self::available_product_rule( $product_id );
+		$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['cart_label_text'] );
 		if ( 'span' === $render_type ) {
 			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ), $pre_order_date );
 		} elseif ( 'dl' === $render_type ) {
@@ -656,5 +674,160 @@ class Merchant_Pre_Orders_Main_Functionality {
 		} else {
 			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
 		}
+	}
+
+	/**
+	 * Get the pre order rules.
+	 *
+	 * @return array The pre order rules.
+	 */
+	private static function pre_order_rules() {
+		return Merchant_Admin_Options::get( self::MODULE_ID, 'rules', array() );
+	}
+
+	/**
+	 * Check if the rule is valid.
+	 *
+	 * @param array $rule The rule to check.
+	 *
+	 * @return boolean True if the rule is valid, false otherwise.
+	 */
+	private static function is_valid_rule( $rule ) {
+		if ( ! isset( $rule['trigger_on'] ) ) {
+			return false;
+		}
+
+		if ( 'product' === $rule['trigger_on'] && empty( $rule['product_ids'] ) ) {
+			return false;
+		}
+
+		if ( 'category' === $rule['trigger_on'] && empty( $rule['category_slugs'] ) ) {
+			return false;
+		}
+
+		if ( isset( $rule['discount_toggle'] ) && $rule['discount_toggle'] === true ) {
+			if ( ! isset( $rule['discount_type'] ) ) {
+				return false;
+			}
+			if ( ! isset( $rule['discount_amount'] ) ) {
+				return false;
+			}
+		}
+
+		if ( isset( $rule['partial_payment_toggle'] ) && $rule['partial_payment_toggle'] === true ) {
+			if ( ! isset( $rule['partial_payment_type'] ) ) {
+				return false;
+			}
+			if ( ! isset( $rule['partial_payment_amount'] ) ) {
+				return false;
+			}
+		}
+
+		if ( ! isset( $rule['user_condition'] ) ) {
+			return false;
+		}
+
+		if ( ( 'customers' === $rule['user_condition'] ) && empty( $rule['user_condition_users'] ) ) {
+			return false;
+		}
+
+		if ( ( 'roles' === $rule['user_condition'] ) && empty( $rule['user_condition_roles'] ) ) {
+			return false;
+		}
+
+		if ( empty( $rule['shipping_date'] ) ) {
+			return false;
+		}
+
+		if ( empty( $rule['button_text'] ) ) {
+			return false;
+		}
+
+		if ( empty( $rule['placement'] ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Prepare the rule fields.
+	 *
+	 * @param array $rule The rule to prepare.
+	 *
+	 * @return array The prepared rule.
+	 */
+	private static function prepare_rule( $rule ) {
+		if ( 'product' === $rule['trigger_on'] ) {
+			$rule['product_ids'] = array_map( 'intval', explode( ',', $rule['product_ids'] ) );
+		}
+
+		if ( ! empty( $rule['pre_order_start'] ) ) {
+			$rule['pre_order_start'] = merchant_convert_date_to_timestamp( $rule['pre_order_start'], self::DATE_TIME_FORMAT );
+		}
+
+		if ( ! empty( $rule['pre_order_end'] ) ) {
+			$rule['pre_order_end'] = merchant_convert_date_to_timestamp( $rule['pre_order_end'], self::DATE_TIME_FORMAT );
+		}
+
+		$rule['shipping_timestamp'] = merchant_convert_date_to_timestamp( $rule['shipping_date'], self::DATE_TIME_FORMAT );
+
+		return $rule;
+	}
+
+	/**
+	 * Get the available product rule.
+	 *
+	 * @param string $product_id The product ID.
+	 *
+	 * @return array The available product rule.
+	 */
+	public static function available_product_rule( $product_id ) {
+		$available_rule = array();
+		$rules          = self::pre_order_rules();
+		$current_time = merchant_get_current_timestamp();
+		foreach ( $rules as $rule ) {
+			if ( self::is_valid_rule( $rule ) ) {
+				$rule = self::prepare_rule( $rule );
+
+				// check if pre-order start date is set and if it is not in the future
+				if ( ! empty( $rule['pre_order_start'] ) && $rule['pre_order_start'] > $current_time ) {
+					continue;
+				}
+
+				// check if pre-order end date is set and if it is in the past
+				if ( ! empty( $rule['pre_order_end'] ) && $rule['pre_order_end'] < $current_time ) {
+					continue;
+				}
+
+				if ( 'product' === $rule['trigger_on'] && in_array( $product_id, $rule['product_ids'], true ) ) {
+					$available_rule = $rule;
+					break;
+				}
+				if ( 'category' === $rule['trigger_on'] ) {
+					$terms = get_the_terms( $product_id, 'product_cat' );
+					if ( ! empty( $terms ) ) {
+						foreach ( $terms as $term ) {
+							if ( in_array( $term->slug, $rule['category_slugs'], true ) ) {
+								$available_rule = $rule;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * Filter the available product rule.
+		 *
+		 * @param array $available_rule The available product rule.
+		 * @param int   $product_id     The product ID.
+		 *
+		 * @return array The available product rule.
+		 *
+		 * @since 1.9.9
+		 */
+		return apply_filters( 'merchant_pre_order_available_rule', $available_rule, $product_id );
 	}
 }
