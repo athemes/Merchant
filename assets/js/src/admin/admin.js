@@ -1621,3 +1621,41 @@ jQuery.fn.extend({
         return pathes.join(',');
     }
 });
+
+
+//
+jQuery( document ).ready( function(){
+    initMediaUpload()
+} )
+
+
+
+function initMediaUpload() {
+
+    const fileInput = document.getElementById( 'merchant-adv-review-images' );
+    const dropArea = document.querySelectorAll( '.merchant-upload-drop-area' );
+
+    dropArea.forEach( item => {
+
+        item.addEventListener('dragenter', function() {
+            // Implement drag-and-drop functionality
+            [ 'dragenter', 'dragover', 'dragleave', 'drop' ].forEach( eventName => {
+                item?.addEventListener( eventName, function ( e ) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, false );
+            } );
+
+            // Handle file drop
+            item?.addEventListener( 'drop', function ( e ) {
+                let dt = e.dataTransfer;
+                let files = dt.files;
+
+                console.log( files );
+            }, false );
+
+        }, false)
+    })
+
+}
+//

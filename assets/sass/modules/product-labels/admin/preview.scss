@@ -64,3 +64,13 @@
 		}
 	}
 }
+
+.merchant-choices-label_text_shape label figure,
+.merchant-choices-label_image_shape label figure {
+	border-color: #E8E8E8;
+}
+
+.merchant-module-page-setting-field-choices .merchant-choices-label_image_shape {
+	gap: 5px;
+	flex-wrap: wrap;
+}

@@ -47,11 +47,12 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'label_text'           => __( 'Spring Special', 'merchant' ),
+			'label_text'           => __( 'Spring Special', 'merchant' ), // Remove
+			'label'                => __( 'SALE', 'merchant' ),
 			'display_percentage'   => 0,
-			'percentage_text'      => '-{value}%',
+			'percentage_text'      => '-{value}%', // Remove
 			'label_position'       => 'top-left',
-			'label_shape'          => 0,
+			'shape_radius'         => 5,
 			'label_text_transform' => 'uppercase',
 		);
 
@@ -423,20 +424,23 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function get_labels( $product, $context = 'both' ) {
 		$settings            = $this->get_module_settings();
 		$product_labels_html = '';
+
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
-				if ( ! isset( $label['pages_to_display'] ) ) {
+				if ( ! isset( $label['show_pages'] ) ) {
 					continue;
 				}
-				if ( $label['pages_to_display'] !== 'both' ) {
-					if ( $label['pages_to_display'] === 'single' && $context !== 'single' ) {
-						continue;
-					}
-					if ( $label['pages_to_display'] === 'archive' && $context !== 'archive' ) {
-						continue;
-					}
-				}
+
+				//if ( $label['pages_to_display'] !== 'both' ) {
+					//if ( $label['pages_to_display'] === 'single' && $context !== 'single' ) {
+						//continue;
+					//}
+					//if ( $label['pages_to_display'] === 'archive' && $context !== 'archive' ) {
+						//continue;
+					//}
+				//}
+
 				if ( isset( $label['display_rules'] ) ) {
 					switch ( $label['display_rules'] ) {
 						case 'featured_products':
@@ -444,21 +448,26 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 								$product_labels_html .= $this->label( $label );
 							}
 							break;
+
 						case 'products_on_sale':
 							if ( $this->is_on_sale( $product ) ) {
-								$product_labels_html .= $this->label( $this->percentage_label( $product, $label ) );
+								//$product_labels_html .= $this->label( $this->percentage_label( $product, $label ) );
+								$product_labels_html .= $this->label( $label );
 							}
 							break;
+
 						case 'by_category':
 							if ( isset( $label['product_cats'] ) && $this->is_in_category( $product, $label['product_cats'] ) ) {
 								$product_labels_html .= $this->label( $label );
 							}
 							break;
+
 						case 'out_of_stock':
 							if ( $this->is_out_of_stock( $product ) ) {
 								$product_labels_html .= $this->label( $label );
 							}
 							break;
+
 						case 'new_products':
 							if ( isset( $label['new_products_days'] ) && $this->is_new( $product, $label['new_products_days'] ) ) {
 								$product_labels_html .= $this->label( $label );
@@ -479,16 +488,41 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			}
 		} else {
 			// legacy mode support.
-			return $this->legacy_product_label( $product );
+			return $this->legacy_product_label( $product ); // ??
 		}
 
 		if ( $product_labels_html ) {
-			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '">' . $product_labels_html . '</div>';
+            $label_type = $label['label_type'] ?? 'text';
+
+            $classes  = 'merchant-product-labels';
+            $classes .= ' position-' . $settings['label_position'] ?? 'top-left';
+
+            $classes .= $label_type === 'text' ? ' merchant-product-labels__' . $label['label_text_shape'] ?? 'pl-text-shape-1' : '';
+
+			return '<div class="' . esc_attr( $classes ) . '">' . $product_labels_html . '</div>';
 		}
 
 		return '';
 	}
 
+	public function show_label() {
+		$show   = false;
+		$show_pages = Merchant_Admin_Options::get( self::MODULE_ID, 'show_pages', array( 'homepage', 'single', 'archive' ) );
+
+		if ( is_product() && in_array( 'product_single', $show_pages, true ) ) {
+			$show = true;
+		}
+
+		if ( in_array( 'product_archive', $show_pages, true ) && ( is_product_taxonomy() || is_shop() ) ) {
+			$show = true;
+		}
+
+		if ( in_array( 'homepage', $show_pages, true ) && is_front_page() ) {
+			$show = true;
+		}
+
+		return $show;
+	}
 
 	/**
 	 * Product label output.
@@ -564,15 +598,16 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
 		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
 		$styles         = array();
-		if ( ! empty( $label_data['background_color'] ) ) {
-			$styles['background-color'] = $label_data['background_color'];
-		}
-		if ( ! empty( $label_data['text_color'] ) ) {
-			$styles['color'] = $label_data['text_color'];
-		}
+
+        $styles['background-color'] = $label_data['background_color'] ?? '#212121';
+		$styles['color']            = $label_data['text_color'] ?? '#ffffff';
+		$styles['border-radius']    = ( $label_data['shape_radius'] ?? 5 ) . 'px';
+
 		if ( empty( $label_data['label'] ) ) {
 			return '';
 		}
+
+        // Todo: change css variables
 		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
 				. esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
 				. trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';

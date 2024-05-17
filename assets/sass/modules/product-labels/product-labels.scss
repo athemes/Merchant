@@ -30,7 +30,7 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		text-transform: var(--mrc-pl-text-transform, uppercase);
+		//text-transform: var(--mrc-pl-text-transform, uppercase);
 		//color: var(--mrc-pl-text-color, #ffffff);
 		//background-color: var(--mrc-pl-background-color, #212121);
 		border-radius: var(--mrc-pl-border-radius, 0px);
@@ -46,6 +46,13 @@
 	
 	.merchant-label-shape-rounded {
 		border-radius: 4px;
+	}
+
+	// Text shapes
+	&.merchant-product-labels {
+		&__pl-text-shape-1 {
+
+		}
 	}
 }
 
