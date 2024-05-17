@@ -155,13 +155,13 @@ Merchant_Admin_Options::create( array(
 // Settings
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Free_Gifts::MODULE_ID,
-	'title'  => esc_html__( 'Settings', 'merchant' ),
+	'title'  => esc_html__( 'Cart Settings', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Gift based on spending type', 'merchant' ),
-			'desc'    => esc_html__( 'To which the spending goal should be based on to receive gifts. "Cart Subtotal" does not include additional calculated discounts, whereas the "Cart Total" does.',
+			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any additional discounts are applied, whereas the ‘Cart Total’ includes all discounts and additional charges.',
 				'merchant' ),
 			'options' => array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
@@ -173,7 +173,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'free_text',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Free text', 'merchant' ),
+			'title'   => esc_html__( 'Gift price label', 'merchant' ),
 			'default' => esc_html__( 'Free', 'merchant' ),
 		),
 
@@ -366,7 +366,7 @@ Merchant_Admin_Options::create( array(
 			array(
 				'id'      => 'free_text_color',
 				'type'    => 'color',
-				'title'   => esc_html__( 'Free text color', 'merchant' ),
+				'title'   => esc_html__( 'Gift price label color', 'merchant' ),
 				'default' => '#212121',
 			),
 		),
