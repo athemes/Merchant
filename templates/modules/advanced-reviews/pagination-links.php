@@ -15,10 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $wp_rewrite;
 
-//echo '<pre>';
-//print_r( $args );
-//echo '</pre>';
-
 $current_page = $args['cpage'] ?? 1;
 $total_pages  = ceil( $args[ 'total' ] ?? 1 );
 
@@ -33,6 +29,13 @@ $pagination_args = array(
 	'next_text'    => is_rtl() ? '&larr;' : '&rarr;',
 	'add_fragment' => '#comments',
 );
+
+/**
+ * Hook: `merchant_adv_pagination_args`
+ *
+ * @since 2.0.0
+ */
+$pagination_args = apply_filters( 'merchant_adv_pagination_args', $pagination_args );
 
 if ( $wp_rewrite->using_permalinks() ) {
 	$defaults['base'] = user_trailingslashit( trailingslashit( get_permalink( $args[ 'product_id' ] ) ) . $wp_rewrite->comments_pagination_base . '-%#%', 'commentpaged' );

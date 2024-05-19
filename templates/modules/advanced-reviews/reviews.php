@@ -24,6 +24,7 @@ $product      = $args[ 'product' ];
 $product_id   = $product->get_id();
 $review_count = $product->get_review_count();
 $average      = $product->get_average_rating();
+$average      = floor( $average ) === ceil( $average ) ? intval( $average ) : number_format( $average, 1 );
 
 // Title tag
 $title_tag = $args[ 'title_tag' ] ?? 'h2';
@@ -38,7 +39,7 @@ $comments_args = array(
 	'number'  => get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : '',
 );
 
-// Pagination - Todo
+// Pagination
 $comment_pages = 0;
 if ( get_option( 'page_comments' ) ) {
 	$cpaged = get_query_var( 'cpage' );

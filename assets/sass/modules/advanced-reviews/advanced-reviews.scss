@@ -440,6 +440,8 @@ body {
 	justify-content: center;
 
 	&.woocommerce-pagination {
+		float: none;
+
 		ul {
 			li {
 				span.current {
@@ -454,6 +456,11 @@ body {
 						color: var( --mrc-adv-reviews-button-color-hover, #FFF ) !important;
 						border-color: var( --mrc-adv-reviews-button-bg-color-hover, #757575 ) !important;
 						background-color: var( --mrc-adv-reviews-button-bg-color-hover, #757575 ) !important;
+					}
+
+					&.prev,
+					&.next {
+						text-indent: 0;
 					}
 				}
 			}
