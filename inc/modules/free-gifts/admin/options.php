@@ -235,7 +235,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => 999,
 			'step'    => 1,
 			'unit'    => 'px',
-			'default' => 250,
+			'default' => 150,
 		),
 
 		array(
