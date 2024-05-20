@@ -83,6 +83,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_get_price_html', array( $this, 'dynamic_discount_price_html' ), 10, 2 );
 		add_action( 'woocommerce_before_calculate_totals', array( $this, 'dynamic_discount_cart_price' ) );
 		add_action( 'woocommerce_checkout_order_created', array( $this, 'splitting_orders' ) );
+		//todo: add support for non-HPOS orders
 		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'shop_order_column' ), 11 );
 		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'shop_order_column_content' ), 10, 2 );
 	}
