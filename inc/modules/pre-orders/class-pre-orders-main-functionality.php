@@ -47,10 +47,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function init() {
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'allow_one_type_only' ), 99, 2 );
+		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'add_cart_item_data' ), 10, 4 );
+		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
+		add_action( 'woocommerce_add_order_item_meta', array( $this, 'add_order_item_meta' ), 10, 2 );
 
 		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'manage_pre_orders' ), 10, 2 );
-		add_filter( 'woocommerce_thankyou', array( $this, 'set_pre_order_status' ), 10 );
-		add_filter( 'woocommerce_billing_fields', array( $this, 'add_shipping_date_field' ) );
 
 		// Cronjob.
 		if ( ! wp_next_scheduled( 'check_for_released_preorders' ) ) {
@@ -58,15 +59,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		add_action( 'check_for_released_preorders', array( $this, 'check_for_pre_orders_and_maybe_update_status' ) );
-
-		// Variations tab
-		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'custom_fields_for_variable_products' ), 10, 3 );
-
-		// Inventory tab
-		add_action( 'woocommerce_product_options_stock_status', array( $this, 'custom_fields_for_simple_products' ) );
-
-		add_action( 'woocommerce_save_product_variation', array( $this, 'custom_fields_for_variable_products_save' ), 10, 2 );
-		add_action( 'woocommerce_process_product_meta', array( $this, 'custom_fields_for_simple_products_save' ), 10, 2 );
 
 		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'change_button_text' ), 10, 2 );
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'change_button_text' ), 10, 2 );
@@ -90,6 +82,352 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		add_filter( 'woocommerce_get_price_html', array( $this, 'dynamic_discount_price_html' ), 10, 2 );
 		add_action( 'woocommerce_before_calculate_totals', array( $this, 'dynamic_discount_cart_price' ) );
+		add_action( 'woocommerce_checkout_order_created', array( $this, 'splitting_orders' ) );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'shop_order_column' ), 11 );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'shop_order_column_content' ), 10, 2 );
+	}
+
+	/**
+	 * Add shipping date column to the orders list.
+	 *
+	 * @param $columns array The columns.
+	 *
+	 * @return array The columns.
+	 */
+	public function shop_order_column( $columns ) {
+		$columns['pre_order_shipping_date'] = esc_html__( 'Shipping Date', 'merchant' );
+
+		return $columns;
+	}
+
+	/**
+	 * Display the shipping date in the orders list.
+	 *
+	 * @param $column string The column.
+	 * @param $order  WC_Order The order object.
+	 *
+	 * @return void
+	 */
+	public function shop_order_column_content( $column, $order ) {
+		if ( $column === 'pre_order_shipping_date' ) {
+			/**
+			 * Filter the pre order shipping date.
+			 *
+			 * @param int      $shipping_date The shipping date.
+			 * @param WC_Order $order         The order object.
+			 *
+			 * @since 1.9.9
+			 */
+			$shipping_date = apply_filters(
+				'merchant_pre_order_shipping_date_column',
+				$order->get_meta( '_merchant_order_pre_order_shipping_date' ),
+				$order
+			);
+			if ( $shipping_date ) {
+				echo '<strong>' . esc_html( $this->convert_timestamp_to_human_readable( $shipping_date ) ) . '</strong>';
+			}
+		}
+	}
+
+	/**
+	 * Convert timestamp to human readable date.
+	 *
+	 * @param $timestamp int The timestamp.
+	 *
+	 * @return string The human readable date.
+	 */
+	private function convert_timestamp_to_human_readable( $timestamp ) {
+		$date = new \DateTime();
+		$date->setTimestamp( $timestamp );
+
+		return $date->format( self::DATE_TIME_FORMAT );
+	}
+
+	/**
+	 * Add offer details to the product.
+	 *
+	 * @param $cart_item_data array The cart item data.
+	 * @param $product_id     int The product ID.
+	 * @param $variation_id   int The variation ID.
+	 * @param $quantity       int The quantity.
+	 *
+	 * @return array The cart item data.
+	 */
+	public function add_cart_item_data( $cart_item_data, $product_id, $variation_id, $quantity ) {
+		$product = wc_get_product( $product_id );
+		$offer   = self::available_product_rule( $product_id );
+		if ( empty( $offer ) && $product->is_type( 'variation' ) ) {
+			$offer = self::available_product_rule( $variation_id );
+		}
+		if ( ! empty( $offer ) ) {
+			$cart_item_data['_merchant_pre_order']               = $offer;
+			$cart_item_data['_merchant_pre_order_shipping_date'] = $offer['shipping_timestamp'];
+		}
+
+		return $cart_item_data;
+	}
+
+	/**
+	 * Add pre-order data to order item meta.
+	 *
+	 * @param $item_id int The item ID.
+	 * @param $values  array The values.
+	 *
+	 * @return void
+	 */
+	public function add_order_item_meta( $item_id, $values ) {
+		if ( isset( $values['_merchant_pre_order'] ) ) {
+			wc_add_order_item_meta( $item_id, '_merchant_pre_order', $values['_merchant_pre_order'] );
+		}
+
+		if ( isset( $values['_merchant_pre_order_shipping_date'] ) ) {
+			wc_add_order_item_meta( $item_id, '_merchant_pre_order_shipping_date', $values['_merchant_pre_order_shipping_date'] );
+		}
+	}
+
+	/**
+	 * Splitting orders.
+	 *
+	 * @param $order WC_Order The order object.
+	 *
+	 * @return void
+	 */
+	public function splitting_orders( $order ) {
+		$mode = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
+		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
+			$this->mark_whole_order_as_pre_order( $order );
+		} elseif ( 'group_pre_order_into_one_order' === $mode ) {
+			$this->group_pre_order_into_one_order( $order );
+		} elseif ( 'separate_order_for_pre_orders' === $mode ) {
+			$this->separate_order_for_pre_orders( $order );
+		}
+	}
+
+	/**
+	 * Mark whole order as pre-order if it contains pre-order products.
+	 *
+	 * @param $order WC_Order The order object.
+	 *
+	 * @return void
+	 */
+	public function mark_whole_order_as_pre_order( $order ) {
+		$has_pre_order  = 0;
+		$shipping_dates = array();
+		foreach ( $order->get_items() as $item_id => $item ) {
+			$product_id = $item->get_product_id();
+			if ( $this->is_pre_order( $product_id ) ) {
+				$shipping_dates[] = $item->get_meta( '_merchant_pre_order_shipping_date' );
+				++ $has_pre_order;
+				break;
+			}
+		}
+
+		if ( $has_pre_order ) {
+			$order->set_status( 'wc-pre-ordered' );
+			$order->add_meta_data( '_is_pre_order', true );
+			$order->add_meta_data( '_merchant_order_pre_order_shipping_date', max( $shipping_dates ) );
+			$order->save();
+		}
+	}
+
+	/**
+	 * Group pre-order products into one order and keep the original order.
+	 *
+	 * @param WC_Order $order The order object.
+	 *
+	 * @return void
+	 */
+	public function group_pre_order_into_one_order( $order ) {
+		// Get the original order
+		$original_order = $order;
+
+		// Store sub-orders IDs
+		$sub_order_ids = $pre_order_products = array();
+
+		// Loop through each product in the original order
+		foreach ( $original_order->get_items() as $item_id => $item ) {
+			if ( $this->is_pre_order( $item->get_product_id() ) ) {
+				$pre_order_products[] = $item;
+			}
+		}
+
+		if ( ! empty( $pre_order_products ) ) {
+			$shipping_dates = array();
+			// Create a new order
+			$new_order = wc_create_order();
+
+			// Copy order details from original order to new order.
+			$this->copy_order_details( $original_order, $new_order );
+
+			// Set the parent order ID
+			$new_order->set_parent_id( $order->get_id() );
+
+			$new_order->add_meta_data( '_is_sub_order', true );
+			$new_order->add_meta_data( '_is_pre_order', true );
+			$new_order->set_status( 'wc-pre-ordered' );
+
+			// Copy order meta data from original order
+			foreach ( $original_order->get_meta_data() as $meta ) {
+				$new_order->add_meta_data( $meta->key, $meta->value );
+			}
+
+			// add pre-order products to the new order
+			foreach ( $pre_order_products as $item ) {
+				$rule     = self::available_product_rule( $item->get_product_id() );
+				$new_item = $item;
+				$new_item->add_meta_data( '_merchant_pre_order', $rule );
+				$new_item->add_meta_data( '_merchant_is_pre_order_product', true );
+				$new_item->add_meta_data( '_merchant_pre_order_shipping_date', $rule['shipping_timestamp'] );
+				$new_order->add_item( $new_item );
+				$shipping_dates[] = $rule['shipping_timestamp'];
+			}
+
+			// Calculate totals and set status
+			$new_order->calculate_totals();
+			$new_order->add_meta_data( '_merchant_order_pre_order_shipping_date', max( $shipping_dates ) );
+			$new_order->save();
+
+			$sub_order_ids[] = $new_order->get_id();
+
+			// Save sub-order IDs to the original order
+			$original_order->update_meta_data( '_sub_order_ids', $sub_order_ids );
+
+
+			// Update original order totals after removing items
+			$original_order->calculate_totals();
+			$original_order->save();
+		}
+	}
+
+	/**
+	 * Generate separate orders for each pre-order product.
+	 *
+	 * @param WC_Order $order The order object.
+	 *
+	 * @return void
+	 */
+	public function separate_order_for_pre_orders( $order ) {
+		// Get the original order
+		$original_order = $order;
+
+		// Store sub-orders IDs
+		$sub_order_ids = array();
+
+		// Loop through each product in the original order
+		foreach ( $original_order->get_items() as $item_id => $item ) {
+			//check if the item is a product
+
+			// Get product details
+			$product_id = $item->get_product_id();
+			if ( ! $product_id ) {
+				continue;
+			}
+
+			// check if the product is a pre-order
+			if ( ! $this->is_pre_order( $product_id ) ) {
+				continue;
+			}
+
+			// Create a new order
+			$new_order = wc_create_order();
+
+			$new_item = $item;
+			$rule     = self::available_product_rule( $product_id );
+			$new_item->add_meta_data( '_merchant_pre_order', $rule );
+			$new_item->add_meta_data( '_merchant_is_pre_order_product', true );
+			$new_item->add_meta_data( '_merchant_pre_order_shipping_date', $rule['shipping_timestamp'] );
+			$new_order->add_item( $item );
+
+			// Copy order details from original order to new order.
+			$this->copy_order_details( $original_order, $new_order );
+
+			// Set the parent order ID
+			$new_order->set_parent_id( $order->get_id() );
+
+			// Calculate totals and set status
+			$new_order->calculate_totals();
+
+			// Save new order and store its ID
+			$new_order->add_meta_data( '_is_sub_order', true );
+			$new_order->add_meta_data( '_is_pre_order', true );
+			$new_order->add_meta_data( '_merchant_order_pre_order_shipping_date', $rule['shipping_timestamp'] );
+			$new_order->set_status( 'wc-pre-ordered' );
+			$new_order->save();
+			$sub_order_ids[] = $new_order->get_id();
+		}
+
+		// Save sub-order IDs to the original order
+		$original_order->update_meta_data( '_sub_order_ids', $sub_order_ids );
+
+		// Update original order totals after removing items
+		$original_order->calculate_totals();
+		$original_order->save();
+	}
+
+	/**
+	 * Hide order item meta that will be used for internal use only.
+	 *
+	 * @param $args array The hidden order item meta.
+	 *
+	 * @return array The hidden order item meta.
+	 */
+	function hidden_order_itemmeta( $args ) {
+		$args[] = '_merchant_pre_order';
+		$args[] = '_merchant_is_pre_order_product';
+		$args[] = '_merchant_pre_order_shipping_date';
+
+		return $args;
+	}
+
+	/**
+	 * Copy order details from the original order to the new child order.
+	 *
+	 * @param $original_order WC_Order The original order.
+	 * @param $new_order      WC_Order The new child order.
+	 *
+	 * @return void
+	 */
+	private function copy_order_details( $original_order, $new_order ) {
+		$new_order->set_customer_id( $original_order->get_customer_id() );
+
+		// set customer billing details
+		$new_order->set_billing_first_name( $original_order->get_billing_first_name() );
+		$new_order->set_billing_last_name( $original_order->get_billing_last_name() );
+		$new_order->set_billing_phone( $original_order->get_billing_phone() );
+		$new_order->set_billing_email( $original_order->get_billing_email() );
+		$new_order->set_billing_address_1( $original_order->get_billing_address_1() );
+		$new_order->set_billing_address_2( $original_order->get_billing_address_2() );
+		$new_order->set_billing_city( $original_order->get_billing_city() );
+		$new_order->set_billing_state( $original_order->get_billing_state() );
+		$new_order->set_billing_postcode( $original_order->get_billing_postcode() );
+		$new_order->set_billing_country( $original_order->get_billing_country() );
+
+		// set customer shipping details
+		$new_order->set_shipping_first_name( $original_order->get_shipping_first_name() );
+		$new_order->set_shipping_last_name( $original_order->get_shipping_last_name() );
+		$new_order->set_shipping_address_1( $original_order->get_shipping_address_1() );
+		$new_order->set_shipping_address_2( $original_order->get_shipping_address_2() );
+		$new_order->set_shipping_city( $original_order->get_shipping_city() );
+		$new_order->set_shipping_state( $original_order->get_shipping_state() );
+		$new_order->set_shipping_postcode( $original_order->get_shipping_postcode() );
+		$new_order->set_shipping_country( $original_order->get_shipping_country() );
+
+		$new_order->set_customer_note( $original_order->get_customer_note() );
+		/**
+		 * This action is documented in woocommerce/includes/class-wc-checkout.php
+		 *
+		 * @since 3.0.0 or earlier
+		 */
+		$new_order->set_customer_id( apply_filters( 'woocommerce_checkout_customer_id', get_current_user_id() ) );
+		$new_order->set_customer_ip_address( WC_Geolocation::get_ip_address() );
+		$new_order->set_customer_user_agent( wc_get_user_agent() );
+		$new_order->set_currency( get_woocommerce_currency() );
+		$new_order->set_created_via( 'checkout' );
+
+		// Copy order meta data from original order
+		foreach ( $original_order->get_meta_data() as $meta ) {
+			$new_order->add_meta_data( $meta->key, $meta->value );
+		}
 	}
 
 	/**
@@ -290,15 +628,17 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function allow_one_type_only( $passed, $product_id ) {
 		$products       = array_filter( WC()->cart->get_cart_contents() );
+		$pre_orders     = 0;
 		$has_pre_orders = false;
-
 		foreach ( $products as $product ) {
 			$is_pre_order = $this->is_pre_order( $product['data']->get_id() );
 			if ( $is_pre_order ) {
-				$has_pre_orders = true;
+				++ $pre_orders;
 			}
 		}
-
+		if ( $pre_orders ) {
+			$has_pre_orders = true;
+		}
 		$input_post_data = array(
 			'variation_id' => filter_input( INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT ),
 		);
@@ -309,14 +649,17 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( empty( $products ) || ( $is_variable_has_pre_order && $has_pre_orders ) || ( false === $is_variable_has_pre_order && false === $has_pre_orders ) ) {
 			$passed = true;
 		} else {
-			$passed = false;
-			if ( $is_variable_has_pre_order ) {
-				$notice = esc_html__( 'We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding.',
-					'merchant' );
-			} else {
-				$notice = esc_html__( 'We detected that your cart has pre-order products. Please remove them before being able to add this product.', 'merchant' );
+			$mode = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
+			if ( 'only_pre_orders' === $mode ) {
+				$passed = false;
+				if ( $is_variable_has_pre_order ) {
+					$notice = esc_html__( 'We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding.',
+						'merchant' );
+				} else {
+					$notice = esc_html__( 'We detected that your cart has pre-order products. Please remove them before being able to add this product.', 'merchant' );
+				}
+				wc_add_notice( $notice, 'error' );
 			}
-			wc_add_notice( $notice, 'error' );
 		}
 
 		return $passed;
@@ -353,122 +696,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * Set pre order status.
-	 *
-	 * @param string  $status
-	 * @param integer $order_id
-	 * @param object  $order
-	 *
-	 * @return string
-	 */
-	public function set_pre_order_status( $order_id ) {
-		if ( ! $order_id ) {
-			return;
-		}
-
-		$order = wc_get_order( $order_id );
-
-		// Change the order status.
-		if ( $order->get_meta( '_preorder_date' ) ) {
-			$order->update_status( 'wc-pre-ordered' );
-		}
-
-		// Save.
-		$order->save();
-	}
-
-	/**
-	 * Add shipping date field.
-	 *
-	 * @param array $fields
-	 *
-	 * @return array
-	 */
-	public function add_shipping_date_field( $fields ) {
-		if ( ! is_checkout() && ! is_cart() ) {
-			return $fields;
-		}
-
-		global $woocommerce;
-
-		$this->check_pre_order_products( $woocommerce->cart->get_cart() );
-
-		if ( count( $this->get_pre_order_products() ) > 0 ) {
-			$fields['preorder_date'] = array(
-				'type'     => 'text',
-				'class'    => array( 'merchant-hidden' ),
-				'required' => true,
-				'default'  => $this->get_oldest_date(),
-			);
-		}
-
-		return $fields;
-	}
-
-	/**
-	 * Check pre order products in cart.
-	 *
-	 * @param array $items
-	 *
-	 * @return void
-	 */
-	public function check_pre_order_products( $items ) {
-		if ( isset( $items['line_items'] ) ) {
-			$items = $items['line_items'];
-		}
-
-		$pre_order_products = array_filter( $items, function ( $v ) {
-			return $this->is_pre_order( $v['product_id'] ) || $this->is_pre_order( $v['variation_id'] );
-		} );
-
-		$this->set_pre_order_products( $pre_order_products );
-	}
-
-	/**
-	 * Get the oldest date.
-	 *
-	 * @return string
-	 */
-	public function get_oldest_date() {
-		$product_with_oldest_date = array_reduce( $this->get_pre_order_products(), function ( $a, $b ) {
-			if ( null === $a ) {
-				return $b;
-			}
-			$aId = isset( $a['variation_id'] ) && 0 !== $a['variation_id'] ? $a['variation_id'] : $a['product_id'];
-			$bId = isset( $b['variation_id'] ) && 0 !== $b['variation_id'] ? $b['variation_id'] : $b['product_id'];
-
-			return $a ? ( strtotime( get_post_meta( $aId, '_pre_order_date', true ) ) > strtotime( get_post_meta( $bId, '_pre_order_date', true ) ) ? $a : $b ) : $b;
-		} );
-
-		$oldestId = isset( $product_with_oldest_date['variation_id'] ) && 0 !== $product_with_oldest_date['variation_id'] ? $product_with_oldest_date['variation_id']
-			: $product_with_oldest_date['product_id'];
-
-		return get_post_meta( $oldestId, '_pre_order_date', true );
-	}
-
-	/**
-	 * Get pre order products.
-	 *
-	 * @return array
-	 */
-	public function get_pre_order_products() {
-		return $this->pre_order_products;
-	}
-
-	/**
-	 * Set pre order products.
-	 *
-	 * @param array $pre_order_products
-	 *
-	 * @return $this
-	 */
-	public function set_pre_order_products( $pre_order_products ) {
-		$this->pre_order_products = $pre_order_products;
-
-		return $this;
-	}
-
-	/**
 	 * Check for pre orders and maybe update the status.
 	 *
 	 * @return void
@@ -481,7 +708,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$pre_ordered_orders = wc_get_orders( $args );
 
 		foreach ( $pre_ordered_orders as $order ) {
-			$pre_order_date = strtotime( $order->get_meta( '_preorder_date' ) );
+			$pre_order_date = $order->get_meta( '_merchant_order_pre_order_shipping_date' );
 
 			if ( $pre_order_date < time() ) {
 				$parent_order_id = $order->get_parent_id();
@@ -490,131 +717,13 @@ class Merchant_Pre_Orders_Main_Functionality {
 					$parent_order = wc_get_order( $parent_order_id );
 
 					if ( $parent_order->get_status() === 'completed' ) {
-						$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
+						$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
 					}
 				} elseif ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
-					$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
+					$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
 				}
 			}
 		}
-	}
-
-	/**
-	 * Custom pre-order fields for variations.
-	 *
-	 * @param integer $loop
-	 * @param array   $variation_data
-	 * @param object  $variation
-	 *
-	 * @return void
-	 */
-	public function custom_fields_for_variable_products( $loop, $variation_data, $variation ) {
-		echo '<div class="is_pre_order_meta_field form-row form-row-full" style="display: flex; align-items: center;">';
-		woocommerce_wp_checkbox(
-			array(
-				'id'    => '_is_pre_order_' . $variation->ID,
-				'label' => '&nbsp;' . esc_html__( 'Pre-Order Product - Set this product as pre-order', 'merchant' ),
-				'value' => get_post_meta( $variation->ID, '_is_pre_order', true ),
-			)
-		);
-
-		echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
-		echo '</div>';
-		echo '<div class="form-row form-row-full">';
-		woocommerce_wp_text_input(
-			array(
-				'type'  => 'date',
-				'id'    => '_pre_order_date_' . $variation->ID,
-				'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
-				'value' => get_post_meta( $variation->ID, '_pre_order_date', true ),
-			)
-		);
-		echo '</div>';
-	}
-
-	/**
-	 * Custom pre-order fields for simple products.
-	 *
-	 * @return void
-	 */
-	public function custom_fields_for_simple_products() {
-		echo '<div class="is_pre_order_meta_field form-row form-row-full hide_if_variable" style="display: flex; align-items: center;">';
-		woocommerce_wp_checkbox(
-			array(
-				'id'          => '_is_pre_order',
-				'label'       => esc_html__( 'Pre-Order Product', 'merchant' ),
-				'description' => esc_html__( 'Set this product as pre-order', 'merchant' ),
-				'value'       => get_post_meta( get_the_ID(), '_is_pre_order', true ),
-			)
-		);
-
-		echo '<div style="margin-left: -20px">';
-		echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
-		echo '</div>';
-		echo '</div>';
-		echo '<div class="form-row form-row-full hide_if_variable">';
-		woocommerce_wp_text_input(
-			array(
-				'type'  => 'date',
-				'id'    => '_pre_order_date',
-				'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
-				'value' => get_post_meta( get_the_ID(), '_pre_order_date', true ),
-			)
-		);
-		echo '</div>';
-	}
-
-	/**
-	 * Save custom fields for variable products.
-	 *
-	 * @param integer $post_id
-	 *
-	 * @return void
-	 */
-	public function custom_fields_for_variable_products_save( $post_id ) {
-		$input_post_data = array(
-			'_is_pre_order_by_post_id'   => filter_input( INPUT_POST, '_is_pre_order_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
-			'_pre_order_data_by_post_id' => filter_input( INPUT_POST, '_pre_order_date_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
-		);
-
-		$product = wc_get_product( $post_id );
-
-		$is_pre_order_variation = isset( $input_post_data['_is_pre_order_by_post_id'] ) ? 'yes' : 'no';
-		$product->update_meta_data( '_is_pre_order', $is_pre_order_variation );
-
-		if ( 'yes' === $is_pre_order_variation && isset( $input_post_data['_pre_order_data_by_post_id'] ) ) {
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_data_by_post_id'] ) );
-			$product->update_meta_data( '_pre_order_date', $pre_order_date_value );
-		}
-
-		$product->save();
-	}
-
-	/**
-	 * Save custom fields for simple products.
-	 *
-	 * @param integer $post_id
-	 *
-	 * @return void
-	 */
-	public function custom_fields_for_simple_products_save( $post_id ) {
-		$input_post_data = array(
-			'_is_pre_order'   => filter_input( INPUT_POST, '_is_pre_order', FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
-			'_pre_order_date' => filter_input( INPUT_POST, '_pre_order_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
-		);
-
-		$product      = wc_get_product( $post_id );
-		$is_pre_order = isset( $input_post_data['_is_pre_order'] ) ? 'yes' : 'no';
-		$product->update_meta_data( '_is_pre_order', $is_pre_order );
-
-		if ( 'yes' === $is_pre_order && isset( $input_post_data['_pre_order_date'] ) ) {
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_date'] ) );
-			$product->update_meta_data( '_pre_order_date', esc_attr( $pre_order_date_value ) );
-		} else {
-			$product->update_meta_data( '_pre_order_date', '' );
-		}
-
-		$product->save();
 	}
 
 	/**
@@ -650,10 +759,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 			$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
 			$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
-			$text            = $this->replaceDateTxt( $additional_text, $time_format );
+			$text            = $this->replace_date_text( $additional_text, $time_format );
 
 			if ( ! empty( $text ) ) {
-				$data['is_pre_order_date'] = $this->replaceDateTxt( $additional_text, $time_format );
+				$data['is_pre_order_date'] = $this->replace_date_text( $additional_text, $time_format );
 			}
 		}
 
@@ -668,7 +777,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 *
 	 * @return string
 	 */
-	public function replaceDateTxt( $string_contains_date_tag, $time_format ) {
+	public function replace_date_text( $string_contains_date_tag, $time_format ) {
 		$from = array( '{date}' );
 		$to   = array( $time_format );
 
@@ -703,7 +812,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 				if ( $this->is_pre_order( $_post->ID ) ) {
 					$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
 					$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
-					$text            = $this->replaceDateTxt( $additional_text, $time_format );
+					$text            = $this->replace_date_text( $additional_text, $time_format );
 
 					printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
 				}
@@ -736,7 +845,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return array
 	 */
 	public function add_pre_orders_order_statuses( $order_statuses ) {
-		$order_statuses['wc-pre-ordered'] = 'Pre Ordered';
+		$order_statuses['wc-pre-ordered'] = esc_html__( 'Pre Ordered', 'merchant' );
 
 		return $order_statuses;
 	}
@@ -765,16 +874,21 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function cart_message_handler( $item_data, $cart_item ) {
 		$product_id = $cart_item['product_id'];
+		if ( $cart_item['data']->is_type( 'variation' ) ) {
+			$product_id = $cart_item['variation_id'];
+		}
 		if ( $this->is_pre_order( $product_id ) ) {
 			$pre_order_rule = self::available_product_rule( $product_id );
-			$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
-			$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
+			if ( $pre_order_rule ) {
+				$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+				$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 
-			$item_data[] = array(
-				'key'     => $label_text,
-				'value'   => $pre_order_date,
-				'display' => '',
-			);
+				$item_data[] = array(
+					'key'     => $label_text,
+					'value'   => $pre_order_date,
+					'display' => '',
+				);
+			}
 		}
 
 		return $item_data;
