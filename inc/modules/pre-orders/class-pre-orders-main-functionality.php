@@ -29,7 +29,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Pre order products.
-	 * 
+	 *
 	 */
 	private $pre_order_products = array();
 
@@ -42,7 +42,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Init.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function init() {
@@ -58,7 +58,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		add_action( 'check_for_released_preorders', array( $this, 'check_for_pre_orders_and_maybe_update_status' ) );
-		
+
 		// Variations tab
 		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'custom_fields_for_variable_products' ), 10, 3 );
 
@@ -144,7 +144,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		foreach ( $variations as $variation_id ) {
 			$variation       = wc_get_product( $variation_id );
 			$variation_offer = self::available_product_rule( $variation_id );
-			$regular_price = $variation->get_regular_price();
+			$regular_price   = $variation->get_regular_price();
 			if ( empty( $variation_offer ) ) {
 				if ( $variation->is_on_sale() ) {
 					$sale_price = $variation->get_sale_price();
@@ -154,7 +154,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 				$prices[] = $sale_price;
 				continue;
 			}
-			$sale_price    = $this->calculate_discounted_price( $regular_price, $variation_offer, $variation );
+			$sale_price = $this->calculate_discounted_price( $regular_price, $variation_offer, $variation );
 			if ( $sale_price <= 0 ) {
 				// If the price is less than 0, set it to the regular/sale price
 				if ( $variation->is_on_sale() ) {
@@ -282,9 +282,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Validation (one type only).
-	 * 
-	 * @param  boolean $passed
-	 * @param  integer $product_id
+	 *
+	 * @param boolean $passed
+	 * @param integer $product_id
+	 *
 	 * @return boolean
 	 */
 	public function allow_one_type_only( $passed, $product_id ) {
@@ -299,7 +300,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		$input_post_data = array(
-			'variation_id' => filter_input(INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT),
+			'variation_id' => filter_input( INPUT_POST, 'variation_id', FILTER_SANITIZE_NUMBER_INT ),
 		);
 
 		$variable_id               = ( isset( $input_post_data['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $input_post_data['variation_id'] ) ) : 0;
@@ -310,7 +311,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		} else {
 			$passed = false;
 			if ( $is_variable_has_pre_order ) {
-				$notice = esc_html__( 'We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding.', 'merchant' );
+				$notice = esc_html__( 'We detected that you are trying to add a pre-order product in your cart. Please remove the rest of the products before proceeding.',
+					'merchant' );
 			} else {
 				$notice = esc_html__( 'We detected that your cart has pre-order products. Please remove them before being able to add this product.', 'merchant' );
 			}
@@ -322,8 +324,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Check if product is a pre order item by product ID.
-	 * 
-	 * @param  integer $product_id
+	 *
+	 * @param integer $product_id
+	 *
 	 * @return boolean
 	 */
 	public function is_pre_order( $product_id ) {
@@ -334,9 +337,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Update pre order meta data (date).
-	 * 
-	 * @param  integer $orderId
-	 * @param  array   $data
+	 *
+	 * @param integer $orderId
+	 * @param array   $data
+	 *
 	 * @return void
 	 */
 	public function manage_pre_orders( $orderId, $data ) {
@@ -350,10 +354,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Set pre order status.
-	 * 
-	 * @param  string  $status
-	 * @param  integer $order_id
-	 * @param  object  $order
+	 *
+	 * @param string  $status
+	 * @param integer $order_id
+	 * @param object  $order
+	 *
 	 * @return string
 	 */
 	public function set_pre_order_status( $order_id ) {
@@ -361,8 +366,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return;
 		}
 
-		$order = wc_get_order($order_id);
-		
+		$order = wc_get_order( $order_id );
+
 		// Change the order status.
 		if ( $order->get_meta( '_preorder_date' ) ) {
 			$order->update_status( 'wc-pre-ordered' );
@@ -374,8 +379,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Add shipping date field.
-	 * 
-	 * @param  array $fields
+	 *
+	 * @param array $fields
+	 *
 	 * @return array
 	 */
 	public function add_shipping_date_field( $fields ) {
@@ -401,8 +407,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Check pre order products in cart.
-	 * 
-	 * @param  array $items
+	 *
+	 * @param array $items
+	 *
 	 * @return void
 	 */
 	public function check_pre_order_products( $items ) {
@@ -419,7 +426,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Get the oldest date.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_oldest_date() {
@@ -429,17 +436,19 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 			$aId = isset( $a['variation_id'] ) && 0 !== $a['variation_id'] ? $a['variation_id'] : $a['product_id'];
 			$bId = isset( $b['variation_id'] ) && 0 !== $b['variation_id'] ? $b['variation_id'] : $b['product_id'];
+
 			return $a ? ( strtotime( get_post_meta( $aId, '_pre_order_date', true ) ) > strtotime( get_post_meta( $bId, '_pre_order_date', true ) ) ? $a : $b ) : $b;
 		} );
 
-		$oldestId = isset( $product_with_oldest_date['variation_id'] ) && 0 !== $product_with_oldest_date['variation_id'] ? $product_with_oldest_date['variation_id'] : $product_with_oldest_date['product_id'];
+		$oldestId = isset( $product_with_oldest_date['variation_id'] ) && 0 !== $product_with_oldest_date['variation_id'] ? $product_with_oldest_date['variation_id']
+			: $product_with_oldest_date['product_id'];
 
 		return get_post_meta( $oldestId, '_pre_order_date', true );
 	}
 
 	/**
 	 * Get pre order products.
-	 * 
+	 *
 	 * @return array
 	 */
 	public function get_pre_order_products() {
@@ -448,18 +457,20 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Set pre order products.
-	 * 
+	 *
 	 * @param array $pre_order_products
+	 *
 	 * @return $this
 	 */
 	public function set_pre_order_products( $pre_order_products ) {
 		$this->pre_order_products = $pre_order_products;
+
 		return $this;
 	}
 
 	/**
 	 * Check for pre orders and maybe update the status.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function check_for_pre_orders_and_maybe_update_status() {
@@ -470,7 +481,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$pre_ordered_orders = wc_get_orders( $args );
 
 		foreach ( $pre_ordered_orders as $order ) {
-			$pre_order_date = strtotime( $order->get_meta('_preorder_date')  );
+			$pre_order_date = strtotime( $order->get_meta( '_preorder_date' ) );
 
 			if ( $pre_order_date < time() ) {
 				$parent_order_id = $order->get_parent_id();
@@ -482,7 +493,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 						$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
 					}
 				} elseif ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
-						$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
+					$order->update_status( 'wc-completed', '[WooCommerce Pre Orders] ' );
 				}
 			}
 		}
@@ -490,87 +501,89 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Custom pre-order fields for variations.
-	 * 
-	 * @param  integer $loop
-	 * @param  array   $variation_data
-	 * @param  object  $variation
+	 *
+	 * @param integer $loop
+	 * @param array   $variation_data
+	 * @param object  $variation
+	 *
 	 * @return void
 	 */
 	public function custom_fields_for_variable_products( $loop, $variation_data, $variation ) {
 		echo '<div class="is_pre_order_meta_field form-row form-row-full" style="display: flex; align-items: center;">';
-			woocommerce_wp_checkbox(
-				array(
-					'id'    => '_is_pre_order_' . $variation->ID,
-					'label' => '&nbsp;' . esc_html__( 'Pre-Order Product - Set this product as pre-order', 'merchant' ),
-					'value' => get_post_meta( $variation->ID, '_is_pre_order', true ),
-				)
-			);
+		woocommerce_wp_checkbox(
+			array(
+				'id'    => '_is_pre_order_' . $variation->ID,
+				'label' => '&nbsp;' . esc_html__( 'Pre-Order Product - Set this product as pre-order', 'merchant' ),
+				'value' => get_post_meta( $variation->ID, '_is_pre_order', true ),
+			)
+		);
 
-			echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
+		echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
 		echo '</div>';
 		echo '<div class="form-row form-row-full">';
-			woocommerce_wp_text_input(
-				array(
-					'type'  => 'date',
-					'id'    => '_pre_order_date_' . $variation->ID,
-					'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
-					'value' => get_post_meta( $variation->ID, '_pre_order_date', true ),
-				)
-			);
+		woocommerce_wp_text_input(
+			array(
+				'type'  => 'date',
+				'id'    => '_pre_order_date_' . $variation->ID,
+				'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
+				'value' => get_post_meta( $variation->ID, '_pre_order_date', true ),
+			)
+		);
 		echo '</div>';
 	}
 
 	/**
 	 * Custom pre-order fields for simple products.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function custom_fields_for_simple_products() {
 		echo '<div class="is_pre_order_meta_field form-row form-row-full hide_if_variable" style="display: flex; align-items: center;">';
-			woocommerce_wp_checkbox(
-				array(
-					'id'          => '_is_pre_order',
-					'label'       => esc_html__( 'Pre-Order Product', 'merchant' ),
-					'description' => esc_html__( 'Set this product as pre-order', 'merchant' ),
-					'value'       => get_post_meta( get_the_ID(), '_is_pre_order', true ),
-				)
-			);
+		woocommerce_wp_checkbox(
+			array(
+				'id'          => '_is_pre_order',
+				'label'       => esc_html__( 'Pre-Order Product', 'merchant' ),
+				'description' => esc_html__( 'Set this product as pre-order', 'merchant' ),
+				'value'       => get_post_meta( get_the_ID(), '_is_pre_order', true ),
+			)
+		);
 
-			echo '<div style="margin-left: -20px">';
-				echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
-			echo '</div>';
+		echo '<div style="margin-left: -20px">';
+		echo wc_help_tip( __( 'Important: To pre-order out of stock products you must enable the \'Backorder\' stock option.', 'merchant' ) );
+		echo '</div>';
 		echo '</div>';
 		echo '<div class="form-row form-row-full hide_if_variable">';
-			woocommerce_wp_text_input(
-				array(
-					'type'  => 'date',
-					'id'    => '_pre_order_date',
-					'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
-					'value' => get_post_meta( get_the_ID(), '_pre_order_date', true ),
-				)
-			);
+		woocommerce_wp_text_input(
+			array(
+				'type'  => 'date',
+				'id'    => '_pre_order_date',
+				'label' => esc_html__( 'Pre-Order Shipping Date', 'merchant' ),
+				'value' => get_post_meta( get_the_ID(), '_pre_order_date', true ),
+			)
+		);
 		echo '</div>';
 	}
 
 	/**
 	 * Save custom fields for variable products.
-	 * 
-	 * @param  integer $post_id
+	 *
+	 * @param integer $post_id
+	 *
 	 * @return void
 	 */
 	public function custom_fields_for_variable_products_save( $post_id ) {
 		$input_post_data = array(
-			'_is_pre_order_by_post_id' => filter_input(INPUT_POST, '_is_pre_order_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-			'_pre_order_data_by_post_id' => filter_input(INPUT_POST, '_pre_order_date_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+			'_is_pre_order_by_post_id'   => filter_input( INPUT_POST, '_is_pre_order_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+			'_pre_order_data_by_post_id' => filter_input( INPUT_POST, '_pre_order_date_' . $post_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
 		);
-		
+
 		$product = wc_get_product( $post_id );
 
-		$is_pre_order_variation = isset( $input_post_data[ '_is_pre_order_by_post_id' ] ) ? 'yes' : 'no';
+		$is_pre_order_variation = isset( $input_post_data['_is_pre_order_by_post_id'] ) ? 'yes' : 'no';
 		$product->update_meta_data( '_is_pre_order', $is_pre_order_variation );
 
-		if ( 'yes' === $is_pre_order_variation && isset( $input_post_data[ '_pre_order_data_by_post_id' ] ) ) {
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data[ '_pre_order_data_by_post_id' ] ) );
+		if ( 'yes' === $is_pre_order_variation && isset( $input_post_data['_pre_order_data_by_post_id'] ) ) {
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_data_by_post_id'] ) );
 			$product->update_meta_data( '_pre_order_date', $pre_order_date_value );
 		}
 
@@ -579,22 +592,23 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Save custom fields for simple products.
-	 * 
-	 * @param  integer $post_id
+	 *
+	 * @param integer $post_id
+	 *
 	 * @return void
 	 */
 	public function custom_fields_for_simple_products_save( $post_id ) {
 		$input_post_data = array(
-			'_is_pre_order' => filter_input(INPUT_POST, '_is_pre_order', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-			'_pre_order_date' => filter_input(INPUT_POST, '_pre_order_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+			'_is_pre_order'   => filter_input( INPUT_POST, '_is_pre_order', FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
+			'_pre_order_date' => filter_input( INPUT_POST, '_pre_order_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS ),
 		);
 
 		$product      = wc_get_product( $post_id );
-		$is_pre_order = isset( $input_post_data['_is_pre_order'] ) ? 'yes' : 'no'; 
+		$is_pre_order = isset( $input_post_data['_is_pre_order'] ) ? 'yes' : 'no';
 		$product->update_meta_data( '_is_pre_order', $is_pre_order );
 
-		if ( 'yes' === $is_pre_order && isset( $input_post_data['_pre_order_date'] ) ) { 
-			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_date'] ) ); 
+		if ( 'yes' === $is_pre_order && isset( $input_post_data['_pre_order_date'] ) ) {
+			$pre_order_date_value = sanitize_text_field( wp_unslash( $input_post_data['_pre_order_date'] ) );
 			$product->update_meta_data( '_pre_order_date', esc_attr( $pre_order_date_value ) );
 		} else {
 			$product->update_meta_data( '_pre_order_date', '' );
@@ -605,15 +619,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Change pre-order button text.
-	 * 
+	 *
 	 * @param string     $text
 	 * @param WC_Product $product
+	 *
 	 * @return string
 	 */
 	public function change_button_text( $text, $product ) {
 		if ( $product && $this->is_pre_order( $product->get_id() ) ) {
 			$pre_order_rule = self::available_product_rule( $product->get_id() );
-			$text = $pre_order_rule['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
+			$text           = $pre_order_rule['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
 		}
 
 		return $text;
@@ -621,15 +636,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Change pre-order button text for variable products.
-	 * 
-	 * @param  array   $data
-	 * @param  object  $product
-	 * @param  object  $variation
+	 *
+	 * @param array  $data
+	 * @param object $product
+	 * @param object $variation
+	 *
 	 * @return array
 	 */
 	public function change_button_text_for_variable_products( $data, $product, $variation ) {
 		if ( $this->is_pre_order( $variation->get_id() ) ) {
-			$pre_order_rule = self::available_product_rule( $variation->get_id() );
+			$pre_order_rule       = self::available_product_rule( $variation->get_id() );
 			$data['is_pre_order'] = true;
 
 			$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
@@ -639,7 +655,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 			if ( ! empty( $text ) ) {
 				$data['is_pre_order_date'] = $this->replaceDateTxt( $additional_text, $time_format );
 			}
-
 		}
 
 		return $data;
@@ -647,9 +662,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Replace {date} markup with new text.
-	 * 
-	 * @param  string $string_contains_date_tag
-	 * @param  string $time_format
+	 *
+	 * @param string $string_contains_date_tag
+	 * @param string $time_format
 	 *
 	 * @return string
 	 */
@@ -662,7 +677,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Maybe render additional information.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function maybe_render_additional_information() {
@@ -698,7 +713,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Register pre orders status.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function register_pre_orders_order_status() {
@@ -715,8 +730,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Add pre orders status to order statuses.
-	 * 
-	 * @param  array $order_statuses
+	 *
+	 * @param array $order_statuses
+	 *
 	 * @return array
 	 */
 	public function add_pre_orders_order_statuses( $order_statuses ) {
@@ -727,7 +743,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Add pre orders class identifies to the body tag.
-	 * 
+	 *
 	 */
 	public function pre_orders_post_class( $classes, $product ) {
 		if ( $this->is_pre_order( $product->get_id() ) ) {
@@ -751,7 +767,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$product_id = $cart_item['product_id'];
 		if ( $this->is_pre_order( $product_id ) ) {
 			$pre_order_rule = self::available_product_rule( $product_id );
-			$label_text  = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+			$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
 			$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 
 			$item_data[] = array(
@@ -772,6 +788,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @param \WC_Order_Item_Product $item       Item array data.
 	 * @param \WC_Order              $order      Order data.
 	 * @param bool                   $plain_text Is plain text or not.
+	 *
 	 * @return string
 	 */
 	public function order_item_meta_end( $item_id, $item, $order, $plain_text ) {
@@ -787,7 +804,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 	/**
 	 * Add the_title filter for block rendering.
-	 * @param array $context      Default context.
+	 *
+	 * @param array $context Default context.
+	 *
 	 * @return array
 	 */
 	public function add_block_title_filter( $context ) {
@@ -796,6 +815,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			add_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10, 2 );
 			add_filter( 'render_block', array( $this, 'block_remove_the_title_filter' ), 10, 3 );
 		}
+
 		return $context;
 	}
 
@@ -805,6 +825,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @param string      $html    Product grid item HTML.
 	 * @param object      $data    Product data passed to the template.
 	 * @param \WC_Product $product Product object.
+	 *
 	 * @return string     Updated product grid item HTML.
 	 */
 	public function override_product_grid_block( $html, $data, $product ) {
@@ -812,6 +833,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( $pre_order_text ) {
 			$html = str_replace( $data->title, $data->title . $pre_order_text, $html );
 		}
+
 		return $html;
 	}
 
@@ -820,6 +842,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 *
 	 * @param string $title   Title.
 	 * @param int    $post_id Post ID.
+	 *
 	 * @return string
 	 */
 	public function block_add_the_title_filter( $title, $post_id ) {
@@ -840,6 +863,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			remove_filter( 'the_title', array( $this, 'block_add_the_title_filter' ), 10 );
 			$this->is_pre_order_filter_on = false;
 		}
+
 		return $block_content;
 	}
 
@@ -848,6 +872,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 *
 	 * @param int    $product_id
 	 * @param string $render_type Render template type string. 'span', 'dl', ''. Default ''.
+	 *
 	 * @return string
 	 */
 	private function get_pre_order_text( $product_id, $render_type = '' ) {
@@ -859,7 +884,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
 		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['cart_label_text'] );
 		if ( 'span' === $render_type ) {
-			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ), $pre_order_date );
+			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ),
+				$pre_order_date );
 		} elseif ( 'dl' === $render_type ) {
 			return sprintf( '<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>', esc_html( $label_text ), $pre_order_date );
 		} else {
@@ -1052,7 +1078,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 				}
 
 				if ( 'customers' === $rule['user_condition'] ) {
-					$allowed_users = $rule['user_condition_users'];
+					$allowed_users   = $rule['user_condition_users'];
 					$current_user_id = $current_user->ID;
 					if ( ! in_array( $current_user_id, $allowed_users, true ) ) {
 						continue;
