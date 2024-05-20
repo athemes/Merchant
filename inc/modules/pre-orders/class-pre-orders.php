@@ -227,7 +227,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			// Additional text.
 			$additional_text = $settings[ 'additional_text' ];
 			$time_format     = date_i18n( get_option( 'date_format' ), strtotime( gmdate( 'Y-m-d', strtotime('+2 days') ) ) );
-			$text            = $this->main_func->replaceDateTxt( $additional_text, $time_format );
+			$text            = $this->main_func->replace_date_text( $additional_text, $time_format );
 
 			ob_start();
 			self::admin_preview_content( $settings, $text );
