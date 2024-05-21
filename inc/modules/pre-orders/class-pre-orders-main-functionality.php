@@ -249,7 +249,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		// Loop through each product in the original order
 		foreach ( $original_order->get_items() as $item_id => $item ) {
-			if ( $this->is_pre_order( $item->get_product_id() ) ) {
+			if ( $this->is_pre_order( $item->get_product()->get_id() ) ) {
 				$pre_order_products[] = $item;
 			}
 		}
@@ -273,8 +273,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 			// add pre-order products to the new order
 			foreach ( $pre_order_products as $item ) {
-				$rule     = self::available_product_rule( $item->get_product_id() );
-				$new_item = $item;
+				$rule     = self::available_product_rule( $item->get_product()->get_id() );
+				$new_item = $this->clone_order_item( $item );
 				$new_item->add_meta_data( '_merchant_pre_order', $rule );
 				$new_item->add_meta_data( '_merchant_is_pre_order_product', true );
 				$new_item->add_meta_data( '_merchant_pre_order_shipping_date', $rule['shipping_timestamp'] );
@@ -318,7 +318,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			//check if the item is a product
 
 			// Get product details
-			$product_id = $item->get_product_id();
+			$product_id = $item->get_product()->get_id();
 			if ( ! $product_id ) {
 				continue;
 			}
