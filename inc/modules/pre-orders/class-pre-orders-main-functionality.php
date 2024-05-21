@@ -733,7 +733,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function change_button_text( $text, $product ) {
 		if ( $product && $this->is_pre_order( $product->get_id() ) ) {
 			$pre_order_rule = self::available_product_rule( $product->get_id() );
-			$text           = $pre_order_rule['button_text'] ?? esc_html__( 'Pre Order Now!', 'merchant' );
+			$text           = $pre_order_rule['button_text'] ? Merchant_Translator::translate( $pre_order_rule['button_text'] ) : esc_html__( 'Pre Order Now!', 'merchant' );
 		}
 
 		return $text;
@@ -750,10 +750,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function change_button_text_for_variable_products( $data, $product, $variation ) {
 		if ( $this->is_pre_order( $variation->get_id() ) ) {
-			$pre_order_rule       = self::available_product_rule( $variation->get_id() );
+			$pre_order_rule = self::available_product_rule( $variation->get_id() );
 			$data['is_pre_order'] = true;
 
-			$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
+			$additional_text = $pre_order_rule['additional_text'] ? Merchant_Translator::translate( $pre_order_rule['additional_text'] )
+				: esc_html__( 'Ships on {date}.', 'merchant' );
 			$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 			$text            = $this->replace_date_text( $additional_text, $time_format );
 
@@ -806,7 +807,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( ! empty( $pre_order_rule ) ) {
 			if ( null !== $_product ) {
 				if ( $this->is_pre_order( $_post->ID ) ) {
-					$additional_text = $pre_order_rule['additional_text'] ?? esc_html__( 'Ships on {date}.', 'merchant' );
+					$additional_text = $pre_order_rule['additional_text'] ? Merchant_Translator::translate( $pre_order_rule['additional_text'] )
+						: esc_html__( 'Ships on {date}.', 'merchant' );
 					$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 					$text            = $this->replace_date_text( $additional_text, $time_format );
 
@@ -876,7 +878,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( $this->is_pre_order( $product_id ) ) {
 			$pre_order_rule = self::available_product_rule( $product_id );
 			if ( $pre_order_rule ) {
-				$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+				$label_text     = $pre_order_rule['cart_label_text'] ? Merchant_Translator::translate( $pre_order_rule['cart_label_text'] ) : esc_html__( 'Ships on', 'merchant' );
 				$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 
 				$item_data[] = array(
@@ -991,7 +993,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		$pre_order_rule = self::available_product_rule( $product_id );
-		$label_text     = $pre_order_rule['cart_label_text'] ?? esc_html__( 'Ships on', 'merchant' );
+		$label_text     = $pre_order_rule['cart_label_text'] ? Merchant_Translator::translate( $pre_order_rule['cart_label_text'] ) : esc_html__( 'Ships on', 'merchant' );
 		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['cart_label_text'] );
 		if ( 'span' === $render_type ) {
 			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ),
