@@ -51,8 +51,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
 		add_action( 'woocommerce_add_order_item_meta', array( $this, 'add_order_item_meta' ), 10, 2 );
 
-		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'manage_pre_orders' ), 10, 2 );
-
 		// Cronjob.
 		if ( ! wp_next_scheduled( 'check_for_released_preorders' ) ) {
 			wp_schedule_event( time(), 'twicedaily', 'check_for_released_preorders' );
@@ -264,9 +262,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 			// Copy order details from original order to new order.
 			$this->copy_order_details( $original_order, $new_order );
 
-			// Set the parent order ID
-			$new_order->set_parent_id( $order->get_id() );
-
 			$new_order->add_meta_data( '_is_sub_order', true );
 			$new_order->add_meta_data( '_is_pre_order', true );
 			$new_order->set_status( 'wc-pre-ordered' );
@@ -345,9 +340,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 			// Copy order details from original order to new order.
 			$this->copy_order_details( $original_order, $new_order );
-
-			// Set the parent order ID
-			$new_order->set_parent_id( $order->get_id() );
 
 			// Calculate totals and set status
 			$new_order->calculate_totals();
@@ -681,23 +673,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$available_pre_order = self::available_product_rule( $product_id );
 
 		return ! empty( $available_pre_order );
-	}
-
-	/**
-	 * Update pre order meta data (date).
-	 *
-	 * @param integer $orderId
-	 * @param array   $data
-	 *
-	 * @return void
-	 */
-	public function manage_pre_orders( $orderId, $data ) {
-		$order = wc_get_order( $orderId );
-
-		if ( isset( $data['preorder_date'] ) ) {
-			$order->update_meta_data( '_preorder_date', esc_attr( $data['preorder_date'] ) );
-			$order->save();
-		}
 	}
 
 	/**
