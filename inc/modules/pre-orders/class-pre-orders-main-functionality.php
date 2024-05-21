@@ -303,6 +303,20 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 	}
 
+	private function clone_order_item( $item ) {
+		$new_item = new WC_Order_Item_Product();
+		$new_item->set_product_id( $item->get_product_id() );
+		$new_item->set_variation_id( $item->get_variation_id() );
+		$new_item->set_name( $item->get_name() );
+		$new_item->set_quantity( $item->get_quantity() );
+		$new_item->set_subtotal( $item->get_subtotal() );
+		$new_item->set_total( $item->get_total() );
+		$new_item->set_taxes( $item->get_taxes() );
+		$new_item->set_meta_data( $item->get_meta_data() );
+
+		return $new_item;
+	}
+
 	/**
 	 * Generate separate orders for each pre-order product.
 	 *
@@ -339,12 +353,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 				)
 			);
 
-			$new_item = $item;
+			$new_item = $this->clone_order_item( $item );
 			$rule     = self::available_product_rule( $product_id );
 			$new_item->add_meta_data( '_merchant_pre_order', $rule );
 			$new_item->add_meta_data( '_merchant_is_pre_order_product', true );
 			$new_item->add_meta_data( '_merchant_pre_order_shipping_date', $rule['shipping_timestamp'] );
-			$new_order->add_item( $item );
+			$new_order->add_item( $new_item );
 
 			// Copy order details from original order to new order.
 			$this->copy_order_details( $original_order, $new_order );
