@@ -28,12 +28,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public const DATE_TIME_FORMAT = 'm-d-Y h:i A';
 
 	/**
-	 * Pre order products.
-	 *
-	 */
-	private $pre_order_products = array();
-
-	/**
 	 * Flag if the_title filter is added or not.
 	 *
 	 * @var bool
