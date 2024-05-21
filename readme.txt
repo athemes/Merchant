@@ -1,4 +1,4 @@
-=== Merchant ===
+=== Merchant - All-in-One WooCommerce Plugin for Pre-Orders, Product Labels, Buy Now, Quick View, and More ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.5
@@ -12,11 +12,11 @@ Merchant is a modular WooCommerce toolkit focused on conversions. Features inclu
 
 == Description ==
 
-**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN**
+**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE PLUGIN**
 
 On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
 
-[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one, performance-optimized plugin.
+[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one plugin.
 
 [TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
