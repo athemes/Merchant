@@ -1231,4 +1231,72 @@ class Merchant_Pre_Orders_Main_Functionality {
 		 */
 		return apply_filters( 'merchant_pre_order_available_rule', $available_rule, $product_id );
 	}
+
+	/**
+	 * Migrate old data to the new module storage.
+	 *
+	 * @return void
+	 */
+	public static function data_migration() {
+		$args     = array(
+			'post_type'      => array( 'product', 'product_variation' ),
+			'posts_per_page' => - 1,
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array(
+					'key'     => '_pre_order_date',
+					'compare' => 'EXISTS',
+				),
+				array(
+					'key'     => '_pre_order_date',
+					'compare' => '!=',
+					'value'   => '',
+				),
+				array(
+					'key'     => '_is_pre_order',
+					'compare' => 'EXISTS',
+				),
+				array(
+					'key'     => '_is_pre_order',
+					'compare' => 'in',
+					'value'   => array( 'yes', '1' ),
+				),
+			),
+		);
+		$migrated = get_option( 'merchant_pre_orders_migrated' );
+		if ( ! $migrated ) {
+			$products = new WP_Query( $args );
+			if ( $products->have_posts() ) {
+				$rules = self::pre_order_rules();
+				while ( $products->have_posts() ) {
+					$products->the_post();
+					$product_id     = get_the_ID();
+					$pre_order_date = get_post_meta( $product_id, '_pre_order_date', true );
+					$is_pre_order   = get_post_meta( $product_id, '_is_pre_order', true );
+					$pre_order_date = merchant_convert_date_to_timestamp( $pre_order_date, 'yy-m-d' );
+					$pre_order_date = date_i18n( self::DATE_TIME_FORMAT, $pre_order_date );
+					if ( $is_pre_order ) {
+						$rules[] = array(
+							'offer-title'     => esc_html__( 'Custom Pre-order', 'merchant' ),
+							'trigger_on'      => 'product',
+							'product_ids'     => $product_id,
+							'discount_toggle' => false,
+							'user_condition'  => 'all',
+							'shipping_date'   => $pre_order_date,
+							'button_text'     => esc_html__( 'Pre Order Now!', 'merchant' ),
+							'additional_text' => esc_html__( 'Ships on {date}.', 'merchant' ),
+							'placement'       => 'before',
+							'cart_label_text' => esc_html__( 'Ships on', 'merchant' ),
+							'layout'          => 'rule-details',
+						);
+					}
+				}
+				Merchant_Admin_Options::set( self::MODULE_ID, 'rules', $rules );
+			}
+			update_option( 'merchant_pre_orders_migrated', true );
+		}
+	}
 }
+
+add_action( 'init', 'Merchant_Pre_Orders_Main_Functionality::data_migration' );
