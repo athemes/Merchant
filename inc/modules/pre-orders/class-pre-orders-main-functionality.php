@@ -257,7 +257,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( ! empty( $pre_order_products ) ) {
 			$shipping_dates = array();
 			// Create a new order
-			$new_order = wc_create_order();
+			$new_order = wc_create_order(
+				array(
+					'parent' => $original_order->get_id(),
+				)
+			);
 
 			// Copy order details from original order to new order.
 			$this->copy_order_details( $original_order, $new_order );
@@ -329,7 +333,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 
 			// Create a new order
-			$new_order = wc_create_order();
+			$new_order = wc_create_order(
+				array(
+					'parent' => $original_order->get_id(),
+				)
+			);
 
 			$new_item = $item;
 			$rule     = self::available_product_rule( $product_id );
