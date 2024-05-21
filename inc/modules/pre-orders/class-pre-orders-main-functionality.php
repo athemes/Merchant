@@ -159,7 +159,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function add_cart_item_data( $cart_item_data, $product_id, $variation_id, $quantity ) {
 		$product = wc_get_product( $product_id );
 		$offer   = self::available_product_rule( $product_id );
-		if ( empty( $offer ) && $product->is_type( 'variation' ) ) {
+		if ( empty( $offer ) && $product->is_type( 'variable' ) ) {
 			$offer = self::available_product_rule( $variation_id );
 		}
 		if ( ! empty( $offer ) ) {
