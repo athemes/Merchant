@@ -11,7 +11,6 @@ $position       = Merchant_Admin_Options::get( Merchant_Product_Labels::MODULE_I
 $margin_y_label = ( $position === 'top-left' || $position === 'top-right' ) ? esc_html__( 'Margin Top', 'merchant' ) : esc_html__( 'Margin Bottom', 'merchant' );
 $margin_x_label = ( $position === 'top-left' || $position === 'bottom-left' ) ? esc_html__( 'Margin Left', 'merchant' ) : esc_html__( 'Margin Right', 'merchant' );
 
-
 $text_shapes  = array();
 $image_shapes = array();
 

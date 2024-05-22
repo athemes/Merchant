@@ -1943,7 +1943,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 	                                <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="layout-body xxxxx">
+                            <div class="layout-body">
 								<?php
 								foreach ( $layout['fields'] as $sub_field ) :
 									$classes = array( 'layout-field' );

@@ -47,8 +47,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'layout'           => 'single-label',
-            'labels'           => array(
+			'layout' => 'single-label',
+            'labels' => array(
 	            array(
 		            'label_type'       => 'text',
 		            'label'            => esc_html__( 'SALE', 'merchant' ),
@@ -578,6 +578,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		return '';
 	}
 
+	/**
+     * Get all styles for the current label
+     *
+	 * @param $label
+	 *
+	 * @return array
+	 */
 	public function get_shape_based_styles( $label ) {
 		$styles           = array();
 
@@ -590,8 +597,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$label_shape    = $label['label_text_shape'] ?? 'text-shape-1';
 
 		if ( $label_type === 'text' ) {
-			$styles['width']  = ( $label['label_width'] ?? 75 ) . 'px';
-			$styles['height'] = ( $label['label_height'] ?? 32 ) . 'px';
+			$styles['width']     = ( $label['label_width'] ?? 100 ) . 'px';
+			$styles['height']    = ( $label['label_height'] ?? 32 ) . 'px';
 			$styles['font-size'] = ( $label['font_size'] ?? 14 ) . 'px';
 
 			$font_style = $label['font_style'] ?? 'normal';
@@ -615,6 +622,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
         return $styles;
     }
 
+	/**
+     * Should show the label for current page.
+     *
+	 * @param $label
+	 *
+	 * @return bool
+	 */
 	public function show_label( $label ) {
 		$show       = false;
         $show_pages = $label ['show_pages' ] ?? array();
