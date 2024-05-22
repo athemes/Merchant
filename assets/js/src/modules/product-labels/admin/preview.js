@@ -168,6 +168,12 @@
         initPreview();
     } );
 
+    $( document).on('merchant-flexible-content-added', function ( e, $layout ) {
+        $('.merchant-flexible-content-control.product-labels-style').find('.layout').removeClass('active');
+        $layout.addClass('active');
+        initPreview();
+    } );
+
     $(document).on('merchant-product-labels-reload-product-preview', function (e) {
         initPreview();
     } );
@@ -196,7 +202,7 @@
             borderRadius = layout.find('.merchant-field-shape_radius input').val(),
             fontSize = layout.find('.merchant-field-font_size input').val(),
             fontStyle = layout.find('.merchant-field-font_style select').val(),
-            position = $('.merchant-field-label_position select').val();
+            position = layout.find( '.merchant-field-label_position select' ).val();
 
         const labelPreview = $( '.merchant-product-labels-preview' ).find( '.merchant-product-labels' );
 
@@ -342,6 +348,16 @@
             'merchant-field-margin_x': 'marginX',
             'merchant-field-margin_y': 'marginY',
         };
+
+        const labelType = $layout.find( '.merchant-field-label_type input:checked' ).val();
+
+        // If custom image uploaded, don't change style when trying to select predefined images
+        if ( labelType === 'image' ) {
+           const customImage = $layout.find( '.merchant-field-label_image_shape_custom input[type="hidden"]' ).val();
+           if ( customImage && $input.closest( '.merchant-choices-label_image_shape' ).length ) {
+               return;
+           }
+        }
 
         for ( const [ inputWrapper, propertyName ] of Object.entries( properties ) ) {
             const value = shapesDefaultStyles[ shapeType ][ selectedShape ]?.[ propertyName ];

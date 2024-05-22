@@ -53,7 +53,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'label_type',
 							'type'    => 'buttons_content',
-							'title'   => esc_html__( 'Label type', 'merchant' ),
+							'title'   => '',
 							'desc'    => esc_html__( 'Move your mouse over each option to see the animations. Click on one of the buttons to select that animation.', 'merchant' ),
 							'options' => array(
 								'text'    => array(
@@ -109,12 +109,30 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'      => 'enable_label_image_custom_shape',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Use custom shape', 'merchant' ),
+							'default' => '0',
+						),
+
+						array(
 							'id'        => 'label_image_shape_custom',
 							'type'      => 'upload',
 							'drag_drop' => true,
 							'title'     => esc_html__( 'Upload custom shape', 'merchant' ),
 							'label'     => esc_html__( 'Click to upload or drag and drop', 'merchant' ),
 							'condition' => array( 'label_type', '==', 'image' ),
+						),
+
+						array(
+							'id'      => 'label_position',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Position', 'merchant' ),
+							'options' => array(
+								'top-left'  => esc_html__( 'Top left', 'merchant' ),
+								'top-right' => esc_html__( 'Top right', 'merchant' ),
+							),
+							'default' => 'top-left',
 						),
 
 						array(
@@ -225,7 +243,7 @@ Merchant_Admin_Options::create( array(
 								'out_of_stock'      => esc_html__( 'Out of Stock Products', 'merchant' ),
 								'all_products'      => esc_html__( 'All Products', 'merchant' ),
 								'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
-								'by_category'       => esc_html__( 'Specific Category', 'merchant' ),
+								'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
 							),
 							'default' => 'featured_products',
 						),
@@ -239,6 +257,36 @@ Merchant_Admin_Options::create( array(
 							'desc'      => esc_html__( 'Set the number of days the product will be marked as ‘New’ after it has been created', 'merchant' ),
 							'default'   => 3,
 							'condition' => array( 'display_rules', '==', 'new_products' ),
+						),
+
+						array(
+							'id'          => 'product_cats',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the label.', 'merchant' ),
+							'condition'   => array( 'display_rules', '==', 'by_category' ),
+						),
+
+						array(
+							'id'            => 'product_ids',
+							'type'          => 'products_selector',
+							'multiple'      => true,
+							'desc'          => esc_html__( 'Select the products that will show the layel.', 'merchant' ),
+							'allowed_types' => array( 'simple', 'variable' ),
+							'condition'     => array( 'display_rules', '==', 'specific_products' ),
+						),
+
+						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this label.', 'merchant' ),
+							'condition' => array( 'display_rules', 'any', 'all_products|by_category|featured_products|new_products|products_on_sale|out_of_stock' ),
 						),
 
 						array(
@@ -263,33 +311,7 @@ Merchant_Admin_Options::create( array(
 							),
 							'default' => array( 'desktop', 'mobile' ),
 						),
-
-						array(
-							'id'        => 'percentage_text',
-							'type'      => 'text',
-							'title'     => esc_html__( 'Sale Percentage', 'merchant' ),
-							'default'   => '-{value}%',
-							'desc'      => esc_html__( 'You may use the {value} tag. E.g. {value}% OFF!', 'merchant' ),
-							'condition' => array( 'display_rules', '==', 'products_on_sale' ),
-						),
-						array(
-							'id'        => 'product_cats',
-							'type'      => 'select',
-							'title'     => esc_html__( 'Product Categories', 'merchant' ),
-							'options'   => merchant_get_product_categories(),
-							'condition' => array( 'display_rules', '==', 'by_category' ),
-						),
-						array(
-							'id'            => 'product_ids',
-							'type'          => 'products_selector',
-							'multiple'      => true,
-							'desc'          => esc_html__( 'Select the products that will show the label.', 'merchant' ),
-							'allowed_types' => array( 'simple', 'variable' ),
-							'condition'     => array( 'display_rules', '==', 'specific_products' ),
-						),
-
 					),
-
 				),
 			),
 			'default'      => array(
@@ -299,16 +321,6 @@ Merchant_Admin_Options::create( array(
 					'display_rules'    => 'featured_products',
 				),
 			),
-		),
-		array(
-			'id'      => 'label_position',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Position', 'merchant' ),
-			'options' => array(
-				'top-left'  => esc_html__( 'Top left', 'merchant' ),
-				'top-right' => esc_html__( 'Top right', 'merchant' ),
-			),
-			'default' => 'top-left',
 		),
 	),
 ) );

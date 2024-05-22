@@ -106,6 +106,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
+        // Enqueue scripts
+		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
+
 		// Inject module content in the products.
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
@@ -187,6 +190,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function enqueue_css() {
 		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-labels.min.css', array(), MERCHANT_VERSION );
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function enqueue_js() {
+		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/product-labels.min.js', array(), MERCHANT_VERSION, true );
 	}
 
 	/**
@@ -453,6 +465,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 				$rule = $label['display_rules'] ?? 'featured_products';
 
+				if ( in_array( $rule, array( 'all_products', 'featured_products', 'products_on_sale', 'by_category', 'out_of_stock' ), true ) ) {
+					$excluded_product_ids = $label['excluded_products'] ?? array();
+					$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
+
+					if ( in_array( (int) $product->get_id(), $excluded_product_ids, true ) ) {
+						continue;
+					}
+				}
+
 				switch ( $rule ) {
 					case 'featured_products':
 						if ( $this->is_featured( $product ) ) {
@@ -467,7 +488,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 						break;
 
 					case 'by_category':
-						if ( isset( $label['product_cats'] ) && $this->is_in_category( $product, $label['product_cats'] ) ) {
+						$categories   = $label['product_cats'] ?? array();
+						$categories   = is_array( $categories ) ? $categories : (array) $categories;
+
+                        if ( ! empty( $categories ) && $this->is_in_category( $product, $categories ) ) {
 							$product_labels_html .= $this->label( $label );
 						}
 						break;
@@ -525,7 +549,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
                     );
 
 					$label_type     = $label['label_type'] ?? 'text';
-					$label_position = $settings['label_position'] ?? 'top-left';
+					$label_position = $label['label_position'] ?? 'top-left';
 
 					$styles = $this->get_shape_based_styles( $label );
 
@@ -561,7 +585,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
             return $styles;
         }
 
-		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
+		$label_position = $label['label_position'] ?? 'top-left';
 		$label_type     = $label['label_type'] ?? 'text';
 		$label_shape    = $label['label_text_shape'] ?? 'text-shape-1';
 
@@ -687,8 +711,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return $html;
 		}
 
-		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
-		//$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
+		$label_position = $label_data['label_position'] ?? 'top-left';
 
         $label_type = $label_data['label_type'] ?? 'text';
 
@@ -733,18 +756,22 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Check if product is in category.
+	 * Check if product is in categories.
 	 *
 	 * @param $product WC_Product product object.
-	 * @param $slug    string category slug.
+	 * @param $slugs    array category slugs.
 	 *
 	 * @return bool
 	 */
-	private function is_in_category( $product, $slug ) {
+	private function is_in_category( $product, $slugs ) {
+		if ( ! is_array( $slugs ) ) {
+			$slugs = array( $slugs );
+		}
+
 		$terms = get_the_terms( $product->get_id(), 'product_cat' );
 		if ( $terms && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-				if ( $term->slug === $slug ) {
+				if ( in_array( $term->slug, $slugs, true ) ) {
 					return true;
 				}
 			}
