@@ -44,7 +44,7 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'convert-more';
+		$this->module_section = 'improve-experience';
 
 		// Module default settings.
 		$this->module_default_settings = array(
