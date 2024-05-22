@@ -55,7 +55,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'change_button_text' ), 10, 2 );
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'change_button_text' ), 10, 2 );
 		add_filter( 'woocommerce_available_variation', array( $this, 'change_button_text_for_variable_products' ), 10, 3 );
-		add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'maybe_render_additional_information' ), 10 );
+		add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'additional_information_before_cart_form' ) );
+		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'additional_information_after_cart_form' ) );
 
 		// Cart
 		add_filter( 'woocommerce_get_item_data', array( $this, 'cart_message_handler' ), 10, 2 );
@@ -782,11 +783,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * Maybe render additional information.
+	 * Display pre order additional information before add to cart form.
 	 *
 	 * @return void
 	 */
-	public function maybe_render_additional_information() {
+	public function additional_information_before_cart_form() {
 		$input_post_data = array(
 			'product_id' => filter_input( INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT ),
 		);
@@ -802,19 +803,56 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$_post    = get_post( absint( $input_post_data['product_id'] ) );
 			$_product = wc_get_product( $_post->ID );
 		}
-
-		$pre_order_rule = self::available_product_rule( $_product->get_id() );
-		if ( ! empty( $pre_order_rule ) ) {
-			if ( null !== $_product ) {
-				if ( $this->is_pre_order( $_post->ID ) ) {
-					$additional_text = $pre_order_rule['additional_text'] ? Merchant_Translator::translate( $pre_order_rule['additional_text'] )
-						: esc_html__( 'Ships on {date}.', 'merchant' );
-					$time_format     = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
-					$text            = $this->replace_date_text( $additional_text, $time_format );
-
-					printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
-				}
+		if ( $this->is_pre_order( $_post->ID ) ) {
+			$pre_order_rule = self::available_product_rule( $_product->get_id() );
+			if ( ! empty( $pre_order_rule ) && $pre_order_rule['placement'] === 'before' ) {
+				$this->maybe_render_additional_information( $pre_order_rule );
 			}
+		}
+	}
+
+	/**
+	 * Display pre order additional information after add to cart form.
+	 *
+	 * @return void
+	 */
+	public function additional_information_after_cart_form() {
+		$input_post_data = array(
+			'product_id' => filter_input( INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT ),
+		);
+
+		global $post, $product;
+
+		// Do not override globals.
+		$_post    = $post;
+		$_product = $product;
+
+		// In some cases the $post might be null. e.g inside quick view popup.
+		if ( ! $_post && isset( $input_post_data['product_id'] ) ) {
+			$_post    = get_post( absint( $input_post_data['product_id'] ) );
+			$_product = wc_get_product( $_post->ID );
+		}
+		if ( $_product && $this->is_pre_order( $_post->ID ) ) {
+			$pre_order_rule = self::available_product_rule( $_product->get_id() );
+			if ( ! empty( $pre_order_rule ) && $pre_order_rule['placement'] === 'after' ) {
+				$this->maybe_render_additional_information( $pre_order_rule );
+			}
+		}
+	}
+
+	/**
+	 * Maybe render additional information.
+	 *
+	 * @return void
+	 */
+	public function maybe_render_additional_information( $rule ) {
+		if ( ! empty( $rule ) ) {
+			$additional_text = $rule['additional_text'] ? Merchant_Translator::translate( $rule['additional_text'] )
+				: esc_html__( 'Ships on {date}.', 'merchant' );
+			$time_format     = date_i18n( get_option( 'date_format' ), $rule['shipping_timestamp'] );
+			$text            = $this->replace_date_text( $additional_text, $time_format );
+
+			printf( '<div class="merchant-pre-orders-date">%s</div>', esc_html( $text ) );
 		}
 	}
 
