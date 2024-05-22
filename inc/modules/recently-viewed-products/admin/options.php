@@ -82,7 +82,7 @@ Merchant_Admin_Options::create( array(
 			'max'       => 30,
 			'step'      => 1,
 			'unit'      => '',
-			'default'   => 10,
+			'default'   => 6,
 		),
 
 		// Number of Columns.
@@ -194,6 +194,17 @@ Merchant_Admin_Options::create( array(
 			'condition' => array( 'slider', '==', '1' ),
 		),
 
+		array(
+			'id'      => 'show_pages',
+			'type'    => 'checkbox_multiple',
+			'title'   => esc_html__( 'Show on pages', 'merchant' ),
+			'options' => array(
+				'product_single' => esc_html__( 'Product Single', 'merchant' ),
+				'cart'           => esc_html__( 'Cart', 'merchant' ),
+				'checkout'       => esc_html__( 'Checkout', 'merchant' ),
+			),
+			'default' => array( 'product_single' ),
+		),
 	),
 ) );
 
