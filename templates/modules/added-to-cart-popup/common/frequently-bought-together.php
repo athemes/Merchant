@@ -24,18 +24,18 @@ foreach ( $args['product_offers'] as $offer ) {
                 <div class="offer-product main-product">
                     <div class="image-wrapper">
                         <a href="<?php
-						echo esc_url( $args['popup_data']['product_url'] ); ?>">
+						echo esc_url( $offer['products'][0]['permalink'] ); ?>">
 							<?php
-							echo wp_kses_post( $args['popup_data']['product_image_large'] ); ?>
+							echo wp_kses_post( $offer['products'][0]['image_big'] ); ?>
                         </a>
                     </div>
                     <div class="product-summary">
                         <a href="<?php
-						echo esc_url( $args['popup_data']['product_url'] ); ?>">
+						echo esc_url( $offer['products'][0]['permalink'] ); ?>">
                             <h3><?php
-								echo esc_html( $args['popup_data']['product_name'] ); ?></h3></a>
+								echo esc_html( $offer['products'][0]['title'] ); ?></h3></a>
                         <div class="product-price"><?php
-							echo wp_kses_post( $args['popup_data']['product_price'] ); ?></div>
+							echo wp_kses_post( $offer['products'][0]['price_html'] ); ?></div>
                     </div>
                 </div>
             </div>

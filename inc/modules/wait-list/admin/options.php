@@ -57,6 +57,14 @@ Merchant_Admin_Options::create( array(
 			'default' => __( 'You have been successfully unsubscribed from our stock waitlist.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will show after clicking on unsubscribe link.', 'merchant' ),
 		),
+		array(
+			'id'            => 'exclude_products',
+			'type'          => 'products_selector',
+			'title'         => esc_html__( 'Exclude products', 'merchant' ),
+			'multiple'      => true,
+			'desc'          => esc_html__( 'Select the products that will be excluded from the waitlist.', 'merchant' ),
+			'allowed_types' => array( 'simple', 'variable' ),
+		),
 	),
 ) );
 
