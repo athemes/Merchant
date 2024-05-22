@@ -46,7 +46,8 @@ if ( get_option( 'page_comments' ) ) {
 
 	$comment_pages = count( get_comments( array(
 		'post_id' => $product_id,
-		'fields' => 'ids',
+		'fields'  => 'ids',
+		'status'  => 'approve',
 	) ) );
 
 	$comment_pages = ceil( $comment_pages / get_option( 'comments_per_page' ) );
@@ -216,7 +217,21 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
 			</div>
 
 			<div class="mrc-col mrc-right-col">
-				<a href="#" class="merchant-adv-review-write-button"><?php echo esc_html__( 'Write a Review', 'merchant' ); ?></a>
+                <?php
+                $btn_text  = esc_html__( 'Write a Review', 'merchant' );
+                $btn_link  = '#';
+                $btn_attrs = '';
+                $btn_class = 'merchant-adv-review-write-button';
+
+                if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+	                $btn_text = esc_html__( 'Log in to write a Review', 'merchant' );
+	                $btn_link = wp_login_url( get_permalink() );
+	                $btn_attrs = 'rel="nofollow"';
+                } else {
+                    $btn_class .= ' js-merchant-adv-review-write-button';
+                }
+                ?>
+				<a href="<?php echo esc_url( $btn_link ); ?>" class="<?php echo esc_attr( $btn_class ); ?>" <?php echo wp_kses_post( $btn_attrs ); ?>><?php echo esc_html( $btn_text ); ?></a>
 
 				<?php if ( $review_count > 0 ) : ?>
                     <form class="merchant-reviews-orderby-form" method="get" action="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>#reviews-stars">

@@ -12,7 +12,8 @@ global $product;
 
 $total_pages = count( get_comments( array(
 	'post_id' => $product->get_id(),
-	'fields' => 'ids',
+	'fields'  => 'ids',
+	'status'  => 'approve',
 ) ) );
 
 $total_pages = ceil( $total_pages / get_option( 'comments_per_page' ) );
