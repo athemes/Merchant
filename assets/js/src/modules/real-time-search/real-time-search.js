@@ -1,6 +1,6 @@
 /**
  * Real Time Search.
- * 
+ *
  */
 
 'use strict';
@@ -13,44 +13,44 @@ merchant.modules = merchant.modules || {};
 
 	merchant.modules.ajaxRealTimeSearch = {
 
-	  init: function() {
+		init: function() {
 
 	    var self   = this;
 	   	var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field');
 
 	    if ( fields.length ) {
 
-	      var _loop = function( i ) {
+			var _loop = function( i ) {
 
 	        fields[i].setAttribute('autocomplete', 'off');
 
 	        fields[i].addEventListener('keyup', self.debounce(function () {
-	          self.searchFormHandler(fields[i]);
+				self.searchFormHandler(fields[i]);
 	        }, 300));
 
 	        fields[i].addEventListener('focus', self.debounce(function () {
-	          self.searchFormHandler(fields[i]);
+				self.searchFormHandler(fields[i]);
 	        }, 300));
 
-	      };
+			};
 
-	      for (var i = 0; i < fields.length; i++) {
+			for (var i = 0; i < fields.length; i++) {
 	        _loop(i);
-	      }
+			}
 
-	      document.addEventListener('click', function( e ) {
+			document.addEventListener('click', function( e ) {
 	        if ( e.target.closest('.merchant-ajax-search-wrapper') === null ) {
-	          self.destroy();
+				self.destroy();
 	        }
-	      });
+			});
 	    }
 
-	  },
+		},
 
-	  searchFormHandler: function( el ) {
+		searchFormHandler: function( el ) {
 
 	    if ( el.value.length < 3 ) {
-	      return false;
+			return false;
 	    }
 
 	    var self  = this,
@@ -58,45 +58,45 @@ merchant.modules = merchant.modules || {};
 	        clist = el.classList,
 	        type  = clist.contains('wc-block-product-search-field') || clist.contains('wc-search-field') ? 'product' : 'post';
 
-      $.post( window.merchant.setting.ajax_url, {
+        $.post( window.merchant.setting.ajax_url, {
         action: 'ajax_search_callback',
         nonce: window.merchant.setting.nonce,
-	      type: type,
-	      search_term: term,
-	      posts_per_page: window.merchant.setting.ajax_search_results_amounth_per_search,
-	      orderby: window.merchant.setting.ajax_search_results_order_by,
-	      order: window.merchant.setting.ajax_search_results_order,
-	      display_categories: window.merchant.setting.ajax_search_results_display_categories,
-	      enable_search_by_sku: window.merchant.setting.ajax_search_results_enable_search_by_sku,
-      }, function( response ) {
+			type: type,
+			search_term: term,
+			posts_per_page: window.merchant.setting.ajax_search_results_amounth_per_search,
+			orderby: window.merchant.setting.ajax_search_results_order_by,
+			order: window.merchant.setting.ajax_search_results_order,
+			display_categories: window.merchant.setting.ajax_search_results_display_categories,
+			enable_search_by_sku: window.merchant.setting.ajax_search_results_enable_search_by_sku,
+        }, function( response ) {
 
-	      var wrapper = el.parentNode.getElementsByClassName('merchant-ajax-search-wrapper')[0];
+			var wrapper = el.parentNode.getElementsByClassName('merchant-ajax-search-wrapper')[0];
 
-	      if ( typeof wrapper === 'undefined' ) {
+			if ( typeof wrapper === 'undefined' ) {
 
 	        wrapper = document.createElement('div');
 	        wrapper.className = 'merchant-ajax-search-wrapper';
 	        el.parentNode.append(wrapper);
 	        el.parentNode.classList.add('merchant-ajax-search');
 
-	      }
+			}
 
-	      wrapper.innerHTML = response.output;
+			wrapper.innerHTML = response.output;
 
-	      var products_wrapper = document.querySelector('.merchant-ajax-search-products');
+			var products_wrapper = document.querySelector('.merchant-ajax-search-products');
 
-	      if ( products_wrapper !== null && self.scrollbarVisible(products_wrapper) ) {
+			if ( products_wrapper !== null && self.scrollbarVisible(products_wrapper) ) {
 	        products_wrapper.classList.add('has-scrollbar');
-	      }
+			}
 
-	      if ( self.elementIsOutOfScreenHorizontal(wrapper) ) {
+			if ( self.elementIsOutOfScreenHorizontal(wrapper) ) {
 	        wrapper.classList.add('merchant-reverse');
-	      }
+			}
 
 	    });
-	  },
+		},
 
-	  destroy: function() {
+		destroy: function() {
 
 		if( typeof document.querySelector( 'body.wp-admin' ) !== 'undefined' ) {
 			return false;
@@ -105,35 +105,35 @@ merchant.modules = merchant.modules || {};
 	    var wrappers = document.querySelectorAll('.merchant-ajax-search-wrapper');
 
 	    if (wrappers.length) {
-	      for (var i = 0; i < wrappers.length; i++) {
+			for (var i = 0; i < wrappers.length; i++) {
 	        wrappers[i].remove();
-	      }
+			}
 	    }
 
-	  },
+		},
 
-	  debounce: function( callback, wait ) {
+		debounce: function( callback, wait ) {
 	    var timeoutId = null;
 	    return function () {
-	      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+			for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
 	        args[_key] = arguments[_key];
-	      }
+			}
 
-	      window.clearTimeout(timeoutId);
-	      timeoutId = window.setTimeout(function () {
+			window.clearTimeout(timeoutId);
+			timeoutId = window.setTimeout(function () {
 	        callback.apply(null, args);
-	      }, wait);
+			}, wait);
 	    };
-	  },
+		},
 
-	  scrollbarVisible: function( el ) {
+		scrollbarVisible: function( el ) {
 	    return el.scrollHeight > el.clientHeight;
-	  },
+		},
 
-	  elementIsOutOfScreenHorizontal: function( el ) {
+		elementIsOutOfScreenHorizontal: function( el ) {
 	    var rect = el.getBoundingClientRect();
 	    return rect.x + rect.width > window.innerWidth;
-	  }
+		}
 
 	};
 
