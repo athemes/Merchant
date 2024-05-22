@@ -109,13 +109,6 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'enable_label_image_custom_shape',
-							'type'    => 'switcher',
-							'title'   => esc_html__( 'Use custom shape', 'merchant' ),
-							'default' => '0',
-						),
-
-						array(
 							'id'        => 'label_image_shape_custom',
 							'type'      => 'upload',
 							'drag_drop' => true,
