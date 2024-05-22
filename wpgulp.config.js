@@ -707,6 +707,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// pre orders preview
+	{
+		name: 'preOrdersAdminPreview',
+		src: './assets/js/src/modules/pre-orders/admin/preview.js',
+		destination: './assets/js/modules/pre-orders/admin',
+		file: 'preview'
+	},
+
 	// Quick View.
 	{
 		name: 'quickView',

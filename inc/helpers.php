@@ -528,3 +528,58 @@ if ( ! function_exists( 'merchant_get_share_link_title' ) ) {
 		return isset( $share_link_data[ $social_network ] ) ? $share_link_data[ $social_network ]['title'] : '';
 	}
 }
+
+if ( ! function_exists( 'merchant_timezone' ) ) {
+	/**
+	 * Get the WP timezone.
+	 *
+	 * @return string
+	 */
+	function merchant_timezone() {
+		/**
+		 * Filter the storewide sale timezone.
+		 *
+		 * @param string $timezone
+		 *
+		 * @since 1.9.9
+		 */
+		return apply_filters(
+			'merchant_storewide_sale_timezone',
+			wp_timezone_string()
+		);
+	}
+}
+
+if ( ! function_exists( 'merchant_get_current_timestamp' ) ) {
+	/**
+	 * Get the current timestamp.
+	 *
+	 * @return int|string
+	 */
+	function merchant_get_current_timestamp() {
+		$timezone = new DateTimeZone( merchant_timezone() );
+
+		// Get the timestamp
+		return ( new DateTime( 'now', $timezone ) )->getTimestamp();
+	}
+}
+
+if ( ! function_exists( 'merchant_convert_date_to_timestamp' ) ) {
+	/**
+	 * Convert date to timestamp.
+	 *
+	 * @param string $date The date to convert
+	 * @param string $format The format of the date
+	 *
+	 * @return int The timestamp
+	 */
+	function merchant_convert_date_to_timestamp( $date, $format = 'm-d-Y h:i A' ) {
+		$timezone    = new DateTimeZone( merchant_timezone() );
+		$date_object = DateTime::createFromFormat( $format, $date, $timezone ); // Create DateTime object with specified format and timezone
+		if ( false === $date_object ) {
+			return 0;
+		}
+
+		return $date_object->getTimestamp(); // Output the timestamp
+	}
+}

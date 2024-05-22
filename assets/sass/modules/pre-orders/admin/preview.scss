@@ -4,6 +4,12 @@
  *
  */
 
+.merchant-flexible-content-control.pre-orders-style {
+	.layout:not(.active) {
+		border-color: #5c5f62;
+	}
+}
+
 // Canvas.
 .merchant-module-page-preview-browser-inner {
 	display: flex;
