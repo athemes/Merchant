@@ -82,7 +82,7 @@ Merchant_Admin_Options::create( array(
 			'max'       => 30,
 			'step'      => 1,
 			'unit'      => '',
-			'default'   => 10,
+			'default'   => 6,
 		),
 
 		// Number of Columns.

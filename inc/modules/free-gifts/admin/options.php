@@ -81,7 +81,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'content',
 							'title'     => esc_html__( 'Spending goal target', 'merchant' ),
 							'content'   => '',
-							'desc'      => esc_html__( 'Configure the 3 states of the Gift offer. Personalize the text to maximize the conversion.', 'merchant' ),
+							'desc'      => esc_html__( 'Configure the text for the gift offer across three phases. Personalize the text at each phase to maximize conversions.', 'merchant' ),
 						),
 
 						array(
