@@ -36,7 +36,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'convert-more';
+		$this->module_section = 'reduce-abandonment';
 
 		// Module id.
 		$this->module_id = self::MODULE_ID;

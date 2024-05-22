@@ -47,6 +47,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
+				'wait-list' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wait-list' ),
+					'title' => esc_html__( 'Waitlist', 'merchant' ),
+					'desc' => esc_html__( 'Build waitlists for sold-out items and auto-notify potential customers when items are restocked', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/',
+				),
 				'product-bundles' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -71,14 +79,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y ', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/',
 				),
-				'storewide-sale' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
-					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
-					'desc' => esc_html__( 'Create discount campaigns for all your products, one or more categories, or a selection of products', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-storewide-sale/',
-				),
 				'volume-discounts' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -87,13 +87,13 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Offer discounts on larger quantity purchases to drive up average order value', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-bulk-discounts/',
 				),
-				'wait-list' => array(
+				'storewide-sale' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wait-list' ),
-					'title' => esc_html__( 'Waitlist', 'merchant' ),
-					'desc' => esc_html__( 'Build waitlists for sold-out items and auto-notify potential customers when items are restocked', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-waitlist/',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
+					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
+					'desc' => esc_html__( 'Create discount campaigns for all your products, one or more categories, or a selection of products', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-storewide-sale/',
 				),
 				'spending-goal' => array(
 					'pro' => true,
@@ -111,23 +111,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target or apply a coupon', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/',
 				),
-				'added-to-cart-popup' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
-					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
-					'desc' => esc_html__( 'Display a dynamic popup with product suggestions when items are added to the cart', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-added-to-cart-popup/',
-				),
 				// Increase Conversion Rates (Convert More).
-				'buy-now' => array(
-					'pro' => false,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-now' ),
-					'title' => esc_html__( 'Buy Now', 'merchant' ),
-					'desc' => esc_html__( 'Send your customers directly to checkout instead of the cart with Buy Now buttons', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
-				),
 				'product-labels' => array(
 					'pro' => false,
 					'section' => 'convert-more',
@@ -135,38 +119,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Product Labels', 'merchant' ),
 					'desc'  => esc_html__( 'Create customizable product labels with specific display conditions and color settings', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/product-labels/',
-				),
-				'animated-add-to-cart' => array(
-					'pro' => false,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-animated-add-to-cart' ),
-					'title' => esc_html__( 'Animated Add to Cart', 'merchant' ),
-					'desc' => esc_html__( 'Make your Add To Cart button stand out by adding an animation on mouse over or page load', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
-				),
-				'quick-view' => array(
-					'pro' => false,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-quick-view' ),
-					'title' => esc_html__( 'Quick View', 'merchant' ),
-					'desc' => esc_html__( 'Allows users to quickly view product details without leaving the current page', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/quick-view/',
-				),
-				'add-to-cart-text' => array(
-					'pro' => false,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-add-to-cart-text' ),
-					'title' => esc_html__( 'Add To Cart Text', 'merchant' ),
-					'desc' => esc_html__( 'Change your store\'s \'Add to Cart\' text for various product types, as well as individual products', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-add-to-cart-text/',
-				),
-				'sticky-add-to-cart' => array(
-					'pro' => true,
-					'section' => 'convert-more',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-sticky-add-to-cart' ),
-					'title' => esc_html__( 'Sticky Add To Cart', 'merchant' ),
-					'desc' => esc_html__( 'Display a sticky add to cart bar when visitors are scrolling on your product pages', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-sticky-add-to-cart/',
 				),
 				'countdown-timer' => array(
 					'pro' => true,
@@ -184,6 +136,22 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Let visitors know that stock is running low on products they are looking at', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-stock-scarcity/',
 				),
+				'added-to-cart-popup' => array(
+					'pro' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
+					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
+					'desc' => esc_html__( 'Display a dynamic popup with product suggestions when items are added to the cart', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-added-to-cart-popup/',
+				),
+				'sticky-add-to-cart' => array(
+					'pro' => true,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-sticky-add-to-cart' ),
+					'title' => esc_html__( 'Sticky Add To Cart', 'merchant' ),
+					'desc' => esc_html__( 'Display a sticky add to cart bar when visitors are scrolling on your product pages', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-sticky-add-to-cart/',
+				),
 				'checkout' => array(
 					'pro' => true,
 					'section' => 'convert-more',
@@ -191,6 +159,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title'        => esc_html__( 'Checkouts', 'merchant' ),
 					'desc'         => esc_html__( 'Choose from three different checkout layouts: Shopify-style, Multi-step or One-page', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-checkouts/',
+				),
+				'quick-view' => array(
+					'pro' => false,
+					'section' => 'convert-more',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-quick-view' ),
+					'title' => esc_html__( 'Quick View', 'merchant' ),
+					'desc' => esc_html__( 'Allows users to quickly view product details without leaving the current page', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/quick-view/',
 				),
 				'recently-viewed-products' => array(
 					'pro' => true,
@@ -204,6 +180,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				// Boost Revenue.
 
 				// Reduce Cart Abandonment.
+				'buy-now' => array(
+					'pro' => false,
+					'section' => 'reduce-abandonment',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-now' ),
+					'title' => esc_html__( 'Buy Now', 'merchant' ),
+					'desc' => esc_html__( 'Send your customers directly to checkout instead of the cart with Buy Now buttons', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/buy-now/',
+				),
 				'cart-count-favicon' => array(
 					'pro' => false,
 					'section' => 'reduce-abandonment',
@@ -220,14 +204,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Modify the browser tab\'s title when the visitor navigates away from your store', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-inactive-tab-message/',
 				),
-				'floating-mini-cart' => array(
-					'pro' => true,
-					'section' => 'reduce-abandonment',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
-					'title'        => esc_html__( 'Floating Mini Cart', 'merchant' ),
-					'desc'         => esc_html__( 'A cart icon will always be visible and a sliding cart when the customer clicks it', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-floating-mini-cart/',
-				),
 				'cart-reserved-timer' => array(
 					'pro' => true,
 					'section' => 'reduce-abandonment',
@@ -235,6 +211,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title'        => esc_html__( 'Cart Reserved Timer', 'merchant' ),
 					'desc'         => esc_html__( 'Create urgency by letting visitors know that the products in cart are reserved for a limited time', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-cart-reserved-timer/',
+				),
+				'floating-mini-cart' => array(
+					'pro' => true,
+					'section' => 'reduce-abandonment',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
+					'title'        => esc_html__( 'Floating Mini Cart', 'merchant' ),
+					'desc'         => esc_html__( 'A cart icon will always be visible and a sliding cart when the customer clicks it', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-floating-mini-cart/',
 				),
 				'side-cart' => array(
 					'pro' => true,
@@ -246,14 +230,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 				// Build Trust.
-				'trust-badges' => array(
-					'pro' => false,
-					'section' => 'build-trust',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-trust-badges' ),
-					'title' => esc_html__( 'Trust Badges', 'merchant' ),
-					'desc' => esc_html__( 'Reassure customers by showcasing different badge-shaped store benefits', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/',
-				),
 				'payment-logos' => array(
 					'pro' => false,
 					'section' => 'build-trust',
@@ -261,6 +237,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Payment Logos', 'merchant' ),
 					'desc' => esc_html__( 'Display the logos of the payment methods you accept on product pages', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/payment-logos/',
+				),
+				'trust-badges' => array(
+					'pro' => false,
+					'section' => 'build-trust',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-trust-badges' ),
+					'title' => esc_html__( 'Trust Badges', 'merchant' ),
+					'desc' => esc_html__( 'Reassure customers by showcasing different badge-shaped store benefits', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/trust-badges/',
 				),
 				'advanced-reviews' => array(
 					'pro' => true,
@@ -296,13 +280,21 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				),
 
 				// Improve User Experience.
-				'real-time-search' => array(
+				'animated-add-to-cart' => array(
 					'pro' => false,
 					'section' => 'improve-experience',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-real-time-search' ),
-					'title' => esc_html__( 'Real-Time Search', 'merchant' ),
-					'desc' => esc_html__( 'Help visitors instantly find the products they\'re looking for by using predictive search', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/real-time-search/',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-animated-add-to-cart' ),
+					'title' => esc_html__( 'Animated Add to Cart', 'merchant' ),
+					'desc' => esc_html__( 'Make your Add To Cart button stand out by adding an animation on mouse over or page load', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/animated-add-to-cart/',
+				),
+				'add-to-cart-text' => array(
+					'pro' => false,
+					'section' => 'improve-experience',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-add-to-cart-text' ),
+					'title' => esc_html__( 'Add To Cart Text', 'merchant' ),
+					'desc' => esc_html__( 'Change your store\'s \'Add to Cart\' text for various product types, as well as individual products', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-add-to-cart-text/',
 				),
 				'auto-external-links' => array(
 					'pro' => false,
@@ -312,13 +304,13 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Keep users from navigating away from your store by opening external links in a new browser tab', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/auto-external-links/',
 				),
-				'scroll-to-top-button' => array(
+				'real-time-search' => array(
 					'pro' => false,
 					'section' => 'improve-experience',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-scroll-to-top-button' ),
-					'title' => esc_html__( 'Scroll to Top Button', 'merchant' ),
-					'desc' => esc_html__( 'Help your customers get back easily to the top of the page with a single click', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/scroll-to-top-button/',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-real-time-search' ),
+					'title' => esc_html__( 'Real-Time Search', 'merchant' ),
+					'desc' => esc_html__( 'Help visitors instantly find the products they\'re looking for by using predictive search', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/real-time-search/',
 				),
 				'code-snippets' => array(
 					'pro' => false,
@@ -328,21 +320,13 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Add code snippets in WordPress without having to edit your theme\'s functions.php file ', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/code-snippets/',
 				),
-				'wishlist' => array(
-					'pro' => true,
+				'scroll-to-top-button' => array(
+					'pro' => false,
 					'section' => 'improve-experience',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wishlist' ),
-					'title' => esc_html__( 'Wishlist', 'merchant' ),
-					'desc' => esc_html__( 'Allow customers to easily save products they are interested in for later', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-wishlist/',
-				),
-				'product-swatches' => array(
-					'pro' => true,
-					'section' => 'improve-experience',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-swatches' ),
-					'title'        => esc_html__( 'Variation Swatches', 'merchant' ),
-					'desc'         => esc_html__( 'Display variable product options as customizable color/image icons, buttons, or dropdowns', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-variation-swatches/',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-scroll-to-top-button' ),
+					'title' => esc_html__( 'Scroll to Top Button', 'merchant' ),
+					'desc' => esc_html__( 'Help your customers get back easily to the top of the page with a single click', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/scroll-to-top-button/',
 				),
 				'address-autocomplete' => array(
 					'pro'          => true,
@@ -359,6 +343,30 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title'        => esc_html__( 'Size Chart', 'merchant' ),
 					'desc'         => esc_html__( 'Reduce returns and increase sales by showing a size chart on specific products or all products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-size-chart/',
+				),
+				'product-swatches' => array(
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-swatches' ),
+					'title'        => esc_html__( 'Variation Swatches', 'merchant' ),
+					'desc'         => esc_html__( 'Display variable product options as customizable color/image icons, buttons, or dropdowns', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-variation-swatches/',
+				),
+				'wishlist' => array(
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-wishlist' ),
+					'title' => esc_html__( 'Wishlist', 'merchant' ),
+					'desc' => esc_html__( 'Allow customers to easily save products they are interested in for later', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-wishlist/',
+				),
+				'product-navigation-links' => array(
+					'pro' => true,
+					'section' => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-navigation-links' ),
+					'title'        => esc_html__( 'Product Navigation Links', 'merchant' ),
+					'desc'         => esc_html__( 'Enable easy navigation from one product to the next with next/previous links', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-navigation-links/',
 				),
 				'product-video' => array(
 					'pro' => true,
@@ -383,14 +391,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title'        => esc_html__( 'Login Popup', 'merchant' ),
 					'desc'         => esc_html__( 'Allow users to log in with a simple pop up without navigating to a new page', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-login-popup/',
-				),
-				'product-navigation-links' => array(
-					'pro' => true,
-					'section' => 'improve-experience',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-navigation-links' ),
-					'title'        => esc_html__( 'Product Navigation Links', 'merchant' ),
-					'desc'         => esc_html__( 'Enable easy navigation from one product to the next with next/previous links', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-navigation-links/',
 				),
 				
 				// Protect Your Store.
