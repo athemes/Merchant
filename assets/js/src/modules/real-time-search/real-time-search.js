@@ -16,7 +16,7 @@ merchant.modules = merchant.modules || {};
 		init: function () {
 
 			var self = this;
-			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field');
+			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field, .woocommerce-product-search .search-field');
 
 			if (fields.length) {
 
@@ -137,6 +137,8 @@ merchant.modules = merchant.modules || {};
 
 	};
 
-	merchant.modules.ajaxRealTimeSearch.init();
+	$(document).ready(function () {
+		merchant.modules.ajaxRealTimeSearch.init();
+	});
 
 }(jQuery));
