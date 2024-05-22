@@ -13,12 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $settings   = isset( $args['settings'] ) ? $args['settings'] : array();
 $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
-
-//echo '<pre>';
-//print_r( 'all_offers' );
-//print_r( $args['offers'] );
-//echo '</pre>';
-//die;
 ?>
 
 <?php
