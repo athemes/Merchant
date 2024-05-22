@@ -1213,6 +1213,7 @@
                     $wrapper.append('<div class="merchant-upload-image"><i class="merchant-upload-remove dashicons dashicons-no-alt"></i><img src="' + thumb + '" /></div>');
 
                     $input.val(item.id).trigger('change');
+                    $this.find( '.merchant-upload-button-drag-drop' ).hide();
 
                     $this.find('.merchant-upload-remove').on('click', function (e) {
 
@@ -1221,18 +1222,28 @@
                         $(this).parent().remove();
 
                         $input.val('').trigger('change');
-
+                        $this.find( '.merchant-upload-button-drag-drop' ).show();
                     });
-
-
                 });
-
             });
         }
 
         $('.merchant-module-page-setting-field-upload:not(.template)').each(function () {
             initUploadField($(this))
         });
+
+        // Drag & Drag
+        const events = [ 'dragenter', 'dragover', 'dragleave', 'drop' ];
+        jQuery.each( events, function( index, eventName ) {
+            $( document).on( eventName, '.merchant-upload-button-drag-drop', function( e ) {
+                e.preventDefault();
+                e.stopPropagation();
+            } );
+        } );
+
+        $( document).on( 'dragenter', '.merchant-upload-button-drag-drop', function( e ) {
+            $( this ).closest('.merchant-module-page-setting-field-upload').find( '.merchant-upload-button' ).click();
+        } );
 
         const initSelectAjax = ($selectAjax) => {
             var $select = $selectAjax.find('select');
@@ -1621,41 +1632,3 @@ jQuery.fn.extend({
         return pathes.join(',');
     }
 });
-
-
-//
-jQuery( document ).ready( function(){
-    initMediaUpload()
-} )
-
-
-
-function initMediaUpload() {
-
-    const fileInput = document.getElementById( 'merchant-adv-review-images' );
-    const dropArea = document.querySelectorAll( '.merchant-upload-drop-area' );
-
-    dropArea.forEach( item => {
-
-        item.addEventListener('dragenter', function() {
-            // Implement drag-and-drop functionality
-            [ 'dragenter', 'dragover', 'dragleave', 'drop' ].forEach( eventName => {
-                item?.addEventListener( eventName, function ( e ) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }, false );
-            } );
-
-            // Handle file drop
-            item?.addEventListener( 'drop', function ( e ) {
-                let dt = e.dataTransfer;
-                let files = dt.files;
-
-                console.log( files );
-            }, false );
-
-        }, false)
-    })
-
-}
-//

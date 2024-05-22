@@ -17,10 +17,10 @@ $image_shapes = array();
 
 for ( $i = 1; $i <= 24; $i++ ) {
 	if ( $i <= 8 ) {
-		$text_shapes[ 'pl-text-shape-' . $i ] = MERCHANT_URI . 'assets/images/icons/product-labels/text-shape-' . $i . '.svg';
+		$text_shapes[ 'text-shape-' . $i ] = MERCHANT_URI . 'assets/images/icons/product-labels/text-shape-' . $i . '.svg';
 	}
 
-	$image_shapes[ 'pl-image-shape-' . $i ] = MERCHANT_URI . 'assets/images/icons/product-labels/image-shape-' . $i . '.svg';
+	$image_shapes[ 'image-shape-' . $i ] = MERCHANT_URI . 'assets/images/icons/product-labels/image-shape-' . $i . '.svg';
 }
 
 /**
@@ -95,7 +95,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'choices',
 							'title'     => esc_html__( 'Label shape', 'merchant' ),
 							'options'   => $text_shapes,
-							'default'   => 'pl-text-shape-1',
+							'default'   => 'text-shape-1',
 							'condition' => array( 'label_type', '==', 'text' ),
 						),
 
@@ -104,14 +104,16 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'choices',
 							'title'     => esc_html__( 'Label shape', 'merchant' ),
 							'options'   => $image_shapes,
-							'default'   => 'pl-image-shape-1',
+							'default'   => 'image-shape-1',
 							'condition' => array( 'label_type', '==', 'image' ),
 						),
 
 						array(
 							'id'        => 'label_image_shape_custom',
 							'type'      => 'upload',
+							'drag_drop' => true,
 							'title'     => esc_html__( 'Upload custom shape', 'merchant' ),
+							'label'     => esc_html__( 'Click to upload or drag and drop', 'merchant' ),
 							'condition' => array( 'label_type', '==', 'image' ),
 						),
 
@@ -122,7 +124,7 @@ Merchant_Admin_Options::create( array(
 							'min'     => 0,
 							'max'     => 250,
 							'step'    => 1,
-							'default' => 20,
+							'default' => 10,
 							'unit'    => 'px',
 						),
 
@@ -133,7 +135,7 @@ Merchant_Admin_Options::create( array(
 							'min'     => 0,
 							'max'     => 250,
 							'step'    => 1,
-							'default' => 20,
+							'default' => 10,
 							'unit'    => 'px',
 						),
 
@@ -142,7 +144,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'range',
 							'title'     => esc_html__( 'Label width', 'merchant' ),
 							'min'       => 1,
-							'max'       => 250,
+							'max'       => 1000,
 							'step'      => 1,
 							'default'   => 50,
 							'unit'      => 'px',
@@ -165,53 +167,51 @@ Merchant_Admin_Options::create( array(
 							'default'   => '#212121',
 							'condition' => array( 'label_type', '==', 'text' ),
 						),
+
 						array(
-							'id'      => 'shadow_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Shadow color', 'merchant' ),
-							'default' => '#3858E9',
+							'id'        => 'shape_radius',
+							'type'      => 'range',
+							'title'     => esc_html__( 'Shape radius', 'merchant' ),
+							'min'       => 0,
+							'max'       => 250,
+							'step'      => 1,
+							'unit'      => 'px',
+							'default'   => 5,
+							'condition' => array( 'label_type', '==', 'text' ),
 						),
 
 						array(
-							'id'      => 'shape_radius',
-							'type'    => 'range',
-							'title'   => esc_html__( 'Shape radius', 'merchant' ),
-							'min'     => 0,
-							'max'     => 35,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 5,
+							'id'        => 'font_size',
+							'type'      => 'range',
+							'title'     => esc_html__( 'Font size', 'merchant' ),
+							'min'       => 0,
+							'max'       => 250,
+							'step'      => 1,
+							'unit'      => 'px',
+							'default'   => 14,
+							'condition' => array( 'label_type', '==', 'text' ),
 						),
 
 						array(
-							'id'      => 'font_size',
-							'type'    => 'range',
-							'title'   => esc_html__( 'Font size', 'merchant' ),
-							'min'     => 0,
-							'max'     => 250,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 16,
-						),
-
-						array(
-							'id'      => 'font_style',
-							'type'    => 'select',
-							'title'   => esc_html__( 'Font style', 'merchant' ),
-							'options' => array(
+							'id'        => 'font_style',
+							'type'      => 'select',
+							'title'     => esc_html__( 'Font style', 'merchant' ),
+							'options'   => array(
 								'normal'      => esc_html__( 'Normal', 'merchant' ),
 								'italic'      => esc_html__( 'Italic', 'merchant' ),
 								'bold'        => esc_html__( 'Bold', 'merchant' ),
 								'bold_italic' => esc_html__( 'Bold Italic', 'merchant' ),
 							),
-							'default' => 'normal',
+							'default'   => 'normal',
+							'condition' => array( 'label_type', '==', 'text' ),
 						),
 
 						array(
-							'id'      => 'text_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Font color', 'merchant' ),
-							'default' => '#ffffff',
+							'id'        => 'text_color',
+							'type'      => 'color',
+							'title'     => esc_html__( 'Font color', 'merchant' ),
+							'default'   => '#ffffff',
+							'condition' => array( 'label_type', '==', 'text' ),
 						),
 
 						array(
@@ -228,6 +228,17 @@ Merchant_Admin_Options::create( array(
 								'by_category'       => esc_html__( 'Specific Category', 'merchant' ),
 							),
 							'default' => 'featured_products',
+						),
+
+						array(
+							'id'        => 'new_products_days',
+							'type'      => 'number',
+							'min'       => 0,
+							'step'      => 1,
+							'title'     => esc_html__( 'How long counts as new', 'merchant' ),
+							'desc'      => esc_html__( 'Set the number of days the product will be marked as ‘New’ after it has been created', 'merchant' ),
+							'default'   => 3,
+							'condition' => array( 'display_rules', '==', 'new_products' ),
 						),
 
 						array(
@@ -254,16 +265,6 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'        => 'new_products_days',
-							'type'      => 'number',
-							'min'       => 0,
-							'step'      => 1,
-							'title'     => esc_html__( 'How long counts as new', 'merchant' ),
-							'desc'      => esc_html__( 'Set the number of days the product will be marked as ‘New’ after it has been created', 'merchant' ),
-							'default'   => 3,
-							'condition' => array( 'display_rules', '==', 'new_products' ),
-						),
-						array(
 							'id'        => 'percentage_text',
 							'type'      => 'text',
 							'title'     => esc_html__( 'Sale Percentage', 'merchant' ),
@@ -279,11 +280,12 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'display_rules', '==', 'by_category' ),
 						),
 						array(
-							'id'        => 'product_ids',
-							'type'      => 'products_selector',
-							'multiple'  => true,
-							'desc'      => esc_html__( 'Select the products that will show the label.', 'merchant' ),
-							'condition' => array( 'display_rules', '==', 'specific_products' ),
+							'id'            => 'product_ids',
+							'type'          => 'products_selector',
+							'multiple'      => true,
+							'desc'          => esc_html__( 'Select the products that will show the label.', 'merchant' ),
+							'allowed_types' => array( 'simple', 'variable' ),
+							'condition'     => array( 'display_rules', '==', 'specific_products' ),
 						),
 
 					),
@@ -293,14 +295,8 @@ Merchant_Admin_Options::create( array(
 			'default'      => array(
 				array(
 					'layout'           => 'single-label',
-					'label'            => Merchant_Admin_Options::get( Merchant_Product_Labels::MODULE_ID, 'label_text', esc_html__( 'SALE', 'merchant' ) ),
-					'pages_to_display' => 'both',
-					'show_pages' => array( 'homepage', 'single', 'archive' ),// Todo
-					'show_devices' => array( 'desktop', 'mobile' ), // Todo
-					'display_rules'    => 'products_on_sale',
-					'percentage_text'  => Merchant_Admin_Options::get( Merchant_Product_Labels::MODULE_ID, 'percentage_text', '-{value}%' ),
-					'background_color' => Merchant_Admin_Options::get( Merchant_Product_Labels::MODULE_ID, 'background_color', '#212121' ),
-					'text_color'       => Merchant_Admin_Options::get( Merchant_Product_Labels::MODULE_ID, 'text_color', '#ffffff' ),
+					'label'            => esc_html__( 'SALE', 'merchant' ),
+					'display_rules'    => 'featured_products',
 				),
 			),
 		),
@@ -313,41 +309,6 @@ Merchant_Admin_Options::create( array(
 				'top-right' => esc_html__( 'Top right', 'merchant' ),
 			),
 			'default' => 'top-left',
-		),
-
-		array(
-			'id'      => 'label_text_transform',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Letter case', 'merchant' ),
-			'options' => array(
-				'uppercase'  => esc_html__( 'Uppercase', 'merchant' ),
-				'lowercase'  => esc_html__( 'Lowercase', 'merchant' ),
-				'capitalize' => esc_html__( 'Capitalize', 'merchant' ),
-				'none'       => esc_html__( 'None', 'merchant' ),
-			),
-			'default' => 'uppercase',
-		),
-
-		array(
-			'id'      => 'padding',
-			'type'    => 'range',
-			'title'   => esc_html__( 'Padding', 'merchant' ),
-			'min'     => 0,
-			'max'     => 250,
-			'step'    => 1,
-			'unit'    => 'px',
-			'default' => 8,
-		),
-
-		array(
-			'id'      => 'font-size',
-			'type'    => 'range',
-			'title'   => esc_html__( 'Font size', 'merchant' ),
-			'min'     => 0,
-			'max'     => 250,
-			'step'    => 1,
-			'unit'    => 'px',
-			'default' => 14,
 		),
 	),
 ) );
