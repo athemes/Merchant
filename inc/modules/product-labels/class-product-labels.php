@@ -47,12 +47,16 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'label_text'           => __( 'Spring Special', 'merchant' ),
-			'display_percentage'   => 0,
-			'percentage_text'      => '-{value}%',
-			'label_position'       => 'top-left',
-			'label_shape'          => 0,
-			'label_text_transform' => 'uppercase',
+			'layout' => 'single-label',
+            'labels' => array(
+	            array(
+		            'label_type'       => 'text',
+		            'label'            => esc_html__( 'SALE', 'merchant' ),
+                    'label_text_shape' => 'text-shape-1',
+                    'show_pages'       => array( 'homepage', 'single', 'archive' ),
+                    'show_devices'     => array( 'desktop', 'mobile' ),
+	            ),
+            ),
 		);
 
 		// Mount preview url.
@@ -102,10 +106,14 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
+        // Enqueue scripts
+		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
+
 		// Inject module content in the products.
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
 		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
+		add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 10, 3 );
 
 		// Custom CSS.
@@ -154,6 +162,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-labels.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
@@ -181,6 +190,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function enqueue_css() {
 		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/product-labels.min.css', array(), MERCHANT_VERSION );
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function enqueue_js() {
+		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/product-labels.min.js', array(), MERCHANT_VERSION, true );
 	}
 
 	/**
@@ -216,18 +234,12 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content() {
-		$settings = $this->get_module_settings();
-
-		$label_text = ! empty( $settings['display_percentage'] ) ? str_replace( '{value}', 20, $settings['percentage_text'] ) : $settings['label_text'];
-
 		?>
-
         <div class="merchant-product-labels-preview">
             <div class="image-wrapper">
-                <span class="merchant-label merchant-onsale-<?php
-                echo esc_attr( $settings['label_position'] ); ?> merchant-onsale-shape-<?php
-                echo esc_attr( $settings['label_shape'] ) ?>"><?php
-	                echo esc_html( $label_text ); ?></span>
+                <div class="merchant-product-labels" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
+                    <span class="merchant-label merchant-label-top-left"></span>
+                </div>
             </div>
             <h3><?php
 				echo esc_html__( 'Product Title', 'merchant' ); ?></h3>
@@ -239,64 +251,68 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Calculate the percentage and display it replacing the label text.
+	 * Get sale percentage & amount
 	 *
 	 * @return string label
 	 */
-	public function percentage_label( $product, $label ) {
-		$label_text = isset( $label['label'] ) ? $label['label'] : '';
-		if ( ! empty( $label['percentage_text'] ) ) {
-			if ( $product->is_type( 'variable' ) ) {
-				$percentages = array();
-				$prices      = $product->get_variation_prices();
+	public function get_product_sale_data( $product, $label ) {
+		$sale_data = array();
 
-				foreach ( $prices['price'] as $key => $price ) {
-					if ( $prices['regular_price'][ $key ] !== $price ) {
-						$percentages[] = round( 100 - ( floatval( $prices['sale_price'][ $key ] ) / floatval( $prices['regular_price'][ $key ] ) * 100 ) );
-					}
-				}
+        if ( $product->is_type( 'variable' ) ) {
+	        $amounts     = array();
+            $percentages = array();
+            $prices      = $product->get_variation_prices();
 
-				$percentage = max( $percentages );
-			} elseif ( $product->is_type( 'grouped' ) ) {
-				$percentages  = array();
-				$children_ids = $product->get_children();
+            foreach ( $prices['price'] as $key => $price ) {
+                if ( $prices['regular_price'][ $key ] !== $price ) {
+                    $regular_price = (float) $prices['regular_price'][ $key ];
+                    $sale_price    = (float) $prices['sale_price'][ $key ];
 
-				foreach ( $children_ids as $child_id ) {
-					$child_product = wc_get_product( $child_id );
-					$regular_price = (float) $child_product->get_regular_price();
-					$sale_price    = (float) $child_product->get_sale_price();
+	                $amounts[]     = $regular_price - $sale_price;
+	                $percentages[] = round( 100 - ( $sale_price / $regular_price * 100 ) );
+                }
+            }
 
-					if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
-						$percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
-					}
-				}
-				$percentage = max( $percentages );
-			} else {
-				$regular_price = (float) $product->get_regular_price();
-				$sale_price    = (float) $product->get_sale_price();
+	        $sale_data['amount']     = ! empty( $amounts ) ? max( $amounts ) : '';;
+	        $sale_data['percentage'] = ! empty( $percentages ) ? max( $percentages ) : '';
+        } elseif ( $product->is_type( 'grouped' ) ) {
+	        $amounts      = array();
+            $percentages  = array();
+            $children_ids = $product->get_children();
 
-				if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
-					$percentage = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
-				}
-			}
+            foreach ( $children_ids as $child_id ) {
+                $child_product = wc_get_product( $child_id );
+                $regular_price = (float) $child_product->get_regular_price();
+                $sale_price    = (float) $child_product->get_sale_price();
 
-			/**
-			 * Filter the product discount price.
-			 *
-			 * @param int        $percentage The product discount percentage.
-			 * @param WC_Product $product    The product object.
-			 * @param array      $label      The label data.
-			 *
-			 * @since 1.9.7
-			 */
-			$percentage = apply_filters( 'merchant_product_labels_product_discount_percentage', $percentage, $product, $label );
+                if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
+	                $amounts[]     = $regular_price - $sale_price;
+                    $percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+                }
+            }
 
-			$label_text = str_replace( '{value}', $percentage, Merchant_Translator::translate( $label['percentage_text'] ) );
-		}
+	        $sale_data['amount']     = ! empty( $amounts ) ? max( $amounts ) : '';
+	        $sale_data['percentage'] = ! empty( $percentages ) ? max( $percentages ) : '';
+        } else {
+            $regular_price = (float) $product->get_regular_price();
+            $sale_price    = (float) $product->get_sale_price();
 
-		$label['label'] = $label_text;
+            if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
+	            $sale_data['amount']     = $regular_price - $sale_price;
+	            $sale_data['percentage'] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+            }
+        }
 
-		return $label;
+        /**
+         * Filter the product sale dat .
+         *
+         * @param int        $percentage The product discount percentage.
+         * @param WC_Product $product    The product object.
+         * @param array      $label      The label data.
+         *
+         * @since 1.9.7
+         */
+        return apply_filters( 'merchant_product_labels_product_sale', $sale_data, $product, $label );
 	}
 
 	/**
@@ -306,19 +322,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 */
 	public function get_module_custom_css() {
 		$css = '';
-
-		// Border Radius.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_shape', 0, '.merchant-label', '--mrc-pl-border-radius', 'px' );
-
-		// Text Transform.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'label_text_transform', 'uppercase', '.merchant-label', '--mrc-pl-text-transform' );
-
-		// Padding.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'padding', 8, '.merchant-label', '--mrc-pl-padding', 'px' );
-
-		// Font Size.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'product-labels', 'font-size', 14, '.merchant-label', '--mrc-pl-font-size', 'px' );
-
 
 		return $css;
 	}
@@ -383,14 +386,35 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		echo wp_kses( $this->get_labels( $product, 'single' ), array(
 			'div'    => array(
 				'class' => array(),
+				'style' => array(),
 			),
 			'strong' => array(),
 			'span'   => array(
 				'class' => array(),
 				'style' => array(),
 			),
+            'img'   => array(
+				'src'    => true,
+				'width'  => true,
+				'height' => true,
+				'class'  => array(),
+				'style'  => array(),
+			),
 		) );
 	}
+
+	/**
+     * Add class to image wrapper in Product page.
+     *
+	 * @param $classes
+	 *
+	 * @return mixed
+	 */
+	public function single_product_image_gallery_classes( $classes ) {
+        $classes[] = 'merchant-product-labels-image-wrap';
+
+        return $classes;
+    }
 
 	/**
 	 * Loop product output.
@@ -403,11 +427,19 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		echo wp_kses( $this->get_labels( $product, 'archive' ), array(
 			'div'    => array(
 				'class' => array(),
+				'style' => array(),
 			),
 			'strong' => array(),
 			'span'   => array(
 				'class' => array(),
 				'style' => array(),
+			),
+			'img'   => array(
+				'src'    => true,
+				'width'  => true,
+				'height' => true,
+				'class'  => array(),
+				'style'  => array(),
 			),
 		) );
 	}
@@ -423,58 +455,119 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function get_labels( $product, $context = 'both' ) {
 		$settings            = $this->get_module_settings();
 		$product_labels_html = '';
+
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
-				if ( ! isset( $label['pages_to_display'] ) ) {
+				if ( ! isset( $label['show_pages'] ) || ! $this->show_label( $label ) ) {
 					continue;
 				}
-				if ( $label['pages_to_display'] !== 'both' ) {
-					if ( $label['pages_to_display'] === 'single' && $context !== 'single' ) {
-						continue;
-					}
-					if ( $label['pages_to_display'] === 'archive' && $context !== 'archive' ) {
+
+				$rule = $label['display_rules'] ?? 'featured_products';
+
+				if ( in_array( $rule, array( 'all_products', 'featured_products', 'products_on_sale', 'by_category', 'out_of_stock' ), true ) ) {
+					$excluded_product_ids = $label['excluded_products'] ?? array();
+					$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
+
+					if ( in_array( (int) $product->get_id(), $excluded_product_ids, true ) ) {
 						continue;
 					}
 				}
-				if ( isset( $label['display_rules'] ) ) {
-					switch ( $label['display_rules'] ) {
-						case 'featured_products':
-							if ( $this->is_featured( $product ) ) {
-								$product_labels_html .= $this->label( $label );
-							}
-							break;
-						case 'products_on_sale':
-							if ( $this->is_on_sale( $product ) ) {
-								$product_labels_html .= $this->label( $this->percentage_label( $product, $label ) );
-							}
-							break;
-						case 'by_category':
-							if ( isset( $label['product_cats'] ) && $this->is_in_category( $product, $label['product_cats'] ) ) {
-								$product_labels_html .= $this->label( $label );
-							}
-							break;
-						case 'out_of_stock':
-							if ( $this->is_out_of_stock( $product ) ) {
-								$product_labels_html .= $this->label( $label );
-							}
-							break;
-						case 'new_products':
-							if ( isset( $label['new_products_days'] ) && $this->is_new( $product, $label['new_products_days'] ) ) {
-								$product_labels_html .= $this->label( $label );
-							}
-							break;
 
-						case 'specific_products':
-							$product_ids = $label['product_ids'] ?? array();
-							$product_ids = ! is_array( $product_ids ) ? explode( ',', $product_ids ) : $product_ids;
-							$product_ids = array_map( 'intval', $product_ids );
+				switch ( $rule ) {
+					case 'featured_products':
+						if ( $this->is_featured( $product ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
 
-							if ( in_array( $product->get_id(), $product_ids, true ) ) {
-								$product_labels_html .= $this->label( $label );
-							}
-							break;
+					case 'products_on_sale':
+						if ( $this->is_on_sale( $product ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'by_category':
+						$categories   = $label['product_cats'] ?? array();
+						$categories   = is_array( $categories ) ? $categories : (array) $categories;
+
+                        if ( ! empty( $categories ) && $this->is_in_category( $product, $categories ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'out_of_stock':
+						if ( $this->is_out_of_stock( $product ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'new_products':
+						if ( isset( $label['new_products_days'] ) && $this->is_new( $product, $label['new_products_days'] ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'specific_products':
+						$product_ids = $label['product_ids'] ?? array();
+						$product_ids = ! is_array( $product_ids ) ? explode( ',', $product_ids ) : $product_ids;
+						$product_ids = array_map( 'intval', $product_ids );
+
+						if ( in_array( $product->get_id(), $product_ids, true ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'all_products':
+                        $product_labels_html .= $this->label( $label );
+						break;
+				}
+
+				if ( $product_labels_html ) {
+					$sale_data       = $this->is_on_sale( $product ) ? $this->get_product_sale_data( $product, $label ) : array();
+					$sale_amount     = wc_price( $sale_data['amount'] ?? '' );
+					$sale_percentage = ( $sale_data['percentage'] ?? '' ) . '%';
+
+                    $inventory     = $product->is_in_stock() ? esc_html__( 'In stock', 'merchant' ) : esc_html__( 'Sold out', 'merchant' );
+					$inventory_qty = $product->get_stock_quantity();
+
+                    // Replace {shortcodes} by real values.
+					$product_labels_html = str_replace(
+                        array(
+                            '{sale}',
+                            '{sale_amount}',
+                            '{inventory}',
+                            '{inventory_quantity}',
+                        ),
+						array(
+							$sale_percentage,
+							$sale_amount,
+							$inventory,
+							$inventory_qty,
+                        ),
+                        $product_labels_html
+                    );
+
+					$label_type     = $label['label_type'] ?? 'text';
+					$label_position = $label['label_position'] ?? 'top-left';
+
+					$styles = $this->get_shape_based_styles( $label );
+
+					$device_visibility_classes = '';
+
+					if ( isset( $label['show_devices'] ) ) {
+						foreach ( $label['show_devices'] as $device ) {
+							$device_visibility_classes .= ' show-on-' . $device;
+						}
 					}
+
+					$classes  = 'merchant-product-labels';
+					$classes .= ' position-' . $label_position;
+					$classes .= ' merchant-product-labels__' . $label_type;
+					$classes .= $label_type === 'text' ? ' merchant-product-labels__' . $label['label_text_shape'] ?? 'text-shape-1' : '';
+					$classes .= $device_visibility_classes;
+
+					return '<div class="' . esc_attr( $classes ) . '" style="' . merchant_array_to_css( $styles ) . '">' . $product_labels_html . '</div>';
 				}
 			}
 		} else {
@@ -482,13 +575,82 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return $this->legacy_product_label( $product );
 		}
 
-		if ( $product_labels_html ) {
-			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '">' . $product_labels_html . '</div>';
-		}
-
 		return '';
 	}
 
+	/**
+     * Get all styles for the current label
+     *
+	 * @param $label
+	 *
+	 * @return array
+	 */
+	public function get_shape_based_styles( $label ) {
+		$styles           = array();
+
+        if ( ! is_array( $label ) || empty( $label ) ) {
+            return $styles;
+        }
+
+		$label_position = $label['label_position'] ?? 'top-left';
+		$label_type     = $label['label_type'] ?? 'text';
+		$label_shape    = $label['label_text_shape'] ?? 'text-shape-1';
+
+		if ( $label_type === 'text' ) {
+			$styles['width']     = ( $label['label_width'] ?? 100 ) . 'px';
+			$styles['height']    = ( $label['label_height'] ?? 32 ) . 'px';
+			$styles['font-size'] = ( $label['font_size'] ?? 14 ) . 'px';
+
+			$font_style = $label['font_style'] ?? 'normal';
+
+            if ( strpos( $font_style, 'bold' ) !== false ) {
+				$styles['font-weight'] = 'bold';
+			}
+
+			if ( strpos( $font_style, 'italic' ) !== false ) {
+				$styles['font-style'] = 'italic';
+			}
+
+			$styles['background-color'] = $label['background_color'] ?? '#212121';
+			$styles['color']            = $label['text_color'] ?? '#ffffff';
+			$styles['border-radius']    = ( $label['shape_radius'] ?? 5 ) . 'px';
+		}
+
+		$styles['top']= ( $label['margin_y'] ?? 10 ) . 'px';
+		$styles[ ( $label_position === 'top-left' ) ? 'left' : 'right' ] = ( $label['margin_x'] ?? 10 ) . 'px';
+
+        return $styles;
+    }
+
+	/**
+     * Should show the label for current page.
+     *
+	 * @param $label
+	 *
+	 * @return bool
+	 */
+	public function show_label( $label ) {
+		$show       = false;
+        $show_pages = $label ['show_pages' ] ?? array();
+
+        if ( empty( $show_pages ) ) {
+            return $show;
+        }
+
+		if ( is_product() && in_array( 'single', $show_pages, true ) ) {
+			$show = true;
+		}
+
+		if ( in_array( 'archive', $show_pages, true ) && ( is_product_taxonomy() || is_shop() ) ) {
+			$show = true;
+		}
+
+		if ( in_array( 'homepage', $show_pages, true ) && is_front_page() ) {
+			$show = true;
+		}
+
+		return $show;
+	}
 
 	/**
 	 * Product label output.
@@ -542,9 +704,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 			$styles['background-color'] = isset( $settings['background_color'] ) ? $settings['background_color'] : '#212121';
 			$styles['color']            = isset( $settings['text_color'] ) ? $settings['text_color'] : '#ffffff';
-			$styles['text-transform']   = isset( $settings['label_text_transform'] ) ? $settings['label_text_transform'] : 'uppercase';
-			$styles['padding']          = isset( $settings['padding'] ) ? $settings['padding'] . 'px' : 8 . 'px';
-			$styles['font-size']        = isset( $settings['font-size'] ) ? $settings['font-size'] . 'px' : 14 . 'px';
 			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 8 . 'px';
 
 			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
@@ -561,21 +720,32 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function label( $label_data ) {
-		$label_position = Merchant_Admin_Options::get( self::MODULE_ID, 'label_position', 'top-left' );
-		$label_shape    = Merchant_Admin_Options::get( self::MODULE_ID, 'label_shape', 0 );
-		$styles         = array();
-		if ( ! empty( $label_data['background_color'] ) ) {
-			$styles['background-color'] = $label_data['background_color'];
-		}
-		if ( ! empty( $label_data['text_color'] ) ) {
-			$styles['color'] = $label_data['text_color'];
-		}
+		$html = '';
 		if ( empty( $label_data['label'] ) ) {
-			return '';
+			return $html;
 		}
-		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . ' merchant-label-shape-'
-				. esc_attr( $label_shape ) . '" style="' . merchant_array_to_css( $styles ) . '">'
-				. trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) ) . '</span>';
+
+		$label_position = $label_data['label_position'] ?? 'top-left';
+
+        $label_type = $label_data['label_type'] ?? 'text';
+
+        $styles = array();
+
+        if ( $label_type === 'text' ) {
+	        $html = trim( esc_html( Merchant_Translator::translate( $label_data['label'] ) ) );
+        } else {
+	        $styles['width']  = ( $label_data['label_width'] ?? 45 ) . 'px';
+	        $styles['height'] = ( $label_data['label_height'] ?? 45 ) . 'px';
+
+            $custom_shape_id = $label_data['label_image_shape_custom'] ?? false;
+            $shape_url       = $custom_shape_id ? wp_get_attachment_url( $custom_shape_id ) : MERCHANT_URI . 'assets/images/icons/' . self::MODULE_ID . '/' . ( $label_data['label_image_shape'] ?? 'image-shape-1' ) .'.svg';
+
+	        $html = '<img src="' . esc_url( $shape_url ) . '"/>';
+        }
+
+
+		$label = '<span class="merchant-label merchant-label-' . esc_attr( $label_position ) . '" style="' . merchant_array_to_css( $styles ) . '">'
+				. $html . '</span>';
 
 		/**
 		 * Filter the single product label.
@@ -600,18 +770,22 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Check if product is in category.
+	 * Check if product is in categories.
 	 *
 	 * @param $product WC_Product product object.
-	 * @param $slug    string category slug.
+	 * @param $slugs    array category slugs.
 	 *
 	 * @return bool
 	 */
-	private function is_in_category( $product, $slug ) {
+	private function is_in_category( $product, $slugs ) {
+		if ( ! is_array( $slugs ) ) {
+			$slugs = array( $slugs );
+		}
+
 		$terms = get_the_terms( $product->get_id(), 'product_cat' );
 		if ( $terms && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-				if ( $term->slug === $slug ) {
+				if ( in_array( $term->slug, $slugs, true ) ) {
 					return true;
 				}
 			}

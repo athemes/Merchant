@@ -858,6 +858,15 @@ const scripts = [
 		destination: './assets/js/modules/quick-social-links/admin',
 		file: 'preview'
 	},
+
+	// Product labels
+	{
+		name: 'productLabels',
+		src: './assets/js/src/modules/product-labels/product-labels.js',
+		destination: './assets/js/modules/product-labels/',
+		file: 'product-labels'
+	},
+
 	{
 		name: 'productLabelsAdmin',
 		src: './assets/js/src/modules/product-labels/admin/preview.js',
