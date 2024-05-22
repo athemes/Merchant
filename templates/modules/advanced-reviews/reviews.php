@@ -24,6 +24,7 @@ $product      = $args[ 'product' ];
 $product_id   = $product->get_id();
 $review_count = $product->get_review_count();
 $average      = $product->get_average_rating();
+$average      = floor( $average ) === ceil( $average ) ? intval( $average ) : number_format( $average, 1 );
 
 // Title tag
 $title_tag = $args[ 'title_tag' ] ?? 'h2';
@@ -45,45 +46,48 @@ if ( get_option( 'page_comments' ) ) {
 
 	$comment_pages = count( get_comments( array(
 		'post_id' => $product_id,
-		'fields' => 'ids',
+		'fields'  => 'ids',
+		'status'  => 'approve',
 	) ) );
 
-	$comment_pages = $comment_pages / get_option( 'comments_per_page' );
+	$comment_pages = ceil( $comment_pages / get_option( 'comments_per_page' ) );
 
-	$comments_args[ 'paged' ] = empty( $cpaged ) ? 1 : $cpaged;
+	$comments_args['product_id'] = $product_id;
+	$comments_args['cpage']      = empty( $cpaged ) ? 1 : $cpaged;
+	$comments_args['total']      = $comment_pages;
 }
 
 // Orderby
 switch ( $sort_orderby ) {
 	case 'newest':
-		$comments_args[ 'order' ]   = 'DESC';
-		$comments_args[ 'orderby' ] = 'comment_date_gmt';
+		$comments_args['order']   = 'DESC';
+		$comments_args['orderby'] = 'comment_date_gmt';
 		break;
 
 	case 'oldest':
-		$comments_args[ 'order' ]   = 'ASC';
-		$comments_args[ 'orderby' ] = 'comment_date_gmt';
+		$comments_args['order']   = 'ASC';
+		$comments_args['orderby'] = 'comment_date_gmt';
 		break;
 
 	case 'top-rated':
-		$comments_args[ 'order' ]   = 'DESC';
-		$comments_args[ 'orderby' ] = 'meta_value_num';
+		$comments_args['order']   = 'DESC';
+		$comments_args['orderby'] = 'meta_value_num';
 		// phpcs:disable
-		$comments_args[ 'meta_key' ] = 'rating';
+		$comments_args['meta_key'] = 'rating';
 		// phpcs:enable
 		break;
 
 	case 'low-rated':
-		$comments_args[ 'order' ]   = 'ASC';
-		$comments_args[ 'orderby' ] = 'meta_value_num';
+		$comments_args['order']   = 'ASC';
+		$comments_args['orderby'] = 'meta_value_num';
 		// phpcs:disable
-		$comments_args[ 'meta_key' ] = 'rating';
+		$comments_args['meta_key'] = 'rating';
 		// phpcs:enable
 		break;
 
 	case 'photo-first':
 		// phpcs:disable
-		$comments_args[ 'meta_query' ] = array(
+		$comments_args['meta_query'] = array(
 			'relation' => 'OR',
 			array(
 				'key'     => 'review_images',
@@ -94,7 +98,7 @@ switch ( $sort_orderby ) {
 				'compare' => 'NOT EXISTS',
 			),
 		);
-		$comments_args[ 'orderby' ] = array(
+		$comments_args['orderby'] = array(
 			'meta_value' => 'DESC',
 			'comment_date'   => 'DESC',
 		);
@@ -213,7 +217,21 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
 			</div>
 
 			<div class="mrc-col mrc-right-col">
-				<a href="#" class="merchant-adv-review-write-button"><?php echo esc_html__( 'Write a Review', 'merchant' ); ?></a>
+                <?php
+                $btn_text  = esc_html__( 'Write a Review', 'merchant' );
+                $btn_link  = '#';
+                $btn_attrs = '';
+                $btn_class = 'merchant-adv-review-write-button';
+
+                if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+	                $btn_text = esc_html__( 'Log in to write a Review', 'merchant' );
+	                $btn_link = wp_login_url( get_permalink() );
+	                $btn_attrs = 'rel="nofollow"';
+                } else {
+                    $btn_class .= ' js-merchant-adv-review-write-button';
+                }
+                ?>
+				<a href="<?php echo esc_url( $btn_link ); ?>" class="<?php echo esc_attr( $btn_class ); ?>" <?php echo wp_kses_post( $btn_attrs ); ?>><?php echo esc_html( $btn_text ); ?></a>
 
 				<?php if ( $review_count > 0 ) : ?>
                     <form class="merchant-reviews-orderby-form" method="get" action="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>#reviews-stars">
@@ -235,37 +253,17 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
 	    <?php merchant_get_template_part( Merchant_Advanced_Reviews::MODULE_TEMPLATES_PATH, 'reviews-list', $args ); ?>
     </div>
 
-	<?php
-    if ( count( $_comments ) > 0 ) :
-		echo '<div class="merchant-adv-reviews-footer">';
-			if ( $comment_pages > 1 && get_option( 'page_comments' ) ) {
-				if ( $args['pagination_type'] === 'default' ) {
-					echo '<nav class="woocommerce-pagination merchant-pagination merchant-adv-reviews-pagination">';
-					merchant_get_template_part( 'modules/advanced-reviews', 'pagination-links', array_merge(
-						$args,
-						array(
-							'pagination_args' => array(
-								'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
-								'next_text' => is_rtl() ? '&larr;' : '&rarr;',
-								'type'      => 'list',
-							),
-							'cpages'     => $comment_pages,
-							'product_id' => $product_id,
-						)
-					) );
-					echo '</nav>';
-                }
-
-				/**
-				 * Hook 'merchant_after_shop_reviews_adv_pagination'
-				 * 
-				 * @since 1.0
-				 */
-				do_action( 'merchant_after_shop_reviews_adv_pagination' );
-			}
-		echo '</div>';
-	endif;
-    ?>
+    <div class="merchant-adv-reviews-footer">
+        <?php
+        if ( count( $_comments ) > 0 ) :
+            /**
+             * Hook 'merchant_after_shop_reviews_adv_pagination'
+             *
+             * @since 1.0
+             */
+            do_action( 'merchant_after_shop_reviews_adv_pagination', array_merge( $args, $comments_args ) );
+        endif;
+        ?>
 </section>
 
 <?php

@@ -60,7 +60,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-frequently-bought-together' ),
 					'title' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-					'desc' => esc_html__( 'Create bundles of related products and offer them at a discount or at the regular price', 'merchant' ),
+					'desc' => esc_html__( 'Create bundles of related products that customers can add to their cart with just one click', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-frequently-bought-together/',
 				),
 				'buy-x-get-y' => array(
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'added-to-cart-popup' ),
 					'title' => esc_html__( 'Added To Cart Popup', 'merchant' ),
-					'desc' => esc_html__( 'Display a dynamic popup with product suggestion when items are added to the cart', 'merchant' ),
+					'desc' => esc_html__( 'Display a dynamic popup with product suggestions when items are added to the cart', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-added-to-cart-popup/',
 				),
 				// Increase Conversion Rates (Convert More).
@@ -267,7 +267,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'build-trust',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-advanced-reviews' ),
 					'title' => esc_html__( 'Advanced Reviews', 'merchant' ),
-					'desc' => esc_html__( 'Let customers run your marketing by collecting and displaying advanced reviews', 'merchant' ),
+					'desc' => esc_html__( 'Enhance your customer reviews with advanced features including photo uploads and more', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-advanced-reviews/',
 				),
 				'reasons-to-buy' => array(

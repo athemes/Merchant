@@ -20,9 +20,8 @@ $_comments = $args['comments'] ?? array();
                             <div class="mrc-col">
                                 <div class="merchant-reviews-author-wrapper">
 									<?php
-									$comment_rating_value = isset( $args['comment_rating'] ) ? $args['comment_rating'] : get_comment_meta( $_comment->comment_ID, 'rating', true ); ?>
-
-									<?php if ( wc_review_ratings_enabled() ) : ?>
+									$comment_rating_value = (int) ( $args['comment_rating'] ?? get_comment_meta( $_comment->comment_ID, 'rating', true ) );
+                                    if ( $comment_rating_value && wc_review_ratings_enabled() ) : ?>
                                         <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated <?php echo esc_attr( $comment_rating_value ); ?>.00 out of 5">
                                                 <span style="width: <?php echo esc_attr( ( ( $comment_rating_value / 5 ) * 100 ) ); ?>%;">
                                                     <?php

@@ -3,43 +3,44 @@
 /**
  * Template for advanced reviews pagination links.
  * 
- * $args module settings.
+ * @var $args array template args
  * 
  * @since 1.0
  * 
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
 global $wp_rewrite;
 
-if ( ! is_singular() ) {
-	return;
-}
+$current_page = $args['cpage'] ?? 1;
+$total_pages  = ceil( $args[ 'total' ] ?? 1 );
 
-$_page = get_query_var( 'cpage' );
-if ( ! $_page ) {
-	$_page = 1;
-}
-
-
-$max_page = ceil( $args[ 'cpages' ] );
-$defaults = array(
+$pagination_args = array(
 	'base'         => add_query_arg( 'cpage', '%#%' ),
 	'format'       => '',
-	'total'        => $max_page,
-	'current'      => $_page,
+	'current'      => $current_page,
+	'total'        => $total_pages,
 	'echo'         => true,
-	'type'         => 'plain',
+	'type'         => 'list',
+	'prev_text'    => is_rtl() ? '&rarr;' : '&larr;',
+	'next_text'    => is_rtl() ? '&larr;' : '&rarr;',
 	'add_fragment' => '#comments',
 );
+
+/**
+ * Hook: `merchant_adv_pagination_args`
+ *
+ * @since 2.0.0
+ */
+$pagination_args = apply_filters( 'merchant_adv_pagination_args', $pagination_args );
+
 if ( $wp_rewrite->using_permalinks() ) {
 	$defaults['base'] = user_trailingslashit( trailingslashit( get_permalink( $args[ 'product_id' ] ) ) . $wp_rewrite->comments_pagination_base . '-%#%', 'commentpaged' );
 }
-
-$pagination_args = wp_parse_args( $args[ 'pagination_args' ], $defaults );
-$page_links      = paginate_links( $pagination_args );
-
-echo wp_kses_post( $page_links );
+?>
+<nav class="woocommerce-pagination merchant-pagination merchant-adv-reviews-pagination" data-current-page="<?php echo esc_attr( $current_page ); ?>" data-total-pages="<?php echo esc_attr( $total_pages ); ?>">
+	<?php echo wp_kses_post( paginate_links( $pagination_args ) ); ?>
+</nav>

@@ -72,7 +72,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				'photos_limit'                    => 6,
 				'review_options'                  => 'image_and_text',
 				'review_images_carousel'          => 0,
-				'carousel_title'                  => esc_html__( 'Customer Images', 'merchant' ),
+				'carousel_title'                  => esc_html__( 'Review images', 'merchant' ),
 				'hook_order'                      => 10,
 				'review_images_carousel_total'    => 12,
 				'review_images_carousel_per_page' => 3,
