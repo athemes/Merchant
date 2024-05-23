@@ -81,9 +81,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
 
-			// Render module essencial instructions before the module page body content.
-			add_action( 'merchant_admin_after_module_page_page_header', array( $this, 'admin_module_essencial_instructions' ) );
-
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
@@ -91,6 +88,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
+
+		add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
@@ -232,7 +231,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 * @return array $setting The merchant global object setting parameter.
 	 */
 	public function localize_script( $setting ) {
-		$module_settings = $this->get_module_settings();
+		//$module_settings = $this->get_module_settings();
 
 		$setting['pre_orders'] = true;
 		$rule                  = $this->current_rule();
@@ -243,36 +242,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		}
 
 		return $setting;
-	}
-
-	/**
-	 * Render module essencial instructions.
-	 *
-	 * @return void
-	 */
-	public function admin_module_essencial_instructions() { ?>
-        <div class="merchant-module-page-settings">
-            <div class="merchant-module-page-setting-box merchant-module-page-setting-box-style-2">
-                <div class="merchant-module-page-setting-title"><?php
-					echo esc_html__( 'Tag Pre-Orders', 'merchant' ); ?></div>
-                <div class="merchant-module-page-setting-fields">
-                    <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
-                        <div class="merchant-module-page-setting-field-inner">
-                            <div class="merchant-tag-pre-orders">
-                                <i class="dashicons dashicons-info"></i>
-                                <p><?php
-									echo esc_html__( 'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.',
-										'merchant' ); ?><?php
-									printf( '<a href="%s" target="_blank">%s</a>', esc_url( admin_url( 'edit.php?post_type=shop_order' ) ),
-										esc_html__( 'View Pre-Orders', 'merchant' ) ); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-		<?php
 	}
 
 	/**
@@ -432,6 +401,39 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		}
 
 		return array();
+	}
+
+	/**
+	 * Help banner.
+	 *
+	 * @return void
+	 */
+	public function help_banner( $module_id ) {
+		if ( $module_id === 'pre-orders' ) {
+			?>
+            <div class="merchant-module-page-setting-fields">
+                <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+                    <div class="merchant-module-page-setting-field-inner">
+                        <div class="merchant-tag-pre-orders">
+                            <i class="dashicons dashicons-info"></i>
+                            <p>
+								<?php
+								echo esc_html__(
+									'Pre-orders captured by Merchant are tagged with "MerchantPreOrder" and can be found in your WooCommerce Order Section.',
+									'merchant'
+								);
+								printf(
+									'<a href="%1s" target="_blank">%2s</a>',
+									esc_url( admin_url( 'edit.php?post_type=shop_order' ) ),
+									esc_html__( 'View Pre-Orders', 'merchant' )
+								);
+								?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php
+		}
 	}
 }
 

@@ -10,79 +10,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+/**
+ * Hook functionality before including modules options.
+ *
+ * @since 1.9.8
+ */
+do_action( 'merchant_admin_before_include_modules_options', Merchant_Pre_Orders::MODULE_ID );
+
 Merchant_Admin_Options::create(
 	array(
 		'title'  => esc_html__( 'Pre-order Rule', 'merchant' ),
 		'module' => Merchant_Pre_Orders::MODULE_ID,
 		'fields' => array(
-			array(
-				'id'      => 'modes',
-				'type'    => 'select',
-				'title'   => esc_html__( 'Pre-order Modes', 'merchant' ),
-				'options' => array(
-					'only_pre_orders'                => esc_html__( 'Allow only pre-orders', 'merchant' ),
-					'unified_order'                  => esc_html__( 'Treat the whole order as pre-order', 'merchant' ),
-					'separate_order_for_pre_orders'  => esc_html__( 'Generate separate orders for each pre-order product', 'merchant' ),
-					'group_pre_order_into_one_order' => esc_html__( 'Generate two separate orders, one for pre-orders and one for in-stock products', 'merchant' ),
-				),
-				'default' => 'unified_order',
-			),
-			array(
-				'id'          => 'helping_instructions_only_pre_orders',
-				'type'        => 'info_block',
-				'description' => esc_html__( 'Use this mode if you want to only allow your customers to either choose pre-order products or available ones.', 'merchant' ),
-				'conditions'  => array(
-					'terms' => array(
-						array(
-							'field'    => 'modes', // field ID
-							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'only_pre_orders', // can be a single value or an array of string/number/int
-						),
-					),
-				),
-			),
-			array(
-				'id'          => 'helping_instructions_unified_order',
-				'type'        => 'info_block',
-				'description' => esc_html__( 'Use this mode if you want to treat the whole order as a pre-order if at least one product is a pre-order.', 'merchant' ),
-				'conditions'  => array(
-					'terms' => array(
-						array(
-							'field'    => 'modes', // field ID
-							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'unified_order', // can be a single value or an array of string/number/int
-						),
-					),
-				),
-			),
-			array(
-				'id'          => 'helping_instructions_separate_order_for_pre_orders',
-				'type'        => 'info_block',
-				'description' => esc_html__( 'Use this mode if you want to generate separate orders for each pre-order product.', 'merchant' ),
-				'conditions'  => array(
-					'terms' => array(
-						array(
-							'field'    => 'modes', // field ID
-							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'separate_order_for_pre_orders', // can be a single value or an array of string/number/int
-						),
-					),
-				),
-			),
-			array(
-				'id'          => 'helping_instructions_group_pre_order_into_one_order',
-				'type'        => 'info_block',
-				'description' => esc_html__( 'Use this mode if you want to generate two separate orders, one for pre-orders and one for in-stock products.', 'merchant' ),
-				'conditions'  => array(
-					'terms' => array(
-						array(
-							'field'    => 'modes', // field ID
-							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'group_pre_order_into_one_order', // can be a single value or an array of string/number/int
-						),
-					),
-				),
-			),
 			array(
 				'id'           => 'rules',
 				'type'         => 'flexible_content',
@@ -315,6 +254,74 @@ Merchant_Admin_Options::create(
 				'default'      => array(
 					array(
 						'layout' => 'rule-details',
+					),
+				),
+			),
+			array(
+				'id'      => 'modes',
+				'type'    => 'select',
+				'title'   => esc_html__( 'Pre-order Modes', 'merchant' ),
+				'options' => array(
+					'only_pre_orders'                => esc_html__( 'Allow only pre-orders', 'merchant' ),
+					'unified_order'                  => esc_html__( 'Treat the whole order as pre-order', 'merchant' ),
+					'separate_order_for_pre_orders'  => esc_html__( 'Generate separate orders for each pre-order product', 'merchant' ),
+					'group_pre_order_into_one_order' => esc_html__( 'Generate two separate orders, one for pre-orders and one for in-stock products', 'merchant' ),
+				),
+				'default' => 'unified_order',
+			),
+			array(
+				'id'          => 'helping_instructions_only_pre_orders',
+				'type'        => 'info_block',
+				'description' => esc_html__( 'Use this mode if you want to only allow your customers to either choose pre-order products or available ones.', 'merchant' ),
+				'conditions'  => array(
+					'terms' => array(
+						array(
+							'field'    => 'modes', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'only_pre_orders', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'          => 'helping_instructions_unified_order',
+				'type'        => 'info_block',
+				'description' => esc_html__( 'Use this mode if you want to treat the whole order as a pre-order if at least one product is a pre-order.', 'merchant' ),
+				'conditions'  => array(
+					'terms' => array(
+						array(
+							'field'    => 'modes', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'unified_order', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'          => 'helping_instructions_separate_order_for_pre_orders',
+				'type'        => 'info_block',
+				'description' => esc_html__( 'Use this mode if you want to generate separate orders for each pre-order product.', 'merchant' ),
+				'conditions'  => array(
+					'terms' => array(
+						array(
+							'field'    => 'modes', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'separate_order_for_pre_orders', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'          => 'helping_instructions_group_pre_order_into_one_order',
+				'type'        => 'info_block',
+				'description' => esc_html__( 'Use this mode if you want to generate two separate orders, one for pre-orders and one for in-stock products.', 'merchant' ),
+				'conditions'  => array(
+					'terms' => array(
+						array(
+							'field'    => 'modes', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'group_pre_order_into_one_order', // can be a single value or an array of string/number/int
+						),
 					),
 				),
 			),
