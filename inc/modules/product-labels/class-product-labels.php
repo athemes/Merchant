@@ -463,7 +463,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					continue;
 				}
 
-				$rule = $label['display_rules'] ?? 'featured_products';
+				$rule = $label['display_rules'] ?? 'products_on_sale';
 
 				if ( in_array( $rule, array( 'all_products', 'featured_products', 'products_on_sale', 'by_category', 'out_of_stock' ), true ) ) {
 					$excluded_product_ids = $label['excluded_products'] ?? array();

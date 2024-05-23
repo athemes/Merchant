@@ -117,7 +117,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-labels' ),
 					'title' => esc_html__( 'Product Labels', 'merchant' ),
-					'desc'  => esc_html__( 'Create customizable product labels with specific display conditions and color settings', 'merchant' ),
+					'desc'  => esc_html__( 'Create customizable product labels with display conditions and color settings', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/product-labels/',
 				),
 				'quick-view' => array(

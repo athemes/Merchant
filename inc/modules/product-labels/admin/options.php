@@ -38,7 +38,7 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Label', 'merchant' ),
 			'layouts'      => array(
 				'single-label' => array(
-					'title'       => esc_html__( 'Products label', 'merchant' ),
+					'title'       => esc_html__( 'Product label', 'merchant' ),
 					'title-field' => 'label-title',
 					'fields'      => array(
 						array(
@@ -46,7 +46,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Label name', 'merchant' ),
 							'desc'    => esc_html__( 'Internal label name. This is not visible to customers.', 'merchant' ),
 							'type'    => 'text',
-							'default' => esc_html__( 'Products label', 'merchant' ),
+							'default' => esc_html__( 'Product label', 'merchant' ),
 						),
 
 						array(
@@ -101,7 +101,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'        => 'label_image_shape',
 							'type'      => 'choices',
-							'title'     => esc_html__( 'Label shape', 'merchant' ),
+							'title'     => esc_html__( 'Image label', 'merchant' ),
 							'options'   => $image_shapes,
 							'default'   => 'image-shape-1',
 							'condition' => array( 'label_type', '==', 'image' ),
@@ -111,7 +111,7 @@ Merchant_Admin_Options::create( array(
 							'id'        => 'label_image_shape_custom',
 							'type'      => 'upload',
 							'drag_drop' => true,
-							'title'     => esc_html__( 'Upload custom shape', 'merchant' ),
+							'title'     => esc_html__( 'Upload custom image label', 'merchant' ),
 							'label'     => esc_html__( 'Click to upload or drag and drop', 'merchant' ),
 							'condition' => array( 'label_type', '==', 'image' ),
 						),
@@ -237,7 +237,7 @@ Merchant_Admin_Options::create( array(
 								'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
 								'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
 							),
-							'default' => 'featured_products',
+							'default' => 'products_on_sale',
 						),
 
 						array(
