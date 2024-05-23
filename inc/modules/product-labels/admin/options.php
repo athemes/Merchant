@@ -53,7 +53,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'label_type',
 							'type'    => 'buttons_content',
 							'title'   => '',
-							'desc'    => esc_html__( 'Move your mouse over each option to see the animations. Click on one of the buttons to select that animation.', 'merchant' ),
+							'desc'    => '',
 							'options' => array(
 								'text'    => array(
 									'title' => esc_html__( 'Text', 'merchant' ),
