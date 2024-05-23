@@ -135,7 +135,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string The human readable date.
 	 */
 	private function convert_timestamp_to_human_readable( $timestamp ) {
-		$date = new \DateTime();
+		$timezone = new DateTimeZone( merchant_timezone() );
+		$date     = new \DateTime( 'now', $timezone );
 		$date->setTimestamp( $timestamp );
 
 		return $date->format( self::DATE_TIME_FORMAT );
