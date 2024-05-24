@@ -73,30 +73,32 @@ class Merchant_Product_Bundles extends Merchant_Add_Module {
      *
      * @return void
      */
-	public function help_banner() {
-		?>
-        <div class="merchant-module-page-setting-fields">
-            <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
-                <div class="merchant-module-page-setting-field-inner">
-                    <div class="merchant-tag-pre-orders">
-                        <i class="dashicons dashicons-info"></i>
-                        <p>
-						<?php
-						echo esc_html__(
-							'To create a new product bundle (simple or variable), go to Products > Add New menu in the left sidebar of your WordPress admin area.',
-							'merchant'
-						);
-						printf(
-							'<a href="%1s" target="_blank">%2s</a>',
-							esc_url( admin_url( 'post-new.php?post_type=product' ) ),
-							esc_html__( 'Add New Bundle', 'merchant' )
-						);
-						?></p>
+	public function help_banner( $module_id ) {
+		if ( $module_id === 'product-bundles' ) {
+			?>
+            <div class="merchant-module-page-setting-fields">
+                <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+                    <div class="merchant-module-page-setting-field-inner">
+                        <div class="merchant-tag-pre-orders">
+                            <i class="dashicons dashicons-info"></i>
+                            <p>
+								<?php
+								echo esc_html__(
+									'To create a new product bundle (simple or variable), go to Products > Add New menu in the left sidebar of your WordPress admin area.',
+									'merchant'
+								);
+								printf(
+									'<a href="%1s" target="_blank">%2s</a>',
+									esc_url( admin_url( 'post-new.php?post_type=product' ) ),
+									esc_html__( 'Add New Bundle', 'merchant' )
+								);
+								?></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-		<?php
+			<?php
+		}
 	}
 
 	/**

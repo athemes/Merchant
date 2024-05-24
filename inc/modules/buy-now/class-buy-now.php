@@ -36,7 +36,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		parent::__construct();
 
 		// Module section.
-		$this->module_section = 'convert-more';
+		$this->module_section = 'reduce-abandonment';
 
 		// Module id.
 		$this->module_id = self::MODULE_ID;
@@ -317,7 +317,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
-		if ( ! $product->is_type( 'simple' ) ) {
+		if ( ! in_array( $product->get_type(), array( 'simple', 'merchant_pro_bundle' ), true ) ) {
+			return;
+		}
+
+		if ( $product->is_type( 'merchant_pro_bundle' ) && $product->has_variables() ) {
 			return;
 		}
 

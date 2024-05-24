@@ -20,12 +20,20 @@ body.merchant-gift-was-claimed {
 		&--top_right,
 		&--top_left {
 			top: var(--merchant-free-gifts-distance);
+
+			.merchant-free-gifts-widget-button {
+				top: 0;
+			}
 		}
 
 
 		&--bottom_right,
 		&--bottom_left {
 			bottom: var(--merchant-free-gifts-distance);
+
+			.merchant-free-gifts-widget-button {
+				bottom: 0;
+			}
 		}
 
 		&--top_right,
@@ -141,7 +149,6 @@ body.merchant-gift-was-claimed {
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
-	top: 0;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	
@@ -203,9 +210,9 @@ body .merchant-free-gifts-claim-form {
 		height: 35px;
 		min-height: auto;
 		line-height: 1;
-		border: 1px solid #eeeeee;
-		padding: 5px 8px;
-		border-radius: 5px;
+		border: 1px solid #eeeeee !important;
+		padding: 5px 8px !important;
+		border-radius: 5px !important;
 	}
 
 	.merchant-free-gifts-claim-button {
@@ -249,7 +256,7 @@ body .merchant-free-gifts-claim-form {
 }
 
 .rtl{
-	.merchant-free-gifts-widget-offer-product{
+	.merchant-free-gifts-widget-offer-product {
 		img{
 			margin-right: 0;
 			margin-left: 10px;

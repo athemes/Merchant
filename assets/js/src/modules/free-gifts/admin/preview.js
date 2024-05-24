@@ -89,6 +89,10 @@
 
             $( '.merchant-free-gifts-widget' ).addClass( 'merchant-free-gifts-widget--' + value );
 
+            // Set distance value based on select field selection
+            let distanceValue = ( value === 'bottom_left' || value === 'bottom_right' ) ? 100 : 150;
+            $( '.merchant-field-distance input' ).val( distanceValue );
+            $( '.merchant-free-gifts-widget' ).css( '--merchant-free-gifts-distance', distanceValue + 'px' );
         } );
     }
 

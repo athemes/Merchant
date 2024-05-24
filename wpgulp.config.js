@@ -707,6 +707,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// pre orders preview
+	{
+		name: 'preOrdersAdminPreview',
+		src: './assets/js/src/modules/pre-orders/admin/preview.js',
+		destination: './assets/js/modules/pre-orders/admin',
+		file: 'preview'
+	},
+
 	// Quick View.
 	{
 		name: 'quickView',
@@ -858,6 +866,15 @@ const scripts = [
 		destination: './assets/js/modules/quick-social-links/admin',
 		file: 'preview'
 	},
+
+	// Product labels
+	{
+		name: 'productLabels',
+		src: './assets/js/src/modules/product-labels/product-labels.js',
+		destination: './assets/js/modules/product-labels/',
+		file: 'product-labels'
+	},
+
 	{
 		name: 'productLabelsAdmin',
 		src: './assets/js/src/modules/product-labels/admin/preview.js',

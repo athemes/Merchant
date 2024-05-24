@@ -134,7 +134,7 @@ Merchant_Admin_Options::create(
 				'id'      => 'review_images_carousel',
 				'type'    => 'switcher',
 				'title'   => __( 'Review images carousel', 'merchant' ),
-				'desc'    => __( 'Display first image from each review as carousel to captivate and assist shoppers in their decision-making process.', 'merchant' ),
+				'desc'    => __( 'Display the first image from each review in a carousel to engage shoppers and help their decision-making process.', 'merchant' ),
 				'default' => 0,
 			),
 
@@ -143,7 +143,7 @@ Merchant_Admin_Options::create(
 				'id'        => 'review_images_carousel_total',
 				'type'      => 'range',
 				'title'     => __( 'Total images', 'merchant' ),
-				'desc'      => __( 'Controls the number of images to be displayed in the slider.', 'merchant' ),
+				'desc'      => __( 'Controls the total number of images to be displayed in the slider.', 'merchant' ),
 				'min'       => 1,
 				'step'      => 1,
 				'unit'      => '',
@@ -170,7 +170,7 @@ Merchant_Admin_Options::create(
 				'id'      => 'carousel_title',
 				'type'    => 'text',
 				'title'   => __( 'Carousel Title', 'merchant' ),
-				'default' => __( 'Customer Images', 'merchant' ),
+				'default' => __( 'Review images', 'merchant' ),
 			),
 
 			// Hook Order.

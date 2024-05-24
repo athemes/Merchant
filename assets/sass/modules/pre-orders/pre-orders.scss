@@ -8,10 +8,10 @@
 	margin-bottom: 15px;
 }
 
-.woocommerce {
-	
+.woocommerce.single-product {
+
 	.merchant-pre-ordered-product {
-		
+
 		.add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
 		.product_type_grouped:not(.merchant_buy_now_button):not(.merchant-quick-view-button),
 		.single_add_to_cart_button:not(.merchant_buy_now_button):not(.merchant-quick-view-button) {

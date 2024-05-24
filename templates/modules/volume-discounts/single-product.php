@@ -16,6 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="merchant-volume-discounts">
 	<?php
+    $in_cart = 'false';
+	$quantity = 0;
+	if ( ! empty( $args['in_cart'] ) ) {
+		$in_cart = 'true';
+	}
+    if ( ! empty( $args['product_cart_quantity'] ) ) {
+        $quantity = $args['product_cart_quantity'];
+    }
 	foreach ( $args['discount_tiers'] as $discount_tier ) :
 		if ( isset( $discount_tier['discount_type'], $discount_tier['save_label'], $discount_tier['item_text'], $discount_tier['total_text'] ) ) {
 			$discount = $discount_tier['discount_type'] === 'percentage_discount'
@@ -23,12 +31,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 				: $discount_tier['discount'];
 
             $discount_percent = ( $discount_tier['discount'] ?? 0 ) . '%';
-            $discount_qty     = (int) ( $discount_tier['quantity'] ?? 1 );
+            $discount_qty = (int) ( $discount_tier['quantity'] ?? 1 );
 
 			$discounted_price = $args['product_price'] - $discount;
 			$total_discount   = intval( $discount_qty ) * $discount;
 			$total_price      = intval( $discount_qty ) * $discounted_price;
-            ?>
+			$clickable        = '';
+			if ( ! is_admin() ) {
+				$product = wc_get_product( get_the_ID() );
+				if ( $quantity < $discount_qty && ! $product->is_type( 'variable' ) ) {
+					$clickable = ' clickable';
+				}
+			}
+			?>
 			<?php
 			if ( isset( $discount_tier['table_title'] ) && ! empty( $discount_tier['table_title'] ) ): ?>
                 <div class="merchant-volume-discounts-title" style="<?php
@@ -38,7 +53,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo esc_html( Merchant_Translator::translate( $discount_tier['table_title'] ) ) ?></div>
 			<?php
 			endif; ?>
-            <div class="merchant-volume-discounts-item" style="<?php
+            <div class="merchant-volume-discounts-item<?php echo esc_attr( $clickable )?>" title="Add offer to cart" data-in-cart="<?php
+            echo esc_attr( $in_cart ) ?>" data-product-id="<?php echo esc_attr(get_the_ID())?>" data-offer-quantity="<?php echo esc_attr( $discount_qty )?>" style="<?php
 			echo isset( $discount_tier['table_item_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['table_item_bg_color'] . ';' ) : '';
 			echo isset( $discount_tier['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['table_item_border_color'] . ';' ) : '';
 			echo isset( $discount_tier['table_item_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['table_item_text_color'] . ';' ) : ''; ?>">

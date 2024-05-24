@@ -129,7 +129,8 @@ class Merchant_Add_Module {
 		}
 
 		// Parse settings with defaults.
-		$settings = wp_parse_args( $settings[ $this->module_id ], $defaults );
+		// Todo: check if recursive_parse_args() works for all modules and remove the condition.
+		$settings = $this->module_id === 'product-labels' ? $this->recursive_parse_args( $settings[ $this->module_id ], $defaults ) : wp_parse_args( $settings[ $this->module_id ], $defaults );
 
 		return $settings;
 	}
@@ -248,5 +249,28 @@ class Merchant_Add_Module {
 		 * @since 1.9.3
 		 */
 		return apply_filters( "merchant_{$this->module_id}_is_shortcode_enabled", Merchant_Admin_Options::get( $this->module_id, 'use_shortcode', false ) );
+	}
+
+	/**
+	 * Recursively merges user-defined arguments into default arguments.
+	 *
+	 * @param $args
+	 * @param $defaults
+	 *
+	 * @return mixed
+	 */
+	private function recursive_parse_args( $args, $defaults ) {
+		$result = $defaults;
+
+		foreach ( $args as $key => $value ) {
+			// If the value is an array and the corresponding default is also an array, merge them recursively.
+			if ( is_array( $value ) && isset( $result[ $key ] ) && is_array( $result[ $key ] ) ) {
+				$result[ $key ] = $this->recursive_parse_args( $value, $result[ $key ] );
+			} else {
+				$result[ $key ] = $value;
+			}
+		}
+
+		return $result;
 	}
 }

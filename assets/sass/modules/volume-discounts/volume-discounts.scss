@@ -18,6 +18,10 @@
   background-color: #fcf0f1;
   border-radius: 5px;
   color: #3c434a;
+
+  &.clickable{
+    cursor: pointer;
+  }
 }
 
 .merchant-volume-discounts-item ul {

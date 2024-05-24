@@ -1,9 +1,9 @@
-=== Merchant ===
+=== Merchant - All-in-One WooCommerce Plugin for Pre-Orders, Product Labels, Buy Now, Quick View, and More ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.9
+Stable tag: 1.9.10
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -12,11 +12,11 @@ Merchant is a modular WooCommerce toolkit focused on conversions. Features inclu
 
 == Description ==
 
-**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE, FULLY INTEGRATED PLUGIN**
+**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE PLUGIN**
 
 On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
 
-[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one, performance-optimized plugin.
+[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one plugin.
 
 [TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
@@ -216,6 +216,20 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.10 =
+* Added - Product Labels — Image option for labels now available, including predefined shapes and the ability to upload custom shapes.
+* Added - Product Labels — Enhanced control over label styling.
+* Added - Product Labels — Option to visible Labels across various pages (Homepage, Single, Archive).
+* Added - Product Labels — Labels now supported on different device types (Desktop, Mobile).
+* Added - Product Labels — Support for multiple categories.
+* Added - Product Labels — Option to exclude products from all products and specific categories.
+* Fixed - Real-Time Search — Resolved issue where the search was not working with the Kadence theme.
+* Fixed - Real-Time Search — Fixed compatibility issues with the search component from the Impreza theme.
+* Changed - Pre-Orders — Updated pre-order module logic to support multiple rules with discounts.
+* Added - Pre-Orders — Added modes for mixing pre-order and non-pre-order products in the cart.
+* Added - Pre-Orders — Start and end dates for scheduling pre-order campaigns.
+* Added - Pre-Orders — Campaign availability conditions based on selected users/roles.
+
 = 1.9.9 =
 * Changed - Conditional changes in some modules.
 
