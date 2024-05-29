@@ -29,8 +29,8 @@ foreach ( $args['offers'] as $offer ) :
 	$spending_text_0       = $offer['spending_text_0'] ?? '';
 	$spending_text_1_to_99 = $offer['spending_text_1_to_99'] ?? '';
 	$spending_text_100     = $offer['spending_text_100'] ?? '';
-    $text_not_claimed      = $offer['text_not_claimed'] ?? '';
-	$text_after_claimed    = $offer['text_after_claimed'] ?? '';
+    $text_before_claim     = $offer['text_before_claim'] ?? '';
+	$text_after_claim      = $offer['text_after_claim'] ?? '';
 
 	$rules      = $offer['rules_to_apply'] ?? '';
 	$offer_type = $offer['offer_type'] ?? '';
@@ -118,9 +118,9 @@ foreach ( $args['offers'] as $offer ) :
 
 	// Different text based on whether the gift has been claimed or not.
 	if ( ! empty( $offer['is_gift_claimed'] ) ) {
-		$spending_text = $text_after_claimed;
+		$spending_text = $text_after_claim;
 	} elseif ( $is_cart_page && $show_claim_button ) {
-		$spending_text = $text_not_claimed;
+		$spending_text = $text_before_claim;
 	}
     ?>
     <div class="merchant-free-gifts-widget-offer">

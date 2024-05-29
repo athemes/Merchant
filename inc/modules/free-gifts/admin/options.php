@@ -114,14 +114,14 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'text_not_claimed',
+							'id'      => 'text_before_claim',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Reminder to claim the gift on the cart page', 'merchant' ),
 							'default' => esc_html__( 'Don\'t forget to claim your free gift before checking out!', 'merchant' ),
 						),
 
 						array(
-							'id'      => 'text_after_claimed',
+							'id'      => 'text_after_claim',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Gift claimed message', 'merchant' ),
 							'default' => esc_html__( 'Your free gift has been added to your cart. Thank you for shopping with us!', 'merchant' ),
