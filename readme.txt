@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.10
+Stable tag: 1.9.11
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -216,6 +216,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.11 =
+* Fixed - Product Labels - Images under the Image Label field weren't fitting properly in their boxes.
+* Fixed - Product Labels - Uncaught error: call to undefined function when Merchant Pro is not active.
+
 = 1.9.10 =
 * Added - Product Labels — Image option for labels now available, including predefined shapes and the ability to upload custom shapes.
 * Added - Product Labels — Enhanced control over label styling.
