@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $settings   = isset( $args['settings'] ) ? $args['settings'] : array();
 $cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
-?>
 
-<?php
+$is_cart_page = wp_doing_ajax() ? filter_var( $_POST['is_cart_page'] ?? false, FILTER_VALIDATE_BOOLEAN ) : is_cart(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+
 foreach ( $args['offers'] as $offer ) :
 	if ( empty( $offer['product'] ) ) {
 		continue;
@@ -29,6 +29,8 @@ foreach ( $args['offers'] as $offer ) :
 	$spending_text_0       = $offer['spending_text_0'] ?? '';
 	$spending_text_1_to_99 = $offer['spending_text_1_to_99'] ?? '';
 	$spending_text_100     = $offer['spending_text_100'] ?? '';
+    $text_before_claim     = $offer['text_before_claim'] ?? '';
+	$text_after_claim      = $offer['text_after_claim'] ?? '';
 
 	$rules      = $offer['rules_to_apply'] ?? '';
 	$offer_type = $offer['offer_type'] ?? '';
@@ -108,10 +110,17 @@ foreach ( $args['offers'] as $offer ) :
 		$applied_coupons = WC()->cart->get_applied_coupons();
         $is_coupon_added = in_array( $coupon, $applied_coupons, true );
 
-		$show_claim_button =  $is_coupon_added && empty( $offer['is_gift_claimed'] );
+		$show_claim_button = $is_coupon_added && empty( $offer['is_gift_claimed'] );
 
         /* Translators: 1. Amount */
 		$spending_text = $is_coupon_added ? $spending_text_100 : sprintf(  __( 'Use %s coupon to get this product', 'merchant' ), $coupon );
+	}
+
+	// Different text based on whether the gift has been claimed or not.
+	if ( ! empty( $offer['is_gift_claimed'] ) ) {
+		$spending_text = $text_after_claim;
+	} elseif ( $is_cart_page && $show_claim_button ) {
+		$spending_text = $text_before_claim;
 	}
     ?>
     <div class="merchant-free-gifts-widget-offer">

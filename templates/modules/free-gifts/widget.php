@@ -29,4 +29,3 @@ $fg_classes .= ' merchant-free-gifts-widget--' . ( $settings['position'] ?? 'top
         </div>
     </div>
 </div>
-
