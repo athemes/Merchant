@@ -1731,6 +1731,12 @@ body.merchant-module-disabled {
       box-shadow: none;
     }
   }
+
+  .merchant-module-page-setting-field-inner {
+    &:empty {
+      display: none;
+    }
+  }
 }
 
 .merchant-info-block,
