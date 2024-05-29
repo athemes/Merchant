@@ -60,7 +60,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-product-bundles' ),
 					'title' => esc_html__( 'Product Bundles', 'merchant' ),
-					'desc' => esc_html__( 'Create bundles of products to be sold together', 'merchant' ),
+					'desc' => esc_html__( 'Create bundles of products to be sold together and boost your average order value', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-product-bundles/',
 				),
 				'frequently-bought-together' => array(
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-buy-x-get-y' ),
 					'title' => esc_html__( 'Buy X, Get Y', 'merchant' ),
-					'desc' => esc_html__( 'When product X is purchased, give a discount on product Y ', 'merchant' ),
+					'desc' => esc_html__( 'Create offers where purchasing a specific quantity of Product X triggers a discount on Product Y', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/',
 				),
 				'volume-discounts' => array(

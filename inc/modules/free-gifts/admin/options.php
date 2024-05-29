@@ -81,7 +81,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'content',
 							'title'     => esc_html__( 'Spending goal target', 'merchant' ),
 							'content'   => '',
-							'desc'      => esc_html__( 'Configure the text for the gift offer across three phases. Personalize the text at each phase to maximize conversions.', 'merchant' ),
+							'desc'      => esc_html__( 'Configure the text for the gift offer across five phases. Personalize the text at each phase to maximize conversions.', 'merchant' ),
 						),
 
 						array(
@@ -111,6 +111,20 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'text',
 							'title'   => esc_html__( 'At 100%', 'merchant' ),
 							'default' => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
+						),
+
+						array(
+							'id'      => 'text_before_claim',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Reminder to claim the gift on the cart page', 'merchant' ),
+							'default' => esc_html__( 'Don\'t forget to claim your free gift before checking out!', 'merchant' ),
+						),
+
+						array(
+							'id'      => 'text_after_claim',
+							'type'    => 'text',
+							'title'   => esc_html__( 'Gift claimed message', 'merchant' ),
+							'default' => esc_html__( 'Your free gift has been added to your cart. Thank you for shopping with us!', 'merchant' ),
 						),
 					),
 				),

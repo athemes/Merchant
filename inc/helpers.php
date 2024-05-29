@@ -583,3 +583,21 @@ if ( ! function_exists( 'merchant_convert_date_to_timestamp' ) ) {
 		return $date_object->getTimestamp(); // Output the timestamp
 	}
 }
+
+/**
+ * Parses a list of product IDs
+ * @return array
+ */
+if ( ! function_exists( 'merchant_parse_product_ids' ) ) {
+	function merchant_parse_product_ids( $product_ids ) {
+		$parsed_ids = $product_ids ?? array();
+
+		// Convert to array if it's not already an array
+		$parsed_ids = ! is_array( $parsed_ids ) ? explode( ',', $parsed_ids ) : $parsed_ids;
+
+		// Convert all elements to integers
+		$parsed_ids = array_map( 'intval', $parsed_ids );
+
+		return $parsed_ids;
+	}
+}
