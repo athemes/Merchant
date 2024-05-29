@@ -62,10 +62,6 @@
 				max-width: calc(12.5% + 10px);
 			}
 		}
-
-		figure img {
-			width: 100%;
-		}
 	}
 
 	.merchant-choices-label_image_shape {
@@ -97,5 +93,9 @@
 			padding: 10px;
 			justify-content: center;
 		}
+	}
+
+	figure img {
+		width: 100%;
 	}
 }
