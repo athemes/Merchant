@@ -174,3 +174,86 @@ button.button.merchant-bogo-add-to-cart {
 		left: 5px;
 	}
 }
+
+.bogo-cart-item-offer__container {
+	border: 1px solid #eee;
+	padding: 10px;
+	border-radius: 5px;
+	box-sizing: border-box;
+	background-color: #fcfcfc;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	&.is-variable {
+		.product-details {
+			.description {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	.bogo-cart-item-offer__row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-left: -5px;
+		margin-right: -5px;
+
+		.column {
+			padding-right: 5px;
+			padding-left: 5px;
+			//height: 55px;
+		}
+
+		.column_1 {
+			flex: 1;
+		}
+
+		.column_2 {
+			flex: 2;
+		}
+
+		.column_3 {
+			flex: 3;
+		}
+
+		.column_4 {
+			flex: 4;
+		}
+
+		.product_image {
+			max-width: 60px;
+			justify-content: center;
+			display: flex;
+			flex-direction: column;
+
+			img {
+				width: 100px;
+			}
+		}
+
+		.product-details {
+			.variation-select {
+				font-size: 12px;
+				padding: 7px;
+				padding-right: 20px
+			}
+		}
+
+		.add-to-cart {
+			justify-content: center;
+			display: flex;
+			flex-direction: column;
+
+			.add-to-cart-button {
+				padding: 10px 14px;
+				font-size: 12px;
+			}
+		}
+	}
+}
