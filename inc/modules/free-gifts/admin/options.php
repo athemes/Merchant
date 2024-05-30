@@ -61,6 +61,42 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_apply', '==', 'product' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 						),
+
+						array(
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'customers' => esc_html__( 'Selected Users', 'merchant' ),
+								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to users with these roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Users', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'user',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'condition' => array( 'user_condition', '==', 'customers' ),
+						),
+
 						'amount' => array(
 							'id'      => 'amount',
 							'title'   => esc_html__( 'Spending goal', 'merchant' ),
@@ -68,6 +104,7 @@ Merchant_Admin_Options::create( array(
 							'append'  => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
 							'default' => 100,
 						),
+
 						array(
 							'id'            => 'product',
 							'type'          => 'products_selector',
