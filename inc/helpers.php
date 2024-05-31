@@ -616,7 +616,7 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 		$is_logged_in = is_user_logged_in();
 		$current_user = $is_logged_in ? wp_get_current_user() : null;
 
-		$condition = $args['condition'] ?? 'all';
+		$condition = $args['user_condition'] ?? 'all';
 
 		switch ( $condition ) {
 			case 'all':
@@ -631,7 +631,7 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 				break;
 
 			case 'roles':
-				$roles = $args['roles'] ?? array();
+				$roles = $args['user_condition_roles'] ?? array();
 				$role  = $current_user->roles[0] ?? '';
 
 				if ( in_array( $role, $roles, true ) ) {
@@ -640,7 +640,7 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 				break;
 
 			case 'customers':
-				$customers_id = $args['customers'] ?? array();
+				$customers_id = $args['user_condition_users'] ?? array();
 				$customers_id = array_map( 'intval', $customers_id );
 				$customer_id  = (int) ( $current_user->ID ?? 0 );
 
