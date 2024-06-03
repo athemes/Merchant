@@ -8,15 +8,13 @@ Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Merchant is a modular WooCommerce toolkit focused on conversions. Features include Buy Now buttons, Product Labels, Trust Badges, and more.
+Enhance your WooCommerce store with 40+ modules including Pre-Orders, Product Labels, Buy Now, Quick View & more
 
 == Description ==
 
-**ALL ESSENTIAL ECOMMERCE FEATURES IN A SINGLE PLUGIN**
+**A WOOCOMMERCE TOOLKIT FOR MODERN STORES**
 
-On average, WooCommerce store owners rely on 20+ plugins to run their sites. But using so many plugins can be expensive, put a drag on site performance, and lead to compatibility issues between plugins.
-
-[Merchant](https://athemes.com/merchant/) solves these problems by consolidating all of the features a modern store needs into one plugin.
+[Merchant](https://athemes.com/merchant/) is an all-in-one WooCommerce plugin that offers over 40 powerful modules designed to enhance your store and boost your revenue.
 
 [TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
@@ -79,7 +77,7 @@ With these 15 modules, you can boost your store’s sales, reduce cart abandonme
 
 ### MORE MODULES (25+) IN MERCHANT PRO
 
-[Merchant Pro](https://athemes.com/merchant/#pricing) packs in all the must-have eCommerce features you need to run your store successfully. 
+[Merchant Pro](https://athemes.com/merchant/#features) packs in all the must-have eCommerce features you need to run your store successfully. 
 
 **1. BOOST REVENUE**
 
@@ -157,7 +155,7 @@ Rest assured, Merchant Pro comes with a 30-day money-back guarantee. If you’re
 Even though Merchant will work with any theme, if you combine it with a good WooCommerce theme, you can be confident that you are giving your shoppers the best experience possible. [Botiga](https://wordpress.org/themes/botiga/) is a fast WooCommerce theme with endless customization options that pairs perfectly with Merchant. Give them both a try - you won’t be disappointed! 
 
 **Backed by a trusted team**
-Merchant is brought to you by [aThemes](https://athemes.com/), a WordPress product company, trusted by more than 150K+ happy users.
+Merchant is brought to you by [aThemes](https://athemes.com/), a WordPress product company with 750+ 5-star reviews and 100k+ users.
 
 **Documentation and Support**
 - To learn how to use Merchant you can check our [documentation](https://docs.athemes.com/documentation/merchant/).
