@@ -37,9 +37,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
-								'product'    => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Product categories', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
+								'product'    => esc_html__( 'Specific products', 'merchant' ),
+								'categories' => esc_html__( 'Specific categories', 'merchant' ),
 							),
 							'default' => 'all',
 						),
@@ -60,6 +60,15 @@ Merchant_Admin_Options::create( array(
 							'desc'      => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
 							'condition' => array( 'rules_to_apply', '==', 'product' ),
 							'allowed_types' => array( 'simple', 'variable' ),
+						),
+
+						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this offer.', 'merchant' ),
+							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
 						),
 
 						array(

@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$settings   = isset( $args['settings'] ) ? $args['settings'] : array();
-$cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
+$settings = isset( $args['settings'] ) ? $args['settings'] : array();
+//$cart_total = $args['cart_total'] ?? WC()->cart->get_subtotal();
 
 $is_cart_page = wp_doing_ajax() ? filter_var( $_POST['is_cart_page'] ?? false, FILTER_VALIDATE_BOOLEAN ) : is_cart(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 
@@ -93,6 +93,7 @@ foreach ( $args['offers'] as $offer ) :
 				break;
 
 			case 'all':
+				$cart_total = $offer['cart_total_all'] ?? 0;
 				if ( $cart_total >= $goal_amount ) {
 					$spending_text = $spending_text_100;
 				} elseif ( $cart_total > 0 ) {
