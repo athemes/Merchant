@@ -715,10 +715,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 					$parent_order = wc_get_order( $parent_order_id );
 
 					if ( $parent_order->get_status() === 'completed' ) {
-						$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
+						$order->update_status( 'processing', '[Merchant Pre Orders] ' );
 					}
-				} elseif ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
-					$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
+				} elseif ( $order->payment_complete() ) {
+					$order->update_status( 'processing', '[Merchant Pre Orders] ' );
 				}
 			}
 		}
