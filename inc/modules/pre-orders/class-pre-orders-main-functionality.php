@@ -882,7 +882,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return array
 	 */
 	public function add_pre_orders_order_statuses( $order_statuses ) {
-		$order_statuses['wc-pre-ordered'] = esc_html__( 'Pre Ordered', 'merchant' );
+		$order_statuses['wc-pre-ordered'] = esc_html__( 'Pre-Ordered', 'merchant' );
 
 		return $order_statuses;
 	}
