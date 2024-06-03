@@ -46,11 +46,11 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
 
 		?>
         <div class="merchant-notice merchant-notice-with-thumbnail notice" style="position:relative;">
-			<h3><?php echo esc_html__( 'Earn More with Your Store and Merchant Pro! 💰', 'merchant' ); ?></h3>
+			<h3><?php echo esc_html__( 'Supercharge Your Store with Merchant Pro! 🚀', 'merchant' ); ?></h3>
 
 			<p>
 				<?php
-					echo esc_html__( 'Merchant Pro packs in all the must-have eCommerce features you need to run your store successfully. With 40+ powerful modules and more to come, Merchant Pro will level up your store and save you the hassle of managing multiple plugins.', 'merchant' );
+					echo esc_html__( 'With Merchant Pro\'s 40+ powerful modules — including Product Bundles, Frequently Bought Together, and Bulk Discounts — you can boost sales, enhance customer experience, and minimize cart abandonment, all from one convenient plugin.', 'merchant' );
 				?>
 			</p>
 
