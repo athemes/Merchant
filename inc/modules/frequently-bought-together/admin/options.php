@@ -20,6 +20,7 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Bundle', 'merchant' ),
 			'style'        => Merchant_Frequently_Bought_Together::MODULE_ID . '-style default',
 			'sorting'      => true,
+			'duplicate'    => true,
 			'accordion'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
