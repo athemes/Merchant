@@ -609,9 +609,7 @@
                         return;
                     }
 
-                    const $dataLayout = $duplicateBtn.data( 'layout' );
-
-                    const $sourceLayout = $duplicateBtn.closest( '.layout[data-type=' + $dataLayout + ']' );
+                    const $sourceLayout = $duplicateBtn.closest( '.layout' );
                     if ( ! $sourceLayout.length ) {
                         return;
                     }

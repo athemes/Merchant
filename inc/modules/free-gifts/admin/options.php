@@ -21,6 +21,7 @@ Merchant_Admin_Options::create( array(
 			'style'        => Merchant_Free_Gifts::MODULE_ID . '-style default',
 			'sorting'      => true,
 			'accordion'    => true,
+			'duplicate'    => true,
 			'layouts'      => array(
 				'spending' => array(
 					'title'       => esc_html__( 'Spending Based', 'merchant' ),
