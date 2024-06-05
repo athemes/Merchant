@@ -10,7 +10,7 @@
 	opacity: 0;
 	visibility: hidden;
 	transition: ease opacity 300ms, ease bottom 300ms;
-	z-index: 998;
+	z-index: 9999;
 	&.position-top {
 		position: fixed;
 		top: 0;
@@ -68,7 +68,7 @@
 				.button {
 					white-space: nowrap;
 					margin-left: 15px;
-					max-height: 51px;
+					margin-top: 0;
 				}
 
 				form.cart,
@@ -146,6 +146,7 @@
 							align-items: center;
 							flex-direction: row;
 							margin-bottom: 0;
+							border: none;
 
 							&:last-child {
 								.value {
@@ -153,13 +154,22 @@
 								}
 							}
 
+							.label,
+							.value {
+								background: none;
+							}
+
 							.label {
 								vertical-align: middle;
-								min-width: 64px;
+								//min-width: 64px;
 							}
 
 							.value {
 								width: 100%;
+							}
+
+							label {
+								margin-block: 0;
 							}
 						}
 						td, th {
@@ -175,6 +185,17 @@
 							top: 100%;
 							right: 0;
 						}
+
+						.merchant-variations-wrapper {
+							 > div {
+								flex-wrap: nowrap;
+
+								a {
+									min-width: auto;
+									min-height: auto;
+								}
+							}
+						}
 					}
 
 					.reset_variations {
@@ -184,6 +205,7 @@
 					.woocommerce-variation-add-to-cart {
 						display: flex;
 						flex-wrap: nowrap !important;
+						align-items: center;
 
 						// Blocksy.
 						.ct-cart-actions {
@@ -221,7 +243,17 @@
 				}
 				td.value {
 					> select {
+						min-width: 150px;
+						width: 100%;
+						height: auto;
 						margin: 0;
+						padding: 10px 15px 10px 12px;
+						border-radius: 2px;
+						appearance: none;
+						background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZmlsbD0ibm9uZSIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDE1IDE1IiB3aWR0aD0iMTUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNC4xODE3OSA2LjE4MTgxQzQuMzU3NTMgNi4wMDYwOCA0LjY0MjQ1IDYuMDA2MDggNC44MTgxOSA2LjE4MTgxTDcuNDk5OTkgOC44NjM2MkwxMC4xODE4IDYuMTgxODFDMTAuMzU3NSA2LjAwNjA4IDEwLjY0MjQgNi4wMDYwOCAxMC44MTgyIDYuMTgxODFDMTAuOTkzOSA2LjM1NzU1IDEwLjk5MzkgNi42NDI0NyAxMC44MTgyIDYuODE4MjFMNy44MTgxOSA5LjgxODIxQzcuNzMzNzkgOS45MDI2IDcuNjE5MzQgOS45NTAwMSA3LjQ5OTk5IDkuOTUwMDFDNy4zODA2NCA5Ljk1MDAxIDcuMjY2MTggOS45MDI2IDcuMTgxNzkgOS44MTgyMUw0LjE4MTc5IDYuODE4MjFDNC4wMDYwNSA2LjY0MjQ3IDQuMDA2MDUgNi4zNTc1NSA0LjE4MTc5IDYuMTgxODFaIiBmaWxsPSJjdXJyZW50Q29sb3IiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==");
+						background-repeat: no-repeat;
+						background-position: right 7px center;
+						background-size: 20px 20px;
 					}
 				}
 				.label {
