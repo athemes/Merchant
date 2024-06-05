@@ -739,8 +739,22 @@
 
         // Products selector.
         // Handle keyup event for the search input
+        let debounceTimer;
         $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
+            clearTimeout( debounceTimer );
+
+            const $layout = $(this).closest( '.layout' );
+
+            let categories = [];
+            const $rules = $layout.find( '.merchant-field-rules_to_apply select' ).val()
+                || $layout.find( '.merchant-field-rules_to_display select' ).val()
+                || $layout.find( '.merchant-field-display_rules select' ).val();
+            if ( $rules === 'categories' || $rules === 'by_category' ) {
+                categories = $layout.find('.merchant-field-category_slugs select').val() || $layout.find('.merchant-field-product_cats select').val();
+            }
+
             let parent = $(this).closest('.merchant-products-search-container');
+
             if ($(this).val() !== '') {
                 parent.find('.merchant-searching').addClass('active');
                 let data = {
@@ -749,14 +763,17 @@
                     keyword: $(this).val(),
                     product_types: $(this).data('allowed-types'),
                     ids: parent.find('.merchant-selected-products').val(),
+                    categories,
                 };
 
-                $.post(merchant_admin_options.ajaxurl, data, function (response) {
-                    let results = parent.find('.merchant-selections-products-preview');
-                    results.show();
-                    results.html(response);
-                    parent.find('.merchant-searching').removeClass('active');
-                });
+                debounceTimer = setTimeout( () => {
+                    $.post(merchant_admin_options.ajaxurl, data, function (response) {
+                        let results = parent.find('.merchant-selections-products-preview');
+                        results.show();
+                        results.html(response);
+                        parent.find('.merchant-searching').removeClass('active');
+                    });
+                }, 250 );
             } else {
                 parent.find('.merchant-selections-products-preview').html('').hide();
             }
