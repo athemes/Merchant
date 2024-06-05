@@ -55,11 +55,11 @@ Merchant_Admin_Options::create( array(
 							'condition'   => array( 'rules_to_apply', '==', 'categories' ),
 						),
 						array(
-							'id'        => 'product_to_purchase',
-							'type'      => 'products_selector',
-							'multiple'  => false,
-							'desc'      => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
-							'condition' => array( 'rules_to_apply', '==', 'product' ),
+							'id'            => 'product_to_purchase',
+							'type'          => 'products_selector',
+							'multiple'      => false,
+							'desc'          => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
+							'condition'     => array( 'rules_to_apply', '==', 'product' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 						),
 
