@@ -402,7 +402,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							}
 						}
 
-
 						$options[ $settings['module'] ][ $field['id'] ] = self::sanitize( $field, $value );
 					}
 				}
@@ -591,7 +590,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 				if ( ! $value && ( 0 !== $value && '0' !== $value ) ) {
 					if ( $type === 'checkbox_multiple' ) {
-						$value = is_array( $default ) ? $default : array();
+						$value = is_array( $value ) ? $value : (array) $default;
 					} else {
 						$value = $default;
 					}
@@ -805,6 +804,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function checkbox_multiple( $settings, $value ) {
 			if ( ! empty( $settings['options'] ) ) : ?>
+                <!-- required to save when all options are unchecked -->
+                <input type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="0">
 				<?php
 				foreach ( $settings['options'] as $key => $option ) : ?>
                     <label>

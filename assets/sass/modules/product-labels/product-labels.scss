@@ -4,10 +4,6 @@
  *
  */
 
-.type-product {
-	position: relative;
-}
-
 .merchant-product-labels {
 	flex-wrap: wrap;
 	gap: 10px;
@@ -36,13 +32,12 @@
 	
 	&.position-top-right {
 		right: 10px;
-		//justify-content: flex-end;
 	}
 
 	&__text {
 		.merchant-label {
 			position: relative;
-			padding: 8px;
+			padding: 0 8px;
 		}
 	}
 
@@ -175,3 +170,30 @@
 	overflow: hidden;
 }
 
+.type-product {
+	position: relative;
+
+	a img {
+		width: 100%;
+	}
+}
+
+.wc-block-grid {
+	&__product {
+		a {
+			overflow: hidden;
+		}
+	}
+}
+
+.theme-kadence {
+	.editor-styles-wrapper {
+		.wc-block-grid__product {
+			a,
+			&-image,
+			&-image img {
+				width: 100% !important;
+			}
+		}
+	}
+}
