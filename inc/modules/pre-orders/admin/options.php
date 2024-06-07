@@ -264,8 +264,8 @@ Merchant_Admin_Options::create(
 				'options' => array(
 					'only_pre_orders'                => esc_html__( 'Allow only pre-orders', 'merchant' ),
 					'unified_order'                  => esc_html__( 'Treat the whole order as pre-order', 'merchant' ),
-					'separate_order_for_pre_orders'  => esc_html__( 'Generate separate orders for each pre-order product', 'merchant' ),
-					'group_pre_order_into_one_order' => esc_html__( 'Generate two separate orders, one for pre-orders and one for in-stock products', 'merchant' ),
+//                  'separate_order_for_pre_orders'  => esc_html__( 'Generate separate orders for each pre-order product', 'merchant' ),
+//                  'group_pre_order_into_one_order' => esc_html__( 'Generate two separate orders, one for pre-orders and one for in-stock products', 'merchant' ),
 				),
 				'default' => 'unified_order',
 			),
