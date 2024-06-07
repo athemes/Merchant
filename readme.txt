@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.11
+Stable tag: 1.9.12
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -214,6 +214,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.12 =
+* Fixed - Pre-order: Automatic conversion of order status from Pre-Ordered to Processing after the pre-order date passes.
+* Fixed - Pre-order: Issues with pre-order emails firing again for both customers and admins.
+* Changed - Pre-order: Removed Modes 3 and 4, switching all relevant setups to Mode 1.
+* Fixed - Pre-order: Incorrect date display on the product archive page.
+* Fixed - Product Labels: Labels now appear in WooCommerce blocks such as Products by Category and Newest Products.
+
 = 1.9.11 =
 * Fixed - Product Labels - Images under the Image Label field weren't fitting properly in their boxes.
 * Fixed - Product Labels - Uncaught error: call to undefined function when Merchant Pro is not active.
