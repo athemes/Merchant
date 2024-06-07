@@ -226,6 +226,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$order->add_meta_data( '_is_pre_order', true );
 			$order->add_meta_data( '_merchant_order_pre_order_shipping_date', max( $shipping_dates ) );
 			$order->save();
+			$this->trigger_emails( $order );
 		}
 	}
 
@@ -288,6 +289,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$new_order->save();
 
 			$sub_order_ids[] = $new_order->get_id();
+
+			$this->trigger_emails( $new_order );
 
 			// Save sub-order IDs to the original order
 			$original_order->update_meta_data( '_sub_order_ids', $sub_order_ids );
@@ -368,6 +371,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$new_order->add_meta_data( '_merchant_order_pre_order_shipping_date', $rule['shipping_timestamp'] );
 			$new_order->set_status( 'wc-pre-ordered' );
 			$new_order->save();
+			$this->trigger_emails( $new_order );
 			$sub_order_ids[] = $new_order->get_id();
 		}
 
@@ -377,6 +381,24 @@ class Merchant_Pre_Orders_Main_Functionality {
 		// Update original order totals after removing items
 		$original_order->calculate_totals();
 		$original_order->save();
+	}
+
+	/**
+	 * Trigger sending emails for specific order.
+	 *
+	 * @param $order WC_Order The order object.
+	 *
+	 * @return void
+	 */
+	private function trigger_emails( $order ) {
+		$mailer = WC()->mailer();
+		// Send customer email
+		$customer_email_instance = $mailer->emails['WC_Email_Customer_Processing_Order'];
+		$customer_email_instance->trigger( $order->get_id(), $order );
+
+		// Send admin email
+		$admin_email_instance = $mailer->emails['WC_Email_New_Order'];
+		$admin_email_instance->trigger( $order->get_id(), $order );
 	}
 
 	/**
