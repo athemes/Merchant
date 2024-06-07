@@ -249,7 +249,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 
 		// Include forms tags.
 		if ( in_array( 'forms', $extra, true ) || in_array( 'all', $extra, true ) ) {
-			$tags = array( 'form', 'input', 'select', 'option', 'textarea', 'a', 'div' );
+			$tags = array( 'form', 'input', 'select', 'option', 'textarea', 'a' );
 
 			foreach ( $tags as $tag ) {
 				$allowed_tags[ $tag ] = array(
