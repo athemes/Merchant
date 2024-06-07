@@ -1033,14 +1033,25 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		$pre_order_rule = self::available_product_rule( $product_id );
 		$label_text     = $pre_order_rule['cart_label_text'] ? Merchant_Translator::translate( $pre_order_rule['cart_label_text'] ) : esc_html__( 'Ships on', 'merchant' );
-		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['cart_label_text'] );
+		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 		if ( 'span' === $render_type ) {
-			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ),
-				$pre_order_date );
+			return sprintf(
+				'<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		} elseif ( 'dl' === $render_type ) {
-			return sprintf( '<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>', esc_html( $label_text ), $pre_order_date );
+			return sprintf(
+				'<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		} else {
-			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
+			return sprintf(
+				'%s: %s',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		}
 	}
 
