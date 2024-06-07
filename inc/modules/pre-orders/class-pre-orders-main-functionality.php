@@ -75,7 +75,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		add_filter( 'woocommerce_get_price_html', array( $this, 'dynamic_discount_price_html' ), 10, 2 );
 		add_action( 'woocommerce_before_calculate_totals', array( $this, 'dynamic_discount_cart_price' ) );
-		add_action( 'woocommerce_checkout_order_created', array( $this, 'splitting_orders' ) );
+		add_action( 'woocommerce_thankyou', array( $this, 'splitting_orders' ) );
 		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'shop_order_column' ), 11 );
 		add_filter( 'manage_edit-shop_order_columns', array( $this, 'shop_order_column' ), 11 );
 		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'shop_order_column_content' ), 10, 2 );
@@ -187,17 +187,19 @@ class Merchant_Pre_Orders_Main_Functionality {
 	/**
 	 * Splitting orders.
 	 *
-	 * @param $order WC_Order The order object.
+	 * @param $order_id int The order ID.
 	 *
 	 * @return void
 	 */
-	public function splitting_orders( $order ) {
-		$mode = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
-		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
-			$this->mark_whole_order_as_pre_order( $order );
-		}
+	public function splitting_orders( $order_id ) {
+		$order = wc_get_order( $order_id );
+		$mode  = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
 
-//      elseif ( 'group_pre_order_into_one_order' === $mode ) {
+		$this->mark_whole_order_as_pre_order( $order );
+
+//      if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
+//          $this->mark_whole_order_as_pre_order( $order );
+//      } elseif ( 'group_pre_order_into_one_order' === $mode ) {
 //          $this->group_pre_order_into_one_order( $order );
 //      } elseif ( 'separate_order_for_pre_orders' === $mode ) {
 //          $this->separate_order_for_pre_orders( $order );
