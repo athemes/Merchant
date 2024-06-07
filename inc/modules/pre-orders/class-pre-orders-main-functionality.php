@@ -197,9 +197,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		$this->mark_whole_order_as_pre_order( $order );
 
-//		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
-//			$this->mark_whole_order_as_pre_order( $order );
-//		} elseif ( 'group_pre_order_into_one_order' === $mode ) {
+//      if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
+//          $this->mark_whole_order_as_pre_order( $order );
+//      } elseif ( 'group_pre_order_into_one_order' === $mode ) {
 //          $this->group_pre_order_into_one_order( $order );
 //      } elseif ( 'separate_order_for_pre_orders' === $mode ) {
 //          $this->separate_order_for_pre_orders( $order );
