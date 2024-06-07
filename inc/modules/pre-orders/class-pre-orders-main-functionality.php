@@ -42,7 +42,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function init() {
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'allow_one_type_only' ), 99, 2 );
 		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'add_cart_item_data' ), 10, 4 );
-		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
+//      add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
 		add_action( 'woocommerce_add_order_item_meta', array( $this, 'add_order_item_meta' ), 10, 2 );
 
 		// Cronjob.
@@ -221,7 +221,6 @@ class Merchant_Pre_Orders_Main_Functionality {
 			if ( $this->is_pre_order( $product_id ) ) {
 				$shipping_dates[] = $item->get_meta( '_merchant_pre_order_shipping_date' );
 				++ $has_pre_order;
-				break;
 			}
 		}
 
