@@ -53,8 +53,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		            'label_type'       => 'text',
 		            'label'            => esc_html__( 'SALE', 'merchant' ),
                     'label_text_shape' => 'text-shape-1',
-                    'show_pages'       => array( 'homepage', 'single', 'archive' ),
-                    'show_devices'     => array( 'desktop', 'mobile' ),
 	            ),
             ),
 		);
@@ -98,6 +96,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return;
 		}
 
+        // Required for block editor
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_css' ) );
+
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
 			return;
@@ -114,7 +115,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
 		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
 		add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
-		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 10, 3 );
+		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 9999, 3 );
+		add_filter( 'woocommerce_sale_flash', array( $this, 'remove_on_sale' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -149,7 +151,43 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function products_block( $html, $data, $product ) {
-		return str_replace( '</li>', $this->get_labels( $product, 'archive' ) . '</li>', $html );
+
+		/**
+		 * Filters the HTML for products in the grid.
+		 *
+		 * @param string $html Product grid item HTML.
+		 * @param array $data Product data passed to the template.
+		 * @param \WC_Product $product Product object.
+		 * @return string Updated product grid item HTML.
+		 *
+		 * @since 1.9.12
+		 */
+		return apply_filters(
+			'merchant_blocks_product_grid_item_html',
+			"<li class=\"wc-block-grid__product merchant_product-labels-grid_item_html\">
+				<a href=\"{$data->permalink}\" class=\"wc-block-grid__product-link\">
+					{$data->image}
+					{$data->title}
+					{$this->get_labels( $product, 'archive' )}
+				</a>
+				{$data->price}
+				{$data->rating}
+				{$data->button}
+			</li>",
+			$data,
+			$product
+		);
+	}
+
+	/**
+     * Remove default sale message
+     *
+	 * @param $html
+	 *
+	 * @return string
+	 */
+	public function remove_on_sale( $html ) {
+		return '';
 	}
 
 	/**
@@ -358,16 +396,19 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// All themes.
 		$css .= '
 			.woocommerce .onsale,
+			.wc-block-grid__product-onsale,
 			.wc-block-grid__product .onsale { 
-				display: none !important; 
+			    display: none !important;
 			}
 		';
 
-		// Astra.
-		if ( 'Astra' === $theme_name ) {
+		// Kadence
+		if ( 'Kadence' === $theme_name ) {
 			$css .= '
-				.woocommerce .ast-onsale-card {
-					display: none !important;
+				.wc-block-grid__product a,
+				.wc-block-grid__product-image,
+				.wc-block-grid__product-image img {
+					width: 100% !important;
 				}
 			';
 		}
@@ -459,7 +500,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
-				if ( ! isset( $label['show_pages'] ) || ! $this->show_label( $label ) ) {
+                if ( ! isset( $label['show_pages'] ) ) {
+	                $label['show_pages'] = array( 'homepage', 'single', 'archive' );
+                }
+
+                if ( ! isset( $label['show_devices'] ) ) {
+	                $label['show_devices'] = array( 'desktop', 'mobile' );
+                }
+
+				if ( ! $this->show_label( $label ) ) {
 					continue;
 				}
 
@@ -629,9 +678,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 *
 	 * @return bool
 	 */
-	public function show_label( $label ) {
+	public function show_label( $label, $context = '' ) {
 		$show       = false;
-        $show_pages = $label ['show_pages' ] ?? array();
+        $show_pages = $label['show_pages' ] ?? array();
 
         if ( empty( $show_pages ) ) {
             return $show;
@@ -642,6 +691,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 
 		if ( in_array( 'archive', $show_pages, true ) && ( is_product_taxonomy() || is_shop() ) ) {
+			$show = true;
+		}
+
+        // Block
+		if ( in_array( 'archive', $show_pages, true ) && $context !== 'archive' ) {
 			$show = true;
 		}
 
