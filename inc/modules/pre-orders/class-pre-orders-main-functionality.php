@@ -194,11 +194,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function splitting_orders( $order_id ) {
 		$order = wc_get_order( $order_id );
 		$mode  = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
-		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
-			$this->mark_whole_order_as_pre_order( $order );
-		}
 
-//      elseif ( 'group_pre_order_into_one_order' === $mode ) {
+		$this->mark_whole_order_as_pre_order( $order );
+
+//		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
+//			$this->mark_whole_order_as_pre_order( $order );
+//		} elseif ( 'group_pre_order_into_one_order' === $mode ) {
 //          $this->group_pre_order_into_one_order( $order );
 //      } elseif ( 'separate_order_for_pre_orders' === $mode ) {
 //          $this->separate_order_for_pre_orders( $order );
