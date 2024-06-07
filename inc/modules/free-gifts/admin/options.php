@@ -72,6 +72,22 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
 						),
 
+						'amount' => array(
+							'id'      => 'amount',
+							'title'   => esc_html__( 'Spending goal', 'merchant' ),
+							'type'    => 'number',
+							'append'  => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
+							'default' => 100,
+						),
+
+						array(
+							'id'            => 'product',
+							'type'          => 'products_selector',
+							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
+							'multiple'      => false,
+							'allowed_types' => array( 'simple', 'variable', 'variation' ),
+						),
+
 						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
@@ -105,22 +121,6 @@ Merchant_Admin_Options::create( array(
 							'multiple'  => true,
 							'classes'   => array( 'flex-grow' ),
 							'condition' => array( 'user_condition', '==', 'customers' ),
-						),
-
-						'amount' => array(
-							'id'      => 'amount',
-							'title'   => esc_html__( 'Spending goal', 'merchant' ),
-							'type'    => 'number',
-							'append'  => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
-							'default' => 100,
-						),
-
-						array(
-							'id'            => 'product',
-							'type'          => 'products_selector',
-							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
-							'multiple'      => false,
-							'allowed_types' => array( 'simple', 'variable', 'variation' ),
 						),
 
 						array(
