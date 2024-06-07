@@ -195,11 +195,13 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$mode = Merchant_Admin_Options::get( self::MODULE_ID, 'modes', 'unified_order' );
 		if ( 'unified_order' === $mode || 'only_pre_orders' === $mode ) {
 			$this->mark_whole_order_as_pre_order( $order );
-		} elseif ( 'group_pre_order_into_one_order' === $mode ) {
-			$this->group_pre_order_into_one_order( $order );
-		} elseif ( 'separate_order_for_pre_orders' === $mode ) {
-			$this->separate_order_for_pre_orders( $order );
 		}
+
+//      elseif ( 'group_pre_order_into_one_order' === $mode ) {
+//          $this->group_pre_order_into_one_order( $order );
+//      } elseif ( 'separate_order_for_pre_orders' === $mode ) {
+//          $this->separate_order_for_pre_orders( $order );
+//      }
 	}
 
 	/**
@@ -226,6 +228,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$order->add_meta_data( '_is_pre_order', true );
 			$order->add_meta_data( '_merchant_order_pre_order_shipping_date', max( $shipping_dates ) );
 			$order->save();
+			$this->trigger_emails( $order );
 		}
 	}
 
@@ -288,6 +291,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$new_order->save();
 
 			$sub_order_ids[] = $new_order->get_id();
+
+			$this->trigger_emails( $new_order );
 
 			// Save sub-order IDs to the original order
 			$original_order->update_meta_data( '_sub_order_ids', $sub_order_ids );
@@ -368,6 +373,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$new_order->add_meta_data( '_merchant_order_pre_order_shipping_date', $rule['shipping_timestamp'] );
 			$new_order->set_status( 'wc-pre-ordered' );
 			$new_order->save();
+			$this->trigger_emails( $new_order );
 			$sub_order_ids[] = $new_order->get_id();
 		}
 
@@ -377,6 +383,24 @@ class Merchant_Pre_Orders_Main_Functionality {
 		// Update original order totals after removing items
 		$original_order->calculate_totals();
 		$original_order->save();
+	}
+
+	/**
+	 * Trigger sending emails for specific order.
+	 *
+	 * @param $order WC_Order The order object.
+	 *
+	 * @return void
+	 */
+	private function trigger_emails( $order ) {
+		$mailer = WC()->mailer();
+		// Send customer email
+		$customer_email_instance = $mailer->emails['WC_Email_Customer_Processing_Order'];
+		$customer_email_instance->trigger( $order->get_id(), $order );
+
+		// Send admin email
+		$admin_email_instance = $mailer->emails['WC_Email_New_Order'];
+		$admin_email_instance->trigger( $order->get_id(), $order );
 	}
 
 	/**
@@ -715,10 +739,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 					$parent_order = wc_get_order( $parent_order_id );
 
 					if ( $parent_order->get_status() === 'completed' ) {
-						$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
+						$order->update_status( 'processing', '[Merchant Pre Orders] ' );
 					}
-				} elseif ( $order->get_status() === 'wc-pre-ordered' && $order->payment_complete() ) {
-					$order->update_status( 'wc-completed', '[Merchant Pre Orders] ' );
+				} elseif ( $order->payment_complete() ) {
+					$order->update_status( 'processing', '[Merchant Pre Orders] ' );
 				}
 			}
 		}
@@ -882,7 +906,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return array
 	 */
 	public function add_pre_orders_order_statuses( $order_statuses ) {
-		$order_statuses['wc-pre-ordered'] = esc_html__( 'Pre Ordered', 'merchant' );
+		$order_statuses['wc-pre-ordered'] = esc_html__( 'Pre-Ordered', 'merchant' );
 
 		return $order_statuses;
 	}
@@ -1033,14 +1057,25 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		$pre_order_rule = self::available_product_rule( $product_id );
 		$label_text     = $pre_order_rule['cart_label_text'] ? Merchant_Translator::translate( $pre_order_rule['cart_label_text'] ) : esc_html__( 'Ships on', 'merchant' );
-		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['cart_label_text'] );
+		$pre_order_date = date_i18n( get_option( 'date_format' ), $pre_order_rule['shipping_timestamp'] );
 		if ( 'span' === $render_type ) {
-			return sprintf( '<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>', esc_html( $label_text ),
-				$pre_order_date );
+			return sprintf(
+				'<span class="merchant-pre-orders-note"><span class="merchant-pre-orders-label">%s:</span><span>%s</span></span>',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		} elseif ( 'dl' === $render_type ) {
-			return sprintf( '<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>', esc_html( $label_text ), $pre_order_date );
+			return sprintf(
+				'<dl class="merchant-pre-orders-note"><dt>%s:</dt><dd>%s</dd></dl>',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		} else {
-			return sprintf( '%s: %s', esc_html( $label_text ), $pre_order_date );
+			return sprintf(
+				'%s: %s',
+				esc_html( $label_text ),
+				$pre_order_date
+			);
 		}
 	}
 
