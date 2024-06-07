@@ -20,6 +20,7 @@ Merchant_Admin_Options::create( array(
 			'button_label' => esc_html__( 'Add New Bundle', 'merchant' ),
 			'style'        => Merchant_Frequently_Bought_Together::MODULE_ID . '-style default',
 			'sorting'      => true,
+			'duplicate'    => true,
 			'accordion'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
@@ -77,6 +78,7 @@ Merchant_Admin_Options::create( array(
 							'multiple' => true,
 							'desc'     => esc_html__( 'Select the products that will be included the bundle.', 'merchant' ),
 						),
+
 						array(
 							'id'        => 'external',
 							'label'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
@@ -107,6 +109,42 @@ Merchant_Admin_Options::create( array(
 							'default' => 10,
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
+
+						array(
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'customers' => esc_html__( 'Selected Users', 'merchant' ),
+								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to users with these roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Users', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'user',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'condition' => array( 'user_condition', '==', 'customers' ),
+						),
+
 						array(
 							'id'      => 'single_product_placement',
 							'type'    => 'radio',

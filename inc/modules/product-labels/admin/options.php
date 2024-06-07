@@ -156,7 +156,7 @@ Merchant_Admin_Options::create( array(
 							'min'       => 1,
 							'max'       => 1000,
 							'step'      => 1,
-							'default'   => 50,
+							'default'   => 100,
 							'unit'      => 'px',
 						),
 						array(
@@ -166,7 +166,7 @@ Merchant_Admin_Options::create( array(
 							'min'       => 1,
 							'max'       => 250,
 							'step'      => 1,
-							'default'   => 50,
+							'default'   => 32,
 							'unit'      => 'px',
 						),
 
