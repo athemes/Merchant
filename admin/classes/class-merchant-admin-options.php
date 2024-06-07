@@ -1354,6 +1354,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				$query_args['post__not_in'] = array_map( 'absint', $added_ids );
 			}
 
+            // Filter by category slugs.
+			$categories = array_map( 'sanitize_text_field', $_POST['categories'] ?? array() );
+            if ( is_array( $categories ) && ! empty( $categories ) ) {
+	            $query_args['tax_query'][] = array(
+		            'taxonomy' => 'product_cat',
+		            'field'    => 'slug',
+		            'terms'    => $categories,
+		            'operator' => 'IN',
+	            );
+            }
+
 			$query = new WP_Query( $query_args );
 
 			if ( $query->have_posts() ) {
