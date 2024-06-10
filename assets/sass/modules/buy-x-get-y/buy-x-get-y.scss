@@ -184,7 +184,7 @@ button.button.merchant-bogo-add-to-cart {
 
 	.bogo-cart-item-offer__container {
 		box-sizing: border-box;
-		margin-top: 30px;
+		margin-top: 20px;
 		margin-bottom: 10px;
 
 		* {
@@ -220,11 +220,12 @@ button.button.merchant-bogo-add-to-cart {
 			}
 
 			.product_image {
-				width: 100px;
-				padding-right: 15px;
+				//width: 100px;
+				padding-right: 14px;
 
 				img {
 					max-width: 100%;
+					width: 55px;
 				}
 			}
 
@@ -233,16 +234,22 @@ button.button.merchant-bogo-add-to-cart {
 
 				.offer-description {
 					font-weight: 600;
-					margin-bottom: 5px;
+					margin-bottom: 4px;
+					font-size: 11px;
+					line-height: 12px;
 				}
 
-				.product-name {
+				.product-name a {
 					font-weight: 600;
 					margin-bottom: 8px;
+					font-size: 10px;
+					line-height: 16px;
 				}
 
 				.price-area {
 					margin-bottom: 8px;
+					font-size: 8px;
+					line-height: 12px;
 				}
 
 				.product-variations-wrapper {
@@ -274,9 +281,13 @@ button.button.merchant-bogo-add-to-cart {
 				flex-direction: column;
 
 				.add-to-cart-button {
-					padding: 6px 14px;
-					font-size: 12px;
+					//padding: 6px 14px;
+					font-size: 6px;
 					max-width: 140px;
+					line-height: 13px;
+					width: 60px;
+					height: 20px;
+					padding: 0;
 				}
 			}
 		}
@@ -296,6 +307,10 @@ button.button.merchant-bogo-add-to-cart {
 		.cart-item-has-bogo-offer {
 			.product-thumbnail {
 				align-self: baseline;
+			}
+
+			> .product-name{
+				padding-top: 15px;
 			}
 		}
 	}
