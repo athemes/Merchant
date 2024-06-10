@@ -21,6 +21,7 @@ Merchant_Admin_Options::create( array(
 			'style'        => Merchant_Storewide_Sale::MODULE_ID . '-style default',
 			'sorting'      => true,
 			'accordion'    => true,
+			'duplicate'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Storewide Discount Campaign', 'merchant' ),

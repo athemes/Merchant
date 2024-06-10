@@ -249,7 +249,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 
 		// Include forms tags.
 		if ( in_array( 'forms', $extra, true ) || in_array( 'all', $extra, true ) ) {
-			$tags = array( 'form', 'input', 'select', 'option', 'textarea' );
+			$tags = array( 'form', 'input', 'select', 'option', 'textarea', 'a' );
 
 			foreach ( $tags as $tag ) {
 				$allowed_tags[ $tag ] = array(
@@ -599,5 +599,57 @@ if ( ! function_exists( 'merchant_parse_product_ids' ) ) {
 		$parsed_ids = array_map( 'intval', $parsed_ids );
 
 		return $parsed_ids;
+	}
+}
+
+/**
+ * Check if the user condition is passed.
+ *
+ * @param $args
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
+	function merchant_is_user_condition_passed( $args = array() ) {
+		$passed = false;
+
+		$is_logged_in = is_user_logged_in();
+		$current_user = $is_logged_in ? wp_get_current_user() : null;
+
+		$condition = $args['user_condition'] ?? 'all';
+
+		switch ( $condition ) {
+			case 'all':
+			case '':
+				$passed = true;
+				break;
+
+			case 'logged-in':
+				if ( $is_logged_in ) {
+					$passed = true;
+				}
+				break;
+
+			case 'roles':
+				$roles = $args['user_condition_roles'] ?? array();
+				$role  = $current_user->roles[0] ?? '';
+
+				if ( in_array( $role, $roles, true ) ) {
+					$passed = true;
+				}
+				break;
+
+			case 'customers':
+				$customers_id = $args['user_condition_users'] ?? array();
+				$customers_id = array_map( 'intval', $customers_id );
+				$customer_id  = (int) ( $current_user->ID ?? 0 );
+
+				if ( in_array( $customer_id, $customers_id, true ) ) {
+					$passed = true;
+				}
+				break;
+		}
+
+		return $passed;
 	}
 }

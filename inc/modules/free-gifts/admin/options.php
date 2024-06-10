@@ -21,6 +21,7 @@ Merchant_Admin_Options::create( array(
 			'style'        => Merchant_Free_Gifts::MODULE_ID . '-style default',
 			'sorting'      => true,
 			'accordion'    => true,
+			'duplicate'    => true,
 			'layouts'      => array(
 				'spending' => array(
 					'title'       => esc_html__( 'Spending Based', 'merchant' ),
@@ -37,9 +38,9 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'Any product', 'merchant' ),
-								'product'    => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Product categories', 'merchant' ),
+								'all'        => esc_html__( 'All products', 'merchant' ),
+								'product'    => esc_html__( 'Specific products', 'merchant' ),
+								'categories' => esc_html__( 'Specific categories', 'merchant' ),
 							),
 							'default' => 'all',
 						),
@@ -54,13 +55,23 @@ Merchant_Admin_Options::create( array(
 							'condition'   => array( 'rules_to_apply', '==', 'categories' ),
 						),
 						array(
-							'id'        => 'product_to_purchase',
-							'type'      => 'products_selector',
-							'multiple'  => false,
-							'desc'      => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
-							'condition' => array( 'rules_to_apply', '==', 'product' ),
+							'id'            => 'product_to_purchase',
+							'type'          => 'products_selector',
+							'multiple'      => false,
+							'desc'          => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
+							'condition'     => array( 'rules_to_apply', '==', 'product' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 						),
+
+						array(
+							'id'        => 'excluded_products',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
+							'multiple'  => true,
+							'desc'      => esc_html__( 'Exclude products from this offer.', 'merchant' ),
+							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
+						),
+
 						'amount' => array(
 							'id'      => 'amount',
 							'title'   => esc_html__( 'Spending goal', 'merchant' ),
@@ -68,12 +79,48 @@ Merchant_Admin_Options::create( array(
 							'append'  => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
 							'default' => 100,
 						),
+
 						array(
 							'id'            => 'product',
 							'type'          => 'products_selector',
 							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
 							'multiple'      => false,
 							'allowed_types' => array( 'simple', 'variable', 'variation' ),
+						),
+
+						array(
+							'id'      => 'user_condition',
+							'type'    => 'select',
+							'title'   => esc_html__( 'User Condition', 'merchant' ),
+							'options' => array(
+								'all'       => esc_html__( 'All Users', 'merchant' ),
+								'customers' => esc_html__( 'Selected Users', 'merchant' ),
+								'roles'     => esc_html__( 'Selected Roles', 'merchant' ),
+							),
+							'default' => 'all',
+						),
+
+						array(
+							'id'        => 'user_condition_roles',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'User Roles', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to users with these roles.', 'merchant' ),
+							'source'    => 'options',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'options'   => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'condition' => array( 'user_condition', '==', 'roles' ),
+						),
+
+						array(
+							'id'        => 'user_condition_users',
+							'type'      => 'select_ajax',
+							'title'     => esc_html__( 'Users', 'merchant' ),
+							'desc'      => esc_html__( 'This will limit the offer to the selected customers.', 'merchant' ),
+							'source'    => 'user',
+							'multiple'  => true,
+							'classes'   => array( 'flex-grow' ),
+							'condition' => array( 'user_condition', '==', 'customers' ),
 						),
 
 						array(
