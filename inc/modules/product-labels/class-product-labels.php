@@ -111,7 +111,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
 
 		// Inject module content in the products.
-		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
+		add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
 		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
 		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
 		add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
@@ -412,6 +412,14 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 			';
 		}
+
+        if ( 'Flatsome' === $theme_name || 'Flatsome Child' === $theme_name ) {
+            $css .= '
+                .type-product .col-inner {
+                    overflow: hiddenX;
+                }
+            ';
+        }
 
 		return $css;
 	}
