@@ -258,6 +258,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'style'                   => true,
 					'name'                    => true,
 					'href'                    => true,
+					'target'                  => true,
 					'value'                   => true,
 					'type'                    => true,
 					'placeholder'             => true,
