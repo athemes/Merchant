@@ -107,6 +107,18 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		add_action( 'woocommerce_gzd_register_legal_checkbox_args', array( $this, 'gzd_register_legal_checkboxes' ), 10, 2 );
+	}
+
+
+	public function gzd_register_legal_checkboxes( $args, $id ) {
+
+		if ( $id === 'terms' ) {
+			$args['template_name'] = './../../woocommerce/templates/checkout/terms.php';
+		}
+
+		return $args;
 	}
 
 	/**
