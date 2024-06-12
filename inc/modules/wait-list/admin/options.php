@@ -47,7 +47,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'form_success_message',
 			'type'    => 'textarea',
 			'title'   => esc_html__( 'Form success message', 'merchant' ),
-			'default' => __( 'You are now subscribed to our stock notification list for this product. When stock becomes available, we will let you know you via email.', 'merchant' ),
+			'default' => __( 'You are now subscribed to our stock notification list for this product. When stock becomes available, we will let you know via email.', 'merchant' ),
 			'desc'    => esc_html__( 'The message that will show after form submission.', 'merchant' ),
 		),
 		array(
