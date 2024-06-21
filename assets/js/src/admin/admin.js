@@ -743,14 +743,18 @@
         $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
             clearTimeout( debounceTimer );
 
-            const $layout = $(this).closest( '.layout' );
-
             let categories = [];
-            const $rules = $layout.find( '.merchant-field-rules_to_apply select' ).val()
-                || $layout.find( '.merchant-field-rules_to_display select' ).val()
-                || $layout.find( '.merchant-field-display_rules select' ).val();
-            if ( $rules === 'categories' || $rules === 'by_category' ) {
-                categories = $layout.find('.merchant-field-category_slugs select').val() || $layout.find('.merchant-field-product_cats select').val();
+
+            const $excluded = $( this ).closest( '[data-id="excluded_products"]' );
+            if ( $excluded.length ) {
+                const $layout = $(this).closest( '.layout' );
+                const rules = $layout.find( '.merchant-field-rules_to_apply select' ).val()
+                    || $layout.find( '.merchant-field-rules_to_display select' ).val()
+                    || $layout.find( '.merchant-field-display_rules select' ).val();
+
+                if ( rules === 'categories' || rules === 'by_category' ) {
+                    categories = $layout.find('.merchant-field-category_slugs select').val() || $layout.find('.merchant-field-product_cats select').val();
+                }
             }
 
             let parent = $(this).closest('.merchant-products-search-container');
