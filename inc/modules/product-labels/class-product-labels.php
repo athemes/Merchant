@@ -110,13 +110,24 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
         // Enqueue scripts
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
 
-		// Inject module content in the products.
-		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
-		add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
-		add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
-		add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
+		// Product Loop/Archives
+		add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+
+        // Woo Block
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 9999, 3 );
-		add_filter( 'woocommerce_sale_flash', array( $this, 'remove_on_sale' ) );
+
+        // Product Single
+        if ( merchant_is_flatsome_active() ) {
+	        add_action( 'flatsome_sale_flash', array( $this, 'single_product_output' ) );
+        } elseif ( class_exists( 'Woostify_WooCommerce' ) ) {
+	        add_action( 'woostify_product_images_box_end', array( $this, 'single_product_output' ) );
+        } else {
+	        add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
+        }
+
+        add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
+
+        add_filter( 'woocommerce_sale_flash', array( $this, 'remove_on_sale' ), 9999 );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
@@ -405,13 +416,42 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		// Kadence
 		if ( 'Kadence' === $theme_name ) {
 			$css .= '
-				.wc-block-grid__product a,
-				.wc-block-grid__product-image,
-				.wc-block-grid__product-image img {
+			    .merchant-product-labels-image-wrap img,
+				.merchant_product-labels-grid_item_html a,
+				.merchant_product-labels-grid_item_html .wc-block-grid__product-image,
+				.merchant_product-labels-grid_item_html .wc-block-grid__product-image img {
 					width: 100% !important;
 				}
 			';
 		}
+
+        if ( 'Flatsome' === $theme_name || 'Flatsome Child' === $theme_name ) {
+            $css .= '
+                .type-product .col-inner {
+                    overflow: hidden;
+                }
+            ';
+        }
+
+        if ( 'OceanWP' === $theme_name ) {
+            $css .= '
+                .type-product .product-inner {
+                    overflow: hidden;
+                }
+            ';
+        }
+
+        if ( 'Astra' === $theme_name ) {
+            $css .= '
+                .woocommerce-js div.product div.images.woocommerce-product-gallery .flex-viewport {
+                    z-index: 999;
+                }
+                
+                .ast-onsale-card {
+                    display: none;
+                }
+            ';
+        }
 
 		return $css;
 	}
