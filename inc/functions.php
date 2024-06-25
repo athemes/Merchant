@@ -155,6 +155,17 @@ if ( ! function_exists( 'merchant_is_astra_active' ) ) {
 }
 
 /**
+ * Check if WooCommerce Germanized theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_woocommerce_germanized_active' ) ) {
+	function merchant_is_woocommerce_germanized_active() {
+		return class_exists( 'WooCommerce_Germanized' );
+	}
+}
+
+/**
  * Check if any shortcode starts with merchant.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */

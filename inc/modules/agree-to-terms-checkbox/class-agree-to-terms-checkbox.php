@@ -102,6 +102,9 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		// Control the text from the module settings.
 		add_filter( 'woocommerce_get_terms_and_conditions_checkbox_text', array( $this, 'agree_to_terms_form_field' ) );
 
+		// Fix: Germanized for WooCommerce
+		add_filter( 'woocommerce_gzd_legal_checkbox_terms_label', array( $this, 'alter_terms_text' ), 999, 2 );
+
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
@@ -204,7 +207,7 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 	public function agree_to_terms_form_field( $text = '' ) {
 		$settings = $this->get_module_settings();
 
-		if ( ! isset( $settings['text'] ) || empty( $settings['text'] ) ) {
+		if ( empty( $settings['text'] ) ) {
 			return $text;
 		}
 
@@ -213,6 +216,20 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			esc_url( Merchant_Translator::translate( $settings['link'] ) ),
 			esc_html( Merchant_Translator::translate( $settings['text'] ) )
 		);
+	}
+
+	/**
+	 * Show our terms text instead of Germanized plugin's.
+	 *
+	 * @param $label
+	 * @param $instance
+	 *
+	 * @return string
+	 */
+	public function alter_terms_text( $label, $instance ) {
+		$label = $this->agree_to_terms_form_field();
+
+		return $label;
 	}
 
 	/**
