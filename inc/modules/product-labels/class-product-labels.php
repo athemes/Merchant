@@ -308,8 +308,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$sale_data = array();
 
         if ( $product->is_type( 'variable' ) ) {
-	        $regular_price = $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
-	        $sale_price    = $product->get_variation_sale_price( 'min' );
+	        $regular_price = (float) $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
+	        $sale_price    = (float) $product->get_variation_sale_price( 'min' );
 
 	        if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 		        $sale_data['amount']     = $regular_price - $sale_price;
