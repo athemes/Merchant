@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$clickable        = '';
 			if ( ! is_admin() ) {
 				$product = wc_get_product( get_the_ID() );
-				if ( $quantity < $discount_qty && ! $product->is_type( 'variable' ) ) {
+				if ( $product && ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
 					$clickable = ' clickable';
 				}
 			}
