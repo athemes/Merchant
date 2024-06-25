@@ -59,7 +59,7 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 				'merchant' ),
 			'email_new_subscriber'     => __( 'Hello, thank you for joining the stock notification list for {product}. We will email you when the product is back in stock.',
 				'merchant' ),
-			'form_unsubscribe_message' => __( 'You have been successfully unsubscribed from our stock waitlist.', 'merchant' ),
+			'form_unsubscribe_message' => __( 'You have been successfully unsubscribed from our stock waitlist for this product.', 'merchant' ),
 			'email_update'             => __( 'Hello, thanks for your patience and finally the wait is over! Your {product} is now back in stock! We only have a limited amount of stock, and this email is not a guarantee you’ll get one. Add this {product} directly to your cart.',
 				'merchant' ),
 			'form_nonce_field'         => wp_nonce_field( 'merchant_wait_list_action', 'merchant_wait_list_action', true, false ),
