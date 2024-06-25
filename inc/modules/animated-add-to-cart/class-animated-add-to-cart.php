@@ -48,7 +48,7 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'trigger' => 'on-mouse-hover',
+			'trigger'   => 'on-mouse-hover',
 			'animation' => 'swing',
 		);
 
@@ -222,29 +222,32 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 	 */
 	public function get_module_custom_css() {
 		$settings = $this->get_module_settings();
-		
+
+        $trigger         = $settings['trigger'] ?? 'on-mouse-hover';
+        $animation_style = $settings['animation'] ?? 'swing';
+        $iteration_count = $trigger === 'on-mouse-hover' ? 'infinite' : 1;
+
 		$css = '';
 
-		$css .= '.add_to_cart_button:not(.merchant_buy_now_button),';
-		$css .= '.product_type_grouped:not(.merchant_buy_now_button) {';
+		$css .= '.add_to_cart_button:not(.merchant-buy-now-button),';
+		$css .= '.product_type_grouped:not(.merchant-buy-now-button),';
+		$css .= '.single_add_to_cart_button:not(.merchant-buy-now-button) {';
 		$css .= '	transition: all .3s ease-in;';
 		$css .= '}';
 
-		if ( 'on-mouse-hover' === $settings[ 'trigger' ] ) {
-			$css .= '.add_to_cart_button:not(.merchant_buy_now_button):hover,';
-			$css .= '.product_type_grouped:not(.merchant_buy_now_button):hover,';
-			$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button):hover,';
-		}
+		if ( 'on-mouse-hover' === $trigger ) {
+			$css .= '.add_to_cart_button:not(.merchant-buy-now-button):hover,';
+			$css .= '.product_type_grouped:not(.merchant-buy-now-button):hover,';
+			$css .= '.single_add_to_cart_button:not(.merchant-buy-now-button):hover {';
+		} elseif ( 'on-page-load' === $trigger ) {
+			$css .= '.add_to_cart_button:not(.merchant-buy-now-button),';
+			$css .= '.product_type_grouped:not(.merchant-buy-now-button),';
+			$css .= '.single_add_to_cart_button:not(.merchant-buy-now-button) {';
+        }
 
-		$css .= '.add_to_cart_button:not(.merchant_buy_now_button).merchant-active,';
-		$css .= '.product_type_grouped:not(.merchant_buy_now_button).merchant-active,';
-		$css .= '.single_add_to_cart_button:not(.merchant_buy_now_button).merchant-active {';
-
-		switch ( $settings[ 'animation' ] ) {
-
+		switch ( $animation_style ) {
 			case 'flash':
-				$css .= 'animation: merchant-flash 1s infinite both;';
-				$css .= 'animation-iteration-count: 1;';
+				$css .= 'animation: merchant-flash 1s both;';
 				break;
 
 			case 'bounce':
@@ -262,15 +265,15 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 				break;
 
 			case 'pulse':
-				$css .= 'animation: merchant-pulse 1.5s ease-in-out infinite both;';
+				$css .= 'animation: merchant-pulse 1.5s ease-in-out ' . $iteration_count . ' both;';
 				break;
 
 			case 'jello-shake':
-				$css .= 'animation: merchant-jello-shake 1.5s infinite both;';
+				$css .= 'animation: merchant-jello-shake 1.5s ' . $iteration_count . ' both;';
 				break;
 
 			case 'wobble':
-				$css .= 'animation: merchant-wobble 1.5s ease-in-out infinite both;';
+				$css .= 'animation: merchant-wobble 1.5s ease-in-out ' . $iteration_count . ' both;';
 				break;
 
 			case 'vibrate':
@@ -278,13 +281,12 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 				break;
 
 			case 'swing':
-				$css .= 'animation: merchant-swing 2s ease-in-out infinite alternate;';
+				$css .= 'animation: merchant-swing 2s ease-in-out ' . $iteration_count . ' alternate;';
 				break;
 
 			case 'tada':
-				$css .= 'animation: merchant-tada 1s infinite both;';
+				$css .= 'animation: merchant-tada 1s ' . $iteration_count . ' both;';
 				break;
-
 		}
 
 		$css .= '}';
