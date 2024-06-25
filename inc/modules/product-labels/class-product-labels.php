@@ -308,23 +308,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$sale_data = array();
 
         if ( $product->is_type( 'variable' ) ) {
-	        $amounts     = array();
-            $percentages = array();
-            $prices      = $product->get_variation_prices();
+	        $regular_price = (float) $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
+	        $sale_price    = (float) $product->get_variation_sale_price( 'min' );
 
-            foreach ( $prices['price'] as $key => $price ) {
-                if ( $prices['regular_price'][ $key ] !== $price ) {
-                    $regular_price = (float) $prices['regular_price'][ $key ];
-                    $sale_price    = (float) $prices['sale_price'][ $key ];
-
-	                $amounts[]     = $regular_price - $sale_price;
-	                $percentages[] = round( 100 - ( $sale_price / $regular_price * 100 ) );
-                }
-            }
-
-	        $sale_data['amount']     = ! empty( $amounts ) ? max( $amounts ) : '';;
-	        $sale_data['percentage'] = ! empty( $percentages ) ? max( $percentages ) : '';
+	        if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
+		        $sale_data['amount']     = $regular_price - $sale_price;
+		        $sale_data['percentage'] = $regular_price ? round( 100 - ( $sale_price / $regular_price * 100 ) ) : 0;
+	        }
         } elseif ( $product->is_type( 'grouped' ) ) {
+            // Todo: change logic
 	        $amounts      = array();
             $percentages  = array();
             $children_ids = $product->get_children();
@@ -336,7 +328,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
                 if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 	                $amounts[]     = $regular_price - $sale_price;
-                    $percentages[] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+                    $percentages[] = $regular_price ? round( 100 - ( ( $sale_price / $regular_price ) * 100 ) ) : 0;
                 }
             }
 
@@ -348,7 +340,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
             if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 	            $sale_data['amount']     = $regular_price - $sale_price;
-	            $sale_data['percentage'] = round( 100 - ( ( $sale_price / $regular_price ) * 100 ) );
+	            $sale_data['percentage'] = $regular_price ? round( 100 - ( ( $sale_price / $regular_price ) * 100 ) ) : 0;
             }
         }
 
