@@ -2195,6 +2195,63 @@ body.merchant-module-disabled {
   //margin-bottom: 10px;
 }
 
+.merchant-group-field{
+  padding: 30px 20px;
+  border: 2px solid #F0F0F1;
+  border-radius: 4px;
+
+  .title-area{
+    position: relative;
+    .merchant-module-page-setting-field-title {
+      margin-bottom: 10px;
+    }
+
+    .field-status:not(.hidden){
+      border-radius: 15px;
+      padding: 3px 8px;
+      font-size: 12px;
+      margin-left: 20px;
+
+      &.active{
+        color: #04543F;
+        background-color: #DEF7EC;
+      }
+
+      &.inactive{
+        color: #723B14;
+        background-color: #FDF6B2;
+      }
+    }
+
+    &.accordion-style{
+      padding-right: 40px;
+
+      .accordion-icon{
+        position: absolute;
+        top: 0;
+        right: -7px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 17px;
+        transition: 300ms;
+      }
+
+      &.ui-accordion-header-active{
+        .accordion-icon{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .merchant-group-fields-container{
+    padding-top: 20px;
+  }
+
+}
+
 .merchant-sortable-repeater-control {
   max-width: 100%;
 

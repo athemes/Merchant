@@ -20,6 +20,8 @@
                     merchant.show_save = true;
                 }
             }
+
+            GroubField.initFlag();
         });
 
         $ajaxForm.ajaxForm({
@@ -462,6 +464,37 @@
         // Initialize Sortable Repeater.
         SortableRepeaterField.init();
 
+        const GroubField = {
+            init: function () {
+                const self = this;
+                self.initAccordion();
+                self.initFlag();
+            },
+            initAccordion: function (){
+                const self = this;
+                $('.merchant-group-field.has-accordion').each(function () {
+                    let element = $(this);
+                    element.accordion({
+                        collapsible: true,
+                        header: "> .title-area",
+                        heightStyle: "content",
+                        active: false
+                    })
+                });
+            },
+            initFlag: function (){
+                $('.merchant-group-field.has-flag').each(function () {
+                    let element = $(this);
+                    let field_id = element.data('id');
+                    let status_field = element.find(`.merchant-field-${field_id}_status select`);
+                    let selected_value = status_field.val();
+                    let selected_label = status_field.find('option:selected').text();
+                    let status_element = element.find('.field-status');
+                    status_element.removeClass('hidden active inactive').text(selected_label).addClass(selected_value);
+                });
+            }
+        }
+
         // Flexible Content.
         const FlexibleContentField = {
             init: function (field) {
@@ -564,6 +597,7 @@
 
                     $layout.find('input, select, textarea').each(function () {
                         if ($(this).data('name')) {
+                        console.log('ssss')
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
                     })
@@ -589,6 +623,8 @@
                         // Expand the accordion last added
                         parentDiv.find('.merchant-flexible-content').accordion("option", "active", -1);
                     }
+
+                    GroubField.initFlag();
 
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
 
@@ -736,6 +772,7 @@
 
         // Initialize Flexible Content.
         FlexibleContentField.init();
+        GroubField.init();
 
         // Products selector.
         // Handle keyup event for the search input

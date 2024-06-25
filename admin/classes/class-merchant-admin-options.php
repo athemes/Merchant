@@ -1969,19 +1969,30 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     <div class="<?php
 									echo esc_attr( implode( ' ', $classes ) ); ?>">
 										<?php
-										static::replace_field( $sub_field,
-											'',
-											array(
-												"name=\"merchant[{$sub_field['id']}]",
-												'merchant-module-page-setting-field-upload',
-												'merchant-module-page-setting-field-select_ajax',
-											),
-											array(
-												"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
-												'merchant-module-page-setting-field-upload template',
-												'merchant-module-page-setting-field-select_ajax template',
-											),
-											$module_id ); ?>
+										if ( 'fields_group' === $sub_field['type'] ) {
+											static::fields_group( $sub_field, $value, $module_id, true, array(
+												'id'         => $settings['id'],
+												'option_key' => 0,
+                                                'value'      => $value,
+											) );
+										} else {
+											static::replace_field(
+                                                    $sub_field,
+												'',
+												array(
+													"name=\"merchant[{$sub_field['id']}]",
+													'merchant-module-page-setting-field-upload',
+													'merchant-module-page-setting-field-select_ajax',
+												),
+												array(
+													"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
+													'merchant-module-page-setting-field-upload template',
+													'merchant-module-page-setting-field-select_ajax template',
+												),
+												$module_id
+                                            );
+										}
+                                        ?>
                                     </div>
 								<?php
 								endforeach; ?>
@@ -2054,11 +2065,23 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 										} elseif ( isset( $sub_field['default'] ) ) {
 											$value = $sub_field['default'];
 										}
-										static::replace_field( $sub_field,
-											$value,
-											"name=\"merchant[{$sub_field['id']}]",
-											"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]",
-											$module_id ); ?>
+
+										if ( 'fields_group' === $sub_field['type'] ) {
+											static::fields_group( $sub_field, $value, $module_id, true, array(
+												'id'         => $settings['id'],
+												'option_key' => $option_key,
+												'value'      => $option,
+											) );
+										} else {
+											static::replace_field(
+												$sub_field,
+												$value,
+												"name=\"merchant[{$sub_field['id']}]",
+												"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]",
+												$module_id
+											);
+										}
+										?>
                                     </div>
 								<?php
 								endforeach; ?>
@@ -2113,6 +2136,98 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                     </div>
                     <button class="button customize-control-flexible-content-add-button" type="button"><?php
 						echo esc_html( $settings['button_label'] ); ?></button>
+                </div>
+            </div>
+			<?php
+		}
+
+		/**
+         * Field: Group.
+         *
+		 * @param $settings        array field settings.
+		 * @param $value           mixed field value.
+		 * @param $module_id       string module id.
+		 * @param $inside_flexible boolean is inside flexible content.
+		 * @param $args            array extra arguments to be passed if inside flexible content.
+		 *
+		 * @return void
+		 */
+		public static function fields_group( $settings, $value, $module_id = '', $inside_flexible = false, $args = array() ) {
+			$control_field_status = ! empty( $settings['display_status'] ) && $settings['display_status'] === true;
+			$accordion            = ! empty( $settings['accordion'] ) && $settings['accordion'] === true;
+			?>
+            <div class="merchant-group-field<?php
+			echo $accordion ? ' has-accordion' : '';
+			echo $control_field_status ? ' has-flag' : '' ?>" data-id="<?php
+			echo esc_attr
+			( $settings['id'] ) ?>">
+                <div class="title-area<?php
+				echo $accordion ? ' accordion-style' : '' ?>">
+					<?php
+					if ( ! empty( $settings['title'] ) ) {
+						printf( '<div class="merchant-module-page-setting-field-title">%s<span class="field-status hidden"></span></div>', esc_html( $settings['title'] ) );
+					}
+					if ( ! empty( $settings['sub-desc'] ) ) {
+						printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', esc_html( $settings['sub-desc'] ) );
+					}
+
+					if ( $accordion ) {
+		                ?>
+                            <span class="accordion-icon dashicons dashicons-arrow-down-alt2"></span>
+		                <?php
+	                }
+	                ?>
+                </div>
+                <div class="merchant-group-fields-container">
+					<?php
+					if ( $control_field_status ) {
+						/**
+						 * Field: Status.
+						 *
+						 * @since 1.9.12
+						 */
+						$status = apply_filters(
+							'merchant_group_status_field',
+							array(
+								'id'      => $settings['id'] . '_status',
+								'type'    => 'select',
+								'title'   => esc_html__( 'Status', 'merchant' ),
+								'options' => array(
+									'inactive' => esc_html__( 'Inactive', 'merchant' ),
+									'active'   => esc_html__( 'Active', 'merchant' ),
+								),
+								'default' => 'disabled',
+							),
+							$settings,
+							$value,
+							$module_id
+						);
+						if ( $inside_flexible ) {
+							static::replace_field(
+								$status,
+								isset( $args['value'][ $status['id'] ] ) ? $args['value'][ $status['id'] ] : $status['default'] ?? '',
+								"name=\"merchant[{$status['id']}]",
+								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$status['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$status['id']}]",
+								$module_id
+							);
+						} else {
+							static::field( $status, $value[ $status['id'] ] ?? '', $module_id );
+						}
+					}
+
+					foreach ( $settings['fields'] as $field ) {
+						if ( $inside_flexible ) {
+							static::replace_field(
+								$field,
+								isset( $args['value'][ $field['id'] ] ) ? $args['value'][ $field['id'] ] : $field['default'] ?? '',
+								"name=\"merchant[{$field['id']}]",
+								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$field['id']}]",
+								$module_id
+							);
+						} else {
+							static::field( $field, $value[ $field['id'] ] ?? '', $module_id );
+						}
+					} ?>
                 </div>
             </div>
 			<?php
