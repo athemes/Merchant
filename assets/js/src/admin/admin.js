@@ -597,7 +597,6 @@
 
                     $layout.find('input, select, textarea').each(function () {
                         if ($(this).data('name')) {
-                        console.log('ssss')
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
                     })
