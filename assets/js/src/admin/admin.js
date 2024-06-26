@@ -623,7 +623,7 @@
                         parentDiv.find('.merchant-flexible-content').accordion("option", "active", -1);
                     }
 
-                    GroubField.initFlag();
+                    GroubField.init();
 
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
 
