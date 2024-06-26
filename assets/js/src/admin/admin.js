@@ -714,6 +714,7 @@
                     }
 
                     self.updateLayoutTitle();
+                    GroubField.init();
                 } );
 
                 // Delete item
