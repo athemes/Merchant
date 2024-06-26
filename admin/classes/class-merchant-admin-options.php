@@ -2170,7 +2170,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					if ( ! empty( $settings['sub-desc'] ) ) {
 						printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', esc_html( $settings['sub-desc'] ) );
 					}
-
 					if ( $accordion ) {
 		                ?>
                             <span class="accordion-icon dashicons dashicons-arrow-down-alt2"></span>
@@ -2207,11 +2206,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								$status,
 								isset( $args['value'][ $status['id'] ] ) ? $args['value'][ $status['id'] ] : $status['default'] ?? '',
 								"name=\"merchant[{$status['id']}]",
-								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$status['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$status['id']}]",
+								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$status['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$status['id']}]",
 								$module_id
 							);
 						} else {
-							static::field( $status, $value[ $status['id'] ] ?? '', $module_id );
+							static::replace_field(
+								$status,
+								$value[ $field['id'] ] ?? '',
+								"name=\"merchant[{$status['id']}]",
+								"name=\"merchant[{$settings['id']}][{$status['id']}]",
+								$module_id
+							);
 						}
 					}
 
@@ -2221,11 +2226,17 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								$field,
 								isset( $args['value'][ $field['id'] ] ) ? $args['value'][ $field['id'] ] : $field['default'] ?? '',
 								"name=\"merchant[{$field['id']}]",
-								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$field['id']}]",
+								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$field['id']}]",
 								$module_id
 							);
 						} else {
-							static::field( $field, $value[ $field['id'] ] ?? '', $module_id );
+							static::replace_field(
+								$field,
+								$value[ $field['id'] ] ?? '',
+								"name=\"merchant[{$field['id']}]",
+								"name=\"merchant[{$settings['id']}][{$field['id']}]",
+								$module_id
+							);
 						}
 					} ?>
                 </div>
