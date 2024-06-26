@@ -2204,7 +2204,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( $inside_flexible ) {
 							static::replace_field(
 								$status,
-								isset( $args['value'][ $status['id'] ] ) ? $args['value'][ $status['id'] ] : $status['default'] ?? '',
+								isset( $args['value'][$settings['id']][ $status['id'] ] ) ? $args['value'][$settings['id']][ $status['id'] ] : $status['default'] ?? '',
 								"name=\"merchant[{$status['id']}]",
 								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$status['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$status['id']}]",
 								$module_id
@@ -2212,7 +2212,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						} else {
 							static::replace_field(
 								$status,
-								$value[ $field['id'] ] ?? '',
+								isset( $value[ $status['id'] ] ) ? $value[ $status['id'] ] : '',
 								"name=\"merchant[{$status['id']}]",
 								"name=\"merchant[{$settings['id']}][{$status['id']}]",
 								$module_id
@@ -2224,7 +2224,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( $inside_flexible ) {
 							static::replace_field(
 								$field,
-								isset( $args['value'][ $field['id'] ] ) ? $args['value'][ $field['id'] ] : $field['default'] ?? '',
+								isset( $args['value'][$settings['id']][ $field['id'] ] ) ? $args['value'][$settings['id']][ $field['id'] ] : $field['default'] ?? '',
 								"name=\"merchant[{$field['id']}]",
 								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$field['id']}]",
 								$module_id
@@ -2232,7 +2232,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						} else {
 							static::replace_field(
 								$field,
-								$value[ $field['id'] ] ?? '',
+								isset( $value[ $field['id'] ] ) ? $value[ $field['id'] ] : '',
 								"name=\"merchant[{$field['id']}]",
 								"name=\"merchant[{$settings['id']}][{$field['id']}]",
 								$module_id
