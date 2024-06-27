@@ -320,6 +320,37 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+						array(
+							'id'             => 'cart_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Cart page', 'merchant' ),
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
+							),
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// Text Formatting Settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} to get {discount} Discount', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
 					),
 				),
 			),
