@@ -2168,7 +2168,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						printf( '<div class="merchant-module-page-setting-field-title">%s<span class="field-status hidden"></span></div>', esc_html( $settings['title'] ) );
 					}
 					if ( ! empty( $settings['sub-desc'] ) ) {
-						printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', esc_html( $settings['sub-desc'] ) );
+						printf( '<div class="merchant-module-page-setting-field-desc">%s</div>', wp_kses_post( $settings['sub-desc'] ) );
 					}
 					if ( $accordion ) {
 		                ?>
