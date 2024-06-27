@@ -118,29 +118,25 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		$strings = array(
+			'table_title'           => 'Bulk discount: title',
+			'save_label'            => 'Bulk discount: save label',
+			'buy_text'              => 'Bulk discount: buy text',
+			'item_text'             => 'Bulk discount: item text',
+			'total_text'            => 'Bulk discount: total text',
+			'cart_title_text'       => 'Bulk discount: cart item discount title',
+			'cart_description_text' => 'Bulk discount: Cart item discount description',
+		);
 		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
 			foreach ( $settings['offers'] as $offer ) {
-				if ( ! empty( $offer['table_title'] ) ) {
-					Merchant_Translator::register_string( $offer['table_title'], esc_html__( 'Bulk discount: title', 'merchant' ) );
-				}
-				if ( ! empty( $offer['save_label'] ) ) {
-					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Bulk discount: save label', 'merchant' ) );
-				}
-				if ( ! empty( $offer['buy_text'] ) ) {
-					Merchant_Translator::register_string( $offer['buy_text'], esc_html__( 'Bulk discount: buy text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['item_text'] ) ) {
-					Merchant_Translator::register_string( $offer['item_text'], esc_html__( 'Bulk discount: item text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['total_text'] ) ) {
-					Merchant_Translator::register_string( $offer['total_text'], esc_html__( 'Bulk discount: total text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['cart_title_text'] ) ) {
-					Merchant_Translator::register_string( $offer['cart_title_text'], esc_html__( 'Bulk discount: cart item discount title', 'merchant' ) );
-				}
-				if ( ! empty( $offer['cart_description_text'] ) ) {
-					Merchant_Translator::register_string( $offer['cart_description_text'], esc_html__( 'Bulk discount: Cart item discount description', 'merchant' ) );
-				}
+				foreach ( $strings as $key => $string ) {
+                    if ( ! empty( $offer['product_single_page'][ $key ] ) ) {
+                        Merchant_Translator::register_string( $offer['product_single_page'][ $key ], $string . ' - product single page' );
+                    }
+					if ( ! empty( $rule['cart_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['cart_page'][ $key ], $string . ' - cart page' );
+					}
+                }
 			}
 		}
 	}
