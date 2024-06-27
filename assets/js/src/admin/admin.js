@@ -233,7 +233,7 @@
 
             $( this ).find( 'span:first' ).text( $trigger.text() === showText ? hiddenText : showText );
 
-            $( this ).closest( '.layout-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
+            $( this ).closest( '.merchant-module-page-setting-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
         } );
 
         // Add support for toggle field inside flexible content.
