@@ -158,121 +158,170 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'single_product_placement',
-							'type'    => 'radio',
-							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
-							'options' => array(
-								'after-cart-form'  => esc_html__( 'After add to cart', 'merchant' ),
-								'before-cart-form' => esc_html__( 'Before add to cart', 'merchant' ),
+							'id'             => 'product_single_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Product single page', 'merchant' ),
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
+									'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
 							),
-							'default' => 'after-cart-form',
-						),
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'single_product_placement',
+									'type'    => 'radio',
+									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+									'options' => array(
+										'after-cart-form'  => esc_html__( 'After add to cart', 'merchant' ),
+										'before-cart-form' => esc_html__( 'Before add to cart', 'merchant' ),
+									),
+									'default' => 'after-cart-form',
+								),
 
-						// Text Formatting Settings
-						array(
-							'id'      => 'title',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Offer title', 'merchant' ),
-							'default' => esc_html__( 'Buy One Get One', 'merchant' ),
-						),
+								// Text Formatting Settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Buy One Get One', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'buy_label',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Buy label', 'merchant' ),
-							'default' => esc_html__( 'Buy {quantity}', 'merchant' ),
-						),
+								array(
+									'id'      => 'buy_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Buy label', 'merchant' ),
+									'default' => esc_html__( 'Buy {quantity}', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'get_label',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Get label', 'merchant' ),
-							'default' => esc_html__( 'Get {quantity} with {discount} off', 'merchant' ),
-						),
+								array(
+									'id'      => 'get_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Get label', 'merchant' ),
+									'default' => esc_html__( 'Get {quantity} with {discount} off', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'button_text',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Button text', 'merchant' ),
-							'default' => esc_html__( 'Add To Cart', 'merchant' ),
-						),
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
 
-						// Style Settings
-						array(
-							'id'      => 'title_font_weight',
-							'type'    => 'select',
-							'title'   => esc_html__( 'Font weight', 'merchant' ),
-							'options' => array(
-								'lighter' => esc_html__( 'Light', 'merchant' ),
-								'normal'  => esc_html__( 'Normal', 'merchant' ),
-								'bold'    => esc_html__( 'Bold', 'merchant' ),
+								// Style Settings
+								array(
+									'id'      => 'title_font_weight',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Font weight', 'merchant' ),
+									'options' => array(
+										'lighter' => esc_html__( 'Light', 'merchant' ),
+										'normal'  => esc_html__( 'Normal', 'merchant' ),
+										'bold'    => esc_html__( 'Bold', 'merchant' ),
+									),
+									'default' => 'normal',
+								),
+
+								array(
+									'id'      => 'title_font_size',
+									'type'    => 'range',
+									'title'   => esc_html__( 'Font size', 'merchant' ),
+									'min'     => 0,
+									'max'     => 100,
+									'step'    => 1,
+									'unit'    => 'px',
+									'default' => 16,
+								),
+
+								array(
+									'id'      => 'title_text_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Title text color', 'merchant' ),
+									'default' => '#212121',
+								),
+
+								array(
+									'id'      => 'label_bg_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Label background color', 'merchant' ),
+									'default' => '#d61313',
+								),
+
+								array(
+									'id'      => 'label_text_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Label text color', 'merchant' ),
+									'default' => '#fff',
+								),
+
+								array(
+									'id'      => 'arrow_bg_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Arrow background color', 'merchant' ),
+									'default' => '#d61313',
+								),
+
+								array(
+									'id'      => 'arrow_text_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Arrow text color', 'merchant' ),
+									'default' => '#fff',
+								),
+
+
+								array(
+									'id'      => 'offer_border_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Offer border color', 'merchant' ),
+									'default' => '#cccccc',
+								),
+
+								array(
+									'id'      => 'offer_border_radius',
+									'type'    => 'range',
+									'title'   => esc_html__( 'Offer border Radius', 'merchant' ),
+									'min'     => 0,
+									'max'     => 100,
+									'step'    => 1,
+									'unit'    => 'px',
+									'default' => 5,
+								),
 							),
-							'default' => 'normal',
 						),
-
 						array(
-							'id'      => 'title_font_size',
-							'type'    => 'range',
-							'title'   => esc_html__( 'Font size', 'merchant' ),
-							'min'     => 0,
-							'max'     => 100,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 16,
-						),
+							'id'             => 'cart_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Cart page', 'merchant' ),
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
+							),
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// Text Formatting Settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Buy {min_quantity} Get {offer_quantity} with {discount} off', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'title_text_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Title text color', 'merchant' ),
-							'default' => '#212121',
-						),
-
-						array(
-							'id'      => 'label_bg_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Label background color', 'merchant' ),
-							'default' => '#d61313',
-						),
-
-						array(
-							'id'      => 'label_text_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Label text color', 'merchant' ),
-							'default' => '#fff',
-						),
-
-						array(
-							'id'      => 'arrow_bg_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Arrow background color', 'merchant' ),
-							'default' => '#d61313',
-						),
-
-						array(
-							'id'      => 'arrow_text_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Arrow text color', 'merchant' ),
-							'default' => '#fff',
-						),
-
-
-						array(
-							'id'      => 'offer_border_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Offer border color', 'merchant' ),
-							'default' => '#cccccc',
-						),
-
-						array(
-							'id'      => 'offer_border_radius',
-							'type'    => 'range',
-							'title'   => esc_html__( 'Offer border Radius', 'merchant' ),
-							'min'     => 0,
-							'max'     => 100,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 5,
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
 						),
 					),
 				),
