@@ -85,22 +85,22 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		$strings = array(
+			'offer-title' => 'Buy X Get Y: Campaign title',
+			'title'       => 'Buy X Get Y: title',
+			'buy_label'   => 'Buy X Get Y: buy label',
+			'get_label'   => 'Buy X Get Y: get label',
+			'button_text' => 'Buy X Get Y: button text',
+		);
 		if ( ! empty( $settings['rules'] ) ) {
 			foreach ( $settings['rules'] as $rule ) {
-				if ( ! empty( $rule['offer-title'] ) ) {
-					Merchant_Translator::register_string( $rule['offer-title'], esc_html__( 'Campaign title', 'merchant' ) );
-				}
-				if ( ! empty( $rule['title'] ) ) {
-					Merchant_Translator::register_string( $rule['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
-				}
-				if ( ! empty( $rule['buy_label'] ) ) {
-					Merchant_Translator::register_string( $rule['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
-				}
-				if ( ! empty( $rule['get_label'] ) ) {
-					Merchant_Translator::register_string( $rule['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
-				}
-				if ( ! empty( $rule['button_text'] ) ) {
-					Merchant_Translator::register_string( $rule['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+				foreach ( $strings as $key => $string ) {
+					if ( ! empty( $rule['product_single_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['product_single_page'][ $key ], $string . ' - product single page' );
+					}
+					if ( ! empty( $rule['cart_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['cart_page'][ $key ], $string . ' - cart page' );
+					}
 				}
 			}
 		}
