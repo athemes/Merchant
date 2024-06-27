@@ -251,6 +251,68 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+
+						array(
+							'id'    => 'cart_page',
+							'type'  => 'fields_group',
+							'title' => esc_html__( 'Cart Page', 'merchant' ),
+
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
+							),
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// text formatting settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bundle title', 'merchant' ),
+									'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'price_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Price label', 'merchant' ),
+									'default' => esc_html__( 'Bundle price', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'save_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'You save label', 'merchant' ),
+									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'no_variation_selected_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'no_variation_selected_text_has_no_discount',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
+									'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
+								),
+							),
+						),
 					),
 				),
 			),
