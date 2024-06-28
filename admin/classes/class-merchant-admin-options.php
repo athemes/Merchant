@@ -2158,9 +2158,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
             <div class="merchant-group-field<?php
 			echo $accordion ? ' has-accordion' : '';
-			echo $control_field_status ? ' has-flag' : '' ?>" data-id="<?php
-			echo esc_attr
-			( $settings['id'] ) ?>">
+			echo $control_field_status ? ' has-flag' : '';
+			echo ' merchant-group-field-' . esc_attr( $settings['id'] ) ?>" data-id="<?php
+			echo esc_attr( $settings['id'] ) ?>">
                 <div class="title-area<?php
 				echo $accordion ? ' accordion-style' : '' ?>">
 					<?php
