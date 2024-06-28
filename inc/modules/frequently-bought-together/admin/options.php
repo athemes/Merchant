@@ -45,12 +45,12 @@ Merchant_Admin_Options::create( array(
 							'default' => 'products',
 						),
 						array(
-							'id'       => 'product_to_display',
-							'type'     => 'products_selector',
-							'title'    => esc_html__( 'Select a product', 'merchant' ),
-							'multiple' => false,
-							'desc'     => esc_html__( 'Select the product that you want to create the bundle for.', 'merchant' ),
-							'condition'   => array( 'rules_to_display', '==', 'products' ),
+							'id'        => 'product_to_display',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Select a product', 'merchant' ),
+							'multiple'  => false,
+							'desc'      => esc_html__( 'Select the product that you want to create the bundle for.', 'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
 							'id'          => 'category_slugs',
@@ -93,20 +93,20 @@ Merchant_Admin_Options::create( array(
 							'default' => 0,
 						),
 						array(
-							'id'      => 'discount_type',
-							'type'    => 'radio',
-							'title'   => esc_html__( 'Discount', 'merchant' ),
-							'options' => array(
+							'id'        => 'discount_type',
+							'type'      => 'radio',
+							'title'     => esc_html__( 'Discount', 'merchant' ),
+							'options'   => array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default' => 'percentage',
+							'default'   => 'percentage',
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 						array(
-							'id'      => 'discount_value',
-							'type'    => 'number',
-							'default' => 10,
+							'id'        => 'discount_value',
+							'type'      => 'number',
+							'default'   => 10,
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 
@@ -146,92 +146,172 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'single_product_placement',
-							'type'    => 'radio',
-							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
-							'options' => array(
-								'after-summary' => esc_html__( 'After Product Summary', 'merchant' ),
-								'after-tabs'    => esc_html__( 'After Product Tabs', 'merchant' ),
-								'bottom'        => esc_html__( 'At the Bottom', 'merchant' ),
+							'id'             => 'product_single_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
+									'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
 							),
-							'default' => 'after-summary',
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'single_product_placement',
+									'type'    => 'radio',
+									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+									'options' => array(
+										'after-summary' => esc_html__( 'After Product Summary', 'merchant' ),
+										'after-tabs'    => esc_html__( 'After Product Tabs', 'merchant' ),
+										'bottom'        => esc_html__( 'At the Bottom', 'merchant' ),
+									),
+									'default' => 'after-summary',
+								),
+
+								// text formatting settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bundle title', 'merchant' ),
+									'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'price_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Price label', 'merchant' ),
+									'default' => esc_html__( 'Bundle price', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'save_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'You save label', 'merchant' ),
+									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'no_variation_selected_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'no_variation_selected_text_has_no_discount',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
+									'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
+								),
+
+								// style settings
+								array(
+									'id'      => 'plus_bg_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Plus sign background color', 'merchant' ),
+									'default' => '#212121',
+								),
+
+								array(
+									'id'      => 'plus_text_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Plus sign text color', 'merchant' ),
+									'default' => '#fff',
+								),
+
+								array(
+									'id'      => 'bundle_border_color',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Bundle border color', 'merchant' ),
+									'default' => '#f9f9f9',
+								),
+
+								array(
+									'id'      => 'bundle_border_radius',
+									'type'    => 'range',
+									'title'   => esc_html__( 'Bundle border radius', 'merchant' ),
+									'min'     => 0,
+									'max'     => 100,
+									'step'    => 1,
+									'unit'    => 'px',
+									'default' => 5,
+								),
+							),
 						),
 
-						// text formatting settings
 						array(
-							'id'      => 'title',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Bundle title', 'merchant' ),
-							'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-						),
+							'id'    => 'cart_page',
+							'type'  => 'fields_group',
+							'title' => esc_html__( 'Cart Page', 'merchant' ),
 
-						array(
-							'id'      => 'price_label',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Price label', 'merchant' ),
-							'default' => esc_html__( 'Bundle price', 'merchant' ),
-						),
+							'sub-desc'       => sprintf(
+							/*
+							 * translators: %s: preview link
+							 */
+								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
+								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
+							),
+							'state'          => 'open',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// text formatting settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bundle title', 'merchant' ),
+									'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'save_label',
-							'type'    => 'text',
-							'title'   => esc_html__( 'You save label', 'merchant' ),
-							'default' => esc_html__( 'You save: {amount}', 'merchant' ),
-						),
+								array(
+									'id'      => 'price_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Price label', 'merchant' ),
+									'default' => esc_html__( 'Bundle price', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'no_variation_selected_text',
-							'type'    => 'text',
-							'title'   => esc_html__( 'No variation selected text', 'merchant' ),
-							'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
-						),
+								array(
+									'id'      => 'save_label',
+									'type'    => 'text',
+									'title'   => esc_html__( 'You save label', 'merchant' ),
+									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'no_variation_selected_text_has_no_discount',
-							'type'    => 'text',
-							'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
-							'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
-							'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
-						),
+								array(
+									'id'      => 'no_variation_selected_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
+								),
 
-						array(
-							'id'      => 'button_text',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Button text', 'merchant' ),
-							'default' => esc_html__( 'Add to cart', 'merchant' ),
-						),
+								array(
+									'id'      => 'no_variation_selected_text_has_no_discount',
+									'type'    => 'text',
+									'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
+									'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
+									'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
+								),
 
-						// style settings
-						array(
-							'id'      => 'plus_bg_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Plus sign background color', 'merchant' ),
-							'default' => '#212121',
-						),
-
-						array(
-							'id'      => 'plus_text_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Plus sign text color', 'merchant' ),
-							'default' => '#fff',
-						),
-
-						array(
-							'id'      => 'bundle_border_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Bundle border color', 'merchant' ),
-							'default' => '#f9f9f9',
-						),
-
-						array(
-							'id'      => 'bundle_border_radius',
-							'type'    => 'range',
-							'title'   => esc_html__( 'Bundle border radius', 'merchant' ),
-							'min'     => 0,
-							'max'     => 100,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 5,
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
+								),
+							),
 						),
 					),
 				),
@@ -263,7 +343,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'type'    => 'info',
 			'id'      => 'shortcode_info',
-			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+				'merchant' ),
 		),
 		array(
 			'id'        => 'shortcode_text',

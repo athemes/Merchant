@@ -106,25 +106,24 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
+		$strings  = array(
+			'title'                                      => 'Frequently bought together: title',
+			'price_label'                                => 'Frequently bought together: price label',
+			'save_label'                                 => 'Frequently bought together: save label',
+			'no_variation_selected_text'                 => 'Frequently bought together: no variation selected text',
+			'no_variation_selected_text_has_no_discount' => 'Frequently bought together: no variation selected text (no discount)',
+			'button_text'                                => 'Frequently bought together: button text',
+		);
+		if ( ! empty( $settings['offers'] ) ) {
 			foreach ( $settings['offers'] as $offer ) {
-				if ( ! empty( $offer['title'] ) ) {
-					Merchant_Translator::register_string( $offer['title'], esc_html__( 'Frequently bought together: title', 'merchant' ) );
-				}
-				if ( ! empty( $offer['price_label'] ) ) {
-					Merchant_Translator::register_string( $offer['price_label'], esc_html__( 'Frequently bought together: price label', 'merchant' ) );
-				}
-				if ( ! empty( $offer['save_label'] ) ) {
-					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Frequently bought together: save label', 'merchant' ) );
-				}
-				if ( ! empty( $offer['no_variation_selected_text'] ) ) {
-					Merchant_Translator::register_string( $offer['no_variation_selected_text'], esc_html__( 'Frequently bought together: no variation selected text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['no_variation_selected_text_has_no_discount'] ) ) {
-					Merchant_Translator::register_string( $offer['no_variation_selected_text_has_no_discount'], esc_html__( 'Frequently bought together: no variation selected text (no discount)', 'merchant' ) );
-				}
-				if ( ! empty( $offer['button_text'] ) ) {
-					Merchant_Translator::register_string( $offer['button_text'], esc_html__( 'Frequently bought together: button text', 'merchant' ) );
+				// Register strings.
+				foreach ( $strings as $key => $string ) {
+					if ( ! empty( $offer['product_single_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $offer['product_single_page'][ $key ], $string . ' - product single page' );
+					}
+					if ( ! empty( $offer['cart_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $offer['cart_page'][ $key ], $string . ' - cart page' );
+					}
 				}
 			}
 		}
@@ -161,6 +160,78 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Cart item admin preview.
+	 *
+	 * @return string
+	 */
+	public function cart_item_preview() {
+		?>
+		<div class="merchant-cart-offers-container">
+			<div class="cart-item-offers">
+				<div class="cart-item-offer__container fbt">
+					<div class="cart-item-offer">
+						<div class="offer-title">Frequently Bought Together</div>
+						<div class="item-row product-row">
+							<div class="column_1">
+								<div class="product_image">
+									<a href="#" title="Product Name">
+                                        <span class="product-image-placeholder"></span>
+									</a>
+								</div>
+							</div>
+							<div class="column_3">
+								<div class="product-details">
+									<div class="product-name"><a href="#" title="Product Name">Product Name</a></div>
+									<div class="price-area">
+										<span class="price">
+											<?php echo wp_kses( wc_format_sale_price(24,15), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                        <div class="item-row product-row">
+                            <div class="column_1">
+                                <div class="product_image">
+                                    <a href="#" title="Product Name">
+                                        <span class="product-image-placeholder"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="column_3">
+                                <div class="product-details">
+                                    <div class="product-name"><a href="#" title="Product Name">Product Name</a></div>
+                                    <div class="price-area">
+										<span class="price">
+											<?php echo wp_kses( wc_format_sale_price(18,16), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+
+					<div class="item-footer">
+						<div class="offer-discount">
+							<div class="discount-label"><span class="label">Bundle price</span></div>
+							<div class="discount-price"><del>
+								<?php echo wp_kses( wc_format_sale_price(42,31), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
+							</div>
+							<div class="discount-savings">
+                                <span class="label">You save:</span>
+                                <?php
+								echo wp_kses( wc_price( 11 ), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?></div>
+						</div>
+						<div class="add-to-cart">
+							<button class="add-to-cart-button" type="button">Claim offer</button>
+						</div>
+					</div>
+				</div>
+			</div></div>
+		<?php
+	}
+
+	/**
 	 * Admin preview content.
 	 *
 	 * @param array $settings
@@ -168,6 +239,9 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
+        ?>
+		<div class="merchant-single-product-preview">
+        <?php
 		echo wp_kses( merchant_get_template_part(
 			self::MODULE_TEMPLATES_PATH,
 			'single-product',
@@ -212,6 +286,14 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			true
 		),
 			merchant_kses_allowed_tags() );
+		?>
+        </div>
+        <div class="merchant-cart-preview">
+		<?php
+		    $this->cart_item_preview();
+		?>
+        </div>
+		<?php
 	}
 
 	/**

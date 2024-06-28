@@ -118,28 +118,24 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		$strings  = array(
+			'table_title'           => 'Bulk discount: title',
+			'save_label'            => 'Bulk discount: save label',
+			'buy_text'              => 'Bulk discount: buy text',
+			'item_text'             => 'Bulk discount: item text',
+			'total_text'            => 'Bulk discount: total text',
+			'cart_title_text'       => 'Bulk discount: cart item discount title',
+			'cart_description_text' => 'Bulk discount: Cart item discount description',
+		);
 		if ( isset( $settings['offers'] ) && ! empty( $settings['offers'] ) ) {
 			foreach ( $settings['offers'] as $offer ) {
-				if ( ! empty( $offer['table_title'] ) ) {
-					Merchant_Translator::register_string( $offer['table_title'], esc_html__( 'Bulk discount: title', 'merchant' ) );
-				}
-				if ( ! empty( $offer['save_label'] ) ) {
-					Merchant_Translator::register_string( $offer['save_label'], esc_html__( 'Bulk discount: save label', 'merchant' ) );
-				}
-				if ( ! empty( $offer['buy_text'] ) ) {
-					Merchant_Translator::register_string( $offer['buy_text'], esc_html__( 'Bulk discount: buy text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['item_text'] ) ) {
-					Merchant_Translator::register_string( $offer['item_text'], esc_html__( 'Bulk discount: item text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['total_text'] ) ) {
-					Merchant_Translator::register_string( $offer['total_text'], esc_html__( 'Bulk discount: total text', 'merchant' ) );
-				}
-				if ( ! empty( $offer['cart_title_text'] ) ) {
-					Merchant_Translator::register_string( $offer['cart_title_text'], esc_html__( 'Bulk discount: cart item discount title', 'merchant' ) );
-				}
-				if ( ! empty( $offer['cart_description_text'] ) ) {
-					Merchant_Translator::register_string( $offer['cart_description_text'], esc_html__( 'Bulk discount: Cart item discount description', 'merchant' ) );
+				foreach ( $strings as $key => $string ) {
+					if ( ! empty( $offer['product_single_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $offer['product_single_page'][ $key ], $string . ' - product single page' );
+					}
+					if ( ! empty( $rule['cart_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['cart_page'][ $key ], $string . ' - cart page' );
+					}
 				}
 			}
 		}
@@ -213,55 +209,102 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	public function admin_preview_content() {
 		$settings = $this->get_module_settings();
 		?>
+        <div class="merchant-single-product-preview">
+            <div class="mrc-preview-single-product-elements">
+                <div class="mrc-preview-left-column">
+                    <div class="mrc-preview-product-image-wrapper">
+                        <div class="mrc-preview-product-image"></div>
+                        <div class="mrc-preview-product-image-thumbs">
+                            <div class="mrc-preview-product-image-thumb"></div>
+                            <div class="mrc-preview-product-image-thumb"></div>
+                            <div class="mrc-preview-product-image-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mrc-preview-right-column" data-currency="<?php
+				echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
+					<?php
+					merchant_get_template_part(
+						Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
+						'single-product',
+						array(
+							'settings'       => $settings,
+							'discount_tiers' => array(
+								array(
+									'quantity'            => 10,
+									'discount'            => 5,
+									'discount_type'       => 'percentage_discount',
+									'product_single_page' => array(
+										'save_label'  => esc_html__( 'Save {amount}', 'merchant' ),
+										'item_text'   => esc_html__( 'Per item:', 'merchant' ),
+										'total_text'  => esc_html__( 'Total price:', 'merchant' ),
+										'buy_text'    => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
+										'table_title' => esc_html__( 'Buy more, save more!', 'merchant' ),
+									),
+								),
+							),
+							'product_price'  => 20,
+						)
+					);
+					?>
+                </div>
+            </div>
+        </div>
+		<?php
+		$this->cart_item_preview();
+	}
 
-        <div class="mrc-preview-single-product-elements">
-            <div class="mrc-preview-left-column">
-                <div class="mrc-preview-product-image-wrapper">
-                    <div class="mrc-preview-product-image"></div>
-                    <div class="mrc-preview-product-image-thumbs">
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
-                        <div class="mrc-preview-product-image-thumb"></div>
+	/**
+	 * Cart item admin preview.
+	 *
+	 * @return void
+	 */
+	public function cart_item_preview() {
+		?>
+        <div class="merchant-cart-preview">
+            <div class="merchant-cart-offers-container">
+                <div class="cart-item-offers">
+                    <div class="cart-item-offer__container">
+                        <div class="cart-item-offer">
+                            <div class="item-row">
+                                <div class="column_3">
+                                    <div class="product-details">
+                                        <div class="offer-description">Add 3 to get 20% Discount</div>
+                                        <div class="product-name">
+                                            <a href="#" title="Product Name">Product Name</a>
+                                        </div>
+                                        <div class="price-area">
+                                            <span class="price">
+                                                <?php
+                                                echo wp_kses( wc_price( 15 ), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
+                                            </span>
+                                        </div>
+                                        <div class="item-footer">
+                                            <div class="product-variations-wrapper"></div>
+                                            <div class="add-to-cart">
+                                                <button class="add-to-cart-button alt" type="button">Add To Cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mrc-preview-right-column" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
-				<?php
-				merchant_get_template_part(
-					Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
-					'single-product',
-					array(
-						'settings'       => $settings,
-						'discount_tiers' => array(
-							array(
-								'quantity'      => 10,
-								'discount'      => 5,
-								'discount_type' => 'percentage_discount',
-								'save_label'    => esc_html__( 'Save {amount}', 'merchant' ),
-								'item_text'     => esc_html__( 'Per item:', 'merchant' ),
-								'total_text'    => esc_html__( 'Total price:', 'merchant' ),
-								'buy_text'      => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
-								'table_title'   => esc_html__( 'Buy more, save more!', 'merchant' ),
-							),
-						),
-						'product_price'  => 20,
-					)
-				);
-				?>
-            </div>
         </div>
-
 		<?php
 	}
 
 	/**
-     * Add this function for backward compatibility purpose.
+	 * Add this function for backward compatibility purpose.
+	 *
 	 * @return void
 	 */
-    public function get_module_custom_css() {
-        // No implementation needed.
-        return;
-    }
+	public function get_module_custom_css() {
+		// No implementation needed.
+		return;
+	}
 }
 
 
