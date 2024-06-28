@@ -26,11 +26,241 @@
 
 // Canvas.
 .merchant-module-page-preview-browser-inner {
-	display: flex;
+
+}
+
+.link-do-nothing {
+	pointer-events: none;
+}
+
+.merchant-single-product-preview {
 	flex-grow: 0;
 	width: 100%;
 	margin: auto;
 	padding: 25px;
+	display: none;
+
+	&.show {
+		display: flex;
+	}
+}
+
+.merchant-cart-preview {
+	display: none;
+
+	&.show {
+		display: block;
+	}
+
+	.merchant-cart-offers-container {
+
+		.cart-item-offers {
+			display: flex;
+			justify-content: center;
+			padding: 30px;
+		}
+
+		.cart-item-offer__container {
+			box-sizing: border-box;
+			margin-bottom: 10px;
+
+			* {
+				box-sizing: border-box;
+			}
+
+			.offer-title {
+				font-size: 11px;
+				font-weight: 600;
+				line-height: 12px;
+				margin-bottom: 15px;
+			}
+
+			.offer-description {
+				font-weight: 600;
+				margin-bottom: 12px;
+				font-size: 11px;
+				line-height: 12px;
+			}
+
+			.cart-item-offer {
+				margin-bottom: 15px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				.item-row {
+					display: flex;
+					gap: 14px;
+					//flex-direction: row;
+					flex-wrap: wrap;
+				}
+
+				.column {
+					padding-right: 5px;
+					padding-left: 5px;
+				}
+
+				.column_2 {
+					flex: 2;
+				}
+
+				.column_3 {
+					flex: 3;
+				}
+
+				.column_4 {
+					flex: 4;
+				}
+
+				.product_image {
+					.product-image-placeholder {
+						width: 55px;
+						height: 55px;
+						display: block;
+						background-color: #d8d8d8;
+					}
+				}
+
+				.product-details {
+					font-size: 12px;
+
+					.product-name a {
+						font-weight: 600;
+						margin-bottom: 8px;
+						font-size: 10px;
+						line-height: 16px;
+						text-decoration: none;
+					}
+
+					.price-area {
+						margin-bottom: 8px;
+						font-size: 8px;
+						line-height: 12px;
+					}
+
+					.product-variations-wrapper {
+						margin-bottom: 8px;
+					}
+				}
+
+				.product-variations-wrapper {
+					margin-bottom: 5px;
+
+					.product-variations {
+						display: grid;
+						grid-template-columns: 1fr 1fr;
+						grid-gap: 10px;
+
+						.variation-select {
+							font-size: 8px;
+							padding: 0px;
+							padding-right: 20px;
+							padding-left: 5px;
+							width: unset;
+							min-height: unset;
+						}
+					}
+				}
+			}
+
+			.offer-discount {
+				margin-bottom: 12px;
+
+				.discount-label {
+					font-size: 11px;
+					line-height: 12px;
+					color: #242021;
+					margin-bottom: 8px;
+				}
+
+				.discount-price {
+					margin-bottom: 6px;
+					line-height: 8px;
+
+					del {
+						font-size: 10px;
+
+						color: #616161;
+					}
+
+					ins {
+						font-size: 12px;
+						color: #242021;
+						font-weight: 600;
+					}
+
+					p {
+						font-size: 10px;
+						color: #242021;
+						line-height: 12px;
+						margin-bottom: 0;
+					}
+				}
+
+				.discount-savings {
+					font-style: italic;
+					font-size: 10px;
+					color: #242021;
+				}
+			}
+
+			.add-to-cart {
+				justify-content: center;
+				display: flex;
+				flex-direction: column;
+
+				.add-to-cart-button {
+					font-size: 6px;
+					max-width: 140px;
+					line-height: 13px;
+					width: 60px;
+					height: 20px;
+					padding: 0;
+					background-color: #212121;
+					color: #fff;
+					border: none;
+					pointer-events: none;
+					cursor: pointer;
+				}
+			}
+
+			&.fbt {
+				.cart-item-offer {
+					padding-top: 10px;
+
+					.item-row {
+						position: relative;
+						margin-bottom: 15px;
+
+
+						&:nth-last-of-type(1) {
+							margin: 0;
+						}
+
+						//&:before {
+						//	content: '+';
+						//	position: absolute;
+						//	top: -20px;
+						//	left: 0;
+						//	font-size: 11px;
+						//	line-height: 11px;
+						//	width: 15px;
+						//	height: 15px;
+						//	border-radius: 50%;
+						//	border: 1px solid #CBCBCB;
+						//	color: #000;
+						//	text-align: center;
+						//}
+
+						.product-variations-wrapper {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 // Canvas Placeholder (Single Product Style).
