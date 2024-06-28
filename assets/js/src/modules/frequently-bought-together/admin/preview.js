@@ -73,11 +73,9 @@
         if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
             show_cart_page_preview();
             hide_single_product_preview()
-            console.log('cart page preview')
         } else {
             show_single_product_preview();
             hide_cart_page_preview();
-            console.log('single product preview')
         }
     });
 
