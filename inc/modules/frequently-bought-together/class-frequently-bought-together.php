@@ -158,7 +158,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 
 		return $preview;
 	}
-	
+
+	/**
+	 * Cart item admin preview.
+	 *
+	 * @return string
+	 */
 	public function cart_item_preview() {
 		?>
 		<div class="merchant-cart-offers-container">
