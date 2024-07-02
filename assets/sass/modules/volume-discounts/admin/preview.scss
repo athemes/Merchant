@@ -26,7 +26,8 @@
 
 // Canvas.
 .merchant-module-page-preview-browser-inner {
-
+	position: relative;
+	min-height: 320px;
 }
 
 .link-do-nothing {
@@ -38,18 +39,35 @@
 	width: 100%;
 	margin: auto;
 	padding: 25px;
-	display: none;
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: opacity 300ms, visibility 300ms;
 
 	&.show {
-		display: flex;
+		visibility: visible;
+		opacity: 1;
 	}
 }
 
 .merchant-cart-preview {
-	display: none;
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: opacity 300ms, visibility 300ms;
 
 	&.show {
-		display: block;
+		visibility: visible;
+		opacity: 1;
 	}
 
 	.merchant-cart-offers-container {
