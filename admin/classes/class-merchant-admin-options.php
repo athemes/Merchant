@@ -2195,7 +2195,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 									'inactive' => esc_html__( 'Inactive', 'merchant' ),
 									'active'   => esc_html__( 'Active', 'merchant' ),
 								),
-								'default' => 'disabled',
+								'default' => isset( $settings['default'] ) ? $settings['default'] : 'active',
 							),
 							$settings,
 							$value,
