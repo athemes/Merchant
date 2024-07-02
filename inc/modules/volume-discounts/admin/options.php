@@ -166,6 +166,7 @@ Merchant_Admin_Options::create( array(
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
+							'default'        => 'active',
 							'fields'         => array(
 								array(
 									'id'      => 'single_product_placement',
@@ -334,6 +335,7 @@ Merchant_Admin_Options::create( array(
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
+							'default'        => 'inactive',
 							'fields'         => array(
 								// Text Formatting Settings
 								array(
