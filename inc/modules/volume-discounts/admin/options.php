@@ -155,14 +155,7 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product single page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
-									'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
@@ -325,13 +318,7 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Cart page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, before checkout.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
