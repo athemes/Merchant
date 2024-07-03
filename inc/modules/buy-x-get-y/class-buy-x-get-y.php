@@ -186,7 +186,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 					true
 				);
 				$preview_html .= '</div>';
-				// $preview_html .= $this->cart_preview();
+                $preview_html .= $this->cart_preview();
 				$preview->set_html( $preview_html );
 			} else {
 				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
