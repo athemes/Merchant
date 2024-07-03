@@ -109,7 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php if ( ! $has_no_discount ) : ?>
 								<p class="merchant-frequently-bought-together-bundle-save<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
 									<?php echo isset( $bundle['product_single_page']['save_label'] )
-										? wp_kses( str_replace( '{amount}', wc_price( $bundle['product_single_page']['total_discount'] ), Merchant_Translator::translate( $bundle['save_label'] ) ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
+										? wp_kses( str_replace( '{amount}', wc_price( $bundle['total_discount'] ), Merchant_Translator::translate( $bundle['product_single_page']['save_label'] ) ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
 										: wp_kses(
 											/* Translators: 1. Total discount */
 											sprintf( __( 'You save: %s', 'merchant' ), wc_price( $bundle['total_discount'] ) ),
