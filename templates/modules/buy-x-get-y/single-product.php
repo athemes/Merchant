@@ -98,7 +98,8 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
             <div class="merchant-bogo-product-y is-<?php
 			echo esc_attr( $product_type ); ?>" style="<?php
 			echo isset( $offer['product_single_page']['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['product_single_page']['offer_border_color'] . ';' ) : '';
-			echo isset( $offer['product_single_page']['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['product_single_page']['offer_border_radius'] . 'px;' ) : ''; ?>"
+			echo isset( $offer['product_single_page']['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['product_single_page']['offer_border_radius'] . 'px;' )
+				: ''; ?>"
             ">
             <form class="merchant-bogo-form" data-product="<?php
 			echo esc_attr( $buy_product->get_id() ); ?>">
@@ -143,7 +144,12 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
                             </p>
                             <div class="merchant-bogo-product-price">
 								<?php
-								echo wp_kses( $buy_product->get_price_html(), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+								if ( $offer['discount_type'] === 'percentage' ) {
+									$buy_product_reduced_price = $buy_product->get_price() - ( $buy_product->get_price() * $offer['discount'] / 100 );
+								} else {
+									$buy_product_reduced_price = $buy_product->get_price() - ( $offer['discount'] / $offer['quantity'] );
+								}
+								echo wp_kses( wc_format_sale_price( $buy_product->get_price(), $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
                             </div>
                         </div>
                     </div>
