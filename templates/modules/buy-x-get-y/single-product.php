@@ -47,6 +47,7 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
 			continue;
 		}
 
+		$is_in_stock = ( $buy_product->is_type( 'simple' ) || $buy_product->is_type( 'variation' ) ) ? $buy_product->is_in_stock() : true; // For variable products it'll be handled by JS when a variable will be selected
 		?>
         <p class="merchant-bogo-title" style="<?php
 		echo isset( $offer['product_single_page']['title_font_weight'] ) ? esc_attr( 'font-weight: ' . $offer['product_single_page']['title_font_weight'] . ';' ) : '';
@@ -130,72 +131,83 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
                 </div>
 				<?php
 				if ( $buy_product ) {
-					?>
-                    <div class="merchant-bogo-product">
-						<?php
-						echo wp_kses_post( $buy_product->get_image( 'woocommerce_gallery_thumbnail' ) ); ?>
-                        <div class="merchant-bogo-product-contents">
-                            <p class="woocommerce-loop-product__title">
-                                <a href="<?php
-								echo esc_url( $buy_product->get_permalink() ); ?>" target="_blank">
-									<?php
-									echo esc_html( $buy_product->get_name() ); ?>
-                                </a>
-                            </p>
-                            <div class="merchant-bogo-product-price">
+				?>
+                <div class="merchant-bogo-product">
+					<?php
+					echo wp_kses_post( $buy_product->get_image( 'woocommerce_gallery_thumbnail' ) ); ?>
+                    <div class="merchant-bogo-product-contents">
+                        <p class="woocommerce-loop-product__title">
+                            <a href="<?php
+							echo esc_url( $buy_product->get_permalink() ); ?>" target="_blank">
 								<?php
-								if ( $offer['discount_type'] === 'percentage' ) {
-									$buy_product_reduced_price = $buy_product->get_price() - ( $buy_product->get_price() * $offer['discount'] / 100 );
-								} else {
-									$buy_product_reduced_price = $buy_product->get_price() - ( $offer['discount'] / $offer['quantity'] );
-								}
-								echo wp_kses( wc_format_sale_price( $buy_product->get_price(), $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
-                            </div>
+								echo esc_html( $buy_product->get_name() ); ?>
+                            </a>
+                        </p>
+                        <div class="merchant-bogo-product-price">
+		                    <?php
+		                    if ( $is_in_stock ) {
+			                    if ( $offer['discount_type'] === 'percentage' ) {
+				                    $buy_product_reduced_price = $buy_product->get_price() - ( $buy_product->get_price() * $offer['discount'] / 100 );
+			                    } else {
+				                    $buy_product_reduced_price = $buy_product->get_price() - ( $offer['discount'] / $offer['quantity'] );
+			                    }
+			                    echo wp_kses( wc_format_sale_price( $buy_product->get_price(), $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+		                    } else {
+			                    echo '<span class="error">' . esc_html__( 'Out of stock', 'merchant' ) . '</span>';
+		                    }
+		                    ?>
                         </div>
                     </div>
+                </div>
+			<?php
+			if ( $buy_product->is_type( 'variable' ) ) : ?>
+                <div class="merchant-bogo-product-attributes" data-nonce="<?php
+				echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
 					<?php
-					if ( $buy_product->is_type( 'variable' ) ) : ?>
-                        <div class="merchant-bogo-product-attributes" data-nonce="<?php
-						echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
+					foreach ( $buy_product->get_variation_attributes() as $attribute => $terms ) :
+						$attribute_label = wc_attribute_label( $attribute );
+						?>
+                        <select class="merchant-bogo-select-attribute" name="<?php
+						echo esc_attr( $attribute ) ?>" required>
+                            <option value="">
+								<?php
+								echo esc_html(
+								/* Translators: 1. Attribute label */
+									sprintf( __( 'Select %s', 'merchant' ), $attribute_label )
+								); ?>
+                            </option>
 							<?php
-							foreach ( $buy_product->get_variation_attributes() as $attribute => $terms ) :
-								$attribute_label = wc_attribute_label( $attribute );
+							foreach ( $terms as $_term_key => $_term ) :
 								?>
-                                <select class="merchant-bogo-select-attribute" name="<?php
-								echo esc_attr( $attribute ) ?>" required>
-                                    <option value="">
-										<?php
-										echo esc_html(
-										/* Translators: 1. Attribute label */
-											sprintf( __( 'Select %s', 'merchant' ), $attribute_label )
-										); ?>
-                                    </option>
-									<?php
-									foreach ( $terms as $_term_key => $_term ) :
-										?>
-                                        <option value="<?php
-										echo esc_attr( $_term ) ?>"><?php
-											echo esc_html( ucfirst( $_term ) ) ?></option>
-									<?php
-									endforeach; ?>
-                                </select>
+                                <option value="<?php
+								echo esc_attr( $_term ) ?>"><?php
+									echo esc_html( ucfirst( $_term ) ) ?></option>
 							<?php
 							endforeach; ?>
-                        </div>
+                        </select>
 					<?php
-					endif; ?>
-                    <button type="submit" name="merchant-bogo-add-to-cart" value="97" class="button alt wp-element-button merchant-bogo-add-to-cart">
-						<?php
-						echo isset( $offer['product_single_page']['button_text'] ) ? esc_html( Merchant_Translator::translate( $offer['product_single_page']['button_text'] ) )
-							: esc_html__( 'Add To Cart', 'merchant' ); ?>
-                    </button>
-                    <div class="merchant-bogo-offer-error"></div>
-					<?php
-				} ?>
+					endforeach; ?>
+                </div>
+			<?php
+			endif; ?>
+                <button
+                        type="submit"
+                        name="merchant-bogo-add-to-cart"
+                        value=""
+                        class="button alt wp-element-button merchant-bogo-add-to-cart"
+					<?php if ( ! $is_in_stock ) : ?>
+                        disabled="disabled"
+					<?php endif; ?>
+                >
+					<?php echo isset( $offer['product_single_page']['button_text'] ) ? esc_html( Merchant_Translator::translate( $offer['product_single_page']['button_text'] ) ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
+                </button>
+                <div class="merchant-bogo-offer-error"></div>
+			<?php
+			} ?>
             </form>
         </div>
     </div>
-	<?php
+    <?php
 	endforeach; ?>
 </div>
 </div>
