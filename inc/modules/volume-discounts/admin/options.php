@@ -105,7 +105,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'discount',
 							'type'    => 'number',
-							'default' => 1,
+							'default' => 10,
 						),
 
 						array(
@@ -329,7 +329,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} Discount', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} discount off each', 'merchant' ),
 								),
 
 								array(
