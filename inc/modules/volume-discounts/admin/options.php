@@ -100,7 +100,7 @@ Merchant_Admin_Options::create( array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default' => 'fixed_discount',
+							'default' => 'percentage_discount',
 						),
 						array(
 							'id'      => 'discount',
@@ -329,7 +329,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} Discount', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} discount off each', 'merchant' ),
 								),
 
 								array(

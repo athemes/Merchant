@@ -99,7 +99,8 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
             <div class="merchant-bogo-product-y is-<?php
 			echo esc_attr( $product_type ); ?>" style="<?php
 			echo isset( $offer['product_single_page']['offer_border_color'] ) ? esc_attr( 'border-color: ' . $offer['product_single_page']['offer_border_color'] . ';' ) : '';
-			echo isset( $offer['product_single_page']['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['product_single_page']['offer_border_radius'] . 'px;' ) : ''; ?>"
+			echo isset( $offer['product_single_page']['offer_border_radius'] ) ? esc_attr( 'border-radius: ' . $offer['product_single_page']['offer_border_radius'] . 'px;' )
+				: ''; ?>"
             ">
             <form class="merchant-bogo-form" data-product="<?php
 			echo esc_attr( $buy_product->get_id() ); ?>">
@@ -143,13 +144,18 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
                                 </a>
                             </p>
                             <div class="merchant-bogo-product-price">
-								<?php
-								if ( $is_in_stock ) {
-									echo wp_kses( $buy_product->get_price_html(), merchant_kses_allowed_tags( array( 'bdi' ) ) );
-                                } else {
-                                    echo '<span class="error">' . esc_html__( 'Out of stock', 'merchant' ) . '</span>';
-                                }
-                                ?>
+		                        <?php
+		                        if ( $is_in_stock ) {
+			                        if ( $offer['discount_type'] === 'percentage' ) {
+				                        $buy_product_reduced_price = $buy_product->get_price() - ( $buy_product->get_price() * $offer['discount'] / 100 );
+			                        } else {
+				                        $buy_product_reduced_price = $buy_product->get_price() - ( $offer['discount'] / $offer['quantity'] );
+			                        }
+			                        echo wp_kses( wc_format_sale_price( $buy_product->get_price(), $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+		                        } else {
+			                        echo '<span class="error">' . esc_html__( 'Out of stock', 'merchant' ) . '</span>';
+		                        }
+		                        ?>
                             </div>
                         </div>
                     </div>
@@ -184,16 +190,12 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
                         </div>
 					<?php
 					endif; ?>
-                    <button
-                        type="submit"
-                        name="merchant-bogo-add-to-cart"
-                        value=""
-                        class="button alt wp-element-button merchant-bogo-add-to-cart"
-                        <?php if ( ! $is_in_stock ) : ?>
-                            disabled="disabled"
-                        <?php endif; ?>
-                    >
-						<?php echo isset( $offer['product_single_page']['button_text'] ) ? esc_html( Merchant_Translator::translate( $offer['product_single_page']['button_text'] ) ) : esc_html__( 'Add To Cart', 'merchant' ); ?>
+                    <button type="submit" name="merchant-bogo-add-to-cart" value="97" class="button alt wp-element-button merchant-bogo-add-to-cart" <?php if ( ! $is_in_stock ) : ?>
+                        disabled="disabled"
+                    <?php endif; ?>>
+						<?php
+						echo isset( $offer['product_single_page']['button_text'] ) ? esc_html( Merchant_Translator::translate( $offer['product_single_page']['button_text'] ) )
+							: esc_html__( 'Add To Cart', 'merchant' ); ?>
                     </button>
                     <div class="merchant-bogo-offer-error"></div>
 					<?php
@@ -201,7 +203,7 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
             </form>
         </div>
     </div>
-	<?php
+    <?php
 	endforeach; ?>
 </div>
 </div>
