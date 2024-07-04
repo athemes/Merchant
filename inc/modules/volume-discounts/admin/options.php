@@ -155,17 +155,11 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product single page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
-									'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on product pages.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
+							'default'        => 'active',
 							'fields'         => array(
 								array(
 									'id'      => 'single_product_placement',
@@ -324,23 +318,18 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Cart page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the cart page.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
+							'default'        => 'inactive',
 							'fields'         => array(
 								// Text Formatting Settings
 								array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} to get {discount} Discount', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} Discount', 'merchant' ),
 								),
 
 								array(

@@ -235,24 +235,24 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 			<div class="merchant-cart-offers-container">
                 <div class="cart-item-offers">
 					<div class="cart-item-offer__container">
-						<div class="offer-title">Buy 3 Get 3 with 20% off</div>
 						<div class="cart-item-offer">
+						    <div class="offer-title">Buy 3 Get 3 with 20% off</div>
 							<div class="item-row">
 								<div class="column_1">
 									<div class="product_image">
-                                        <a href="#" title="Product Name">
+                                        <a href="#" class="link-do-nothing" title="Product Name">
                                             <span class="product-image-placeholder"></span>
                                         </a>
 									</div>
 								</div>
 								<div class="column_3">
 									<div class="product-details">
-										<div class="product-name"><a href="#" title="Product Name">Product Name</a></div>
-										<div class="price-area">
-											<span class="price">
-                                                <?php echo wp_kses( wc_format_sale_price(18,16), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
-                                            </span>
-										</div>
+										<div class="product-name"><a href="#" class="link-do-nothing" title="Product Name">Product Name</a></div>
+                                        <div class="offer-discount">
+                                            <div class="discount-savings">
+                                                <span class="label">with <strong>15%</strong> off</span>
+                                            </div>
+                                        </div>
 										<div class="item-footer">
 											<div class="product-variations-wrapper"></div>
 											<div class="add-to-cart">

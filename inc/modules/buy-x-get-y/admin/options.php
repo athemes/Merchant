@@ -161,15 +161,9 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product single page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
-									'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description.', 'merchant' ),
 							'state'          => 'open',
+							'default'        => 'active',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
@@ -296,14 +290,9 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Cart page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, before checkout.', 'merchant' ),
 							'state'          => 'open',
+							'default'        => 'inactive',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
@@ -312,7 +301,14 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Buy {min_quantity} Get {offer_quantity} with {discount} off', 'merchant' ),
+									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'discount_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( 'with {discount} off', 'merchant' ),
 								),
 
 								array(

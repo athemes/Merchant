@@ -56,6 +56,15 @@
       .cart-item-offer {
         margin-bottom: 15px;
 
+        &:before{
+          content: '';
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: #EEEEEE;
+          margin-bottom: 12px;
+        }
+
         &:last-child {
           margin-bottom: 0;
         }
@@ -136,7 +145,7 @@
       }
 
       .offer-discount {
-        margin-bottom: 12px;
+        margin-bottom: 8px;
 
         .discount-label {
           font-size: 11px;
@@ -170,7 +179,7 @@
         }
 
         .discount-savings {
-          font-style: italic;
+          //font-style: italic;
           font-size: 10px;
           color: #242021;
         }
@@ -182,17 +191,19 @@
         flex-direction: column;
 
         .add-to-cart-button {
-          font-size: 6px;
-          max-width: 140px;
           line-height: 13px;
-          width: 60px;
-          height: 20px;
-          padding: 0;
           background-color: #212121;
           color: #fff;
           border: none;
           pointer-events: none;
           cursor: pointer;
+          font-size: 8px;
+          font-weight: bold;
+          max-width: 140px;
+          line-height: 13px;
+          width: 80px;
+          height: 25px;
+          padding: 0;
         }
       }
 

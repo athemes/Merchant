@@ -149,15 +149,9 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description. %s',
-									'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'sub-desc'       => esc_html__( 'Showcase the products from the offer, together with the discount. Suited just below the product description.', 'merchant' ),
 							'state'          => 'open',
+							'default'        => 'active',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
@@ -256,14 +250,8 @@ Merchant_Admin_Options::create( array(
 							'id'    => 'cart_page',
 							'type'  => 'fields_group',
 							'title' => esc_html__( 'Cart Page', 'merchant' ),
-
-							'sub-desc'       => sprintf(
-							/*
-							 * translators: %s: preview link
-							 */
-								esc_html__( 'Remind customers about this offer in the last step, before checkout. %s', 'merchant' ),
-								'<a href="#" target="_blank" class="link-do-nothing">' . esc_html__( 'Preview', 'merchant' ) . '</a>'
-							),
+							'default'        => 'inactive',
+							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, before checkout.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
 							'display_status' => true,
@@ -273,37 +261,37 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Bundle title', 'merchant' ),
-									'default' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+									'default' => esc_html__( 'Add', 'merchant' ),
 								),
 
-								array(
-									'id'      => 'price_label',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Price label', 'merchant' ),
-									'default' => esc_html__( 'Bundle price', 'merchant' ),
-								),
+//                              array(
+//                                  'id'      => 'price_label',
+//                                  'type'    => 'text',
+//                                  'title'   => esc_html__( 'Price label', 'merchant' ),
+//                                  'default' => esc_html__( 'Bundle price', 'merchant' ),
+//                              ),
 
 								array(
 									'id'      => 'save_label',
 									'type'    => 'text',
-									'title'   => esc_html__( 'You save label', 'merchant' ),
-									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+									'title'   => esc_html__( 'And save label', 'merchant' ),
+									'default' => esc_html__( 'and save: {amount}', 'merchant' ),
 								),
 
-								array(
-									'id'      => 'no_variation_selected_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'No variation selected text', 'merchant' ),
-									'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
-								),
-
-								array(
-									'id'      => 'no_variation_selected_text_has_no_discount',
-									'type'    => 'text',
-									'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
-									'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
-									'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
-								),
+//                              array(
+//                                  'id'      => 'no_variation_selected_text',
+//                                  'type'    => 'text',
+//                                  'title'   => esc_html__( 'No variation selected text', 'merchant' ),
+//                                  'default' => esc_html__( 'Please select an option to see your savings.', 'merchant' ),
+//                              ),
+//
+//                              array(
+//                                  'id'      => 'no_variation_selected_text_has_no_discount',
+//                                  'type'    => 'text',
+//                                  'title'   => esc_html__( 'No variation selected text (no discount)', 'merchant' ),
+//                                  'desc'    => esc_html__( 'This text will be displayed when the bundle has no discount and includes a variable product.', 'merchant' ),
+//                                  'default' => esc_html__( 'Please select an option to see the total price.', 'merchant' ),
+//                              ),
 
 								array(
 									'id'      => 'button_text',
