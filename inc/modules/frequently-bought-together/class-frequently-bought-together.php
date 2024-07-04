@@ -170,58 +170,27 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			<div class="cart-item-offers">
 				<div class="cart-item-offer__container fbt">
 					<div class="cart-item-offer">
-						<div class="offer-title">Frequently Bought Together</div>
+						<div class="offer-title">Add</div>
 						<div class="item-row product-row">
 							<div class="column_1">
 								<div class="product_image">
-									<a href="#" title="Product Name">
+									<a href="#" title="Product Name" class="link-do-nothing">
                                         <span class="product-image-placeholder"></span>
 									</a>
 								</div>
 							</div>
 							<div class="column_3">
 								<div class="product-details">
-									<div class="product-name"><a href="#" title="Product Name">Product Name</a></div>
-									<div class="price-area">
-										<span class="price">
-											<?php echo wp_kses( wc_format_sale_price(24,15), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
-										</span>
-									</div>
+									<div class="product-name"><a href="#" class="link-do-nothing" title="Product Name">Product Name</a></div>
+                                    <div class="offer-discount">
+                                        <div class="discount-savings"><span class="label">and save:</span> <strong>£15.50</strong></div>
+                                    </div>
 								</div>
 							</div>
 						</div>
-                        <div class="item-row product-row">
-                            <div class="column_1">
-                                <div class="product_image">
-                                    <a href="#" title="Product Name">
-                                        <span class="product-image-placeholder"></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="column_3">
-                                <div class="product-details">
-                                    <div class="product-name"><a href="#" title="Product Name">Product Name</a></div>
-                                    <div class="price-area">
-										<span class="price">
-											<?php echo wp_kses( wc_format_sale_price(18,16), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
-										</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 					</div>
 
 					<div class="item-footer">
-						<div class="offer-discount">
-							<div class="discount-label"><span class="label">Bundle price</span></div>
-							<div class="discount-price"><del>
-								<?php echo wp_kses( wc_format_sale_price(42,31), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?>
-							</div>
-							<div class="discount-savings">
-                                <span class="label">You save:</span>
-                                <?php
-								echo wp_kses( wc_price( 11 ), merchant_kses_allowed_tags( array( 'bdi' ) ) ) ?></div>
-						</div>
 						<div class="add-to-cart">
 							<button class="add-to-cart-button" type="button">Claim offer</button>
 						</div>

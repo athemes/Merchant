@@ -23,8 +23,7 @@
             offerBorderColor = layout.find('.merchant-field-bundle_border_color input').val(),
             offerBorderRadius = layout.find('.merchant-field-bundle_border_radius input.merchant-range-number-input').val(),
             cartBundleTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
-            cartBundlePriceLabel = layout.find('.merchant-group-field-cart_page .merchant-field-price_label input').val(),
-            cartBundleSaveLabel = layout.find('.merchant-group-field-cart_page .merchant-field-save_label input').val(),
+            cartSaveLabel = layout.find('.merchant-group-field-cart_page .merchant-field-save_label input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-frequently-bought-together-bundle-product-plus').css({
@@ -40,8 +39,7 @@
         $('.merchant-frequently-bought-together-bundle-total').html(totalText);
         $('.merchant-frequently-bought-together-bundles .merchant-add-bundle-to-cart').html(addToCartText);
         $('.cart-item-offer__container .offer-title').text(cartBundleTitle)
-        $('.cart-item-offer__container .discount-label .label').text(cartBundlePriceLabel)
-        $('.cart-item-offer__container .discount-savings .label').text(cartBundleSaveLabel.replace('{amount}', ''))
+        $('.cart-item-offer__container .discount-savings .label').text(cartSaveLabel.replace('{amount}', ''))
         $('.cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText)
     }
 

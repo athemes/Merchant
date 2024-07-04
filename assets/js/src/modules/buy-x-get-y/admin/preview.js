@@ -23,6 +23,7 @@
             offerBorderColor = layout.find('.merchant-field-offer_border_color input').val(),
             offerBorderRadius = layout.find('.merchant-field-offer_border_radius input.merchant-range-number-input').val(),
             cartOfferTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
+            cartDiscountText = layout.find('.merchant-group-field-cart_page .merchant-field-discount_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-bogo-title').css('color', titleTextColor);
@@ -40,7 +41,11 @@
         });
 
         $('.merchant-cart-preview .cart-item-offer__container .offer-title').text(
-            cartOfferTitle.replace('{min_quantity}', '3').replace('{offer_quantity}', '1').replace('{discount}', '20%')
+            cartOfferTitle.replace('{min_quantity}', '3').replace('{offer_quantity}', '1')
+        );
+
+        $('.merchant-cart-preview .cart-item-offer__container .discount-savings .label').html(
+            cartDiscountText.replace('{discount}', `<strong>20%</strong>`)
         );
         $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
     }

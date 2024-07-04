@@ -59,10 +59,10 @@
 	visibility: hidden;
 	opacity: 0;
 	position: absolute;
-	top: 0;
+	top: 50%;
 	left: 0;
 	right: 0;
-	bottom: 0;
+	transform: translateY(-50%);
 	transition: opacity 300ms, visibility 300ms;
 
 	&.show {
@@ -95,13 +95,22 @@
 
 			.offer-description {
 				font-weight: 600;
-				margin-bottom: 12px;
+				margin-bottom: 10px;
 				font-size: 11px;
 				line-height: 12px;
 			}
 
 			.cart-item-offer {
 				margin-bottom: 15px;
+
+				&:before{
+					content: '';
+					display: block;
+					width: 100%;
+					height: 1px;
+					background-color: #EEEEEE;
+					margin-bottom: 12px;
+				}
 
 				&:last-child {
 					margin-bottom: 0;
@@ -229,17 +238,19 @@
 				flex-direction: column;
 
 				.add-to-cart-button {
-					font-size: 6px;
-					max-width: 140px;
 					line-height: 13px;
-					width: 60px;
-					height: 20px;
-					padding: 0;
 					background-color: #212121;
 					color: #fff;
 					border: none;
 					pointer-events: none;
 					cursor: pointer;
+					font-size: 8px;
+					font-weight: bold;
+					max-width: 140px;
+					line-height: 13px;
+					width: 80px;
+					height: 25px;
+					padding: 0;
 				}
 			}
 
