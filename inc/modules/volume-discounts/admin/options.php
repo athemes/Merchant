@@ -100,12 +100,12 @@ Merchant_Admin_Options::create( array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default' => 'fixed_discount',
+							'default' => 'percentage_discount',
 						),
 						array(
 							'id'      => 'discount',
 							'type'    => 'number',
-							'default' => 10,
+							'default' => 1,
 						),
 
 						array(
