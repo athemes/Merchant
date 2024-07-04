@@ -307,7 +307,7 @@ Merchant_Admin_Options::create( array(
 								array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
-									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
 									'default' => esc_html__( 'with {discount} off', 'merchant' ),
 								),
 
