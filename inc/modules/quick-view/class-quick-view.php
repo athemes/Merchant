@@ -394,7 +394,16 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 							<div class="merchant-quick-view-product-price">
 								<div class="price"><?php echo wp_kses( $product->get_price_html(), merchant_kses_allowed_tags() ); ?></div>
 							</div>
+
 							<?php if ( 'top' === $settings[ 'place_product_description' ] ) : ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_before_product_description' );
+								?>
 								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
 									<div class="merchant-quick-view-product-excerpt">
 										<?php echo wp_kses_post( $product->get_description() ); ?>
@@ -404,11 +413,47 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
 									</div>
 								<?php endif; ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_after_product_description' );
+								?>
 							<?php endif; ?>
+
+							<?php
+							/**
+							 * Hook 'merchant_quick_view_before_add_to_cart'
+							 *
+							 * @since 1.9.14
+							 */
+							do_action( 'merchant_quick_view_before_add_to_cart' );
+							?>
+
 							<div class="merchant-quick-view-product-add-to-cart <?php echo esc_attr( $hide_quantity ); ?>">
 								<?php woocommerce_template_single_add_to_cart(); ?>
 							</div>
+
+							<?php
+							/**
+							 * Hook 'merchant_quick_view_after_add_to_cart'
+							 *
+							 * @since 1.9.14
+							 */
+							do_action( 'merchant_quick_view_after_add_to_cart' );
+							?>
+
 							<?php if ( 'bottom' === $settings[ 'place_product_description' ] ) : ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_before_product_description' );
+								?>
 								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
 									<div class="merchant-quick-view-product-excerpt">
 										<?php echo wp_kses_post( $product->get_description() ); ?>
@@ -418,6 +463,14 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
 									</div>
 								<?php endif; ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_after_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_after_product_description' );
+								?>
 							<?php endif; ?>
 							<div class="merchant-quick-view-product-meta">
 								<?php woocommerce_template_single_meta(); ?>
