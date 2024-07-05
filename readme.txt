@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.12
+Stable tag: 1.9.13
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -214,6 +214,15 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.13 =
+* Fixed - Product Labels: label wasn't compatible with Storewide sale
+* Fixed - Product Labels: label wasn't appearing correctly on the Flatsome theme
+* Fixed - Product Labels: diagonal label shapes weren't appearing correctly on some themes [Fixed] Free gifts: Now includes tax in calculations for spending goals when spending type is set to cart total
+* Fixed - Quick View: not all button styling options were working for some themes
+* Fixed - Animated Add to Cart: animation not working on Page load when Activate this animation setting is set to "On page load"
+* Fixed - Agree to Terms Checkbox module: Overriding text with Germanized Plugin
+* Fixed - Settings: Fixed a couple of responsive design issues and included functions to resolve conflicts between merchant and other plugins using the same function
+
 = 1.9.12 =
 * Fixed - Pre-order: Automatic conversion of order status from Pre-Ordered to Processing after the pre-order date passes.
 * Fixed - Pre-order: Issues with pre-order emails firing again for both customers and admins.
