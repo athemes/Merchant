@@ -518,13 +518,13 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'icon-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-icon-color' );
 
 		// Button Icon Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'icon-hover-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-icon-hover-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'icon-hover-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-icon-color-hover' );
 
 		// Button Text Color.
-		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'text-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-color' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'text-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-text-color' );
 
 		// Button Text Color (hover).
-		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'text-hover-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-color-hover' );
+		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'text-hover-color', '#ffffff', '.merchant-quick-view-button', '--mrc-qv-button-text-color-hover' );
 
 		// Button Border Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( 'quick-view', 'border-color', '#212121', '.merchant-quick-view-button', '--mrc-qv-button-border-color' );

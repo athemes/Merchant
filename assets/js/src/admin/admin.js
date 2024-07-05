@@ -20,6 +20,8 @@
                     merchant.show_save = true;
                 }
             }
+
+            GroubField.initFlag();
         });
 
         $ajaxForm.ajaxForm({
@@ -231,7 +233,7 @@
 
             $( this ).find( 'span:first' ).text( $trigger.text() === showText ? hiddenText : showText );
 
-            $( this ).closest( '.layout-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
+            $( this ).closest( '.merchant-module-page-setting-field' ).find( '.merchant-module-page-setting-field-hidden-desc' ).stop(true, true).slideToggle( 'fast' );
         } );
 
         // Add support for toggle field inside flexible content.
@@ -462,6 +464,37 @@
         // Initialize Sortable Repeater.
         SortableRepeaterField.init();
 
+        const GroubField = {
+            init: function () {
+                const self = this;
+                self.initAccordion();
+                self.initFlag();
+            },
+            initAccordion: function (){
+                const self = this;
+                $('.merchant-group-field.has-accordion').each(function () {
+                    let element = $(this);
+                    element.accordion({
+                        collapsible: true,
+                        header: "> .title-area",
+                        heightStyle: "content",
+                        active: false
+                    })
+                });
+            },
+            initFlag: function (){
+                $('.merchant-group-field.has-flag').each(function () {
+                    let element = $(this);
+                    let field_id = element.data('id');
+                    let status_field = element.find(`.merchant-field-${field_id}_status select`);
+                    let selected_value = status_field.val();
+                    let selected_label = status_field.find('option:selected').text();
+                    let status_element = element.find('.field-status');
+                    status_element.removeClass('hidden active inactive').text(selected_label).addClass(selected_value);
+                });
+            }
+        }
+
         // Flexible Content.
         const FlexibleContentField = {
             init: function (field) {
@@ -590,6 +623,8 @@
                         parentDiv.find('.merchant-flexible-content').accordion("option", "active", -1);
                     }
 
+                    GroubField.init();
+
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
 
                     self.updateLayoutTitle()
@@ -679,6 +714,7 @@
                     }
 
                     self.updateLayoutTitle();
+                    GroubField.init();
                 } );
 
                 // Delete item
@@ -736,6 +772,7 @@
 
         // Initialize Flexible Content.
         FlexibleContentField.init();
+        GroubField.init();
 
         // Products selector.
         // Handle keyup event for the search input
@@ -743,14 +780,18 @@
         $(document).on('keyup', '.merchant-module-page-setting-field-products_selector .merchant-search-field', function () {
             clearTimeout( debounceTimer );
 
-            const $layout = $(this).closest( '.layout' );
-
             let categories = [];
-            const $rules = $layout.find( '.merchant-field-rules_to_apply select' ).val()
-                || $layout.find( '.merchant-field-rules_to_display select' ).val()
-                || $layout.find( '.merchant-field-display_rules select' ).val();
-            if ( $rules === 'categories' || $rules === 'by_category' ) {
-                categories = $layout.find('.merchant-field-category_slugs select').val() || $layout.find('.merchant-field-product_cats select').val();
+
+            const $excluded = $( this ).closest( '[data-id="excluded_products"]' );
+            if ( $excluded.length ) {
+                const $layout = $(this).closest( '.layout' );
+                const rules = $layout.find( '.merchant-field-rules_to_apply select' ).val()
+                    || $layout.find( '.merchant-field-rules_to_display select' ).val()
+                    || $layout.find( '.merchant-field-display_rules select' ).val();
+
+                if ( rules === 'categories' || rules === 'by_category' ) {
+                    categories = $layout.find('.merchant-field-category_slugs select').val() || $layout.find('.merchant-field-product_cats select').val();
+                }
             }
 
             let parent = $(this).closest('.merchant-products-search-container');

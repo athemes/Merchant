@@ -37,7 +37,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );
-			add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ), 999 );
 			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ), 999 );
 		}
 
@@ -127,29 +126,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			);
 
 			return array_merge( $action_links, $links );
-		}
-
-		/**
-		 * Add plugin settings link on the plugin page.
-		 */
-		public function add_admin_footer_text( $text ) {
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			
-			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
-
-				$text = '';
-				
-				if ( empty( $module ) ) {
-					
-					$text .= sprintf( '<a href="https://www.facebook.com/groups/245922400035997" target="_blank" class="merchant-admin-footer-text-link">%s</a>', esc_html__( 'Join our community', 'merchant' ) );
-					$text .= esc_html__( 'to discuss about the product and ask for support or help the community.', 'merchant' );
-					
-				}
-				
-			}
-			
-			return $text;
 		}
 		
 		/**

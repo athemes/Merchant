@@ -85,22 +85,22 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
+		$strings  = array(
+			'offer-title' => 'Buy X Get Y: Campaign title',
+			'title'       => 'Buy X Get Y: title',
+			'buy_label'   => 'Buy X Get Y: buy label',
+			'get_label'   => 'Buy X Get Y: get label',
+			'button_text' => 'Buy X Get Y: button text',
+		);
 		if ( ! empty( $settings['rules'] ) ) {
 			foreach ( $settings['rules'] as $rule ) {
-				if ( ! empty( $rule['offer-title'] ) ) {
-					Merchant_Translator::register_string( $rule['offer-title'], esc_html__( 'Campaign title', 'merchant' ) );
-				}
-				if ( ! empty( $rule['title'] ) ) {
-					Merchant_Translator::register_string( $rule['title'], esc_html__( 'Buy X, Get Y title', 'merchant' ) );
-				}
-				if ( ! empty( $rule['buy_label'] ) ) {
-					Merchant_Translator::register_string( $rule['buy_label'], esc_html__( 'Buy X, Get Y buy label', 'merchant' ) );
-				}
-				if ( ! empty( $rule['get_label'] ) ) {
-					Merchant_Translator::register_string( $rule['get_label'], esc_html__( 'Buy X, Get Y get label', 'merchant' ) );
-				}
-				if ( ! empty( $rule['button_text'] ) ) {
-					Merchant_Translator::register_string( $rule['button_text'], esc_html__( 'Buy X, Get Y button text', 'merchant' ) );
+				foreach ( $strings as $key => $string ) {
+					if ( ! empty( $rule['product_single_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['product_single_page'][ $key ], $string . ' - product single page' );
+					}
+					if ( ! empty( $rule['cart_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $rule['cart_page'][ $key ], $string . ' - cart page' );
+					}
 				}
 			}
 		}
@@ -148,11 +148,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
-	public
-	function render_admin_preview(
-		$preview,
-		$module
-	) {
+	public function render_admin_preview( $preview, $module ) {
 		if ( $module === self::MODULE_ID ) {
 			// get 2 simple wc products ids
 			$product_ids = wc_get_products(
@@ -165,7 +161,9 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 			);
 			// HTML.
 			if ( ! empty( $product_ids ) && 1 < count( $product_ids ) ) {
-				$preview->set_html( merchant_get_template_part(
+				$preview_html = '';
+				$preview_html .= '<div class="merchant-single-product-preview">';
+				$preview_html .= merchant_get_template_part(
 					self::MODULE_TEMPLATES,
 					'single-product',
 					array(
@@ -186,7 +184,10 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 						'product'  => $product_ids[0],
 					),
 					true
-				) );
+				);
+				$preview_html .= '</div>';
+                $preview_html .= $this->cart_preview();
+				$preview->set_html( $preview_html );
 			} else {
 				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
 			}
@@ -220,6 +221,54 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		}
 
 		return $preview;
+	}
+
+	/**
+     * Cart item admin preview.
+     *
+	 * @return string
+	 */
+	public function cart_preview() {
+		ob_start();
+		?>
+		<div class="merchant-cart-preview">
+			<div class="merchant-cart-offers-container">
+                <div class="cart-item-offers">
+					<div class="cart-item-offer__container">
+						<div class="cart-item-offer">
+						    <div class="offer-title">Buy 3 Get 3 with 20% off</div>
+							<div class="item-row">
+								<div class="column_1">
+									<div class="product_image">
+                                        <a href="#" class="link-do-nothing" title="Product Name">
+                                            <span class="product-image-placeholder"></span>
+                                        </a>
+									</div>
+								</div>
+								<div class="column_3">
+									<div class="product-details">
+										<div class="product-name"><a href="#" class="link-do-nothing" title="Product Name">Product Name</a></div>
+                                        <div class="offer-discount">
+                                            <div class="discount-savings">
+                                                <span class="label">with <strong>15%</strong> off</span>
+                                            </div>
+                                        </div>
+										<div class="item-footer">
+											<div class="product-variations-wrapper"></div>
+											<div class="add-to-cart">
+												<button class="add-to-cart-button alt" type="button">Add To Cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }
 

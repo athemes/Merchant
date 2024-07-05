@@ -28,7 +28,9 @@
             discountAmount = +layout.find('.merchant-field-discount input').val(),
             saveLabelValue = layout.find('.merchant-field-save_label input').val(),
             buyLabelValue = layout.find('.merchant-field-buy_text input').val(),
-            quantityValue = +layout.find('.merchant-field-quantity input').val();
+            quantityValue = +layout.find('.merchant-field-quantity input').val(),
+            cartOfferTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
+            cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-volume-discounts-title').css({
             'color': titleTextColor,
@@ -62,6 +64,11 @@
             .replace( /{discount}|{percent}/g, `<strong>${ discountEach }</strong>` )
             .replace( /{quantity}|{amount}/g, `<strong>${ quantityValue }</strong>` );
         $buyLabelPreview.html( buyLabelValue );
+
+        $('.merchant-cart-preview .cart-item-offer__container .offer-description').text(
+            cartOfferTitle.replace('{quantity}', '3').replace('{discount}', '20%')
+        );
+        $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
@@ -95,4 +102,37 @@
         } );
     } );
 
+    function show_single_product_preview(){
+        let element = $('.merchant-single-product-preview');
+        element.addClass('show');
+    }
+
+    function hide_single_product_preview(){
+        let element = $('.merchant-single-product-preview');
+        element.removeClass('show');
+    }
+
+    function show_cart_page_preview(){
+        let element = $('.merchant-cart-preview');
+        element.addClass('show');
+    }
+
+    function hide_cart_page_preview(){
+        let element = $('.merchant-cart-preview');
+        element.removeClass('show');
+    }
+
+    $('.merchant-module-page-setting-box').on('click', function (e) {
+        let clickedElement = $(e.target);
+
+        if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
+            show_cart_page_preview();
+            hide_single_product_preview()
+        } else {
+            show_single_product_preview();
+            hide_cart_page_preview();
+        }
+    });
+
+    show_single_product_preview();
 })(jQuery);

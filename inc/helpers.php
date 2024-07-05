@@ -257,6 +257,8 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'class'                   => true,
 					'style'                   => true,
 					'name'                    => true,
+					'href'                    => true,
+					'target'                  => true,
 					'value'                   => true,
 					'type'                    => true,
 					'placeholder'             => true,
@@ -285,6 +287,12 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'aria-label'              => true,
 					'multiple'                => true,
 				);
+
+				if ( $tag === 'a' ) {
+					$allowed_tags[ $tag ]['href']   = true;
+					$allowed_tags[ $tag ]['title']  = true;
+					$allowed_tags[ $tag ]['target'] = true;
+				}
 			}
 		}
 
