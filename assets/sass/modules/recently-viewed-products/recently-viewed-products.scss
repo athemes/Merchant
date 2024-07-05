@@ -39,6 +39,12 @@
             }
         }
     }
+
+    .merchant-carousel {
+        @media (max-width: 575px) {
+            padding: 0;
+        }
+    }
 }
 
 .merchant-recently-viewed-products {
