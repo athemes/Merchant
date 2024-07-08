@@ -540,7 +540,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	                $label['show_devices'] = array( 'desktop', 'mobile' );
                 }
 
-				if ( ! $this->show_label( $label ) ) {
+				if ( ! $this->show_label( $label, $context ) ) {
 					continue;
 				}
 
@@ -727,8 +727,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 
         // Block
-		if ( in_array( 'archive', $show_pages, true ) && $context !== 'archive' ) {
+		if ( in_array( 'archive', $show_pages, true ) && $context === 'archive' ) {
 			$show = true;
+
+            // Don't show for blocks on homepage if `homepage` is unchecked
+            if ( ! in_array( 'homepage', $show_pages, true ) && is_front_page() ) {
+	            $show = false;
+            }
 		}
 
 		if ( in_array( 'homepage', $show_pages, true ) && is_front_page() ) {
