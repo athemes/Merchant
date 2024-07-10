@@ -282,6 +282,18 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
+							'condition'   => array( 'display_rules', '==', 'all_products' ),
+						),
+
+						array(
 							'id'      => 'show_pages',
 							'type'    => 'checkbox_multiple',
 							'title'   => esc_html__( 'Show on pages', 'merchant' ),
