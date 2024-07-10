@@ -1120,8 +1120,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 							foreach ( $option['options'] as $child_option ) {
 								$selected_value = is_array( $value ) ? in_array( $child_option['id'], $value, true ) : $child_option['id'];
-								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $child_option['text'] )
-									. '</option>';
+								echo '<option value="' . esc_attr( $child_option['id'] ) . '" ' . selected( $selected_value, is_array( $value ) ? true : $value, false ) . '>' . esc_html( $child_option['text'] ) . '</option>';
 							}
 
 							echo '</optgroup>';
@@ -2489,15 +2488,37 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * @return array
 		 */
 		public static function get_category_select2_choices() {
-			$choices = array();
-			$cats    = merchant_get_product_categories();
+			$choices    = array();
+			$categories = merchant_get_product_categories();
 
-			if ( is_array( $cats ) && ! empty( $cats ) ) {
-				foreach ( $cats as $slug => $name ) {
-					$choices[] = array(
-						'id'   => esc_attr( $slug ),
-						'text' => esc_html( $name ),
-					);
+			if ( is_array( $categories ) && ! empty( $categories ) ) {
+			    $choices = self::build_category_select2_choices( $categories );
+			}
+
+			return $choices;
+		}
+
+		/**
+         * Build Select2 choices for hierarchical categories.
+         *
+		 * @param $categories
+		 * @param $level
+		 *
+		 * @return array
+		 */
+		private static function build_category_select2_choices( $categories, $level = 0 ) {
+			$choices = array();
+
+			foreach ( $categories as $cat ) {
+				$indent = str_repeat( '&nbsp;', $level * 4 ); // Use non-breaking spaces for indentation
+
+                $choices[] = array(
+					'id'   => esc_attr( $cat['slug'] ?? '' ),
+					'text' => esc_html( $indent . ( $cat['name'] ?? '' ) ),
+				);
+
+				if ( ! empty( $cat['children'] ) ) {
+					$choices = array_merge( $choices, self::build_category_select2_choices( $cat['children'], $level + 1 ) );
 				}
 			}
 
