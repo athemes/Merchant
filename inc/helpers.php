@@ -661,3 +661,38 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 		return $passed;
 	}
 }
+
+/**
+ * Check if a product is excluded based on given arguments.
+ *
+ * @param $product_id
+ * @param $args
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
+	function merchant_is_product_excluded( $product_id, $args = array() ) {
+		$display_rule = $args['rules_to_display'] ?? 'products';
+
+		// Exclude products
+		if ( in_array( $display_rule, array( 'all', 'categories' ), true ) ) {
+			$excluded_product_ids = $args['excluded_products'] ?? array();
+			$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
+
+			if ( in_array( (int) $product_id, $excluded_product_ids, true ) ) {
+				return true;
+			}
+		}
+
+		// Exclude categories
+		if ( $display_rule === 'all' ) {
+			$excluded_categories_slugs = $args['excluded_categories'] ?? array();
+
+			if ( ! empty( $excluded_categories_slugs ) && has_term( $excluded_categories_slugs, 'product_cat', $product_id ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
