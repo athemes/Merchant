@@ -319,6 +319,51 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+						array(
+							'id'             => 'thank_you_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Thank you page', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, after checkout.', 'merchant' ),
+							'state'          => 'open',
+							'default'        => 'inactive',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// Text Formatting Settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement', 'merchant' ),
+									'options' => array(
+										'on_top'               => esc_html__( 'On Top', 'merchant' ),
+										'before_order_details' => esc_html__( 'Before Order details', 'merchant' ),
+										'after_order_details'  => esc_html__( 'After Order details', 'merchant' ),
+									),
+									'default' => 'on_top',
+								),
+
+								array(
+									'id'      => 'discount_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
 					),
 				),
 			),
