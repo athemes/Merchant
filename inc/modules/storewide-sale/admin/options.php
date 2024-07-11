@@ -73,6 +73,17 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
 						),
 						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this discount campaign.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'all' ),
+						),
+						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Discount', 'merchant' ),
