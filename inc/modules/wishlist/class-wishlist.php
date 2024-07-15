@@ -54,28 +54,29 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'display_on_shop_archive' => 1,
+			'display_on_shop_archive'   => 1,
 			'display_on_single_product' => 1,
-			'button_icon' => 'heart1',
-			'button_position_top' => 8,
-			'button_position_left' => 85,
-			'tooltip' => 1,
-			'tooltip_text' => __( 'Add To Wishlist', 'merchant' ),
-			'tooltip_border_radius' => 4,
-			'hide_page_title' => 0,
-			'enable_sharing' => 1,
-			'sharing_links' => array(
+			'button_icon'               => 'heart1',
+			'button_position_top'       => 8,
+			'button_position_left'      => 85,
+			'tooltip'                   => 1,
+			'tooltip_text'              => __( 'Add To Wishlist', 'merchant' ),
+			'tooltip_text_after'        => __( 'Added To Wishlist', 'merchant' ),
+			'tooltip_border_radius'     => 4,
+			'hide_page_title'           => 0,
+			'enable_sharing'            => 1,
+			'sharing_links'             => array(
 				array(
-					'layout' => 'social',
-					'social_network'    => 'facebook',
+					'layout'         => 'social',
+					'social_network' => 'facebook',
 				),
 				array(
-					'layout' => 'social',
-					'social_network'    => 'twitter',
+					'layout'         => 'social',
+					'social_network' => 'twitter',
 				),
 				array(
-					'layout' => 'social',
-					'social_network'    => 'linkedin',
+					'layout'         => 'social',
+					'social_network' => 'linkedin',
 				),
 			),
 			'display_copy_to_clipboard' => 1,

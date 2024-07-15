@@ -44,7 +44,7 @@ ul.products {
 		}
 	}
 
-	&.merchant-wishlist-button-tooltip:not(.active) {
+	&.merchant-wishlist-button-tooltip {
 		&:before {
 			content: attr(data-merchant-wishlist-tooltip);
 			position: absolute;
