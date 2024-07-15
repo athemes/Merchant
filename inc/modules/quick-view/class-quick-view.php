@@ -600,26 +600,22 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			return;
 		}
 
-		$bulk_discounts_module = Merchant_Modules::get_module( Merchant_Volume_Discounts::MODULE_ID );
-		if ( ! ( $bulk_discounts_module instanceof Merchant_Volume_Discounts ) ) {
-			return;
-		}
-
-		$settings       = $bulk_discounts_module->get_module_settings();
 		$product_id     = $product->get_id();
 		$discount_tiers = Merchant_Pro_Volume_Discounts::availabe_offers( $product_id );
 
-		merchant_get_template_part(
-			Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
-			'single-product',
-			array(
-				'settings'              => $settings,
-				'discount_tiers'        => $discount_tiers,
-				'product_price'         => $product->get_price(),
-				'in_cart'               => Merchant_Pro_Volume_Discounts::is_in_cart( $product_id ),
-				'product_cart_quantity' => Merchant_Pro_Volume_Discounts::get_product_cart_quantity( $product_id ),
-			)
-		);
+        if ( ! empty( $discount_tiers ) ) {
+	        merchant_get_template_part(
+		        Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
+		        'single-product',
+		        array(
+			        'settings'              => Merchant_Admin_Options::get_all( Merchant_Volume_Discounts::MODULE_ID ),
+			        'discount_tiers'        => $discount_tiers,
+			        'product_price'         => $product->get_price(),
+			        'in_cart'               => Merchant_Pro_Volume_Discounts::is_in_cart( $product_id ),
+			        'product_cart_quantity' => Merchant_Pro_Volume_Discounts::get_product_cart_quantity( $product_id ),
+		        )
+	        );
+        }
 	}
 
 	/**
@@ -671,21 +667,13 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 
 		if ( ! empty( $bundles ) ) {
-			$fbt_module = Merchant_Modules::get_module( Merchant_Frequently_Bought_Together::MODULE_ID );
-			if ( ! ( $fbt_module instanceof Merchant_Frequently_Bought_Together ) ) {
-				return;
-			}
-
-			$nonce    = wp_create_nonce( Merchant_Pro_Frequently_Bought_Together::AJAX_NONCE_ACTION );
-			$settings = $fbt_module->get_module_settings();
-
 			merchant_get_template_part(
 				Merchant_Frequently_Bought_Together::MODULE_TEMPLATES_PATH,
 				'single-product',
 				array(
 					'bundles'  => $bundles,
-					'nonce'    => $nonce,
-					'settings' => $settings,
+					'nonce'    => wp_create_nonce( Merchant_Pro_Frequently_Bought_Together::AJAX_NONCE_ACTION ),
+					'settings' => Merchant_Admin_Options::get_all( Merchant_Frequently_Bought_Together::MODULE_ID ),
 				)
 			);
 		}
