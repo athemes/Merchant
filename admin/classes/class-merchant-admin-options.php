@@ -301,6 +301,15 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function create( $settings ) {
 			$module_id = ( isset( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+			// Remove 'pro' dependent fields if Merchant Pro is not active
+			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+				foreach ( $settings['fields'] as $key => $field ) {
+					if ( isset( $field['pro'] ) && $field['pro'] === true ) {
+						unset( $settings['fields'][ $key ] );
+					}
+				}
+			}
+
 			/**
 			 * Hook: merchant_module_settings
 			 *
