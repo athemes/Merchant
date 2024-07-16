@@ -95,6 +95,13 @@ Merchant_Admin_Options::create( array(
 			'default'   => __( 'Add to wishlist', 'merchant' ),
 			'condition' => array( 'tooltip', '==', '1' ),
 		),
+		array(
+			'id'        => 'tooltip_text_after',
+			'type'      => 'text',
+			'title'     => __( 'Tooltip text after adding to wishlist', 'merchant' ),
+			'default'   => __( 'Added to wishlist', 'merchant' ),
+			'condition' => array( 'tooltip', '==', '1' ),
+		),
 
 		// Tooltip border radius.
 		array(

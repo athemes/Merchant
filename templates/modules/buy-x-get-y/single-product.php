@@ -53,8 +53,7 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
 		echo isset( $offer['product_single_page']['title_font_weight'] ) ? esc_attr( 'font-weight: ' . $offer['product_single_page']['title_font_weight'] . ';' ) : '';
 		echo isset( $offer['product_single_page']['title_font_size'] ) ? esc_attr( 'font-size: ' . $offer['product_single_page']['title_font_size'] . 'px;' ) : '';
 		echo isset( $offer['product_single_page']['title_text_color'] ) ? esc_attr( 'color: ' . $offer['product_single_page']['title_text_color'] . ';' ) : ''; ?>">
-			<?php
-			echo isset( $offer['title'] ) ? esc_html( Merchant_Translator::translate( $offer['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ) ?>
+			<?php echo isset( $offer['product_single_page']['title'] ) ? esc_html( Merchant_Translator::translate( $offer['product_single_page']['title'] ) ) : esc_html__( 'Buy One Get One', 'merchant' ); ?>
         </p>
 		<?php
 		if ( ! $is_purchasable ) {

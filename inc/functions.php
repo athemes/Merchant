@@ -61,6 +61,17 @@ function merchant_get_template_part( $folder_path = '', $name = '', $args = arra
 }
 
 /**
+ * Check if Merchant Pro is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_pro_active' ) ) {
+	function merchant_is_pro_active() {
+		return defined( 'MERCHANT_PRO_VERSION' );
+	}
+}
+
+/**
  * Check if Botiga theme is installed and active.
  *
  * @return bool

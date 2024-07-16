@@ -119,7 +119,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'range',
 			'title'   => esc_html__( 'Border radius', 'merchant' ),
 			'min'     => 0,
-			'max'     => 35,
+			'max'     => 9999,
 			'step'    => 1,
 			'unit'    => 'px',
 			'default' => 0,
