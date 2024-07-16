@@ -228,7 +228,22 @@ Merchant_Admin_Options::create( array(
 			'default' => 1,
 		),
 
-		//
+		array(
+			'id'      => 'show_buy_now_button',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show buy now button', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'          => 'show_buy_now_button_instructions',
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display a Buy Now button by using Merchant’s Buy Now module.', 'merchant' ),
+			'button_text' => esc_html__( 'View Buy Now', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=buy-now' ) ),
+			'condition'   => array( 'show_buy_now_button', '==', '1' ),
+		),
+
 		array(
 			'id'      => 'show_suggested_products',
 			'pro'     => true, // Merchant Pro dependent
@@ -345,7 +360,6 @@ Merchant_Admin_Options::create( array(
 				),
 			),
 		),
-		//
 
 		array(
 			'id'      => 'sale-price-color',

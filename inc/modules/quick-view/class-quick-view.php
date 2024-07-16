@@ -59,6 +59,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			'place_product_description'    => 'top',
 			'description_style'            => 'short',
 			'place_product_image'          => 'thumbs-at-left',
+            'show_buy_now_button'          => false,
             'show_suggested_products'      => true,
             'suggested_products_module'    => 'bulk_discounts',
             'suggested_products_placement' => 'after_add_to_cart',
@@ -104,7 +105,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() && ! defined( 'DOING_AJAX' ) ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return; 
 		}
 
@@ -121,10 +122,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		if ( defined( 'BOTIGA_PRO_URI' ) && defined( 'BOTIGA_PRO_VERSION' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'modal_compatibility_with_botiga_theme' ) );
 		}
-
-		// Modal content ajax callback.
-		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
-		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 
 		// Button Position.
 		$button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'overlay' );
@@ -145,15 +142,23 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		add_action( 'wp_footer', array( $this, 'modal_output' ) );
 
         // Suggested Module Content
-		$show_suggested = (bool) Merchant_Admin_Options::get( self::MODULE_ID, 'show_suggested_products', true );
-		if ( $show_suggested ) {
-			$placement = Merchant_Admin_Options::get( self::MODULE_ID, 'suggested_products_placement', 'after_add_to_cart' );
-			add_action( 'merchant_quick_view_' . $placement, array( $this, 'render_suggested_module_content' ), 10, 2 );
-		}
+        $suggested_placement = Merchant_Admin_Options::get( self::MODULE_ID, 'suggested_products_placement', 'after_add_to_cart' );
+        add_action( 'merchant_quick_view_' . $suggested_placement, array( $this, 'render_suggested_module_content' ), 10, 2 );
+
+        // Show Buy Now Button
+        add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'render_buy_now_button' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		// Modal content ajax callback.
+		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
+		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 	}
+
+	public function simple_add_to_cart() {
+        echo 'Cool';
+    }
 
 	/**
 	 * Init translations.
@@ -559,6 +564,45 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	}
 
 	/**
+     * Renders the Buy Now button.
+     *
+	 * @return void
+	 */
+	public function render_buy_now_button() {
+		if ( ! Merchant_Modules::is_module_active( Merchant_Buy_Now::MODULE_ID ) ) {
+			return;
+		}
+
+		// Don't include on Single Product
+		if ( ! did_action( 'merchant_quick_view_before_add_to_cart' ) ) {
+			return;
+		}
+
+		$show_buy_now = (bool) Merchant_Admin_Options::get( $this->module_id, 'show_buy_now_button', false );
+        if ( ! $show_buy_now ) {
+            return;
+        }
+
+		global $product;
+
+		$text = Merchant_Admin_Options::get( Merchant_Buy_Now::MODULE_ID, 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
+
+		$_wrapper_classes   = array();
+		$_wrapper_classes[] = $product->get_type() === 'variable' ? 'disabled' : '';
+
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_class'
+		 *
+		 * @since 1.8
+		 */
+		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', $_wrapper_classes );
+		?>
+        <!-- Don't define type="submit" because it creates issue with block themes. The button is inside the form, so by default the type is already "submit". -->
+        <button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+		<?php
+    }
+
+	/**
      * Renders the suggested module content based on the provided settings.
      *
 	 * @param $product
@@ -567,7 +611,9 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function render_suggested_module_content( $product, $settings ) {
-		if ( empty( $product ) ) {
+		$show_suggested = (bool) Merchant_Admin_Options::get( $this->module_id, 'show_suggested_products', true );
+
+		if ( ! $show_suggested || empty( $product ) ) {
 			return;
 		}
 
