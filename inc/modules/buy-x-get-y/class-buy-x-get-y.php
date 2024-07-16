@@ -187,6 +187,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				);
 				$preview_html .= '</div>';
                 $preview_html .= $this->cart_preview();
+                $preview_html .= $this->thank_you_page_preview();
 				$preview->set_html( $preview_html );
 			} else {
 				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
@@ -232,41 +233,88 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		ob_start();
 		?>
 		<div class="merchant-cart-preview">
-			<div class="merchant-cart-offers-container">
-                <div class="cart-item-offers">
-					<div class="cart-item-offer__container">
-						<div class="cart-item-offer">
-						    <div class="offer-title">Buy 3 Get 3 with 20% off</div>
-							<div class="item-row">
-								<div class="column_1">
-									<div class="product_image">
-                                        <a href="#" class="link-do-nothing" title="Product Name">
-                                            <span class="product-image-placeholder"></span>
-                                        </a>
-									</div>
-								</div>
-								<div class="column_3">
-									<div class="product-details">
-										<div class="product-name"><a href="#" class="link-do-nothing" title="Product Name">Product Name</a></div>
-                                        <div class="offer-discount">
-                                            <div class="discount-savings">
-                                                <span class="label">with <strong>15%</strong> off</span>
-                                            </div>
+            <div class="my-cart">
+                <div class="cart-title"><?php esc_html_e( 'My Cart', 'merchant' ); ?></div>
+                <table class="cart-table">
+                    <tr>
+                        <th class="product-col"><?php esc_html_e( 'PRODUCT', 'merchant' ); ?></th>
+                        <th class="price-col"><?php esc_html_e( 'PRICE', 'merchant' ); ?></th>
+                        <th class="quantity-col"><?php esc_html_e( 'QUANTITY', 'merchant' ); ?></th>
+                        <th class="total-col"><?php esc_html_e( 'TOTAL', 'merchant' ); ?></th>
+                    </tr>
+                    <tr class="cart-item">
+                        <td class="product-column">
+                            <div class="product">
+                                <div class="product-image"></div>
+                                <div class="product-info">
+                                    <div class="product-name"><?php esc_html_e( 'Your Product Name', 'merchant' ); ?></div>
+                                    <p class="upsell-offer"><?php esc_html_e( 'You are eligible to get {offer_quantity}', 'merchant' ); ?></p>
+                                    <div class="upsell-product">
+                                        <div class="upsell-image"></div>
+                                        <div class="upsell-info">
+                                            <div class="upsell-name"><?php esc_html_e( 'Product Name', 'merchant' ); ?></div>
+                                            <p><?php esc_html_e( 'with {discount} off', 'merchant' ); ?></p>
+                                            <button class="add-to-cart"><?php esc_html_e( 'Add To Cart', 'merchant' ); ?></button>
                                         </div>
-										<div class="item-footer">
-											<div class="product-variations-wrapper"></div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-button alt" type="button">Add To Cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-col">
+                            <span class="original-price"><?php echo wp_kses(wc_price(16), merchant_kses_allowed_tags(array( 'bdi' )))?></span>
+                            <span class="discounted-price"><?php echo wp_kses(wc_price(12), merchant_kses_allowed_tags(array( 'bdi' )))?></span>
+                        </td>
+                        <td class="quantity-col">
+                            <div class="quantity-control">
+                                <button class="decrease">-</button>
+                                <input type="text" value="1" min="1">
+                                <button class="increase">+</button>
+                            </div>
+                        </td>
+                        <td class="total-col"><?php echo wp_kses(wc_price(300), merchant_kses_allowed_tags(array( 'bdi' )))?></td>
+                    </tr>
+                </table>
+            </div>
 		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+    /**
+     * Thank you page preview.
+     *
+     * @return string
+     */
+	public function thank_you_page_preview() {
+		ob_start();
+		?>
+        <div class="merchant-thank-you-preview">
+            <div class="order-received">
+                <div class="page-title"><?php esc_html_e('Order Received','merchant'); ?></div>
+                <p><?php esc_html_e('Thank you. Your order has been received.','merchant'); ?></p>
+                <div class="order-details">
+                    <div class="order-info">
+                        <div class="item-title"><?php esc_html_e('ORDER NUMBER:','merchant'); ?></div>
+                        <p>550</p>
+                    </div>
+                    <div class="order-info">
+                        <div class="item-title"><?php esc_html_e('PAYMENT METHOD:','merchant'); ?></div>
+                        <p><?php echo esc_html( merchant_get_first_active_payment_gateway_label() ?? 'Apple Pay' ) ?></p>
+                    </div>
+                </div>
+                <div class="upsell-offer">
+                    <div class="offer-title"><?php esc_html_e('Last chance to get {offer_quantity} x','merchant'); ?></div>
+                    <div class="product-details">
+                        <div class="product-image"></div>
+                        <div class="product-info">
+                            <div class="product-name"><?php esc_html_e('Your Product Name','merchant'); ?></div>
+                            <p><?php esc_html_e('with {discount} off','merchant'); ?></p>
+                            <button class="add-to-order"><?php esc_html_e('Add To My Order','merchant'); ?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<?php
 		return ob_get_clean();
 	}

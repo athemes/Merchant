@@ -661,3 +661,25 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 		return $passed;
 	}
 }
+
+
+/**
+ * Get the label of the first active payment gateway in WooCommerce.
+ *
+ * @return string|null The label of the first active payment gateway, or null if none are found.
+ */
+if ( ! function_exists( 'merchant_get_first_active_payment_gateway_label' ) ) {
+	function merchant_get_first_active_payment_gateway_label() {
+		// Get the available payment gateways
+		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
+
+		// Check if there are any active gateways
+		if ( ! empty( $available_gateways ) ) {
+			// Get the first active gateway
+			return reset( $available_gateways )->get_title();
+		}
+
+		// Return null if no active gateways are found
+		return null;
+	}
+}

@@ -1,8 +1,8 @@
 === Merchant - All-in-One WooCommerce Plugin for Pre-Orders, Product Labels, Buy Now, Quick View, and More ===
 Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
-Tested up to: 6.5
-Requires PHP: 7.0
+Tested up to: 6.6
+Requires PHP: 7.2
 Stable tag: 1.9.13
 Contributors: aThemes
 License: GPLv3 or later
