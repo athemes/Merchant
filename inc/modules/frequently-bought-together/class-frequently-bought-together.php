@@ -166,37 +166,48 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function cart_item_preview() {
 		?>
-		<div class="merchant-cart-offers-container">
-			<div class="cart-item-offers">
-				<div class="cart-item-offer__container fbt">
-					<div class="cart-item-offer">
-						<div class="offer-title">Add</div>
-						<div class="item-row product-row">
-							<div class="column_1">
-								<div class="product_image">
-									<a href="#" title="Product Name" class="link-do-nothing">
-                                        <span class="product-image-placeholder"></span>
-									</a>
-								</div>
-							</div>
-							<div class="column_3">
-								<div class="product-details">
-									<div class="product-name"><a href="#" class="link-do-nothing" title="Product Name">Product Name</a></div>
-                                    <div class="offer-discount">
-                                        <div class="discount-savings"><span class="label">and save:</span> <strong>£15.50</strong></div>
+        <div class="my-cart">
+            <div class="cart-title"><?php esc_html_e( 'My Cart', 'merchant' ); ?></div>
+            <table class="cart-table">
+                <tr>
+                    <th class="product-col"><?php esc_html_e( 'PRODUCT', 'merchant' ); ?></th>
+                    <th class="price-col"><?php esc_html_e( 'PRICE', 'merchant' ); ?></th>
+                    <th class="quantity-col"><?php esc_html_e( 'QUANTITY', 'merchant' ); ?></th>
+                    <th class="total-col"><?php esc_html_e( 'TOTAL', 'merchant' ); ?></th>
+                </tr>
+                <tr class="cart-item">
+                    <td class="product-column">
+                        <div class="product">
+                            <div class="product-image"></div>
+                            <div class="product-info">
+                                <div class="product-name"><?php esc_html_e( 'Your Product Name', 'merchant' ); ?></div>
+                                <p class="upsell-offer"><?php esc_html_e( 'You are eligible to get {offer_quantity}', 'merchant' ); ?></p>
+                                <div class="upsell-product">
+                                    <div class="upsell-image"></div>
+                                    <div class="upsell-info">
+                                        <div class="upsell-name"><?php esc_html_e( 'Product Name', 'merchant' ); ?></div>
+                                        <p><?php esc_html_e( 'with {amount} off', 'merchant' ); ?></p>
+                                        <button class="add-to-cart"><?php esc_html_e( 'Add To Cart', 'merchant' ); ?></button>
                                     </div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="item-footer">
-						<div class="add-to-cart">
-							<button class="add-to-cart-button" type="button">Claim offer</button>
-						</div>
-					</div>
-				</div>
-			</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="price-col">
+                        <span class="original-price"><?php echo wp_kses(wc_price(16), merchant_kses_allowed_tags(array( 'bdi' )))?></span>
+                        <span class="discounted-price"><?php echo wp_kses(wc_price(12), merchant_kses_allowed_tags(array( 'bdi' )))?></span>
+                    </td>
+                    <td class="quantity-col">
+                        <div class="quantity-control">
+                            <button class="decrease">-</button>
+                            <input type="text" value="1" min="1">
+                            <button class="increase">+</button>
+                        </div>
+                    </td>
+                    <td class="total-col"><?php echo wp_kses(wc_price(300), merchant_kses_allowed_tags(array( 'bdi' )))?></td>
+                </tr>
+            </table>
+        </div>
 		<?php
 	}
 

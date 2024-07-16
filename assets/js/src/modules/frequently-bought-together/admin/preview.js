@@ -41,9 +41,9 @@
         $('.merchant-frequently-bought-together-title').html(titleTextColor);
         $('.merchant-frequently-bought-together-bundle-total').html(totalText);
         $('.merchant-frequently-bought-together-bundles .merchant-add-bundle-to-cart').html(addToCartText);
-        $('.cart-item-offer__container .offer-title').text(cartBundleTitle);
-        $('.cart-item-offer__container .discount-savings .label').text(cartSaveLabel.replace('{amount}', ''));
-        $('.cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-offer').text(cartBundleTitle);
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info p').text(cartSaveLabel.replace('{amount}', '10%'));
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3'));
         $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
