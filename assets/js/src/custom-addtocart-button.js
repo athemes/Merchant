@@ -51,7 +51,7 @@ merchant.customAddToCartButton = {
 						}, 1500);
 
 						jQuery( document.body ).trigger( 'wc_fragment_refresh' );
-						jQuery( document.body ).trigger( 'added_to_cart' );
+						jQuery( document.body ).trigger( 'added_to_cart', [ button, productId ] );
 
 						document.body.dispatchEvent( new Event( 'merchant.custom_added_to_cart' ) );
 					}
