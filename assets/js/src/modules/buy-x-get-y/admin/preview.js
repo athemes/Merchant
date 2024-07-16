@@ -43,14 +43,14 @@
             'border-radius': offerBorderRadius + 'px'
         });
 
-        $('.merchant-cart-preview .cart-item-offer__container .offer-title').text(
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-offer').text(
             cartOfferTitle.replace('{min_quantity}', '3').replace('{offer_quantity}', '1')
         );
 
-        $('.merchant-cart-preview .cart-item-offer__container .discount-savings .label').html(
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info p').html(
             cartDiscountText.replace('{discount}', `<strong>20%</strong>`)
         );
-        $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3'));
         $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
