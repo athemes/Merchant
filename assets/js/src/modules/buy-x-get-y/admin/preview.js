@@ -24,6 +24,9 @@
             offerBorderRadius = layout.find('.merchant-field-offer_border_radius input.merchant-range-number-input').val(),
             cartOfferTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
             cartDiscountText = layout.find('.merchant-group-field-cart_page .merchant-field-discount_text input').val(),
+            thankYouTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
+            thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val(),
+            thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-bogo-title').css('color', titleTextColor);
@@ -48,6 +51,9 @@
             cartDiscountText.replace('{discount}', `<strong>20%</strong>`)
         );
         $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3'));
+        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 
     function show_single_product_preview(){

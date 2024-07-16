@@ -282,26 +282,26 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		?>
         <div class="merchant-thank-you-preview">
             <div class="order-received">
-                <div class="page-title">Order Received</div>
-                <p>Thank you. Your order has been received.</p>
+                <div class="page-title"><?php esc_html_e('Order Received','merchant'); ?></div>
+                <p><?php esc_html_e('Thank you. Your order has been received.','merchant'); ?></p>
                 <div class="order-details">
                     <div class="order-info">
-                        <div class="item-title">ORDER NUMBER:</div>
+                        <div class="item-title"><?php esc_html_e('ORDER NUMBER:','merchant'); ?></div>
                         <p>550</p>
                     </div>
                     <div class="order-info">
-                        <div class="item-title">PAYMENT METHOD:</div>
-                        <p>Apple Pay</p>
+                        <div class="item-title"><?php esc_html_e('PAYMENT METHOD:','merchant'); ?></div>
+                        <p><?php echo esc_html( merchant_get_first_active_payment_gateway_label() ?? 'Apple Pay' ) ?></p>
                     </div>
                 </div>
                 <div class="upsell-offer">
-                    <div class="offer-title">Last chance to get {offer_quantity} x</div>
+                    <div class="offer-title"><?php esc_html_e('Last chance to get {offer_quantity} x','merchant'); ?></div>
                     <div class="product-details">
                         <div class="product-image"></div>
                         <div class="product-info">
-                            <div class="product-name">Your Product Name</div>
-                            <p>with {discount} off</p>
-                            <button class="add-to-order">Add To My Order</button>
+                            <div class="product-name"><?php esc_html_e('Your Product Name','merchant'); ?></div>
+                            <p><?php esc_html_e('with {discount} off','merchant'); ?></p>
+                            <button class="add-to-order"><?php esc_html_e('Add To My Order','merchant'); ?></button>
                         </div>
                     </div>
                 </div>
