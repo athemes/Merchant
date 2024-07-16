@@ -30,6 +30,9 @@
             buyLabelValue = layout.find('.merchant-field-buy_text input').val(),
             quantityValue = +layout.find('.merchant-field-quantity input').val(),
             cartOfferTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
+            thankYouTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
+            thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val(),
+            thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-volume-discounts-title').css({
@@ -69,6 +72,9 @@
             cartOfferTitle.replace('{quantity}', '3').replace('{discount}', '20%')
         );
         $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{quantity}', '3'));
+        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
@@ -122,15 +128,31 @@
         element.removeClass('show');
     }
 
+    function show_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.addClass('show');
+    }
+
+    function hide_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.removeClass('show');
+    }
+
     $('.merchant-module-page-setting-box').on('click', function (e) {
         let clickedElement = $(e.target);
 
         if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
             show_cart_page_preview();
             hide_single_product_preview()
+            hide_thank_you_page_preview();
+        } else if (clickedElement.closest('.merchant-group-field-thank_you_page').length > 0 || clickedElement.hasClass('merchant-group-field-thank_you_page')) {
+            show_thank_you_page_preview();
+            hide_single_product_preview();
+            hide_cart_page_preview();
         } else {
             show_single_product_preview();
             hide_cart_page_preview();
+            hide_thank_you_page_preview();
         }
     });
 
