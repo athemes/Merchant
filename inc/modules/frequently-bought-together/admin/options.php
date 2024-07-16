@@ -317,7 +317,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Bundle title', 'merchant' ),
-									'default' => esc_html__( 'Add', 'merchant' ),
+									'default' => esc_html__( 'Last chance to get', 'merchant' ),
 								),
 
 								array(
@@ -333,10 +333,10 @@ Merchant_Admin_Options::create( array(
 								),
 
 								array(
-									'id'      => 'save_label',
+									'id'      => 'discount_text',
 									'type'    => 'text',
-									'title'   => esc_html__( 'And save label', 'merchant' ),
-									'default' => esc_html__( 'and save: {amount}', 'merchant' ),
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( 'with {discount} off', 'merchant' ),
 								),
 								array(
 									'id'      => 'button_text',
