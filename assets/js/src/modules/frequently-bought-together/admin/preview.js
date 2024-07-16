@@ -24,6 +24,9 @@
             offerBorderRadius = layout.find('.merchant-field-bundle_border_radius input.merchant-range-number-input').val(),
             cartBundleTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
             cartSaveLabel = layout.find('.merchant-group-field-cart_page .merchant-field-save_label input').val(),
+            thankYouTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
+            thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val(),
+            thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-frequently-bought-together-bundle-product-plus').css({
@@ -38,9 +41,12 @@
         $('.merchant-frequently-bought-together-title').html(titleTextColor);
         $('.merchant-frequently-bought-together-bundle-total').html(totalText);
         $('.merchant-frequently-bought-together-bundles .merchant-add-bundle-to-cart').html(addToCartText);
-        $('.cart-item-offer__container .offer-title').text(cartBundleTitle)
-        $('.cart-item-offer__container .discount-savings .label').text(cartSaveLabel.replace('{amount}', ''))
-        $('.cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText)
+        $('.cart-item-offer__container .offer-title').text(cartBundleTitle);
+        $('.cart-item-offer__container .discount-savings .label').text(cartSaveLabel.replace('{amount}', ''));
+        $('.cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3'));
+        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 
     $('.merchant-flexible-content-control .layout:first-child').addClass('active').trigger('click');
@@ -65,15 +71,31 @@
         element.removeClass('show');
     }
 
+    function show_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.addClass('show');
+    }
+
+    function hide_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.removeClass('show');
+    }
+
     $('.merchant-module-page-setting-box').on('click', function (e) {
         let clickedElement = $(e.target);
 
         if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
             show_cart_page_preview();
             hide_single_product_preview()
+            hide_thank_you_page_preview();
+        } else if (clickedElement.closest('.merchant-group-field-thank_you_page').length > 0 || clickedElement.hasClass('merchant-group-field-thank_you_page')) {
+            show_thank_you_page_preview();
+            hide_single_product_preview();
+            hide_cart_page_preview();
         } else {
             show_single_product_preview();
             hide_cart_page_preview();
+            hide_thank_you_page_preview();
         }
     });
 
