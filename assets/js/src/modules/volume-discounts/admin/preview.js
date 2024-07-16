@@ -68,10 +68,10 @@
             .replace( /{quantity}|{amount}/g, `<strong>${ quantityValue }</strong>` );
         $buyLabelPreview.html( buyLabelValue );
 
-        $('.merchant-cart-preview .cart-item-offer__container .offer-description').text(
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-offer').text(
             cartOfferTitle.replace('{quantity}', '3').replace('{discount}', '20%')
         );
-        $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{quantity}', '3'));
         $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
