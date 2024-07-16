@@ -145,7 +145,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
         $suggested_placement = Merchant_Admin_Options::get( self::MODULE_ID, 'suggested_products_placement', 'after_add_to_cart' );
         add_action( 'merchant_quick_view_' . $suggested_placement, array( $this, 'render_suggested_module_content' ), 10, 2 );
 
-        // Show Buy Now Button
+        // Buy Now Button
         add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'render_buy_now_button' ) );
 
 		// Custom CSS.
@@ -155,10 +155,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 	}
-
-	public function simple_add_to_cart() {
-        echo 'Cool';
-    }
 
 	/**
 	 * Init translations.
@@ -642,7 +638,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function print_bulk_discounts( $product ) {
-		if ( ! Merchant_Modules::is_module_active( Merchant_Volume_Discounts::MODULE_ID ) ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Volume_Discounts::MODULE_ID ) ) {
 			return;
 		}
 
@@ -672,7 +668,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function print_buy_x_get_y( $product ) {
-		if ( ! Merchant_Modules::is_module_active( Merchant_Buy_X_Get_Y::MODULE_ID ) ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Buy_X_Get_Y::MODULE_ID ) ) {
 			return;
 		}
 
@@ -701,7 +697,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function print_frequently_bought_together( $product ) {
-		if ( ! Merchant_Modules::is_module_active( Merchant_Frequently_Bought_Together::MODULE_ID ) ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Frequently_Bought_Together::MODULE_ID ) ) {
 			return;
 		}
 

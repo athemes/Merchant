@@ -1401,6 +1401,16 @@ body.merchant-module-disabled {
   font-size: 14px;
   font-weight: 500;
   color: #2F2F2F;
+
+  &__has-upsell {
+    gap: 7px !important;
+
+    &,
+    a span {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 .merchant-module-page-setting-field-desc {
