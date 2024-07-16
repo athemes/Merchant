@@ -70,19 +70,36 @@
         element.removeClass('show');
     }
 
+    // thank you page preview
+    function show_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.addClass('show');
+    }
+
+    function hide_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.removeClass('show');
+    }
+
     $('.merchant-flexible-content-control .layout:first-child').addClass('active').trigger('click');
 
-    $('.merchant-module-page-setting-box').on('click', function (e) {
-        let clickedElement = $(e.target);
+	$('.merchant-module-page-setting-box').on('click', function (e) {
+		let clickedElement = $(e.target);
 
-        if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
-            show_cart_page_preview();
-            hide_single_product_preview()
-        } else {
-            show_single_product_preview();
+		if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
+			show_cart_page_preview();
+			hide_single_product_preview()
+            hide_thank_you_page_preview();
+		} else if (clickedElement.closest('.merchant-group-field-thank_you_page').length > 0 || clickedElement.hasClass('merchant-group-field-thank_you_page')) {
+			show_thank_you_page_preview();
+			hide_single_product_preview();
             hide_cart_page_preview();
-        }
-    });
+		} else {
+			show_single_product_preview();
+			hide_cart_page_preview();
+            hide_thank_you_page_preview();
+		}
+	});
 
     show_single_product_preview();
 })(jQuery);

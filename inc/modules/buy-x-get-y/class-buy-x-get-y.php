@@ -187,6 +187,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				);
 				$preview_html .= '</div>';
                 $preview_html .= $this->cart_preview();
+                $preview_html .= $this->thank_you_page_preview();
 				$preview->set_html( $preview_html );
 			} else {
 				$preview->set_html( '<p>' . esc_html__( 'No products found, please add some products to render the module preview', 'merchant' ) . '</p>' );
@@ -267,6 +268,45 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				</div>
 			</div>
 		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+    /**
+     * Thank you page preview.
+     *
+     * @return string
+     */
+	public function thank_you_page_preview() {
+		ob_start();
+		?>
+        <div class="merchant-thank-you-preview">
+            <div class="order-received">
+                <div class="page-title">Order Received</div>
+                <p>Thank you. Your order has been received.</p>
+                <div class="order-details">
+                    <div class="order-info">
+                        <div class="item-title">ORDER NUMBER:</div>
+                        <p>550</p>
+                    </div>
+                    <div class="order-info">
+                        <div class="item-title">PAYMENT METHOD:</div>
+                        <p>Apple Pay</p>
+                    </div>
+                </div>
+                <div class="upsell-offer">
+                    <div class="offer-title">Last chance to get {offer_quantity} x</div>
+                    <div class="product-details">
+                        <div class="product-image"></div>
+                        <div class="product-info">
+                            <div class="product-name">Your Product Name</div>
+                            <p>with {discount} off</p>
+                            <button class="add-to-order">Add To My Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<?php
 		return ob_get_clean();
 	}
