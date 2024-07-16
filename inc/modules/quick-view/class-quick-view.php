@@ -141,11 +141,11 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		// Inject quick view modal output on footer.
 		add_action( 'wp_footer', array( $this, 'modal_output' ) );
 
-        // Suggested Module Content
+        // Show Suggested Module
         $suggested_placement = Merchant_Admin_Options::get( self::MODULE_ID, 'suggested_products_placement', 'after_add_to_cart' );
         add_action( 'merchant_quick_view_' . $suggested_placement, array( $this, 'render_suggested_module_content' ), 10, 2 );
 
-        // Buy Now Button
+        // Show Buy Now Module
         add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'render_buy_now_button' ) );
 
 		// Custom CSS.
