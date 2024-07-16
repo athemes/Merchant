@@ -48,17 +48,21 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'button_type' => 'text',
-			'button_text' => __( 'Quick View', 'merchant' ),
-			'button_icon' => 'eye',
-			'button_position' => 'overlay',
-			'button-position-top' => 50,
-			'button-position-left' => 50,
-			'zoom_effect' => 1,
-			'show_quantity' => 1,
-			'place_product_description' => 'top',
-			'description_style' => 'short',
-			'place_product_image' => 'thumbs-at-left',
+			'button_type'                  => 'text',
+			'button_text'                  => __( 'Quick View', 'merchant' ),
+			'button_icon'                  => 'eye',
+			'button_position'              => 'overlay',
+			'button-position-top'          => 50,
+			'button-position-left'         => 50,
+			'zoom_effect'                  => 1,
+			'show_quantity'                => 1,
+			'place_product_description'    => 'top',
+			'description_style'            => 'short',
+			'place_product_image'          => 'thumbs-at-left',
+            'show_buy_now_button'          => false,
+            'show_suggested_products'      => true,
+            'suggested_products_module'    => 'bulk_discounts',
+            'suggested_products_placement' => 'after_add_to_cart',
 		);
 
 		// Mount preview url.
@@ -101,7 +105,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() && ! defined( 'DOING_AJAX' ) ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return; 
 		}
 
@@ -118,10 +122,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		if ( defined( 'BOTIGA_PRO_URI' ) && defined( 'BOTIGA_PRO_VERSION' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'modal_compatibility_with_botiga_theme' ) );
 		}
-
-		// Modal content ajax callback.
-		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
-		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 
 		// Button Position.
 		$button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'overlay' );
@@ -141,8 +141,19 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		// Inject quick view modal output on footer.
 		add_action( 'wp_footer', array( $this, 'modal_output' ) );
 
+        // Show Suggested Module
+        $suggested_placement = Merchant_Admin_Options::get( self::MODULE_ID, 'suggested_products_placement', 'after_add_to_cart' );
+        add_action( 'merchant_quick_view_' . $suggested_placement, array( $this, 'render_suggested_module_content' ), 10, 2 );
+
+        // Show Buy Now Module
+        add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'render_buy_now_button' ) );
+
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		// Modal content ajax callback.
+		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
+		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 	}
 
 	/**
@@ -342,48 +353,43 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 */
 	public function modal_content_ajax_callback() {
 		check_ajax_referer( 'merchant-nonce', 'nonce' );
-		
+
 		if ( ! isset( $_POST['product_id'] ) || ! function_exists( 'wc_get_product' ) ) {
 			wp_send_json_error();
 		}
-		
+
 		$args = array(
 			'product_id' => absint( $_POST['product_id'] ),
 		);
-		
+
 		global $product;
 
 		$settings = $this->get_module_settings();
 		$product  = wc_get_product( $args['product_id'] );
-		
+
 		if ( is_wp_error( $product ) || empty( $product ) ) {
 			wp_send_json_error();
 		}
-		
+
 		$product_id    = $product->get_id(); 
 		$hide_quantity = ( empty( $settings[ 'show_quantity' ] ) ) ? 'merchant-hide-quantity' : '';
 
 		ob_start();
-		
 		?>
-		
 			<div id="product-<?php echo absint( $product_id ); ?>" <?php wc_product_class( '', $product ); ?>>
-
 				<div class="merchant-quick-view-row">
-
 					<div class="merchant-quick-view-column">
 						<div class="merchant-quick-view-product-gallery">
 							<?php woocommerce_show_product_images(); ?>
 						</div>
 					</div>
-					
+
 					<div class="merchant-quick-view-column">
-
 						<div class="merchant-quick-view-summary product-gallery-summary">
-
 							<div class="merchant-quick-view-product-title">
 								<h2 class="product_title entry-title"><?php echo esc_html( $product->get_title() ); ?></h2>
 							</div>
+
 							<?php if ( 0 !== $product->get_average_rating() ) : ?>
 								<div class="merchant-quick-view-product-rating">
 									<div class="woocommerce-product-rating">
@@ -391,10 +397,20 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 									</div>
 								</div>
 							<?php endif; ?>
+
 							<div class="merchant-quick-view-product-price">
 								<div class="price"><?php echo wp_kses( $product->get_price_html(), merchant_kses_allowed_tags() ); ?></div>
 							</div>
+
 							<?php if ( 'top' === $settings[ 'place_product_description' ] ) : ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_before_product_description' );
+								?>
 								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
 									<div class="merchant-quick-view-product-excerpt">
 										<?php echo wp_kses_post( $product->get_description() ); ?>
@@ -404,11 +420,47 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
 									</div>
 								<?php endif; ?>
+
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_after_product_description' );
+								?>
 							<?php endif; ?>
+
+							<?php
+							/**
+							 * Hook 'merchant_quick_view_before_add_to_cart'
+							 *
+							 * @since 1.9.14
+							 */
+							do_action( 'merchant_quick_view_before_add_to_cart', $product, $settings );
+							?>
 							<div class="merchant-quick-view-product-add-to-cart <?php echo esc_attr( $hide_quantity ); ?>">
 								<?php woocommerce_template_single_add_to_cart(); ?>
 							</div>
+
+							<?php
+							/**
+							 * Hook 'merchant_quick_view_after_add_to_cart'
+							 *
+							 * @since 1.9.14
+							 */
+							do_action( 'merchant_quick_view_after_add_to_cart', $product, $settings );
+							?>
+
 							<?php if ( 'bottom' === $settings[ 'place_product_description' ] ) : ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_before_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_before_product_description' );
+								?>
 								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
 									<div class="merchant-quick-view-product-excerpt">
 										<?php echo wp_kses_post( $product->get_description() ); ?>
@@ -418,6 +470,14 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
 									</div>
 								<?php endif; ?>
+								<?php
+								/**
+								 * Hook 'merchant_quick_view_after_product_description'
+								 *
+								 * @since 1.9.14
+								 */
+								do_action( 'merchant_quick_view_after_product_description' );
+								?>
 							<?php endif; ?>
 							<div class="merchant-quick-view-product-meta">
 								<?php woocommerce_template_single_meta(); ?>
@@ -431,17 +491,11 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 							 */
 							do_action( 'merchant_quick_view_after_product_meta' ); 
 							?>
-
 						</div>
-
 					</div>
-
 				</div>
-
 			</div>
-
 		<?php
-
 		$content = ob_get_contents();
 
 		ob_get_clean();
@@ -457,7 +511,6 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 */
 	public function modal_output() {
 		$settings = $this->get_module_settings();
-
 		?>
 			<div class="single-product merchant-quick-view-modal merchant-quick-view-<?php echo esc_attr( $settings[ 'place_product_image' ] ); ?>">
 				<div class="merchant-quick-view-overlay"></div>
@@ -504,6 +557,168 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		?>
 			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?></a>
 		<?php
+	}
+
+	/**
+     * Renders the Buy Now button.
+     *
+	 * @return void
+	 */
+	public function render_buy_now_button() {
+		if ( ! Merchant_Modules::is_module_active( Merchant_Buy_Now::MODULE_ID ) ) {
+			return;
+		}
+
+		// Don't include on Single Product
+		if ( ! did_action( 'merchant_quick_view_before_add_to_cart' ) ) {
+			return;
+		}
+
+		$show_buy_now = (bool) Merchant_Admin_Options::get( $this->module_id, 'show_buy_now_button', false );
+        if ( ! $show_buy_now ) {
+            return;
+        }
+
+		global $product;
+
+		$text = Merchant_Admin_Options::get( Merchant_Buy_Now::MODULE_ID, 'button-text', esc_html__( 'Buy Now', 'merchant' ) );
+
+		$_wrapper_classes   = array();
+		$_wrapper_classes[] = $product->get_type() === 'variable' ? 'disabled' : '';
+
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_class'
+		 *
+		 * @since 1.8
+		 */
+		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', $_wrapper_classes );
+		?>
+        <!-- Don't define type="submit" because it creates issue with block themes. The button is inside the form, so by default the type is already "submit". -->
+        <button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+		<?php
+    }
+
+	/**
+     * Renders the suggested module content based on the provided settings.
+     *
+	 * @param $product
+	 * @param $settings
+	 *
+	 * @return void
+	 */
+	public function render_suggested_module_content( $product, $settings ) {
+		$show_suggested = (bool) Merchant_Admin_Options::get( $this->module_id, 'show_suggested_products', true );
+
+		if ( ! $show_suggested || empty( $product ) ) {
+			return;
+		}
+
+		$suggested_module = $settings['suggested_products_module'] ?? 'bulk_discounts';
+
+		switch ( $suggested_module ) {
+			case 'bulk_discounts':
+				$this->print_bulk_discounts( $product );
+				break;
+
+			case 'buy_x_get_y':
+				$this->print_buy_x_get_y( $product );
+				break;
+
+			case 'frequently_bought_together':
+				$this->print_frequently_bought_together( $product );
+				break;
+		}
+	}
+
+	/**
+     * Prints the bulk discounts for the specified product.
+     *
+	 * @param $product
+	 *
+	 * @return void
+	 */
+	public function print_bulk_discounts( $product ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Volume_Discounts::MODULE_ID ) ) {
+			return;
+		}
+
+		$product_id     = $product->get_id();
+		$discount_tiers = Merchant_Pro_Volume_Discounts::availabe_offers( $product_id );
+
+        if ( ! empty( $discount_tiers ) ) {
+	        merchant_get_template_part(
+		        Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
+		        'single-product',
+		        array(
+			        'settings'              => Merchant_Admin_Options::get_all( Merchant_Volume_Discounts::MODULE_ID ),
+			        'discount_tiers'        => $discount_tiers,
+			        'product_price'         => $product->get_price(),
+			        'in_cart'               => Merchant_Pro_Volume_Discounts::is_in_cart( $product_id ),
+			        'product_cart_quantity' => Merchant_Pro_Volume_Discounts::get_product_cart_quantity( $product_id ),
+		        )
+	        );
+        }
+	}
+
+	/**
+     * Prints the Buy X Get Y offers for the specified product.
+     *
+	 * @param $product
+	 *
+	 * @return void
+	 */
+	public function print_buy_x_get_y( $product ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Buy_X_Get_Y::MODULE_ID ) ) {
+			return;
+		}
+
+		$product_id = $product->get_id();
+		$offers     = Merchant_Pro_Buy_X_Get_Y::availabe_offers( $product_id );
+
+		if ( ! empty( $offers ) ) {
+			merchant_get_template_part(
+				Merchant_Buy_X_Get_Y::MODULE_TEMPLATES,
+				'single-product',
+				array(
+					'offers'   => $offers,
+					'nonce'    => wp_create_nonce( 'merchant_bogo_add_to_cart' ),
+					'settings' => Merchant_Admin_Options::get_all( Merchant_Buy_X_Get_Y::MODULE_ID ),
+					'product'  => $product_id,
+				)
+			);
+		}
+	}
+
+	/**
+     * Prints the frequently bought together bundles for the specified product.
+     *
+	 * @param $product
+	 *
+	 * @return void
+	 */
+	public function print_frequently_bought_together( $product ) {
+		if ( ! merchant_is_pro_active() || ! Merchant_Modules::is_module_active( Merchant_Frequently_Bought_Together::MODULE_ID ) ) {
+			return;
+		}
+
+		$post_id     = $product->get_id();
+		$bundle_data = Merchant_Pro_Frequently_Bought_Together::availabe_offers( $post_id, Merchant_Pro_Frequently_Bought_Together::bundles() );
+
+		if ( ! empty( $bundle_data ) ) {
+			$bundles[ $post_id ] = Merchant_Pro_Frequently_Bought_Together::map_bundles( $bundle_data );
+		}
+
+		if ( ! empty( $bundles ) ) {
+			merchant_get_template_part(
+				Merchant_Frequently_Bought_Together::MODULE_TEMPLATES_PATH,
+				'single-product',
+				array(
+					'bundles'  => $bundles,
+					'nonce'    => wp_create_nonce( Merchant_Pro_Frequently_Bought_Together::AJAX_NONCE_ACTION ),
+					'settings' => Merchant_Admin_Options::get_all( Merchant_Frequently_Bought_Together::MODULE_ID ),
+				)
+			);
+		}
 	}
 	
 	/**

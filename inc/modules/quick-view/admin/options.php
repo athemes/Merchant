@@ -158,9 +158,8 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Modal', 'merchant' ),
 	'module' => 'quick-view',
 	'fields' => array(
-
 		array(
-		'id'      => 'modal_width',
+			'id'      => 'modal_width',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Modal width', 'merchant' ),
 			'min'     => 1,
@@ -171,7 +170,7 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-		'id'      => 'modal_height',
+			'id'      => 'modal_height',
 			'type'    => 'range',
 			'title'   => esc_html__( 'Modal height', 'merchant' ),
 			'min'     => 1,
@@ -227,6 +226,139 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Show quantity selector', 'merchant' ),
 			'default' => 1,
+		),
+
+		array(
+			'id'      => 'show_buy_now_button',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show buy now button', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'          => 'show_buy_now_button_instructions',
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display a Buy Now button by using Merchant’s Buy Now module.', 'merchant' ),
+			'button_text' => esc_html__( 'View Buy Now', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=buy-now' ) ),
+			'condition'   => array( 'show_buy_now_button', '==', '1' ),
+		),
+
+		array(
+			'id'      => 'show_suggested_products',
+			'pro'     => true, // Merchant Pro dependent
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show suggested products', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'suggested_products_module',
+			'pro'        => true,
+			'type'       => 'select',
+			'options'    => array(
+				'bulk_discounts'             => esc_html__( 'Bulk Discounts', 'merchant' ),
+				'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
+				'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+			),
+			'default'    => 'bulk_discounts',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_suggested_products',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'          => 'suggested_products_instructions_bulk_discounts',
+			'pro'         => true,
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules (Bulk Discounts, Buy X Get Y or Frequently Bought Together) from Merchant.', 'merchant' ),
+			'button_text' => esc_html__( 'View Bulk Discounts', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=volume-discounts' ) ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_suggested_products',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'suggested_products_module',
+						'operator' => '===',
+						'value'    => 'bulk_discounts',
+					),
+				),
+			),
+		),
+		array(
+			'id'          => 'suggested_products_instructions_frequently_bought_together',
+			'pro'         => true,
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules (Bulk Discounts, Buy X Get Y or Frequently Bought Together) from Merchant.', 'merchant' ),
+			'button_text' => esc_html__( 'View Frequently Bought Together', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=frequently-bought-together' ) ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_suggested_products',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'suggested_products_module',
+						'operator' => '===',
+						'value'    => 'frequently_bought_together',
+					),
+				),
+			),
+		),
+		array(
+			'id'          => 'suggested_products_instructions_buy_x_get_y',
+			'pro'         => true,
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can display suggested products by enabling certain modules (Bulk Discounts, Buy X Get Y or Frequently Bought Together) from Merchant.', 'merchant' ),
+			'button_text' => esc_html__( 'View Buy X Get Y', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=buy-x-get-y' ) ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_suggested_products',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'suggested_products_module',
+						'operator' => '===',
+						'value'    => 'buy_x_get_y',
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'suggested_products_placement',
+			'pro'        => true,
+			'type'       => 'radio',
+			'title'      => esc_html__( 'Suggested products placement', 'merchant' ),
+			'options'    => array(
+				'before_add_to_cart' => esc_html__( 'Before Add to Cart', 'merchant' ),
+				'after_add_to_cart'  => esc_html__( 'After Add to Cart', 'merchant' ),
+			),
+			'default'    => 'after_add_to_cart',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_suggested_products',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
 		),
 
 		array(
