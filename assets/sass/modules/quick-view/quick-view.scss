@@ -318,19 +318,24 @@
 	
 	.woocommerce-variation-price,
 	.merchant-quick-view-product-price {
-		color: var(--mrc-qv-regular-price-color, #999999);
+		color: var(--mrc-qv-modal-regular-price-color, #999999);
 		
 		del {
-			color: var(--mrc-qv-regular-price-color, #999999);
+			color: var(--mrc-qv-modal-regular-price-color, #999999);
 		}
 		
 		ins {
-			color: var(--mrc-qv-sale-price-color, #212121);
+			color: var(--mrc-qv-modal-sale-price-color, #212121);
 			margin: 0;
 			font-size: 24px;
 		}
+
+		span,
+		strong {
+			color: inherit;
+		}
 	}
-	
+
 	form.cart,
 	.woocommerce-variation-add-to-cart {
 		display: flex;
