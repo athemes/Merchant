@@ -1307,6 +1307,9 @@
             var $config = window.merchant_admin_options;
             var $object = {
                 width: '100%',
+                templateSelection: function( category ) {
+                    return category.text.replace(/&nbsp;-*\s*/g, '').trim();
+                },
             }
 
             if ($source === 'post' || $source === 'product' || $source === 'user') {
