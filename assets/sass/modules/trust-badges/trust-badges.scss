@@ -10,9 +10,10 @@
 	grid-gap: 15px;
 	flex-direction: column;
 	padding: 15px;
+	background: none;
 	border: 1px solid var(--mrc-tb-border-color, #e5e5e5);
-	margin-top: var(--mrc-tb-margin-top, 20px) !important;
-	margin-bottom: var(--mrc-tb-margin-bottom, 20px) !important;
+	margin: var(--mrc-tb-margin-top, 20px) 0 var(--mrc-tb-margin-bottom, 20px) 0 !important;
+	border-radius: 4px;
 	
 	+ .merchant-trust-badges {
 		display: none;
@@ -23,12 +24,15 @@
 	display: flex;
 	justify-content: var(--mrc-tb-align, center);
 	width: 100%;
+	background: none;
 	color: var(--mrc-tb-text-color, #212121);
+	border: none;
 	font-size: var(--mrc-tb-font-size, 15px);
 	font-weight: 700;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin-bottom: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 .merchant-trust-badges-images  {

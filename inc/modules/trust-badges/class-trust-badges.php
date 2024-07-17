@@ -146,7 +146,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		ob_start();
 
 		$settings       = $this->get_module_settings();
-		$is_placeholder = empty( $settings[ 'badges' ] ) ? true : false;
+		$is_placeholder = empty( $settings['badges'] );
 		$badges         = $this->get_badges( $settings[ 'badges' ] );
 		?>
         <fieldset class="merchant-trust-badges">
@@ -258,7 +258,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content() {
 		?>
-
 		<div class="mrc-preview-single-product-elements">
 			<div class="mrc-preview-left-column">
 				<div class="mrc-preview-product-image-wrapper">
@@ -318,52 +317,40 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function trust_badges_output() {
-		if ( $this->is_shortcode_enabled() ) {
+		if ( $this->is_shortcode_enabled() || ! is_product() ) {
 			return;
 		}
 
-		if ( is_archive() || is_page() ) {
-			return;
-		}
-		
 		$settings               = $this->get_module_settings();
-		$is_placeholder         = empty( $settings[ 'badges' ] ) ? true : false;
+		$is_placeholder         = empty( $settings['badges'] );
 		$badges                 = $this->get_badges( $settings[ 'badges' ] );
 		$placeholder_badges_alt = $this->get_placeholder_badges_alt_map();
-
 		?>
+        <fieldset class="merchant-trust-badges">
+            <?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
+                <legend class="merchant-trust-badges-title"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></legend>
+            <?php endif; ?>
 
-			<fieldset class="merchant-trust-badges">
+            <?php if ( ! $is_placeholder ) : ?>
+                <div class="merchant-trust-badges-images">
+                    <?php
+                    foreach ( $badges as $image_id ) {
+                        echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );
+                    }
+                    ?>
+                </div>
 
-				<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
-					<legend class="merchant-trust-badges-title"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></legend>
-				<?php endif; ?>
-
-				<?php if ( ! $is_placeholder ) : ?>
-
-					<div class="merchant-trust-badges-images">
-
-						<?php foreach ( $badges as $image_id ) {
-							echo wp_kses_post( wp_get_attachment_image( $image_id ) );
-						} ?>
-
-					</div>
-
-					<?php else : ?>
-
-						<div class="merchant-trust-badges-images is-placeholder">
-							<?php foreach ( $badges as $badge_src ) : 
-								$image_basename = basename( $badge_src );
-								$image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
-								?>
-								<img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
-							<?php endforeach; ?>
-						</div>
-
-					<?php endif; ?>
-
-			</fieldset>
-			
+                <?php else : ?>
+                    <div class="merchant-trust-badges-images is-placeholder">
+                        <?php foreach ( $badges as $badge_src ) :
+                            $image_basename = basename( $badge_src );
+                            $image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
+                            ?>
+                            <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+        </fieldset>
 		<?php 
 	}
 
