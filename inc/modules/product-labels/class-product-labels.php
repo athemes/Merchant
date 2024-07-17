@@ -544,18 +544,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					continue;
 				}
 
-				$rule = $label['display_rules'] ?? 'products_on_sale';
-
-				if ( in_array( $rule, array( 'all_products', 'featured_products', 'products_on_sale', 'by_category', 'out_of_stock' ), true ) ) {
-					$excluded_product_ids = $label['excluded_products'] ?? array();
-					$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
-
-					if ( in_array( (int) $product->get_id(), $excluded_product_ids, true ) ) {
-						continue;
-					}
+				$is_excluded = merchant_is_product_excluded( $product->get_id(), $label );
+				if ( $is_excluded ) {
+					continue;
 				}
 
-				switch ( $rule ) {
+				$display_rule = $label['display_rules'] ?? 'products_on_sale';
+				switch ( $display_rule ) {
 					case 'featured_products':
 						if ( $this->is_featured( $product ) ) {
 							$product_labels_html .= $this->label( $label );
