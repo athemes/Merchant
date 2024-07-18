@@ -383,18 +383,37 @@ if ( ! function_exists( 'merchant_is_cart_block_layout' ) ) {
  */
 if ( ! function_exists( 'merchant_get_product_categories' ) ) {
 	function merchant_get_product_categories() {
-		$product_categories = get_terms( array(
+		$args = array(
 			'taxonomy'   => 'product_cat',
 			'hide_empty' => false,
-		) );
-		$category_names     = array();
-		if ( ! empty( $product_categories ) && ! is_wp_error( $product_categories ) ) {
-			foreach ( $product_categories as $category ) {
-				$category_names[ $category->slug ] = $category->name;
+		);
+
+		$categories = get_terms( $args );
+
+		$categories_tree    = array();
+		$indexed_categories = array();
+
+		if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+			foreach ( $categories as $category ) {
+				$indexed_categories[ $category->term_id ] = array(
+					'id'       => $category->term_id,
+					'slug'     => $category->slug,
+					'name'     => $category->name,
+					'parent'   => $category->parent,
+					'children' => array(),
+				);
+			}
+
+			foreach ( $indexed_categories as &$cat ) {
+				if ( (int) $cat['parent'] === 0 ) {
+					$categories_tree[] = &$cat;
+				} else {
+					$indexed_categories[ $cat['parent'] ]['children'][] = &$cat;
+				}
 			}
 		}
 
-		return $category_names;
+		return $categories_tree;
 	}
 }
 
@@ -659,6 +678,44 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 		}
 
 		return $passed;
+	}
+}
+
+/**
+ * Check if a product is excluded based on given arguments.
+ *
+ * @param $product_id
+ * @param $args
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
+	function merchant_is_product_excluded( $product_id, $args = array() ) {
+		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
+
+		// Exclude products
+		if ( in_array( $display_rule, array( 'all', 'all_products', 'categories', 'by_category' ), true ) ) {
+			$excluded_product_ids = $args['excluded_products'] ?? array();
+			$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
+
+			if ( in_array( (int) $product_id, $excluded_product_ids, true ) ) {
+				return true;
+			}
+		}
+
+		// Exclude categories
+		if ( in_array( $display_rule, array( 'all', 'all_products' ), true ) ) {
+			$excluded_categories_slugs = $args['excluded_categories'] ?? array();
+
+			$product     = wc_get_product( $product_id );
+			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
+
+			if ( ! empty( $excluded_categories_slugs ) && has_term( $excluded_categories_slugs, 'product_cat', $_product_id ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 

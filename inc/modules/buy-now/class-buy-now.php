@@ -80,7 +80,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return;
 		}
 
@@ -264,6 +264,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function single_product_buy_now_button() {
 		// Don't include on Sticky Add to Cart
 		if ( did_filter( 'merchant_sticky_add_to_cart_template_args' ) ) {
+			return;
+		}
+
+		// Don't include on Quick View
+		if ( did_action( 'merchant_quick_view_before_add_to_cart' ) ) {
 			return;
 		}
 

@@ -72,6 +72,18 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
 						),
 
+						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
+							'condition'   => array( 'rules_to_apply', '==', 'all' ),
+						),
+
 						'amount' => array(
 							'id'      => 'amount',
 							'title'   => esc_html__( 'Spending goal', 'merchant' ),
