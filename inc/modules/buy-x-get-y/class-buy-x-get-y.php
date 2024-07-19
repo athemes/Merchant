@@ -187,6 +187,7 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 				);
 				$preview_html .= '</div>';
                 $preview_html .= $this->cart_preview();
+                $preview_html .= $this->checkout_page_preview();
                 $preview_html .= $this->thank_you_page_preview();
 				$preview->set_html( $preview_html );
 			} else {
@@ -276,6 +277,35 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
                 </table>
             </div>
 		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Checkout page preview.
+	 *
+	 * @return string
+	 */
+	public function checkout_page_preview() {
+		ob_start();
+		?>
+        <div class="merchant-checkout-preview">
+            <div class="order-received">
+                <div class="page-title"><?php esc_html_e('Checkout','merchant'); ?></div>
+                <br>
+                <div class="upsell-offer">
+                    <div class="offer-title"><?php esc_html_e('Last chance to get {offer_quantity} x','merchant'); ?></div>
+                    <div class="product-details">
+                        <div class="product-image"></div>
+                        <div class="product-info">
+                            <div class="product-name"><?php esc_html_e('Your Product Name','merchant'); ?></div>
+                            <p><?php esc_html_e('with {discount} off','merchant'); ?></p>
+                            <button class="add-to-order"><?php esc_html_e('Add To My Order','merchant'); ?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<?php
 		return ob_get_clean();
 	}

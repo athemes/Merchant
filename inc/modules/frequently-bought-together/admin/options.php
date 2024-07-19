@@ -343,7 +343,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get', 'merchant' ),
+									'default' => esc_html__( 'Don’t miss', 'merchant' ),
 								),
 								array(
 									'id'      => 'discount_text',
