@@ -19,7 +19,10 @@
 
 .single-product {
 	.merchant-stock-scarcity {
-		margin-top: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		margin-top: 15px;
 	}
 
 	ul.products li.product, 
