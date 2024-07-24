@@ -323,8 +323,14 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
             foreach ( $children_ids as $child_id ) {
 	            $child_product = wc_get_product( $child_id );
+
 	            $regular_price = (float) $child_product->get_regular_price();
 	            $sale_price    = (float) $child_product->get_sale_price();
+
+                if ( $child_product->is_type( 'variable' ) ) {
+	                $regular_price = (float) $child_product->get_variation_regular_price( 'min' );
+	                $sale_price    = (float) $child_product->get_variation_sale_price( 'min' );
+                }
 
 	            $total_regular_price += $regular_price;
 	            $total_sale_price    += ! empty( $sale_price ) ? $sale_price : $regular_price;
