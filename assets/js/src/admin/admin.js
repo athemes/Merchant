@@ -280,7 +280,11 @@
                     if (fieldOptions) {
                         if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
                             fieldOptions.minDate = new Date();
+                            if(fieldOptions.timeZone !== undefined && fieldOptions.timeZone !== ''){
+                                fieldOptions.minDate = new Date(fieldOptions.minDate.toLocaleString('en-US', {timeZone: fieldOptions.timeZone}));
+                            }
                         }
+                        console.log(fieldOptions.timeZone);
                         options = Object.assign(options, fieldOptions);
                     }
                     new AirDatepicker(input.getPath(), options);
