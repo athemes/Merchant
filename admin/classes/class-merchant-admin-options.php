@@ -118,10 +118,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								esc_html__( 'Nov', 'merchant' ),
 								esc_html__( 'Dec', 'merchant' ),
 							),
+							'clear'       => esc_html__( 'Clear', 'merchant' ),
 						)
 					),
 				) );
-            }
+			}
 		}
 
 		/**

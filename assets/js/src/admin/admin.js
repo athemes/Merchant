@@ -276,6 +276,8 @@
                             }
                         },
                         fieldOptions = $(this).data('options');
+                    // add buttons to fieldOptions
+                    fieldOptions.buttons = ['clear'];
 
                     if (fieldOptions) {
                         if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
