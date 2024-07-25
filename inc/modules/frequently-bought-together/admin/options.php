@@ -385,7 +385,7 @@ Merchant_Admin_Options::create( array(
 										'before_order_details' => esc_html__( 'Before Order details', 'merchant' ),
 										'after_order_details'  => esc_html__( 'After Order details', 'merchant' ),
 									),
-									'default' => 'on_top',
+									'default' => 'before_order_details',
 								),
 
 								array(
