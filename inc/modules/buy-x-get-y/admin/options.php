@@ -333,7 +333,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Checkout page', 'merchant' ),
+							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
 							'state'          => 'open',
 							'default'        => 'inactive',
