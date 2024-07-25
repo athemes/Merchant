@@ -358,7 +358,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {offer_quantity} x', 'merchant' ),
+									'default' => esc_html__( 'Last chance to get {offer_quantity}x', 'merchant' ),
 								),
 								array(
 									'id'      => 'discount_text',
