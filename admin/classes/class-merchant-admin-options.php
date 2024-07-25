@@ -118,10 +118,11 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								esc_html__( 'Nov', 'merchant' ),
 								esc_html__( 'Dec', 'merchant' ),
 							),
+							'clear'       => esc_html__( 'Clear', 'merchant' ),
 						)
 					),
 				) );
-            }
+			}
 		}
 
 		/**
@@ -1892,12 +1893,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * @return void
 		 */
         public static function date_time( $settings, $value, $module_id = '' ) {
-            // All options are documented here: https://air-datepicker.com/docs
+	        // All options are documented here: https://air-datepicker.com/docs
 	        $options = array(
 		        'dateFormat' => 'MM-dd-yyyy',
 		        'timepicker' => true,
 		        'timeFormat' => 'hh:mm AA',
 		        'minDate'    => 'today',
+		        'timeZone'   => wp_timezone_string(),
 	        );
 	        if ( isset( $settings['options'] ) ) {
 		        $settings['options'] = wp_parse_args( $settings['options'], $options );
