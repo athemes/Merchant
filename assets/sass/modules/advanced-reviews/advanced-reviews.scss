@@ -499,9 +499,17 @@ body {
 		max-width: calc( 100vw - 40px );
 
 		.merchant-adv-reviews-modal-close {
-			position: absolute;
-			top: 25px;
-			right: 30px;
+			position: fixed;
+
+			@media screen and (min-width: 769px) {
+				top: 30px;
+				right: 30px;
+			}
+
+			@media screen and (max-width: 768px) {
+				top: 20px;
+				right: 20px;
+			}
 
 			.icon-cancel {
 				cursor: pointer;
@@ -851,7 +859,7 @@ body {
 		z-index: 99;
 
 		@media (max-width: 768px) {
-			max-width: calc(100vw - 100px);
+			max-width: calc(100vw - 80px);
 		}
 
 		.merchant-adv-reviews-modal-content {
@@ -912,7 +920,14 @@ body {
 	.merchant-adv-reviews-modal {
 		&-content {
 			display: flex;
-			grid-gap: 30px;
+
+			@media screen and (min-width: 769px) {
+				grid-gap: 30px;
+			}
+
+			@media screen and (max-width: 768px) {
+				flex-direction: column;
+			}
 		}
 
 		&-body {
@@ -920,18 +935,30 @@ body {
 		}
 
 		&-column {
-			flex: 1;
-			width: 50%;
 			overflow: hidden;
 			position: relative;
 
 			&:first-child {
 				background: #000;
-				padding: 0 20px;
 			}
 
-			&:last-child {
-				padding: 30px 0;
+			@media screen and (min-width: 769px) {
+				flex: 1;
+				width: 50%;
+
+				&:first-child {
+					padding: 0 20px;
+				}
+
+				&:last-child {
+					padding: 30px 0;
+				}
+			}
+
+			@media screen and (max-width: 768px) {
+				&:first-child {
+					padding: 0 7px;
+				}
 			}
 
 			&-review {
@@ -940,6 +967,10 @@ body {
 				display: flex;
 				flex-direction: column;
 				gap: 15px;
+
+				@media screen and (max-width: 768px) {
+					padding: 25px;
+				}
 			}
 
 			&-review-title {
@@ -964,32 +995,49 @@ body {
 	}
 }
 
-.merchant-adv-reviews-modal-next-prev {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	background: none !important;
-	z-index: 999;
-	border: none;
-	box-shadow: none;
-	outline: none;
-	padding: 15px;
-	margin: 0;
-
-	&:focus,
-	&:active {
+.merchant-adv-reviews-modal {
+	&-next-prev {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background: none !important;
+		z-index: 999;
+		border: none;
+		box-shadow: none;
 		outline: none;
+		margin: 0;
+
+		@media screen and (min-width: 769px) {
+			padding: 15px;
+
+			&.merchant-adv-reviews-modal-next {
+				right: 10px;
+			}
+
+			&.merchant-adv-reviews-modal-prev {
+				left: 10px;
+			}
+		}
+
+		@media screen and (max-width: 768px) {
+			padding: 7px;
+
+			&.merchant-adv-reviews-modal-next {
+				right: 5px;
+			}
+
+			&.merchant-adv-reviews-modal-prev {
+				left: 5px;
+			}
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
 	}
 }
 
 .merchant-adv-reviews-modal-photo-slider-single-review .merchant-adv-reviews-modal-next-prev {
 	display: none;
-}
-
-.merchant-adv-reviews-modal-next {
-	right: 10px;
-}
-
-.merchant-adv-reviews-modal-prev {
-	left: 10px;
 }
