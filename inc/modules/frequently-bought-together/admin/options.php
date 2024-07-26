@@ -266,7 +266,7 @@ Merchant_Admin_Options::create( array(
 							'title'          => esc_html__( 'Cart Page', 'merchant' ),
 							'default'        => 'inactive',
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the cart page.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
@@ -320,7 +320,7 @@ Merchant_Admin_Options::create( array(
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
 							'display_status' => true,
@@ -343,13 +343,13 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Don’t miss', 'merchant' ),
+									'default' => esc_html__( 'Create a Bundle and Save!', 'merchant' ),
 								),
 								array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'default' => esc_html__( 'Add and get {discount} off your bundle', 'merchant' ),
 								),
 								array(
 									'id'      => 'button_text',
@@ -365,7 +365,7 @@ Merchant_Admin_Options::create( array(
 							'title'          => esc_html__( 'Thank you Page', 'merchant' ),
 							'default'        => 'inactive',
 							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, after checkout.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
