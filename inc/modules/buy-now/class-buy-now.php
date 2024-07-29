@@ -312,6 +312,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	public function shop_archive_product_buy_now_button() {
 		global $post, $product;
 
+        if ( ! $product->is_in_stock() ) {
+            return;
+        }
+
 		$settings = $this->get_module_settings();
 
 		if ( ! is_product() && isset( $settings['display-archive'] ) && ! $settings['display-archive'] ) {
