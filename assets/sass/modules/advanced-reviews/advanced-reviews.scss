@@ -70,6 +70,7 @@ body {
 		top: 1px;
 
 		&:before {
+			content: "SSSSS";
 			color: var( --mrc-adv-reviews-stars-bg-color, #777 ) !important;
 		}
 
@@ -238,6 +239,10 @@ body {
 		align-items: center;
 		cursor: pointer;
 
+		&:focus {
+			outline: none;
+		}
+
 		&:hover > div {
 			opacity: .7;
 		}
@@ -255,9 +260,7 @@ body {
 	.merchant-star-rating-bar-item-inner {
 		display: flex;
 		align-items: center;
-		//justify-content: space-between;
-		width: 410px;
-		//max-width: 100%;
+		width: 420px;
 		position: relative;
 
 		@media(max-width: 768px) {
@@ -279,18 +282,20 @@ body {
 			width: 300px;
 			border-radius: 10px;
 			overflow: hidden;
+
 			.item-bar-inner {
 				position: absolute;
 				top: 0;
 				left: 0;
 				background-color: var( --mrc-adv-reviews-bar-color, #212121 );
-				width: 0%;
+				width: 0;
 				height: 100%;
 				border-radius: 10px;
 			}
 		}
 
 		.item-qty {
+			width: 30px;
 			font-size: 0.8rem;
 			margin: 0 0 0 10px !important;
 			color: var( --mrc-adv-reviews-title-color, #212121 );
@@ -303,7 +308,8 @@ body {
 				white-space: nowrap;
 			}
 			.item-bar {
-				min-width: calc( 100% - 125px );
+				width: 180px;
+				min-width: calc( 100% - 120px );
 			}
 			.item-qty {
 				margin-left: auto;
