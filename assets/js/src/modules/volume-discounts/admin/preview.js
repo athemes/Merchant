@@ -80,7 +80,7 @@
         $('.merchant-checkout-preview .product-details .product-info .add-to-order').text(checkoutButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle
             .replace('{quantity}', '3')
-            .replace('{post_purchase_discount}', '15%')
+            .replace('{discount}', '15%')
             .replace('{total_quantity}', '5')
         );
         $('.merchant-thank-you-preview .product-details .product-info p').html(thankYouDiscountText.replace('{product_price}', merchant_volume_discounts.mock_item_price).replace('{discount}', '10%'));
