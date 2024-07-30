@@ -28,7 +28,7 @@ Merchant_Admin_Options::create(
 				'sorting'      => true,
 				'accordion'    => true,
 				'style'        => Merchant_Pre_Orders::MODULE_ID . '-style default',
-				'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+				'button_label' => esc_html__( 'Add New Pre-Order', 'merchant' ),
 				'layouts'      => array(
 					'rule-details' => array(
 						'title'       => esc_html__( 'Campaign', 'merchant' ),
@@ -67,7 +67,7 @@ Merchant_Admin_Options::create(
 								'multiple'    => true,
 								'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 								'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-								'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+								'desc'        => esc_html__( 'Select the category or categories for which the products will be available for pre-order.', 'merchant' ),
 								'condition'   => array( 'trigger_on', '==', 'category' ),
 							),
 							array(
