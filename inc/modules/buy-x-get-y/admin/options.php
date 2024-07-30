@@ -122,7 +122,7 @@ Merchant_Admin_Options::create( array(
 								'percentage' => esc_html__( 'Percentage Discount', 'merchant' ),
 								'fixed'      => esc_html__( 'Fixed Discount', 'merchant' ),
 							),
-							'default' => 'fixed',
+							'default' => 'percentage',
 						),
 						array(
 							'id'      => 'discount',
@@ -171,7 +171,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Product single page', 'merchant' ),
+							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on product pages.', 'merchant' ),
 							'state'          => 'open',
 							'default'        => 'active',
@@ -202,6 +202,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Buy label', 'merchant' ),
 									'default' => esc_html__( 'Buy {quantity}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo offered product quantity */
+										__(
+											'<strong>%1$s:</strong> to show offered product quantity',
+											'merchant'
+										),
+										'{quantity}'
+									),
 								),
 
 								array(
@@ -209,6 +218,16 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Get label', 'merchant' ),
 									'default' => esc_html__( 'Get {quantity} with {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo offered product quantity, %2$s: bogo offer discount */
+										__(
+											'<strong>%1$s:</strong> to show offered product quantity<br><strong>%2$s:</strong> to show offer discount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
 								),
 
 								array(
@@ -300,9 +319,9 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Cart page', 'merchant' ),
+							'title'          => esc_html__( 'Cart Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the cart page.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
 							'display_status' => true,
@@ -313,6 +332,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
 									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo offered product quantity */
+										__(
+											'<strong>%1$s:</strong> to show offered product quantity',
+											'merchant'
+										),
+										'{offer_quantity}'
+									),
 								),
 
 								array(
@@ -320,6 +348,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
 									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
 								),
 
 								array(
@@ -334,8 +371,8 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
-							'state'          => 'open',
+							'sub-desc'       => esc_html__( 'Use these settings to control how Buy X get Y offers appear on the checkout page.', 'merchant' ),
+							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
 							'display_status' => true,
@@ -358,13 +395,31 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {offer_quantity}x', 'merchant' ),
+									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo offer quantity */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity',
+											'merchant'
+										),
+										'{offer_quantity}'
+									),
 								),
 								array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
 									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
 								),
 								array(
 									'id'      => 'button_text',
@@ -377,9 +432,9 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'thank_you_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Thank you page', 'merchant' ),
+							'title'          => esc_html__( 'Thank-You Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, after checkout.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
 							'display_status' => true,
@@ -390,6 +445,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
 									'default' => esc_html__( 'Last chance to get {offer_quantity}x', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo {offer_quantity} tag */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity',
+											'merchant'
+										),
+										'{offer_quantity}'
+									),
 								),
 
 								array(
@@ -409,6 +473,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
 									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: bogo Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
 								),
 
 								array(

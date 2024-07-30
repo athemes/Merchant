@@ -152,6 +152,9 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 			wp_enqueue_style( "merchant-{$this->module_id}", MERCHANT_URI . "assets/css/modules/{$this->module_id}/{$this->module_id}.min.css", array(), MERCHANT_VERSION );
 			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION,
 				true );
+            wp_localize_script( "merchant-{$this->module_id}", 'merchant_volume_discounts', array(
+                'mock_item_price' => wc_format_sale_price( 20, 16 ),
+            ) );
 		}
 	}
 

@@ -138,7 +138,15 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		if ( parent::is_module_settings_page() ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/frequently-bought-together.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
-			wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
+			wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array( 'jquery' ),
+				MERCHANT_VERSION, true );
+			wp_localize_script(
+				'merchant-admin-' . self::MODULE_ID,
+				'fbt_object',
+				array(
+					'product_names' => esc_html__( 'Product 1, Product 2, Product 3', 'merchant' ),
+				)
+			);
 		}
 	}
 

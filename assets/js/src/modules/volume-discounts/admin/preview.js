@@ -75,11 +75,15 @@
             cartOfferTitle.replace('{quantity}', '3').replace('{discount}', '20%')
         );
         $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
-        $('.merchant-checkout-preview .offer-title').text(checkoutTitle.replace('{quantity}', '3'));
-        $('.merchant-checkout-preview .product-details .product-info p').text(checkoutDiscountText.replace('{discount}', '10%'));
+        $('.merchant-checkout-preview .offer-title').text(checkoutTitle.replace('{quantity}', '3').replace('{discount}', '10%'));
+        $('.merchant-checkout-preview .product-details .product-info p').html(checkoutDiscountText.replace('{discount}', '10%').replace('{product_price}', merchant_volume_discounts.mock_item_price));
         $('.merchant-checkout-preview .product-details .product-info .add-to-order').text(checkoutButtonText);
-        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{quantity}', '3'));
-        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle
+            .replace('{quantity}', '3')
+            .replace('{post_purchase_discount}', '15%')
+            .replace('{total_quantity}', '5')
+        );
+        $('.merchant-thank-you-preview .product-details .product-info p').html(thankYouDiscountText.replace('{product_price}', merchant_volume_discounts.mock_item_price).replace('{discount}', '10%'));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 

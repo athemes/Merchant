@@ -484,7 +484,7 @@
                         collapsible: true,
                         header: "> .title-area",
                         heightStyle: "content",
-                        active: false
+                        active: element.hasClass('open') ? 0 : false,
                     })
                 });
             },
