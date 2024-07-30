@@ -341,6 +341,16 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
 									'default' => esc_html__( 'Add {quantity} more to get a {discount} discount off each', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: offer quantity, %2$s: discount amount */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity<br><strong>%2$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
 								),
 
 								array(
@@ -355,7 +365,7 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the checkout page.', 'merchant' ),
 							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
@@ -379,13 +389,33 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {quantity}x', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off all {total_quantity}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: offer quantity, %2$s: discount amount */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity<br><strong>%2$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
 								),
 								array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'default' => esc_html__( '{product_price}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: product price */
+										__(
+											'<strong>%1$s:</strong> to show product price<br><strong>%2$s:</strong> to show offer discount amount',
+											'merchant'
+										),
+										'{product_price}',
+										'{discount}'
+									),
 								),
 								array(
 									'id'      => 'button_text',
@@ -410,7 +440,18 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} discount off each', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {post_purchase_discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: quantity, %2$s: post purchase discount, %3$s: In Stock, %4$s: Total quantity */
+										__(
+											'<strong>%1$s:</strong> to show product quantity<br><strong>%2$s:</strong> to show the dynamic discount amount that will be applied on the next order<br><strong>%3$s:</strong> to show total offer quantity',
+											'merchant'
+										),
+										'{quantity}',
+										'{post_purchase_discount}',
+										'{total_quantity}'
+									),
 								),
 
 								array(
@@ -429,7 +470,17 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'default' => esc_html__( '{product_price}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount, %2$s: product price */
+										__(
+											'<strong>%1$s:</strong> to show the discount amount<br><strong>%2$s:</strong> to show the product price before and after the offer discount',
+											'merchant'
+										),
+										'{discount}',
+										'{product_price}'
+									),
 								),
 
 								array(

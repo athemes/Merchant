@@ -201,6 +201,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'You save label', 'merchant' ),
 									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{amount}'
+									),
 								),
 
 								array(
@@ -290,6 +299,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'And save label', 'merchant' ),
 									'default' => esc_html__( 'and save: {amount}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{amount}'
+									),
 								),
 
 								//                              array(
@@ -319,7 +337,7 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how Frequently bought together offers appear on the checkout page.', 'merchant' ),
 							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
@@ -343,13 +361,23 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Create a Bundle and Save!', 'merchant' ),
+									'default' => esc_html__( 'Bundle and Save!', 'merchant' ),
 								),
 								array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'Add and get {discount} off your bundle', 'merchant' ),
+									'default' => esc_html__( 'Add to get {discount} off all items in your bundle ({fbt_products}).', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
+										__(
+											'<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show the product names in the offer',
+											'merchant'
+										),
+										'{discount}',
+										'{fbt_products}'
+									),
 								),
 								array(
 									'id'      => 'button_text',
@@ -393,6 +421,15 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
 									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
 								),
 								array(
 									'id'      => 'button_text',
