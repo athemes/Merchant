@@ -428,7 +428,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'thank_you_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Thank-You Page', 'merchant' ),
+							'title'          => esc_html__( 'Thank You Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the thank you page.', 'merchant' ),
 							'state'          => 'closed',
 							'accordion'      => true,
