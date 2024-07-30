@@ -389,7 +389,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} off all {total_quantity}', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: offer quantity, %2$s: discount amount */
@@ -428,7 +428,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'thank_you_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Thank-You Page', 'merchant' ),
+							'title'          => esc_html__( 'Thank You Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the thank you page.', 'merchant' ),
 							'state'          => 'closed',
 							'accordion'      => true,
@@ -440,17 +440,16 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {post_purchase_discount} off', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: quantity, %2$s: post purchase discount, %3$s: In Stock, %4$s: Total quantity */
 										__(
-											'<strong>%1$s:</strong> to show product quantity<br><strong>%2$s:</strong> to show the dynamic discount amount that will be applied on the next order<br><strong>%3$s:</strong> to show total offer quantity',
+											'<strong>%1$s:</strong> to show product quantity<br><strong>%2$s:</strong> to show the discount amount',
 											'merchant'
 										),
 										'{quantity}',
-										'{post_purchase_discount}',
-										'{total_quantity}'
+										'{discount}'
 									),
 								),
 
@@ -481,6 +480,13 @@ Merchant_Admin_Options::create( array(
 										'{discount}',
 										'{product_price}'
 									),
+								),
+
+								array(
+									'id'      => 'bonus_tip_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bonus tip text', 'merchant' ),
+									'default' => esc_html__( 'Bonus: You will also receive this discount off each item you already purchased as part of this bulk discount offer.', 'merchant' ),
 								),
 
 								array(
