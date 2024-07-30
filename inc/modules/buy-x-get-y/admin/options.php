@@ -371,7 +371,7 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Remind customers about this offer in the last step, in checkout page.', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how Buy X get Y offers appear on the checkout page.', 'merchant' ),
 							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
