@@ -401,7 +401,16 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Bundle title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get', 'merchant' ),
+									'default' => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
 								),
 
 								array(
