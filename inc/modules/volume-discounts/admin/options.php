@@ -389,7 +389,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} off all {total_quantity}', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: offer quantity, %2$s: discount amount */
