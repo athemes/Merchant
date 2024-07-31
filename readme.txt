@@ -226,6 +226,7 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 * Fixed - Scroll to Top Button: Conditional fields not working in settings
 * Fixed - Trust Badges: Overlapping issues in some themes
 * Fixed - Merchant dashboard: Icon appearance inconsistency in Enabled Modules dashboard
+* Fixed - Product Labels: Background color cutoff in full-width sections with product grids
 
 = 1.9.13 =
 * Fixed - Product Labels: label wasn't compatible with Storewide sale
