@@ -13,9 +13,13 @@
   .merchant-quick-social-links-inner {
     display: flex;
     border-radius: var(--merchant-border-radius);
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
     background-color: var(--merchant-bg-color);
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 320px) {
+      flex-wrap: wrap;
+    }
   }
 
   .ql-image {
@@ -108,7 +112,6 @@
   }
 }
 
-
 @media (max-width: 991px) {
   .merchant-quick-social-links {
     bottom: 0;
@@ -124,7 +127,6 @@
 
       .merchant-quick-social-link {
         border-bottom: 0;
-        border-right: 1px solid;
 
         &:last-of-type {
           border-right: 0;
@@ -145,6 +147,7 @@
 
         img {
           max-height: 27px;
+          max-width: none;
         }
       }
     }
