@@ -40,7 +40,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<div class="merchant-module-page-title">
 								<?php esc_html_e( 'Global Settings', 'merchant' ); ?>
 							</div>
-							<div class="merchant-module-page-desc"><?php esc_html_e( 'License activation, operating mode selection and custom code.', 'merchant' ); ?></div>
+							<div class="merchant-module-page-desc">
+								<?php 
+								$page_desc = defined( 'MERCHANT_PRO_VERSION' ) ? esc_html__( 'License activation, operating mode selection and custom code.', 'merchant' ) : esc_html__( 'Operating mode selection and custom code.', 'merchant' );
+								echo $page_desc; 
+								?>
+							</div>
 						</div>
 					</div>
 
