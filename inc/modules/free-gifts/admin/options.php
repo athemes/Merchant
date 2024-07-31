@@ -270,7 +270,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'tiered_free_gifts',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Tiered Free Gifts', 'merchant' ),
-			//'desc'    => esc_html__( '', 'merchant' ),
+			'desc'    => esc_html__( 'Customers can claim one free gift per order. Selecting a new gift automatically replaces any previously chosen gift.', 'merchant' ),
 			'default' => 0,
 		),
 	),
