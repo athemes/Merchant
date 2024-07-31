@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
-Stable tag: 1.9.13
+Stable tag: 1.9.14
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -214,6 +214,20 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.14 =
+* Fixed - Pre-orders: Duplicate order received emails in pre-orders
+* Fixed - Product Labels: Show Pages settings not working
+* Fixed - Product Labels: Incorrect sale amount/percentage for Grouped products. Now shows the sale amount/percent of the total price of items in the grouped product
+* Fixed - Quick View: Sale price color and regular price color not working
+* Added - Quick View: New field 'Show suggested products' to control which module's content to show on the modal
+* Added - Quick View: New field 'Show buy now button' to show the Buy Now button on the modal
+* Fixed - Buy Now: Buy button was showing up on archive pages for out-of-stock products
+* Changed - Scroll to Top Button: Value 0 was not allowed for fields like offset, padding, border-radius
+* Fixed - Scroll to Top Button: Conditional fields not working in settings
+* Fixed - Trust Badges: Overlapping issues in some themes
+* Fixed - Merchant dashboard: Icon appearance inconsistency in Enabled Modules dashboard
+* Fixed - Product Labels: Background color cutoff in full-width sections with product grids
+
 = 1.9.13 =
 * Fixed - Product Labels: label wasn't compatible with Storewide sale
 * Fixed - Product Labels: label wasn't appearing correctly on the Flatsome theme
