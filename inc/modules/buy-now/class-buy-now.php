@@ -33,13 +33,17 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 *
 	 */
 	public function __construct() {
+
+		// Module id.
+		$this->module_id = self::MODULE_ID;
+
+		// WooCommerce only.
+		$this->wc_only = true;
+
 		parent::__construct();
 
 		// Module section.
 		$this->module_section = 'reduce-abandonment';
-
-		// Module id.
-		$this->module_id = self::MODULE_ID;
 
 		// Module default settings.
 		$this->module_default_settings = array(
@@ -80,7 +84,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return;
 		}
 
@@ -267,6 +271,11 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 			return;
 		}
 
+		// Don't include on Quick View
+		if ( did_action( 'merchant_quick_view_before_add_to_cart' ) ) {
+			return;
+		}
+
 		global $post, $product;
 
 		$settings = $this->get_module_settings();
@@ -306,6 +315,10 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 */
 	public function shop_archive_product_buy_now_button() {
 		global $post, $product;
+
+        if ( ! $product->is_in_stock() ) {
+            return;
+        }
 
 		$settings = $this->get_module_settings();
 

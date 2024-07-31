@@ -30,6 +30,12 @@
             buyLabelValue = layout.find('.merchant-field-buy_text input').val(),
             quantityValue = +layout.find('.merchant-field-quantity input').val(),
             cartOfferTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
+            checkoutTitle = layout.find('.merchant-group-field-checkout_page .merchant-field-title input').val(),
+            checkoutDiscountText = layout.find('.merchant-group-field-checkout_page .merchant-field-discount_text input').val(),
+            checkoutButtonText = layout.find('.merchant-group-field-checkout_page .merchant-field-button_text input').val(),
+            thankYouTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
+            thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val(),
+            thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-volume-discounts-title').css({
@@ -65,10 +71,20 @@
             .replace( /{quantity}|{amount}/g, `<strong>${ quantityValue }</strong>` );
         $buyLabelPreview.html( buyLabelValue );
 
-        $('.merchant-cart-preview .cart-item-offer__container .offer-description').text(
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-offer').text(
             cartOfferTitle.replace('{quantity}', '3').replace('{discount}', '20%')
         );
-        $('.merchant-cart-preview .cart-item-offer__container .add-to-cart .add-to-cart-button').text(cartBundleButtonText);
+        $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
+        $('.merchant-checkout-preview .offer-title').text(checkoutTitle.replace('{quantity}', '3').replace('{discount}', '10%'));
+        $('.merchant-checkout-preview .product-details .product-info p').html(checkoutDiscountText.replace('{discount}', '10%').replace('{product_price}', merchant_volume_discounts.mock_item_price));
+        $('.merchant-checkout-preview .product-details .product-info .add-to-order').text(checkoutButtonText);
+        $('.merchant-thank-you-preview .offer-title').text(thankYouTitle
+            .replace('{quantity}', '3')
+            .replace('{discount}', '15%')
+            .replace('{total_quantity}', '5')
+        );
+        $('.merchant-thank-you-preview .product-details .product-info p').html(thankYouDiscountText.replace('{product_price}', merchant_volume_discounts.mock_item_price).replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');
@@ -122,15 +138,49 @@
         element.removeClass('show');
     }
 
+    function show_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.addClass('show');
+    }
+
+    function hide_thank_you_page_preview(){
+        let element = $('.merchant-thank-you-preview');
+        element.removeClass('show');
+    }
+
+    function show_checkout_page_preview(){
+        let element = $('.merchant-checkout-preview');
+        element.addClass('show');
+    }
+
+    function hide_checkout_page_preview(){
+        let element = $('.merchant-checkout-preview');
+        element.removeClass('show');
+    }
+
     $('.merchant-module-page-setting-box').on('click', function (e) {
         let clickedElement = $(e.target);
 
         if (clickedElement.closest('.merchant-group-field-cart_page').length > 0 || clickedElement.hasClass('merchant-group-field-cart_page')) {
             show_cart_page_preview();
-            hide_single_product_preview()
+            hide_single_product_preview();
+            hide_thank_you_page_preview();
+            hide_checkout_page_preview();
+        } else if (clickedElement.closest('.merchant-group-field-thank_you_page').length > 0 || clickedElement.hasClass('merchant-group-field-thank_you_page')) {
+            show_thank_you_page_preview();
+            hide_single_product_preview();
+            hide_cart_page_preview();
+            hide_checkout_page_preview()
+        }else if (clickedElement.closest('.merchant-group-field-checkout_page').length > 0 || clickedElement.hasClass('merchant-group-field-checkout_page')) {
+            show_checkout_page_preview();
+            hide_single_product_preview();
+            hide_cart_page_preview();
+            hide_thank_you_page_preview();
         } else {
             show_single_product_preview();
             hide_cart_page_preview();
+            hide_thank_you_page_preview();
+            hide_checkout_page_preview();
         }
     });
 

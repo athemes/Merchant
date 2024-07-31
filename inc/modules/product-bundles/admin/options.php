@@ -23,6 +23,14 @@ Merchant_Admin_Options::create( array(
 	'fields' => array(
 
 		array(
+			'id'      => 'price_range',
+			'type'    => 'switcher',
+			'title'   => __( 'Display bundle price as range for variable products', 'merchant' ),
+			'desc'   => __( 'Display a price range for bundles that include variable products.', 'merchant' ),
+			'default' => '1',
+		),
+
+		array(
 			'id'      => 'bundled_thumb',
 			'type'    => 'switcher',
 			'title'   => __( 'Display bundled product thumbnails', 'merchant' ),

@@ -174,17 +174,18 @@
 li.type-product,
 div.type-product {
 	position: relative;
-	overflow: hidden;
 
 	a img {
 		width: 100%;
 	}
 }
 
-.merchant_product-labels-grid_item_html {
-	a {
-		overflow: hidden;
-	}
+ul.wc-block-product-template li.product,
+ul.wc-block-grid__products li.wc-block-grid__product,
+ul.wc-block-grid__products li.product,
+ul.products li.wc-block-grid__product,
+ul.products li.product {
+	overflow: hidden;
 }
 
 .theme-kadence {

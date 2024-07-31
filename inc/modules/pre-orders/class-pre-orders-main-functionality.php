@@ -396,8 +396,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 	private function trigger_emails( $order ) {
 		$mailer = WC()->mailer();
 		// Send customer email
-		$customer_email_instance = $mailer->emails['WC_Email_Customer_Processing_Order'];
-		$customer_email_instance->trigger( $order->get_id(), $order );
+//      $customer_email_instance = $mailer->emails['WC_Email_Customer_Processing_Order'];
+//      $customer_email_instance->trigger( $order->get_id(), $order );
 
 		// Send admin email
 		$admin_email_instance = $mailer->emails['WC_Email_New_Order'];

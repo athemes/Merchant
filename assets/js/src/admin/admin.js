@@ -276,11 +276,17 @@
                             }
                         },
                         fieldOptions = $(this).data('options');
+                    // add buttons to fieldOptions
+                    fieldOptions.buttons = ['clear'];
 
                     if (fieldOptions) {
                         if (fieldOptions.minDate !== undefined && fieldOptions.minDate === 'today') {
                             fieldOptions.minDate = new Date();
+                            if(fieldOptions.timeZone !== undefined && fieldOptions.timeZone !== ''){
+                                fieldOptions.minDate = new Date(fieldOptions.minDate.toLocaleString('en-US', {timeZone: fieldOptions.timeZone}));
+                            }
                         }
+                        console.log(fieldOptions.timeZone);
                         options = Object.assign(options, fieldOptions);
                     }
                     new AirDatepicker(input.getPath(), options);
@@ -478,7 +484,7 @@
                         collapsible: true,
                         header: "> .title-area",
                         heightStyle: "content",
-                        active: false
+                        active: element.hasClass('open') ? 0 : false,
                     })
                 });
             },
@@ -1307,6 +1313,9 @@
             var $config = window.merchant_admin_options;
             var $object = {
                 width: '100%',
+                templateSelection: function( category ) {
+                    return category.text.replace(/&nbsp;-*\s*/g, '').trim();
+                },
             }
 
             if ($source === 'post' || $source === 'product' || $source === 'user') {

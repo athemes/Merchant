@@ -72,6 +72,18 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
 						),
 
+						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
+							'condition'   => array( 'rules_to_apply', '==', 'all' ),
+						),
+
 						'amount' => array(
 							'id'      => 'amount',
 							'title'   => esc_html__( 'Spending goal', 'merchant' ),
@@ -252,6 +264,14 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Cart item description text', 'merchant' ),
 			'default' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 			'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
+		),
+
+		array(
+			'id'      => 'tiered_free_gifts',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Tiered Free Gifts', 'merchant' ),
+			'desc'    => esc_html__( 'Customers can claim one free gift per order. Selecting a new gift automatically replaces any previously chosen gift.', 'merchant' ),
+			'default' => 0,
 		),
 	),
 ) );

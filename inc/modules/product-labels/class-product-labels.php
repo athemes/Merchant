@@ -316,24 +316,30 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		        $sale_data['percentage'] = $regular_price ? round( 100 - ( $sale_price / $regular_price * 100 ) ) : 0;
 	        }
         } elseif ( $product->is_type( 'grouped' ) ) {
-            // Todo: change logic
-	        $amounts      = array();
-            $percentages  = array();
             $children_ids = $product->get_children();
 
-            foreach ( $children_ids as $child_id ) {
-                $child_product = wc_get_product( $child_id );
-                $regular_price = (float) $child_product->get_regular_price();
-                $sale_price    = (float) $child_product->get_sale_price();
+	        $total_regular_price = 0;
+	        $total_sale_price    = 0;
 
-                if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
-	                $amounts[]     = $regular_price - $sale_price;
-                    $percentages[] = $regular_price ? round( 100 - ( ( $sale_price / $regular_price ) * 100 ) ) : 0;
+            foreach ( $children_ids as $child_id ) {
+	            $child_product = wc_get_product( $child_id );
+
+	            $regular_price = (float) $child_product->get_regular_price();
+	            $sale_price    = (float) $child_product->get_sale_price();
+
+                if ( $child_product->is_type( 'variable' ) ) {
+	                $regular_price = (float) $child_product->get_variation_regular_price( 'min' );
+	                $sale_price    = (float) $child_product->get_variation_sale_price( 'min' );
                 }
+
+	            $total_regular_price += $regular_price;
+	            $total_sale_price    += ! empty( $sale_price ) ? $sale_price : $regular_price;
             }
 
-	        $sale_data['amount']     = ! empty( $amounts ) ? max( $amounts ) : '';
-	        $sale_data['percentage'] = ! empty( $percentages ) ? max( $percentages ) : '';
+	        if ( 0 !== $total_sale_price || ! empty( $total_sale_price ) ) {
+		        $sale_data['amount']     = $total_regular_price - $total_sale_price;
+		        $sale_data['percentage'] = $total_regular_price ? round( 100 - ( ( $total_sale_price / $total_regular_price ) * 100 ) ) : 0;
+	        }
         } else {
             $regular_price = (float) $product->get_regular_price();
             $sale_price    = (float) $product->get_sale_price();
@@ -540,22 +546,17 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	                $label['show_devices'] = array( 'desktop', 'mobile' );
                 }
 
-				if ( ! $this->show_label( $label ) ) {
+				if ( ! $this->show_label( $label, $context ) ) {
 					continue;
 				}
 
-				$rule = $label['display_rules'] ?? 'products_on_sale';
-
-				if ( in_array( $rule, array( 'all_products', 'featured_products', 'products_on_sale', 'by_category', 'out_of_stock' ), true ) ) {
-					$excluded_product_ids = $label['excluded_products'] ?? array();
-					$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
-
-					if ( in_array( (int) $product->get_id(), $excluded_product_ids, true ) ) {
-						continue;
-					}
+				$is_excluded = merchant_is_product_excluded( $product->get_id(), $label );
+				if ( $is_excluded ) {
+					continue;
 				}
 
-				switch ( $rule ) {
+				$display_rule = $label['display_rules'] ?? 'products_on_sale';
+				switch ( $display_rule ) {
 					case 'featured_products':
 						if ( $this->is_featured( $product ) ) {
 							$product_labels_html .= $this->label( $label );
@@ -605,9 +606,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 				}
 
 				if ( $product_labels_html ) {
-					$sale_data       = $this->is_on_sale( $product ) ? $this->get_product_sale_data( $product, $label ) : array();
-					$sale_amount     = wc_price( $sale_data['amount'] ?? '' );
-					$sale_percentage = ( $sale_data['percentage'] ?? '' ) . '%';
+					$sale_data = $this->is_on_sale( $product ) ? $this->get_product_sale_data( $product, $label ) : array();
+
+                    $sale_amount     = ! empty( $sale_data['amount'] ) ? wc_price( $sale_data['amount'] ) : '';
+					$sale_percentage = ! empty( $sale_data['percentage'] ) ? $sale_data['percentage'] . '%' : '';
 
                     $inventory     = $product->is_in_stock() ? esc_html__( 'In stock', 'merchant' ) : esc_html__( 'Sold out', 'merchant' );
 					$inventory_qty = $product->get_stock_quantity();
@@ -727,8 +729,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 
         // Block
-		if ( in_array( 'archive', $show_pages, true ) && $context !== 'archive' ) {
+		if ( in_array( 'archive', $show_pages, true ) && $context === 'archive' ) {
 			$show = true;
+
+            // Don't show for blocks on homepage if `homepage` is unchecked
+            if ( ! in_array( 'homepage', $show_pages, true ) && is_front_page() ) {
+	            $show = false;
+            }
 		}
 
 		if ( in_array( 'homepage', $show_pages, true ) && is_front_page() ) {

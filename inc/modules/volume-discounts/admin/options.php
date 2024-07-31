@@ -86,6 +86,17 @@ Merchant_Admin_Options::create( array(
 							'condition' => array( 'rules_to_display', 'any', 'all|categories|tags' ),
 						),
 						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'all' ),
+						),
+						array(
 							'id'      => 'quantity',
 							'type'    => 'number',
 							'title'   => esc_html__( 'Quantity', 'merchant' ),
@@ -154,7 +165,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Product single page', 'merchant' ),
+							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on product pages.', 'merchant' ),
 							'state'          => 'open',
 							'accordion'      => true,
@@ -317,9 +328,9 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Cart page', 'merchant' ),
+							'title'          => esc_html__( 'Cart Page', 'merchant' ),
 							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the cart page.', 'merchant' ),
-							'state'          => 'open',
+							'state'          => 'closed',
 							'accordion'      => true,
 							'display_status' => true,
 							'default'        => 'inactive',
@@ -329,7 +340,153 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Add {quantity} more to get {discount} discount off each', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get a {discount} discount off each', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: offer quantity, %2$s: discount amount */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity<br><strong>%2$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
+						array(
+							'id'             => 'checkout_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the checkout page.', 'merchant' ),
+							'state'          => 'closed',
+							'default'        => 'inactive',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement', 'merchant' ),
+									'options' => array(
+										'before_billing_details'     => esc_html__( 'Before Billing Details', 'merchant' ),
+										'after_billing_details'      => esc_html__( 'After Billing Details', 'merchant' ),
+										'before_order_details'       => esc_html__( 'Before Order Details', 'merchant' ),
+										'before_payment_options'     => esc_html__( 'Before Payment Gateways', 'merchant' ),
+										'before_order_placement_btn' => esc_html__( 'Before Order Placement Button', 'merchant' ),
+										'after_order_placement_btn'  => esc_html__( 'After Order Placement Button', 'merchant' ),
+									),
+									'default' => 'before_billing_details',
+								),
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: offer quantity, %2$s: discount amount */
+										__(
+											'<strong>%1$s:</strong> to show offer quantity<br><strong>%2$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
+								),
+								array(
+									'id'      => 'discount_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( '{product_price}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: product price */
+										__(
+											'<strong>%1$s:</strong> to show product price<br><strong>%2$s:</strong> to show offer discount amount',
+											'merchant'
+										),
+										'{product_price}',
+										'{discount}'
+									),
+								),
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
+						array(
+							'id'             => 'thank_you_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Thank You Page', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the thank you page.', 'merchant' ),
+							'state'          => 'closed',
+							'accordion'      => true,
+							'display_status' => true,
+							'default'        => 'inactive',
+							'fields'         => array(
+								// Text Formatting Settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Add {quantity} more to get {discount} off', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: quantity, %2$s: post purchase discount, %3$s: In Stock, %4$s: Total quantity */
+										__(
+											'<strong>%1$s:</strong> to show product quantity<br><strong>%2$s:</strong> to show the discount amount',
+											'merchant'
+										),
+										'{quantity}',
+										'{discount}'
+									),
+								),
+
+								array(
+									'id'      => 'placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement', 'merchant' ),
+									'options' => array(
+										'on_top'               => esc_html__( 'On Top', 'merchant' ),
+										'before_order_details' => esc_html__( 'Before Order details', 'merchant' ),
+										'after_order_details'  => esc_html__( 'After Order details', 'merchant' ),
+									),
+									'default' => 'before_order_details',
+								),
+
+								array(
+									'id'      => 'discount_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( '{product_price}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount, %2$s: product price */
+										__(
+											'<strong>%1$s:</strong> to show the discount amount<br><strong>%2$s:</strong> to show the product price before and after the offer discount',
+											'merchant'
+										),
+										'{discount}',
+										'{product_price}'
+									),
+								),
+
+								array(
+									'id'      => 'bonus_tip_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bonus tip text', 'merchant' ),
+									'default' => esc_html__( 'Bonus: You will also receive this discount off each item you already purchased as part of this bulk discount offer.', 'merchant' ),
 								),
 
 								array(
