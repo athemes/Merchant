@@ -265,6 +265,14 @@ Merchant_Admin_Options::create( array(
 			'default' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 			'desc'    => esc_html__( 'This is displayed on the cart page.', 'merchant' ),
 		),
+
+		array(
+			'id'      => 'tiered_free_gifts',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Tiered Free Gifts', 'merchant' ),
+			'desc'    => esc_html__( 'Customers can claim one free gift per order. Selecting a new gift automatically replaces any previously chosen gift.', 'merchant' ),
+			'default' => 0,
+		),
 	),
 ) );
 
