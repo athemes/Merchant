@@ -205,6 +205,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_frequently_bought_together',
 				'merchant_module_buy_x_get_y',
 				'merchant_module_product_bundles',
+				'merchant_module_quick_social_links',
 			)
 		);
 
