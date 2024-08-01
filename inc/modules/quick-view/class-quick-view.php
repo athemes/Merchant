@@ -655,6 +655,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			        'product_price'         => $product->get_price(),
 			        'in_cart'               => Merchant_Pro_Volume_Discounts::is_in_cart( $product_id ),
 			        'product_cart_quantity' => Merchant_Pro_Volume_Discounts::get_product_cart_quantity( $product_id ),
+			        'product_id'            => $product_id,
 		        )
 	        );
         }
