@@ -1,21 +1,18 @@
 ;( function( $ ) {
 	$( document ).ready( function() {
-		const spendingWidgetSelector = '.js-merchant-spending-goal-widget';
-
-		if ( typeof merchant === 'undefined' || ! $( spendingWidgetSelector ).length ) {
+		if ( typeof merchant === 'undefined' ) {
 			return;
 		}
 
-		const {
-			is_added_to_cart,
-			enable_auto_slide_in,
-			spending_goal_nonce,
-			ajax_url,
-		} = merchant.setting || {};
+		const spendingWidget = '.merchant-spending-goal-widget';
+
+		const { is_added_to_cart, enable_auto_slide_in, spending_goal_nonce, ajax_url } = merchant.setting || {};
 
 		// Show/Hide widget when clicking on it.
-		$( document ).on( 'click', spendingWidgetSelector, function () {
-			showWidget( true );
+		$( document ).on( 'click', spendingWidget, function () {
+			if ( $( this ).hasClass( 'merchant-spending-goal-widget__regular' ) ) {
+				showWidget( true );
+			}
 		} );
 
 		// Auto open after a product is added to the Cart on Product Single Page; no AJAX.
@@ -23,8 +20,7 @@
 			showWidget();
 		}
 
-		// Update the widget and Auto slide when a product is Added/Removed to cart via AJAX.
-		// Works on pages like Shop & Cart, updated_cart_totals updated_wc_div events are required for the Cart page.
+		// Update the widget and auto slide when a product is added/removed to cart via AJAX
 		$( document.body ).on( 'added_to_cart removed_from_cart updated_cart_totals updated_wc_div', function( event, data ) {
 			$.ajax( {
 				type: 'POST',
@@ -38,16 +34,31 @@
 						return;
 					}
 
-					// Check if widget is currently open
-					const isVisible = $( spendingWidgetSelector ).hasClass( 'active' );
+					// Loop through and check if it's a regular widget or added via shortcode and do necessary changes in the markup.
+					$( spendingWidget ).each( function () {
+						const isShortCode = $( this ).hasClass( 'merchant-spending-goal-widget__shortcode' );
 
-					// Replace the widget markup
-					$( spendingWidgetSelector ).replaceWith( response.data.markup );
+						const newMarkup = $.parseHTML( response.data.markup.trim() )[0];
 
-					// Open widget immediately if open, else with slight delay for slide-in effect
-					if ( enable_auto_slide_in ) {
-						isVisible ? showWidget() : setTimeout( showWidget, 66 );
-					}
+						if ( isShortCode ) {
+							$( newMarkup )
+								.removeClass( 'merchant-spending-goal-widget__regular' )
+								.addClass( 'merchant-spending-goal-widget__shortcode' );
+						} else {
+							$( newMarkup )
+								.removeClass( 'merchant-spending-goal-widget__shortcode' )
+								.addClass( 'merchant-spending-goal-widget__regular' );
+						}
+
+						// Replace with new markup
+						$( this ).replaceWith( newMarkup );
+
+						// For regular widget only.
+						// Open widget immediately if open, else with slight delay for slide-in effect.
+						if ( ! isShortCode && enable_auto_slide_in ) {
+							$( this ).hasClass( 'active' ) ? showWidget() : setTimeout( showWidget, 66 );
+						}
+					} );
 				},
 				error: ( error ) => {
 					console.log( error );
@@ -57,7 +68,9 @@
 
 		// Helper
 		function showWidget( toggle = false ) {
-			toggle ? $( spendingWidgetSelector ).toggleClass( 'active' ) : $( spendingWidgetSelector ).addClass( 'active' );
+			if ( $( spendingWidget ).hasClass( 'merchant-spending-goal-widget__regular' ) ) {
+				toggle ? $( spendingWidget ).toggleClass( 'active' ) : $( spendingWidget ).addClass( 'active' );
+			}
 		}
 	} );
 } )( jQuery );
