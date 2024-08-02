@@ -3,7 +3,7 @@
  *
  */
 .merchant-quick-social-links {
-	&__has-pos {
+	&__regular {
 		position: fixed;
 		bottom: 50px;
 		z-index: 9999;
@@ -12,7 +12,7 @@
 		transform: translate(-50%, 50%);
 	}
 
-	&:not(&__has-pos) {
+	&:not(&__regular) {
 		.merchant-quick-social-links-container {
 			display: flex;
 		}
@@ -81,7 +81,7 @@
 			display: none;
 		}
 
-		&__has-pos {
+		&__regular {
 			&.pos-right,
 			&.pos-left {
 				left: 0;
@@ -124,8 +124,7 @@
 
 @media (max-width: 991px) {
 	.merchant-quick-social-links {
-
-		&__has-pos {
+		&__regular {
 			bottom: 0;
 			transform: translate(-50%, 0%);
 
