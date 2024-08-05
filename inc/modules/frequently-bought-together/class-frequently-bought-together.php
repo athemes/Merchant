@@ -275,6 +275,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
                             <button class="add-to-order"><?php esc_html_e('Add To My Order','merchant'); ?></button>
                         </div>
                     </div>
+                    <div class="bonus-tip"><?php esc_html_e('Note: When you click ‘Add to Cart’, the item will be added to your cart and you’ll be taken to the cart page where you’ll see that a bundle discount has been applied to it. This is shown under ‘Your Savings’, and reflects a 10% discount based on the original prices of the {products}. You can then proceed to checkout as usual.','merchant'); ?></div></div>
                 </div>
             </div>
         </div>
