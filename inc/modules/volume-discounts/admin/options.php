@@ -486,7 +486,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'bonus_tip_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Bonus tip text', 'merchant' ),
-									'default' => esc_html__( 'Bonus: You will also receive this discount off each item you already purchased as part of this bulk discount offer.', 'merchant' ),
+									'default' => esc_html__( 'Bonus: You will also receive this discount off each item you just purchased as part of this bulk discount offer.', 'merchant' ),
 								),
 
 								array(

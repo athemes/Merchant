@@ -30,6 +30,7 @@
             thankYouTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
             thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val(),
             thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
+            thankYouBonusTipText = layout.find('.merchant-group-field-thank_you_page .merchant-field-bonus_tip_text textarea').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
         $('.merchant-frequently-bought-together-bundle-product-plus').css({
@@ -51,7 +52,8 @@
         $('.merchant-checkout-preview .product-details .product-info p').text(checkoutDiscountText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
         $('.merchant-checkout-preview .product-details .product-info .add-to-order').text(checkoutButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3').replace('{discount}', '10%'));
-        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%'));
+        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
+        $('.merchant-thank-you-preview .merchant-tooltip .tooltip-text').html(thankYouBonusTipText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 

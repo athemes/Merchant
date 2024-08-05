@@ -429,15 +429,32 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
+									'default' => esc_html__( 'Add now to complete your bundle ({fbt_products}) and save', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
 										__(
-											'<strong>%1$s:</strong> to show discount amount',
+											'<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show the product names in the offer',
 											'merchant'
 										),
-										'{discount}'
+										'{discount}',
+										'{fbt_products}'
+									),
+								),
+								array(
+									'id'      => 'bonus_tip_text',
+									'type'    => 'textarea',
+									'title'   => esc_html__( 'Bonus tip text', 'merchant' ),
+									'default' => esc_html__( 'Note: When you click ‘Add to Cart’, the item will be added to your cart and you’ll be taken to the cart page where you’ll see that a bundle discount has been applied to it. This is shown under ‘Your Savings’, and reflects a {discount} discount based on the original prices of the {fbt_products}. You can then proceed to checkout as usual. ', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show the product names in the offer',
+											'merchant'
+										),
+										'{discount}',
+										'{fbt_products}'
 									),
 								),
 								array(
