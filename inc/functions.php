@@ -209,6 +209,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_product_navigation_links',
 				'merchant_module_spending_goal',
 				'merchant_module_product_video',
+				'merchant_module_countdown_timer',
 			)
 		);
 
