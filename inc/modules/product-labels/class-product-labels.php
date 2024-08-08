@@ -492,7 +492,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		ob_start();
 
-
 		echo wp_kses( $this->get_labels( $product, 'single' ), array(
 			'div'    => array(
 				'class' => array(),
@@ -723,7 +722,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					}
 
 					$classes  = 'merchant-product-labels';
-					$classes .= ' merchant-product-labels__' . ( $is_shortcode ? 'shortcode' : 'regular' );
+					$classes .= ' merchant-product-labels__' . ( ( $is_shortcode && $context === 'single' ) ? 'shortcode' : 'regular' );
 					$classes .= ' position-' . $label_position;
 					$classes .= ' merchant-product-labels__' . $label_type;
 					$classes .= $label_type === 'text' ? ' merchant-product-labels__' . $label['label_text_shape'] ?? 'text-shape-1' : '';
