@@ -37,6 +37,7 @@
                 borderRadius: 0,
                 marginX: 25,
                 marginY: 10,
+                disableInShortCode: true,
             },
             'text-shape-6' : {
                 width: 140,
@@ -44,6 +45,7 @@
                 borderRadius: 0,
                 marginX: 25,
                 marginY: 10,
+                disableInShortCode: true,
             },
             'text-shape-7' : {
                 width: 90,
@@ -206,7 +208,7 @@
 
         const labelPreview = $( '.merchant-product-labels-preview' ).find( '.merchant-product-labels' );
 
-        let classes = `position-${position} merchant-product-labels__${labelType}`;
+        let classes = `merchant-product-labels__regular position-${position} merchant-product-labels__${labelType}`;
         classes += labelType === 'text' ? ` merchant-product-labels__${textShape}` : '';
 
         const labelClassPattern = /\bmerchant-product-labels__\S+/g;
@@ -291,8 +293,7 @@
         marginXEl
             .closest( '.layout-field' )
             .find( '.merchant-module-page-setting-field-title' )
-            .text( position === 'top-left' ? 'Margin left' : 'Margin right' )
-
+            .text( position === 'top-left' ? 'Margin left' : 'Margin right' );
     }
 
     $(document).on('change input change.merchant', '.merchant-module-page-setting-box', function (e) {
@@ -324,7 +325,6 @@
     } );
 
     $( document ).on( 'change', '.merchant-choices-label_text_shape input', function () {
-
         const $layout = $( this ).closest( '.layout' )
         const shape = $layout.find( '.merchant-choices-label_text_shape input:checked' ).val();
 
@@ -336,6 +336,40 @@
         const shape = $layout.find( '.merchant-choices-label_image_shape input:checked' ).val();
 
         updateStyles( 'image', shape, $( this ) );
+    } );
+
+    const dataPrev = 'data-previous';
+    $( document ).on( 'change', '.merchant-field-use_shortcode input', function () {
+        const shortcode = $( this );
+
+        $( '.merchant-flexible-content-control.product-labels-style .layout .merchant-choices-label_text_shape' ).each( function () {
+            const $input = $( this ).find( 'input:checked' );
+            const selectedShape = $input.val();
+            const isDisabled = shapesDefaultStyles.text[ selectedShape ]?.disableInShortCode;
+
+            if ( shortcode.is( ':checked' ) ) {
+                if ( isDisabled ) {
+                    $input.attr( dataPrev, selectedShape );
+                    $input.prop( 'checked', false );
+                    $( this ).find('input[value="text-shape-1"]').prop('checked', true);
+
+                    updateStyles( 'text', 'text-shape-1' , $( this ) );
+                }
+            } else {
+                const $previouslySelectedInput = $( this ).find( 'input['+ dataPrev +']' );
+                const previousValue = $previouslySelectedInput.val();
+
+                if ( previousValue ) {
+                    $input.prop( 'checked', false );
+
+                    $( this ).find('input[value="'+ previousValue +'"]').prop( 'checked', true );
+
+                    $previouslySelectedInput.removeAttr( dataPrev );
+
+                    updateStyles( 'text', previousValue , $( this ) );
+                }
+            }
+        } );
     } );
 
     const updateStyles = ( shapeType, selectedShape, $input ) => {
