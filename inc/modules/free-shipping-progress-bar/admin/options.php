@@ -38,6 +38,29 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'          => 'free_shipping_text',
+			'type'        => 'text',
+			'title'       => esc_html__( 'Free shipping text', 'merchant' ),
+			'default'     => esc_html__( 'You are {amount} away from free shipping.', 'merchant' ),
+			'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+			'hidden_desc' => sprintf(
+			/* Translators: %1$s: the free shipping amount */
+				__(
+					'<strong>%1$s:</strong> to show the free shipping amount',
+					'merchant'
+				),
+				'{amount}'
+			),
+		),
+
+		array(
+			'id'      => 'qualified_free_shipping_text',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Qualified free shipping text', 'merchant' ),
+			'default' => esc_html__( 'You have qualified for free shipping.', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text color', 'merchant' ),
