@@ -100,7 +100,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
 					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
-					'desc' => esc_html__( 'Create discount campaigns for all your products, one or more categories, or a selection of products', 'merchant' ),
+					'desc' => esc_html__( 'Create discount campaigns for all your products, specific categories, or specific products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-storewide-sale/',
 				),
 				'spending-goal' => array(

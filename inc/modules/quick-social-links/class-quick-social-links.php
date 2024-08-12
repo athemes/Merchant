@@ -177,6 +177,7 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 		// Classes
 		$classes = array(
 				'merchant-quick-social-links',
+				'merchant-quick-social-links__regular',
 				$settings['layout'],
 				$settings['visibility'],
 		);

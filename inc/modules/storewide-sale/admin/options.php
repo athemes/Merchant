@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Simple Discount', 'merchant' ),
+	'title'  => esc_html__( 'Discounts', 'merchant' ),
 	'module' => Merchant_Storewide_Sale::MODULE_ID,
 	'fields' => array(
 		array(
