@@ -83,6 +83,13 @@ const styles = [
 		destination: './assets/css',
 	},
 
+	// free-shipping-progress-bar
+	{
+		name: 'freeShippingProgressBar',
+		src: './assets/sass/modules/free-shipping-progress-bar/admin/preview.scss',
+		destination: './assets/css/modules/free-shipping-progress-bar/admin',
+	},
+
 	// Buy Now.
 	{
 		name: 'buyNow',
@@ -813,6 +820,14 @@ const scripts = [
 		name: 'productBundlesPreview',
 		src: './assets/js/src/modules/product-bundles/admin/preview.js',
 		destination: './assets/js/modules/product-bundles/admin',
+		file: 'preview'
+	},
+
+	// free-shipping-progress-bar
+	{
+		name: 'freeShippingProgressBar',
+		src: './assets/js/src/modules/free-shipping-progress-bar/admin/preview.js',
+		destination: './assets/js/modules/free-shipping-progress-bar/admin',
 		file: 'preview'
 	},
 
