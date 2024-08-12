@@ -1,0 +1,23 @@
+.merchant-freespb-wrapper {
+	padding: 30px;
+
+	.merchant-freespb-text {
+		color: #212121;
+		margin-bottom: 20px !important;
+	}
+
+	.merchant-freespb-progress-bar-wrapper {
+		.merchant-freespb-progress-bar {
+			border-radius: 0 0 0 0;
+			height: 10px;
+			background-color: #757575;
+			height: 10px;
+
+			.merchant-freespb-progress-bar-inner {
+				border-radius: 0 0 0 0;
+				height: 10px;
+				background-color: #212121;
+			}
+		}
+	}
+}
