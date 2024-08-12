@@ -210,6 +210,11 @@ Merchant_Admin_Options::create( array(
 							'title' => esc_html__( 'Use coupon to receive this product for free', 'merchant' ),
 							'type'  => 'wc_coupons',
 						),
+						array(
+							'id'          => 'coupon_campaign_info',
+							'type'        => 'info_block',
+							'description' => esc_html__( 'The offer won’t appear in the Free-Gifts widget unless the associated coupon is entered.', 'merchant' ),
+						),
 					),
 				),
 			),
