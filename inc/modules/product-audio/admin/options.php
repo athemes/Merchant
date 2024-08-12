@@ -53,4 +53,3 @@ Merchant_Admin_Options::create( array(
 		),
 	),
 ) );
-
