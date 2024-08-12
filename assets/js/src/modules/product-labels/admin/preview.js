@@ -37,6 +37,7 @@
                 borderRadius: 0,
                 marginX: 25,
                 marginY: 10,
+                disableInShortCode: true,
             },
             'text-shape-6' : {
                 width: 140,
@@ -44,6 +45,7 @@
                 borderRadius: 0,
                 marginX: 25,
                 marginY: 10,
+                disableInShortCode: true,
             },
             'text-shape-7' : {
                 width: 90,
@@ -206,7 +208,7 @@
 
         const labelPreview = $( '.merchant-product-labels-preview' ).find( '.merchant-product-labels' );
 
-        let classes = `position-${position} merchant-product-labels__${labelType}`;
+        let classes = `merchant-product-labels__regular position-${position} merchant-product-labels__${labelType}`;
         classes += labelType === 'text' ? ` merchant-product-labels__${textShape}` : '';
 
         const labelClassPattern = /\bmerchant-product-labels__\S+/g;
@@ -291,8 +293,7 @@
         marginXEl
             .closest( '.layout-field' )
             .find( '.merchant-module-page-setting-field-title' )
-            .text( position === 'top-left' ? 'Margin left' : 'Margin right' )
-
+            .text( position === 'top-left' ? 'Margin left' : 'Margin right' );
     }
 
     $(document).on('change input change.merchant', '.merchant-module-page-setting-box', function (e) {
@@ -324,7 +325,6 @@
     } );
 
     $( document ).on( 'change', '.merchant-choices-label_text_shape input', function () {
-
         const $layout = $( this ).closest( '.layout' )
         const shape = $layout.find( '.merchant-choices-label_text_shape input:checked' ).val();
 
@@ -337,6 +337,63 @@
 
         updateStyles( 'image', shape, $( this ) );
     } );
+
+    $( document ).on( 'save.merchant', function ( e, module ) {
+        if ( module === 'product-labels' ) {
+            $( '.merchant-choices-label_text_shape input' ).each( function () {
+                $( this ).removeAttr( 'data-previous' );
+            } );
+        }
+    } );
+
+    // Page load
+    handleShortcodeChange( $( '.merchant-field-use_shortcode input').is( ':checked' ) );
+
+    // Enable/Disable Shortcode
+    $( document ).on( 'change', '.merchant-field-use_shortcode input', function () {
+        handleShortcodeChange( $( this ).is( ':checked' ) );
+    } );
+
+    // Enable/Disable shapes based on shortcode enabled/disabled
+    function handleShortcodeChange( isEnabled ) {
+        const dataPrev = 'data-previous';
+        $( '.merchant-flexible-content-control.product-labels-style .layout .merchant-choices-label_text_shape' ).each( function () {
+            const $inputs = $( this ).find( 'input' );
+
+            $inputs.each( function () {
+                const $input = $( this );
+                const value = $input.val();
+                const isDisabledInShortCode = shapesDefaultStyles.text[ value ]?.disableInShortCode;
+
+                if ( isEnabled ) {
+                    if ( isDisabledInShortCode ) {
+                        if ( $input.is( ':checked' ) ) {
+                            // Store previous value and change the selection to default shape
+                            $input.attr( dataPrev, value ).prop( 'checked', false )
+                            $inputs.filter( 'input[value="text-shape-1"]' ).prop( 'checked', true );
+
+                            updateStyles( 'text', 'text-shape-1', $inputs.filter( 'input[value="text-shape-1"]' ) );
+                        }
+
+                        // Disable
+                        $input.attr( 'disabled', true );
+                    }
+                } else {
+                    if ( $input.attr( dataPrev ) ) {
+                        // Revert to previously selected shape if shortcode disabled without saving.
+                        $inputs.filter( 'input[value="text-shape-1"]' ).prop( 'checked', false );
+                        $inputs.filter( `input[value="${value}"]` ).prop( 'checked', true );
+                        $input.removeAttr( dataPrev );
+
+                        updateStyles( 'text', value, $inputs.filter( `input[value="${value}"]` ) );
+                    }
+
+                    // Enable
+                    $input.attr( 'disabled', false );
+                }
+            } );
+        } );
+    }
 
     const updateStyles = ( shapeType, selectedShape, $input ) => {
         const $layout = $input.closest( '.layout' );
