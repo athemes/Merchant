@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template for Volume Discounts Single Product
+ * Template for Bulk Discounts Single Product
  *
  * @var array $args template args
  *
@@ -11,9 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
 ?>
-
 <div class="merchant-volume-discounts">
 	<?php
     $in_cart = 'false';
@@ -37,22 +35,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$total_discount   = intval( $discount_qty ) * $discount;
 			$total_price      = intval( $discount_qty ) * $discounted_price;
 			$clickable        = '';
-			if ( ! is_admin() ) {
-				$product = wc_get_product( get_the_ID() );
+            $product_id       = $args['product_id'] ?? get_the_ID();
+
+			if ( $product_id ) {
+				$product = wc_get_product( $product_id );
 				if ( $product && ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
 					$clickable = ' clickable';
 				}
 			}
-			if ( isset( $discount_tier['product_single_page']['table_title'] ) && ! empty( $discount_tier['product_single_page']['table_title'] ) ): ?>
+
+			if ( isset( $discount_tier['product_single_page']['table_title'] ) && ! empty( $discount_tier['product_single_page']['table_title'] ) ) : ?>
                 <div class="merchant-volume-discounts-title" style="<?php
 				echo isset( $discount_tier['product_single_page']['title_font_weight'] ) ? esc_attr( 'font-weight: ' . $discount_tier['product_single_page']['title_font_weight'] . ';' ) : '';
 				echo isset( $discount_tier['product_single_page']['title_font_size'] ) ? esc_attr( 'font-size: ' . $discount_tier['product_single_page']['title_font_size'] . 'px;' ) : '';
 				echo isset( $discount_tier['product_single_page']['title_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['product_single_page']['title_text_color'] . ';' ) : ''; ?>"><?php
-					echo esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['table_title'] ) ) ?></div>
+					echo esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['table_title'] ) ); ?>
+                </div>
 			<?php
 			endif; ?>
-            <div class="merchant-volume-discounts-item<?php echo esc_attr( $clickable )?>" title="Add offer to cart" data-in-cart="<?php
-            echo esc_attr( $in_cart ) ?>" data-product-id="<?php echo esc_attr(get_the_ID())?>" data-offer-quantity="<?php echo esc_attr( $discount_qty )?>" style="<?php
+            <div class="merchant-volume-discounts-item<?php echo esc_attr( $clickable ); ?>" title="Add offer to cart" data-in-cart="<?php
+            echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>" style="<?php
 			echo isset( $discount_tier['product_single_page']['table_item_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['product_single_page']['table_item_bg_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['product_single_page']['table_item_border_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['product_single_page']['table_item_text_color'] . ';' ) : ''; ?>">
@@ -109,7 +111,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </li>
                     <li>
                         <div class="merchant-volume-discounts-item-text"><?php
-							echo isset($discount_tier['product_single_page']['item_text']) ? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['item_text'] ) ) : esc_html__( 'Per item:', 'merchant' ) ?></div>
+							echo isset($discount_tier['product_single_page']['item_text']) ? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['item_text'] ) ) : esc_html__( 'Per item:', 'merchant' ); ?></div>
                         <div><strong><?php
 								echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                     </li>
@@ -117,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="merchant-volume-discounts-total-text"><?php
 							echo isset( $discount_tier['product_single_page']['total_text'] )
 								? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['total_text'] ) )
-								: esc_html__( 'Total price:', 'merchant' ) ?></div>
+								: esc_html__( 'Total price:', 'merchant' ); ?></div>
                         <div><strong><?php
 								echo wp_kses( wc_price( $total_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                     </li>
