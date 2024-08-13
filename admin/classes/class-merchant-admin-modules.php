@@ -50,9 +50,9 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				'free-shipping-progress-bar' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-pre-orders' ),
-					'title' => esc_html__( 'Free Shipping Progress Bar', 'merchant' ),
-					'desc' => esc_html__( 'Show the progress of your free shipping', 'merchant' ),
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'free-shipping-progress-bar' ),
+					'title' => esc_html__( 'Free Shipping Bar', 'merchant' ),
+					'desc' => esc_html__( 'Display amount left for free shipping and encourage customers to buy more', 'merchant' ),
 					'tutorial_url' => '#',
 				),
 				'wait-list' => array(
