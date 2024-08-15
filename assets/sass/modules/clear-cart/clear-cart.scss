@@ -12,7 +12,7 @@ button.merchant-clear-cart-button {
 
 	.merchant-floating-side-mini-cart-widget & {
 		&-mini-cart {
-			display: none;
+			display: none !important;
 		}
 
 		// Show on Side Cart

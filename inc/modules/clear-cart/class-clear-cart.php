@@ -56,13 +56,13 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		$this->module_default_settings = array(
 			'enable_auto_clear'           => false,
 			'auto_clear_expiration_hours' => 24,
-			'redirect_link_type'          => '',
+			'redirect_link'               => '',
 			'redirect_link_custom'        => '',
 			'enable_cart_page'            => true,
 			'cart_page_position'          => 'woocommerce_cart_actions',
-			'enable_mini_cart'            => false,
+			'enable_mini_cart'            => true,
 			'mini_cart_position'          => 'after_checkout',
-			'enable_side_cart'            => false,
+			'enable_side_cart'            => true,
 			'side_cart_position'          => 'after_view_cart',
 			'label'                       => __( 'Clear Cart', 'merchant' ),
 			'style'                       => 'solid',
@@ -134,13 +134,50 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Enqueue scripts.
-		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_scripts' ) );
+		add_action( 'merchant_enqueue_after_main_css_js', array( $this, 'enqueue_scripts' ) );
+
+		// Localize script.
+		//add_filter( 'merchant_localize_script', array( $this, 'localize_script' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 
 		add_action( 'body_class', array( $this, 'body_class' ) );
+
+		add_action( 'wp_ajax_clear_cart', array( $this, 'clear_cart_ajax_handler' ) );
+		add_action( 'wp_ajax_nopriv_clear_cart', array( $this, 'clear_cart_ajax_handler' ) );
 	}
+
+    public function clear_cart_ajax_handler() {
+	    check_ajax_referer( 'merchant-nonce', 'nonce' );
+
+        if ( ! empty( WC()->cart ) ) {
+	        $settings = $this->get_module_settings();
+
+            $redirect_url  = '';
+            $redirect_link = $settings['redirect_link'] ?? '';
+
+            switch ( $redirect_link ) {
+                case 'home':
+	                $redirect_url = home_url();
+                    break;
+
+	            case 'shop':
+		            $redirect_url = wc_get_page_permalink( 'shop' );
+		            break;
+
+	            case 'custom':
+		            $custom_link  = $settings['redirect_link_custom'] ?? '';
+		            $redirect_url = ! empty( $custom_link ) ? esc_url( $custom_link ) : '';
+		            break;
+            }
+
+	        //WC()->cart->empty_cart();
+	        wp_send_json_success( array( 'url' => $redirect_url ) );
+        }
+
+        wp_send_json_error( array( 'message' => esc_html__( 'Cart is Empty', 'merchant' ) ) );
+    }
 
 	/**
 	 * Add body class.
@@ -299,7 +336,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	public function enqueue_css() {
         // Gulp Todo
 		// Specific module styles.
-		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/clear-cart.min.css', array(), time() );
+		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/clear-cart.min.css', array(), MERCHANT_VERSION );
 	}
 
 	/**
@@ -309,6 +346,20 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/clear-cart.min.js', array(), MERCHANT_VERSION, true );
+	}
+
+	/**
+	 * Localize script with module settings.
+	 *
+	 * @param array $setting The merchant global object setting parameter.
+	 * @return array $setting The merchant global object setting parameter.
+	 */
+	public function localize_script( $setting ) {
+		$module_settings = $this->get_module_settings();
+
+		//$setting['clear_cart_nonce'] = wp_create_nonce( 'clear-cart-nonce' );
+
+		return $setting;
 	}
 
 	/**
