@@ -172,7 +172,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		            break;
             }
 
-	        //WC()->cart->empty_cart();
+	        WC()->cart->empty_cart();
 	        wp_send_json_success( array( 'url' => $redirect_url ) );
         }
 
