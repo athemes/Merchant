@@ -54,7 +54,18 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'button_text' => __( 'Clear Cart', 'merchant' ),
+			'enable_auto_clear'           => false,
+			'auto_clear_expiration_hours' => 24,
+			'redirect_link_type'          => '',
+			'redirect_link_custom'        => '',
+			'enable_cart_page'            => true,
+			'cart_page_position'          => 'woocommerce_cart_actions',
+			'enable_mini_cart'            => false,
+			'mini_cart_position'          => 'after_checkout',
+			'enable_side_cart'            => false,
+			'side_cart_position'          => 'after_view_cart',
+			'label'                       => __( 'Clear Cart', 'merchant' ),
+			'style'                       => 'solid',
         );
 
 		// Mount preview url.
@@ -86,8 +97,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
-			// Init translations.
-			//$this->init_translations(); // Todo
+			$this->init_translations();
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
@@ -95,11 +105,103 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 			return;
 		}
 
+		$settings = $this->get_module_settings();
+
+        // Cart Page
+        if ( ! empty( $settings['enable_cart_page'] ) ) {
+            $hook_name = ! empty( $settings['cart_page_position'] ) ? $settings['cart_page_position'] : 'woocommerce_cart_actions';
+
+	        add_action( $hook_name, array( $this, 'button_cart_page' ) );
+        }
+
+        // Mini Cart
+        if ( ! empty( $settings['enable_mini_cart'] ) ) {
+            $position      = $settings['mini_cart_position'] ?? 'after_checkout';
+	        $hook_priority = $position === 'before_view_cart' ? 9 : ( $position === 'after_view_cart' ? 15 : 30 );
+
+	        add_action( 'woocommerce_widget_shopping_cart_buttons', array( $this, 'button_mini_cart' ), $hook_priority );
+        }
+
+        // Side Cart
+		if ( ! empty( $settings['enable_side_cart'] ) && merchant_is_pro_active() && Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
+            $position      = $settings['side_cart_position'] ?? 'after_view_cart';
+            $hook_priority = $position === 'before_view_cart' ? 15 : ( $position === 'before_checkout' ? 30 : 9 );
+
+            add_action( 'woocommerce_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
+		}
+
+		// Enqueue styles.
+		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
+
 		// Enqueue scripts.
+		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_scripts' ) );
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		add_action( 'body_class', array( $this, 'body_class' ) );
 	}
+
+	/**
+	 * Add body class.
+	 *
+	 * @param array $classes The body classes.
+	 * @return array $classes The body classes.
+	 */
+	public function body_class( $classes ) {
+
+		//$classes[] = 'merchant-floating-side-mini-cart-show';
+
+		return $classes;
+	}
+
+	/**
+     * Display Button on Cart Page
+     *
+	 * @return void
+	 */
+	public function button_cart_page() {
+        $this->print_button( 'cart-page' );
+    }
+
+	/**
+     * Display Button on Side Cart
+     *
+	 * @return void
+	 */
+	public function button_side_cart() {
+        $this->print_button( 'side-cart' );
+    }
+
+	/**
+     * Display Button on Mini Cart
+     *
+	 * @return void
+	 */
+	public function button_mini_cart() {
+        $this->print_button( 'mini-cart' );
+    }
+
+	/**
+     * Display Button
+     *
+	 * @param $context
+	 *
+	 * @return void
+	 */
+    public function print_button( $context = '' ) {
+	    $settings = $this->get_module_settings();
+
+        $label = $settings['label'] ?? esc_html__( 'Clear Cart', 'merchant' );
+
+        $classes  = 'merchant-clear-cart-button';
+        $classes .= $context ? ' merchant-clear-cart-button-' . $context : '';
+	    ?>
+        <button type="button" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> <?php echo esc_attr( $classes ); ?>">
+            <?php echo esc_html( $label ); ?>
+        </button>
+	    <?php
+    }
 
 	/**
 	 * Init translations.
@@ -108,8 +210,8 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		if ( ! empty( $settings['button_text'] ) ) {
-			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Clear Cart', 'merchant' ) );
+		if ( ! empty( $settings['label'] ) ) {
+			Merchant_Translator::register_string( $settings['label'], esc_html__( 'Clear Cart', 'merchant' ) );
 		}
 	}
 
@@ -128,16 +230,6 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Admin Enqueue scripts.
-	 *
-	 * @return void
-	 */
-	public function enqueue_scripts() {
-		// Register and enqueue the main module script.
-		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/auto-external-links.min.js', array(), MERCHANT_VERSION, true );
-	}
-
-	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -150,7 +242,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 			$preview->set_html( array( $this, 'admin_preview_content' ), $this->get_module_settings() );
 
 			// Button Text.
-			$preview->set_text( 'button_text', '.aaa' );
+			$preview->set_text( 'label', '.aaa' );
 
 		}
 
@@ -164,7 +256,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	 */
 	public static function admin_preview_content( $settings ) {
 		?>
-        <a href="" class="aaa"><?php echo esc_html( $settings[ 'button_text' ] ); ?></a>
+        <a href="" class="aaa"><?php echo esc_html( $settings[ 'label' ] ); ?></a>
 		<?php
 	}
 
@@ -197,6 +289,26 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, self::MODULE_ID, get_the_ID() );
+	}
+
+	/**
+	 * Enqueue CSS.
+	 *
+	 * @return void
+	 */
+	public function enqueue_css() {
+        // Gulp Todo
+		// Specific module styles.
+		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/clear-cart.min.css', array(), time() );
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/clear-cart.min.js', array(), MERCHANT_VERSION, true );
 	}
 
 	/**

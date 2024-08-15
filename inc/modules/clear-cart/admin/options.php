@@ -60,6 +60,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'text',
 			'title'     => esc_html__( 'Custom Redirect URL', 'merchant' ),
 			'desc'      => esc_html__( 'The URL pattern is /page-name, /category, /pages/contact, etc.', 'merchant' ),
+			'placeholder' => esc_attr( 'https://yoursite.com/page-link' ), // Todo
 			'default'   => '',
 			'condition' => array( 'redirect_link', '==', 'custom' ),
 		),
@@ -85,49 +86,65 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => esc_html__( 'Position', 'merchant' ),
 			'options'   => array(
-				'before_update_cart' => esc_html__( 'Before Update Cart Button', 'merchant' ),
-				'after_update_cart'  => esc_html__( 'After Update Cart Button', 'merchant' ),
+				'woocommerce_cart_actions'      => esc_html__( 'After Update Cart Button', 'merchant' ),
+				'woocommerce_cart_coupon'       => esc_html__( 'After Coupon Button', 'merchant' ),
+				'woocommerce_before_cart_table' => esc_html__( 'Before Cart Table', 'merchant' ),
+				'woocommerce_after_cart_table'  => esc_html__( 'After Cart Table', 'merchant' ),
 			),
 			'condition' => array( 'enable_cart_page', '==', '1' ),
-			'default'   => 'before_update_cart',
+			'default'   => 'woocommerce_cart_actions',
 		),
 
 		array(
 			'id'      => 'enable_mini_cart',
 			'type'    => 'switcher',
 			'title'   => __( 'Mini Cart', 'merchant' ),
-			'default' => 1,
+			'default' => 0,
 		),
 
 		array(
-			'id'        => 'cart_page_position',
+			'id'        => 'mini_cart_position',
 			'type'      => 'select',
 			'title'     => esc_html__( 'Position', 'merchant' ),
 			'options'   => array(
-				'before_subtotal' => esc_html__( 'Before Subtotal', 'merchant' ),
-				'after_subtotal'  => esc_html__( 'After Subtotal', 'merchant' ),
+				'before_view_cart' => esc_html__( 'Before View Cart Button', 'merchant' ),
+				'after_view_cart'  => esc_html__( 'After View Cart Button', 'merchant' ),
+				'after_checkout'   => esc_html__( 'After Checkout Button', 'merchant' ),
 			),
+			'default'   => 'after_checkout',
 			'condition' => array( 'enable_mini_cart', '==', '1' ),
-			'default'   => 'after_subtotal',
 		),
 
 		array(
 			'id'      => 'enable_side_cart',
 			'type'    => 'switcher',
-			'title'   => __( 'Side Cart - // Todo check if side cart enabled', 'merchant' ),
-			'default' => 1,
+			'title'   => esc_html__( 'Side Cart', 'merchant' ),
+			'pro'     => true,
+			'default' => 0,
 		),
 
 		array(
-			'id'        => 'cart_page_position',
+			'id'        => 'side_cart_position',
 			'type'      => 'select',
+			'pro'       => true,
 			'title'     => esc_html__( 'Position', 'merchant' ),
 			'options'   => array(
-				'before_subtotal' => esc_html__( 'Before Subtotal', 'merchant' ),
-				'after_subtotal'  => esc_html__( 'After Subtotal', 'merchant' ),
+				'before_view_cart' => esc_html__( 'Before View Cart Button', 'merchant' ),
+				'after_view_cart'  => esc_html__( 'After View Cart Button', 'merchant' ),
+				'before_checkout'   => esc_html__( 'Before Checkout Button', 'merchant' ),
 			),
+			'default'   => 'after_view_cart',
 			'condition' => array( 'enable_side_cart', '==', '1' ),
-			'default'   => 'after_subtotal',
+		),
+
+		array(
+			'id'          => 'side_cart_info',
+			'pro'         => true,
+			'type'        => 'info_block',
+			'description' => esc_html__( 'You can add a Clear Cart button to the Side Cart using the Merchant Side Cart module.', 'merchant' ),
+			'button_text' => esc_html__( 'View Side Cart', 'merchant' ),
+			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=side-cart' ) ),
+			'condition'   => array( 'enable_side_cart', '==', '1' ),
 		),
 	),
 ) );
@@ -140,14 +157,14 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Clear_Cart::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'      => 'button_text',
+			'id'      => 'label',
 			'type'    => 'text',
 			'title'   => esc_html__( 'Button Text', 'merchant' ),
 			'default' => esc_html__( 'Clear Cart', 'merchant' ),
 		),
 
 		array(
-			'id'      => 'button_style',
+			'id'      => 'style',
 			'type'    => 'radio',
 			'title'   => esc_html__( 'Style', 'merchant' ),
 			'options' => array(
@@ -167,7 +184,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => 'px',
 			'default'   => 2,
-			'condition' => array( 'button_style', '==', 'outline' ),
+			'condition' => array( 'style', '==', 'outline' ),
 		),
 
 		array(
@@ -179,7 +196,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'unit'      => 'px',
 			'default'   => 5,
-			'condition' => array( 'button_style', 'any', 'solid|outline' ),
+			'condition' => array( 'style', 'any', 'solid|outline' ),
 		),
 
 		array(
@@ -191,7 +208,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'default'   => 10,
 			'unit'      => 'px',
-			'condition' => array( 'button_style', 'any', 'solid|outline' ),
+			'condition' => array( 'style', 'any', 'solid|outline' ),
 		),
 
 		array(
@@ -203,7 +220,7 @@ Merchant_Admin_Options::create( array(
 			'step'      => 1,
 			'default'   => 15,
 			'unit'      => 'px',
-			'condition' => array( 'button_style', 'any', 'solid|outline' ),
+			'condition' => array( 'style', 'any', 'solid|outline' ),
 		),
 
 		array(
@@ -233,7 +250,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Button Background Color', 'merchant' ),
 			'default'   => '#212121',
-			'condition' => array( 'button_style', '==', 'solid' ),
+			'condition' => array( 'style', '==', 'solid' ),
 		),
 
 		array(
@@ -248,7 +265,7 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'color',
 			'title'     => esc_html__( 'Button Outline Color', 'merchant' ),
 			'default'   => '#212121',
-			'condition' => array( 'button_style', '==', 'outline' ),
+			'condition' => array( 'style', '==', 'outline' ),
 		),
 	),
 ) );

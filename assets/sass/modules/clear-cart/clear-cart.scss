@@ -1,0 +1,23 @@
+button.merchant-clear-cart-button {
+
+	// Hide by default to hide on Mini Cart
+	&-side-cart {
+		display: none;
+	}
+
+	&-side-cart,
+	&-mini-cart {
+		width: 100%;
+	}
+
+	.merchant-floating-side-mini-cart-widget & {
+		&-mini-cart {
+			display: none;
+		}
+
+		// Show on Side Cart
+		&-side-cart {
+			display: block;
+		}
+	}
+}
