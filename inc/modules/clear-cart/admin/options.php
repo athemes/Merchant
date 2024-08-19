@@ -17,6 +17,15 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Clear_Cart::MODULE_ID,
 	'fields' => array(
 		array(
+			'id'        => 'cart_threshold',
+			'type'      => 'number',
+			'title'     => esc_html__( 'Cart Item Threshold', 'merchant' ),
+			'desc'      => esc_html__( 'Show a "Clear Cart" button when the cart contains at least this many items.', 'merchant' ),
+			'step'      => 1,
+			'default'   => 1,
+		),
+
+		array(
 			'id'      => 'enable_auto_clear',
 			'type'    => 'switcher',
 			'title'   => __( 'Clear Cart After Inactivity', 'merchant' ),
@@ -29,17 +38,17 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'number',
 			'title'     => esc_html__( 'Time of Cart Session Expiration (hours)', 'merchant' ),
 			'desc'      => esc_html__( 'Cart will be automatically cleared after this time', 'merchant' ),
+			'step'      => 1,
 			'condition' => array( 'enable_auto_clear', '==', '1' ),
 			'default'   => 24,
 		),
 
 		array(
-			'id'        => 'auto_clear_popup_message',
+			'id'        => 'popup_message',
 			'type'      => 'text',
 			'title'     => esc_html__( 'Confirmation Message', 'merchant' ),
 			'desc'      => esc_html__( 'Clear cart confirmation dialog box', 'merchant' ),
 			'default'   => esc_html__( 'It looks like you haven’t been active for a while. Would you like to empty your shopping cart?', 'merchant' ),
-			'condition' => array( 'enable_auto_clear', '==', '1' ),
 		),
 
 		array(
@@ -56,13 +65,13 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'        => 'redirect_link_custom',
-			'type'      => 'text',
-			'title'     => esc_html__( 'Custom Redirect URL', 'merchant' ),
-			'desc'      => esc_html__( 'The URL pattern is /page-name, /category, /pages/contact, etc.', 'merchant' ),
-			'placeholder' => esc_attr( 'https://yoursite.com/page-link' ), // Todo
-			'default'   => '',
-			'condition' => array( 'redirect_link', '==', 'custom' ),
+			'id'          => 'redirect_link_custom',
+			'type'        => 'text',
+			'title'       => esc_html__( 'Custom Redirect URL', 'merchant' ),
+			'desc'        => esc_html__( 'Enter a custom URL to redirect users to a specific page.', 'merchant' ),
+			'placeholder' => esc_attr( 'https://yourdomain.com/page-slug' ),
+			'default'     => '',
+			'condition'   => array( 'redirect_link', '==', 'custom' ),
 		),
 	),
 ) );
@@ -86,13 +95,12 @@ Merchant_Admin_Options::create( array(
 			'type'      => 'select',
 			'title'     => esc_html__( 'Position', 'merchant' ),
 			'options'   => array(
-				'woocommerce_cart_actions'      => esc_html__( 'After Update Cart Button', 'merchant' ),
 				'woocommerce_cart_coupon'       => esc_html__( 'After Coupon Button', 'merchant' ),
-				'woocommerce_before_cart_table' => esc_html__( 'Before Cart Table', 'merchant' ),
+				'woocommerce_cart_actions'      => esc_html__( 'After Update Cart Button', 'merchant' ),
 				'woocommerce_after_cart_table'  => esc_html__( 'After Cart Table', 'merchant' ),
 			),
 			'condition' => array( 'enable_cart_page', '==', '1' ),
-			'default'   => 'woocommerce_cart_actions',
+			'default'   => 'woocommerce_cart_coupon',
 		),
 
 		array(
@@ -159,7 +167,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'label',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Button Text', 'merchant' ),
+			'title'   => esc_html__( 'Label', 'merchant' ),
 			'default' => esc_html__( 'Clear Cart', 'merchant' ),
 		),
 
@@ -206,7 +214,7 @@ Merchant_Admin_Options::create( array(
 			'min'       => 0,
 			'max'       => 100,
 			'step'      => 1,
-			'default'   => 10,
+			'default'   => 13,
 			'unit'      => 'px',
 			'condition' => array( 'style', 'any', 'solid|outline' ),
 		),
@@ -218,31 +226,9 @@ Merchant_Admin_Options::create( array(
 			'min'       => 0,
 			'max'       => 100,
 			'step'      => 1,
-			'default'   => 15,
+			'default'   => 25,
 			'unit'      => 'px',
 			'condition' => array( 'style', 'any', 'solid|outline' ),
-		),
-
-		array(
-			'id'      => 'margin_vertical',
-			'type'    => 'range',
-			'title'   => esc_html__( 'Margin Top/Bottom', 'merchant' ),
-			'min'     => 0,
-			'max'     => 100,
-			'step'    => 1,
-			'default' => 10,
-			'unit'    => 'px',
-		),
-
-		array(
-			'id'        => 'margin_horizontal',
-			'type'      => 'range',
-			'title'     => esc_html__( 'Margin Left/Right', 'merchant' ),
-			'min'       => 0,
-			'max'       => 100,
-			'step'      => 1,
-			'default'   => 10,
-			'unit'      => 'px',
 		),
 
 		array(
@@ -254,9 +240,24 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'        => 'background_color_hover',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Button Background Hover Color', 'merchant' ),
+			'default'   => '#414141',
+			'condition' => array( 'style', '==', 'solid' ),
+		),
+
+		array(
 			'id'        => 'text_color',
 			'type'      => 'color',
 			'title'     => esc_html__( 'Button Text Color', 'merchant' ),
+			'default'   => '#ffffff',
+		),
+
+		array(
+			'id'        => 'text_color_hover',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Button Text Hover Color', 'merchant' ),
 			'default'   => '#ffffff',
 		),
 
@@ -266,6 +267,25 @@ Merchant_Admin_Options::create( array(
 			'title'     => esc_html__( 'Button Outline Color', 'merchant' ),
 			'default'   => '#212121',
 			'condition' => array( 'style', '==', 'outline' ),
+		),
+
+		array(
+			'id'        => 'border_color_hover',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Button Outline Hover Color', 'merchant' ),
+			'default'   => '#414141',
+			'condition' => array( 'style', '==', 'outline' ),
+		),
+
+		array(
+			'id'      => 'font_size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Font size', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 16,
+			'unit'    => 'px',
 		),
 	),
 ) );

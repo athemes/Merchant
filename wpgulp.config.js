@@ -940,6 +940,13 @@ const scripts = [
 		destination: './assets/js/modules/clear-cart/',
 		file: 'clear-cart'
 	},
+
+	{
+		name: 'clearCartAdmin',
+		src: './assets/js/src/modules/clear-cart/admin/preview.js',
+		destination: './assets/js/modules/clear-cart/admin/',
+		file: 'preview'
+	},
 ];
 
 // Watch options.
