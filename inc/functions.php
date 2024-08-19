@@ -212,6 +212,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_countdown_timer',
 				'merchant_module_product_labels',
 				'merchant_module_wishlist',
+				'merchant_module_clear_cart',
 			)
 		);
 

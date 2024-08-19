@@ -400,6 +400,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc'         => esc_html__( 'Allow users to log in with a simple pop up without navigating to a new page', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-login-popup/',
 				),
+				'clear-cart' => array(
+					'pro'          => false,
+					'section'      => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-clear-cart' ),
+					'title'        => esc_html__( 'Clear Cart', 'merchant' ),
+					'desc'         => esc_html__( 'Allow users to clear the entire cart with just a click', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-clear-cart/',
+				),
 				
 				// Protect Your Store.
 				'agree-to-terms-checkbox' => array(
