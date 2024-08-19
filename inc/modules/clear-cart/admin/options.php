@@ -203,7 +203,7 @@ Merchant_Admin_Options::create( array(
 			'max'       => 999,
 			'step'      => 1,
 			'unit'      => 'px',
-			'default'   => 5,
+			'default'   => 0,
 			'condition' => array( 'style', 'any', 'solid|outline' ),
 		),
 

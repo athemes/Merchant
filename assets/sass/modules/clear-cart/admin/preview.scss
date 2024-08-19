@@ -170,6 +170,7 @@
 
 		&--solid {
 			background-color: var(--mrc-clear-cart-bg-color, #212121);
+			border-radius: var(--mrc-clear-cart-border-radius, 0);
 
 			&:hover {
 				background-color: var(--mrc-clear-cart-bg-color-hover, #414141);
@@ -177,7 +178,8 @@
 		}
 
 		&--outline {
-			border: 2px solid var(--mrc-clear-cart-border-color, #212121);
+			border: var(--mrc-clear-cart-border-width, 2px) solid var(--mrc-clear-cart-border-color, #212121);
+			border-radius: var(--mrc-clear-cart-border-radius, 0);
 
 			&:hover {
 				border-color: var(--mrc-clear-cart-border-color-hover, #414141)

@@ -387,7 +387,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
         </button>
 		<?php
         // Because of a CSS issue, adding extra Update cart button on Botiga. Default one hidden by CSS.
-		if ( $context === 'cart-page' && $theme_name === 'Botiga' && $is_enabled_cart_page && $cart_page_position === 'woocommerce_cart_actions' ) {
+		if ( $context === 'cart-page' && $theme_name === 'Botiga' && ! $this->is_shortcode_enabled() && $is_enabled_cart_page && $cart_page_position === 'woocommerce_cart_actions' ) {
 			?>
             <button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> merchant-clear-cart-button__update-cart" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'merchant' ); ?>"><?php esc_html_e( 'Update cart', 'merchant' ); ?></button>
 			<?php
@@ -552,7 +552,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 
 		$css .= $this->get_module_custom_css();
 
-		if ( $theme_name === 'Botiga' ) {
+		if ( $theme_name === 'Botiga' && ! $this->is_shortcode_enabled() ) {
 			if ( $is_enabled_mini_cart ) {
 				$css .= '
                     #site-header-cart button.merchant-clear-cart-button {
@@ -614,7 +614,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
             }
 
             // After Update Cart Button
-			if ( $is_enabled_cart_page  && $cart_page_position === 'woocommerce_cart_actions' ) {
+			if ( $is_enabled_cart_page && $cart_page_position === 'woocommerce_cart_actions' ) {
 				$css .= '
 				    .shop_table .button[name="update_cart"]:not(.merchant-clear-cart-button__update-cart) {
 				        display: none;
@@ -651,7 +651,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	 * @return string
 	 */
 	public function get_module_custom_css() {
-		if ( ! $this->should_load_assets() ) {
+		if ( ! $this->should_load_assets() && ! is_admin() ) {
 			return '';
 		}
 
@@ -663,11 +663,17 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		// Background Color(Hover).
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'background_color_hover', '#414141', '.merchant-clear-cart-button', '--mrc-clear-cart-bg-color-hover' );
 
+		// Border Width
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border_width', 2, '.merchant-clear-cart-button', '--mrc-clear-cart-border-width', 'px' );
+
 		// Border Color
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border_color', '#212121', '.merchant-clear-cart-button', '--mrc-clear-cart-border-color' );
 
 		// Border Color(Hover).
         $css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border_color_hover', '#414141', '.merchant-clear-cart-button', '--mrc-clear-cart-border-color-hover' );
+
+		// Border radius.
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'border_radius', 0, '.merchant-clear-cart-button', '--mrc-clear-cart-border-radius', 'px' );
 
 		// Text Color.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'text_color', '#ffffff', '.merchant-clear-cart-button', '--mrc-clear-cart-text-color' );
