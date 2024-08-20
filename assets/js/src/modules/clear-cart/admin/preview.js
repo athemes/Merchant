@@ -42,7 +42,8 @@
 		const $buttonPreview = $( '.merchant-clear-cart-button' );
 
 		const isCartPageEnabled = $( '.merchant-field-enable_cart_page input' ).is( ':checked' );
-		const cartPagePosition = $( '.merchant-field-cart_page_position select' ).val();
+		const $cartPagePositionField = $( '.merchant-field-cart_page_position select' );
+		const cartPagePosition = $cartPagePositionField.val();
 
 		// If Cart Page is Disabled
 		$buttonPreview.toggleClass( 'hide', ! isCartPageEnabled );
@@ -65,6 +66,19 @@
 
 			if ( $( this ).is( ':checked' ) ) {
 				$buttonPreview.addClass( `merchant-clear-cart-button--${value}` );
+			}
+		} );
+
+		const $shopTableBottom = $( '.shop_table-bottom' );
+		$cartPagePositionField.find( 'option' ).each( function () {
+			const value = $( this ).val();
+
+			// Remove the class corresponding to the value of each option
+			$shopTableBottom.removeClass(value);
+
+			// If the current option is selected, add the class
+			if ( $( this ).is( ':selected' ) ) {
+				$shopTableBottom.addClass( value );
 			}
 		} );
 	}

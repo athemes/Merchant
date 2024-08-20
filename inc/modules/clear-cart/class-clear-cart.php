@@ -264,14 +264,14 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
             <div class="shop_table-bottom__start">
                 <div class="shop_table__coupon">
                     <input type="text" placeholder="<?php echo esc_attr__( 'Coupon Code', 'merchant' ); ?>">
-                    <button class="shop_table__button shop_table__button__apply-coupon"><?php echo esc_html__( 'Apply', 'merchant' ); ?></button>
+                    <button class="shop_table__button shop_table__button__apply-coupon"><?php echo esc_html__( 'Apply Coupon', 'merchant' ); ?></button>
                 </div>
                 <div class="shop_table__clear-cart">
                     <button class="hide shop_table__button merchant-clear-cart-button woocommerce_cart_coupon"><?php echo esc_html( $settings['label'] ); ?></button>
                 </div>
             </div>
             <div class="shop_table-bottom__end">
-                <button class="shop_table__button shop_table__button__update-cart"><?php echo esc_html__( 'Update', 'merchant' ); ?></button>
+                <button class="shop_table__button shop_table__button__update-cart"><?php echo esc_html__( 'Update Cart', 'merchant' ); ?></button>
                 <button class="hide shop_table__button merchant-clear-cart-button woocommerce_cart_actions"><?php echo esc_html( $settings['label'] ); ?></button>
             </div>
         </div>
@@ -683,7 +683,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'font_size', 16, '.merchant-clear-cart-button', '--mrc-clear-cart-font-size', 'px' );
 
 		// Padding Top/Bottom.
-		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding_vertical', 13, '.merchant-clear-cart-button', '--mrc-clear-cart-padding-vertical', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding_vertical', 15, '.merchant-clear-cart-button', '--mrc-clear-cart-padding-vertical', 'px' );
 
 		// Padding Left/Right.
 		$css .= Merchant_Custom_CSS::get_variable_css( self::MODULE_ID, 'padding_horizontal', 25, '.merchant-clear-cart-button', '--mrc-clear-cart-padding-horizontal', 'px' );
