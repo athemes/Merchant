@@ -55,7 +55,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'cart_threshold'              => 1,
-			'enable_auto_clear'           => true,
+			'enable_auto_clear'           => false,
 			'auto_clear_expiration_hours' => 24,
 			'popup_message'               => __( 'It looks like you haven’t been active for a while. Would you like to empty your shopping cart?', 'merchant' ),
 			'redirect_link'               => '',
@@ -135,6 +135,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
             add_action( 'woocommerce_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
 		}
 
+		// Enqueue CSS.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
 		// Enqueue scripts.
@@ -200,9 +201,6 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 
 			// Button Label.
 			$preview->set_text( 'label', '.merchant-clear-cart-button' );
-
-			//$preview->set_class( 'enable_cart_page', '.merchant-clear-cart-button', array( 'hide', 'show' ), 'show' );
-
 		}
 
 		return $preview;
