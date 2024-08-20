@@ -99,7 +99,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						array(
 							'type'    => 'warning',
-							'content' => esc_html__( 'Do not modify these settings unless you\'re an experienced developer', 'merchant' ),
+							'content' => esc_html__( 'These settings allow you to add custom code, and are recommended for developers or advanced users only', 'merchant' ),
 						),
 
 						array(
