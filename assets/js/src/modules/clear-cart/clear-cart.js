@@ -25,6 +25,11 @@ class ClearCart {
 		this.clearCartAutoAlert();
 	}
 
+	/**
+	 * Clear the cart AJAX
+	 *
+	 * @param $button
+	 */
 	clearCartAjax( $button = null ) {
 		const $ = jQuery;
 
@@ -60,11 +65,13 @@ class ClearCart {
 		} );
 	}
 
+	/**
+	 * Check if time passed as soon as the page loaded and show the alert if so.
+	 */
 	clearCartPageLoadAlert() {
-		const $ = jQuery;
 		const that = this;
 
-		$( window ).on( 'load', function () {
+		jQuery( window ).on( 'load', function () {
 			if ( ! merchant?.setting?.clear_cart_auto_clear ) {
 				that.deleteClearCartCookie();
 				return;
@@ -72,11 +79,14 @@ class ClearCart {
 
 			const expirationTime = that.getCookie( that.clearCartCookie );
 			if ( expirationTime && that.getCurrentTime() > expirationTime ) {
-				that.showClearCartAlert(); // Maybe after
+				that.showClearCartAlert();
 			}
 		} );
 	}
 
+	/**
+	 * Show Alert on Clear Cart Button Click
+	 */
 	clearCartButtonAlert() {
 		const $ = jQuery;
 		const that = this;
@@ -88,6 +98,9 @@ class ClearCart {
 		} );
 	}
 
+	/**
+	 * Auto Clear Cart
+	 */
 	clearCartAutoAlert() {
 		const $ = jQuery;
 		const that = this;
@@ -127,27 +140,33 @@ class ClearCart {
 				return;
 			}
 
+			// If All items removed.
 			if ( event?.type === 'removed_from_cart' && ! hash ) {
 				return;
 			}
 
-			let refresh = clear_cart_total_items >= clear_cart_threshold;
+			let refreshCookie = clear_cart_total_items >= clear_cart_threshold;
 
 			if ( data && data['.merchant_clear_cart_cart_count'] !== undefined ) {
-				refresh = data['.merchant_clear_cart_cart_count'] >= clear_cart_threshold;
-				if ( ! refresh ) {
+				refreshCookie = data['.merchant_clear_cart_cart_count'] >= clear_cart_threshold;
+				if ( ! refreshCookie ) {
 					that.deleteClearCartCookie();
 					return;
 				}
 			}
 
-			if ( clear_cart_auto_clear && refresh ) {
+			if ( clear_cart_auto_clear && refreshCookie ) {
 				const expireTime = that.setClearCartCookie();
 				that.timer = setTimeout( () => that.showClearCartAlert(), expireTime );
 			}
 		} );
 	}
 
+	/**
+	 * Show Alert.
+	 *
+	 * @param $button
+	 */
 	showClearCartAlert( $button = null ) {
 		const that = this;
 
@@ -170,6 +189,11 @@ class ClearCart {
 		}
 	}
 
+	/**
+	 * Set Clear Cart Cookie.
+	 *
+	 * @returns {number}
+	 */
 	setClearCartCookie() {
 		clearTimeout( this.timer );
 
@@ -185,16 +209,32 @@ class ClearCart {
 		return cartExpireDuration;
 	}
 
+	/**
+	 * Delete Clear Cart Cookie.
+	 */
 	deleteClearCartCookie() {
 		clearTimeout( this.timer );
 		this.deleteCookie( this.clearCartCookie );
 	}
 
+	/**
+	 * Get Current time.
+	 *
+	 * @param time
+	 * @returns {number|Date}
+	 */
 	getCurrentTime( time = true ) {
 		const date = new Date();
 		return time ? date.getTime() : date;
 	}
 
+	/**
+	 * Set Cookie Helper.
+	 *
+	 * @param name
+	 * @param value
+	 * @param expiration
+	 */
 	setCookie( name, value, expiration ) {
 		const date = new Date( expiration );
 
@@ -202,6 +242,12 @@ class ClearCart {
 		document.cookie = `${ name }=${ value };${ expires };path=/`;
 	}
 
+	/**
+	 * Get Cookie Helper.
+	 *
+	 * @param name
+	 * @returns {null|string}
+	 */
 	getCookie( name ) {
 		const cookies = document.cookie.split( ';' );
 
@@ -215,6 +261,11 @@ class ClearCart {
 		return null;
 	}
 
+	/**
+	 * Delete Cookie Helper.
+	 *
+	 * @param name
+	 */
 	deleteCookie( name ) {
 		document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 	}
