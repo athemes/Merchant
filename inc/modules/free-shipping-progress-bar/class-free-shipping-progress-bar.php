@@ -29,6 +29,11 @@ class Merchant_Free_Shipping_Progress_Bar extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Module template path.
+	 */
+	const MODULE_TEMPLATES = 'modules/' . self::MODULE_ID;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -67,6 +72,8 @@ class Merchant_Free_Shipping_Progress_Bar extends Merchant_Add_Module {
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
+
+			add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
 		}
 
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
@@ -116,6 +123,39 @@ class Merchant_Free_Shipping_Progress_Bar extends Merchant_Add_Module {
 		}
 
 		return $preview;
+	}
+
+	/**
+	 * Help banner.
+	 *
+	 * @return void
+	 */
+	public function help_banner( $module_id ) {
+		if ( $module_id === self::MODULE_ID ) {
+			?>
+            <div class="merchant-module-page-setting-fields">
+                <div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+                    <div class="merchant-module-page-setting-field-inner">
+                        <div class="merchant-tag-pre-orders">
+                            <i class="dashicons dashicons-info"></i>
+                            <p>
+								<?php
+								echo esc_html__(
+									'You need to setup free shipping rules with a minimum order value, to do that go to WooCommerce > Settings > Shipping menu in the left sidebar of your WordPress admin area and configure your free shipping method.',
+									'merchant'
+								);
+								printf(
+									'<a href="%1s" target="_blank">%2s</a>',
+									esc_url( admin_url( 'post-new.php?post_type=product' ) ),
+									esc_html__( 'Add Shipping', 'merchant' )
+								);
+								?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<?php
+		}
 	}
 
 	/**
