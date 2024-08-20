@@ -100,17 +100,63 @@
 	.shop_table {
 		&-bottom {
 			display: flex;
-			flex-wrap: wrap;
 			gap: 5px;
 			justify-content: space-between;
 			margin-top: 20px;
+			position: relative;
+
+			&.woocommerce_cart_actions,
+			&.woocommerce_cart_coupon,
+			&.woocommerce_after_cart_table {
+				@media (max-width: 1368px) {
+					flex-wrap: wrap;
+				}
+
+				.shop_table-bottom__end {
+					@media (min-width: 1369px) {
+						transform-origin: right;
+						position: absolute;
+						right: 0;
+					}
+
+					@media (max-width: 1368px) and (min-width: 992px), (max-width: 801px) {
+						transform-origin: left;
+					}
+
+					@media (max-width: 991px) and (min-width: 800px) {
+						transform-origin: right;
+					}
+				}
+			}
+
+			&.woocommerce_cart_actions {
+
+				.shop_table-bottom__end {
+					@media (max-width: 1368px) {
+						flex-wrap: wrap;
+					}
+				}
+			}
+
+			&.woocommerce_cart_coupon {
+				.shop_table-bottom__end {}
+			}
+
+			&.woocommerce_after_cart_table {
+				.shop_table-bottom__end {}
+			}
 		}
 
 		&-bottom__start {
+			transform-origin: left;
+		}
+
+		&-bottom__start,
+		&-bottom__end {
 			display: flex;
 			align-items: center;
-			flex-wrap: wrap;
 			gap: 5px;
+			transform: scale(.78);
 		}
 
 		&__coupon,
@@ -119,17 +165,20 @@
 		}
 
 		&__button {
-			background-color: #212121;
 			font-size: 16px;
+			font-weight: 300;
+			line-height: 1;
+			background-color: #212121;
 			color: #fff;
 			text-transform: uppercase;
 			text-decoration: none;
 			border: none;
 			box-shadow: none;
+			white-space: nowrap;
 
 			&__apply-coupon,
 			&__update-cart {
-				padding: 13px;
+				padding: 15px 25px;
 			}
 		}
 
@@ -140,7 +189,7 @@
 				border: 1px solid #eee;
 				background: none;
 				outline: none;
-				width: 130px;
+				width: 140px;
 				padding-left: 10px;
 				margin-right: -3px;
 				border-radius: 0;
@@ -151,6 +200,8 @@
 	.merchant-clear-cart-button {
 		color: var(--mrc-clear-cart-text-color, #ffffff);
 		font-size: var(--mrc-clear-cart-font-size, 16px);
+		font-weight: 300;
+		line-height: 1;
 		padding-block: var(--mrc-clear-cart-padding-vertical, 15px);
 		padding-inline: var(--mrc-clear-cart-padding-horizontal, 25px);
 		background: none;
@@ -161,6 +212,8 @@
 
 		&.woocommerce_after_cart_table {
 			margin-top: 20px;
+			transform: scale(.78);
+			transform-origin: left;
 		}
 
 		&:hover {

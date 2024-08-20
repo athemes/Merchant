@@ -2,7 +2,8 @@
 button.merchant-clear-cart-button {
 	color: var(--mrc-clear-cart-text-color, #ffffff);
 	font-size: var(--mrc-clear-cart-font-size, 16px) !important;
-	padding-block: var(--mrc-clear-cart-padding-vertical, 13px);
+	line-height: 1;
+	padding-block: var(--mrc-clear-cart-padding-vertical, 15px);
 	padding-inline: var(--mrc-clear-cart-padding-horizontal, 25px);
 	background: none;
 	border: none;
