@@ -422,7 +422,12 @@ Merchant_Admin_Options::create( array(
 				),
 			),
 		),
-
+		array(
+			'id'      => 'show_on_mini_cart_widget',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
+			'default' => 1,
+		),
 		array(
 			'id'      => 'show_on_cart_page',
 			'type'    => 'switcher',
@@ -445,64 +450,6 @@ Merchant_Admin_Options::create( array(
 						'field'    => 'show_on_cart_page',
 						'operator' => '===',
 						'value'    => true,
-					),
-				),
-			),
-		),
-		array(
-			'id'      => 'show_on_mini_cart_widget',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'         => 'mini_cart_page_placement',
-			'type'       => 'select',
-			'title'      => esc_html__( 'Position', 'merchant' ),
-			'options'    => array(
-				'woocommerce_before_mini_cart'                    => esc_html__( 'Before Mini Cart', 'merchant' ),
-				'woocommerce_before_mini_cart_contents'           => esc_html__( 'Before Mini Cart Contents', 'merchant' ),
-				'woocommerce_mini_cart_contents'                  => esc_html__( 'Mini Cart Contents', 'merchant' ),
-				'woocommerce_widget_cart_item_quantity'           => esc_html__( 'Mini Cart Item Quantity', 'merchant' ),
-				'woocommerce_after_mini_cart_contents'            => esc_html__( 'After Mini Cart Contents', 'merchant' ),
-				'woocommerce_widget_shopping_cart_before_buttons' => esc_html__( 'Before Mini Cart Buttons', 'merchant' ),
-				'woocommerce_widget_shopping_cart_buttons'        => esc_html__( 'Mini Cart Buttons', 'merchant' ),
-				'woocommerce_widget_shopping_cart_total'          => esc_html__( 'Mini Cart Total', 'merchant' ),
-				'woocommerce_widget_shopping_cart_after_buttons'  => esc_html__( 'After Mini Cart Buttons', 'merchant' ),
-				'woocommerce_after_mini_cart'                     => esc_html__( 'After Mini Cart', 'merchant' ),
-			),
-			'default'    => 'woocommerce_before_mini_cart',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_on_mini_cart_widget',
-						'operator' => '===',
-						'value'    => true,
-					),
-				),
-			),
-		),
-		array(
-			'id'      => 'show_on_side_cart_widget',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Side Cart', 'merchant' ),
-			'default' => 1,
-		),
-		array(
-			'id'         => 'side_cart_page_placement',
-			'type'       => 'select',
-			'title'      => esc_html__( 'Position', 'merchant' ),
-			'options'    => array(
-				'place_1' => esc_html__( 'Place 1', 'merchant' ),
-				'place_2' => esc_html__( 'Place 2', 'merchant' ),
-			),
-			'default'    => 'place_1',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_on_side_cart_widget', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
 			),
@@ -646,6 +593,16 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Spacing Inside Left', 'merchant' ),
 		),
 		array(
+			'id'         => 'card_text_bottom_spacing',
+			'type'       => 'range',
+			'min'        => '0',
+			'max'        => '100',
+			'step'       => '1',
+			'unit'       => 'PX',
+			'default'    => '20',
+			'title'      => esc_html__( 'Text bottom spacing', 'merchant' ),
+		),
+		array(
 			'id'      => 'card_border_radius',
 			'type'    => 'range',
 			'min'     => '0',
@@ -736,25 +693,6 @@ Merchant_Admin_Options::create( array(
 			'unit'       => '%',
 			'default'    => '100',
 			'title'      => esc_html__( 'Progress bar width', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
-			'id'         => 'bar_text_bottom_spacing',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '30',
-			'step'       => '1',
-			'unit'       => 'PX',
-			'default'    => '20',
-			'title'      => esc_html__( 'Text bottom spacing', 'merchant' ),
 			'conditions' => array(
 				'terms' => array(
 					array(
