@@ -36,9 +36,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$total_price      = intval( $discount_qty ) * $discounted_price;
 			$clickable        = '';
             $product_id       = $args['product_id'] ?? get_the_ID();
+            $product_type     = '';
 
 			if ( $product_id ) {
 				$product = wc_get_product( $product_id );
+				$product_type = $product->get_type();
 				if ( $product && ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
 					$clickable = ' clickable';
 				}
@@ -52,8 +54,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					echo esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['table_title'] ) ); ?>
                 </div>
 			<?php
-			endif; ?>
-            <div class="merchant-volume-discounts-item<?php echo esc_attr( $clickable ); ?>" title="Add offer to cart" data-in-cart="<?php
+			endif;
+
+			$items_classes  = 'merchant-volume-discounts-item' . esc_attr( $clickable );
+			$items_classes .= $product_type ? ' merchant-volume-discounts-item-' . esc_attr( $product_type ) : '';
+            ?>
+            <div class="<?php echo esc_attr( $items_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>" data-in-cart="<?php
             echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>" style="<?php
 			echo isset( $discount_tier['product_single_page']['table_item_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['product_single_page']['table_item_bg_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['product_single_page']['table_item_border_color'] . ';' ) : '';
