@@ -543,6 +543,7 @@
 
                 });
                 this.updateLayoutTitle();
+                this.updateDiscountPercentMaxVal();
                 // Events.
                 this.events();
             },
@@ -561,8 +562,32 @@
                 });
             },
 
+            updateDiscountPercentMaxVal: function() {
+                $( '.merchant-flexible-content .layout' ).each( function () {
+                    const $layout = $( this );
+                    const $discountType = $layout.find( '.merchant-module-page-setting-field[data-id="discount_type"]' );
+
+                    let $discountVal = $layout.find( '.merchant-module-page-setting-field[data-id="discount_value"]' );
+                    $discountVal = $discountVal.length ? $discountVal : $layout.find( '.merchant-module-page-setting-field[data-id="discount"]' );
+                    $discountVal = $discountVal.length ? $discountVal : $layout.find( '.merchant-module-page-setting-field[data-id="discount_amount"]' );
+
+                    const checkedValue = $discountType.find( 'input:checked' ).val();
+
+                    // Set/Remove max value based on the discount type.
+                    ( checkedValue === 'percentage_discount' || checkedValue === 'percentage' )
+                        ? $discountVal.find( 'input' ).attr( 'max', 100 )
+                        : $discountVal.find( 'input' ).removeAttr( 'max' );
+                } );
+
+                $( '.merchant-module-page-setting-fields' )
+            },
+
             events: function () {
                 const self = this;
+
+                $( document ).on( 'change', '.merchant-module-page-setting-field[data-id="discount_type"] input', function() {
+                    self.updateDiscountPercentMaxVal();
+                } );
 
                 // Update "selected" attribute on select. It's Required for duplicating layouts.
                 $( document ).on( 'change', 'select', function() {
@@ -633,7 +658,8 @@
 
                     $(document).trigger('merchant-flexible-content-added', [$layout]);
 
-                    self.updateLayoutTitle()
+                    self.updateLayoutTitle();
+                    self.updateDiscountPercentMaxVal();
                 });
 
                 // Duplicate item

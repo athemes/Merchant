@@ -113,7 +113,7 @@ Merchant_Admin_Options::create( array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default'   => 'percentage',
+							'default'   => 'percentage_discount',
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 						array(
