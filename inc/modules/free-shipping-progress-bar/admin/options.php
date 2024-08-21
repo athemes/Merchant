@@ -193,36 +193,36 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 
-		array(
-			'id'         => 'desktop_alignment',
-			'type'       => 'select',
-			'title'      => esc_html__( 'Desktop Alignment', 'merchant' ),
-			'options'    => array(
-				'right' => esc_html__( 'Right', 'merchant' ),
-				'left'  => esc_html__( 'Left', 'merchant' ),
-			),
-			'default'    => 'right',
-			'conditions' => array(
-				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-				'terms'    => array(
-					array(
-						'field'    => 'desktop_placement', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => 'top', // can be a single value or an array of string/number/int
-					),
-					array(
-						'field'    => 'top_bottom_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-					array(
-						'field'    => 'top_bottom_bar_show_on', // field ID
-						'operator' => 'in', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => array( 'desktop', 'both' ), // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
+		//      array(
+		//          'id'         => 'desktop_alignment',
+		//          'type'       => 'select',
+		//          'title'      => esc_html__( 'Desktop Alignment', 'merchant' ),
+		//          'options'    => array(
+		//              'right' => esc_html__( 'Right', 'merchant' ),
+		//              'left'  => esc_html__( 'Left', 'merchant' ),
+		//          ),
+		//          'default'    => 'right',
+		//          'conditions' => array(
+		//              'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+		//              'terms'    => array(
+		//                  array(
+		//                      'field'    => 'desktop_placement', // field ID
+		//                      'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+		//                      'value'    => 'top', // can be a single value or an array of string/number/int
+		//                  ),
+		//                  array(
+		//                      'field'    => 'top_bottom_bar', // field ID
+		//                      'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+		//                      'value'    => true, // can be a single value or an array of string/number/int
+		//                  ),
+		//                  array(
+		//                      'field'    => 'top_bottom_bar_show_on', // field ID
+		//                      'operator' => 'in', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+		//                      'value'    => array( 'desktop', 'both' ), // can be a single value or an array of string/number/int
+		//                  ),
+		//              ),
+		//          ),
+		//      ),
 
 		array(
 			'id'         => 'desktop_offset_toggle',
@@ -376,7 +376,7 @@ Merchant_Admin_Options::create( array(
 			'min'        => '1',
 			'step'       => '1',
 			'default'    => '24',
-			'title'      => esc_html__( 'Session Expiration', 'merchant' ),
+			'title'      => esc_html__( 'Session Expiration Hours', 'merchant' ),
 			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to the free shipping bar again.', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -577,7 +577,7 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'      => 'text_color',
+			'id'      => 'card_text_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Text color', 'merchant' ),
 			'default' => '#212121',
@@ -590,20 +590,20 @@ Merchant_Admin_Options::create( array(
 			'default' => '#212121',
 		),
 		array(
-			'id'      => 'font_size',
+			'id'      => 'card_font_size',
 			'type'    => 'range',
 			'min'     => '4',
 			'max'     => '30',
 			'step'    => '1',
 			'unit'    => 'PX',
-			'default' => '14',
+			'default' => '16',
 			'title'   => esc_html__( 'Font Size', 'merchant' ),
 		),
 		array(
-			'id'      => 'background_color',
+			'id'      => 'card_background_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Background Color', 'merchant' ),
-			'default' => '#757575',
+			'default' => '#e6e6e6',
 		),
 		array(
 			'id'      => 'card_padding_top',
@@ -646,17 +646,17 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Spacing Inside Left', 'merchant' ),
 		),
 		array(
-			'id'      => 'border_radius',
+			'id'      => 'card_border_radius',
 			'type'    => 'range',
 			'min'     => '0',
-			'max'     => '20',
+			'max'     => '45',
 			'step'    => '1',
 			'unit'    => 'PX',
 			'default' => '4',
 			'title'   => esc_html__( 'Corner Radius', 'merchant' ),
 		),
 		array(
-			'id'      => 'border_size',
+			'id'      => 'card_border_width',
 			'type'    => 'range',
 			'min'     => '0',
 			'max'     => '20',
@@ -666,7 +666,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Border Size', 'merchant' ),
 		),
 		array(
-			'id'      => 'border_color',
+			'id'      => 'card_border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border Color', 'merchant' ),
 			'default' => 'rgba(255, 255, 255, 0)',
@@ -753,7 +753,7 @@ Merchant_Admin_Options::create( array(
 			'max'        => '30',
 			'step'       => '1',
 			'unit'       => 'PX',
-			'default'    => '10',
+			'default'    => '20',
 			'title'      => esc_html__( 'Text bottom spacing', 'merchant' ),
 			'conditions' => array(
 				'terms' => array(
@@ -766,13 +766,13 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'         => 'bar_radius',
+			'id'         => 'bar_border_radius',
 			'type'       => 'range',
 			'min'        => '0',
 			'max'        => '30',
 			'step'       => '1',
 			'unit'       => 'PX',
-			'default'    => '4',
+			'default'    => '0',
 			'title'      => esc_html__( 'Corner Radius', 'merchant' ),
 			'conditions' => array(
 				'terms' => array(
