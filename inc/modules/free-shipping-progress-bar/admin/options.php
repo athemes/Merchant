@@ -372,13 +372,12 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'id'         => 'close_card_stay_time',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '30',
+			'type'       => 'number',
+			'min'        => '1',
 			'step'       => '1',
-			'unit'       => esc_html__( 'Hours', 'merchant' ),
-			'default'    => '4',
-			'title'      => esc_html__( 'Stay closed time', 'merchant' ),
+			'default'    => '24',
+			'title'      => esc_html__( 'Session Expiration', 'merchant' ),
+			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to the free shipping bar again.', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
