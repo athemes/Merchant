@@ -149,7 +149,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'At 0%', 'merchant' ),
 							'default' => sprintf(
 								/* Translators: 1. goal amount */
-								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								esc_html__( 'Spend %1$s to receive this gift!', 'merchant' ),
 								'{goalAmount}' // existing one is {amount}
 							),
 						),
@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Between 1 - 99%', 'merchant' ),
 							'default' => sprintf(
 								/* Translators: 1. more amount */
-								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								esc_html__( 'Spend %1$s more to receive this gift!', 'merchant' ),
 								'{amountMore}'
 							),
 						),

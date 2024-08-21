@@ -155,8 +155,8 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 	public function localize_script( $data ) {
         $data['spending_texts'] = array(
 	        'all'        => array(
-		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} on any product to receive this gift!', 'merchant' ),
-		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} on any product to receive this gift!', 'merchant' ),
+		        'spending_text_0'       => esc_html__( 'Spend {goalAmount} to receive this gift!', 'merchant' ),
+		        'spending_text_1_to_99' => esc_html__( 'Spend {amountMore} more to receive this gift!', 'merchant' ),
 		        'spending_text_100'     => esc_html__( 'Congratulations! You are eligible to receive a free gift.', 'merchant' ),
 	        ),
 	        'product'    => array(
