@@ -646,30 +646,12 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'color',
 			'title'      => esc_html__( 'Progress bar background color', 'merchant' ),
 			'default'    => '#757575',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'         => 'bar_foreground_color',
 			'type'       => 'color',
 			'title'      => esc_html__( 'Progress bar foreground color', 'merchant' ),
 			'default'    => '#212121',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'         => 'bar_height',
@@ -680,15 +662,6 @@ Merchant_Admin_Options::create( array(
 			'unit'       => 'PX',
 			'default'    => '10',
 			'title'      => esc_html__( 'Progress bar height', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'         => 'bar_width',
@@ -699,15 +672,6 @@ Merchant_Admin_Options::create( array(
 			'unit'       => '%',
 			'default'    => '100',
 			'title'      => esc_html__( 'Progress bar width', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'         => 'bar_border_radius',
@@ -718,15 +682,6 @@ Merchant_Admin_Options::create( array(
 			'unit'       => 'PX',
 			'default'    => '0',
 			'title'      => esc_html__( 'Corner Radius', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 	),
 ) );
