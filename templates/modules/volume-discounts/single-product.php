@@ -56,10 +56,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			endif;
 
-			$items_classes  = 'merchant-volume-discounts-item' . esc_attr( $clickable );
-			$items_classes .= $product_type ? ' merchant-volume-discounts-item-' . esc_attr( $product_type ) : '';
+			$item_classes  = 'merchant-volume-discounts-item' . esc_attr( $clickable );
+			$item_classes .= $product_type ? ' merchant-volume-discounts-item-' . esc_attr( $product_type ) : '';
             ?>
-            <div class="<?php echo esc_attr( $items_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>" data-in-cart="<?php
+            <div class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>" data-in-cart="<?php
             echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>" style="<?php
 			echo isset( $discount_tier['product_single_page']['table_item_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['product_single_page']['table_item_bg_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['product_single_page']['table_item_border_color'] . ';' ) : '';
