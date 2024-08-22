@@ -618,7 +618,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => '30',
 			'step'    => '1',
 			'unit'    => 'PX',
-			'default' => '16',
+			'default' => '18',
 			'title'   => esc_html__( 'Font Size', 'merchant' ),
 		),
 		array(
