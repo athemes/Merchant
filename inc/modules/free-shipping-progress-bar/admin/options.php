@@ -147,6 +147,26 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'         => 'scroll_visibility',
+			'type'       => 'radio',
+			'title'      => __( 'Position', 'merchant' ),
+			'options'    => array(
+				'sticky' => __( 'Sticky (always visible)', 'merchant' ),
+				'fixed'  => __( 'Fixed (hidden on scroll)', 'merchant' ),
+			),
+			'default'    => 'sticky',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'top_bottom_bar', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+
+		array(
 			'id'         => 'top_bottom_bar_show_on',
 			'type'       => 'select',
 			'title'      => esc_html__( 'Show on', 'merchant' ),
@@ -376,8 +396,8 @@ Merchant_Admin_Options::create( array(
 			'min'        => '1',
 			'step'       => '1',
 			'default'    => '24',
-			'title'      => esc_html__( 'Session Expiration Hours', 'merchant' ),
-			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to the free shipping bar again.', 'merchant' ),
+			'title'      => esc_html__( 'Session Expiration Time', 'merchant' ),
+			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to close the free shipping bar again.', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -423,6 +443,22 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'id'         => 'single_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on single product page', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'      => 'show_on_mini_cart_widget',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
@@ -455,6 +491,22 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'id'         => 'cart_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on cart page', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_cart_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'      => 'show_on_checkout_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Checkout Page', 'merchant' ),
@@ -473,6 +525,22 @@ Merchant_Admin_Options::create( array(
 				'woocommerce_after_checkout_form'         => esc_html__( 'After Checkout Form', 'merchant' ),
 			),
 			'default'    => 'woocommerce_before_checkout_form',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_checkout_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'checkout_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on checkout page', 'merchant' ),
+			'default'    => 1,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -607,7 +675,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => '1',
 			'unit'    => 'PX',
 			'default' => '20',
-			'title'   => esc_html__( 'Text bottom spacing', 'merchant' ),
+			'title'   => esc_html__( 'Text Bottom Spacing', 'merchant' ),
 		),
 		array(
 			'id'      => 'card_border_radius',
@@ -635,23 +703,16 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Border Color', 'merchant' ),
 			'default' => 'rgba(255, 255, 255, 0)',
 		),
-
-		array(
-			'id'      => 'show_progress_bar',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Progress bar', 'merchant' ),
-			'default' => 1,
-		),
 		array(
 			'id'      => 'bar_background_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Progress bar background color', 'merchant' ),
+			'title'   => esc_html__( 'Progress Bar Background Color', 'merchant' ),
 			'default' => '#757575',
 		),
 		array(
 			'id'      => 'bar_foreground_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Progress bar foreground color', 'merchant' ),
+			'title'   => esc_html__( 'Progress Bar Foreground Color', 'merchant' ),
 			'default' => '#212121',
 		),
 		array(
@@ -662,7 +723,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => '1',
 			'unit'    => 'PX',
 			'default' => '10',
-			'title'   => esc_html__( 'Progress bar height', 'merchant' ),
+			'title'   => esc_html__( 'Progress Bar Height', 'merchant' ),
 		),
 		array(
 			'id'      => 'bar_width',
@@ -672,7 +733,7 @@ Merchant_Admin_Options::create( array(
 			'step'    => '1',
 			'unit'    => '%',
 			'default' => '100',
-			'title'   => esc_html__( 'Progress bar width', 'merchant' ),
+			'title'   => esc_html__( 'Progress Bar Width', 'merchant' ),
 		),
 		array(
 			'id'      => 'bar_border_radius',
