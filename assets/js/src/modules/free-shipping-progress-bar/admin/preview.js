@@ -17,7 +17,7 @@
 			borderBottomRightRadius = $('.merchant-field-select_border_radius #merchant-select_border_radius-bottom').val(),
 			borderBottomLeftRadius = $('.merchant-field-select_border_radius #merchant-select_border_radius-left').val();
 
-		$('.merchant-freespb-text').html(freeShippingText.replace('{amount}', merchantFreeShippingProgressBar.amount)).css('color', textColor);
+		$('.merchant-freespb-text').html(freeShippingText.replace('{amount_left}', merchantFreeShippingProgressBar.amount)).css('color', textColor);
 
 		$('.merchant-freespb-progress-bar').css({
 			'background-color': backgroundColor,
