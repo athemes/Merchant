@@ -146,7 +146,7 @@ class Merchant_Free_Shipping_Progress_Bar extends Merchant_Add_Module {
 								);
 								printf(
 									'<a href="%1s" target="_blank">%2s</a>',
-									esc_url( admin_url( 'post-new.php?post_type=product' ) ),
+									esc_url( admin_url( 'wp-admin/admin.php?page=wc-settings&tab=shipping' ) ),
 									esc_html__( 'Add Shipping', 'merchant' )
 								);
 								?></p>
