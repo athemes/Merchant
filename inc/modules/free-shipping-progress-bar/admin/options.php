@@ -143,7 +143,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'top_bottom_bar',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Top/Bottom Bar', 'merchant' ),
-			'default' => 1,
+			'default' => 0,
 		),
 
 		array(
