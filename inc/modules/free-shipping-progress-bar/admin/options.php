@@ -143,7 +143,27 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'top_bottom_bar',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Top/Bottom Bar', 'merchant' ),
-			'default' => 1,
+			'default' => 0,
+		),
+
+		array(
+			'id'         => 'scroll_visibility',
+			'type'       => 'radio',
+			'title'      => __( 'Position', 'merchant' ),
+			'options'    => array(
+				'sticky' => __( 'Sticky (always visible)', 'merchant' ),
+				'fixed'  => __( 'Fixed (hidden on scroll)', 'merchant' ),
+			),
+			'default'    => 'sticky',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'top_bottom_bar', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 
 		array(
@@ -175,7 +195,7 @@ Merchant_Admin_Options::create( array(
 				'top'    => esc_html__( 'Top', 'merchant' ),
 				'bottom' => esc_html__( 'Bottom', 'merchant' ),
 			),
-			'default'    => 'top',
+			'default'    => 'bottom',
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -376,8 +396,8 @@ Merchant_Admin_Options::create( array(
 			'min'        => '1',
 			'step'       => '1',
 			'default'    => '24',
-			'title'      => esc_html__( 'Session Expiration Hours', 'merchant' ),
-			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to the free shipping bar again.', 'merchant' ),
+			'title'      => esc_html__( 'Session Expiration Time', 'merchant' ),
+			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to close the free shipping bar again.', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -423,6 +443,22 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'id'         => 'single_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on single product page', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'      => 'show_on_mini_cart_widget',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
@@ -444,6 +480,22 @@ Merchant_Admin_Options::create( array(
 				'woocommerce_after_cart_table'              => esc_html__( 'After Cart Table', 'merchant' ),
 			),
 			'default'    => 'woocommerce_cart_totals_before_order_total',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_cart_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'cart_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on cart page', 'merchant' ),
+			'default'    => 1,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -483,6 +535,22 @@ Merchant_Admin_Options::create( array(
 				),
 			),
 		),
+		array(
+			'id'         => 'checkout_page_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on checkout page', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_checkout_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
 	),
 ) );
 
@@ -498,7 +566,14 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Template', 'merchant' ),
 			'options' => array(
-				' custom' => esc_html__( 'Custom style', 'merchant' ),
+				'custom'           => esc_html__( 'Custom style', 'merchant' ),
+				'solar_night'      => esc_html__( 'Solar Night', 'merchant' ),
+				'lively_breeze'    => esc_html__( 'Lively Breeze', 'merchant' ),
+				'midnight_tide'    => esc_html__( 'Midnight Tide', 'merchant' ),
+				'clean_slate'      => esc_html__( 'Clean Slate', 'merchant' ),
+				'fresh_frost'      => esc_html__( 'Fresh Frost', 'merchant' ),
+				'sky_blue_harmony' => esc_html__( 'Sky Blue Harmony', 'merchant' ),
+				'ocean_breeze'     => esc_html__( 'Ocean Breeze', 'merchant' ),
 			),
 			'default' => 'custom',
 		),
@@ -543,7 +618,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => '30',
 			'step'    => '1',
 			'unit'    => 'PX',
-			'default' => '16',
+			'default' => '18',
 			'title'   => esc_html__( 'Font Size', 'merchant' ),
 		),
 		array(
@@ -593,14 +668,14 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Spacing Inside Left', 'merchant' ),
 		),
 		array(
-			'id'         => 'card_text_bottom_spacing',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '100',
-			'step'       => '1',
-			'unit'       => 'PX',
-			'default'    => '20',
-			'title'      => esc_html__( 'Text bottom spacing', 'merchant' ),
+			'id'      => 'card_text_bottom_spacing',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '20',
+			'title'   => esc_html__( 'Text Bottom Spacing', 'merchant' ),
 		),
 		array(
 			'id'      => 'card_border_radius',
@@ -628,99 +703,47 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Border Color', 'merchant' ),
 			'default' => 'rgba(255, 255, 255, 0)',
 		),
-
 		array(
-			'id'      => 'show_progress_bar',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Progress bar', 'merchant' ),
-			'default' => 1,
+			'id'      => 'bar_background_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Progress Bar Background Color', 'merchant' ),
+			'default' => '#757575',
 		),
 		array(
-			'id'         => 'bar_background_color',
-			'type'       => 'color',
-			'title'      => esc_html__( 'Progress bar background color', 'merchant' ),
-			'default'    => '#757575',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
+			'id'      => 'bar_foreground_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Progress Bar Foreground Color', 'merchant' ),
+			'default' => '#212121',
 		),
 		array(
-			'id'         => 'bar_foreground_color',
-			'type'       => 'color',
-			'title'      => esc_html__( 'Progress bar foreground color', 'merchant' ),
-			'default'    => '#212121',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
+			'id'      => 'bar_height',
+			'type'    => 'range',
+			'min'     => '4',
+			'max'     => '30',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '10',
+			'title'   => esc_html__( 'Progress Bar Height', 'merchant' ),
 		),
 		array(
-			'id'         => 'bar_height',
-			'type'       => 'range',
-			'min'        => '4',
-			'max'        => '30',
-			'step'       => '1',
-			'unit'       => 'PX',
-			'default'    => '10',
-			'title'      => esc_html__( 'Progress bar height', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
+			'id'      => 'bar_width',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => '%',
+			'default' => '100',
+			'title'   => esc_html__( 'Progress Bar Width', 'merchant' ),
 		),
 		array(
-			'id'         => 'bar_width',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '100',
-			'step'       => '1',
-			'unit'       => '%',
-			'default'    => '100',
-			'title'      => esc_html__( 'Progress bar width', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
-			'id'         => 'bar_border_radius',
-			'type'       => 'range',
-			'min'        => '0',
-			'max'        => '30',
-			'step'       => '1',
-			'unit'       => 'PX',
-			'default'    => '0',
-			'title'      => esc_html__( 'Corner Radius', 'merchant' ),
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'show_progress_bar', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
+			'id'      => 'bar_border_radius',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '30',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '0',
+			'title'   => esc_html__( 'Corner Radius', 'merchant' ),
 		),
 	),
 ) );
