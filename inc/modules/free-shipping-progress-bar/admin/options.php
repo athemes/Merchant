@@ -175,7 +175,7 @@ Merchant_Admin_Options::create( array(
 				'top'    => esc_html__( 'Top', 'merchant' ),
 				'bottom' => esc_html__( 'Bottom', 'merchant' ),
 			),
-			'default'    => 'top',
+			'default'    => 'bottom',
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
