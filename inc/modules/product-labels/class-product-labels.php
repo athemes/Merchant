@@ -29,6 +29,13 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Whether the module has a shortcode or not.
+	 *
+	 * @var bool
+	 */
+	public $has_shortcode = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -286,7 +293,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		?>
         <div class="merchant-product-labels-preview">
             <div class="image-wrapper">
-                <div class="merchant-product-labels" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
+                <div class="merchant-product-labels merchant-product-labels__regular" data-currency="<?php echo esc_attr( get_woocommerce_currency_symbol() ); ?>">
                     <span class="merchant-label merchant-label-top-left"></span>
                 </div>
             </div>
@@ -448,6 +455,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
                 .ast-onsale-card {
                     display: none;
                 }
+                
+                .merchant-product-labels__image img {
+                    box-shadow: none;
+                }
             ';
         }
 
@@ -455,11 +466,75 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Print shortcode content.
+	 *
+	 * @return string
+	 */
+	public function shortcode_handler() {
+		if ( ! Merchant_Modules::is_module_active( $this->module_id ) ) {
+			return '';
+		}
+
+		if ( ! $this->is_shortcode_enabled() ) {
+			return '';
+		}
+
+		if ( ! is_singular( 'product' ) ) {
+			// If user is admin, show error message.
+			if ( current_user_can( 'manage_options' ) ) {
+				return $this->shortcode_placement_error();
+			}
+
+			return '';
+		}
+
+		global $product;
+
+		ob_start();
+
+		echo wp_kses( $this->get_labels( $product, 'single' ), array(
+			'div'    => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'strong' => array(),
+			'span'   => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'img'   => array(
+				'src'    => true,
+				'width'  => true,
+				'height' => true,
+				'class'  => array(),
+				'style'  => array(),
+			),
+		) );
+
+		$shortcode_content = ob_get_clean();
+
+		/**
+		 * Filter the shortcode html content.
+		 *
+		 * @param string $shortcode_content shortcode html content
+		 * @param string $module_id         module id
+		 * @param int    $post_id           product id
+		 *
+		 * @since 1.8
+		 */
+		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, $this->module_id, get_the_ID() );
+    }
+
+	/**
 	 * Single product output.
 	 *
 	 * @return void
 	 */
 	public function single_product_output() {
+		if ( $this->is_shortcode_enabled() ) {
+			return;
+		}
+
 		global $product;
 
 		echo wp_kses( $this->get_labels( $product, 'single' ), array(
@@ -534,6 +609,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	public function get_labels( $product, $context = 'both' ) {
 		$settings            = $this->get_module_settings();
 		$product_labels_html = '';
+
+		$is_shortcode = $settings['use_shortcode'] ?? false;
 
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
@@ -645,6 +722,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 					}
 
 					$classes  = 'merchant-product-labels';
+					$classes .= ' merchant-product-labels__' . ( ( $is_shortcode && $context === 'single' ) ? 'shortcode' : 'regular' );
 					$classes .= ' position-' . $label_position;
 					$classes .= ' merchant-product-labels__' . $label_type;
 					$classes .= $label_type === 'text' ? ' merchant-product-labels__' . $label['label_text_shape'] ?? 'text-shape-1' : '';
@@ -751,6 +829,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	 * @return string legacy product label html.
 	 */
 	private function legacy_product_label( $product ) {
+		if ( $this->is_shortcode_enabled() ) {
+			return '';
+		}
+
 		global $product;
 		$settings = $this->get_module_settings();
 		$styles   = array();
@@ -799,7 +881,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			$styles['color']            = isset( $settings['text_color'] ) ? $settings['text_color'] : '#ffffff';
 			$styles['border-radius']    = isset( $settings['label_shape'] ) ? $settings['label_shape'] . 'px' : 8 . 'px';
 
-			return '<div class="merchant-product-labels position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
+			return '<div class="merchant-product-labels merchant-product-labels__regular position-' . esc_attr( $settings['label_position'] ) . '"><span class="merchant-label merchant-label-'
 					. esc_attr( $settings['label_position'] ) . ' merchant-onsale-shape-' . esc_attr( $settings['label_shape'] ) . '" style="' . merchant_array_to_css( $styles )
 					. '">' . esc_html( Merchant_Translator::translate( $label_text ) ) . '</span></div>';
 		}

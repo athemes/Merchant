@@ -233,7 +233,7 @@ class Merchant_Add_Module {
 			'<div class="merchant-shortcode-wrong-placement">' .
 			$message
 			. '</div>',
-			$this->module->module_id );
+			$this->module_id );
 	}
 
 	/**

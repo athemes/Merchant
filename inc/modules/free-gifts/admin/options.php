@@ -149,7 +149,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'At 0%', 'merchant' ),
 							'default' => sprintf(
 								/* Translators: 1. goal amount */
-								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								esc_html__( 'Spend %1$s to receive this gift!', 'merchant' ),
 								'{goalAmount}' // existing one is {amount}
 							),
 						),
@@ -160,7 +160,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Between 1 - 99%', 'merchant' ),
 							'default' => sprintf(
 								/* Translators: 1. more amount */
-								esc_html__( 'Spend %1$s on any product to receive this gift!', 'merchant' ),
+								esc_html__( 'Spend %1$s more to receive this gift!', 'merchant' ),
 								'{amountMore}'
 							),
 						),
@@ -202,13 +202,18 @@ Merchant_Admin_Options::create( array(
 							'type'          => 'products_selector',
 							'title'         => esc_html__( 'Product', 'merchant' ),
 							'multiple'      => false,
-							'desc'          => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
+							'desc'          => esc_html__( 'Select the product that the coupon will apply to.', 'merchant' ),
 							'allowed_types' => array( 'simple', 'variable', 'variation' ),
 						),
 						'coupon' => array(
 							'id'    => 'coupon',
-							'title' => esc_html__( 'Use coupon to receive this product for free', 'merchant' ),
+							'title' => esc_html__( 'Select the coupon that will apply to this offer.', 'merchant' ),
 							'type'  => 'wc_coupons',
+						),
+						array(
+							'id'          => 'coupon_campaign_info',
+							'type'        => 'info_block',
+							'description' => esc_html__( 'The offer won’t appear in the Free-Gifts widget unless the associated coupon is entered.', 'merchant' ),
 						),
 					),
 				),

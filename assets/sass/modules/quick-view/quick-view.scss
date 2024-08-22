@@ -270,6 +270,7 @@
 	.woocommerce-product-gallery {
 		display: flex !important;
 		grid-gap: 5px !important;
+		flex-direction: row;
 		
 		.woocommerce-product-gallery__trigger {
 			display: none !important;

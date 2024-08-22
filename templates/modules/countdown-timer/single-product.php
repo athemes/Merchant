@@ -11,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+if ( empty( $args ) ) {
+    return;
+}
+
 $theme = $args['theme'] ?? 'classic';
 $align = $args['sale_ending_alignment'] ?? 'left';
 

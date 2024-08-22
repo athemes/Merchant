@@ -7,9 +7,6 @@
 .merchant-product-labels {
 	flex-wrap: wrap;
 	gap: 10px;
-	position: absolute;
-	top: 10px;
-	z-index: 999;
 	justify-content: flex-start;
 	display: none;
 
@@ -24,14 +21,20 @@
 			display: flex;
 		}
 	}
-	
-	&.position-top-left {
-		left: 10px;
-		justify-content: flex-start;
-	}
-	
-	&.position-top-right {
-		right: 10px;
+
+	&__regular {
+		position: absolute;
+		top: 10px;
+		z-index: 999;
+
+		&.position-top-left {
+			left: 10px;
+			justify-content: flex-start;
+		}
+
+		&.position-top-right {
+			right: 10px;
+		}
 	}
 
 	&__text {

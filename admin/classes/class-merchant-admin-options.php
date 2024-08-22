@@ -735,7 +735,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			?>
             <input type="text" name="merchant[<?php
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
-			echo esc_attr( $value ); ?>"/>
+			echo esc_attr( $value ); ?>" placeholder="<?php
+            echo esc_attr( $settings['placeholder'] ?? '' ); ?>"/>
 			<?php
 		}
 
