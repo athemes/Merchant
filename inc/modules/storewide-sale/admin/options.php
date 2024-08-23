@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Discounts', 'merchant' ),
+	'title'  => esc_html__( 'Simple Discount', 'merchant' ),
 	'module' => Merchant_Storewide_Sale::MODULE_ID,
 	'fields' => array(
 		array(
@@ -91,14 +91,14 @@ Merchant_Admin_Options::create( array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
 							),
-							'default' => 'percentage_discount',
+							'default' => 'percentage',
 						),
 						array(
 							'id'      => 'discount_value',
 							'type'    => 'number',
 							'default' => 10,
 							'min'     => 0,
-							'step'    => 0.1,
+							'step'    => 0.01,
 						),
 
 						array(
