@@ -128,7 +128,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'discount',
 							'type'    => 'number',
 							'min'     => 0,
-							'step'    => 1,
+							'step'    => 0.01,
 							//'title'   => esc_html__( 'Discount Value', 'merchant' ),
 							'default' => 1,
 						),
