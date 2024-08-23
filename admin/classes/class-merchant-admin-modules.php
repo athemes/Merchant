@@ -52,8 +52,8 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'free-shipping-progress-bar' ),
 					'title' => esc_html__( 'Free Shipping Bar', 'merchant' ),
-					'desc' => esc_html__( 'Display amount left for free shipping and encourage customers to buy more', 'merchant' ),
-					'tutorial_url' => '#',
+					'desc' => esc_html__( 'Display the amount left needed for free shipping', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-free-shipping-progress-bar/',
 				),
 				'wait-list' => array(
 					'pro' => true,
