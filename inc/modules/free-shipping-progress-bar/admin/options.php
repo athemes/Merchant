@@ -171,8 +171,8 @@ Merchant_Admin_Options::create( array(
 			'title'      => esc_html__( 'Show on', 'merchant' ),
 			'options'    => array(
 				'both'    => esc_html__( 'Both', 'merchant' ),
-				'desktop' => esc_html__( 'Desktop', 'merchant' ),
-				'mobile'  => esc_html__( 'Mobile', 'merchant' ),
+				'desktop' => esc_html__( 'Desktop Only', 'merchant' ),
+				'mobile'  => esc_html__( 'Mobile Only', 'merchant' ),
 			),
 			'default'    => 'both',
 			'conditions' => array(
@@ -430,6 +430,25 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'id'         => 'show_on_shop_page',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Show on Shop Page', 'merchant' ),
+			'desc'       => esc_html__( 'Show the bar on shop page', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'top_bottom_bar',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'type' => 'divider',
+		),
+		array(
 			'id'      => 'show_on_single_product_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Single Product Page', 'merchant' ),
@@ -474,6 +493,9 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'type' => 'divider',
+		),
+		array(
 			'id'      => 'show_on_mini_cart_widget',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
@@ -513,6 +535,9 @@ Merchant_Admin_Options::create( array(
 					),
 				),
 			),
+		),
+		array(
+			'type' => 'divider',
 		),
 		array(
 			'id'      => 'show_on_side_cart_widget',
@@ -557,6 +582,9 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'type' => 'divider',
+		),
+		array(
 			'id'      => 'show_on_cart_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Cart Page', 'merchant' ),
@@ -597,6 +625,9 @@ Merchant_Admin_Options::create( array(
 					),
 				),
 			),
+		),
+		array(
+			'type' => 'divider',
 		),
 		array(
 			'id'      => 'show_on_checkout_page',
@@ -658,14 +689,14 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Template', 'merchant' ),
 			'options' => array(
-				'custom'           => esc_html__( 'Custom style', 'merchant' ),
-				'solar_night'      => esc_html__( 'Solar Night', 'merchant' ),
-				'lively_breeze'    => esc_html__( 'Lively Breeze', 'merchant' ),
-				'midnight_tide'    => esc_html__( 'Midnight Tide', 'merchant' ),
-				'clean_slate'      => esc_html__( 'Clean Slate', 'merchant' ),
-				'fresh_frost'      => esc_html__( 'Fresh Frost', 'merchant' ),
-				'sky_blue_harmony' => esc_html__( 'Sky Blue Harmony', 'merchant' ),
-				'ocean_breeze'     => esc_html__( 'Ocean Breeze', 'merchant' ),
+				'custom'        => esc_html__( 'Custom style', 'merchant' ),
+				'solar_night'   => esc_html__( 'Solar Night', 'merchant' ),
+				'lively_breeze' => esc_html__( 'Lively Breeze', 'merchant' ),
+				'midnight_tide' => esc_html__( 'Midnight Tide', 'merchant' ),
+				'clean_slate'   => esc_html__( 'Clean Slate', 'merchant' ),
+				'fresh_frost'   => esc_html__( 'Fresh Frost', 'merchant' ),
+				'sky_harmony'   => esc_html__( 'Sky Harmony', 'merchant' ),
+				'ocean_breeze'  => esc_html__( 'Ocean Breeze', 'merchant' ),
 			),
 			'default' => 'custom',
 		),
