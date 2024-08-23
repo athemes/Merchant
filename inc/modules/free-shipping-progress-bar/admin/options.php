@@ -414,6 +414,22 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
+			'id'         => 'show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on top and bottom bar', 'merchant' ),
+			'default'    => 0,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'top_bottom_bar',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'      => 'show_on_single_product_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Single Product Page', 'merchant' ),
