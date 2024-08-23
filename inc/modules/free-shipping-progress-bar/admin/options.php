@@ -24,6 +24,13 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Content', 'merchant' ),
 	'module' => Merchant_Free_Shipping_Progress_Bar::MODULE_ID,
 	'fields' => array(
+		array(
+			'id'      => 'config_msg',
+			'type'    => 'content',
+			'title'   => esc_html__( 'Message Configuration', 'merchant' ),
+			'content' => '',
+			'desc'    => esc_html__( 'Configure the 3 states of the free shipping offer. Personalize the text to maximize the conversion.', 'merchant' ),
+		),
 
 		array(
 			'id'          => 'free_shipping_initial_text',
@@ -132,14 +139,6 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Free_Shipping_Progress_Bar::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'      => 'config_msg',
-			'type'    => 'content',
-			'title'   => esc_html__( 'Message Configuration', 'merchant' ),
-			'content' => '',
-			'desc'    => esc_html__( 'Configure the 3 states of the free shipping offer. Personalize the text to maximize the conversion.', 'merchant' ),
-		),
-
-		array(
 			'id'      => 'top_bottom_bar',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Top/Bottom Bar', 'merchant' ),
@@ -154,7 +153,7 @@ Merchant_Admin_Options::create( array(
 				'sticky' => __( 'Sticky (always visible)', 'merchant' ),
 				'fixed'  => __( 'Fixed (hidden on scroll)', 'merchant' ),
 			),
-			'default'    => 'sticky',
+			'default'    => 'fixed',
 			'conditions' => array(
 				'terms' => array(
 					array(
