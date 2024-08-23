@@ -465,6 +465,83 @@ Merchant_Admin_Options::create( array(
 			'default' => 1,
 		),
 		array(
+			'id'         => 'mini_cart_placement',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Position', 'merchant' ),
+			'options'    => array(
+				'woocommerce_before_mini_cart_contents'  => esc_html__( 'Before Cart Items', 'merchant' ),
+				'woocommerce_widget_shopping_cart_total' => esc_html__( 'After Subtotal', 'merchant' ),
+			),
+			'default'    => 'woocommerce_before_mini_cart_contents',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_mini_cart_widget',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'mini_cart_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on mini cart', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_mini_cart_widget',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'show_on_side_cart_widget',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Side Cart', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'side_cart_placement',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Position', 'merchant' ),
+			'options'    => array(
+				'woocommerce_before_mini_cart_contents'           => esc_html__( 'Before Cart Items', 'merchant' ),
+				'woocommerce_widget_shopping_cart_before_buttons' => esc_html__( 'Before Cart Buttons', 'merchant' ),
+				'woocommerce_widget_shopping_cart_after_buttons'  => esc_html__( 'After Cart Buttons', 'merchant' ),
+			),
+			'default'    => 'woocommerce_widget_shopping_cart_before_buttons',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_side_cart_widget',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'side_cart_show_progress_bar',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
+			'desc'       => esc_html__( 'Enable Progress bar on side cart', 'merchant' ),
+			'default'    => 1,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_side_cart_widget',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'      => 'show_on_cart_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Cart Page', 'merchant' ),
