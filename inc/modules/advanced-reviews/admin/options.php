@@ -178,7 +178,7 @@ Merchant_Admin_Options::create(
 				'id'      => 'hook_order',
 				'type'    => 'range',
 				'title'   => __( 'Hook order', 'merchant' ),
-				'desc'    => __( 'Controls the display order from the entire advanced reviews section. Low values will move the section to top. High values will move the section to bottom.', 'merchant' ),
+				'desc'    => __( 'Controls the display position for the entire advanced reviews section. Lower values will move the section towards the top, while higher values will move the section towards the bottom.', 'merchant' ),
 				'min'     => 1,
 				'max'     => 100,
 				'step'    => 1,
