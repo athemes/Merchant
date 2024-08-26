@@ -44,11 +44,29 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'        => 'popup_message',
+			'id'         => 'popup_message',
+			'type'       => 'text',
+			'title'      => esc_html__( 'Confirmation Message', 'merchant' ),
+			'desc'       => esc_html__( 'Clear cart confirmation dialog box', 'merchant' ),
+			'default'    => esc_html__( 'Are you sure you want to empty your shopping cart?', 'merchant' ),
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'enable_auto_clear',
+						'operator' => '===',
+						'value'    => false,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'        => 'popup_message_inactive',
 			'type'      => 'text',
-			'title'     => esc_html__( 'Confirmation Message', 'merchant' ),
+			'title'     => esc_html__( 'Inactive Confirmation Message', 'merchant' ),
 			'desc'      => esc_html__( 'Clear cart confirmation dialog box', 'merchant' ),
 			'default'   => esc_html__( 'It looks like you haven’t been active for a while. Would you like to empty your shopping cart?', 'merchant' ),
+			'condition' => array( 'enable_auto_clear', '==', '1' ),
 		),
 
 		array(

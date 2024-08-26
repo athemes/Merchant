@@ -1,5 +1,7 @@
 const merchant = merchant || {};
 
+const { clear_cart: clearCartObj = {} } = merchant?.setting || {};
+
 ;( function( $, window, document ) {
 	$( document ).ready( function( $ ) {
 		new ClearCart( $ );
@@ -72,14 +74,14 @@ class ClearCart {
 		const that = this;
 
 		jQuery( window ).on( 'load', function () {
-			if ( ! merchant?.setting?.clear_cart_auto_clear ) {
+			if ( ! clearCartObj?.auto_clear ) {
 				that.deleteClearCartCookie();
 				return;
 			}
 
 			const expirationTime = that.getCookie( that.clearCartCookie );
 			if ( expirationTime && that.getCurrentTime() > expirationTime ) {
-				that.showClearCartAlert();
+				setTimeout( () => that.showClearCartAlert(), 1000 );
 			}
 		} );
 	}
@@ -95,6 +97,10 @@ class ClearCart {
 		$( document ).on( 'click', '.merchant-clear-cart-button', function( e ) {
 			e.preventDefault();
 			that.showClearCartAlert( $( this ) );
+
+			// For some reason cookie doesn't get clear automatically when clicking clear button on home page(or others)
+			// On that case delete it after a delay
+			setTimeout( () => that.deleteClearCartCookie(), 1000 );
 		} );
 	}
 
@@ -106,12 +112,13 @@ class ClearCart {
 		const that = this;
 
 		const {
-			clear_cart_is_cart_page,
-			clear_cart_auto_clear,
-			clear_cart_total_items,
-			clear_cart_threshold,
-			clear_cart_added_to_cart
-		} = merchant?.setting || {};
+			is_product_single,
+			is_cart_page,
+			auto_clear,
+			total_items,
+			threshold,
+			added_to_cart_no_ajax,
+		} = clearCartObj;
 
 		// Cart is being emptied
 		$( document.body ).on( 'wc_cart_emptied', function( event ) {
@@ -126,16 +133,21 @@ class ClearCart {
 		} );
 
 		// Product Single Page
-		if ( clear_cart_added_to_cart ) {
+		if ( auto_clear && added_to_cart_no_ajax ) {
 			const expireTime = that.setClearCartCookie();
 			that.timer = setTimeout( () => that.showClearCartAlert(), expireTime );
 		}
 
 		// Adding & Updating Qty - AJAX.
 		$( document.body ).on( 'wc_fragment_refresh added_to_cart updated_wc_div removed_from_cart', function( event, data, hash, button ) {
-
 			// Cart Page
-			if ( event?.type === 'updated_wc_div' && clear_cart_is_cart_page && ! $( '.woocommerce-cart-form' ).length ) {
+			if ( event?.type === 'updated_wc_div' && is_cart_page && ! $( '.woocommerce-cart-form' ).length ) {
+				that.deleteClearCartCookie();
+				return;
+			}
+
+			// Product Single
+			if ( is_product_single && event?.type === 'wc_fragment_refresh' ) {
 				that.deleteClearCartCookie();
 				return;
 			}
@@ -145,17 +157,17 @@ class ClearCart {
 				return;
 			}
 
-			let refreshCookie = clear_cart_total_items >= clear_cart_threshold;
+			let refreshCookie = total_items >= threshold;
 
 			if ( data && data['.merchant_clear_cart_cart_count'] !== undefined ) {
-				refreshCookie = data['.merchant_clear_cart_cart_count'] >= clear_cart_threshold;
+				refreshCookie = data['.merchant_clear_cart_cart_count'] >= threshold;
 				if ( ! refreshCookie ) {
 					that.deleteClearCartCookie();
 					return;
 				}
 			}
 
-			if ( clear_cart_auto_clear && refreshCookie ) {
+			if ( auto_clear && refreshCookie ) {
 				const expireTime = that.setClearCartCookie();
 				that.timer = setTimeout( () => that.showClearCartAlert(), expireTime );
 			}
@@ -177,7 +189,9 @@ class ClearCart {
 			return;
 		}
 
-		if ( window.confirm( merchant?.setting?.clear_cart_popup_message ) ) {
+		const message = ( $button && $button.length ) ? clearCartObj?.popup_message : clearCartObj?.popup_message_inactive;
+
+		if ( window.confirm( message ) ) {
 			that.deleteClearCartCookie();
 			that.clearCartAjax( $button );
 		} else {
@@ -197,9 +211,9 @@ class ClearCart {
 	setClearCartCookie() {
 		clearTimeout( this.timer );
 
-		const { clear_cart_expiration_time, wc_session_expiration_time } = merchant?.setting || {};
+		const { expiration_time, wc_session_expiration_time } = clearCartObj || {};
 
-		const cartExpireDuration = clear_cart_expiration_time * 1000;
+		const cartExpireDuration = expiration_time * 1000;
 
 		const cartExpireTime = this.getCurrentTime() + cartExpireDuration; // millisecond
 		const cookieExpireTime = this.getCurrentTime() + ( wc_session_expiration_time * 1000 ); // millisecond
