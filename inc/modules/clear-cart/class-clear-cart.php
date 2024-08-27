@@ -57,7 +57,8 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 			'cart_threshold'              => 1,
 			'enable_auto_clear'           => false,
 			'auto_clear_expiration_hours' => 24,
-			'popup_message'               => __( 'It looks like you haven’t been active for a while. Would you like to empty your shopping cart?', 'merchant' ),
+			'popup_message'               => __( 'Are you sure you want to empty your shopping cart?', 'merchant' ),
+			'popup_message_inactive'      => __( 'It looks like you haven’t been active for a while. Would you like to empty your shopping cart?', 'merchant' ),
 			'redirect_link'               => '',
 			'redirect_link_custom'        => '',
 			'enable_cart_page'            => true,
@@ -499,19 +500,20 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 		$module_settings = $this->get_module_settings();
 
         $expiration_in_hours   = (int) ( $module_settings['auto_clear_expiration_hours'] ?? 24 );
-        $expiration_in_seconds = $expiration_in_hours * 60 * 60;
+		$expiration_in_seconds = $expiration_in_hours * 60 * 60;
 
-		$setting['clear_cart_auto_clear']      = $module_settings['enable_auto_clear'] ?? false;
-		$setting['clear_cart_expiration_time'] = $expiration_in_seconds;
-		$setting['wc_session_expiration_time'] = DAY_IN_SECONDS * 2; // Default 48h
-		$setting['clear_cart_popup_message']   = $module_settings['popup_message'] ?? '';
-
-        $setting['clear_cart_total_items']     = WC()->cart->get_cart_contents_count();
-		$setting['clear_cart_threshold']       = $module_settings['cart_threshold'] ?? 1;
-		$setting['clear_cart_is_cart_page']    = is_cart();
-
-		// When product is added without AJAX.
-		$setting['clear_cart_added_to_cart'] = ! empty( $_REQUEST['add-to-cart'] ) || ! empty( $_REQUEST['botiga-adtc-added-to-cart'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$setting['clear_cart'] = array(
+			'threshold'                  => (int) ( $module_settings['cart_threshold'] ?? 1 ),
+			'auto_clear'                 => (bool) ( $module_settings['enable_auto_clear'] ?? false ),
+			'expiration_time'            => $expiration_in_seconds,
+			'wc_session_expiration_time' => DAY_IN_SECONDS * 2, // Default 48h,
+			'popup_message'              => $module_settings['popup_message'] ?? '',
+			'popup_message_inactive'     => $module_settings['popup_message_inactive'] ?? '',
+			'is_cart_page'               => is_cart(),
+			'is_product_single'          => is_product(),
+			'added_to_cart_no_ajax'      => ! empty( $_REQUEST['add-to-cart'] ) || ! empty( $_REQUEST['botiga-adtc-added-to-cart'] ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			'total_items'                => WC()->cart->get_cart_contents_count(),
+        );
 
 		return $setting;
 	}

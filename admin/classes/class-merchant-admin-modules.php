@@ -405,7 +405,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section'      => 'improve-experience',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-clear-cart' ),
 					'title'        => esc_html__( 'Clear Cart', 'merchant' ),
-					'desc'         => esc_html__( 'Display a clear cart button to let customers clear their carts and start fresh.', 'merchant' ),
+					'desc'         => esc_html__( 'Display a clear cart button to let customers empty their carts and start fresh', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-clear-cart/',
 				),
 				
