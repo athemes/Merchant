@@ -649,7 +649,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 				if ( empty( $offer ) ) {
 					continue;
 				}
-
+				if ( ! isset( $offer['discount_toggle'] ) ) {
+					continue;
+				}
 				$regular_price = $product->get_regular_price();
 				$sale_price    = $this->calculate_discounted_price( $regular_price, $offer, $product );
 				$cart_item['data']->set_price( $sale_price );

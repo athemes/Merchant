@@ -246,7 +246,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'         => 'desktop_offset_toggle',
 			'type'       => 'checkbox',
-			'label'      => __( 'Custom offset', 'merchant' ),
+			'label'      => __( 'Custom vertical offset', 'merchant' ),
 			'default'    => 0,
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -325,7 +325,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'         => 'mobile_offset_toggle',
 			'type'       => 'checkbox',
-			'label'      => __( 'Custom offset', 'merchant' ),
+			'label'      => __( 'Custom vertical offset', 'merchant' ),
 			'default'    => 0,
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -396,7 +396,7 @@ Merchant_Admin_Options::create( array(
 			'step'       => '1',
 			'default'    => '24',
 			'title'      => esc_html__( 'Session Expiration Time', 'merchant' ),
-			'desc'       => esc_html__( 'After this number of hours, the user will be prompted to close the free shipping bar again.', 'merchant' ),
+			'desc'       => esc_html__( 'After this number of hours, the free shipping bar will show again, even if the user has closed it previously.', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -446,12 +446,13 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type' => 'divider',
+			'type'  => 'divider',
+			'title' => esc_html__( 'Single Product Page', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_single_product_page',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Single Product Page', 'merchant' ),
+			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -481,7 +482,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
 			'desc'       => esc_html__( 'Enable Progress bar on single product page', 'merchant' ),
-			'default'    => 1,
+			'default'    => 0,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -494,11 +495,12 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'type' => 'divider',
+			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_mini_cart_widget',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
+			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -525,7 +527,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
 			'desc'       => esc_html__( 'Enable Progress bar on mini cart', 'merchant' ),
-			'default'    => 1,
+			'default'    => 0,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -538,11 +540,12 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'type' => 'divider',
+			'title'   => esc_html__( 'Side Cart', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_side_cart_widget',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Side Cart', 'merchant' ),
+			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -570,7 +573,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
 			'desc'       => esc_html__( 'Enable Progress bar on side cart', 'merchant' ),
-			'default'    => 1,
+			'default'    => 0,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -583,11 +586,12 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'type' => 'divider',
+			'title'   => esc_html__( 'Cart Page', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_cart_page',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Cart Page', 'merchant' ),
+			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -615,7 +619,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
 			'desc'       => esc_html__( 'Enable Progress bar on cart page', 'merchant' ),
-			'default'    => 1,
+			'default'    => 0,
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -628,11 +632,12 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'type' => 'divider',
+			'title'   => esc_html__( 'Checkout Page', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_checkout_page',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Checkout Page', 'merchant' ),
+			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -663,7 +668,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Progress Bar', 'merchant' ),
 			'desc'       => esc_html__( 'Enable Progress bar on checkout page', 'merchant' ),
-			'default'    => 1,
+			'default'    => 0,
 			'conditions' => array(
 				'terms' => array(
 					array(
