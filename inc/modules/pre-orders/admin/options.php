@@ -97,7 +97,8 @@ Merchant_Admin_Options::create(
 							),
 							array(
 								'id'         => 'discount_amount',
-								'type'       => 'text',
+								'type'       => 'number',
+								'step'       => 0.01,
 								'default'    => 10,
 								'conditions' => array(
 									'terms' => array(

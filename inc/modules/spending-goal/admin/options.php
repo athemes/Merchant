@@ -20,6 +20,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'spending_goal',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Spending goal', 'merchant' ),
+			'step'    => 0.01,
 			'default' => 150,
 		),
 
@@ -50,6 +51,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'discount_amount',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Discount amount', 'merchant' ),
+			'step'    => 0.01,
 			'default' => 10,
 		),
 

@@ -116,6 +116,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'discount',
 							'type'    => 'number',
+							'step'    => 0.01,
 							'default' => 10,
 						),
 

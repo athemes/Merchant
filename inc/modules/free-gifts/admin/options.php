@@ -88,6 +88,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'amount',
 							'title'   => esc_html__( 'Spending goal', 'merchant' ),
 							'type'    => 'number',
+							'step'    => 0.01,
 							'append'  => function_exists( 'get_woocommerce_currency_symbol' ) ? get_woocommerce_currency() : esc_html__( 'USD', 'merchant' ),
 							'default' => 100,
 						),

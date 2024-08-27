@@ -120,6 +120,7 @@ Merchant_Admin_Options::create( array(
 							'id'        => 'discount_value',
 							'type'      => 'number',
 							'default'   => 10,
+							'step'      => 0.01,
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 
