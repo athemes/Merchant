@@ -98,8 +98,8 @@ class ClearCart {
 			e.preventDefault();
 			that.showClearCartAlert( $( this ) );
 
-			// For some reason cookie doesn't get clear automatically when clicking clear button on home page(or others)
-			// On that case delete it after a delay
+			// Sometimes the cookie doesn't clear automatically when the clear button is clicked on the home page (or other pages).
+			// In those cases, delete it after a short delay.
 			setTimeout( () => that.deleteClearCartCookie(), 1000 );
 		} );
 	}
