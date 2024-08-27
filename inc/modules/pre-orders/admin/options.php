@@ -55,7 +55,7 @@ Merchant_Admin_Options::create(
 								'id'            => 'product_ids',
 								'type'          => 'products_selector',
 								'multiple'      => true,
-								'allowed_types' => array( 'simple', 'variable', 'variation' ),
+								'allowed_types' => array( 'simple', 'variable', 'variation', 'merchant_pro_bundle' ),
 								'desc'          => esc_html__( 'Select the product(s) included in this pre-order.', 'merchant' ),
 								'condition'     => array( 'trigger_on', '==', 'product' ),
 							),
