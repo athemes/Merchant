@@ -47,7 +47,7 @@ merchant.modules = merchant.modules || {};
 
 		  dateObj.setTime( dateObj.getTime() + ( expDays*24*60*60*1000 ) );
 
-		  document.cookie = cookieName + "=" + cookieValue + ";expires=" + dateObj.toUTCString() + "";
+		  document.cookie = cookieName + "=" + cookieValue + ";expires=" + dateObj.toUTCString() + ";path=/";
 
 		},
 
