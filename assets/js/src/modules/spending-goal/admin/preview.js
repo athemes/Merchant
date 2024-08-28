@@ -11,8 +11,10 @@
 
         if (type === 'percent') {
             $(discountInputSelector).parent().find(beforeInputSelector).text('%')
+            $(discountInputSelector).attr( 'max', 100 );
         } else {
-            $(discountInputSelector).parent().find(beforeInputSelector).text(merchantSpendingGoal.currencySymbol)
+            $(discountInputSelector).parent().find(beforeInputSelector).text(merchantSpendingGoal.currencySymbol);
+            $(discountInputSelector).removeAttr( 'max' );
         }
     }
 

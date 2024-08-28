@@ -42,8 +42,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 							</div>
 							<div class="merchant-module-page-desc">
 								<?php 
-								$page_desc = defined( 'MERCHANT_PRO_VERSION' ) ? esc_html__( 'License activation, operating mode selection and custom code.', 'merchant' ) : esc_html__( 'Operating mode selection and custom code.', 'merchant' );
-								echo $page_desc; 
+								$page_desc = defined( 'MERCHANT_PRO_VERSION' ) ? __( 'License activation, operating mode selection and custom code.', 'merchant' ) : __( 'Operating mode selection and custom code.', 'merchant' );
+								echo esc_html( $page_desc );
 								?>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						array(
 							'type'    => 'warning',
-							'content' => esc_html__( 'Do not modify these settings unless you\'re an experienced developer', 'merchant' ),
+							'content' => esc_html__( 'These settings allow you to add custom code, and are recommended for developers or advanced users only', 'merchant' ),
 						),
 
 						array(

@@ -1,0 +1,33 @@
+.merchant-module-page-preview-browser-inner {
+	padding: 15px;
+}
+
+.merchant-freespb-wrapper {
+	padding: 30px;
+	border-style: solid;
+	border-width: 0;
+	border-color: transparent;
+
+	.merchant-freespb-text {
+		color: #212121;
+		text-align: center;
+		margin-top: 0;
+		margin-bottom: 20px !important;
+	}
+
+	.merchant-freespb-progress-bar-wrapper {
+		.merchant-freespb-progress-bar {
+			border-radius: 0 0 0 0;
+			height: 10px;
+			background-color: #757575;
+			margin-left: auto;
+			margin-right: auto;
+
+			.merchant-freespb-progress-bar-inner {
+				border-radius: 0 0 0 0;
+				height: 10px;
+				background-color: #212121;
+			}
+		}
+	}
+}

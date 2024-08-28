@@ -113,6 +113,11 @@ foreach ( $args['offers'] as $offer ) :
 
 		$show_claim_button = $is_coupon_added && empty( $offer['is_gift_claimed'] );
 
+        // Don't show the offer on widget unless coupon is entered
+        if ( ! $is_coupon_added ) {
+            continue;
+        }
+
         /* Translators: 1. Amount */
 		$spending_text = $is_coupon_added ? $spending_text_100 : sprintf(  __( 'Use %s coupon to get this product', 'merchant' ), $coupon );
 	}

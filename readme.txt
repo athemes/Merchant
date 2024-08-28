@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, trust badge
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
-Stable tag: 1.9.14
+Stable tag: 1.9.15
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -214,6 +214,18 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.9.15 =
+* Added - Clear Cart: New module added under Improve Experience category
+* Fixed - Quick View: Bulk Discounts are now clickable in Quick View
+* Fixed - Quick View: Improved Buy X, Get Y display on smaller screens
+* Fixed - Quick View: Product thumbnails now appear correctly in Bricks theme
+* Added - Product Labels: Shortcode added
+* Added - Product Labels: Duplicate option added
+* Fixed - Pre-order: Discount value now limited to 100% when Discount type is set to Percentage
+* Changed - Pre-Orders: Added decimal input support for Price and Discount fields
+* Fixed - Pre-order: Module no longer applies sale when the sale toggle is off (now respects the product's sale settings)
+* Fixed - Cookie Banner: Now working properly on all pages
+
 = 1.9.14 =
 * Fixed - Pre-orders: Duplicate order received emails in pre-orders
 * Fixed - Product Labels: Show Pages settings not working

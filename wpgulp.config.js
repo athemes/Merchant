@@ -83,6 +83,13 @@ const styles = [
 		destination: './assets/css',
 	},
 
+	// free-shipping-progress-bar
+	{
+		name: 'freeShippingProgressBar',
+		src: './assets/sass/modules/free-shipping-progress-bar/admin/preview.scss',
+		destination: './assets/css/modules/free-shipping-progress-bar/admin',
+	},
+
 	// Buy Now.
 	{
 		name: 'buyNow',
@@ -549,6 +556,18 @@ const styles = [
 		destination: './assets/css/modules/product-navigation-links/admin',
 	},
 
+	// Clear Cart.
+	{
+		name: 'clearCart',
+		src: './assets/sass/modules/clear-cart/clear-cart.scss',
+		destination: './assets/css/modules/clear-cart',
+	},
+	{
+		name: 'clearCartAdmin',
+		src: './assets/sass/modules/clear-cart/admin/preview.scss',
+		destination: './assets/css/modules/clear-cart/admin',
+	},
+
 	{
 		name: 'botigaCompatibility',
 		src: './assets/sass/compatibility/botiga/style.scss',
@@ -816,6 +835,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// free-shipping-progress-bar
+	{
+		name: 'freeShippingProgressBar',
+		src: './assets/js/src/modules/free-shipping-progress-bar/admin/preview.js',
+		destination: './assets/js/modules/free-shipping-progress-bar/admin',
+		file: 'preview'
+	},
+
 	// Floating Mini Cart.
 	{
 		name: 'floatingMiniCart',
@@ -903,6 +930,21 @@ const scripts = [
 		name: 'freeGiftsAdmin',
 		src: './assets/js/src/modules/free-gifts/admin/preview.js',
 		destination: './assets/js/modules/free-gifts/admin/',
+		file: 'preview'
+	},
+
+	// Clear Cart
+	{
+		name: 'clearCart',
+		src: './assets/js/src/modules/clear-cart/clear-cart.js',
+		destination: './assets/js/modules/clear-cart/',
+		file: 'clear-cart'
+	},
+
+	{
+		name: 'clearCartAdmin',
+		src: './assets/js/src/modules/clear-cart/admin/preview.js',
+		destination: './assets/js/modules/clear-cart/admin/',
 		file: 'preview'
 	},
 ];

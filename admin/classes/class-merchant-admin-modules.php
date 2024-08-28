@@ -47,6 +47,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
+				'free-shipping-progress-bar' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'free-shipping-progress-bar' ),
+					'title' => esc_html__( 'Free Shipping Bar', 'merchant' ),
+					'desc' => esc_html__( 'Display the amount left needed for free shipping', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-free-shipping-progress-bar/',
+				),
 				'wait-list' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -92,7 +100,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-storewide-sale' ),
 					'title' => esc_html__( 'Storewide Sale', 'merchant' ),
-					'desc' => esc_html__( 'Create discount campaigns for all your products, one or more categories, or a selection of products', 'merchant' ),
+					'desc' => esc_html__( 'Create discount campaigns for all your products, specific categories, or specific products', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-storewide-sale/',
 				),
 				'spending-goal' => array(
@@ -391,6 +399,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title'        => esc_html__( 'Login Popup', 'merchant' ),
 					'desc'         => esc_html__( 'Allow users to log in with a simple pop up without navigating to a new page', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-login-popup/',
+				),
+				'clear-cart' => array(
+					'pro'          => false,
+					'section'      => 'improve-experience',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-clear-cart' ),
+					'title'        => esc_html__( 'Clear Cart', 'merchant' ),
+					'desc'         => esc_html__( 'Display a clear cart button to let customers empty their carts and start fresh', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-clear-cart/',
 				),
 				
 				// Protect Your Store.

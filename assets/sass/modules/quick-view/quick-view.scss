@@ -270,6 +270,7 @@
 	.woocommerce-product-gallery {
 		display: flex !important;
 		grid-gap: 5px !important;
+		flex-direction: row;
 		
 		.woocommerce-product-gallery__trigger {
 			display: none !important;
@@ -448,7 +449,29 @@
 	}
 }
 
-@media(max-width: 767px)  {
+@media(max-width: 1024px) and (min-width: 769px) {
+	.merchant-quick-view {
+		&-inner {
+			padding-inline: 25px;
+		}
+
+		&-row {
+			grid-gap: 20px;
+		}
+
+		&-column {
+			&:first-child {
+				width: 40%;
+			}
+
+			&:last-child {
+				width: 60%;
+			}
+		}
+	}
+}
+
+@media(max-width: 768px) {
 	
 	.merchant-quick-view-row {
 		flex-direction: column;

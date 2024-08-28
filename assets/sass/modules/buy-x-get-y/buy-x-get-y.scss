@@ -6,6 +6,10 @@
 .merchant-bogo {
 	margin-block: 20px;
 
+	.merchant-quick-view-content & {
+		max-width: 100%;
+	}
+
 	&-title {
 		margin: 0 0 10px;
 		font-size: var(--merchant-font-size);
@@ -24,6 +28,18 @@
 
 	&:not(:last-child) {
 		margin-bottom: 20px;
+	}
+
+	@media(max-width: 1024px) and (min-width: 769px) {
+		.merchant-quick-view-content & {
+			.merchant-bogo-product-x {
+				width: 45%;
+			}
+
+			.merchant-bogo-product-y {
+				width: 55%;
+			}
+		}
 	}
 }
 

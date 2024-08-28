@@ -888,15 +888,15 @@ merchant.carousel = {
 			jQuery( document.body ).on( 'wc_fragment_refresh added_to_cart removed_from_cart', function(){
 				setTimeout(function(){
 					var mini_cart 	   = document.getElementById( 'site-header-cart' ),
-						mini_cart_list = mini_cart.querySelector( '.cart_list' ); 
+						mini_cart_list = mini_cart?.querySelector( '.cart_list' );
 
 					if( mini_cart_list !== null ) {
-						if( mini_cart_list.children.length > 2 ) {
-							mini_cart.classList.remove( 'mini-cart-has-no-scroll' );
-							mini_cart.classList.add( 'mini-cart-has-scroll' );
+						if( mini_cart_list?.children.length > 2 ) {
+							mini_cart?.classList.remove( 'mini-cart-has-no-scroll' );
+							mini_cart?.classList.add( 'mini-cart-has-scroll' );
 						} else {
-							mini_cart.classList.remove( 'mini-cart-has-scroll' );
-							mini_cart.classList.add( 'mini-cart-has-no-scroll' );
+							mini_cart?.classList.remove( 'mini-cart-has-scroll' );
+							mini_cart?.classList.add( 'mini-cart-has-no-scroll' );
 						}
 					}
 					_this.build();
