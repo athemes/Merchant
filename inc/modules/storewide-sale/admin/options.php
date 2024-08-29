@@ -109,7 +109,7 @@ Merchant_Admin_Options::create( array(
 								'regular' => __( 'Regular price', 'merchant' ),
 								'sale'    => __( 'Sale Price', 'merchant' ),
 							),
-							'default' => 'regular_price',
+							'default' => 'regular',
 						),
 
 						array(
