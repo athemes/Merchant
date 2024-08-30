@@ -24,6 +24,11 @@
 		color: var(--mrc-buy-now-text-color, #FFF) !important;
 		border-color: var(--mrc-buy-now-border-color, #212121) !important;
 		background-color: var(--mrc-buy-now-background-color, #212121) !important;
+
+		&.disabled {
+			cursor: not-allowed;
+			opacity: .5;
+		}
 	
 		&:hover {
 			color: var(--mrc-buy-now-text-hover-color, #FFF) !important;
