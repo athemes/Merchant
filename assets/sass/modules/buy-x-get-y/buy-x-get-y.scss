@@ -53,11 +53,16 @@
 	p,
 	span {
 		font-size: 13px;
+
+		del,
+		bdi {
+			font-size: inherit !important;
+		}
 	}
 
 	img {
-		max-height: 80px;
-		max-width: 80px;
+		max-height: 80px !important;
+		max-width: 80px !important;
 	}
 }
 

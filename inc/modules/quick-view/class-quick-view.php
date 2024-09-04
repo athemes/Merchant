@@ -28,6 +28,8 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 */
 	public static $is_module_preview = false;
 
+	private static $instance = null;
+
 	/**
 	 * Constructor.
 	 * 
@@ -133,9 +135,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		} elseif ( 'overlay' === $button_position ) {
 			if ( merchant_is_kadence_active() ) {
 				add_filter( 'kadence_archive_content_wrap_start', array( $this, 'add_quick_view_button' ) );
-			} elseif ( merchant_is_breakdance_active() ) {
-				add_filter( 'breakdance_before_shop_loop_after_image', array( $this, 'add_quick_view_button' ) );
-            } else {
+			} else {
 				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
 			}
 		}
@@ -156,6 +156,15 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		// Modal content ajax callback.
 		add_action( 'wp_ajax_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
+	}
+
+
+	public static function get_instance() {
+		if ( self::$instance === null ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
 	}
 
 	/**
@@ -542,20 +551,20 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	public function quick_view_button() {
 		global $product;
 
-		$settings   = $this->get_module_settings(); 
+		$settings   = $this->get_module_settings();
 		$product_id = $product->get_id();
-	
+
 		$button_text_html = '';
 		$button_icon_html = '';
-	
+
 		if ( 'icon' === $settings[ 'button_type' ] || 'icon-text' === $settings[ 'button_type' ] ) {
 			$button_icon_html = Merchant_SVG_Icons::get_svg_icon( $settings[ 'button_icon' ] );
 		}
-	
+
 		if ( 'text' === $settings[ 'button_type' ] || 'icon-text' === $settings[ 'button_type' ] ) {
 			$button_text_html = '<span>' . Merchant_Translator::translate( $settings[ 'button_text' ] ) . '</span>';
 		}
-	
+
 		?>
 			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?></a>
 		<?php
@@ -798,33 +807,11 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	public function frontend_custom_css( $css ) {
 		$css .= $this->get_module_custom_css();
 
-		if ( merchant_is_breakdance_active() ) {
-			$css .= '
-			    .breakdance-woocommerce .products .product .merchant-quick-view-button {
-			        padding: var(--bde-button-padding-base);
-			        font-size: var(--bde-button-font-size);
-                    line-height: var(--bde-button-line-height);
-                    font-weight: var(--bde-button-font-weight);
-                    border-radius: var(--bde-button-border-radius);
-			    }
-			    .breakdance-woocommerce .products .product .merchant-quick-view-position-before {
-			        margin-bottom: 10px;
-			    }
-			    .breakdance-woocommerce .products .product .merchant-quick-view-position-after {
-			        margin-top: 10px;
-			    }
-			    .breakdance-woocommerce .products .product .merchant-quick-view-position-overlay {
-			        width: auto;
-			        position: absolute;
-			    }
-			';
-        }
-
 		return $css;
 	}
 }
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Quick_View();
+	Merchant_Quick_View::get_instance();
 } );
