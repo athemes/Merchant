@@ -40,6 +40,10 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 	 *
 	 */
 	public function __construct() {
+		if ( ! class_exists( 'Woocommerce' ) ) {
+			return;
+		}
+
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
