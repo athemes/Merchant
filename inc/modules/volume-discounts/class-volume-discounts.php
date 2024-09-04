@@ -229,7 +229,7 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 					<?php
 					merchant_get_template_part(
 						Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
-						'single-product',
+						'admin-preview',
 						array(
 							'settings'       => $settings,
 							'discount_tiers' => array(
