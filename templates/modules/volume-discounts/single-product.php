@@ -11,8 +11,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$product_id     = get_the_ID();
-$product        = wc_get_product( $product_id );
+$product        = $args['product'];
+$product_id     = $product->get_id();
 ?>
 <div class="merchant-volume-discounts">
 	<?php
@@ -207,21 +207,26 @@ $product        = wc_get_product( $product_id );
 		            <?php
 		            endif; ?>
                     <div class="form-footer">
-                        <div class="offer-quantity-input">
-		                    <?php
-		                    woocommerce_quantity_input( array(
-			                    'input_name'  => 'offer-quantity',
-			                    'input_value' => $discount_qty,
-		                    ) ) ?>
-                        </div>
+		                <?php
+		                if ( $is_variable ) { ?>
+                            <div class="offer-quantity-input">
+				                <?php
+				                woocommerce_quantity_input( array(
+					                'input_name'  => 'offer-quantity',
+					                'input_value' => Merchant_Pro_Volume_Discounts::offer_dynamic_remaining_quantity( $discount_tier, $product ),
+				                ) ) ?>
+                            </div>
+		                <?php
+		                } ?>
                         <div class="offer-submit">
-                            <button type="submit">
+                            <button type="submit" class="single_add_to_cart_button button alt">
                             <span class="offer-submit-text"><?php
 	                            esc_html_e( 'Add to cart', 'merchant' ); ?></span>
                             </button>
                         </div>
                     </div>
                 </div>
+                <div class="user-message"><span class="message-text"></span></div>
             </div>
 			<?php
 		}
