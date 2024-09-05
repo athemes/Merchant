@@ -207,13 +207,17 @@ $product_id     = $product->get_id();
 		            <?php
 		            endif; ?>
                     <div class="form-footer">
-                        <div class="offer-quantity-input">
-		                    <?php
-		                    woocommerce_quantity_input( array(
-			                    'input_name'  => 'offer-quantity',
-			                    'input_value' => Merchant_Pro_Volume_Discounts::offer_dynamic_remaining_quantity( $discount_tier, $product ),
-		                    ) ) ?>
-                        </div>
+		                <?php
+		                if ( $is_variable ) { ?>
+                            <div class="offer-quantity-input">
+				                <?php
+				                woocommerce_quantity_input( array(
+					                'input_name'  => 'offer-quantity',
+					                'input_value' => Merchant_Pro_Volume_Discounts::offer_dynamic_remaining_quantity( $discount_tier, $product ),
+				                ) ) ?>
+                            </div>
+		                <?php
+		                } ?>
                         <div class="offer-submit">
                             <button type="submit" class="single_add_to_cart_button button alt">
                             <span class="offer-submit-text"><?php
