@@ -48,35 +48,8 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 				}
 			}
 
-			add_action( 'wp', array( $this, 'setup_product_object' ) );
-
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
-		}
-
-		/**
-		 * Ensure $product is an object in the Breakdance builder editor.
-		 * If $product is a string, convert it to a WooCommerce product object.
-		 *
-		 * @return void
-		 */
-		public function setup_product_object() {
-			if ( ! is_product() ) {
-				return;
-			}
-
-			global $product;
-
-			// Check if $product is a string and not already an object
-			if ( ! is_object( $product ) && is_string( $product ) ) {
-				// Retrieve the product object by slug
-				$product_object = wc_get_product( get_page_by_path( $product, OBJECT, 'product' ) );
-
-				// Update global $product with the retrieved product object if found
-				if ( $product_object ) {
-					$product = $product_object;
-				}
-			}
 		}
 
 		/**
