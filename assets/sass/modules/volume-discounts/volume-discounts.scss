@@ -54,7 +54,7 @@
 					background-color: #fff;
 
 					.botiga-quantity-plus,
-					.botiga-quantity-minus{
+					.botiga-quantity-minus {
 						font-size: 14px;
 						color: #757575;
 					}
@@ -85,6 +85,52 @@
 					padding: 7px 15px;
 					border: 2px solid transparent;
 				}
+			}
+		}
+	}
+
+	.user-message {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		border-radius: 5px;
+		visibility: hidden;
+		opacity: 0;
+		transition: 300ms;
+		background-color: rgba(0, 0, 0, 0.3);
+
+		&.show {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		.message-text {
+			position: absolute;
+			top: 50%;
+			left: 40px;
+			right: 40px;
+			text-align: center;
+			font-weight: bold;
+			line-height: 50px;
+			border-radius: 5px;
+			user-select: none;
+			transform: translateY(-50%);
+			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		&.success {
+			.message-text {
+				background-color: #55c649;
+				color: #fff;
+			}
+		}
+
+		&.error {
+			.message-text {
+				background-color: #d83b3b;
+				color: #fff;
 			}
 		}
 	}
