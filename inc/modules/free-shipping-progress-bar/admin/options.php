@@ -802,7 +802,7 @@ Merchant_Admin_Options::create( array(
 			'max'     => '100',
 			'step'    => '1',
 			'unit'    => 'PX',
-			'default' => '20',
+			'default' => '0',
 			'title'   => esc_html__( 'Text Bottom Spacing', 'merchant' ),
 		),
 		array(
