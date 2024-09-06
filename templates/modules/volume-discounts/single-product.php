@@ -178,7 +178,7 @@ $product_id     = $product->get_id();
                         } ?>
                     </span>
                 </div>
-                <div class="offer-form" data-product_id="">
+                <div class="offer-form">
 		            <?php
 		            if ( $is_variable && ! empty( $attributes ) ) : ?>
                         <div class="variation-form">
