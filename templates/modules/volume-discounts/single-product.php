@@ -24,6 +24,7 @@ $product_id     = $product->get_id();
     if ( ! empty( $args['product_cart_quantity'] ) ) {
         $quantity = $args['product_cart_quantity'];
     }
+    $i = 0;
 	foreach ( $args['discount_tiers'] as $offer_id => $discount_tier ) :
 		if ( isset( $discount_tier['discount_type'], $discount_tier['product_single_page']['save_label'], $discount_tier['product_single_page']['item_text'], $discount_tier['product_single_page']['total_text'] ) ) {
 			$discount = $discount_tier['discount_type'] === 'percentage_discount'
@@ -58,18 +59,28 @@ $product_id     = $product->get_id();
 			<?php
 			endif;
 
-			$item_classes  = 'merchant-volume-discounts-item' . esc_attr( $clickable );
+			$item_classes = 'merchant-volume-discounts-item' . esc_attr( $clickable );
 			$item_classes .= $product_type ? ' merchant-volume-discounts-item-' . esc_attr( $product_type ) : '';
+			$item_classes .= ' merchant-volume-discounts-item-' . esc_attr( $i );
+			// Check if it's a variable product
+			$is_variable = $product->is_type( 'variable' );
 
-				// Check if it's a variable product
-				$is_variable = $product->is_type('variable');
+			// Get available variations and attributes
+			$available_variations = $is_variable ? $product->get_available_variations() : array();
+			$attributes           = $is_variable ? $product->get_variation_attributes() : array();
 
-				// Get available variations and attributes
-				$available_variations = $is_variable ? $product->get_available_variations() : array();
-				$attributes = $is_variable ? $product->get_variation_attributes() : array();
-
-
-            ?>
+			if ( isset( $discount_tier['product_single_page']['table_item_text_color'] ) ) {
+                // todo: to be improved later
+				?>
+                <style>
+                    .merchant-volume-discounts-item-<?php echo esc_attr( $i ); ?> .merchant-volume-discounts-buy-label .woocommerce-Price-amount,
+                    .merchant-volume-discounts-item-<?php echo esc_attr( $i ); ?> ul .woocommerce-Price-amount {
+                        color: <?php echo esc_attr( $discount_tier['product_single_page']['table_item_text_color'] ) ; ?> !important;
+                    }
+                </style>
+				<?php
+			}
+			?>
             <div class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>" data-in-cart="<?php
             echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>" data-offer-id="<?php echo esc_attr( $offer_id ); ?>"
                 style="<?php
@@ -128,7 +139,7 @@ $product_id     = $product->get_id();
                     <li>
                         <div class="merchant-volume-discounts-item-text"><?php
 							echo isset($discount_tier['product_single_page']['item_text']) ? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['item_text'] ) ) : esc_html__( 'Per item:', 'merchant' ); ?></div>
-                        <div><strong><?php
+                        <div><strong style="color: #ff0000 !important;"><?php
 								echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
                     </li>
                     <li>
@@ -230,5 +241,6 @@ $product_id     = $product->get_id();
             </div>
 			<?php
 		}
+        ++$i ;
 	endforeach; ?>
 </div>
