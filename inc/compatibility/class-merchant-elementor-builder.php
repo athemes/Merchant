@@ -108,6 +108,24 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 				';
 			}
 
+			// Payment Logos
+			if ( Merchant_Modules::is_module_active( Merchant_Payment_Logos::MODULE_ID ) ) {
+				$css .= '
+				    .single-product li .merchant-payment-logos {
+				        display: none !important;
+				    }
+				';
+			}
+
+			// Trust Badges
+			if ( Merchant_Modules::is_module_active( Merchant_Trust_Badges::MODULE_ID ) ) {
+				$css .= '
+				    .single-product li .merchant-trust-badges {
+				        display: none !important;
+				    }
+				';
+			}
+
 			if ( merchant_is_pro_active() ) {
 				// Variation Swatches
 				if ( Merchant_Modules::is_module_active( Merchant_Stock_Scarcity::MODULE_ID ) ) {
@@ -134,24 +152,6 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 					';
 				}
 
-				// Payment Logos
-				if ( Merchant_Modules::is_module_active( Merchant_Payment_Logos::MODULE_ID ) ) {
-					$css .= '
-					    .single-product li .merchant-payment-logos {
-					        display: none !important;
-					    }
-					';
-				}
-
-				// Trust Badges
-				if ( Merchant_Modules::is_module_active( Merchant_Trust_Badges::MODULE_ID ) ) {
-					$css .= '
-					    .single-product li .merchant-trust-badges {
-					        display: none !important;
-					    }
-					';
-				}
-
 				// Product Brand Image
 				if ( Merchant_Modules::is_module_active( Merchant_Product_Brand_Image::MODULE_ID ) ) {
 					$css .= '
@@ -161,16 +161,7 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 					';
 				}
 
-				// Reasons To Buy List
-				if ( Merchant_Modules::is_module_active( Merchant_Reasons_To_Buy::MODULE_ID ) ) {
-					$css .= '
-					    .single-product li .merchant-reasons-list {
-					        display: none !important;
-					    }
-					';
-				}
-
-				// Reasons To Buy List
+				// Product Navigation Links
 				if ( Merchant_Modules::is_module_active( Merchant_Product_Navigation_Links::MODULE_ID ) ) {
 					$css .= '
 					    .single-product li .merchant-product-navigation {
