@@ -102,6 +102,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-blocksy-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-flatsome-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-breakdance-builder.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-elementor-builder.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.

@@ -260,6 +260,12 @@
           display: none; // Hide on other places
         }
       }
+
+      form.cart {
+        .js-merchant-quantity-btn {
+          display: none;
+        }
+      }
     }
 
     .merchant-quantity {
