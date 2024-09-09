@@ -45,7 +45,7 @@ $product_id     = $product->get_id();
 				$product = wc_get_product( $product_id );
 				$product_type = $product->get_type();
 				if ( $product && ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
-					$clickable = ' clickablezz';
+					$clickable = ' clickable';
 				}
 			}
 
@@ -191,7 +191,8 @@ $product_id     = $product->get_id();
                 </div>
                 <div class="offer-form">
 		            <?php
-		            if ( $is_variable && ! empty( $attributes ) ) : ?>
+		            if ( $is_variable && ! empty( $attributes ) ) {
+                        ?>
                         <div class="variation-form">
 				            <?php
 				            foreach ( $attributes as $attribute_name => $options ) :
@@ -216,10 +217,9 @@ $product_id     = $product->get_id();
 				            endforeach; ?>
                         </div>
 		            <?php
-		            endif; ?>
-                    <div class="form-footer">
-		                <?php
-		                if ( $is_variable ) { ?>
+		            }
+	                if ( $is_variable ) { ?>
+                        <div class="form-footer">
                             <div class="offer-quantity-input">
 				                <?php
 				                woocommerce_quantity_input( array(
@@ -227,15 +227,15 @@ $product_id     = $product->get_id();
 					                'input_value' => Merchant_Pro_Volume_Discounts::offer_dynamic_remaining_quantity( $discount_tier, $product ),
 				                ) ) ?>
                             </div>
-		                <?php
-		                } ?>
-                        <div class="offer-submit">
-                            <button type="submit" class="single_add_to_cart_button button alt">
+                            <div class="offer-submit">
+                                <button type="submit" class="single_add_to_cart_button button alt">
                             <span class="offer-submit-text"><?php
 	                            esc_html_e( 'Add to cart', 'merchant' ); ?></span>
-                            </button>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+		                <?php
+	                } ?>
                 </div>
                 <div class="user-message"><span class="message-text"></span></div>
             </div>
