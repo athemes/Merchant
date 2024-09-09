@@ -100,21 +100,21 @@ Merchant_Admin_Options::create(array(
 		array(
 			'id'      => 'low_inventory_text',
 			'type'    => 'text',
-			'title'   => esc_html__('Text when inventory is low', 'merchant'),
+			'title'   => esc_html__('Text when inventory is low (when only 1 item left in stock)', 'merchant'),
 			'default' => esc_html__('Hurry! Only {stock} unit left in stock!', 'merchant'),
 		),
 
 		array(
 			'id'      => 'low_inventory_text_plural',
 			'type'    => 'text',
-			'title'   => esc_html__('Text when inventory is low (plural)', 'merchant'),
+			'title'   => esc_html__('Text when inventory is low (when more than 1 item is left in stock)', 'merchant'),
 			'default' => esc_html__('Hurry! Only {stock} units left in stock!', 'merchant'),
 		),
 
 		array(
 			'id'      => 'low_inventory_text_simple',
 			'type'    => 'text',
-			'title'   => esc_html__('Text when inventory is low (simple - used for product variation)', 'merchant'),
+			'title'   => esc_html__('Text when inventory is low (variable - used for product variation)', 'merchant'),
 			'default' => esc_html__('Hurry, low stock.', 'merchant'),
 		),
 	),
