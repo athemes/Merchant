@@ -174,10 +174,10 @@
 }
 
 .merchant-volume-discounts {
-  &-buy-label span,
-  &-buy-label bdi,
-  &-save-label .woocommerce-Price-amount,
-  &-save-label .woocommerce-Price-amount bdi {
-    color: inherit !important;
-  }
+	&-buy-label span,
+	&-buy-label bdi,
+	&-save-label .woocommerce-Price-amount,
+	&-save-label .woocommerce-Price-amount bdi {
+		color: inherit !important;
+	}
 }
