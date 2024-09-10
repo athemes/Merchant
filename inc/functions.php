@@ -176,6 +176,33 @@ if ( ! function_exists( 'merchant_is_woocommerce_germanized_active' ) ) {
 	}
 }
 
+
+/**
+ * Check if Breakdance Builder is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_breakdance_active' ) ) {
+	function merchant_is_breakdance_active() {
+		return defined( '__BREAKDANCE_VERSION' );
+	}
+}
+
+/**
+ * Check if Elementor or its Pro version is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_elementor_active' ) ) {
+	function merchant_is_elementor_active( $is_pro_active = false ) {
+		if ( $is_pro_active ) {
+			return defined( 'ELEMENTOR_PRO_VERSION' );
+		}
+
+		return defined( 'ELEMENTOR_VERSION' );
+	}
+}
+
 /**
  * Check if any shortcode starts with merchant.
  * If the shortcode is not registered, register it with return null to guarantee it exists.

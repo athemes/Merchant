@@ -18,7 +18,7 @@
 	
 	&.after-tabs {
 		padding-bottom: 40px;
-	}	
+	}
 }
 
 .merchant-frequently-bought-together-bundles {
@@ -143,6 +143,11 @@
 		color: red;
 		font-size: 14px;
 		margin-top: 5px;
+	}
+
+	del,
+	bdi {
+		font-size: inherit !important;
 	}
 }
 

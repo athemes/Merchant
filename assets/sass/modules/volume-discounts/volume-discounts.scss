@@ -23,6 +23,11 @@
 		cursor: pointer;
 	}
 
+    del,
+    bdi {
+      font-size: inherit !important;
+    }
+
 	.offer-form {
 		margin-top: 10px;
 
@@ -168,6 +173,11 @@
 	right: 0;
 }
 
-.merchant-volume-discounts-save-label .woocommerce-Price-amount {
-	color: inherit;
+.merchant-volume-discounts {
+	&-buy-label span,
+	&-buy-label bdi,
+	&-save-label .woocommerce-Price-amount,
+	&-save-label .woocommerce-Price-amount bdi {
+		color: inherit !important;
+	}
 }
