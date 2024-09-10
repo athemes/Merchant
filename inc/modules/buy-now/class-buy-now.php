@@ -295,7 +295,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$_wrapper_classes   = array();
 		$_wrapper_classes[] = $product->get_type() === 'variable' ? 'disabled' : '';
 
-        $_attrs = array();
+        $_attrs   = array();
         $_attrs[] = $product->get_type() === 'variable' ? 'disabled=disabled' : '';
 
         /**

@@ -22,9 +22,7 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 				add_filter( 'merchant_quick_view_description', array( $this, 'quick_view_description' ) );
 			}
 
-			if ( merchant_is_pro_active() ) {
-
-			}
+			if ( merchant_is_pro_active() ) {}
 
 			//add_filter( 'merchant_module_settings', array( $this, 'alter_settings' ), 10, 2 );
 
@@ -56,7 +54,6 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 		 * @return mixed|string
 		 */
 		public function shortcode_error_message( $content, $module_id ) {
-
 			// Todo: check other way to find if current page is product page and return custom message. is_singular( 'product' ) or is_product() doesn't work
 			if ( function_exists( 'is_et_pb_preview' ) && is_et_pb_preview() ) {
 				return '<div class="merchant-shortcode-wrong-placement">' . esc_html__( 'Please view the product page to see this content.', 'merchant' ) . '</div>';
@@ -88,7 +85,6 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 		 * @return string $css The custom CSS.
 		 */
 		public function frontend_custom_css( $css ) {
-
 			if ( is_cart() ) {
 				$css .= '
 					.woocommerce .merchant-cart-offers .cart-item-offer__container .add-to-cart .add-to-cart-button {
@@ -125,7 +121,6 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 					    .single-product .merchant-wishlist-button {
 					        position: static;
 					    }
-
 					    .single-product li .merchant-wishlist-button {
 					        position: absolute;
 					    }
