@@ -35,18 +35,13 @@ $product_id     = $product->get_id();
             $discount_qty = (int) ( $discount_tier['quantity'] ?? 1 );
 
 			$discounted_price = $args['product_price'] - $discount;
-			$total_discount   = intval( $discount_qty ) * $discount;
-			$total_price      = intval( $discount_qty ) * $discounted_price;
+			$total_discount   = $discount_qty * $discount;
+			$total_price      = $discount_qty * $discounted_price;
 			$clickable        = '';
-            $product_id       = $args['product_id'] ?? get_the_ID();
             $product_type     = '';
 
-			if ( $product_id ) {
-				$product = wc_get_product( $product_id );
-				$product_type = $product->get_type();
-				if ( $product && ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
-					$clickable = ' clickable';
-				}
+			if ( ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
+				$clickable = ' clickable';
 			}
 
 			if ( isset( $discount_tier['product_single_page']['table_title'] ) && ! empty( $discount_tier['product_single_page']['table_title'] ) ) : ?>
@@ -68,6 +63,7 @@ $product_id     = $product->get_id();
 			// Get available variations and attributes
 			$available_variations = $is_variable ? $product->get_available_variations() : array();
 			$attributes           = $is_variable ? $product->get_variation_attributes() : array();
+			$available_variations = $is_variable ? $product->get_available_variations() : array();
 
 			if ( isset( $discount_tier['product_single_page']['table_item_text_color'] ) ) {
                 // todo: to be improved later
@@ -82,7 +78,8 @@ $product_id     = $product->get_id();
 			}
 			?>
             <div class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>" data-in-cart="<?php
-            echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>" data-offer-id="<?php echo esc_attr( $offer_id ); ?>"
+            echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>"
+                data-offer-id="<?php echo esc_attr( $offer_id ); ?>" data-variations="<?php echo esc_attr( wp_json_encode( $available_variations ) ); ?>"
                 style="<?php
 			echo isset( $discount_tier['product_single_page']['table_item_bg_color'] ) ? esc_attr( 'background-color: ' . $discount_tier['product_single_page']['table_item_bg_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['product_single_page']['table_item_border_color'] . ';' ) : '';
