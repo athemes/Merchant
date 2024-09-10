@@ -35,6 +35,18 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 					remove_action( 'breakdance_shop_loop_footer', 'woocommerce_template_loop_add_to_cart' );
 				}
 
+				// Wishlist
+				if ( Merchant_Modules::is_module_active( Merchant_Wishlist::MODULE_ID ) ) {
+					// Display on single product.
+					$display_on_single_product = Merchant_Admin_Options::get( Merchant_Wishlist::MODULE_ID, 'display_on_single_product', true );
+					if ( $display_on_single_product ) {
+						$wishlist = new Merchant_Pro_Wishlist( Merchant_Modules::get_module( Merchant_Wishlist::MODULE_ID ) );;
+
+						add_action( 'woocommerce_after_add_to_cart_form', array( $wishlist, 'wishlist_link' ) );
+					}
+				}
+
+
 				// Side/Floating Mini Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) || Merchant_Modules::is_module_active( Merchant_Floating_Mini_Cart::MODULE_ID ) ) {
 					remove_action( 'woocommerce_widget_cart_item_quantity', '\Breakdance\WooCommerce\addQuantityInputToMiniCart' );
@@ -128,6 +140,15 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 					$css .= '
 					    .breakdance-woocommerce .products .product .merchant-wishlist-button {
 					        width: auto;
+					    }
+					    .single-product .merchant-wishlist-button {
+					        position: static;
+					    }
+					    .single-product li .merchant-wishlist-button {
+					        position: absolute;
+					    }
+					    .merchant-wishlist-button ~ .merchant-product-swatches .merchant-wishlist-button {
+					        display: none !important;
 					    }
 					';
 				}
