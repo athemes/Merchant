@@ -127,6 +127,7 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 			}
 
 			if ( merchant_is_pro_active() ) {
+
 				// Variation Swatches
 				if ( Merchant_Modules::is_module_active( Merchant_Stock_Scarcity::MODULE_ID ) ) {
 					$css .= '

@@ -421,16 +421,19 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 								 * @since 1.9.14
 								 */
 								do_action( 'merchant_quick_view_before_product_description' );
+
+                                $description = $settings[ 'description_style' ] === 'full' ? $product->get_description() : $product->get_short_description();
+
+								/**
+								 * `merchant_quick_view_description`
+                                 *
+                                 * @since 1.9.16
+								 */
+								$description = apply_filters( 'merchant_quick_view_description', $description );
 								?>
-								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
-									<div class="merchant-quick-view-product-excerpt">
-										<?php echo wp_kses_post( $product->get_description() ); ?>
-									</div>
-								<?php else : ?>
-									<div class="merchant-quick-view-product-excerpt">
-										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
-									</div>
-								<?php endif; ?>
+                                <div class="merchant-quick-view-product-excerpt">
+									<?php echo wp_kses_post( $description ); ?>
+                                </div>
 
 								<?php
 								/**
@@ -471,16 +474,20 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 								 * @since 1.9.14
 								 */
 								do_action( 'merchant_quick_view_before_product_description' );
+
+								$description = $settings[ 'description_style' ] === 'full' ? $product->get_description() : $product->get_short_description();
+
+								/**
+								 * `merchant_quick_view_description`
+								 *
+								 * @since 1.9.16
+								 */
+								$description = apply_filters( 'merchant_quick_view_description', $description );
 								?>
-								<?php if ( 'full' === $settings[ 'description_style' ] ) : ?>
-									<div class="merchant-quick-view-product-excerpt">
-										<?php echo wp_kses_post( $product->get_description() ); ?>
-									</div>
-								<?php else : ?>
-									<div class="merchant-quick-view-product-excerpt">
-										<p><?php echo wp_kses_post( $product->get_short_description() ); ?></p>
-									</div>
-								<?php endif; ?>
+                                <div class="merchant-quick-view-product-excerpt">
+									<?php echo wp_kses_post( $description ); ?>
+                                </div>
+
 								<?php
 								/**
 								 * Hook 'merchant_quick_view_after_product_description'

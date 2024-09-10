@@ -133,6 +133,16 @@ class Merchant_Add_Module {
 		// Todo: check if recursive_parse_args() works for all modules and remove the condition.
 		$settings = $this->module_id === 'product-labels' ? $this->recursive_parse_args( $settings[ $this->module_id ], $defaults ) : wp_parse_args( $settings[ $this->module_id ], $defaults );
 
+		/**
+		 * Hook: merchant_module_settings
+		 *
+		 * @param array  $settings  Module settings.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 1.9.16
+		 */
+		$settings = apply_filters( 'merchant_module_settings', $settings, $this->module_id );
+
 		return $settings;
 	}
 
