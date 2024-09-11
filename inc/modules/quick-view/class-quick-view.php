@@ -669,6 +669,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		        'single-product',
 		        array(
 			        'settings'              => Merchant_Admin_Options::get_all( Merchant_Volume_Discounts::MODULE_ID ),
+			        'product'               => $product,
 			        'discount_tiers'        => $discount_tiers,
 			        'product_price'         => $product->get_price(),
 			        'in_cart'               => Merchant_Pro_Volume_Discounts::is_in_cart( $product_id ),
