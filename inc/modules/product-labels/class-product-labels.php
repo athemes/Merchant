@@ -757,6 +757,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$label_type     = $label['label_type'] ?? 'text';
 		$label_shape    = $label['label_text_shape'] ?? 'text-shape-1';
 
+		$styles['margin']  = 0;
+		$styles['padding'] = 0;
+
 		if ( $label_type === 'text' ) {
 			$styles['width']     = ( $label['label_width'] ?? 100 ) . 'px';
 			$styles['height']    = ( $label['label_height'] ?? 32 ) . 'px';

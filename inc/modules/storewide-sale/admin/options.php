@@ -102,6 +102,17 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'      => 'discount_target',
+							'type'    => 'select',
+							'title'   => __( 'Apply discount to', 'merchant' ),
+							'options' => array(
+								'regular' => __( 'Regular price', 'merchant' ),
+								'sale'    => __( 'Sale Price', 'merchant' ),
+							),
+							'default' => 'regular',
+						),
+
+						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
 							'title'   => esc_html__( 'User Condition', 'merchant' ),

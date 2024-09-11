@@ -67,6 +67,7 @@ class Merchant_Add_Module {
 		add_filter( "merchant_admin_module_{$this->module_id}_list_item_class", array( $this, 'modules_list_item_class' ) );
 
 		if ( $this->has_shortcode ) {
+			add_action( 'wp', array( $this, 'setup_product_object' ) );
 			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
 		}
 	}
@@ -131,6 +132,16 @@ class Merchant_Add_Module {
 		// Parse settings with defaults.
 		// Todo: check if recursive_parse_args() works for all modules and remove the condition.
 		$settings = $this->module_id === 'product-labels' ? $this->recursive_parse_args( $settings[ $this->module_id ], $defaults ) : wp_parse_args( $settings[ $this->module_id ], $defaults );
+
+		/**
+		 * Hook: merchant_module_settings
+		 *
+		 * @param array  $settings  Module settings.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 1.9.16
+		 */
+		$settings = apply_filters( 'merchant_module_settings', $settings, $this->module_id );
 
 		return $settings;
 	}
@@ -272,5 +283,30 @@ class Merchant_Add_Module {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Ensure $product is an object in the Breakdance builder editor.
+	 * If $product is a string, convert it to a WooCommerce product object.
+	 *
+	 * @return void
+	 */
+	public function setup_product_object() {
+		if ( ! is_product() ) {
+			return;
+		}
+
+		global $product;
+
+		// Check if $product is a string and not already an object
+		if ( ! is_object( $product ) && is_string( $product ) ) {
+			// Retrieve the product object by slug
+			$product_object = wc_get_product( get_page_by_path( $product, OBJECT, 'product' ) );
+
+			// Update global $product with the retrieved product object if found
+			if ( $product_object ) {
+				$product = $product_object;
+			}
+		}
 	}
 }

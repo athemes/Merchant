@@ -260,6 +260,12 @@
           display: none; // Hide on other places
         }
       }
+
+      form.cart {
+        .js-merchant-quantity-btn {
+          display: none;
+        }
+      }
     }
 
     .merchant-quantity {
@@ -438,6 +444,10 @@
       transform: translateX(-50%);
       background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
       opacity: 0.1;
+    }
+
+    .button {
+      text-decoration: none;
     }
 
     a.button.checkout {

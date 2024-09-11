@@ -295,15 +295,40 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		$_wrapper_classes   = array();
 		$_wrapper_classes[] = $product->get_type() === 'variable' ? 'disabled' : '';
 
+        $_attrs   = array();
+        $_attrs[] = $product->get_type() === 'variable' ? 'disabled=disabled' : '';
+
         /**
 		 * Hook 'merchant_module_buy_now_wrapper_class'
 		 * 
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', $_wrapper_classes );
+
+		$_attrs = array();
+
+        // Add the disabled attribute if the product is variable
+		if ( $product->get_type() === 'variable' ) {
+			$_attrs['disabled'] = 'disabled';
+		}
+
+		/**
+		 * Hook 'merchant_module_buy_now_wrapper_attrs'
+		 *
+		 * @since 1.9.16
+		 */
+		$attrs = apply_filters( 'merchant_module_buy_now_wrapper_attrs', $_attrs );
+
+        // Convert attributes array to a string
+		$attributes = '';
+		foreach ( $attrs as $key => $value ) {
+			$attributes .= sprintf( '%s="%s" ', esc_attr( $key ), esc_attr( $value ) );
+		}
 		?>
         <!-- Don't define type="submit" because it creates issue with block themes. The button is inside the form, so by default the type is already "submit". -->
-		<button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></button>
+		<button name="merchant-buy-now" value="<?php echo absint( $product->get_ID() ); ?>" class="button alt wp-element-button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" <?php echo wp_kses( trim( $attributes ), merchant_kses_allowed_tags() ); ?>>
+            <?php echo esc_html( Merchant_Translator::translate( $text ) ); ?>
+        </button>
 		<?php
 	}
 

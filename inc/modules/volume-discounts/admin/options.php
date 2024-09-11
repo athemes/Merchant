@@ -46,6 +46,14 @@ Merchant_Admin_Options::create( array(
 							'default' => 'products',
 						),
 						array(
+							'id'      => 'include_all_cart_products',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Include all cart products', 'merchant' ),
+							'desc'    => esc_html__( 'Apply the discount based on the total quantity of products added to the cart, rather than requiring a specific quantity of each individual product.',   'merchant' ),
+							'default' => false,
+							'condition'   => array( 'rules_to_display', '==', 'all' ),
+						),
+						array(
 							'id'            => 'product_id',
 							'type'          => 'products_selector',
 							//'title'     => esc_html__( 'Select product', 'merchant' ),
@@ -65,6 +73,55 @@ Merchant_Admin_Options::create( array(
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'      => 'include_all_category_products',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Include all category products', 'merchant' ),
+							'desc'    => esc_html__( 'Apply the discount based on the total quantity of products within the same category added to the cart, rather than requiring a specific quantity of each individual product.', 'merchant' ),
+							'default' => false,
+							'condition'   => array( 'rules_to_display', '==', 'categories' ),
+						),
+						array(
+							'id'      => 'include_all_products_info',
+							'type'    => 'info',
+							'content'    => esc_html__( 'When configuring offer priorities, consider the order in which they are applied. Typically, more general offers should be prioritized higher to ensure consistent discount application. You can control the priority by sorting the offers—offers listed at the top have the highest priority. However, note that this setup will not work on the thank you page.',
+								'merchant' ),
+							'conditions' => array(
+								'relation' => 'OR', // AND/OR, If not provided, only first term will be considered
+								'terms'    => array(
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'rules_to_display', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'categories', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'include_all_category_products', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+										),
+									),
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'rules_to_display', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'all', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'include_all_cart_products', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+										),
+									),
+								),
+							),
 						),
 						array(
 							'id'          => 'tag_slugs',

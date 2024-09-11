@@ -18,7 +18,7 @@ foreach ( $args['product_offers'] as $offer ) {
 	?>
     <div class="buy-x-get-y">
         <h3 class="section-title"><?php
-			echo esc_html( Merchant_Translator::translate( $offer['title'] ) ); ?></h3>
+			echo esc_html( Merchant_Translator::translate( $offer['title'] ?? '' ) ); ?></h3>
         <div class="offer-products">
             <div class="offer-column">
                 <div class="offer-product first-product">

@@ -1013,6 +1013,10 @@ body {
 		outline: none;
 		margin: 0;
 
+		&.hidden {
+			display: none;
+		}
+
 		@media screen and (min-width: 769px) {
 			padding: 15px;
 

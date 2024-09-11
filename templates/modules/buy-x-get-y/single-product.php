@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Prevent older merchant pro versions from breaking.
-if ( ! method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) ) {
+if ( ! method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) && ! is_admin() ) {
 	if ( current_user_can( 'manage_options' ) ) {
 		echo '<div class="error"><p>' . esc_html__( 'Please update Merchant Pro plugin to the latest version to use this feature..', 'merchant' ) . '</p></div>';
 	}
