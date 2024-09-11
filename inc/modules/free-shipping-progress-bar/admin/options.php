@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'merchant_admin_before_include_modules_options', Merchant_Free_Shipping_Progress_Bar::MODULE_ID );
 
-
+$merchant_module_id = Merchant_Free_Shipping_Progress_Bar::MODULE_ID;
 /**
  * Content
  */
@@ -456,6 +456,21 @@ Merchant_Admin_Options::create( array(
 			'default' => 1,
 		),
 		array(
+			'id'         => 'single_product_page_shortcode',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Use Shortcode', 'merchant' ),
+			'default'    => 0,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
 			'id'         => 'single_product_page_placement',
 			'type'       => 'select',
 			'title'      => esc_html__( 'Position', 'merchant' ),
@@ -468,15 +483,65 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'    => 'woocommerce_before_add_to_cart_form',
 			'conditions' => array(
-				'terms' => array(
+				'relation' => 'AND',
+				'terms'    => array(
 					array(
 						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'single_product_page_shortcode',
+						'operator' => '===',
+						'value'    => false,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'         => 'single_product_page_shortcode_info',
+			'type'       => 'info',
+			'content'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that this shortcode can only be used on single product pages.',
+				'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'single_product_page_shortcode',
 						'operator' => '===',
 						'value'    => true,
 					),
 				),
 			),
 		),
+		array(
+			'id'         => 'single_product_page_shortcode_text',
+			'type'       => 'text_readonly',
+			'title'      => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'    => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . '_single_product_page]',
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_single_product_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'single_product_page_shortcode',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
 		array(
 			'id'         => 'single_page_show_progress_bar',
 			'type'       => 'switcher',
@@ -494,8 +559,8 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type' => 'divider',
-			'title'   => esc_html__( 'Mini Cart', 'merchant' ),
+			'type'  => 'divider',
+			'title' => esc_html__( 'Mini Cart', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_mini_cart_widget',
@@ -539,8 +604,8 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type' => 'divider',
-			'title'   => esc_html__( 'Side Cart', 'merchant' ),
+			'type'  => 'divider',
+			'title' => esc_html__( 'Side Cart', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_side_cart_widget',
@@ -585,14 +650,71 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type' => 'divider',
-			'title'   => esc_html__( 'Cart Page', 'merchant' ),
+			'type'  => 'divider',
+			'title' => esc_html__( 'Cart Page', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_cart_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
+		),
+		array(
+			'id'         => 'cart_page_shortcode',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Use Shortcode', 'merchant' ),
+			'default'    => 0,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_cart_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'cart_page_shortcode_info',
+			'type'       => 'info',
+			'content'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that this shortcode can only be used on cart page.',
+				'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_cart_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'cart_page_shortcode',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'cart_page_shortcode_text',
+			'type'       => 'text_readonly',
+			'title'      => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'    => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . '_cart_page]',
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_cart_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'cart_page_shortcode',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
 		),
 		array(
 			'id'         => 'cart_page_placement',
@@ -605,11 +727,17 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'    => 'woocommerce_cart_totals_before_order_total',
 			'conditions' => array(
-				'terms' => array(
+				'relation' => 'AND',
+				'terms'    => array(
 					array(
 						'field'    => 'show_on_cart_page',
 						'operator' => '===',
 						'value'    => true,
+					),
+					array(
+						'field'    => 'cart_page_shortcode',
+						'operator' => '===',
+						'value'    => false,
 					),
 				),
 			),
@@ -631,14 +759,71 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'type' => 'divider',
-			'title'   => esc_html__( 'Checkout Page', 'merchant' ),
+			'type'  => 'divider',
+			'title' => esc_html__( 'Checkout Page', 'merchant' ),
 		),
 		array(
 			'id'      => 'show_on_checkout_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Bar', 'merchant' ),
 			'default' => 1,
+		),
+		array(
+			'id'         => 'checkout_page_shortcode',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Use Shortcode', 'merchant' ),
+			'default'    => 0,
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_on_checkout_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'checkout_page_shortcode_info',
+			'type'       => 'info',
+			'content'    => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that this shortcode can only be used on checkout page.',
+				'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_checkout_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'checkout_page_shortcode',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+		array(
+			'id'         => 'checkout_page_shortcode_text',
+			'type'       => 'text_readonly',
+			'title'      => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'    => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . '_checkout_page]',
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'show_on_checkout_page',
+						'operator' => '===',
+						'value'    => true,
+					),
+					array(
+						'field'    => 'checkout_page_shortcode',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
 		),
 		array(
 			'id'         => 'checkout_page_placement',
@@ -654,11 +839,17 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'    => 'woocommerce_before_checkout_form',
 			'conditions' => array(
+				'relation' => 'AND',
 				'terms' => array(
 					array(
 						'field'    => 'show_on_checkout_page',
 						'operator' => '===',
 						'value'    => true,
+					),
+					array(
+						'field'    => 'checkout_page_shortcode',
+						'operator' => '===',
+						'value'    => false,
 					),
 				),
 			),

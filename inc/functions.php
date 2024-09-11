@@ -240,6 +240,9 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_product_labels',
 				'merchant_module_wishlist',
 				'merchant_module_clear_cart',
+				'merchant_module_free_shipping_progress_bar_single_product_page',
+				'merchant_module_free_shipping_progress_bar_cart_page',
+				'merchant_module_free_shipping_progress_bar_checkout_page',
 			)
 		);
 

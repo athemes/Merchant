@@ -1,5 +1,5 @@
 === Merchant - All-in-One WooCommerce Plugin for Pre-Orders, Product Labels, Buy Now, Quick View, and More ===
-Tags: pre-orders, buy now button, product labels, quick view, trust badge
+Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
@@ -18,7 +18,7 @@ Enhance your WooCommerce store with 40+ modules including Pre-Orders, Product La
 
 [TRY A LIVE DEMO](https://app.instawp.io/launch?t=merchant-pro&d=v2)
 
-### A QUICK LOOK AT ALL FREE MODULES (15 AND COUNTING)
+### A QUICK LOOK AT ALL FREE MODULES (16 AND COUNTING)
 
 Let's take a closer look at what each module offers, along with how it can improve your WooCommerce store.
 
@@ -53,6 +53,8 @@ Let's take a closer look at what each module offers, along with how it can impro
 **5. IMPROVE EXPERIENCE**
 
 **Real-Time Search**: Upgrade your WooCommerce product search with real-time predictive search results and frequently searched term suggestions.
+
+**Clear Cart**: Allow customers to easily clear their carts and start fresh.
 
 **Scroll to Top**: Let your shoppers easily navigate back to the top of your site’s pages, which can help create a smooth browsing experience for your store.
 
@@ -90,6 +92,8 @@ With these 15 modules, you can boost your store’s sales, reduce cart abandonme
 **Spending Goal**: Motivate higher average order values by gamifying the shopping experience and offering customers discounts for reaching spending goals.
 
 **Free Gifts**: Increase average order value and boost customer satisfaction by rewarding shoppers with a gift for hitting a spending target or applying a coupon.
+
+**Free Shipping Bar**: Displays the remaining amount needed to qualify for free shipping.
 
 **2. CONVERT MORE**
 
