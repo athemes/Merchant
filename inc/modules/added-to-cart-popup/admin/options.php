@@ -63,6 +63,27 @@ Merchant_Admin_Options::create( array(
 			),
 			'default' => array( 'title_and_price', 'description', 'thumbnail' ),
 		),
+
+		array(
+			'id'      => 'description_type',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Description type', 'merchant' ),
+			'options' => array(
+				'full'  => esc_html__( 'Full description', 'merchant' ),
+				'short' => esc_html__( 'Short description', 'merchant' ),
+			),
+			'default' => 'full',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'show_product_info', // field ID
+						'operator' => 'contains', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'description', // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+
 		array(
 			'id'         => 'description_length',
 			'type'       => 'range',

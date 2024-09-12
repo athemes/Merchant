@@ -167,7 +167,7 @@ Merchant_Admin_Options::create( array(
 			'id'          => 'side_cart_info',
 			'pro'         => true,
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can add a Clear Cart button to the Side Cart using the Merchant Side Cart module.', 'merchant' ),
+			'description' => esc_html__( 'To add a Clear Cart button to the Side Cart, you need to activate the Side Cart module.', 'merchant' ),
 			'button_text' => esc_html__( 'View Side Cart', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=side-cart' ) ),
 			'condition'   => array( 'enable_side_cart', '==', '1' ),

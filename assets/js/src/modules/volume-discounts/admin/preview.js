@@ -26,6 +26,7 @@
             labelTextColor = layout.find('.merchant-field-table_label_text_color input').val(),
             discountType = layout.find('.merchant-field-discount_type input:checked').val(),
             discountAmount = +layout.find('.merchant-field-discount input').val(),
+            discountAmountField = layout.find('.merchant-field-discount input'),
             saveLabelValue = layout.find('.merchant-field-save_label input').val(),
             buyLabelValue = layout.find('.merchant-field-buy_text input').val(),
             quantityValue = +layout.find('.merchant-field-quantity input').val(),
@@ -85,6 +86,16 @@
         );
         $('.merchant-thank-you-preview .product-details .product-info p').html(thankYouDiscountText.replace('{product_price}', merchant_volume_discounts.mock_item_price).replace('{discount}', '10%'));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
+
+        if (discountType === 'percentage_discount') {
+            discountAmountField.attr('max', 100);
+            if (discountAmountField.val() > 100) {
+                discountAmountField.val(100);
+            }
+        } else {
+            // remove attribute
+            discountAmountField.removeAttr('max');
+        }
     }
 
     $('.merchant-flexible-content-control.volume-discounts-style .layout:first-child').addClass('active').trigger('click');

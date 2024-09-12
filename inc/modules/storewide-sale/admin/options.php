@@ -106,7 +106,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => __( 'Apply discount to', 'merchant' ),
 							'options' => array(
-								'regular' => __( 'Regular price', 'merchant' ),
+								'regular' => __( 'Regular Price', 'merchant' ),
 								'sale'    => __( 'Sale Price', 'merchant' ),
 							),
 							'default' => 'regular',
