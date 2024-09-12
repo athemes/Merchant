@@ -74,11 +74,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 						echo wp_kses(
 							str_replace(
 								array(
+									'{amount}',
 									'{quantity}',
 									'{discount}',
 									'{percent}',
 								),
 								array(
+									'<strong>' . esc_html( $discount_qty ) . '</strong>',
 									'<strong>' . esc_html( $discount_qty ) . '</strong>',
 									'<strong>' . wc_price( $discount ) . '</strong>',
 									'<strong>' . esc_html( $discount_percent ) . '</strong>',
