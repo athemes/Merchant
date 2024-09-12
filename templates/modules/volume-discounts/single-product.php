@@ -94,14 +94,16 @@ $product_id     = $product->get_id();
 						echo wp_kses(
 							str_replace(
 								array(
+									'{amount}',
 									'{quantity}',
 									'{discount}',
 									'{percent}',
 								),
 								array(
-									'<strong class="tier-quantity">' . esc_html( $discount_qty ) . '</strong>',
-									'<strong class="tier-discount">' . wc_price( $discount ) . '</strong>',
-									'<strong class="tier-discount-percent">' . esc_html( $discount_percent ) . '</strong>',
+									'<strong>' . esc_html( $discount_qty ) . '</strong>',
+									'<strong>' . esc_html( $discount_qty ) . '</strong>',
+									'<strong>' . wc_price( $discount ) . '</strong>',
+									'<strong>' . esc_html( $discount_percent ) . '</strong>',
 								),
 								esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['buy_text'] ) )
 							),
