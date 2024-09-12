@@ -57,12 +57,17 @@ merchant.modules = merchant.modules || {};
 
 							if ( typeof $.fn.wc_product_gallery === 'function' && $gallery.length ) {
                                 $gallery.trigger('wc-product-gallery-before-init', [$gallery.get(0), wc_single_product_params]);
-                                $gallery.wc_product_gallery(wc_single_product_params);
-                                $gallery.trigger('wc-product-gallery-after-init', [$gallery.get(0), wc_single_product_params]);
+
+								// Force-enable the gallery slider in case the theme/plugin has removed it using `remove_theme_support( 'wc-product-gallery-slider' )`
+								wc_single_product_params['flexslider_enabled'] = '1';
+
+								$gallery.wc_product_gallery(wc_single_product_params);
+
+								$gallery.trigger('wc-product-gallery-after-init', [$gallery.get(0), wc_single_product_params]);
 							}
 
 							var $variations = $content.find('.variations_form');
-							
+
 							if ( typeof $.fn.wc_variation_form === 'function' && $variations.length ) {
 								$variations.each(function () {
 									$(this).wc_variation_form();
@@ -76,50 +81,36 @@ merchant.modules = merchant.modules || {};
 							if ( window.botiga && window.botiga.qtyButton ) {
 					            window.botiga.qtyButton.init('quick-view');
 							}
-
 						} else {
-
 							$content.html(response.data);
 
 							$inner.addClass('merchant-show');
 							$modal.removeClass('merchant-loading');
-			
-						}
 
+						}
 						window.dispatchEvent( new Event( 'merchant.quickview.ajax.loaded' ) );
 					}).fail( function( xhr, textStatus ) {
-
 						$content.html(textStatus);
-			
+
 						$inner.addClass('merchant-show');
 						$modal.removeClass('merchant-loading');
-
 					});
-					
 				});
-				
+
 				$overlay.on('click', function( e ) {
-					
 					e.preventDefault();
-
 					$closeButton.trigger('click');
-
 				});
-				
+
 				$closeButton.on('click', function( e ) {
-					
 					e.preventDefault();
-					
+
 					isOpen = false;
 					$modal.removeClass('merchant-show');
 					$inner.removeClass('merchant-show');
-
 				});
-
 			});
-
 		},
-
 	};
 
 	$(document).ready(function() {

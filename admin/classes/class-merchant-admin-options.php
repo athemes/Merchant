@@ -827,8 +827,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 */
 		public static function checkbox_multiple( $settings, $value ) {
 			if ( ! empty( $settings['options'] ) ) : ?>
-                <!-- required to save when all options are unchecked -->
-                <input type="hidden" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="0">
 				<?php
 				foreach ( $settings['options'] as $key => $option ) : ?>
                     <label>
