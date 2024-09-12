@@ -81,50 +81,36 @@ merchant.modules = merchant.modules || {};
 							if ( window.botiga && window.botiga.qtyButton ) {
 					            window.botiga.qtyButton.init('quick-view');
 							}
-
 						} else {
-
 							$content.html(response.data);
 
 							$inner.addClass('merchant-show');
 							$modal.removeClass('merchant-loading');
 
 						}
-
 						window.dispatchEvent( new Event( 'merchant.quickview.ajax.loaded' ) );
 					}).fail( function( xhr, textStatus ) {
-
 						$content.html(textStatus);
 
 						$inner.addClass('merchant-show');
 						$modal.removeClass('merchant-loading');
-
 					});
-
 				});
 
 				$overlay.on('click', function( e ) {
-
 					e.preventDefault();
-
 					$closeButton.trigger('click');
-
 				});
 
 				$closeButton.on('click', function( e ) {
-
 					e.preventDefault();
 
 					isOpen = false;
 					$modal.removeClass('merchant-show');
 					$inner.removeClass('merchant-show');
-
 				});
-
 			});
-
 		},
-
 	};
 
 	$(document).ready(function() {
