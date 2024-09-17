@@ -24,36 +24,56 @@
             GroubField.initFlag();
         });
 
-        $ajaxForm.ajaxForm({
-            beforeSubmit: function () {
-                $ajaxHeader.addClass('merchant-saving');
-            },
-            success: function () {
+        $(document).on('submit','.merchant-module-page-ajax-form', function (e) {
+            e.preventDefault();
+            // Collect form inputs as an array of objects (name, value pairs)
+            let formDataArray = $(this).serializeArray();
+            let nonce = $('#merchant_nonce').val()
+            let submitUrl = $('#module_url').val();
+            // Convert the form data array to a JSON object
+            let formDataJson = {};
+            $.each(formDataArray, function(_, field) {
+                formDataJson[field.name] = field.value;
+            });
 
-                $ajaxHeader.removeClass('merchant-show');
+            $.ajax({
+                url: submitUrl,
+                type: 'POST',
+                data: {
+                    merchant_save: true,
+                    merchant_nonce: nonce,
+                    module: currentModule,
+                    data: JSON.stringify(formDataJson),
+                },
+                beforeSend: function (e, l) {
+                    $ajaxHeader.addClass('merchant-saving');
+                },
+                success: function (response) {
+                    $ajaxHeader.removeClass('merchant-show');
 
-                merchant.show_save = false;
+                    merchant.show_save = false;
 
-                // Module Alert after Ajax Save
-                if (!$('.merchant-module-action').hasClass('merchant-enabled')) {
+                    // Module Alert after Ajax Save
+                    if (!$('.merchant-module-action').hasClass('merchant-enabled')) {
 
-                    var $moduleAlert = $('.merchant-module-alert');
+                        var $moduleAlert = $('.merchant-module-alert');
 
-                    $moduleAlert.addClass('merchant-show');
+                        $moduleAlert.addClass('merchant-show');
 
-                    $(document).off('click.merchant-alert-close');
+                        $(document).off('click.merchant-alert-close');
 
-                    $(document).on('click.merchant-alert-close', function (e) {
-                        if (!$(e.target).closest('.merchant-module-alert-wrapper').length) {
-                            $moduleAlert.removeClass('merchant-show');
-                            $(document).off('click.merchant-alert-close');
-                        }
-                    });
+                        $(document).on('click.merchant-alert-close', function (e) {
+                            if (!$(e.target).closest('.merchant-module-alert-wrapper').length) {
+                                $moduleAlert.removeClass('merchant-show');
+                                $(document).off('click.merchant-alert-close');
+                            }
+                        });
 
+                    }
+
+                    $( document ).trigger( 'save.merchant', [ currentModule ] );
                 }
-
-                $( document ).trigger( 'save.merchant', [ currentModule ] );
-            }
+            })
         });
         const $disableModuleSubmitBtn = $('.merchant-module-question-answer-button');
         const $disableModuleTextField = $('.merchant-module-question-answer-textarea');

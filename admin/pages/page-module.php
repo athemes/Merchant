@@ -19,7 +19,10 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 
             <form method="post" action="" class="merchant-module-page-ajax-form" autocomplete="off">
 
-                <input type="hidden" name="merchant_nonce" value="<?php echo esc_attr( wp_create_nonce( 'merchant_nonce' ) ); ?>"/>
+                <input type="hidden" id="merchant_nonce" name="merchant_nonce" value="<?php echo esc_attr( wp_create_nonce( 'merchant_nonce' ) ); ?>"/>
+                <input type="hidden" name="module_name" value="<?php echo esc_attr( $merchant_module ); ?>"/>
+                <input type="hidden" name="module_url" id="module_url" value="<?php echo esc_url( add_query_arg( array( 'page' => 'merchant', 'module' => $merchant_module ), 'admin.php' ) )
+                ?>"/>
 
                 <div class="merchant-module-page-ajax-header">
                     <div class="merchant-module-page-ajax-notice"><?php esc_html_e( 'Your settings have been modified. Save?', 'merchant' ); ?></div>

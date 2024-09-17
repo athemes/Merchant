@@ -37,6 +37,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
+//          add_action( 'wp_ajax_merchant_save', array( $this, 'save_options' ) );
 
             add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
 		}
@@ -366,12 +367,46 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+		 * Converts a flat array with keys containing bracket notation (e.g., 'merchant[rules][0][offer-title]')
+		 * into a multidimensional array.
+		 *
+		 * @param array $array The flat array to be converted.
+		 *
+		 * @return array The converted multidimensional array.
+		 */
+		public static function convert_to_flat_keys( $arr ) {
+			$new_array = array();
+
+			foreach ( $arr as $key => $value ) {
+				// Split the key by brackets (ignoring empty parts)
+				$keys = preg_split( '/[\[\]]+/', $key, - 1, PREG_SPLIT_NO_EMPTY );
+
+				// Reference to the root of the new array
+				$current = &$new_array;
+
+				// Iterate through the key parts and build the array structure
+				foreach ( $keys as $index ) {
+					if ( ! isset( $current[ $index ] ) ) {
+						$current[ $index ] = array();
+					}
+					$current = &$current[ $index ];
+				}
+
+				// Finally assign the value to the innermost key
+				$current = $value;
+			}
+
+			return $new_array;
+		}
+
+		/**
 		 * Save options.
 		 */
-		public static function save_options( $settings ) {
-			$save  = ( isset( $_POST['merchant_save'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_save'] ) ) : '';
-			$reset = ( isset( $_POST['merchant_reset'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_reset'] ) ) : '';
-			$nonce = ( isset( $_POST['merchant_nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_nonce'] ) ) : '';
+		public static function save_options( $settings = array() ) {
+			$save   = ( isset( $_POST['merchant_save'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_save'] ) ) : '';
+			$reset  = ( isset( $_POST['merchant_reset'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_reset'] ) ) : '';
+			$nonce  = ( isset( $_POST['merchant_nonce'] ) ) ? sanitize_text_field( wp_unslash( $_POST['merchant_nonce'] ) ) : '';
+			$data   = ( isset( $_POST['data'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data'] ) ) : '';
 
 			if ( ! wp_verify_nonce( $nonce, 'merchant_nonce' ) ) {
 				return;
@@ -384,6 +419,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			$options = get_option( 'merchant', array() );
 
 			if ( ! empty( $save ) ) {
+				$inputs = self::convert_to_flat_keys( json_decode( $data, 1 ) );
 				if ( ! empty( $settings['fields'] ) ) {
 					foreach ( $settings['fields'] as $field ) {
 						if ( ! isset( $field['id'] ) ) {
@@ -391,20 +427,20 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						}
 
 						if ( ! merchant_is_pro_active() && isset( $field['pro'] ) && $field['pro'] === true ) {
-                            continue;
+							continue;
 						}
 
 						$value = null;
 
-						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
+						if ( isset( $inputs['merchant'] ) && isset( $inputs['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
-								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
+								$value = wp_kses( $inputs['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
 							} elseif ( 'textarea_multiline' === $field['type'] ) {
-								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
-							} elseif ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
-								$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
+								$value = sanitize_textarea_field( $inputs['merchant'][ $field['id'] ] );
+							} elseif ( is_array( $inputs['merchant'][ $field['id'] ] ) ) {
+								$value = array_filter( map_deep( wp_unslash( $inputs['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
 							} else {
-								$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
+								$value = sanitize_text_field( wp_unslash( $inputs['merchant'][ $field['id'] ] ) );
 							}
 						}
 
