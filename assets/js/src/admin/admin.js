@@ -33,7 +33,30 @@
             // Convert the form data array to a JSON object
             let formDataJson = {};
             $.each(formDataArray, function(_, field) {
-                formDataJson[field.name] = field.value;
+                // Check if the field name represents an array (has "[]")
+                if (field.name.includes('[]')) {
+                    // Remove the "[]" from the field name for consistency
+                    let cleanName = field.name.replace('[]', '');
+
+                    // Initialize as an array if it doesn't exist
+                    if (!Array.isArray(formDataJson[cleanName])) {
+                        formDataJson[cleanName] = [];
+                    }
+                    // Push the value into the array
+                    formDataJson[cleanName].push(field.value);
+
+                } else {
+                    // For non-checkbox fields or fields without "[]", handle as before
+                    if (formDataJson.hasOwnProperty(field.name)) {
+                        if (Array.isArray(formDataJson[field.name])) {
+                            formDataJson[field.name].push(field.value);
+                        } else {
+                            formDataJson[field.name] = [formDataJson[field.name], field.value];
+                        }
+                    } else {
+                        formDataJson[field.name] = field.value;
+                    }
+                }
             });
 
             $.ajax({
