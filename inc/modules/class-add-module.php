@@ -292,6 +292,10 @@ class Merchant_Add_Module {
 	 * @return void
 	 */
 	public function setup_product_object() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+
 		if ( ! is_product() ) {
 			return;
 		}
