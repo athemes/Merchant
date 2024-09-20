@@ -29,6 +29,14 @@
 			margin-top: 0;
 		}
 
+		div.quantity {
+			max-width: 120px;
+
+			.qty {
+				text-align: center;
+			}
+		}
+
 		.variations_form {
 			flex-direction: row;
 			margin-block: 0;
