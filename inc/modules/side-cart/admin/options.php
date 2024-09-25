@@ -244,30 +244,7 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'id'         => 'upsells_products_count_limitation',
-			'title'      => __( 'Limit the number of upsells in the cart', 'merchant' ),
-			'type'       => 'number',
-			'default'    => 10,
-			'min'        => 1,
-			'step'       => 1,
-			'conditions' => array(
-				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-				'terms'    => array(
-					array(
-						'field'    => 'use_upsells', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-					array(
-						'field'    => 'upsells_products_count_limitation_toggle', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
-			'id'         => 'upsells_products_count_limitation',
-			'title'      => __( 'Limit the number of upsells in the cart', 'merchant' ),
+			'title'      => __( 'Maximum number of upsells to display', 'merchant' ),
 			'type'       => 'number',
 			'default'    => 10,
 			'min'        => 1,
