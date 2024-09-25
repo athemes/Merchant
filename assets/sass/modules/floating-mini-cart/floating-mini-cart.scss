@@ -524,6 +524,92 @@
 	}
 }
 
+// Wrapper for the merchant mini cart upsell section
+.merchant-mini-cart-upsell-wrap {
+	// Styling for the component title
+	.component-title {
+		font-size: 16px;
+		text-align: center;
+		margin-top: 0;
+	}
+
+	// Wrapper for each upsell item
+	.merchant-mini-cart-upsell-item-wrap {
+		margin-bottom: 30px;
+
+		// Container for the column layout
+		.column-container {
+			display: flex;
+			justify-content: space-between; // Distribute space between columns
+			align-items: center; // Center items vertically
+			gap: 15px;
+
+			// General column styling
+			.column {
+				flex: 1; // Allow columns to grow equally
+			}
+
+			// Left column alignment
+			.column-left {
+				text-align: left;
+			}
+
+			// Middle column styling
+			.column-middle {
+				flex: 2; // Give middle column more space
+				margin: 0 auto; // Center the middle column
+			}
+
+			// Right column alignment
+			.column-right {
+				text-align: right;
+			}
+		}
+
+		.product-price{
+			font-size: 14px;
+			font-weight: 600;
+		}
+
+		// Styling for the add to cart button wrapper
+		.add-to-cart-wrap {
+			.rebuy-button {
+				padding: 2px 12px;
+			}
+		}
+
+		// Styling for product variations section
+		.product-variations {
+			margin-top: 10px;
+			position: relative;
+
+			// Individual product attribute styling
+			.product-attribute {
+				margin-bottom: 10px;
+
+				// Variation selector dropdown styling
+				.variation-selector {
+					padding: 5px 10px;
+					min-height: 20px;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+}
+
+// Hide the merchant upsell widget by default
+.merchant-upsell-widget {
+	display: none !important;
+}
+
+// Show the merchant upsell widget only within the floating side mini cart
+.merchant-floating-side-mini-cart-body {
+	.merchant-upsell-widget {
+		display: block !important;
+	}
+}
+
 .rtl {
 	.merchant-floating-side-mini-cart {
 		.merchant-floating-side-mini-cart-close-button {

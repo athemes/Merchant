@@ -3,6 +3,8 @@
  *
  */
 jQuery(document).ready(function ($) {
+	'use strict';
+
 	// Toggle side cart
 	if (merchant.setting.hasOwnProperty('show_after_add_to_cart_single_product')) {
 		const isSingleProductPage = $('body.single-product').length;
@@ -131,4 +133,171 @@ jQuery(document).ready(function ($) {
 			);
 		}
 	}
+
+	let merchant_upsells = {
+		init: function () {
+			this.bindEvents();
+		},
+		bindEvents: function () {
+			$(document).on('change', '.merchant-mini-cart-upsell-item-wrap .variation-selector', this.handleVariationChange.bind(this));
+			$(document).on('click', '.add-to-cart-wrap .merchant-upsell-add-to-cart:not(.disabled)', this.handleAddToCartClick.bind(this));
+		},
+		handleVariationChange: function (event) {
+			let variationField = $(event.target),
+				container = variationField.closest('.merchant-mini-cart-upsell-item-wrap'),
+				variations = container.attr('data-variations') && JSON.parse(container.attr('data-variations')) || [],
+				dropDowns = container.find('.variation-selector');
+			container.attr('data-variation-id', 0); // reset variation ID
+			let currentField = {
+				name: $(event.target).attr('data-attribute_name'),
+				value: $(event.target).val()
+			}
+			let availableOptions = [];
+			let matchingVariations = variations.filter(
+				function (variation) {
+					return typeof variation.attributes[currentField.name.toLowerCase()] !== 'undefined'
+						&& variation.attributes[currentField.name.toLowerCase()] === currentField.value;
+				}
+			);
+
+			// Hide not available options
+			dropDowns.each(function () {
+				let dropdown = $(this);
+				let attribute_name = dropdown.attr('data-attribute_name');
+				// Collect available options for this attribute
+				matchingVariations.forEach(function (variation) {
+					let optionValue = variation.attributes[attribute_name.toLowerCase()];
+					if (typeof optionValue !== 'undefined' && optionValue !== '' && !availableOptions.includes(optionValue)) {
+						availableOptions.push(optionValue);
+					}
+				});
+				if (currentField.name.toLowerCase() !== attribute_name.toLowerCase()) {
+					dropdown.find('option').each(function () {
+						let optionValue = $(this).attr('value');
+						if (optionValue !== '') {
+							if (availableOptions.includes(optionValue)) {
+								$(this).show();
+							} else {
+								$(this).hide();
+							}
+						}
+					});
+				}
+			});
+
+			if (this.isAllVariationsSelected(container)) {
+				this.fetchVariationDetails(container, container.attr('data-product-id'), this.getSelectedAttributes(container));
+				// ajax call here to get product information...
+				this.handleAddToCartBtnState(container, true);
+			} else {
+				this.handleAddToCartBtnState(container, false);
+			}
+		},
+		/**
+		 * Fetches variation details via AJAX.
+		 *
+		 * @param {Object} container - The container element.
+		 * @param {Object} productID - The product ID.
+		 * @param {Object} selectedAttributes - The selected variation attributes.
+		 *
+		 * @return {void}
+		 */
+		fetchVariationDetails: function (container, productID, selectedAttributes) {
+			$.ajax({
+				type: 'POST',
+				url: merchant_side_cart_params.ajax_url,
+				data: {
+					action: 'merchant_get_variation_data',
+					product_id: productID,
+					nonce: merchant_side_cart_params.variation_info_nonce,
+					attributes: selectedAttributes
+				},
+				success: function (response) {
+					if (response.success) {
+						console.log(response.data)
+						container.attr('data-variation-id', response.data.id);
+					}
+				},
+				error: function (error) {
+					console.log('Error:', error);
+				}
+			});
+		},
+		getSelectedAttributes: function (container) {
+			let attributes = {};
+			container.find('.variation-selector').each(function () {
+				attributes[$(this).attr('name')] = $(this).val();
+			});
+			return attributes;
+		},
+		handleAddToCartBtnState: function (container, allSelected) {
+			let btn = container.find('.add-to-cart-wrap .merchant-upsell-add-to-cart');
+			if (allSelected) {
+				btn.removeClass('disabled');
+				btn.prop('disabled', false);
+			} else {
+				btn.addClass('disabled');
+				btn.prop('disabled', true);
+			}
+		},
+		isAllVariationsSelected: function (container) {
+			let variationFields = container.find('.variation-selector');
+			return variationFields.length && variationFields.toArray().every(function (field) {
+				return $(field).val() !== '';
+			});
+		},
+		handleAddToCartClick: function (event) {
+			event.preventDefault();
+			let self = this,
+				btn = $(event.currentTarget),
+				container = btn.closest('.merchant-mini-cart-upsell-item-wrap'),
+				productType = container.attr('data-product-type'),
+				productId = container.attr('data-product-id'),
+				variationId = container.attr('data-variation-id');
+
+			if (productType === 'variable' && variationId !== '0') {
+				this.addToCart(self, 'variable', productId, variationId, btn);
+			} else if (productType === 'simple') {
+				this.addToCart(self, 'simple', productId, variationId, btn);
+			} else {
+				console.log('Unsupported product type:', productType);
+			}
+		},
+		addToCart: function (self, productType, productId, variationId, btn) {
+			let data = {
+				action: 'merchant_side_cart_upsells_add_to_cart',
+				product_id: productId,
+				variation_id: variationId,
+				nonce: merchant_side_cart_params.nonce
+			}
+			$.ajax({
+				type: 'POST',
+				url: merchant_side_cart_params.ajax_url,
+				data: data,
+				beforeSend: function () {
+					btn.addClass('loading');
+				},
+				success: function (response) {
+					self.handleSuccess(response);
+				},
+				error: function (error) {
+					self.handleError(error);
+				},
+				complete: function () {
+					btn.removeClass('loading');
+				}
+			});
+		},
+		handleSuccess: function (response) {
+			console.log(response.data);
+			if (response.data.fragments) {
+				$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, null, 'side-cart']);
+			}
+		},
+		handleError: function (error) {
+			console.log('Error:', error);
+		}
+	}
+
+	merchant_upsells.init();
 });
