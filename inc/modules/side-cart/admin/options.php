@@ -220,6 +220,26 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+						array(
+							'id'          => 'upsells_category_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Select category(es)', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
+							'desc'        => esc_html__( 'Select the category(es) that you want to display the upsell products form.', 'merchant' ),
+							'conditions'  => array(
+								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+								'terms'    => array(
+									array(
+										'field'    => 'custom_upsell_type', // field ID
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => 'categories', // can be a single value or an array of string/number/int
+									),
+								),
+							),
+						),
 					),
 				),
 			),
@@ -305,7 +325,7 @@ Merchant_Admin_Options::create( array(
 				'carousel' => esc_html__( 'Carousel', 'merchant' ),
 				'block'    => esc_html__( 'Block', 'merchant' ),
 			),
-			'default'    => 'carousel',
+			'default'    => 'block',
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
