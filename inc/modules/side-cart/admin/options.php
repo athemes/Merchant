@@ -185,7 +185,7 @@ Merchant_Admin_Options::create( array(
 										'value'    => array( 'all', 'categories' ), // can be a single value or an array of string/number/int
 									),
 									array(
-										'field'    => 'exclude_product_ids', // field ID
+										'field'    => 'exclude_product_ids_toggle', // field ID
 										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 										'value'    => true, // can be a single value or an array of string/number/int
 									),
