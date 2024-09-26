@@ -95,7 +95,7 @@ Merchant_Admin_Options::create( array(
 					'layout'              => 'upsell-details',
 					'upsell_based_on'     => 'products',
 					'exclude_product_ids' => 0,
-					'custom_upsell_type'       => 'products',
+					'custom_upsell_type'  => 'products',
 				),
 			),
 			'layouts'      => array(
@@ -153,7 +153,7 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
-							'id'         => 'exclude_product_ids',
+							'id'         => 'exclude_product_ids_toggle',
 							'type'       => 'switcher',
 							'title'      => __( 'Exclusion List', 'merchant' ),
 							'desc'       => __( 'Enable upsell products in the side cart', 'merchant' ),
