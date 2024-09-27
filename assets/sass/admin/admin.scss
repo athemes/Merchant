@@ -1395,6 +1395,10 @@ body.merchant-module-disabled {
   &.merchant-hide {
     display: none;
   }
+
+  &[data-id="shortcode_text"] {
+    margin-top: 24px;
+  }
 }
 
 .merchant-module-page-setting-field-title {
@@ -2282,6 +2286,11 @@ body.merchant-module-disabled {
     padding-top: 20px;
   }
 
+  .merchant-module-page-setting-field {
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
 }
 
 .merchant-sortable-repeater-control {
@@ -2620,6 +2629,11 @@ body.merchant-module-disabled {
 
       &-has_accordion {
         right: 43px;
+      }
+
+      &-no_accordion {
+        top: 0;
+        right: 0;
       }
 
       a {
