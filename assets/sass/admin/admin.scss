@@ -1349,7 +1349,7 @@ body.merchant-module-disabled {
 
 .merchant-module-page-preview-title,
 .merchant-module-page-setting-title {
-  margin-top: 10px;
+  margin-top: 0;
   padding-right: 50px;
   font-size: 20px;
   font-weight: 500;
@@ -1377,7 +1377,7 @@ body.merchant-module-disabled {
   border: 2px solid #F0F0F1;
   background-color: #fff;
 
-  >.merchant-module-page-setting-field:last-of-type{
+  > .merchant-module-page-setting-field:last-of-type {
     margin-bottom: 0;
   }
 }
@@ -2516,6 +2516,12 @@ body.merchant-module-disabled {
 
       .layout-body {
         padding: 15px 20px;
+
+        .layout-field:last-of-type {
+          .merchant-group-field {
+            margin-bottom: 5px;
+          }
+        }
       }
     }
   }
@@ -2763,7 +2769,7 @@ body.merchant-module-disabled {
     color: #3858E9;
     border-color: #3858E9;
     background-color: transparent;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     padding: 4px 19px;
 
     &:hover,
@@ -3036,6 +3042,10 @@ body.merchant-module-disabled {
   border-radius: 4px;
   border: 1px solid #0d65d7;
   background-color: #e6effa;
+
+  &[data-id="shortcode_info"] {
+    margin-bottom: 0;
+  }
 }
 
 .merchant-module-page-setting-field-divider {
