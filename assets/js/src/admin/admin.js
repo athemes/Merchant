@@ -630,6 +630,10 @@
                         if ($(this).data('name')) {
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
+
+                        if ($(this).is(':checkbox, :radio') && $(this).attr('checked')) {
+                            $(this).prop('checked', true);
+                        }
                     })
                     $layout.find('.layout-count').text($items.length + 1)
 
