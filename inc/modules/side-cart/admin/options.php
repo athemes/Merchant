@@ -156,7 +156,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'exclude_product_ids_toggle',
 							'type'       => 'switcher',
 							'title'      => __( 'Exclusion List', 'merchant' ),
-							'desc'       => __( 'Enable upsell products in the side cart', 'merchant' ),
+							'desc'       => __( 'Select products that will not display upsells.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
