@@ -803,7 +803,9 @@
                 } );
 
                 function hideOtherActions( $layout ) {
-                    $layout.siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                    if ( $layout && $layout.length ) {
+                        $layout.siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                    }
                 }
             },
 
