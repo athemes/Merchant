@@ -514,7 +514,10 @@
                     if (hasAccordion) {
                         $content.accordion({
                             collapsible: true,
-                            header: "> div > .layout-header",
+                            //header: "> div > .layout-header",
+                            header: function( elem ) {
+                                return elem.find( '.layout__inner > .layout-header' );
+                            },
                             heightStyle: "content"
                         }).sortable({
                             axis: 'y',
@@ -685,6 +688,8 @@
                         return;
                     }
 
+                    $sourceLayout.find( '.layout-actions__inner' ).hide();
+
                     // Clone the layout without data & events.
                     const $clonedLayout = $sourceLayout.clone();
                     const $items = $flexibleContent.find('.layout');
@@ -776,6 +781,36 @@
                     }
                     $(document).trigger('change.merchant');
                 });
+
+                // Toggle Actions(delete/duplicate)
+                $( document ).on( 'click', '.layout-actions__toggle', function( e ) {
+                    e.preventDefault();
+
+                    // Hide other opened elements
+                    hideOtherActions( $( this ).closest( '.layout' ) )
+
+                    // Toggle the current element
+                    $( this )
+                        .closest( '.layout-actions' )
+                        .find( '.layout-actions__inner' )
+                        .stop()
+                        .slideToggle( 300 );
+                } );
+
+                // Hide Actions when collapse/open
+                $( document ).on( 'click', '.layout-header', function() {
+                    hideOtherActions( $( this ).closest( '.layout' ) );
+                } )
+
+                $( document ).on( 'merchant-flexible-content-added', function( e, $layout ) {
+                    hideOtherActions( $layout );
+                } );
+
+                function hideOtherActions( $layout ) {
+                    if ( $layout && $layout.length ) {
+                        $layout.siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                    }
+                }
             },
 
             refreshNumbers: function ($content) {

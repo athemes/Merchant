@@ -69,13 +69,14 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 			} );
 
 			add_filter( 'merchant_enqueue_module_styles', array( $this, 'should_enqueue_styles' ), 10, 2 );
+			add_filter( 'merchant_enqueue_module_scripts', array( $this, 'should_enqueue_scripts' ), 10, 2 );
 
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 		}
 
 		/**
-		 * If a module is active, enqueue its styles on Elementor Preview mode
+		 * Determines whether to enqueue styles for modules.
 		 *
 		 * @param $enqueue
 		 * @param $module
@@ -83,8 +84,60 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 		 * @return boolean
 		 */
 		public function should_enqueue_styles( $enqueue, $module ) {
-			if ( \Elementor\Plugin::$instance->preview->is_preview_mode() && Merchant_Modules::is_module_active( $module->module_id ?? '' ) ) {
+			$module_id = $module->module_id ?? '';
+
+			if ( \Elementor\Plugin::$instance->preview->is_preview_mode() && Merchant_Modules::is_module_active( $module_id ) ) {
 				return true;
+			}
+
+			// Todo: check if required for other modules as well
+			if ( ! \Elementor\Plugin::$instance->preview->is_preview_mode() && Merchant_Modules::is_module_active( $module_id ) && ( $module_id === 'wishlist' ) ) {
+				global $post;
+
+				if ( empty( $post ) ) {
+					return $enqueue;
+				}
+
+				$elementor_data = get_post_meta( $post->ID, '_elementor_data', true );
+				if (
+					$elementor_data &&
+					( strpos( $elementor_data, 'woocommerce-products' ) !== false || strpos( $elementor_data, 'wc-products' ) !== false ) ) {
+					return true;
+				}
+			}
+
+			return $enqueue;
+		}
+
+		/**
+		 * Determines whether to enqueue scripts for modules.
+		 *
+		 * @param $enqueue
+		 * @param $module
+		 *
+		 * @return mixed|true
+		 */
+		public function should_enqueue_scripts( $enqueue, $module ) {
+			$module_id = $module->module_id ?? '';
+
+			if ( \Elementor\Plugin::$instance->preview->is_preview_mode() && Merchant_Modules::is_module_active( $module_id ) ) {
+				return true;
+			}
+
+			// Todo: check if required for other modules as well
+			if ( ! \Elementor\Plugin::$instance->preview->is_preview_mode() && Merchant_Modules::is_module_active( $module_id ) && ( $module_id === 'wishlist' ) ) {
+				global $post;
+
+				if ( empty( $post ) ) {
+					return $enqueue;
+				}
+
+				$elementor_data = get_post_meta( $post->ID, '_elementor_data', true );
+				if (
+					$elementor_data &&
+					( strpos( $elementor_data, 'woocommerce-products' ) !== false || strpos( $elementor_data, 'wc-products' ) !== false ) ) {
+					return true;
+				}
 			}
 
 			return $enqueue;
