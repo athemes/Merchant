@@ -514,7 +514,10 @@
                     if (hasAccordion) {
                         $content.accordion({
                             collapsible: true,
-                            header: "> div > .layout-header",
+                            //header: "> div > .layout-header",
+                            header: function( elem ) {
+                                return elem.find( '.layout__inner > .layout-header' );
+                            },
                             heightStyle: "content"
                         }).sortable({
                             axis: 'y',
@@ -681,6 +684,8 @@
                         return;
                     }
 
+                    $sourceLayout.find( '.layout-actions__inner' ).hide();
+
                     // Clone the layout without data & events.
                     const $clonedLayout = $sourceLayout.clone();
                     const $items = $flexibleContent.find('.layout');
@@ -772,6 +777,25 @@
                     }
                     $(document).trigger('change.merchant');
                 });
+
+                // Toggle Actions(delete/duplicate)
+                $( document ).on( 'click', '.layout-actions__toggle', function( e ) {
+                    e.preventDefault();
+
+                    // Hide other opened elements
+                    $( this ).closest( '.layout' ).siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+
+                    // Toggle the current element
+                    $( this )
+                        .closest( '.layout-actions' )
+                        .find( '.layout-actions__inner' )
+                        .stop()
+                        .slideToggle( 300 );
+                } );
+
+                $( document ).on( 'click', '.layout-header', function() {
+                    $( this ).closest( '.layout' ).find( '.layout-actions__inner' ).slideUp( 300 );
+                } )
             },
 
             refreshNumbers: function ($content) {
