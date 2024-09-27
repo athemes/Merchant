@@ -2497,7 +2497,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
         private static function print_flexible_layout_actions( $settings, $layout_type ) {
 	        $has_duplicate = ! empty( $settings['duplicate'] );
-	        $has_accordion = $settings['accordion'] ?? true;
+	        $has_accordion = ! empty( $settings['accordion'] );
             ?>
             <div class="layout-actions<?php echo $has_accordion ? esc_attr( ' layout-actions-has_accordion' ) :  ' layout-actions-no_accordion'; ?>">
                 <a href="#" class="layout-actions__toggle">
