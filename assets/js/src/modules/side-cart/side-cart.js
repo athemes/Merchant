@@ -122,6 +122,8 @@ jQuery(document).ready(function ($) {
 
 							if ($cart_item.length) {
 								$cart_item.unblock();
+								$(document).trigger('merchant_destroy_carousel');
+								$(document).trigger('merchant_init_carousel');
 							}
 						},
 						error: (error) => {
@@ -137,10 +139,33 @@ jQuery(document).ready(function ($) {
 	let merchant_upsells = {
 		init: function () {
 			this.bindEvents();
+
+			setTimeout(function () {
+				$(document).trigger('merchant_init_carousel');
+
+				// Pause the slider on hover
+				$(document).find('.woocommerce-mini-cart-item.merchant-upsell-widget').on('mouseenter', function () {
+					if ($(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel').hasClass('slick-initialized')) {
+						$('.merchant-mini-cart-upsells.upsells-layout-carousel').slick('slickPause');
+					}
+				});
+
+				// Resume the slider on mouse leave
+				$(document).find('.woocommerce-mini-cart-item.merchant-upsell-widget').on('mouseleave', function () {
+					if ($(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel').hasClass('slick-initialized')) {
+						$('.merchant-mini-cart-upsells.upsells-layout-carousel').slick('slickPlay');
+					}
+				});
+
+			}, 500);
 		},
 		bindEvents: function () {
 			$(document).on('change', '.merchant-mini-cart-upsell-item-wrap .variation-selector', this.handleVariationChange.bind(this));
 			$(document).on('click', '.add-to-cart-wrap .merchant-upsell-add-to-cart:not(.disabled)', this.handleAddToCartClick.bind(this));
+			$(document).on('merchant_init_carousel', this.initCarousel.bind(this));
+			$(document).on('merchant_destroy_carousel', this.destroyCarousel.bind(this));
+			$(document).on('added_to_cart', this.handleAddToCart.bind(this));
+			$(document).on('removed_from_cart', this.handleRemoveFromCart.bind(this));
 		},
 		handleVariationChange: function (event) {
 			let variationField = $(event.target),
@@ -186,7 +211,7 @@ jQuery(document).ready(function ($) {
 			});
 
 			if (this.isAllVariationsSelected(container)) {
-				this.fetchVariationDetails(container, container.attr('data-product-id'), this.getSelectedAttributes(container));
+				this.fetchVariationDetails(container, container.attr('data-product-id'), this.getSelectedAttributes(container), this);
 				// ajax call here to get product information...
 				this.handleAddToCartBtnState(container, true);
 			} else {
@@ -199,10 +224,11 @@ jQuery(document).ready(function ($) {
 		 * @param {Object} container - The container element.
 		 * @param {Object} productID - The product ID.
 		 * @param {Object} selectedAttributes - The selected variation attributes.
+		 * @param {Object} self - The current object.
 		 *
 		 * @return {void}
 		 */
-		fetchVariationDetails: function (container, productID, selectedAttributes) {
+		fetchVariationDetails: function (container, productID, selectedAttributes, self) {
 			$.ajax({
 				type: 'POST',
 				url: merchant_side_cart_params.ajax_url,
@@ -216,12 +242,17 @@ jQuery(document).ready(function ($) {
 					if (response.success) {
 						console.log(response.data)
 						container.attr('data-variation-id', response.data.id);
+						self.updateProductThumbnail(container, response.data.thumbnail_url);
 					}
 				},
 				error: function (error) {
 					console.log('Error:', error);
 				}
 			});
+		},
+		updateProductThumbnail: function (container, thumbnailUrl) {
+			let productThumbnail = container.find('.product-thumbnail a img');
+			productThumbnail.attr('src', thumbnailUrl);
 		},
 		getSelectedAttributes: function (container) {
 			let attributes = {};
@@ -289,13 +320,50 @@ jQuery(document).ready(function ($) {
 			});
 		},
 		handleSuccess: function (response) {
-			console.log(response.data);
 			if (response.data.fragments) {
+				$(document).trigger('merchant_destroy_carousel');
 				$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, null, 'side-cart']);
+				$(document).trigger('merchant_init_carousel');
 			}
 		},
 		handleError: function (error) {
 			console.log('Error:', error);
+		},
+		handleAddToCart: function (event, fragments, cart_hash, $button, $context) {
+			$(document).trigger('merchant_destroy_carousel');
+			$(document).trigger('merchant_init_carousel');
+		},
+		handleRemoveFromCart: function (event) {
+			$(document).trigger('merchant_destroy_carousel');
+			$(document).trigger('merchant_init_carousel');
+		},
+		initCarousel: function () {
+			// check if slick is initialized
+			let carousel = $(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel');
+			if ('carousel' === merchant_side_cart_params.upsells_style && !carousel.hasClass('slick-initialized')) {
+				carousel.slick({
+					infinite: true,
+					arrows: true,
+					slidesToShow: 1,
+					dots: false,
+					autoplay: false,
+					autoplaySpeed: 2000,
+					fade: true,
+					cssEase: 'linear',
+					pauseOnFocus: true,
+					pauseOnHover: true,
+					prevArrow: '<button type="button" class="slick-prev"><</button>',
+					nextArrow: '<button type="button" class="slick-next">></button>',
+					rtl: merchant_side_cart_params.is_rtl
+				});
+			}
+		},
+		destroyCarousel: function () {
+			// check if slick is initialized
+			let carousel = $(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel');
+			if ('carousel' === merchant_side_cart_params.upsells_style && carousel.hasClass('slick-initialized')) {
+				carousel.slick('unslick');
+			}
 		}
 	}
 

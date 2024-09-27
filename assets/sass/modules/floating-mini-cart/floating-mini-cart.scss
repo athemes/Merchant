@@ -566,7 +566,7 @@
 			}
 		}
 
-		.product-price{
+		.product-price {
 			font-size: 14px;
 			font-weight: 600;
 		}
@@ -594,6 +594,39 @@
 					font-size: 13px;
 				}
 			}
+		}
+	}
+
+	.slick-arrow {
+		position: absolute;
+		top: 20px;
+		border: none;
+		opacity: .3;
+		transition: 300ms;
+		background-image: url(../../../images/arrow-2.svg);
+		background-position: center;
+		background-size: 40px;
+		padding: 5px;
+		border-radius: 50%;
+		width: 25px;
+		height: 25px;
+		font-size: 0;
+		&:hover {
+			opacity: 1;
+		}
+
+		@media (max-width: 768px) {
+			opacity: 1;
+		}
+
+		&.slick-prev {
+			left: -30px;
+			transform: rotate(270deg);
+		}
+
+		&.slick-next {
+			right: -30px;
+			transform: rotate(90deg);
 		}
 	}
 }
