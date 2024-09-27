@@ -18,6 +18,14 @@
   }
 }
 
+.merchant-flexible-content-control[data-id="condition_rules"] .layout {
+	margin-bottom: 0;
+}
+
+.merchant-flexible-content-control[data-id="links"] .layout .layout-actions-no_accordion {
+	top: 10px;
+	right: 20px;
+}
 
 // Canvas.
 .merchant-module-page-preview-browser-inner {

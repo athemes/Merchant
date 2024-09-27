@@ -1,3 +1,15 @@
+.merchant-module-page-setting-fields {
+	gap: 24px;
+}
+
+.merchant-module-page-setting-field {
+	margin: 0;
+
+	&[data-id="shortcode_text"] {
+		margin-top: 0;
+	}
+}
+
 .merchant-module-page-preview {
 
 	&-browser-inner {

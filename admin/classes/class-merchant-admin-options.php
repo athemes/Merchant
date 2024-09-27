@@ -2499,7 +2499,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 	        $has_duplicate = ! empty( $settings['duplicate'] );
 	        $has_accordion = ! empty( $settings['accordion'] );
             ?>
-            <div class="layout-actions <?php echo $has_accordion ? esc_attr( 'layout-actions-has_accordion' ) :  ''; ?>">
+            <div class="layout-actions<?php echo $has_accordion ? esc_attr( ' layout-actions-has_accordion' ) :  ' layout-actions-no_accordion'; ?>">
                 <a href="#" class="layout-actions__toggle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="4" viewBox="0 0 14 4" fill="none">
                         <path d="M1.5 0.763184C2.32843 0.763183 3 1.43476 3 2.26318C3 3.09161 2.32843 3.76318 1.5 3.76318C0.671573 3.76318 -2.93554e-08 3.09161 -6.55671e-08 2.26318C-1.01779e-07 1.43476 0.671573 0.763184 1.5 0.763184Z" fill="#4A4A4A"/>
