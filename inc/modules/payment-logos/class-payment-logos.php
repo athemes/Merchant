@@ -35,8 +35,6 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 	 */
 	public $has_shortcode = true;
 
-    private $image_dimension = array();
-
 	/**
 	 * Constructor.
 	 * 
@@ -110,8 +108,6 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return; 
 		}
-
-
 
 		add_action( 'admin_init', array( $this, 'add_image_sizes' ) );
 		add_action( 'wp_ajax_merchant_regenerate_images', array( $this, 'regenerate_images' ) );
@@ -234,7 +230,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 						$imagedata = wp_get_attachment_image_src( $image_id, 'merchant_payment_logos' ); ?>
 						<?php
 						if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : 
-								echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+								echo wp_kses_post( wp_get_attachment_image( $image_id, 'merchant_payment_logos' ) );
 						endif; ?>
 					<?php
 					endforeach; ?>

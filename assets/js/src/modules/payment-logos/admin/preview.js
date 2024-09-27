@@ -44,7 +44,7 @@
 				attachments,
 			},
 			beforeSend: ( r ) => {
-				if ( is_dimension_changed ) {
+				if ( isDimensionChanged ) {
 					//$('<span>Regenerating...</span>').insertAfter( $( '.merchant-gallery-button' ) );
 				}
 			},
@@ -52,7 +52,6 @@
 				if ( ! response || ! response.data ) {
 					return;
 				}
-				// console.log( response.data );
 				// Do something
 			},
 			error: ( error ) => {
