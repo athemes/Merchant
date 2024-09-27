@@ -783,7 +783,7 @@
                     e.preventDefault();
 
                     // Hide other opened elements
-                    $( this ).closest( '.layout' ).siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                    hideOtherActions( $( this ).closest( '.layout' ) )
 
                     // Toggle the current element
                     $( this )
@@ -793,9 +793,18 @@
                         .slideToggle( 300 );
                 } );
 
+                // Hide Actions when collapse/open
                 $( document ).on( 'click', '.layout-header', function() {
-                    $( this ).closest( '.layout' ).find( '.layout-actions__inner' ).slideUp( 300 );
+                    hideOtherActions( $( this ).closest( '.layout' ) );
                 } )
+
+                $( document ).on( 'merchant-flexible-content-added', function( e, $layout ) {
+                    hideOtherActions( $layout );
+                } );
+
+                function hideOtherActions( $layout ) {
+                    $layout.siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                }
             },
 
             refreshNumbers: function ($content) {
