@@ -116,6 +116,17 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 			array(),
 			MERCHANT_VERSION,
 			true );
+
+		wp_localize_script( 'merchant-preview-' . self::MODULE_ID, 'merchant_side_cart_params', array(
+			'keywords' => array(
+				'multi_categories'     => esc_html__( 'Multi Categories', 'merchant' ),
+				'category_trigger'     => esc_html__( 'Category Trigger:', 'merchant' ),
+				'no_cats_selected'     => esc_html__( 'No Categories Selected', 'merchant' ),
+				'no_products_selected' => esc_html__( 'No Products Selected', 'merchant' ),
+				'multi_products'       => esc_html__( 'Multi Products', 'merchant' ),
+				'all_products'         => esc_html__( 'All Products', 'merchant' ),
+			),
+		) );
 	}
 
 
