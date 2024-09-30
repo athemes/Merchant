@@ -34,7 +34,6 @@
 				let upsellsGroups = $('.merchant-field-custom_upsells .merchant-flexible-content .layout');
 				upsellsGroups.each(function () {
 					let group = $(this),
-						badge = self.upsellsLabelBadge(group),
 						trigger = self.customUpsellTrigger(group),
 						categories = self.customUpsellCategories(group),
 						products = self.customUpsellProducts(group);
@@ -78,7 +77,7 @@
 			let groupLabel = group.find('.layout-title');
 			if ('categories' === type) {
 				if (count > 1) {
-					groupLabel.html('Multi Categories Upsell' + this.upsellsLabelBadge(group));
+					groupLabel.html('Multi Categories' + this.upsellsLabelBadge(group));
 				} else if (count === 1) {
 					groupLabel.html('Category Trigger: ' + data[0] + this.upsellsLabelBadge(group));
 				} else {
@@ -87,7 +86,7 @@
 			}
 			if ('products' === type) {
 				if (count > 1) {
-					groupLabel.html('Multi Products Upsell' + this.upsellsLabelBadge(group));
+					groupLabel.html('Multi Products' + this.upsellsLabelBadge(group));
 				} else if (count === 1) {
 					groupLabel.html(data[0].name + ' (#' + data[0].id + ')' + this.upsellsLabelBadge(group));
 				} else {
@@ -95,7 +94,7 @@
 				}
 			}
 			if ('all' === type) {
-				groupLabel.html('All Products Upsell' + this.upsellsLabelBadge(group));
+				groupLabel.html('All Products' + this.upsellsLabelBadge(group));
 			}
 		}
 
@@ -133,7 +132,10 @@
 		 * @returns {Array} The selected categories.
 		 */
 		customUpsellCategories(group) {
-			return group.find('.merchant-field-category_slugs select').val();
+			let upsellDropdown = group.find('.merchant-field-category_slugs select');
+			return upsellDropdown.find('option:selected').map(function () {
+				return $(this).text().trim();
+			}).get();
 		}
 
 		/**
