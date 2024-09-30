@@ -84,7 +84,7 @@ class Merchant_Product_Bundles extends Merchant_Add_Module {
                             <p>
 								<?php
 								echo esc_html__(
-									'To create a new product bundle (simple or variable), go to Products > Add New menu in the left sidebar of your WordPress admin area.',
+									'To create a new product bundle, go to Products > Add New menu in the left sidebar of your WordPress admin area. Then, from the Product data dropdown, select Product Bundle.',
 									'merchant'
 								);
 								printf(

@@ -72,7 +72,7 @@ Merchant_Admin_Options::create( array(
 				'full'  => esc_html__( 'Full description', 'merchant' ),
 				'short' => esc_html__( 'Short description', 'merchant' ),
 			),
-			'default' => 'full',
+			'default' => 'short',
 			'conditions' => array(
 				'terms' => array(
 					array(

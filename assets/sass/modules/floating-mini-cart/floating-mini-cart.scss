@@ -4,10 +4,11 @@
  */
 
 .merchant-floating-mini-cart-icon {
+
 	position: fixed;
 	bottom: var(--mrc-fmci-corner-offset, 30px);
 	font-size: var(--mrc-fmci-icon-size, 25px);
-	z-index: 999;
+	z-index: 9999;
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;

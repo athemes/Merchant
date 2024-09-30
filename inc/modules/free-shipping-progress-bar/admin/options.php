@@ -170,7 +170,7 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'select',
 			'title'      => esc_html__( 'Show on', 'merchant' ),
 			'options'    => array(
-				'both'    => esc_html__( 'Both', 'merchant' ),
+				'both'    => esc_html__( 'Both Desktop & Mobile', 'merchant' ),
 				'desktop' => esc_html__( 'Desktop Only', 'merchant' ),
 				'mobile'  => esc_html__( 'Mobile Only', 'merchant' ),
 			),

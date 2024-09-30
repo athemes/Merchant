@@ -183,7 +183,7 @@ const styles = [
 		destination: './assets/css/modules/product-labels/admin',
 	},
 
-	// Product Labels.
+	// Payment Logos.
 	{
 		name: 'paymentLogos',
 		src: './assets/sass/modules/payment-logos/payment-logos.scss',
@@ -923,6 +923,14 @@ const scripts = [
 		name: 'productLabelsAdmin',
 		src: './assets/js/src/modules/product-labels/admin/preview.js',
 		destination: './assets/js/modules/product-labels/admin/',
+		file: 'preview'
+	},
+
+	// Payment Logos
+	{
+		name: 'paymentLogosAdmin',
+		src: './assets/js/src/modules/payment-logos/admin/preview.js',
+		destination: './assets/js/modules/payment-logos/admin/',
 		file: 'preview'
 	},
 
