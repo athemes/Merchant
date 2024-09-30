@@ -77,24 +77,24 @@
 			let groupLabel = group.find('.layout-title');
 			if ('categories' === type) {
 				if (count > 1) {
-					groupLabel.html('Multi Categories' + this.upsellsLabelBadge(group));
+					groupLabel.html(merchant_side_cart_params.keywords.multi_categories + this.upsellsLabelBadge(group));
 				} else if (count === 1) {
-					groupLabel.html('Category Trigger: ' + data[0] + this.upsellsLabelBadge(group));
+					groupLabel.html(merchant_side_cart_params.keywords.category_trigger + ' ' + data[0] + this.upsellsLabelBadge(group));
 				} else {
-					groupLabel.html('No Categories Selected' + this.upsellsLabelBadge(group));
+					groupLabel.html(merchant_side_cart_params.keywords.no_cats_selected + this.upsellsLabelBadge(group));
 				}
 			}
 			if ('products' === type) {
 				if (count > 1) {
-					groupLabel.html('Multi Products' + this.upsellsLabelBadge(group));
+					groupLabel.html(merchant_side_cart_params.keywords.multi_products + this.upsellsLabelBadge(group));
 				} else if (count === 1) {
 					groupLabel.html(data[0].name + ' (#' + data[0].id + ')' + this.upsellsLabelBadge(group));
 				} else {
-					groupLabel.html('No Products Selected' + this.upsellsLabelBadge(group));
+					groupLabel.html(merchant_side_cart_params.keywords.no_products_selected + this.upsellsLabelBadge(group));
 				}
 			}
 			if ('all' === type) {
-				groupLabel.html('All Products' + this.upsellsLabelBadge(group));
+				groupLabel.html(merchant_side_cart_params.keywords.all_products + this.upsellsLabelBadge(group));
 			}
 		}
 
