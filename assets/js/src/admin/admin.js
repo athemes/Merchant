@@ -862,21 +862,21 @@
             if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
                 // replace the first item
                 parent.find('.merchant-selected-products-preview ul li').remove();
-                valueField.val('');
+                valueField.val('').change();
             }
             $(this).children('.remove').attr('aria-label', 'Remove').html('×');
             parent.find('.merchant-selected-products-preview ul').append($(this));
             parent.find('.merchant-selections-products-preview').html('').hide();
-            parent.find('.merchant-search-field').val('');
+            parent.find('.merchant-search-field').val('').change();
             if (oldValue === '') {
                 valueField.val($(this).data('id'));
             } else {
                 if (!multiple) {
-                    valueField.val($(this).data('id'));
+                    valueField.val($(this).data('id')).change();
                 } else {
                     let newValue = oldValue.split(',');
                     newValue.push($(this).data('id'));
-                    valueField.val(newValue.join(','));
+                    valueField.val(newValue.join(',')).change();
                 }
             }
         });
@@ -900,7 +900,7 @@
                         }
                     }
                 }
-                valueField.val(currentValue.join(','));
+                valueField.val(currentValue.join(',')).change();
                 valueField.trigger('change.merchant');
             }
         });
