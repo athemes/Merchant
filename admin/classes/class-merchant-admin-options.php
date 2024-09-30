@@ -1938,7 +1938,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				"{$settings['style']}-style",
 			);
 
-			if ( $settings['sorting'] === false ) {
+			$has_sorting = (bool) ( $settings['sorting'] ?? true );
+			if ( ! $has_sorting ) {
 				$classes[] = 'disable-sorting';
 			}
 
@@ -1957,186 +1958,174 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 data-id="<?php
 				echo esc_attr( $settings['id'] ) ?>">
 
-                <div class="layouts" data-id="<?php
-				echo esc_attr( $settings['id'] ) ?>">
-
-					<?php
-					foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
-
+                <div class="layouts" data-id="<?php echo esc_attr( $settings['id'] ) ?>">
+					<?php foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
                         <div class="layout" data-type="<?php echo esc_attr( $layout_type ) ?>">
-                            <div class="layout-header">
-                                <div class="layout-count">1</div>
-                                <div class="layout-title"<?php
-	                            if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
-		                            echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
-	                            } ?>>
-									<?php
-									echo esc_html( $layout['title'] ) ?>
-                                </div>
-                                <div class="layout-toggle">
-	                                <?php if ( $has_accordion ) : ?>
-                                        <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-	                                <?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="layout-body">
-								<?php
-								foreach ( $layout['fields'] as $sub_field ) :
-									$classes = array( 'layout-field' );
-
-									if ( isset( $sub_field['classes'] ) ) {
-										$classes = array_merge( $classes, $sub_field['classes'] );
-									} ?>
-                                    <div class="<?php
-									echo esc_attr( implode( ' ', $classes ) ); ?>">
-										<?php
-										if ( 'fields_group' === $sub_field['type'] ) {
-											static::fields_group( $sub_field, $value, $module_id, true, array(
-												'id'         => $settings['id'],
-												'option_key' => 0,
-                                                'value'      => $value,
-											) );
-										} else {
-											static::replace_field(
-                                                    $sub_field,
-												'',
-												array(
-													"name=\"merchant[{$sub_field['id']}]",
-													'merchant-module-page-setting-field-upload',
-													'merchant-module-page-setting-field-select_ajax',
-												),
-												array(
-													"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
-													'merchant-module-page-setting-field-upload template',
-													'merchant-module-page-setting-field-select_ajax template',
-												),
-												$module_id
-                                            );
-										}
-                                        ?>
-                                    </div>
-								<?php
-								endforeach; ?>
-                                <input type="hidden" data-name="merchant[<?php
-								echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
-								echo esc_attr( $layout_type ) ?>">
-                            </div>
-
-                            <div class="layout-actions">
-                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                <a class="customize-control-flexible-content-delete" href="#">
-                                    <span class="dashicons dashicons-no-alt"></span>
-                                </a>
-		                        <?php if ( $has_duplicate ) : ?>
-                                    <a
-                                        href="#"
-                                        class="customize-control-flexible-content-duplicate"
-                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
-                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
-                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16" fill="#50575e">
-                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
-                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                            <div class="layout__inner">
+                                <?php if ( $has_sorting ) : ?>
+                                    <span class="customize-control-flexible-content-move">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="14" viewBox="0 0 10 14" fill="none">
+                                        <path d="M1.75 0.5C1.19772 0.5 0.75 0.947715 0.75 1.5V2.5C0.75 3.05228 1.19772 3.5 1.75 3.5H2.75C3.30228 3.5 3.75 3.05228 3.75 2.5V1.5C3.75 0.947715 3.30228 0.5 2.75 0.5H1.75Z" fill="#4A4A4A"/>
+                                        <path d="M1.75 5.5C1.19772 5.5 0.75 5.94772 0.75 6.5V7.5C0.75 8.05228 1.19772 8.5 1.75 8.5H2.75C3.30228 8.5 3.75 8.05228 3.75 7.5V6.5C3.75 5.94772 3.30228 5.5 2.75 5.5H1.75Z" fill="#4A4A4A"/>
+                                        <path d="M0.75 11.5C0.75 10.9477 1.19772 10.5 1.75 10.5H2.75C3.30228 10.5 3.75 10.9477 3.75 11.5V12.5C3.75 13.0523 3.30228 13.5 2.75 13.5H1.75C1.19772 13.5 0.75 13.0523 0.75 12.5V11.5Z" fill="#4A4A4A"/>
+                                        <path d="M7.25 0.5C6.69772 0.5 6.25 0.947715 6.25 1.5V2.5C6.25 3.05228 6.69772 3.5 7.25 3.5H8.25C8.80228 3.5 9.25 3.05228 9.25 2.5V1.5C9.25 0.947715 8.80228 0.5 8.25 0.5H7.25Z" fill="#4A4A4A"/>
+                                        <path d="M6.25 6.5C6.25 5.94772 6.69772 5.5 7.25 5.5H8.25C8.80228 5.5 9.25 5.94772 9.25 6.5V7.5C9.25 8.05228 8.80228 8.5 8.25 8.5H7.25C6.69772 8.5 6.25 8.05228 6.25 7.5V6.5Z" fill="#4A4A4A"/>
+                                        <path d="M7.25 10.5C6.69772 10.5 6.25 10.9477 6.25 11.5V12.5C6.25 13.0523 6.69772 13.5 7.25 13.5H8.25C8.80228 13.5 9.25 13.0523 9.25 12.5V11.5C9.25 10.9477 8.80228 10.5 8.25 10.5H7.25Z" fill="#4A4A4A"/>
                                         </svg>
-                                    </a>
-		                        <?php endif; ?>
+                                    </span>
+                                <?php endif; ?>
+                                <div class="layout-header">
+                                    <div class="layout-count">1</div>
+                                    <div class="layout-title"<?php
+                                    if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
+                                        echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+                                    } ?>>
+                                        <?php
+                                        echo esc_html( $layout['title'] ) ?>
+                                    </div>
+                                    <div class="layout-toggle">
+                                        <?php if ( $has_accordion ) : ?>
+                                            <span class="customize-control-flexible-content-accordion">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.71967 0.732854C1.01256 0.43996 1.48744 0.43996 1.78033 0.732854L5.25 4.20252L8.71967 0.732854C9.01256 0.43996 9.48744 0.43996 9.78033 0.732854C10.0732 1.02575 10.0732 1.50062 9.78033 1.79351L5.78033 5.79351C5.48744 6.08641 5.01256 6.08641 4.71967 5.79351L0.71967 1.79351C0.426777 1.50062 0.426777 1.02575 0.71967 0.732854Z" fill="#4A4A4A"/>
+                                                </svg>
+                                            </span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="layout-body">
+                                    <?php
+                                    foreach ( $layout['fields'] as $sub_field ) :
+                                        $classes = array( 'layout-field' );
+
+                                        if ( isset( $sub_field['classes'] ) ) {
+                                            $classes = array_merge( $classes, $sub_field['classes'] );
+                                        } ?>
+                                        <div class="<?php
+                                        echo esc_attr( implode( ' ', $classes ) ); ?>">
+                                            <?php
+                                            if ( 'fields_group' === $sub_field['type'] ) {
+                                                static::fields_group( $sub_field, $value, $module_id, true, array(
+                                                    'id'         => $settings['id'],
+                                                    'option_key' => 0,
+                                                    'value'      => $value,
+                                                ) );
+                                            } else {
+                                                static::replace_field(
+                                                        $sub_field,
+                                                    '',
+                                                    array(
+                                                        "name=\"merchant[{$sub_field['id']}]",
+                                                        'merchant-module-page-setting-field-upload',
+                                                        'merchant-module-page-setting-field-select_ajax',
+                                                    ),
+                                                    array(
+                                                        "data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
+                                                        'merchant-module-page-setting-field-upload template',
+                                                        'merchant-module-page-setting-field-select_ajax template',
+                                                    ),
+                                                    $module_id
+                                                );
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php
+                                    endforeach; ?>
+                                    <input type="hidden" data-name="merchant[<?php
+                                    echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
+                                    echo esc_attr( $layout_type ) ?>">
+                                </div>
+                                <?php self::print_flexible_layout_actions( $settings, $layout_type ); ?>
                             </div>
                         </div>
-
 					<?php
 					endforeach; ?>
-
                 </div>
 
-                <div class="merchant-flexible-content <?php
-				echo esc_attr( $empty ); ?> sortable">
-
+                <div class="merchant-flexible-content <?php echo esc_attr( $empty ); ?> sortable">
 					<?php
 					foreach ( $values as $option_key => $option ) : ?>
                         <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>">
-                            <div class="layout-header">
-                                <div class="layout-count"><?php
-									echo absint( $option_key + 1 ) ?></div>
-                                <div class="layout-title"<?php
-                                if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
-	                                echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
-                                } ?>>
-									<?php
-									echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
-                                </div>
-                                <div class="layout-toggle">
-	                                <?php if ( $has_accordion ) : ?>
-                                        <span class="customize-control-flexible-content-accordion dashicons dashicons-arrow-down"></span>
-	                                <?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="layout-body">
-								<?php
-								foreach ( $settings['layouts'][ $option['layout'] ]['fields'] as $sub_field ) :
-									$classes = array( 'layout-field' );
-									if ( isset( $sub_field['classes'] ) ) {
-										$classes = array_merge( $classes, $sub_field['classes'] );
-									} ?>
-                                    <div class="<?php
-									echo esc_attr( implode( ' ', $classes ) ) ?>">
-										<?php
-										$value = null;
-										if ( isset( $option[ $sub_field['id'] ] ) ) {
-											$value = $option[ $sub_field['id'] ];
-										} elseif ( isset( $sub_field['default'] ) ) {
-											$value = $sub_field['default'];
-										}
-
-										if ( 'fields_group' === $sub_field['type'] ) {
-											static::fields_group( $sub_field, $value, $module_id, true, array(
-												'id'         => $settings['id'],
-												'option_key' => $option_key,
-												'value'      => $option,
-											) );
-										} else {
-											static::replace_field(
-												$sub_field,
-												$value,
-												"name=\"merchant[{$sub_field['id']}]",
-												"name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]",
-												$module_id
-											);
-										}
-										?>
-                                    </div>
-								<?php
-								endforeach; ?>
-                                <input type="hidden" name="merchant[<?php
-								echo esc_attr( $settings['id'] ) ?>][<?php
-								echo absint( $option_key ) ?>][layout]"
-                                        value="<?php
-										echo esc_attr( $option['layout'] ) ?>">
-                            </div>
-
-                            <div class="layout-actions">
-                                <span class="customize-control-flexible-content-move dashicons dashicons-menu"></span>
-                                <a class="customize-control-flexible-content-delete" href="#">
-                                    <span class="dashicons dashicons-no-alt"></span>
-                                </a>
-	                            <?php if ( $has_duplicate ) : ?>
-                                    <a
-                                        href="#"
-                                        class="customize-control-flexible-content-duplicate"
-                                        data-id="<?php echo esc_attr( $settings['id'] ); ?>"
-                                        data-layout="<?php echo esc_attr( $layout_type ); ?>"
-                                        title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="16" height="16" fill="#50575e">
-                                            <path d="M20.717,34.748H3.616A3.37,3.37,0,0,1,.25,31.381v-17.1a3.369,3.369,0,0,1,3.366-3.365h17.1a3.368,3.368,0,0,1,3.365,3.365v17.1A3.369,3.369,0,0,1,20.717,34.748ZM3.616,13.416a.866.866,0,0,0-.866.865v17.1a.867.867,0,0,0,.866.867h17.1a.867.867,0,0,0,.865-.867v-17.1a.865.865,0,0,0-.865-.865Z"/>
-                                            <path d="M31.384,24.079H22.837a1.25,1.25,0,1,1,0-2.5h8.547a.867.867,0,0,0,.866-.866V3.618a.866.866,0,0,0-.866-.865h-17.1a.866.866,0,0,0-.866.865v8.548a1.25,1.25,0,0,1-2.5,0V3.618A3.369,3.369,0,0,1,14.279.253H31.384A3.369,3.369,0,0,1,34.75,3.618v17.1A3.37,3.37,0,0,1,31.384,24.079Z"/>
+                            <div class="layout__inner">
+                                <?php if ( $has_sorting ) : ?>
+                                    <span class="customize-control-flexible-content-move">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="14" viewBox="0 0 10 14" fill="none">
+                                        <path d="M1.75 0.5C1.19772 0.5 0.75 0.947715 0.75 1.5V2.5C0.75 3.05228 1.19772 3.5 1.75 3.5H2.75C3.30228 3.5 3.75 3.05228 3.75 2.5V1.5C3.75 0.947715 3.30228 0.5 2.75 0.5H1.75Z" fill="#4A4A4A"/>
+                                        <path d="M1.75 5.5C1.19772 5.5 0.75 5.94772 0.75 6.5V7.5C0.75 8.05228 1.19772 8.5 1.75 8.5H2.75C3.30228 8.5 3.75 8.05228 3.75 7.5V6.5C3.75 5.94772 3.30228 5.5 2.75 5.5H1.75Z" fill="#4A4A4A"/>
+                                        <path d="M0.75 11.5C0.75 10.9477 1.19772 10.5 1.75 10.5H2.75C3.30228 10.5 3.75 10.9477 3.75 11.5V12.5C3.75 13.0523 3.30228 13.5 2.75 13.5H1.75C1.19772 13.5 0.75 13.0523 0.75 12.5V11.5Z" fill="#4A4A4A"/>
+                                        <path d="M7.25 0.5C6.69772 0.5 6.25 0.947715 6.25 1.5V2.5C6.25 3.05228 6.69772 3.5 7.25 3.5H8.25C8.80228 3.5 9.25 3.05228 9.25 2.5V1.5C9.25 0.947715 8.80228 0.5 8.25 0.5H7.25Z" fill="#4A4A4A"/>
+                                        <path d="M6.25 6.5C6.25 5.94772 6.69772 5.5 7.25 5.5H8.25C8.80228 5.5 9.25 5.94772 9.25 6.5V7.5C9.25 8.05228 8.80228 8.5 8.25 8.5H7.25C6.69772 8.5 6.25 8.05228 6.25 7.5V6.5Z" fill="#4A4A4A"/>
+                                        <path d="M7.25 10.5C6.69772 10.5 6.25 10.9477 6.25 11.5V12.5C6.25 13.0523 6.69772 13.5 7.25 13.5H8.25C8.80228 13.5 9.25 13.0523 9.25 12.5V11.5C9.25 10.9477 8.80228 10.5 8.25 10.5H7.25Z" fill="#4A4A4A"/>
                                         </svg>
-                                    </a>
-	                            <?php endif; ?>
+                                    </span>
+                                <?php endif; ?>
+                                <div class="layout-header">
+                                    <div class="layout-count"><?php
+                                        echo absint( $option_key + 1 ) ?></div>
+                                    <div class="layout-title"<?php
+                                    if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
+                                        echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+                                    } ?>>
+                                        <?php
+                                        echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
+                                    </div>
+                                    <div class="layout-toggle">
+                                        <?php if ( $has_accordion ) : ?>
+                                            <span class="customize-control-flexible-content-accordion">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.71967 0.732854C1.01256 0.43996 1.48744 0.43996 1.78033 0.732854L5.25 4.20252L8.71967 0.732854C9.01256 0.43996 9.48744 0.43996 9.78033 0.732854C10.0732 1.02575 10.0732 1.50062 9.78033 1.79351L5.78033 5.79351C5.48744 6.08641 5.01256 6.08641 4.71967 5.79351L0.71967 1.79351C0.426777 1.50062 0.426777 1.02575 0.71967 0.732854Z" fill="#4A4A4A"/>
+                                                </svg>
+                                            </span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="layout-body">
+                                    <?php
+                                    foreach ( $settings['layouts'][ $option['layout'] ]['fields'] as $sub_field ) :
+                                        $classes = array( 'layout-field' );
+                                        if ( isset( $sub_field['classes'] ) ) {
+                                            $classes = array_merge( $classes, $sub_field['classes'] );
+                                        } ?>
+                                        <div class="<?php
+                                        echo esc_attr( implode( ' ', $classes ) ) ?>">
+                                            <?php
+                                            $value = null;
+                                            if ( isset( $option[ $sub_field['id'] ] ) ) {
+                                                $value = $option[ $sub_field['id'] ];
+                                            } elseif ( isset( $sub_field['default'] ) ) {
+                                                $value = $sub_field['default'];
+                                            }
+
+                                            if ( 'fields_group' === $sub_field['type'] ) {
+                                                static::fields_group( $sub_field, $value, $module_id, true, array(
+                                                    'id'         => $settings['id'],
+                                                    'option_key' => $option_key,
+                                                    'value'      => $option,
+                                                ) );
+                                            } else {
+                                                static::replace_field(
+                                                    $sub_field,
+                                                    $value,
+                                                    "name=\"merchant[{$sub_field['id']}]",
+                                                    "name=\"merchant[{$settings['id']}][{$option_key}][{$sub_field['id']}]",
+                                                    $module_id
+                                                );
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php
+                                    endforeach; ?>
+                                    <input type="hidden" name="merchant[<?php
+                                    echo esc_attr( $settings['id'] ) ?>][<?php
+                                    echo absint( $option_key ) ?>][layout]"
+                                            value="<?php
+                                            echo esc_attr( $option['layout'] ) ?>">
+                                </div>
+                                <?php self::print_flexible_layout_actions( $settings, $layout_type ); ?>
                             </div>
                         </div>
-
 					<?php
 					endforeach; ?>
-
                 </div>
 
                 <div class="customize-control-flexible-content-add-wrapper">
@@ -2505,6 +2494,44 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 			return false;
 		}
+
+        private static function print_flexible_layout_actions( $settings, $layout_type ) {
+	        $has_duplicate = ! empty( $settings['duplicate'] );
+	        $has_accordion = ! empty( $settings['accordion'] );
+            ?>
+            <div class="layout-actions<?php echo $has_accordion ? esc_attr( ' layout-actions-has_accordion' ) :  ' layout-actions-no_accordion'; ?>">
+                <a href="#" class="layout-actions__toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="4" viewBox="0 0 14 4" fill="none">
+                        <path d="M1.5 0.763184C2.32843 0.763183 3 1.43476 3 2.26318C3 3.09161 2.32843 3.76318 1.5 3.76318C0.671573 3.76318 -2.93554e-08 3.09161 -6.55671e-08 2.26318C-1.01779e-07 1.43476 0.671573 0.763184 1.5 0.763184Z" fill="#4A4A4A"/>
+                        <path d="M7 0.763183C7.82843 0.763183 8.5 1.43476 8.5 2.26318C8.5 3.09161 7.82843 3.76318 7 3.76318C6.17157 3.76318 5.5 3.09161 5.5 2.26318C5.5 1.43476 6.17157 0.763183 7 0.763183Z" fill="#4A4A4A"/>
+                        <path d="M12.5 0.763183C13.3284 0.763183 14 1.43476 14 2.26318C14 3.09161 13.3284 3.76318 12.5 3.76318C11.6716 3.76318 11 3.09161 11 2.26318C11 1.43476 11.6716 0.763183 12.5 0.763183Z" fill="#4A4A4A"/>
+                    </svg>
+                </a>
+                <div class="layout-actions__inner" style="display: none;">
+			        <?php if ( $has_duplicate ) : ?>
+                        <a
+                            href="#"
+                            class="customize-control-flexible-content-duplicate"
+                            data-id="<?php echo esc_attr( $settings['id'] ); ?>"
+                            data-layout="<?php echo esc_attr( $layout_type ); ?>"
+                            title="<?php echo esc_attr__( 'Duplicate', 'merchant' ); ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 22" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2 1.76318H13C13.2761 1.76318 13.5 1.98704 13.5 2.26318V13.2632C13.5 13.5393 13.2761 13.7632 13 13.7632H2C1.72386 13.7632 1.5 13.5393 1.5 13.2632V2.26318C1.5 1.98704 1.72386 1.76318 2 1.76318ZM0 2.26318C0 1.15861 0.895431 0.263184 2 0.263184H13C14.1046 0.263184 15 1.15861 15 2.26318V13.2632C15 14.3678 14.1046 15.2632 13 15.2632H2C0.89543 15.2632 0 14.3678 0 13.2632V2.26318ZM17 5.26318V16.0132C17 16.7035 16.4404 17.2632 15.75 17.2632H3V18.7632H15.75C17.2688 18.7632 18.5 17.532 18.5 16.0132V5.26318H17Z" fill="#757575"/>
+                            </svg>
+                            <span><?php echo esc_html__( 'Duplicate', 'merchant' ); ?></span>
+                        </a>
+			        <?php endif; ?>
+
+                    <a class="customize-control-flexible-content-delete" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="17" viewBox="0 0 14 17" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 0.263184C5.18578 0.263184 3.67247 1.55151 3.32502 3.26318H0V4.76318H1.2699L2.08782 13.7602C2.21659 15.1767 3.40421 16.2613 4.82652 16.2613H9.17366C10.596 16.2613 11.7836 15.1767 11.9124 13.7602L12.7303 4.76318H14V3.26318H10.675C10.3275 1.5515 8.81422 0.263184 7 0.263184ZM7 1.76318C6.02034 1.76318 5.18691 2.38929 4.87803 3.26318H9.12197C8.81309 2.38929 7.97966 1.76318 7 1.76318ZM11.2241 4.76318H2.77609L3.58166 13.6244C3.64019 14.2683 4.18002 14.7613 4.82652 14.7613H9.17366C9.82017 14.7613 10.36 14.2683 10.4185 13.6244L11.2241 4.76318Z" fill="#757575"/>
+                        </svg>
+                        <span><?php echo esc_html__( 'Delete', 'merchant' ); ?></span>
+                    </a>
+                </div>
+            </div>
+            <?php
+        }
 
 		/**
          * Get category choices for select2

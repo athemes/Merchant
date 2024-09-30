@@ -514,7 +514,10 @@
                     if (hasAccordion) {
                         $content.accordion({
                             collapsible: true,
-                            header: "> div > .layout-header",
+                            //header: "> div > .layout-header",
+                            header: function( elem ) {
+                                return elem.find( '.layout__inner > .layout-header' );
+                            },
                             heightStyle: "content"
                         }).sortable({
                             axis: 'y',
@@ -630,6 +633,10 @@
                         if ($(this).data('name')) {
                             $(this).attr('name', $(this).data('name').replace('0', ($items.length)))
                         }
+
+                        if ($(this).is(':checkbox, :radio') && $(this).attr('checked')) {
+                            $(this).prop('checked', true);
+                        }
                     })
                     $layout.find('.layout-count').text($items.length + 1)
 
@@ -680,6 +687,8 @@
                     if ( ! $sourceLayout.length ) {
                         return;
                     }
+
+                    $sourceLayout.find( '.layout-actions__inner' ).hide();
 
                     // Clone the layout without data & events.
                     const $clonedLayout = $sourceLayout.clone();
@@ -772,6 +781,36 @@
                     }
                     $(document).trigger('change.merchant');
                 });
+
+                // Toggle Actions(delete/duplicate)
+                $( document ).on( 'click', '.layout-actions__toggle', function( e ) {
+                    e.preventDefault();
+
+                    // Hide other opened elements
+                    hideOtherActions( $( this ).closest( '.layout' ) )
+
+                    // Toggle the current element
+                    $( this )
+                        .closest( '.layout-actions' )
+                        .find( '.layout-actions__inner' )
+                        .stop()
+                        .slideToggle( 300 );
+                } );
+
+                // Hide Actions when collapse/open
+                $( document ).on( 'click', '.layout-header', function() {
+                    hideOtherActions( $( this ).closest( '.layout' ) );
+                } )
+
+                $( document ).on( 'merchant-flexible-content-added', function( e, $layout ) {
+                    hideOtherActions( $layout );
+                } );
+
+                function hideOtherActions( $layout ) {
+                    if ( $layout && $layout.length ) {
+                        $layout.siblings().find( '.layout-actions__inner' ).slideUp( 300 );
+                    }
+                }
             },
 
             refreshNumbers: function ($content) {
@@ -862,21 +901,21 @@
             if (parent.find('.merchant-selected-products-preview ul li').length > 0 && !multiple) {
                 // replace the first item
                 parent.find('.merchant-selected-products-preview ul li').remove();
-                valueField.val('');
+                valueField.val('').change();
             }
             $(this).children('.remove').attr('aria-label', 'Remove').html('×');
             parent.find('.merchant-selected-products-preview ul').append($(this));
             parent.find('.merchant-selections-products-preview').html('').hide();
-            parent.find('.merchant-search-field').val('');
+            parent.find('.merchant-search-field').val('').change();
             if (oldValue === '') {
                 valueField.val($(this).data('id'));
             } else {
                 if (!multiple) {
-                    valueField.val($(this).data('id'));
+                    valueField.val($(this).data('id')).change();
                 } else {
                     let newValue = oldValue.split(',');
                     newValue.push($(this).data('id'));
-                    valueField.val(newValue.join(','));
+                    valueField.val(newValue.join(',')).change();
                 }
             }
         });
@@ -900,7 +939,7 @@
                         }
                     }
                 }
-                valueField.val(currentValue.join(','));
+                valueField.val(currentValue.join(',')).change();
                 valueField.trigger('change.merchant');
             }
         });

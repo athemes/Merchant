@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
-Stable tag: 1.9.17
+Stable tag: 1.10.0
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,11 +218,14 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.10.0 =
+* Fixed - Fatal error when WooCommerce is not active
+
 = 1.9.17 =
 * Added - Backward compatibility for {amount} markup
 
 = 1.9.16 =
-* Changed - Conditional changes implemented in several modules.
+* Changed - Conditional changes implemented in several modules
 
 = 1.9.15 =
 * Added - Clear Cart: New module added under Improve Experience category

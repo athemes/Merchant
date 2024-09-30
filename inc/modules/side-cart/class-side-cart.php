@@ -83,11 +83,18 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	 */
 	public function admin_enqueue_css() {
 		if ( $this->is_module_settings_page() ) {
-			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . Merchant_Floating_Mini_Cart::MODULE_ID . '/floating-mini-cart.min.css', array(), MERCHANT_VERSION );
+			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . Merchant_Floating_Mini_Cart::MODULE_ID . '/floating-mini-cart.min.css', array(),
+				MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID,
 				MERCHANT_URI . 'assets/css/modules/' . Merchant_Floating_Mini_Cart::MODULE_ID . '/admin/preview.min.css',
 				array(),
 				MERCHANT_VERSION );
+
+			wp_enqueue_style( 'merchant-admin-preview-' . self::MODULE_ID,
+				MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css',
+				array(),
+				MERCHANT_VERSION
+			);
 		}
 	}
 
@@ -103,6 +110,23 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 			array(),
 			MERCHANT_VERSION,
 			true );
+
+		wp_enqueue_script( 'merchant-preview-' . self::MODULE_ID,
+			MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js',
+			array(),
+			MERCHANT_VERSION,
+			true );
+
+		wp_localize_script( 'merchant-preview-' . self::MODULE_ID, 'merchant_side_cart_params', array(
+			'keywords' => array(
+				'multi_categories'     => esc_html__( 'Multi Categories', 'merchant' ),
+				'category_trigger'     => esc_html__( 'Category Trigger:', 'merchant' ),
+				'no_cats_selected'     => esc_html__( 'No Categories Selected', 'merchant' ),
+				'no_products_selected' => esc_html__( 'No Products Selected', 'merchant' ),
+				'multi_products'       => esc_html__( 'Multi Products', 'merchant' ),
+				'all_products'         => esc_html__( 'All Products', 'merchant' ),
+			),
+		) );
 	}
 
 
@@ -110,7 +134,7 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
@@ -167,19 +191,23 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
             <div class="merchant-floating-side-mini-cart">
                 <div class="merchant-floating-side-mini-cart-body">
                     <a href="#" class="merchant-floating-side-mini-cart-close-button merchant-floating-side-mini-cart-toggle"
-                        title="<?php echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
-						<?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( array(), false ) ); ?>
+                        title="<?php
+						echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
+						<?php
+						echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( array(), false ) ); ?>
                     </a>
 
                     <div class="merchant-floating-side-mini-cart-widget">
-                        <div class="merchant-floating-side-mini-cart-widget-title"><?php echo esc_html__( 'Your Cart', 'merchant' ); ?></div>
+                        <div class="merchant-floating-side-mini-cart-widget-title"><?php
+							echo esc_html__( 'Your Cart', 'merchant' ); ?></div>
                         <div class="widget_shopping_cart_content">
                             <ul class="woocommerce-mini-cart cart_list product_list_widget">
                                 <li class="woocommerce-mini-cart-item mini_cart_item">
                                     <a href="#" class="remove remove_from_cart_button">×</a>
                                     <a href="#">
                                         <span class="mrc-product-image"></span>
-										<?php echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
+										<?php
+										echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
                                     </a>
                                     <span class="quantity">1 ×
 										<span class="woocommerce-Price-amount amount">
@@ -191,7 +219,8 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
                                     <a href="#" class="remove remove_from_cart_button">×</a>
                                     <a href="#">
                                         <span class="mrc-product-image"></span>
-										<?php echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
+										<?php
+										echo esc_html__( 'Product Sample Title', 'merchant' ); ?>
                                     </a>
                                     <span class="quantity">1 ×
 										<span class="woocommerce-Price-amount amount">
@@ -202,14 +231,15 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
                             </ul>
 
                             <p class="woocommerce-mini-cart__total total">
-                                <strong><?php echo esc_html__( 'Subtotal:', 'merchant' ); ?></strong>
+                                <strong><?php
+									echo esc_html__( 'Subtotal:', 'merchant' ); ?></strong>
                                 <span class="woocommerce-Price-amount amount">
 									<bdi><span class="woocommerce-Price-currencySymbol">$</span>12.00 </bdi>
 								</span>
                             </p>
                             <p class="woocommerce-mini-cart__buttons buttons">
-                                <a href="#" class="button wc-forward"><?php echo esc_html__( 'View cart:', 'merchant' ); ?></a>
-                                <a href="#" class="button checkout wc-forward"><?php echo esc_html__( 'Checkout:', 'merchant' ); ?></a>
+                                <a href="#" class="button wc-forward"><?php echo esc_html__( 'View cart', 'merchant' ); ?></a>
+                                <a href="#" class="button checkout wc-forward"><?php echo esc_html__( 'Checkout', 'merchant' ); ?></a>
                             </p>
                         </div>
                     </div>

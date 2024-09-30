@@ -67,19 +67,6 @@ $attributes = array_reverse( $attributes );
 ?>
 
 <div <?php echo wp_kses( implode( ' ', $attributes ), array() ); ?>>
-	<div class="merchant-sticky-add-to-cart-wrapper-content-mobile">
-		
-		<?php if ( ! is_admin() && ( 'variable' === $product->get_type() || 'variable-subscription' === $product->get_type() ) ) : ?>
-                <?php merchant_get_template_part( 'single-product/add-to-cart', 'variable', array( 'hook_prefix' => 'merchant_sticky_add_to_cart' ) ); ?>
-            <?php else : ?>
-                <a href="#" class="button merchant-mobile-sticky-addtocart-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
-                    <?php echo ! empty( $product ) ? esc_html( $product->add_to_cart_text() ) : esc_html__( 'Add To Cart S', 'merchant' ); ?>
-                </a>
-		<?php endif; ?>
-		<a href="#" class="button merchant-mobile-sticky-close-button" onclick="merchant.toggleClass.init(event, this, false);" data-merchant-toggle-class="merchant-sticky-addtocart-mobile-active" data-merchant-selector=".merchant-sticky-add-to-cart-wrapper">
-			<?php echo esc_html__( 'Close', 'merchant' ); ?>
-		</a>
-	</div>
 	<div class="merchant-sticky-add-to-cart-wrapper-content">
 		
 		<?php 
@@ -115,6 +102,5 @@ $attributes = array_reverse( $attributes );
 			echo '</div>';
 		} 
 		?>
-
 	</div>
 </div>

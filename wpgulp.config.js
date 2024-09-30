@@ -183,7 +183,7 @@ const styles = [
 		destination: './assets/css/modules/product-labels/admin',
 	},
 
-	// Product Labels.
+	// Payment Logos.
 	{
 		name: 'paymentLogos',
 		src: './assets/sass/modules/payment-logos/payment-logos.scss',
@@ -357,10 +357,18 @@ const styles = [
 		src: './assets/sass/modules/floating-mini-cart/admin/preview.scss',
 		destination: './assets/css/modules/floating-mini-cart/admin',
 	},
+
 	{
 		name: 'floatingMiniCart',
 		src: './assets/sass/modules/floating-mini-cart/floating-mini-cart.scss',
 		destination: './assets/css/modules/floating-mini-cart',
+	},
+
+	// side cart preview
+	{
+		name: 'sideCartAdmin',
+		src: './assets/sass/modules/side-cart/admin/preview.scss',
+		destination: './assets/css/modules/side-cart/admin',
 	},
 
 	// free-gifts
@@ -858,6 +866,15 @@ const scripts = [
 		file: 'side-cart'
 	},
 
+	// side cart admin
+	{
+		name: 'sideCartAdmin',
+		src: './assets/js/src/modules/side-cart/admin/preview.js',
+		destination: './assets/js/modules/side-cart/admin',
+		file: 'preview'
+	},
+
+
 	// Login Popups.
 	{
 		name: 'loginPopups',
@@ -906,6 +923,14 @@ const scripts = [
 		name: 'productLabelsAdmin',
 		src: './assets/js/src/modules/product-labels/admin/preview.js',
 		destination: './assets/js/modules/product-labels/admin/',
+		file: 'preview'
+	},
+
+	// Payment Logos
+	{
+		name: 'paymentLogosAdmin',
+		src: './assets/js/src/modules/payment-logos/admin/preview.js',
+		destination: './assets/js/modules/payment-logos/admin/',
 		file: 'preview'
 	},
 

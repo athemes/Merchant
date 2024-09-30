@@ -84,13 +84,15 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
+			// Enqueue admin scripts.
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -103,9 +105,12 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return; 
 		}
+
+		add_action( 'admin_init', array( $this, 'add_image_sizes' ) );
+		add_action( 'wp_ajax_merchant_regenerate_images', array( $this, 'regenerate_images' ) );
 
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
@@ -115,6 +120,65 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+	}
+
+	/**
+     * Add custom image sizes for the merchant module.
+     *
+	 * It runs on AJAX requests as it hooks into the `admin_init` hook, so
+	 * there is no need to call it again in the `$this->regenerate_images` method.
+     *
+	 * @return void
+	 */
+	public function add_image_sizes() {
+        $settings = $this->get_module_settings();
+        $width    = (int) ( $settings['image-max-width'] ?? 80 );
+        $height   = (int) ( $settings['image-max-height'] ?? 100 );
+
+        add_image_size( 'merchant_payment_logos', $width, $height );
+    }
+
+	/**
+     * Regenerate image sizes for specified attachments.
+     *
+	 * @return void
+	 */
+    public function regenerate_images() {
+	    check_ajax_referer( 'merchant', 'nonce' );
+
+	    if ( ! current_user_can( 'manage_options' ) ) {
+		    wp_send_json_error( esc_html__( 'You are not allowed to do this.', 'merchant' ) );
+	    }
+
+	    $attachments          = array_map( 'sanitize_text_field', $_POST['attachments'] ?? array() );
+	    $is_dimension_changed = filter_var( $_POST['is_dimension_changed'] ?? false, FILTER_VALIDATE_BOOLEAN );
+
+        if ( ! function_exists( 'wp_get_attachment_metadata' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+        }
+
+        $generated_images = array();
+
+        foreach ( $attachments as $attachment_id ) {
+	        $attachment_id = (int) $attachment_id;
+            if ( ! $attachment_id ) {
+                continue;
+            }
+
+            $attachment_metadata = wp_get_attachment_metadata( $attachment_id );
+
+	        if ( $is_dimension_changed || empty( $attachment_metadata['sizes']['merchant_payment_logos'] ) ) {
+		        // Regenerate image sizes and update metadata
+		        $updated_metadata = wp_generate_attachment_metadata( $attachment_id, get_attached_file( $attachment_id ) );
+
+		        if ( ! is_wp_error( $updated_metadata ) ) {
+			        wp_update_attachment_metadata( $attachment_id, $updated_metadata );
+			        $generated_images[] = $attachment_id;
+		        }
+	        }
+        }
+
+        wp_send_json_success( array( $generated_images ) );
 	}
 
 	/**
@@ -163,10 +227,10 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 					<?php
 					foreach ( $logos as $image_id ) : ?>
 						<?php
-						$imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
+						$imagedata = wp_get_attachment_image_src( $image_id, 'merchant_payment_logos' ); ?>
 						<?php
 						if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : 
-								echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+								echo wp_kses_post( wp_get_attachment_image( $image_id, 'merchant_payment_logos' ) );
 						endif; ?>
 					<?php
 					endforeach; ?>
@@ -223,6 +287,17 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/payment-logos.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
+		}
+	}
+
+	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		if ( $this->is_module_settings_page() ) {
+			wp_enqueue_script( "merchant-{$this->module_id}", MERCHANT_URI . "assets/js/modules/{$this->module_id}/admin/preview.min.js", array( 'jquery' ), MERCHANT_VERSION, true );
 		}
 	}
 
@@ -362,7 +437,7 @@ class Merchant_Payment_Logos extends Merchant_Add_Module {
 				<div class="merchant-payment-logos-images">
 
 					<?php foreach ( $logos as $image_id ) {
-						echo wp_kses_post( wp_get_attachment_image( $image_id ) );
+						echo wp_kses_post( wp_get_attachment_image( $image_id, 'merchant_payment_logos' ) );
 					} ?>
 
 				</div>
