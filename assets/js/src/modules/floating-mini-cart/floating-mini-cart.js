@@ -105,16 +105,16 @@ merchant.modules = merchant.modules || {};
 
 			$counter.text( );
 
-			jQuery.ajax({
-				type: 'POST',
-				url: merchant.setting.ajax_url,
-				data: {
-					'action': 'merchant_get_cart_count'
-				},
-				success: function(response) {
-					$counter.text(response);
-				}
-			})
+			// jQuery.ajax({
+			// 	type: 'POST',
+			// 	url: merchant.setting.ajax_url,
+			// 	data: {
+			// 		'action': 'merchant_get_cart_count'
+			// 	},
+			// 	success: function(response) {
+			// 		$counter.text(response);
+			// 	}
+			// })
 
 		},
 

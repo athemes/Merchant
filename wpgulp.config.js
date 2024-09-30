@@ -357,10 +357,18 @@ const styles = [
 		src: './assets/sass/modules/floating-mini-cart/admin/preview.scss',
 		destination: './assets/css/modules/floating-mini-cart/admin',
 	},
+
 	{
 		name: 'floatingMiniCart',
 		src: './assets/sass/modules/floating-mini-cart/floating-mini-cart.scss',
 		destination: './assets/css/modules/floating-mini-cart',
+	},
+
+	// side cart preview
+	{
+		name: 'sideCartAdmin',
+		src: './assets/sass/modules/side-cart/admin/preview.scss',
+		destination: './assets/css/modules/side-cart/admin',
 	},
 
 	// free-gifts
@@ -857,6 +865,15 @@ const scripts = [
 		destination: './assets/js/modules/side-cart',
 		file: 'side-cart'
 	},
+
+	// side cart admin
+	{
+		name: 'sideCartAdmin',
+		src: './assets/js/src/modules/side-cart/admin/preview.js',
+		destination: './assets/js/modules/side-cart/admin',
+		file: 'preview'
+	},
+
 
 	// Login Popups.
 	{

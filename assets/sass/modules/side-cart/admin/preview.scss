@@ -1,0 +1,17 @@
+.merchant-upsells-badge {
+	background-color: #f0f0f1;
+	color: #757575;
+	border-radius: 15px;
+	padding: 5px 10px;
+	margin-left: 20px;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 18px;
+}
+
+.rtl {
+	.merchant-upsells-badge {
+		margin-right: 20px;
+		margin-left: 0;
+	}
+}
