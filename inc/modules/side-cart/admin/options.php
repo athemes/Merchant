@@ -12,24 +12,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Side_Cart::MODULE_ID,
-	'title'  => esc_html__( 'Settings', 'merchant' ),
+	'title'  => esc_html__( 'Display Settings', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'      => 'show_after_add_to_cart',
 			'type'    => 'switcher',
-			'title'   => __( 'Display after adding a product to the cart on shop', 'merchant' ),
+			'title'   => __( 'Shop Page', 'merchant' ),
+			'desc'   => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'show_after_add_to_cart_single_product',
 			'type'    => 'switcher',
-			'title'   => __( 'Display after adding a product to the cart on single product page', 'merchant' ),
+			'title'   => __( 'Product Page', 'merchant' ),
+			'desc'   => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'show_on_cart_url_click',
 			'type'    => 'switcher',
-			'title'   => __( 'Display on cart URL click', 'merchant' ),
+			'title'   => __( 'Cart Icons', 'merchant' ),
+			'desc'   => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
 			'default' => 1,
 		),
 	),
@@ -110,7 +113,7 @@ Merchant_Admin_Options::create( array(
 							'options' => array(
 								'all'        => esc_html__( 'All products', 'merchant' ),
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Specific category(es)', 'merchant' ),
+								'categories' => esc_html__( 'Specific category', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -198,7 +201,7 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Trigger upsells', 'merchant' ),
 							'options' => array(
 								'products'   => esc_html__( 'Specific product', 'merchant' ),
-								'categories' => esc_html__( 'Specific category(es)', 'merchant' ),
+								'categories' => esc_html__( 'Specific category', 'merchant' ),
 							),
 							'default' => 'products',
 						),
@@ -305,7 +308,7 @@ Merchant_Admin_Options::create( array(
 			'id'         => 'upsells_add_to_cart_text',
 			'title'      => __( 'Button text', 'merchant' ),
 			'type'       => 'text',
-			'default'    => __( 'Add to cart', 'merchant' ),
+			'default'    => __( 'Add', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -342,7 +345,7 @@ Merchant_Admin_Options::create( array(
 
 // Side Cart Settings
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Side Cart Settings', 'merchant' ),
+	'title'  => esc_html__( 'Look and Feel', 'merchant' ),
 	'module' => 'floating-mini-cart',
 	'fields' => array(
 
