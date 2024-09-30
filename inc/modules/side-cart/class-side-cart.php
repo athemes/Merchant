@@ -180,8 +180,8 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
             <div class="merchant-floating-side-mini-cart">
                 <div class="merchant-floating-side-mini-cart-body">
                     <a href="#" class="merchant-floating-side-mini-cart-close-button merchant-floating-side-mini-cart-toggle"
-                       title="<?php
-					   echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
+                        title="<?php
+						echo esc_attr__( 'Close the side mini cart', 'merchant' ); ?>">
 						<?php
 						echo wp_kses( Merchant_SVG_Icons::get_svg_icon( 'icon-cancel' ), merchant_kses_allowed_tags( array(), false ) ); ?>
                     </a>
