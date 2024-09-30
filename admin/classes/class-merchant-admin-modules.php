@@ -47,14 +47,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
-				'free-shipping-progress-bar' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'free-shipping-progress-bar' ),
-					'title' => esc_html__( 'Free Shipping Bar', 'merchant' ),
-					'desc' => esc_html__( 'Display the amount left needed for free shipping', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-free-shipping-progress-bar/',
-				),
 				'wait-list' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -118,6 +110,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Free Gifts', 'merchant' ),
 					'desc' => esc_html__( 'Reward shoppers with a gift if they hit a specified spending target or apply a coupon', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-gift-card/',
+				),
+				'free-shipping-progress-bar' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'free-shipping-progress-bar' ),
+					'title' => esc_html__( 'Free Shipping Bar', 'merchant' ),
+					'desc' => esc_html__( 'Encourage customers to spend more by displaying the amount left needed for free shipping', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-free-shipping-progress-bar/',
 				),
 				// Increase Conversion Rates (Convert More).
 				'product-labels' => array(
