@@ -40,7 +40,7 @@ Merchant_Admin_Options::create( array(
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Side_Cart::MODULE_ID,
-	'title'  => esc_html__( 'Upsell', 'merchant' ),
+	'title'  => esc_html__( 'Upsells', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'      => 'use_upsells',
@@ -103,7 +103,7 @@ Merchant_Admin_Options::create( array(
 			),
 			'layouts'      => array(
 				'upsell-details' => array(
-					'title'       => esc_html__( 'Custom Upsell', 'merchant' ),
+					'title'       => esc_html__( 'Custom Upsells', 'merchant' ),
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
@@ -269,7 +269,7 @@ Merchant_Admin_Options::create( array(
 			'id'         => 'upsells_products_count_limitation',
 			'title'      => __( 'Maximum number of upsells to display', 'merchant' ),
 			'type'       => 'number',
-			'default'    => 10,
+			'default'    => 5,
 			'min'        => 1,
 			'step'       => 1,
 			'conditions' => array(
@@ -323,10 +323,10 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'         => 'upsells_style',
 			'type'       => 'select',
-			'title'      => esc_html__( 'Upsell direction', 'merchant' ),
+			'title'      => esc_html__( 'Upsell layout', 'merchant' ),
 			'options'    => array(
 				'carousel' => esc_html__( 'Carousel', 'merchant' ),
-				'block'    => esc_html__( 'Block', 'merchant' ),
+				'block'    => esc_html__( 'List', 'merchant' ),
 			),
 			'default'    => 'block',
 			'conditions' => array(
