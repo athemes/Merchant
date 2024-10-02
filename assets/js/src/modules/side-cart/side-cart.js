@@ -354,7 +354,7 @@ jQuery(document).ready(function ($) {
 					pauseOnHover: true,
 					prevArrow: '<button type="button" class="slick-prev"><</button>',
 					nextArrow: '<button type="button" class="slick-next">></button>',
-					rtl: merchant_side_cart_params.is_rtl
+					rtl: merchant_side_cart_params.is_rtl === '1'
 				});
 			}
 		},
