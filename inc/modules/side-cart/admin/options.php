@@ -35,6 +35,18 @@ Merchant_Admin_Options::create( array(
 			'desc'   => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
 			'default' => 1,
 		),
+		array(
+			'id'      => 'use_discount_codes',
+			'type'    => 'switcher',
+			'title'   => __( 'Show discount codes input', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'      => 'use_strikethrough_prices',
+			'type'    => 'switcher',
+			'title'   => __( 'Show strikethrough prices', 'merchant' ),
+			'default' => 0,
+		),
 	),
 ) );
 
