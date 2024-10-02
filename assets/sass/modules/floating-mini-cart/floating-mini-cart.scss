@@ -484,6 +484,74 @@
 			color: var(--mrc-fmci-side-cart-total-text-color, #212121) !important;
 		}
 	}
+
+	.woocommerce-mini-cart__coupon {
+		position: relative;
+		margin: 0;
+		padding: 30px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+		line-height: 1em;
+		border: none;
+		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
+
+		input {
+			height: 50px;
+		}
+
+		button {
+			padding: 3px 10px;
+			line-height: 1.4;
+		}
+
+		.overlay{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0,0,0,0.2);
+			z-index: 1;
+			animation: shining 3s infinite;
+			visibility: hidden;
+			pointer-events: none;
+		}
+
+		&.loading{
+			.overlay{
+				visibility: visible;
+				pointer-events: auto;
+			}
+		}
+	}
+
+	.woocommerce-mini-cart__coupons{
+		margin: 0;
+		padding: 15px 30px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
+	}
+}
+
+@keyframes shining {
+	0%{
+		background-color: rgba(0,0,0,0.2);
+	}
+	50%{
+		background-color: rgba(0,0,0,0.3);
+	}
+	100%{
+		background-color: rgba(0,0,0,0.2);
+	}
 }
 
 .rtl {

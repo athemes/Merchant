@@ -162,6 +162,8 @@ jQuery(document).ready(function ($) {
 		bindEvents: function () {
 			$(document).on('change', '.merchant-mini-cart-upsell-item-wrap .variation-selector', this.handleVariationChange.bind(this));
 			$(document).on('click', '.add-to-cart-wrap .merchant-upsell-add-to-cart:not(.disabled)', this.handleAddToCartClick.bind(this));
+			$(document).on('click', '.merchant-coupon-form button', this.handleCouponBtnClick.bind(this));
+			$(document).on('click', '.merchant-remove-coupon', this.handleCouponRemoveClick.bind(this));
 			$(document).on('merchant_init_carousel', this.initCarousel.bind(this));
 			$(document).on('merchant_destroy_carousel', this.destroyCarousel.bind(this));
 			$(document).on('added_to_cart', this.handleAddToCart.bind(this));
@@ -364,6 +366,80 @@ jQuery(document).ready(function ($) {
 			if ('carousel' === merchant_side_cart_params.upsells_style && carousel.hasClass('slick-initialized')) {
 				carousel.slick('unslick');
 			}
+		},
+		handleCouponBtnClick: function (event) {
+			event.preventDefault();
+			let self = this,
+				btn = $(event.currentTarget),
+				container = btn.closest('.merchant-coupon-form'),
+				couponCode = container.find('.coupon_code').val();
+			if (couponCode === '') {
+				return;
+			}
+			this.applyCoupon(self, couponCode, container);
+		},
+		applyCoupon: function (self, couponCode, container) {
+			let data = {
+				action: 'merchant_side_cart_apply_coupon',
+				coupon_code: couponCode,
+				nonce: merchant_side_cart_params.nonce
+			}
+			$.ajax({
+				type: 'POST',
+				url: merchant_side_cart_params.ajax_url,
+				data: data,
+				beforeSend: function () {
+					container.addClass('loading');
+				},
+				success: function (response) {
+					self.handleCouponSuccess(response);
+				},
+				error: function (error) {
+					self.handleCouponError(error);
+				},
+				complete: function () {
+					container.removeClass('loading');
+				}
+			});
+		},
+		removeCoupon: function (self, couponCode) {
+			let data = {
+				action: 'merchant_side_cart_remove_coupon',
+				coupon_code: couponCode,
+				nonce: merchant_side_cart_params.nonce
+			}
+			$.ajax({
+				type: 'POST',
+				url: merchant_side_cart_params.ajax_url,
+				data: data,
+				beforeSend: function () {
+				},
+				success: function (response) {
+					self.handleCouponSuccess(response);
+				},
+				error: function (error) {
+					self.handleCouponError(error);
+				}
+			});
+		},
+		handleCouponSuccess: function (response) {
+			if (response.fragments !== undefined) {
+				$(document).trigger('merchant_destroy_carousel');
+				$(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, null, 'side-cart']);
+				$(document).trigger('merchant_init_carousel');
+			}
+		},
+		handleCouponError: function (error) {
+			console.log('Error:', error);
+		},
+
+		handleCouponRemoveClick: function (event) {
+			event.preventDefault();
+			let self = this,
+				btn = $(event.currentTarget),
+				couponCode = btn.attr('data-coupon');
+			console.log(btn);
+			this.removeCoupon(self, couponCode);
 		}
 	}
 
