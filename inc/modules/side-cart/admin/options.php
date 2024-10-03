@@ -47,6 +47,16 @@ Merchant_Admin_Options::create( array(
 			'title'   => __( 'Show strikethrough prices', 'merchant' ),
 			'default' => 0,
 		),
+		array(
+			'id'      => 'show_on_devices',
+			'type'    => 'checkbox_multiple',
+			'title'   => esc_html__( 'Show on devices', 'merchant' ),
+			'options' => array(
+				'desktop' => esc_html__( 'Desktop', 'merchant' ),
+				'mobile'  => esc_html__( 'Mobile', 'merchant' ),
+			),
+			'default' => array( 'desktop', 'mobile' ),
+		),
 	),
 ) );
 

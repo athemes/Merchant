@@ -5,8 +5,25 @@
 jQuery(document).ready(function ($) {
 	'use strict';
 
+	/**
+	 * Check if the current device is allowed to show the side cart.
+	 *
+	 * @returns {boolean}
+	 */
+	function merchant_is_allowed_device() {
+		let allowed_devices = merchant_side_cart_params.allowed_devices;
+		let screenWidth = window.innerWidth;
+		if (screenWidth <= 768 && allowed_devices.includes('mobile')) {
+			return true;
+		} else if (screenWidth > 768 && allowed_devices.includes('desktop')) {
+			return true;
+		}
+
+		return false;
+	}
+
 	// Toggle side cart
-	if (merchant.setting.hasOwnProperty('show_after_add_to_cart_single_product')) {
+	if (merchant.setting.hasOwnProperty('show_after_add_to_cart_single_product') && merchant_is_allowed_device()) {
 		const isSingleProductPage = $('body.single-product').length;
 		const isNoticeVisible = $('.woocommerce-notices-wrapper').is(':visible') && !$('.woocommerce-notices-wrapper').is(':empty')
 		const isBlockNoticeVisible = $('.wc-block-components-notice-banner').is(':visible') && !$('.wc-block-components-notice-banner').is(':empty')
@@ -18,7 +35,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// Add to cart AJAX event.
-	if (merchant.setting.hasOwnProperty('add_to_cart_slide_out')) {
+	if (merchant.setting.hasOwnProperty('add_to_cart_slide_out') && merchant_is_allowed_device()) {
 		$(document.body).on('added_to_cart', function (event, fragments, cart_hash, $button, $context) {
 			if ($context !== 'side-cart') {
 				$('body').toggleClass('merchant-floating-side-mini-cart-show');
@@ -28,7 +45,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// On cart URL click
-	if (merchant.setting.hasOwnProperty('cart_url')) {
+	if (merchant.setting.hasOwnProperty('cart_url') && merchant_is_allowed_device()) {
 		$('[href="' + merchant.setting.cart_url + '"]').on('click', function (e) {
 			e.preventDefault();
 			$(window).trigger('merchant.floating-mini-cart-resize');
@@ -37,7 +54,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// Update Product quantity in Side Cart
-	if (merchant.setting.hasOwnProperty('add_to_cart_slide_out') || merchant.setting.hasOwnProperty('floating_mini_cart_count')) {
+	if ((merchant.setting.hasOwnProperty('add_to_cart_slide_out') || merchant.setting.hasOwnProperty('floating_mini_cart_count')) && merchant_is_allowed_device()) {
 		// Update quantity on plus/minus click
 		$(document).on('click', '.js-merchant-quantity-btn', function (e) {
 			e.preventDefault();
