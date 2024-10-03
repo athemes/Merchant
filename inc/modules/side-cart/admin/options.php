@@ -255,19 +255,99 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
-							'id'            => 'excluded_product_ids',
-							'type'          => 'products_selector',
-							'title'         => esc_html__( 'Trigger', 'merchant' ),
-							'multiple'      => true,
-							'desc'          => esc_html__( 'Upsell will not be displayed for selected products.', 'merchant' ),
-							'allowed_types' => array( 'simple', 'variable' ),
-							'conditions'    => array(
+							'id'         => 'exclude_based_on',
+							'type'       => 'select',
+							'title'      => esc_html__( 'Exclude based on', 'merchant' ),
+							'options'    => array(
+								'products'   => esc_html__( 'Products', 'merchant' ),
+								'categories' => esc_html__( 'Categories', 'merchant' ),
+							),
+							'default'    => 'products',
+							'conditions' => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 								'terms'    => array(
 									array(
 										'field'    => 'upsell_based_on', // field ID
-										'operator' => 'in', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-										'value'    => array( 'all', 'categories' ), // can be a single value or an array of string/number/int
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => 'all', // can be a single value or an array of string/number/int
+									),
+									array(
+										'field'    => 'exclude_product_ids_toggle', // field ID
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => true, // can be a single value or an array of string/number/int
+									),
+								),
+							),
+						),
+						array(
+							'id'            => 'excluded_product_ids',
+							'type'          => 'products_selector',
+							'title'         => esc_html__( 'Exclude products', 'merchant' ),
+							'multiple'      => true,
+							'desc'          => esc_html__( 'Upsell will not be displayed for selected products.', 'merchant' ),
+							'allowed_types' => array( 'simple', 'variable' ),
+							'conditions'    => array(
+								'relation' => 'OR', // AND/OR, If not provided, only first term will be considered
+								'terms'    => array(
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'upsell_based_on', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'all', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'exclude_product_ids_toggle', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'exclude_based_on', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'products', // can be a single value or an array of string/number/int
+											),
+										),
+									),
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'upsell_based_on', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'categories', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'exclude_product_ids_toggle', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+										),
+									),
+								),
+							),
+						),
+						array(
+							'id'          => 'excluded_category_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude category(es)', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
+							'desc'        => esc_html__( 'Upsell will not be displayed for selected category products.', 'merchant' ),
+							'conditions'  => array(
+								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+								'terms'    => array(
+									array(
+										'field'    => 'upsell_based_on', // field ID
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => 'all', // can be a single value or an array of string/number/int
+									),
+									array(
+										'field'    => 'exclude_based_on', // field ID
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => 'categories', // can be a single value or an array of string/number/int
 									),
 									array(
 										'field'    => 'exclude_product_ids_toggle', // field ID
