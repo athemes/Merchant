@@ -368,7 +368,7 @@ jQuery(document).ready(function ($) {
 					slidesToShow: 1,
 					dots: false,
 					autoplay: false,
-					autoplaySpeed: 2000,
+					// autoplaySpeed: 2000,
 					fade: true,
 					cssEase: 'linear',
 					pauseOnFocus: true,
@@ -460,7 +460,6 @@ jQuery(document).ready(function ($) {
 			this.removeCoupon(self, couponCode);
 		},
 		sideCartBtns: function () {
-			console.log('xxxx');
 			let showCheckoutBtn = merchant_side_cart_params.show_checkout_btn === '1',
 				showViewCartBtn = merchant_side_cart_params.show_view_cart_btn === '1',
 				checkoutBtnTxt = merchant_side_cart_params.checkout_btn_text,
