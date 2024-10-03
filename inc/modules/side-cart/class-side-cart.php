@@ -57,7 +57,10 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
-
+		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
+			// Init translations.
+			$this->init_translations();
+		}
 		// Is module preview page.
 		if ( is_admin() && parent::is_module_settings_page() ) {
 			self::$is_module_preview = true;
@@ -73,6 +76,22 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
+		}
+	}
+
+	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['checkout_btn_text'] ) ) {
+			Merchant_Translator::register_string( $settings['checkout_btn_text'], esc_html__( 'Side cart checkout button text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['view_cart_btn_text'] ) ) {
+			Merchant_Translator::register_string( $settings['view_cart_btn_text'], esc_html__( 'Side cart view cart button text', 'merchant' ) );
+		}
+		if ( ! empty( $settings['upsells_title'] ) ) {
+			Merchant_Translator::register_string( $settings['upsells_title'], esc_html__( 'Side cart upsells title', 'merchant' ) );
+		}
+		if ( ! empty( $settings['upsells_add_to_cart_text'] ) ) {
+			Merchant_Translator::register_string( $settings['upsells_add_to_cart_text'], esc_html__( 'Side cart upsells add to cart text', 'merchant' ) );
 		}
 	}
 

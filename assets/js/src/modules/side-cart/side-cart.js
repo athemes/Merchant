@@ -155,6 +155,7 @@ jQuery(document).ready(function ($) {
 
 	let merchant_upsells = {
 		init: function () {
+			let self = this;
 			this.bindEvents();
 
 			setTimeout(function () {
@@ -174,6 +175,7 @@ jQuery(document).ready(function ($) {
 					}
 				});
 
+				self.sideCartBtns();
 			}, 500);
 		},
 		bindEvents: function () {
@@ -449,7 +451,6 @@ jQuery(document).ready(function ($) {
 		handleCouponError: function (error) {
 			console.log('Error:', error);
 		},
-
 		handleCouponRemoveClick: function (event) {
 			event.preventDefault();
 			let self = this,
@@ -457,6 +458,35 @@ jQuery(document).ready(function ($) {
 				couponCode = btn.attr('data-coupon');
 			console.log(btn);
 			this.removeCoupon(self, couponCode);
+		},
+		sideCartBtns: function () {
+			console.log('xxxx');
+			let showCheckoutBtn = merchant_side_cart_params.show_checkout_btn === '1',
+				showViewCartBtn = merchant_side_cart_params.show_view_cart_btn === '1',
+				checkoutBtnTxt = merchant_side_cart_params.checkout_btn_text,
+				viewCartBtnTxt = merchant_side_cart_params.view_cart_btn_text,
+				buttonsWrapper = $(document).find('.merchant-floating-side-mini-cart-body .woocommerce-mini-cart__buttons'),
+				checkoutBtn = buttonsWrapper.find('.checkout'),
+				viewCartBtn = buttonsWrapper.find('a:not(.checkout)');
+
+			if (!showCheckoutBtn && !showViewCartBtn) {
+				buttonsWrapper.hide();
+				return;
+			}
+			if (!showCheckoutBtn) {
+				checkoutBtn.hide();
+			}
+			if (!showViewCartBtn) {
+				viewCartBtn.hide();
+			}
+
+			if (checkoutBtnTxt !== '') {
+				checkoutBtn.text(checkoutBtnTxt);
+			}
+
+			if (viewCartBtnTxt !== '') {
+				viewCartBtn.text(viewCartBtnTxt);
+			}
 		}
 	}
 

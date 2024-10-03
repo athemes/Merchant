@@ -18,21 +18,21 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'show_after_add_to_cart',
 			'type'    => 'switcher',
 			'title'   => __( 'Shop Page', 'merchant' ),
-			'desc'   => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
+			'desc'    => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'show_after_add_to_cart_single_product',
 			'type'    => 'switcher',
 			'title'   => __( 'Product Page', 'merchant' ),
-			'desc'   => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
+			'desc'    => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'show_on_cart_url_click',
 			'type'    => 'switcher',
 			'title'   => __( 'Cart Icons', 'merchant' ),
-			'desc'   => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
+			'desc'    => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -40,6 +40,50 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'switcher',
 			'title'   => __( 'Show discount codes input', 'merchant' ),
 			'default' => 0,
+		),
+		array(
+			'id'      => 'show_checkout_btn',
+			'type'    => 'switcher',
+			'title'   => __( 'Show checkout button', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'checkout_btn_text',
+			'type'       => 'text',
+			//          'title'   => esc_html__( 'Placement', 'merchant' ),
+			'default'    => esc_html__( 'Checkout', 'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'show_checkout_btn', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'show_view_cart_btn',
+			'type'    => 'switcher',
+			'title'   => __( 'Show view cart button', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'view_cart_btn_text',
+			'type'       => 'text',
+			//          'title'   => esc_html__( 'Placement', 'merchant' ),
+			'default'    => esc_html__( 'View Cart', 'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'show_view_cart_btn', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 		array(
 			'id'      => 'use_strikethrough_prices',
