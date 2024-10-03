@@ -48,6 +48,12 @@ Merchant_Admin_Options::create( array(
 			'default' => 0,
 		),
 		array(
+			'id'      => 'show_savings',
+			'type'    => 'switcher',
+			'title'   => __( 'Show savings at the bottom', 'merchant' ),
+			'default' => 0,
+		),
+		array(
 			'id'      => 'show_on_devices',
 			'type'    => 'checkbox_multiple',
 			'title'   => esc_html__( 'Show on devices', 'merchant' ),
