@@ -36,6 +36,16 @@ Merchant_Admin_Options::create( array(
 			'default' => 1,
 		),
 		array(
+			'id'      => 'slide_direction',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Cart position', 'merchant' ),
+			'options' => array(
+				'right' => esc_html__( 'Slide from right', 'merchant' ),
+				'left' => esc_html__( 'Slide from left', 'merchant' ),
+			),
+			'default' => 'right',
+		),
+		array(
 			'id'      => 'use_discount_codes',
 			'type'    => 'switcher',
 			'title'   => __( 'Show discount codes input', 'merchant' ),

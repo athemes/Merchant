@@ -108,17 +108,13 @@
 	color: var(--mrc-fmci-side-cart-content-text-color, #212121);
 	background-color: var(--mrc-fmci-side-cart-content-background-color, #ffffff);
 
+	&.slide-left{
+		left: 0;
+		right: unset;
+		transform: translate3d(-100%, 0, 0);
+	}
 	* {
 		box-sizing: border-box;
-	}
-}
-
-.rtl {
-	.merchant-floating-side-mini-cart {
-		right: unset;
-		left: 0;
-		transform: translate3d(-100%, 0, 0);
-
 	}
 }
 
