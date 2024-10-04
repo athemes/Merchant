@@ -108,19 +108,20 @@
 	color: var(--mrc-fmci-side-cart-content-text-color, #212121);
 	background-color: var(--mrc-fmci-side-cart-content-background-color, #ffffff);
 
-	&.slide-left{
+	&.slide-left {
 		left: 0;
 		right: unset;
 		transform: translate3d(-100%, 0, 0);
 	}
+
 	* {
 		box-sizing: border-box;
 	}
 }
 
-.woocommerce-mini-cart__savings,
+.woocommerce-mini-cart__cart_total,
 .woocommerce-mini-cart__coupon,
-.woocommerce-mini-cart__coupons{
+.woocommerce-mini-cart__coupons {
 	display: none;
 }
 
@@ -416,8 +417,20 @@
 	}
 
 	.woocommerce-mini-cart__total {
+		&:before {
+			content: "";
+			position: absolute;
+			width: calc(100% - 60px);
+			height: 1px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+			opacity: .1;
+		}
+
 		margin: 0;
-		padding: 30px;
+		padding: 20px 30px;
 		display: flex;
 		justify-content: space-between;
 		line-height: 1em;
@@ -437,9 +450,21 @@
 	}
 
 	.woocommerce-mini-cart__buttons {
+		&:before {
+			content: "";
+			position: absolute;
+			width: calc(100% - 60px);
+			height: 1px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+			opacity: .1;
+		}
+
 		position: relative;
 		margin: 0;
-		padding: 30px;
+		padding: 20px 30px;
 		display: flex;
 		grid-gap: 20px;
 		flex-direction: column-reverse;
@@ -488,9 +513,22 @@
 	}
 
 	.woocommerce-mini-cart__coupon {
+		&:before {
+			content: "";
+			position: absolute;
+			width: calc(100% - 60px);
+			height: 1px;
+			top: 0;
+			left: 50%;
+			-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+			background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+			opacity: .1;
+		}
+
 		position: relative;
 		margin: 0;
-		padding: 30px;
+		padding: 20px 30px;
 		display: flex;
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
@@ -508,31 +546,43 @@
 			line-height: 1.4;
 		}
 
-		.overlay{
+		.overlay {
 			position: absolute;
 			top: 0;
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background-color: rgba(0,0,0,0.2);
+			background-color: rgba(0, 0, 0, 0.2);
 			z-index: 1;
 			animation: shining 3s infinite;
 			visibility: hidden;
 			pointer-events: none;
 		}
 
-		&.loading{
-			.overlay{
+		&.loading {
+			.overlay {
 				visibility: visible;
 				pointer-events: auto;
 			}
 		}
 	}
 
-	.woocommerce-mini-cart__savings{
+	.woocommerce-mini-cart__cart_total {
+		&:before {
+			content: "";
+			position: absolute;
+			width: calc(100% - 60px);
+			height: 1px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+			opacity: .1;
+		}
+
 		position: relative;
 		margin: 0;
-		padding: 30px;
+		padding: 20px 30px;
 		display: flex;
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
@@ -543,26 +593,44 @@
 		color: var(--mrc-fmci-side-cart-total-text-color, #212121);
 	}
 
-	.woocommerce-mini-cart__coupons{
+	.woocommerce-mini-cart__coupons {
+		&:before {
+			content: "";
+			position: absolute;
+			width: calc(100% - 60px);
+			height: 1px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+			opacity: .1;
+		}
+
+		position: relative;
 		margin: 0;
-		padding: 15px 30px;
+		padding: 20px 30px;
 		display: flex;
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
 		justify-content: space-between;
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
+		color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+
+		a {
+			color: var(--mrc-fmci-side-cart-total-text-color, #212121);
+		}
 	}
 }
 
 @keyframes shining {
-	0%{
-		background-color: rgba(0,0,0,0.2);
+	0% {
+		background-color: rgba(0, 0, 0, 0.2);
 	}
-	50%{
-		background-color: rgba(0,0,0,0.3);
+	50% {
+		background-color: rgba(0, 0, 0, 0.3);
 	}
-	100%{
-		background-color: rgba(0,0,0,0.2);
+	100% {
+		background-color: rgba(0, 0, 0, 0.2);
 	}
 }
 
@@ -635,6 +703,10 @@
 	// Wrapper for each upsell item
 	.merchant-mini-cart-upsell-item-wrap {
 		margin-bottom: 30px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 
 		// Container for the column layout
 		.column-container {
