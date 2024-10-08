@@ -16,7 +16,7 @@ merchant.modules = merchant.modules || {};
 		init: function () {
 
 			var self = this;
-			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field, .woocommerce-product-search .search-field, .w-search-form input');
+			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field, .woocommerce-product-search .search-field, .w-search-form input, .the7-search-form__input, input[type="search"]');
 
 			if (fields.length) {
 
@@ -78,7 +78,6 @@ merchant.modules = merchant.modules || {};
 					wrapper.className = 'merchant-ajax-search-wrapper';
 					el.parentNode.append(wrapper);
 					el.parentNode.classList.add('merchant-ajax-search');
-
 				}
 
 				wrapper.innerHTML = response.output;
@@ -134,7 +133,6 @@ merchant.modules = merchant.modules || {};
 			var rect = el.getBoundingClientRect();
 			return rect.x + rect.width > window.innerWidth;
 		}
-
 	};
 
 	$(document).ready(function () {
