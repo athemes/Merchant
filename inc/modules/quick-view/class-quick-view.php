@@ -28,6 +28,13 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 */
 	public static $is_module_preview = false;
 
+	/**
+	 * Whether the module has a shortcode or not.
+	 *
+	 * @var bool
+	 */
+	public $has_shortcode = true;
+
 	private static $instance = null;
 
 	/**
@@ -126,19 +133,21 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		}
 
 		// Button Position.
-		$button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'overlay' );
+        if ( ! $this->is_shortcode_enabled() ) {
+	        $button_position = Merchant_Admin_Options::get( self::MODULE_ID, 'button_position', 'overlay' );
 
-		if ( 'before' === $button_position ) {
-			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 5 );
-		} elseif ( 'after' === $button_position ) {
-			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
-		} elseif ( 'overlay' === $button_position ) {
-			if ( merchant_is_kadence_active() ) {
-				add_filter( 'kadence_archive_content_wrap_start', array( $this, 'add_quick_view_button' ) );
-			} else {
-				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
-			}
-		}
+	        if ( 'before' === $button_position ) {
+		        add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 5 );
+	        } elseif ( 'after' === $button_position ) {
+		        add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
+	        } elseif ( 'overlay' === $button_position ) {
+		        if ( merchant_is_kadence_active() ) {
+			        add_filter( 'kadence_archive_content_wrap_start', array( $this, 'add_quick_view_button' ) );
+		        } else {
+			        add_action( 'woocommerce_after_shop_loop_item', array( $this, 'quick_view_button' ), 15 );
+		        }
+	        }
+        }
 
 		// Inject quick view modal output on footer.
 		add_action( 'wp_footer', array( $this, 'modal_output' ) );
@@ -158,7 +167,11 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		add_action( 'wp_ajax_nopriv_merchant_quick_view_content', array( $this, 'modal_content_ajax_callback' ) );
 	}
 
-
+	/**
+     * Singleton
+     *
+	 * @return self|null
+	 */
 	public static function get_instance() {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
@@ -177,6 +190,42 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 		if ( ! empty( $settings['button_text'] ) ) {
 			Merchant_Translator::register_string( $settings['button_text'], esc_html__( 'Quick view button text', 'merchant' ) );
 		}
+	}
+
+	/**
+	 * Print shortcode content.
+	 *
+	 * @return string
+	 */
+	public function shortcode_handler() {
+		// Check if module is active.
+		if ( ! Merchant_Modules::is_module_active( $this->module_id ) ) {
+			return '';
+		}
+
+		// Check if shortcode is enabled.
+		if ( ! $this->is_shortcode_enabled() ) {
+			return '';
+		}
+
+        global $product;
+
+        $product_id = is_object( $product ) ? $product->get_id() : get_the_ID();
+
+        ob_start();
+		$this->quick_view_button( 'shortcode' );
+		$shortcode_content = ob_get_clean();
+
+		/**
+		 * Filter the shortcode html content.
+		 *
+		 * @param string $shortcode_content shortcode html content
+		 * @param string $module_id         module id
+		 * @param int    $post_id           product id
+		 *
+		 * @since 1.8
+		 */
+		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, $this->module_id, $product_id );
 	}
 
 	/**
@@ -555,8 +604,12 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 	 * 
 	 * @return void
 	 */
-	public function quick_view_button() {
+	public function quick_view_button( $context = '' ) {
 		global $product;
+
+        if ( ! is_object( $product ) ) {
+            return;
+        }
 
 		$settings   = $this->get_module_settings();
 		$product_id = $product->get_id();
@@ -572,8 +625,12 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 			$button_text_html = '<span>' . Merchant_Translator::translate( $settings[ 'button_text' ] ) . '</span>';
 		}
 
+        $classes  = 'button wp-element-button merchant-quick-view-button';
+        $classes .= $context !== 'shortcode' ? ' merchant-quick-view-position-' . ( $settings[ 'button_position' ] ?? '' ) : '';
 		?>
-			<a href="#" class="button wp-element-button merchant-quick-view-button merchant-quick-view-position-<?php echo esc_attr( $settings[ 'button_position' ] ); ?>" data-product-id="<?php echo absint( $product_id ); ?>"><?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?></a>
+        <a href="#" class="<?php echo esc_attr( $classes ); ?>" data-product-id="<?php echo absint( $product_id ); ?>">
+            <?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?>
+        </a>
 		<?php
 	}
 
