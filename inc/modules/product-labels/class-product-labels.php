@@ -653,6 +653,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	                    foreach ( $slugs as $slug ) {
 		                    if ( has_term( $slug, $taxonomy, $product->get_id() ) ) {
 			                    $product_labels_html .= $this->label( $label );
+			                    break;
 		                    }
 	                    }
 						break;
