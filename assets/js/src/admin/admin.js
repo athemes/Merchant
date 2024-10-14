@@ -1671,8 +1671,12 @@
 	        }
 
             let value = $target.val();
-            if ($target.attr('type') === 'checkbox' || $target.attr('type') === 'radio') {
+            if ($target.attr('type') === 'checkbox') {
                 value = $target.is(':checked');
+            }
+
+            if ($target.attr('type') === 'radio') {
+                value = $target.filter(':checked').val();
             }
 
 	        // check if the field is multiple checkbox
