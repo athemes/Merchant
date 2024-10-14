@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Merchant
- * Plugin URI:  https://athemes.com
+ * Plugin URI:  https://athemes.com/merchant
  * Description: All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
  * Version:     1.10.0
  * Author:      aThemes
