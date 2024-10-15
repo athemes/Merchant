@@ -327,17 +327,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['cookie_banner_duration'] = Merchant_Admin_Options::get( 'cookie-banner', 'cookie_duration', 365 );
 			}
 
-			// Real Time Search
-			// TODO: Move this to the respective module class.
-			if ( Merchant_Modules::is_module_active( 'real-time-search' ) ) {
-				$setting['ajax_search']                              = true;
-				$setting['ajax_search_results_amounth_per_search']   = Merchant_Admin_Options::get( 'real-time-search', 'results_amounth_per_search', 15 );
-				$setting['ajax_search_results_order_by']             = Merchant_Admin_Options::get( 'real-time-search', 'results_order_by', 'title' );
-				$setting['ajax_search_results_order']                = Merchant_Admin_Options::get( 'real-time-search', 'results_order', 'asc' );
-				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'real-time-search', 'display_categories', 0 );
-				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
-			}
-
 			/**
 			 * Hook 'merchant_enqueue_after_main_css_js'
 			 *
