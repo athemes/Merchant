@@ -258,13 +258,24 @@
 				&-wrap,
 				&-plus,
 				&-minus {
-					display: none; // Hide on other places
+					display: none !important; // Hide on other places
 				}
 			}
 
 			form.cart {
 				.js-merchant-quantity-btn {
-					display: none;
+					display: none !important; // Hide on other places
+				}
+			}
+
+			// Show on Side Cart
+			.merchant-floating-side-mini-cart {
+				.merchant-quantity {
+					&-wrap,
+					&-plus,
+					&-minus {
+						display: block !important;
+					}
 				}
 			}
 		}
@@ -311,7 +322,7 @@
 			}
 
 			&-wrap {
-				display: flex; // Show on Side cart only
+				display: flex !important; // Show on Side cart only
 				flex-direction: column;
 				align-self: stretch;
 				flex: 1 1 auto;
@@ -344,8 +355,8 @@
 
 			&-plus,
 			&-minus {
-				color: #777777;
-				background: none;
+				color: #777777 !important;
+				background: none !important;
 				border: 1px solid #dbdbdb;
 				box-shadow: none;
 				height: 35px;
