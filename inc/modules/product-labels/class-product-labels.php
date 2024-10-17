@@ -118,7 +118,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
 
 		// Product Loop/Archives
-		add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+		if ( merchant_is_botiga_active() ) {
+			add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
+        } else {
+			add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+        }
 
         // Woo Block
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 9999, 3 );

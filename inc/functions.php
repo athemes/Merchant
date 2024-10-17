@@ -166,6 +166,17 @@ if ( ! function_exists( 'merchant_is_astra_active' ) ) {
 }
 
 /**
+ * Check if Storefront theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_storefront_active' ) ) {
+	function merchant_is_storefront_active() {
+		return class_exists( 'Storefront' );
+	}
+}
+
+/**
  * Check if WooCommerce Germanized theme is installed and active.
  *
  * @return bool

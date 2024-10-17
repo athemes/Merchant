@@ -87,6 +87,30 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'      => 'button-position-top-mobile',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button position top (Mobile)', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
+			'id'      => 'button-position-left-mobile',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button position left (Mobile)', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
 			'id'        => 'icon-color',
 			'type'      => 'color',
 			'title'     => esc_html__( 'Icon color', 'merchant' ),
