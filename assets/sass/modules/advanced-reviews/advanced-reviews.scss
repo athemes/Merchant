@@ -1301,9 +1301,25 @@ body {
 				letter-spacing: var(--bt-letter-spacing-button, 0px);
 				font-size: var(--bt-font-size-button, 14px);
 				background-color: var(--bt-color-button-bg, #212121);
-				color: var(--bt-color-button, #FFF);
 				text-decoration: none;
 				width: 100%;
+				position: relative;
+
+				&.loading{
+					&::after {
+						content: "";
+						position: absolute;
+						top: 50%;
+						right: 10px;  // Place the spinner to the right side
+						width: 1rem;
+						height: 1rem;
+						margin-top: -0.5rem;
+						border: 2px solid rgba(255, 255, 255, 0.6); // Outer part of the spinner
+						border-top-color: #fff; // Spinner color
+						border-radius: 50%;
+						animation: loading_spinner_animation 0.6s linear infinite;
+					}
+				}
 			}
 
 			.merchant-ajax-message {
@@ -1322,4 +1338,14 @@ body {
 	}
 
 
+}
+
+// Spinner animation
+@keyframes loading_spinner_animation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
