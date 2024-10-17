@@ -990,8 +990,8 @@
             });
         }).trigger('merchant.change');
 
-        $(document).on('merchant-admin-check-fields merchant-flexible-content-added keyup', function () {
-            $('.merchant-module-page-setting-field').each(function () {
+        $(document).on('merchant-admin-check-fields merchant-flexible-content-added change keyup', function () {
+            $(document).find('.merchant-module-page-setting-field').each(function () {
                 let $field = $(this);
                 if ($field.data('conditions')) {
                     let conditions = $field.data('conditions'),
@@ -1669,6 +1669,11 @@
 				// Maybe the field is a multiple field
 		        $target = $('input[name="merchant[' + condition.field + '][]"],select[name="merchant[' + condition.field + '][]"]')
 	        }
+
+            if (!$target.length) {
+                // Maybe the field is inside fields group
+                $target = $('.merchant-group-fields-container').find('.merchant-field-' + condition.field + ' input[name*="' + condition.field + '"],.merchant-field-' + condition.field + ' select[name*="' + condition.field + '"]');
+            }
 
             let value = $target.val();
             if ($target.attr('type') === 'checkbox') {
