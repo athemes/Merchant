@@ -373,7 +373,7 @@ Merchant_Admin_Options::create(
 					'percent'    => esc_html__( 'Percentage', 'merchant' ),
 					'fixed_cart' => esc_html__( 'Fixed', 'merchant' ),
 				),
-				'default'    => 'percentage',
+				'default'    => 'percent',
 				'conditions' => array(
 					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 					'terms'    => array(
