@@ -332,7 +332,7 @@ Merchant_Admin_Options::create(
 				'title'      => esc_html__( 'Discount generation method', 'merchant' ),
 				'options'    => array(
 					'auto'   => esc_html__( 'Auto-generated code (different each time)', 'merchant' ),
-					'single' => esc_html__( 'Single discount code', 'merchant' ),
+					'manual' => esc_html__( 'Single discount code', 'merchant' ),
 				),
 				'default'    => 'auto',
 				'conditions' => array(
@@ -458,7 +458,7 @@ Merchant_Admin_Options::create(
 						array(
 							'field'    => 'discount_generation_method', // field ID
 							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'single', // can be a single value or an array of string/number/int
+							'value'    => 'manual', // can be a single value or an array of string/number/int
 						),
 					),
 				),
@@ -479,7 +479,7 @@ Merchant_Admin_Options::create(
 						array(
 							'field'    => 'discount_generation_method', // field ID
 							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-							'value'    => 'single', // can be a single value or an array of string/number/int
+							'value'    => 'manual', // can be a single value or an array of string/number/int
 						),
 					),
 				),
@@ -514,9 +514,8 @@ Merchant_Admin_Options::create(
 						'id'      => 'body',
 						'type'    => 'textarea',
 						'title'   => __( 'Body', 'merchant' ),
-						'default' => __( 'Hello {first_name},
-						
-We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
+						'default' => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
+Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 					),
 					array(
 						'id'      => 'review_btn_type',
@@ -630,7 +629,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 							esc_url(
 								add_query_arg(
 									array(
-										'action' => 'merchant_pro_preview_request_review_email',
+										'action' => 'merchant_pro_preview_request_review_reminder_email',
 										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
 									),
 									admin_url( 'admin-post.php' )
@@ -642,7 +641,99 @@ We would be grateful if you shared how things look and feel. Your review helps u
 				),
 			),
 
+			array(
+				'id'             => 'discount_for_review_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Discount for review', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Send customers a next-purchase code after submitting a review.', 'merchant' ),
+				'state'          => 'open',
+				'default'        => 'active',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'      => 'subject',
+						'type'    => 'text',
+						'title'   => __( 'Subject', 'merchant' ),
+						'default' => __( 'Discount around!', 'merchant' ),
+						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+					),
+					array(
+						'id'      => 'body',
+						'type'    => 'textarea',
+						'title'   => __( 'Body', 'merchant' ),
+						'default' => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.', 'merchant' ),
+					),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_discount_for_review_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
 
+				),
+			),
+			array(
+				'id'             => 'discount_for_review_reminder_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Discount reminder for review', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Remind your customers to use their next-purchase discount if they haven\'t used it yet.', 'merchant' ),
+				'state'          => 'closed',
+				'default'        => 'active',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'      => 'days_after_first_email',
+						'type'    => 'number',
+						'title'   => esc_html__( 'After the first email, send the discount reminder after', 'merchant' ),
+						'default' => '3',
+					),
+					array(
+						'id'      => 'subject',
+						'type'    => 'text',
+						'title'   => __( 'Subject', 'merchant' ),
+						'default' => __( 'Reminder: Claim your next-purchase discount', 'merchant' ),
+						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+					),
+					array(
+						'id'      => 'body',
+						'type'    => 'textarea',
+						'title'   => __( 'Body', 'merchant' ),
+						'default' => __( 'Hello {first_name},
+This is a reminder to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}', 'merchant' ),
+					),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_request_review_reminder_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
+
+				),
+			),
 			array(
 				'id'          => 'sender_name',
 				'type'        => 'text',
