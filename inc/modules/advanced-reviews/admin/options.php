@@ -723,7 +723,7 @@ This is a reminder to let you know that you are eligible to receive a discount o
 							esc_url(
 								add_query_arg(
 									array(
-										'action' => 'merchant_pro_preview_request_review_reminder_email',
+										'action' => 'merchant_pro_preview_discount_for_review_reminder_email',
 										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
 									),
 									admin_url( 'admin-post.php' )
