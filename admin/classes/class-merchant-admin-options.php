@@ -402,7 +402,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 							} elseif ( 'textarea_multiline' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
 							} elseif ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
-								$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_text_field' ) );
+								$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_textarea_field' ) );
 							} else {
 								$value = sanitize_text_field( wp_unslash( $_POST['merchant'][ $field['id'] ] ) );
 							}
@@ -454,6 +454,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = sanitize_text_field( $value );
 					break;
 
+				case 'textarea_multiline':
 				case 'textarea':
 					$value = sanitize_textarea_field( $value );
 					break;
