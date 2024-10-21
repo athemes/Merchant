@@ -509,6 +509,18 @@ Merchant_Admin_Options::create(
 						'title'   => __( 'Subject', 'merchant' ),
 						'default' => __( 'Order {order_id}, how did it go?', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
 					),
 					array(
 						'id'      => 'body',
@@ -516,6 +528,19 @@ Merchant_Admin_Options::create(
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
 Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
+						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
 					),
 //                  array(
 //                      'id'      => 'review_btn_type',
@@ -585,6 +610,18 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'title'   => __( 'Subject', 'merchant' ),
 						'default' => __( 'Order {order_id}, how did it go?', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
 					),
 					array(
 						'id'      => 'body',
@@ -593,6 +630,19 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'default' => __( 'Hello {first_name},
 						
 We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
+						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
 					),
 //                  array(
 //                      'id'      => 'review_btn_type',
@@ -656,12 +706,33 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'title'   => __( 'Subject', 'merchant' ),
 						'default' => __( 'Your discount is ready', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
 					),
 					array(
 						'id'      => 'body',
 						'type'    => 'textarea_multiline',
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.', 'merchant' ),
+						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
 					),
 					array(
 						'id'      => 'preview-info',
@@ -705,6 +776,16 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'title'   => __( 'Subject', 'merchant' ),
 						'default' => __( 'Your discount is waiting for you', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
 					),
 					array(
 						'id'      => 'body',
@@ -712,6 +793,17 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name},
 This is a reminder to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}', 'merchant' ),
+						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
 					),
 					array(
 						'id'      => 'preview-info',
