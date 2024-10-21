@@ -517,32 +517,32 @@ Merchant_Admin_Options::create(
 						'default' => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
 Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 					),
-					array(
-						'id'      => 'review_btn_type',
-						'type'    => 'select',
-						'title'   => esc_html__( 'Review request button type', 'merchant' ),
-						'options' => array(
-							'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
-							'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
-						),
-						'default' => 'custom_button',
-					),
-					array(
-						'id'         => 'review_btn_text',
-						'type'       => 'text',
-						'title'      => __( 'Button text', 'merchant' ),
-						'default'    => __( 'Write a review', 'merchant' ),
-						'conditions' => array(
-							'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-							'terms'    => array(
-								array(
-									'field'    => 'review_btn_type', // field ID
-									'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-									'value'    => 'custom_button', // can be a single value or an array of string/number/int
-								),
-							),
-						),
-					),
+//                  array(
+//                      'id'      => 'review_btn_type',
+//                      'type'    => 'select',
+//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+//                      'options' => array(
+//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+//                      ),
+//                      'default' => 'custom_button',
+//                  ),
+//                  array(
+//                      'id'         => 'review_btn_text',
+//                      'type'       => 'text',
+//                      'title'      => __( 'Button text', 'merchant' ),
+//                      'default'    => __( 'Write a review', 'merchant' ),
+//                      'conditions' => array(
+//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+//                          'terms'    => array(
+//                              array(
+//                                  'field'    => 'review_btn_type', // field ID
+//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+//                              ),
+//                          ),
+//                      ),
+//                  ),
 					array(
 						'id'      => 'preview-info',
 						'type'    => 'info',
@@ -594,32 +594,32 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						
 We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
 					),
-					array(
-						'id'      => 'review_btn_type',
-						'type'    => 'select',
-						'title'   => esc_html__( 'Review request button type', 'merchant' ),
-						'options' => array(
-							'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
-							'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
-						),
-						'default' => 'custom_button',
-					),
-					array(
-						'id'         => 'review_btn_text',
-						'type'       => 'text',
-						'title'      => __( 'Button text', 'merchant' ),
-						'default'    => __( 'Write a review', 'merchant' ),
-						'conditions' => array(
-							'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-							'terms'    => array(
-								array(
-									'field'    => 'review_btn_type', // field ID
-									'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-									'value'    => 'custom_button', // can be a single value or an array of string/number/int
-								),
-							),
-						),
-					),
+//                  array(
+//                      'id'      => 'review_btn_type',
+//                      'type'    => 'select',
+//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+//                      'options' => array(
+//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+//                      ),
+//                      'default' => 'custom_button',
+//                  ),
+//                  array(
+//                      'id'         => 'review_btn_text',
+//                      'type'       => 'text',
+//                      'title'      => __( 'Button text', 'merchant' ),
+//                      'default'    => __( 'Write a review', 'merchant' ),
+//                      'conditions' => array(
+//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+//                          'terms'    => array(
+//                              array(
+//                                  'field'    => 'review_btn_type', // field ID
+//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+//                              ),
+//                          ),
+//                      ),
+//                  ),
 					array(
 						'id'      => 'preview-info',
 						'type'    => 'info',
@@ -640,13 +640,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 
 				),
 			),
-
 			array(
 				'id'             => 'discount_for_review_email',
 				'type'           => 'fields_group',
 				'title'          => esc_html__( 'Discount for review', 'merchant' ),
 				'sub-desc'       => esc_html__( 'Send customers a next-purchase code after submitting a review.', 'merchant' ),
-				'state'          => 'open',
+				'state'          => 'closed',
 				'default'        => 'active',
 				'accordion'      => true,
 				'display_status' => true,
