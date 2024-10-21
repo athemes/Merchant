@@ -131,6 +131,40 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			if ( ! empty( $settings['description'] ) ) {
 				Merchant_Translator::register_string( $settings['description'], esc_html__( 'Advanced reviews description', 'merchant' ) );
 			}
+
+			if ( ! empty( $settings['review_request_reminder_email']['subject'] ) ) {
+				Merchant_Translator::register_string( $settings['review_request_reminder_email']['subject'], esc_html__( 'Advanced reviews review request reminder email subject',
+					'merchant' ) );
+			}
+
+			if ( ! empty( $settings['review_request_reminder_email']['body'] ) ) {
+				Merchant_Translator::register_string( $settings['review_request_reminder_email']['body'], esc_html__( 'Advanced reviews review request reminder email body', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['review_request_email']['subject'] ) ) {
+				Merchant_Translator::register_string( $settings['review_request_email']['subject'], esc_html__( 'Advanced reviews review request email subject', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['review_request_email']['body'] ) ) {
+				Merchant_Translator::register_string( $settings['review_request_email']['body'], esc_html__( 'Advanced reviews review request email body', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['discount_for_review_email']['subject'] ) ) {
+				Merchant_Translator::register_string( $settings['discount_for_review_email']['subject'], esc_html__( 'Advanced reviews discount email subject', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['discount_for_review_email']['body'] ) ) {
+				Merchant_Translator::register_string( $settings['discount_for_review_email']['body'], esc_html__( 'Advanced reviews discount email body', 'merchant' ) );
+			}
+
+			if ( ! empty( $settings['discount_for_review_reminder_email']['subject'] ) ) {
+				Merchant_Translator::register_string( $settings['discount_for_review_reminder_email']['subject'], esc_html__( 'Advanced reviews discount reminder email subject',
+					'merchant' ) );
+			}
+
+			if ( ! empty( $settings['discount_for_review_reminder_email']['body'] ) ) {
+				Merchant_Translator::register_string( $settings['discount_for_review_reminder_email']['body'], esc_html__( 'Advanced reviews discount reminder email body', 'merchant' ) );
+			}
 		}
 
 		/**
