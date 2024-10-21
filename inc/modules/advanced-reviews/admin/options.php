@@ -300,21 +300,21 @@ Merchant_Admin_Options::create(
 			array(
 				'id'      => 'days_after_order_complete',
 				'type'    => 'number',
-				'title'   => esc_html__( 'After the order is completed, send the review request after', 'merchant' ),
-				'desc'    => esc_html__( 'The emails will be sent to orders that have been fulfilled.', 'merchant' ),
+				'title'   => esc_html__( 'After the order is completed, send the review request after the following number of days', 'merchant' ),
+				'desc'    => esc_html__( 'The emails will be sent to orders that have been completed.', 'merchant' ),
 				'default' => '3',
 			),
 			array(
 				'id'      => 'discount_toggle',
 				'type'    => 'switcher',
 				'title'   => __( 'Discount for reviews', 'merchant' ),
-				'desc'    => __( 'An email is sent to the customer after leaving a review on the store. The email is sent to the address they use for the review.', 'merchant' ),
+				'desc'    => __( 'An email containing a discount coupon will be sent to the customer after they leave a review on the store. The email will be sent to the address associated with their review.', 'merchant' ),
 				'default' => 0,
 			),
 			array(
 				'id'         => 'require_photo_for_discount',
 				'type'       => 'checkbox',
-				'label'      => esc_html__( 'Offering the discount specifically to leave a photo review', 'merchant' ),
+				'label'      => esc_html__( 'Offer a discount specifically for leaving a photo review.', 'merchant' ),
 				'default'    => false,
 				'conditions' => array(
 					'terms' => array(
@@ -512,7 +512,7 @@ Merchant_Admin_Options::create(
 					),
 					array(
 						'id'      => 'body',
-						'type'    => 'textarea',
+						'type'    => 'textarea_multiline',
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
 Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
@@ -588,7 +588,7 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 					),
 					array(
 						'id'      => 'body',
-						'type'    => 'textarea',
+						'type'    => 'textarea_multiline',
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name},
 						
@@ -655,12 +655,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'id'      => 'subject',
 						'type'    => 'text',
 						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Discount around!', 'merchant' ),
+						'default' => __( 'Your discount is ready', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 					),
 					array(
 						'id'      => 'body',
-						'type'    => 'textarea',
+						'type'    => 'textarea_multiline',
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.', 'merchant' ),
 					),
@@ -669,7 +669,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'type'    => 'info',
 						'content' => sprintf(
 						/* Translators: 1. docs link */
-							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
 							esc_url(
 								add_query_arg(
 									array(
@@ -697,19 +697,19 @@ We would be grateful if you shared how things look and feel. Your review helps u
 					array(
 						'id'      => 'days_after_first_email',
 						'type'    => 'number',
-						'title'   => esc_html__( 'After the first email, send the discount reminder after', 'merchant' ),
+						'title'   => esc_html__( 'After the first email, send the discount reminder after the following number of days', 'merchant' ),
 						'default' => '3',
 					),
 					array(
 						'id'      => 'subject',
 						'type'    => 'text',
 						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Reminder: Claim your next-purchase discount', 'merchant' ),
+						'default' => __( 'Your discount is waiting for you', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 					),
 					array(
 						'id'      => 'body',
-						'type'    => 'textarea',
+						'type'    => 'textarea_multiline',
 						'title'   => __( 'Body', 'merchant' ),
 						'default' => __( 'Hello {first_name},
 This is a reminder to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}', 'merchant' ),
