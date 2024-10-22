@@ -694,7 +694,7 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
 
 		// Exclude products
-		if ( in_array( $display_rule, array( 'all', 'all_products', 'categories', 'by_category' ), true ) ) {
+		if ( in_array( $display_rule, array( 'all', 'all_products', 'categories', 'by_category', 'tags', 'by_tags' ), true ) ) {
 			$excluded_product_ids = $args['excluded_products'] ?? array();
 			$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
 

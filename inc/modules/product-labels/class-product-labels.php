@@ -651,12 +651,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 						break;
 
 					case 'by_category':
-						$categories   = $label['product_cats'] ?? array();
-						$categories   = is_array( $categories ) ? $categories : (array) $categories;
-
-                        if ( ! empty( $categories ) && $this->is_in_category( $product, $categories ) ) {
-							$product_labels_html .= $this->label( $label );
-						}
+                    case 'by_tags':
+	                    $taxonomy = $display_rule === 'by_category' ? 'product_cat' : 'product_tag';
+	                    $slugs    = $display_rule === 'by_category' ? ( $label['product_cats'] ?? array() ) : ( $label['product_tags'] ?? array() );
+	                    foreach ( $slugs as $slug ) {
+		                    if ( has_term( $slug, $taxonomy, $product->get_id() ) ) {
+			                    $product_labels_html .= $this->label( $label );
+			                    break;
+		                    }
+	                    }
 						break;
 
 					case 'out_of_stock':

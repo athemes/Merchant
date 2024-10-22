@@ -237,6 +237,7 @@ Merchant_Admin_Options::create( array(
 								'all_products'      => esc_html__( 'All Products', 'merchant' ),
 								'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
 								'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
+								'by_tags'           => esc_html__( 'Specific tags', 'merchant' ),
 							),
 							'default' => 'products_on_sale',
 						),
@@ -265,6 +266,18 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'          => 'product_tags',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that will show the label.', 'merchant' ),
+							'condition'   => array( 'display_rules', '==', 'by_tags' ),
+						),
+
+						array(
 							'id'            => 'product_ids',
 							'type'          => 'products_selector',
 							'multiple'      => true,
@@ -279,7 +292,7 @@ Merchant_Admin_Options::create( array(
 							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'  => true,
 							'desc'      => esc_html__( 'Exclude products from this label.', 'merchant' ),
-							'condition' => array( 'display_rules', 'any', 'all_products|by_category|featured_products|new_products|products_on_sale|out_of_stock' ),
+							'condition' => array( 'display_rules', 'any', 'all_products|by_category|by_tags|featured_products|new_products|products_on_sale|out_of_stock' ),
 						),
 
 						array(
