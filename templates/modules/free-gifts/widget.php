@@ -15,6 +15,7 @@ $settings = isset( $args['settings'] ) ? $args['settings'] : array();
 
 $fg_classes  = 'merchant-free-gifts-widget';
 $fg_classes .= ' merchant-free-gifts-widget--' . ( $settings['position'] ?? 'top_right' );
+$fg_classes .= ! empty( $settings['mobile_width'] ) ? ' merchant-free-gifts-widget-has-mobile-width' : '';
 ?>
 <div id="merchant-free-gifts-widget" class="<?php echo esc_attr( $fg_classes ); ?>">
     <div class="merchant-free-gifts-widget-inner">

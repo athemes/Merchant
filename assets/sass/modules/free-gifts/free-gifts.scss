@@ -40,8 +40,10 @@ body.merchant-gift-was-claimed {
 		&--bottom_right {
 			right: calc(var(--merchant-content-width) * -1);
 
-			@media (max-width: 768px) {
-				right: calc(var(--merchant-content-width-mobile) * -1);
+			&.merchant-free-gifts-widget-has-mobile-width {
+				@media (max-width: 768px) {
+					right: calc(var(--merchant-content-width-mobile) * -1);
+				}
 			}
 
 			.merchant-free-gifts-widget-button {
@@ -58,8 +60,10 @@ body.merchant-gift-was-claimed {
 		&--bottom_left {
 			left: calc(var(--merchant-content-width) * -1);
 
-			@media (max-width: 768px) {
-				left: calc(var(--merchant-content-width-mobile) * -1);
+			&.merchant-free-gifts-widget-has-mobile-width {
+				@media (max-width: 768px) {
+					left: calc(var(--merchant-content-width-mobile) * -1);
+				}
 			}
 
 			.merchant-free-gifts-widget-button {
@@ -105,8 +109,10 @@ body.merchant-gift-was-claimed {
 	border-bottom-left-radius: 4px;
 	box-sizing: border-box;
 
-	@media (max-width: 768px) {
-		width: var(--merchant-content-width-mobile)
+	.merchant-free-gifts-widget-has-mobile-width & {
+		@media (max-width: 768px) {
+			width: var(--merchant-content-width-mobile)
+		}
 	}
 }
 

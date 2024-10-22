@@ -62,6 +62,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
 			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 			'tiered_free_gifts'     => false,
+			'mobile_width'          => false,
 		);
 
 		// Mount preview url.

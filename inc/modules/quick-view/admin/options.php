@@ -87,27 +87,63 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'        => 'mobile_position',
+			'type'      => 'checkbox',
+			'label'     => esc_html__( 'Position mobile', 'merchant' ),
+			'default'   => 0,
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
 			'id'      => 'button-position-top-mobile',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Button position top (Mobile)', 'merchant' ),
+			'title'   => esc_html__( 'Button position top', 'merchant' ),
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,
 			'default' => 50,
 			'unit'    => '%',
-			'condition' => array( 'button_position', '==', 'overlay' ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'button_position',
+						'operator' => '===',
+						'value'    => 'overlay',
+					),
+					array(
+						'field'    => 'mobile_position',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
 		),
 
 		array(
 			'id'      => 'button-position-left-mobile',
 			'type'    => 'range',
-			'title'   => esc_html__( 'Button position left (Mobile)', 'merchant' ),
+			'title'   => esc_html__( 'Button position left', 'merchant' ),
 			'min'     => 1,
 			'max'     => 100,
 			'step'    => 1,
 			'default' => 50,
 			'unit'    => '%',
-			'condition' => array( 'button_position', '==', 'overlay' ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'button_position',
+						'operator' => '===',
+						'value'    => 'overlay',
+					),
+					array(
+						'field'    => 'mobile_position',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
 		),
 
 		array(
