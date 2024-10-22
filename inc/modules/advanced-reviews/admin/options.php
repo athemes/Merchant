@@ -294,7 +294,7 @@ Merchant_Admin_Options::create(
 			array(
 				'id'      => 'auto_emails_toggle',
 				'type'    => 'checkbox',
-				'label'   => esc_html__( 'Send automatic emails for review requests', 'merchant' ),
+				'label'   => esc_html__( 'Send automated emails for review requests', 'merchant' ),
 				'default' => false,
 			),
 			array(
@@ -348,7 +348,7 @@ Merchant_Admin_Options::create(
 			array(
 				'id'         => 'discount_info',
 				'type'       => 'info',
-				'content'    => esc_html__( 'Merchant will generate a unique code for each review', 'merchant' ),
+				'content'    => esc_html__( 'Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. ', 'merchant' ),
 				'conditions' => array(
 					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 					'terms'    => array(
@@ -497,7 +497,7 @@ Merchant_Admin_Options::create(
 				'id'             => 'review_request_email',
 				'type'           => 'fields_group',
 				'title'          => esc_html__( 'Review request', 'merchant' ),
-				'sub-desc'       => esc_html__( 'Encourage your customers to leave a review with an automated email.', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Encourage your customers to leave a review with automated emails.', 'merchant' ),
 				'state'          => 'open',
 				'default'        => 'active',
 				'accordion'      => true,
@@ -507,12 +507,12 @@ Merchant_Admin_Options::create(
 						'id'      => 'subject',
 						'type'    => 'text',
 						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Order {order_id}, how did it go?', 'merchant' ),
+						'default' => __( 'Enjoying your recent purchase?', 'merchant' ),
 						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
 								'merchant'
 							),
 							'{first_name}',
@@ -532,7 +532,7 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
 								'merchant'
 							),
 							'{first_name}',
@@ -573,7 +573,7 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'type'    => 'info',
 						'content' => sprintf(
 						/* Translators: 1. docs link */
-							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
 							esc_url(
 								add_query_arg(
 									array(
@@ -613,7 +613,7 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
 								'merchant'
 							),
 							'{first_name}',
@@ -634,7 +634,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
 								'merchant'
 							),
 							'{first_name}',
@@ -709,7 +709,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
 								'merchant'
 							),
 							'{first_name}',
@@ -726,7 +726,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
 								'merchant'
 							),
 							'{first_name}',
@@ -757,7 +757,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 			array(
 				'id'             => 'discount_for_review_reminder_email',
 				'type'           => 'fields_group',
-				'title'          => esc_html__( 'Discount reminder for review', 'merchant' ),
+				'title'          => esc_html__( 'Review discount reminder', 'merchant' ),
 				'sub-desc'       => esc_html__( 'Remind your customers to use their next-purchase discount if they haven\'t used it yet.', 'merchant' ),
 				'state'          => 'closed',
 				'default'        => 'active',
@@ -779,7 +779,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
 								'merchant'
 							),
 							'{first_name}',
@@ -797,7 +797,7 @@ This is a reminder to let you know that you are eligible to receive a discount o
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show Customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
 								'merchant'
 							),
 							'{first_name}',
