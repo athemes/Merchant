@@ -447,6 +447,8 @@ Merchant_Admin_Options::create(
 				'type'        => 'info_block',
 				'description' => esc_html__( 'You need to create the discount code in WooCommerce by navigating to Marketing > Coupons. The same discount code will be sent to all customers.',
 					'merchant' ),
+				'button_text' => esc_html__( 'Create discount code', 'merchant' ),
+				'button_link' => admin_url( 'edit.php?post_type=shop_coupon' ),
 				'conditions'  => array(
 					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 					'terms'    => array(
