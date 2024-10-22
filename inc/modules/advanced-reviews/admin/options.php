@@ -308,7 +308,8 @@ Merchant_Admin_Options::create(
 				'id'      => 'discount_toggle',
 				'type'    => 'switcher',
 				'title'   => __( 'Discount for reviews', 'merchant' ),
-				'desc'    => __( 'An email containing a discount coupon will be sent to the customer after they leave a review on the store. The email will be sent to the address associated with their review.', 'merchant' ),
+				'desc'    => __( 'An email containing a discount coupon will be sent to the customer after they leave a review on the store. The email will be sent to the address associated with their review.',
+					'merchant' ),
 				'default' => 0,
 			),
 			array(
@@ -348,7 +349,8 @@ Merchant_Admin_Options::create(
 			array(
 				'id'         => 'discount_info',
 				'type'       => 'info',
-				'content'    => esc_html__( 'Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. ', 'merchant' ),
+				'content'    => esc_html__( 'Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. ',
+					'merchant' ),
 				'conditions' => array(
 					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 					'terms'    => array(
@@ -506,11 +508,11 @@ Merchant_Admin_Options::create(
 				'display_status' => true,
 				'fields'         => array(
 					array(
-						'id'      => 'subject',
-						'type'    => 'text',
-						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Enjoying your recent purchase?', 'merchant' ),
-						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Enjoying your recent purchase?', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -525,12 +527,12 @@ Merchant_Admin_Options::create(
 						),
 					),
 					array(
-						'id'      => 'body',
-						'type'    => 'textarea_multiline',
-						'title'   => __( 'Body', 'merchant' ),
-						'default' => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
 Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
-						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -544,32 +546,32 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 							'{order_url_close}'
 						),
 					),
-//                  array(
-//                      'id'      => 'review_btn_type',
-//                      'type'    => 'select',
-//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
-//                      'options' => array(
-//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
-//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
-//                      ),
-//                      'default' => 'custom_button',
-//                  ),
-//                  array(
-//                      'id'         => 'review_btn_text',
-//                      'type'       => 'text',
-//                      'title'      => __( 'Button text', 'merchant' ),
-//                      'default'    => __( 'Write a review', 'merchant' ),
-//                      'conditions' => array(
-//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-//                          'terms'    => array(
-//                              array(
-//                                  'field'    => 'review_btn_type', // field ID
-//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
-//                              ),
-//                          ),
-//                      ),
-//                  ),
+					//                  array(
+					//                      'id'      => 'review_btn_type',
+					//                      'type'    => 'select',
+					//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+					//                      'options' => array(
+					//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+					//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+					//                      ),
+					//                      'default' => 'custom_button',
+					//                  ),
+					//                  array(
+					//                      'id'         => 'review_btn_text',
+					//                      'type'       => 'text',
+					//                      'title'      => __( 'Button text', 'merchant' ),
+					//                      'default'    => __( 'Write a review', 'merchant' ),
+					//                      'conditions' => array(
+					//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					//                          'terms'    => array(
+					//                              array(
+					//                                  'field'    => 'review_btn_type', // field ID
+					//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+					//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+					//                              ),
+					//                          ),
+					//                      ),
+					//                  ),
 					array(
 						'id'      => 'preview-info',
 						'type'    => 'info',
@@ -607,11 +609,11 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'default' => '3',
 					),
 					array(
-						'id'      => 'subject',
-						'type'    => 'text',
-						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Order {order_id}, how did it go?', 'merchant' ),
-						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Order {order_id}, how did it go?', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -626,13 +628,13 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						),
 					),
 					array(
-						'id'      => 'body',
-						'type'    => 'textarea_multiline',
-						'title'   => __( 'Body', 'merchant' ),
-						'default' => __( 'Hello {first_name},
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name},
 						
 We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
-						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -646,32 +648,32 @@ We would be grateful if you shared how things look and feel. Your review helps u
 							'{order_url_close}'
 						),
 					),
-//                  array(
-//                      'id'      => 'review_btn_type',
-//                      'type'    => 'select',
-//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
-//                      'options' => array(
-//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
-//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
-//                      ),
-//                      'default' => 'custom_button',
-//                  ),
-//                  array(
-//                      'id'         => 'review_btn_text',
-//                      'type'       => 'text',
-//                      'title'      => __( 'Button text', 'merchant' ),
-//                      'default'    => __( 'Write a review', 'merchant' ),
-//                      'conditions' => array(
-//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-//                          'terms'    => array(
-//                              array(
-//                                  'field'    => 'review_btn_type', // field ID
-//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
-//                              ),
-//                          ),
-//                      ),
-//                  ),
+					//                  array(
+					//                      'id'      => 'review_btn_type',
+					//                      'type'    => 'select',
+					//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+					//                      'options' => array(
+					//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+					//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+					//                      ),
+					//                      'default' => 'custom_button',
+					//                  ),
+					//                  array(
+					//                      'id'         => 'review_btn_text',
+					//                      'type'       => 'text',
+					//                      'title'      => __( 'Button text', 'merchant' ),
+					//                      'default'    => __( 'Write a review', 'merchant' ),
+					//                      'conditions' => array(
+					//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					//                          'terms'    => array(
+					//                              array(
+					//                                  'field'    => 'review_btn_type', // field ID
+					//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+					//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+					//                              ),
+					//                          ),
+					//                      ),
+					//                  ),
 					array(
 						'id'      => 'preview-info',
 						'type'    => 'info',
@@ -703,11 +705,11 @@ We would be grateful if you shared how things look and feel. Your review helps u
 				'display_status' => true,
 				'fields'         => array(
 					array(
-						'id'      => 'subject',
-						'type'    => 'text',
-						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Your discount is ready', 'merchant' ),
-						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Your discount is ready', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -720,11 +722,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						),
 					),
 					array(
-						'id'      => 'body',
-						'type'    => 'textarea_multiline',
-						'title'   => __( 'Body', 'merchant' ),
-						'default' => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.', 'merchant' ),
-						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.',
+							'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -773,11 +776,11 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'default' => '3',
 					),
 					array(
-						'id'      => 'subject',
-						'type'    => 'text',
-						'title'   => __( 'Subject', 'merchant' ),
-						'default' => __( 'Your discount is waiting for you', 'merchant' ),
-						'desc'    => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Your discount is waiting for you', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
@@ -790,12 +793,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						),
 					),
 					array(
-						'id'      => 'body',
-						'type'    => 'textarea_multiline',
-						'title'   => __( 'Body', 'merchant' ),
-						'default' => __( 'Hello {first_name},
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name},
 This is a reminder to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}', 'merchant' ),
-						'desc'    => __( 'You can use these codes in the content.', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
