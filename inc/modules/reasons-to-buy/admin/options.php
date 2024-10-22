@@ -91,6 +91,30 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'          => 'excluded_categories',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from these items.', 'merchant' ),
+							'condition'   => array( 'display_rules', '==', 'all' ),
+						),
+
+						array(
+							'id'          => 'excluded_tags',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude tags from these items.', 'merchant' ),
+							'condition'   => array( 'display_rules', '==', 'all' ),
+						),
+
+						array(
 							'id'           => 'items',
 							'type'         => 'sortable_repeater',
 							'sorting'      => true,

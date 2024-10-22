@@ -715,6 +715,18 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			}
 		}
 
+		// Exclude tags
+		if ( in_array( $display_rule, array( 'all', 'all_products' ), true ) ) {
+			$excluded_tags_slugs = $args['excluded_tags'] ?? array();
+
+			$product     = wc_get_product( $product_id );
+			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
+
+			if ( ! empty( $excluded_tags_slugs ) && has_term( $excluded_tags_slugs, 'product_tag', $_product_id ) ) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 }

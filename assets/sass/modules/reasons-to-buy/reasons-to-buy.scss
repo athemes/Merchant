@@ -12,15 +12,10 @@
     }
 
     .merchant-reasons-list-item {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-align: start;
-            -ms-flex-align: start;
-                align-items: flex-start;
+        align-items: flex-start;
 
         .merchant-reasons-list-item-icon {
-            //display: none !important;
             margin-right: 0.5em;
 
             img,
@@ -36,24 +31,16 @@
             margin: 0 !important;
         }
     }
-
-    &.show-icon {
-        .merchant-reasons-list-item {
-            .merchant-reasons-list-item-icon {
-                display: block !important;
-            }
-        }
-    }
 }
 
 .products li .merchant-reasons-list {
     display: none !important;
 }
 
-.rtl{
-    .merchant-reasons-list{
-        .merchant-reasons-list-item{
-            .merchant-reasons-list-item-icon{
+.rtl {
+    .merchant-reasons-list {
+        .merchant-reasons-list-item {
+            .merchant-reasons-list-item-icon {
                 margin-right: unset;
                 margin-left: 0.5em;
             }
