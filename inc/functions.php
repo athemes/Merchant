@@ -166,6 +166,17 @@ if ( ! function_exists( 'merchant_is_astra_active' ) ) {
 }
 
 /**
+ * Check if Storefront theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_storefront_active' ) ) {
+	function merchant_is_storefront_active() {
+		return class_exists( 'Storefront' );
+	}
+}
+
+/**
  * Check if WooCommerce Germanized theme is installed and active.
  *
  * @return bool
@@ -243,6 +254,8 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_free_shipping_progress_bar_single_product_page',
 				'merchant_module_free_shipping_progress_bar_cart_page',
 				'merchant_module_free_shipping_progress_bar_checkout_page',
+				'merchant_module_quick_view',
+				'merchant_module_real_time_search',
 			)
 		);
 

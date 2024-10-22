@@ -17,3 +17,7 @@
 .woocommerce-product-search {
 	max-height: 43px;
 }
+
+.woocommerce-product-search.merchant-ajax-search {
+	max-width: 500px;
+}
