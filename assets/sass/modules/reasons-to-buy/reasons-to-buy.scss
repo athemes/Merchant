@@ -9,7 +9,6 @@
     .merchant-reasons-list-title {
         display: block;
         margin-bottom: 15px;
-        color:  var( --mrc-rtb-title-color, #212121 );
     }
 
     .merchant-reasons-list-item {
@@ -21,24 +20,20 @@
                 align-items: flex-start;
 
         .merchant-reasons-list-item-icon {
-            display: none !important;
+            //display: none !important;
             margin-right: 0.5em;
 
+            img,
             svg {
                 width: 0.9em;
                 height: 0.9em;
                 margin-top: 0.4em;
-                stroke: var( --mrc-rtb-items-icon-color, #777 );
+                stroke: currentColor;
             }
         }
 
         .merchant-reasons-list-item-text {
-            color: var( --mrc-rtb-items-text-color, #777 );
             margin: 0 !important;
-        }
-
-        & + .merchant-reasons-list-item {
-            margin-top: var( --mrc-rtb-items-spacing, 5px );
         }
     }
 
