@@ -306,7 +306,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public static function ajax_search_callback() {
-		//check_ajax_referer( 'merchant-nonce', 'nonce' );
+		check_ajax_referer( 'merchant-nonce', 'nonce' );
 	
 		$search_term          = isset( $_POST['search_term'] ) ? sanitize_text_field( wp_unslash( $_POST['search_term'] ) ) : '';
 		$posts_per_page       = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : 15;
