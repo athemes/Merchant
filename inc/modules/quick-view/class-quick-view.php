@@ -649,7 +649,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
         $classes  = 'button wp-element-button merchant-quick-view-button';
         $classes .= $context !== 'shortcode' ? ' merchant-quick-view-position-' . ( $settings[ 'button_position' ] ?? '' ) : '';
-        $classes .= ( $context !== 'shortcode' && ! empty( $settings['mobile_position'] ) ) ? ' merchant-quick-view-position-has-mobile-position' ?? '' : '';
+        $classes .= ( $context !== 'shortcode' && ! empty( $settings['mobile_position'] ) ) ? ' merchant-quick-view-position-has-mobile-position' : '';
 		?>
         <button class="<?php echo esc_attr( $classes ); ?>" data-product-id="<?php echo absint( $product_id ); ?>" type="button">
             <?php echo wp_kses( $button_icon_html, merchant_kses_allowed_tags( array(), false ) ) . wp_kses_post( $button_text_html ); ?>
