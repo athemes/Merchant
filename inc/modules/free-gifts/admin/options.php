@@ -400,7 +400,18 @@ Merchant_Admin_Options::create( array(
 			array(
 				'id'      => 'content_width',
 				'type'    => 'range',
-				'title'   => esc_html__( 'Content width', 'merchant' ),
+				'title'   => esc_html__( 'Content width Desktop', 'merchant' ),
+				'min'     => 0,
+				'max'     => 600,
+				'step'    => 1,
+				'unit'    => 'px',
+				'default' => 300,
+			),
+
+			array(
+				'id'      => 'content_width_mobile',
+				'type'    => 'range',
+				'title'   => esc_html__( 'Content width Mobile', 'merchant' ),
 				'min'     => 0,
 				'max'     => 600,
 				'step'    => 1,
