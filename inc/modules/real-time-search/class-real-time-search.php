@@ -170,7 +170,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	 * @return array $setting The merchant global object setting parameter.
 	 */
 	public function localize_script( $setting ) {
-
 		$module_settings = $this->get_module_settings();
 
 		$setting['real_time_search'] = array(
@@ -248,12 +247,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		</div>
 		<?php
 	}
-
-    private function print_search_form( $view = '' ) {
-        ?>
-
-        <?php
-    }
 
 	/**
 	 * Print shortcode content.
