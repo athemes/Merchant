@@ -409,6 +409,25 @@ Merchant_Admin_Options::create( array(
 			),
 
 			array(
+				'id'        => 'mobile_width',
+				'type'      => 'checkbox',
+				'label'     => esc_html__( 'Width mobile', 'merchant' ),
+				'default'   => 0,
+			),
+
+			array(
+				'id'        => 'content_width_mobile',
+				'type'      => 'range',
+				'title'     => esc_html__( 'Content width', 'merchant' ),
+				'min'       => 0,
+				'max'       => 600,
+				'step'      => 1,
+				'unit'      => 'px',
+				'default'   => 300,
+				'condition' => array( 'mobile_width', '==', '1' ),
+			),
+
+			array(
 				'id'      => 'content_bg_color',
 				'type'    => 'color',
 				'title'   => esc_html__( 'Content background color', 'merchant' ),
