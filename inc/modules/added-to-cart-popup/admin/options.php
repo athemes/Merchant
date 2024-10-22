@@ -174,8 +174,8 @@ Merchant_Admin_Options::create( array(
 			'options'    => array(
 				'related_products'           => esc_html__( 'Related Products', 'merchant' ),
 				'recently_viewed_products'   => esc_html__( 'Recently Viewed Products', 'merchant' ),
-				'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-				'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
+//              'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+//              'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
 			),
 			'default'    => 'related_products',
 			'conditions' => array(
