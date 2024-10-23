@@ -704,6 +704,7 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			'products_on_sale',
 			'new_products',
 			'out_of_stock',
+			'pre-order',
 		);
 
 		// Exclude products
