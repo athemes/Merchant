@@ -81,13 +81,45 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'         => 'exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => __( 'Exclusion List', 'merchant' ),
+							'desc'       => __( 'Select products that will not display items.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+								),
+							),
+						),
+
+						array(
 							'id'            => 'excluded_products',
 							'type'          => 'products_selector',
 							'title'         => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'      => true,
 							'desc'          => esc_html__( 'Exclude products from these items', 'merchant' ),
 							'allowed_types' => array( 'simple', 'variable' ),
-							'condition'     => array( 'display_rules', 'any', 'all|categories' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(
@@ -99,7 +131,21 @@ Merchant_Admin_Options::create( array(
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Exclude categories from these items.', 'merchant' ),
-							'condition'   => array( 'display_rules', '==', 'all' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(
@@ -111,7 +157,21 @@ Merchant_Admin_Options::create( array(
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
 							'desc'        => esc_html__( 'Exclude tags from these items.', 'merchant' ),
-							'condition'   => array( 'display_rules', '==', 'all' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(
