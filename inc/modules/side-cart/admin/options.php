@@ -273,7 +273,7 @@ Merchant_Admin_Options::create( array(
 												'value'    => 'all', // can be a single value or an array of string/number/int
 											),
 											array(
-												'field'    => 'exclude_product_ids_toggle', // field ID
+												'field'    => 'exclusion_toggle', // field ID
 												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 												'value'    => true, // can be a single value or an array of string/number/int
 											),
@@ -288,7 +288,7 @@ Merchant_Admin_Options::create( array(
 												'value'    => 'categories', // can be a single value or an array of string/number/int
 											),
 											array(
-												'field'    => 'exclude_product_ids_toggle', // field ID
+												'field'    => 'exclusion_toggle', // field ID
 												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 												'value'    => true, // can be a single value or an array of string/number/int
 											),
@@ -315,7 +315,7 @@ Merchant_Admin_Options::create( array(
 										'value'    => 'all', // can be a single value or an array of string/number/int
 									),
 									array(
-										'field'    => 'exclude_product_ids_toggle', // field ID
+										'field'    => 'exclusion_toggle', // field ID
 										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 										'value'    => true, // can be a single value or an array of string/number/int
 									),
