@@ -2093,6 +2093,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                             $value = null;
                                             if ( isset( $option[ $sub_field['id'] ] ) ) {
                                                 $value = $option[ $sub_field['id'] ];
+                                            } elseif ( isset( $sub_field['type'] ) && $sub_field['type'] === 'switcher' ) {
+	                                            $value = is_null( $value ) ? 0 : 1;
                                             } elseif ( isset( $sub_field['default'] ) ) {
                                                 $value = $sub_field['default'];
                                             }
