@@ -103,6 +103,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-flatsome-theme.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-breakdance-builder.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-elementor-builder.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-bricks-builder.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.
@@ -305,16 +306,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['scroll_to_top'] = true;
 			}
 
-			// Animated Add to Cart
-			// TODO: Move this to the respective module class.
-			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
-				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
-
-				if ( 'on-page-load' === $trigger ) {
-					wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				}
-			}
-
 			// Auto External Links
 			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'auto-external-links' ) ) {
@@ -325,17 +316,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			if ( Merchant_Modules::is_module_active( 'cookie-banner' ) ) {
 				$setting['cookie_banner']          = true;
 				$setting['cookie_banner_duration'] = Merchant_Admin_Options::get( 'cookie-banner', 'cookie_duration', 365 );
-			}
-
-			// Real Time Search
-			// TODO: Move this to the respective module class.
-			if ( Merchant_Modules::is_module_active( 'real-time-search' ) ) {
-				$setting['ajax_search']                              = true;
-				$setting['ajax_search_results_amounth_per_search']   = Merchant_Admin_Options::get( 'real-time-search', 'results_amounth_per_search', 15 );
-				$setting['ajax_search_results_order_by']             = Merchant_Admin_Options::get( 'real-time-search', 'results_order_by', 'title' );
-				$setting['ajax_search_results_order']                = Merchant_Admin_Options::get( 'real-time-search', 'results_order', 'asc' );
-				$setting['ajax_search_results_display_categories']   = Merchant_Admin_Options::get( 'real-time-search', 'display_categories', 0 );
-				$setting['ajax_search_results_enable_search_by_sku'] = Merchant_Admin_Options::get( 'real-time-search', 'enable_search_by_sku', 0 );
 			}
 
 			/**

@@ -62,6 +62,7 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 			'cart_title_text'       => esc_html__( 'Free Gift', 'merchant' ),
 			'cart_description_text' => esc_html__( 'This item was added as a free gift', 'merchant' ),
 			'tiered_free_gifts'     => false,
+			'mobile_width'          => false,
 		);
 
 		// Mount preview url.
@@ -200,7 +201,9 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 
 			$preview->set_css( 'content_width', '.merchant-free-gifts-widget-offers', '--merchant-content-width', 'px' );
 			$preview->set_css( 'content_width', '.merchant-free-gifts-widget', '--merchant-content-width', 'px' );
-			$preview->set_css( 'content_bg_color', '.merchant-free-gifts-widget-offers', '--merchant-bg-color' );
+			$preview->set_css( 'content_width_mobile', '.merchant-free-gifts-widget-offers', '--merchant-content-width-mobile', 'px' );
+			$preview->set_css( 'content_width_mobile', '.merchant-free-gifts-widget', '--merchant-content-width-mobile', 'px' );
+            $preview->set_css( 'content_bg_color', '.merchant-free-gifts-widget-offers', '--merchant-bg-color' );
 			$preview->set_css( 'count_bg_color', '.merchant-free-gifts-widget-count', '--merchant-bg-color' );
 			$preview->set_css( 'count_text_color', '.merchant-free-gifts-widget-count', '--merchant-text-color' );
 			$preview->set_css( 'button_bg_color', '.merchant-free-gifts-widget-button', '--merchant-bg-color' );
@@ -321,8 +324,10 @@ class Merchant_Free_Gifts extends Merchant_Add_Module {
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'button_bg_color', '#362e94', '.merchant-free-gifts-widget-button', '--merchant-bg-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'button_hover_bg_color', '#7167e1', '.merchant-free-gifts-widget-button', '--merchant-hover-bg-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'button_text_color', '#fff', '.merchant-free-gifts-widget-button', '--merchant-text-color' );
-		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_width', 300, '.merchant-free-gifts-widget-offers', '--merchant-content-width', 'px' );
+        $css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_width', 300, '.merchant-free-gifts-widget-offers', '--merchant-content-width', 'px' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_width', 300, '.merchant-free-gifts-widget', '--merchant-content-width', 'px' );
+        $css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_width_mobile', 300, '.merchant-free-gifts-widget-offers', '--merchant-content-width-mobile', 'px' );
+		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_width_mobile', 300, '.merchant-free-gifts-widget', '--merchant-content-width-mobile', 'px' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'content_bg_color', '#fff', '.merchant-free-gifts-widget-offers', '--merchant-bg-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'label_bg_color', '#f5f5f5', '.merchant-free-gifts-widget-offer-label', '--merchant-bg-color' );
 		$css .= Merchant_Custom_CSS::get_variable_css( $this->module_id, 'label_text_color', '#212121', '.merchant-free-gifts-widget-offer-label', '--merchant-text-color' );

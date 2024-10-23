@@ -18,29 +18,111 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'show_after_add_to_cart',
 			'type'    => 'switcher',
 			'title'   => __( 'Shop Page', 'merchant' ),
-			'desc'   => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
+			'desc'    => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'show_after_add_to_cart_single_product',
 			'type'    => 'switcher',
 			'title'   => __( 'Product Page', 'merchant' ),
-			'desc'   => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
+			'desc'    => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'show_on_cart_url_click',
 			'type'    => 'switcher',
 			'title'   => __( 'Cart Icons', 'merchant' ),
-			'desc'   => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
+			'desc'    => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
 			'default' => 1,
+		),
+		array(
+			'id'      => 'slide_direction',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Cart position', 'merchant' ),
+			'options' => array(
+				'right' => esc_html__( 'Slide from right', 'merchant' ),
+				'left' => esc_html__( 'Slide from left', 'merchant' ),
+			),
+			'default' => 'right',
+		),
+		array(
+			'id'      => 'use_discount_codes',
+			'type'    => 'switcher',
+			'title'   => __( 'Show discount codes input', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'      => 'show_checkout_btn',
+			'type'    => 'switcher',
+			'title'   => __( 'Show checkout button', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'checkout_btn_text',
+			'type'       => 'text',
+			//          'title'   => esc_html__( 'Placement', 'merchant' ),
+			'default'    => esc_html__( 'Checkout', 'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'show_checkout_btn', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'show_view_cart_btn',
+			'type'    => 'switcher',
+			'title'   => __( 'Show view cart button', 'merchant' ),
+			'default' => 1,
+		),
+		array(
+			'id'         => 'view_cart_btn_text',
+			'type'       => 'text',
+			//          'title'   => esc_html__( 'Placement', 'merchant' ),
+			'default'    => esc_html__( 'View Cart', 'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'show_view_cart_btn', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'use_strikethrough_prices',
+			'type'    => 'switcher',
+			'title'   => __( 'Show strikethrough prices', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'      => 'show_savings',
+			'type'    => 'switcher',
+			'title'   => __( 'Show savings at the bottom', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'      => 'show_on_devices',
+			'type'    => 'checkbox_multiple',
+			'title'   => esc_html__( 'Show on devices', 'merchant' ),
+			'options' => array(
+				'desktop' => esc_html__( 'Desktop', 'merchant' ),
+				'mobile'  => esc_html__( 'Mobile', 'merchant' ),
+			),
+			'default' => array( 'desktop', 'mobile' ),
 		),
 	),
 ) );
 
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Side_Cart::MODULE_ID,
-	'title'  => esc_html__( 'Upsell', 'merchant' ),
+	'title'  => esc_html__( 'Upsells', 'merchant' ),
 	'fields' => array(
 		array(
 			'id'      => 'use_upsells',
@@ -103,7 +185,7 @@ Merchant_Admin_Options::create( array(
 			),
 			'layouts'      => array(
 				'upsell-details' => array(
-					'title'       => esc_html__( 'Custom Upsell', 'merchant' ),
+					'title'       => esc_html__( 'Custom Upsells', 'merchant' ),
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
@@ -156,7 +238,7 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
-							'id'         => 'exclude_product_ids_toggle',
+							'id'         => 'exclusion_toggle',
 							'type'       => 'switcher',
 							'title'      => __( 'Exclusion List', 'merchant' ),
 							'desc'       => __( 'Select products that will not display upsells.', 'merchant' ),
@@ -175,20 +257,65 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'            => 'excluded_product_ids',
 							'type'          => 'products_selector',
-							'title'         => esc_html__( 'Trigger', 'merchant' ),
+							'title'         => esc_html__( 'Exclude products', 'merchant' ),
 							'multiple'      => true,
 							'desc'          => esc_html__( 'Upsell will not be displayed for selected products.', 'merchant' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 							'conditions'    => array(
+								'relation' => 'OR', // AND/OR, If not provided, only first term will be considered
+								'terms'    => array(
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'upsell_based_on', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'all', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'exclusion_toggle', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+										),
+									),
+									array(
+										'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+										'terms'    => array(
+											array(
+												'field'    => 'upsell_based_on', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => 'categories', // can be a single value or an array of string/number/int
+											),
+											array(
+												'field'    => 'exclusion_toggle', // field ID
+												'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+												'value'    => true, // can be a single value or an array of string/number/int
+											),
+										),
+									),
+								),
+							),
+						),
+						array(
+							'id'          => 'excluded_category_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude category(es)', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
+							'desc'        => esc_html__( 'Upsell will not be displayed for selected category products.', 'merchant' ),
+							'conditions'  => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 								'terms'    => array(
 									array(
 										'field'    => 'upsell_based_on', // field ID
-										'operator' => 'in', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-										'value'    => array( 'all', 'categories' ), // can be a single value or an array of string/number/int
+										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+										'value'    => 'all', // can be a single value or an array of string/number/int
 									),
 									array(
-										'field'    => 'exclude_product_ids_toggle', // field ID
+										'field'    => 'exclusion_toggle', // field ID
 										'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
 										'value'    => true, // can be a single value or an array of string/number/int
 									),
@@ -269,7 +396,7 @@ Merchant_Admin_Options::create( array(
 			'id'         => 'upsells_products_count_limitation',
 			'title'      => __( 'Maximum number of upsells to display', 'merchant' ),
 			'type'       => 'number',
-			'default'    => 10,
+			'default'    => 5,
 			'min'        => 1,
 			'step'       => 1,
 			'conditions' => array(
@@ -323,10 +450,10 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'         => 'upsells_style',
 			'type'       => 'select',
-			'title'      => esc_html__( 'Upsell direction', 'merchant' ),
+			'title'      => esc_html__( 'Upsell layout', 'merchant' ),
 			'options'    => array(
 				'carousel' => esc_html__( 'Carousel', 'merchant' ),
-				'block'    => esc_html__( 'Block', 'merchant' ),
+				'block'    => esc_html__( 'List', 'merchant' ),
 			),
 			'default'    => 'block',
 			'conditions' => array(

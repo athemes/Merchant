@@ -48,6 +48,7 @@ if ( get_option( 'page_comments' ) ) {
 		'post_id' => $product_id,
 		'fields'  => 'ids',
 		'status'  => 'approve',
+		'hierarchical' => 'threaded',
 	) ) );
 
 	$comment_pages = ceil( $comment_pages / get_option( 'comments_per_page' ) );
@@ -105,6 +106,9 @@ switch ( $sort_orderby ) {
 		// phpcs:enable
 		break;
 }
+
+// Set hierarchy to threaded.
+$comments_args['hierarchical'] = 'threaded';
 
 /**
  * Hook 'merchant_wc_reviews_advanced_sorting_args'

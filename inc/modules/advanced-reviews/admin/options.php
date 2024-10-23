@@ -77,10 +77,10 @@ Merchant_Admin_Options::create(
 				'type'    => 'select',
 				'title'   => __( 'Default reviews sorting', 'merchant' ),
 				'options' => array(
-					'newest'    => __( 'Newest', 'merchant' ),
-					'oldest'    => __( 'Oldest', 'merchant' ),
-					'top-rated' => __( 'Top rated', 'merchant' ),
-					'low-rated' => __( 'Low rated', 'merchant' ),
+					'newest'      => __( 'Newest', 'merchant' ),
+					'oldest'      => __( 'Oldest', 'merchant' ),
+					'top-rated'   => __( 'Top rated', 'merchant' ),
+					'low-rated'   => __( 'Low rated', 'merchant' ),
 					'photo-first' => __( 'Photo first', 'merchant' ),
 				),
 				'default' => 'newest',
@@ -92,8 +92,9 @@ Merchant_Admin_Options::create(
 				'type'    => 'select',
 				'title'   => __( 'Pagination type', 'merchant' ),
 				'desc'    => sprintf(
-					/* Translators: 1. Defualt WordPress discussion settings page. */
-					__( 'This option works only if you have pagination for comments enabled. By default, WordPress doesn\'t have pagination enabled for comments/reviews. You can change it from: <a href="%1$s" target="_blank">Settings > Discusson</a>', 'merchant' ),
+				/* Translators: 1. Defualt WordPress discussion settings page. */
+					__( 'This option works only if you have pagination for comments enabled. By default, WordPress doesn\'t have pagination enabled for comments/reviews. You can change it from: <a href="%1$s" target="_blank">Settings > Discusson</a>',
+						'merchant' ),
 					admin_url( 'options-discussion.php' )
 				),
 				'options' => array(
@@ -178,7 +179,8 @@ Merchant_Admin_Options::create(
 				'id'      => 'hook_order',
 				'type'    => 'range',
 				'title'   => __( 'Hook order', 'merchant' ),
-				'desc'    => __( 'Controls the display position for the entire advanced reviews section. Lower values will move the section towards the top, while higher values will move the section towards the bottom.', 'merchant' ),
+				'desc'    => __( 'Controls the display position for the entire advanced reviews section. Lower values will move the section towards the top, while higher values will move the section towards the bottom.',
+					'merchant' ),
 				'min'     => 1,
 				'max'     => 100,
 				'step'    => 1,
@@ -283,6 +285,571 @@ Merchant_Admin_Options::create(
 	)
 );
 
+
+Merchant_Admin_Options::create(
+	array(
+		'title'  => __( 'Collect Reviews', 'merchant' ),
+		'module' => Merchant_Advanced_Reviews::MODULE_ID,
+		'fields' => array(
+			array(
+				'id'      => 'auto_emails_toggle',
+				'type'    => 'checkbox',
+				'label'   => esc_html__( 'Send automated emails for review requests', 'merchant' ),
+				'default' => false,
+			),
+			array(
+				'id'      => 'days_after_order_complete',
+				'type'    => 'number',
+				'title'   => esc_html__( 'After the order is completed, send the review request after the following number of days', 'merchant' ),
+				'desc'    => esc_html__( 'The emails will be sent to orders that have been completed.', 'merchant' ),
+				'default' => '3',
+			),
+			array(
+				'id'      => 'discount_toggle',
+				'type'    => 'switcher',
+				'title'   => __( 'Discount for reviews', 'merchant' ),
+				'desc'    => __( 'An email containing a discount coupon will be sent to the customer after they leave a review on the store. The email will be sent to the address associated with their review.',
+					'merchant' ),
+				'default' => 0,
+			),
+			array(
+				'id'         => 'require_photo_for_discount',
+				'type'       => 'checkbox',
+				'label'      => esc_html__( 'Offer a discount specifically for leaving a photo review.', 'merchant' ),
+				'default'    => false,
+				'conditions' => array(
+					'terms' => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'discount_generation_method',
+				'type'       => 'radio',
+				'title'      => esc_html__( 'Discount generation method', 'merchant' ),
+				'options'    => array(
+					'auto'   => esc_html__( 'Auto-generated code (different each time)', 'merchant' ),
+					'manual' => esc_html__( 'Single discount code', 'merchant' ),
+				),
+				'default'    => 'auto',
+				'conditions' => array(
+					'terms' => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'discount_info',
+				'type'       => 'info',
+				'content'    => esc_html__( 'Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. ',
+					'merchant' ),
+				'conditions' => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'auto', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'discount_type',
+				'type'       => 'radio',
+				'title'      => esc_html__( 'Discount', 'merchant' ),
+				'options'    => array(
+					'percent'    => esc_html__( 'Percentage', 'merchant' ),
+					'fixed_cart' => esc_html__( 'Fixed', 'merchant' ),
+				),
+				'default'    => 'percent',
+				'conditions' => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'auto', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'discount_amount',
+				'type'       => 'number',
+				'step'       => 0.01,
+				'default'    => 10,
+				'conditions' => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'auto', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'discount_expire_after',
+				'type'       => 'select',
+				'title'      => esc_html__( 'Discount expires after', 'merchant' ),
+				'options'    => array(
+					'never' => esc_html__( 'Never', 'merchant' ),
+					'7'     => esc_html__( '7 days', 'merchant' ),
+					'14'    => esc_html__( '14 days', 'merchant' ),
+					'21'    => esc_html__( '21 days', 'merchant' ),
+					'30'    => esc_html__( '30 days', 'merchant' ),
+					'60'    => esc_html__( '60 days', 'merchant' ),
+					'90'    => esc_html__( '90 days', 'merchant' ),
+					'180'   => esc_html__( '180 days', 'merchant' ),
+					'365'   => esc_html__( '365 days', 'merchant' ),
+				),
+				'conditions' => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'auto', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'          => 'coupon_campaign_info',
+				'type'        => 'info_block',
+				'description' => esc_html__( 'You need to create the discount code in WooCommerce by navigating to Marketing > Coupons. The same discount code will be sent to all customers.',
+					'merchant' ),
+				'button_text' => esc_html__( 'Create discount code', 'merchant' ),
+				'button_link' => admin_url( 'edit.php?post_type=shop_coupon' ),
+				'conditions'  => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'manual', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+			array(
+				'id'         => 'manual_coupon_code',
+				'type'       => 'wc_coupons',
+				'title'      => esc_html__( 'Select manually created discount code', 'merchant' ),
+				//'desc'        => esc_html__( 'The discount code must be created in WooCommerce to work and add here to validate.', 'merchant' ),
+				'conditions' => array(
+					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					'terms'    => array(
+						array(
+							'field'    => 'discount_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+						array(
+							'field'    => 'discount_generation_method', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => 'manual', // can be a single value or an array of string/number/int
+						),
+					),
+				),
+			),
+		),
+	)
+);
+
+Merchant_Admin_Options::create(
+	array(
+		'title'  => __( 'Collect Reviews', 'merchant' ),
+		'module' => Merchant_Advanced_Reviews::MODULE_ID,
+		'fields' => array(
+			array(
+				'id'             => 'review_request_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Review request', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Encourage your customers to leave a review with automated emails.', 'merchant' ),
+				'state'          => 'open',
+				'default'        => 'active',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Enjoying your recent purchase?', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
+					),
+					array(
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
+Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
+					),
+					//                  array(
+					//                      'id'      => 'review_btn_type',
+					//                      'type'    => 'select',
+					//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+					//                      'options' => array(
+					//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+					//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+					//                      ),
+					//                      'default' => 'custom_button',
+					//                  ),
+					//                  array(
+					//                      'id'         => 'review_btn_text',
+					//                      'type'       => 'text',
+					//                      'title'      => __( 'Button text', 'merchant' ),
+					//                      'default'    => __( 'Write a review', 'merchant' ),
+					//                      'conditions' => array(
+					//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					//                          'terms'    => array(
+					//                              array(
+					//                                  'field'    => 'review_btn_type', // field ID
+					//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+					//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+					//                              ),
+					//                          ),
+					//                      ),
+					//                  ),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_request_review_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
+
+				),
+			),
+			array(
+				'id'             => 'review_request_reminder_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Review request reminder', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Send a second review request to customers who did not submit a review yet.', 'merchant' ),
+				'state'          => 'closed',
+				'default'        => 'inactive',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'      => 'days_after_first_email',
+						'type'    => 'number',
+						'title'   => esc_html__( 'After the first email, send the review request reminder after', 'merchant' ),
+						'default' => '3',
+					),
+					array(
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Order {order_id}, how did it go?', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
+					),
+					array(
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name},
+						
+We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{order_id}',
+							'{order_url_open}',
+							'{order_url_close}'
+						),
+					),
+					//                  array(
+					//                      'id'      => 'review_btn_type',
+					//                      'type'    => 'select',
+					//                      'title'   => esc_html__( 'Review request button type', 'merchant' ),
+					//                      'options' => array(
+					//                          'rating_stars'  => esc_html__( 'Rating stars', 'merchant' ),
+					//                          'custom_button' => esc_html__( 'Custom Button', 'merchant' ),
+					//                      ),
+					//                      'default' => 'custom_button',
+					//                  ),
+					//                  array(
+					//                      'id'         => 'review_btn_text',
+					//                      'type'       => 'text',
+					//                      'title'      => __( 'Button text', 'merchant' ),
+					//                      'default'    => __( 'Write a review', 'merchant' ),
+					//                      'conditions' => array(
+					//                          'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+					//                          'terms'    => array(
+					//                              array(
+					//                                  'field'    => 'review_btn_type', // field ID
+					//                                  'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+					//                                  'value'    => 'custom_button', // can be a single value or an array of string/number/int
+					//                              ),
+					//                          ),
+					//                      ),
+					//                  ),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_request_review_reminder_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
+
+				),
+			),
+			array(
+				'id'             => 'discount_for_review_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Discount for review', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Send customers a next-purchase code after submitting a review.', 'merchant' ),
+				'state'          => 'closed',
+				'default'        => 'active',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Your discount is ready', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
+					),
+					array(
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.',
+							'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
+					),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_discount_for_review_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
+
+				),
+			),
+			array(
+				'id'             => 'discount_for_review_reminder_email',
+				'type'           => 'fields_group',
+				'title'          => esc_html__( 'Review discount reminder', 'merchant' ),
+				'sub-desc'       => esc_html__( 'Remind your customers to use their next-purchase discount if they haven\'t used it yet.', 'merchant' ),
+				'state'          => 'closed',
+				'default'        => 'active',
+				'accordion'      => true,
+				'display_status' => true,
+				'fields'         => array(
+					array(
+						'id'      => 'days_after_first_email',
+						'type'    => 'number',
+						'title'   => esc_html__( 'After the first email, send the discount reminder after the following number of days', 'merchant' ),
+						'default' => '3',
+					),
+					array(
+						'id'          => 'subject',
+						'type'        => 'text',
+						'title'       => __( 'Subject', 'merchant' ),
+						'default'     => __( 'Your discount is waiting for you', 'merchant' ),
+						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
+					),
+					array(
+						'id'          => 'body',
+						'type'        => 'textarea_multiline',
+						'title'       => __( 'Body', 'merchant' ),
+						'default'     => __( 'Hello {first_name},
+This is a reminder to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}', 'merchant' ),
+						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+						'hidden_desc' => sprintf(
+						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
+							__(
+								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'merchant'
+							),
+							'{first_name}',
+							'{last_name}',
+							'{discount_code}'
+						),
+					),
+					array(
+						'id'      => 'preview-info',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. docs link */
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'action' => 'merchant_pro_preview_discount_for_review_reminder_email',
+										'nonce'  => wp_create_nonce( 'merchant_pro_advanced_reviews_mailer_preview' ),
+									),
+									admin_url( 'admin-post.php' )
+								)
+							)
+						),
+					),
+
+				),
+			),
+			array(
+				'id'          => 'sender_name',
+				'type'        => 'text',
+				'title'       => esc_html__( 'Sender name', 'merchant' ),
+				'desc'        => esc_html__( 'Will be displayed in the inbox, in the "From" field.', 'merchant' ),
+				'placeholder' => get_bloginfo( 'name' ),
+				'default'     => get_bloginfo( 'name' ),
+			),
+			array(
+				'id'          => 'sender_email',
+				'type'        => 'text',
+				'title'       => esc_html__( 'Sender email', 'merchant' ),
+				'desc'        => esc_html__( 'We recommend using your customer support email so replies from customers are sent to that address.', 'merchant' ),
+				'placeholder' => get_bloginfo( 'admin_email' ),
+				'default'     => get_bloginfo( 'admin_email' ),
+			),
+		),
+	)
+);
+
 // Modal Settings
 Merchant_Admin_Options::create(
 	array(
@@ -291,9 +858,9 @@ Merchant_Admin_Options::create(
 		'fields' => array(
 
 			/**
-			* Styles
-			*
-			*/
+			 * Styles
+			 *
+			 */
 
 			// Modal Close icon color.
 			array(
@@ -371,7 +938,8 @@ Merchant_Admin_Options::create(
 			array(
 				'type'    => 'info',
 				'id'      => 'shortcode_info',
-				'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.', 'merchant' ),
+				'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages.',
+					'merchant' ),
 			),
 			array(
 				'id'        => 'shortcode_text',

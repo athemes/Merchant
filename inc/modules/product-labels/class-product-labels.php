@@ -111,6 +111,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			return;
 		}
 
+        add_filter( 'merchant_product_labels_display_rules', array( $this, 'add_pre_order_option' ) );
+
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
@@ -118,7 +120,11 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_js' ) );
 
 		// Product Loop/Archives
-		add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+		if ( merchant_is_botiga_active() ) {
+			add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
+        } else {
+			add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+        }
 
         // Woo Block
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 9999, 3 );
@@ -158,6 +164,21 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			}
 		}
 	}
+
+	/**
+     * Add option
+     *
+	 * @param $options
+	 *
+	 * @return mixed
+	 */
+	public function add_pre_order_option( $options ) {
+        if ( class_exists( 'Merchant_Pre_Orders' ) && Merchant_Modules::is_module_active( Merchant_Pre_Orders::MODULE_ID ) ) {
+            $options['pre-order'] = esc_html__( 'Pre-Order Products', 'merchant' );
+        }
+
+        return $options;
+    }
 
 	/**
 	 * Function for `woocommerce_blocks_product_grid_item_html` filter-hook.
@@ -647,16 +668,25 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 						break;
 
 					case 'by_category':
-						$categories   = $label['product_cats'] ?? array();
-						$categories   = is_array( $categories ) ? $categories : (array) $categories;
-
-                        if ( ! empty( $categories ) && $this->is_in_category( $product, $categories ) ) {
-							$product_labels_html .= $this->label( $label );
-						}
+                    case 'by_tags':
+	                    $taxonomy = $display_rule === 'by_category' ? 'product_cat' : 'product_tag';
+	                    $slugs    = $display_rule === 'by_category' ? ( $label['product_cats'] ?? array() ) : ( $label['product_tags'] ?? array() );
+	                    foreach ( $slugs as $slug ) {
+		                    if ( has_term( $slug, $taxonomy, $product->get_id() ) ) {
+			                    $product_labels_html .= $this->label( $label );
+			                    break;
+		                    }
+	                    }
 						break;
 
 					case 'out_of_stock':
 						if ( $this->is_out_of_stock( $product ) ) {
+							$product_labels_html .= $this->label( $label );
+						}
+						break;
+
+					case 'pre-order':
+						if ( $this->is_pre_order( $product ) ) {
 							$product_labels_html .= $this->label( $label );
 						}
 						break;
@@ -1009,6 +1039,45 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$days_difference = abs( strtotime( $current_date ) - strtotime( $product_creation_date ) ) / DAY_IN_SECONDS;
 
 		return $days_difference <= $days;
+	}
+
+	/**
+     * Check if product is a pre-order item.
+     *
+	 * @param $product
+	 *
+	 * @return bool
+	 */
+	public function is_pre_order( $product ) {
+        if ( ! is_object( $product ) ) {
+            return false;
+        }
+
+		if ( class_exists( 'Merchant_Pre_Orders' ) && Merchant_Modules::is_module_active( Merchant_Pre_Orders::MODULE_ID ) && class_exists( 'Merchant_Pre_Orders_Main_Functionality' ) ) {
+			$available_pre_order = Merchant_Pre_Orders_Main_Functionality::available_product_rule( $product->get_id() );
+
+			if ( ! empty( $available_pre_order ) ) {
+				return true; // Pre-order available
+			}
+
+            // If Pre-order Not available for variable, check if available for any of its variation
+			if ( $product->is_type( 'variable' ) ) {
+				$variations = $product->get_available_variations();
+
+				foreach ( $variations as $variation ) {
+					$variation_id = $variation['variation_id'];
+
+					// Check if the variation is available for pre-order
+					$available_pre_order = Merchant_Pre_Orders_Main_Functionality::available_product_rule( $variation_id );
+
+					if ( ! empty( $available_pre_order ) ) {
+						return true; // Pre-order available for variation
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }
 

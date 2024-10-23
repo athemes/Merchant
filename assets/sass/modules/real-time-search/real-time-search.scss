@@ -5,7 +5,7 @@
 
 .merchant-ajax-search {
 	position: relative;
-	z-index: 99;
+	z-index: 999;
 }
 
 .merchant-ajax-search-products {
@@ -195,8 +195,9 @@
 	height: 60px;
 	background: #e5e5e5;
 }
+
 .woocommerce-product-search.merchant-ajax-search { 
-	max-width: 500px; 
+	//max-width: 500px;
 	width: 100%; 
 	margin: 0 auto;
 	display: flex;
@@ -204,19 +205,39 @@
 .merchant-module-page-preview-browser-inner {
 	padding: 20px;
 }
-input#woocommerce-product-search-field-search-form-1 {
-	border: 1px solid #212121;
-	border-radius: 0;
-	 flex-grow: 1;
-}
- button.search-submit {
-	background: #212121;
-	color: white;
-	border: 0;
-	margin-left: 10px;
-	padding: 9px 15px;
+
+form.merchant-product-search {
+	&,
+	&.woocommerce-product-search.merchant-ajax-search {
+		margin-block: 15px;
+	}
 }
 
-button.search-submit svg {
-	fill: white;
+body form.woocommerce-product-search,
+.merchant-product-search {
+	width: 100%;
+	display: flex;
+
+	.search-field {
+		border: 1px solid #212121;
+		border-radius: 0;
+		flex-grow: 1;
+		padding-inline: 0.75em;
+		margin-block: 0;
+	}
+
+	button[type="submit"],
+	button.search-submit {
+		background: #212121 !important;
+		color: #fff;
+		border: 0;
+		margin-left: 10px;
+		margin-block: 0;
+		padding: 9px 15px;
+		line-height: 1;
+
+		svg {
+			fill: white;
+		}
+	}
 }

@@ -97,6 +97,61 @@ $_comments = $args['comments'] ?? array();
                         </div>
                     </div>
 
+					<?php 
+
+					// The method has to be checked here because it is also rendered in the preview of the plugin on admin dashboard.
+					$comment_children = method_exists( $comment, 'get_children' ) ? $comment->get_children() : false;
+					if ( $comment_children ) : ?>
+						<?php foreach( $comment_children as $child_comment ) : ?>
+
+							<div id="comment-<?php echo esc_attr( $child_comment->comment_ID ); ?>" class="merchant-reviews-list-item merchant-reviews-list-item-child">
+								<div class="mrc-row mrc-columns-no-gutter">
+									<div class="mrc-col">
+										<div class="merchant-reviews-author-wrapper">
+											<strong class="merchant-review-author">
+												<?php echo esc_html( get_comment_author( $child_comment ) ); ?>
+												<em class="owner-reply"><?php echo esc_html__( ' — Store Owner', 'merchant' ); ?></em>
+											</strong>
+										</div>
+									</div>
+
+									<div class="mrc-col-3 merchant-review-date-wrapper">
+										<time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $child_comment ) ); ?>"><?php echo esc_html( get_comment_date( 'F j, Y', $child_comment ) ); ?></time>
+									</div>
+								</div>
+
+								<div class="mrc-row mrc-columns-no-gutter">
+									<div class="mrc-col">
+										<div class="merchant-review-content">
+											<?php
+
+											/**
+											 * Hook 'merchant_review_before_child_comment_text'
+											 *
+											 * @since 1.10.1
+											 */
+											do_action( 'merchant_review_before_child_comment_text', $child_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins
+
+											if ( isset( $args['comment_text'] ) ) {
+												echo wp_kses_post( $args['comment_text'] );
+											} else {
+												comment_text( $child_comment );
+											}
+
+											/**
+											 * Hook 'merchant_review_after_child_comment_text'
+											 *
+											 * @since 1.10.1
+											 */
+											do_action( 'merchant_review_after_child_comment_text', $child_comment ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Ensure compatibility with WooCommerce plugins ?>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						<?php endforeach; ?>
+					<?php endif; ?>
+
 
 				<?php elseif( isset( $_GET['unapproved'] ) && $comment->comment_ID === $_GET['unapproved'] ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                     <div id="comment-<?php echo esc_attr( $comment->comment_ID ); ?>" class="merchant-reviews-list-item">
@@ -108,12 +163,12 @@ $_comments = $args['comments'] ?? array();
 
 									<?php if ( wc_review_ratings_enabled() ) : ?>
                                         <div class="star-rating merchant-star-rating-style2" role="img" aria-label="Rated <?php echo esc_attr( $comment_rating_value ); ?>.00 out of 5">
-                                                    <span style="width: <?php echo esc_attr( ( ( $comment_rating_value / 5 ) * 100 ) ); ?>%;">
-                                                        <?php
-                                                        /* translators: %s is average rating value */
-                                                        $comment_rating_text = sprintf( __( 'Rated %s out of 5 based on customer ratings.', 'merchant' ), $comment_rating_value );
-                                                        echo esc_html( $comment_rating_text ); ?>
-                                                    </span>
+											<span style="width: <?php echo esc_attr( ( ( $comment_rating_value / 5 ) * 100 ) ); ?>%;">
+												<?php
+												/* translators: %s is average rating value */
+												$comment_rating_text = sprintf( __( 'Rated %s out of 5 based on customer ratings.', 'merchant' ), $comment_rating_value );
+												echo esc_html( $comment_rating_text ); ?>
+											</span>
                                         </div>
 									<?php endif; ?>
 

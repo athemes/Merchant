@@ -16,7 +16,7 @@ merchant.modules = merchant.modules || {};
 		init: function () {
 
 			var self = this;
-			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field, .woocommerce-product-search .search-field, .w-search-form input');
+			var fields = document.querySelectorAll('.woocommerce-product-search .wc-search-field, .widget_product_search .search-field, .wp-block-search .wp-block-search__input, .wc-block-product-search-field, .woocommerce-product-search .search-field, .w-search-form input, .the7-search-form__input, input[type="search"]');
 
 			if (fields.length) {
 
@@ -47,69 +47,71 @@ merchant.modules = merchant.modules || {};
 
 		},
 
-		searchFormHandler: function (el) {
-
-			if (el.value.length < 3) {
+		searchFormHandler: function ( el ) {
+			if ( el.value.length < 3 ) {
 				return false;
 			}
 
-			var self = this,
-				term = el.value,
-				clist = el.classList,
-				type = clist.contains('wc-block-product-search-field') || clist.contains('wc-search-field') ? 'product' : 'post';
+			const self = this;
+			const term = el.value;
+			const clist = el.classList;
+			const type = clist.contains( 'wc-block-product-search-field' ) || clist.contains( 'wc-search-field' ) ? 'product' : 'post';
 
-			$.post(window.merchant.setting.ajax_url, {
-				action: 'ajax_search_callback',
-				nonce: window.merchant.setting.nonce,
-				type: type,
-				search_term: term,
-				posts_per_page: window.merchant.setting.ajax_search_results_amounth_per_search,
-				orderby: window.merchant.setting.ajax_search_results_order_by,
-				order: window.merchant.setting.ajax_search_results_order,
-				display_categories: window.merchant.setting.ajax_search_results_display_categories,
-				enable_search_by_sku: window.merchant.setting.ajax_search_results_enable_search_by_sku,
-			}, function (response) {
+			const {
+				ajax_search_results_amount_per_search: posts_per_page = 15,
+				ajax_search_results_order_by: orderby = 'title',
+				ajax_search_results_order: order = 'asc',
+				ajax_search_results_display_categories: display_categories = 0,
+				ajax_search_results_enable_search_by_sku: enable_search_by_sku = 0
+			} = window.merchant.setting.real_time_search || {};
 
-				var wrapper = el.parentNode.getElementsByClassName('merchant-ajax-search-wrapper')[0];
+			$.ajax( {
+				url: window.merchant.setting.ajax_url,
+				method: 'POST',
+				data: {
+					action: 'ajax_search_callback',
+					nonce: window.merchant.setting.nonce,
+					type: type,
+					search_term: term,
+					posts_per_page,
+					orderby,
+					order,
+					display_categories,
+					enable_search_by_sku
+				},
+				success: function (response) {
+					let wrapper = el.parentNode.querySelector( '.merchant-ajax-search-wrapper' );
 
-				if (typeof wrapper === 'undefined') {
+					if ( ! wrapper ) {
+						wrapper = document.createElement( 'div' );
+						wrapper.className = 'merchant-ajax-search-wrapper';
+						el.parentNode.append( wrapper );
+						el.parentNode.classList.add( 'merchant-ajax-search' );
+					}
 
-					wrapper = document.createElement('div');
-					wrapper.className = 'merchant-ajax-search-wrapper';
-					el.parentNode.append(wrapper);
-					el.parentNode.classList.add('merchant-ajax-search');
+					wrapper.innerHTML = response.output;
 
+					const productsWrapper = document.querySelector( '.merchant-ajax-search-products' );
+
+					if ( productsWrapper && self.scrollbarVisible( productsWrapper ) ) {
+						productsWrapper.classList.add( 'has-scrollbar' );
+					}
+
+					if ( self.elementIsOutOfScreenHorizontal( wrapper ) ) {
+						wrapper.classList.add( 'merchant-reverse' );
+					}
 				}
-
-				wrapper.innerHTML = response.output;
-
-				var products_wrapper = document.querySelector('.merchant-ajax-search-products');
-
-				if (products_wrapper !== null && self.scrollbarVisible(products_wrapper)) {
-					products_wrapper.classList.add('has-scrollbar');
-				}
-
-				if (self.elementIsOutOfScreenHorizontal(wrapper)) {
-					wrapper.classList.add('merchant-reverse');
-				}
-
-			});
+			} );
 		},
 
 		destroy: function () {
-
-			if ($('body').hasClass('wp-admin')) {
+			if ( document.body.classList.contains( 'wp-admin' ) ) {
 				return;
 			}
 
-			var wrappers = document.querySelectorAll('.merchant-ajax-search-wrapper');
+			const wrappers = document.querySelectorAll( '.merchant-ajax-search-wrapper' );
 
-			if (wrappers.length) {
-				for (var i = 0; i < wrappers.length; i++) {
-					wrappers[i].remove();
-				}
-			}
-
+			wrappers.forEach( wrapper => wrapper.remove() );
 		},
 
 		debounce: function (callback, wait) {
@@ -134,7 +136,6 @@ merchant.modules = merchant.modules || {};
 			var rect = el.getBoundingClientRect();
 			return rect.x + rect.width > window.innerWidth;
 		}
-
 	};
 
 	$(document).ready(function () {

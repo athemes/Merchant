@@ -693,8 +693,22 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 	function merchant_is_product_excluded( $product_id, $args = array() ) {
 		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
 
+		$rules = array(
+			'all',
+			'all_products',
+			'categories',
+			'by_category',
+			'tags',
+			'by_tags',
+			'featured_products',
+			'products_on_sale',
+			'new_products',
+			'out_of_stock',
+			'pre-order',
+		);
+
 		// Exclude products
-		if ( in_array( $display_rule, array( 'all', 'all_products', 'categories', 'by_category' ), true ) ) {
+		if ( in_array( $display_rule, $rules, true ) ) {
 			$excluded_product_ids = $args['excluded_products'] ?? array();
 			$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
 
@@ -711,6 +725,18 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
 
 			if ( ! empty( $excluded_categories_slugs ) && has_term( $excluded_categories_slugs, 'product_cat', $_product_id ) ) {
+				return true;
+			}
+		}
+
+		// Exclude tags
+		if ( in_array( $display_rule, array( 'all', 'all_products' ), true ) ) {
+			$excluded_tags_slugs = $args['excluded_tags'] ?? array();
+
+			$product     = wc_get_product( $product_id );
+			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
+
+			if ( ! empty( $excluded_tags_slugs ) && has_term( $excluded_tags_slugs, 'product_tag', $_product_id ) ) {
 				return true;
 			}
 		}
