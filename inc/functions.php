@@ -187,7 +187,6 @@ if ( ! function_exists( 'merchant_is_woocommerce_germanized_active' ) ) {
 	}
 }
 
-
 /**
  * Check if Breakdance Builder is installed and active.
  *
@@ -196,6 +195,17 @@ if ( ! function_exists( 'merchant_is_woocommerce_germanized_active' ) ) {
 if ( ! function_exists( 'merchant_is_breakdance_active' ) ) {
 	function merchant_is_breakdance_active() {
 		return defined( '__BREAKDANCE_VERSION' );
+	}
+}
+
+/**
+ * Check if Brick Builder is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_bricks_builder_active' ) ) {
+	function merchant_is_bricks_builder_active() {
+		return defined( 'BRICKS_VERSION' );
 	}
 }
 

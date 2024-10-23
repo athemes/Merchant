@@ -430,6 +430,7 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 			    display: none!important;
 			}
 			.merchant-variations-wrapper .merchant-variation-type-image,
+			.merchant-variations-wrapper .merchant-variation-type-button,
 			.merchant-variations-wrapper .merchant-variation-type-color {
 			    display: -webkit-box;
 			    display: -ms-flexbox;
@@ -441,6 +442,8 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 			}
 	        .merchant-variations-wrapper .merchant-variation-type-color > a,
 	        .merchant-variations-wrapper .merchant-variation-type-image > a {
+	            width: 26px;
+	            height: 26px;
 			    position: relative;
 			    cursor: pointer;
 			    display: -webkit-box;
@@ -452,11 +455,13 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 			    -webkit-box-sizing: content-box;
 			    box-sizing: content-box;
 		        border-style: solid;
+		        border-radius: 50%;
 			}
 			.merchant-variations-wrapper .merchant-variation-type-image > a > span,
 			.merchant-variations-wrapper .merchant-variation-type-color > a > span {
 			    width: 100%;
 			    height: 100%;
+			    border-radius: 50%;
 			}
 			.merchant-variation-type-color > a > span {
 			    text-indent: -9999px;
