@@ -87,6 +87,66 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'        => 'mobile_position',
+			'type'      => 'checkbox',
+			'label'     => esc_html__( 'Position mobile', 'merchant' ),
+			'default'   => 0,
+			'condition' => array( 'button_position', '==', 'overlay' ),
+		),
+
+		array(
+			'id'      => 'button-position-top-mobile',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button position top', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'button_position',
+						'operator' => '===',
+						'value'    => 'overlay',
+					),
+					array(
+						'field'    => 'mobile_position',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'      => 'button-position-left-mobile',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Button position left', 'merchant' ),
+			'min'     => 1,
+			'max'     => 100,
+			'step'    => 1,
+			'default' => 50,
+			'unit'    => '%',
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'button_position',
+						'operator' => '===',
+						'value'    => 'overlay',
+					),
+					array(
+						'field'    => 'mobile_position',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
+		array(
 			'id'        => 'icon-color',
 			'type'      => 'color',
 			'title'     => esc_html__( 'Icon color', 'merchant' ),
@@ -375,5 +435,32 @@ Merchant_Admin_Options::create( array(
 			'default' => '#999999',
 		),
 
+	),
+) );
+
+// Shortcode
+$merchant_module_id = Merchant_Quick_View::MODULE_ID;
+Merchant_Admin_Options::create( array(
+	'module' => $merchant_module_id,
+	'title'  => esc_html__( 'Use shortcode', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'      => 'use_shortcode',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Use shortcode', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'type'    => 'info',
+			'id'      => 'shortcode_info',
+			'content' => esc_html__( 'If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings.', 'merchant' ),
+		),
+		array(
+			'id'        => 'shortcode_text',
+			'type'      => 'text_readonly',
+			'title'     => esc_html__( 'Shortcode text', 'merchant' ),
+			'default'   => '[merchant_module_' . str_replace( '-', '_', $merchant_module_id ) . ']',
+			'condition' => array( 'use_shortcode', '==', '1' ),
+		),
 	),
 ) );

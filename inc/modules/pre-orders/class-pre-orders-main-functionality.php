@@ -1161,6 +1161,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return false;
 		}
 
+		if ( 'tags' === $rule['trigger_on'] && empty( $rule['tag_slugs'] ) ) {
+			return false;
+		}
+
 		if ( isset( $rule['discount_toggle'] ) && $rule['discount_toggle'] === true ) {
 			if ( ! isset( $rule['discount_type'] ) ) {
 				return false;
@@ -1278,11 +1282,14 @@ class Merchant_Pre_Orders_Main_Functionality {
 					$available_rule = $rule;
 					break;
 				}
-				if ( 'category' === $rule['trigger_on'] ) {
-					$terms = get_the_terms( $product_id, 'product_cat' );
+				if ( 'category' === $rule['trigger_on'] || 'tags' === $rule['trigger_on'] ) {
+					$taxonomy = $rule['trigger_on'] === 'category' ? 'product_cat' : 'product_tag';
+					$slugs    = $rule['trigger_on'] === 'category' ? ( $rule['category_slugs'] ?? array() ) : ( $rule['tag_slugs'] ?? array() );
+
+					$terms = get_the_terms( $product_id, $taxonomy );
 					if ( ! empty( $terms ) ) {
 						foreach ( $terms as $term ) {
-							if ( in_array( $term->slug, $rule['category_slugs'], true ) ) {
+							if ( in_array( $term->slug, $slugs, true ) ) {
 								$available_rule = $rule;
 								break;
 							}

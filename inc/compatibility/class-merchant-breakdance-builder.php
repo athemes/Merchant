@@ -25,7 +25,7 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 				if ( 'overlay' === $button_position ) {
 					$merchant_quick_view = Merchant_Quick_View::get_instance();
 					add_filter( 'breakdance_before_shop_loop_after_image', array( $merchant_quick_view, 'quick_view_button' ) );
-					remove_action( 'woocommerce_after_shop_loop_item', array( $merchant_quick_view, 'quick_view_button' ), 15 );
+					remove_action( 'woocommerce_after_shop_loop_item', array( $merchant_quick_view, 'quick_view_button' ) );
 				}
 			}
 

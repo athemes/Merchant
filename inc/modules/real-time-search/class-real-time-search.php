@@ -29,6 +29,13 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Whether the module has a shortcode or not.
+	 *
+	 * @var bool
+	 */
+	public $has_shortcode = true;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -79,11 +86,13 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
 			// Enqueue admin scripts.
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+			// add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+
+			// Localize script.
+			//add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
 
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
-
 		}
 
 		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
@@ -100,6 +109,9 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 
 		// Enqueue scripts.
 		add_action( 'merchant_enqueue_after_main_css_js', array( $this, 'enqueue_scripts' ) );
+
+		// Localize script.
+		add_filter( 'merchant_localize_script', array( $this, 'localize_script' ) );
 	}
 
 	/**
@@ -152,6 +164,27 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Localize script with module settings.
+	 *
+	 * @param array $setting The merchant global object setting parameter.
+	 * @return array $setting The merchant global object setting parameter.
+	 */
+	public function localize_script( $setting ) {
+		$module_settings = $this->get_module_settings();
+
+		$setting['real_time_search'] = array(
+			'ajax_search'                              => true,
+            'ajax_search_results_amount_per_search'    => $module_settings['results_amounth_per_search'] ?? 15,
+            'ajax_search_results_order_by'             => $module_settings['results_order_by'] ?? 'title',
+            'ajax_search_results_order'                => $module_settings['results_order'] ?? 'asc',
+            'ajax_search_results_display_categories'   => $module_settings['display_categories'] ?? 0,
+            'ajax_search_results_enable_search_by_sku' => $module_settings['enable_search_by_sku'] ?? 0,
+        );
+
+		return $setting;
+    }
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -180,19 +213,16 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content() {
 		?>
-
-		<div class="woocommerce-product-search merchant-ajax-search">
-			<input type="search" id="woocommerce-product-search-field-search-form-1" class="search-field wc-search-field" placeholder="Search products…" value="" name="s"
-					autocomplete="off">
-			<button type="submit" class="search-submit" value="Search" title="Search for the product">
-				<i class="ws-svg-icon">
-					<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M10.875 3.75a7.125 7.125 0 100 14.25 7.125 7.125 0 000-14.25zM2.25 10.875a8.625 8.625 0 1117.25 0 8.625 8.625 0 01-17.25 0z"></path>
-						<path fill-rule="evenodd" d="M15.913 15.914a.75.75 0 011.06 0l4.557 4.556a.75.75 0 01-1.06 1.06l-4.557-4.556a.75.75 0 010-1.06z"></path>
-					</svg>
-				</i>
-			</button>
-			<input type="hidden" name="post_type" value="product">
+		<div class="woocommerce-product-search merchant-product-search merchant-ajax-search">
+            <input type="search" class="search-field wc-search-field" placeholder="<?php echo esc_attr__( 'Search products...', 'merchant' ); ?>" value="" name="s" autocomplete="off">
+            <button type="submit" class="search-submit" value="<?php echo esc_attr__( 'Search', 'merchant' ); ?>" title="<?php echo esc_attr__( 'Search for the product', 'merchant' ); ?>">
+                <i class="ws-svg-icon">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.875 3.75a7.125 7.125 0 100 14.25 7.125 7.125 0 000-14.25zM2.25 10.875a8.625 8.625 0 1117.25 0 8.625 8.625 0 01-17.25 0z"></path>
+                        <path fill-rule="evenodd" d="M15.913 15.914a.75.75 0 011.06 0l4.557 4.556a.75.75 0 01-1.06 1.06l-4.557-4.556a.75.75 0 010-1.06z"></path>
+                    </svg>
+                </i>
+            </button>
 			<div>
 				<div class="merchant-ajax-search-wrapper">
 					<div class="merchant-ajax-search-heading-title"><?php echo esc_html__( 'Products', 'merchant' ) ?></div>
@@ -215,8 +245,52 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				</div>
 			</div>
 		</div>
-
 		<?php
+	}
+
+	/**
+	 * Print shortcode content.
+	 *
+	 * @return string
+	 */
+	public function shortcode_handler() {
+		// Check if module is active.
+		if ( ! Merchant_Modules::is_module_active( $this->module_id ) ) {
+			return '';
+		}
+
+		// Check if shortcode is enabled.
+		if ( ! $this->is_shortcode_enabled() ) {
+			return '';
+		}
+
+		ob_start();
+        ?>
+        <form method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="woocommerce-product-search merchant-product-search">
+            <input type="search" class="search-field wc-search-field" placeholder="<?php echo esc_attr__( 'Search products...', 'merchant' ); ?>" value="" name="s" autocomplete="off">
+            <button type="submit" class="search-submit" value="<?php echo esc_attr__( 'Search', 'merchant' ); ?>" title="<?php echo esc_attr__( 'Search for the product', 'merchant' ); ?>">
+                <i class="ws-svg-icon">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.875 3.75a7.125 7.125 0 100 14.25 7.125 7.125 0 000-14.25zM2.25 10.875a8.625 8.625 0 1117.25 0 8.625 8.625 0 01-17.25 0z"></path>
+                        <path fill-rule="evenodd" d="M15.913 15.914a.75.75 0 011.06 0l4.557 4.556a.75.75 0 01-1.06 1.06l-4.557-4.556a.75.75 0 010-1.06z"></path>
+                    </svg>
+                </i>
+            </button>
+            <input type="hidden" name="post_type" value="product">
+        </form>
+        <?php
+		$shortcode_content = ob_get_clean();
+
+		/**
+		 * Filter the shortcode html content.
+		 *
+		 * @param string $shortcode_content shortcode html content
+		 * @param string $module_id         module id
+		 * @param int    $post_id           product id
+		 *
+		 * @since 1.8
+		 */
+		return apply_filters( 'merchant_module_shortcode_content_html', $shortcode_content, $this->module_id, get_the_ID() );
 	}
 
 	/**

@@ -698,6 +698,8 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			'all_products',
 			'categories',
 			'by_category',
+			'tags',
+			'by_tags',
 			'featured_products',
 			'products_on_sale',
 			'new_products',
