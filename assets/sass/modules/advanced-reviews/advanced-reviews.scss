@@ -368,7 +368,8 @@ body {
 			}
 		}
 
-		.verified {
+		.verified,
+		.owner-reply {
 			display: inline-flex;
 			align-items: center;
 			margin-left: 6px;

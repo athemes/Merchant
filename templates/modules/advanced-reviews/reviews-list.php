@@ -110,6 +110,7 @@ $_comments = $args['comments'] ?? array();
 										<div class="merchant-reviews-author-wrapper">
 											<strong class="merchant-review-author">
 												<?php echo esc_html( get_comment_author( $child_comment ) ); ?>
+												<em class="owner-reply"><?php echo esc_html__( ' — Store Owner', 'merchant' ); ?></em>
 											</strong>
 										</div>
 									</div>
