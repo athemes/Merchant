@@ -36,7 +36,6 @@ if ( ! class_exists( 'Merchant_Bricks_Builder' ) ) {
 		public function should_enqueue_scripts( $enqueue, $module ) {
 			$module_id = $module->module_id ?? '';
 
-			// Todo: improve
 			if ( $module_id === 'product-swatches' ) {
 				return true;
 			}
