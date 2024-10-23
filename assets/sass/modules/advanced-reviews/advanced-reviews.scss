@@ -440,6 +440,10 @@ body {
 			}
 		}
 
+		&.merchant-reviews-list-item-child {
+			margin-left: 40px;
+		}
+
 		& + .merchant-reviews-list-item {
 			border-top: 1px solid var(--mrc-adv-reviews-dividers-color, #e9e9e9);
 		}
