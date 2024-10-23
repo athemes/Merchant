@@ -22,6 +22,24 @@ for ( $i = 1; $i <= 24; $i++ ) {
 	$image_shapes[ 'image-shape-' . $i ] = MERCHANT_URI . 'assets/images/icons/product-labels/image-shape-' . $i . '.svg';
 }
 
+$display_rules = array(
+	'featured_products' => esc_html__( 'Featured Products', 'merchant' ),
+	'products_on_sale'  => esc_html__( 'Products on Sale', 'merchant' ),
+	'new_products'      => esc_html__( 'New Products', 'merchant' ),
+	'out_of_stock'      => esc_html__( 'Out of Stock Products', 'merchant' ),
+	'all_products'      => esc_html__( 'All Products', 'merchant' ),
+	'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
+	'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
+	'by_tags'           => esc_html__( 'Specific tags', 'merchant' ),
+);
+
+/**
+ * `merchant_product_labels_display_rules`
+ *
+ * @since 1.10.1
+ */
+$display_rules = apply_filters( 'merchant_product_labels_display_rules', $display_rules, Merchant_Product_Labels::MODULE_ID );
+
 /**
  * Settings
  */
@@ -229,16 +247,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'display_rules',
 							'type'    => 'select',
 							'title'   => esc_html__( 'Product trigger', 'merchant' ),
-							'options' => array(
-								'featured_products' => esc_html__( 'Featured Products', 'merchant' ),
-								'products_on_sale'  => esc_html__( 'Products on Sale', 'merchant' ),
-								'new_products'      => esc_html__( 'New Products', 'merchant' ),
-								'out_of_stock'      => esc_html__( 'Out of Stock Products', 'merchant' ),
-								'all_products'      => esc_html__( 'All Products', 'merchant' ),
-								'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
-								'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
-								'by_tags'           => esc_html__( 'Specific tags', 'merchant' ),
-							),
+							'options' => $display_rules,
 							'default' => 'products_on_sale',
 						),
 
@@ -292,7 +301,7 @@ Merchant_Admin_Options::create( array(
 							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'  => true,
 							'desc'      => esc_html__( 'Exclude products from this label.', 'merchant' ),
-							'condition' => array( 'display_rules', 'any', 'all_products|by_category|by_tags|featured_products|new_products|products_on_sale|out_of_stock' ),
+							'condition' => array( 'display_rules', 'any', 'all_products|by_category|by_tags|featured_products|new_products|products_on_sale|out_of_stock|pre-order' ),
 						),
 
 						array(
