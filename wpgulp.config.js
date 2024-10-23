@@ -972,6 +972,14 @@ const scripts = [
 		destination: './assets/js/modules/clear-cart/admin/',
 		file: 'preview'
 	},
+
+	// Reasons To Buy List
+	{
+		name: 'reasonsToBuyAdmin',
+		src: './assets/js/src/modules/reasons-to-buy/admin/preview.js',
+		destination: './assets/js/modules/reasons-to-buy/admin/',
+		file: 'preview'
+	},
 ];
 
 // Watch options.
