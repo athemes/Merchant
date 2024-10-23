@@ -221,3 +221,18 @@
 		font-weight: 500;
 	}
 }
+
+tr.mrc-fbt-savings-total {
+	text-align: left;
+	border: none !important;
+
+	th {
+		border: none;
+		padding-inline: 0;
+	}
+
+	th,
+	.woocommerce-Price-amount {
+		font-weight: 400;
+	}
+}
