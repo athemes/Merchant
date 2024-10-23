@@ -306,16 +306,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 				$setting['scroll_to_top'] = true;
 			}
 
-			// Animated Add to Cart
-			// TODO: Move this to the respective module class.
-			if ( Merchant_Modules::is_module_active( 'animated-add-to-cart' ) ) {
-				$trigger = Merchant_Admin_Options::get( 'animated-add-to-cart', 'trigger', 'on-mouse-hover' );
-
-				if ( 'on-page-load' === $trigger ) {
-					wp_enqueue_script( 'merchant-animated-add-to-cart', MERCHANT_URI . 'assets/js/modules/animated-add-to-cart.js', array( 'merchant' ), MERCHANT_VERSION, true );
-				}
-			}
-
 			// Auto External Links
 			// TODO: Move this to the respective module class.
 			if ( Merchant_Modules::is_module_active( 'auto-external-links' ) ) {
