@@ -1008,6 +1008,8 @@ const zipIgnoreGlob = [
 	'!/**/*package-lock.json',
 	'!/**/*assets/img/raw/**/*',
 	'!/**/*assets/img/raw',
+	'!/**/*assets/sass',
+	'!/**/*assets/sass/**/*',
 	'!/**/*assets/js/src/**/*',
 	'!/**/*assets/js/src',
 	'!/**/*tests/**/*',
