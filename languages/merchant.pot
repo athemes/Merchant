@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2024-10-23 14:19+0000\n"
+"POT-Creation-Date: 2024-10-25 18:04+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -747,54 +747,54 @@ msgstr ""
 msgid "Manage coupons"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2206
+#: admin/classes/class-merchant-admin-options.php:2208
 msgid "Status"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2208, admin/pages/page-settings.php:85
+#: admin/classes/class-merchant-admin-options.php:2210, admin/pages/page-settings.php:85
 msgid "Inactive"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2209, admin/pages/page-settings.php:77
+#: admin/classes/class-merchant-admin-options.php:2211, admin/pages/page-settings.php:77
 msgid "Active"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:2282
+#: admin/classes/class-merchant-admin-options.php:2284
 msgid "It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page."
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:2291
+#: admin/classes/class-merchant-admin-options.php:2293
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:2300
+#: admin/classes/class-merchant-admin-options.php:2302
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2302
+#: admin/classes/class-merchant-admin-options.php:2304
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2308
+#: admin/classes/class-merchant-admin-options.php:2310
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2309
+#: admin/classes/class-merchant-admin-options.php:2311
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2271
+#: admin/classes/class-merchant-admin-options.php:2273
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2518, admin/classes/class-merchant-admin-options.php:2522, inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
+#: admin/classes/class-merchant-admin-options.php:2520, admin/classes/class-merchant-admin-options.php:2524, inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
 msgid "Duplicate"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2530
+#: admin/classes/class-merchant-admin-options.php:2532
 msgid "Delete"
 msgstr ""
 
@@ -2080,7 +2080,7 @@ msgstr ""
 msgid "Multi Products"
 msgstr ""
 
-#: inc/modules/side-cart/class-side-cart.php:146, inc/modules/product-labels/admin/options.php:30
+#: inc/modules/side-cart/class-side-cart.php:146, inc/modules/product-labels/admin/options.php:30, inc/modules/reasons-to-buy/admin/options.php:43, inc/modules/volume-discounts/admin/options.php:41
 msgid "All Products"
 msgstr ""
 
@@ -2647,11 +2647,11 @@ msgstr ""
 msgid "Trigger"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:271, inc/modules/product-labels/admin/options.php:31
+#: inc/modules/added-to-cart-popup/admin/options.php:271, inc/modules/pre-orders/admin/options.php:50, inc/modules/product-labels/admin/options.php:31, inc/modules/reasons-to-buy/admin/options.php:44, inc/modules/volume-discounts/admin/options.php:42
 msgid "Specific Products"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:272, inc/modules/product-labels/admin/options.php:32
+#: inc/modules/added-to-cart-popup/admin/options.php:272, inc/modules/pre-orders/admin/options.php:51, inc/modules/product-labels/admin/options.php:32, inc/modules/reasons-to-buy/admin/options.php:45, inc/modules/volume-discounts/admin/options.php:43
 msgid "Specific Categories"
 msgstr ""
 
@@ -2659,7 +2659,7 @@ msgstr ""
 msgid "Popup will not be displayed for selected products."
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:314, inc/modules/buy-x-get-y/admin/options.php:62, inc/modules/buy-x-get-y/admin/options.php:81, inc/modules/free-gifts/admin/options.php:53, inc/modules/free-gifts/admin/options.php:82, inc/modules/frequently-bought-together/admin/options.php:62, inc/modules/frequently-bought-together/admin/options.php:82, inc/modules/pre-orders/admin/options.php:71, inc/modules/product-labels/admin/options.php:272, inc/modules/product-labels/admin/options.php:314, inc/modules/reasons-to-buy/admin/options.php:66, inc/modules/reasons-to-buy/admin/options.php:132, inc/modules/size-chart/admin/options.php:34, inc/modules/storewide-sale/admin/options.php:63, inc/modules/storewide-sale/admin/options.php:82, inc/modules/volume-discounts/admin/options.php:73, inc/modules/volume-discounts/admin/options.php:152
+#: inc/modules/added-to-cart-popup/admin/options.php:314, inc/modules/buy-x-get-y/admin/options.php:62, inc/modules/buy-x-get-y/admin/options.php:81, inc/modules/free-gifts/admin/options.php:53, inc/modules/free-gifts/admin/options.php:82, inc/modules/frequently-bought-together/admin/options.php:62, inc/modules/frequently-bought-together/admin/options.php:82, inc/modules/pre-orders/admin/options.php:71, inc/modules/product-labels/admin/options.php:272, inc/modules/product-labels/admin/options.php:314, inc/modules/reasons-to-buy/admin/options.php:66, inc/modules/reasons-to-buy/admin/options.php:132, inc/modules/side-cart/admin/options.php:223, inc/modules/side-cart/admin/options.php:356, inc/modules/size-chart/admin/options.php:34, inc/modules/storewide-sale/admin/options.php:63, inc/modules/storewide-sale/admin/options.php:82, inc/modules/volume-discounts/admin/options.php:73, inc/modules/volume-discounts/admin/options.php:152
 msgid "Select categories"
 msgstr ""
 
@@ -3014,7 +3014,7 @@ msgid "Single discount code"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:352
-msgid "Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. "
+msgid "A unique, single-use coupon code will be generated for each customer who leaves a review. This code can only be redeemed by the customer associated with the review."
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:375, inc/modules/frequently-bought-together/admin/options.php:113, inc/modules/pre-orders/admin/options.php:97, inc/modules/storewide-sale/admin/options.php:91, inc/modules/volume-discounts/admin/options.php:168
@@ -3117,7 +3117,7 @@ msgid "You can use these codes in the content."
 msgstr ""
 
 #. translators: 1. docs link
-#: inc/modules/advanced-reviews/admin/options.php:580, inc/modules/advanced-reviews/admin/options.php:747
+#: inc/modules/advanced-reviews/admin/options.php:580, inc/modules/advanced-reviews/admin/options.php:682, inc/modules/advanced-reviews/admin/options.php:747, inc/modules/advanced-reviews/admin/options.php:818
 msgid "Click <a href=\"%1$s\" target=\"_blank\">here</a> to preview the email and see how it will look."
 msgstr ""
 
@@ -3130,7 +3130,7 @@ msgid "Send a second review request to customers who did not submit a review yet
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:608
-msgid "After the first email, send the review request reminder after"
+msgid "After the first email, send the review request reminder after the following number of days"
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:615
@@ -3142,11 +3142,6 @@ msgid ""
 "Hello {first_name},\n"
 "						\n"
 "We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds."
-msgstr ""
-
-#. translators: 1. docs link
-#: inc/modules/advanced-reviews/admin/options.php:682, inc/modules/advanced-reviews/admin/options.php:818
-msgid "Click <a href=\"%1$s\" target=\"_blank\">here</a> to preview the email and see how the review email looks like."
 msgstr ""
 
 #: inc/modules/advanced-reviews/admin/options.php:700
@@ -3404,15 +3399,15 @@ msgstr ""
 msgid "Offer name"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:41, inc/modules/free-gifts/admin/options.php:41, inc/modules/frequently-bought-together/admin/options.php:41, inc/modules/reasons-to-buy/admin/options.php:43, inc/modules/side-cart/admin/options.php:196, inc/modules/storewide-sale/admin/options.php:42, inc/modules/volume-discounts/admin/options.php:41
+#: inc/modules/buy-x-get-y/admin/options.php:41, inc/modules/free-gifts/admin/options.php:41, inc/modules/frequently-bought-together/admin/options.php:41, inc/modules/side-cart/admin/options.php:196, inc/modules/storewide-sale/admin/options.php:42
 msgid "All products"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:42, inc/modules/free-gifts/admin/options.php:42, inc/modules/pre-orders/admin/options.php:50, inc/modules/reasons-to-buy/admin/options.php:44, inc/modules/storewide-sale/admin/options.php:43, inc/modules/volume-discounts/admin/options.php:42
+#: inc/modules/buy-x-get-y/admin/options.php:42, inc/modules/free-gifts/admin/options.php:42, inc/modules/storewide-sale/admin/options.php:43
 msgid "Specific products"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:43, inc/modules/free-gifts/admin/options.php:43, inc/modules/frequently-bought-together/admin/options.php:43, inc/modules/pre-orders/admin/options.php:51, inc/modules/reasons-to-buy/admin/options.php:45, inc/modules/storewide-sale/admin/options.php:44, inc/modules/volume-discounts/admin/options.php:43
+#: inc/modules/buy-x-get-y/admin/options.php:43, inc/modules/free-gifts/admin/options.php:43, inc/modules/frequently-bought-together/admin/options.php:43, inc/modules/storewide-sale/admin/options.php:44
 msgid "Specific categories"
 msgstr ""
 
@@ -4507,7 +4502,7 @@ msgid "Content width"
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:414
-msgid "Width mobile"
+msgid "Mobile width"
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:454
@@ -5151,7 +5146,7 @@ msgid "Internal campaign name. This is not visible to customers."
 msgstr ""
 
 #: inc/modules/pre-orders/admin/options.php:52, inc/modules/product-labels/admin/options.php:33, inc/modules/reasons-to-buy/admin/options.php:46, inc/modules/volume-discounts/admin/options.php:44
-msgid "Specific tags"
+msgid "Specific Tags"
 msgstr ""
 
 #: inc/modules/pre-orders/admin/options.php:61
@@ -5907,7 +5902,7 @@ msgid "Button position left"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:92
-msgid "Position mobile"
+msgid "Mobile position"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:160, inc/modules/scroll-to-top-button/admin/options.php:217, inc/modules/size-chart/admin/options.php:94
@@ -5919,7 +5914,7 @@ msgid "Modal"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:246
-msgid "Place product image"
+msgid "Product gallery image placement"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:248
@@ -5939,7 +5934,7 @@ msgid "Zoom effect on image"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:265
-msgid "Place product description"
+msgid "Product description placement"
 msgstr ""
 
 #: inc/modules/quick-view/admin/options.php:276
@@ -6390,16 +6385,12 @@ msgstr ""
 msgid "Select the product(s) that you want to add the upsell for"
 msgstr ""
 
-#: inc/modules/side-cart/admin/options.php:223, inc/modules/side-cart/admin/options.php:356
-msgid "Select category(es)"
-msgstr ""
-
 #: inc/modules/side-cart/admin/options.php:227, inc/modules/side-cart/admin/options.php:307, inc/modules/side-cart/admin/options.php:360
-msgid "Search category(es)"
+msgid "Search categories"
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:228
-msgid "Select the category(es) that you want to add the upsell for."
+msgid "Select the categories that you want to add the upsell for."
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:244
@@ -6415,7 +6406,7 @@ msgid "Upsell will not be displayed for selected products."
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:303
-msgid "Exclude category(es)"
+msgid "Exclude categories"
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:308
@@ -6427,7 +6418,7 @@ msgid "Trigger upsells"
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:361
-msgid "Select the category(es) that you want to display the upsell products form."
+msgid "Select the categories that you want to display the upsell products form."
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:381

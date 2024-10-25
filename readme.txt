@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
-Stable tag: 1.10.1
+Stable tag: 1.10.2
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.10.2 =
+[Fixed] Quick View: Button position not allowing a value of 0 to be saved
+
 = 1.10.1 =
 * Added - Pre-Orders: Tag selection option
 * Added - Pre-Orders: Pre-order Rule duplication option
