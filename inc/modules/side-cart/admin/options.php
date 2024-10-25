@@ -220,12 +220,12 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'          => 'category_slugs',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Select category(es)', 'merchant' ),
+							'title'       => esc_html__( 'Select categories', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
-							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
-							'desc'        => esc_html__( 'Select the category(es) that you want to add the upsell for.', 'merchant' ),
+							'placeholder' => esc_html__( 'Search categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select the categories that you want to add the upsell for.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 								'terms'    => array(
@@ -300,11 +300,11 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'          => 'excluded_category_slugs',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Exclude category(es)', 'merchant' ),
+							'title'       => esc_html__( 'Exclude categories', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
-							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
+							'placeholder' => esc_html__( 'Search categories', 'merchant' ),
 							'desc'        => esc_html__( 'Upsell will not be displayed for selected category products.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -353,12 +353,12 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'          => 'upsells_category_slugs',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Select category(es)', 'merchant' ),
+							'title'       => esc_html__( 'Select categories', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
-							'placeholder' => esc_html__( 'Search category(es)', 'merchant' ),
-							'desc'        => esc_html__( 'Select the category(es) that you want to display the upsell products form.', 'merchant' ),
+							'placeholder' => esc_html__( 'Search categories', 'merchant' ),
+							'desc'        => esc_html__( 'Select the categories that you want to display the upsell products form.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 								'terms'    => array(

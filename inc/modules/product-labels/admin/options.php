@@ -30,7 +30,7 @@ $display_rules = array(
 	'all_products'      => esc_html__( 'All Products', 'merchant' ),
 	'specific_products' => esc_html__( 'Specific Products', 'merchant' ),
 	'by_category'       => esc_html__( 'Specific Categories', 'merchant' ),
-	'by_tags'           => esc_html__( 'Specific tags', 'merchant' ),
+	'by_tags'           => esc_html__( 'Specific Tags', 'merchant' ),
 );
 
 /**
