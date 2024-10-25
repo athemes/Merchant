@@ -349,7 +349,7 @@ Merchant_Admin_Options::create(
 			array(
 				'id'         => 'discount_info',
 				'type'       => 'info',
-				'content'    => esc_html__( 'Merchant will generate a unique, single-use coupon code for each customer who leaves a review. Only the customer who left the review will be able to redeem the code. ',
+				'content'    => esc_html__( 'A unique, single-use coupon code will be generated for each customer who leaves a review. This code can only be redeemed by the customer associated with the review.',
 					'merchant' ),
 				'conditions' => array(
 					'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -605,7 +605,7 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 					array(
 						'id'      => 'days_after_first_email',
 						'type'    => 'number',
-						'title'   => esc_html__( 'After the first email, send the review request reminder after', 'merchant' ),
+						'title'   => esc_html__( 'After the first email, send the review request reminder after the following number of days', 'merchant' ),
 						'default' => '3',
 					),
 					array(
@@ -679,7 +679,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'type'    => 'info',
 						'content' => sprintf(
 						/* Translators: 1. docs link */
-							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
 							esc_url(
 								add_query_arg(
 									array(
@@ -815,7 +815,7 @@ This is a reminder to let you know that you are eligible to receive a discount o
 						'type'    => 'info',
 						'content' => sprintf(
 						/* Translators: 1. docs link */
-							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how the review email looks like.', 'merchant' ),
+							__( 'Click <a href="%1$s" target="_blank">here</a> to preview the email and see how it will look.', 'merchant' ),
 							esc_url(
 								add_query_arg(
 									array(
