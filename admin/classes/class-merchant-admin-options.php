@@ -599,6 +599,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				if ( ! $value && ( 0 !== $value && '0' !== $value ) ) {
 					if ( $type === 'checkbox_multiple' ) {
 						$value = is_array( $value ) ? $value : (array) $default;
+					} elseif ( $type === 'text' && ! empty( $module_id ) ) {
+						$value = Merchant_Option::get( $module_id, $id );
 					} else {
 						$value = $default;
 					}
