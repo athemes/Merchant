@@ -89,7 +89,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'mobile_position',
 			'type'      => 'checkbox',
-			'label'     => esc_html__( 'Position mobile', 'merchant' ),
+			'label'     => esc_html__( 'Mobile position', 'merchant' ),
 			'default'   => 0,
 			'condition' => array( 'button_position', '==', 'overlay' ),
 		),
@@ -243,7 +243,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'place_product_image',
 			'type'    => 'radio',
-			'title'   => esc_html__( 'Place product image', 'merchant' ),
+			'title'   => esc_html__( 'Product gallery image placement', 'merchant' ),
 			'options' => array(
 				'thumbs-at-left'   => esc_html__( 'Thumbs at left', 'merchant' ),
 				'thumbs-at-right'  => esc_html__( 'Thumbs at right', 'merchant' ),
@@ -262,7 +262,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'       => 'place_product_description',
 			'type'     => 'radio',
-			'title'    => esc_html__( 'Place product description', 'merchant' ),
+			'title'    => esc_html__( 'Product description placement', 'merchant' ),
 			'options'  => array(
 				'top'    => esc_html__( 'Top', 'merchant' ),
 				'bottom' => esc_html__( 'Bottom', 'merchant' ),
