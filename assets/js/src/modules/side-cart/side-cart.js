@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
 	 * @returns {boolean}
 	 */
 	function merchant_is_allowed_device() {
-		let allowed_devices = merchant_side_cart_params.allowed_devices;
+		let allowed_devices = merchant_side_cart_params?.allowed_devices;
 		let screenWidth = window.innerWidth;
 		if (screenWidth <= 768 && allowed_devices.includes('mobile')) {
 			return true;
@@ -252,11 +252,11 @@ jQuery(document).ready(function ($) {
 		fetchVariationDetails: function (container, productID, selectedAttributes, self) {
 			$.ajax({
 				type: 'POST',
-				url: merchant_side_cart_params.ajax_url,
+				url: merchant_side_cart_params?.ajax_url,
 				data: {
 					action: 'merchant_get_variation_data',
 					product_id: productID,
-					nonce: merchant_side_cart_params.variation_info_nonce,
+					nonce: merchant_side_cart_params?.variation_info_nonce,
 					attributes: selectedAttributes
 				},
 				success: function (response) {
@@ -320,11 +320,11 @@ jQuery(document).ready(function ($) {
 				action: 'merchant_side_cart_upsells_add_to_cart',
 				product_id: productId,
 				variation_id: variationId,
-				nonce: merchant_side_cart_params.nonce
+				nonce: merchant_side_cart_params?.nonce
 			}
 			$.ajax({
 				type: 'POST',
-				url: merchant_side_cart_params.ajax_url,
+				url: merchant_side_cart_params?.ajax_url,
 				data: data,
 				beforeSend: function () {
 					btn.addClass('loading');
@@ -361,7 +361,7 @@ jQuery(document).ready(function ($) {
 		initCarousel: function () {
 			// check if slick is initialized
 			let carousel = $(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel');
-			if ('carousel' === merchant_side_cart_params.upsells_style && !carousel.hasClass('slick-initialized')) {
+			if ('carousel' === merchant_side_cart_params?.upsells_style && !carousel.hasClass('slick-initialized')) {
 				carousel.slick({
 					infinite: true,
 					arrows: true,
@@ -375,14 +375,14 @@ jQuery(document).ready(function ($) {
 					pauseOnHover: true,
 					prevArrow: '<button type="button" class="slick-prev"><</button>',
 					nextArrow: '<button type="button" class="slick-next">></button>',
-					rtl: merchant_side_cart_params.is_rtl === '1'
+					rtl: merchant_side_cart_params?.is_rtl === '1'
 				});
 			}
 		},
 		destroyCarousel: function () {
 			// check if slick is initialized
 			let carousel = $(document).find('.merchant-mini-cart-upsells.upsells-layout-carousel');
-			if ('carousel' === merchant_side_cart_params.upsells_style && carousel.hasClass('slick-initialized')) {
+			if ('carousel' === merchant_side_cart_params?.upsells_style && carousel.hasClass('slick-initialized')) {
 				carousel.slick('unslick');
 			}
 		},
@@ -401,11 +401,11 @@ jQuery(document).ready(function ($) {
 			let data = {
 				action: 'merchant_side_cart_apply_coupon',
 				coupon_code: couponCode,
-				nonce: merchant_side_cart_params.nonce
+				nonce: merchant_side_cart_params?.nonce
 			}
 			$.ajax({
 				type: 'POST',
-				url: merchant_side_cart_params.ajax_url,
+				url: merchant_side_cart_params?.ajax_url,
 				data: data,
 				beforeSend: function () {
 					container.addClass('loading');
@@ -425,11 +425,11 @@ jQuery(document).ready(function ($) {
 			let data = {
 				action: 'merchant_side_cart_remove_coupon',
 				coupon_code: couponCode,
-				nonce: merchant_side_cart_params.nonce
+				nonce: merchant_side_cart_params?.nonce
 			}
 			$.ajax({
 				type: 'POST',
-				url: merchant_side_cart_params.ajax_url,
+				url: merchant_side_cart_params?.ajax_url,
 				data: data,
 				beforeSend: function () {
 				},
@@ -460,10 +460,10 @@ jQuery(document).ready(function ($) {
 			this.removeCoupon(self, couponCode);
 		},
 		sideCartBtns: function () {
-			let showCheckoutBtn = merchant_side_cart_params.show_checkout_btn === '1',
-				showViewCartBtn = merchant_side_cart_params.show_view_cart_btn === '1',
-				checkoutBtnTxt = merchant_side_cart_params.checkout_btn_text,
-				viewCartBtnTxt = merchant_side_cart_params.view_cart_btn_text,
+			let showCheckoutBtn = merchant_side_cart_params?.show_checkout_btn === '1',
+				showViewCartBtn = merchant_side_cart_params?.show_view_cart_btn === '1',
+				checkoutBtnTxt = merchant_side_cart_params?.checkout_btn_text,
+				viewCartBtnTxt = merchant_side_cart_params?.view_cart_btn_text,
 				buttonsWrapper = $(document).find('.merchant-floating-side-mini-cart-body .woocommerce-mini-cart__buttons'),
 				checkoutBtn = buttonsWrapper.find('.checkout'),
 				viewCartBtn = buttonsWrapper.find('a:not(.checkout)');
