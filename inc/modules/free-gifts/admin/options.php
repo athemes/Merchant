@@ -411,7 +411,7 @@ Merchant_Admin_Options::create( array(
 			array(
 				'id'        => 'mobile_width',
 				'type'      => 'checkbox',
-				'label'     => esc_html__( 'Width mobile', 'merchant' ),
+				'label'     => esc_html__( 'Mobile width', 'merchant' ),
 				'default'   => 0,
 			),
 
