@@ -39,8 +39,8 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
 							'options' => array(
 								'all'        => esc_html__( 'All products', 'merchant' ),
-								'product'    => esc_html__( 'Specific products', 'merchant' ),
-								'categories' => esc_html__( 'Specific categories', 'merchant' ),
+								'product'    => esc_html__( 'Specific Products', 'merchant' ),
+								'categories' => esc_html__( 'Specific Categories', 'merchant' ),
 							),
 							'default' => 'all',
 						),
@@ -99,6 +99,14 @@ Merchant_Admin_Options::create( array(
 							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
 							'multiple'      => false,
 							'allowed_types' => array( 'simple', 'variable', 'variation' ),
+						),
+
+						array(
+							'id'      => 'exclude_coupon',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Exclude coupons', 'merchant' ),
+							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer.', 'merchant' ),
+							'default' => false,
 						),
 
 						array(
