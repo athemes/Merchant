@@ -53,7 +53,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'cart_page_title_tag',
 			'type'      => 'select',
-			'title'     => __( 'Title HTML tag', 'merchant' ),
+			'title'     => esc_html__( 'Title HTML tag', 'merchant' ),
 			'options'   => array(
 				'h1'  => esc_html__( 'H1', 'merchant' ),
 				'h2'  => esc_html__( 'H2', 'merchant' ),
@@ -64,6 +64,7 @@ Merchant_Admin_Options::create( array(
 				'div' => esc_html__( 'div', 'merchant' ),
 			),
 			'default'   => 'h2',
+			'condition' => array( 'display_on_cart_page', '==', '1' ),
 		),
 	),
 ) );

@@ -112,3 +112,17 @@ ul.products {
 	transform: none;
 	text-decoration: none !important;
 }
+
+.merchant-wishlist-section-cart {
+	margin-block: 30px;
+	clear: both;
+
+	.section-title {
+		margin-bottom: 15px;
+	}
+}
+
+.woocommerce .merchant-wishlist-items-cart ul.products:not(.elementor-grid),
+.woocommerce-page .merchant-wishlist-items-cart ul.products:not(.elementor-grid) {
+	row-gap: 2em;
+}
