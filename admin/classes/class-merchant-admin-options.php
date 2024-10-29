@@ -2015,8 +2015,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                                 ) );
                                             } else {
                                                 static::replace_field(
-                                                        $sub_field,
-                                                    '',
+                                                    $sub_field,
+	                                                $sub_field['default'] ?? '',
                                                     array(
                                                         "name=\"merchant[{$sub_field['id']}]",
                                                         'merchant-module-page-setting-field-upload',
