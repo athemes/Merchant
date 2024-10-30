@@ -38,8 +38,21 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'display_on_cart_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Display on cart page', 'merchant' ),
-			'desc'    => esc_html__( 'Display the wishlist items in the cart pages.', 'merchant' ),
+			'desc'    => esc_html__( 'Display the wishlist products in the cart pages.', 'merchant' ),
 			'default' => 0,
+		),
+
+		array(
+			'id'        => 'posts_per_page',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Products', 'merchant' ),
+			'desc'      => esc_html__( 'Controls the number of products to display in the wishlist grid.', 'merchant' ),
+			'min'       => 1,
+			'max'       => 30,
+			'step'      => 1,
+			'unit'      => '',
+			'default'   => 6,
+			'condition' => array( 'display_on_cart_page', '==', '1' ),
 		),
 
 		array(
