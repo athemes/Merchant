@@ -468,15 +468,17 @@ jQuery(document).ready(function ($) {
 				checkoutBtn = buttonsWrapper.find('.checkout'),
 				viewCartBtn = buttonsWrapper.find('a:not(.checkout)');
 
+			// handled in PHP.
+			// Todo: remove following hide code.
 			if (!showCheckoutBtn && !showViewCartBtn) {
-				buttonsWrapper.hide();
+				//buttonsWrapper.hide();
 				return;
 			}
 			if (!showCheckoutBtn) {
-				checkoutBtn.hide();
+				//checkoutBtn.hide();
 			}
 			if (!showViewCartBtn) {
-				viewCartBtn.hide();
+				//viewCartBtn.hide();
 			}
 
 			if (checkoutBtnTxt !== '') {
