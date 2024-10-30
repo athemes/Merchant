@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: aThemes <team@athemes.com>\n"
 "Last-Translator: aThemes <team@athemes.com>\n"
-"POT-Creation-Date: 2024-10-25 18:04+0000\n"
+"POT-Creation-Date: 2024-10-30 20:26+0000\n"
 "Report-Msgid-Bugs-To: https://athemes.com/contact/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Copied!"
 msgstr ""
 
-#: inc/helpers.php:469, inc/modules/quick-social-links/class-quick-social-links.php:260, inc/modules/wishlist/admin/options.php:304
+#: inc/helpers.php:469, inc/modules/quick-social-links/class-quick-social-links.php:260, inc/modules/wishlist/admin/options.php:349
 msgid "Facebook"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "LinkedIn"
 msgstr ""
 
-#: inc/helpers.php:481, inc/modules/quick-social-links/class-quick-social-links.php:283, inc/modules/wishlist/admin/options.php:312
+#: inc/helpers.php:481, inc/modules/quick-social-links/class-quick-social-links.php:283, inc/modules/wishlist/admin/options.php:357
 msgid "Reddit"
 msgstr ""
 
@@ -45,19 +45,19 @@ msgstr ""
 msgid "WhatsApp"
 msgstr ""
 
-#: inc/helpers.php:489, inc/modules/quick-social-links/class-quick-social-links.php:264, inc/modules/wishlist/admin/options.php:307
+#: inc/helpers.php:489, inc/modules/quick-social-links/class-quick-social-links.php:264, inc/modules/wishlist/admin/options.php:352
 msgid "Pinterest"
 msgstr ""
 
-#: inc/helpers.php:493, inc/modules/quick-social-links/class-quick-social-links.php:266, inc/modules/wishlist/admin/options.php:309
+#: inc/helpers.php:493, inc/modules/quick-social-links/class-quick-social-links.php:266, inc/modules/wishlist/admin/options.php:354
 msgid "Telegram"
 msgstr ""
 
-#: inc/helpers.php:497, inc/modules/quick-social-links/class-quick-social-links.php:274, inc/modules/wishlist/admin/options.php:311
+#: inc/helpers.php:497, inc/modules/quick-social-links/class-quick-social-links.php:274, inc/modules/wishlist/admin/options.php:356
 msgid "Weibo"
 msgstr ""
 
-#: inc/helpers.php:501, inc/modules/quick-social-links/class-quick-social-links.php:273, inc/modules/wishlist/admin/options.php:310
+#: inc/helpers.php:501, inc/modules/quick-social-links/class-quick-social-links.php:273, inc/modules/wishlist/admin/options.php:355
 msgid "VK"
 msgstr ""
 
@@ -65,11 +65,11 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: inc/helpers.php:509, inc/modules/quick-social-links/class-quick-social-links.php:271, inc/modules/wishlist/admin/options.php:314
+#: inc/helpers.php:509, inc/modules/quick-social-links/class-quick-social-links.php:271, inc/modules/wishlist/admin/options.php:359
 msgid "Xing"
 msgstr ""
 
-#: inc/helpers.php:513, inc/modules/wishlist/admin/options.php:315
+#: inc/helpers.php:513, inc/modules/wishlist/admin/options.php:360
 msgid "Mail"
 msgstr ""
 
@@ -669,132 +669,132 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:631, admin/pages/page-dashboard.php:391
+#: admin/classes/class-merchant-admin-options.php:633, admin/pages/page-dashboard.php:391
 msgid "This option is only available on Merchant Pro"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:647
+#: admin/classes/class-merchant-admin-options.php:649
 msgid "Field not found!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:672, admin/classes/class-merchant-admin-options.php:672
+#: admin/classes/class-merchant-admin-options.php:674, admin/classes/class-merchant-admin-options.php:674
 msgid "Show more"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:672
+#: admin/classes/class-merchant-admin-options.php:674
 msgid "Show less"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1187
+#: admin/classes/class-merchant-admin-options.php:1189
 msgid "WooCommerce is not installed or activated."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1210
+#: admin/classes/class-merchant-admin-options.php:1212
 msgid "Search products"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1212
+#: admin/classes/class-merchant-admin-options.php:1214
 msgid "Searching..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1214
+#: admin/classes/class-merchant-admin-options.php:1216
 msgid "Search icon"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1273, inc/classes/class-merchant-metabox.php:831, inc/classes/class-merchant-metabox.php:875
+#: admin/classes/class-merchant-admin-options.php:1275, inc/classes/class-merchant-metabox.php:831, inc/classes/class-merchant-metabox.php:875
 msgid "Remove"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1271, inc/modules/frequently-bought-together/admin/options.php:288, inc/modules/side-cart/admin/options.php:438
+#: admin/classes/class-merchant-admin-options.php:1273, inc/modules/frequently-bought-together/admin/options.php:288, inc/modules/side-cart/admin/options.php:438
 msgid "Add"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1310
+#: admin/classes/class-merchant-admin-options.php:1312
 msgid "sold individually"
 msgstr ""
 
 #. translators: %s is the search keyword
-#: admin/classes/class-merchant-admin-options.php:1441
+#: admin/classes/class-merchant-admin-options.php:1443
 msgid "No results found for \"%s\""
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1481, inc/classes/class-merchant-metabox.php:924, inc/modules/advanced-reviews/admin/options.php:101
+#: admin/classes/class-merchant-admin-options.php:1483, inc/classes/class-merchant-metabox.php:924, inc/modules/advanced-reviews/admin/options.php:101
 msgid "Default"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1666
+#: admin/classes/class-merchant-admin-options.php:1668
 msgid "Select Images"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1712
+#: admin/classes/class-merchant-admin-options.php:1714
 msgid "Select Image"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1731
+#: admin/classes/class-merchant-admin-options.php:1733
 msgid "Upload image"
 msgstr ""
 
 #. translators: 1. Coupon admin url 2. Link target attribute value
-#: admin/classes/class-merchant-admin-options.php:1876, inc/classes/class-merchant-metabox.php:976
+#: admin/classes/class-merchant-admin-options.php:1878, inc/classes/class-merchant-metabox.php:976
 msgid "No coupons found! <a href=\"%1$s\" target=\"%2$s\">Create a new coupon</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1855, inc/classes/class-merchant-metabox.php:958
+#: admin/classes/class-merchant-admin-options.php:1857, inc/classes/class-merchant-metabox.php:958
 msgid "Select a coupon"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:1866, inc/classes/class-merchant-metabox.php:969
+#: admin/classes/class-merchant-admin-options.php:1868, inc/classes/class-merchant-metabox.php:969
 msgid "Manage coupons"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2208
+#: admin/classes/class-merchant-admin-options.php:2210
 msgid "Status"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2210, admin/pages/page-settings.php:85
+#: admin/classes/class-merchant-admin-options.php:2212, admin/pages/page-settings.php:85
 msgid "Inactive"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2211, admin/pages/page-settings.php:77
+#: admin/classes/class-merchant-admin-options.php:2213, admin/pages/page-settings.php:77
 msgid "Active"
 msgstr ""
 
 #. translators: 1: page name
-#: admin/classes/class-merchant-admin-options.php:2284
+#: admin/classes/class-merchant-admin-options.php:2286
 msgid "It looks like you haven't created a <strong>%1$s</strong> page yet. Click the below button to create the page."
 msgstr ""
 
 #. translators: 1: link to edit page
-#: admin/classes/class-merchant-admin-options.php:2293
+#: admin/classes/class-merchant-admin-options.php:2295
 msgid "<p class=\"merchant-module-page-setting-field-desc\">Page created with success!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
 #. translators: 1: page title, 2: page meta key, 3: page meta value, 4: option name, 5: nonce, 6: loading text, 7: success text
-#: admin/classes/class-merchant-admin-options.php:2302
+#: admin/classes/class-merchant-admin-options.php:2304
 msgid "<a href=\"#\" class=\"merchant-create-page-control-button button-tertiary\" data-page-title=\"%2$s\" data-page-meta-key=\"%3$s\" data-page-meta-value=\"%4$s\" data-option-name=\"%5$s\" data-nonce=\"%6$s\" data-creating-text=\"%7$s\" data-created-text=\"%8$s\">%1$s</a>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2304
+#: admin/classes/class-merchant-admin-options.php:2306
 msgid "Create Page"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2310
+#: admin/classes/class-merchant-admin-options.php:2312
 msgid "Creating..."
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2311
+#: admin/classes/class-merchant-admin-options.php:2313
 msgid "Created!"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2273
+#: admin/classes/class-merchant-admin-options.php:2275
 msgid "<p class=\"merchant-module-page-setting-field-desc mrc-mt-0\">Your page is created!</p><p class=\"merchant-module-page-setting-field-desc\">Click <a href=\"%1$s\" target=\"_blank\">here</a> if you want to edit the page.</p><p class=\"merchant-module-page-setting-field-desc mrc-mb-0\">To display the page in your theme header area, assign the page to the primary menu by clicking <a href=\"%2$s\" target=\"_blank\">here</a></p>"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2520, admin/classes/class-merchant-admin-options.php:2524, inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
+#: admin/classes/class-merchant-admin-options.php:2522, admin/classes/class-merchant-admin-options.php:2526, inc/classes/class-merchant-metabox.php:817, inc/classes/class-merchant-metabox.php:861
 msgid "Duplicate"
 msgstr ""
 
-#: admin/classes/class-merchant-admin-options.php:2532
+#: admin/classes/class-merchant-admin-options.php:2534
 msgid "Delete"
 msgstr ""
 
@@ -962,7 +962,7 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
-#: admin/pages/page-module.php:91, inc/modules/wishlist/admin/options.php:282
+#: admin/pages/page-module.php:91, inc/modules/wishlist/admin/options.php:327
 msgid "Enable"
 msgstr ""
 
@@ -1471,7 +1471,7 @@ msgstr ""
 msgid "Thumbnail image"
 msgstr ""
 
-#: inc/modules/clear-cart/class-clear-cart.php:239, inc/modules/free-gifts/admin/options.php:204
+#: inc/modules/clear-cart/class-clear-cart.php:239, inc/modules/free-gifts/admin/options.php:212
 msgid "Product"
 msgstr ""
 
@@ -1575,15 +1575,15 @@ msgstr ""
 msgid "View cart"
 msgstr ""
 
-#: inc/modules/free-gifts/class-free-gifts.php:61, templates/modules/free-gifts/widget-contents.php:174, inc/modules/free-gifts/admin/options.php:256
+#: inc/modules/free-gifts/class-free-gifts.php:61, templates/modules/free-gifts/widget-contents.php:174, inc/modules/free-gifts/admin/options.php:263
 msgid "Free"
 msgstr ""
 
-#: inc/modules/free-gifts/class-free-gifts.php:62, inc/modules/free-gifts/admin/options.php:263
+#: inc/modules/free-gifts/class-free-gifts.php:62, inc/modules/free-gifts/admin/options.php:270
 msgid "Free Gift"
 msgstr ""
 
-#: inc/modules/free-gifts/class-free-gifts.php:63, inc/modules/free-gifts/admin/options.php:271
+#: inc/modules/free-gifts/class-free-gifts.php:63, inc/modules/free-gifts/admin/options.php:278
 msgid "This item was added as a free gift"
 msgstr ""
 
@@ -1611,7 +1611,7 @@ msgstr ""
 msgid "Spend {amountMore} more to receive this gift!"
 msgstr ""
 
-#: inc/modules/free-gifts/class-free-gifts.php:161, inc/modules/free-gifts/class-free-gifts.php:166, inc/modules/free-gifts/class-free-gifts.php:171, inc/modules/free-gifts/admin/options.php:173
+#: inc/modules/free-gifts/class-free-gifts.php:161, inc/modules/free-gifts/class-free-gifts.php:166, inc/modules/free-gifts/class-free-gifts.php:171, inc/modules/free-gifts/admin/options.php:181
 msgid "Congratulations! You are eligible to receive a free gift."
 msgstr ""
 
@@ -1816,7 +1816,7 @@ msgstr ""
 msgid "Pre-Order Products"
 msgstr ""
 
-#: inc/modules/product-labels/class-product-labels.php:322, inc/modules/quick-view/class-quick-view.php:383, inc/modules/recently-viewed-products/class-recently-viewed-products.php:184, inc/modules/recently-viewed-products/class-recently-viewed-products.php:191, inc/modules/recently-viewed-products/class-recently-viewed-products.php:198, inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:200, inc/modules/wishlist/class-wishlist.php:177
+#: inc/modules/product-labels/class-product-labels.php:322, inc/modules/quick-view/class-quick-view.php:383, inc/modules/recently-viewed-products/class-recently-viewed-products.php:184, inc/modules/recently-viewed-products/class-recently-viewed-products.php:191, inc/modules/recently-viewed-products/class-recently-viewed-products.php:198, inc/modules/sticky-add-to-cart/class-sticky-add-to-cart.php:200, inc/modules/wishlist/class-wishlist.php:181
 msgid "Product Title"
 msgstr ""
 
@@ -1916,7 +1916,7 @@ msgstr ""
 msgid "Instagram"
 msgstr ""
 
-#: inc/modules/quick-social-links/class-quick-social-links.php:262, inc/modules/wishlist/admin/options.php:305
+#: inc/modules/quick-social-links/class-quick-social-links.php:262, inc/modules/wishlist/admin/options.php:350
 msgid "Twitter"
 msgstr ""
 
@@ -2000,7 +2000,7 @@ msgstr ""
 msgid "Search for the product"
 msgstr ""
 
-#: inc/modules/real-time-search/class-real-time-search.php:228, inc/modules/real-time-search/class-real-time-search.php:361, inc/modules/recently-viewed-products/admin/options.php:79
+#: inc/modules/real-time-search/class-real-time-search.php:228, inc/modules/real-time-search/class-real-time-search.php:361, inc/modules/recently-viewed-products/admin/options.php:79, inc/modules/wishlist/admin/options.php:48
 msgid "Products"
 msgstr ""
 
@@ -2036,7 +2036,7 @@ msgstr ""
 msgid "Recently viewed products: title"
 msgstr ""
 
-#: inc/modules/recently-viewed-products/class-recently-viewed-products.php:185, inc/modules/recently-viewed-products/class-recently-viewed-products.php:192, inc/modules/recently-viewed-products/class-recently-viewed-products.php:199, inc/modules/wishlist/class-wishlist.php:178
+#: inc/modules/recently-viewed-products/class-recently-viewed-products.php:185, inc/modules/recently-viewed-products/class-recently-viewed-products.php:192, inc/modules/recently-viewed-products/class-recently-viewed-products.php:199, inc/modules/wishlist/class-wishlist.php:182
 msgid "Product description normally goes here."
 msgstr ""
 
@@ -2264,11 +2264,15 @@ msgstr ""
 msgid "Wait list: Email update"
 msgstr ""
 
-#: inc/modules/wishlist/class-wishlist.php:63
+#: inc/modules/wishlist/class-wishlist.php:61, inc/modules/wishlist/admin/options.php:62
+msgid "Saved for later"
+msgstr ""
+
+#: inc/modules/wishlist/class-wishlist.php:67
 msgid "Add To Wishlist"
 msgstr ""
 
-#: inc/modules/wishlist/class-wishlist.php:64
+#: inc/modules/wishlist/class-wishlist.php:68
 msgid "Added To Wishlist"
 msgstr ""
 
@@ -2583,7 +2587,7 @@ msgstr ""
 msgid "Show cart details"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:112, inc/modules/free-gifts/admin/options.php:247, inc/modules/spending-goal/admin/options.php:34
+#: inc/modules/added-to-cart-popup/admin/options.php:112, inc/modules/free-gifts/admin/options.php:254, inc/modules/spending-goal/admin/options.php:34
 msgid "Cart total"
 msgstr ""
 
@@ -2647,11 +2651,11 @@ msgstr ""
 msgid "Trigger"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:271, inc/modules/pre-orders/admin/options.php:50, inc/modules/product-labels/admin/options.php:31, inc/modules/reasons-to-buy/admin/options.php:44, inc/modules/volume-discounts/admin/options.php:42
+#: inc/modules/added-to-cart-popup/admin/options.php:271, inc/modules/free-gifts/admin/options.php:42, inc/modules/pre-orders/admin/options.php:50, inc/modules/product-labels/admin/options.php:31, inc/modules/reasons-to-buy/admin/options.php:44, inc/modules/volume-discounts/admin/options.php:42
 msgid "Specific Products"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:272, inc/modules/pre-orders/admin/options.php:51, inc/modules/product-labels/admin/options.php:32, inc/modules/reasons-to-buy/admin/options.php:45, inc/modules/volume-discounts/admin/options.php:43
+#: inc/modules/added-to-cart-popup/admin/options.php:272, inc/modules/free-gifts/admin/options.php:43, inc/modules/pre-orders/admin/options.php:51, inc/modules/product-labels/admin/options.php:32, inc/modules/reasons-to-buy/admin/options.php:45, inc/modules/volume-discounts/admin/options.php:43
 msgid "Specific Categories"
 msgstr ""
 
@@ -2667,11 +2671,11 @@ msgstr ""
 msgid "Popup will not be displayed for selected categories."
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:335, inc/modules/free-gifts/admin/options.php:331, inc/modules/product-labels/admin/options.php:322, inc/modules/recently-viewed-products/admin/options.php:200, inc/modules/stock-scarcity/admin/options.php:28
+#: inc/modules/added-to-cart-popup/admin/options.php:335, inc/modules/free-gifts/admin/options.php:338, inc/modules/product-labels/admin/options.php:322, inc/modules/recently-viewed-products/admin/options.php:200, inc/modules/stock-scarcity/admin/options.php:28
 msgid "Show on pages"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:337, inc/modules/free-gifts/admin/options.php:332, inc/modules/product-labels/admin/options.php:324
+#: inc/modules/added-to-cart-popup/admin/options.php:337, inc/modules/free-gifts/admin/options.php:339, inc/modules/product-labels/admin/options.php:324
 msgid "Homepage"
 msgstr ""
 
@@ -2695,7 +2699,7 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: inc/modules/added-to-cart-popup/admin/options.php:359, inc/modules/clear-cart/admin/options.php:182, inc/modules/countdown-timer/admin/options.php:225, inc/modules/free-gifts/admin/options.php:362, inc/modules/free-shipping-progress-bar/admin/options.php:880, inc/modules/side-cart/admin/options.php:475
+#: inc/modules/added-to-cart-popup/admin/options.php:359, inc/modules/clear-cart/admin/options.php:182, inc/modules/countdown-timer/admin/options.php:225, inc/modules/free-gifts/admin/options.php:369, inc/modules/free-shipping-progress-bar/admin/options.php:880, inc/modules/side-cart/admin/options.php:475
 msgid "Look and Feel"
 msgstr ""
 
@@ -2792,39 +2796,39 @@ msgstr ""
 msgid "Photos"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:24, inc/modules/reasons-to-buy/admin/options.php:33, inc/modules/recently-viewed-products/admin/options.php:23, inc/modules/recently-viewed-products/admin/options.php:123
+#: inc/modules/advanced-reviews/admin/options.php:24, inc/modules/reasons-to-buy/admin/options.php:33, inc/modules/recently-viewed-products/admin/options.php:23, inc/modules/recently-viewed-products/admin/options.php:123, inc/modules/wishlist/admin/options.php:61
 msgid "Title"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:32, inc/modules/recently-viewed-products/admin/options.php:31
+#: inc/modules/advanced-reviews/admin/options.php:32, inc/modules/recently-viewed-products/admin/options.php:31, inc/modules/wishlist/admin/options.php:69
 msgid "Title HTML tag"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:34, inc/modules/recently-viewed-products/admin/options.php:33
+#: inc/modules/advanced-reviews/admin/options.php:34, inc/modules/recently-viewed-products/admin/options.php:33, inc/modules/wishlist/admin/options.php:71
 msgid "H1"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:35, inc/modules/recently-viewed-products/admin/options.php:34
+#: inc/modules/advanced-reviews/admin/options.php:35, inc/modules/recently-viewed-products/admin/options.php:34, inc/modules/wishlist/admin/options.php:72
 msgid "H2"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:36, inc/modules/recently-viewed-products/admin/options.php:35
+#: inc/modules/advanced-reviews/admin/options.php:36, inc/modules/recently-viewed-products/admin/options.php:35, inc/modules/wishlist/admin/options.php:73
 msgid "H3"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:37, inc/modules/recently-viewed-products/admin/options.php:36
+#: inc/modules/advanced-reviews/admin/options.php:37, inc/modules/recently-viewed-products/admin/options.php:36, inc/modules/wishlist/admin/options.php:74
 msgid "H4"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:38, inc/modules/recently-viewed-products/admin/options.php:37
+#: inc/modules/advanced-reviews/admin/options.php:38, inc/modules/recently-viewed-products/admin/options.php:37, inc/modules/wishlist/admin/options.php:75
 msgid "H5"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:39, inc/modules/recently-viewed-products/admin/options.php:38
+#: inc/modules/advanced-reviews/admin/options.php:39, inc/modules/recently-viewed-products/admin/options.php:38, inc/modules/wishlist/admin/options.php:76
 msgid "H6"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:40, inc/modules/recently-viewed-products/admin/options.php:39
+#: inc/modules/advanced-reviews/admin/options.php:40, inc/modules/recently-viewed-products/admin/options.php:39, inc/modules/wishlist/admin/options.php:77
 msgid "div"
 msgstr ""
 
@@ -3227,15 +3231,15 @@ msgstr ""
 msgid "Modal background color"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:930, inc/modules/advanced-reviews/admin/options.php:935, inc/modules/buy-x-get-y/admin/options.php:512, inc/modules/buy-x-get-y/admin/options.php:517, inc/modules/cart-reserved-timer/admin/options.php:103, inc/modules/cart-reserved-timer/admin/options.php:108, inc/modules/clear-cart/admin/options.php:315, inc/modules/clear-cart/admin/options.php:320, inc/modules/countdown-timer/admin/options.php:336, inc/modules/countdown-timer/admin/options.php:341, inc/modules/frequently-bought-together/admin/options.php:488, inc/modules/frequently-bought-together/admin/options.php:493, inc/modules/payment-logos/admin/options.php:125, inc/modules/payment-logos/admin/options.php:130, inc/modules/product-audio/admin/options.php:34, inc/modules/product-audio/admin/options.php:39, inc/modules/product-brand-image/admin/options.php:82, inc/modules/product-brand-image/admin/options.php:87, inc/modules/product-bundles/admin/options.php:158, inc/modules/product-bundles/admin/options.php:163, inc/modules/product-labels/admin/options.php:359, inc/modules/product-labels/admin/options.php:364, inc/modules/product-navigation-links/admin/options.php:131, inc/modules/product-navigation-links/admin/options.php:136, inc/modules/product-video/admin/options.php:52, inc/modules/product-video/admin/options.php:57, inc/modules/quick-social-links/admin/options.php:419, inc/modules/quick-social-links/admin/options.php:424, inc/modules/quick-view/admin/options.php:445, inc/modules/quick-view/admin/options.php:450, inc/modules/real-time-search/admin/options.php:112, inc/modules/real-time-search/admin/options.php:117, inc/modules/reasons-to-buy/admin/options.php:277, inc/modules/reasons-to-buy/admin/options.php:282, inc/modules/recently-viewed-products/admin/options.php:215, inc/modules/recently-viewed-products/admin/options.php:220, inc/modules/size-chart/admin/options.php:215, inc/modules/size-chart/admin/options.php:220, inc/modules/stock-scarcity/admin/options.php:188, inc/modules/stock-scarcity/admin/options.php:193, inc/modules/trust-badges/admin/options.php:132, inc/modules/trust-badges/admin/options.php:137, inc/modules/volume-discounts/admin/options.php:577, inc/modules/volume-discounts/admin/options.php:582, inc/modules/wait-list/admin/options.php:142, inc/modules/wait-list/admin/options.php:147, inc/modules/wishlist/admin/options.php:353, inc/modules/wishlist/admin/options.php:358
+#: inc/modules/advanced-reviews/admin/options.php:930, inc/modules/advanced-reviews/admin/options.php:935, inc/modules/buy-x-get-y/admin/options.php:512, inc/modules/buy-x-get-y/admin/options.php:517, inc/modules/cart-reserved-timer/admin/options.php:103, inc/modules/cart-reserved-timer/admin/options.php:108, inc/modules/clear-cart/admin/options.php:315, inc/modules/clear-cart/admin/options.php:320, inc/modules/countdown-timer/admin/options.php:336, inc/modules/countdown-timer/admin/options.php:341, inc/modules/frequently-bought-together/admin/options.php:488, inc/modules/frequently-bought-together/admin/options.php:493, inc/modules/payment-logos/admin/options.php:125, inc/modules/payment-logos/admin/options.php:130, inc/modules/product-audio/admin/options.php:34, inc/modules/product-audio/admin/options.php:39, inc/modules/product-brand-image/admin/options.php:82, inc/modules/product-brand-image/admin/options.php:87, inc/modules/product-bundles/admin/options.php:158, inc/modules/product-bundles/admin/options.php:163, inc/modules/product-labels/admin/options.php:359, inc/modules/product-labels/admin/options.php:364, inc/modules/product-navigation-links/admin/options.php:131, inc/modules/product-navigation-links/admin/options.php:136, inc/modules/product-video/admin/options.php:52, inc/modules/product-video/admin/options.php:57, inc/modules/quick-social-links/admin/options.php:419, inc/modules/quick-social-links/admin/options.php:424, inc/modules/quick-view/admin/options.php:445, inc/modules/quick-view/admin/options.php:450, inc/modules/real-time-search/admin/options.php:112, inc/modules/real-time-search/admin/options.php:117, inc/modules/reasons-to-buy/admin/options.php:277, inc/modules/reasons-to-buy/admin/options.php:282, inc/modules/recently-viewed-products/admin/options.php:215, inc/modules/recently-viewed-products/admin/options.php:220, inc/modules/size-chart/admin/options.php:215, inc/modules/size-chart/admin/options.php:220, inc/modules/stock-scarcity/admin/options.php:188, inc/modules/stock-scarcity/admin/options.php:193, inc/modules/trust-badges/admin/options.php:132, inc/modules/trust-badges/admin/options.php:137, inc/modules/volume-discounts/admin/options.php:577, inc/modules/volume-discounts/admin/options.php:582, inc/modules/wait-list/admin/options.php:142, inc/modules/wait-list/admin/options.php:147, inc/modules/wishlist/admin/options.php:398, inc/modules/wishlist/admin/options.php:403
 msgid "Use shortcode"
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:941, inc/modules/buy-x-get-y/admin/options.php:523, inc/modules/cart-reserved-timer/admin/options.php:114, inc/modules/countdown-timer/admin/options.php:347, inc/modules/frequently-bought-together/admin/options.php:499, inc/modules/payment-logos/admin/options.php:136, inc/modules/product-audio/admin/options.php:45, inc/modules/product-brand-image/admin/options.php:93, inc/modules/product-bundles/admin/options.php:169, inc/modules/product-labels/admin/options.php:370, inc/modules/product-navigation-links/admin/options.php:142, inc/modules/product-video/admin/options.php:63, inc/modules/reasons-to-buy/admin/options.php:288, inc/modules/recently-viewed-products/admin/options.php:226, inc/modules/size-chart/admin/options.php:226, inc/modules/stock-scarcity/admin/options.php:199, inc/modules/trust-badges/admin/options.php:143, inc/modules/volume-discounts/admin/options.php:588, inc/modules/wait-list/admin/options.php:153, inc/modules/wishlist/admin/options.php:364
+#: inc/modules/advanced-reviews/admin/options.php:941, inc/modules/buy-x-get-y/admin/options.php:523, inc/modules/cart-reserved-timer/admin/options.php:114, inc/modules/countdown-timer/admin/options.php:347, inc/modules/frequently-bought-together/admin/options.php:499, inc/modules/payment-logos/admin/options.php:136, inc/modules/product-audio/admin/options.php:45, inc/modules/product-brand-image/admin/options.php:93, inc/modules/product-bundles/admin/options.php:169, inc/modules/product-labels/admin/options.php:370, inc/modules/product-navigation-links/admin/options.php:142, inc/modules/product-video/admin/options.php:63, inc/modules/reasons-to-buy/admin/options.php:288, inc/modules/recently-viewed-products/admin/options.php:226, inc/modules/size-chart/admin/options.php:226, inc/modules/stock-scarcity/admin/options.php:199, inc/modules/trust-badges/admin/options.php:143, inc/modules/volume-discounts/admin/options.php:588, inc/modules/wait-list/admin/options.php:153, inc/modules/wishlist/admin/options.php:409
 msgid "If you are using a page builder or a theme that supports shortcodes, then you can output the module using the shortcode above. This might be useful if, for example, you find that you want to control the position of the module output more precisely than with the module settings. Note that the shortcodes can only be used on single product pages."
 msgstr ""
 
-#: inc/modules/advanced-reviews/admin/options.php:947, inc/modules/buy-x-get-y/admin/options.php:529, inc/modules/cart-reserved-timer/admin/options.php:119, inc/modules/clear-cart/admin/options.php:333, inc/modules/countdown-timer/admin/options.php:352, inc/modules/free-shipping-progress-bar/admin/options.php:526, inc/modules/free-shipping-progress-bar/admin/options.php:701, inc/modules/free-shipping-progress-bar/admin/options.php:810, inc/modules/frequently-bought-together/admin/options.php:505, inc/modules/payment-logos/admin/options.php:141, inc/modules/product-audio/admin/options.php:50, inc/modules/product-brand-image/admin/options.php:98, inc/modules/product-bundles/admin/options.php:175, inc/modules/product-labels/admin/options.php:375, inc/modules/product-navigation-links/admin/options.php:147, inc/modules/product-video/admin/options.php:68, inc/modules/quick-social-links/admin/options.php:435, inc/modules/quick-view/admin/options.php:461, inc/modules/real-time-search/admin/options.php:128, inc/modules/reasons-to-buy/admin/options.php:293, inc/modules/recently-viewed-products/admin/options.php:231, inc/modules/size-chart/admin/options.php:231, inc/modules/stock-scarcity/admin/options.php:207, inc/modules/trust-badges/admin/options.php:148, inc/modules/volume-discounts/admin/options.php:594, inc/modules/wait-list/admin/options.php:158, inc/modules/wishlist/admin/options.php:369
+#: inc/modules/advanced-reviews/admin/options.php:947, inc/modules/buy-x-get-y/admin/options.php:529, inc/modules/cart-reserved-timer/admin/options.php:119, inc/modules/clear-cart/admin/options.php:333, inc/modules/countdown-timer/admin/options.php:352, inc/modules/free-shipping-progress-bar/admin/options.php:526, inc/modules/free-shipping-progress-bar/admin/options.php:701, inc/modules/free-shipping-progress-bar/admin/options.php:810, inc/modules/frequently-bought-together/admin/options.php:505, inc/modules/payment-logos/admin/options.php:141, inc/modules/product-audio/admin/options.php:50, inc/modules/product-brand-image/admin/options.php:98, inc/modules/product-bundles/admin/options.php:175, inc/modules/product-labels/admin/options.php:375, inc/modules/product-navigation-links/admin/options.php:147, inc/modules/product-video/admin/options.php:68, inc/modules/quick-social-links/admin/options.php:435, inc/modules/quick-view/admin/options.php:461, inc/modules/real-time-search/admin/options.php:128, inc/modules/reasons-to-buy/admin/options.php:293, inc/modules/recently-viewed-products/admin/options.php:231, inc/modules/size-chart/admin/options.php:231, inc/modules/stock-scarcity/admin/options.php:207, inc/modules/trust-badges/admin/options.php:148, inc/modules/volume-discounts/admin/options.php:594, inc/modules/wait-list/admin/options.php:158, inc/modules/wishlist/admin/options.php:414
 msgid "Shortcode text"
 msgstr ""
 
@@ -3391,11 +3395,11 @@ msgstr ""
 msgid "Add New Offer"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:27, inc/modules/buy-x-get-y/admin/options.php:34, inc/modules/free-gifts/admin/options.php:199, inc/modules/frequently-bought-together/admin/options.php:34, inc/modules/pre-orders/admin/options.php:35, inc/modules/volume-discounts/admin/options.php:34
+#: inc/modules/buy-x-get-y/admin/options.php:27, inc/modules/buy-x-get-y/admin/options.php:34, inc/modules/free-gifts/admin/options.php:207, inc/modules/frequently-bought-together/admin/options.php:34, inc/modules/pre-orders/admin/options.php:35, inc/modules/volume-discounts/admin/options.php:34
 msgid "Campaign"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:33, inc/modules/free-gifts/admin/options.php:33, inc/modules/free-gifts/admin/options.php:198, inc/modules/frequently-bought-together/admin/options.php:33, inc/modules/storewide-sale/admin/options.php:33, inc/modules/volume-discounts/admin/options.php:33
+#: inc/modules/buy-x-get-y/admin/options.php:33, inc/modules/free-gifts/admin/options.php:33, inc/modules/free-gifts/admin/options.php:206, inc/modules/frequently-bought-together/admin/options.php:33, inc/modules/storewide-sale/admin/options.php:33, inc/modules/volume-discounts/admin/options.php:33
 msgid "Offer name"
 msgstr ""
 
@@ -3403,11 +3407,11 @@ msgstr ""
 msgid "All products"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:42, inc/modules/free-gifts/admin/options.php:42, inc/modules/storewide-sale/admin/options.php:43
+#: inc/modules/buy-x-get-y/admin/options.php:42, inc/modules/storewide-sale/admin/options.php:43
 msgid "Specific products"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:43, inc/modules/free-gifts/admin/options.php:43, inc/modules/frequently-bought-together/admin/options.php:43, inc/modules/storewide-sale/admin/options.php:44
+#: inc/modules/buy-x-get-y/admin/options.php:43, inc/modules/frequently-bought-together/admin/options.php:43, inc/modules/storewide-sale/admin/options.php:44
 msgid "Specific categories"
 msgstr ""
 
@@ -3467,35 +3471,35 @@ msgstr ""
 msgid "Fixed Discount"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:139, inc/modules/free-gifts/admin/options.php:107, inc/modules/free-shipping-progress-bar/admin/options.php:84, inc/modules/frequently-bought-together/admin/options.php:130, inc/modules/pre-orders/admin/options.php:163, inc/modules/spending-goal/admin/options.php:69, inc/modules/storewide-sale/admin/options.php:118, inc/modules/volume-discounts/admin/options.php:191
+#: inc/modules/buy-x-get-y/admin/options.php:139, inc/modules/free-gifts/admin/options.php:115, inc/modules/free-shipping-progress-bar/admin/options.php:84, inc/modules/frequently-bought-together/admin/options.php:130, inc/modules/pre-orders/admin/options.php:163, inc/modules/spending-goal/admin/options.php:69, inc/modules/storewide-sale/admin/options.php:118, inc/modules/volume-discounts/admin/options.php:191
 msgid "User Condition"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:141, inc/modules/free-gifts/admin/options.php:109, inc/modules/free-shipping-progress-bar/admin/options.php:86, inc/modules/frequently-bought-together/admin/options.php:132, inc/modules/pre-orders/admin/options.php:165, inc/modules/spending-goal/admin/options.php:71, inc/modules/storewide-sale/admin/options.php:120, inc/modules/volume-discounts/admin/options.php:193
+#: inc/modules/buy-x-get-y/admin/options.php:141, inc/modules/free-gifts/admin/options.php:117, inc/modules/free-shipping-progress-bar/admin/options.php:86, inc/modules/frequently-bought-together/admin/options.php:132, inc/modules/pre-orders/admin/options.php:165, inc/modules/spending-goal/admin/options.php:71, inc/modules/storewide-sale/admin/options.php:120, inc/modules/volume-discounts/admin/options.php:193
 msgid "All Users"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:142, inc/modules/free-gifts/admin/options.php:110, inc/modules/free-shipping-progress-bar/admin/options.php:87, inc/modules/frequently-bought-together/admin/options.php:133, inc/modules/pre-orders/admin/options.php:166, inc/modules/spending-goal/admin/options.php:72, inc/modules/storewide-sale/admin/options.php:121, inc/modules/volume-discounts/admin/options.php:194
+#: inc/modules/buy-x-get-y/admin/options.php:142, inc/modules/free-gifts/admin/options.php:118, inc/modules/free-shipping-progress-bar/admin/options.php:87, inc/modules/frequently-bought-together/admin/options.php:133, inc/modules/pre-orders/admin/options.php:166, inc/modules/spending-goal/admin/options.php:72, inc/modules/storewide-sale/admin/options.php:121, inc/modules/volume-discounts/admin/options.php:194
 msgid "Selected Users"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:143, inc/modules/free-gifts/admin/options.php:111, inc/modules/free-shipping-progress-bar/admin/options.php:88, inc/modules/frequently-bought-together/admin/options.php:134, inc/modules/pre-orders/admin/options.php:167, inc/modules/spending-goal/admin/options.php:73, inc/modules/storewide-sale/admin/options.php:122, inc/modules/volume-discounts/admin/options.php:195
+#: inc/modules/buy-x-get-y/admin/options.php:143, inc/modules/free-gifts/admin/options.php:119, inc/modules/free-shipping-progress-bar/admin/options.php:88, inc/modules/frequently-bought-together/admin/options.php:134, inc/modules/pre-orders/admin/options.php:167, inc/modules/spending-goal/admin/options.php:73, inc/modules/storewide-sale/admin/options.php:122, inc/modules/volume-discounts/admin/options.php:195
 msgid "Selected Roles"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:151, inc/modules/free-gifts/admin/options.php:119, inc/modules/free-shipping-progress-bar/admin/options.php:96, inc/modules/frequently-bought-together/admin/options.php:142, inc/modules/pre-orders/admin/options.php:175, inc/modules/quick-social-links/admin/options.php:304, inc/modules/spending-goal/admin/options.php:81, inc/modules/storewide-sale/admin/options.php:130, inc/modules/volume-discounts/admin/options.php:203
+#: inc/modules/buy-x-get-y/admin/options.php:151, inc/modules/free-gifts/admin/options.php:127, inc/modules/free-shipping-progress-bar/admin/options.php:96, inc/modules/frequently-bought-together/admin/options.php:142, inc/modules/pre-orders/admin/options.php:175, inc/modules/quick-social-links/admin/options.php:304, inc/modules/spending-goal/admin/options.php:81, inc/modules/storewide-sale/admin/options.php:130, inc/modules/volume-discounts/admin/options.php:203
 msgid "User Roles"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:152, inc/modules/free-gifts/admin/options.php:120, inc/modules/free-shipping-progress-bar/admin/options.php:97, inc/modules/frequently-bought-together/admin/options.php:143, inc/modules/spending-goal/admin/options.php:82, inc/modules/storewide-sale/admin/options.php:131, inc/modules/volume-discounts/admin/options.php:204
+#: inc/modules/buy-x-get-y/admin/options.php:152, inc/modules/free-gifts/admin/options.php:128, inc/modules/free-shipping-progress-bar/admin/options.php:97, inc/modules/frequently-bought-together/admin/options.php:143, inc/modules/spending-goal/admin/options.php:82, inc/modules/storewide-sale/admin/options.php:131, inc/modules/volume-discounts/admin/options.php:204
 msgid "This will limit the offer to users with these roles."
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:163, inc/modules/free-gifts/admin/options.php:131, inc/modules/free-shipping-progress-bar/admin/options.php:116, inc/modules/frequently-bought-together/admin/options.php:154, inc/modules/pre-orders/admin/options.php:187, inc/modules/spending-goal/admin/options.php:93, inc/modules/storewide-sale/admin/options.php:142, inc/modules/volume-discounts/admin/options.php:215
+#: inc/modules/buy-x-get-y/admin/options.php:163, inc/modules/free-gifts/admin/options.php:139, inc/modules/free-shipping-progress-bar/admin/options.php:116, inc/modules/frequently-bought-together/admin/options.php:154, inc/modules/pre-orders/admin/options.php:187, inc/modules/spending-goal/admin/options.php:93, inc/modules/storewide-sale/admin/options.php:142, inc/modules/volume-discounts/admin/options.php:215
 msgid "Users"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:164, inc/modules/free-gifts/admin/options.php:132, inc/modules/free-shipping-progress-bar/admin/options.php:117, inc/modules/frequently-bought-together/admin/options.php:155, inc/modules/spending-goal/admin/options.php:94, inc/modules/storewide-sale/admin/options.php:143, inc/modules/volume-discounts/admin/options.php:216
+#: inc/modules/buy-x-get-y/admin/options.php:164, inc/modules/free-gifts/admin/options.php:140, inc/modules/free-shipping-progress-bar/admin/options.php:117, inc/modules/frequently-bought-together/admin/options.php:155, inc/modules/spending-goal/admin/options.php:94, inc/modules/storewide-sale/admin/options.php:143, inc/modules/volume-discounts/admin/options.php:216
 msgid "This will limit the offer to the selected customers."
 msgstr ""
 
@@ -3569,11 +3573,11 @@ msgstr ""
 msgid "Title text color"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:274, inc/modules/free-gifts/admin/options.php:440
+#: inc/modules/buy-x-get-y/admin/options.php:274, inc/modules/free-gifts/admin/options.php:447
 msgid "Label background color"
 msgstr ""
 
-#: inc/modules/buy-x-get-y/admin/options.php:281, inc/modules/free-gifts/admin/options.php:447
+#: inc/modules/buy-x-get-y/admin/options.php:281, inc/modules/free-gifts/admin/options.php:454
 msgid "Label text color"
 msgstr ""
 
@@ -3890,7 +3894,7 @@ msgstr ""
 msgid "Enter a custom URL to redirect users to a specific page."
 msgstr ""
 
-#: inc/modules/clear-cart/admin/options.php:114, inc/modules/clear-cart/admin/options.php:134, inc/modules/clear-cart/admin/options.php:156, inc/modules/floating-mini-cart/admin/options.php:47, inc/modules/free-gifts/admin/options.php:307, inc/modules/free-shipping-progress-bar/admin/options.php:151, inc/modules/free-shipping-progress-bar/admin/options.php:476, inc/modules/free-shipping-progress-bar/admin/options.php:574, inc/modules/free-shipping-progress-bar/admin/options.php:619, inc/modules/free-shipping-progress-bar/admin/options.php:722, inc/modules/free-shipping-progress-bar/admin/options.php:831, inc/modules/product-labels/admin/options.php:141, inc/modules/scroll-to-top-button/admin/options.php:64, inc/modules/sticky-add-to-cart/admin/options.php:23
+#: inc/modules/clear-cart/admin/options.php:114, inc/modules/clear-cart/admin/options.php:134, inc/modules/clear-cart/admin/options.php:156, inc/modules/floating-mini-cart/admin/options.php:47, inc/modules/free-gifts/admin/options.php:314, inc/modules/free-shipping-progress-bar/admin/options.php:151, inc/modules/free-shipping-progress-bar/admin/options.php:476, inc/modules/free-shipping-progress-bar/admin/options.php:574, inc/modules/free-shipping-progress-bar/admin/options.php:619, inc/modules/free-shipping-progress-bar/admin/options.php:722, inc/modules/free-shipping-progress-bar/admin/options.php:831, inc/modules/product-labels/admin/options.php:141, inc/modules/scroll-to-top-button/admin/options.php:64, inc/modules/sticky-add-to-cart/admin/options.php:23
 msgid "Position"
 msgstr ""
 
@@ -4275,7 +4279,7 @@ msgstr ""
 msgid "Content text color"
 msgstr ""
 
-#: inc/modules/floating-mini-cart/admin/options.php:167, inc/modules/free-gifts/admin/options.php:433, inc/modules/side-cart/admin/options.php:521, inc/modules/spending-goal/admin/options.php:184
+#: inc/modules/floating-mini-cart/admin/options.php:167, inc/modules/free-gifts/admin/options.php:440, inc/modules/side-cart/admin/options.php:521, inc/modules/spending-goal/admin/options.php:184
 msgid "Content background color"
 msgstr ""
 
@@ -4335,189 +4339,197 @@ msgstr ""
 msgid "Product rewarded as a gift"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:142
-msgid "Spending goal target"
+#: inc/modules/free-gifts/admin/options.php:107, inc/modules/volume-discounts/admin/options.php:183
+msgid "Exclude coupons"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:144
-msgid "Configure the text for the gift offer across five phases. Personalize the text at each phase to maximize conversions."
+#: inc/modules/free-gifts/admin/options.php:108
+msgid "Coupon codes will not be applicable on top of this offer."
 msgstr ""
 
 #: inc/modules/free-gifts/admin/options.php:150
+msgid "Spending goal target"
+msgstr ""
+
+#: inc/modules/free-gifts/admin/options.php:152
+msgid "Configure the text for the gift offer across five phases. Personalize the text at each phase to maximize conversions."
+msgstr ""
+
+#: inc/modules/free-gifts/admin/options.php:158
 msgid "At 0%"
 msgstr ""
 
 #. translators: 1. goal amount
-#: inc/modules/free-gifts/admin/options.php:153
+#: inc/modules/free-gifts/admin/options.php:161
 msgid "Spend %1$s to receive this gift!"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:161
+#: inc/modules/free-gifts/admin/options.php:169
 msgid "Between 1 - 99%"
 msgstr ""
 
 #. translators: 1. more amount
-#: inc/modules/free-gifts/admin/options.php:164
+#: inc/modules/free-gifts/admin/options.php:172
 msgid "Spend %1$s more to receive this gift!"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:172
+#: inc/modules/free-gifts/admin/options.php:180
 msgid "At 100%"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:179
+#: inc/modules/free-gifts/admin/options.php:187
 msgid "Reminder to claim the gift on the cart page"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:180
+#: inc/modules/free-gifts/admin/options.php:188
 msgid "Don't forget to claim your free gift before checking out!"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:186
+#: inc/modules/free-gifts/admin/options.php:194
 msgid "Gift claimed message"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:187
+#: inc/modules/free-gifts/admin/options.php:195
 msgid "Your free gift has been added to your cart. Thank you for shopping with us!"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:192
+#: inc/modules/free-gifts/admin/options.php:200
 msgid "Coupon Based"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:206
+#: inc/modules/free-gifts/admin/options.php:214
 msgid "Select the product that the coupon will apply to."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:211
+#: inc/modules/free-gifts/admin/options.php:219
 msgid "Select the coupon that will apply to this offer."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:217
+#: inc/modules/free-gifts/admin/options.php:225
 msgid "The offer won’t appear in the Free-Gifts widget unless the associated coupon is entered."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:237
+#: inc/modules/free-gifts/admin/options.php:245
 msgid "Cart Settings"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:242
+#: inc/modules/free-gifts/admin/options.php:250
 msgid "Gift based on spending type"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:243
-msgid "Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any additional discounts are applied, whereas the ‘Cart Total’ includes all discounts and additional charges."
+#: inc/modules/free-gifts/admin/options.php:251
+msgid "Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any adjustments, whereas the ‘Cart Total’ includes all charges and fees."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:246, inc/modules/spending-goal/admin/options.php:33
+#: inc/modules/free-gifts/admin/options.php:253, inc/modules/spending-goal/admin/options.php:33
 msgid "Cart subtotal"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:255
+#: inc/modules/free-gifts/admin/options.php:262
 msgid "Gift price label"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:262
+#: inc/modules/free-gifts/admin/options.php:269
 msgid "Cart item title text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:264, inc/modules/free-gifts/admin/options.php:272, inc/modules/volume-discounts/admin/options.php:302
+#: inc/modules/free-gifts/admin/options.php:271, inc/modules/free-gifts/admin/options.php:279, inc/modules/volume-discounts/admin/options.php:302
 msgid "This is displayed on the cart page."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:270
+#: inc/modules/free-gifts/admin/options.php:277
 msgid "Cart item description text"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:278
+#: inc/modules/free-gifts/admin/options.php:285
 msgid "Tiered Free Gifts"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:279
+#: inc/modules/free-gifts/admin/options.php:286
 msgid "Customers can claim one free gift per order. Selecting a new gift automatically replaces any previously chosen gift."
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:287
+#: inc/modules/free-gifts/admin/options.php:294
 msgid "Gift Widget"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:293
+#: inc/modules/free-gifts/admin/options.php:300
 msgid "Widget icon"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:309
+#: inc/modules/free-gifts/admin/options.php:316
 msgid "Top Right"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:310
+#: inc/modules/free-gifts/admin/options.php:317
 msgid "Top Left"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:311
+#: inc/modules/free-gifts/admin/options.php:318
 msgid "Bottom Right"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:312
+#: inc/modules/free-gifts/admin/options.php:319
 msgid "Bottom Left"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:320
+#: inc/modules/free-gifts/admin/options.php:327
 msgid "Distance"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:339
+#: inc/modules/free-gifts/admin/options.php:346
 msgid "Shop page"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:346
+#: inc/modules/free-gifts/admin/options.php:353
 msgid "Product page"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:353
+#: inc/modules/free-gifts/admin/options.php:360
 msgid "Cart page"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:368
+#: inc/modules/free-gifts/admin/options.php:375
 msgid "Count background color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:375
+#: inc/modules/free-gifts/admin/options.php:382
 msgid "Count text color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:382
+#: inc/modules/free-gifts/admin/options.php:389
 msgid "Gift button background color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:389
+#: inc/modules/free-gifts/admin/options.php:396
 msgid "Gift button Hover background color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:396
+#: inc/modules/free-gifts/admin/options.php:403
 msgid "Gift button Icon color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:403, inc/modules/free-gifts/admin/options.php:421, inc/modules/spending-goal/admin/options.php:173
+#: inc/modules/free-gifts/admin/options.php:410, inc/modules/free-gifts/admin/options.php:428, inc/modules/spending-goal/admin/options.php:173
 msgid "Content width"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:414
+#: inc/modules/free-gifts/admin/options.php:421
 msgid "Mobile width"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:454
+#: inc/modules/free-gifts/admin/options.php:461
 msgid "Product text color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:461
+#: inc/modules/free-gifts/admin/options.php:468
 msgid "Product hover text color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:468
+#: inc/modules/free-gifts/admin/options.php:475
 msgid "Product price text color"
 msgstr ""
 
-#: inc/modules/free-gifts/admin/options.php:475
+#: inc/modules/free-gifts/admin/options.php:482
 msgid "Gift price label color"
 msgstr ""
 
@@ -5689,7 +5701,7 @@ msgstr ""
 msgid "Display Conditions"
 msgstr ""
 
-#: inc/modules/quick-social-links/admin/options.php:108, inc/modules/quick-social-links/admin/options.php:356, inc/modules/wishlist/admin/options.php:294
+#: inc/modules/quick-social-links/admin/options.php:108, inc/modules/quick-social-links/admin/options.php:356, inc/modules/wishlist/admin/options.php:339
 msgid "Add new"
 msgstr ""
 
@@ -5841,7 +5853,7 @@ msgstr ""
 msgid "Add a social link with an associated icon, or insert a custom link and upload your preferred image or SVG"
 msgstr ""
 
-#: inc/modules/quick-social-links/admin/options.php:359, inc/modules/wishlist/admin/options.php:297
+#: inc/modules/quick-social-links/admin/options.php:359, inc/modules/wishlist/admin/options.php:342
 msgid "Social link"
 msgstr ""
 
@@ -5873,7 +5885,7 @@ msgstr ""
 msgid "Quick view"
 msgstr ""
 
-#: inc/modules/quick-view/admin/options.php:44, inc/modules/reasons-to-buy/admin/options.php:217, inc/modules/wishlist/admin/options.php:50
+#: inc/modules/quick-view/admin/options.php:44, inc/modules/reasons-to-buy/admin/options.php:217, inc/modules/wishlist/admin/options.php:95
 msgid "Select an icon"
 msgstr ""
 
@@ -6342,7 +6354,7 @@ msgid "Show strikethrough prices"
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:107
-msgid "Show savings at the bottom"
+msgid "Show cart savings"
 msgstr ""
 
 #: inc/modules/side-cart/admin/options.php:125
@@ -6494,7 +6506,7 @@ msgstr ""
 msgid "Table headings text color"
 msgstr ""
 
-#: inc/modules/size-chart/admin/options.php:176, inc/modules/wishlist/admin/options.php:209
+#: inc/modules/size-chart/admin/options.php:176, inc/modules/wishlist/admin/options.php:254
 msgid "Table body background color"
 msgstr ""
 
@@ -6782,10 +6794,6 @@ msgstr ""
 msgid "Select the product tags that will show the offer."
 msgstr ""
 
-#: inc/modules/volume-discounts/admin/options.php:183
-msgid "Exclude coupons"
-msgstr ""
-
 #: inc/modules/volume-discounts/admin/options.php:184
 msgid "Coupon codes will not be applicable on top of this offer campaign."
 msgstr ""
@@ -7006,151 +7014,163 @@ msgstr ""
 msgid "Display the wishlist button in the single product pages."
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:42
+#: inc/modules/wishlist/admin/options.php:40
+msgid "Display on cart page"
+msgstr ""
+
+#: inc/modules/wishlist/admin/options.php:41
+msgid "Display the wishlist products in the cart pages."
+msgstr ""
+
+#: inc/modules/wishlist/admin/options.php:49
+msgid "Controls the number of products to display in the wishlist grid."
+msgstr ""
+
+#: inc/modules/wishlist/admin/options.php:87
 msgid "Add To Wishlist Button Settings"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:62
+#: inc/modules/wishlist/admin/options.php:107
 msgid "Button vertical position"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:74
+#: inc/modules/wishlist/admin/options.php:119
 msgid "Button horizontal position"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:86
+#: inc/modules/wishlist/admin/options.php:131
 msgid "Display tooltip"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:94
+#: inc/modules/wishlist/admin/options.php:139
 msgid "Tooltip text"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:95
+#: inc/modules/wishlist/admin/options.php:140
 msgid "Add to wishlist"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:101
+#: inc/modules/wishlist/admin/options.php:146
 msgid "Tooltip text after adding to wishlist"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:102
+#: inc/modules/wishlist/admin/options.php:147
 msgid "Added to wishlist"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:110
+#: inc/modules/wishlist/admin/options.php:155
 msgid "Tooltip border radius"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:125
+#: inc/modules/wishlist/admin/options.php:170
 msgid "Icon stroke color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:133
+#: inc/modules/wishlist/admin/options.php:178
 msgid "Icon stroke color (hover)"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:141
+#: inc/modules/wishlist/admin/options.php:186
 msgid "Icon fill color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:149
+#: inc/modules/wishlist/admin/options.php:194
 msgid "Icon fill color (hover)"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:157
+#: inc/modules/wishlist/admin/options.php:202
 msgid "Tooltip text color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:165
+#: inc/modules/wishlist/admin/options.php:210
 msgid "Tooltip background color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:175
+#: inc/modules/wishlist/admin/options.php:220
 msgid "Wishlist Page Settings"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:182
+#: inc/modules/wishlist/admin/options.php:227
 msgid "Wishlist page"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:183
+#: inc/modules/wishlist/admin/options.php:228
 msgid "My Wishlist"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:193
+#: inc/modules/wishlist/admin/options.php:238
 msgid "Hide page title"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:201
+#: inc/modules/wishlist/admin/options.php:246
 msgid "Table heading background color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:217
+#: inc/modules/wishlist/admin/options.php:262
 msgid "Table text color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:225
+#: inc/modules/wishlist/admin/options.php:270
 msgid "Table links color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:233
+#: inc/modules/wishlist/admin/options.php:278
 msgid "Table links color (hover)"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:241
+#: inc/modules/wishlist/admin/options.php:286
 msgid "Buttons color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:249
+#: inc/modules/wishlist/admin/options.php:294
 msgid "Buttons color (hover)"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:257
+#: inc/modules/wishlist/admin/options.php:302
 msgid "Buttons background color"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:265
+#: inc/modules/wishlist/admin/options.php:310
 msgid "Buttons background color (hover)"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:275
+#: inc/modules/wishlist/admin/options.php:320
 msgid "Wishlist Sharing Settings"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:283
+#: inc/modules/wishlist/admin/options.php:328
 msgid "Allow users to share the wishlist."
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:292
+#: inc/modules/wishlist/admin/options.php:337
 msgid "Social links"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:293
+#: inc/modules/wishlist/admin/options.php:338
 msgid "Add the available social links to share the wishlist."
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:301
+#: inc/modules/wishlist/admin/options.php:346
 msgid "Social Network"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:306
+#: inc/modules/wishlist/admin/options.php:351
 msgid "Linkedin"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:308
+#: inc/modules/wishlist/admin/options.php:353
 msgid "Whatsapp"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:313
+#: inc/modules/wishlist/admin/options.php:358
 msgid "Ok"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:342
+#: inc/modules/wishlist/admin/options.php:387
 msgid "Display copy to clipboard"
 msgstr ""
 
-#: inc/modules/wishlist/admin/options.php:343
+#: inc/modules/wishlist/admin/options.php:388
 msgid "Displays a copy to clipboard field after the social links."
 msgstr ""
 

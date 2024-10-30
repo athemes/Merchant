@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.6
 Requires PHP: 7.2
-Stable tag: 1.10.2
+Stable tag: 1.10.3
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,8 +218,11 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.10.3 =
+* Fixed - Default values from flexible content field not being applied when a new entry is added.
+
 = 1.10.2 =
-[Fixed] Quick View: Button position not allowing a value of 0 to be saved
+* Fixed - Quick View: Button position not allowing a value of 0 to be saved
 
 = 1.10.1 =
 * Added - Pre-Orders: Tag selection option
@@ -229,10 +232,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 * Added - Real-Time Search: Shortcode support
 * Added - Quick View: Shortcode support
 * Added - Quick View: Separate position options for mobile
-* Fixed -  Quick View: Styling compatibility issues across different themes
-* Fixed -  Real-Time Search: Search issue on Elementor
-* Fixed -  Product Labels: Excluded product not working
-* Fixed -  Product Labels: Excluded product not working for some triggers
+* Fixed - Quick View: Styling compatibility issues across different themes
+* Fixed - Real-Time Search: Search issue on Elementor
+* Fixed - Product Labels: Excluded product not working
+* Fixed - Product Labels: Excluded product not working for some triggers
 * Changed - Reasons To Buy List: Refactored module settings. Users can now add multiple lists with Product triggering option
 
 = 1.10.0 =

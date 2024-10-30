@@ -77,3 +77,7 @@ button.merchant-clear-cart-button {
 		}
 	}
 }
+
+.site-header-cart .merchant-clear-cart-button ~ .merchant-clear-cart-button {
+	display: none;
+}

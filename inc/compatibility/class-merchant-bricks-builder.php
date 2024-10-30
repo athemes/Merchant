@@ -50,6 +50,18 @@ if ( ! class_exists( 'Merchant_Bricks_Builder' ) ) {
 		 * @return string $css The custom CSS.
 		 */
 		public function frontend_custom_css( $css ) {
+
+			// Wishlist
+			if ( Merchant_Modules::is_module_active( Merchant_Wishlist::MODULE_ID ) && Merchant_Admin_Options::get( 'wishlist', 'display_on_cart_page', false ) ) {
+				$css .= '
+					.merchant-wishlist-items-cart ul.products li.product {
+						display: flex;
+						flex-direction: column;
+						gap: 10px;
+					}
+				';
+			}
+
 			return $css;
 		}
 	}

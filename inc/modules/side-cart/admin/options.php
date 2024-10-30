@@ -104,7 +104,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'show_savings',
 			'type'    => 'switcher',
-			'title'   => __( 'Show savings at the bottom', 'merchant' ),
+			'title'   => __( 'Show cart savings', 'merchant' ),
 			'default' => 0,
 		),
 		array(

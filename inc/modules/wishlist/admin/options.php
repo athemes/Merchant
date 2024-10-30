@@ -2,7 +2,7 @@
 
 /**
  * Wishlist Options.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // General Settings.
 Merchant_Admin_Options::create( array(
-	'title'  => __( 'General Settings', 'merchant' ),
+	'title'  => esc_html__( 'General Settings', 'merchant' ),
 	'module' => 'wishlist',
 	'fields' => array(
 
@@ -20,8 +20,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display_on_shop_archive',
 			'type'    => 'switcher',
-			'title'   => __( 'Display on shop archive', 'merchant' ),
-			'desc'    => __( 'Display the wishlist button in the products grid from shop catalog pages.', 'merchant' ),
+			'title'   => esc_html__( 'Display on shop archive', 'merchant' ),
+			'desc'    => esc_html__( 'Display the wishlist button in the products grid from shop catalog pages.', 'merchant' ),
 			'default' => 1,
 		),
 
@@ -29,17 +29,62 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display_on_single_product',
 			'type'    => 'switcher',
-			'title'   => __( 'Display on single product', 'merchant' ),
-			'desc'    => __( 'Display the wishlist button in the single product pages.', 'merchant' ),
+			'title'   => esc_html__( 'Display on single product', 'merchant' ),
+			'desc'    => esc_html__( 'Display the wishlist button in the single product pages.', 'merchant' ),
 			'default' => 1,
 		),
 
+		array(
+			'id'      => 'display_on_cart_page',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Display on cart page', 'merchant' ),
+			'desc'    => esc_html__( 'Display the wishlist products in the cart pages.', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'        => 'posts_per_page',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Products', 'merchant' ),
+			'desc'      => esc_html__( 'Controls the number of products to display in the wishlist grid.', 'merchant' ),
+			'min'       => 1,
+			'max'       => 30,
+			'step'      => 1,
+			'unit'      => '',
+			'default'   => 6,
+			'condition' => array( 'display_on_cart_page', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'cart_page_title',
+			'type'      => 'text',
+			'title'     => esc_html__( 'Title', 'merchant' ),
+			'default'   => esc_html__( 'Saved for later', 'merchant' ),
+			'condition' => array( 'display_on_cart_page', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'cart_page_title_tag',
+			'type'      => 'select',
+			'title'     => esc_html__( 'Title HTML tag', 'merchant' ),
+			'options'   => array(
+				'h1'  => esc_html__( 'H1', 'merchant' ),
+				'h2'  => esc_html__( 'H2', 'merchant' ),
+				'h3'  => esc_html__( 'H3', 'merchant' ),
+				'h4'  => esc_html__( 'H4', 'merchant' ),
+				'h5'  => esc_html__( 'H5', 'merchant' ),
+				'h6'  => esc_html__( 'H6', 'merchant' ),
+				'div' => esc_html__( 'div', 'merchant' ),
+			),
+			'default'   => 'h2',
+			'condition' => array( 'display_on_cart_page', '==', '1' ),
+		),
 	),
 ) );
 
 // Add To Wishlist Button Settings
 Merchant_Admin_Options::create( array(
-	'title'  => __( 'Add To Wishlist Button Settings', 'merchant' ),
+	'title'  => esc_html__( 'Add To Wishlist Button Settings', 'merchant' ),
 	'module' => 'wishlist',
 	'fields' => array(
 
@@ -47,7 +92,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'button_icon',
 			'type'      => 'choices',
-			'title'     => __( 'Select an icon', 'merchant' ),
+			'title'     => esc_html__( 'Select an icon', 'merchant' ),
 			'options'   => array(
 				'heart1'    => MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart1.svg',
 				'heart2'    => MERCHANT_URI . 'inc/modules/wishlist/admin/icons/heart2.svg',
@@ -59,7 +104,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'button_position_top',
 			'type'    => 'range',
-			'title'   => __( 'Button vertical position', 'merchant' ),
+			'title'   => esc_html__( 'Button vertical position', 'merchant' ),
 			'min'     => 1,
 			'max'     => 80,
 			'step'    => 1,
@@ -71,7 +116,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'button_position_left',
 			'type'    => 'range',
-			'title'   => __( 'Button horizontal position', 'merchant' ),
+			'title'   => esc_html__( 'Button horizontal position', 'merchant' ),
 			'min'     => 1,
 			'max'     => 80,
 			'step'    => 1,
@@ -83,7 +128,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tooltip',
 			'type'    => 'switcher',
-			'title'   => __( 'Display tooltip', 'merchant' ),
+			'title'   => esc_html__( 'Display tooltip', 'merchant' ),
 			'default' => 1,
 		),
 
@@ -91,15 +136,15 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'        => 'tooltip_text',
 			'type'      => 'text',
-			'title'     => __( 'Tooltip text', 'merchant' ),
-			'default'   => __( 'Add to wishlist', 'merchant' ),
+			'title'     => esc_html__( 'Tooltip text', 'merchant' ),
+			'default'   => esc_html__( 'Add to wishlist', 'merchant' ),
 			'condition' => array( 'tooltip', '==', '1' ),
 		),
 		array(
 			'id'        => 'tooltip_text_after',
 			'type'      => 'text',
-			'title'     => __( 'Tooltip text after adding to wishlist', 'merchant' ),
-			'default'   => __( 'Added to wishlist', 'merchant' ),
+			'title'     => esc_html__( 'Tooltip text after adding to wishlist', 'merchant' ),
+			'default'   => esc_html__( 'Added to wishlist', 'merchant' ),
 			'condition' => array( 'tooltip', '==', '1' ),
 		),
 
@@ -107,7 +152,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tooltip_border_radius',
 			'type'    => 'range',
-			'title'   => __( 'Tooltip border radius', 'merchant' ),
+			'title'   => esc_html__( 'Tooltip border radius', 'merchant' ),
 			'min'     => 0,
 			'max'     => 35,
 			'step'    => 1,
@@ -122,7 +167,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon_stroke_color',
 			'type'    => 'color',
-			'title'   => __( 'Icon stroke color', 'merchant' ),
+			'title'   => esc_html__( 'Icon stroke color', 'merchant' ),
 			'default' => '#212121',
 		),
 
@@ -130,7 +175,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon_stroke_color_hover',
 			'type'    => 'color',
-			'title'   => __( 'Icon stroke color (hover)', 'merchant' ),
+			'title'   => esc_html__( 'Icon stroke color (hover)', 'merchant' ),
 			'default' => '#212121',
 		),
 
@@ -138,7 +183,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon_fill_color',
 			'type'    => 'color',
-			'title'   => __( 'Icon fill color', 'merchant' ),
+			'title'   => esc_html__( 'Icon fill color', 'merchant' ),
 			'default' => 'transparent',
 		),
 
@@ -146,7 +191,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'icon_fill_color_hover',
 			'type'    => 'color',
-			'title'   => __( 'Icon fill color (hover)', 'merchant' ),
+			'title'   => esc_html__( 'Icon fill color (hover)', 'merchant' ),
 			'default' => '#f04c4c',
 		),
 
@@ -154,7 +199,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tooltip_text_color',
 			'type'    => 'color',
-			'title'   => __( 'Tooltip text color', 'merchant' ),
+			'title'   => esc_html__( 'Tooltip text color', 'merchant' ),
 			'default' => '#FFF',
 		),
 
@@ -162,7 +207,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tooltip_background_color',
 			'type'    => 'color',
-			'title'   => __( 'Tooltip background color', 'merchant' ),
+			'title'   => esc_html__( 'Tooltip background color', 'merchant' ),
 			'default' => '#212121',
 		),
 
@@ -172,15 +217,15 @@ Merchant_Admin_Options::create( array(
 // Wishlist Page Settings
 Merchant_Admin_Options::create( array(
 	'module'    => 'wishlist',
-	'title'     => __( 'Wishlist Page Settings', 'merchant' ),
+	'title'     => esc_html__( 'Wishlist Page Settings', 'merchant' ),
 	'fields'    => array(
 
 		// Create Wishlist Page.
 		array(
 			'id'              => 'create_page',
 			'type'            => 'create_page',
-			'title'           => __( 'Wishlist page', 'merchant' ),
-			'page_title'      => __( 'My Wishlist', 'merchant' ),
+			'title'           => esc_html__( 'Wishlist page', 'merchant' ),
+			'page_title'      => esc_html__( 'My Wishlist', 'merchant' ),
 			'page_meta_key'   => '_wp_page_template',
 			'page_meta_value' => 'modules/wishlist/page-template-wishlist.php',
 			'option_name'     => 'merchant_wishlist_page_id',
@@ -190,15 +235,15 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'hide_page_title',
 			'type'    => 'switcher',
-			'title'   => __( 'Hide page title', 'merchant' ),
+			'title'   => esc_html__( 'Hide page title', 'merchant' ),
 			'default' => 0,
 		),
-		
+
 		// Table heading background color.
 		array(
 			'id'      => 'table_heading_background_color',
 			'type'    => 'color',
-			'title'   => __( 'Table heading background color', 'merchant' ),
+			'title'   => esc_html__( 'Table heading background color', 'merchant' ),
 			'default' => '#FFF',
 		),
 
@@ -206,7 +251,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'table_body_background_color',
 			'type'    => 'color',
-			'title'   => __( 'Table body background color', 'merchant' ),
+			'title'   => esc_html__( 'Table body background color', 'merchant' ),
 			'default' => '#fdfdfd',
 		),
 
@@ -214,7 +259,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'table_text_color',
 			'type'    => 'color',
-			'title'   => __( 'Table text color', 'merchant' ),
+			'title'   => esc_html__( 'Table text color', 'merchant' ),
 			'default' => '#777',
 		),
 
@@ -222,7 +267,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'table_links_color',
 			'type'    => 'color',
-			'title'   => __( 'Table links color', 'merchant' ),
+			'title'   => esc_html__( 'Table links color', 'merchant' ),
 			'default' => '#212121',
 		),
 
@@ -230,7 +275,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'table_links_color_hover',
 			'type'    => 'color',
-			'title'   => __( 'Table links color (hover)', 'merchant' ),
+			'title'   => esc_html__( 'Table links color (hover)', 'merchant' ),
 			'default' => '#757575',
 		),
 
@@ -238,15 +283,15 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'buttons_color',
 			'type'    => 'color',
-			'title'   => __( 'Buttons color', 'merchant' ),
+			'title'   => esc_html__( 'Buttons color', 'merchant' ),
 			'default' => '#FFF',
 		),
-		
+
 		// Buttons color (hover).
 		array(
 			'id'      => 'buttons_color_hover',
 			'type'    => 'color',
-			'title'   => __( 'Buttons color (hover)', 'merchant' ),
+			'title'   => esc_html__( 'Buttons color (hover)', 'merchant' ),
 			'default' => '#FFF',
 		),
 
@@ -254,15 +299,15 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'buttons_background_color',
 			'type'    => 'color',
-			'title'   => __( 'Buttons background color', 'merchant' ),
+			'title'   => esc_html__( 'Buttons background color', 'merchant' ),
 			'default' => '#212121',
 		),
-		
+
 		// Buttons color (hover).
 		array(
 			'id'      => 'buttons_background_color_hover',
 			'type'    => 'color',
-			'title'   => __( 'Buttons background color (hover)', 'merchant' ),
+			'title'   => esc_html__( 'Buttons background color (hover)', 'merchant' ),
 			'default' => '#757575',
 		),
 
@@ -279,8 +324,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'enable_sharing',
 			'type'    => 'switcher',
-			'title'   => __( 'Enable', 'merchant' ),
-			'desc'    => __( 'Allow users to share the wishlist.', 'merchant' ),
+			'title'   => esc_html__( 'Enable', 'merchant' ),
+			'desc'    => esc_html__( 'Allow users to share the wishlist.', 'merchant' ),
 			'default' => 1,
 		),
 
@@ -289,7 +334,7 @@ Merchant_Admin_Options::create( array(
 			'id'           => 'sharing_links',
 			'type'         => 'flexible_content',
 			'sorting'      => true,
-			'title'   => __( 'Social links', 'merchant' ),
+			'title'        => esc_html__( 'Social links', 'merchant' ),
 			'desc'         => esc_html__( 'Add the available social links to share the wishlist.', 'merchant' ),
 			'button_label' => esc_html__( 'Add new', 'merchant' ),
 			'layouts'      => array(
@@ -339,8 +384,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'display_copy_to_clipboard',
 			'type'    => 'switcher',
-			'title'   => __( 'Display copy to clipboard', 'merchant' ),
-			'desc'    => __( 'Displays a copy to clipboard field after the social links.', 'merchant' ),
+			'title'   => esc_html__( 'Display copy to clipboard', 'merchant' ),
+			'desc'    => esc_html__( 'Displays a copy to clipboard field after the social links.', 'merchant' ),
 			'default' => 1,
 		),
 	),
@@ -355,7 +400,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'use_shortcode',
 			'type'    => 'switcher',
-			'title'   => __( 'Use shortcode', 'merchant' ),
+			'title'   => esc_html__( 'Use shortcode', 'merchant' ),
 			'default' => 0,
 		),
 		array(
