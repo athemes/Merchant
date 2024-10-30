@@ -39,8 +39,8 @@ Merchant_Admin_Options::create( array(
 							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
 							'options' => array(
 								'all'        => esc_html__( 'All products', 'merchant' ),
-								'product'    => esc_html__( 'Specific products', 'merchant' ),
-								'categories' => esc_html__( 'Specific categories', 'merchant' ),
+								'product'    => esc_html__( 'Specific Products', 'merchant' ),
+								'categories' => esc_html__( 'Specific Categories', 'merchant' ),
 							),
 							'default' => 'all',
 						),
@@ -99,6 +99,14 @@ Merchant_Admin_Options::create( array(
 							'title'         => esc_html__( 'Product rewarded as a gift', 'merchant' ),
 							'multiple'      => false,
 							'allowed_types' => array( 'simple', 'variable', 'variation' ),
+						),
+
+						array(
+							'id'      => 'exclude_coupon',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Exclude coupons', 'merchant' ),
+							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer.', 'merchant' ),
+							'default' => false,
 						),
 
 						array(
@@ -240,8 +248,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Gift based on spending type', 'merchant' ),
-			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any additional discounts are applied, whereas the ‘Cart Total’ includes all discounts and additional charges.',
-				'merchant' ),
+			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any adjustments, whereas the ‘Cart Total’ includes all charges and fees.', 'merchant' ),
 			'options' => array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
