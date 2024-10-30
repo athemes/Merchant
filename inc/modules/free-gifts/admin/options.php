@@ -248,8 +248,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Gift based on spending type', 'merchant' ),
-			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any additional discounts are applied, whereas the ‘Cart Total’ includes all discounts and additional charges.',
-				'merchant' ),
+			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any adjustments, whereas the ‘Cart Total’ includes all charges and fees.', 'merchant' ),
 			'options' => array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
