@@ -441,9 +441,9 @@ jQuery(document).ready(function ($) {
 			});
 		},
 		handleCouponSuccess: function (response) {
-			if (response.fragments !== undefined) {
+			if (response?.fragments !== undefined) {
 				$(document).trigger('merchant_destroy_carousel');
-				$(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, null, 'side-cart']);
+				$(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $( '.merchant-coupon-form button' ), 'side-cart']);
 				$(document).trigger('merchant_init_carousel');
 			}
 		},

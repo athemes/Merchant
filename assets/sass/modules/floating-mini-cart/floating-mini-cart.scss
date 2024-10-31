@@ -566,6 +566,7 @@
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
 		justify-content: space-between;
+		gap: 5px;
 		line-height: 1em;
 		border: none;
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
@@ -577,6 +578,7 @@
 		button {
 			padding: 3px 10px;
 			line-height: 1.4;
+			white-space: nowrap;
 		}
 
 		.overlay {
