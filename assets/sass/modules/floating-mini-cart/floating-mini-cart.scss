@@ -572,7 +572,9 @@
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
 
 		input {
+			flex: 1;
 			height: 50px;
+			padding: 10px;
 		}
 
 		button {
