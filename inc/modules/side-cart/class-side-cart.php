@@ -22,6 +22,11 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	const MODULE_ID = 'side-cart';
 
 	/**
+	 * Module template path.
+	 */
+	const MODULE_TEMPLATES_PATH = 'modules/' . self::MODULE_ID;
+
+	/**
 	 * Is module preview.
 	 *
 	 */

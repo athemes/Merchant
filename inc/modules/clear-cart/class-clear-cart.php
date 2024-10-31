@@ -137,7 +137,11 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
             $position      = $settings['side_cart_position'] ?? 'after_view_cart';
             $hook_priority = $position === 'before_view_cart' ? 15 : ( $position === 'before_checkout' ? 30 : 9 );
 
+            // Floating Mini Cart
             add_action( 'woocommerce_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
+
+            // Side Cart
+            add_action( 'merchant_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
 		}
 
 		// Enqueue CSS.

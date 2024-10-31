@@ -261,7 +261,6 @@ jQuery(document).ready(function ($) {
 				},
 				success: function (response) {
 					if (response.success) {
-						console.log(response.data)
 						container.attr('data-variation-id', response.data.id);
 						self.updateProductThumbnail(container, response.data.thumbnail_url);
 					}
@@ -456,7 +455,6 @@ jQuery(document).ready(function ($) {
 			let self = this,
 				btn = $(event.currentTarget),
 				couponCode = btn.attr('data-coupon');
-			console.log(btn);
 			this.removeCoupon(self, couponCode);
 		},
 		sideCartBtns: function () {
@@ -482,11 +480,11 @@ jQuery(document).ready(function ($) {
 			}
 
 			if (checkoutBtnTxt !== '') {
-				checkoutBtn.text(checkoutBtnTxt);
+				// checkoutBtn.text(checkoutBtnTxt);
 			}
 
 			if (viewCartBtnTxt !== '') {
-				viewCartBtn.text(viewCartBtnTxt);
+				// viewCartBtn.text(viewCartBtnTxt);
 			}
 		}
 	}
