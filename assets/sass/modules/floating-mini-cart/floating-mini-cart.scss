@@ -123,6 +123,17 @@
 		padding-inline: 30px;
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
 	}
+
+	.merchant-freespb-wrapper {
+		//margin: 20px 30px;
+	}
+
+	ul.woocommerce-mini-cart {
+		.merchant-freespb-wrapper {
+			//margin: 0;
+			margin-bottom: 20px;
+		}
+	}
 }
 
 .woocommerce-mini-cart__cart_total,
