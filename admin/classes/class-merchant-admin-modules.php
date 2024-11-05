@@ -128,7 +128,15 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc'  => esc_html__( 'Create customizable product labels with display conditions and color settings', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/product-labels/',
 				),
-				'quick-view' => array(
+				'recent-sales-notifications' => array(
+					'pro'          => true,
+					'section'      => 'convert-more',
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-labels' ),
+					'title'        => esc_html__( 'Recent Sales Notifications', 'merchant' ),
+					'desc'         => esc_html__( 'Create social proof by showing notifications regarding your recent orders and products being added to cart', 'merchant' ),
+					'tutorial_url' => '#',
+				),
+				'quick-view'                 => array(
 					'pro' => false,
 					'section' => 'convert-more',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-quick-view' ),
@@ -483,7 +491,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 		 *
 		 */
 		public static function get_upsell_modules() {
-			return array_filter( self::$modules_data, function( $module ){
+			return array_filter( self::$modules_data, static function( $module ){
 				return isset( $module[ 'pro' ] ) && $module[ 'pro' ] ? $module : false;
 			} );
 		}
