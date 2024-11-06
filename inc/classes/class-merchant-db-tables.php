@@ -65,6 +65,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		                timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		                PRIMARY KEY (ID),
 		                INDEX product_event_type_idx (product_id, event_type),
+		                INDEX product_event_type_customer_idx (product_id, event_type, customer_id),
 		                INDEX timestamp_idx (timestamp),
 		                CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES `{$wpdb->prefix}posts`(ID) ON DELETE CASCADE 
 	                ) $collate;
