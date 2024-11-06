@@ -60,6 +60,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 	                    ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 		                event_type VARCHAR(255) NOT NULL,  -- cart, order, product_view.
 		                product_id BIGINT UNSIGNED NOT NULL,
+		                quantity BIGINT UNSIGNED NOT NULL,
 		                customer_id VARCHAR(255) NULL,  -- Adjusted to accommodate string customer IDs
 		                timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		                PRIMARY KEY (ID),
