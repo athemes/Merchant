@@ -366,7 +366,7 @@ jQuery(document).ready(function ($) {
 		handleSuccess: function (response) {
 			if (response.data.fragments) {
 				$(document).trigger('merchant_destroy_carousel');
-				$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, null, 'side-cart']);
+				$(document.body).trigger('added_to_cart', [response.data.fragments, response.data.cart_hash, $( '.merchant-upsell-add-to-cart' ), 'side-cart']);
 				$(document).trigger('merchant_init_carousel');
 			}
 		},

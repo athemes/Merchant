@@ -46,7 +46,7 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 		// Parent construct.
 		parent::__construct();
 
-		$this->migrate_floating_mini_cart_settings();
+		$this->migrate_floating_mini_cart_to_side_cart();
 
 		// Module default settings.
 		$this->module_default_settings = array(
@@ -54,6 +54,8 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 			'show_after_add_to_cart_single_product' => 0,
 			'show_on_cart_url_click'                => 1,
 			'enable-floating-cart'                  => false,
+			'show_view_cart_btn'                    => true,
+			'show_checkout_btn'                     => true,
 		);
 
 		// Module data.
@@ -86,11 +88,7 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 
-            add_filter( 'admin_body_class', function( $classes ) {
-                $classes .= ' merchant-side-cart-show';
-
-                return $classes;
-            } );
+            add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		}
 	}
 
@@ -319,6 +317,19 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	}
 
 	/**
+     * Add class to body in admin.
+     *
+	 * @param $classes
+	 *
+	 * @return string
+	 */
+	public function admin_body_class( $classes ) {
+		$classes .= ' merchant-side-cart-show';
+
+		return $classes;
+	}
+
+	/**
 	 * Admin custom CSS.
 	 *
 	 * @param string $css The custom CSS.
@@ -372,10 +383,8 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	 *
 	 * @return void
 	 */
-	private function migrate_floating_mini_cart_settings() {
-		// update_option( 'merchant_floating_mini_cart_merged_with_side_cart', false );
-
-		if ( get_option( 'merchant_floating_mini_cart_merged_with_side_cart', false ) || ! method_exists( 'Merchant_Admin_Options', 'set' ) ) {
+	private function migrate_floating_mini_cart_to_side_cart() {
+        if ( get_option( 'merchant_floating_mini_cart_merged_with_side_cart', false ) || ! method_exists( 'Merchant_Admin_Options', 'set' ) ) {
 			return;
 		}
 
@@ -425,11 +434,22 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	        }
         }
 
-		update_option( 'merchant_floating_mini_cart_merged_with_side_cart', true );
+        // Delete FMC Module's Enabled/Disabled data from DB
+		$modules = get_option( Merchant_Modules::$option, array() );
+		if ( isset( $modules[ $fmc_module_id ] ) ) {
+			unset( $modules[ $fmc_module_id ] );
+			update_option( Merchant_Modules::$option, $modules );
+		}
 
-		// Todo: Delete whole Floating Cart settings
-		//$options = get_option( 'merchant', array() );
-		//unset( $options['floating-mini-cart'] );
+		// Delete FMC Module's settings information from DB
+		$options = get_option( 'merchant', array() );
+		if( isset( $options[ $fmc_module_id ] ) ) {
+			unset( $options[ $fmc_module_id ] );
+			update_option( 'merchant', $options );
+		}
+
+		// Track Migration to do the action once only.
+		update_option( 'merchant_floating_mini_cart_merged_with_side_cart', true );
     }
 }
 

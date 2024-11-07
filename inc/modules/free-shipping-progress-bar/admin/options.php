@@ -618,8 +618,8 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'select',
 			'title'      => esc_html__( 'Position', 'merchant' ),
 			'options'    => array(
-				'merchant_widget_shopping_cart_before_buttons' => esc_html__( 'Before Cart Buttons', 'merchant' ),
 				'merchant_before_mini_cart_contents'           => esc_html__( 'Before Cart Items', 'merchant' ),
+				'merchant_widget_shopping_cart_before_buttons' => esc_html__( 'Before Cart Buttons', 'merchant' ),
 				'merchant_widget_shopping_cart_after_buttons'  => esc_html__( 'After Cart Buttons', 'merchant' ),
 			),
 			'default'    => 'merchant_widget_shopping_cart_before_buttons',
