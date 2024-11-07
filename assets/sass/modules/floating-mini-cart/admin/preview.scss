@@ -103,7 +103,7 @@
 }
 
 // Mini Cart Show.
-body.merchant-floating-side-mini-cart-show {
+body.merchant-side-cart-show {
 	overflow: auto !important;
 }
 
@@ -127,11 +127,11 @@ body.merchant-floating-side-mini-cart-show {
 }
 
 // Side Mini Cart.
-.merchant-floating-side-mini-cart-overlay {
+.merchant-side-cart-overlay {
 	position: absolute;
 }
 
-.merchant-floating-side-mini-cart {
+.merchant-side-cart {
 	position: absolute;
 }
 
@@ -142,7 +142,7 @@ body.merchant-floating-side-mini-cart-show {
     background-color: #f5f5f5;
 }
 
-.merchant-floating-side-mini-cart-widget {
+.merchant-side-cart-widget {
 	.product_list_widget {
 		height: 200px !important;
 	}
