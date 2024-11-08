@@ -10,14 +10,30 @@
 
 .merchant-volume-discounts-item {
 	display: block;
+	background-color: var(--merchant-item-bg-color, #fcf0f1);
+	border: 1px solid var(--merchant-item-border-color, #d83b3b);
 	position: relative;
-	border: 1px solid #d83b3b;
 	margin-top: 25px;
 	margin-bottom: 25px;
 	padding: 20px 20px 10px;
-	background-color: #fcf0f1;
 	border-radius: 5px;
-	color: #3c434a;
+
+	&,
+	ul .woocommerce-Price-amount,
+	.merchant-volume-discounts-buy-label .woocommerce-Price-amount {
+		color: var(--merchant-item-text-color, #3c434a);
+	}
+
+	&:hover {
+		color: var(--merchant-item-text-color-hover, var(--merchant-item-text-color));
+		background: var(--merchant-item-bg-color-hover, var(--merchant-item-bg-color));
+		border-color: var(--merchant-item-border-color-hover, var(--merchant-item-border-color));
+
+		ul .woocommerce-Price-amount,
+		.merchant-volume-discounts-buy-label .woocommerce-Price-amount {
+			color: var(--merchant-item-text-color-hover, var(--merchant-item-text-color));
+		}
+	}
 
 	&.clickable {
 		cursor: pointer;
@@ -158,12 +174,16 @@
 }
 
 .merchant-volume-discounts-item-label > span {
-	background-color: #d83b3b;
-	color: #ffffff;
+	background-color: var(--merchant-label-bg-color, #d83b3b);
 	padding: 4px 12px;
 	font-weight: bold;
 	border-radius: 5px;
 	margin-left: 10px;
+
+	&,
+	.woocommerce-Price-amount {
+		color: var(--merchant-label-text-color, #ffffff);
+	}
 }
 
 .merchant-volume-discounts-item-label {
@@ -171,13 +191,4 @@
 	top: -13px;
 	left: 6px;
 	right: 0;
-}
-
-.merchant-volume-discounts {
-	&-buy-label span,
-	&-buy-label bdi,
-	&-save-label .woocommerce-Price-amount,
-	&-save-label .woocommerce-Price-amount bdi {
-		color: inherit !important;
-	}
 }
