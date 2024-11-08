@@ -11,6 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
 $product        = $args['product'];
 $product_id     = $product->get_id();
 ?>
@@ -204,10 +205,12 @@ $product_id     = $product->get_id();
                                         <option value=""><?php
 								            echo esc_html( $attribute_label ); ?></option>
 							            <?php
-							            foreach ( $options as $option ) : ?>
+							            foreach ( $options as $option ) : 
+											$option_term = get_term_by( 'slug', $option, $attribute_name );
+											?>
                                             <option value="<?php
 								            echo esc_attr( $option ); ?>"><?php
-									            echo esc_html( ucfirst( $option ) ); ?></option>
+									            echo esc_html( $option_term->name ); ?></option>
 							            <?php
 							            endforeach; ?>
                                     </select>
