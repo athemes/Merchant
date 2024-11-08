@@ -38,7 +38,6 @@ $product_id     = $product->get_id();
 			$total_discount   = $discount_qty * $discount;
 			$total_price      = $discount_qty * $discounted_price;
 			$clickable        = '';
-            $product_type     = '';
 
 			if ( ! $product->is_type( 'variable' ) && $quantity < $discount_qty ) {
 				$clickable = ' clickable';
@@ -55,7 +54,7 @@ $product_id     = $product->get_id();
 			endif;
 
 			$item_classes = 'merchant-volume-discounts-item' . esc_attr( $clickable );
-			$item_classes .= $product_type ? ' merchant-volume-discounts-item-' . esc_attr( $product_type ) : '';
+			$item_classes .= ' merchant-volume-discounts-item-' . esc_attr( $product->get_type() );
 			$item_classes .= ' merchant-volume-discounts-item-' . esc_attr( $i );
 			// Check if it's a variable product
 			$is_variable = $product->is_type( 'variable' );
