@@ -11,259 +11,202 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Settings', 'merchant' ),
+	'title'  => esc_html__( 'Timing Settings', 'merchant' ),
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'           => 'reasons_to_buy',
-			'type'         => 'flexible_content',
-			'button_label' => esc_html__( 'Add New', 'merchant' ),
-			'style'        => Merchant_Recent_Sales_Notifications::MODULE_ID . '-style default',
-			'sorting'      => true,
-			'accordion'    => true,
-			'duplicate'    => true,
-			'layouts'      => array(
-				'single-reason' => array(
-					'title'       => esc_html__( 'Reasons To Buy', 'merchant' ),
-					'title-field' => 'title',
-					'fields'      => array(
-						array(
-							'id'      => 'title',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Title', 'merchant' ),
-							'default' => esc_html__( 'Reasons to buy list', 'merchant' ),
-							'desc'    => '',
-						),
+			'id'      => 'time_before_show_first_one',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Seconds before the first notification is shown', 'merchant' ),
+			'default' => '8',
+		),
+		array(
+			'id'      => 'time_to_stay_on_screen',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Time on screen (seconds)', 'merchant' ),
+			'default' => '8',
+		),
+		array(
+			'id'      => 'delay_between_notifications',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Delay between notifications (seconds)', 'merchant' ),
+			'default' => '12',
+		),
+		array(
+			'id'      => 'notifications_per_session',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Notifications per session', 'merchant' ),
+			'desc'    => esc_html__( 'The maximum number of notifications shown to the same visitor during a browsing session.', 'merchant' ),
+			'default' => '6',
+		),
+	),
+) );
 
-						array(
-							'id'      => 'display_rules',
-							'type'    => 'select',
-							'title'   => esc_html__( 'Products that will display the items', 'merchant' ),
-							'options' => array(
-								'all'        => esc_html__( 'All Products', 'merchant' ),
-								'products'   => esc_html__( 'Specific Products', 'merchant' ),
-								'categories' => esc_html__( 'Specific Categories', 'merchant' ),
-								'tags'       => esc_html__( 'Specific Tags', 'merchant' ),
-							),
-							'default' => 'all',
-						),
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Add To Cart Settings', 'merchant' ),
+	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'show_add_to_cart_events',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show Add To Cart events', 'merchant' ),
+			'desc'    => esc_html__( 'Show notifications for products added to cart. This is especially useful if you don\'t have orders yet but you still want to show the activity on your store.',
+				'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'show_grouped_add_to_cart_events',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show grouped Add To Cart events', 'merchant' ),
+			'desc'    => esc_html__( 'Show events such as: "13 people added this product to cart today:”', 'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'minumum_add_to_cart_for_group_notification',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Minimum number of add to carts for group notifications', 'merchant' ),
+			'desc'    => esc_html__( 'Set the number of times a product must be added to cart in one day, for a group notification to be triggered', 'merchant' ),
+			'default' => '10',
+		),
+		array(
+			'id'          => 'group_notification_template',
+			'type'        => 'text',
+			'title'       => esc_html__( '"Add To Cart" group notification template', 'merchant' ),
+			'desc'        => esc_html__( 'Eg.: "12 people added this product to cart today:" Do not modify the text to present fake data.', 'merchant' ),
+			'placeholder' => esc_html__( '{{count}} people added this product to cart today:', 'merchant' ),
+		),
+	),
+) );
 
-						array(
-							'id'            => 'product_ids',
-							'type'          => 'products_selector',
-							'multiple'      => true,
-							'desc'          => esc_html__( 'Select the product(s) on which the items will appear', 'merchant' ),
-							'condition'     => array( 'display_rules', '==', 'products' ),
-							'allowed_types' => array( 'simple', 'variable' ),
-						),
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Other Settings', 'merchant' ),
+	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'show_customer_names',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show customer names', 'merchant' ),
+			'desc'    => esc_html__( 'If you are based in the EU or you have customers from the EU, we recommend you deselect this option, for GDPR purposes.',
+				'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'show_customer_location',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show the customer\'s location', 'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'open_links_in_new_tab',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Open links in new tab', 'merchant' ),
+			'desc'    => esc_html__( 'When the visitor clicks on the Recent Sales widget, you can choose to open the link in a new tab or the current tab.',
+				'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'hide_on_mobile',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide on Mobile', 'merchant' ),
+			'desc'    => esc_html__( 'Because the mobile screen is much smaller, you might not want to take up space with this module.',
+				'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'show_verified_badge',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show "Verified by aThemes" badge', 'merchant' ),
+			'desc'    => esc_html__( 'If enabled, it will show a Verified by aThemes badge in the popup. This will create an extra sense of trust for your visitors.',
+				'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'show_order_time_ago',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show when the order was placed', 'merchant' ),
+			'desc'    => esc_html__( 'Eg.: "2 hours ago"', 'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'hide_date_for_old_events_than',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Hide the date for events older than (days)', 'merchant' ),
+			'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
+			'default' => '1',
+		),
+		array(
+			'id'      => 'dont_show_events_older_than',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Don\'t show events older than (days)', 'merchant' ),
+			'desc'    => esc_html__( 'If no events are found in the selected period, no notifications will be displayed.', 'merchant' ),
+			'default' => '60',
+		),
+	),
+) );
 
-						array(
-							'id'          => 'category_slugs',
-							'type'        => 'select_ajax',
-							'source'      => 'options',
-							'multiple'    => true,
-							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
-							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product categories where the items will appear', 'merchant' ),
-							'condition'   => array( 'display_rules', '==', 'categories' ),
-						),
-
-						array(
-							'id'          => 'tag_slugs',
-							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Tags', 'merchant' ),
-							'source'      => 'options',
-							'multiple'    => true,
-							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
-							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product tags where the items will appear', 'merchant' ),
-							'condition'   => array( 'display_rules', '==', 'tags' ),
-						),
-
-						array(
-							'id'         => 'exclusion_enabled',
-							'type'       => 'switcher',
-							'title'      => __( 'Exclusion List', 'merchant' ),
-							'desc'       => __( 'Select products that will not display items.', 'merchant' ),
-							'default'    => 0,
-							'conditions' => array(
-								'relation' => 'AND',
-								'terms'    => array(
-									array(
-										'field'    => 'display_rules',
-										'operator' => 'in',
-										'value'    => array( 'all', 'categories', 'tags' ),
-									),
-								),
-							),
-						),
-
-						array(
-							'id'            => 'excluded_products',
-							'type'          => 'products_selector',
-							'title'         => esc_html__( 'Exclude Products', 'merchant' ),
-							'multiple'      => true,
-							'desc'          => esc_html__( 'Exclude products from these items', 'merchant' ),
-							'allowed_types' => array( 'simple', 'variable' ),
-							'conditions'    => array(
-								'relation' => 'AND',
-								'terms'    => array(
-									array(
-										'field'    => 'display_rules',
-										'operator' => 'in',
-										'value'    => array( 'all', 'categories', 'tags' ),
-									),
-									array(
-										'field'    => 'exclusion_enabled',
-										'operator' => '===',
-										'value'    => true,
-									),
-								),
-							),
-						),
-
-						array(
-							'id'          => 'excluded_categories',
-							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
-							'source'      => 'options',
-							'multiple'    => true,
-							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
-							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude categories from these items.', 'merchant' ),
-							'conditions'    => array(
-								'relation' => 'AND',
-								'terms'    => array(
-									array(
-										'field'    => 'display_rules',
-										'operator' => 'in',
-										'value'    => array( 'all' ),
-									),
-									array(
-										'field'    => 'exclusion_enabled',
-										'operator' => '===',
-										'value'    => true,
-									),
-								),
-							),
-						),
-
-						array(
-							'id'          => 'excluded_tags',
-							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
-							'source'      => 'options',
-							'multiple'    => true,
-							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
-							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude tags from these items.', 'merchant' ),
-							'conditions'    => array(
-								'relation' => 'AND',
-								'terms'    => array(
-									array(
-										'field'    => 'display_rules',
-										'operator' => 'in',
-										'value'    => array( 'all' ),
-									),
-									array(
-										'field'    => 'exclusion_enabled',
-										'operator' => '===',
-										'value'    => true,
-									),
-								),
-							),
-						),
-
-						array(
-							'id'           => 'items',
-							'type'         => 'sortable_repeater',
-							'sorting'      => true,
-							'title'        => esc_html__( 'Items', 'merchant' ),
-							'desc'         => '',
-							'button_label' => esc_html__( 'Add new item', 'merchant' ),
-							'default'      => array(
-								esc_html__( '100% Polyester.', 'merchant' ),
-								// esc_html__( 'Recycled Polyamid.', 'merchant' ),
-								// esc_html__( 'GOTS-certified organic cotton.', 'merchant' ),
-							),
-						),
-
-						// Placement
-						array(
-							'id'      => 'placement',
-							'type'    => 'select',
-							'title'   => esc_html__( 'Placement on product page', 'merchant' ),
-							'options' => array(
-								'after-short-description' => esc_html__( 'After short description', 'merchant' ),
-								'before-cart-form'        => esc_html__( 'Before add to cart form', 'merchant' ),
-								'after-cart-form'         => esc_html__( 'After add to cart form', 'merchant' ),
-								'bottom-product-summary'  => esc_html__( 'Bottom of product summary', 'merchant' ),
-							),
-							'default' => 'bottom-product-summary',
-						),
-
-						// Display Icon.
-						array(
-							'id'      => 'display_icon',
-							'type'    => 'switcher',
-							'title'   => esc_html__( 'Display icon', 'merchant' ),
-							'default' => 1,
-						),
-
-						// List items Icon.
-						array(
-							'id'        => 'icon',
-							'type'      => 'choices',
-							'title'     => esc_html__( 'Select an icon', 'merchant' ),
-							'options'   => array(
-								'check2' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check2.svg',
-								'check3' => MERCHANT_URI . 'inc/modules/reasons-to-buy/admin/icons/check3.svg',
-							),
-							'default'   => 'check2',
-							'condition' => array( 'display_icon', '==', '1' ),
-						),
-
-						// List items Spacing.
-						array(
-							'id'      => 'spacing',
-							'type'    => 'range',
-							'title'   => esc_html__( 'List items spacing', 'merchant' ),
-							'min'     => 0,
-							'max'     => 80,
-							'step'    => 1,
-							'unit'    => 'px',
-							'default' => 5,
-						),
-
-						// Title color.
-						array(
-							'id'      => 'title_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'Title color', 'merchant' ),
-							'default' => '#212121',
-						),
-
-						// List items color.
-						array(
-							'id'      => 'items_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'List items color', 'merchant' ),
-							'default' => '#777',
-						),
-
-						// List items Icon color.
-						array(
-							'id'      => 'icon_color',
-							'type'    => 'color',
-							'title'   => esc_html__( 'List items Icon color', 'merchant' ),
-							'default' => '#212121',
-						),
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Hide for some products and orders', 'merchant' ),
+	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'product_exclusion',
+			'type'    => 'switcher',
+			'title'   => __( 'Product Exclusion', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'            => 'excluded_products',
+			'type'          => 'products_selector',
+			'title'         => esc_html__( 'Exclude products', 'merchant' ),
+			'multiple'      => true,
+			'allowed_types' => array( 'simple', 'variable' ),
+			'conditions'    => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'product_exclusion', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
 					),
 				),
 			),
-			'default'      => array(
-				array(
-					'layout' => 'single-reason',
+		),
+		array(
+			'id'          => 'excluded_categories',
+			'type'        => 'select_ajax',
+			'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+			'source'      => 'options',
+			'multiple'    => true,
+			'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+			'conditions'  => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'product_exclusion', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'order_exclusion',
+			'type'    => 'switcher',
+			'title'   => __( 'Order Exclusion', 'merchant' ),
+			'default' => 0,
+		),
+		array(
+			'id'         => 'excluded_products',
+			'type'       => 'text',
+			'desc'       => esc_html__( 'Add comma separated order IDs that you don\'t want to show.', 'merchant' ),
+			'conditions' => array(
+				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
+				'terms'    => array(
+					array(
+						'field'    => 'order_exclusion', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => true, // can be a single value or an array of string/number/int
+					),
 				),
 			),
 		),
