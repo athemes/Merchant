@@ -37,7 +37,8 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 			return apply_filters(
 				'merchant_db_tables',
 				array(
-					'sales_notifications_table' => self::get_sales_notifications_table(),
+					'sales_notifications_table'       => self::get_sales_notifications_table(),
+					'sales_notifications_shown_table' => self::get_sales_notifications_shown_table(),
 				)
 			);
 		}
@@ -68,6 +69,39 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		                INDEX product_event_type_customer_idx (product_id, event_type, customer_id),
 		                INDEX timestamp_idx (timestamp),
 		                CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES `{$wpdb->prefix}posts`(ID) ON DELETE CASCADE 
+	                ) $collate;
+	            ",
+				'version'        => 1,
+				'schema_updater' => '', // Attach a callable here to update the schema when needed, you must increment the version number
+			);
+		}
+
+		/**
+		 * Get the sales notifications shown table definition.
+		 *
+		 * This table records the user events that have been shown to each customer.
+		 * The event_id is a foreign key to the merchant_sales_notifications table.
+		 * The customer_id is null when the notification is shown to an anonymous visitor.
+		 *
+		 * @return array
+		 */
+		private static function get_sales_notifications_shown_table() {
+			global $wpdb;
+
+			$table_name = $wpdb->prefix . 'merchant_sales_notifications_shown';
+			$collate    = $wpdb->has_cap( 'collation' ) ? $wpdb->get_charset_collate() : '';
+
+			return array(
+				'name'           => $table_name,
+				'query'          => "
+	                CREATE TABLE $table_name ( 
+	                    ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+		                event_id BIGINT UNSIGNED NOT NULL,
+		                customer_id VARCHAR(255) NULL,  -- Adjusted to accommodate string customer IDs
+		                timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		                PRIMARY KEY (ID),
+		                INDEX event_id_customer_idx (event_id, customer_id),
+		                CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES `{$wpdb->prefix}merchant_sales_notifications`(ID) ON DELETE CASCADE 
 	                ) $collate;
 	            ",
 				'version'        => 1,
@@ -151,9 +185,9 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		 */
 		private static function is_plugin_update( $options ) {
 			return isset( $options['action'], $options['type'], $options['plugins'] )
-					&& $options['action'] === 'update'
-					&& $options['type'] === 'plugin'
-					&& in_array( plugin_basename( MERCHANT_FILE ), $options['plugins'], true );
+			       && $options['action'] === 'update'
+			       && $options['type'] === 'plugin'
+			       && in_array( plugin_basename( MERCHANT_FILE ), $options['plugins'], true );
 		}
 	}
 }
