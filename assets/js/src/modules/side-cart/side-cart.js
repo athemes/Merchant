@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
 		$( window ).trigger( 'merchant.side-cart-resize' );
 	} );
 
-	// Manually update Side Cart as for some reason `wc_fragment_refresh` doesn't refresh the Side Cart Custom Mini Cart widget.
+	// Manually update Side Cart as for some reason `wc_fragment_refresh` doesn't refresh the Side Cart widget.
 	$body.on( 'wc_cart_emptied', function( e, context ){
 		$( '.merchant_widget_shopping_cart_content' ).fadeOut( function() {
 			$( this )

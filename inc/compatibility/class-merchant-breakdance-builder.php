@@ -46,8 +46,7 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 					}
 				}
 
-
-				// Side/Floating Mini Cart
+				// Side Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
 					remove_action( 'woocommerce_widget_cart_item_quantity', '\Breakdance\WooCommerce\addQuantityInputToMiniCart' );
 				}
@@ -153,7 +152,7 @@ if ( ! class_exists( 'Merchant_Breakdance_Builder' ) ) {
 					';
 				}
 
-				// Side/Floating Mini Cart
+				// Side Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
 					$css .= '
 					    .bde-mini-cart-offcanvas-footer .woocommerce-mini-cart__buttons a {

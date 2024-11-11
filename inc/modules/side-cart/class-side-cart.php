@@ -46,7 +46,7 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 		// Parent construct.
 		parent::__construct();
 
-		$this->migrate_floating_mini_cart_to_side_cart();
+		$this->migrate_floating_mini_cart_to_side_cart(); // Run on both BE & FE
 
 		// Module default settings.
 		$this->module_default_settings = array(
@@ -137,7 +137,6 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
-		// Register and enqueue the main module script.
 		wp_enqueue_script(
             'merchant-' . self::MODULE_ID,
             MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/side-cart.min.js',
@@ -197,7 +196,6 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 			$preview->set_svg_icon( 'icon', '.merchant-side-cart-floating-cart-icon' );
 
 			// Position.
-			// $preview->set_class( 'icon-position', '.merchant-side-cart-floating-cart', array( 'left', 'right' ) );
 			$preview->set_class( 'icon-position', '.merchant-side-cart-floating-cart', array( 'merchant-side-cart-floating-cart-position-left', 'merchant-side-cart-floating-cart-position-right' ) );
 
             $preview->set_class( 'show_view_cart_btn', '.merchant-side-cart-view-cart-btn', array(), 'show-btn' );
@@ -443,7 +441,7 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 
 		// Delete FMC Module's settings information from DB
 		$options = get_option( 'merchant', array() );
-		if( isset( $options[ $fmc_module_id ] ) ) {
+		if ( isset( $options[ $fmc_module_id ] ) ) {
 			unset( $options[ $fmc_module_id ] );
 			update_option( 'merchant', $options );
 		}
