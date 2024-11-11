@@ -14,8 +14,19 @@
 		 * Initialize the logic.
 		 */
 		init() {
+			this.preview();
 			this.events();
 			this.flexibleContentLabel();
+		}
+
+		preview() {
+			$( document ).on( 'change', '.merchant-field-slide_direction input', function() {
+				if ( $( this ).is( ':checked' ) ) {
+					$( '.merchant-side-cart' )
+						.removeClass( 'slide-left slide-right' )
+						.addClass( 'slide-' + $( this ).val() );
+				}
+			} );
 		}
 
 		/**

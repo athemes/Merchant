@@ -348,37 +348,65 @@ Merchant_Admin_Options::create( array(
 								),
 
 								array(
+									'id'      => 'title_text_color_hover',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Title text color hover', 'merchant' ),
+									'default' => '#212121',
+								),
+
+								array(
 									'id'      => 'table_item_bg_color',
 									'type'    => 'color',
-									'title'   => esc_html__( 'Choose background color', 'merchant' ),
+									'title'   => esc_html__( 'Background color', 'merchant' ),
+									'default' => '#fcf0f1',
+								),
+
+								array(
+									'id'      => 'table_item_bg_color_hover',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Background color hover', 'merchant' ),
 									'default' => '#fcf0f1',
 								),
 
 								array(
 									'id'      => 'table_item_border_color',
 									'type'    => 'color',
-									'title'   => esc_html__( 'Choose border color', 'merchant' ),
+									'title'   => esc_html__( 'Border color', 'merchant' ),
+									'default' => '#d83b3b',
+								),
+
+								array(
+									'id'      => 'table_item_border_color_hover',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Border color hover', 'merchant' ),
 									'default' => '#d83b3b',
 								),
 
 								array(
 									'id'      => 'table_item_text_color',
 									'type'    => 'color',
-									'title'   => esc_html__( 'Choose text color', 'merchant' ),
+									'title'   => esc_html__( 'Text color', 'merchant' ),
+									'default' => '#3c434a',
+								),
+
+								array(
+									'id'      => 'table_item_text_color_hover',
+									'type'    => 'color',
+									'title'   => esc_html__( 'Text color hover', 'merchant' ),
 									'default' => '#3c434a',
 								),
 
 								array(
 									'id'      => 'table_label_bg_color',
 									'type'    => 'color',
-									'title'   => esc_html__( 'Choose label background color', 'merchant' ),
+									'title'   => esc_html__( 'Label background color', 'merchant' ),
 									'default' => '#d83b3b',
 								),
 
 								array(
 									'id'      => 'table_label_text_color',
 									'type'    => 'color',
-									'title'   => esc_html__( 'Choose label text color', 'merchant' ),
+									'title'   => esc_html__( 'Label text color', 'merchant' ),
 									'default' => '#ffffff',
 								),
 							),

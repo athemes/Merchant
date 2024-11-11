@@ -331,7 +331,6 @@ const styles = [
 		destination: './assets/css/modules/advanced-reviews/admin',
 	},
 
-
 	// Checkout Admin Preview.
 	{
 		name: 'checkoutAdmin',
@@ -351,17 +350,11 @@ const styles = [
 		destination: './assets/css/modules/countdown-timer',
 	},
 
-	// Floating Mini Cart.
+	// Side Cart
 	{
-		name: 'floatingMiniCartAdmin',
-		src: './assets/sass/modules/floating-mini-cart/admin/preview.scss',
-		destination: './assets/css/modules/floating-mini-cart/admin',
-	},
-
-	{
-		name: 'floatingMiniCart',
-		src: './assets/sass/modules/floating-mini-cart/floating-mini-cart.scss',
-		destination: './assets/css/modules/floating-mini-cart',
+		name: 'sideCart',
+		src: './assets/sass/modules/side-cart/side-cart.scss',
+		destination: './assets/css/modules/side-cart',
 	},
 
 	// side cart preview
@@ -851,13 +844,6 @@ const scripts = [
 		file: 'preview'
 	},
 
-	// Floating Mini Cart.
-	{
-		name: 'floatingMiniCart',
-		src: './assets/js/src/modules/floating-mini-cart/floating-mini-cart.js',
-		destination: './assets/js/modules/floating-mini-cart',
-		file: 'floating-mini-cart'
-	},
 	// Side cart
 	{
 		name: 'sideCart',
