@@ -221,8 +221,8 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-cart-reserved-timer/',
 				),
 				'floating-mini-cart' => array(
-					'pro' => true,
-					'section' => 'reduce-abandonment',
+					'pro'          => true,
+					'section'      => 'reduce-abandonment',
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-floating-mini-cart' ),
 					'title'        => esc_html__( 'Floating Mini Cart', 'merchant' ),
 					'desc'         => esc_html__( 'A cart icon will always be visible and a sliding cart when the customer clicks it', 'merchant' ),
