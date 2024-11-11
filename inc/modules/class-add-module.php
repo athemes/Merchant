@@ -57,6 +57,9 @@ class Merchant_Add_Module {
 		// Add and expose the module into the plugin dashboard.
 		add_filter( 'merchant_modules', array( $this, 'add_module' ) );
 
+		// Delete a module
+		add_filter( 'merchant_modules', array( $this, 'delete_module' ) );
+
 		// Add module options.
 		add_filter( 'merchant_module_file_path', array( $this, 'add_module_options' ), 10, 2 );
 
@@ -201,6 +204,28 @@ class Merchant_Add_Module {
 	 */
 	public function add_module( $modules ) {
 		$modules[ $this->module_section ]['modules'][ $this->module_id ] = $this->module_data;
+
+		return $modules;
+	}
+
+	/**
+	 * Delete the 'floating-mini-cart' module from Merchant dashboard.
+	 *
+	 * TODO: This is a temporary fix to avoid a fatal error while merging the Floating Cart with the Side Cart.
+	 *
+	 * In a future release, remove this code and delete the `floating-mini-cart` directory and all its files from `merchant/inc/modules/`.
+	 * Also, remove the 'floating-mini-cart' entry from the `self::$modules_data` array in `merchant/inc/modules/class-add-module.php`.
+	 *
+	 * Changes was made in merchant v1.10.4
+	 *
+	 * @param array $modules
+	 *
+	 * @return array
+	 */
+	public function delete_module( $modules ) {
+		if ( isset( $modules['reduce-abandonment']['modules']['floating-mini-cart'] ) ) {
+			unset( $modules['reduce-abandonment']['modules']['floating-mini-cart'] );
+		}
 
 		return $modules;
 	}
