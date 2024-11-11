@@ -62,6 +62,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		                event_type VARCHAR(255) NOT NULL,  -- cart, order, product_view.
 		                product_id BIGINT UNSIGNED NOT NULL,
 		                quantity BIGINT UNSIGNED NOT NULL,
+		                order_id BIGINT UNSIGNED NULL,  -- To be used for excluding notifications for the some order.
 		                customer_id VARCHAR(255) NULL,  -- Adjusted to accommodate string customer IDs
 		                timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		                PRIMARY KEY (ID),
