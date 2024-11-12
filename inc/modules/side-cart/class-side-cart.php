@@ -303,8 +303,8 @@ class Merchant_Side_Cart extends Merchant_Add_Module {
 								</span>
                             </p>
                             <p class="woocommerce-mini-cart__buttons buttons">
-                                <a href="#" class="button wc-forward merchant-side-cart-view-cart-btn<?php echo esc_attr( $settings['show_view_cart_btn'] ) ? ' show-btn' : ''; ?>"><?php echo esc_html( $settings['view_cart_btn_text'] ?? 'View Cart' ); ?></a>
-                                <a href="#" class="button checkout wc-forward merchant-side-cart-checkout-btn<?php echo esc_attr( $settings['show_view_cart_btn'] ) ? ' show-btn' : ''; ?>"><?php echo esc_html( $settings['checkout_btn_text'] ?? 'Checkout' ); ?></a>
+                                <a href="#" class="button wc-forward merchant-side-cart-view-cart-btn<?php echo esc_attr( ! empty( $settings['show_view_cart_btn'] ) ) ? ' show-btn' : ''; ?>"><?php echo esc_html( $settings['view_cart_btn_text'] ?? 'View Cart' ); ?></a>
+                                <a href="#" class="button checkout wc-forward merchant-side-cart-checkout-btn<?php echo esc_attr( ! empty( $settings['show_checkout_btn'] ) ) ? ' show-btn' : ''; ?>"><?php echo esc_html( $settings['checkout_btn_text'] ?? 'Checkout' ); ?></a>
                             </p>
                         </div>
                     </div>
