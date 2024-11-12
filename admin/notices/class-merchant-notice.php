@@ -33,7 +33,7 @@ class Merchant_Notice {
 	 * 
 	 */
 	public $only_free = false;
-		
+
 	/**
 	 * The single class instance.
 	 * 

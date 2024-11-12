@@ -45,7 +45,7 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
 
             @media(min-width: 1270px) {
                 .merchant-campaign-notice {
-                    padding: 40px 61px !important;
+                    padding: 45px 61px 40px !important;
                 }
             }
 
@@ -53,13 +53,21 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
                 color: #FFF;
                 font-size: 42px;
                 font-weight: 700;
-                line-height: 1.4;
-                min-width: 370px;
-                max-width: 25%;
-                margin-bottom: 20px;
+                line-height: 1.1;
+                margin-bottom: 40px;
+            }
+
+            @media(min-width: 576px) {
+                .merchant-campaign-notice h3 {
+                    min-width: 455px;
+                    max-width: 25%;
+                    line-height: 0.8;
+                }   
             }
 
             .merchant-campaign-notice h3 span {
+                position: relative;
+                top: 12px;
                 display: inline-flex;
                 align-items: center;
                 gap: 10px;
@@ -77,8 +85,14 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
                     position: absolute;
                     right: 40px;
                     bottom: 0;
-                    max-width: 663px;
+                    max-width: 553px;
                     margin-top: 0;
+                }
+            }
+
+            @media(min-width: 1300px) {
+                .merchant-campaign-notice-thumbnail {
+                    max-width: 663px;
                 }
             }
 
@@ -114,13 +128,13 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
      * 
      * @return void
      */
-    public function notice_markup() { 
+    public function notice_markup() {
 		?>
 
         <div class="merchant-notice notice merchant-campaign-notice" style="position:relative;">
 			<h3><?php echo wp_kses_post( sprintf(
                 /* Translators: 1. Image url. */
-                __( 'Black Friday: Up to <span><img src="%1$s" class="merchant-campaign-notice-percent" alt="Up to 40 Percent Off!" /> Off!</span>', 'merchant' ),
+                __( 'Merchant Black Friday: Up to <span><img src="%1$s" class="merchant-campaign-notice-percent" alt="Up to 40 Percent Off!" /> Off!</span>', 'merchant' ),
                 MERCHANT_URI . 'assets/images/admin/40-percent.png'
             ) ); ?></h3>
 
