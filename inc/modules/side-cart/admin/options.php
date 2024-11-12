@@ -478,7 +478,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'enable-floating-cart',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Cart Icon', 'merchant' ),
+			'title'   => esc_html__( 'Floating cart', 'merchant' ),
 			'desc'    => esc_html__( 'Enable floating cart icon', 'merchant' ),
 			'default' => 0,
 		),
