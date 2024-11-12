@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Floating login popup class.
+ * Login popup class.
  *
  */
 class Merchant_Login_Popup extends Merchant_Add_Module {
@@ -48,7 +48,7 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'login_link_text' => esc_html__( 'Login', 'merchant' ),
+			'login_link_text'      => esc_html__( 'Login', 'merchant' ),
 			'show_welcome_message' => true,
 			/* Translators: 1. Display name */
 			'welcome_message_text' => sprintf( esc_html__( 'Welcome %s', 'merchant' ), '{display_name}' ),
@@ -80,7 +80,6 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -122,8 +121,6 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
-
-		// Register and enqueue the main module script.
 		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/login-popup.min.js', array(), MERCHANT_VERSION, true );
 	}
 
