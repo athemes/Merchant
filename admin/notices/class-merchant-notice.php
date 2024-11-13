@@ -35,6 +35,12 @@ class Merchant_Notice {
 	public $only_free = false;
 
 	/**
+	 * End date target.
+	 * 
+	 */
+	public $end_date_target = '';
+
+	/**
 	 * The single class instance.
 	 * 
 	 */
@@ -83,24 +89,41 @@ class Merchant_Notice {
 	}
 
 	/**
+	 * Has end date passed.
+	 * 
+	 * @return bool
+	 */
+	public function has_end_date_passed() {
+		if ( empty( $this->end_date_target ) ) {
+			return false;
+		}
+
+		$end_date = strtotime( $this->end_date_target );
+		$current_date = time();
+
+		return $current_date > $end_date;
+	}
+
+	/**
 	 * Notice.
 	 * 
 	 * @return void
 	 */
 	public function notice() {
 		$dismissed_notice = $this->is_notice_dismissed();
+		$has_end_date_passed = $this->has_end_date_passed();
 
 		if( $this->only_free && defined( 'MERCHANT_PRO_VERSION' ) ) {
 			return;
 		}
 
-		if ( $dismissed_notice ) {
+		if ( $dismissed_notice || $has_end_date_passed ) {
 			return;
 		}
 
 		// Display Conditions
 		global $hook_suffix;
-		
+
 		if( ! in_array( $hook_suffix, $this->display_conditions, true ) ) {
 			return;
 		}

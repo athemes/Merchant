@@ -17,6 +17,8 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
 	public function __construct() {
 		$this->id        = 'merchant-campaign-notice';
         $this->only_free = false;
+        $this->end_date_target = '2024-12-01';
+        $this->display_conditions = array( 'toplevel_page_merchant' );
 
 		parent::__construct();
 
@@ -36,6 +38,12 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
         }
 
         $css = "
+            .toplevel_page_merchant #wpbody-content>.updated.merchant-campaign-notice, 
+            .toplevel_page_merchant #wpbody-content>.notice.merchant-campaign-notice {
+                display: block !important;
+                margin: -1px -1px 0px -20px;
+            }
+
             .merchant-campaign-notice {
                 position: relative !important;
                 background-color: #000;
@@ -142,7 +150,7 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
 
             <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/people-trust.png' ); ?>" alt="<?php echo esc_attr__( 'Ready to join 130,000+ WordPress creators who\'ve found their perfect match?', 'merchant' ); ?>" class="merchant-campaign-notice-thumbnail" />
 
-			<a class="notice-dismiss" href="?<?php echo esc_attr( $this->id ); ?>_dismiss=1" style="text-decoration:none;"></a>
+			<a class="notice-dismiss" href="?page=merchant&<?php echo esc_attr( $this->id ); ?>_dismiss=1" style="text-decoration:none;"></a>             
 		</div>
 
         <?php
