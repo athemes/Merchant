@@ -99,7 +99,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'use_strikethrough_prices',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Show strikethrough prices', 'merchant' ),
-			'default' => 0,
+			'default' => 1,
 		),
 		array(
 			'id'      => 'show_savings',

@@ -50,6 +50,31 @@ class Merchant_Floating_Mini_Cart extends Merchant_Add_Module {
 
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
+
+		// Delete a module
+		add_filter( 'merchant_modules', array( $this, 'delete_module' ) );
+	}
+
+	/**
+	 * Delete the 'floating-mini-cart' module from Merchant dashboard.
+	 *
+	 * TODO: This is a temporary fix to avoid a fatal error while merging the Floating Cart with the Side Cart.
+	 *
+	 * In a future release, remove this code and delete the `floating-mini-cart` directory and all its files from `merchant/inc/modules/`.
+	 * Also, remove the 'floating-mini-cart' entry from the `self::$modules_data` array in `merchant/inc/modules/class-add-module.php`.
+	 *
+	 * Changes was made in merchant v1.10.4
+	 *
+	 * @param array $modules
+	 *
+	 * @return array
+	 */
+	public function delete_module( $modules ) {
+		if ( isset( $modules['reduce-abandonment']['modules']['floating-mini-cart'] ) ) {
+			unset( $modules['reduce-abandonment']['modules']['floating-mini-cart'] );
+		}
+
+		return $modules;
 	}
 
 	/**

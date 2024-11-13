@@ -171,7 +171,7 @@ Merchant_Admin_Options::create(
 				'id'      => 'carousel_title',
 				'type'    => 'text',
 				'title'   => __( 'Carousel Title', 'merchant' ),
-				'default' => __( 'Review images', 'merchant' ),
+				'default' => __( 'Reviews with Photos', 'merchant' ),
 			),
 
 			// Hook Order.

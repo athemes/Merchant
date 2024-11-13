@@ -33,7 +33,7 @@ class Merchant_Notice {
 	 * 
 	 */
 	public $only_free = false;
-		
+
 	/**
 	 * The single class instance.
 	 * 
@@ -73,13 +73,22 @@ class Merchant_Notice {
 	}
 
 	/**
+	 * Get notice dismiss status.
+	 * 
+	 */
+	public function is_notice_dismissed() {
+		$user_id = get_current_user_id();
+
+		return get_user_meta( $user_id, $this->id . '_dismiss', true ) ? true : false;
+	}
+
+	/**
 	 * Notice.
 	 * 
 	 * @return void
 	 */
 	public function notice() {
-		$user_id                  = get_current_user_id();
-		$dismissed_notice         = get_user_meta( $user_id, $this->id . '_dismiss', true ) ? true : false;
+		$dismissed_notice = $this->is_notice_dismissed();
 
 		if( $this->only_free && defined( 'MERCHANT_PRO_VERSION' ) ) {
 			return;
