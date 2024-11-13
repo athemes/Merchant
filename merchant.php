@@ -3,7 +3,7 @@
  * Plugin Name: Merchant
  * Plugin URI:  https://athemes.com/merchant
  * Description: All-in-one plugin designed to help you grow your WooCommerce store. Pre-orders, Buy Now buttons, product labels, trust badges, payment logos, and more.
- * Version:     1.10.3
+ * Version:     1.10.4
  * Author:      aThemes
  * Author URI:  https://athemes.com
  * License:     GPLv3 or later License
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 6.0
- * WC tested up to: 9.3.3
+ * WC tested up to: 9.4.1
  *
  * @package Merchant
  * @since 1.0
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Merchant constants.
-define( 'MERCHANT_VERSION', '1.10.3' );
+define( 'MERCHANT_VERSION', '1.10.4' );
 define( 'MERCHANT_FILE', __FILE__ );
 define( 'MERCHANT_BASE', trailingslashit( plugin_basename( MERCHANT_FILE ) ) );
 define( 'MERCHANT_DIR', trailingslashit( plugin_dir_path( MERCHANT_FILE ) ) );
