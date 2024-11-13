@@ -146,7 +146,7 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
                 MERCHANT_URI . 'assets/images/admin/40-percent.png'
             ) ); ?></h3>
 
-            <a href="https://athemes.com/black-friday/?utm_source=plugin_notice&utm_medium=button&utm_campaign=Merchant" class="merchant-btn merchant-btn-primary" target="_blank"><?php esc_html_e( 'Give Me This Deal', 'merchant' ); ?></a>
+            <a href="https://athemes.com/black-friday/?utm_source=plugin_notice&utm_medium=button&utm_campaign=Merchant#merchant-pro" class="merchant-btn merchant-btn-primary" target="_blank"><?php esc_html_e( 'Give Me This Deal', 'merchant' ); ?></a>
 
             <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/people-trust.png' ); ?>" alt="<?php echo esc_attr__( 'Ready to join 130,000+ WordPress creators who\'ve found their perfect match?', 'merchant' ); ?>" class="merchant-campaign-notice-thumbnail" />
 
