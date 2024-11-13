@@ -150,7 +150,7 @@ if ( ! class_exists( 'Merchant_Elementor_Builder' ) ) {
 		 * @return string $css The custom CSS.
 		 */
 		public function frontend_custom_css( $css ) {
-			$css .= Merchant_Floating_Mini_Cart::get_module_custom_css();
+			$css .= Merchant_Side_Cart::get_module_custom_css();
 
 			// Quick View
 			if ( Merchant_Modules::is_module_active( Merchant_Quick_View::MODULE_ID ) ) {

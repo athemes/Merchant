@@ -124,9 +124,14 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 			add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_product_output' ) );
         } else {
 			add_action( 'woocommerce_before_shop_loop_item', array( $this, 'loop_product_output' ) );
+		}
+
+		// Ultimate Addon Elementor
+        if ( defined( 'UAEL_FILE' ) ) {
+            add_action( 'uael_woo_products_before_summary_wrap', array( $this, 'loop_product_output' ) );
         }
 
-        // Woo Block
+		// Woo Block
 		add_filter( 'woocommerce_blocks_product_grid_item_html', array( $this, 'products_block' ), 9999, 3 );
 
         // Product Single
@@ -479,6 +484,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
                 
                 .merchant-product-labels__image img {
                     box-shadow: none;
+                }
+            ';
+        }
+
+        // Ultimate addon Elementor
+        if ( defined( 'UAEL_FILE' ) ) {
+            $css .= '
+                .uael-woo-product-wrapper {
+                    position: relative;
                 }
             ';
         }

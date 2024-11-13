@@ -89,7 +89,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'background_color',
 			'type'    => 'color',
-			'title'   => esc_html__( 'Choose background Color', 'merchant' ),
+			'title'   => esc_html__( 'Background Color', 'merchant' ),
 			'default' => '#f4f6f8',
 		),
 
