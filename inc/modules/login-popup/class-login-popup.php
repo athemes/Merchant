@@ -74,6 +74,9 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			// Enqueue admin scripts.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
@@ -125,6 +128,15 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $script ) {
+		$script['is_admin'] = is_admin();
+
+		return $script;
+	}
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
@@ -149,11 +161,13 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 					),
 				)
 			);
+			$preview->set_text( 'login_link_text', '.merchant-login-popup-button' );
+
 			$preview->set_css( 'login-text-color', '.merchant-login-popup-dropdown', '--merchant-login-text-color' );
 			$preview->set_css( 'login-text-color-hover', '.merchant-login-popup-dropdown', '--merchant-login-text-color-hover' );
 			$preview->set_css( 'dropdown-background-color', '.merchant-login-popup-dropdown', '--merchant-dropdown-background-color' );
 			$preview->set_css( 'dropdown-link-color', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color' );
-			$preview->set_css( 'dropdown-link-color-hover', '#515151', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color-hover' );
+			$preview->set_css( 'dropdown-link-color-hover', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color-hover' );
 
 			$preview->set_css( 'popup-width', '.merchant-login-popup', '--merchant-popup-width', 'px' );
 			$preview->set_css( 'popup-title-color', '.merchant-login-popup', '--merchant-popup-title-color' );
