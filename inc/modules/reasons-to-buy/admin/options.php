@@ -38,7 +38,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'      => 'display_rules',
 							'type'    => 'select',
-							'title'   => esc_html__( 'Products that will display the items', 'merchant' ),
+							'title'   => esc_html__( 'Products that will display the list.', 'merchant' ),
 							'options' => array(
 								'all'        => esc_html__( 'All Products', 'merchant' ),
 								'products'   => esc_html__( 'Specific Products', 'merchant' ),
@@ -52,7 +52,7 @@ Merchant_Admin_Options::create( array(
 							'id'            => 'product_ids',
 							'type'          => 'products_selector',
 							'multiple'      => true,
-							'desc'          => esc_html__( 'Select the product(s) on which the items will appear', 'merchant' ),
+							'desc'          => esc_html__( 'Select the product(s) on which the list will appear.', 'merchant' ),
 							'condition'     => array( 'display_rules', '==', 'products' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 						),
@@ -64,7 +64,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product categories where the items will appear', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories where the list will appear.', 'merchant' ),
 							'condition'   => array( 'display_rules', '==', 'categories' ),
 						),
 
@@ -76,15 +76,15 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product tags where the items will appear', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags where the list will appear.', 'merchant' ),
 							'condition'   => array( 'display_rules', '==', 'tags' ),
 						),
 
 						array(
 							'id'         => 'exclusion_enabled',
 							'type'       => 'switcher',
-							'title'      => __( 'Exclusion List', 'merchant' ),
-							'desc'       => __( 'Select products that will not display items.', 'merchant' ),
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select products that will not display the list.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',
@@ -103,7 +103,7 @@ Merchant_Admin_Options::create( array(
 							'type'          => 'products_selector',
 							'title'         => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'      => true,
-							'desc'          => esc_html__( 'Exclude products from these items', 'merchant' ),
+							'desc'          => esc_html__( 'Exclude products from these list.', 'merchant' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 							'conditions'    => array(
 								'relation' => 'AND',
@@ -130,7 +130,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude categories from these items.', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this list.', 'merchant' ),
 							'conditions'    => array(
 								'relation' => 'AND',
 								'terms'    => array(
@@ -156,7 +156,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude tags from these items.', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude tags from this list.', 'merchant' ),
 							'conditions'    => array(
 								'relation' => 'AND',
 								'terms'    => array(
@@ -178,13 +178,11 @@ Merchant_Admin_Options::create( array(
 							'id'           => 'items',
 							'type'         => 'sortable_repeater',
 							'sorting'      => true,
-							'title'        => esc_html__( 'Items', 'merchant' ),
+							'title'        => esc_html__( 'List items', 'merchant' ),
 							'desc'         => '',
 							'button_label' => esc_html__( 'Add new item', 'merchant' ),
 							'default'      => array(
 								esc_html__( '100% Polyester.', 'merchant' ),
-								// esc_html__( 'Recycled Polyamid.', 'merchant' ),
-								// esc_html__( 'GOTS-certified organic cotton.', 'merchant' ),
 							),
 						),
 
@@ -279,7 +277,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'use_shortcode',
 			'type'    => 'switcher',
-			'title'   => __( 'Use shortcode', 'merchant' ),
+			'title'   => esc_html__( 'Use shortcode', 'merchant' ),
 			'default' => 0,
 		),
 		array(

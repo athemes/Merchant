@@ -133,11 +133,12 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
         }
 
         // Side Cart
-		if ( ! empty( $settings['enable_side_cart'] ) && merchant_is_pro_active() && ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) || Merchant_Modules::is_module_active( Merchant_Floating_Mini_Cart::MODULE_ID ) ) ) {
+		if ( ! empty( $settings['enable_side_cart'] ) && merchant_is_pro_active() && Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
             $position      = $settings['side_cart_position'] ?? 'after_view_cart';
             $hook_priority = $position === 'before_view_cart' ? 15 : ( $position === 'before_checkout' ? 30 : 9 );
 
-            add_action( 'woocommerce_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
+            // Side Cart
+            add_action( 'merchant_widget_shopping_cart_buttons', array( $this, 'button_side_cart' ), $hook_priority );
 		}
 
 		// Enqueue CSS.

@@ -2241,7 +2241,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( $inside_flexible ) {
 							static::replace_field(
 								$field,
-								isset( $args['value'][$settings['id']][ $field['id'] ] ) ? $args['value'][$settings['id']][ $field['id'] ] : $field['default'] ?? '',
+								isset( $args['value'][$settings['id']][ $field['id'] ] ) ? $args['value'][$settings['id']][ $field['id'] ] : ( $field['default'] ?? '' ),
 								"name=\"merchant[{$field['id']}]",
 								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$field['id']}]",
 								$module_id
@@ -2249,7 +2249,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						} else {
 							static::replace_field(
 								$field,
-								isset( $value[ $field['id'] ] ) ? $value[ $field['id'] ] : '',
+								isset( $value[ $field['id'] ] ) ? $value[ $field['id'] ] : ( $field['default'] ?? '' ),
 								"name=\"merchant[{$field['id']}]",
 								"name=\"merchant[{$settings['id']}][{$field['id']}]",
 								$module_id

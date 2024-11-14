@@ -1,10 +1,9 @@
 /**
- * Floating Mini Cart
+ * Side Cart
  *
  */
 
-.merchant-floating-mini-cart-icon {
-
+.merchant-side-cart-floating-cart {
 	position: fixed;
 	bottom: var(--mrc-fmci-corner-offset, 30px);
 	font-size: var(--mrc-fmci-icon-size, 25px);
@@ -31,20 +30,20 @@
 	}
 }
 
-.merchant-floating-side-mini-cart-body,
-.merchant-floating-side-mini-cart-widget {
+.merchant-side-cart-body,
+.merchant-side-cart-widget {
 	height: 100%;
 }
 
-.merchant-floating-mini-cart-icon-position-left {
+.merchant-side-cart-floating-cart-position-left {
 	left: var(--mrc-fmci-corner-offset, 30px);
 }
 
-.merchant-floating-mini-cart-icon-position-right {
+.merchant-side-cart-floating-cart-position-right {
 	right: var(--mrc-fmci-corner-offset, 30px);
 }
 
-.merchant-floating-mini-cart-icon-counter {
+.merchant-side-cart-floating-cart-counter {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -56,13 +55,12 @@
 	line-height: 1em;
 	width: 22px;
 	height: 22px;
-	color: #fff;
 	color: var(--mrc-fmci-counter-color, #fff);
 	background-color: var(--mrc-fmci-counter-background-color, #757575);
 	box-sizing: border-box;
 }
 
-.merchant-floating-mini-cart-icon-icon {
+.merchant-side-cart-floating-cart-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -79,7 +77,7 @@
 	}
 }
 
-.merchant-floating-side-mini-cart-overlay {
+.merchant-side-cart-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -95,7 +93,7 @@
 	z-index: 100000;
 }
 
-.merchant-floating-side-mini-cart {
+.merchant-side-cart {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -118,27 +116,17 @@
 		box-sizing: border-box;
 	}
 
-	.mrc-fbt-savings-total-mini-cart {
-		order: unset;
-		padding-inline: 30px;
+	.merchant-side-cart-savings {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 30px;
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
-
-		strong {
-			font-weight: 400;
-		}
+		line-height: 1;
 	}
 
-	.woocommerce-mini-cart__total.total {
-		display: none;
-	}
-
-	.merchant-freespb-wrapper {
-		.merchant-freespb-text {
-			margin-bottom: 0 !important;
-		}
-
-		.merchant-freespb-progress-bar-wrapper {
-			margin-top: var(--free-shipping-bar-card-margin-bottom);
+	ul.woocommerce-mini-cart {
+		.merchant-freespb-wrapper {
+			margin-bottom: 20px;
 		}
 	}
 }
@@ -149,7 +137,7 @@
 	display: none;
 }
 
-.merchant-floating-side-mini-cart-widget {
+.merchant-side-cart-widget {
 
 	.product_list_widget {
 		flex: 1;
@@ -305,7 +293,7 @@
 			}
 
 			// Show on Side Cart
-			.merchant-floating-side-mini-cart {
+			.merchant-side-cart {
 				.merchant-quantity {
 					&-wrap,
 					&-plus,
@@ -573,17 +561,21 @@
 		-webkit-box-pack: justify;
 		-ms-flex-pack: justify;
 		justify-content: space-between;
+		gap: 5px;
 		line-height: 1em;
 		border: none;
 		background-color: var(--mrc-fmci-side-cart-total-background-color, #f5f5f5);
 
 		input {
+			flex: 1;
 			height: 50px;
+			padding: 10px;
 		}
 
 		button {
 			padding: 3px 10px;
 			line-height: 1.4;
+			white-space: nowrap;
 		}
 
 		.overlay {
@@ -675,13 +667,13 @@
 }
 
 .rtl {
-	.merchant-floating-side-mini-cart-widget .product_list_widget li a.remove {
+	.merchant-side-cart-widget .product_list_widget li a.remove {
 		left: unset;
 		right: -8px;
 	}
 }
 
-.merchant-floating-side-mini-cart-widget-title {
+.merchant-side-cart-widget-title {
 	font-size: 22px;
 	line-height: 33px;
 	padding: 13px 35px;
@@ -691,13 +683,14 @@
 	background-color: var(--mrc-fmci-side-cart-title-background-color, #cccccc);
 }
 
-.merchant-floating-side-mini-cart-widget > .widget_shopping_cart_content {
+.merchant-side-cart-widget > .widget_shopping_cart_content,
+.merchant-side-cart-widget > .merchant_widget_shopping_cart_content {
 	height: calc(100% - 58px);
 	display: flex;
 	flex-direction: column;
 }
 
-.merchant-floating-side-mini-cart-close-button {
+.merchant-side-cart-close-button {
 	position: absolute;
 	z-index: 10;
 	top: 20px;
@@ -716,16 +709,16 @@
 	}
 }
 
-.merchant-floating-side-mini-cart-show {
+.merchant-side-cart-show {
 	overflow: hidden;
 
-	.merchant-floating-side-mini-cart-overlay {
+	.merchant-side-cart-overlay {
 		opacity: 0.5;
 		visibility: visible;
 		pointer-events: auto;
 	}
 
-	.merchant-floating-side-mini-cart {
+	.merchant-side-cart {
 		transform: none;
 	}
 }
@@ -738,6 +731,7 @@
 		text-align: center;
 		margin-top: 0;
 		font-weight: 700;
+		margin-block: 0 15px;
 	}
 
 	// Wrapper for each upsell item
@@ -849,15 +843,15 @@
 }
 
 // Show the merchant upsell widget only within the floating side mini cart
-.merchant-floating-side-mini-cart-body {
+.merchant-side-cart-body {
 	.merchant-upsell-widget {
 		display: block !important;
 	}
 }
 
 .rtl {
-	.merchant-floating-side-mini-cart {
-		.merchant-floating-side-mini-cart-close-button {
+	.merchant-side-cart {
+		.merchant-side-cart-close-button {
 			left: 30px;
 			right: auto;
 		}

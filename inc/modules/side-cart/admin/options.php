@@ -17,22 +17,22 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'show_after_add_to_cart',
 			'type'    => 'switcher',
-			'title'   => __( 'Shop Page', 'merchant' ),
-			'desc'    => __( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
+			'title'   => esc_html__( 'Shop Page', 'merchant' ),
+			'desc'    => esc_html__( 'Show side cart after adding product to the cart from shop archive page', 'merchant' ),
 			'default' => 1,
 		),
 		array(
 			'id'      => 'show_after_add_to_cart_single_product',
 			'type'    => 'switcher',
-			'title'   => __( 'Product Page', 'merchant' ),
-			'desc'    => __( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
+			'title'   => esc_html__( 'Product Page', 'merchant' ),
+			'desc'    => esc_html__( 'Display side cart after adding product to the cart from product single page', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'show_on_cart_url_click',
 			'type'    => 'switcher',
-			'title'   => __( 'Cart Icons', 'merchant' ),
-			'desc'    => __( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
+			'title'   => esc_html__( 'Cart Icons', 'merchant' ),
+			'desc'    => esc_html__( 'Show side cart when a user clicks on the cart URL or menu items', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -41,20 +41,20 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Cart position', 'merchant' ),
 			'options' => array(
 				'right' => esc_html__( 'Slide from right', 'merchant' ),
-				'left' => esc_html__( 'Slide from left', 'merchant' ),
+				'left'  => esc_html__( 'Slide from left', 'merchant' ),
 			),
 			'default' => 'right',
 		),
 		array(
 			'id'      => 'use_discount_codes',
 			'type'    => 'switcher',
-			'title'   => __( 'Show discount codes input', 'merchant' ),
+			'title'   => esc_html__( 'Show discount codes input', 'merchant' ),
 			'default' => 0,
 		),
 		array(
 			'id'      => 'show_checkout_btn',
 			'type'    => 'switcher',
-			'title'   => __( 'Show checkout button', 'merchant' ),
+			'title'   => esc_html__( 'Show checkout button', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -76,7 +76,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'show_view_cart_btn',
 			'type'    => 'switcher',
-			'title'   => __( 'Show view cart button', 'merchant' ),
+			'title'   => esc_html__( 'Show view cart button', 'merchant' ),
 			'default' => 1,
 		),
 		array(
@@ -98,13 +98,13 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'use_strikethrough_prices',
 			'type'    => 'switcher',
-			'title'   => __( 'Show strikethrough prices', 'merchant' ),
-			'default' => 0,
+			'title'   => esc_html__( 'Show strikethrough prices', 'merchant' ),
+			'default' => 1,
 		),
 		array(
 			'id'      => 'show_savings',
 			'type'    => 'switcher',
-			'title'   => __( 'Show cart savings', 'merchant' ),
+			'title'   => esc_html__( 'Show cart savings', 'merchant' ),
 			'default' => 0,
 		),
 		array(
@@ -120,6 +120,7 @@ Merchant_Admin_Options::create( array(
 	),
 ) );
 
+// Upsells
 Merchant_Admin_Options::create( array(
 	'module' => Merchant_Side_Cart::MODULE_ID,
 	'title'  => esc_html__( 'Upsells', 'merchant' ),
@@ -127,8 +128,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'use_upsells',
 			'type'    => 'switcher',
-			'title'   => __( 'Cart Upsells', 'merchant' ),
-			'desc'    => __( 'Enable upsell products in the side cart', 'merchant' ),
+			'title'   => esc_html__( 'Cart Upsells', 'merchant' ),
+			'desc'    => esc_html__( 'Enable upsell products in the side cart', 'merchant' ),
 			'default' => 0,
 		),
 		array(
@@ -240,8 +241,8 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'         => 'exclusion_toggle',
 							'type'       => 'switcher',
-							'title'      => __( 'Exclusion List', 'merchant' ),
-							'desc'       => __( 'Select products that will not display upsells.', 'merchant' ),
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select products that will not display upsells.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
@@ -375,10 +376,9 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 
-
 		array(
 			'id'         => 'upsells_products_count_limitation_toggle',
-			'label'      => __( 'Limit the number of upsells in the cart', 'merchant' ),
+			'label'      => esc_html__( 'Limit the number of upsells in the cart', 'merchant' ),
 			'type'       => 'checkbox',
 			'default'    => 0,
 			'conditions' => array(
@@ -394,7 +394,7 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'id'         => 'upsells_products_count_limitation',
-			'title'      => __( 'Maximum number of upsells to display', 'merchant' ),
+			'title'      => esc_html__( 'Maximum number of upsells to display', 'merchant' ),
 			'type'       => 'number',
 			'default'    => 5,
 			'min'        => 1,
@@ -417,9 +417,9 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'id'         => 'upsells_title',
-			'title'      => __( 'Upsell title', 'merchant' ),
+			'title'      => esc_html__( 'Upsell title', 'merchant' ),
 			'type'       => 'text',
-			'default'    => __( 'You might also like', 'merchant' ),
+			'default'    => esc_html__( 'You might also like', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -433,9 +433,9 @@ Merchant_Admin_Options::create( array(
 		),
 		array(
 			'id'         => 'upsells_add_to_cart_text',
-			'title'      => __( 'Button text', 'merchant' ),
+			'title'      => esc_html__( 'Button text', 'merchant' ),
 			'type'       => 'text',
-			'default'    => __( 'Add', 'merchant' ),
+			'default'    => esc_html__( 'Add', 'merchant' ),
 			'conditions' => array(
 				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 				'terms'    => array(
@@ -470,10 +470,132 @@ Merchant_Admin_Options::create( array(
 	),
 ) );
 
+// Floating Mini Cart
+Merchant_Admin_Options::create( array(
+	'module' => Merchant_Side_Cart::MODULE_ID,
+	'title'  => esc_html__( 'Floating Mini Cart', 'merchant' ),
+	'fields' => array(
+		array(
+			'id'      => 'enable-floating-cart',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Floating cart', 'merchant' ),
+			'desc'    => esc_html__( 'Enable floating cart icon', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'        => 'icon-display',
+			'type'      => 'select',
+			'title'     => esc_html__( 'Display', 'merchant' ),
+			'options'   => array(
+				'cart-not-empty' => esc_html__( 'When cart is not empty', 'merchant' ),
+				'always'         => esc_html__( 'Always', 'merchant' ),
+			),
+			'default'   => 'always',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon',
+			'type'      => 'choices',
+			'title'     => esc_html__( 'Icon', 'merchant' ),
+			'options'   => array(
+				'cart-icon-1' => MERCHANT_URI . 'assets/images/icons/side-cart/admin/cart-icon-1.svg',
+				'cart-icon-2' => MERCHANT_URI . 'assets/images/icons/side-cart/admin/cart-icon-2.svg',
+				'cart-icon-3' => MERCHANT_URI . 'assets/images/icons/side-cart/admin/cart-icon-3.svg',
+				'cart-icon-4' => MERCHANT_URI . 'assets/images/icons/side-cart/admin/cart-icon-4.svg',
+				'cart-icon-5' => MERCHANT_URI . 'assets/images/icons/side-cart/admin/cart-icon-5.svg',
+			),
+			'default'   => 'cart-icon-1',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-position',
+			'type'      => 'radio',
+			'title'     => esc_html__( 'Position', 'merchant' ),
+			'options'   => array(
+				'left'  => esc_html__( 'Left', 'merchant' ),
+				'right' => esc_html__( 'Right', 'merchant' ),
+			),
+			'default'   => 'right',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-size',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Icon size', 'merchant' ),
+			'min'       => 0,
+			'max'       => 250,
+			'step'      => 1,
+			'default'   => 25,
+			'unit'      => 'px',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-corner-offset',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Corner offset', 'merchant' ),
+			'min'       => 0,
+			'max'       => 250,
+			'step'      => 1,
+			'default'   => 30,
+			'unit'      => 'px',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-border-radius',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Border radius', 'merchant' ),
+			'min'       => 0,
+			'max'       => 35,
+			'step'      => 1,
+			'default'   => 35,
+			'unit'      => 'px',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Icon color', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-background-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Background color', 'merchant' ),
+			'default'   => '#212121',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-counter-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Counter color', 'merchant' ),
+			'default'   => '#ffffff',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+
+		array(
+			'id'        => 'icon-counter-background-color',
+			'type'      => 'color',
+			'title'     => esc_html__( 'Counter background color', 'merchant' ),
+			'default'   => '#757575',
+			'condition' => array( 'enable-floating-cart', '==', '1' ),
+		),
+	),
+) );
+
 // Side Cart Settings
 Merchant_Admin_Options::create( array(
+	'module' => Merchant_Side_Cart::MODULE_ID,
 	'title'  => esc_html__( 'Look and Feel', 'merchant' ),
-	'module' => 'floating-mini-cart',
 	'fields' => array(
 
 		array(
@@ -591,6 +713,5 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Button background color hover', 'merchant' ),
 			'default' => '#313131',
 		),
-
 	),
 ) );

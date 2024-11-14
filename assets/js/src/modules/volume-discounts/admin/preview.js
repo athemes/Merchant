@@ -20,8 +20,11 @@
             titleTextFontSize = layout.find('.merchant-field-title_font_size input').val(),
             titleTextFontWeight = layout.find('.merchant-field-title_font_weight select').val(),
             bgColor = layout.find('.merchant-field-table_item_bg_color input').val(),
+            bgColorHover = layout.find('.merchant-field-table_item_bg_color_hover input').val(),
             borderColor = layout.find('.merchant-field-table_item_border_color input').val(),
+            borderColorHover = layout.find('.merchant-field-table_item_border_color_hover input').val(),
             textColor = layout.find('.merchant-field-table_item_text_color input').val(),
+            textColorHover = layout.find('.merchant-field-table_item_text_color_hover input').val(),
             labelBgColor = layout.find('.merchant-field-table_label_bg_color input').val(),
             labelTextColor = layout.find('.merchant-field-table_label_text_color input').val(),
             discountType = layout.find('.merchant-field-discount_type input:checked').val(),
@@ -44,18 +47,24 @@
             'font-size': titleTextFontSize + 'px',
             'font-weight': titleTextFontWeight
         }).html(titleText);
+
+        console.log(bgColorHover)
+
         $('.merchant-volume-discounts-item').css({
-            'border-color': borderColor,
-            'background-color': bgColor,
-            'color': textColor
+            '--merchant-item-text-color': textColor,
+            '--merchant-item-text-color-hover': textColorHover || textColor,
+            '--merchant-item-bg-color': bgColor,
+            '--merchant-item-bg-color-hover': bgColorHover || bgColor,
+            '--merchant-item-border-color': borderColor,
+            '--merchant-item-border-color-hover': borderColorHover || borderColor,
         });
 
         const $saveLabelPreview = $( '.merchant-volume-discounts-item-label' );
         const $buyLabelPreview = $( '.merchant-volume-discounts-buy-label' );
 
         $saveLabelPreview.find( 'span:first' ).css({
-            'background-color': labelBgColor,
-            'color': labelTextColor
+            '--merchant-label-text-color': labelTextColor,
+            '--merchant-label-bg-color': labelBgColor
         });
 
         const currency = $saveLabelPreview.closest( '.mrc-preview-right-column' ).attr( 'data-currency' );

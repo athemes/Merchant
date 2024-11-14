@@ -171,7 +171,7 @@ Merchant_Admin_Options::create(
 				'id'      => 'carousel_title',
 				'type'    => 'text',
 				'title'   => __( 'Carousel Title', 'merchant' ),
-				'default' => __( 'Review images', 'merchant' ),
+				'default' => __( 'Reviews with Photos', 'merchant' ),
 			),
 
 			// Hook Order.
@@ -301,15 +301,14 @@ Merchant_Admin_Options::create(
 				'id'      => 'days_after_order_complete',
 				'type'    => 'number',
 				'title'   => esc_html__( 'After the order is completed, send the review request after the following number of days', 'merchant' ),
-				'desc'    => esc_html__( 'The emails will be sent to orders that have been completed.', 'merchant' ),
-				'default' => '3',
+				'desc'    => esc_html__( 'The emails will be sent for orders that have been completed.', 'merchant' ),
+				'default' => 7,
 			),
 			array(
 				'id'      => 'discount_toggle',
 				'type'    => 'switcher',
 				'title'   => __( 'Discount for reviews', 'merchant' ),
-				'desc'    => __( 'An email containing a discount coupon will be sent to the customer after they leave a review on the store. The email will be sent to the address associated with their review.',
-					'merchant' ),
+				'desc'    => __( 'After a customer leaves a review on the store, an email containing a discount coupon will be sent to the email address associated with their order.', 'merchant' ),
 				'default' => 0,
 			),
 			array(
@@ -503,7 +502,7 @@ Merchant_Admin_Options::create(
 				'title'          => esc_html__( 'Review request', 'merchant' ),
 				'sub-desc'       => esc_html__( 'Encourage your customers to leave a review with automated emails.', 'merchant' ),
 				'state'          => 'open',
-				'default'        => 'active',
+				'default'        => 'inactive',
 				'accordion'      => true,
 				'display_status' => true,
 				'fields'         => array(
@@ -511,12 +510,12 @@ Merchant_Admin_Options::create(
 						'id'          => 'subject',
 						'type'        => 'text',
 						'title'       => __( 'Subject', 'merchant' ),
-						'default'     => __( 'Enjoying your recent purchase?', 'merchant' ),
+						'default'     => __( 'How did we do?', 'merchant' ),
 						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays the customer’s order id<br><strong>%4$s</strong> and <strong>%5$s:</strong> These tags are used together to create a clickable link that directs the customer to their order page, where they can submit a review.<br><br><strong>Example usage:</strong><br>Please click {order_url_open}here{order_url_close} to leave a review for your recent order.',
 								'merchant'
 							),
 							'{first_name}',
@@ -530,13 +529,20 @@ Merchant_Admin_Options::create(
 						'id'          => 'body',
 						'type'        => 'textarea_multiline',
 						'title'       => __( 'Body', 'merchant' ),
-						'default'     => __( 'Hello {first_name}, We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.
-Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
+						'default'     => __( 'Hello {first_name},
+
+We hope you’re enjoying your recent purchase from us. 
+
+We would be grateful if you could take a moment to share your experience by leaving a review.
+
+Your feedback helps us improve and provides valuable insights for other customers. Please click {order_url_open}here{order_url_close} to submit your review.
+
+Best regards,', 'merchant' ),
 						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays the customer’s order id<br><strong>%4$s</strong> and <strong>%5$s:</strong> These tags are used together to create a clickable link that directs the customer to their order page, where they can submit a review.<br><br><strong>Example usage:</strong><br>Please click {order_url_open}here{order_url_close} to leave a review for your recent order.',
 								'merchant'
 							),
 							'{first_name}',
@@ -606,18 +612,18 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'id'      => 'days_after_first_email',
 						'type'    => 'number',
 						'title'   => esc_html__( 'After the first email, send the review request reminder after the following number of days', 'merchant' ),
-						'default' => '3',
+						'default' => 7,
 					),
 					array(
 						'id'          => 'subject',
 						'type'        => 'text',
 						'title'       => __( 'Subject', 'merchant' ),
-						'default'     => __( 'Order {order_id}, how did it go?', 'merchant' ),
+						'default'     => __( 'We value your feedback', 'merchant' ),
 						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays the customer’s order id<br><strong>%4$s</strong> and <strong>%5$s:</strong> These tags are used together to create a clickable link that directs the customer to their order page, where they can submit a review.<br><br><strong>Example usage:</strong><br>Please click {order_url_open}here{order_url_close} to leave a review for your recent order.',
 								'merchant'
 							),
 							'{first_name}',
@@ -632,13 +638,19 @@ Check your order {order_url_open}here{order_url_close}.', 'merchant' ),
 						'type'        => 'textarea_multiline',
 						'title'       => __( 'Body', 'merchant' ),
 						'default'     => __( 'Hello {first_name},
-						
-We would be grateful if you shared how things look and feel. Your review helps us and the community that supports us, and it only takes a few seconds.', 'merchant' ),
+
+We hope you’re enjoying your recent purchase from us. 
+
+We would be grateful if you could take a moment to share your experience by leaving a review.
+
+Your feedback helps us improve and provides valuable insights for other customers. Please click {order_url_open}here{order_url_close} to submit your review.
+
+Best regards,', 'merchant' ),
 						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show order id<br><strong>%4$s:</strong> to show the opening order URL<br><strong>%5$s:</strong> to show the closing order URL',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays the customer’s order id<br><strong>%4$s</strong> and <strong>%5$s:</strong> These tags are used together to create a clickable link that directs the customer to their order page, where they can submit a review.<br><br><strong>Example usage:</strong><br>Please click {order_url_open}here{order_url_close} to leave a review for your recent order.',
 								'merchant'
 							),
 							'{first_name}',
@@ -700,7 +712,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 				'title'          => esc_html__( 'Discount for review', 'merchant' ),
 				'sub-desc'       => esc_html__( 'Send customers a next-purchase code after submitting a review.', 'merchant' ),
 				'state'          => 'closed',
-				'default'        => 'active',
+				'default'        => 'inactive',
 				'accordion'      => true,
 				'display_status' => true,
 				'fields'         => array(
@@ -708,12 +720,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'id'          => 'subject',
 						'type'        => 'text',
 						'title'       => __( 'Subject', 'merchant' ),
-						'default'     => __( 'Your discount is ready', 'merchant' ),
+						'default'     => __( 'Your discount code is inside', 'merchant' ),
 						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays discount code',
 								'merchant'
 							),
 							'{first_name}',
@@ -725,13 +737,12 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'id'          => 'body',
 						'type'        => 'textarea_multiline',
 						'title'       => __( 'Body', 'merchant' ),
-						'default'     => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.',
-							'merchant' ),
+						'default'     => __( 'Hello {first_name}, We would like to let you know that you are eligible to receive a discount on your next purchase. Here is your discount code: {discount_code}.', 'merchant' ),
 						'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays discount code',
 								'merchant'
 							),
 							'{first_name}',
@@ -765,7 +776,7 @@ We would be grateful if you shared how things look and feel. Your review helps u
 				'title'          => esc_html__( 'Review discount reminder', 'merchant' ),
 				'sub-desc'       => esc_html__( 'Remind your customers to use their next-purchase discount if they haven\'t used it yet.', 'merchant' ),
 				'state'          => 'closed',
-				'default'        => 'active',
+				'default'        => 'inactive',
 				'accordion'      => true,
 				'display_status' => true,
 				'fields'         => array(
@@ -773,18 +784,18 @@ We would be grateful if you shared how things look and feel. Your review helps u
 						'id'      => 'days_after_first_email',
 						'type'    => 'number',
 						'title'   => esc_html__( 'After the first email, send the discount reminder after the following number of days', 'merchant' ),
-						'default' => '3',
+						'default' => 7,
 					),
 					array(
 						'id'          => 'subject',
 						'type'        => 'text',
 						'title'       => __( 'Subject', 'merchant' ),
-						'default'     => __( 'Your discount is waiting for you', 'merchant' ),
+						'default'     => __( 'A reminder to to use your discount', 'merchant' ),
 						'desc'        => __( 'Be concise, avoid CAPS and !s, and use emojis sparingly.', 'merchant' ),
 						'hidden_desc' => sprintf(
 						/* Translators: %1$s: Discount percentage, %2$s: Discount amount, %3$s: In Stock, %4$s: Total quantity */
 							__(
-								'<strong>%1$s:</strong> to show customer first name<br><strong>%2$s:</strong> to show customer last name<br><strong>%3$s:</strong> to show the discount code',
+								'<strong>%1$s:</strong> displays the customer’s first name<br><strong>%2$s:</strong> displays the customer’s last name<br><strong>%3$s:</strong> displays discount code',
 								'merchant'
 							),
 							'{first_name}',
