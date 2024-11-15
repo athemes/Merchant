@@ -185,8 +185,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-recently-viewed-products/',
 				),
 
-				// Boost Revenue.
-
 				// Reduce Cart Abandonment.
 				'buy-now' => array(
 					'pro' => false,
@@ -319,14 +317,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Real-Time Search', 'merchant' ),
 					'desc' => esc_html__( 'Help visitors instantly find the products they\'re looking for by using predictive search', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/real-time-search/',
-				),
-				'code-snippets' => array(
-					'pro' => false,
-					'section' => 'improve-experience',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-code-snippets' ),
-					'title' => esc_html__( 'Code Snippets', 'merchant' ),
-					'desc' => esc_html__( 'Add code snippets in WordPress without having to edit your theme\'s functions.php file ', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/code-snippets/',
 				),
 				'scroll-to-top-button' => array(
 					'pro' => false,
