@@ -47,95 +47,363 @@ Merchant_Admin_Options::create( array(
 ) );
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Add To Cart Settings', 'merchant' ),
+	'title'  => esc_html__( 'Notifications control', 'merchant' ),
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'      => 'show_add_to_cart_events',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show Add To Cart events', 'merchant' ),
-			'desc'    => esc_html__( 'Show notifications for products added to cart. This is especially useful if you don\'t have orders yet but you still want to show the activity on your store.',
-				'merchant' ),
-			'default' => true,
-		),
-		array(
-			'id'      => 'show_grouped_add_to_cart_events',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show grouped Add To Cart events', 'merchant' ),
-			'desc'    => esc_html__( 'Show events such as: "13 people added this product to cart today:”', 'merchant' ),
-			'default' => true,
-		),
-		array(
-			'id'      => 'minumum_add_to_cart_for_group_notification',
-			'type'    => 'number',
-			'title'   => esc_html__( 'Minimum number of add to carts for group notifications', 'merchant' ),
-			'desc'    => esc_html__( 'Set the number of times a product must be added to cart in one day, for a group notification to be triggered', 'merchant' ),
-			'default' => '10',
-		),
-		array(
-			'id'          => 'group_notification_template',
-			'type'        => 'text',
-			'title'       => esc_html__( '"Add To Cart" group notification template', 'merchant' ),
-			'desc'        => esc_html__( 'Eg.: "12 people added this product to cart today:" Do not modify the text to present fake data.', 'merchant' ),
-			'placeholder' => esc_html__( '{{count}} people added this product to cart today:', 'merchant' ),
-		),
-	),
-) );
+			'id'             => 'product_purchases_count',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Product purchases count', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of customers who have purchased a product.', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'minimum_purchases',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Minimum number of purchases required', 'merchant' ),
+					'desc'    => esc_html__( 'Set the minimum number of times a product must be purchased in period, for a notification to be triggered', 'merchant' ),
+					'default' => '5',
+					'min'     => '1',
+				),
+				array(
+					'id'      => 'number_of_days',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Number of days', 'merchant' ),
+					'desc'    => esc_html__( 'Search for orders within the last number of days', 'merchant' ),
+					'default' => '7',
+					'min'     => '1',
+				),
+				array(
+					'id'          => 'template_singular',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Singular Template', 'merchant' ),
+					'desc'        => esc_html__( 'Singular template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} customer bought this product in the last 7 days', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
 
-Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Other Settings', 'merchant' ),
-	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
-	'fields' => array(
-		array(
-			'id'      => 'show_customer_names',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show customer names', 'merchant' ),
-			'desc'    => esc_html__( 'If you are based in the EU or you have customers from the EU, we recommend you deselect this option, for GDPR purposes.',
-				'merchant' ),
-			'default' => true,
+				// Plural template for displaying the number of customers who have purchased a product in a period
+				array(
+					'id'          => 'template_plural',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Plural Template', 'merchant' ),
+					'desc'        => esc_html__( 'Plural template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} customers bought this product in the last 7 days', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+			),
 		),
 		array(
-			'id'      => 'show_customer_location',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show the customer\'s location', 'merchant' ),
-			'default' => true,
+			'id'             => 'single_product_purchase',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Single product purchase', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display notification when someone purchases a product', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'time_span',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Timespan', 'merchant' ),
+					'desc'    => esc_html__( 'Number of time units to display the a customers who have purchased a product.', 'merchant' ),
+					'default' => '7',
+				),
+				array(
+					'id'      => 'time_unit',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Time unit', 'merchant' ),
+					'options' => array(
+						'YEAR'   => esc_html__( 'Years', 'merchant' ),
+						'MONTH'  => esc_html__( 'Months', 'merchant' ),
+						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
+						'DAY'    => esc_html__( 'Days', 'merchant' ),
+						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
+						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
+					),
+					'default' => 'DAY',
+				),
+				array(
+					'id'      => 'hide_date_for_old_events_than',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Hide date for old events than (days)', 'merchant' ),
+					'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
+					'default' => '5',
+				),
+				array(
+					'id'          => 'template_full_data',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Full Data Template', 'merchant' ),
+					'desc'        => esc_html__( 'Text template when name, country, and city are available.', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} in {country_code}, {city} purchased', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: {customer_name}, %2$s: {country_code}, %3$s: {city} */
+						__(
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name<br>
+<strong>%2$s:</strong> displays the customer’s country<br>
+<strong>%3$s:</strong> displays the customer’s city',
+							'merchant'
+						),
+						'{customer_name}',
+						'{country_code}',
+						'{city}'
+					),
+				),
+
+				// Text template when only the name is available
+				array(
+					'id'          => 'template_name_only',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Name Only Template', 'merchant' ),
+					'desc'        => esc_html__( 'Text template when only name is available', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} purchased', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: {customer_name} */
+						__(
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name',
+							'merchant'
+						),
+						'{customer_name}'
+					),
+				),
+
+				// Fallback text template when no specific data is available
+				array(
+					'id'      => 'template_no_data',
+					'type'    => 'text',
+					'label'   => esc_html__( 'Fallback Template', 'merchant' ),
+					'desc'    => esc_html__( 'Text template when no customer data is available.', 'merchant' ),
+					'default' => esc_html__( 'Someone purchased', 'merchant' ),
+				),
+			),
 		),
 		array(
-			'id'      => 'open_links_in_new_tab',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Open links in new tab', 'merchant' ),
-			'desc'    => esc_html__( 'When the visitor clicks on the Recent Sales widget, you can choose to open the link in a new tab or the current tab.',
-				'merchant' ),
-			'default' => true,
+			'id'             => 'product_carts_count',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Product grouped add to cart (To Be Implemented)', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of customers who have added a product to cart.', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'minimum_count',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Minimum number of add to carts required', 'merchant' ),
+					'desc'    => esc_html__( 'Set the minimum number of times a product must be added to cart in period, for a notification to be triggered', 'merchant' ),
+					'default' => '2',
+					'min'     => '1',
+				),
+				array(
+					'id'      => 'number_of_days',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Number of days', 'merchant' ),
+					'desc'    => esc_html__( 'Search for add to cart events within the last number of days', 'merchant' ),
+					'default' => '1',
+					'min'     => '1',
+				),
+				array(
+					'id'          => 'template_singular',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Singular Template', 'merchant' ),
+					'desc'        => esc_html__( 'Singular text for displaying the number of customers who have added a product in their cart in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} people added this product to cart today', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+
+				// Plural template for displaying the number of customers who have purchased a product in a period
+				array(
+					'id'          => 'template_plural',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Plural Template', 'merchant' ),
+					'desc'        => esc_html__( 'Plural text for displaying the number of customers who have added a product in their cart in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} people added this product to cart today', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+			),
 		),
 		array(
-			'id'      => 'show_verified_badge',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show "Verified by aThemes" badge', 'merchant' ),
-			'desc'    => esc_html__( 'If enabled, it will show a Verified by aThemes badge in the popup. This will create an extra sense of trust for your visitors.',
-				'merchant' ),
-			'default' => true,
+			'id'             => 'single_product_add_to_cart',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Single product add to cart', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display notification when someone adds a product to cart', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'time_span',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Timespan', 'merchant' ),
+					'desc'    => esc_html__( 'Number of time units to display the a customers who have add a product to cart.', 'merchant' ),
+					'default' => '2',
+				),
+				array(
+					'id'      => 'time_unit',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Time unit', 'merchant' ),
+					'options' => array(
+						'YEAR'   => esc_html__( 'Years', 'merchant' ),
+						'MONTH'  => esc_html__( 'Months', 'merchant' ),
+						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
+						'DAY'    => esc_html__( 'Days', 'merchant' ),
+						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
+						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
+					),
+					'default' => 'HOUR',
+				),
+				array(
+					'id'      => 'hide_date_for_old_events_than',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Hide date for old events than (days)', 'merchant' ),
+					'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
+					'default' => '5',
+				),
+				array(
+					'id'          => 'template_full_data',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Full Data Template', 'merchant' ),
+					'desc'        => esc_html__( 'Text template when name, country, and city are available.', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} in {country_code}, {city} added to cart', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: {customer_name}, %2$s: {country_code}, %3$s: {city} */
+						__(
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name<br>
+<strong>%2$s:</strong> displays the customer’s country<br>
+<strong>%3$s:</strong> displays the customer’s city',
+							'merchant'
+						),
+						'{customer_name}',
+						'{country_code}',
+						'{city}'
+					),
+				),
+
+				// Text template when only the name is available
+				array(
+					'id'          => 'template_name_only',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Name Only Template', 'merchant' ),
+					'desc'        => esc_html__( 'Text template when only name is available', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} added to cart', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: {customer_name} */
+						__(
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name',
+							'merchant'
+						),
+						'{customer_name}'
+					),
+				),
+
+				// Fallback text template when no specific data is available
+				array(
+					'id'      => 'template_no_data',
+					'type'    => 'text',
+					'label'   => esc_html__( 'Fallback Template', 'merchant' ),
+					'desc'    => esc_html__( 'Text template when no customer data is available.', 'merchant' ),
+					'default' => esc_html__( 'Someone added to cart', 'merchant' ),
+				),
+			),
 		),
 		array(
-			'id'      => 'show_order_time_ago',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show when the order was placed', 'merchant' ),
-			'desc'    => esc_html__( 'Eg.: "2 hours ago"', 'merchant' ),
-			'default' => true,
-		),
-		array(
-			'id'      => 'hide_date_for_old_events_than',
-			'type'    => 'number',
-			'title'   => esc_html__( 'Hide the date for events older than (days)', 'merchant' ),
-			'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
-			'default' => '1',
-		),
-		array(
-			'id'      => 'dont_show_events_older_than',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Don\'t show events older than (days)', 'merchant' ),
-			'desc'    => esc_html__( 'If no events are found in the selected period, no notifications will be displayed.', 'merchant' ),
-			'default' => '60',
+			'id'             => 'product_views_settings',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Product views', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of times a product has been viewed in a period.', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'time_span',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Timespan', 'merchant' ),
+					'desc'    => esc_html__( 'Number of time units to display the a customers who have viewed a product.', 'merchant' ),
+					'default' => '7',
+				),
+				array(
+					'id'      => 'time_unit',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Time unit', 'merchant' ),
+					'options' => array(
+						'YEAR'   => esc_html__( 'Years', 'merchant' ),
+						'MONTH'  => esc_html__( 'Months', 'merchant' ),
+						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
+						'DAY'    => esc_html__( 'Days', 'merchant' ),
+						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
+						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
+					),
+					'default' => 'DAY',
+				),
+				array(
+					'id'          => 'template_singular',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Singular Template', 'merchant' ),
+					'desc'        => esc_html__( 'Singular template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} people viewed today', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+
+				// Plural template for displaying the number of customers who have purchased a product in a period
+				array(
+					'id'          => 'template_plural',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Plural Template', 'merchant' ),
+					'desc'        => esc_html__( 'Plural template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} people viewed today', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+			),
 		),
 	),
 ) );
