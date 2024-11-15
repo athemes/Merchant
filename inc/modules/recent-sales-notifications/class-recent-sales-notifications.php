@@ -30,7 +30,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$this->module_id = self::MODULE_ID;
 
 			// WooCommerce only.
-			$this->wc_only           = true;
+			$this->wc_only = true;
 
 			// Module section.
 			$this->module_section = 'convert-more';
@@ -47,6 +47,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			}
 
 			if ( is_admin() && parent::is_module_settings_page() ) {
+				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_assets' ) );
 				// Admin preview box.
 				add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 			}
@@ -67,7 +68,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		 * Render admin preview
 		 *
 		 * @param Merchant_Admin_Preview $preview
-		 * @param string $module
+		 * @param string                 $module
 		 *
 		 * @return Merchant_Admin_Preview
 		 */
@@ -78,6 +79,10 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			}
 
 			return $preview;
+		}
+
+		public function admin_enqueue_assets() {
+			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
 		}
 	}
 }
