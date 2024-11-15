@@ -388,6 +388,13 @@ const styles = [
 		destination: './assets/css/modules/frequently-bought-together',
 	},
 
+	//recent-sales-notifications
+	{
+		name: 'recentSalesNotificationsAdmin',
+		src: './assets/sass/modules/recent-sales-notifications/admin/preview.scss',
+		destination: './assets/css/modules/recent-sales-notifications/admin',
+	},
+
 	// Login Popups.
 	{
 		name: 'loginPopupsAdmin',
