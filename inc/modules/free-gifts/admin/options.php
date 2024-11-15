@@ -38,12 +38,23 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Products that can be purchased to claim the gift', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'All products', 'merchant' ),
+								'all'        => esc_html__( 'All Products', 'merchant' ),
 								'product'    => esc_html__( 'Specific Products', 'merchant' ),
 								'categories' => esc_html__( 'Specific Categories', 'merchant' ),
+								'tags'       => esc_html__( 'Specific Tags', 'merchant' ),
 							),
 							'default' => 'all',
 						),
+
+						array(
+							'id'            => 'product_to_purchase',
+							'type'          => 'products_selector',
+							'multiple'      => false,
+							'desc'          => esc_html__( 'Select the products that the spending goal will apply to.', 'merchant' ),
+							'condition'     => array( 'rules_to_apply', '==', 'product' ),
+							'allowed_types' => array( 'simple', 'variable' ),
+						),
+
 						array(
 							'id'          => 'category_slugs',
 							'type'        => 'select_ajax',
@@ -54,13 +65,35 @@ Merchant_Admin_Options::create( array(
 							'desc'        => esc_html__( 'Select the product categories that the spending goal will apply to.', 'merchant' ),
 							'condition'   => array( 'rules_to_apply', '==', 'categories' ),
 						),
+
 						array(
-							'id'            => 'product_to_purchase',
-							'type'          => 'products_selector',
-							'multiple'      => false,
-							'desc'          => esc_html__( 'Select the product that the spending goal will apply to.', 'merchant' ),
-							'condition'     => array( 'rules_to_apply', '==', 'product' ),
-							'allowed_types' => array( 'simple', 'variable' ),
+							'id'          => 'tag_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that the spending goal will apply to.', 'merchant' ),
+							'condition'   => array( 'rules_to_apply', '==', 'tags' ),
+						),
+
+						array(
+							'id'         => 'exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select the products that the spending goal will not apply to.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_apply',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+								),
+							),
 						),
 
 						array(
@@ -68,8 +101,22 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'products_selector',
 							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'  => true,
-							'desc'      => esc_html__( 'Exclude products from this offer.', 'merchant' ),
-							'condition' => array( 'rules_to_apply', 'any', 'all|categories|tags' ),
+							'desc'      => esc_html__( 'Select the products that the spending goal will not apply to.', 'merchant' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_apply',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(
@@ -80,8 +127,48 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
-							'condition'   => array( 'rules_to_apply', '==', 'all' ),
+							'desc'        => esc_html__( 'Select the product categories that the spending goal will not apply to.', 'merchant' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_apply',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
+							'id'          => 'excluded_tags',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that the spending goal will not apply to.', 'merchant' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_apply',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						'amount' => array(
@@ -157,7 +244,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'text',
 							'title'   => esc_html__( 'At 0%', 'merchant' ),
 							'default' => sprintf(
-								/* Translators: 1. goal amount */
+							/* Translators: 1. goal amount */
 								esc_html__( 'Spend %1$s to receive this gift!', 'merchant' ),
 								'{goalAmount}' // existing one is {amount}
 							),
@@ -168,7 +255,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'text',
 							'title'   => esc_html__( 'Between 1 - 99%', 'merchant' ),
 							'default' => sprintf(
-								/* Translators: 1. more amount */
+							/* Translators: 1. more amount */
 								esc_html__( 'Spend %1$s more to receive this gift!', 'merchant' ),
 								'{amountMore}'
 							),
@@ -368,7 +455,6 @@ Merchant_Admin_Options::create( array(
 		'module' => Merchant_Free_Gifts::MODULE_ID,
 		'title'  => esc_html__( 'Look and Feel', 'merchant' ),
 		'fields' => array(
-
 			array(
 				'id'      => 'count_bg_color',
 				'type'    => 'color',
