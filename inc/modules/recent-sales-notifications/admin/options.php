@@ -460,7 +460,7 @@ Merchant_Admin_Options::create( array(
 			'default' => 0,
 		),
 		array(
-			'id'         => 'excluded_products',
+			'id'         => 'excluded_order_ids',
 			'type'       => 'text',
 			'desc'       => esc_html__( 'Add comma separated order IDs that you don\'t want to show.', 'merchant' ),
 			'conditions' => array(
