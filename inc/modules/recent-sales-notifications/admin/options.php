@@ -198,7 +198,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_carts_count',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Product grouped add to cart (To Be Implemented)', 'merchant' ),
+			'title'          => esc_html__( 'Product grouped add to cart', 'merchant' ),
 			'sub-desc'       => esc_html__( 'Display the number of customers who have added a product to cart.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
