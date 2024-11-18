@@ -691,6 +691,10 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
  */
 if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 	function merchant_is_product_excluded( $product_id, $args = array() ) {
+		if ( empty( $args['exclusion_enabled'] ) ) {
+			return false;
+		}
+
 		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
 
 		$rules = array(
