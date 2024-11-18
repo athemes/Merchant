@@ -157,7 +157,7 @@ Merchant_Admin_Options::create( array(
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name}, %2$s: {country_code}, %3$s: {city} */
 						__(
-							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name<br>
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><br><strong>%1$s:</strong> displays the customer’s name<br>
 <strong>%2$s:</strong> displays the customer’s country<br>
 <strong>%3$s:</strong> displays the customer’s city',
 							'merchant'
@@ -178,7 +178,7 @@ Merchant_Admin_Options::create( array(
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name} */
 						__(
-							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name',
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><br><strong>%1$s:</strong> displays the customer’s name',
 							'merchant'
 						),
 						'{customer_name}'
@@ -302,7 +302,7 @@ Merchant_Admin_Options::create( array(
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name}, %2$s: {country_code}, %3$s: {city} */
 						__(
-							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name<br>
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><br><strong>%1$s:</strong> displays the customer’s name<br>
 <strong>%2$s:</strong> displays the customer’s country<br>
 <strong>%3$s:</strong> displays the customer’s city',
 							'merchant'
@@ -323,7 +323,7 @@ Merchant_Admin_Options::create( array(
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name} */
 						__(
-							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><strong>%1$s:</strong> displays the customer’s name',
+							'If you are based in the EU or you have customers from the EU, we recommend you to hide customer names for GDPR purposes. <br><br><strong>%1$s:</strong> displays the customer’s name',
 							'merchant'
 						),
 						'{customer_name}'
@@ -494,6 +494,13 @@ Merchant_Admin_Options::create( array(
 			'label'   => esc_html__( 'Hide on Desktop', 'merchant' ),
 			'desc'    => esc_html__( 'If you want to disable the Recent Sales Notifications on desktop, you can do it here.', 'merchant' ),
 			'default' => false,
+		),
+		array(
+			'id'      => 'shuffle_notifications',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Shuffle Notifications', 'merchant' ),
+			'desc'    => esc_html__( 'If you want to shuffle the notifications, you can do it here.', 'merchant' ),
+			'default' => true,
 		),
 		array(
 			'id'      => 'layout',
