@@ -101,7 +101,7 @@ Merchant_Admin_Options::create( array(
 							'type'       => 'products_selector',
 							'title'      => esc_html__( 'Exclude products', 'merchant' ),
 							'multiple'   => true,
-							'desc'       => esc_html__( 'Exclude product(s) from this discount campaign.', 'merchant' ),
+							'desc'       => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
 							'conditions' => array(
 								'relation' => 'AND',
 								'terms'    => array(
