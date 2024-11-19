@@ -734,6 +734,14 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// recent sales notifications admin preview
+	{
+		name: 'recentSalesNotificationsAdminPreview',
+		src: './assets/js/src/modules/recent-sales-notifications/admin/preview.js',
+		destination: './assets/js/modules/recent-sales-notifications/admin',
+		file: 'preview'
+	},
+
 	// pre orders preview
 	{
 		name: 'preOrdersAdminPreview',

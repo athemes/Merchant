@@ -83,6 +83,13 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 		public function admin_enqueue_assets() {
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
+			wp_enqueue_script(
+				'merchant-admin-' . self::MODULE_ID,
+				MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js',
+				array( 'jquery' ),
+				MERCHANT_VERSION,
+				true
+			);
 		}
 	}
 }
