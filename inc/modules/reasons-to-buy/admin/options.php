@@ -60,6 +60,7 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'          => 'category_slugs',
 							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Categories', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
