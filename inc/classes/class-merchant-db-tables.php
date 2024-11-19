@@ -17,6 +17,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		 * Initializes database by creating or updating the table structure.
 		 */
 		public static function init() {
+			add_action( 'init', array( __CLASS__, 'maybe_create_tables' ) );
 			add_action( 'upgrader_process_complete', array( __CLASS__, 'on_upgrade' ), 10, 2 );
 			register_activation_hook( MERCHANT_FILE, array( __CLASS__, 'create_tables' ) );
 		}
@@ -185,13 +186,53 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 		 * @return bool
 		 */
 		private static function is_plugin_update( $options ) {
-			return isset( $options['action'], $options['type'], $options['plugins'] )
-			       && $options['action'] === 'update'
-			       && $options['type'] === 'plugin'
-			       && in_array( plugin_basename( MERCHANT_FILE ), $options['plugins'], true );
+			if (
+				isset( $options['action'], $options['type'], $options['plugins'] )
+				&& $options['action'] === 'update'
+				&& $options['type'] === 'plugin'
+				&& in_array( plugin_basename( MERCHANT_FILE ), $options['plugins'], true )
+			) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Check if the tables need to be created.
+		 */
+		public static function maybe_create_tables() {
+			if ( ! is_blog_installed() ) {
+				return;
+			}
+
+			if ( is_admin() ) {
+				$installed_version = self::get_db_version();
+
+				if ( MERCHANT_DB_VERSION !== $installed_version ) {
+					self::create_tables();
+					self::update_db_version();
+				}
+			}
+		}
+
+		/**
+		 * Get the current database version.
+		 *
+		 * @return string
+		 */
+		private static function get_db_version() {
+			return get_option( 'merchant_db_version' );
+		}
+
+		/**
+		 * Update the database version option.
+		 *
+		 * @return void
+		 */
+		private static function update_db_version() {
+			update_option( 'merchant_db_version', MERCHANT_DB_VERSION, false );
 		}
 	}
 }
 
-// Initialize the merchant database tables.
-Merchant_DB_Tables::init();
