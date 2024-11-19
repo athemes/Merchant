@@ -695,12 +695,13 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			return false;
 		}
 
-		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
+		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? $args['trigger_on'] ?? 'products';
 
 		$rules = array(
 			'all',
 			'all_products',
 			'categories',
+			'category',
 			'by_category',
 			'tags',
 			'by_tags',
@@ -748,7 +749,6 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 		return false;
 	}
 }
-
 
 /**
  * Get the label of the first active payment gateway in WooCommerce.

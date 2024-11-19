@@ -1157,7 +1157,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return false;
 		}
 
-		if ( 'category' === $rule['trigger_on'] && empty( $rule['category_slugs'] ) ) {
+		if ( ('category' === $rule['trigger_on']) && empty( $rule['category_slugs'] ) ) {
 			return false;
 		}
 
@@ -1278,13 +1278,19 @@ class Merchant_Pre_Orders_Main_Functionality {
 					}
 				}
 
-				if ( 'product' === $rule['trigger_on'] && in_array( $product_id, $rule['product_ids'], true ) ) {
+				$is_excluded = merchant_is_product_excluded( $product_id, $rule );
+				if ( $is_excluded ) {
+					continue;
+				}
+
+				$trigger = $rule['trigger_on'] ?? 'product';
+
+				if ( 'product' === $trigger && in_array( $product_id, $rule['product_ids'], true ) ) {
 					$available_rule = $rule;
 					break;
-				}
-				if ( 'category' === $rule['trigger_on'] || 'tags' === $rule['trigger_on'] ) {
-					$taxonomy = $rule['trigger_on'] === 'category' ? 'product_cat' : 'product_tag';
-					$slugs    = $rule['trigger_on'] === 'category' ? ( $rule['category_slugs'] ?? array() ) : ( $rule['tag_slugs'] ?? array() );
+				} elseif ( 'category' === $trigger || 'tags' === $trigger ) {
+					$taxonomy = $trigger === 'category' ? 'product_cat' : 'product_tag';
+					$slugs    = $trigger === 'category' ? ( $rule['category_slugs'] ?? array() ) : ( $rule['tag_slugs'] ?? array() );
 
 					$terms = get_the_terms( $product_id, $taxonomy );
 					if ( ! empty( $terms ) ) {
@@ -1295,6 +1301,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 							}
 						}
 					}
+				} elseif ( 'all' === $trigger ) {
+					$available_rule = $rule;
 				}
 			}
 		}
