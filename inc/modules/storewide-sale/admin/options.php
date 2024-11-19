@@ -154,7 +154,7 @@ Merchant_Admin_Options::create( array(
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
 							'desc'        => esc_html__( 'Exclude tags from this discount campaign.', 'merchant' ),
-							'conditions'    => array(
+							'conditions'  => array(
 								'relation' => 'AND',
 								'terms'    => array(
 									array(

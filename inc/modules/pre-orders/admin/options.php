@@ -134,7 +134,7 @@ Merchant_Admin_Options::create(
 								'multiple'    => true,
 								'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 								'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-								'desc'        => esc_html__( 'Exclude categories from this discount campaign.', 'merchant' ),
+								'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
 								'conditions'  => array(
 									'relation' => 'AND',
 									'terms'    => array(
@@ -160,8 +160,8 @@ Merchant_Admin_Options::create(
 								'multiple'    => true,
 								'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 								'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-								'desc'        => esc_html__( 'Exclude tags from this discount campaign.', 'merchant' ),
-								'conditions'    => array(
+								'desc'        => esc_html__( 'Exclude tags from this campaign.', 'merchant' ),
+								'conditions'  => array(
 									'relation' => 'AND',
 									'terms'    => array(
 										array(
