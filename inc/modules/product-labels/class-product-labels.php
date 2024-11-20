@@ -341,8 +341,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$sale_data = array();
 
         if ( $product->is_type( 'variable' ) ) {
-	        $regular_price = (float) $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
-	        $sale_price    = (float) $product->get_variation_sale_price( 'min' );
+	        $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_variation_regular_price( 'min' ) ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
 
 	        if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 		        $sale_data['amount']     = $regular_price - $sale_price;
@@ -357,6 +357,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
             foreach ( $children_ids as $child_id ) {
 	            $child_product = wc_get_product( $child_id );
 
+                // Todo: check if wc_get_price_to_display() fits better
 	            $regular_price = (float) $child_product->get_regular_price();
 	            $sale_price    = (float) $child_product->get_sale_price();
 
@@ -374,8 +375,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		        $sale_data['percentage'] = $total_regular_price ? round( 100 - ( ( $total_sale_price / $total_regular_price ) * 100 ) ) : 0;
 	        }
         } else {
-            $regular_price = (float) $product->get_regular_price();
-            $sale_price    = (float) $product->get_sale_price();
+            $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
 
             if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 	            $sale_data['amount']     = $regular_price - $sale_price;
