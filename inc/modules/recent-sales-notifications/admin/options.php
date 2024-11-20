@@ -54,7 +54,7 @@ Merchant_Admin_Options::create( array(
 			'id'             => 'product_purchases_count',
 			'type'           => 'fields_group',
 			'title'          => esc_html__( 'Product purchases count', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display the number of customers who have purchased a product.', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of customers who have purchased a product in a given period.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -71,7 +71,7 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'number_of_days',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Number of days', 'merchant' ),
+					'title'   => esc_html__( 'Time period (days)', 'merchant' ),
 					'desc'    => esc_html__( 'Search for orders within the last number of days', 'merchant' ),
 					'default' => '7',
 					'min'     => '1',
@@ -85,7 +85,7 @@ Merchant_Admin_Options::create( array(
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
-							'<strong>%1$s:</strong> displays customers count',
+							'<strong>%1$s:</strong> displays number of customers who have purchased a product in specified period',
 							'merchant'
 						),
 						'{count}'
@@ -123,8 +123,9 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'time_span',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Timespan', 'merchant' ),
-					'desc'    => esc_html__( 'Number of time units to display the a customers who have purchased a product.', 'merchant' ),
+					'title'   => esc_html__( 'Time period', 'merchant' ),
+					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who purchased a product.',
+						'merchant' ),
 					'default' => '7',
 				),
 				array(
@@ -144,8 +145,8 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'hide_date_for_old_events_than',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Hide date for old events than (days)', 'merchant' ),
-					'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
+					'title'   => esc_html__( 'Hide date for events older than (days)', 'merchant' ),
+					'desc'    => esc_html__( 'For events that occurred before the specified number of days, the notification will not display the date.', 'merchant' ),
 					'default' => '5',
 				),
 				array(
@@ -198,8 +199,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_carts_count',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Product grouped add to cart', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display the number of customers who have added a product to cart.', 'merchant' ),
+			'title'          => esc_html__( 'Add to cart count', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of customers who have added a product to their cart in a given period.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -209,14 +210,14 @@ Merchant_Admin_Options::create( array(
 					'id'      => 'minimum_count',
 					'type'    => 'number',
 					'title'   => esc_html__( 'Minimum number of add to carts required', 'merchant' ),
-					'desc'    => esc_html__( 'Set the minimum number of times a product must be added to cart in period, for a notification to be triggered', 'merchant' ),
+					'desc'    => esc_html__( 'Set the minimum number of times a product must be added to cart in a period for a notification to be triggered', 'merchant' ),
 					'default' => '2',
 					'min'     => '1',
 				),
 				array(
 					'id'      => 'number_of_days',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Number of days', 'merchant' ),
+					'title'   => esc_html__( 'Time period (days)', 'merchant' ),
 					'desc'    => esc_html__( 'Search for add to cart events within the last number of days', 'merchant' ),
 					'default' => '1',
 					'min'     => '1',
@@ -226,7 +227,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Singular Template', 'merchant' ),
 					'desc'        => esc_html__( 'Singular text for displaying the number of customers who have added a product in their cart in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} people added this product to cart today', 'merchant' ),
+					'default'     => esc_html__( '{count} person added this product to their cart today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
@@ -259,7 +260,7 @@ Merchant_Admin_Options::create( array(
 			'id'             => 'single_product_add_to_cart',
 			'type'           => 'fields_group',
 			'title'          => esc_html__( 'Single product add to cart', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display notification when someone adds a product to cart', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display a notification when someone adds a product to their cart.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -268,8 +269,9 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'time_span',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Timespan', 'merchant' ),
-					'desc'    => esc_html__( 'Number of time units to display the a customers who have add a product to cart.', 'merchant' ),
+					'title'   => esc_html__( 'Time period', 'merchant' ),
+					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who added a product to their cart.',
+						'merchant' ),
 					'default' => '2',
 				),
 				array(
@@ -289,8 +291,8 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'hide_date_for_old_events_than',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Hide date for old events than (days)', 'merchant' ),
-					'desc'    => esc_html__( 'Events older than the selected period will not include the date in the notification.', 'merchant' ),
+					'title'   => esc_html__( 'Hide date for events older than (days)', 'merchant' ),
+					'desc'    => esc_html__( 'For events that occurred before the specified number of days, the notification will not display the date.', 'merchant' ),
 					'default' => '5',
 				),
 				array(
@@ -298,7 +300,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Full Data Template', 'merchant' ),
 					'desc'        => esc_html__( 'Text template when name, country, and city are available.', 'merchant' ),
-					'default'     => esc_html__( '{customer_name} in {country_code}, {city} added to cart', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} in {country_code}, {city} added this to their cart', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name}, %2$s: {country_code}, %3$s: {city} */
 						__(
@@ -319,7 +321,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Name Only Template', 'merchant' ),
 					'desc'        => esc_html__( 'Text template when only name is available', 'merchant' ),
-					'default'     => esc_html__( '{customer_name} added to cart', 'merchant' ),
+					'default'     => esc_html__( '{customer_name} added this to their cart', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: {customer_name} */
 						__(
@@ -336,7 +338,7 @@ Merchant_Admin_Options::create( array(
 					'type'    => 'text',
 					'label'   => esc_html__( 'Fallback Template', 'merchant' ),
 					'desc'    => esc_html__( 'Text template when no customer data is available.', 'merchant' ),
-					'default' => esc_html__( 'Someone added to cart', 'merchant' ),
+					'default' => esc_html__( 'Someone added this to their cart', 'merchant' ),
 				),
 			),
 		),
@@ -353,8 +355,9 @@ Merchant_Admin_Options::create( array(
 				array(
 					'id'      => 'time_span',
 					'type'    => 'number',
-					'title'   => esc_html__( 'Timespan', 'merchant' ),
-					'desc'    => esc_html__( 'Number of time units to display the a customers who have viewed a product.', 'merchant' ),
+					'title'   => esc_html__( 'Time period', 'merchant' ),
+					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who viewed a product.',
+						'merchant' ),
 					'default' => '7',
 				),
 				array(
@@ -376,7 +379,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Singular Template', 'merchant' ),
 					'desc'        => esc_html__( 'Singular template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} people viewed today', 'merchant' ),
+					'default'     => esc_html__( '{count} person viewed this item today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
@@ -393,7 +396,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Plural Template', 'merchant' ),
 					'desc'        => esc_html__( 'Plural template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} people viewed today', 'merchant' ),
+					'default'     => esc_html__( '{count} people viewed this item today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
@@ -409,7 +412,7 @@ Merchant_Admin_Options::create( array(
 ) );
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Hide for some products and orders', 'merchant' ),
+	'title'  => esc_html__( 'Hide for certain products and orders', 'merchant' ),
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
@@ -486,13 +489,20 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide on Mobile', 'merchant' ),
 			'desc'    => esc_html__( 'Because the mobile screen is much smaller, you might not want to take up space with this module.', 'merchant' ),
-			'default' => false,
+			'default' => true,
 		),
 		array(
 			'id'      => 'hide_on_desktop',
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide on Desktop', 'merchant' ),
 			'desc'    => esc_html__( 'If you want to disable the Recent Sales Notifications on desktop, you can do it here.', 'merchant' ),
+			'default' => false,
+		),
+		array(
+			'id'      => 'hide_product_name',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide product name from notifications', 'merchant' ),
+			'desc'    => esc_html__( 'if turned on, product names will be hidden from notification banners.', 'merchant' ),
 			'default' => false,
 		),
 		array(
@@ -528,7 +538,7 @@ Merchant_Admin_Options::create( array(
 				'bottom-right' => esc_html__( 'Bottom Right', 'merchant' ),
 				'bottom-left'  => esc_html__( 'Bottom Left', 'merchant' ),
 			),
-			'default' => 'top-right',
+			'default' => 'bottom-left',
 			'desc'    => esc_html__( 'The direction from which the notification box will slide from.', 'merchant' ),
 		),
 		array(
