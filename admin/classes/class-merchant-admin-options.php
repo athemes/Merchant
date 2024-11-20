@@ -752,6 +752,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * @return string Updated field HTML.
 		 */
 		private static function update_field_attributes( $field, $updates ) {
+            if ( ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+                return $field;
+            }
+
 			foreach ( $updates as $tag => $append ) {
 				$processor = new WP_HTML_Tag_Processor( $field ); // Reset processor for each tag type
 
