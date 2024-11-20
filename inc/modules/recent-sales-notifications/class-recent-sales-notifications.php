@@ -75,7 +75,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		public function render_admin_preview( $preview, $module ) {
 			if ( self::MODULE_ID === $module ) {
 				// HTML.
-				$preview->set_html( 'welcome' );
+				$preview->set_html( merchant_get_template_part( 'modules/' . self::MODULE_ID . '/admin', 'preview', array(), true ) );
 			}
 
 			return $preview;
