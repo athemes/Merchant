@@ -375,6 +375,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		        $sale_data['percentage'] = $total_regular_price ? round( 100 - ( ( $total_sale_price / $total_regular_price ) * 100 ) ) : 0;
 	        }
         } else {
+            // Todo: Test when storewide sale applies to sale price
             $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
             $sale_price    = (float) wc_get_price_to_display( $product );
 
