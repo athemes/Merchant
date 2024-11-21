@@ -194,7 +194,7 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'switcher',
 							'title'   => esc_html__( 'Exclude coupons', 'merchant' ),
 							'desc'    => esc_html__( 'Coupon codes will not be applicable on top of this offer.', 'merchant' ),
-							'default' => false,
+							'default' => 1,
 						),
 
 						array(
@@ -336,7 +336,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Gift based on spending type', 'merchant' ),
-			'desc'    => esc_html__( 'Select whether the spending goal for receiving a gift should be based on the ‘Cart Subtotal’ or the ‘Cart Total.’ The ‘Cart Subtotal’ reflects the total before any adjustments, whereas the ‘Cart Total’ includes all charges and fees.', 'merchant' ),
+			'desc'    => esc_html__( 'Select the basis for the gift spending goal: ‘Cart Subtotal’ (excludes tax and shipping) or ‘Cart Total’ (includes tax and shipping).', 'merchant' ),
 			'options' => array(
 				'subtotal' => esc_html__( 'Cart subtotal', 'merchant' ),
 				'total'    => esc_html__( 'Cart total', 'merchant' ),
