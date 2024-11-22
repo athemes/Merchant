@@ -1309,12 +1309,10 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 				$trigger = $rule['trigger_on'] ?? 'product';
 
-				// if ( $trigger !== 'product' ) {
-					$is_excluded = merchant_is_product_excluded( $product_id, $rule );
-					if ( $is_excluded ) {
-						continue;
-					}
-				// }
+				$is_excluded = merchant_is_product_excluded( $product_id, $rule );
+				if ( $is_excluded ) {
+					continue;
+				}
 
 				if ( 'product' === $trigger && in_array( $product_id, $rule['product_ids'], true ) ) {
 					$available_rule = $rule;
