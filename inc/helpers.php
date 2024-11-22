@@ -748,6 +748,38 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 }
 
 /**
+ * Check if a product or any of its variations is excluded based on the given offer.
+ *
+ * This method determines if a product (simple or variable) or any of its variations
+ * satisfies the merchant exclusion rules.
+ *
+ * @param int   $product_id The ID of the product to check.
+ * @param array $offer      The offer data to evaluate against exclusion rules.
+ *
+ * @return bool True if the product or any of its variations is excluded, false otherwise.
+ */
+if ( ! function_exists( 'merchant_is_product_or_variation_excluded' ) ) {
+	function merchant_is_product_or_variation_excluded( $product_id, $offer = array() ) {
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return false;
+		}
+
+		// Get IDs to check for exclusion
+		$product_ids = $product->is_type( 'variable' ) ? $product->get_children() : array( $product_id );
+
+		foreach ( $product_ids as $id ) {
+			if ( merchant_is_product_excluded( $id, $offer ) ) {
+				return true; // Excluded if any ID matches
+			}
+		}
+
+		return false;
+	}
+}
+
+/**
  * Get the label of the first active payment gateway in WooCommerce.
  *
  * @return string|null The label of the first active payment gateway, or null if none are found.

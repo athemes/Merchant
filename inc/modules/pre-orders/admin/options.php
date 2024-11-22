@@ -104,12 +104,13 @@ Merchant_Admin_Options::create(
 							),
 
 							array(
-								'id'         => 'excluded_products',
-								'type'       => 'products_selector',
-								'title'      => esc_html__( 'Exclude products', 'merchant' ),
-								'multiple'   => true,
-								'desc'       => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
-								'conditions' => array(
+								'id'            => 'excluded_products',
+								'type'          => 'products_selector',
+								'title'         => esc_html__( 'Exclude products', 'merchant' ),
+								'desc'          => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+								'allowed_types' => array( 'simple', 'variable' ),
+								'multiple'      => true,
+								'conditions'    => array(
 									'relation' => 'AND',
 									'terms'    => array(
 										array(

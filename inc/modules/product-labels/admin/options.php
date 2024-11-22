@@ -314,12 +314,13 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'         => 'excluded_products',
-							'type'       => 'products_selector',
-							'title'      => esc_html__( 'Exclude Products', 'merchant' ),
-							'multiple'   => true,
-							'desc'       => esc_html__( 'Exclude products from this label.', 'merchant' ),
-							'conditions' => array(
+							'id'            => 'excluded_products',
+							'type'          => 'products_selector',
+							'title'         => esc_html__( 'Exclude Products', 'merchant' ),
+							'desc'          => esc_html__( 'Exclude products from this label.', 'merchant' ),
+							'multiple'      => true,
+							'allowed_types' => array( 'simple', 'variable' ),
+							'conditions'    => array(
 								'relation' => 'AND',
 								'terms'    => array(
 									array(
