@@ -364,7 +364,6 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
             foreach ( $children_ids as $child_id ) {
 	            $child_product = wc_get_product( $child_id );
 
-                // Todo: check if wc_get_price_to_display() fits better
 	            $regular_price = (float) $child_product->get_regular_price();
 	            $sale_price    = (float) $child_product->get_sale_price();
 
