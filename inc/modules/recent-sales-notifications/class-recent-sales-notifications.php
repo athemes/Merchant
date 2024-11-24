@@ -127,6 +127,9 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				MERCHANT_VERSION,
 				true
 			);
+			wp_localize_script( 'merchant-admin-' . self::MODULE_ID, 'MerchantRSN', array(
+				'merchant_url' => MERCHANT_URI,
+			) );
 		}
 	}
 }
