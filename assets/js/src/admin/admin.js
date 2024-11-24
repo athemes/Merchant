@@ -1366,8 +1366,8 @@
 
                     var item = wpMediaFrame.state().get('selection').first().attributes;
                     var thumb = (item.sizes && item.sizes.thumbnail && item.sizes.thumbnail.url) ? item.sizes.thumbnail.url : item.url;
-
-                    $wrapper.append('<div class="merchant-upload-image"><i class="merchant-upload-remove dashicons dashicons-no-alt"></i><img src="' + thumb + '" /></div>');
+                    let sizes = item.sizes ? JSON.stringify(item.sizes) : '';
+                    $wrapper.append('<div class="merchant-upload-image" data-sizes=\''+ sizes +'\'><i class="merchant-upload-remove dashicons dashicons-no-alt"></i><img src="' + thumb + '" /></div>');
 
                     $input.val(item.id).trigger('change');
                     $this.find( '.merchant-upload-button-drag-drop' ).hide();
