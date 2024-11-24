@@ -11,7 +11,7 @@
             </div>
             <div class="merchant-notification-text">
                 <p class="merchant-notification-message">8 people viewed today</p>
-                <p class="merchant-notification-title">Album</p>
+                <p class="merchant-notification-title">Product Name</p>
             </div>
         </div></div>
 </div>
