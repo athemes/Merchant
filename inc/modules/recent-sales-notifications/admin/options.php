@@ -53,8 +53,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_purchases_count',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Product purchases count', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display the number of customers who have purchased a product in a given period.', 'merchant' ),
+			'title'          => esc_html__( 'Sales Pop', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show the number of successful orders to encourage customers to purchase products', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -113,8 +113,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'single_product_purchase',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Single product purchase', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display notification when someone purchases a product', 'merchant' ),
+			'title'          => esc_html__( 'Product Purchases', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show when a product is purchased to create activity and boost social proof.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -199,8 +199,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_carts_count',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Add to cart count', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display the number of customers who have added a product to their cart in a given period.', 'merchant' ),
+			'title'          => esc_html__( 'Cart Summary', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show recent cart additions to create activity and boost credibility with real-time insights.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -259,8 +259,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'single_product_add_to_cart',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Single product add to cart', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display a notification when someone adds a product to their cart.', 'merchant' ),
+			'title'          => esc_html__( 'Cart Notification', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show when products are added to the cart to create activity and boost social proof.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -345,8 +345,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_views_settings',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Product views', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Display the number of times a product has been viewed in a period.', 'merchant' ),
+			'title'          => esc_html__( 'Visitors Count', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Display the number of visitors at a specific time to show how popular your product is.', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -412,9 +412,44 @@ Merchant_Admin_Options::create( array(
 ) );
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Hide for certain products and orders', 'merchant' ),
+	'title'  => esc_html__( 'Custom Settings', 'merchant' ),
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
+		array(
+			'id'      => 'hide_on_mobile',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide on Mobile', 'merchant' ),
+			'desc'    => esc_html__( 'Because the mobile screen is much smaller, you might not want to take up space with this module.', 'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'hide_on_desktop',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide on Desktop', 'merchant' ),
+			'desc'    => esc_html__( 'If you want to disable the Recent Sales Notifications on desktop, you can do it here.', 'merchant' ),
+			'default' => false,
+		),
+		array(
+			'id'      => 'shuffle_notifications',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Shuffle Notifications', 'merchant' ),
+			'desc'    => esc_html__( 'If you want to shuffle the notifications, you can do it here.', 'merchant' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'hide_product_name',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide product name from notifications', 'merchant' ),
+			'desc'    => esc_html__( 'if turned on, product names will be hidden from notification banners.', 'merchant' ),
+			'default' => false,
+		),
+		array(
+			'id'      => 'show_verified_badge',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Show "Verified by aThemes" badge', 'merchant' ),
+			'desc'    => esc_html__( 'If enabled, it will show a Verified by aThemes badge in the popup. This will create an extra sense of trust for your visitors.', 'merchant' ),
+			'default' => false,
+		),
 		array(
 			'id'      => 'product_exclusion',
 			'type'    => 'switcher',
@@ -438,45 +473,6 @@ Merchant_Admin_Options::create( array(
 				),
 			),
 		),
-		array(
-			'id'         => 'excluded_categories',
-			'type'       => 'select_ajax',
-			'title'      => esc_html__( 'Exclude Categories', 'merchant' ),
-			'source'     => 'options',
-			'multiple'   => true,
-			'options'    => Merchant_Admin_Options::get_category_select2_choices(),
-			'conditions' => array(
-				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-				'terms'    => array(
-					array(
-						'field'    => 'product_exclusion', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
-		array(
-			'id'      => 'order_exclusion',
-			'type'    => 'switcher',
-			'title'   => __( 'Order Exclusion', 'merchant' ),
-			'default' => 0,
-		),
-		array(
-			'id'         => 'excluded_order_ids',
-			'type'       => 'text',
-			'desc'       => esc_html__( 'Add comma separated order IDs that you don\'t want to show.', 'merchant' ),
-			'conditions' => array(
-				'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
-				'terms'    => array(
-					array(
-						'field'    => 'order_exclusion', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => true, // can be a single value or an array of string/number/int
-					),
-				),
-			),
-		),
 	),
 ) );
 
@@ -485,48 +481,29 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'      => 'hide_on_mobile',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Hide on Mobile', 'merchant' ),
-			'desc'    => esc_html__( 'Because the mobile screen is much smaller, you might not want to take up space with this module.', 'merchant' ),
-			'default' => true,
-		),
-		array(
-			'id'      => 'hide_on_desktop',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Hide on Desktop', 'merchant' ),
-			'desc'    => esc_html__( 'If you want to disable the Recent Sales Notifications on desktop, you can do it here.', 'merchant' ),
-			'default' => false,
-		),
-		array(
-			'id'      => 'hide_product_name',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Hide product name from notifications', 'merchant' ),
-			'desc'    => esc_html__( 'if turned on, product names will be hidden from notification banners.', 'merchant' ),
-			'default' => false,
-		),
-		array(
-			'id'      => 'shuffle_notifications',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Shuffle Notifications', 'merchant' ),
-			'desc'    => esc_html__( 'If you want to shuffle the notifications, you can do it here.', 'merchant' ),
-			'default' => true,
-		),
-		array(
 			'id'      => 'layout',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Layout', 'merchant' ),
+			'type'    => 'image_picker',
+			'title'   => esc_html__( 'Select layout', 'merchant' ),
 			'options' => array(
-				'layout-1' => esc_html__( 'Layout 1', 'merchant' ),
-				'layout-2' => esc_html__( 'Layout 2', 'merchant' ),
-				'layout-3' => esc_html__( 'Layout 3', 'merchant' ),
-				'layout-4' => esc_html__( 'Layout 4', 'merchant' ),
-				'layout-5' => esc_html__( 'Layout 5', 'merchant' ),
-				'layout-6' => esc_html__( 'Layout 6', 'merchant' ),
-				'layout-7' => esc_html__( 'Layout 7', 'merchant' ),
+				'layout-1' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/layout-1.png',
+					'title' => esc_html__( 'Layout 1', 'merchant' ),
+				),
+				'layout-2' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/layout-2.png',
+					'title' => esc_html__( 'Layout 2', 'merchant' ),
+				),
+				'layout-3' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/layout-3.png',
+					'title' => esc_html__( 'Layout 3', 'merchant' ),
+				),
+				'layout-4' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/layout-4.png',
+					'title' => esc_html__( 'Layout 4', 'merchant' ),
+				),
 			),
 			'default' => 'top-right',
-			'desc'    => esc_html__( 'Choose the layout of the notification box.', 'merchant' ),
+			'desc'    => esc_html__( 'Choose the layout & style of the notification box.', 'merchant' ),
 		),
 		array(
 			'id'      => 'slide_from',
@@ -553,34 +530,82 @@ Merchant_Admin_Options::create( array(
 			'desc'    => esc_html__( 'The width of the notification box.', 'merchant' ),
 		),
 		array(
-			'id'      => 'notification_box_radius',
-			'type'    => 'range',
-			'min'     => '0',
-			'max'     => '100',
-			'step'    => '1',
-			'unit'    => 'PX',
-			'default' => '0',
-			'title'   => esc_html__( 'Notification corner radius', 'merchant' ),
-			'desc'    => esc_html__( 'The corner radius of the notification box.', 'merchant' ),
+			'id'      => 'theme_type',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Choose theme', 'merchant' ),
+			'desc'    => esc_html__( 'Choose the theme of the notification box.', 'merchant' ),
+			'options' => array(
+				'custom'   => esc_html__( 'Custom', 'merchant' ),
+				'template' => esc_html__( 'Template', 'merchant' ),
+			),
+			'default' => 'template',
 		),
 		array(
-			'id'      => 'product_image_radius',
-			'type'    => 'range',
-			'min'     => '0',
-			'max'     => '100',
-			'step'    => '1',
-			'unit'    => 'PX',
-			'default' => '0',
-			'title'   => esc_html__( 'Product image radius', 'merchant' ),
-			'desc'    => esc_html__( 'The corner radius of the product image.', 'merchant' ),
+			'id'         => 'theme',
+			'type'       => 'image_picker',
+			'title'      => esc_html__( 'Select layout', 'merchant' ),
+			'options'    => array(
+				'new_year' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/new_year.png',
+					'title' => esc_html__( 'New Year', 'merchant' ),
+				),
+				'halloween' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/halloween.png',
+					'title' => esc_html__( 'Halloween', 'merchant' ),
+				),
+				'christmas' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/christmas.png',
+					'title' => esc_html__( 'Christmas', 'merchant' ),
+				),
+				'black_friday' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/black_friday.png',
+					'title' => esc_html__( 'Black Friday', 'merchant' ),
+				),
+				'cyber_monday' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/cyber_monday.png',
+					'title' => esc_html__( 'Cyber Monday', 'merchant' ),
+				),
+				'valentine' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/valentine.png',
+					'title' => esc_html__( 'Valentine', 'merchant' ),
+				),
+				'spring' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/spring.png',
+					'title' => esc_html__( 'Spring', 'merchant' ),
+				),
+				'thanks_giving' => array(
+					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/thanks_giving.png',
+					'title' => esc_html__( 'Thanks Giving', 'merchant' ),
+				),
+			),
+			'default'    => 'new_year',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'theme_type', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'template', // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 		array(
-			'id'        => 'background_image',
-			'type'      => 'upload',
-			'drag_drop' => true,
-			'title'     => esc_html__( 'Upload custom background image', 'merchant' ),
-			'label'     => esc_html__( 'Click to upload or drag and drop', 'merchant' ),
-			'desc'      => esc_html__( 'The selected image will automatically adjust to fit and center within the notification box. An ideal size is 420px by 110px.', 'merchant' ),
+			'id'         => 'background_image',
+			'type'       => 'upload',
+			'drag_drop'  => true,
+			'title'      => esc_html__( 'Upload custom background image', 'merchant' ),
+			'label'      => esc_html__( 'Click to upload or drag and drop', 'merchant' ),
+			'desc'       => esc_html__( 'The selected image will automatically adjust to fit and center within the notification box. An ideal size is 420px by 110px.',
+				'merchant' ),
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'theme_type', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'template', // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 		array(
 			'id'      => 'background_color',
@@ -588,6 +613,15 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Background color', 'merchant' ),
 			'default' => '#ffffff',
 			'desc'    => esc_html__( 'The background color of the notification box.', 'merchant' ),
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'theme_type', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'custom', // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 		array(
 			'id'      => 'close_btn_color',
@@ -609,6 +643,28 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Border color', 'merchant' ),
 			'default' => 'rgba(255, 255, 255, 0)',
 			'desc'    => esc_html__( 'The color of the border.', 'merchant' ),
+		),
+		array(
+			'id'      => 'notification_box_radius',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '0',
+			'title'   => esc_html__( 'Notification corner radius', 'merchant' ),
+			'desc'    => esc_html__( 'The corner radius of the notification box.', 'merchant' ),
+		),
+		array(
+			'id'      => 'product_image_radius',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '0',
+			'title'   => esc_html__( 'Product image radius', 'merchant' ),
+			'desc'    => esc_html__( 'The corner radius of the product image.', 'merchant' ),
 		),
 	),
 ) );
