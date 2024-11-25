@@ -131,7 +131,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 				'recent-sales-notifications' => array(
 					'pro'          => true,
 					'section'      => 'convert-more',
-					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'module-product-labels' ),
+					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'recent-sales-notifications' ),
 					'title'        => esc_html__( 'Recent Sales Notifications', 'merchant' ),
 					'desc'         => esc_html__( 'Create social proof by showing notifications regarding your recent orders and products being added to cart', 'merchant' ),
 					'tutorial_url' => '#',
