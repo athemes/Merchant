@@ -64,6 +64,7 @@
 		width: 19px;
 		height: 19px !important;
 		padding: 1px !important;
+		transition: 300ms;
 
 		svg {
 			line-height: 0;
@@ -86,6 +87,7 @@
 				height: 77px;
 				background-color: #dadada;
 				border-radius: var(--merchant-rsn-box-product-image-radius);
+				transition: 300ms;
 			}
 		}
 
