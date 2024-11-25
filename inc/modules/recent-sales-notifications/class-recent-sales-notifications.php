@@ -70,13 +70,13 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				Merchant_Translator::register_string( $settings['product_purchases_count']['template_plural'], 'Recent sales notifications: Sales Pop' );
 			}
 			if ( ! empty( $settings['single_product_purchase']['template_full_data'] ) ) {
-				Merchant_Translator::register_string( $settings['product_purchases_count']['template_full_data'], 'Recent sales notifications: Product Purchases' );
+				Merchant_Translator::register_string( $settings['single_product_purchase']['template_full_data'], 'Recent sales notifications: Product Purchases' );
 			}
 			if ( ! empty( $settings['single_product_purchase']['template_name_only'] ) ) {
-				Merchant_Translator::register_string( $settings['product_purchases_count']['template_name_only'], 'Recent sales notifications: Product Purchases' );
+				Merchant_Translator::register_string( $settings['single_product_purchase']['template_name_only'], 'Recent sales notifications: Product Purchases' );
 			}
 			if ( ! empty( $settings['single_product_purchase']['template_no_data'] ) ) {
-				Merchant_Translator::register_string( $settings['product_purchases_count']['template_no_data'], 'Recent sales notifications: Product Purchases' );
+				Merchant_Translator::register_string( $settings['single_product_purchase']['template_no_data'], 'Recent sales notifications: Product Purchases' );
 			}
 			if ( ! empty( $settings['product_carts_count']['template_singular'] ) ) {
 				Merchant_Translator::register_string( $settings['product_carts_count']['template_singular'], 'Recent sales notifications: Cart Summary' );
