@@ -47,74 +47,14 @@ Merchant_Admin_Options::create( array(
 ) );
 
 Merchant_Admin_Options::create( array(
-	'title'  => esc_html__( 'Notifications control', 'merchant' ),
+	'title'  => esc_html__( 'Notifications Control', 'merchant' ),
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'             => 'product_purchases_count',
-			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Sales Pop', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Show the number of successful orders to encourage customers to purchase products', 'merchant' ),
-			'state'          => 'closed',
-			'default'        => 'active',
-			'accordion'      => true,
-			'display_status' => true,
-			'fields'         => array(
-				array(
-					'id'      => 'minimum_purchases',
-					'type'    => 'number',
-					'title'   => esc_html__( 'Minimum number of purchases required', 'merchant' ),
-					'desc'    => esc_html__( 'Set the minimum number of times a product must be purchased in period, for a notification to be triggered', 'merchant' ),
-					'default' => '5',
-					'min'     => '1',
-				),
-				array(
-					'id'      => 'number_of_days',
-					'type'    => 'number',
-					'title'   => esc_html__( 'Time period (days)', 'merchant' ),
-					'desc'    => esc_html__( 'Search for orders within the last number of days', 'merchant' ),
-					'default' => '7',
-					'min'     => '1',
-				),
-				array(
-					'id'          => 'template_singular',
-					'type'        => 'text',
-					'label'       => esc_html__( 'Singular Template', 'merchant' ),
-					'desc'        => esc_html__( 'Singular template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} customer bought this product in the last 7 days', 'merchant' ),
-					'hidden_desc' => sprintf(
-					/* Translators: %1$s: the customers count */
-						__(
-							'<strong>%1$s:</strong> displays number of customers who have purchased a product in specified period',
-							'merchant'
-						),
-						'{count}'
-					),
-				),
-
-				// Plural template for displaying the number of customers who have purchased a product in a period
-				array(
-					'id'          => 'template_plural',
-					'type'        => 'text',
-					'label'       => esc_html__( 'Plural Template', 'merchant' ),
-					'desc'        => esc_html__( 'Plural template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} customers bought this product in the last 7 days', 'merchant' ),
-					'hidden_desc' => sprintf(
-					/* Translators: %1$s: the customers count */
-						__(
-							'<strong>%1$s:</strong> displays customers count',
-							'merchant'
-						),
-						'{count}'
-					),
-				),
-			),
-		),
-		array(
 			'id'             => 'single_product_purchase',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Product Purchases', 'merchant' ),
-			'sub-desc'       => esc_html__( 'Show when a product is purchased to create activity and boost social proof.', 'merchant' ),
+			'title'          => esc_html__( 'Sales Pop', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show recently purchased orders to build trust and FOMO (fear of missing out).', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
 			'accordion'      => true,
@@ -196,6 +136,67 @@ Merchant_Admin_Options::create( array(
 				),
 			),
 		),
+		array(
+			'id'             => 'product_purchases_count',
+			'type'           => 'fields_group',
+			'title'          => esc_html__( 'Sold Count', 'merchant' ),
+			'sub-desc'       => esc_html__( 'Show the number of successful orders to encourage customers to purchase products', 'merchant' ),
+			'state'          => 'closed',
+			'default'        => 'active',
+			'accordion'      => true,
+			'display_status' => true,
+			'fields'         => array(
+				array(
+					'id'      => 'minimum_purchases',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Minimum number of purchases required', 'merchant' ),
+					'desc'    => esc_html__( 'Set the minimum number of times a product must be purchased in period, for a notification to be triggered', 'merchant' ),
+					'default' => '5',
+					'min'     => '1',
+				),
+				array(
+					'id'      => 'number_of_days',
+					'type'    => 'number',
+					'title'   => esc_html__( 'Time period (days)', 'merchant' ),
+					'desc'    => esc_html__( 'Search for orders within the last number of days', 'merchant' ),
+					'default' => '7',
+					'min'     => '1',
+				),
+				array(
+					'id'          => 'template_singular',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Singular Template', 'merchant' ),
+					'desc'        => esc_html__( 'Singular template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} customer bought this product in the last 7 days', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays number of customers who have purchased a product in specified period',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+
+				// Plural template for displaying the number of customers who have purchased a product in a period
+				array(
+					'id'          => 'template_plural',
+					'type'        => 'text',
+					'label'       => esc_html__( 'Plural Template', 'merchant' ),
+					'desc'        => esc_html__( 'Plural template for displaying the number of customers who have purchased a product in a period.', 'merchant' ),
+					'default'     => esc_html__( '{count} customers bought this product in the last 7 days', 'merchant' ),
+					'hidden_desc' => sprintf(
+					/* Translators: %1$s: the customers count */
+						__(
+							'<strong>%1$s:</strong> displays customers count',
+							'merchant'
+						),
+						'{count}'
+					),
+				),
+			),
+		),
+
 		array(
 			'id'             => 'product_carts_count',
 			'type'           => 'fields_group',
@@ -437,6 +438,13 @@ Merchant_Admin_Options::create( array(
 			'default' => true,
 		),
 		array(
+			'id'      => 'hide_product_image',
+			'type'    => 'checkbox',
+			'label'   => esc_html__( 'Hide product image', 'merchant' ),
+			'desc'    => esc_html__( 'if turned on, product image will be hidden from notification banners.', 'merchant' ),
+			'default' => false,
+		),
+		array(
 			'id'      => 'hide_product_name',
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide product name from notifications', 'merchant' ),
@@ -481,6 +489,19 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
+			'id'      => 'slide_from',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Slide from', 'merchant' ),
+			'options' => array(
+				'top-right'    => esc_html__( 'Top Right', 'merchant' ),
+				'top-left'     => esc_html__( 'Top Left', 'merchant' ),
+				'bottom-right' => esc_html__( 'Bottom Right', 'merchant' ),
+				'bottom-left'  => esc_html__( 'Bottom Left', 'merchant' ),
+			),
+			'default' => 'bottom-left',
+			'desc'    => esc_html__( 'The direction from which the notification box will slide from.', 'merchant' ),
+		),
+		array(
 			'id'      => 'layout',
 			'type'    => 'image_picker',
 			'title'   => esc_html__( 'Select layout', 'merchant' ),
@@ -506,19 +527,6 @@ Merchant_Admin_Options::create( array(
 			'desc'    => esc_html__( 'Choose the layout & style of the notification box.', 'merchant' ),
 		),
 		array(
-			'id'      => 'slide_from',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Slide from', 'merchant' ),
-			'options' => array(
-				'top-right'    => esc_html__( 'Top Right', 'merchant' ),
-				'top-left'     => esc_html__( 'Top Left', 'merchant' ),
-				'bottom-right' => esc_html__( 'Bottom Right', 'merchant' ),
-				'bottom-left'  => esc_html__( 'Bottom Left', 'merchant' ),
-			),
-			'default' => 'bottom-left',
-			'desc'    => esc_html__( 'The direction from which the notification box will slide from.', 'merchant' ),
-		),
-		array(
 			'id'      => 'notification_box_width',
 			'type'    => 'range',
 			'min'     => '250',
@@ -528,6 +536,28 @@ Merchant_Admin_Options::create( array(
 			'default' => '420',
 			'title'   => esc_html__( 'Notification box width', 'merchant' ),
 			'desc'    => esc_html__( 'The width of the notification box.', 'merchant' ),
+		),
+		array(
+			'id'      => 'notification_box_radius',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '0',
+			'title'   => esc_html__( 'Notification corner radius', 'merchant' ),
+			'desc'    => esc_html__( 'The corner radius of the notification box.', 'merchant' ),
+		),
+		array(
+			'id'      => 'product_image_radius',
+			'type'    => 'range',
+			'min'     => '0',
+			'max'     => '100',
+			'step'    => '1',
+			'unit'    => 'PX',
+			'default' => '0',
+			'title'   => esc_html__( 'Product image radius', 'merchant' ),
+			'desc'    => esc_html__( 'The corner radius of the product image.', 'merchant' ),
 		),
 		array(
 			'id'      => 'theme_type',
@@ -545,31 +575,31 @@ Merchant_Admin_Options::create( array(
 			'type'       => 'image_picker',
 			'title'      => esc_html__( 'Select layout', 'merchant' ),
 			'options'    => array(
-				'new_year' => array(
+				'new_year'      => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/new_year.png',
 					'title' => esc_html__( 'New Year', 'merchant' ),
 				),
-				'halloween' => array(
+				'halloween'     => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/halloween.png',
 					'title' => esc_html__( 'Halloween', 'merchant' ),
 				),
-				'christmas' => array(
+				'christmas'     => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/christmas.png',
 					'title' => esc_html__( 'Christmas', 'merchant' ),
 				),
-				'black_friday' => array(
+				'black_friday'  => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/black_friday.png',
 					'title' => esc_html__( 'Black Friday', 'merchant' ),
 				),
-				'cyber_monday' => array(
+				'cyber_monday'  => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/cyber_monday.png',
 					'title' => esc_html__( 'Cyber Monday', 'merchant' ),
 				),
-				'valentine' => array(
+				'valentine'     => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/valentine.png',
 					'title' => esc_html__( 'Valentine', 'merchant' ),
 				),
-				'spring' => array(
+				'spring'        => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/spring.png',
 					'title' => esc_html__( 'Spring', 'merchant' ),
 				),
@@ -608,11 +638,21 @@ Merchant_Admin_Options::create( array(
 			),
 		),
 		array(
-			'id'      => 'background_color',
-			'type'    => 'color',
-			'title'   => esc_html__( 'Background color', 'merchant' ),
-			'default' => '#ffffff',
-			'desc'    => esc_html__( 'The background color of the notification box.', 'merchant' ),
+			'id'      => 'text_coloring',
+			'type'    => 'radio',
+			'title'   => __( 'Text coloring', 'merchant' ),
+			'options' => array(
+				'auto'   => esc_html__( 'Automatic', 'merchant' ),
+				'manual' => esc_html__( 'Manual', 'merchant' ),
+			),
+			'default' => 'auto',
+		),
+		array(
+			'id'         => 'background_color',
+			'type'       => 'color',
+			'title'      => esc_html__( 'Background color', 'merchant' ),
+			'default'    => '#ffffff',
+			'desc'       => esc_html__( 'The background color of the notification box.', 'merchant' ),
 			'conditions' => array(
 				'terms' => array(
 					array(
@@ -645,26 +685,49 @@ Merchant_Admin_Options::create( array(
 			'desc'    => esc_html__( 'The color of the border.', 'merchant' ),
 		),
 		array(
-			'id'      => 'notification_box_radius',
-			'type'    => 'range',
-			'min'     => '0',
-			'max'     => '100',
-			'step'    => '1',
-			'unit'    => 'PX',
-			'default' => '0',
-			'title'   => esc_html__( 'Notification corner radius', 'merchant' ),
-			'desc'    => esc_html__( 'The corner radius of the notification box.', 'merchant' ),
+			'id'      => 'message_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Notification message color', 'merchant' ),
+			'default' => '#000000',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'text_coloring', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'manual', // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 		array(
-			'id'      => 'product_image_radius',
-			'type'    => 'range',
-			'min'     => '0',
-			'max'     => '100',
-			'step'    => '1',
-			'unit'    => 'PX',
-			'default' => '0',
-			'title'   => esc_html__( 'Product image radius', 'merchant' ),
-			'desc'    => esc_html__( 'The corner radius of the product image.', 'merchant' ),
+			'id'      => 'product_name_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Product name color', 'merchant' ),
+			'default' => '#000000',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'text_coloring', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'manual', // can be a single value or an array of string/number/int
+					),
+				),
+			),
+		),
+		array(
+			'id'      => 'time_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Time color', 'merchant' ),
+			'default' => '#919191',
+			'conditions' => array(
+				'terms' => array(
+					array(
+						'field'    => 'text_coloring', // field ID
+						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+						'value'    => 'manual', // can be a single value or an array of string/number/int
+					),
+				),
+			),
 		),
 	),
 ) );
