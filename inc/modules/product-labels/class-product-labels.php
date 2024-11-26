@@ -341,8 +341,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$sale_data = array();
 
         if ( $product->is_type( 'variable' ) ) {
-	        $regular_price = (float) $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
-	        $sale_price    = (float) $product->get_variation_sale_price( 'min' );
+	        $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_variation_regular_price( 'min' ) ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
+
+	        /**
+	         * `merchant_product_labels_sale_data_sale_price`
+	         *
+	         * @since 1.10.5
+	         */
+	        $sale_price = apply_filters( 'merchant_product_labels_sale_data_sale_price', $sale_price, $product, $label );
 
 	        if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 		        $sale_data['amount']     = $regular_price - $sale_price;
@@ -374,8 +381,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		        $sale_data['percentage'] = $total_regular_price ? round( 100 - ( ( $total_sale_price / $total_regular_price ) * 100 ) ) : 0;
 	        }
         } else {
-            $regular_price = (float) $product->get_regular_price();
-            $sale_price    = (float) $product->get_sale_price();
+            $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
+
+	        /**
+	         * `merchant_product_labels_sale_data_sale_price`
+             *
+             * @since 1.10.5
+	         */
+            $sale_price = apply_filters( 'merchant_product_labels_sale_data_sale_price', $sale_price, $product, $label );
 
             if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 	            $sale_data['amount']     = $regular_price - $sale_price;
@@ -390,9 +404,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
          * @param WC_Product $product    The product object.
          * @param array      $label      The label data.
          *
-         * @since 1.9.7
+         * @since 1.10.5
          */
-        return apply_filters( 'merchant_product_labels_product_sale', $sale_data, $product, $label );
+        return apply_filters( 'merchant_product_labels_sale_data', $sale_data, $product, $label );
 	}
 
 	/**
