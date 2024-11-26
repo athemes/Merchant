@@ -104,11 +104,6 @@ if ( ! class_exists( 'Merchant_Custom_CSS' ) ) {
 				$css .= $this->get_variable_css( 'real-time-search', 'results_box_width', 500, '.merchant-ajax-search-wrapper', '--merchant-results-box-width', 'px' );
 			}
 
-			// Code Snippets
-			if ( Merchant_Modules::is_module_active( 'code-snippets' ) ) {
-				$css .= Merchant_Option::get( 'code-snippets', 'custom_css', '' );
-			}
-
 			// Global Settings.
 			if ( ! is_admin() ) {
 				$css .= Merchant_Option::get( 'global-settings', 'custom_css', '' );

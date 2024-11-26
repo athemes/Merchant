@@ -195,7 +195,7 @@ Merchant_Admin_Options::create(
 								'id'      => 'button_text',
 								'type'    => 'text',
 								'title'   => esc_html__( 'Button text', 'merchant' ),
-								'default' => esc_html__( 'Pre-Order Now!', 'merchant' ),
+								'default' => esc_html__( 'Pre-Order', 'merchant' ),
 							),
 
 							array(

@@ -39,6 +39,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
 
             add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
+
+            // Delete module data
+            add_action( 'admin_init', array( $this, 'delete_module_data' ) );
 		}
 
 		/**
@@ -2717,6 +2720,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( in_array( 'customer', $user_roles, true ) ) {
 				delete_transient( 'customers_select2_choices' );
             }
+        }
+
+		/**
+         * Delete module data.
+         *
+		 * @return void
+		 */
+		public function delete_module_data() {
+			$options = get_option( 'merchant', array() );
+
+            // Code Snippets module was removed, so delete data from DB as well.
+			if ( isset( $options['code-snippets'] ) ) {
+			    unset( $options['code-snippets'] );
+				update_option( 'merchant', $options );
+			}
         }
 	}
 
