@@ -13,6 +13,14 @@
         initPreview();
     });
 
+    $( document ).on( 'change', '.merchant-module-page-setting-field-select select', function () {
+        const selectedHook = $( this ).val();
+
+        let priority = merchant?.fbt_object?.hooks[selectedHook] || 10;
+
+        $( this ).closest( '.merchant-module-page-setting-field-hook_select' ).find( '.merchant-module-page-setting-field-number input' ).val( priority );
+    } );
+
     function initPreview() {
         let layout = $('.merchant-flexible-content-control.frequently-bought-together-style').find('.layout.active'),
             titleTextColor = layout.find('.merchant-field-title input').val(),
@@ -49,11 +57,11 @@
         $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info p').text(cartSaveLabel.replace('{amount}', '10%'));
         $('.merchant-cart-preview .my-cart .cart-table .cart-item .product .product-info .upsell-product .upsell-info .add-to-cart').text(cartBundleButtonText);
         $('.merchant-checkout-preview .offer-title').text(checkoutTitle.replace('{offer_quantity}', '3'));
-        $('.merchant-checkout-preview .product-details .product-info p').text(checkoutDiscountText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
+        $('.merchant-checkout-preview .product-details .product-info p').text(checkoutDiscountText.replace('{discount}', '10%').replace('{fbt_products}', merchant?.fbt_object.product_names));
         $('.merchant-checkout-preview .product-details .product-info .add-to-order').text(checkoutButtonText);
         $('.merchant-thank-you-preview .offer-title').text(thankYouTitle.replace('{offer_quantity}', '3').replace('{discount}', '10%'));
-        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
-        $('.merchant-thank-you-preview .merchant-tooltip .tooltip-text').html(thankYouBonusTipText.replace('{discount}', '10%').replace('{fbt_products}', fbt_object.product_names));
+        $('.merchant-thank-you-preview .product-details .product-info p').text(thankYouDiscountText.replace('{discount}', '10%').replace('{fbt_products}', merchant?.fbt_object.product_names));
+        $('.merchant-thank-you-preview .merchant-tooltip .tooltip-text').html(thankYouBonusTipText.replace('{discount}', '10%').replace('{fbt_products}', merchant?.fbt_object.product_names));
         $('.merchant-thank-you-preview .product-details .product-info .add-to-order').text(thankYouButtonText);
     }
 

@@ -172,14 +172,22 @@ Merchant_Admin_Options::create( array(
 							'fields'         => array(
 								array(
 									'id'      => 'single_product_placement',
-									'type'    => 'radio',
-									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+									'type'    => 'hook_select',
+									'title'   => esc_html__('Placement on product page', 'merchant'),
 									'options' => array(
 										'after-summary' => esc_html__( 'After Product Summary', 'merchant' ),
 										'after-tabs'    => esc_html__( 'After Product Tabs', 'merchant' ),
 										'bottom'        => esc_html__( 'At the Bottom', 'merchant' ),
 									),
-									'default' => 'after-summary',
+									'min'     => -999,
+									'max'     => 999,
+									'step'    => 1,
+									'unit'    => '',
+									'order'   => true,
+									'default' => array(
+										'hook_name'     => 'after-summary',
+										'hook_priority' => 10,
+									),
 								),
 
 								// text formatting settings
