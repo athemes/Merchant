@@ -452,13 +452,6 @@ Merchant_Admin_Options::create( array(
 			'default' => false,
 		),
 		array(
-			'id'      => 'show_verified_badge',
-			'type'    => 'checkbox',
-			'label'   => esc_html__( 'Show "Verified by aThemes" badge', 'merchant' ),
-			'desc'    => esc_html__( 'If enabled, it will show a Verified by aThemes badge in the popup. This will create an extra sense of trust for your visitors.', 'merchant' ),
-			'default' => true,
-		),
-		array(
 			'id'      => 'product_exclusion',
 			'type'    => 'switcher',
 			'title'   => __( 'Product Exclusion', 'merchant' ),
