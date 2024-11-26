@@ -1186,7 +1186,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return false;
 		}
 
-		if ( ('category' === $rule['trigger_on']) && empty( $rule['category_slugs'] ) ) {
+		if ( 'category' === $rule['trigger_on'] && empty( $rule['category_slugs'] ) ) {
 			return false;
 		}
 
