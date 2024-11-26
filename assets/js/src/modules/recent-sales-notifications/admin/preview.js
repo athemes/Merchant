@@ -1,71 +1,5 @@
 'use strict';
 (function ($) {
-	class MerchantRecentSalesNotificationsColorRecommender {
-		constructor(config) {
-			this.config = config;
-		}
-
-		rgbToLuminance(r, g, b) {
-			[r, g, b] = [r, g, b].map(c => {
-				c /= 255;
-				return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-			});
-			return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		}
-
-		analyzeColor(color) {
-			const [r, g, b] = color.match(/\d+/g).map(Number);
-			const luminance = this.rgbToLuminance(r, g, b);
-			return luminance > 0.5 ? 'dark-text-color-scheme' : 'light-text-color-scheme';
-		}
-
-		// Method to recommend text color based on background color or image
-		colorRecommender() {
-			let self = this;
-			let widget = $(this.config.widgetSelector);
-			let bgColor = widget.css("background-color");
-			let bgImage = widget.css("background-image");
-
-			// If background image is detected, analyze the dominant color in the center
-			if (bgImage && bgImage !== 'none') {
-				let imageUrl = bgImage.slice(5, -2); // Extract URL without `url("")`
-
-				let img = new Image();
-				img.crossOrigin = "Anonymous"; // Enable CORS for cross-origin images
-				img.src = imageUrl;
-
-				img.onload = function () {
-					let canvas = document.createElement('canvas');
-					let ctx = canvas.getContext('2d');
-					let {width, height} = img;
-
-					// Set canvas size to the center portion of the image for average color sampling
-					canvas.width = canvas.height = 1;
-					ctx.drawImage(img, width / 2, height / 2, 1, 1, 0, 0, 1, 1);
-
-					let pixelData = ctx.getImageData(0, 0, 1, 1).data;
-					let [r, g, b] = pixelData;
-
-					// Recommend text color based on image's center color luminance
-					const recommendedColor = self.analyzeColor(`rgb(${r}, ${g}, ${b})`);
-					widget.removeClass('light-text-color-scheme dark-text-color-scheme');
-					widget.addClass(recommendedColor);
-				};
-
-				return 'light-text-color-scheme'; // Temporary default class while image loads
-			} else if (/^rgb/.test(bgColor)) {
-				// If no background image, analyze background color
-				let recommendedColor = self.analyzeColor(bgColor);
-				widget.removeClass('light-text-color-scheme dark-text-color-scheme');
-				widget.addClass(recommendedColor);
-				return recommendedColor;
-			}
-
-			// Default to 'dark' if no valid color is detected
-			return 'dark-text-color-scheme';
-		}
-	}
-
 	/**
 	 * Initializes the preview of the recent sales notifications.
 	 *
@@ -75,7 +9,6 @@
 	 */
 	function merchantInitPreview(e = null) {
 		let widget = $('.merchant-recent-sales-notifications-widget'),
-			textColoring = $('.merchant-field-text_coloring input:checked').val(),
 			layout = $('.merchant-field-layout input:checked').val(),
 			themeType = $('.merchant-field-theme_type input:checked').val(),
 			theme = $('.merchant-field-theme input:checked').val(),
@@ -144,25 +77,9 @@
 		// Change product image border radius
 		document.documentElement.style.setProperty('--merchant-rsn-box-product-image-radius', productImageBorderRadius.val() + 'px');
 
-		widget.find('.merchant-notification-message').removeAttr('style');
-		widget.find('.merchant-notification-title').removeAttr('style');
-		widget.find('.merchant-notification-time').removeAttr('style');
-
-		setTimeout(function () {
-			if (textColoring === 'auto') {
-				let colorRecommender = new MerchantRecentSalesNotificationsColorRecommender({
-					widgetSelector: '.merchant-recent-sales-notifications-widget'
-				});
-
-				colorRecommender.colorRecommender();
-			}
-		}, 100);
-
-		if (textColoring === 'manual') {
-			widget.find('.merchant-notification-message').css('color', messageColor);
-			widget.find('.merchant-notification-title').css('color', productNameColor);
-			widget.find('.merchant-notification-time').css('color', timeColor);
-		}
+		widget.find('.merchant-notification-message').css('color', messageColor);
+		widget.find('.merchant-notification-title').css('color', productNameColor);
+		widget.find('.merchant-notification-time').css('color', timeColor);
 
 		if (hideProductImage) {
 			widget.find('.merchant-notification-image').hide();
