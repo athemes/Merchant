@@ -1,3 +1,16 @@
+<?php
+/**
+ * Template for the Recent Sales Notifications module preview.
+ *
+ * @var $args array template args
+ *
+ * @since 1.10.3
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 <div class="merchant-recent-sales-notifications-widget top-right widget-layout-1 show" data-product-id="24">
     <button type="button" class="merchant-close-notification" title="Snooze for 30 minutes">
         <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
