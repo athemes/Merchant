@@ -441,14 +441,14 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'hide_product_image',
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide product image', 'merchant' ),
-			'desc'    => esc_html__( 'if turned on, product image will be hidden from notification banners.', 'merchant' ),
+			'desc'    => esc_html__( 'If turned on, product image will be hidden from notification banners.', 'merchant' ),
 			'default' => false,
 		),
 		array(
 			'id'      => 'hide_product_name',
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide product name from notifications', 'merchant' ),
-			'desc'    => esc_html__( 'if turned on, product names will be hidden from notification banners.', 'merchant' ),
+			'desc'    => esc_html__( 'If turned on, product names will be hidden from notification banners.', 'merchant' ),
 			'default' => false,
 		),
 		array(
@@ -456,7 +456,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Show "Verified by aThemes" badge', 'merchant' ),
 			'desc'    => esc_html__( 'If enabled, it will show a Verified by aThemes badge in the popup. This will create an extra sense of trust for your visitors.', 'merchant' ),
-			'default' => false,
+			'default' => true,
 		),
 		array(
 			'id'      => 'product_exclusion',
@@ -568,7 +568,7 @@ Merchant_Admin_Options::create( array(
 				'custom'   => esc_html__( 'Custom', 'merchant' ),
 				'template' => esc_html__( 'Template', 'merchant' ),
 			),
-			'default' => 'template',
+			'default' => 'custom',
 		),
 		array(
 			'id'         => 'theme',
@@ -605,7 +605,7 @@ Merchant_Admin_Options::create( array(
 				),
 				'thanks_giving' => array(
 					'image' => MERCHANT_URI . 'assets/images/modules/recent-sales-notifications/thanks_giving.png',
-					'title' => esc_html__( 'Thanks Giving', 'merchant' ),
+					'title' => esc_html__( 'Thanksgiving', 'merchant' ),
 				),
 			),
 			'default'    => 'new_year',
@@ -636,16 +636,6 @@ Merchant_Admin_Options::create( array(
 					),
 				),
 			),
-		),
-		array(
-			'id'      => 'text_coloring',
-			'type'    => 'radio',
-			'title'   => __( 'Text coloring', 'merchant' ),
-			'options' => array(
-				'auto'   => esc_html__( 'Automatic', 'merchant' ),
-				'manual' => esc_html__( 'Manual', 'merchant' ),
-			),
-			'default' => 'auto',
 		),
 		array(
 			'id'         => 'background_color',
@@ -689,45 +679,18 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'color',
 			'title'   => esc_html__( 'Notification message color', 'merchant' ),
 			'default' => '#000000',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'text_coloring', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => 'manual', // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'      => 'product_name_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Product name color', 'merchant' ),
 			'default' => '#000000',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'text_coloring', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => 'manual', // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 		array(
 			'id'      => 'time_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Time color', 'merchant' ),
 			'default' => '#919191',
-			'conditions' => array(
-				'terms' => array(
-					array(
-						'field'    => 'text_coloring', // field ID
-						'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
-						'value'    => 'manual', // can be a single value or an array of string/number/int
-					),
-				),
-			),
 		),
 	),
 ) );
