@@ -489,14 +489,19 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return $html_price;
 		}
 
-		if ( ! is_admin() && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
+		if ( ( ! is_admin() || wp_doing_ajax() ) && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
 			if ( '' === $product->get_price() ) {
 				return $html_price;
 			}
 
 			$offer = self::available_product_rule( $product->get_id() );
+
 			if ( empty( $offer ) && $product->is_type( 'variation' ) ) {
 				$offer = self::available_product_rule( $product->get_parent_id() );
+				$is_excluded = merchant_is_product_excluded( $product->get_id(), $offer );
+				if ( $is_excluded ) {
+					$offer = array();
+				}
 			}
 
 			if ( $product->is_type( 'variable' ) ) {
@@ -519,13 +524,25 @@ class Merchant_Pre_Orders_Main_Functionality {
 	private function variable_product_price_html( $product ) {
 		$prices     = array();
 		$variations = $product->get_children();
+
 		foreach ( $variations as $variation_id ) {
 			$variation       = wc_get_product( $variation_id );
 			$variation_offer = self::available_product_rule( $variation_id );
-			$regular_price   = $variation->get_regular_price();
+			$regular_price   =  $variation->get_regular_price();
+
+			if ( empty( $variation_offer ) ) {
+				$variation_offer = self::available_product_rule( $product->get_id() );
+
+				$is_excluded = merchant_is_product_excluded( $variation_id, $variation_offer );
+				if ( $is_excluded ) {
+					$prices[] = $regular_price;
+					continue;
+				}
+			}
+
 			if ( empty( $variation_offer ) ) {
 				if ( $variation->is_on_sale() ) {
-					$sale_price = $variation->get_sale_price();
+					$sale_price = wc_get_price_to_display( $variation );
 				} else {
 					$sale_price = $regular_price;
 				}
@@ -536,7 +553,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			if ( $sale_price <= 0 ) {
 				// If the price is less than 0, set it to the regular/sale price
 				if ( $variation->is_on_sale() ) {
-					$sale_price = $variation->get_sale_price();
+					$sale_price = wc_get_price_to_display( $variation );
 				} else {
 					$sale_price = $regular_price;
 				}
@@ -566,7 +583,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		if ( ! $sale ) {
 			return $html_price;
 		}
-		$regular_price    = $product->get_regular_price();
+		$regular_price    = wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
 		$discounted_price = $this->calculate_discounted_price( $regular_price, $offer, $product );
 
 		return wc_format_sale_price( $regular_price, $discounted_price );
@@ -638,14 +655,26 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 			$product_id = $cart_item['data']->get_id();
 			$product    = wc_get_product( $product_id );
-			if ( ! is_admin() && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
+
+			if ( ( ! is_admin() || wp_doing_ajax() ) && in_array( $product->get_type(), $this->allowed_product_types(), true ) ) {
 				$offer = self::available_product_rule( $product->get_id() );
+
 				if ( $product->is_type( 'variable' ) ) {
 					$product_id = $cart_item['variation_id'];
 					$product    = wc_get_product( $product_id );
 					// check if the variation has an offer
 					$offer = self::available_product_rule( $product_id );
 				}
+
+				if ( empty( $offer ) && $product->is_type( 'variation' ) ) {
+					$offer = self::available_product_rule( $product->get_parent_id() );
+
+					$is_excluded = merchant_is_product_excluded( $product_id, $offer );
+					if ( $is_excluded ) {
+						continue;
+					}
+				}
+
 				if ( empty( $offer ) ) {
 					continue;
 				}
@@ -1278,13 +1307,19 @@ class Merchant_Pre_Orders_Main_Functionality {
 					}
 				}
 
-				if ( 'product' === $rule['trigger_on'] && in_array( $product_id, $rule['product_ids'], true ) ) {
+				$trigger = $rule['trigger_on'] ?? 'product';
+
+				$is_excluded = merchant_is_product_excluded( $product_id, $rule );
+				if ( $is_excluded ) {
+					continue;
+				}
+
+				if ( 'product' === $trigger && in_array( $product_id, $rule['product_ids'], true ) ) {
 					$available_rule = $rule;
 					break;
-				}
-				if ( 'category' === $rule['trigger_on'] || 'tags' === $rule['trigger_on'] ) {
-					$taxonomy = $rule['trigger_on'] === 'category' ? 'product_cat' : 'product_tag';
-					$slugs    = $rule['trigger_on'] === 'category' ? ( $rule['category_slugs'] ?? array() ) : ( $rule['tag_slugs'] ?? array() );
+				} elseif ( 'category' === $trigger || 'tags' === $trigger ) {
+					$taxonomy = $trigger === 'category' ? 'product_cat' : 'product_tag';
+					$slugs    = $trigger === 'category' ? ( $rule['category_slugs'] ?? array() ) : ( $rule['tag_slugs'] ?? array() );
 
 					$terms = get_the_terms( $product_id, $taxonomy );
 					if ( ! empty( $terms ) ) {
@@ -1295,6 +1330,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 							}
 						}
 					}
+				} elseif ( 'all' === $trigger ) {
+					$available_rule = $rule;
 				}
 			}
 		}

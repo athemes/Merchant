@@ -691,12 +691,17 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
  */
 if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 	function merchant_is_product_excluded( $product_id, $args = array() ) {
-		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? 'products';
+		if ( empty( $args['exclusion_enabled'] ) ) {
+			return false;
+		}
+
+		$display_rule = $args['rules_to_display'] ?? $args['display_rules'] ?? $args['rules_to_apply'] ?? $args['trigger_on'] ?? 'products';
 
 		$rules = array(
 			'all',
 			'all_products',
 			'categories',
+			'category',
 			'by_category',
 			'tags',
 			'by_tags',
@@ -707,12 +712,15 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 			'pre-order',
 		);
 
+		$product     = wc_get_product( $product_id );
+		$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
+
 		// Exclude products
 		if ( in_array( $display_rule, $rules, true ) ) {
 			$excluded_product_ids = $args['excluded_products'] ?? array();
 			$excluded_product_ids = merchant_parse_product_ids( $excluded_product_ids );
 
-			if ( in_array( (int) $product_id, $excluded_product_ids, true ) ) {
+			if ( in_array( (int) $product_id, $excluded_product_ids, true ) || in_array( (int) $_product_id, $excluded_product_ids, true ) ) {
 				return true;
 			}
 		}
@@ -720,9 +728,6 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 		// Exclude categories
 		if ( in_array( $display_rule, array( 'all', 'all_products' ), true ) ) {
 			$excluded_categories_slugs = $args['excluded_categories'] ?? array();
-
-			$product     = wc_get_product( $product_id );
-			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
 
 			if ( ! empty( $excluded_categories_slugs ) && has_term( $excluded_categories_slugs, 'product_cat', $_product_id ) ) {
 				return true;
@@ -733,9 +738,6 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 		if ( in_array( $display_rule, array( 'all', 'all_products' ), true ) ) {
 			$excluded_tags_slugs = $args['excluded_tags'] ?? array();
 
-			$product     = wc_get_product( $product_id );
-			$_product_id = $product && $product->is_type( 'variation' ) ? $product->get_parent_id() : $product_id;
-
 			if ( ! empty( $excluded_tags_slugs ) && has_term( $excluded_tags_slugs, 'product_tag', $_product_id ) ) {
 				return true;
 			}
@@ -745,6 +747,37 @@ if ( ! function_exists( 'merchant_is_product_excluded' ) ) {
 	}
 }
 
+/**
+ * Check if a product or any of its variations is excluded based on the given offer.
+ *
+ * This method determines if a product (simple or variable) or any of its variations
+ * satisfies the merchant exclusion rules.
+ *
+ * @param int   $product_id The ID of the product to check.
+ * @param array $offer      The offer data to evaluate against exclusion rules.
+ *
+ * @return bool True if the product or any of its variations is excluded, false otherwise.
+ */
+if ( ! function_exists( 'merchant_is_product_or_variation_excluded' ) ) {
+	function merchant_is_product_or_variation_excluded( $product_id, $offer = array() ) {
+		$product = wc_get_product( $product_id );
+
+		if ( ! $product ) {
+			return false;
+		}
+
+		// Get IDs to check for exclusion
+		$product_ids = $product->is_type( 'variable' ) ? $product->get_children() : array( $product_id );
+
+		foreach ( $product_ids as $id ) {
+			if ( merchant_is_product_excluded( $id, $offer ) ) {
+				return true; // Excluded if any ID matches
+			}
+		}
+
+		return false;
+	}
+}
 
 /**
  * Get the label of the first active payment gateway in WooCommerce.

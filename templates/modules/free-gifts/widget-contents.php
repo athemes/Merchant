@@ -92,6 +92,38 @@ foreach ( $args['offers'] as $offer ) :
 				}
 				break;
 
+			case 'tags':
+				if ( ! empty( $offer['tag_slugs'] ) ) {
+					$tags = array();
+					foreach ( $offer['tag_slugs'] as $tag_slug ) {
+						$tag_data = get_term_by( 'slug', $tag_slug, 'product_tag' );
+						if ( $tag_data ) {
+							$tags[] = $tag_data->name;
+						}
+					}
+
+					if ( empty( $tags ) ) {
+						break;
+					}
+
+					$cart_total      = $offer['cart_total_tag'] ?? 0;
+					$_title          = sprintf(
+					/* Translators: 1. Term Name */
+						_n( '%s tag', '%s tags', count( $tags ), 'merchant' ),
+						implode( ', ', $tags )
+					);
+					$title_shortcode = '{tags}';
+
+					if ( $cart_total >= $goal_amount ) {
+						$spending_text = $spending_text_100;
+					} elseif ( $cart_total > 0 ) {
+						$spending_text = $spending_text_1_to_99;
+					} else {
+						$spending_text = $spending_text_0;
+					}
+				}
+				break;
+
 			case 'all':
 				$cart_total = $offer['cart_total_all'] ?? 0;
 				if ( $cart_total >= $goal_amount ) {

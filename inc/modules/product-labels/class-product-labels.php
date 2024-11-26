@@ -149,6 +149,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+        $this->migrate_exclusion_list();
 	}
 
 	/**
@@ -1106,6 +1108,43 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Migrate Exclusion list which was introduced later for the Excluded products.
+	 *
+	 * By default, it's off. So turn it off if condition matches.
+	 *
+	 * @return void
+	 */
+	private function migrate_exclusion_list() {
+		$option = 'merchant_' . $this->module_id .'_exclusion_list';
+
+		if ( get_option( $option, false ) || ! method_exists( 'Merchant_Admin_Options', 'set' ) ) {
+			return;
+		}
+
+		$labels = Merchant_Admin_Options::get( $this->module_id, 'labels', array() );
+		if ( ! empty( $labels ) ) {
+			$update = false;
+			foreach ( $labels as $key => $offer ) {
+				$excluded_products   = $offer['excluded_products'] ?? '';
+				$excluded_categories = $offer['excluded_categories'] ?? array();
+				$excluded_tags       = $offer['excluded_tags'] ?? array();
+
+				if ( ! empty( $excluded_products ) || ! empty( $excluded_categories ) || ! empty( $excluded_tags ) ) {
+					$labels[ $key ]['exclusion_enabled'] = true;
+					$update = true;
+				}
+			}
+
+			// Update only if necessary.
+			if ( $update ) {
+				Merchant_Admin_Options::set( $this->module_id, 'labels', $labels );
+			}
+
+			update_option( $option, true, false );
+		}
 	}
 }
 

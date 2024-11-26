@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Frequently Bought Together Options.
+ * Storewide Sale Options.
  *
  * @package Merchant
  */
@@ -39,9 +39,10 @@ Merchant_Admin_Options::create( array(
 							'type'    => 'select',
 							'title'   => esc_html__( 'Trigger', 'merchant' ),
 							'options' => array(
-								'all'        => esc_html__( 'All products', 'merchant' ),
-								'products'   => esc_html__( 'Specific products', 'merchant' ),
-								'categories' => esc_html__( 'Specific categories', 'merchant' ),
+								'all'        => esc_html__( 'All Products', 'merchant' ),
+								'products'   => esc_html__( 'Specific Products', 'merchant' ),
+								'categories' => esc_html__( 'Specific Categories', 'merchant' ),
+								'tags'       => esc_html__( 'Specific Tags', 'merchant' ),
 							),
 							'default' => 'all',
 						),
@@ -50,7 +51,7 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'products_selector',
 							//'title'    => esc_html__( 'Select a product', 'merchant' ),
 							'multiple'  => true,
-							'desc'      => esc_html__( 'Select the product(s) included in this discount campaign.', 'merchant' ),
+							'desc'      => esc_html__( 'Select the products included in this discount campaign.', 'merchant' ),
 							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
@@ -61,17 +62,63 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product category(s) that will show the offer.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
+
 						array(
-							'id'        => 'excluded_products',
-							'type'      => 'products_selector',
-							'title'     => esc_html__( 'Exclude products', 'merchant' ),
-							'multiple'  => true,
-							'desc'      => esc_html__( 'Exclude product(s) from this discount campaign.', 'merchant' ),
-							'condition' => array( 'rules_to_display', 'any', 'all|categories' ),
+							'id'          => 'tag_slugs',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that will show the offer.', 'merchant' ),
+							'condition'   => array( 'rules_to_display', '==', 'tags' ),
 						),
+
+						array(
+							'id'         => 'exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select the products that will not show the offer.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+								),
+							),
+						),
+
+						array(
+							'id'         => 'excluded_products',
+							'type'       => 'products_selector',
+							'title'      => esc_html__( 'Exclude products', 'merchant' ),
+							'multiple'   => true,
+							'desc'       => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
 						array(
 							'id'          => 'excluded_categories',
 							'type'        => 'select_ajax',
@@ -81,8 +128,49 @@ Merchant_Admin_Options::create( array(
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Exclude categories from this discount campaign.', 'merchant' ),
-							'condition'   => array( 'rules_to_display', '==', 'all' ),
+							'conditions'  => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
+
+						array(
+							'id'          => 'excluded_tags',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude tags from this discount campaign.', 'merchant' ),
+							'conditions'  => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
 						array(
 							'id'      => 'discount_type',
 							'type'    => 'radio',
