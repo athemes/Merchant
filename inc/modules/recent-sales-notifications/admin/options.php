@@ -53,7 +53,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'single_product_purchase',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Sales Pop', 'merchant' ),
+			'title'          => esc_html__( 'Recent Purchases', 'merchant' ),
 			'sub-desc'       => esc_html__( 'Show recently purchased orders to build trust and FOMO (fear of missing out).', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
@@ -73,12 +73,9 @@ Merchant_Admin_Options::create( array(
 					'type'    => 'select',
 					'title'   => esc_html__( 'Time unit', 'merchant' ),
 					'options' => array(
-						'YEAR'   => esc_html__( 'Years', 'merchant' ),
-						'MONTH'  => esc_html__( 'Months', 'merchant' ),
 						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
 						'DAY'    => esc_html__( 'Days', 'merchant' ),
 						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
-						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
 					),
 					'default' => 'DAY',
 				),
@@ -139,7 +136,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'             => 'product_purchases_count',
 			'type'           => 'fields_group',
-			'title'          => esc_html__( 'Sold Count', 'merchant' ),
+			'title'          => esc_html__( 'Sales Count', 'merchant' ),
 			'sub-desc'       => esc_html__( 'Show the number of successful orders to encourage customers to purchase products', 'merchant' ),
 			'state'          => 'closed',
 			'default'        => 'active',
@@ -280,12 +277,9 @@ Merchant_Admin_Options::create( array(
 					'type'    => 'select',
 					'title'   => esc_html__( 'Time unit', 'merchant' ),
 					'options' => array(
-						'YEAR'   => esc_html__( 'Years', 'merchant' ),
-						'MONTH'  => esc_html__( 'Months', 'merchant' ),
 						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
 						'DAY'    => esc_html__( 'Days', 'merchant' ),
 						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
-						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
 					),
 					'default' => 'HOUR',
 				),
@@ -359,19 +353,18 @@ Merchant_Admin_Options::create( array(
 					'title'   => esc_html__( 'Time period', 'merchant' ),
 					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who viewed a product.',
 						'merchant' ),
-					'default' => '7',
+					'default' => '1',
+					'max'     => '30',
+					'min'     => '1',
 				),
 				array(
 					'id'      => 'time_unit',
 					'type'    => 'select',
 					'title'   => esc_html__( 'Time unit', 'merchant' ),
 					'options' => array(
-						'YEAR'   => esc_html__( 'Years', 'merchant' ),
-						'MONTH'  => esc_html__( 'Months', 'merchant' ),
 						'WEEK'   => esc_html__( 'Weeks', 'merchant' ),
 						'DAY'    => esc_html__( 'Days', 'merchant' ),
 						'HOUR'   => esc_html__( 'Hours', 'merchant' ),
-						'MINUTE' => esc_html__( 'Minutes', 'merchant' ),
 					),
 					'default' => 'DAY',
 				),
@@ -380,7 +373,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Singular Template', 'merchant' ),
 					'desc'        => esc_html__( 'Singular template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} person viewed this item today', 'merchant' ),
+					'default'     => esc_html__( '{count} person has viewed this item today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
@@ -397,7 +390,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Plural Template', 'merchant' ),
 					'desc'        => esc_html__( 'Plural template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} people viewed this item today', 'merchant' ),
+					'default'     => esc_html__( '{count} people have viewed this item today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
