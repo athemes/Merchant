@@ -67,6 +67,7 @@ Merchant_Admin_Options::create( array(
 					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who purchased a product.',
 						'merchant' ),
 					'default' => '7',
+					'min'     => '1',
 				),
 				array(
 					'id'      => 'time_unit',
@@ -271,6 +272,7 @@ Merchant_Admin_Options::create( array(
 					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who added a product to their cart.',
 						'merchant' ),
 					'default' => '2',
+					'min'     => '1',
 				),
 				array(
 					'id'      => 'time_unit',
@@ -354,7 +356,6 @@ Merchant_Admin_Options::create( array(
 					'desc'    => esc_html__( 'Choose the number of days, weeks, or other time unit to look back when displaying the count of customers who viewed a product.',
 						'merchant' ),
 					'default' => '1',
-					'max'     => '30',
 					'min'     => '1',
 				),
 				array(
