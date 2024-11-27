@@ -1,5 +1,33 @@
 'use strict';
 (function ($) {
+
+	/**
+	 * Set max value for the input field based on the unit
+	 *
+	 * @param element The input field
+	 * @param unit The unit of the input field
+	 */
+	function setMaxValue(element, unit) {
+		if('WEEK' === unit) {
+			element.attr('max', 4);
+			if (element.val() > 4) {
+				element.val(4);
+			}
+		}
+		if('DAY' === unit) {
+			element.attr('max', 30);
+			if (element.val() > 30) {
+				element.val(30);
+			}
+		}
+		if('HOUR' === unit) {
+			element.attr('max', 720);
+			if (element.val() > 720) {
+				element.val(720);
+			}
+		}
+	}
+
 	/**
 	 * Initializes the preview of the recent sales notifications.
 	 *
@@ -23,7 +51,14 @@
 			boxBorderRadius = $('.merchant-field-notification_box_radius input'),
 			productImageBorderRadius = $('.merchant-field-product_image_radius input'),
 			closeBtnBgColor = $('.merchant-field-close_btn_bg_color input').val(),
-			closeBtnColor = $('.merchant-field-close_btn_color input').val();
+			closeBtnColor = $('.merchant-field-close_btn_color input').val(),
+			recentPurchasesUnit = $('.merchant-field-single_product_purchase .merchant-field-time_unit select').val(),
+			cartNotificationUnit = $('.merchant-field-single_product_add_to_cart .merchant-field-time_unit select').val(),
+			visitorsCountUnit = $('.merchant-field-product_views_settings .merchant-field-time_unit select').val();
+
+		setMaxValue($('.merchant-field-single_product_purchase .merchant-field-time_span input'), recentPurchasesUnit);
+		setMaxValue($('.merchant-field-single_product_add_to_cart .merchant-field-time_span input'), cartNotificationUnit);
+		setMaxValue($('.merchant-field-product_views_settings .merchant-field-time_span input'), visitorsCountUnit);
 
 		// remove all classes starts with merchant-rsn-
 		widget.attr('class', function (i, c) {
