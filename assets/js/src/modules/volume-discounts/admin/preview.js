@@ -48,8 +48,6 @@
             'font-weight': titleTextFontWeight
         }).html(titleText);
 
-        console.log(bgColorHover)
-
         $('.merchant-volume-discounts-item').css({
             '--merchant-item-text-color': textColor,
             '--merchant-item-text-color-hover': textColorHover || textColor,
