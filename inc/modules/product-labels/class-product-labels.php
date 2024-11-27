@@ -149,6 +149,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+        $this->migrate_exclusion_list();
 	}
 
 	/**
@@ -341,8 +343,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		$sale_data = array();
 
         if ( $product->is_type( 'variable' ) ) {
-	        $regular_price = (float) $product->get_variation_regular_price( 'min' ); // check how works with 'max' as well
-	        $sale_price    = (float) $product->get_variation_sale_price( 'min' );
+	        $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_variation_regular_price( 'min' ) ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
+
+	        /**
+	         * `merchant_product_labels_sale_data_sale_price`
+	         *
+	         * @since 1.10.5
+	         */
+	        $sale_price = apply_filters( 'merchant_product_labels_sale_data_sale_price', $sale_price, $product, $label );
 
 	        if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 		        $sale_data['amount']     = $regular_price - $sale_price;
@@ -374,8 +383,15 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		        $sale_data['percentage'] = $total_regular_price ? round( 100 - ( ( $total_sale_price / $total_regular_price ) * 100 ) ) : 0;
 	        }
         } else {
-            $regular_price = (float) $product->get_regular_price();
-            $sale_price    = (float) $product->get_sale_price();
+            $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
+            $sale_price    = (float) wc_get_price_to_display( $product );
+
+	        /**
+	         * `merchant_product_labels_sale_data_sale_price`
+             *
+             * @since 1.10.5
+	         */
+            $sale_price = apply_filters( 'merchant_product_labels_sale_data_sale_price', $sale_price, $product, $label );
 
             if ( 0 !== $sale_price || ! empty( $sale_price ) ) {
 	            $sale_data['amount']     = $regular_price - $sale_price;
@@ -390,9 +406,9 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
          * @param WC_Product $product    The product object.
          * @param array      $label      The label data.
          *
-         * @since 1.9.7
+         * @since 1.10.5
          */
-        return apply_filters( 'merchant_product_labels_product_sale', $sale_data, $product, $label );
+        return apply_filters( 'merchant_product_labels_sale_data', $sale_data, $product, $label );
 	}
 
 	/**
@@ -1092,6 +1108,43 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Migrate Exclusion list which was introduced later for the Excluded products.
+	 *
+	 * By default, it's off. So turn it off if condition matches.
+	 *
+	 * @return void
+	 */
+	private function migrate_exclusion_list() {
+		$option = 'merchant_' . $this->module_id .'_exclusion_list';
+
+		if ( get_option( $option, false ) || ! method_exists( 'Merchant_Admin_Options', 'set' ) ) {
+			return;
+		}
+
+		$labels = Merchant_Admin_Options::get( $this->module_id, 'labels', array() );
+		if ( ! empty( $labels ) ) {
+			$update = false;
+			foreach ( $labels as $key => $offer ) {
+				$excluded_products   = $offer['excluded_products'] ?? '';
+				$excluded_categories = $offer['excluded_categories'] ?? array();
+				$excluded_tags       = $offer['excluded_tags'] ?? array();
+
+				if ( ! empty( $excluded_products ) || ! empty( $excluded_categories ) || ! empty( $excluded_tags ) ) {
+					$labels[ $key ]['exclusion_enabled'] = true;
+					$update = true;
+				}
+			}
+
+			// Update only if necessary.
+			if ( $update ) {
+				Merchant_Admin_Options::set( $this->module_id, 'labels', $labels );
+			}
+
+			update_option( $option, true, false );
+		}
 	}
 }
 

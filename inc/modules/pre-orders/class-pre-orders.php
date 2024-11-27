@@ -104,7 +104,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		$main_func->init();
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return;
 		}
 

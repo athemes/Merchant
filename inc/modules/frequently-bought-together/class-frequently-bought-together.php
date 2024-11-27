@@ -94,6 +94,12 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
+			// Enqueue admin scripts.
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
+
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
@@ -138,16 +144,37 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		if ( parent::is_module_settings_page() ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/frequently-bought-together.min.css', array(), MERCHANT_VERSION );
 			wp_enqueue_style( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/admin/preview.min.css', array(), MERCHANT_VERSION );
+
+		}
+	}
+
+	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		if ( $this->is_module_settings_page() ) {
 			wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array( 'jquery' ),
 				MERCHANT_VERSION, true );
-			wp_localize_script(
-				'merchant-admin-' . self::MODULE_ID,
-				'fbt_object',
-				array(
-					'product_names' => esc_html__( 'Product 1, Product 2, Product 3', 'merchant' ),
-				)
-			);
-		}
+
+        }
+	}
+
+	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $script ) {
+		$script['fbt_object'] = array(
+			'product_names' => esc_html__( 'Product 1, Product 2, Product 3', 'merchant' ),
+            'hooks'         => array(
+                'after-summary' => 10,
+                'after-tabs'    => 15,
+                'bottom'        => 20,
+            ),
+		);
+
+		return $script;
 	}
 
 	/**

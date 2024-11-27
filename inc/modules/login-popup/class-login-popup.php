@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Floating login popup class.
+ * Login popup class.
  *
  */
 class Merchant_Login_Popup extends Merchant_Add_Module {
@@ -48,7 +48,7 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-			'login_link_text' => esc_html__( 'Login', 'merchant' ),
+			'login_link_text'      => esc_html__( 'Login', 'merchant' ),
 			'show_welcome_message' => true,
 			/* Translators: 1. Display name */
 			'welcome_message_text' => sprintf( esc_html__( 'Welcome %s', 'merchant' ), '{display_name}' ),
@@ -74,13 +74,15 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 			// Enqueue admin scripts.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -122,9 +124,16 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
-
-		// Register and enqueue the main module script.
 		wp_enqueue_script( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/login-popup.min.js', array(), MERCHANT_VERSION, true );
+	}
+
+	/**
+	 * Localize Script.
+	 */
+	public function localize_script( $script ) {
+		$script['is_admin'] = is_admin();
+
+		return $script;
 	}
 
 	/**
@@ -152,11 +161,13 @@ class Merchant_Login_Popup extends Merchant_Add_Module {
 					),
 				)
 			);
+			$preview->set_text( 'login_link_text', '.merchant-login-popup-button' );
+
 			$preview->set_css( 'login-text-color', '.merchant-login-popup-dropdown', '--merchant-login-text-color' );
 			$preview->set_css( 'login-text-color-hover', '.merchant-login-popup-dropdown', '--merchant-login-text-color-hover' );
 			$preview->set_css( 'dropdown-background-color', '.merchant-login-popup-dropdown', '--merchant-dropdown-background-color' );
 			$preview->set_css( 'dropdown-link-color', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color' );
-			$preview->set_css( 'dropdown-link-color-hover', '#515151', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color-hover' );
+			$preview->set_css( 'dropdown-link-color-hover', '.merchant-login-popup-dropdown', '--merchant-dropdown-link-color-hover' );
 
 			$preview->set_css( 'popup-width', '.merchant-login-popup', '--merchant-popup-width', 'px' );
 			$preview->set_css( 'popup-title-color', '.merchant-login-popup', '--merchant-popup-title-color' );
