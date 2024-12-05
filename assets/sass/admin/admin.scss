@@ -3484,7 +3484,7 @@ body.merchant-module-disabled {
 
 				.product-review-content {
 					flex: none;
-					width: 240px;
+					width: 140px;
 				}
 
 				.spacer{
@@ -3500,6 +3500,14 @@ body.merchant-module-disabled {
 				.product-review-product-name,
 				.product-review-product-image {
 					display: block;
+				}
+
+				.product-review-product-image {
+					a {
+						img {
+							width: 30px;
+						}
+					}
 				}
 
 				.product-review-product-name {
