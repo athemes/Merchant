@@ -938,6 +938,121 @@ $merchant_module_id = Merchant_Advanced_Reviews::MODULE_ID;
 Merchant_Admin_Options::create(
 	array(
 		'module' => $merchant_module_id,
+		'title'  => esc_html__( 'Showcase reviews', 'merchant' ),
+		'fields' => array(
+			array(
+				'id'      => 'carousel_toggle',
+				'type'    => 'switcher',
+				'title'   => esc_html__( 'Use reviews carousel', 'merchant' ),
+				'default' => 0,
+			),
+			array(
+				'id'           => 'carousels',
+				'type'         => 'flexible_content',
+				'sorting'      => true,
+				'accordion'    => true,
+				'duplicate'    => true,
+				'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
+				'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+				'conditions'   => array(
+					'terms' => array(
+						array(
+							'field'    => 'carousel_toggle', // field ID
+							'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+							'value'    => true, // can be a single value or an array of string/number/int
+						),
+					),
+				),
+				'layouts'      => array(
+					'carousels' => array(
+						'title'  => esc_html__( 'Reviews', 'merchant' ),
+						'fields' => array(
+							array(
+								'id'      => 'enable',
+								'type'    => 'switcher',
+								'title'   => esc_html__( 'Enable this carousel', 'merchant' ),
+								'default' => 1,
+							),
+							array(
+								'id'      => 'carousel_title',
+								'type'    => 'text',
+								'title'   => __( 'Carousel title', 'merchant' ),
+								'desc'    => __( 'This title will be displayed above the carousel.', 'merchant' ),
+								'default' => __( 'What our customers say', 'merchant' ),
+							),
+							array(
+								'id'    => 'reviews',
+								'type'  => 'reviews_selector',
+								'title' => __( 'Reviews', 'merchant' ),
+							),
+							array(
+								'id'      => 'show_on',
+								'type'    => 'radio',
+								'title'   => esc_html__( 'Show on', 'merchant' ),
+								'options' => array(
+									'shop_page' => esc_html__( 'Shop page', 'merchant' ),
+									'shortcode' => esc_html__( 'Shortcode', 'merchant' ),
+								),
+								'default' => 'shortcode',
+							),
+							array(
+								'id'         => 'placement',
+								'type'       => 'select',
+								'title'      => esc_html__( 'Placement', 'merchant' ),
+								'options'    => array(
+									'woocommerce_before_main_content' => esc_html__( 'Before Main Content', 'merchant' ),
+									'woocommerce_after_main_content'  => esc_html__( 'After Main Content', 'merchant' ),
+								),
+								'default'    => 'woocommerce_before_main_content',
+								'conditions' => array(
+									'terms' => array(
+										array(
+											'field'    => 'show_on', // field ID
+											'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+											'value'    => 'shop_page', // can be a single value or an array of string/number/int
+										),
+									),
+								),
+							),
+							array(
+								'id'         => 'shortcode_info',
+								'type'       => 'info',
+								'content'    => sprintf(
+								/* Translators: 1. Link open tag 2. Link close tag */
+									__(
+										'Use this shortcode %s to showcase the reviews carousel, and include the instance number in the shortcode ID.',
+										'merchant'
+									),
+									'<strong>[merchant_reviews_carousel id="1"]</strong>'
+								),
+								'conditions' => array(
+									'terms' => array(
+										array(
+											'field'    => 'show_on', // field ID
+											'operator' => '===', // Available operators: ===, !==, >, <, >=, <=, in, !in, contains, !contains
+											'value'    => 'shortcode', // can be a single value or an array of string/number/int
+										),
+									),
+								),
+							),
+						),
+					),
+				),
+				'default'      => array(
+					array(
+						'layout' => 'carousels',
+						'label'  => esc_html__( 'Reviews carousels', 'merchant' ),
+					),
+				),
+			),
+
+		),
+	)
+);
+
+Merchant_Admin_Options::create(
+	array(
+		'module' => $merchant_module_id,
 		'title'  => esc_html__( 'Use shortcode', 'merchant' ),
 		'fields' => array(
 			array(
