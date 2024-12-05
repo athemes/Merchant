@@ -509,9 +509,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
-                case 'reviews_selector':
-                    $value = array_map( 'absint', $value );
-                    break;
+				case 'reviews_selector':
+					if ( ! is_array( $value ) ) {
+						$value = explode( ',', $value );
+					}
+					$value = array_map( 'absint', $value );
+					break;
 
 				case 'hook_select':
 					$value = is_array( $value ) ? $value : array();
