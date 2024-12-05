@@ -570,10 +570,8 @@
                     self.makeSelectedReviewsSortable();
                     self.initAccordion();
                 });
-            },
-
-            // Make selected reviews sortable
-            makeSelectedReviewsSortable: function (container = $(document).find('.merchant-reviews-selector')) {
+            },          // Make selected reviews sortable
+            makeSelectedReviewsSortable: function (container = $(document).find('.merchant-reviews-selector').not('.layouts .merchant-reviews-selector')) {
                 const self = this;
 
                 let selectedReviews = container.find('.selected-reviews .product-reviews');
