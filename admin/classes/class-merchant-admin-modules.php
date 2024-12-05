@@ -268,7 +268,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'icon'         => Merchant_SVG_Icons::get_svg_icon( 'recent-sales-notifications' ),
 					'title'        => esc_html__( 'Recent Sales Notifications', 'merchant' ),
 					'desc'         => esc_html__( 'Build trust by displaying real-time notifications of purchases and other user activity on your store', 'merchant' ),
-					'tutorial_url' => '#',
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-recent-sales-notifications/',
 				),
 				'reasons-to-buy' => array(
 					'pro' => true,
