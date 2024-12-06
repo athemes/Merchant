@@ -296,6 +296,19 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 			}
 		}
 
+		// Include script tag
+		if ( in_array( 'script', $extra, true ) ) {
+			$allowed_tags['script'] = array(
+				'id'          => true,
+				'src'         => true,
+				'type'        => true,
+				'async'       => true,
+				'defer'       => true,
+				'integrity'   => true,
+				'crossorigin' => true,
+			);
+		}
+
 		/**
 		 * Filters the allowed tags.
 		 *
