@@ -2084,6 +2084,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     <input type="hidden" data-name="merchant[<?php
                                     echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
                                     echo esc_attr( $layout_type ) ?>">
+                                    <input type="hidden" class="flexible-id" data-name="merchant[<?php
+                                    echo esc_attr( $settings['id'] ) ?>][0][flexible_id]" value="">
                                 </div>
                                 <?php self::print_flexible_layout_actions( $settings, $layout_type ); ?>
                             </div>
@@ -2172,6 +2174,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     echo absint( $option_key ) ?>][layout]"
                                             value="<?php
                                             echo esc_attr( $option['layout'] ) ?>">
+                                    <input type="hidden" class="flexible-id" name="merchant[<?php
+	                                echo esc_attr( $settings['id'] ) ?>][0][flexible_id]" value="<?php
+                                    echo isset( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : '' ?>">
                                 </div>
                                 <?php self::print_flexible_layout_actions( $settings, $layout_type ); ?>
                             </div>
