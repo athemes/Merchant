@@ -295,7 +295,7 @@
 
 	.merchant-login-popup {
 		opacity: 1;
-		visibility: visible;
+		visibility: visible !important;
 		pointer-events: auto;
 	}
 }
