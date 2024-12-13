@@ -22,6 +22,10 @@
 		}
 	}
 
+	~ .merchant-product-labels {
+		display: none;
+	}
+
 	&__regular {
 		position: absolute;
 		top: 10px;

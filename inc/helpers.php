@@ -296,6 +296,18 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 			}
 		}
 
+
+		// Include script tag
+		if ( in_array( 'script', $extra, true ) ) {
+			$allowed_tags['script'] = array(
+				'id'          => true,
+				'src'         => true,
+				'type'        => true,
+				'async'       => true,
+				'defer'       => true,
+			);
+		}
+
 		if ( in_array( 'div', $extra, true ) ) {
 			$tags = array( 'form', 'input', 'select', 'option', 'textarea', 'a', 'div' );
 
