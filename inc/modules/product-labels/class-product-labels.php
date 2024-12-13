@@ -107,7 +107,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_css' ) );
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return;
 		}
 
@@ -142,6 +142,18 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
         } else {
 	        add_action( 'woocommerce_product_thumbnails', array( $this, 'single_product_output' ) );
         }
+
+		// XStore Theme - Archive/Single/Elementor Widget
+		if ( defined( 'ETHEME_FW' ) ) {
+			// Product Single: Default
+            add_action( 'woocommerce_before_single_product_summary', array( $this, 'single_product_output' ) );
+
+			// Product Single: Elementor Product Image widget
+			add_action( 'etheme_before_single_product_image', array( $this, 'single_product_output' ) );
+
+            // Archive: Elementor Products Widgets by XStore
+            add_filter( 'single_product_archive_thumbnail_size', array( $this, 'loop_product_output' ) );
+		}
 
         add_action( 'woocommerce_single_product_image_gallery_classes', array( $this, 'single_product_image_gallery_classes' ) );
 
@@ -384,7 +396,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 	        }
         } else {
             $regular_price = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_regular_price() ) );
-            $sale_price    = (float) wc_get_price_to_display( $product );
+            $sale_price    = (float) wc_get_price_to_display( $product, array( 'price' => $product->get_sale_price() ) );
 
 	        /**
 	         * `merchant_product_labels_sale_data_sale_price`
@@ -509,6 +521,18 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
             $css .= '
                 .uael-woo-product-wrapper {
                     position: relative;
+                }
+            ';
+        }
+
+        // XStore Theme
+        if ( defined( 'ETHEME_FW' ) ) {
+            $css .= '
+                .product-content .merchant-product-labels.position-top-left {
+                    margin-left: 15px !important;
+                }
+                .product-content .merchant-product-labels.position-top-right {
+                    margin-right: 15px !important;
                 }
             ';
         }

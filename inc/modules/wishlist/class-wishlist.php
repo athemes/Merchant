@@ -58,7 +58,7 @@ class Merchant_Wishlist extends Merchant_Add_Module {
 			'display_on_single_product' => 1,
 			'display_on_cart_page'      => false,
 			'posts_per_page'            => 6,
-			'cart_page_title'           => esc_html__( 'Saved for later', 'merchant' ),
+			'cart_page_title'           => esc_html__( 'Your wishlist items', 'merchant' ),
 			'cart_page_title_tag'       => 'h2',
 			'button_icon'               => 'heart1',
 			'button_position_top'       => 8,

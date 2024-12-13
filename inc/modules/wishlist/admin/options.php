@@ -38,7 +38,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'display_on_cart_page',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Display on cart page', 'merchant' ),
-			'desc'    => esc_html__( 'Display the wishlist products in the cart pages.', 'merchant' ),
+			'desc'    => esc_html__( 'Display the wishlist products on the cart page.', 'merchant' ),
 			'default' => 0,
 		),
 
@@ -59,7 +59,7 @@ Merchant_Admin_Options::create( array(
 			'id'        => 'cart_page_title',
 			'type'      => 'text',
 			'title'     => esc_html__( 'Title', 'merchant' ),
-			'default'   => esc_html__( 'Saved for later', 'merchant' ),
+			'default'   => esc_html__( 'Your wishlist items', 'merchant' ),
 			'condition' => array( 'display_on_cart_page', '==', '1' ),
 		),
 
