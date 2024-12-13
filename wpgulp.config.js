@@ -276,13 +276,6 @@ const styles = [
 		destination: './assets/css/modules/real-time-search/admin',
 	},
 
-	// Code Snippets.
-	{
-		name: 'codeSnippetsAdmin',
-		src: './assets/sass/modules/code-snippets/admin/preview.scss',
-		destination: './assets/css/modules/code-snippets/admin',
-	},
-
 	// Cookie Banner.
 	{
 		name: 'cookieBanner',

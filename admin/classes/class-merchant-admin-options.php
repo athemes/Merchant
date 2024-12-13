@@ -39,6 +39,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
 
             add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
+
+            // Delete module data
+            add_action( 'admin_init', array( $this, 'delete_module_data' ) );
 		}
 
 		/**
@@ -726,9 +729,53 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		public static function replace_field( $settings, $value, $search, $replace, $module_id = '') {
 			ob_start();
 			self::field( $settings, $value, $module_id );
-			$field = ob_get_clean();
+			$field_html = ob_get_clean();
 
-			echo wp_kses( str_replace( $search, $replace, $field ), merchant_kses_allowed_tags( array( 'all' ) ) );
+			// Replace attributes in the field
+			$field = str_replace( $search, $replace, $field_html );
+
+			// Process specific field types
+			if ( isset( $settings['type'] ) && $settings['type'] === 'hook_select' ) {
+				$field = self::update_field_attributes( $field, array(
+					'select' => '[hook_name]',
+					'input'  => '[hook_priority]',
+				) );
+			}
+
+			echo wp_kses( $field, merchant_kses_allowed_tags( array( 'all' ) ) );
+		}
+
+		/**
+		 * Update attributes for specific tags in the field HTML.
+		 *
+		 * @param string $field_html   The field's HTML.
+		 * @param array  $tag_updates  An associative array where keys are tag names
+		 *                             and values are strings to append to the `name` attribute.
+		 *
+		 * @return string Updated field HTML.
+		 */
+		private static function update_field_attributes( $field, $updates ) {
+            if ( ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+                return $field;
+            }
+
+			foreach ( $updates as $tag => $append ) {
+				$processor = new WP_HTML_Tag_Processor( $field ); // Reset processor for each tag type
+
+				while ( $processor->next_tag( $tag ) ) {
+					$current_name = $processor->get_attribute( 'name' );
+
+					// Append the specified string if not already present
+					if ( $current_name && ! str_ends_with( $current_name, $append ) ) {
+						$processor->set_attribute( 'name', $current_name . $append );
+					}
+				}
+
+				// Update the field with the latest processed HTML
+				$field = $processor->get_updated_html();
+			}
+
+			return $field;
 		}
 
 		/**
@@ -2241,7 +2288,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 						if ( $inside_flexible ) {
 							static::replace_field(
 								$field,
-								isset( $args['value'][$settings['id']][ $field['id'] ] ) ? $args['value'][$settings['id']][ $field['id'] ] : ( $field['default'] ?? '' ),
+								$args['value'][ $settings['id'] ][ $field['id'] ] ?? ( $field['default'] ?? '' ),
 								"name=\"merchant[{$field['id']}]",
 								"name=\"merchant[{$args['id']}][{$args['option_key']}][{$settings['id']}][{$field['id']}]\"  data-name=\"merchant[{$args['id']}][0][{$settings['id']}][{$field['id']}]",
 								$module_id
@@ -2673,6 +2720,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			if ( in_array( 'customer', $user_roles, true ) ) {
 				delete_transient( 'customers_select2_choices' );
             }
+        }
+
+		/**
+         * Delete module data.
+         *
+		 * @return void
+		 */
+		public function delete_module_data() {
+			$options = get_option( 'merchant', array() );
+
+            // Code Snippets module was removed, so delete data from DB as well.
+			if ( isset( $options['code-snippets'] ) ) {
+			    unset( $options['code-snippets'] );
+				update_option( 'merchant', $options );
+			}
         }
 	}
 

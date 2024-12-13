@@ -290,18 +290,51 @@ Merchant_Admin_Options::create( array(
 							'id'            => 'product_ids',
 							'type'          => 'products_selector',
 							'multiple'      => true,
-							'desc'          => esc_html__( 'Select the products that will show the layel.', 'merchant' ),
+							'desc'          => esc_html__( 'Select the products that will show the label.', 'merchant' ),
 							'allowed_types' => array( 'simple', 'variable' ),
 							'condition'     => array( 'display_rules', '==', 'specific_products' ),
 						),
 
 						array(
-							'id'        => 'excluded_products',
-							'type'      => 'products_selector',
-							'title'     => esc_html__( 'Exclude Products', 'merchant' ),
-							'multiple'  => true,
-							'desc'      => esc_html__( 'Exclude products from this label.', 'merchant' ),
-							'condition' => array( 'display_rules', 'any', 'all_products|by_category|by_tags|featured_products|new_products|products_on_sale|out_of_stock|pre-order' ),
+							'id'         => 'exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select the products that will not show the label.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all_products', 'by_category', 'by_tags', 'featured_products', 'new_products', 'products_on_sale', 'out_of_stock', 'pre-order' ),
+									),
+								),
+							),
+						),
+
+						array(
+							'id'            => 'excluded_products',
+							'type'          => 'products_selector',
+							'title'         => esc_html__( 'Exclude Products', 'merchant' ),
+							'desc'          => esc_html__( 'Exclude products from this label.', 'merchant' ),
+							'multiple'      => true,
+							'allowed_types' => array( 'simple', 'variable' ),
+							'conditions'    => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all_products', 'by_category', 'by_tags', 'featured_products', 'new_products', 'products_on_sale', 'out_of_stock', 'pre-order' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(
@@ -313,7 +346,47 @@ Merchant_Admin_Options::create( array(
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
 							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
-							'condition'   => array( 'display_rules', '==', 'all_products' ),
+							'conditions'  => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all_products' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
+							'id'          => 'excluded_tags',
+							'type'        => 'select_ajax',
+							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+							'source'      => 'options',
+							'multiple'    => true,
+							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude tags from this campaign.', 'merchant' ),
+							'conditions'  => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'display_rules',
+										'operator' => 'in',
+										'value'    => array( 'all_products' ),
+									),
+									array(
+										'field'    => 'exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(

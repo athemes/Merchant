@@ -261,7 +261,7 @@
                 if (elements.length === 0) {
                     return;
                 }
-                elements.each(function () {
+                elements.each(function ( index ) {
                     let input = $(this).find('input'),
                         options = {
                             locale: JSON.parse(merchant_datepicker_locale),
@@ -269,10 +269,11 @@
                             onSelect: ({date, formattedDate, datepicker}) => {
                                 if (typeof (formattedDate) === "undefined") {
                                     // allow removing date
-                                    input.val('');
+                                    // input.val('');
+                                    datepicker.$el.value = '';
                                 }
                                 input.trigger('change.merchant');
-                                input.trigger('change.merchant-datepicker', [ formattedDate, input ]);
+                                input.trigger('change.merchant-datepicker', [ formattedDate, input, options, index ]);
                             }
                         },
                         fieldOptions = $(this).data('options');
@@ -288,8 +289,11 @@
                         }
                         options = Object.assign(options, fieldOptions);
                     }
-                    new AirDatepicker(input.getPath(), options);
+
+                    const datepickerObj = new AirDatepicker(input.getPath(), options);
                     input.attr('readonly', true);
+
+                    $( document ).trigger( 'initiated.merchant-datepicker', [ datepickerObj, input, options, index ] );
                 });
             },
 

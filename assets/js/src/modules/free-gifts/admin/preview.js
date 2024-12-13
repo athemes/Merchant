@@ -36,10 +36,16 @@
                 productNames.push( $(this).attr( 'title' ) )
             } );
             productName = productNames.length ? productNames.join( ', ' ) : 'Categories';
+        } else if ( rule === 'tags' ) {
+            const productNames = [];
+            layout.find( '.merchant-field-tag_slugs .select2-selection__choice' ).each( function() {
+                productNames.push( $(this).attr( 'title' ) )
+            } );
+            productName = productNames.length ? productNames.join( ', ' ) : 'Tags';
         }
 
         spendingText = spendingText?.replace( /{amount}|{goalAmount}/g, spendingGoal );
-        spendingText = spendingText?.replace( /{productName}|{categories}/g, productName );
+        spendingText = spendingText?.replace( /{productName}|{categories}|{tags}/g, productName );
         $( '.merchant-free-gifts-widget-offer-label' ).html( spendingText );
 
         $( document ).on( 'change', '.merchant-field-rules_to_apply select', function() {

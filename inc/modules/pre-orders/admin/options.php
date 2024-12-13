@@ -47,6 +47,7 @@ Merchant_Admin_Options::create(
 								'type'    => 'select',
 								'title'   => esc_html__( 'Trigger', 'merchant' ),
 								'options' => array(
+									'all'      => esc_html__( 'All Products', 'merchant' ),
 									'product'  => esc_html__( 'Specific Products', 'merchant' ),
 									'category' => esc_html__( 'Specific Categories', 'merchant' ),
 									'tags'     => esc_html__( 'Specific Tags', 'merchant' ),
@@ -83,6 +84,101 @@ Merchant_Admin_Options::create(
 								'desc'        => esc_html__( 'Select the tag or tags for which the products will be available for pre-order.', 'merchant' ),
 								'condition'   => array( 'trigger_on', '==', 'tags' ),
 							),
+
+							array(
+								'id'         => 'exclusion_enabled',
+								'type'       => 'switcher',
+								'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+								'desc'       => esc_html__( 'Select the products that will not show the offer.', 'merchant' ),
+								'default'    => 0,
+								'conditions' => array(
+									'relation' => 'AND',
+									'terms'    => array(
+										array(
+											'field'    => 'trigger_on',
+											'operator' => 'in',
+											'value'    => array( 'all', 'category', 'tags' ),
+										),
+									),
+								),
+							),
+
+							array(
+								'id'            => 'excluded_products',
+								'type'          => 'products_selector',
+								'title'         => esc_html__( 'Exclude products', 'merchant' ),
+								'desc'          => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+								'allowed_types' => array( 'simple', 'variable' ),
+								'multiple'      => true,
+								'conditions'    => array(
+									'relation' => 'AND',
+									'terms'    => array(
+										array(
+											'field'    => 'trigger_on',
+											'operator' => 'in',
+											'value'    => array( 'all', 'category', 'tags' ),
+										),
+										array(
+											'field'    => 'exclusion_enabled',
+											'operator' => '===',
+											'value'    => true,
+										),
+									),
+								),
+							),
+
+							array(
+								'id'          => 'excluded_categories',
+								'type'        => 'select_ajax',
+								'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+								'source'      => 'options',
+								'multiple'    => true,
+								'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+								'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+								'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
+								'conditions'  => array(
+									'relation' => 'AND',
+									'terms'    => array(
+										array(
+											'field'    => 'trigger_on',
+											'operator' => 'in',
+											'value'    => array( 'all' ),
+										),
+										array(
+											'field'    => 'exclusion_enabled',
+											'operator' => '===',
+											'value'    => true,
+										),
+									),
+								),
+							),
+
+							array(
+								'id'          => 'excluded_tags',
+								'type'        => 'select_ajax',
+								'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+								'source'      => 'options',
+								'multiple'    => true,
+								'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
+								'placeholder' => esc_html__( 'Select tags', 'merchant' ),
+								'desc'        => esc_html__( 'Exclude tags from this campaign.', 'merchant' ),
+								'conditions'  => array(
+									'relation' => 'AND',
+									'terms'    => array(
+										array(
+											'field'    => 'trigger_on',
+											'operator' => 'in',
+											'value'    => array( 'all' ),
+										),
+										array(
+											'field'    => 'exclusion_enabled',
+											'operator' => '===',
+											'value'    => true,
+										),
+									),
+								),
+							),
+
 							array(
 								'id'      => 'discount_toggle',
 								'type'    => 'switcher',
@@ -195,7 +291,7 @@ Merchant_Admin_Options::create(
 								'id'      => 'button_text',
 								'type'    => 'text',
 								'title'   => esc_html__( 'Button text', 'merchant' ),
-								'default' => esc_html__( 'Pre-Order Now!', 'merchant' ),
+								'default' => esc_html__( 'Pre-Order', 'merchant' ),
 							),
 
 							array(
