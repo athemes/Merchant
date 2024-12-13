@@ -114,6 +114,8 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				// Custom CSS.
 				// The custom CSS should be added here as well due to ensure preview box works properly.
 				add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
+
+				add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
 			}
 		}
 
@@ -406,6 +408,39 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 			$css .= $this->get_module_custom_css();
 
 			return $css;
+		}
+
+		/**
+		 * Help banner.
+		 *
+		 * @return void
+		 */
+		public function help_banner( $module_id ) {
+			if ( $module_id === 'advanced-reviews' ) {
+				?>
+				<div class="merchant-module-page-setting-fields">
+					<div class="merchant-module-page-setting-field merchant-module-page-setting-field-content">
+						<div class="merchant-module-page-setting-field-inner">
+							<div class="merchant-tag-pre-orders">
+								<i class="dashicons dashicons-info"></i>
+								<p>
+									<?php
+									echo esc_html__(
+										'Check all your reviews from Products > Reviews menu in the left sidebar of your WordPress admin area or clicking the \'View Reviews\' option below.',
+										'merchant'
+									);
+									printf(
+										'<a href="%1s" target="_blank">%2s</a>',
+										esc_url( admin_url( 'edit.php?post_type=product&page=product-reviews' ) ),
+										esc_html__( 'View Reviews', 'merchant' )
+									);
+									?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
 		}
 	}
 
