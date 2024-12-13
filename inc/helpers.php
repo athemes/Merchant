@@ -304,8 +304,6 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 				'type'        => true,
 				'async'       => true,
 				'defer'       => true,
-				'integrity'   => true,
-				'crossorigin' => true,
 			);
 		}
 
