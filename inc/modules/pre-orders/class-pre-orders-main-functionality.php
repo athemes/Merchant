@@ -579,13 +579,20 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return wc_format_sale_price( $regular_price, $sale_price );
 		}
 
-		$min_price = min( $prices );
-		$max_price = max( $prices );
-		if ( $min_price !== $max_price ) {
-			return wc_format_price_range( $min_price, $max_price );
+		// Ensure $prices is not empty
+		if ( ! empty( $prices ) ) {
+			$min_price = min( $prices );
+			$max_price = max( $prices );
+
+			if ( $min_price !== $max_price ) {
+				return wc_format_price_range( $min_price, $max_price );
+			}
+
+			return wc_price( $min_price );
 		}
 
-		return wc_price( $min_price );
+		// If $prices is empty.
+		return '';
 	}
 
 	/**
