@@ -275,7 +275,6 @@
 	padding: 20px;
 	color: var(--merchant-popup-footer-text-color, #212121);
 	background-color: var(--merchant-popup-footer-background-color, #f5f5f5);
-	display: flex;
 	grid-gap: 5px;
 	text-align: center;
 	align-items: center;
@@ -294,8 +293,9 @@
 	overflow: hidden;
 
 	.merchant-login-popup {
+		display: flex !important;;
 		opacity: 1;
-		visibility: visible !important;
+		visibility: visible;
 		pointer-events: auto;
 	}
 }
