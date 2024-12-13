@@ -579,7 +579,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			return wc_format_sale_price( $regular_price, $sale_price );
 		}
 
-		// Ensure $prices is not empty before calling min() and max().
+		// Ensure $prices is not empty
 		if ( ! empty( $prices ) ) {
 			$min_price = min( $prices );
 			$max_price = max( $prices );
