@@ -177,7 +177,7 @@ Merchant_Admin_Options::create(
 			array(
 				'id'      => 'carousel_title',
 				'type'    => 'text',
-				'title'   => __( 'Carousel Title', 'merchant' ),
+				'title'   => __( 'Carousel title', 'merchant' ),
 				'default' => __( 'Reviews with Photos', 'merchant' ),
 			),
 
@@ -781,7 +781,7 @@ $merchant_module_id = Merchant_Advanced_Reviews::MODULE_ID;
 Merchant_Admin_Options::create(
 	array(
 		'module' => $merchant_module_id,
-		'title'  => esc_html__( 'Showcase Review Testimonial', 'merchant' ),
+		'title'  => esc_html__( 'Review Carousels', 'merchant' ),
 		'fields' => array(
 			array(
 				'id'      => 'carousel_toggle',
@@ -796,7 +796,7 @@ Merchant_Admin_Options::create(
 				'accordion'    => true,
 				'duplicate'    => true,
 				'style'        => Merchant_Advanced_Reviews::MODULE_ID . '-style default',
-				'button_label' => esc_html__( 'Add New Testimonial', 'merchant' ),
+				'button_label' => esc_html__( 'Add New Carousel', 'merchant' ),
 				'conditions'   => array(
 					'terms' => array(
 						array(
@@ -868,7 +868,7 @@ Merchant_Admin_Options::create(
 								'max'       => 20,
 								'step'      => 1,
 								'unit'      => 'px',
-								'default'   => 0,
+								'default'   => 1,
 								'condition' => array( 'show_as_boxed', '==', '1' ),
 							),
 							array(
@@ -911,7 +911,7 @@ Merchant_Admin_Options::create(
 								'title'      => esc_html__( 'Placement', 'merchant' ),
 								'options'    => array(
 									'woocommerce_before_main_content' => esc_html__( 'Before Main Content', 'merchant' ),
-									'woocommerce_after_shop_loop '    => esc_html__( 'After Main Content', 'merchant' ),
+									'woocommerce_after_shop_loop'    => esc_html__( 'After Main Content', 'merchant' ),
 								),
 								'default'    => 'woocommerce_before_main_content',
 								'conditions' => array(
