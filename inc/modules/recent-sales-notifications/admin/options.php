@@ -510,7 +510,7 @@ Merchant_Admin_Options::create( array(
 					'title' => esc_html__( 'Layout 4', 'merchant' ),
 				),
 			),
-			'default' => 'top-right',
+			'default' => 'layout-1',
 			'desc'    => esc_html__( 'Choose the layout & style of the notification box.', 'merchant' ),
 		),
 		array(
@@ -658,7 +658,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'border_color',
 			'type'    => 'color',
 			'title'   => esc_html__( 'Border color', 'merchant' ),
-			'default' => 'rgba(255, 255, 255, 0)',
+			'default' => '#ffffff',
 			'desc'    => esc_html__( 'The color of the border.', 'merchant' ),
 		),
 		array(
