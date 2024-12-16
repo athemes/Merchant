@@ -123,7 +123,7 @@
 				const $shippingDateField = $( this ).closest( '.layout-body' ).find( '.merchant-field-shipping_date input' );
 				if ( $shippingDateField.length && ! $shippingDateField.val() ) {
 					$shippingDateField.css( 'borderColor', '#f00' );
-					alert( merchant?.shipping_date_missing_text || 'Please set a Shipping date first' );
+					alert( merchant?.shipping_date_missing_text || 'Please set a shipping date first' );
 				}
 			} );
 		},

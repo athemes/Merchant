@@ -246,7 +246,7 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			$setting['pre_orders_add_button_title'] = esc_html__( 'Pre Order Now!', 'merchant' );
 		}
 
-		$setting['shipping_date_missing_text'] = esc_html__( 'Please set a Shipping date first', 'merchant' );
+		$setting['shipping_date_missing_text'] = esc_html__( 'Please set a shipping date first', 'merchant' );
 
 		return $setting;
 	}
