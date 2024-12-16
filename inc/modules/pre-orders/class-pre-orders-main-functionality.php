@@ -525,17 +525,23 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$prices     = array();
 		$variations = $product->get_children();
 
+		$regular_prices = array();
+		$sale_prices    = array();
+
 		foreach ( $variations as $variation_id ) {
 			$variation       = wc_get_product( $variation_id );
 			$variation_offer = self::available_product_rule( $variation_id );
 			$regular_price   =  $variation->get_regular_price();
+
+			$regular_prices[] = $regular_price;
 
 			if ( empty( $variation_offer ) ) {
 				$variation_offer = self::available_product_rule( $product->get_id() );
 
 				$is_excluded = merchant_is_product_excluded( $variation_id, $variation_offer );
 				if ( $is_excluded ) {
-					$prices[] = $regular_price;
+					$prices[]      = $regular_price;
+					$sale_prices[] = $regular_price;
 					continue;
 				}
 			}
@@ -546,9 +552,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 				} else {
 					$sale_price = $regular_price;
 				}
-				$prices[] = $sale_price;
+				$prices[]      = $sale_price;
+				$sale_prices[] = $sale_price;
 				continue;
 			}
+
 			$sale_price = $this->calculate_discounted_price( $regular_price, $variation_offer, $variation );
 			if ( $sale_price <= 0 ) {
 				// If the price is less than 0, set it to the regular/sale price
@@ -558,16 +566,33 @@ class Merchant_Pre_Orders_Main_Functionality {
 					$sale_price = $regular_price;
 				}
 			}
-			$prices[] = $sale_price;
+			$prices[]      = $sale_price;
+			$sale_prices[] = $sale_price;
 		}
 
-		$min_price = min( $prices );
-		$max_price = max( $prices );
-		if ( $min_price !== $max_price ) {
-			return wc_format_price_range( $min_price, $max_price );
+		$regular_prices = array_unique( $regular_prices );
+		$sale_prices    = array_unique( $sale_prices );
+
+		if ( 1 === count( $regular_prices ) && 1 === count( $sale_prices ) ) {
+			$regular_price = reset( $regular_prices );
+			$sale_price    = reset( $sale_prices );
+			return wc_format_sale_price( $regular_price, $sale_price );
 		}
 
-		return wc_price( $min_price );
+		// Ensure $prices is not empty
+		if ( ! empty( $prices ) ) {
+			$min_price = min( $prices );
+			$max_price = max( $prices );
+
+			if ( $min_price !== $max_price ) {
+				return wc_format_price_range( $min_price, $max_price );
+			}
+
+			return wc_price( $min_price );
+		}
+
+		// If $prices is empty.
+		return '';
 	}
 
 	/**

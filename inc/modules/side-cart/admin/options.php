@@ -138,7 +138,7 @@ Merchant_Admin_Options::create( array(
 			//'title'   => esc_html__( 'Placement', 'merchant' ),
 			'options'    => array(
 				'related_products' => esc_html__( 'Related Products', 'merchant' ),
-				'custom_upsell'    => esc_html__( 'Custom Upsell', 'merchant' ),
+				'custom_upsell'    => esc_html__( 'Custom Upsells', 'merchant' ),
 			),
 			'default'    => 'related_products',
 			'conditions' => array(
@@ -359,7 +359,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Search categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the categories that you want to display the upsell products form.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the categories that you want to display the upsell products from.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND', // AND/OR, If not provided, only first term will be considered
 								'terms'    => array(

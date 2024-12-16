@@ -225,7 +225,7 @@ if ( ! function_exists( 'merchant_is_elementor_active' ) ) {
 }
 
 /**
- * Check if any shortcode starts with merchant.
+ * Check if any shortcode starts with merchant doesn't exist.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */
 if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
@@ -266,6 +266,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_free_shipping_progress_bar_checkout_page',
 				'merchant_module_quick_view',
 				'merchant_module_real_time_search',
+				'merchant_reviews_carousel',
 			)
 		);
 

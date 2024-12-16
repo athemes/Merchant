@@ -81,6 +81,9 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
 
+			// Localize Script.
+			add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 
@@ -158,11 +161,13 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		}
 	}
 
+	/**
+     * Admin JS
+     *
+	 * @return void
+	 */
 	public function admin_enqueue_js() {
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
+		if ( parent::is_module_settings_page() ) {
 			wp_enqueue_script(
 				'merchant-admin-' . self::MODULE_ID,
 				MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js',
@@ -240,6 +245,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 		} else {
 			$setting['pre_orders_add_button_title'] = esc_html__( 'Pre Order Now!', 'merchant' );
 		}
+
+		$setting['shipping_date_missing_text'] = esc_html__( 'Please set a shipping date first', 'merchant' );
 
 		return $setting;
 	}
