@@ -79,6 +79,10 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			// Modules global settings.
 			require_once MERCHANT_DIR . 'inc/modules/global-settings/global-settings.php';
 
+			// Modules analytics
+			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-db-orm.php';
+			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics.php';
+
 			// Modules (free and pro).
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
 				if (
