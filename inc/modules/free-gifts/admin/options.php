@@ -254,7 +254,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'exclude_users',
 							'type'       => 'select_ajax',
 							'title'      => esc_html__( 'Exclude Users', 'merchant' ),
-							'desc'       => esc_html__( 'This will exclude the rule to the selected customers.', 'merchant' ),
+							'desc'       => esc_html__( 'This will exclude the offer for the selected customers.', 'merchant' ),
 							'source'     => 'user',
 							'multiple'   => true,
 							'classes'    => array( 'flex-grow' ),
