@@ -381,6 +381,13 @@ const styles = [
 		destination: './assets/css/modules/frequently-bought-together',
 	},
 
+	//recent-sales-notifications
+	{
+		name: 'recentSalesNotificationsAdmin',
+		src: './assets/sass/modules/recent-sales-notifications/admin/preview.scss',
+		destination: './assets/css/modules/recent-sales-notifications/admin',
+	},
+
 	// Login Popups.
 	{
 		name: 'loginPopupsAdmin',
@@ -717,6 +724,14 @@ const scripts = [
 		name: 'addedToCartPopupAdminPreview',
 		src: './assets/js/src/modules/added-to-cart-popup/admin/preview.js',
 		destination: './assets/js/modules/added-to-cart-popup/admin',
+		file: 'preview'
+	},
+
+	// recent sales notifications admin preview
+	{
+		name: 'recentSalesNotificationsAdminPreview',
+		src: './assets/js/src/modules/recent-sales-notifications/admin/preview.js',
+		destination: './assets/js/modules/recent-sales-notifications/admin',
 		file: 'preview'
 	},
 

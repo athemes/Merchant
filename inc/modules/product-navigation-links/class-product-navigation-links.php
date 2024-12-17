@@ -181,7 +181,11 @@ class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 	 */
 	public static function get_module_custom_css() {
 		// Navigation buttons base CSS.
-		$css = '.merchant-product-navigation {	display: flex; }';
+		$css = '
+		    .merchant-product-navigation { display: flex; gap: 15px;}
+		    .merchant-product-navigation a { max-width: 50%; }
+		    .merchant-product-navigation a:last-child { text-align: right; }
+		';
 
 		// Text hover color.
 		$css .= Merchant_Custom_CSS::get_color_css( self::MODULE_ID, 'text_hover_color', '#757575', '.merchant-product-navigation a:hover', false, true );

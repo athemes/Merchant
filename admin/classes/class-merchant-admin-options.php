@@ -37,6 +37,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_create_page_control', array( $this, 'create_page_control_ajax_callback' ) );
 			add_action( 'wp_ajax_merchant_admin_options_select_ajax', array( $this, 'select_content_ajax' ) );
 			add_action( 'wp_ajax_merchant_admin_products_search', array( $this, 'products_search' ) );
+			add_action( 'wp_ajax_merchant_get_review_images', array( $this, 'get_review_images' ) );
+			add_action( 'wp_ajax_merchant_search_reviews', array( $this, 'search_reviews' ) );
+			add_action( 'wp_ajax_merchant_load_more_reviews', array( $this, 'load_more_reviews' ) );
+
 
             add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
 
@@ -404,6 +408,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
 							} elseif ( 'textarea_multiline' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
+							} elseif ( 'reviews_selector' === $field['type'] ) {
+								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
+								$value = explode( ',', $value );
 							} elseif ( is_array( $_POST['merchant'][ $field['id'] ] ) ) {
 								$value = array_filter( map_deep( wp_unslash( $_POST['merchant'][ $field['id'] ] ), 'sanitize_textarea_field' ) );
 							} else {
@@ -500,6 +507,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'buttons_alt':
 				case 'buttons_content':
 					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
+					break;
+
+				case 'reviews_selector':
+					if ( ! is_array( $value ) ) {
+						$value = explode( ',', $value );
+					}
+					$value = array_map( 'absint', $value );
 					break;
 
 				case 'hook_select':
@@ -980,11 +994,320 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		}
 
 		/**
+         * Reviews selector field.
+         *
+		 * @param $settings Array field settings
+		 * @param $value Array field value
+		 * @param $module_id string module ID
+		 *
+		 * @return void
+		 */
+		public static function reviews_selector( $settings, $value, $module_id = '' ) {
+			if ( ! is_array( $value ) ) {
+				$value = array();
+			}
+			?>
+            <div class="merchant-reviews-selector" data-id="<?php
+			echo esc_attr( $settings['id'] ); ?>">
+                <div class="selected-reviews">
+                    <div class="product-reviews"><?php // keep this (no space) between the div and php tag to avoid white space issues with css
+						foreach ( $value as $review ) {
+		                    echo wp_kses( self::get_review( $review ), merchant_kses_allowed_tags( array( 'div' ) ) );
+	                    } ?></div>
+                </div>
+                <button type="button" class="merchant-btn-control popup-trigger"><?php esc_html_e('Select Reviews', 'merchant'); ?></button>
+                <div class="overlay"></div>
+                <div class="selector-popup">
+                    <div class="popup-content">
+                        <div class="popup-header">
+                            <label>
+                                <span>
+                                    <?php
+                                    esc_html_e( 'Search & filter', 'merchant' ); ?>
+                                </span>
+                                <input type="text" name="products_search" class="products-search" placeholder="<?php  echo esc_attr__( 'Search for a product', 'merchant' ); ?>">
+                            </label>
+
+                            <span class="close" title="<?php esc_attr_e( 'Close', 'merchant' ); ?>">&times;</span>
+                        </div>
+                        <div class="popup-body merchant-reviews-selector-body">
+                            <div class="products-search-results">
+                                <?php
+                                echo wp_kses(self::products_selector_search_results(), merchant_kses_allowed_tags(array( 'div' ))); ?>
+                            </div>
+                        </div>
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <input type="hidden" class="review-saved-ids" name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]" value="<?php
+                echo esc_attr( implode( ',', $value ) ) ?>">
+            </div>
+			<?php
+		}
+
+		/**
+         * Get search results for the reviews selector.
+         *
+		 * @return void
+		 */
+		public function search_reviews() {
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'merchant_admin_options' ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'merchant' ) ) );
+			}
+
+			$term = '';
+			if ( isset( $_POST['search'] ) && ! empty( $_POST['search'] ) ) {
+				$term = trim( sanitize_text_field( $_POST['search'] ) );
+			}
+			wp_send_json_success( self::products_selector_search_results( $term ) );
+		}
+
+		/**
+         * Load more reviews for a product.
+         * Used in the reviews ajax requests.
+         *
+		 * @return void
+		 */
+        public function load_more_reviews() {
+	        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'merchant_admin_options' ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'merchant' ) ) );
+	        }
+
+            $product_id = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
+            $offset = isset( $_POST['offset'] ) ? absint( $_POST['offset'] ) : 0;
+            if( 0 === $product_id ) {
+                wp_send_json_error( array( 'message' => esc_html__( 'Invalid product ID', 'merchant' ) ) );
+            }
+
+            wp_send_json_success( self::get_rendered_product_reviews( wc_get_product( $product_id ), $offset ) );
+        }
+
+		/**
+		 * Search for products and display the results.
+		 *
+		 * @param $term    string Search term.
+		 * @param $exclude array IDs of products to exclude from the search results.
+		 *
+		 * @return string
+		 */
+		private static function products_selector_search_results( $term = '', $exclude = array() ) {
+			$args = array(
+				'post_type'      => 'product',
+				'post_status'    => 'any',
+				'posts_per_page' => 20,
+				'post__not_in'   => $exclude,
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_key'       => '_wc_review_count', // Meta key for review count
+				'orderby'        => 'meta_value_num', // Sort by numeric value of review count
+				'order'          => 'DESC', // Order by descending
+			);
+
+			if ( $term ) {
+				$args['s'] = $term;
+			}
+
+			$query    = new WC_Product_Query( $args );
+			$products = $query->get_products();
+
+			$response = '';
+
+			foreach ( $products as $product ) {
+				$reviews_count            = $product->get_review_count();
+				$reviews_text             = _n( 'Review', 'Reviews', $reviews_count, 'merchant' );
+				$product_item_has_reviews = $reviews_count > 0 ? ' product-item-has-reviews' : '';
+
+				$response .= '<div class="product-item' . $product_item_has_reviews . '" data-id="' . $product->get_id() . '">';
+				$response .= '<div class="header">';
+				$response .= '<div class="product-image"><a href="' . get_edit_post_link( $product->get_id() ) . '" target="_blank">'
+							. get_the_post_thumbnail( $product->get_id(),
+						'thumbnail' ) . '</a></div>';
+				$response .= '<div class="product-title"><a href="' . get_edit_post_link( $product->get_id() ) . '" target="_blank">' . $product->get_name()
+							. '</a></div>';
+				$response .= '<div class="spacer"></div>';
+				$response .= '<div class="rating-stars">' . wc_get_rating_html( $product->get_average_rating(), $reviews_count ) . '</div>';
+				if ( $reviews_count > 0 ) {
+					$response .= '<div class="selected-reviews-count"><span class="counter">0</span>
+<div class="tooltip">' . esc_attr__( 'Number of selected reviews', 'merchant' ) . '</div></div>';
+				}
+				$response .= '<div class="product-status product-status-' . esc_attr( $product->get_status() ) . '">' . esc_html( $product->get_status() )
+							. '</div>';
+				$response .= '<div class="product-reviews-count">' . $reviews_count . ' ' . $reviews_text . '</div>';
+				$response .= '<div class="product-expander"><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 5.07422L6 8.57422L2.5 5.07422" stroke="#a6a4a4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+				$response .= '</div>'; // .header
+				if ( $reviews_count > 0 ) {
+                    $reviews = self::get_rendered_product_reviews( $product );
+					$rendered_reviews = $reviews['reviews'];
+                    $rendered_reviews .= $reviews['load_more'];
+					$response .= '<div class="product-reviews" data-id="' . esc_attr( $product->get_id() ) . '">' . $rendered_reviews . '</div>';
+				}
+				$response .= '</div>';
+			}
+
+			return $response;
+		}
+
+		/**
+         * Get rendered product reviews.
+         *
+		 * @param $product WC_Product Product object.
+		 * @param $offset int Offset for the reviews query.
+		 *
+		 * @return string[] Array with 'reviews' and 'load_more' keys.
+		 */
+		private static function get_rendered_product_reviews( $product, $offset = 0 ) {
+			$response = '';
+			$load_more = '';
+			$reviews_count = $product->get_review_count();
+			if ( $reviews_count === 0 ) {
+				return array(
+					'reviews'   => '',
+					'load_more' => '',
+				);
+			}
+
+			/**
+			 * Filter the number of reviews per page.
+             *
+             * @since 1.10.4
+			 */
+			$reviews_needed = apply_filters( 'merchant_reviews_per_page', 10 );
+			$reviews        = get_comments( array(
+				'post_id' => $product->get_id(),
+				'status'  => array( 'approve', 'spam', 'hold' ),
+				'type'    => 'review',
+				'number'  => $reviews_needed,
+				'offset'  => $offset,
+				'fields'  => 'ids',
+			) );
+
+
+			if ( ! empty( $reviews ) ) {
+				$response .= '<div class="reviews-wrapper">';
+				foreach ( $reviews as $review ) {
+					$response .= self::get_review( $review );
+				}
+				$response .= '</div>';
+			}
+
+			// compare the reviews count and offset to determine if we need to show the load more button
+			if ( $reviews_count > $reviews_needed && $offset + $reviews_needed < $reviews_count ) {
+				$load_more .= '<div class="product-reviews-load-more">';
+				$load_more .= '<button type="button">' . esc_html__( 'Load more', 'merchant' ) . '</button>';
+				$load_more .= '</div>';
+			}
+
+			return array(
+				'reviews'   => $response,
+				'load_more' => $load_more,
+			);
+		}
+
+		/**
+         * Get a single review.
+         *
+		 * @param $review_id int Review ID.
+		 *
+		 * @return string Review HTML.
+		 */
+		private static function get_review( $review_id ) {
+			$response = '';
+	        $review = get_comment( $review_id );
+            $product = wc_get_product( $review->comment_post_ID );
+			if ( $product ) {
+	            $response .= '<div class="product-review" data-id="' . esc_attr( $review->comment_ID ) . '" data-product-id="' . esc_attr( $product->get_id() ) . '">';
+	            $response .= '<div class="product-review-add-checkbox"><input type="checkbox" class="review-checkbox" title="' . esc_html__( 'Add this review', 'merchant' )
+							. '"></div>';
+	            $response .= '<div class="product-review-author">' . esc_html( $review->comment_author ) . '</div>';
+	            $response .= '<div class="product-review-product-image"><a href="' . get_edit_post_link( $product->get_id() ) . '" target="_blank">'
+							. $product->get_image( 'thumbnail' ) . '</a></div>';
+	            $response .= '<div class="product-review-product-name"><a href="' . get_edit_post_link( $product->get_id() ) . '" target="_blank">'
+							. esc_html( $product->get_name() ) . '</a></div>';
+	            $rating   = get_comment_meta( $review->comment_ID, 'rating', true );
+	            $response .= '<div class="product-review-rating">' . wc_get_rating_html( $rating ) . '</div>';
+	            $response .= '<div class="product-review-status"><div class="status status-' . esc_attr( wp_get_comment_status( $review->comment_ID ) ) . '">' . esc_html(
+			            wp_get_comment_status(
+				            $review->comment_ID ) ) . '</div></div>';
+	            $response .= '<div class="product-review-content">' . esc_html( wp_trim_words( $review->comment_content, 8, '...' ) ) . '</div>';
+	            $response .= '<div class="spacer"></div>';
+	            $response .= '<div class="product-review-photos"><div class="tooltip">' . esc_attr__( 'View customer\'s uploaded review photos.', 'merchant' ) . '</div>' . self::get_review_main_photo( $review->comment_ID ) . '</div>';
+	            $response .= '<div class="product-review-date">' . esc_html( get_comment_date( 'j/n/Y', $review->comment_ID ) ) . '</div>';
+	            $response .= '<div class="product-review-edit"><a href="' . esc_url( get_edit_comment_link( $review->comment_ID ) ) . '" target="_blank">' . esc_html__( 'Edit',
+			            'merchant' ) . '</a></div>';
+	            $response .= '<button class="product-review-delete">
+                            <svg width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </button>';
+	            $response .= '<button class="product-review-move">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 3V21M12 3L9 6M12 3L15 6M12 21L15 18M12 21L9 18M3 12H21M3 12L6 15M3 12L6 9M21 12L18 9M21 12L18 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </button>';
+	            $response .= '</div>';
+            }
+            /**
+             * Filter the single review item.
+             *
+             * @since 1.10.4
+             */
+			return apply_filters( 'merchant_single_review_item_rendered', $response, $review );
+        }
+
+		/**
+		 * Get the main photo for a review.
+		 *
+		 * @param $comment_id int Review ID.
+		 *
+		 * @return string Review main photo HTML.
+		 */
+		private static function get_review_main_photo( $comment_id ) {
+			$photos_ids = get_comment_meta( $comment_id, 'review_images', true );
+			if ( empty( $photos_ids ) ) {
+				return '';
+			}
+			$response    = '';
+			$first_image = wp_get_attachment_image_url( $photos_ids[0], array( 60, 60 ) );
+			$counter     = '';
+			if ( count( $photos_ids ) > 1 ) {
+				$counter = '<span class="count">' . count( $photos_ids ) . '</span>';
+			}
+			$response .= '<div class="review-photo"><img src="' . esc_url( $first_image ) . '" alt="">' . $counter . '</div>';
+
+			return $response;
+		}
+
+        /**
+         * Get review images for gallery ajax request.
+         *
+         * @return void
+         */
+		public function get_review_images() {
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'merchant_admin_options' ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'merchant' ) ) );
+			}
+			$review_id = 0;
+			if ( ! isset( $_POST['review_id'] ) || ! is_numeric( $_POST['review_id'] ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Invalid review ID', 'merchant' ) ) );
+			} else {
+				$review_id = absint( $_POST['review_id'] );
+			}
+			$photos_ids = get_comment_meta( $review_id, 'review_images', true );
+			if ( empty( $photos_ids ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'No images found', 'merchant' ) ) );
+			}
+			$images   = array_map( static function ( $image_id ) {
+				return wp_get_attachment_image_url( $image_id, 'full' );
+			}, $photos_ids );
+			$response = '<div class="review-photos-popup images-count-' . count( $images ) . '" data-images-count="' . count( $images ) . '">';
+			$response .= '<div class="overlay"></div>';
+			foreach ( $images as $image ) {
+				$response .= '<div class="review-photo"><a href="' . esc_url( $image ) . '" target="_blank"><img src="' . esc_url( $image ) . '" alt=""></a></div>';
+			}
+			$response .= '</div>';
+
+			wp_send_json_success( $response );
+		}
+
+		/**
 		 * Field: Radio Alt
 		 */
 		public static function radio_alt( $settings, $value, $module_id = '' ) {
-			?>
-			<?php
 			if ( ! empty( $settings['options'] ) ) : ?>
 				<?php
 				foreach ( $settings['options'] as $key => $option ) : ?>
