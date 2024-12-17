@@ -40,7 +40,45 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 				array(
 					'sales_notifications_table'       => self::get_sales_notifications_table(),
 					'sales_notifications_shown_table' => self::get_sales_notifications_shown_table(),
+					'modules_analytics_table'         => self::get_modules_analytics_table(),
 				)
+			);
+		}
+
+		private static function get_modules_analytics_table() {
+			global $wpdb;
+
+			$table_name = $wpdb->prefix . 'merchant_modules_analytics';
+			$collate    = $wpdb->has_cap( 'collation' ) ? $wpdb->get_charset_collate() : '';
+
+			return array(
+				'name'           => $table_name,
+				'query'          => "
+			        CREATE TABLE $table_name (
+			            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			            source_product_id BIGINT UNSIGNED DEFAULT NULL,
+			            event_type VARCHAR(100) DEFAULT NULL,
+			            customer_id BIGINT UNSIGNED DEFAULT NULL,
+			            related_event_id BIGINT UNSIGNED DEFAULT NULL,
+			            module_id BIGINT UNSIGNED DEFAULT NULL,
+			            campaign_id BIGINT UNSIGNED DEFAULT NULL,
+			            campaign_cost DECIMAL(12, 4) DEFAULT NULL,
+			            order_id BIGINT UNSIGNED DEFAULT NULL,
+			            order_subtotal DECIMAL(12, 4) DEFAULT NULL,
+			            meta_data LONGTEXT DEFAULT NULL,
+			            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			            PRIMARY KEY (id),
+			            INDEX (event_type),
+			            INDEX (customer_id),
+			            INDEX (source_product_id),
+			            INDEX (related_event_id),
+			            INDEX (module_id),
+			            INDEX (campaign_id),
+			            INDEX (order_id)
+			        ) $collate;
+			    ",
+				'version'        => 1,
+				'schema_updater' => '', // Attach a callable here to update the schema when needed, you must increment the version number
 			);
 		}
 
