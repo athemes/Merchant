@@ -338,7 +338,6 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 
-
 						array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
