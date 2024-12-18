@@ -701,6 +701,8 @@ if ( ! function_exists( 'merchant_parse_product_ids' ) ) {
  */
 if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 	function merchant_is_user_condition_passed( $args = array() ) {
+		$args = is_array( $args ) ? $args : array();
+
 		$is_logged_in = is_user_logged_in();
 		$current_user = $is_logged_in ? wp_get_current_user() : null;
 		$customer_id  = (int) $current_user->ID ?? 0;
