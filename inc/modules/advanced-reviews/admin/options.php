@@ -48,6 +48,7 @@ Merchant_Admin_Options::create(
 				'step'    => 1,
 				'unit'    => '',
 				'default' => 6,
+				'condition' => array( 'review_options', 'any', 'image_and_text|image' ),
 			),
 
 			// Default Reviews Sorting.
