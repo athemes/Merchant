@@ -34,8 +34,8 @@ class Merchant_Analytics {
 			'source_product_id' => 0,
 			'event_type'        => '',
 			'customer_id'       => $this->user_id,
-			'related_event_id'  => 0,
-			'module_id'         => 0,
+			'related_event_id'  => '',
+			'module_id'         => '',
 			'campaign_id'       => 0,
 			'campaign_cost'     => 0,
 			'order_id'          => 0,
@@ -57,21 +57,26 @@ class Merchant_Analytics {
 			$args
 		);
 
-		$this->database->create( $args );
+		return $this->database->create( $args );
 	}
 
 	public function get_product_module_last_impression( $module_id, $product_id ) {
 		$now       = current_time( 'mysql' );
 		$last_hour = gmdate( 'Y-m-d H:i:s', strtotime( '-1 hour', strtotime( $now ) ) );
 
-		return $this->database
+		$result = $this->database
 			->where_between_dates( $last_hour, $now )
 			->where( array(
 				'event_type'        => 'impression',
 				'source_product_id' => $product_id,
 				'customer_id'       => $this->user_id,
+				'module_id'         => $module_id,
 			) )
 			->first();
+
+		$this->database->reset_query();
+
+		return $result;
 	}
 }
 
