@@ -1237,15 +1237,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 		}
 
-		if ( ! isset( $rule['user_condition'] ) ) {
-			return false;
-		}
-
-		if ( ( 'customers' === $rule['user_condition'] ) && empty( $rule['user_condition_users'] ) ) {
-			return false;
-		}
-
-		if ( ( 'roles' === $rule['user_condition'] ) && empty( $rule['user_condition_roles'] ) ) {
+		$user_condition_passed = merchant_is_user_condition_passed( $rule );
+		if ( ! $user_condition_passed ) {
 			return false;
 		}
 
@@ -1315,21 +1308,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 					continue;
 				}
 
-				if ( 'roles' === $rule['user_condition'] ) {
-					$allowed_roles = $rule['user_condition_roles'];
-					$user_roles    = $current_user->roles;
-					$intersect     = array_intersect( $allowed_roles, $user_roles );
-					if ( empty( $intersect ) ) {
-						continue;
-					}
-				}
-
-				if ( 'customers' === $rule['user_condition'] ) {
-					$allowed_users   = $rule['user_condition_users'];
-					$current_user_id = $current_user->ID;
-					if ( ! in_array( $current_user_id, $allowed_users, true ) ) {
-						continue;
-					}
+				$user_condition_passed = merchant_is_user_condition_passed( $rule );
+				if ( ! $user_condition_passed ) {
+					continue;
 				}
 
 				$trigger = $rule['trigger_on'] ?? 'product';
