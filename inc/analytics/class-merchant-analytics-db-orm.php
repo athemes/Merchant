@@ -26,6 +26,7 @@ class Merchant_Analytics_DB_ORM {
 	private $query_where = '';
 	private $query_params = array();
 	private $query_results = null;
+	private $query_executed = false;
 
 	public function __construct() {
 		global $wpdb;
@@ -38,10 +39,11 @@ class Merchant_Analytics_DB_ORM {
 	 *
 	 * @return $this
 	 */
-	private function reset_query() {
+	public function reset_query() {
 		$this->query_where   = '';
 		$this->query_params  = array();
 		$this->query_results = null;
+		$this->query_executed = false;
 
 		return $this;
 	}
@@ -61,7 +63,6 @@ class Merchant_Analytics_DB_ORM {
 			}
 		}
 		$format = $this->get_data_formats( $data );
-
 		$result = $this->wpdb->insert( $this->table_name, $data, $format );
 
 		if ( $result === false ) {
@@ -221,8 +222,8 @@ class Merchant_Analytics_DB_ORM {
 	 * @return array|null An array of objects representing the matching records, or null if there are no results or an error occurs.
 	 */
 	public function get() {
-		// If results already cached, return them
-		if ( $this->query_results !== null ) {
+		// If results already cached and query was executed, return them
+		if ( $this->query_executed && $this->query_results !== null ) {
 			return $this->query_results;
 		}
 
@@ -237,10 +238,8 @@ class Merchant_Analytics_DB_ORM {
 
 		// Execute query and cache results
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$this->query_results = $this->wpdb->get_results( $sql );
-
-		// Reset query builder for next use
-		$this->reset_query();
+		$this->query_results = $this->wpdb->get_results( $sql, ARRAY_A );
+		$this->query_executed = true;
 
 		return $this->query_results;
 	}
@@ -299,7 +298,7 @@ class Merchant_Analytics_DB_ORM {
 	private function get_data_formats( $data ) {
 		$format = array();
 		foreach ( $data as $key => $value ) {
-			if ( in_array( $key, array( 'source_product_id', 'customer_id', 'related_event_id', 'module_id', 'campaign_id', 'order_id' ), true ) ) { //Strict comparison
+			if ( in_array( $key, array( 'source_product_id', 'related_event_id', 'order_id' ), true ) ) { //Strict comparison
 				$format[] = '%d';
 			} elseif ( $key === 'campaign_cost' || $key === 'order_subtotal' ) { //Strict comparison
 				$format[] = '%f';
