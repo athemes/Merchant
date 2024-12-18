@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 1.11.0
+Stable tag: 1.11.1
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 1.11.1 =
+* Added - Christmas banner
+
 = 1.11.0 =
 * Added - Pre-orders: Added validation for shipping date selection. System now prevents setting pre-order start/end dates when shipping date is unselected and shows an alert message
 * Fixed - Pre-Orders: Resolved fatal error occurring on newer PHP versions when variable products lack pricing information
