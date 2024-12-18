@@ -814,7 +814,7 @@ Merchant_Admin_Options::create(
 							array(
 								'id'      => 'enable',
 								'type'    => 'switcher',
-								'title'   => esc_html__( 'Display featured reviews', 'merchant' ),
+								'title'   => esc_html__( 'Show/hide carousel', 'merchant' ),
 								'default' => 1,
 							),
 							array(
