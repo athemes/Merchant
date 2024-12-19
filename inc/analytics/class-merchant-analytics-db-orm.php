@@ -77,7 +77,7 @@ class Merchant_Analytics_DB_ORM {
 	 *
 	 * @param int $id The ID of the record to find.
 	 *
-	 * @return object|null The record object if found, null otherwise.
+	 * @return array|null The record object if found, null otherwise.
 	 */
 	public function find( $id ) {
 		return $this->reset_query()
@@ -247,7 +247,7 @@ class Merchant_Analytics_DB_ORM {
 	/**
 	 * Get the first result from the query
 	 *
-	 * @return object|null The first record object if found, null otherwise.
+	 * @return array|null The first record object if found, null otherwise.
 	 */
 	public function first() {
 		$results = $this->get();
@@ -286,6 +286,16 @@ class Merchant_Analytics_DB_ORM {
 	 */
 	public function delete( $id ) {
 		return $this->wpdb->delete( $this->table_name, array( 'id' => $id ), array( '%d' ) );
+	}
+
+	/**
+	 * Checks if the analytics table exists.
+	 *
+	 * @return bool True if the table exists, false otherwise.
+	 */
+	public function table_exists() {
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return $this->wpdb->get_var( $this->wpdb->prepare( "SHOW TABLES LIKE %s", $this->table_name ) ) === $this->table_name;
 	}
 
 	/**
