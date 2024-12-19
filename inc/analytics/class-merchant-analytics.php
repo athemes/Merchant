@@ -1,4 +1,5 @@
 <?php
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -42,6 +43,9 @@ class Merchant_Analytics {
 	 * @return false|int The ID of the inserted row on success, false on failure.
 	 */
 	public function log_event( $args ) {
+		if ( ! $this->is_db_table_exists() ) {
+			return false;
+		}
 		$defaults = array(
 			'source_product_id' => 0,
 			'event_type'        => '',
@@ -72,7 +76,18 @@ class Merchant_Analytics {
 		return $this->database->create( $args );
 	}
 
+	/**
+	 * Check if there is an impression event for a module and product in the last hour.
+	 *
+	 * @param $module_id  string The module ID.
+	 * @param $product_id int The product ID.
+	 *
+	 * @return array|null
+	 */
 	public function get_product_module_last_impression( $module_id, $product_id ) {
+		if ( ! $this->is_db_table_exists() ) {
+			return null;
+		}
 		$now       = current_time( 'mysql' );
 		$last_hour = gmdate( 'Y-m-d H:i:s', strtotime( '-1 hour', strtotime( $now ) ) );
 
@@ -133,7 +148,13 @@ class Merchant_Analytics {
 	 * @return bool True if the event exists, false otherwise.
 	 */
 	public function event_exists( $event_id ) {
-		return ! empty( $this->database->where( 'id = %d', $event_id )->first() );
+		if ( ! $this->is_db_table_exists() ) {
+			return false;
+		}
+		$result = ! empty( $this->database->where( 'id = %d', $event_id )->first() );
+		$this->database->reset_query();
+
+		return $result;
 	}
 
 	/**
@@ -145,7 +166,13 @@ class Merchant_Analytics {
 	 * @return false|int The ID of the updated row on success, false on failure.
 	 */
 	public function update_event( $event_id, $data ) {
-		return $this->database->update( $event_id, $data );
+		if ( ! $this->is_db_table_exists() ) {
+			return false;
+		}
+		$result = $this->database->update( $event_id, $data );
+		$this->database->reset_query();
+
+		return $result;
 	}
 
 	/**
@@ -156,7 +183,17 @@ class Merchant_Analytics {
 	 * @return bool True if the event was deleted, false otherwise.
 	 */
 	public function delete_event( $event_id ) {
-		return $this->database->delete( $event_id );
+		if ( ! $this->is_db_table_exists() ) {
+			return false;
+		}
+		$result = $this->database->delete( $event_id );
+		$this->database->reset_query();
+
+		return $result;
+	}
+
+	private function is_db_table_exists() {
+		return $this->database->table_exists();
 	}
 }
 
