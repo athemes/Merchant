@@ -92,6 +92,40 @@ class Merchant_Analytics {
 	}
 
 	/**
+	 * Get event data
+	 *
+	 * @param $event_id int The event ID.
+	 *
+	 * @return ARRAY|NULL  The event data.
+	 */
+	public function get_event( $event_id ) {
+		if ( ! $this->is_db_table_exists() ) {
+			return null;
+		}
+		$result = $this->database->where( 'id = %d', $event_id )->first();
+		$this->database->reset_query();
+
+		return $result;
+	}
+
+	/**
+	 * Get events by attributes.
+	 *
+	 * @param $attributes array The attributes to search for.
+	 *
+	 * @return array|null The events found.
+	 */
+	public function get_event_by( $attributes ) {
+		if ( ! $this->is_db_table_exists() ) {
+			return null;
+		}
+		$result = $this->database->where( $attributes )->first();
+		$this->database->reset_query();
+
+		return $result;
+	}
+
+	/**
 	 * Check if an event exists.
 	 *
 	 * @param $event_id int The event ID.
