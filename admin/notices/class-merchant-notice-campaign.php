@@ -15,9 +15,9 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
 	 * 
 	 */
 	public function __construct() {
-		$this->id        = 'merchant-campaign-notice';
+		$this->id        = 'merchant-campaign-notice-christmas-2024';
         $this->only_free = false;
-        $this->end_date_target = '2024-12-01';
+        $this->end_date_target = '2025-01-01';
         $this->display_conditions = array( 'toplevel_page_merchant' );
 
 		parent::__construct();
@@ -46,7 +46,9 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
 
             .merchant-campaign-notice {
                 position: relative !important;
-                background-color: #000;
+                background: url(". esc_url( MERCHANT_URI . 'assets/images/admin/christmas-background.jpg' ) .");
+                background-size: cover;
+                background-position: center;
                 padding: 30px 30px 0px !important;
                 border-left: 0;
             }
@@ -142,13 +144,13 @@ class Merchant_Notice_Campaign extends Merchant_Notice {
         <div class="merchant-notice notice merchant-campaign-notice" style="position:relative;">
 			<h3><?php echo wp_kses_post( sprintf(
                 /* Translators: 1. Image url. */
-                __( 'Merchant Black Friday: Up to <span><img src="%1$s" class="merchant-campaign-notice-percent" alt="Up to 40 Percent Off!" /> Off!</span>', 'merchant' ),
-                MERCHANT_URI . 'assets/images/admin/40-percent.png'
+                __( 'Merchant Christmas Sale: Up to <span><img src="%1$s" class="merchant-campaign-notice-percent" alt="Up to 30 Percent Off!" /> Off!</span>', 'merchant' ),
+                MERCHANT_URI . 'assets/images/admin/30-percent.png'
             ) ); ?></h3>
 
-            <a href="https://athemes.com/black-friday/?utm_source=plugin_notice&utm_medium=button&utm_campaign=Merchant#merchant-pro" class="merchant-btn merchant-btn-primary" target="_blank"><?php esc_html_e( 'Give Me This Deal', 'merchant' ); ?></a>
+            <a href="https://athemes.com/pricing/?utm_source=plugin_notice&utm_medium=button&utm_campaign=Merchant#merchant-pro" class="merchant-btn merchant-btn-primary" target="_blank"><?php esc_html_e( 'Give Me This Deal', 'merchant' ); ?></a>
 
-            <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/people-trust.png' ); ?>" alt="<?php echo esc_attr__( 'Ready to join 130,000+ WordPress creators who\'ve found their perfect match?', 'merchant' ); ?>" class="merchant-campaign-notice-thumbnail" />
+            <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/people-christmas.png' ); ?>" alt="<?php echo esc_attr__( 'Ready to join 130,000+ WordPress creators who\'ve found their perfect match?', 'merchant' ); ?>" class="merchant-campaign-notice-thumbnail" />
 
 			<a class="notice-dismiss" href="?page=merchant&<?php echo esc_attr( $this->id ); ?>_dismiss=1" style="text-decoration:none;"></a>             
 		</div>
