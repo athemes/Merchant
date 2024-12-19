@@ -81,5 +81,39 @@ class Merchant_Analytics {
 
 		return $result;
 	}
+
+	/**
+	 * Check if an event exists.
+	 *
+	 * @param $event_id int The event ID.
+	 *
+	 * @return bool True if the event exists, false otherwise.
+	 */
+	public function event_exists( $event_id ) {
+		return ! empty( $this->database->where( 'id = %d', $event_id )->first() );
+	}
+
+	/**
+	 * Update an event.
+	 *
+	 * @param $event_id int The event ID.
+	 * @param $data     array The data to update.
+	 *
+	 * @return false|int
+	 */
+	public function update_event( $event_id, $data ) {
+		return $this->database->update( $event_id, $data );
+	}
+
+	/**
+	 * Delete an event.
+	 *
+	 * @param $event_id int The event ID.
+	 *
+	 * @return bool True if the event was deleted, false otherwise.
+	 */
+	public function delete_event( $event_id ) {
+		return $this->database->delete( $event_id );
+	}
 }
 
