@@ -1,10 +1,14 @@
 <?php
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Class Merchant_Analytics
+ *
+ * This class is responsible for logging analytics events.
+ */
 class Merchant_Analytics {
 
 	/**
@@ -21,6 +25,11 @@ class Merchant_Analytics {
 		$this->database = new Merchant_Analytics_DB_ORM();
 	}
 
+	/**
+	 * Set the user ID.
+	 *
+	 * @param $user_id
+	 */
 	public function set_user_id( $user_id ) {
 		$this->user_id = $user_id;
 	}
@@ -99,7 +108,7 @@ class Merchant_Analytics {
 	 * @param $event_id int The event ID.
 	 * @param $data     array The data to update.
 	 *
-	 * @return false|int
+	 * @return false|int The ID of the updated row on success, false on failure.
 	 */
 	public function update_event( $event_id, $data ) {
 		return $this->database->update( $event_id, $data );
