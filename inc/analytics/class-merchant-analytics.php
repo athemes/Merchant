@@ -25,10 +25,13 @@ class Merchant_Analytics {
 		$this->user_id = $user_id;
 	}
 
-	public function load_hooks() {
-		add_action( 'merchant_analytics_log_event', array( $this, 'log_event' ) );
-	}
-
+	/**
+	 * Log an event.
+	 *
+	 * @param $args array The arguments for the event to be logged.
+	 *
+	 * @return false|int The ID of the inserted row on success, false on failure.
+	 */
 	public function log_event( $args ) {
 		$defaults = array(
 			'source_product_id' => 0,
