@@ -98,8 +98,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			return; 
 		}
 
-        add_filter( 'merchant_real_time_search_product_description', array( $this, 'remove_shortcode_product_description' ) );
-
 		// Enqueue styles.
 		add_action( 'merchant_enqueue_before_main_css_js', array( $this, 'enqueue_css' ) );
 
@@ -476,6 +474,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			$item_title = apply_filters( 'merchant_real_time_search_product_title', $item_title, $product );
 
 			$description = $desc_type === 'product-post-content' ? $product->get_description() : $product->get_short_description();
+			$description = strip_shortcodes( $description );
 
 			/**
 			 * `merchant_real_time_search_product_description`
@@ -518,19 +517,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		<?php
 		return ob_get_clean();
 	}
-
-	/**
-	 * Remove merchant shortcodes from product description.
-     *
-	 * @param $description
-	 *
-	 * @return array|string|string[]|null
-	 */
-	public function remove_shortcode_product_description( $content ) {
-		$content = preg_replace( '/\[merchant_[^]]*]/', '', $content );
-
-        return wp_strip_all_tags( $content );
-    }
 }
 
 // Initialize the module.
