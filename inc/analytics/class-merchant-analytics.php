@@ -79,26 +79,33 @@ class Merchant_Analytics {
 	/**
 	 * Check if there is an impression event for a module and product in the last hour.
 	 *
-	 * @param $module_id  string The module ID.
-	 * @param $product_id int The product ID.
+	 * @param $module_id   string The module ID.
+	 * @param $product_id  int The product ID.
+	 * @param $extra_attrs array Extra attributes to search for.
 	 *
 	 * @return array|null
 	 */
-	public function get_product_module_last_impression( $module_id, $product_id ) {
+	public function get_product_module_last_impression( $module_id, $product_id, $extra_attrs = array() ) {
 		if ( ! $this->is_db_table_exists() ) {
 			return null;
 		}
 		$now       = current_time( 'mysql' );
 		$last_hour = gmdate( 'Y-m-d H:i:s', strtotime( '-1 hour', strtotime( $now ) ) );
 
+		$args = array(
+			'event_type'        => 'impression',
+			'source_product_id' => $product_id,
+			'customer_id'       => $this->user_id,
+			'module_id'         => $module_id,
+		);
+
+		if ( ! empty( $extra_attrs ) ) {
+			$args = array_merge( $args, $extra_attrs );
+		}
+
 		$result = $this->database
 			->where_between_dates( $last_hour, $now )
-			->where( array(
-				'event_type'        => 'impression',
-				'source_product_id' => $product_id,
-				'customer_id'       => $this->user_id,
-				'module_id'         => $module_id,
-			) )
+			->where( $args )
 			->first();
 
 		$this->database->reset_query();
