@@ -68,6 +68,7 @@ $product_id     = $product->get_id();
             <div
                 class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>"
                 data-in-cart="<?php echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>"
+                data-flexible-id="<?php echo isset( $discount_tier['flexible_id'] ) ? esc_attr( $discount_tier['flexible_id'] ) : ''; ?>"
                 data-offer-id="<?php echo esc_attr( $offer_id ); ?>" data-variations="<?php echo esc_attr( wp_json_encode( $available_variations ) ); ?>"
                 style="<?php
                     // Inline CSS variables to use in CSS. Will work per item.
