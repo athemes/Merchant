@@ -79,10 +79,18 @@ class Merchant_Analytics_DB_ORM {
 	 *
 	 * @return array|null The record object if found, null otherwise.
 	 */
-	public function find( $id ) {
-		return $this->reset_query()
-		            ->where( 'id = %d', $id )
-		            ->first();
+	public function find( $id, $first_or_last = 'first' ) {
+		if ( $first_or_last === 'last' ) {
+			$results = $this->reset_query()
+			                ->where( 'id = %d', $id )
+			                ->last();
+		} else {
+			$results = $this->reset_query()
+			                ->where( 'id = %d', $id )
+			                ->first();
+		}
+
+		return $results;
 	}
 
 	/**
@@ -253,6 +261,17 @@ class Merchant_Analytics_DB_ORM {
 		$results = $this->get();
 
 		return ! empty( $results ) ? $results[0] : null;
+	}
+
+	/**
+	 * Get the last result from the query
+	 *
+	 * @return array|null The last record object if found, null otherwise.
+	 */
+	public function last() {
+		$results = $this->get();
+
+		return ! empty( $results ) ? $results[count($results) - 1] : null;
 	}
 
 	/**
