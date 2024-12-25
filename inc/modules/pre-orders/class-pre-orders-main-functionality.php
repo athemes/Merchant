@@ -1159,12 +1159,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function log_order_event( $order ) {
 		$module_id = $this->module_id;
+		$user_id   = WC()->session->get_customer_id();
+		$analytics = new Merchant_Analytics();
+		$analytics->set_user_id( $user_id );
 		foreach ( $order->get_items() as $order_item ) {
 			$analytics_id = $order_item->get_meta( '_pre_order_add_to_cart_event_id' );
 			if ( ! empty( $analytics_id ) ) {
-				$user_id   = WC()->session->get_customer_id();
-				$analytics = new Merchant_Analytics();
-				$analytics->set_user_id( $user_id );
 				$add_to_cart_event_id = $analytics_id;
 				$event_data           = $analytics->get_event( $add_to_cart_event_id );
 				$campaign_cost        = ! empty( $event_data['campaign_cost'] ) ? $event_data['campaign_cost'] : 0;
