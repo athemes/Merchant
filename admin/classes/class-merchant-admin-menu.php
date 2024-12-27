@@ -72,11 +72,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				1
 			);
 
-			// Enabled Modules.
+			// All Modules.
 			add_submenu_page(
 				$this->plugin_slug,
-				esc_html__('Enabled Modules', 'merchant'),
-				esc_html__('Enabled Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
 				'manage_options',
 				'admin.php?page=merchant&section=modules',
 				'',
