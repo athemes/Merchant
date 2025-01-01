@@ -73,9 +73,13 @@ foreach ( $all_modules as $module_group ) {
         </div>
     <?php else : ?>
         <div class="merchant-modules-no-active-modules">
-            <img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/admin/no-active-modules.svg" alt="<?php echo esc_html__( 'Merchant', 'merchant' ); ?>"/>
-            <div class="merchant-modules-no-active-modules__text-big"><?php esc_html_e( 'This is where you’ll manage your modules', 'merchant' ); ?></div>
-            <div class="merchant-modules-no-active-modules__text-small"><?php esc_html_e( 'Start by creating and publishing your offers', 'merchant' ); ?></div>
+            <img src="<?php echo esc_url( MERCHANT_URI . 'assets/images/admin/no-active-modules.svg' ); ?>" alt="<?php echo esc_html__( 'Merchant', 'merchant' ); ?>"/>
+            <div class="merchant-modules-no-active-modules__text-big">
+                <?php esc_html_e( 'This is where you’ll manage your modules', 'merchant' ); ?>
+            </div>
+            <div class="merchant-modules-no-active-modules__text-small">
+                <?php esc_html_e( 'Start by creating and publishing your offers', 'merchant' ); ?>
+            </div>
             <a href="<?php echo esc_url( add_query_arg( array( 'page' => 'merchant', 'section' => 'modules' ), admin_url( 'admin.php' ) ) ); ?>" class="merchant-module-page-button">
                 <?php echo esc_html__( 'Add Modules', 'merchant' ); ?>
             </a>
