@@ -227,11 +227,10 @@ $merchant_notification_read = $this->is_latest_notification_read();
 		<div class="merchant-modules-header">
 
 			<div class="merchant-modules-header-left">
-
 				<div class="merchant-modules-header-heading"><?php esc_html_e( 'Welcome To Merchant', 'merchant' ); ?> <img class="merchant-admin-hand-icon" src="<?php echo esc_url( MERCHANT_URI . '/assets/images/admin-hand-icon.png' ); ?>" alt="<?php echo esc_attr__( 'Welcome To Merchant', 'merchant' ); ?>" /></div>
 				<div class="merchant-modules-header-subheading"><?php esc_html_e( 'We’re glad to see you :)', 'merchant' ); ?></div>
-				<div class="merchant-modules-header-image">
-					<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/dashboard-hero.svg" alt="Merchant" />
+				<div class="merchant-modules-header-image merchant-modules-header-image__dashboard">
+					<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/dashboard-hero.svg" alt="<?php echo esc_attr__( 'Merchant', 'merchant' ); ?>"/>
 				</div>
 
 			</div>
@@ -308,7 +307,6 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 					<li class="merchant-modules-header-shortlinks-feedback">
 						<a href="https://athemes.com/feature-request/" target="_blank">
-
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M6.09407 4L5.18893 4.8922L6.53571 6.22098L7.43957 5.32878L6.09343 4H6.09407ZM17.9066 4L16.5598 5.32878L17.4643 6.22098L18.8104 4.89283L17.9066 4ZM12 4.39597C11.7879 4.39851 11.5731 4.41056 11.3571 4.43658C11.3507 4.43658 11.3443 4.43531 11.3379 4.43658C8.73043 4.73165 6.65529 6.81112 6.29464 9.3735C6.00664 11.4358 6.86807 13.3059 8.30357 14.5103C8.89076 15.005 9.28793 15.6838 9.42857 16.433V20.2404H10.8943C11.118 20.6193 11.5262 20.875 12 20.875C12.4738 20.875 12.882 20.6193 13.1057 20.2404H14.5714V17.7022H14.6319V16.9483C14.6319 16.018 15.1217 15.0801 15.9176 14.351C16.9821 13.2989 17.7857 11.8045 17.7857 10.088C17.7857 6.95327 15.1719 4.36678 12 4.39597ZM12 5.6651C14.4846 5.63083 16.5 7.6386 16.5 10.088C16.5 11.4168 15.8764 12.5869 15.0131 13.4385L15.0336 13.4588C14.1757 14.2398 13.6209 15.292 13.4651 16.4337H10.6532C10.5118 15.346 10.0393 14.2933 9.14636 13.5382C8.01043 12.5863 7.3335 11.1522 7.55979 9.53278C7.84071 7.5339 9.48386 5.92654 11.4973 5.70635C11.6635 5.68347 11.8309 5.66991 11.9987 5.66573L12 5.6651ZM3 10.088V11.3572H4.92857V10.088H3ZM19.0714 10.088V11.3572H21V10.088H19.0714ZM6.53571 15.2242L5.18957 16.5523L6.09407 17.4452L7.43893 16.1164L6.53571 15.2242ZM17.4643 15.2242L16.5604 16.1164L17.9059 17.4452L18.8104 16.5523L17.4643 15.2242ZM10.7143 17.7028H13.2857V18.9719H10.7143V17.7028Z" fill="#787C82"/>
 							</svg>
@@ -318,15 +316,19 @@ $merchant_notification_read = $this->is_latest_notification_read();
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M10.8626 8.04102L14.2809 12.0291L10.8626 16.0172L9.72363 15.041L12.3053 12.0291L9.72363 9.01721L10.8626 8.04102Z" fill="#757575"/>
 							</svg>
-
 						</a>
 					</li>
-
 				</ul>
-
 			</div>
-
 		</div>
+
+        <div class="merchant-date-comparison-panel">
+			<?php require_once MERCHANT_DIR . 'admin/components/date-comparison.php'; ?>
+        </div>
+
+        <div class="merchant-analytics-panel">
+			<?php require_once MERCHANT_DIR . 'admin/components/analytics-overall.php'; ?>
+        </div>
 
         <div class="merchant-modules-panel">
 	        <?php require_once MERCHANT_DIR . 'admin/components/enabled-modules.php'; ?>

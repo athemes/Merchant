@@ -52,10 +52,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Enqueue scripts.
 		 */
 		public function enqueue_scripts() {
-			if (
-				isset( $_GET['page'] ) && 'merchant' === $_GET['page'] // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				&& isset( $_GET['module'] )  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			) {
+			$page = sanitize_text_field( $_GET['page'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+            if ( $page === 'merchant' ) {
 				wp_enqueue_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
 				wp_enqueue_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13', 'all' );
 

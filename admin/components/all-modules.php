@@ -1,7 +1,13 @@
 <?php
 /**
  * All Modules.
+ *
+ * @since 2.0.0
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $all_modules = Merchant_Admin_Modules::get_modules();
 if ( empty( $all_modules ) ) {

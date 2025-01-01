@@ -3,6 +3,7 @@
 @import 'pickr';
 @import 'buttons';
 @import 'tabs';
+@import 'analytics';
 
 .toplevel_page_merchant {
   background-color: #F4F6F8;
@@ -415,6 +416,10 @@
   justify-content: center;
   align-items: flex-end;
 
+  &__dashboard {
+    margin-bottom: -50px;
+  }
+
   svg {
     width: 300px;
   }
@@ -426,6 +431,33 @@
     }
   }
 }
+
+.merchant-modules-no-active-modules {
+  padding-block: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 350px;
+    max-width: 100%;
+  }
+
+  &__text {
+    &-big {
+      font-size: 16px;
+      font-weight: 500;
+      color: #101517;
+    }
+
+    &-small {
+      color: #757575;
+      font-size: 13px;
+    }
+  }
+}
+
 
 .merchant-modules-header-shortlinks {
   margin: 20px 0;

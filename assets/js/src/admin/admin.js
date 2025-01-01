@@ -257,7 +257,7 @@
             },
 
             initiate_datepicker: function () {
-                let elements = $('.merchant-module-page-setting-field .merchant-datetime-field');
+                let elements = $('.merchant-module-page-setting-field .merchant-datetime-field, .merchant-date-comparison__fields .merchant-datetime-field');
                 if (elements.length === 0) {
                     return;
                 }
@@ -266,6 +266,8 @@
                         options = {
                             locale: JSON.parse(merchant_datepicker_locale),
                             selectedDates: [input.val() ? new Date(input.val()) : ''],
+                            // position: 'bottom right',
+
                             onSelect: ({date, formattedDate, datepicker}) => {
                                 if (typeof (formattedDate) === "undefined") {
                                     // allow removing date

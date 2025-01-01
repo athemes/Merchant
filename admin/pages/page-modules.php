@@ -47,7 +47,7 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 							}
 						}
 					}
-					
+
 					echo esc_attr( $merchant_count );
 					?>
 				</strong>
@@ -62,7 +62,7 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 
 	<div class="merchant-modules-header-right">
 		<div class="merchant-modules-header-image">
-			<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/modules-hero.svg" alt="Merchant" />
+			<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/modules-hero.svg" alt="<?php echo esc_attr__( 'Merchant', 'merchant' ); ?>"/>
 		</div>
 	</div>
 
