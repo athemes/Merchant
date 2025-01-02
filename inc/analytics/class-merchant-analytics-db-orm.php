@@ -27,6 +27,11 @@ class Merchant_Analytics_DB_ORM {
 	private $query_params = array();
 	private $query_results = null;
 	private $query_executed = false;
+	private $select = '*';
+	private $aggregates = array();
+	private $order_by = '';
+	private $sql_statement = '';
+	private $limit = '';
 
 	public function __construct() {
 		global $wpdb;
@@ -40,10 +45,15 @@ class Merchant_Analytics_DB_ORM {
 	 * @return $this
 	 */
 	public function reset_query() {
-		$this->query_where   = '';
-		$this->query_params  = array();
-		$this->query_results = null;
+		$this->query_where    = '';
+		$this->sql_statement  = '';
+		$this->query_params   = array();
+		$this->query_results  = null;
 		$this->query_executed = false;
+		$this->select         = '*';
+		$this->aggregates     = array();
+		$this->order_by       = '';
+		$this->limit          = '';
 
 		return $this;
 	}
@@ -70,6 +80,15 @@ class Merchant_Analytics_DB_ORM {
 		}
 
 		return $this->wpdb->insert_id;
+	}
+
+	/**
+	 * Get the SQL statement for the last query
+	 *
+	 * @return string The SQL statement
+	 */
+	public function get_sql_statement() {
+		return $this->sql_statement;
 	}
 
 	/**
@@ -225,26 +244,221 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
+	 * Sets columns to select.
+	 *
+	 * @param string|array $columns Columns to select.
+	 *
+	 * @return $this
+	 */
+	public function select( $columns = '*' ) {
+		$this->select = is_array( $columns ) ? implode( ', ', $columns ) : $columns;
+
+		return $this;
+	}
+
+	/**
+	 * Add SUM to query.
+	 *
+	 * @param string $column Column to sum.
+	 * @param string $alias  Optional alias for the sum.
+	 *
+	 * @return $this
+	 */
+	public function sum( $column, $alias = '' ) {
+		$this->aggregates[] = array(
+			'function' => 'SUM',
+			'column'   => $column,
+			'alias'    => $alias ? $alias : "sum_{$column}",
+		);
+
+		return $this;
+	}
+
+
+	/**
+	 * Add COUNT to query.
+	 *
+	 * @param string  $column   Column to count.
+	 * @param boolean $distinct Count distinct values.
+	 * @param string  $alias    Optional alias.
+	 *
+	 * @return $this
+	 */
+	public function count( $column = '*', $distinct = false, $alias = '' ) {
+		$this->aggregates[] = array(
+			'function' => 'COUNT',
+			'column'   => $distinct ? "DISTINCT {$column}" : $column,
+			'alias'    => $alias ? $alias : "count_{$column}",
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Prepares DISTINCT query.
+	 *
+	 * @param string $column Column to get distinct values.
+	 *
+	 * @return $this
+	 */
+	public function distinct( $column ) {
+		$this->select = "DISTINCT {$column}";
+
+		return $this;
+	}
+
+	/**
+	 * Prepares MAX query.
+	 *
+	 * @param string $column Column to get maximum value.
+	 *
+	 * @return $this
+	 */
+	public function max( $column, $alias = '' ) {
+		$this->aggregates[] = array(
+			'function' => 'MAX',
+			'column'   => $column,
+			'alias'    => $alias ? $alias : "max_{$column}",
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Prepares MIN query.
+	 *
+	 * @param string $column Column to get minimum value.
+	 *
+	 * @return $this
+	 */
+	public function min( $column, $alias = '' ) {
+		$this->aggregates[] = array(
+			'function' => 'MIN',
+			'column'   => $column,
+			'alias'    => $alias ? $alias : "min_{$column}",
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Add AVG to query.
+	 *
+	 * @param string $column Column to average.
+	 * @param string $alias  Optional alias.
+	 *
+	 * @return $this
+	 */
+	public function avg( $column, $alias = '' ) {
+		$this->aggregates[] = array(
+			'function' => 'AVG',
+			'column'   => $column,
+			'alias'    => $alias ? $alias : "avg_{$column}",
+		);
+
+		return $this;
+	}
+
+	/**
+	 * Add a group by clause to the query
+	 *
+	 * @param $column string The column to group by
+	 *
+	 * @return $this
+	 */
+	public function group_by( $column ) {
+		$this->query_where .= " GROUP BY " . esc_sql( $column );
+
+		return $this;
+	}
+
+	/**
+	 * Add where not in clause to the query.
+	 *
+	 * @param string $column The column to check.
+	 * @param array  $values Array of values to exclude.
+	 *
+	 * @return $this
+	 */
+	public function where_not_in( string $column, array $values ) {
+		if ( empty( $values ) ) {
+			return $this;
+		}
+
+		$column             = esc_sql( $column );
+		$placeholders       = array_fill( 0, count( $values ), '%s' );
+		$placeholder_string = implode( ',', $placeholders );
+
+		if ( empty( $this->query_where ) ) {
+			$this->query_where = ' WHERE ' . $column . ' NOT IN (' . $placeholder_string . ')';
+		} else {
+			$this->query_where .= ' AND ' . $column . ' NOT IN (' . $placeholder_string . ')';
+		}
+
+		$this->query_params = array_merge( $this->query_params, $values );
+
+		return $this;
+	}
+
+	/**
+	 * Add ORDER BY clause to query.
+	 *
+	 * @param string $column    Column name.
+	 * @param string $direction Sort direction (ASC or DESC).
+	 *
+	 * @return $this
+	 */
+	public function order_by( $column, $direction = 'ASC' ) {
+		$column    = esc_sql( $column );
+		$direction = in_array( strtoupper( $direction ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $direction ) : 'ASC';
+
+		$this->order_by = " ORDER BY {$column} {$direction}";
+
+		return $this;
+	}
+
+	public function limit( $limit, $offset = 0 ) {
+		$this->limit = " LIMIT {$limit} OFFSET {$offset}";
+
+		return $this;
+	}
+
+	/**
 	 * Execute the query and get results
 	 *
 	 * @return array|null An array of objects representing the matching records, or null if there are no results or an error occurs.
 	 */
 	public function get() {
-		// If results already cached and query was executed, return them
 		if ( $this->query_executed && $this->query_results !== null ) {
 			return $this->query_results;
 		}
 
-		// Construct full SQL query
-		$sql = "SELECT * FROM {$this->table_name}" . $this->query_where;
+		$select = $this->select;
 
-		// Prepare and execute query
+		if ( ! empty( $this->aggregates ) ) {
+			$aggregate_parts = array();
+
+			foreach ( $this->aggregates as $agg ) {
+				$aggregate_parts[] = sprintf(
+					'%s(%s) as %s',
+					esc_sql( $agg['function'] ),
+					esc_sql( $agg['column'] ),
+					esc_sql( $agg['alias'] )
+				);
+			}
+
+			$select = implode( ', ', $aggregate_parts );
+		}
+
+		$sql = "SELECT {$select} FROM {$this->table_name}" . $this->query_where . $this->order_by . $this->limit;
+
 		if ( ! empty( $this->query_params ) ) {
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$sql = $this->wpdb->prepare( $sql, $this->query_params );
 		}
 
-		// Execute query and cache results
+		$this->sql_statement = $sql;
+
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$this->query_results = $this->wpdb->get_results( $sql, ARRAY_A );
 		$this->query_executed = true;
