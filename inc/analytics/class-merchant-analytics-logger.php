@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * This class is responsible for logging analytics events.
  */
-class Merchant_Analytics {
+class Merchant_Analytics_Logger {
 
 	/**
 	 * @var Merchant_Analytics_DB_ORM

@@ -162,7 +162,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function record_add_to_cart_event( $cart_item_data, $product_id ) {
 		$user_id   = WC()->session->get_customer_id();
-		$analytics = new Merchant_Analytics();
+		$analytics = new Merchant_Analytics_Logger();
 		$analytics->set_user_id( $user_id );
 		$module_id                  = $this->module_id;
 		$impression_event           = $analytics->get_product_module_last_impression( $module_id, $product_id );
@@ -239,7 +239,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function update_analytics( $cart ) {
 		$cart_items = $cart->get_cart();
 		$user_id    = WC()->session->get_customer_id();
-		$analytics  = new Merchant_Analytics();
+		$analytics  = new Merchant_Analytics_Logger();
 		$analytics->set_user_id( $user_id );
 		foreach ( $cart_items as $cart_item_key => $cart_item_data ) {
 			if (
@@ -989,7 +989,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return void
 	 */
 	public function record_impression( $product_id, $campaign ) {
-		$analytics   = new Merchant_Analytics();
+		$analytics   = new Merchant_Analytics_Logger();
 		$campaign_id = isset( $campaign['flexible_id'] ) ? $campaign['flexible_id'] : 0;
 		$module_id   = $this->module_id;
 		$user_id     = WC()->session->get_customer_id();
@@ -1160,7 +1160,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function log_order_event( $order ) {
 		$module_id = $this->module_id;
 		$user_id   = WC()->session->get_customer_id();
-		$analytics = new Merchant_Analytics();
+		$analytics = new Merchant_Analytics_Logger();
 		$analytics->set_user_id( $user_id );
 		foreach ( $order->get_items() as $order_item ) {
 			$analytics_id = $order_item->get_meta( '_pre_order_add_to_cart_event_id' );
