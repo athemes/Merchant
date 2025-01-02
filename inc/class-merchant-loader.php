@@ -81,7 +81,6 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Modules analytics
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-db-orm.php';
-			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics.php';
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-logger.php';
 
 			// Modules (free and pro).
