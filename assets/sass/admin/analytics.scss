@@ -117,14 +117,13 @@
 					}
 
 					.change-percentage {
+						color: #3D65E9;
+
 						strong {
 							&:before {
 								content: '+';
 							}
 						}
-
-						color: #3D65E9;
-
 
 						&.decrease {
 							color: #E36131;
