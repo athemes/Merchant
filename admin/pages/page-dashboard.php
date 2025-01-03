@@ -195,6 +195,14 @@ $merchant_notification_read = $this->is_latest_notification_read();
 				require MERCHANT_DIR . 'admin/pages/page-settings.php';
 				break;
 
+			case 'analytics':
+				require MERCHANT_DIR . 'admin/pages/page-analytics.php';
+				break;
+
+			case 'campaigns':
+				require MERCHANT_DIR . 'admin/pages/page-campaigns.php';
+				break;
+
 		}
 
 		?>

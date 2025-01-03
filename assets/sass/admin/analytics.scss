@@ -1,0 +1,19 @@
+.merchant-analytics-section {
+	background-color: #fff;
+	margin-bottom: 22px;
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+}
+
+//.highcharts-series-group > g.highcharts-series.highcharts-column-series.highcharts-series-0 > rect {
+//	clip-path: inset(0% 0% -4px 0% round 4px);
+//}
+
+.impressions-chart {
+	.apexcharts-gridlines-vertical line:last-of-type,
+	.apexcharts-gridlines-vertical line:first-of-type {
+		display: none;
+	}
+}
+
+

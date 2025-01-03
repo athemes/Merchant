@@ -34,6 +34,13 @@ const styles = [
 		destination: './assets/css/admin',
 	},
 
+	// analytics
+	{
+		name: 'analytics',
+		src: './assets/sass/admin/analytics.scss',
+		destination: './assets/css/admin',
+	},
+
 	// Admin Notices.
 	{
 		name: 'adminNotices',
@@ -629,6 +636,14 @@ const scripts = [
 		src: './assets/js/src/admin/admin.js',
 		destination: './assets/js/admin',
 		file: 'admin',
+	},
+
+	// analytics
+	{
+		name: 'analytics',
+		src: './assets/js/src/admin/analytics.js',
+		destination: './assets/js/admin',
+		file: 'analytics',
 	},
 
 	// Metabox.

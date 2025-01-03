@@ -38,8 +38,27 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			}
 
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'analytics_assets' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
 			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
+		}
+
+        /**
+         * Enqueue assets for analytics page.
+         *
+         * @return void
+         */
+		public function analytics_assets() {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_GET['page'], $_GET['section'] ) && $_GET['page'] === 'merchant' && $_GET['section'] === 'analytics' ) {
+				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
+                wp_enqueue_script( 'apexcharts', MERCHANT_URI . 'assets/js/vendor/apexcharts.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				wp_enqueue_script( 'merchant-analytics', MERCHANT_URI . 'assets/js/admin/analytics.js', array( 'jquery', 'apexcharts' ), MERCHANT_VERSION, true );
+				wp_localize_script( 'merchant-analytics', 'merchant_analytics', array(
+					'nonce'    => wp_create_nonce( 'merchant' ),
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+				) );
+			}
 		}
 
 		/**
@@ -92,6 +111,27 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'admin.php?page=merchant&section=settings',
 				'',
 				3
+			);
+
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Campaigns', 'merchant'),
+				esc_html__('Campaigns', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=campaigns',
+				'',
+				3
+			);
+
+
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Analytics', 'merchant'),
+				esc_html__('Analytics', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=analytics',
+				'',
+				4
 			);
 
 			// Add 'Upgrade' link.
