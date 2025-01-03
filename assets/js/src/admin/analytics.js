@@ -217,10 +217,10 @@
 												<path d="M0.5 41V22L12.5 26H16.5L24 19L27 16.5L33.5 15L42.5 19L47 17.5L63.5 1V41H0.5Z" fill="url(#paint0_linear_4098_14532)"/>
 												<path d="M0.5 21.5L7.89394 25.3339C11.5717 27.2409 16.0444 26.6827 19.1408 23.9304L26.846 17.0814C29.8153 14.4419 34.2623 14.351 37.3371 16.8667V16.8667C40.5519 19.497 45.2367 19.2633 48.1738 16.3262L63.5 1" stroke="#3661EA" stroke-width="0.5" stroke-dasharray="3 3"/>
 												<defs>
-												<linearGradient id="paint0_linear_4098_14532" x1="23.753" y1="1" x2="16.791" y2="39.8525" gradientUnits="userSpaceOnUse">
-												<stop stop-color="#CDE1FE"/>
-												<stop offset="1" stop-color="#FBFCFF" stop-opacity="0"/>
-												</linearGradient>
+													<linearGradient id="paint0_linear_4098_14532" x1="23.753" y1="1" x2="16.791" y2="39.8525" gradientUnits="userSpaceOnUse">
+														<stop stop-color="${current_data.diff_type === 'decrease' ? '#FFB6B6' : '#CDE1FE'}"/>
+														<stop offset="1" stop-color="#FBFCFF" stop-opacity="0"/>
+													</linearGradient>
 												</defs>
 											</svg>
 										</div>

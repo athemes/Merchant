@@ -13,8 +13,8 @@
 }
 
 .apexcharts-tooltip {
-	opacity: 1 !important;
-	visibility: visible !important;
+	//opacity: 1 !important;
+	//visibility: visible !important;
 }
 
 .revenue-chart {
@@ -118,20 +118,24 @@
 
 					.change-percentage {
 						strong {
-							color: #3D65E9;
-
 							&:before {
 								content: '+';
 							}
+						}
 
-							&.decrease {
-								color: #E36131;
+						color: #3D65E9;
 
+
+						&.decrease {
+							color: #E36131;
+
+							strong {
 								&:before {
 									content: '-';
 								}
 							}
 						}
+
 					}
 				}
 			}
