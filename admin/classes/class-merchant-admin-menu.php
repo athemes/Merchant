@@ -55,11 +55,13 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				wp_enqueue_script( 'apexcharts', MERCHANT_URI . 'assets/js/vendor/apexcharts.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				wp_enqueue_script( 'merchant-analytics', MERCHANT_URI . 'assets/js/admin/analytics.js', array( 'jquery', 'apexcharts' ), MERCHANT_VERSION, true );
 				wp_localize_script( 'merchant-analytics', 'merchant_analytics', array(
-					'nonce'         => wp_create_nonce( 'merchant' ),
-					'ajax_url'      => admin_url( 'admin-ajax.php' ),
-					'currency_name' => get_woocommerce_currency(),
-					'labels'        => array(
-						'orders' => esc_html__( 'orders', 'merchant' ),
+					'nonce'           => wp_create_nonce( 'merchant' ),
+					'ajax_url'        => admin_url( 'admin-ajax.php' ),
+					'currency_name'   => get_woocommerce_currency(),
+					'currency_symbol' => get_woocommerce_currency_symbol(),
+					'labels'          => array(
+						'orders'     => esc_html__( 'orders', 'merchant' ),
+						'orders_aov' => esc_html__( 'Orders AOV', 'merchant' ),
 					),
 				) );
 			}

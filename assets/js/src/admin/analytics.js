@@ -330,18 +330,13 @@
 				},
 			},
 			tooltip: {
-				fixed: {
-
-					offsetX: 0,
-					offsetY: 0,
-				},
 				enabled: true,
 				theme: false,
 				custom: function ({series, seriesIndex, dataPointIndex, w}) {
-					// console.log(w.globals.initialSeries[seriesIndex].data[dataPointIndex])
+					let current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
 					return `<div class="arrow-box-aov">
-								<div class="box-title">Orders AOV</div>
-								<div class="box-value">$350 <span class="diff red">(-3.5%)</span></div>
+								<div class="box-title">${merchant_analytics.labels.orders_aov}</div>
+								<div class="box-value">${current_data.amount} <span class="diff ${current_data.diff_type}">${current_data.difference}%</span></div>
 							</div>`
 				}
 			}
@@ -490,47 +485,80 @@
 			let activeData = [
 				{
 					x: 'Dec 23 2017',
-					y: 49
+					y: 49,
+					amount: '$49',
+					difference: 3.5,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 24 2017',
-					y: 44
+					y: 44,
+					amount: '$44',
+					difference: 7.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 25 2017',
-					y: 36
+					y: 36,
+					amount: '$36',
+					difference: 11.3,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 26 2017',
-					y: 58
+					y: 58,
+					amount: '$58',
+					difference: 4.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 27 2017',
-					y: 34
+					y: 34,
+					amount: '$34',
+					difference: 7.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 28 2017',
-					y: 32
+					y: 32,
+					amount: '$32',
+					difference: 5.6,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 29 2017',
-					y: 55
+					y: 55,
+					amount: '$55',
+					difference: 2.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 30 2017',
-					y: 51
+					y: 51,
+					amount: '$51',
+					difference: 9.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 31 2017',
-					y: 67
+					y: 67,
+					amount: '$67',
+					difference: 1.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Jan 01 2018',
-					y: 22
+					y: 22,
+					amount: '$22',
+					difference: 3.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Jan 02 2018',
-					y: 34
+					y: 34,
+					amount: '$34',
+					difference: 7.2,
+					diff_type: 'decrease'
 				}
 			];
 			let options = merchantChart.avgOrderValChartOptions;

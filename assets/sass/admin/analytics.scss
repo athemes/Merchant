@@ -54,14 +54,23 @@
 
 				.diff {
 					font-size: 14px;
-				}
-
-				.red {
-					color: #E36131;
-				}
-
-				.blue {
 					color: #3D65E9;
+
+					&:before {
+						content: '(+';
+					}
+
+					&:after {
+						content: ')';
+					}
+
+					&.decrease {
+						color: #E36131;
+
+						&:before {
+							content: '(-';
+						}
+					}
 				}
 			}
 		}
