@@ -88,7 +88,6 @@ if ( empty( $all_modules ) ) {
                         <div class="merchant-modules-list-item-content">
                             <div class="merchant-modules-list-item-title">
 								<?php echo esc_html( $module_data['title'] ?? '' ); ?>
-
 								<?php if ( Merchant_Modules::is_module_active( $module_id ) && ! $is_pro ) : ?>
                                     <i class="merchant-modules-indicator"></i>
 								<?php endif; ?>

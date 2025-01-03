@@ -4,10 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$merchant_modules = Merchant_Admin_Modules::get_modules(); 
-
+$merchant_modules = Merchant_Admin_Modules::get_modules();
 ?>
-
 <div class="merchant-modules-header">
 
 	<div class="merchant-modules-header-left">
@@ -57,7 +55,6 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 				<strong><?php echo esc_html( $merchant_active_modules ); ?></strong>
 			</div>
 		</div>
-
 	</div>
 
 	<div class="merchant-modules-header-right">
@@ -65,7 +62,6 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
 			<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/modules-hero.svg" alt="<?php echo esc_attr__( 'Merchant', 'merchant' ); ?>"/>
 		</div>
 	</div>
-
 </div>
 
 <div class="merchant-modules-panel">

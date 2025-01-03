@@ -52,8 +52,12 @@ $analytics_data = array(
 		$value = ! empty( $data['value'] ) ? $data['value'] : '-';
 		?>
 		<div class="merchant-modules-analytics__item">
-			<div class="merchant-modules-analytics__title"><?php echo esc_html( $data['title'] ); ?></div>
-			<div class="merchant-modules-analytics__value <?php echo esc_attr( empty( $value ) ? 'merchant-modules-analytics__value--empty' :  '' ); ?>"><?php echo esc_html( $value ); ?></div>
+			<div class="merchant-modules-analytics__title">
+                <?php echo esc_html( $data['title'] ); ?>
+            </div>
+			<div class="merchant-modules-analytics__value <?php echo esc_attr( empty( $value ) ? 'merchant-modules-analytics__value--empty' :  '' ); ?>">
+                <?php echo esc_html( $value ); ?>
+            </div>
 			<span class="merchant-modules-analytics__growth merchant-modules-analytics__growth--<?php echo esc_attr( $data['growth_rate'] > 0 ? 'up' : 'down' ); ?>">
 				<?php if ( $data['growth_rate'] > 0 ) : ?>
 					<span class="merchant-modules-analytics__growth-arrow merchant-modules-analytics__growth-arrow--up">
@@ -68,7 +72,7 @@ $analytics_data = array(
                         </svg>
                     </span>
 				<?php endif; ?>
-				<?php echo absint( $data['growth_rate'] ); ?>%
+				<?php echo esc_html( absint( $data['growth_rate'] ) ) . '%'; ?>
 			</span>
             <div class="merchant-modules-list-item-badge-wrapper">
                 <span class="merchant-pro-badge merchant-pro-tooltip merchant-modules-analytics__tooltip" data-tooltip-message="<?php echo esc_attr( $data['tooltip'] ); ?>">

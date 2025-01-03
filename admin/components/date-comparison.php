@@ -15,6 +15,13 @@ $options = array(
     'position'   => 'bottom right',
     'maxDate'    => gmdate( 'm-d-Y' ),
 );
+
+/**
+ * `merchant_date_comparison_fields_options` filter.
+ *
+ * @since 2.0.0
+ */
+$options = apply_filters( 'merchant_date_comparison_fields_options', $options );
 ?>
 <div class="merchant-date-comparison__fields">
 	<div class="merchant-datetime-field merchant-date-comparison__field merchant-date-comparison__field-from" data-options="<?php echo esc_attr( wp_json_encode( $options ) ); ?>">
