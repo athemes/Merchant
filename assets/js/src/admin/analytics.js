@@ -198,16 +198,16 @@
 				enabled: true,
 				theme: false,
 				custom: function ({series, seriesIndex, dataPointIndex, w}) {
-					// console.log(w.globals.initialSeries[seriesIndex].data[dataPointIndex])
+					let current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
 					return `<div class="arrow-box">
 								<div class="box-wrapper">
 									<div class="box-column big">
 										<div class="head">
 											<div class="box-title">Total Income</div>
-											<div class="box-value">USD 380.00</div>
+											<div class="box-value">${merchant_analytics.currency_name} ${current_data.y}</div>
 										</div>
 										<div class="orders-count">
-											<strong>125</strong> orders
+											<strong>${current_data.orders_count}</strong> ${merchant_analytics.labels.orders}
 										</div>
 									</div>
 									<div class="separator"></div>
@@ -224,8 +224,8 @@
 												</defs>
 											</svg>
 										</div>
-										<div class="change-percentage">
-											<strong>+7.2%</strong>
+										<div class="change-percentage ${current_data.diff_type}">
+											<strong>${current_data.difference}%</strong>
 										</div>
 									</div>
 								</div>
@@ -329,6 +329,22 @@
 					enabled: false,
 				},
 			},
+			tooltip: {
+				fixed: {
+
+					offsetX: 0,
+					offsetY: 0,
+				},
+				enabled: true,
+				theme: false,
+				custom: function ({series, seriesIndex, dataPointIndex, w}) {
+					// console.log(w.globals.initialSeries[seriesIndex].data[dataPointIndex])
+					return `<div class="arrow-box-aov">
+								<div class="box-title">Orders AOV</div>
+								<div class="box-value">$350 <span class="diff red">(-3.5%)</span></div>
+							</div>`
+				}
+			}
 		},
 		impressionsChartRender: function () {
 			let chartEl = $('.impressions-chart').get(0);
@@ -389,51 +405,81 @@
 				{
 					x: 'Dec 23 2017',
 					y: 49,
-					custom: 'Custom tooltip',
+					orders_count: 10,
+					difference: 7.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 24 2017',
 					y: 44,
-					custom: 'Custom tooltip',
+					orders_count: 12,
+					difference: 17.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 25 2017',
-					y: 36
+					y: 36,
+					orders_count: 8,
+					difference: 11.3,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 26 2017',
-					y: 58
+					y: 58,
+					orders_count: 15,
+					difference: 4.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 27 2017',
-					y: 34
+					y: 34,
+					orders_count: 7,
+					difference: 7.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 28 2017',
-					y: 32
+					y: 32,
+					orders_count: 6,
+					difference: 5.6,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 29 2017',
-					y: 55
+					y: 55,
+					orders_count: 11,
+					difference: 2.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Dec 30 2017',
-					y: 51
+					y: 51,
+					orders_count: 10,
+					difference: 9.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Dec 31 2017',
-					y: 67
+					y: 67,
+					orders_count: 14,
+					difference: 1.2,
+					diff_type: 'increase'
 				},
 				{
 					x: 'Jan 01 2018',
-					y: 22
+					y: 22,
+					orders_count: 5,
+					difference: 3.2,
+					diff_type: 'decrease'
 				},
 				{
 					x: 'Jan 02 2018',
-					y: 34
+					y: 34,
+					orders_count: 7,
+					difference: 7.2,
+					diff_type: 'increase'
 				}
 			];
-			activeData = [];
 			let options = merchantChart.revenueChartOptions;
 			options.series[0].data = activeData
 			this.revenueChart = new ApexCharts(chartEl, options)
@@ -496,6 +542,6 @@
 	$(document).ready(function () {
 		merchantChart.revenueChartRender()
 		merchantChart.avgOrderValChartRender()
-		// merchantChart.impressionsChartRender()
+		merchantChart.impressionsChartRender()
 	})
 })(jQuery);
