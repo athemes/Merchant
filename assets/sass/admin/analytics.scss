@@ -16,4 +16,57 @@
 	}
 }
 
+.apexcharts-tooltip {
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.1) !important;
+	background-color: #fff;
 
+	.arrow-box {
+		.box-wrapper {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+
+			.separator {
+				width: 1px;
+				background-color: #D8D8D8;
+			}
+
+			.box-column {
+				flex: 1;
+
+				&.big {
+					flex: 2;
+				}
+
+				.head {
+					border-bottom: 1px solid #D8D8D8;
+					margin-bottom: 10px;
+
+					.box-title {
+						color: #3D65E9;
+						font-weight: 500;
+						font-size: 14px;
+						margin-bottom: 5px;
+					}
+
+					.box-value {
+						font-size: 16px;
+						font-weight: 500;
+						color: #101517;
+						margin-bottom: 10px;
+					}
+				}
+
+				.orders-count {
+					color: #565865;
+				}
+
+				.change-percentage {
+					color: #3D65E9;
+				}
+			}
+		}
+	}
+}

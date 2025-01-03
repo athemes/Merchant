@@ -6,17 +6,39 @@
 		revenueChart: null,
 		avgOrderValChart: null,
 		columnChartOptions: {
-			series: [
-				{
-					name: 'Data',
-				},
-			],
+			series: [{}],
+			noData: {
+				text: 'No data available',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#686868',
+					fontSize: '18px',
+				}
+			},
 			chart: {
 				type: 'bar',
 				height: 350,
 				stacked: false,
 				toolbar: {
-					show: false
+					show: false,
+					offsetX: -10,
+					offsetY: 10,
+					tools: {
+						download: false,
+						selection: true,
+						zoom: true,
+						zoomin: true,
+						zoomout: true,
+						pan: false,
+						reset: true,
+					}
+				},
+				zoom: {
+					enabled: false,
+					allowMouseWheelZoom: false,
 				}
 			},
 			plotOptions: {
@@ -65,25 +87,51 @@
 					height: 1,
 				},
 			},
+			tooltip: {
+				enabled: false
+			}
 		},
 		revenueChartOptions: {
-			series: [
-				{
-					name: 'Data',
-				},
-			],
+			series: [{}],
+			noData: {
+				text: 'No data available',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#686868',
+					fontSize: '18px',
+				}
+			},
 			chart: {
 				type: 'area',
 				height: 350,
 				stacked: false,
 				toolbar: {
-					show: false
+					show: false,
+					offsetX: -10,
+					offsetY: 10,
+					tools: {
+						download: false,
+						selection: true,
+						zoom: true,
+						zoomin: true,
+						zoomout: true,
+						pan: false,
+						reset: true,
+					}
+				},
+				zoom: {
+					enabled: false,
+					allowMouseWheelZoom: false,
 				}
 			},
 			stroke: {
 				curve: 'smooth',
 				dashArray: 6,
 				width: 2,
+				lineCap: 'round',
 			},
 			fill: {
 				type: 'gradient',
@@ -137,29 +185,88 @@
 					color: '#D8D8D8',
 					height: 1,
 				},
+				tooltip: {
+					enabled: false,
+				},
 			},
 			tooltip: {
-				title: {
-					enabled: false
+				fixed: {
+
+					offsetX: 0,
+					offsetY: 0,
 				},
-				custom: function({series, seriesIndex, dataPointIndex, w}) {
-					console.log(dataPointIndex)
-					return `<div class="arrow_box">xxx</div>`
+				enabled: true,
+				theme: false,
+				custom: function ({series, seriesIndex, dataPointIndex, w}) {
+					// console.log(w.globals.initialSeries[seriesIndex].data[dataPointIndex])
+					return `<div class="arrow-box">
+								<div class="box-wrapper">
+									<div class="box-column big">
+										<div class="head">
+											<div class="box-title">Total Income</div>
+											<div class="box-value">USD 380.00</div>
+										</div>
+										<div class="orders-count">
+											<strong>125</strong> orders
+										</div>
+									</div>
+									<div class="separator"></div>
+									<div class="box-column small">
+										<div class="head">
+											<svg width="64" height="47" viewBox="0 0 64 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M0.5 41V22L12.5 26H16.5L24 19L27 16.5L33.5 15L42.5 19L47 17.5L63.5 1V41H0.5Z" fill="url(#paint0_linear_4098_14532)"/>
+												<path d="M0.5 21.5L7.89394 25.3339C11.5717 27.2409 16.0444 26.6827 19.1408 23.9304L26.846 17.0814C29.8153 14.4419 34.2623 14.351 37.3371 16.8667V16.8667C40.5519 19.497 45.2367 19.2633 48.1738 16.3262L63.5 1" stroke="#3661EA" stroke-width="0.5" stroke-dasharray="3 3"/>
+												<defs>
+												<linearGradient id="paint0_linear_4098_14532" x1="23.753" y1="1" x2="16.791" y2="39.8525" gradientUnits="userSpaceOnUse">
+												<stop stop-color="#CDE1FE"/>
+												<stop offset="1" stop-color="#FBFCFF" stop-opacity="0"/>
+												</linearGradient>
+												</defs>
+											</svg>
+										</div>
+										<div class="change-percentage">
+											<strong>+7.2%</strong>
+										</div>
+									</div>
+								</div>
+							</div>`
 				}
 			}
 		},
 		avgOrderValChartOptions: {
-			series: [
-				{
-					name: 'Data',
-				},
-			],
+			series: [{}],
+			noData: {
+				text: 'No data available',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#686868',
+					fontSize: '18px',
+				}
+			},
 			chart: {
 				type: 'area',
 				height: 350,
 				stacked: false,
 				toolbar: {
-					show: false
+					show: false,
+					offsetX: -10,
+					offsetY: 10,
+					tools: {
+						download: false,
+						selection: true,
+						zoom: true,
+						zoomin: true,
+						zoomout: true,
+						pan: false,
+						reset: true,
+					}
+				},
+				zoom: {
+					enabled: false,
+					allowMouseWheelZoom: false,
 				}
 			},
 			stroke: {
@@ -170,7 +277,6 @@
 			fill: {
 				type: 'gradient',
 				gradient: {
-					// shadeIntensity: 1,
 					inverseColors: false,
 					opacityFrom: 0.55,
 					opacityTo: 0.05,
@@ -218,6 +324,9 @@
 					show: true,
 					color: '#D8D8D8',
 					height: 1,
+				},
+				tooltip: {
+					enabled: false,
 				},
 			},
 		},
@@ -275,7 +384,7 @@
 			this.impressionsChart.render()
 		},
 		revenueChartRender: function () {
-			let chartEl = $('.impressions-chart').get(1);
+			let chartEl = $('.revenue-chart').get(0);
 			let activeData = [
 				{
 					x: 'Dec 23 2017',
@@ -324,13 +433,14 @@
 					y: 34
 				}
 			];
+			activeData = [];
 			let options = merchantChart.revenueChartOptions;
 			options.series[0].data = activeData
 			this.revenueChart = new ApexCharts(chartEl, options)
 			this.revenueChart.render()
 		},
 		avgOrderValChartRender: function () {
-			let chartEl = $('.impressions-chart').get(2);
+			let chartEl = $('.avg-order-value-chart').get(0);
 			let activeData = [
 				{
 					x: 'Dec 23 2017',
@@ -384,8 +494,8 @@
 		}
 	}
 	$(document).ready(function () {
-		merchantChart.impressionsChartRender()
 		merchantChart.revenueChartRender()
 		merchantChart.avgOrderValChartRender()
+		// merchantChart.impressionsChartRender()
 	})
 })(jQuery);

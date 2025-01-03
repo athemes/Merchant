@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="merchant-analytics-section">
-    <div class="impressions-chart"></div>
+    <div class="revenue-chart"></div>
 </div>
 <div class="merchant-analytics-section">
-    <div class="impressions-chart"></div>
+    <div class="avg-order-value-chart"></div>
 </div>
 <div class="merchant-analytics-section">
     <div class="impressions-chart"></div>
