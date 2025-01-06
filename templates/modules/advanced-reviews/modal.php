@@ -23,11 +23,6 @@ global $product;
 				<?php echo get_the_post_thumbnail( $product->get_id(), 'woocommerce_thumbnail' ); ?>
 				<div class="modal-product-info">
 					<h5><?php echo esc_html( $product->get_name() ); ?></h5>
-                    <?php
-                    echo '<pre>';
-                    print_r( get_shortcode_tags_in_content( $product->get_short_description() ) );
-                    echo '</pre>';;
-                    ?>
 					<p><?php echo wp_kses_post( strip_shortcodes( $product->get_short_description() ) ); ?></p>
 				</div>
 			</div>
