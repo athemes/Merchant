@@ -145,9 +145,10 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		}
 		ob_start();
 
-		$settings       = $this->get_module_settings();
-		$is_placeholder = empty( $settings['badges'] );
-		$badges         = $this->get_badges( $settings[ 'badges' ] );
+		$settings               = $this->get_module_settings();
+		$is_placeholder         = empty( $settings['badges'] );
+		$badges                 = $this->get_badges( $settings[ 'badges' ] );
+		$placeholder_badges_alt = $this->get_placeholder_badges_alt_map();
 		?>
         <fieldset class="merchant-trust-badges">
 			<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
@@ -155,17 +156,19 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			<?php endif; ?>
 			<?php if ( ! $is_placeholder ) : ?>
                 <div class="merchant-trust-badges-images">
-					<?php foreach ( $badges as $image_id ) : ?>
-						<?php $imagedata = wp_get_attachment_image_src( $image_id, 'full' ); ?>
-						<?php if ( ! empty( $imagedata ) && ! empty( $imagedata[0] ) ) : ?>
-							<?php printf( '<img src="%s" />', esc_url( $imagedata[0] ) ); ?>
-						<?php endif; ?>
-					<?php endforeach; ?>
+					<?php
+                    foreach ( $badges as $image_id ) {
+						echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );
+                    }
+                    ?>
                 </div>
 			<?php else : ?>
                 <div class="merchant-trust-badges-images is-placeholder">
-					<?php foreach ( $badges as $badge_src ) : ?>
-                        <img src="<?php echo esc_url( $badge_src ); ?>" />
+					<?php foreach ( $badges as $badge_src ) :
+						$image_basename = basename( $badge_src );
+						$image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
+						?>
+                        <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
 					<?php endforeach; ?>
                 </div>
 			<?php endif; ?>
@@ -340,16 +343,16 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
                     ?>
                 </div>
 
-                <?php else : ?>
-                    <div class="merchant-trust-badges-images is-placeholder">
-                        <?php foreach ( $badges as $badge_src ) :
-                            $image_basename = basename( $badge_src );
-                            $image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
-                            ?>
-                            <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+            <?php else : ?>
+                <div class="merchant-trust-badges-images is-placeholder">
+                    <?php foreach ( $badges as $badge_src ) :
+                        $image_basename = basename( $badge_src );
+                        $image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
+                        ?>
+                        <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </fieldset>
 		<?php 
 	}
