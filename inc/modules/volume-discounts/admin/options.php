@@ -296,6 +296,49 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'         => 'user_exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select the users that will not show the offer.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'user_condition',
+										'operator' => 'in',
+										'value'    => array( 'all', 'roles' ),
+									),
+								),
+							),
+						),
+
+						array(
+							'id'         => 'exclude_users',
+							'type'       => 'select_ajax',
+							'title'      => esc_html__( 'Exclude Users', 'merchant' ),
+							'desc'       => esc_html__( 'This will exclude the offer for the selected customers.', 'merchant' ),
+							'source'     => 'user',
+							'multiple'   => true,
+							'classes'    => array( 'flex-grow' ),
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'user_condition',
+										'operator' => 'in',
+										'value'    => array( 'all', 'roles' ),
+									),
+									array(
+										'field'    => 'user_exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
