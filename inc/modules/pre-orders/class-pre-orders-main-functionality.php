@@ -505,7 +505,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 
 			if ( $product->is_type( 'variable' ) ) {
-				$html_price = $this->variable_product_price_html( $product );
+				$html_price = $this->variable_product_price_html( $product, $offer, $html_price );
 			} else {
 				$html_price = $this->simple_product_price_html( $product, $offer, $html_price );
 			}
@@ -521,7 +521,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 *
 	 * @return string The price html.
 	 */
-	private function variable_product_price_html( $product ) {
+	private function variable_product_price_html( $product, $offer, $html_price ) {
+		$sale = self::get_rule_sale( $offer );
+		if ( ! $sale ) {
+			return $html_price;
+		}
+
 		$prices     = array();
 		$variations = $product->get_children();
 
@@ -1157,11 +1162,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * Get the pre order rules.
+	 * Get the pre-order rules.
 	 *
 	 * @param array $rule The rule to get.
 	 *
-	 * @return array|false The pre order rules or false if there are no rule sale.
+	 * @return array|false The pre-order rules or false if there are no rule sale.
 	 */
 	private static function get_rule_sale( $rule ) {
 		$sale = false;
@@ -1237,15 +1242,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 		}
 
-		if ( ! isset( $rule['user_condition'] ) ) {
-			return false;
-		}
-
-		if ( ( 'customers' === $rule['user_condition'] ) && empty( $rule['user_condition_users'] ) ) {
-			return false;
-		}
-
-		if ( ( 'roles' === $rule['user_condition'] ) && empty( $rule['user_condition_roles'] ) ) {
+		$user_condition_passed = merchant_is_user_condition_passed( $rule );
+		if ( ! $user_condition_passed ) {
 			return false;
 		}
 
@@ -1315,21 +1313,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 					continue;
 				}
 
-				if ( 'roles' === $rule['user_condition'] ) {
-					$allowed_roles = $rule['user_condition_roles'];
-					$user_roles    = $current_user->roles;
-					$intersect     = array_intersect( $allowed_roles, $user_roles );
-					if ( empty( $intersect ) ) {
-						continue;
-					}
-				}
-
-				if ( 'customers' === $rule['user_condition'] ) {
-					$allowed_users   = $rule['user_condition_users'];
-					$current_user_id = $current_user->ID;
-					if ( ! in_array( $current_user_id, $allowed_users, true ) ) {
-						continue;
-					}
+				$user_condition_passed = merchant_is_user_condition_passed( $rule );
+				if ( ! $user_condition_passed ) {
+					continue;
 				}
 
 				$trigger = $rule['trigger_on'] ?? 'product';

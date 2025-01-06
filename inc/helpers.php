@@ -701,46 +701,45 @@ if ( ! function_exists( 'merchant_parse_product_ids' ) ) {
  */
 if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 	function merchant_is_user_condition_passed( $args = array() ) {
-		$passed = false;
+		$args = is_array( $args ) ? $args : array();
 
 		$is_logged_in = is_user_logged_in();
 		$current_user = $is_logged_in ? wp_get_current_user() : null;
+		$customer_id  = (int) $current_user->ID ?? 0;
 
 		$condition = $args['user_condition'] ?? 'all';
+
+		$is_exclusion_enabled = $args['user_exclusion_enabled'] ?? false;
+		$excluded_customers   = array_map( 'intval', $args['exclude_users'] ?? array() );
 
 		switch ( $condition ) {
 			case 'all':
 			case '':
-				$passed = true;
-				break;
+				if ( $is_exclusion_enabled && in_array( $customer_id, $excluded_customers, true ) ) {
+					return false;
+				}
+				return true;
 
 			case 'logged-in':
-				if ( $is_logged_in ) {
-					$passed = true;
-				}
-				break;
+				return $is_logged_in;
 
 			case 'roles':
-				$roles = $args['user_condition_roles'] ?? array();
-				$role  = $current_user->roles[0] ?? '';
-
-				if ( in_array( $role, $roles, true ) ) {
-					$passed = true;
+				if ( $is_exclusion_enabled && in_array( $customer_id, $excluded_customers, true ) ) {
+					return false;
 				}
-				break;
+
+				$allowed_roles = $args['user_condition_roles'] ?? array();
+				$user_role     = $current_user->roles[0] ?? '';
+
+				return in_array( $user_role, $allowed_roles, true );
 
 			case 'customers':
-				$customers_id = $args['user_condition_users'] ?? array();
-				$customers_id = array_map( 'intval', $customers_id );
-				$customer_id  = (int) ( $current_user->ID ?? 0 );
+				$allowed_customers = array_map( 'intval', $args['user_condition_users'] ?? array() );
+				return $is_logged_in && in_array( $customer_id, $allowed_customers, true );
 
-				if ( in_array( $customer_id, $customers_id, true ) ) {
-					$passed = true;
-				}
-				break;
+			default:
+				return false;
 		}
-
-		return $passed;
 	}
 }
 
