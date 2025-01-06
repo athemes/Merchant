@@ -505,7 +505,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 			}
 
 			if ( $product->is_type( 'variable' ) ) {
-				$html_price = $this->variable_product_price_html( $product );
+				$html_price = $this->variable_product_price_html( $product, $offer, $html_price );
 			} else {
 				$html_price = $this->simple_product_price_html( $product, $offer, $html_price );
 			}
@@ -521,7 +521,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 *
 	 * @return string The price html.
 	 */
-	private function variable_product_price_html( $product ) {
+	private function variable_product_price_html( $product, $offer, $html_price ) {
+		$sale = self::get_rule_sale( $offer );
+		if ( ! $sale ) {
+			return $html_price;
+		}
+
 		$prices     = array();
 		$variations = $product->get_children();
 
@@ -1157,11 +1162,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
-	 * Get the pre order rules.
+	 * Get the pre-order rules.
 	 *
 	 * @param array $rule The rule to get.
 	 *
-	 * @return array|false The pre order rules or false if there are no rule sale.
+	 * @return array|false The pre-order rules or false if there are no rule sale.
 	 */
 	private static function get_rule_sale( $rule ) {
 		$sale = false;
