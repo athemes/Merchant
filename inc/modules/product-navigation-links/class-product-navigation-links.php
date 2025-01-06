@@ -43,9 +43,10 @@ class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 
 		// Module default settings.
 		$this->module_default_settings = array(
-				'placement'  => 'bottom',
-				'text'       => 'titles',
-				'text_color' => '#212121',
+				'placement'               => 'bottom',
+				'text'                    => 'titles',
+				'text_color'              => '#212121',
+				'product_navigation_mode' => 'default',
 		);
 
 		// Module data.
@@ -184,7 +185,8 @@ class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 		$css = '
 		    .merchant-product-navigation { display: flex; gap: 15px;}
 		    .merchant-product-navigation a { max-width: 50%; }
-		    .merchant-product-navigation a:last-child { text-align: right; }
+		    .merchant-product-navigation a.merchant-next-product:only-child { min-width: 100%; }
+		    .merchant-product-navigation a.merchant-next-product { text-align: right; }
 		';
 
 		// Text hover color.
