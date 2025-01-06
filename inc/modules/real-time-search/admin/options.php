@@ -31,7 +31,7 @@ Merchant_Admin_Options::create( array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Results description', 'merchant' ),
 			'options' => array(
-				'product-post-content'      => esc_html__( 'Product Description', 'merchant' ),
+				'product-post-content'      => esc_html__( 'Product description', 'merchant' ),
 				'product-short-description' => esc_html__( 'Product short description', 'merchant' ),
 			),
 	  		'default' => 'product-short-description',
