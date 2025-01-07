@@ -1298,8 +1298,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$available_rule = array();
 		$rules          = self::pre_order_rules();
 		$current_time   = merchant_get_current_timestamp();
-		$current_user   = wp_get_current_user();
+
 		foreach ( $rules as $rule ) {
+			if ( ! empty( $rule['disable_campaign'] ) ) {
+				continue;
+			}
+
 			if ( self::is_valid_rule( $rule ) ) {
 				$rule = self::prepare_rule( $rule );
 
