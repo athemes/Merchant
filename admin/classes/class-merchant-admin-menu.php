@@ -49,9 +49,14 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
          * @return void
          */
 		public function analytics_assets() {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			if ( isset( $_GET['page'], $_GET['section'] ) && $_GET['page'] === 'merchant' && $_GET['section'] === 'analytics' ) {
+			if (
+				isset( $_GET['page'], $_GET['section'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				&& $_GET['page'] === 'merchant' // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				&& in_array( $_GET['section'], array( 'analytics', 'campaigns' ), true ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			) {
+				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
 				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
+				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				wp_enqueue_script( 'apexcharts', MERCHANT_URI . 'assets/js/vendor/apexcharts.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				wp_enqueue_script( 'merchant-analytics', MERCHANT_URI . 'assets/js/admin/analytics.js', array( 'jquery', 'apexcharts' ), MERCHANT_VERSION, true );
 				wp_localize_script( 'merchant-analytics', 'merchant_analytics', array(
