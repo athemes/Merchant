@@ -61,6 +61,13 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'label-title',
 					'fields'      => array(
 						array(
+							'id'      => 'disable_campaign',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Disable Campaign', 'merchant' ),
+							'desc'    => esc_html__( 'Turn this option on to disable the entire campaign.', 'merchant' ),
+							'default' => 0,
+						),
+						array(
 							'id'      => 'label-title',
 							'title'   => esc_html__( 'Label name', 'merchant' ),
 							'desc'    => esc_html__( 'Internal label name. This is not visible to customers.', 'merchant' ),
