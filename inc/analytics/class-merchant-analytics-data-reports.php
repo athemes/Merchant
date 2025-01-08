@@ -37,7 +37,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	public function get_revenue( $start_date, $end_date ) {
+	public function get_revenue_chart_report( $start_date, $end_date ) {
 		$this->data_provider->set_start_date( $start_date );
 		$this->data_provider->set_end_date( $end_date );
 
@@ -72,7 +72,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	public function get_average_order_value( $start_date, $end_date ) {
+	public function get_aov_chart_report( $start_date, $end_date ) {
 		$this->data_provider->set_start_date( $start_date );
 		$this->data_provider->set_end_date( $end_date );
 
@@ -107,7 +107,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	public function get_impressions( $start_date, $end_date ) {
+	public function get_impressions_chart_report( $start_date, $end_date ) {
 		$this->data_provider->set_start_date( $start_date );
 		$this->data_provider->set_end_date( $end_date );
 
