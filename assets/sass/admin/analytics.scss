@@ -99,3 +99,45 @@
 		}
 	}
 }
+
+// Campaigns Page
+.merchant-page-campaigns {
+	margin-top: 20px;
+
+	table.merchant-campaigns-table {
+		border-color: #F0F0F1;
+		border-radius: 5px;
+
+		thead tr,
+		tbody > :nth-child(even) {
+			background-color: #F8F8FA;
+		}
+
+		th {
+			border-bottom: none;
+
+			a {
+				color: #393F4C;
+				font-weight: 600;
+				display: flex;
+				align-items: center;
+			}
+		}
+
+		th,
+		td {
+			padding-block: 14px;
+
+			&:first-child {
+				width: 27px;
+				padding-inline: 15px 0;
+			}
+		}
+
+		input {
+			&[type='checkbox'] {
+				margin: 0;
+			}
+		}
+	}
+}

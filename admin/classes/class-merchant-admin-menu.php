@@ -83,6 +83,17 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				2
 			);
 
+			// Campaigns.
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('All Campaigns', 'merchant'),
+				esc_html__('Campaigns', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=campaigns',
+				'',
+				3
+			);
+
 			// Settings.
 			add_submenu_page(
 				$this->plugin_slug,
@@ -91,11 +102,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'manage_options',
 				'admin.php?page=merchant&section=settings',
 				'',
-				3
+				4
 			);
 
 			// Add 'Upgrade' link.
-			if( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
 				add_submenu_page(
 					$this->plugin_slug,
 					esc_html__('Upgrade to Pro', 'merchant'),

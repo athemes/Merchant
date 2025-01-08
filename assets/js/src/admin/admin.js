@@ -899,8 +899,16 @@
                     let hasAccordion = $(this).hasClass('has-accordion'),
                         $content = $(this).find('.merchant-flexible-content');
 
+                    const campaignParam = params.get( 'campaign' );
+
+                    let campaignIndex = 0;
+                    if ( campaignParam && ! isNaN( campaignParam ) && Number.isInteger( parseFloat( campaignParam ) ) ) {
+                        campaignIndex = parseInt( campaignParam, 10 );
+                    }
+
                     if (hasAccordion) {
                         $content.accordion({
+                            active: campaignIndex, // Open the campaign with campaign index
                             collapsible: true,
                             //header: "> div > .layout-header",
                             header: function( elem ) {
