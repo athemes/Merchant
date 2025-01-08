@@ -6,7 +6,7 @@
 		revenueChart: null,
 		avgOrderValChart: null,
 		columnChartOptions: {
-			series: [{}],
+			series: [{data: []}],
 			noData: {
 				text: 'No data available',
 				align: 'center',
@@ -92,7 +92,7 @@
 			}
 		},
 		revenueChartOptions: {
-			series: [{}],
+			series: [{data: []}],
 			noData: {
 				text: 'No data available',
 				align: 'center',
@@ -103,6 +103,9 @@
 					color: '#686868',
 					fontSize: '18px',
 				}
+			},
+			legend: {
+				show: false // This hides the legend
 			},
 			chart: {
 				type: 'area',
@@ -152,7 +155,7 @@
 					size: 6,
 				},
 			},
-			colors: ['#3A63E9'],
+			colors: ['#3A63E9', '#393939'],
 			dataLabels: {
 				enabled: false
 			},
@@ -187,11 +190,10 @@
 				},
 				tooltip: {
 					enabled: false,
-				},
+				}
 			},
 			tooltip: {
 				fixed: {
-
 					offsetX: 0,
 					offsetY: 0,
 				},
@@ -204,7 +206,7 @@
 									<div class="box-column big">
 										<div class="head">
 											<div class="box-title">Total Income</div>
-											<div class="box-value">${merchant_analytics.currency_name} ${current_data.y}</div>
+											<div class="box-value">${current_data.number_currency}</div>
 										</div>
 										<div class="orders-count">
 											<strong>${current_data.orders_count}</strong> ${merchant_analytics.labels.orders}
@@ -234,7 +236,7 @@
 			}
 		},
 		avgOrderValChartOptions: {
-			series: [{}],
+			series: [{data: []}],
 			noData: {
 				text: 'No data available',
 				align: 'center',
@@ -336,235 +338,43 @@
 					let current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
 					return `<div class="arrow-box-aov">
 								<div class="box-title">${merchant_analytics.labels.orders_aov}</div>
-								<div class="box-value">${current_data.amount} <span class="diff ${current_data.diff_type}">${current_data.difference}%</span></div>
+								<div class="box-value">${current_data.number_currency} <span class="diff ${current_data.diff_type}">${current_data.difference}%</span></div>
 							</div>`
 				}
 			}
 		},
 		impressionsChartRender: function () {
-			let chartEl = $('.impressions-chart').get(0);
-			let activeData = [
-				{
-					x: 'Dec 23 2017',
-					y: 49
-				},
-				{
-					x: 'Dec 24 2017',
-					y: 44
-				},
-				{
-					x: 'Dec 25 2017',
-					y: 36
-				},
-				{
-					x: 'Dec 26 2017',
-					y: 58
-				},
-				{
-					x: 'Dec 27 2017',
-					y: 34
-				},
-				{
-					x: 'Dec 28 2017',
-					y: 32
-				},
-				{
-					x: 'Dec 29 2017',
-					y: 55
-				},
-				{
-					x: 'Dec 30 2017',
-					y: 51
-				},
-				{
-					x: 'Dec 31 2017',
-					y: 67
-				},
-				{
-					x: 'Jan 01 2018',
-					y: 22
-				},
-				{
-					x: 'Jan 02 2018',
-					y: 34
-				}
-			];
+			let chartEl = $('.impressions-chart');
 			let options = merchantChart.columnChartOptions;
-			options.series[0].data = activeData
-			this.impressionsChart = new ApexCharts(chartEl, options)
-			this.impressionsChart.render()
+			this.impressionsChart = new ApexCharts(chartEl.get(0), options)
+			this.impressionsChart.render();
+			this.impressionsChart.updateSeries([
+				{
+					data: JSON.parse(chartEl.attr('data-period'))
+				},
+			])
 		},
 		revenueChartRender: function () {
-			let chartEl = $('.revenue-chart').get(0);
-			let activeData = [
-				{
-					x: 'Dec 23 2017',
-					y: 49,
-					orders_count: 10,
-					difference: 7.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 24 2017',
-					y: 44,
-					orders_count: 12,
-					difference: 17.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 25 2017',
-					y: 36,
-					orders_count: 8,
-					difference: 11.3,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 26 2017',
-					y: 58,
-					orders_count: 15,
-					difference: 4.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 27 2017',
-					y: 34,
-					orders_count: 7,
-					difference: 7.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 28 2017',
-					y: 32,
-					orders_count: 6,
-					difference: 5.6,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 29 2017',
-					y: 55,
-					orders_count: 11,
-					difference: 2.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 30 2017',
-					y: 51,
-					orders_count: 10,
-					difference: 9.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 31 2017',
-					y: 67,
-					orders_count: 14,
-					difference: 1.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Jan 01 2018',
-					y: 22,
-					orders_count: 5,
-					difference: 3.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Jan 02 2018',
-					y: 34,
-					orders_count: 7,
-					difference: 7.2,
-					diff_type: 'increase'
-				}
-			];
+			let chartEl = $('.revenue-chart');
 			let options = merchantChart.revenueChartOptions;
-			options.series[0].data = activeData
-			this.revenueChart = new ApexCharts(chartEl, options)
-			this.revenueChart.render()
+			this.revenueChart = new ApexCharts(chartEl.get(0), options);
+			this.revenueChart.render();
+			this.revenueChart.updateSeries([
+				{
+					data: JSON.parse(chartEl.attr('data-period'))
+				},
+			])
 		},
 		avgOrderValChartRender: function () {
-			let chartEl = $('.avg-order-value-chart').get(0);
-			let activeData = [
-				{
-					x: 'Dec 23 2017',
-					y: 49,
-					amount: '$49',
-					difference: 3.5,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 24 2017',
-					y: 44,
-					amount: '$44',
-					difference: 7.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 25 2017',
-					y: 36,
-					amount: '$36',
-					difference: 11.3,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 26 2017',
-					y: 58,
-					amount: '$58',
-					difference: 4.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 27 2017',
-					y: 34,
-					amount: '$34',
-					difference: 7.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 28 2017',
-					y: 32,
-					amount: '$32',
-					difference: 5.6,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 29 2017',
-					y: 55,
-					amount: '$55',
-					difference: 2.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Dec 30 2017',
-					y: 51,
-					amount: '$51',
-					difference: 9.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Dec 31 2017',
-					y: 67,
-					amount: '$67',
-					difference: 1.2,
-					diff_type: 'decrease'
-				},
-				{
-					x: 'Jan 01 2018',
-					y: 22,
-					amount: '$22',
-					difference: 3.2,
-					diff_type: 'increase'
-				},
-				{
-					x: 'Jan 02 2018',
-					y: 34,
-					amount: '$34',
-					difference: 7.2,
-					diff_type: 'decrease'
-				}
-			];
+			let chartEl = $('.avg-order-value-chart');
 			let options = merchantChart.avgOrderValChartOptions;
-			options.series[0].data = activeData
-			this.avgOrderValChart = new ApexCharts(chartEl, options)
-			this.avgOrderValChart.render()
+			this.avgOrderValChart = new ApexCharts(chartEl.get(0), options)
+			this.avgOrderValChart.render();
+			this.avgOrderValChart.updateSeries([
+				{
+					data: JSON.parse(chartEl.attr('data-period'))
+				},
+			])
 		}
 	}
 	$(document).ready(function () {
