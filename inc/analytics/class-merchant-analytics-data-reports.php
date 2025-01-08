@@ -19,7 +19,7 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * Constructor.
 	 *
-	 * @param Merchant_Analytics_Data_Provider $data_provider The data provider instance.
+	 * @param Merchant_Analytics_Data_Provider|null $data_provider The data provider instance (optional).
 	 */
 	public function __construct( $data_provider = null ) {
 		if ( $data_provider === null ) {
@@ -41,7 +41,16 @@ class Merchant_Analytics_Data_Reports {
 		$this->data_provider->set_start_date( $start_date );
 		$this->data_provider->set_end_date( $end_date );
 
-		$orders = $this->data_provider->get_dated_orders();
+		/**
+		 * Filter the maximum number of orders to retrieve for revenue chart.
+		 *
+		 * @param int $limit The maximum number of orders to retrieve.
+		 *
+		 * @since 2.0.0
+		 */
+		$limit = apply_filters( 'merchant_analytics_max_orders_limit_revenue', 1000000 );
+
+		$orders = $this->data_provider->get_dated_orders( $limit );
 
 		// Sort orders by timestamp (ascending order)
 		$sorted_orders = $this->sort_orders_by_timestamp( $orders );
@@ -49,8 +58,78 @@ class Merchant_Analytics_Data_Reports {
 		// Determine the best grouping interval based on the date range
 		$interval = $this->determine_grouping_interval( $start_date, $end_date );
 
-		// Group data into the selected interval
-		$chart_data = $this->group_data_by_interval( $sorted_orders, $interval, $start_date, $end_date );
+		// Group data into the selected interval and calculate total revenue
+		$chart_data = $this->group_data_by_interval( $sorted_orders, $interval, $start_date, $end_date, 'revenue' );
+
+		return $chart_data;
+	}
+
+	/**
+	 * Get average order value (AOV) data for the given date range.
+	 *
+	 * @param string $start_date Start date in 'Y-m-d H:i:s' format.
+	 * @param string $end_date   End date in 'Y-m-d H:i:s' format.
+	 *
+	 * @return array
+	 */
+	public function get_average_order_value( $start_date, $end_date ) {
+		$this->data_provider->set_start_date( $start_date );
+		$this->data_provider->set_end_date( $end_date );
+
+		/**
+		 * Filter the maximum number of orders to retrieve for AOV chart.
+		 *
+		 * @param int $limit The maximum number of orders to retrieve.
+		 *
+		 * @since 2.0.0
+		 */
+		$limit = apply_filters( 'merchant_analytics_max_orders_limit_aov', 1000000 );
+
+		$orders = $this->data_provider->get_dated_orders( $limit );
+
+		// Sort orders by timestamp (ascending order)
+		$sorted_orders = $this->sort_orders_by_timestamp( $orders );
+
+		// Determine the best grouping interval based on the date range
+		$interval = $this->determine_grouping_interval( $start_date, $end_date );
+
+		// Group data into the selected interval and calculate AOV
+		$chart_data = $this->group_data_by_interval( $sorted_orders, $interval, $start_date, $end_date, 'aov' );
+
+		return $chart_data;
+	}
+
+	/**
+	 * Get impressions data for the given date range.
+	 *
+	 * @param string $start_date Start date in 'Y-m-d H:i:s' format.
+	 * @param string $end_date   End date in 'Y-m-d H:i:s' format.
+	 *
+	 * @return array
+	 */
+	public function get_impressions( $start_date, $end_date ) {
+		$this->data_provider->set_start_date( $start_date );
+		$this->data_provider->set_end_date( $end_date );
+
+		/**
+		 * Filter the maximum number of impressions to retrieve for the impressions chart.
+		 *
+		 * @param int $limit The maximum number of impressions to retrieve.
+		 *
+		 * @since 2.0.0
+		 */
+		$limit = apply_filters( 'merchant_analytics_max_impressions_limit', 1000000 );
+
+		$impressions = $this->data_provider->get_dated_impressions( $limit );
+
+		// Sort impressions by timestamp (ascending order)
+		$sorted_impressions = $this->sort_impressions_by_timestamp( $impressions );
+
+		// Determine the best grouping interval based on the date range
+		$interval = $this->determine_grouping_interval( $start_date, $end_date );
+
+		// Group data into the selected interval and calculate total impressions
+		$chart_data = $this->group_impressions_by_interval( $sorted_impressions, $interval, $start_date, $end_date );
 
 		return $chart_data;
 	}
@@ -68,6 +147,21 @@ class Merchant_Analytics_Data_Reports {
 		} );
 
 		return $orders;
+	}
+
+	/**
+	 * Sort impressions by timestamp in ascending order.
+	 *
+	 * @param array $impressions The impressions to sort.
+	 *
+	 * @return array
+	 */
+	private function sort_impressions_by_timestamp( $impressions ) {
+		usort( $impressions, static function ( $a, $b ) {
+			return strtotime( $a['timestamp'] ) - strtotime( $b['timestamp'] );
+		} );
+
+		return $impressions;
 	}
 
 	/**
@@ -112,20 +206,21 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
-	 * Group data into intervals (daily, weekly, monthly, yearly).
+	 * Group data into intervals (daily, weekly, monthly, yearly) and calculate the desired metric.
 	 *
 	 * @param array  $orders     The orders to group.
 	 * @param string $interval   The interval to group by ('daily', 'weekly', 'monthly', 'yearly').
 	 * @param string $start_date Start date in 'Y-m-d H:i:s' format.
 	 * @param string $end_date   End date in 'Y-m-d H:i:s' format.
+	 * @param string $metric     The metric to calculate ('revenue' or 'aov').
 	 *
 	 * @return array
 	 */
-	private function group_data_by_interval( $orders, $interval, $start_date, $end_date ) {
+	private function group_data_by_interval( $orders, $interval, $start_date, $end_date, $metric = 'revenue' ) {
 		$grouped_data        = array();
 		$current_group_start = strtotime( $start_date );
 		$end_timestamp       = strtotime( $end_date );
-		$previous_revenue    = null;
+		$previous_value      = null;
 
 		// Loop through each interval
 		while ( $current_group_start <= $end_timestamp ) {
@@ -139,8 +234,15 @@ class Merchant_Analytics_Data_Reports {
 			$total_revenue = array_sum( array_column( $current_group, 'order_subtotal' ) );
 			$orders_count  = count( $current_group );
 
+			// Calculate the desired metric
+			if ( $metric === 'aov' ) {
+				$value = $orders_count > 0 ? $total_revenue / $orders_count : 0; // AOV
+			} else {
+				$value = $total_revenue; // Total revenue
+			}
+
 			// Calculate percentage difference
-			list( $difference, $diff_type ) = $this->calculate_percentage_difference( $total_revenue, $previous_revenue );
+			list( $difference, $diff_type ) = $this->calculate_percentage_difference( $value, $previous_value );
 
 			// Format the x-axis label based on the interval
 			$x_label = $this->format_x_axis_label( $current_group_start, $interval_end, $interval );
@@ -148,16 +250,69 @@ class Merchant_Analytics_Data_Reports {
 			// Add the group to the chart data
 			$grouped_data[] = array(
 				'x'               => $x_label,
-				'y'               => wc_format_decimal( $total_revenue, 2 ),
-				'number_currency' => wc_price( $total_revenue ),
+				'y'               => wc_format_decimal( $value ),
+				'number_currency' => wc_price( $value ),
 				'orders_count'    => $orders_count,
 				'diff_type'       => $diff_type,
 				'difference'      => $difference,
 				'timestamp'       => gmdate( 'Y-m-d H:i:s', $current_group_start ), // Start of the interval
 			);
 
-			// Update previous_revenue for the next group
-			$previous_revenue = $total_revenue;
+			// Update previous_value for the next group
+			$previous_value = $value;
+
+			// Move to the next interval
+			$current_group_start = $interval_end;
+		}
+
+		return $grouped_data;
+	}
+
+	/**
+	 * Group impressions into intervals (daily, weekly, monthly, yearly).
+	 *
+	 * @param array  $impressions The impressions to group.
+	 * @param string $interval    The interval to group by ('daily', 'weekly', 'monthly', 'yearly').
+	 * @param string $start_date  Start date in 'Y-m-d H:i:s' format.
+	 * @param string $end_date    End date in 'Y-m-d H:i:s' format.
+	 *
+	 * @return array
+	 */
+	private function group_impressions_by_interval( $impressions, $interval, $start_date, $end_date ) {
+		$grouped_data        = array();
+		$current_group_start = strtotime( $start_date );
+		$end_timestamp       = strtotime( $end_date );
+		$previous_value      = null;
+
+		// Loop through each interval
+		while ( $current_group_start <= $end_timestamp ) {
+			// Determine the interval end date
+			$interval_end = $this->calculate_interval_end( $current_group_start, $interval );
+
+			// Find impressions within the current interval
+			$current_group = $this->get_impressions_in_interval( $impressions, $current_group_start, $interval_end );
+
+			// Calculate total impressions for the group
+			$total_impressions = array_sum( array_column( $current_group, 'impressions_count' ) );
+
+			// Calculate percentage difference
+			list( $difference, $diff_type ) = $this->calculate_percentage_difference( $total_impressions, $previous_value );
+
+			// Format the x-axis label based on the interval
+			$x_label = $this->format_x_axis_label( $current_group_start, $interval_end, $interval );
+
+			// Add the group to the chart data
+			$grouped_data[] = array(
+				'x'                 => $x_label,
+				'y'                 => $total_impressions,
+				'impressions_count' => count( $current_group ), // Number of impression records
+				'diff_type'         => $diff_type,
+				'difference'        => $difference,
+				'timestamp'         => gmdate( 'Y-m-d H:i:s', $current_group_start ), // Start of the interval
+			);
+
+			// Update previous_value for the next group
+			$previous_value = $total_impressions;
 
 			// Move to the next interval
 			$current_group_start = $interval_end;
@@ -212,25 +367,42 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
-	 * Calculate the percentage difference between the current and previous revenue.
+	 * Get impressions within the specified interval.
 	 *
-	 * @param float      $current_revenue  The current revenue.
-	 * @param float|null $previous_revenue The previous revenue.
+	 * @param array $impressions    The impressions to filter.
+	 * @param int   $interval_start The start timestamp of the interval.
+	 * @param int   $interval_end   The end timestamp of the interval.
+	 *
+	 * @return array
+	 */
+	private function get_impressions_in_interval( $impressions, $interval_start, $interval_end ) {
+		return array_filter( $impressions, function ( $impression ) use ( $interval_start, $interval_end ) {
+			$timestamp = strtotime( $impression['timestamp'] );
+
+			return $timestamp >= $interval_start && $timestamp < $interval_end;
+		} );
+	}
+
+	/**
+	 * Calculate the percentage difference between the current and previous value.
+	 *
+	 * @param float      $current_value  The current value.
+	 * @param float|null $previous_value The previous value.
 	 *
 	 * @return array [difference, diff_type]
 	 */
-	private function calculate_percentage_difference( $current_revenue, $previous_revenue ) {
-		if ( $previous_revenue !== null ) {
-			if ( $previous_revenue === 0 ) {
-				// If previous revenue is 0, handle it as a special case
-				if ( $current_revenue === 0 ) {
+	private function calculate_percentage_difference( $current_value, $previous_value ) {
+		if ( $previous_value !== null ) {
+			if ( $previous_value === 0 ) {
+				// If previous value is 0, handle it as a special case
+				if ( $current_value === 0 ) {
 					return array( 0, 'none' ); // No change
 				}
 
 				return array( 100, 'increase' ); // Infinite increase (from 0 to any positive value)
 			}
 
-			$difference = ( ( $current_revenue - $previous_revenue ) / $previous_revenue ) * 100;
+			$difference = ( ( $current_value - $previous_value ) / $previous_value ) * 100;
 			$diff_type  = ( $difference >= 0 ) ? 'increase' : 'decrease';
 
 			return array( round( abs( $difference ), 2 ), $diff_type ); // Round to 2 decimal places
