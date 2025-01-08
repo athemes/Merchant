@@ -30,6 +30,200 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Get date ranges for the last 7 days and the 7 days before that.
+	 *
+	 * @return array[] An array containing the last 7 days and the 7 days before that date ranges.
+	 */
+	public function get_last_and_previous_7_days_ranges() {
+		// Get the current date and time
+		$now = new DateTime();
+
+		// Calculate the last 7 days range
+		$last_7_days_end   = clone $now;
+		$last_7_days_start = clone $now;
+		$last_7_days_start->modify( '-7 days' );
+
+		// Calculate the 7 days before the last 7 days range
+		$previous_7_days_end   = clone $last_7_days_start; // End of the previous range is the start of the last 7 days
+		$previous_7_days_start = clone $last_7_days_start;
+		$previous_7_days_start->modify( '-7 days' );
+
+		// Format the dates to match the required format
+		$last_7_days_range = array(
+			'start' => $last_7_days_start->format( 'Y-m-d H:i:s' ),
+			'end'   => $last_7_days_end->format( 'Y-m-d H:i:s' ),
+		);
+
+		$previous_7_days_range = array(
+			'start' => $previous_7_days_start->format( 'Y-m-d H:i:s' ),
+			'end'   => $previous_7_days_end->format( 'Y-m-d H:i:s' ),
+		);
+
+		// Return the ranges as an array
+		return array(
+			'last_7_days'     => $last_7_days_range,
+			'previous_7_days' => $previous_7_days_range,
+		);
+	}
+
+	/**
+	 * Get the revenue card report for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_reveue_card_report( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$revenue_first_period = $this->data_provider->get_revenue();
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$revenue_second_period = $this->data_provider->get_revenue();
+
+		$net_revenue_change = $revenue_second_period - $revenue_first_period;
+		$revenue_change     = $this->calculate_percentage_difference( $revenue_second_period, $revenue_first_period );
+
+		return array(
+			'net_revenue_change'    => $net_revenue_change,
+			'revenue_change'        => $revenue_change,
+			'revenue_first_period'  => $revenue_first_period,
+			'revenue_second_period' => $revenue_second_period,
+		);
+	}
+
+	/**
+	 * Get total new orders card report for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_total_new_orders_card_report( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$orders_first_period = $this->data_provider->get_orders_count();
+		$orders_first_period = $orders_first_period > 0 ? $orders_first_period : 1; // Prevent division by zero
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$orders_second_period = $this->data_provider->get_orders_count();
+		$orders_second_period = $orders_second_period > 0 ? $orders_second_period : 1; // Prevent division by zero
+
+		$new_orders_count = $orders_second_period - $orders_first_period;
+
+		$change = $this->calculate_percentage_difference( $orders_second_period, $orders_first_period );
+
+		return array(
+			'orders_change'        => $change,
+			'new_orders_count'     => $new_orders_count,
+			'orders_first_period'  => $orders_first_period,
+			'orders_second_period' => $orders_second_period,
+		);
+	}
+
+	/**
+	 * Get average order value (AOV) card report for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_aov_card_report( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$aov_first_period = $this->data_provider->get_average_order_value();
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$aov_second_period = $this->data_provider->get_average_order_value();
+
+		$diff = $aov_second_period - $aov_first_period;
+
+		$change = $this->calculate_percentage_difference( $aov_second_period, $aov_first_period );
+
+		return array(
+			'diff'              => $diff,
+			'change'            => $change,
+			'aov_first_period'  => $aov_first_period,
+			'aov_second_period' => $aov_second_period,
+		);
+	}
+
+	/**
+	 * Get conversion rate card report for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_conversion_rate_card_report( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$conversion_first_period = $this->data_provider->get_conversion_rate_percentage();
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$conversion_second_period = $this->data_provider->get_conversion_rate_percentage();
+
+		$diff = $conversion_second_period - $conversion_first_period;
+
+		$change = $this->calculate_percentage_difference( $conversion_second_period, $conversion_first_period );
+
+		return array(
+			'diff'                     => $diff,
+			'change'                   => $change,
+			'conversion_first_period'  => $conversion_first_period,
+			'conversion_second_period' => $conversion_second_period,
+		);
+	}
+
+	/**
+	 * Get impressions card report for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_impressions_card_report( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$impressions_first_period = $this->data_provider->get_total_impressions();
+		$impressions_first_period = $impressions_first_period > 0 ? $impressions_first_period : 1; // Prevent division by zero
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$impressions_second_period = $this->data_provider->get_total_impressions();
+		$impressions_second_period = $impressions_second_period > 0 ? $impressions_second_period : 1; // Prevent division by zero
+
+		$diff = $impressions_second_period - $impressions_first_period;
+
+		$change = $this->calculate_percentage_difference( $impressions_second_period, $impressions_first_period );
+
+		return array(
+			'diff'                      => $diff,
+			'change'                    => $change,
+			'impressions_first_period'  => $impressions_first_period,
+			'impressions_second_period' => $impressions_second_period,
+		);
+	}
+
+	/**
 	 * Get revenue data for the given date range.
 	 *
 	 * @param string $start_date Start date in 'Y-m-d H:i:s' format.
