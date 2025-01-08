@@ -472,6 +472,11 @@
 
 			inputs.each(function () {
 				const datePicker = $(this);
+				const initialValue = datePicker.val();
+				let selectedDates = [];
+				if (initialValue) {
+					selectedDates = initialValue.split(',').map(dateStr => new Date(dateStr.trim()));
+				}
 				new AirDatepicker(datePicker.getPath(), {
 					maxDate: new Date(),
 					locale: JSON.parse(merchant_datepicker_locale),
@@ -480,6 +485,7 @@
 					timepicker: true,
 					timeFormat: 'HH:mm:59',
 					dateFormat: 'yyyy-MM-dd',
+					selectedDates: selectedDates, // Set the selected dates
 					multipleDatesSeparator: ',',
 					onSelect: function (data) {
 						if (typeof onSelectHandler === 'function') {
@@ -508,7 +514,7 @@
 
 			this.datePickerInit(container, {
 				onSelectHandler: (data) => {
-					if(data.formattedDate.length === 2) {
+					if (data.formattedDate.length === 2) {
 						updateFunction(data);
 					}
 				}
