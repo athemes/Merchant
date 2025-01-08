@@ -417,8 +417,18 @@ class Merchant_Analytics_DB_ORM {
 		return $this;
 	}
 
+	/**
+	 * Add LIMIT clause to query.
+	 *
+	 * @param int $limit  Number of records to return.
+	 * @param int $offset Offset to start from.
+	 *
+	 * @return $this
+	 */
 	public function limit( $limit, $offset = 0 ) {
-		$this->limit = " LIMIT {$limit} OFFSET {$offset}";
+		if ( $limit >= 0 ) {
+			$this->limit = " LIMIT {$limit} OFFSET {$offset}";
+		}
 
 		return $this;
 	}
