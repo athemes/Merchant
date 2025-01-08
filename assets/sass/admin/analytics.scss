@@ -45,24 +45,6 @@
 	//visibility: visible !important;
 }
 
-.revenue-chart {
-	.apexcharts-tooltip {
-		padding: 20px;
-		border-radius: 5px;
-		box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.1);
-		background-color: #fff;
-	}
-}
-
-.avg-order-value-chart {
-	.apexcharts-tooltip {
-		padding: 10px;
-		border-radius: 5px;
-		box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.1);
-		background-color: #fff;
-	}
-}
-
 .merchant-analytics-section {
 	.chart-head {
 		padding: 20px 20px 0;
@@ -206,8 +188,8 @@
 	display: none;
 }
 
-.revenue-chart,
-.avg-order-value-chart {
+.revenue-chart-section .chart,
+.aov-chart-section .chart{
 	padding: 20px;
 
 	.apexcharts-tooltip {
@@ -312,5 +294,23 @@
 				}
 			}
 		}
+	}
+}
+
+.revenue-chart-section .chart {
+	.apexcharts-tooltip {
+		padding: 20px;
+		border-radius: 5px;
+		box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.1);
+		background-color: #fff;
+	}
+}
+
+.aov-chart-section .chart {
+	.apexcharts-tooltip {
+		padding: 10px;
+		border-radius: 5px;
+		box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.1);
+		background-color: #fff;
 	}
 }
