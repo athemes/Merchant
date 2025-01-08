@@ -58,16 +58,8 @@ class Merchant_Cart_Reserved_Timer extends Merchant_Add_Module {
 			'icon'                  => 'fire',
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'cart' ) );
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = self::MODULE_DIR . "/admin/options.php";

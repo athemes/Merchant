@@ -44,12 +44,8 @@ class Merchant_Added_To_Cart_Popup extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array();
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module section.
 		$this->module_section = $this->module_data['section'];

@@ -147,6 +147,8 @@ class Merchant_Add_Module {
 	}
 
 	/**
+	 * Todo: remove if not used anywhere.
+	 *
 	 * Get preview URL
 	 *
 	 * @param array $args

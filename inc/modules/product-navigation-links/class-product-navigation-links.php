@@ -50,8 +50,7 @@ class Merchant_Product_Navigation_Links extends Merchant_Add_Module {
 		);
 
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $this->set_module_preview_url( array( 'type' => 'product' ) );
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module section.
 		$this->module_section = $this->module_data['section'];

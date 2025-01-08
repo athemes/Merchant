@@ -182,21 +182,6 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
-		// Module preview URL
-		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
-			'type'  => 'product',
-			'query' => array(
-				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'product_type',
-						'field'    => 'slug',
-						'terms'    => 'variable',
-					),
-				),
-			),
-		) );
-
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 

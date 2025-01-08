@@ -53,12 +53,8 @@ class Merchant_Add_To_Cart_Text extends Merchant_Add_Module {
 				'out_of_stock_custom_label'            => 0,
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module section.
 		$this->module_section = $this->module_data['section'];

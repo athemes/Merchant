@@ -58,27 +58,6 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
-		// Module preview URL
-		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
-			'type'  => 'product',
-			'query' => array(
-				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'key'     => '_merchant_frequently_bought_together_bundles',
-						'value'   => '',
-						'compare' => '!=',
-					),
-					array(
-						'key'     => '_merchant_frequently_bought_together_bundles',
-						'value'   => 'a:0:{}',
-						'compare' => '!=',
-					),
-				),
-			),
-		) );
-
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
 
