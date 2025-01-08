@@ -5,7 +5,35 @@
 	border-radius: 4px;
 }
 
-.impressions-chart {
+.merchant-analytics-loading-spinner {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 4px solid rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	border-top-color: #3D65E9; // Change this color to your preference
+	animation: spin 1s ease-in-out infinite;
+	vertical-align: middle;
+	transition: 300ms;
+	opacity: 0;
+	visibility: hidden;
+
+	&.show {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+.impressions-chart-section .chart {
 	.apexcharts-gridlines-vertical line:last-of-type,
 	.apexcharts-gridlines-vertical line:first-of-type {
 		display: none;
