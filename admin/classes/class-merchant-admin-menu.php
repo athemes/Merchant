@@ -69,6 +69,69 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 						'orders_aov' => esc_html__( 'Orders AOV', 'merchant' ),
 					),
 				) );
+
+				wp_localize_script( 'merchant-analytics', 'merchant_datepicker_locale', array(
+					wp_json_encode(
+						array(
+							'days'        => array(
+								esc_html__( 'Sunday', 'merchant' ),
+								esc_html__( 'Monday', 'merchant' ),
+								esc_html__( 'Tuesday', 'merchant' ),
+								esc_html__( 'Wednesday', 'merchant' ),
+								esc_html__( 'Thursday', 'merchant' ),
+								esc_html__( 'Friday', 'merchant' ),
+								esc_html__( 'Saturday', 'merchant' ),
+							),
+							'daysShort'   => array(
+								esc_html__( 'Sun', 'merchant' ),
+								esc_html__( 'Mon', 'merchant' ),
+								esc_html__( 'Tue', 'merchant' ),
+								esc_html__( 'Wed', 'merchant' ),
+								esc_html__( 'Thu', 'merchant' ),
+								esc_html__( 'Fri', 'merchant' ),
+								esc_html__( 'Sat', 'merchant' ),
+							),
+							'daysMin'     => array(
+								esc_html__( 'Su', 'merchant' ),
+								esc_html__( 'Mo', 'merchant' ),
+								esc_html__( 'Tu', 'merchant' ),
+								esc_html__( 'We', 'merchant' ),
+								esc_html__( 'Th', 'merchant' ),
+								esc_html__( 'Fr', 'merchant' ),
+								esc_html__( 'Sa', 'merchant' ),
+							),
+							'months'      => array(
+								esc_html__( 'January', 'merchant' ),
+								esc_html__( 'February', 'merchant' ),
+								esc_html__( 'March', 'merchant' ),
+								esc_html__( 'April', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'June', 'merchant' ),
+								esc_html__( 'July', 'merchant' ),
+								esc_html__( 'August', 'merchant' ),
+								esc_html__( 'September', 'merchant' ),
+								esc_html__( 'October', 'merchant' ),
+								esc_html__( 'November', 'merchant' ),
+								esc_html__( 'December', 'merchant' ),
+							),
+							'monthsShort' => array(
+								esc_html__( 'Jan', 'merchant' ),
+								esc_html__( 'Feb', 'merchant' ),
+								esc_html__( 'Mar', 'merchant' ),
+								esc_html__( 'Apr', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'Jun', 'merchant' ),
+								esc_html__( 'Jul', 'merchant' ),
+								esc_html__( 'Aug', 'merchant' ),
+								esc_html__( 'Sep', 'merchant' ),
+								esc_html__( 'Oct', 'merchant' ),
+								esc_html__( 'Nov', 'merchant' ),
+								esc_html__( 'Dec', 'merchant' ),
+							),
+							'clear'       => esc_html__( 'Clear', 'merchant' ),
+						)
+					),
+				) );
 			}
 		}
 
