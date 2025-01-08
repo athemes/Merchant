@@ -412,8 +412,8 @@
 
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('get_impressions_chart_data', startDate, endDate),
-					'.impressions-chart-loading'
+					this.prepareAjaxData('merchant_get_impressions_chart_data', startDate, endDate),
+					'.impressions-chart-section .merchant-analytics-loading-spinner'
 				);
 				console.log('Impressions data:', response);
 				this.impressionsChart.updateSeries([{data: response.data}]);
@@ -427,13 +427,12 @@
 		 * @param {object} data - The selected date.
 		 */
 		updateRevenueChart: async function (data) {
-			//console.log(formattedDate)
 			const [startDate, endDate] = data.formattedDate;
 
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('get_revenue_chart_data', startDate, endDate),
-					'.revenue-chart-loading'
+					this.prepareAjaxData('merchant_get_revenue_chart_data', startDate, endDate),
+					'.revenue-chart-section .merchant-analytics-loading-spinner'
 				);
 				console.log('Revenue data:', response);
 				this.revenueChart.updateSeries([{data: response.data}]);
@@ -451,8 +450,8 @@
 
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('get_avg_order_value_chart_data', startDate, endDate),
-					'.aov-chart-loading'
+					this.prepareAjaxData('merchant_get_avg_order_value_chart_data', startDate, endDate),
+					'.aov-chart-section .merchant-analytics-loading-spinner'
 				);
 				console.log('AOV data:', response);
 				this.avgOrderValChart.updateSeries([{data: response.data}]);
