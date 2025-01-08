@@ -1,10 +1,21 @@
 'use strict';
 
 (function ($) {
-	let merchantChart = {
+	/**
+	 * Main object for managing merchant analytics charts.
+	 * @namespace merchantAnalyticsChart
+	 */
+	const merchantAnalyticsChart = {
+		AJAX_URL: merchant_analytics.ajax_url,
+		NONCE: merchant_analytics.nonce,
 		impressionsChart: null,
 		revenueChart: null,
 		avgOrderValChart: null,
+
+		/**
+		 * Options for the impressions chart (bar chart).
+		 * @type {Object}
+		 */
 		columnChartOptions: {
 			series: [{data: []}],
 			noData: {
@@ -44,7 +55,6 @@
 			plotOptions: {
 				bar: {
 					columnWidth: '20%',
-					// borderRadius: 5,
 					borderRadius: 5,
 					borderRadiusApplication: 'end',
 					colors: {
@@ -91,6 +101,11 @@
 				enabled: false
 			}
 		},
+
+		/**
+		 * Options for the revenue chart (area chart).
+		 * @type {Object}
+		 */
 		revenueChartOptions: {
 			series: [{data: []}],
 			noData: {
@@ -139,7 +154,6 @@
 			fill: {
 				type: 'gradient',
 				gradient: {
-					// shadeIntensity: 1,
 					inverseColors: false,
 					opacityFrom: 0.55,
 					opacityTo: 0.05,
@@ -200,41 +214,40 @@
 				enabled: true,
 				theme: false,
 				custom: function ({series, seriesIndex, dataPointIndex, w}) {
-					let current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-					return `<div class="arrow-box">
-								<div class="box-wrapper">
-									<div class="box-column big">
-										<div class="head">
-											<div class="box-title">Total Income</div>
-											<div class="box-value">${current_data.number_currency}</div>
-										</div>
-										<div class="orders-count">
-											<strong>${current_data.orders_count}</strong> ${merchant_analytics.labels.orders}
-										</div>
-									</div>
-									<div class="separator"></div>
-									<div class="box-column small">
-										<div class="head">
-											<svg width="64" height="47" viewBox="0 0 64 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M0.5 41V22L12.5 26H16.5L24 19L27 16.5L33.5 15L42.5 19L47 17.5L63.5 1V41H0.5Z" fill="url(#paint0_linear_4098_14532)"/>
-												<path d="M0.5 21.5L7.89394 25.3339C11.5717 27.2409 16.0444 26.6827 19.1408 23.9304L26.846 17.0814C29.8153 14.4419 34.2623 14.351 37.3371 16.8667V16.8667C40.5519 19.497 45.2367 19.2633 48.1738 16.3262L63.5 1" stroke="#3661EA" stroke-width="0.5" stroke-dasharray="3 3"/>
-												<defs>
-													<linearGradient id="paint0_linear_4098_14532" x1="23.753" y1="1" x2="16.791" y2="39.8525" gradientUnits="userSpaceOnUse">
-														<stop stop-color="${current_data.diff_type === 'decrease' ? '#FFB6B6' : '#CDE1FE'}"/>
-														<stop offset="1" stop-color="#FBFCFF" stop-opacity="0"/>
-													</linearGradient>
-												</defs>
-											</svg>
-										</div>
-										<div class="change-percentage ${current_data.diff_type}">
-											<strong>${current_data.difference}%</strong>
-										</div>
-									</div>
-								</div>
-							</div>`
+					const current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+					return `
+                        <div class="arrow-box">
+                            <div class="box-wrapper">
+                                <div class="box-column big">
+                                    <div class="head">
+                                        <div class="box-title">Total Income</div>
+                                        <div class="box-value">${current_data.number_currency}</div>
+                                    </div>
+                                    <div class="orders-count">
+                                        <strong>${current_data.orders_count}</strong> ${merchant_analytics.labels.orders}
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="box-column small">
+                                    <div class="head">
+                                        <svg width="64" height="47" viewBox="0 0 64 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <!-- SVG content -->
+                                        </svg>
+                                    </div>
+                                    <div class="change-percentage ${current_data.diff_type}">
+                                        <strong>${current_data.difference}%</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
 				}
 			}
 		},
+
+		/**
+		 * Options for the average order value (AOV) chart (area chart).
+		 * @type {Object}
+		 */
 		avgOrderValChartOptions: {
 			series: [{data: []}],
 			noData: {
@@ -335,51 +348,219 @@
 				enabled: true,
 				theme: false,
 				custom: function ({series, seriesIndex, dataPointIndex, w}) {
-					let current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-					return `<div class="arrow-box-aov">
-								<div class="box-title">${merchant_analytics.labels.orders_aov}</div>
-								<div class="box-value">${current_data.number_currency} <span class="diff ${current_data.diff_type}">${current_data.difference}%</span></div>
-							</div>`
+					const current_data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+					return `
+                        <div class="arrow-box-aov">
+                            <div class="box-title">${merchant_analytics.labels.orders_aov}</div>
+                            <div class="box-value">${current_data.number_currency} <span class="diff ${current_data.diff_type}">${current_data.difference}%</span></div>
+                        </div>`;
 				}
 			}
 		},
-		impressionsChartRender: function () {
-			let chartEl = $('.impressions-chart');
-			let options = merchantChart.columnChartOptions;
-			this.impressionsChart = new ApexCharts(chartEl.get(0), options)
-			this.impressionsChart.render();
-			this.impressionsChart.updateSeries([
-				{
-					data: JSON.parse(chartEl.attr('data-period'))
-				},
-			])
+
+		/**
+		 * Sends an AJAX request and returns the response.
+		 * @param {Object} data - The data to send with the request.
+		 * @param {string} [loadingIndicatorSelector] - Selector for the loading indicator element.
+		 * @returns {Promise} - The resolved response or rejected error.
+		 */
+		sendAjaxRequest: async function (data, loadingIndicatorSelector = '') {
+			try {
+				if (loadingIndicatorSelector) {
+					$(loadingIndicatorSelector).addClass('show');
+				}
+
+				const response = await $.ajax({
+					url: this.AJAX_URL,
+					method: 'GET',
+					data: data,
+				});
+
+				return response;
+			} catch (error) {
+				console.error('AJAX request failed:', error);
+				throw error;
+			} finally {
+				if (loadingIndicatorSelector) {
+					$(loadingIndicatorSelector).removeClass('show');
+				}
+			}
 		},
+
+		/**
+		 * Prepares data for an AJAX request.
+		 * @param {string} action - The action to perform.
+		 * @param {string} startDate - The start date for the data range.
+		 * @param {string} endDate - The end date for the data range.
+		 * @returns {Object} - The prepared data object.
+		 */
+		prepareAjaxData: function (action, startDate, endDate) {
+			return {
+				action: action,
+				nonce: this.NONCE,
+				start_date: startDate,
+				end_date: endDate,
+			};
+		},
+
+		/**
+		 * Updates the impressions chart with new data.
+		 * @param {object} data - The selected date.
+		 */
+		updateImpressionsChart: async function (data) {
+			const [startDate, endDate] = data.formattedDate;
+
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('get_impressions_chart_data', startDate, endDate),
+					'.impressions-chart-loading'
+				);
+				console.log('Impressions data:', response);
+				this.impressionsChart.updateSeries([{data: response.data}]);
+			} catch (error) {
+				console.error('Error fetching impressions data:', error);
+			}
+		},
+
+		/**
+		 * Updates the revenue chart with new data.
+		 * @param {object} data - The selected date.
+		 */
+		updateRevenueChart: async function (data) {
+			//console.log(formattedDate)
+			const [startDate, endDate] = data.formattedDate;
+
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('get_revenue_chart_data', startDate, endDate),
+					'.revenue-chart-loading'
+				);
+				console.log('Revenue data:', response);
+				this.revenueChart.updateSeries([{data: response.data}]);
+			} catch (error) {
+				console.error('Error fetching revenue data:', error);
+			}
+		},
+
+		/**
+		 * Updates the average order value (AOV) chart with new data.
+		 * @param {object} data - The selected date.
+		 */
+		updateAOVChart: async function (data) {
+			const [startDate, endDate] = data.formattedDate;
+
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('get_avg_order_value_chart_data', startDate, endDate),
+					'.aov-chart-loading'
+				);
+				console.log('AOV data:', response);
+				this.avgOrderValChart.updateSeries([{data: response.data}]);
+			} catch (error) {
+				console.error('Error fetching AOV data:', error);
+			}
+		},
+
+		/**
+		 * Initializes the date picker for a chart container.
+		 * @param {jQuery} container - The container element for the chart.
+		 * @param {Object} options - Options for the date picker.
+		 * @param {Function} options.onSelectHandler - Callback function for date selection.
+		 */
+		datePickerInit: function (container, {onSelectHandler}) {
+			const inputs = container.find('.date-range-input');
+
+			inputs.each(function () {
+				const datePicker = $(this);
+				new AirDatepicker(datePicker.getPath(), {
+					maxDate: new Date(),
+					locale: JSON.parse(merchant_datepicker_locale),
+					range: true,
+					position: 'left top',
+					timepicker: true,
+					timeFormat: 'HH:mm:59',
+					dateFormat: 'yyyy-MM-dd',
+					multipleDatesSeparator: ',',
+					onSelect: function (data) {
+						if (typeof onSelectHandler === 'function') {
+							onSelectHandler(data);
+						} else {
+							console.error('onSelectHandler is not a function');
+						}
+					}
+				});
+			});
+		},
+
+		/**
+		 * Renders a chart and initializes its date picker.
+		 * @param {jQuery} container - The container element for the chart.
+		 * @param {Object} chartOptions - Options for the ApexCharts instance.
+		 * @param {Function} updateFunction - Function to call when the date is selected.
+		 * @param {string} loadingIndicatorSelector - Selector for the loading indicator.
+		 * @returns {ApexCharts} - The rendered chart instance.
+		 */
+		renderChart: function (container, chartOptions, updateFunction, loadingIndicatorSelector) {
+			const chartEl = container.find('.chart');
+			const chart = new ApexCharts(chartEl.get(0), chartOptions);
+			chart.render();
+			chart.updateSeries([{data: JSON.parse(chartEl.attr('data-period'))}]);
+
+			this.datePickerInit(container, {
+				onSelectHandler: (data) => {
+					if(data.formattedDate.length === 2) {
+						updateFunction(data);
+					}
+				}
+			});
+
+			return chart;
+		},
+
+		/**
+		 * Renders the revenue chart.
+		 */
 		revenueChartRender: function () {
-			let chartEl = $('.revenue-chart');
-			let options = merchantChart.revenueChartOptions;
-			this.revenueChart = new ApexCharts(chartEl.get(0), options);
-			this.revenueChart.render();
-			this.revenueChart.updateSeries([
-				{
-					data: JSON.parse(chartEl.attr('data-period'))
-				},
-			])
+			const container = $('.revenue-chart-section');
+			this.revenueChart = this.renderChart(
+				container,
+				this.revenueChartOptions,
+				(data) => this.updateRevenueChart(data),
+				'.revenue-chart-section .merchant-analytics-loading-spinner'
+			);
 		},
+
+		/**
+		 * Renders the average order value (AOV) chart.
+		 */
 		avgOrderValChartRender: function () {
-			let chartEl = $('.avg-order-value-chart');
-			let options = merchantChart.avgOrderValChartOptions;
-			this.avgOrderValChart = new ApexCharts(chartEl.get(0), options)
-			this.avgOrderValChart.render();
-			this.avgOrderValChart.updateSeries([
-				{
-					data: JSON.parse(chartEl.attr('data-period'))
-				},
-			])
+			const container = $('.aov-chart-section');
+			this.avgOrderValChart = this.renderChart(
+				container,
+				this.avgOrderValChartOptions,
+				(data) => this.updateAOVChart(data),
+				'.aov-chart-section .merchant-analytics-loading-spinner'
+			);
+		},
+
+		/**
+		 * Renders the impressions chart.
+		 */
+		impressionsChartRender: function () {
+			const container = $('.impressions-chart-section');
+			this.impressionsChart = this.renderChart(
+				container,
+				this.columnChartOptions,
+				(data) => this.updateImpressionsChart(data),
+				'.impressions-chart-section .merchant-analytics-loading-spinner'
+			);
 		}
-	}
+	};
+
+	// Initialize charts when the document is ready
 	$(document).ready(function () {
-		merchantChart.revenueChartRender()
-		merchantChart.avgOrderValChartRender()
-		merchantChart.impressionsChartRender()
-	})
+		merchantAnalyticsChart.revenueChartRender();
+		merchantAnalyticsChart.avgOrderValChartRender();
+		merchantAnalyticsChart.impressionsChartRender();
+	});
 })(jQuery);
