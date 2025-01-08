@@ -101,6 +101,7 @@
 				input {
 					border: 1px solid #F0F0F1;
 					border-radius: 4px;
+					background-color: #ffffff;
 				}
 			}
 		}
@@ -287,7 +288,7 @@
 }
 
 .revenue-chart-section .chart,
-.aov-chart-section .chart{
+.aov-chart-section .chart {
 	padding: 20px;
 
 	.apexcharts-tooltip {
