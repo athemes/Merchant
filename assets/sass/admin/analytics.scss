@@ -172,14 +172,112 @@
 
 	.overview-cards {
 		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 20px;
 
 		.overview-card {
-			background-color: #fff;
-			box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
-			flex: 1;
-			padding: 20px;
+			background-color: #ffffff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 25px 20px;
+			flex: 1 1 calc(20% - 20px);
 			position: relative;
+
+			.info-icon {
+				display: inline-block;
+				margin-left: 5px;
+				cursor: pointer;
+				position: absolute;
+				top: 8px;
+				right: 8px;
+				width: 18px;
+				height: 18px;
+				background-image: url("../../images/admin/info.svg");
+
+				&::before {
+					content: attr(data-tooltip); // Use the data-tooltip attribute for tooltip text
+					position: absolute;
+					top: 50%;
+					right: calc(100% + 5px);
+					transform: translateY(-50%);
+					background-color: #333;
+					color: #fff;
+					padding: 5px 10px;
+					border-radius: 4px;
+					font-size: 12px;
+					opacity: 0;
+					visibility: hidden;
+					transition: opacity 0.3s ease, visibility 0.3s ease;
+					z-index: 10;
+					width: 200px;
+				}
+
+				&::after {
+					content: '';
+					position: absolute;
+					right: calc(100% - 5px); // Position the arrow just below the tooltip
+					top: 50%;
+					transform: translateY(-50%);
+					border-width: 5px;
+					border-style: solid;
+					border-color: transparent transparent transparent #333; // Arrow pointing down
+					opacity: 0;
+					visibility: hidden;
+					transition: opacity 0.3s ease, visibility 0.3s ease;
+					z-index: 10;
+
+				}
+
+				&:hover::before,
+				&:hover::after {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+
+			.card-title {
+				font-size: 16px;
+				font-weight: 500;
+				color: #333;
+				margin-bottom: 15px;
+				position: relative;
+			}
+
+			.card-value {
+				font-size: 36px;
+				color: #000;
+				line-height: 36px;
+				margin-bottom: 10px;
+			}
+
+			.card-change {
+				position: absolute;
+				bottom: 10px;
+				right: 10px;
+				font-size: 16px;
+				color: #00BD8A;
+
+				&::before {
+					content: '';
+					background-repeat: no-repeat;
+					background-position: center;
+					background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%2213%22%20viewBox%3D%220%200%2011%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0.515625%204.95483L5.29688%200.529297M5.29688%200.529297L10.1719%204.95483M5.29688%200.529297V12.2964%22%20stroke%3D%22%2300BD8A%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+					width: 11px;
+					height: 11px;
+					display: inline-block;
+					margin-right: 4px;
+					background-size: 9px;
+				}
+
+				&.decrease {
+					color: #E36131;
+
+					&::before {
+						background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2211%22%20height%3D%2213%22%20viewBox%3D%220%200%2011%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0.515625%208.3418L5.29688%2012.7673M5.29688%2012.7673L10.1719%208.3418M5.29688%2012.7673V0.999999%22%20stroke%3D%22%23E36131%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+					}
+				}
+			}
 		}
 	}
 }
