@@ -3,7 +3,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$reports = new Merchant_Analytics_Data_Reports();
+$reports         = new Merchant_Analytics_Data_Reports();
+$date_ranges     = $reports->get_last_and_previous_7_days_ranges();
+$added_revenue   = $reports->get_reveue_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$added_orders    = $reports->get_total_new_orders_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$aov_rate        = $reports->get_aov_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$conversion_rate = $reports->get_conversion_rate_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$impressions     = $reports->get_impressions_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 ?>
 <div class="merchant-analytics-overview-section">
     <div class="overview-head">
@@ -14,41 +20,84 @@ $reports = new Merchant_Analytics_Data_Reports();
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
-                    <input type="text" class="date-range-input" placeholder="<?php
+                <span class="first-date-range">
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
                 <span class="compare-text">
                     Comparing to
                 </span>
-                <span>
-                    <input type="text" class="date-range-input" placeholder="<?php
+                <span class="second-date-range">
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
-
     <div class="overview-cards">
-        <div class="overview-card">
-			<?php
-			echo wc_price( 20 ) ?>
+        <div class="overview-card revenue">
+            <div class="card-title"><?php
+				esc_html_e( 'Added revenue', 'merchant' ); ?></div>
+            <div class="card-value"><?php
+				echo wp_kses( wc_price( $added_revenue['revenue_second_period'] ), merchant_kses_allowed_tags( array( 'all' ) ) ) ?></div>
+            <div class="card-change <?php
+			echo esc_html( $added_revenue['revenue_change'][1] ) ?>"><?php
+				echo esc_html( wc_format_decimal( $added_revenue['revenue_change'][0], 2 ) ) ?>%
+            </div>
+            <span class="info-icon" data-tooltip="<?php
+			esc_attr_e( '💰 How much extra cash flowed in between your dates.', 'merchant' ); ?>"></span>
         </div>
-        <div class="overview-card">
-			<?php
-			echo wc_price( 20 ) ?>
+        <div class="overview-card total-orders">
+            <div class="card-title"><?php
+				esc_html_e( 'Total orders', 'merchant' ); ?></div>
+            <div class="card-value"><?php
+				echo esc_html( $added_orders['orders_second_period'] ) ?></div>
+            <div class="card-change <?php
+			echo esc_html( $added_orders['orders_change'][1] ) ?>"><?php
+				echo esc_html( wc_format_decimal( $added_orders['orders_change'][0], 2 ) ) ?>%
+            </div>
+            <span class="info-icon" data-tooltip="<?php
+			esc_attr_e( '📦 More or fewer orders? Here’s the gap.', 'merchant' ); ?>"></span>
         </div>
-        <div class="overview-card">
-			<?php
-			echo wc_price( 20 ) ?>
+        <div class="overview-card aov">
+            <div class="card-title"><?php
+				esc_html_e( 'Average order value', 'merchant' ); ?></div>
+            <div class="card-value"><?php
+				echo wp_kses( wc_price( $aov_rate['aov_second_period'] ), merchant_kses_allowed_tags( array( 'all' ) ) ) ?></div>
+            <div class="card-change <?php
+			echo esc_attr( $aov_rate['change'][1] ) ?>"><?php
+				echo esc_html( wc_format_decimal( $aov_rate['change'][0], 2 ) ) ?>%
+            </div>
+            <span class="info-icon" data-tooltip="<?php
+			esc_attr_e( '💸 Did customers spend more or less per order?', 'merchant' ); ?>"></span>
         </div>
-        <div class="overview-card">
-			<?php
-			echo wc_price( 20 ) ?>
+        <div class="overview-card conversion-rate">
+            <div class="card-title"><?php
+				esc_html_e( 'Conversion rate', 'merchant' ); ?></div>
+            <div class="card-value"><?php
+				echo esc_html( wc_format_decimal( $conversion_rate['conversion_second_period'], 2 ) ) ?>%
+            </div>
+            <div class="card-change <?php
+			echo esc_attr( $conversion_rate['change'][1] ) ?>"><?php
+				echo esc_html( wc_format_decimal( $conversion_rate['change'][0], 2 ) ) ?>%
+            </div>
+            <span class="info-icon" data-tooltip="<?php
+			esc_attr_e( '📊 Did more visitors turn into buyers?', 'merchant' ); ?>"></span>
         </div>
-        <div class="overview-card">
-			<?php
-			echo wc_price( 20 ) ?>
+        <div class="overview-card impressions">
+            <div class="card-title"><?php
+				esc_html_e( 'Impressions', 'merchant' ); ?></div>
+            <div class="card-value"><?php
+				echo esc_html( wc_format_decimal( $impressions['impressions_second_period'], 2 ) ) ?>
+            </div>
+            <div class="card-change <?php
+			echo esc_attr( $impressions['change'][1] ) ?>"><?php
+				echo esc_html( wc_format_decimal( $impressions['change'][0], 2 ) ) ?>%
+            </div>
+            <span class="info-icon" data-tooltip="<?php
+			esc_attr_e( '👀 How many more eyes saw your content?', 'merchant' ); ?>"></span>
         </div>
     </div>
 </div>
@@ -62,14 +111,15 @@ $reports = new Merchant_Analytics_Data_Reports();
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
-                    <input type="text" class="date-range-input" placeholder="<?php
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( '2024-01-01 00:00:00', '2024-12-29 23:59:59' ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
 	?>"></div>
 </div>
 <div class="merchant-analytics-section aov-chart-section">
@@ -82,14 +132,15 @@ $reports = new Merchant_Analytics_Data_Reports();
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
-                    <input type="text" class="date-range-input" placeholder="<?php
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_aov_chart_report( '2024-01-01 00:00:00', '2024-12-29 23:59:59' ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_aov_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
 	?>"></div>
 </div>
 <div class="merchant-analytics-section impressions-chart-section">
@@ -102,13 +153,14 @@ $reports = new Merchant_Analytics_Data_Reports();
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
-                    <input type="text" class="date-range-input" placeholder="<?php
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( '2024-12-01 00:00:00', '2025-11-30 23:59:59' ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
 	?>"></div>
 </div>
