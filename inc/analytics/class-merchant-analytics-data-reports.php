@@ -242,7 +242,7 @@ class Merchant_Analytics_Data_Reports {
 		 *
 		 * @since 2.0.0
 		 */
-		$limit = apply_filters( 'merchant_analytics_max_orders_limit_revenue', 1000000 );
+		$limit = apply_filters( 'merchant_analytics_max_orders_limit_revenue', - 1 );
 
 		$orders = $this->data_provider->get_dated_orders( $limit );
 
@@ -277,7 +277,7 @@ class Merchant_Analytics_Data_Reports {
 		 *
 		 * @since 2.0.0
 		 */
-		$limit = apply_filters( 'merchant_analytics_max_orders_limit_aov', 1000000 );
+		$limit = apply_filters( 'merchant_analytics_max_orders_limit_aov', - 1 );
 
 		$orders = $this->data_provider->get_dated_orders( $limit );
 
@@ -312,7 +312,7 @@ class Merchant_Analytics_Data_Reports {
 		 *
 		 * @since 2.0.0
 		 */
-		$limit = apply_filters( 'merchant_analytics_max_impressions_limit', 1000000 );
+		$limit = apply_filters( 'merchant_analytics_max_impressions_limit', - 1 );
 
 		$impressions = $this->data_provider->get_dated_impressions( $limit );
 
