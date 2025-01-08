@@ -66,7 +66,7 @@ class Merchant_Analytics_Data_Provider {
 		if ( $d && $d->format( 'Y-m-d H:i:s' ) === $date ) {
 			return $date;
 		}
-		throw new InvalidArgumentException( 'Invalid date format. Expected Y-m-d H:i:s.' );
+		throw new InvalidArgumentException( 'Invalid date format. Expected Y-m-d H:i:s given ' . esc_html( $date ) );
 	}
 
 	/**
@@ -118,6 +118,61 @@ class Merchant_Analytics_Data_Provider {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Get the dated revenue.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return array The dated revenue.
+	 */
+	public function get_dated_orders( $limit = 10000 ) {
+		$orders = $this->analytics
+			->select( array( 'timestamp, order_subtotal', 'order_id' ) )
+			->where( 'order_id > %d', 0 )
+			->where( 'event_type = %s', 'order' )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->limit( $limit )
+			->order_by( 'timestamp', 'ASC' )
+			->get();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		if ( ! empty( $orders ) ) {
+			// Use array_column to get the order_ids
+			$orderIds         = array_column( $orders, 'order_id' );
+			$unique_order_ids = array_unique( $orderIds );
+			$unique_orders    = array();
+			foreach ( $orders as $order ) {
+				if ( in_array( $order['order_id'], $unique_order_ids, true ) ) {
+					$unique_orders[] = $order;
+					// Remove the order_id from the uniqueOrderIds array to prevent duplicates
+					$key = array_search( $order['order_id'], $unique_order_ids, true );
+					unset( $unique_order_ids[ $key ] );
+				}
+			}
+
+			return $unique_orders;
+		}
+
+		return array();
+	}
+
+	// get impressions grouped by day
+	public function get_dated_impressions($limit = 10000) {
+		$impressions = $this->analytics
+			->select( array( 'timestamp', 'count(id) as impressions_count' ) )
+			->where( 'event_type = %s', 'impression' )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->group_by( 'DATE(timestamp)' )
+			->order_by( 'timestamp', 'ASC' )
+			->limit( $limit )
+			->get();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		return $impressions;
 	}
 
 	/**
