@@ -70,8 +70,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
-
-
 		// Module options path.
 		$this->module_options_path = self::MODULE_DIR . '/admin/options.php';
 
