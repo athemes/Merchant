@@ -159,8 +159,14 @@ class Merchant_Analytics_Data_Provider {
 		return array();
 	}
 
-	// get impressions grouped by day
-	public function get_dated_impressions($limit = 10000) {
+	/**
+	 * Get the dated revenue.
+	 *
+	 * @param $limit int The limit of the query.
+	 *
+	 * @return array|null
+	 */
+	public function get_dated_impressions( $limit = 10000 ) {
 		$impressions = $this->analytics
 			->select( array( 'timestamp', 'count(id) as impressions_count' ) )
 			->where( 'event_type = %s', 'impression' )
