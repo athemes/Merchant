@@ -103,18 +103,9 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The total revenue.
 	 */
 	public function get_revenue() {
-		$revenue = $this->analytics
-			->distinct( 'order_id' )
-			->where( 'order_id > %d', 0 )
-			->sum( 'order_subtotal' )
-			->where( 'event_type = %s', 'order' )
-			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->first();
-
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
-
-		if ( ! empty( $revenue ) ) {
-			return $revenue['sum_order_subtotal'];
+		$orders_data = $this->get_dated_orders( - 1 );
+		if ( ! empty( $orders_data ) ) {
+			return array_sum( array_column( $orders_data, 'order_subtotal' ) );
 		}
 
 		return 0;
@@ -187,18 +178,13 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The average order value.
 	 */
 	public function get_average_order_value() {
-		$average_order_value = $this->analytics
-			->distinct( 'order_id' )
-			->where( 'order_id > %d', 0 )
-			->where( 'event_type = %s', 'order' )
-			->avg( 'order_subtotal' )
-			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->first();
-
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
-
-		if ( ! empty( $average_order_value ) ) {
-			return $average_order_value['avg_order_subtotal'];
+		$orders_data = $this->get_dated_orders( - 1 );
+		if ( ! empty( $orders_data ) ) {
+			$order_subtotals = array_column( $orders_data, 'order_subtotal' );
+			$orders_count    = count( $order_subtotals );
+			if ( $orders_count > 0 ) {
+				return array_sum( $order_subtotals ) / $orders_count;
+			}
 		}
 
 		return 0;
@@ -210,18 +196,9 @@ class Merchant_Analytics_Data_Provider {
 	 * @return int The total number of orders.
 	 */
 	public function get_orders_count() {
-		$orders_count = $this->analytics
-			->distinct( 'order_id' )
-			->where( 'order_id > %d', 0 )
-			->where( 'event_type = %s', 'order' )
-			->count( 'order_id' )
-			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->first();
-
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
-
-		if ( ! empty( $orders_count ) ) {
-			return $orders_count['count_order_id'];
+		$orders_data = $this->get_dated_orders( - 1 );
+		if ( ! empty( $orders_data ) ) {
+			return count( $orders_data );
 		}
 
 		return 0;
