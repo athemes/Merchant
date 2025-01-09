@@ -77,12 +77,12 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 			            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			            PRIMARY KEY (id),
 			            INDEX (event_type),
-			            INDEX (customer_id),
-			            INDEX (source_product_id),
-			            INDEX (related_event_id),
+			            INDEX (event_type, timestamp),
+			            INDEX (event_type, timestamp, module_id, campaign_id),
 			            INDEX (module_id),
 			            INDEX (campaign_id),
-			            INDEX (order_id)
+			            INDEX (order_id),
+			            INDEX (timestamp)
 			        ) $collate;
 			    ",
 				'version'        => 1,
