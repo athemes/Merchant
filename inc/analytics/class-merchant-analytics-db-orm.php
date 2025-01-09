@@ -19,7 +19,9 @@ class Merchant_Analytics_DB_ORM {
 			'campaign_cost',
 			'order_id',
 			'order_subtotal',
+			'order_total',
 			'meta_data',
+			'meta_data_2',
 		);
 
 	// Query building properties
