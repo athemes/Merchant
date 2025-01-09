@@ -117,26 +117,38 @@
 		.head-wrapper {
 			display: flex;
 			justify-content: space-between;
-			align-content: center;
 			align-items: center;
-			flex-wrap: nowrap;
-			flex-direction: row;
+			flex-wrap: wrap; /* Allow wrapping on smaller screens */
+			gap: 15px; /* Increased gap for better spacing */
+			padding: 15px; /* Increased padding for better spacing */
 
 			.title {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap; /* Allow wrapping on smaller screens */
+				gap: 15px; /* Increased gap between title and percentage */
+
 				.title-text {
-					font-size: 20px;
+					font-size: 24px; /* Increased font size */
 					font-weight: 500;
-					margin-right: 15px;
+					margin-right: 20px; /* Increased margin */
 					vertical-align: middle;
+
+					@media (max-width: 768px) {
+						font-size: 20px; /* Slightly reduced font size on smaller screens */
+						display: block;
+						text-align: center;
+						margin-right: 0; /* Removed margin */
+					}
 				}
 
 				.percentage {
 					vertical-align: middle;
-					font-size: 14px;
+					font-size: 16px; /* Increased font size */
 					color: #335EEA;
 					border: 1px solid #F0F0F1;
 					border-radius: 4px;
-					padding: 3px 5px;
+					padding: 5px 8px; /* Increased padding */
 
 					&:before {
 						content: '+';
@@ -153,20 +165,59 @@
 							content: '-';
 						}
 					}
+
+					@media (max-width: 768px) {
+						font-size: 14px; /* Slightly reduced font size on smaller screens */
+						padding: 4px 6px; /* Adjusted padding */
+					}
+				}
+
+				@media (max-width: 768px) {
+					display: block;
+					width: 100%;
+
 				}
 			}
 
 			.date-range {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap; /* Allow wrapping on smaller screens */
+				gap: 15px; /* Increased gap between elements */
+
+				@media (max-width: 768px) {
+					flex-direction: column; /* Stack inputs vertically on mobile */
+					width: 100%; /* Make date range full width on mobile */
+					gap: 10px; /* Increased gap between stacked elements */
+				}
+
 				.compare-text {
 					color: #335EEA;
-					font-size: 12px;
-					margin: 0 10px;
+					font-size: 14px; /* Increased font size */
+					margin: 0 15px; /* Increased margin */
+
+					@media (max-width: 768px) {
+						margin: 0 10px; /* Adjusted margin */
+					}
 				}
 
 				input {
 					border: 1px solid #F0F0F1;
 					border-radius: 4px;
+					padding: 8px; /* Increased padding for better touch interaction */
+					font-size: 14px; /* Increased font size */
+
+					@media (max-width: 768px) {
+						padding: 6px; /* Adjusted padding */
+						width: 100%; /* Make inputs full width on mobile */
+					}
 				}
+			}
+
+			@media (max-width: 768px) {
+				flex-direction: column; /* Stack items vertically on smaller screens */
+				align-items: flex-start; /* Align items to the start */
+				gap: 20px; /* Increased gap for better spacing */
 			}
 		}
 	}
