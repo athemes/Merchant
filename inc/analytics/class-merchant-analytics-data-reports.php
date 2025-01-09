@@ -110,13 +110,11 @@ class Merchant_Analytics_Data_Reports {
 		$this->data_provider->set_start_date( $first_period['start'] );
 		$this->data_provider->set_end_date( $first_period['end'] );
 
-		$orders_first_period = $this->data_provider->get_orders_count();
-		$orders_first_period = $orders_first_period > 0 ? $orders_first_period : 1; // Prevent division by zero
+		$orders_first_period = (int) $this->data_provider->get_orders_count();
 		$this->data_provider->set_start_date( $second_period['start'] );
 		$this->data_provider->set_end_date( $second_period['end'] );
 
-		$orders_second_period = $this->data_provider->get_orders_count();
-		$orders_second_period = $orders_second_period > 0 ? $orders_second_period : 1; // Prevent division by zero
+		$orders_second_period = (int) $this->data_provider->get_orders_count();
 
 		$new_orders_count = $orders_second_period - $orders_first_period;
 
@@ -208,14 +206,12 @@ class Merchant_Analytics_Data_Reports {
 		$this->data_provider->set_start_date( $first_period['start'] );
 		$this->data_provider->set_end_date( $first_period['end'] );
 
-		$impressions_first_period = $this->data_provider->get_total_impressions();
-		$impressions_first_period = $impressions_first_period > 0 ? $impressions_first_period : 1; // Prevent division by zero
+		$impressions_first_period = (int) $this->data_provider->get_total_impressions();
 
 		$this->data_provider->set_start_date( $second_period['start'] );
 		$this->data_provider->set_end_date( $second_period['end'] );
 
-		$impressions_second_period = $this->data_provider->get_total_impressions();
-		$impressions_second_period = $impressions_second_period > 0 ? $impressions_second_period : 1; // Prevent division by zero
+		$impressions_second_period = (int) $this->data_provider->get_total_impressions();
 
 		$diff = $impressions_second_period - $impressions_first_period;
 
