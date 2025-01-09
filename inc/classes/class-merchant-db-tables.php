@@ -67,6 +67,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 			            order_subtotal DECIMAL(12, 4) DEFAULT NULL,
 			            order_total DECIMAL(12, 4) DEFAULT NULL,
 			            meta_data LONGTEXT DEFAULT NULL,
+			            meta_data_2 LONGTEXT DEFAULT NULL,
 			            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			            PRIMARY KEY (id),
 			            INDEX (event_type),
