@@ -45,6 +45,12 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 			);
 		}
 
+		/**
+		 * Get the modules analytics table definition.
+		 * This table is used to store analytics data for merchant modules.
+		 *
+		 * @return array
+		 */
 		private static function get_modules_analytics_table() {
 			global $wpdb;
 
