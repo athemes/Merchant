@@ -19,9 +19,9 @@ class Merchant_Analytics_DB_ORM {
 			'campaign_cost',
 			'order_id',
 			'order_subtotal',
-			'order_total',
+			'order_total', // Added
 			'meta_data',
-			'meta_data_2',
+			'meta_data_2', // Added
 		);
 
 	// Query building properties
@@ -34,6 +34,8 @@ class Merchant_Analytics_DB_ORM {
 	private $order_by = '';
 	private $sql_statement = '';
 	private $limit = '';
+	private $joins = '';
+	private $eager_load = array();
 
 	public function __construct() {
 		global $wpdb;
@@ -42,7 +44,7 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Reset query builder state
+	 * Reset query builder state.
 	 *
 	 * @return $this
 	 */
@@ -56,6 +58,8 @@ class Merchant_Analytics_DB_ORM {
 		$this->aggregates     = array();
 		$this->order_by       = '';
 		$this->limit          = '';
+		$this->joins          = '';
+		$this->eager_load     = array();
 
 		return $this;
 	}
@@ -85,15 +89,6 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Get the SQL statement for the last query
-	 *
-	 * @return string The SQL statement
-	 */
-	public function get_sql_statement() {
-		return $this->sql_statement;
-	}
-
-	/**
 	 * Finds a record by its primary key (id).
 	 *
 	 * @param int $id The ID of the record to find.
@@ -120,72 +115,48 @@ class Merchant_Analytics_DB_ORM {
 	 * @return array|null An array of objects representing the matching records, or null if there are no results or an error occurs.
 	 */
 	public function get_all() {
-		return $this->reset_query()
-		            ->get();
+		return $this->reset_query()->get();
 	}
 
 	/**
-	 * Add a where clause with multiple conditions
+	 * Add a where clause with multiple conditions.
 	 *
-	 * Supports multiple ways of adding conditions:
-	 * 1. Multiple calls to where()
-	 * 2. Array of conditions
-	 * 3. Nested conditions
-	 *
-	 * @param array|string $conditions Conditions to filter by
-	 * @param mixed        $value      Value for simple key-value condition
+	 * @param array|string $conditions Conditions to filter by.
+	 * @param mixed        $value      Value for simple key-value condition.
 	 *
 	 * @return $this
 	 */
 	public function where( $conditions, $value = null ) {
-		// If query results already set, return existing results
-		if ( $this->query_results !== null ) {
-			return $this;
-		}
-
-		// Simple key-value condition
 		if ( is_string( $conditions ) && $value !== null ) {
-			$this->query_where .= empty( $this->query_where )
+			$this->query_where    .= empty( $this->query_where )
 				? ' WHERE ' . $conditions
 				: ' AND ' . $conditions;
-
 			$this->query_params[] = $value;
-			return $this;
-		}
-
-		// Array of conditions
-		if ( is_array( $conditions ) ) {
+		} elseif ( is_array( $conditions ) ) {
 			$and_conditions = array();
 			foreach ( $conditions as $key => $val ) {
-				// Support for more complex conditions
 				if ( is_array( $val ) ) {
-					// Handle array-based conditions like ['column', 'operator', 'value']
 					if ( count( $val ) === 3 ) {
 						list( $column, $operator, $comparison ) = $val;
-						$and_conditions[] = "$column $operator %s";
+						$and_conditions[]     = "$column $operator %s";
 						$this->query_params[] = $comparison;
-					}
-					// Handle IN and NOT IN conditions
-					elseif ( isset( $val['in'] ) ) {
-						$in_values = $val['in'];
-						$placeholders = implode( ',', array_fill( 0, count( $in_values ), '%s' ) );
-						$and_conditions[] = "$key IN ($placeholders)";
+					} elseif ( isset( $val['in'] ) ) {
+						$in_values          = $val['in'];
+						$placeholders       = implode( ',', array_fill( 0, count( $in_values ), '%s' ) );
+						$and_conditions[]   = "$key IN ($placeholders)";
 						$this->query_params = array_merge( $this->query_params, $in_values );
-					}
-					elseif ( isset( $val['not_in'] ) ) {
-						$not_in_values = $val['not_in'];
-						$placeholders = implode( ',', array_fill( 0, count( $not_in_values ), '%s' ) );
-						$and_conditions[] = "$key NOT IN ($placeholders)";
+					} elseif ( isset( $val['not_in'] ) ) {
+						$not_in_values      = $val['not_in'];
+						$placeholders       = implode( ',', array_fill( 0, count( $not_in_values ), '%s' ) );
+						$and_conditions[]   = "$key NOT IN ($placeholders)";
 						$this->query_params = array_merge( $this->query_params, $not_in_values );
 					}
 				} else {
-					// Standard key-value condition
-					$and_conditions[] = "$key = %s";
+					$and_conditions[]     = "$key = %s";
 					$this->query_params[] = $val;
 				}
 			}
-
-			$conditions_sql = implode( " AND ", $and_conditions );
+			$conditions_sql    = implode( " AND ", $and_conditions );
 			$this->query_where .= empty( $this->query_where )
 				? ' WHERE ' . $conditions_sql
 				: ' AND ' . $conditions_sql;
@@ -195,25 +166,19 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Add OR conditions to the query
+	 * Add OR conditions to the query.
 	 *
-	 * @param array $conditions Conditions to filter by
+	 * @param array $conditions Conditions to filter by.
 	 *
 	 * @return $this
 	 */
 	public function or_where( $conditions ) {
-		// If query results already set, return existing results
-		if ( $this->query_results !== null ) {
-			return $this;
-		}
-
 		$or_conditions = array();
 		foreach ( $conditions as $key => $val ) {
-			$or_conditions[] = "$key = %s";
+			$or_conditions[]      = "$key = %s";
 			$this->query_params[] = $val;
 		}
-
-		$conditions_sql = implode( " OR ", $or_conditions );
+		$conditions_sql    = implode( " OR ", $or_conditions );
 		$this->query_where .= empty( $this->query_where )
 			? ' WHERE ' . $conditions_sql
 			: ' OR ' . $conditions_sql;
@@ -222,7 +187,7 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Add date range filter for chaining
+	 * Add date range filter for chaining.
 	 *
 	 * @param string $start_date The start date for the range (YYYY-MM-DD HH:MM:SS).
 	 * @param string $end_date   The end date for the range (YYYY-MM-DD HH:MM:SS).
@@ -230,15 +195,9 @@ class Merchant_Analytics_DB_ORM {
 	 * @return $this
 	 */
 	public function where_between_dates( $start_date, $end_date ) {
-		// If query results already set, return existing results
-		if ( $this->query_results !== null ) {
-			return $this;
-		}
-
-		$this->query_where .= empty( $this->query_where )
+		$this->query_where    .= empty( $this->query_where )
 			? ' WHERE timestamp BETWEEN %s AND %s'
 			: ' AND timestamp BETWEEN %s AND %s';
-
 		$this->query_params[] = $start_date;
 		$this->query_params[] = $end_date;
 
@@ -275,7 +234,6 @@ class Merchant_Analytics_DB_ORM {
 
 		return $this;
 	}
-
 
 	/**
 	 * Add COUNT to query.
@@ -362,9 +320,9 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Add a group by clause to the query
+	 * Add a group by clause to the query.
 	 *
-	 * @param $column string The column to group by
+	 * @param string $column The column to group by.
 	 *
 	 * @return $this
 	 */
@@ -386,17 +344,11 @@ class Merchant_Analytics_DB_ORM {
 		if ( empty( $values ) ) {
 			return $this;
 		}
-
 		$column             = esc_sql( $column );
-		$placeholders       = array_fill( 0, count( $values ), '%s' );
-		$placeholder_string = implode( ',', $placeholders );
-
-		if ( empty( $this->query_where ) ) {
-			$this->query_where = ' WHERE ' . $column . ' NOT IN (' . $placeholder_string . ')';
-		} else {
-			$this->query_where .= ' AND ' . $column . ' NOT IN (' . $placeholder_string . ')';
-		}
-
+		$placeholders       = implode( ',', array_fill( 0, count( $values ), '%s' ) );
+		$this->query_where  .= empty( $this->query_where )
+			? ' WHERE ' . $column . ' NOT IN (' . $placeholders . ')'
+			: ' AND ' . $column . ' NOT IN (' . $placeholders . ')';
 		$this->query_params = array_merge( $this->query_params, $values );
 
 		return $this;
@@ -411,9 +363,8 @@ class Merchant_Analytics_DB_ORM {
 	 * @return $this
 	 */
 	public function order_by( $column, $direction = 'ASC' ) {
-		$column    = esc_sql( $column );
-		$direction = in_array( strtoupper( $direction ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $direction ) : 'ASC';
-
+		$column         = esc_sql( $column );
+		$direction      = in_array( strtoupper( $direction ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $direction ) : 'ASC';
 		$this->order_by = " ORDER BY {$column} {$direction}";
 
 		return $this;
@@ -436,7 +387,104 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Execute the query and get results
+	 * Add pagination to the query.
+	 *
+	 * @param int $page     The page number.
+	 * @param int $per_page The number of records per page.
+	 *
+	 * @return $this
+	 */
+	public function paginate( $page, $per_page = 10 ) {
+		$offset = ( $page - 1 ) * $per_page;
+		$this->limit( $per_page, $offset );
+
+		return $this;
+	}
+
+	/**
+	 * Add a JOIN clause to the query.
+	 *
+	 * @param string $table    The table to join.
+	 * @param string $first    The first column to join on.
+	 * @param string $operator The join operator.
+	 * @param string $second   The second column to join on.
+	 * @param string $type     The type of join (INNER, LEFT, RIGHT, etc.).
+	 *
+	 * @return $this
+	 */
+	public function join( $table, $first, $operator, $second, $type = 'INNER' ) {
+		$this->joins .= " $type JOIN $table ON $first $operator $second";
+
+		return $this;
+	}
+
+	/**
+	 * Eager load related data.
+	 *
+	 * @param string   $relation The relation to load.
+	 * @param callable $callback A callback to build the related query.
+	 *
+	 * @return $this
+	 */
+	public function with( $relation, callable $callback ) {
+		$this->eager_load[ $relation ] = $callback;
+
+		return $this;
+	}
+
+	/**
+	 * Execute a raw SQL query.
+	 *
+	 * @param string $sql    The SQL query.
+	 * @param array  $params The query parameters.
+	 *
+	 * @return array|null
+	 */
+	public function raw( $sql, $params = array() ) {
+		if ( ! empty( $params ) ) {
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$sql = $this->wpdb->prepare( $sql, $params );
+		}
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return $this->wpdb->get_results( $sql, ARRAY_A );
+	}
+
+	/**
+	 * Start a database transaction.
+	 *
+	 * @return $this
+	 */
+	public function begin_transaction() {
+		$this->wpdb->query( 'START TRANSACTION' );
+
+		return $this;
+	}
+
+	/**
+	 * Commit the current transaction.
+	 *
+	 * @return $this
+	 */
+	public function commit() {
+		$this->wpdb->query( 'COMMIT' );
+
+		return $this;
+	}
+
+	/**
+	 * Rollback the current transaction.
+	 *
+	 * @return $this
+	 */
+	public function rollback() {
+		$this->wpdb->query( 'ROLLBACK' );
+
+		return $this;
+	}
+
+	/**
+	 * Execute the query and get results.
 	 *
 	 * @return array|null An array of objects representing the matching records, or null if there are no results or an error occurs.
 	 */
@@ -449,7 +497,6 @@ class Merchant_Analytics_DB_ORM {
 
 		if ( ! empty( $this->aggregates ) ) {
 			$aggregate_parts = array();
-
 			foreach ( $this->aggregates as $agg ) {
 				$aggregate_parts[] = sprintf(
 					'%s(%s) as %s',
@@ -458,11 +505,10 @@ class Merchant_Analytics_DB_ORM {
 					esc_sql( $agg['alias'] )
 				);
 			}
-
 			$select = implode( ', ', $aggregate_parts );
 		}
 
-		$sql = "SELECT {$select} FROM {$this->table_name}" . $this->query_where . $this->order_by . $this->limit;
+		$sql = "SELECT {$select} FROM {$this->table_name}" . $this->joins . $this->query_where . $this->order_by . $this->limit;
 
 		if ( ! empty( $this->query_params ) ) {
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -470,16 +516,15 @@ class Merchant_Analytics_DB_ORM {
 		}
 
 		$this->sql_statement = $sql;
-
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$this->query_results = $this->wpdb->get_results( $sql, ARRAY_A );
+		$this->query_results  = $this->wpdb->get_results( $sql, ARRAY_A );
 		$this->query_executed = true;
 
 		return $this->query_results;
 	}
 
 	/**
-	 * Get the first result from the query
+	 * Get the first result from the query.
 	 *
 	 * @return array|null The first record object if found, null otherwise.
 	 */
@@ -490,14 +535,14 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Get the last result from the query
+	 * Get the last result from the query.
 	 *
 	 * @return array|null The last record object if found, null otherwise.
 	 */
 	public function last() {
 		$results = $this->get();
 
-		return ! empty( $results ) ? $results[count($results) - 1] : null;
+		return ! empty( $results ) ? $results[ count( $results ) - 1 ] : null;
 	}
 
 	/**
@@ -544,18 +589,18 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
-	 * Gets the data formats for the wpdb update/insert function based on data
+	 * Gets the data formats for the wpdb update/insert function based on data.
 	 *
-	 * @param array $data the data array to check
+	 * @param array $data The data array to check.
 	 *
-	 * @return array the formats array
+	 * @return array The formats array.
 	 */
 	private function get_data_formats( $data ) {
 		$format = array();
 		foreach ( $data as $key => $value ) {
-			if ( in_array( $key, array( 'source_product_id', 'related_event_id', 'order_id' ), true ) ) { //Strict comparison
+			if ( in_array( $key, array( 'source_product_id', 'related_event_id', 'order_id' ), true ) ) {
 				$format[] = '%d';
-			} elseif ( $key === 'campaign_cost' || $key === 'order_subtotal' ) { //Strict comparison
+			} elseif ( $key === 'campaign_cost' || $key === 'order_subtotal' || $key === 'order_total' ) {
 				$format[] = '%f';
 			} else {
 				$format[] = '%s';
@@ -565,4 +610,3 @@ class Merchant_Analytics_DB_ORM {
 		return $format;
 	}
 }
-
