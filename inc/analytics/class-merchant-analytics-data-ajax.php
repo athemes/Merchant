@@ -49,6 +49,7 @@ class Merchant_Analytics_Data_Ajax {
 	public function load_hooks() {
 		add_action( 'wp_ajax_merchant_get_revenue_chart_data', array( $this, 'get_revenue_chart_data' ) );
 		add_action( 'wp_ajax_merchant_get_avg_order_value_chart_data', array( $this, 'get_aov_chart_data' ) );
+		add_action( 'wp_ajax_merchant_get_analytics_cards_data', array( $this, 'get_analytics_cards_data' ) );
 		add_action( 'wp_ajax_merchant_get_impressions_chart_data', array( $this, 'get_impressions_chart_data' ) );
 	}
 
@@ -58,16 +59,19 @@ class Merchant_Analytics_Data_Ajax {
 	public function get_revenue_chart_data() {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
+		try {
+			// Get the date ranges.
+			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
 
-		// Get the date ranges.
-		$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
-		$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+			if ( $start_date === '' || $end_date === '' ) {
+				wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			}
 
-		if ( $start_date === '' || $end_date === '' ) {
-			wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			wp_send_json_success( $this->reports->get_revenue_chart_report( $start_date, $end_date ) );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
 		}
-
-		wp_send_json_success( $this->reports->get_revenue_chart_report( $start_date, $end_date ) );
 	}
 
 	/**
@@ -77,15 +81,19 @@ class Merchant_Analytics_Data_Ajax {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
 
-		// Get the date ranges.
-		$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
-		$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+		try {
+			// Get the date ranges.
+			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
 
-		if ( $start_date === '' || $end_date === '' ) {
-			wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			if ( $start_date === '' || $end_date === '' ) {
+				wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			}
+
+			wp_send_json_success( $this->reports->get_aov_chart_report( $start_date, $end_date ) );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
 		}
-
-		wp_send_json_success( $this->reports->get_aov_chart_report( $start_date, $end_date ) );
 	}
 
 	/**
@@ -94,16 +102,19 @@ class Merchant_Analytics_Data_Ajax {
 	public function get_impressions_chart_data() {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
+		try {
+			// Get the date ranges.
+			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
 
-		// Get the date ranges.
-		$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
-		$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+			if ( $start_date === '' || $end_date === '' ) {
+				wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			}
 
-		if ( $start_date === '' || $end_date === '' ) {
-			wp_send_json_error( __( 'Invalid date range.', 'merchant' ) );
+			wp_send_json_success( $this->reports->get_impressions_chart_report( $start_date, $end_date ) );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
 		}
-
-		wp_send_json_success( $this->reports->get_impressions_chart_report( $start_date, $end_date ) );
 	}
 }
 
