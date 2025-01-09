@@ -16,7 +16,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
         <div class="head-wrapper">
             <div class="title">
                 <span class="title-text"><?php
-	                esc_html_e( 'Overall Overview', 'merchant' ); ?></span>
+	                esc_html_e( 'Merchant Analytics Dashboard', 'merchant' ); ?></span>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
