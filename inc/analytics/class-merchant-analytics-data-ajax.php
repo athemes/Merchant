@@ -97,6 +97,43 @@ class Merchant_Analytics_Data_Ajax {
 	}
 
 	/**
+	 * Get analytics cards data.
+	 */
+	public function get_analytics_cards_data() {
+		// nonce verification.
+		check_ajax_referer( 'merchant', 'nonce' );
+
+		try {
+			$start_date         = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date           = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+			$compare_start_date = isset( $_GET['compare_start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_start_date'] ) ) : '';
+			$compare_end_date   = isset( $_GET['compare_end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_end_date'] ) ) : '';
+
+			if ( $start_date === '' || $end_date === '' || $compare_start_date === '' || $compare_end_date === '' ) {
+				wp_send_json_error( __( 'Invalid date ranges.', 'merchant' ) );
+			}
+			$start_range         = array(
+				'start' => $start_date,
+				'end'   => $end_date,
+			);
+			$compare_range       = array(
+				'start' => $compare_start_date,
+				'end'   => $compare_end_date,
+			);
+			$data                = array();
+			$data['revenue']     = $this->reports->get_reveue_card_report( $start_range, $compare_range );
+			$data['orders']      = $this->reports->get_total_new_orders_card_report( $start_range, $compare_range );
+			$data['aov']         = $this->reports->get_aov_card_report( $start_range, $compare_range );
+			$data['conversion']  = $this->reports->get_conversion_rate_card_report( $start_range, $compare_range );
+			$data['impressions'] = $this->reports->get_impressions_card_report( $start_range, $compare_range );
+
+			wp_send_json_success( $data );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
+		}
+	}
+
+	/**
 	 * Get impressions chart data.
 	 */
 	public function get_impressions_chart_data() {

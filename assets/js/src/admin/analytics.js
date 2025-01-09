@@ -370,13 +370,11 @@
 					$(loadingIndicatorSelector).addClass('show');
 				}
 
-				const response = await $.ajax({
+				return await $.ajax({
 					url: this.AJAX_URL,
 					method: 'GET',
 					data: data,
 				});
-
-				return response;
 			} catch (error) {
 				console.error('AJAX request failed:', error);
 				throw error;
@@ -392,14 +390,18 @@
 		 * @param {string} action - The action to perform.
 		 * @param {string} startDate - The start date for the data range.
 		 * @param {string} endDate - The end date for the data range.
+		 * @param {string} compareStartDate - The start date for the comparison range.
+		 * @param {string} compareEndDate - The end date for the comparison range.
 		 * @returns {Object} - The prepared data object.
 		 */
-		prepareAjaxData: function (action, startDate, endDate) {
+		prepareAjaxData: function (action, startDate, endDate, compareStartDate = '', compareEndDate = '') {
 			return {
 				action: action,
 				nonce: this.NONCE,
 				start_date: startDate,
 				end_date: endDate,
+				compare_start_date: compareStartDate,
+				compare_end_date: compareEndDate,
 			};
 		},
 
@@ -415,8 +417,9 @@
 					this.prepareAjaxData('merchant_get_impressions_chart_data', startDate, endDate),
 					'.impressions-chart-section .merchant-analytics-loading-spinner'
 				);
-				console.log('Impressions data:', response);
-				this.impressionsChart.updateSeries([{data: response.data}]);
+				if (response.success) {
+					this.impressionsChart.updateSeries([{data: response.data}]);
+				}
 			} catch (error) {
 				console.error('Error fetching impressions data:', error);
 			}
@@ -434,8 +437,9 @@
 					this.prepareAjaxData('merchant_get_revenue_chart_data', startDate, endDate),
 					'.revenue-chart-section .merchant-analytics-loading-spinner'
 				);
-				console.log('Revenue data:', response);
-				this.revenueChart.updateSeries([{data: response.data}]);
+				if (response.success) {
+					this.revenueChart.updateSeries([{data: response.data}]);
+				}
 			} catch (error) {
 				console.error('Error fetching revenue data:', error);
 			}
@@ -453,10 +457,105 @@
 					this.prepareAjaxData('merchant_get_avg_order_value_chart_data', startDate, endDate),
 					'.aov-chart-section .merchant-analytics-loading-spinner'
 				);
-				console.log('AOV data:', response);
-				this.avgOrderValChart.updateSeries([{data: response.data}]);
+				if (response.success) {
+					this.avgOrderValChart.updateSeries([{data: response.data}]);
+				}
 			} catch (error) {
 				console.error('Error fetching AOV data:', error);
+			}
+		},
+
+		/**
+		 * Updates the overview cards with new data.
+		 * @param {Object} dates - The selected date ranges.
+		 * @returns {Promise<void>}
+		 */
+		updateOverviewCards: async function (dates) {
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('merchant_get_analytics_cards_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
+				);
+				if (response.success) {
+					// Update the cards with the new data
+					this.updateCardsWithData(response.data);
+				}
+			} catch (error) {
+				console.error('Error fetching cards data:', error);
+			}
+		},
+
+		/**
+		 * Updates the overview cards with new data.
+		 * @param {Object} data - The data to update the cards with.
+		 */
+		updateCardsWithData: function (data) {
+			const container = $('.merchant-analytics-overview-section');
+			// Update Revenue Card
+			if (data.revenue) {
+				this.updateSingleCard(
+					container.find('.overview-card.revenue'),
+					data.revenue.revenue_second_period_currency, // Value
+					data.revenue.revenue_change[0], // Change percentage
+					data.revenue.revenue_change[1] // Change type (increase/decrease)
+				);
+			}
+
+			// Update Orders Card
+			if (data.orders) {
+				this.updateSingleCard(
+					container.find('.overview-card.total-orders'),
+					data.orders.orders_second_period, // Value
+					data.orders.orders_change[0], // Change percentage
+					data.orders.orders_change[1] // Change type (increase/decrease)
+				);
+			}
+
+			// Update AOV Card
+			if (data.aov) {
+				this.updateSingleCard(
+					container.find('.overview-card.aov'),
+					data.aov.aov_second_period_currency, // Value
+					data.aov.change[0], // Change percentage
+					data.aov.change[1] // Change type (increase/decrease)
+				);
+			}
+
+			// Update Conversion Rate Card
+			if (data.conversion) {
+				this.updateSingleCard(
+					container.find('.overview-card.conversion-rate'),
+					data.conversion.conversion_second_period_percentage, // Value
+					data.conversion.change[0], // Change percentage
+					data.conversion.change[1] // Change type (increase/decrease)
+				);
+			}
+
+			// Update Impressions Card
+			if (data.impressions) {
+				this.updateSingleCard(
+					container.find('.overview-card.impressions'),
+					data.impressions.impressions_second_period, // Value
+					data.impressions.change[0], // Change percentage
+					data.impressions.change[1] // Change type (increase/decrease)
+				);
+			}
+		},
+
+		/**
+		 * Updates a single card with new data.
+		 * @param {jQuery} card - The card element to update.
+		 * @param {string} value - The new value to display.
+		 * @param {string} change - The change percentage to display.
+		 * @param {string} change_type - The type of change (increase/decrease).
+		 * @returns {void}
+		 */
+		updateSingleCard: function (card, value, change, change_type) {
+			if (value) {
+				card.find('.card-value').html(value);
+			}
+			if (change_type && change) {
+				card.find('.card-change').removeClass('increase decrease').addClass(change_type).html(change);
 			}
 		},
 
@@ -494,6 +593,35 @@
 						}
 					}
 				});
+			});
+		},
+
+		/**
+		 * Initializes the overview cards.
+		 */
+		initOverviewCards: function () {
+			let container = $('.merchant-analytics-overview-section');
+
+			// Initialize the date picker
+			this.datePickerInit(container, {
+				onSelectHandler: () => {
+					// Get both date range inputs
+					const firstInput = container.find('.first-date-range .date-range-input');
+					const secondInput = container.find('.second-date-range .date-range-input');
+
+					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
+					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+
+					// Ensure both date ranges have exactly two dates
+					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
+						this.updateOverviewCards({
+							startDate: firstDateRange[0],
+							endDate: firstDateRange[1],
+							compareStartDate: secondDateRange[0],
+							compareEndDate: secondDateRange[1]
+						});
+					}
+				}
 			});
 		},
 
@@ -564,6 +692,7 @@
 
 	// Initialize charts when the document is ready
 	$(document).ready(function () {
+		merchantAnalyticsChart.initOverviewCards();
 		merchantAnalyticsChart.revenueChartRender();
 		merchantAnalyticsChart.avgOrderValChartRender();
 		merchantAnalyticsChart.impressionsChartRender();
