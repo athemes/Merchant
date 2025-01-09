@@ -480,7 +480,7 @@
 					maxDate: new Date(),
 					locale: JSON.parse(merchant_datepicker_locale),
 					range: true,
-					position: 'left top',
+					position: 'bottom right',
 					timepicker: true,
 					timeFormat: 'HH:mm:59',
 					dateFormat: 'yyyy-MM-dd',
