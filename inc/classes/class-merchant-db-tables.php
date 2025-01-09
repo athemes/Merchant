@@ -65,6 +65,7 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 			            campaign_cost DECIMAL(12, 4) DEFAULT NULL,
 			            order_id BIGINT UNSIGNED DEFAULT NULL,
 			            order_subtotal DECIMAL(12, 4) DEFAULT NULL,
+			            order_total DECIMAL(12, 4) DEFAULT NULL,
 			            meta_data LONGTEXT DEFAULT NULL,
 			            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 			            PRIMARY KEY (id),
