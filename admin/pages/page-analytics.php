@@ -90,7 +90,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
             <div class="card-title"><?php
 				esc_html_e( 'Impressions', 'merchant' ); ?></div>
             <div class="card-value"><?php
-				echo esc_html( wc_format_decimal( $impressions['impressions_second_period'], 2 ) ) ?>
+				echo esc_html( $impressions['impressions_second_period'] ) ?>
             </div>
             <div class="card-change <?php
 			echo esc_attr( $impressions['change'][1] ) ?>"><?php
