@@ -2469,7 +2469,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 <div class="merchant-flexible-content <?php echo esc_attr( $empty ); ?> sortable">
 					<?php
 					foreach ( $values as $option_key => $option ) : ?>
-                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>">
+                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>" data-layout-id="<?php echo ! empty( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : ''
+                        ?>">
                             <div class="layout__inner">
                                 <?php if ( $has_sorting ) : ?>
                                     <span class="customize-control-flexible-content-move">
