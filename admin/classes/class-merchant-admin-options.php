@@ -408,6 +408,21 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
 							} elseif ( 'textarea_multiline' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
+							} elseif ( 'flexible_content' === $field['type'] ) {
+								// Handle flexible_content field
+								$value = $_POST['merchant'][ $field['id'] ]; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                                // skip the sanitization for the flexible_content field, we will sanitize each item
+								if ( is_array( $value ) ) {
+									foreach ( $value as &$item ) {
+										$item = map_deep( $item, 'sanitize_text_field' );
+										// Ensure each item has a flexible_id
+										if ( ! isset( $item['flexible_id'] ) || empty( $item['flexible_id'] ) ) {
+                                            // If there are any JavaScript errors, this will ensure that the flexible_id is generated
+											$item['flexible_id'] = wp_generate_uuid4(); // Generate a UUID if flexible_id is missing
+										}
+									}
+                                    unset( $item );
+								}
 							} elseif ( 'reviews_selector' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
 								$value = explode( ',', $value );
