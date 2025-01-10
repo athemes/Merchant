@@ -2551,7 +2551,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 	                                echo esc_attr( $settings['id'] ) ?>][0][flexible_id]" value="<?php
                                     echo isset( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : '' ?>">
                                 </div>
-                                <?php self::print_flexible_layout_actions( $settings, $layout_type ); ?>
+                                <?php self::print_flexible_layout_actions( $settings, $option['layout'] ); ?>
                             </div>
                         </div>
 					<?php
