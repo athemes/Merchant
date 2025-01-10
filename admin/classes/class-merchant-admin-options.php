@@ -2423,8 +2423,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		/**
 		 * Field: Flexible Content.
 		 *
-		 * @param array $settings
-		 * @param mixed $value
+		 * @param $settings   array field settings.
+		 * @param $value      array field value.
+		 * @param $module_id  string module id.
 		 *
 		 * @return void
 		 */
