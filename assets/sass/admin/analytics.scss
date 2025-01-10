@@ -464,3 +464,228 @@
 		background-color: #fff;
 	}
 }
+
+.merchant-analytics-section.campaigns-table {
+	.overview-head {
+		.head-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap; /* Allow wrapping on smaller screens */
+			gap: 15px; /* Increased gap for better spacing */
+			padding: 20px; /* Increased padding for better spacing */
+			border-bottom: 1px solid #E9E9E9;
+
+			.title {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap; /* Allow wrapping on smaller screens */
+				gap: 15px; /* Increased gap between title and percentage */
+
+				.title-text {
+					font-size: 20px; /* Increased font size */
+					font-weight: 500;
+					margin-right: 20px; /* Increased margin */
+					vertical-align: middle;
+
+					@media (max-width: 768px) {
+						font-size: 18px; /* Slightly reduced font size on smaller screens */
+						display: block;
+						text-align: center;
+						margin-right: 0; /* Removed margin */
+					}
+				}
+
+				.percentage {
+					vertical-align: middle;
+					font-size: 16px; /* Increased font size */
+					color: #335EEA;
+					border: 1px solid #F0F0F1;
+					border-radius: 4px;
+					padding: 5px 8px; /* Increased padding */
+
+					&:before {
+						content: '+';
+					}
+
+					&:after {
+						content: '%';
+					}
+
+					&.negative {
+						color: #E36131;
+
+						&:before {
+							content: '-';
+						}
+					}
+
+					@media (max-width: 768px) {
+						font-size: 14px; /* Slightly reduced font size on smaller screens */
+						padding: 4px 6px; /* Adjusted padding */
+					}
+				}
+
+				@media (max-width: 768px) {
+					display: block;
+					width: 100%;
+				}
+			}
+
+			.date-range {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap; /* Allow wrapping on smaller screens */
+				gap: 15px; /* Increased gap between elements */
+
+				@media (max-width: 768px) {
+					flex-direction: column; /* Stack inputs vertically on mobile */
+					width: 100%; /* Make date range full width on mobile */
+					gap: 10px; /* Increased gap between stacked elements */
+				}
+
+				.compare-text {
+					color: #335EEA;
+					font-size: 12px; /* Increased font size */
+					margin: 0 15px; /* Increased margin */
+
+					@media (max-width: 768px) {
+						margin: 0 10px; /* Adjusted margin */
+					}
+				}
+
+				input {
+					border: 1px solid #F0F0F1;
+					border-radius: 4px;
+					padding: 8px; /* Increased padding for better touch interaction */
+					font-size: 14px; /* Increased font size */
+					background-color: #fff;
+
+					@media (max-width: 768px) {
+						padding: 6px; /* Adjusted padding */
+						width: 100%; /* Make inputs full width on mobile */
+					}
+				}
+			}
+
+			@media (max-width: 768px) {
+				flex-direction: column; /* Stack items vertically on smaller screens */
+				align-items: flex-start; /* Align items to the start */
+				gap: 20px; /* Increased gap for better spacing */
+			}
+		}
+	}
+
+	.campaigns-table-wrapper {
+		overflow-x: auto; /* Enable horizontal scrolling on mobile */
+		border-radius: 8px; /* Adjust the radius as needed */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visual effect */
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			border-radius: 8px; /* Apply border radius to the table */
+			overflow: hidden; /* Ensures the border radius is applied correctly */
+
+			th, td {
+				padding: 14px 20px;
+				text-align: left;
+				border-bottom: 1px solid #ddd;
+
+				@media (max-width: 768px) {
+					padding: 10px; /* Reduce padding on smaller screens */
+					font-size: 14px; /* Reduce font size for better readability */
+				}
+			}
+
+			/* Make the first column wider */
+			th:first-child,
+			td:first-child {
+				width: 30%; /* Adjust this value as needed */
+				min-width: 150px; /* Ensure it doesn't get too small on mobile */
+
+				@media (max-width: 768px) {
+					width: 40%; /* Increase width on mobile for better readability */
+					min-width: 120px; /* Adjust min-width for mobile */
+				}
+			}
+
+			th {
+				background-color: #fff; /* White background for table head */
+				font-weight: bold; /* Bold font weight for table head */
+				cursor: pointer;
+				position: relative;
+				user-select: none; /* Disable text selection */
+				-webkit-user-select: none; /* Safari */
+				-moz-user-select: none; /* Firefox */
+				-ms-user-select: none; /* IE/Edge */
+
+				&.asc::after {
+					content: ' ▲';
+					font-size: 12px;
+					color: #000;
+				}
+
+				&.desc::after {
+					content: ' ▼';
+					font-size: 12px;
+					color: #000;
+				}
+			}
+
+			/* Alternating row colors */
+			tr:nth-child(odd) {
+				background-color: #F8F8FA; /* Light gray for even rows */
+			}
+
+			tr:nth-child(even) {
+				background-color: #fff; /* White for odd rows */
+			}
+
+			tr:hover {
+				background-color: #f5f5f5; /* Hover effect for rows */
+			}
+
+			/* Optional: Add border radius to the first and last rows */
+			tr:first-child th:first-child {
+				border-top-left-radius: 8px;
+			}
+
+			tr:first-child th:last-child {
+				border-top-right-radius: 8px;
+			}
+
+			tr:last-child td:first-child {
+				border-bottom-left-radius: 8px;
+			}
+
+			tr:last-child td:last-child {
+				border-bottom-right-radius: 8px;
+			}
+
+			td.increase {
+				color: #00BD8A;
+
+				&:before {
+					content: '+ ';
+				}
+
+				&:after {
+					content: '%';
+				}
+			}
+
+			td.decrease {
+				color: #E36131;
+
+				&:before {
+					content: '- ';
+				}
+
+				&:after {
+					content: '%';
+				}
+			}
+		}
+	}
+}

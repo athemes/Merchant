@@ -164,3 +164,72 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
 	?>"></div>
 </div>
+<div class="merchant-analytics-section campaigns-table">
+    <div class="overview-head">
+        <div class="head-wrapper">
+            <div class="title">
+                <span class="title-text"><?php
+	                esc_html_e( 'Top performing campaigns', 'merchant' ); ?></span>
+            </div>
+            <div class="date-range">
+                <span class="merchant-analytics-loading-spinner"></span>
+                <span class="first-date-range">
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
+                    esc_attr_e( 'Date range', 'merchant' ); ?>">
+                </span>
+                <span class="compare-text">
+                    Comparing to
+                </span>
+                <span class="second-date-range">
+                    <input type="text" class="date-range-input" readonly value="<?php
+                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    esc_attr_e( 'Date range', 'merchant' ); ?>">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="campaigns-table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th class="module" data-sort="string"><?php esc_html_e('Modules', 'merchant'); ?></th>
+                <th class="impressions" data-sort="int"><?php esc_html_e('Impressions', 'merchant'); ?></th>
+                <th class="clicks" data-sort="int"><?php esc_html_e('Clicks', 'merchant'); ?></th>
+                <th class="ctr" data-sort="float"><?php esc_html_e('CTR', 'merchant'); ?></th>
+                <th class="orders" data-sort="int"><?php esc_html_e('Orders', 'merchant'); ?></th>
+                <th class="revenue" data-sort="float"><?php esc_html_e('Revenue', 'merchant'); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>FBT:Campaign1</td>
+                <td>9000</td>
+                <td>7203</td>
+                <td class="increase">12.2</td>
+                <td>1567</td>
+                <td><?php
+					echo wc_price( '97.45' ) ?></td>
+            </tr>
+            <tr>
+                <td>FBT:Campaign2</td>
+                <td>7000</td>
+                <td>600</td>
+                <td class="decrease">52.2</td>
+                <td>3567</td>
+                <td><?php
+					echo wc_price( '87.45' ) ?></td>
+            </tr>
+            <tr>
+                <td>FBT:Campaign3</td>
+                <td>9800</td>
+                <td>2303</td>
+                <td class="increase">22.5</td>
+                <td>567</td>
+                <td><?php
+					echo wc_price( '22.35' ) ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

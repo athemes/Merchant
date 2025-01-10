@@ -687,6 +687,61 @@
 				(data) => this.updateImpressionsChart(data),
 				'.impressions-chart-section .merchant-analytics-loading-spinner'
 			);
+		},
+
+		initSortableTable: function (tableId) {
+			this.table = $(`${tableId}`);
+			if (this.table.length) {
+				this.setupSortableTableEventListeners();
+			}
+		},
+
+		setupSortableTableEventListeners: function () {
+			this.table.find('th').on('click', (event) => {
+				this.sortableTable($(event.currentTarget));
+			});
+		},
+
+		sortableTable: function (header) {
+			const column = header.index();
+			const type = header.data('sort');
+			const currentOrder = header.hasClass('asc') ? 'desc' : 'asc';
+
+			// Remove previous sorting classes
+			this.table.find('th').removeClass('asc desc');
+
+			// Add class to indicate current sorting order
+			header.addClass(currentOrder);
+
+			const tbody = this.table.find('tbody');
+			const rows = tbody.find('tr').toArray();
+
+			rows.sort((a, b) => {
+				const keyA = $(a).find('td').eq(column).text();
+				const keyB = $(b).find('td').eq(column).text();
+
+				let valueA, valueB;
+
+				if (type === 'int') {
+					valueA = parseInt(keyA.replace(/[^0-9]/g, ''), 10);
+					valueB = parseInt(keyB.replace(/[^0-9]/g, ''), 10);
+				} else if (type === 'float') {
+					valueA = parseFloat(keyA.replace(/[^0-9.]/g, ''));
+					valueB = parseFloat(keyB.replace(/[^0-9.]/g, ''));
+				} else {
+					valueA = keyA;
+					valueB = keyB;
+				}
+
+				if (currentOrder === 'asc') {
+					return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+				} else {
+					return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+				}
+			});
+
+			// Append sorted rows back to the tbody
+			tbody.append(rows);
 		}
 	};
 
@@ -696,5 +751,6 @@
 		merchantAnalyticsChart.revenueChartRender();
 		merchantAnalyticsChart.avgOrderValChartRender();
 		merchantAnalyticsChart.impressionsChartRender();
+		merchantAnalyticsChart.initSortableTable('.campaigns-table-wrapper');
 	});
 })(jQuery);
