@@ -2304,6 +2304,123 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
         }
 
 		/**
+		 * Supply the cloneable flexible content layouts.
+		 *
+		 * @param $settings      array field settings.
+		 * @param $value         array field value.
+		 * @param $has_sorting   boolean has sorting.
+		 * @param $has_accordion boolean has accordion.
+		 * @param $module_id     string module id.
+		 *
+		 * @return void
+		 */
+		private static function flexible_content_layouts_copy( $settings, $value, $has_sorting, $has_accordion, $module_id = '' ) {
+			?>
+            <div class="layouts" data-id="<?php
+			echo esc_attr( $settings['id'] ) ?>">
+				<?php
+				foreach ( $settings['layouts'] as $layout_type => $layout ) : ?>
+                    <div class="layout" data-type="<?php
+					echo esc_attr( $layout_type ) ?>">
+                        <div class="layout__inner">
+							<?php
+							if ( $has_sorting ) : ?>
+                                <span class="customize-control-flexible-content-move">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="14" viewBox="0 0 10 14" fill="none">
+                                        <path d="M1.75 0.5C1.19772 0.5 0.75 0.947715 0.75 1.5V2.5C0.75 3.05228 1.19772 3.5 1.75 3.5H2.75C3.30228 3.5 3.75 3.05228 3.75 2.5V1.5C3.75 0.947715 3.30228 0.5 2.75 0.5H1.75Z"
+                                              fill="#4A4A4A"/>
+                                        <path d="M1.75 5.5C1.19772 5.5 0.75 5.94772 0.75 6.5V7.5C0.75 8.05228 1.19772 8.5 1.75 8.5H2.75C3.30228 8.5 3.75 8.05228 3.75 7.5V6.5C3.75 5.94772 3.30228 5.5 2.75 5.5H1.75Z"
+                                              fill="#4A4A4A"/>
+                                        <path d="M0.75 11.5C0.75 10.9477 1.19772 10.5 1.75 10.5H2.75C3.30228 10.5 3.75 10.9477 3.75 11.5V12.5C3.75 13.0523 3.30228 13.5 2.75 13.5H1.75C1.19772 13.5 0.75 13.0523 0.75 12.5V11.5Z"
+                                              fill="#4A4A4A"/>
+                                        <path d="M7.25 0.5C6.69772 0.5 6.25 0.947715 6.25 1.5V2.5C6.25 3.05228 6.69772 3.5 7.25 3.5H8.25C8.80228 3.5 9.25 3.05228 9.25 2.5V1.5C9.25 0.947715 8.80228 0.5 8.25 0.5H7.25Z"
+                                              fill="#4A4A4A"/>
+                                        <path d="M6.25 6.5C6.25 5.94772 6.69772 5.5 7.25 5.5H8.25C8.80228 5.5 9.25 5.94772 9.25 6.5V7.5C9.25 8.05228 8.80228 8.5 8.25 8.5H7.25C6.69772 8.5 6.25 8.05228 6.25 7.5V6.5Z"
+                                              fill="#4A4A4A"/>
+                                        <path d="M7.25 10.5C6.69772 10.5 6.25 10.9477 6.25 11.5V12.5C6.25 13.0523 6.69772 13.5 7.25 13.5H8.25C8.80228 13.5 9.25 13.0523 9.25 12.5V11.5C9.25 10.9477 8.80228 10.5 8.25 10.5H7.25Z"
+                                              fill="#4A4A4A"/>
+                                        </svg>
+                                    </span>
+							<?php
+							endif; ?>
+                            <div class="layout-header">
+                                <div class="layout-count">1</div>
+                                <div class="layout-title"<?php
+								if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
+									echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+								} ?>>
+									<?php
+									echo esc_html( $layout['title'] ) ?>
+                                </div>
+                                <div class="layout-toggle">
+									<?php
+									if ( $has_accordion ) : ?>
+                                        <span class="customize-control-flexible-content-accordion">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M0.71967 0.732854C1.01256 0.43996 1.48744 0.43996 1.78033 0.732854L5.25 4.20252L8.71967 0.732854C9.01256 0.43996 9.48744 0.43996 9.78033 0.732854C10.0732 1.02575 10.0732 1.50062 9.78033 1.79351L5.78033 5.79351C5.48744 6.08641 5.01256 6.08641 4.71967 5.79351L0.71967 1.79351C0.426777 1.50062 0.426777 1.02575 0.71967 0.732854Z"
+                                                          fill="#4A4A4A"/>
+                                                </svg>
+                                            </span>
+									<?php
+									endif; ?>
+                                </div>
+                            </div>
+                            <div class="layout-body">
+								<?php
+								foreach ( $layout['fields'] as $sub_field ) :
+									$classes = array( 'layout-field' );
+
+									if ( isset( $sub_field['classes'] ) ) {
+										$classes = array_merge( $classes, $sub_field['classes'] );
+									} ?>
+                                    <div class="<?php
+									echo esc_attr( implode( ' ', $classes ) ); ?>">
+										<?php
+										if ( 'fields_group' === $sub_field['type'] ) {
+											static::fields_group( $sub_field, $value, $module_id, true, array(
+												'id'         => $settings['id'],
+												'option_key' => 0,
+												'value'      => $value,
+											) );
+										} else {
+											static::replace_field(
+												$sub_field,
+												$sub_field['default'] ?? '',
+												array(
+													"name=\"merchant[{$sub_field['id']}]",
+													'merchant-module-page-setting-field-upload',
+													'merchant-module-page-setting-field-select_ajax',
+												),
+												array(
+													"data-name=\"merchant[{$settings['id']}][0][{$sub_field['id']}]",
+													'merchant-module-page-setting-field-upload template',
+													'merchant-module-page-setting-field-select_ajax template',
+												),
+												$module_id
+											);
+										}
+										?>
+                                    </div>
+								<?php
+								endforeach; ?>
+                                <input type="hidden" data-name="merchant[<?php
+								echo esc_attr( $settings['id'] ) ?>][0][layout]" value="<?php
+								echo esc_attr( $layout_type ) ?>">
+                                <input type="hidden" class="flexible-id" data-name="merchant[<?php
+								echo esc_attr( $settings['id'] ) ?>][0][flexible_id]" value="">
+                            </div>
+							<?php
+							self::print_flexible_layout_actions( $settings, $layout_type ); ?>
+                        </div>
+                    </div>
+				<?php
+				endforeach; ?>
+            </div>
+			<?php
+		}
+
+		/**
 		 * Field: Flexible Content.
 		 *
 		 * @param array $settings
