@@ -1016,12 +1016,13 @@
                     event.preventDefault();
                     event.stopImmediatePropagation();
 
-                    var $field = $('.merchant-flexible-content-control[data-id=' + $(this).data('id') + ']')
-                    var $layouts = $field.find('.layouts');
-                    var $selected = $(this).data('layout');
-                    var $layout = $layouts.find('.layout[data-type=' + $selected + ']').clone(true);
-                    var $content = $field.find('.merchant-flexible-content');
-                    var $items = $content.find('.layout')
+                    let $field = $('.merchant-flexible-content-control[data-id=' + $(this).data('id') + ']')
+                    let $layouts = $field.find('.layouts');
+                    let $selected = $(this).data('layout');
+                    let $layout = $layouts.find('.layout[data-type=' + $selected + ']').clone(true);
+                    let $content = $field.find('.merchant-flexible-content');
+                    let $items = $content.find('.layout')
+                    let uuid = self.generateUUID();
 
                     $layout.find('input, select, textarea').each(function () {
                         if ($(this).data('name')) {
@@ -1032,8 +1033,9 @@
                             $(this).prop('checked', true);
                         }
                     })
+                    $layout.attr('data-layout-id', uuid)
                     $layout.find('.layout-count').text($items.length + 1)
-                    $layout.find('.flexible-id').val(self.generateUUID());
+                    $layout.find('.flexible-id').val(uuid);
                     $content.append($layout);
                     $content.removeClass('empty')
 
