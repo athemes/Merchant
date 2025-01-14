@@ -126,6 +126,14 @@ class Merchant_Analytics_DB_ORM {
 	 *
 	 * @return $this
 	 */
+	/**
+	 * Add a where clause with multiple conditions.
+	 *
+	 * @param array|string $conditions Conditions to filter by.
+	 * @param mixed        $value      Value for simple key-value condition.
+	 *
+	 * @return $this
+	 */
 	public function where( $conditions, $value = null ) {
 		if ( is_string( $conditions ) && $value !== null ) {
 			$this->query_where    .= empty( $this->query_where )
@@ -141,15 +149,19 @@ class Merchant_Analytics_DB_ORM {
 						$and_conditions[]     = "$column $operator %s";
 						$this->query_params[] = $comparison;
 					} elseif ( isset( $val['in'] ) ) {
-						$in_values          = $val['in'];
-						$placeholders       = implode( ',', array_fill( 0, count( $in_values ), '%s' ) );
-						$and_conditions[]   = "$key IN ($placeholders)";
-						$this->query_params = array_merge( $this->query_params, $in_values );
+						$in_values        = $val['in'];
+						$placeholders     = implode( ',', array_fill( 0, count( $in_values ), '%s' ) );
+						$and_conditions[] = "$key IN ($placeholders)";
+						foreach ( $in_values as $in_value ) {
+							$this->query_params[] = $in_value;
+						}
 					} elseif ( isset( $val['not_in'] ) ) {
-						$not_in_values      = $val['not_in'];
-						$placeholders       = implode( ',', array_fill( 0, count( $not_in_values ), '%s' ) );
-						$and_conditions[]   = "$key NOT IN ($placeholders)";
-						$this->query_params = array_merge( $this->query_params, $not_in_values );
+						$not_in_values    = $val['not_in'];
+						$placeholders     = implode( ',', array_fill( 0, count( $not_in_values ), '%s' ) );
+						$and_conditions[] = "$key NOT IN ($placeholders)";
+						foreach ( $not_in_values as $not_in_value ) {
+							$this->query_params[] = $not_in_value;
+						}
 					}
 				} else {
 					$and_conditions[]     = "$key = %s";
