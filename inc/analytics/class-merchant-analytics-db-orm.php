@@ -269,12 +269,15 @@ class Merchant_Analytics_DB_ORM {
 	/**
 	 * Prepares DISTINCT query.
 	 *
-	 * @param string $column Column to get distinct values.
+	 * @param string|array $columns Columns to get distinct values.
 	 *
 	 * @return $this
 	 */
-	public function distinct( $column ) {
-		$this->select = "DISTINCT {$column}";
+	public function distinct( $columns ) {
+		if ( is_array( $columns ) ) {
+			$columns = implode( ', ', $columns );
+		}
+		$this->select = "DISTINCT {$columns}";
 
 		return $this;
 	}
