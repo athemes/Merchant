@@ -555,7 +555,7 @@
 				card.find('.card-value').html(value);
 			}
 			if (change_type && change) {
-				card.find('.card-change').removeClass('increase decrease').addClass(change_type).html(change);
+				card.find('.card-change').removeClass('increase decrease').addClass(change_type).html(change + '%');
 			}
 		},
 
