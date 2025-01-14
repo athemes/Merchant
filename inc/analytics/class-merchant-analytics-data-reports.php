@@ -246,7 +246,7 @@ class Merchant_Analytics_Data_Reports {
 		 */
 		$limit = apply_filters( 'merchant_analytics_max_orders_limit_revenue', - 1 );
 
-		$orders = $this->data_provider->get_dated_orders( $limit );
+		$orders = $this->data_provider->get_dated_orders_with_revenue( $limit );
 
 		// Sort orders by timestamp (ascending order)
 		$sorted_orders = $this->sort_orders_by_timestamp( $orders );
@@ -281,7 +281,7 @@ class Merchant_Analytics_Data_Reports {
 		 */
 		$limit = apply_filters( 'merchant_analytics_max_orders_limit_aov', - 1 );
 
-		$orders = $this->data_provider->get_dated_orders( $limit );
+		$orders = $this->data_provider->get_dated_orders_with_revenue( $limit );
 
 		// Sort orders by timestamp (ascending order)
 		$sorted_orders = $this->sort_orders_by_timestamp( $orders );
@@ -427,12 +427,13 @@ class Merchant_Analytics_Data_Reports {
 			$current_group = $this->get_orders_in_interval( $orders, $current_group_start, $interval_end );
 
 			// Calculate total revenue and orders count for the group
-			$total_revenue = array_sum( array_column( $current_group, 'order_subtotal' ) );
-			$orders_count  = count( $current_group );
+			$total_revenue  = array_sum( array_column( $current_group, 'revenue' ) );
+			$order_subtotal = array_sum( array_column( $current_group, 'order_subtotal' ) );
+			$orders_count   = count( $current_group );
 
 			// Calculate the desired metric
 			if ( $metric === 'aov' ) {
-				$value = $orders_count > 0 ? $total_revenue / $orders_count : 0; // AOV
+				$value = $orders_count > 0 ? $order_subtotal / $orders_count : 0; // AOV
 			} else {
 				$value = $total_revenue; // Total revenue
 			}

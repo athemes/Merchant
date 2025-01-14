@@ -103,12 +103,34 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The total revenue.
 	 */
 	public function get_revenue() {
-		$orders_data = $this->get_dated_orders( - 1 );
+		$orders_data = $this->get_dated_orders_with_revenue( - 1 );
 		if ( ! empty( $orders_data ) ) {
-			return array_sum( array_column( $orders_data, 'order_subtotal' ) );
+			return array_sum( array_column( $orders_data, 'revenue' ) );
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Get orders records with in date range.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return array|null
+	 */
+	public function get_orders_in_period( $limit = 10000 ) {
+		$db_orders_records = $this->analytics
+			->select()
+			->where( 'order_id > %d', 0 )
+			->where( 'event_type = %s', 'order' )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->limit( $limit )
+			->get();
+
+		// Reset the query to avoid conflicts
+		$this->analytics->reset_query();
+
+		return $db_orders_records;
 	}
 
 	/**
@@ -118,36 +140,52 @@ class Merchant_Analytics_Data_Provider {
 	 *
 	 * @return array The dated revenue.
 	 */
-	public function get_dated_orders( $limit = 10000 ) {
-		$orders = $this->analytics
-			->select( array( 'timestamp, order_subtotal', 'order_id' ) )
-			->where( 'order_id > %d', 0 )
-			->where( 'event_type = %s', 'order' )
-			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->limit( $limit )
-			->order_by( 'timestamp', 'ASC' )
-			->get();
+	public function get_dated_orders_with_revenue( $limit = 10000 ) {
+		$db_orders_records = $this->get_orders_in_period( $limit );
 
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+		// Group campaigns by order_id and source_product_id
+		$grouped_orders = array();
+		foreach ( $db_orders_records as $order ) {
+			$order_id      = $order['order_id'];
+			$product_id    = $order['source_product_id'];
+			$campaign_cost = (float) $order['campaign_cost'];
 
-		if ( ! empty( $orders ) ) {
-			// Use array_column to get the order_ids
-			$orderIds         = array_column( $orders, 'order_id' );
-			$unique_order_ids = array_unique( $orderIds );
-			$unique_orders    = array();
-			foreach ( $orders as $order ) {
-				if ( in_array( $order['order_id'], $unique_order_ids, true ) ) {
-					$unique_orders[] = $order;
-					// Remove the order_id from the uniqueOrderIds array to prevent duplicates
-					$key = array_search( $order['order_id'], $unique_order_ids, true );
-					unset( $unique_order_ids[ $key ] );
-				}
+			// Initialize the order if it doesn't exist
+			if ( ! isset( $grouped_orders[ $order_id ] ) ) {
+				$grouped_orders[ $order_id ] = array(
+					'order_id'       => $order_id,
+					'order_subtotal' => (float) $order['order_subtotal'],
+					'order_total'    => (float) $order['order_total'],
+					'customer_id'    => $order['customer_id'],
+					'timestamp'      => $order['timestamp'],
+					'products'       => array(),
+					'revenue'        => 0,
+				);
 			}
 
-			return $unique_orders;
+			// Update the product with the biggest campaign cost
+			if (
+				! isset( $grouped_orders[ $order_id ]['products'][ $product_id ] )
+				|| $campaign_cost > $grouped_orders[ $order_id ]['products'][ $product_id ]
+			) {
+				$grouped_orders[ $order_id ]['products'][ $product_id ] = $campaign_cost;
+			}
 		}
 
-		return array();
+		// Calculate revenue for each order
+		foreach ( $grouped_orders as &$order ) {
+			$order['revenue']  = array_sum( $order['products'] );
+			$order['products'] = array_map( static function ( $product_id, $campaign_cost ) {
+				return array(
+					'product_id'    => $product_id,
+					'campaign_cost' => $campaign_cost,
+				);
+			}, array_keys( $order['products'] ), $order['products'] );
+		}
+		unset( $order );
+
+		// Return the grouped orders as an array
+		return array_values( $grouped_orders );
 	}
 
 	/**
@@ -178,7 +216,7 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The average order value.
 	 */
 	public function get_average_order_value() {
-		$orders_data = $this->get_dated_orders( - 1 );
+		$orders_data = $this->get_dated_orders_with_revenue( - 1 );
 		if ( ! empty( $orders_data ) ) {
 			$order_subtotals = array_column( $orders_data, 'order_subtotal' );
 			$orders_count    = count( $order_subtotals );
@@ -196,7 +234,7 @@ class Merchant_Analytics_Data_Provider {
 	 * @return int The total number of orders.
 	 */
 	public function get_orders_count() {
-		$orders_data = $this->get_dated_orders( - 1 );
+		$orders_data = $this->get_dated_orders_with_revenue( - 1 );
 		if ( ! empty( $orders_data ) ) {
 			return count( $orders_data );
 		}
