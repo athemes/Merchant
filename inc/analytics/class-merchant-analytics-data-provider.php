@@ -451,15 +451,16 @@ class Merchant_Analytics_Data_Provider {
 	 *
 	 * @return array The top performing campaigns.
 	 */
-	public function get_top_performing_campaigns() {
+	public function get_top_performing_campaigns( $limit = 10 ) {
 		$top_performing_campaigns = $this->analytics
-			->select( 'module_id, campaign_id, count(order_id) as orders_count' )
+			->select( array( '*', 'COUNT(id) as orders_count' ) )
 			->where( 'event_type = %s', 'order' )
+			->where( 'campaign_id != %s', '' )
 			->where( 'campaign_id != %s', '0' )
-			->group_by( 'campaign_id' )
-			->order_by( 'orders_count', 'DESC' )
-			->limit( 10 )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->order_by( 'orders_count', 'DESC' )
+			->group_by( 'campaign_id' )
+			->limit( $limit )
 			->get();
 
 		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
