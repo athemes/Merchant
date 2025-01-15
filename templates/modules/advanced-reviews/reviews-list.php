@@ -51,7 +51,7 @@ $_comments = $args['comments'] ?? array();
                             </div>
 
                             <div class="mrc-col-3 merchant-review-date-wrapper">
-                                <time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $comment ) ); ?>"><?php echo esc_html( get_comment_date( 'F j, Y', $comment ) ); ?></time>
+                                <time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $comment ) ); ?>"><?php echo esc_html( get_comment_date( get_option( 'date_format', 'F j, Y' ), $comment ) ); ?></time>
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@ $_comments = $args['comments'] ?? array();
 									</div>
 
 									<div class="mrc-col-3 merchant-review-date-wrapper">
-										<time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $child_comment ) ); ?>"><?php echo esc_html( get_comment_date( 'F j, Y', $child_comment ) ); ?></time>
+										<time class="merchant-review-date" datetime="<?php echo esc_attr( get_comment_date( 'c', $child_comment ) ); ?>"><?php echo esc_html( get_comment_date( get_option( 'date_format', 'F j, Y' ), $child_comment ) ); ?></time>
 									</div>
 								</div>
 

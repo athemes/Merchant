@@ -28,6 +28,13 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'title',
 					'fields'      => array(
 						array(
+							'id'      => 'disable_campaign',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Disable Campaign', 'merchant' ),
+							'desc'    => esc_html__( 'Turn this option on to disable the entire campaign.', 'merchant' ),
+							'default' => 0,
+						),
+						array(
 							'id'      => 'title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Title', 'merchant' ),
