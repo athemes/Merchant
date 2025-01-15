@@ -539,6 +539,15 @@ class Merchant_Analytics_DB_ORM {
 	}
 
 	/**
+	 * Get the SQL statement for the last query
+	 *
+	 * @return string The SQL statement
+	 */
+	public function get_sql_statement() {
+		return $this->sql_statement;
+	}
+
+	/**
 	 * Get the first result from the query.
 	 *
 	 * @return array|null The first record object if found, null otherwise.
