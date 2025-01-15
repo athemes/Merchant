@@ -289,8 +289,8 @@ class Merchant_Analytics_Data_Provider {
 	public function get_campaign_impressions( $campaign_id, $module_id ) {
 		$campaign_impressions = $this->analytics
 			->where( 'event_type = %s', 'impression' )
-			->where( 'campaign_id = %d', $campaign_id )
-			->where( 'module_id = %d', $module_id )
+			->where( 'campaign_id = %s', $campaign_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -298,7 +298,7 @@ class Merchant_Analytics_Data_Provider {
 		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
 
 		if ( ! empty( $campaign_impressions ) ) {
-			return $campaign_impressions['count_id'];
+			return (int) $campaign_impressions['count_id'];
 		}
 
 		return 0;
@@ -315,8 +315,8 @@ class Merchant_Analytics_Data_Provider {
 	public function get_campaign_clicks( $campaign_id, $module_id ) {
 		$campaign_clicks = $this->analytics
 			->where( 'event_type = %s', 'add_to_cart' )
-			->where( 'campaign_id = %d', $campaign_id )
-			->where( 'module_id = %d', $module_id )
+			->where( 'campaign_id = %s', $campaign_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -341,10 +341,10 @@ class Merchant_Analytics_Data_Provider {
 	public function get_campaign_orders_count( $campaign_id, $module_id ) {
 		$campaign_orders = $this->analytics
 			->distinct( 'order_id' )
-			->where( 'order_id > %d', 0 )
+			//->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'campaign_id = %d', $campaign_id )
-			->where( 'module_id = %d', $module_id )
+			->where( 'campaign_id = %s', $campaign_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'order_id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -371,9 +371,8 @@ class Merchant_Analytics_Data_Provider {
 			->distinct( 'order_id' )
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'campaign_id = %d', $campaign_id )
-			->where( 'module_id = %d', $module_id )
-			->sum( 'order_subtotal' )
+			->where( 'campaign_id = %s', $campaign_id )
+			->where( 'module_id = %s', $module_id )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
 
@@ -399,8 +398,8 @@ class Merchant_Analytics_Data_Provider {
 			->distinct( 'order_id' )
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'campaign_id = %d', $campaign_id )
-			->where( 'module_id = %d', $module_id )
+			->where( 'campaign_id = %s', $campaign_id )
+			->where( 'module_id = %s', $module_id )
 			->avg( 'order_subtotal' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -463,7 +462,7 @@ class Merchant_Analytics_Data_Provider {
 	public function get_module_impressions( $module_id ) {
 		$module_impressions = $this->analytics
 			->where( 'event_type = %s', 'impression' )
-			->where( 'module_id = %d', $module_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -487,7 +486,7 @@ class Merchant_Analytics_Data_Provider {
 	public function get_module_clicks( $module_id ) {
 		$module_clicks = $this->analytics
 			->where( 'event_type = %s', 'add_to_cart' )
-			->where( 'module_id = %d', $module_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -513,7 +512,7 @@ class Merchant_Analytics_Data_Provider {
 			->distinct( 'order_id' )
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'module_id = %d', $module_id )
+			->where( 'module_id = %s', $module_id )
 			->count( 'order_id' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -539,7 +538,7 @@ class Merchant_Analytics_Data_Provider {
 			->distinct( 'order_id' )
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'module_id = %d', $module_id )
+			->where( 'module_id = %s', $module_id )
 			->sum( 'order_subtotal' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
@@ -565,7 +564,7 @@ class Merchant_Analytics_Data_Provider {
 			->distinct( 'order_id' )
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
-			->where( 'module_id = %d', $module_id )
+			->where( 'module_id = %s', $module_id )
 			->avg( 'order_subtotal' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
 			->first();
