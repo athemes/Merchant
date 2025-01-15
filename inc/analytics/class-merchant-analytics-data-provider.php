@@ -429,15 +429,15 @@ class Merchant_Analytics_Data_Provider {
 	}
 
 	/**
-	 * Get campaign conversion rate percentage.
+	 * Get campaign CTR percentage.
 	 *
 	 * @param int $campaign_id The campaign ID.
 	 * @param int $module_id   The module ID.
 	 *
-	 * @return float The campaign conversion rate percentage or 0 if not found.
+	 * @return float The campaign CTR percentage or 0 if not found.
 	 */
-	public function get_campaign_conversion_rate_percentage( $campaign_id, $module_id ) {
-		$campaign_orders_count = $this->get_campaign_orders_count( $campaign_id, $module_id );
+	public function get_campaign_ctr_percentage( $campaign_id, $module_id ) {
+		$campaign_orders_count = $this->get_campaign_clicks( $campaign_id, $module_id );
 		$campaign_impressions  = $this->get_campaign_impressions( $campaign_id, $module_id );
 		if ( $campaign_impressions > 0 && $campaign_orders_count > 0 ) {
 			return ( $campaign_orders_count / $campaign_impressions ) * 100;
