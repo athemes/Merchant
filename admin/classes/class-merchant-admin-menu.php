@@ -48,12 +48,10 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
          *
          * @return void
          */
-		public function analytics_assets() {
-			if (
-				isset( $_GET['page'], $_GET['section'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				&& $_GET['page'] === 'merchant' // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				&& in_array( $_GET['section'], array( 'analytics', 'campaigns' ), true ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			) {
+		public function analytics_assets( $hook ) {
+            $section = sanitize_text_field( $_GET['section'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( $hook === 'toplevel_page_merchant' && $section !== 'settings' ) {
 				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
 				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
 				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
@@ -165,11 +163,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				1
 			);
 
-			// Enabled Modules.
+			// All Modules.
 			add_submenu_page(
 				$this->plugin_slug,
-				esc_html__('Enabled Modules', 'merchant'),
-				esc_html__('Enabled Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
 				'manage_options',
 				'admin.php?page=merchant&section=modules',
 				'',
@@ -194,9 +192,8 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'manage_options',
 				'admin.php?page=merchant&section=campaigns',
 				'',
-				3
+				4
 			);
-
 
 			add_submenu_page(
 				$this->plugin_slug,
@@ -205,11 +202,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'manage_options',
 				'admin.php?page=merchant&section=analytics',
 				'',
-				4
+				5
 			);
 
 			// Add 'Upgrade' link.
-			if( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
 				add_submenu_page(
 					$this->plugin_slug,
 					esc_html__('Upgrade to Pro', 'merchant'),
@@ -217,7 +214,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					'manage_options',
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
-					4
+					6
 				);
 			}
 		}

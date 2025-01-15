@@ -415,6 +415,10 @@
   justify-content: center;
   align-items: flex-end;
 
+  &__dashboard {
+    margin-bottom: -50px;
+  }
+
   svg {
     width: 300px;
   }
@@ -423,6 +427,32 @@
     img {
       max-width: 450px;
       margin-top: 20px;
+    }
+  }
+}
+
+.merchant-modules-no-active-modules {
+  padding-block: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 350px;
+    max-width: 100%;
+  }
+
+  &__text {
+    &-big {
+      font-size: 16px;
+      font-weight: 500;
+      color: #101517;
+    }
+
+    &-small {
+      color: #757575;
+      font-size: 13px;
     }
   }
 }
@@ -436,7 +466,6 @@
   border-radius: 4px;
   border: 2px solid #F0F0F1;
   background-color: #fff;
-  border-radius: 4px;
 
   li {
     margin: 0 15px;

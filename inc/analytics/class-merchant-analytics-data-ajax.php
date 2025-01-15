@@ -52,6 +52,7 @@ class Merchant_Analytics_Data_Ajax {
 		add_action( 'wp_ajax_merchant_get_analytics_cards_data', array( $this, 'get_analytics_cards_data' ) );
 		add_action( 'wp_ajax_merchant_get_analytics_table_data', array( $this, 'get_analytics_table_data' ) );
 		add_action( 'wp_ajax_merchant_get_impressions_chart_data', array( $this, 'get_impressions_chart_data' ) );
+		add_action( 'wp_ajax_merchant_update_campaign_status', array( $this, 'update_campaign_status' ) );
 	}
 
 	/**
@@ -157,8 +158,8 @@ class Merchant_Analytics_Data_Ajax {
 			$compare_range = array(
 				'start' => $compare_start_date,
 				'end'   => $compare_end_date,
-			);
-			$data          = $this->reports->get_top_performing_campaigns( $start_range, $compare_range );
+			);$data          = $this->reports->get_top_performing_campaigns( $start_range, $compare_range );
+
 			$data          = array_map( static function ( $item ) {
 				$item['revenue'] = wc_price( $item['revenue'] );
 
@@ -189,6 +190,84 @@ class Merchant_Analytics_Data_Ajax {
 		} catch ( Exception $e ) {
 			wp_send_json_error( $e->getMessage() );
 		}
+	}
+
+	public function update_campaign_status() {
+		check_ajax_referer( 'merchant', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'You are not allowed to do this.', 'merchant' ), 403 );
+		}
+
+		$campaign_data = $_POST['campaign_data'] ?? array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		if ( empty( $campaign_data ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'No campaigns found.', 'merchant' ) ), 400 );
+		}
+
+		// Get current options
+		$db_options = get_option( 'merchant', array() );
+
+		if ( empty( $db_options ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'No campaigns found.', 'merchant' ) ), 400 );
+		}
+
+		$should_update  = false;
+		$new_status     = '';
+
+		foreach ( $campaign_data as $module_id => $option ) {
+			if ( ! is_string( $module_id ) || empty( $module_id ) ) {
+				continue;
+			}
+
+			$campaign_key = sanitize_text_field( $option['campaign_key'] ?? '' );
+			$campaigns    = $option['campaigns'] ?? array();
+
+			if ( empty( $campaign_key ) || empty( $campaigns ) ) {
+				continue;
+			}
+
+			foreach ( $campaigns as $index => $campaign ) {
+				$campaign_id = $campaign['campaign_id'] ?? null;
+				$status      = sanitize_text_field( $campaign['status'] ?? '' );
+
+				if ( $campaign_id === null || ! in_array( $status, array( 'active', 'inactive' ), true ) ) {
+					continue;
+				}
+
+				// Check if the campaign exists in the database.
+				if ( isset( $db_options[ $module_id ][ $campaign_key ] ) ) {
+					$db_campaigns = &$db_options[ $module_id ][ $campaign_key ];
+
+					foreach ( $db_campaigns as &$item ) {
+						if ( isset( $item['flexible_id'] ) && $item['flexible_id'] === $campaign_id ) {
+							if ( $status === 'inactive' ) {
+								$item['disable_campaign'] = true;
+							} else {
+								unset( $item['disable_campaign'] );
+							}
+							$new_status    = $status;
+							$should_update = true;
+						}
+					}
+				}
+
+			}
+		}
+
+		if ( $should_update ) {
+			$updated = update_option( 'merchant', $db_options );
+			if ( $updated ) {
+				wp_send_json_success(
+					array(
+						'status'  => $new_status,
+						'message' => esc_html__( 'Campaign updated successfully.', 'merchant' ),
+					)
+				);
+			}
+		}
+
+		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ) , 400  );
 	}
 }
 

@@ -174,8 +174,8 @@ Merchant_Admin_Options::create( array(
 			'options'    => array(
 				'related_products'           => esc_html__( 'Related Products', 'merchant' ),
 				'recently_viewed_products'   => esc_html__( 'Recently Viewed Products', 'merchant' ),
-//              'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
-//              'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
+                // 'frequently_bought_together' => esc_html__( 'Frequently Bought Together', 'merchant' ),
+                // 'buy_x_get_y'                => esc_html__( 'Buy X Get Y', 'merchant' ),
 			),
 			'default'    => 'related_products',
 			'conditions' => array(
@@ -214,8 +214,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'          => 'suggested_products_instructions_recently_viewed_products',
 			'type'        => 'info_block',
-			'description' => esc_html__( 'You can display suggested products by using the default Related Products or by enabling certain modules (Recently Viewed Products, Frequently Bought Together or Buy X Get Y) from Merchant.',
-				'merchant' ),
+			'description' => esc_html__( 'You can display suggested products by using the default Related Products or by enabling the Recently Viewed Products module in Merchant and then selecting it here.', 'merchant' ),
 			'button_text' => esc_html__( 'View Recently Viewed Products', 'merchant' ),
 			'button_link' => esc_url( admin_url( 'admin.php?page=merchant&module=recently-viewed-products' ) ),
 			'conditions'  => array(

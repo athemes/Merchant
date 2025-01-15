@@ -374,7 +374,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Singular Template', 'merchant' ),
 					'desc'        => esc_html__( 'Singular template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} person has viewed this item today', 'merchant' ),
+					'default'     => esc_html__( '{count} person has viewed this today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
@@ -391,7 +391,7 @@ Merchant_Admin_Options::create( array(
 					'type'        => 'text',
 					'label'       => esc_html__( 'Plural Template', 'merchant' ),
 					'desc'        => esc_html__( 'Plural template for displaying the number of people who have viewed a product in a period.', 'merchant' ),
-					'default'     => esc_html__( '{count} people have viewed this item today', 'merchant' ),
+					'default'     => esc_html__( '{count} people have viewed this today', 'merchant' ),
 					'hidden_desc' => sprintf(
 					/* Translators: %1$s: the customers count */
 						__(
