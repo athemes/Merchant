@@ -974,3 +974,43 @@ if ( ! function_exists( 'merchant_get_modules_data' ) ) {
 		return $modules;
 	}
 }
+
+if ( ! function_exists( 'merchant_get_campaign_data' ) ) {
+	/**
+	 * Get the data of a specific campaign.
+	 *
+	 * @param string $campaign_id The ID of the campaign.
+	 * @param string $module_id   The ID of the module.
+	 *
+	 * @return array
+	 */
+	function merchant_get_campaign_data( $campaign_id, $module_id ) {
+		if ( Merchant_Buy_X_Get_Y::MODULE_ID === $module_id || Merchant_Pre_Orders::MODULE_ID === $module_id ) {
+			$key = 'rules';
+		} elseif ( Merchant_Product_Labels::MODULE_ID === $module_id ) {
+			$key = 'labels';
+		} else {
+			$key = 'offers';
+		}
+
+		$all_modules      = merchant_get_modules_data();
+		$module_campaigns = Merchant_Admin_Options::get( $module_id, $key, array() );
+		if ( ! empty( $module_campaigns ) ) {
+			foreach ( $module_campaigns as $campaign ) {
+				if ( isset( $all_modules[ $module_id ], $campaign['flexible_id'] ) && $campaign_id === $campaign['flexible_id'] ) {
+					return array(
+						'campaign_id'      => $campaign['flexible_id'],
+						'campaign_title'   => $campaign['offer-title'] ?? $campaign['label-title'] ?? '',
+						'campaign_status'  => $campaign['status'] ?? 'active',
+						'module_id'        => $module_id,
+						'module_name'      => $all_modules[ $module_id ]['name'],
+						'is_pro'           => $all_modules[ $module_id ]['pro'],
+						'is_module_active' => $all_modules[ $module_id ]['active'],
+					);
+				}
+			}
+		}
+
+		return array();
+	}
+}
