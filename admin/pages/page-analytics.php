@@ -10,6 +10,7 @@ $added_orders    = $reports->get_total_new_orders_card_report( $date_ranges['pre
 $aov_rate        = $reports->get_aov_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 $conversion_rate = $reports->get_conversion_rate_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 $impressions     = $reports->get_impressions_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 ?>
 <div class="merchant-analytics-overview-section">
     <div class="overview-head">
@@ -202,33 +203,36 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>FBT:Campaign1</td>
-                <td>9000</td>
-                <td>7203</td>
-                <td class="increase">12.2</td>
-                <td>1567</td>
-                <td><?php
-					echo wc_price( '97.45' ) ?></td>
-            </tr>
-            <tr>
-                <td>FBT:Campaign2</td>
-                <td>7000</td>
-                <td>600</td>
-                <td class="decrease">52.2</td>
-                <td>3567</td>
-                <td><?php
-					echo wc_price( '87.45' ) ?></td>
-            </tr>
-            <tr>
-                <td>FBT:Campaign3</td>
-                <td>9800</td>
-                <td>2303</td>
-                <td class="increase">22.5</td>
-                <td>567</td>
-                <td><?php
-					echo wc_price( '22.35' ) ?></td>
-            </tr>
+			<?php
+			if ( ! empty( $campaigns_table ) ) {
+				foreach ( $campaigns_table as $campaign ) {
+					?>
+                    <tr>
+                        <td><?php
+							echo esc_html( $campaign['campaign_info']['module_name'] . ': ' . $campaign['campaign_info']['campaign_title'] ) ?></td>
+                        <td><?php
+							echo esc_html( $campaign['impressions'] ) ?></td>
+                        <td><?php
+							echo esc_html( $campaign['clicks'] ) ?></td>
+                        <td class="<?php
+                        echo esc_attr( $campaign['ctr']['change'][1] ) ?>"><?php
+	                        echo esc_html( $campaign['ctr']['change'][0] === 0 ? '-' : $campaign['ctr']['change'][0]  ) ?></td>
+                        <td><?php
+							echo esc_html( $campaign['orders'] ) ?></td>
+                        <td><?php
+							echo wp_kses( wc_price( $campaign['revenue'] ), merchant_kses_allowed_tags( array( 'all' ) ) ) ?></td>
+                    </tr>
+					<?php
+				}
+			} else {
+				?>
+                <tr>
+                    <td colspan="6" style="text-align: center"><?php
+						esc_html_e( 'No data available', 'merchant' ); ?></td>
+                </tr>
+				<?php
+			}
+			?>
             </tbody>
         </table>
     </div>
