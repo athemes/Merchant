@@ -116,3 +116,82 @@ class Merchant {
  * Run the plugin.
  */
 Merchant::instance();
+
+// Temporary
+add_action( 'admin_enqueue_scripts', function() {
+	wp_enqueue_script( 'merchant-analytics', MERCHANT_URI . 'assets/js/src/admin/analytics.js', array(), MERCHANT_VERSION, true );
+
+	// This is temporary.
+	wp_localize_script( 'merchant-analytics', 'merchant', array(
+		'nonce'    => wp_create_nonce( 'merchant-nonce' ),
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+	) );
+} );
+
+add_action( 'wp_ajax_merchant_update_campaign_status', function() {
+	check_ajax_referer( 'merchant-nonce', 'nonce' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( esc_html__( 'You are not allowed to do this.', 'merchant' ), 403 );
+	}
+
+	$campaign_data = $_POST['campaign_data'] ?? array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+	if ( empty( $campaign_data ) ) {
+		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns found.', 'merchant' ) ), 400 );
+	}
+
+	// Get current options
+	$db_options = get_option( 'merchant', array() );
+
+	$should_update  = false;
+	$new_status     = '';
+
+	foreach ( $campaign_data as $module_id => $option ) {
+		if ( ! is_string( $module_id ) || empty( $module_id ) ) {
+			continue;
+		}
+
+		$campaign_key = sanitize_text_field( $option['campaign_key'] ?? '' );
+		$campaigns    = $option['campaigns'] ?? array();
+
+		if ( empty( $campaign_key ) || empty( $campaigns ) ) {
+			continue;
+		}
+
+		foreach ( $campaigns as $index => $campaign ) {
+			$campaign_id = isset( $campaign['campaign_id'] ) ? (int) $campaign['campaign_id'] : null;
+			$status      = sanitize_text_field( $campaign['status'] ?? '' );
+
+			if ( $campaign_id === null || ! in_array( $status, array( 'enable', 'disable' ), true ) ) {
+				continue;
+			}
+
+
+			if ( isset( $db_options[ $module_id ][ $campaign_key ][ $campaign_id ] ) ) {
+				if ( $status === 'disable' ) {
+					$db_options[ $module_id ][ $campaign_key ][ $campaign_id ]['disable_campaign'] = true;
+				} else {
+					unset( $db_options[ $module_id ][ $campaign_key ][ $campaign_id ]['disable_campaign'] );
+				}
+
+				$new_status     = $status;
+				$should_update  = true;
+			}
+		}
+	}
+
+	if ( $should_update ) {
+		$updated = update_option( 'merchant', $db_options );
+		if ( $updated ) {
+			wp_send_json_success(
+				array(
+					'status'  => $new_status,
+					'message' => esc_html__( 'Campaign updated successfully.', 'merchant' ),
+				)
+			);
+		}
+	}
+
+	wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ) , 400  );
+} );
