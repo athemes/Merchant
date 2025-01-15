@@ -13,7 +13,6 @@ const config = require('./wpgulp.config.js');
  */
 const gulp = require('gulp');
 const { exec } = require('child_process');
-const path = require('path');
 
 // CSS related plugins.
 const nodesass     = require('sass')
