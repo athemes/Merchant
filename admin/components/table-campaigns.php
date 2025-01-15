@@ -170,8 +170,7 @@ $sorting_indicator_html = '<span class="sorting-indicators"><span class="sorting
                     <?php if ( $count > $rows_per_page ) : ?>
                         class="is-hidden"
                         style="display: none;"
-                    <?php endif; ?>
-                >
+                    <?php endif; ?>>
                     <td><input type="checkbox" name="campaign_select[]" value="<?php echo esc_attr( $campaign['title'] ); ?>" /></td>
                     <td class="merchant__campaign-name js-campaign-name"><?php echo esc_html( $campaign['title'] ); ?></td>
                     <td class="merchant__module-name js-module-name"><?php echo esc_html( $module['module_name'] ); ?></td>
