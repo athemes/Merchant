@@ -85,12 +85,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
-			// Enqueue admin scripts.
-			// add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-
-			// Localize script.
-			//add_filter( 'merchant_admin_localize_script', array( $this, 'localize_script' ) );
-
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
@@ -100,7 +94,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 		}
 
 		// Return early if it's on admin but not in the respective module settings page.
-		if ( is_admin() && ! parent::is_module_settings_page() ) {
+		if ( is_admin() && ! wp_doing_ajax() && ! parent::is_module_settings_page() ) {
 			return; 
 		}
 
@@ -112,6 +106,10 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 
 		// Localize script.
 		add_filter( 'merchant_localize_script', array( $this, 'localize_script' ) );
+
+		// Ajax handlers.
+		add_action( 'wp_ajax_ajax_search_callback', array( $this, 'ajax_search_callback' ) );
+		add_action( 'wp_ajax_nopriv_ajax_search_callback', array( $this, 'ajax_search_callback' ) );
 	}
 
 	/**
@@ -314,6 +312,15 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			'order'          => $order,
 			'orderby'        => $orderby,
 			'post_status'    => array( 'publish' ),
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'product_visibility',
+					'field'    => 'name',
+					'terms'    => array( 'exclude-from-search' ),
+					'operator' => 'NOT IN',
+				),
+			),
 		);
 	
 		if ( 'price' === $orderby ) {
@@ -334,6 +341,15 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				'order'          => $order,
 				'orderby'        => $orderby,
 				'post_status'    => array( 'publish' ),
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'product_visibility',
+						'field'    => 'name',
+						'terms'    => array( 'exclude-from-search' ),
+						'operator' => 'NOT IN',
+					),
+				),
 				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'meta_query'     => array(
 					'relation' => 'OR',
@@ -352,9 +368,22 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				$args['orderby']  = 'meta_value_num';
 			}
 	
-			$qry_sku         = new WP_Query( $args );
-			$qry->posts      = array_merge( $qry->posts, $qry_sku->posts );
-			$qry->post_count = count( $qry->posts );
+			$qry_sku = new WP_Query( $args );
+
+			// Merge and remove duplicates
+			$merged_posts = array_merge( $qry->posts, $qry_sku->posts );
+			$unique_posts = array();
+			$product_ids  = array();
+
+			foreach ( $merged_posts as $post ) {
+				if ( ! in_array( $post->ID, $product_ids, true ) ) {
+					$unique_posts[] = $post;
+					$product_ids[]  = $post->ID;
+				}
+			}
+
+			$qry->posts      = $unique_posts;
+			$qry->post_count = count( $unique_posts );
 		}
 	
 		if ( $qry->have_posts() ) :
@@ -436,8 +465,25 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			$item_permalink = get_the_permalink( $item_post_id );
 			$item_image     = wp_get_attachment_image( $product->get_image_id() );
 			$item_title     = get_the_title( $item_post_id );
-			$description    = wp_trim_words( 'product-post-content' === $desc_type ? $product->get_description() : $product->get_short_description(), $desc_length );
-			$price          = $product->get_price_html();
+
+			/**
+			 * `merchant_real_time_search_product_title`
+			 *
+			 * @since 1.11.2
+			 */
+			$item_title = apply_filters( 'merchant_real_time_search_product_title', $item_title, $product );
+
+			$description = $desc_type === 'product-post-content' ? $product->get_description() : $product->get_short_description();
+			$description = strip_shortcodes( $description );
+
+			/**
+			 * `merchant_real_time_search_product_description`
+             *
+             * @since 1.11.2
+			 */
+            $description = apply_filters( 'merchant_real_time_search_product_description', $description, $product );
+
+            $price = $product->get_price_html();
 		} else {
 			$item_term_id   = $args['term_id'];
 			$item_term      = get_term( $item_term_id );
@@ -450,7 +496,6 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 	
 		ob_start();
 		?>
-	
 		<a class="merchant-ajax-search-item merchant-ajax-search-item-<?php echo esc_attr( $args['type'] ); ?>" href="<?php echo esc_url( $item_permalink ); ?>">
 			<?php if ( $item_image ) : ?>
 				<div class="merchant-ajax-search-item-image">
@@ -460,7 +505,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 			<div class="merchant-ajax-search-item-info">
 				<div class="merchant-ajax-search-item-title"><?php echo esc_html( $item_title ); ?></div>
 				<?php if ( $description ) : ?>
-					<p><?php echo esc_html( $description ); ?></p>
+					<p><?php echo esc_html( wp_trim_words( $description, $desc_length ) ); ?></p>
 				<?php endif; ?>
 			</div>
 			<?php if ( $price ) : ?>
@@ -469,9 +514,7 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 				</div>
 			<?php endif; ?>
 		</a>
-	
 		<?php
-	
 		return ob_get_clean();
 	}
 }
@@ -480,7 +523,3 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 add_action( 'init', function() {
 	new Merchant_Real_Time_Search();
 } );
-
-// Ajax handlers.
-add_action( 'wp_ajax_ajax_search_callback', array( 'Merchant_Real_Time_Search', 'ajax_search_callback' ) );
-add_action( 'wp_ajax_nopriv_ajax_search_callback', array( 'Merchant_Real_Time_Search', 'ajax_search_callback' ) );

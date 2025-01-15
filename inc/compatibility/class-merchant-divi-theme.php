@@ -28,6 +28,8 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 
 			add_filter( 'merchant_module_shortcode_error_message_html', array( $this, 'shortcode_error_message' ), 10, 2 );
 
+			add_filter( 'merchant_real_time_search_product_description', array( $this, 'remove_shortcode_product_description' ) );
+
 			// Custom CSS.
 			add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
 		}
@@ -41,6 +43,17 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 		 */
 		public function quick_view_description( $description ) {
 			return $this->et_strip_shortcodes( $description );
+		}
+
+		/**
+		 * Remove Divi shortcodes from search Real-time search results product description.
+		 *
+		 * @param $content
+		 *
+		 * @return array|string|string[]|null
+		 */
+		public function remove_shortcode_product_description( $content ) {
+			return $this->et_strip_shortcodes( $content );
 		}
 
 		/**
@@ -159,6 +172,9 @@ if ( ! class_exists( 'Merchant_Divi_Theme' ) ) {
 				'et_pb_code',
 				'et_pb_fullwidth_code',
 				'et_pb_social_media_follow_network',
+				'et_pb_section',
+				'et_pb_row',
+				'et_pb_row_inner',
 			);
 
 			// list of post-based shortcodes.
