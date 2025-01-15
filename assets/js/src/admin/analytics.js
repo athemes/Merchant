@@ -543,6 +543,55 @@
 		},
 
 		/**
+		 * Updates the performing campaigns table with new data.
+		 *
+		 * @param {Object} dates - The selected date ranges.
+		 *
+		 * @returns {Promise<void>}
+		 */
+		updatePerformingCampaignsTable: async function (dates) {
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('merchant_get_analytics_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
+				);
+				if (response.success) {
+					// Update the cards with the new data
+					this.updateTopCampaignsWithData(response.data, dates.container);
+				}
+			} catch (error) {
+				console.error('Error fetching cards data:', error);
+			}
+		},
+
+		/**
+		 * Updates the top campaigns table with new data.
+		 * @param data
+		 * @param container
+		 */
+		updateTopCampaignsWithData: function (data, container) {
+			let table_body = container.find('tbody');
+			container.find('table th').removeClass('asc desc');
+			table_body.empty();
+			$.each(data, function (campaignId, campaign) {
+				// Create the HTML for each row using template literals
+				const rowHTML = `
+		            <tr>
+		                <td>${campaign.campaign_info.module_name}: ${campaign.campaign_info.campaign_title}</td>
+		                <td>${campaign.impressions}</td>
+		                <td>${campaign.clicks}</td>
+		                <td class="${campaign.ctr.change[1]}">${campaign.ctr.change[0] === 0 ? '-' : campaign.ctr.change[0]}</td>
+		                <td>${campaign.orders}</td>
+		                <td>${campaign.revenue}</td>
+		            </tr>
+		        `;
+
+				// Append the row HTML to the container
+				$(table_body).append(rowHTML);
+			});
+		},
+
+		/**
 		 * Updates a single card with new data.
 		 * @param {jQuery} card - The card element to update.
 		 * @param {string} value - The new value to display.
@@ -689,31 +738,61 @@
 			);
 		},
 
-		initSortableTable: function (tableId) {
-			this.table = $(`${tableId}`);
-			if (this.table.length) {
-				this.setupSortableTableEventListeners();
+		/**
+		 * Initializes the top campaigns table.
+		 */
+		initTopCampaignsTable: function () {
+			let container = $('.merchant-analytics-section.campaigns-table');
+			let self = this;
+			// Initialize the date picker
+			this.datePickerInit(container, {
+				onSelectHandler: () => {
+					// Get both date range inputs
+					const firstInput = container.find('.first-date-range .date-range-input');
+					const secondInput = container.find('.second-date-range .date-range-input');
+
+					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
+					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+
+					// Ensure both date ranges have exactly two dates
+					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
+						self.updatePerformingCampaignsTable({
+							startDate: firstDateRange[0],
+							endDate: firstDateRange[1],
+							compareStartDate: secondDateRange[0],
+							compareEndDate: secondDateRange[1],
+							container: container
+						});
+					}
+				}
+			});
+
+
+			if (container.length) {
+				this.setupSortableTableEventListeners(container);
 			}
 		},
 
-		setupSortableTableEventListeners: function () {
-			this.table.find('th').on('click', (event) => {
-				this.sortableTable($(event.currentTarget));
+		setupSortableTableEventListeners: function (container) {
+			let self = this;
+			container.find('th').on('click', (event) => {
+				self.sortableTable($(event.currentTarget), container);
 			});
 		},
 
-		sortableTable: function (header) {
+		sortableTable: function (header, container) {
+			let self = this;
 			const column = header.index();
 			const type = header.data('sort');
 			const currentOrder = header.hasClass('asc') ? 'desc' : 'asc';
 
 			// Remove previous sorting classes
-			this.table.find('th').removeClass('asc desc');
+			container.find('th').removeClass('asc desc');
 
 			// Add class to indicate current sorting order
 			header.addClass(currentOrder);
 
-			const tbody = this.table.find('tbody');
+			const tbody = container.find('tbody');
 			const rows = tbody.find('tr').toArray();
 
 			rows.sort((a, b) => {
@@ -751,6 +830,6 @@
 		merchantAnalyticsChart.revenueChartRender();
 		merchantAnalyticsChart.avgOrderValChartRender();
 		merchantAnalyticsChart.impressionsChartRender();
-		merchantAnalyticsChart.initSortableTable('.campaigns-table-wrapper');
+		merchantAnalyticsChart.initTopCampaignsTable();
 	});
 })(jQuery);
