@@ -367,22 +367,37 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The campaign revenue or 0 if not found.
 	 */
 	public function get_campaign_revenue( $campaign_id, $module_id ) {
-		$campaign_revenue = $this->analytics
-			->distinct( 'order_id' )
+		$revenue           = 0;
+		$db_orders_records = $this->analytics
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
 			->where( 'campaign_id = %s', $campaign_id )
 			->where( 'module_id = %s', $module_id )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->first();
+			->get();
 
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+		$this->analytics->reset_query();
 
-		if ( ! empty( $campaign_revenue ) ) {
-			return $campaign_revenue['sum_order_subtotal'];
+		$grouped_orders = array();
+		foreach ( $db_orders_records as $order ) {
+			$order_id      = $order['order_id'];
+			$product_id    = $order['source_product_id'];
+			$campaign_cost = (float) $order['campaign_cost'];
+
+			if ( ! isset( $grouped_orders[ $order_id ] ) ) {
+				$grouped_orders[ $order_id ] = array( 'products' => array() );
+			}
+
+			if ( ! isset( $grouped_orders[ $order_id ]['products'][ $product_id ] ) || $campaign_cost > $grouped_orders[ $order_id ]['products'][ $product_id ] ) {
+				$grouped_orders[ $order_id ]['products'][ $product_id ] = $campaign_cost;
+			}
 		}
 
-		return 0;
+		foreach ( $grouped_orders as $order ) {
+			$revenue += array_sum( $order['products'] );
+		}
+
+		return $revenue;
 	}
 
 	/**
