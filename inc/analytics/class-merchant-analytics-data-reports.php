@@ -331,6 +331,80 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Get top performing campaigns for the given date ranges.
+	 *
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_top_performing_campaigns( $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+		$campaigns    = array();
+		$db_campaigns = $this->data_provider->get_top_performing_campaigns( 10 );
+		if ( ! empty( $db_campaigns ) ) {
+			foreach ( $db_campaigns as $campaign ) {
+				$this->data_provider->set_start_date( $second_period['start'] );
+				$this->data_provider->set_end_date( $second_period['end'] );
+				$module_id     = $campaign['module_id'];
+				$campaign_id   = $campaign['campaign_id'];
+				$campaign_info = merchant_get_campaign_data( $campaign_id, $module_id );
+				$impressions   = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
+				if ( ! empty( $campaign_info ) ) {
+					$campaigns[] = array(
+						'module_id'     => $module_id,
+						'campaign_id'   => $campaign_id,
+						'revenue'       => $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ),
+						'orders'        => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
+						'aov'           => $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ),
+						'ctr'           => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
+						'clicks'        => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
+						// todo: add list for valid modules that can have impressions
+						'impressions'   => $impressions === 0 ? '-' : $impressions,
+						'campaign_info' => $campaign_info,
+					);
+				}
+			}
+		}
+
+		return $campaigns;
+	}
+
+	/**
+	 * Get the CTR change for the given campaign and date ranges.
+	 *
+	 * @param int   $campaign_id   The campaign ID.
+	 * @param int   $module_id     The module ID.
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$ctr_first_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$ctr_second_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
+
+		$ctr_difference = $ctr_second_period - $ctr_first_period;
+
+		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
+
+		return array(
+			'change'            => $change,
+			'ctr_difference'    => $ctr_difference,
+			'ctr_first_period'  => $ctr_first_period,
+			'ctr_second_period' => $ctr_second_period,
+		);
+	}
+
+	/**
 	 * Sort orders by timestamp in ascending order.
 	 *
 	 * @param array $orders The orders to sort.
