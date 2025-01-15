@@ -30,6 +30,15 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Getter for data_provider
+	 *
+	 * @return Merchant_Analytics_Data_Provider
+	 */
+	public function get_data_provider() {
+		return $this->data_provider;
+	}
+
+	/**
 	 * Get date ranges for the last 7 days and the 7 days before that.
 	 *
 	 * @return array[] An array containing the last 7 days and the 7 days before that date ranges.

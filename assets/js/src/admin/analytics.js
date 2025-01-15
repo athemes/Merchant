@@ -684,6 +684,10 @@
 		 */
 		renderChart: function (container, chartOptions, updateFunction, loadingIndicatorSelector) {
 			const chartEl = container.find('.chart');
+			if ( ! chartEl.length ) {
+				return;
+			}
+
 			const chart = new ApexCharts(chartEl.get(0), chartOptions);
 			chart.render();
 			chart.updateSeries([{data: JSON.parse(chartEl.attr('data-period'))}]);
@@ -775,9 +779,96 @@
 
 		setupSortableTableEventListeners: function (container) {
 			let self = this;
-			container.find('th').on('click', (event) => {
+			container.find('th:not(.no-sort)').on('click', (event) => {
 				self.sortableTable($(event.currentTarget), container);
 			});
+
+			const $table = $( '.js-campaigns-table' );
+			const $searchInput = $( '.js-campaign-search' );
+			const $filterSelect = $( '.js-filter-module' );
+			const $rows = $table.find( 'tbody tr' );
+			const $pagination = $( '.js-pagination' );
+			const $bulkActionBtn = $( '.js-bulk-action' );
+
+			// "Select All" checkbox
+			$table.find( 'thead th:first-child input[type="checkbox"]' ).on( 'change', function() {
+				const isChecked = $( this ).prop( 'checked' );
+				$table
+					.find( 'tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox)' )
+					.prop( 'checked', isChecked );
+			} );
+
+			// Status - Single row
+			$table.on( 'change', '.js-status input[type="checkbox"]', function() {
+				const $checkbox = $( this );
+				const $row = $checkbox.closest( 'tr' );
+				const moduleId = $row.attr( 'data-module-id' );
+
+				const campaignData = {
+					[ moduleId ]: {
+						campaign_key: $row.attr( 'data-campaign-key' ),
+						campaigns: [ {
+							campaign_id: $row.attr( 'data-campaign-id' ),
+							status: $checkbox.prop( 'checked' ) ? 'active' : 'inactive',
+						} ],
+					},
+				};
+
+				self.updateCampaignStatus( campaignData, $checkbox, [ $checkbox ], true );
+			} );
+
+			// Status - Bulk action
+			$bulkActionBtn.on( 'click', function( e ) {
+				e.preventDefault();
+
+				const $select = $( this ).closest( '.bulk-action' ).find( 'select' );
+				const statusAction = $select.val();
+
+				if ( ! statusAction ) {
+					alert( 'Please select an action.' );
+					return;
+				}
+
+				const $checkboxes = $table.find( 'tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox):checked' );
+
+				if ( ! $checkboxes.length ) {
+					alert( 'Please select campaigns.' );
+					return;
+				}
+
+				const campaignData = {};
+
+				$checkboxes.each( function() {
+					const $row = $( this ).closest( 'tr' );
+					const moduleId = $row.attr( 'data-module-id' );
+
+					if ( ! campaignData[ moduleId ] ) {
+						campaignData[ moduleId ] = {
+							campaign_key: $row.attr( 'data-campaign-key' ),
+							campaigns: [],
+						};
+					}
+
+					campaignData[ moduleId ].campaigns.push( {
+						campaign_id: $row.attr( 'data-campaign-id' ),
+						status: statusAction,
+					} );
+				} );
+
+				self.updateCampaignStatus( campaignData, $( this ), $checkboxes );
+			} );
+
+			// Search input
+			$searchInput.on( 'input', self.debounce( function() {
+				// currentPage = 1;
+				self.filterTableTable( $filterSelect.val(), $table, $( this ).val() );
+			}, 300 ) )
+
+			// Module filter
+			$filterSelect.on( 'change', function() {
+				// currentPage = 1;
+				self.filterTableTable( $( this ).val(), $table, '' );
+			} );
 		},
 
 		sortableTable: function (header, container) {
@@ -821,6 +912,102 @@
 
 			// Append sorted rows back to the tbody
 			tbody.append(rows);
+		},
+
+		filterTableTable: function ( moduleId, $table, searchTerm = '' ) {
+			if ( ! $table.length ) {
+				return;
+			}
+
+			const $rows = $table.find( 'tbody tr' );
+
+			$rows.each( function() {
+				const $row = $( this );
+				const rowModuleId = $row.attr( 'data-module-id' );
+				const campaignName = $row.find( '.js-campaign-name' ).text().toLowerCase();
+				const moduleName = $row.find( '.js-module-name' ).text().toLowerCase();
+
+				const moduleMatch = ! moduleId || rowModuleId === moduleId;
+				const searchMatch = ! searchTerm || campaignName.includes( searchTerm ) || moduleName.includes( searchTerm );
+
+				if ( moduleMatch && searchMatch ) {
+					$row.show().removeClass( 'filtered-out' );
+				} else {
+					$row.hide().addClass( 'filtered-out' );
+				}
+			} );
+		},
+
+		updateCampaignStatus: function ( campaignData, $el, $checkboxes, singleRow = false ) {
+			const self = this;
+			const $table = $el.closest( '.campaigns-table' ).find( '.js-campaigns-table' );
+
+			const $loader = '<span class="spinner is-active"></span>';
+
+			$el.prop( 'disabled', true );
+
+			if ( singleRow ) {
+				$el.closest( '.merchant-toggle-switch' ).append( $loader );
+				$el.closest( 'tr' ).css( 'opacity', '.7' );
+			} else {
+				$table.css( 'opacity', '.7' );
+				$el.closest( '.bulk-action' ).append( $loader );
+			}
+
+			$.ajax( {
+				url: self.AJAX_URL,
+				type: 'POST',
+				data: {
+					action: 'merchant_update_campaign_status',
+					nonce: self.NONCE,
+					campaign_data: campaignData,
+				},
+				success: function( response ) {
+					if ( ! response.success ) {
+						return;
+					}
+
+					if ( ! singleRow ) {
+						$checkboxes?.each( function() {
+							$table.find( 'thead th:first-child input[type="checkbox"]' ).prop( 'checked', false );
+							$( this )
+								.prop( 'checked', false )
+								.closest( 'tr' )
+								.find( '.js-status input[type="checkbox"]' )
+								.prop( 'checked', response.data.status === 'active' );
+						} );
+					}
+
+					$( document ).trigger( 'merchant_campaign_status_updated', [
+						response.data,
+						$el,
+						$checkboxes,
+						singleRow,
+						campaignData
+					] );
+				},
+				error: function( error ) {
+					console.log( error );
+				},
+				complete: function() {
+					$( '.spinner' ).remove();
+					$el.prop( 'disabled', false );
+
+					if ( singleRow ) {
+						$el.closest( 'tr' ).css( 'opacity', '' );
+					} else {
+						$table.css( 'opacity', '' );
+					}
+				}
+			} );
+		},
+
+		debounce: function( func, wait ) {
+			let timeout;
+			return function( ...args ) {
+				clearTimeout( timeout );
+				timeout = setTimeout( () => func.apply( this, args ), wait );
+			};
 		}
 	};
 

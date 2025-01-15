@@ -897,8 +897,22 @@
                     let hasAccordion = $(this).hasClass('has-accordion'),
                         $content = $(this).find('.merchant-flexible-content');
 
+                    const campaignId = params.get( 'campaign_id' );
+                    let campaignIndex = 0;
+
+                    // Find the campaignIndex based on campaignId
+                    if (campaignId) {
+                        $content.find('input.flexible-id').each(function (index) {
+                            if ($(this).val() === campaignId) {
+                                campaignIndex = index; // Set the campaignIndex to the matched input's index
+                                return false; // Exit the loop once a match is found
+                            }
+                        });
+                    }
+
                     if (hasAccordion) {
                         $content.accordion({
+                            active: campaignIndex, // Open the campaign with campaign index
                             collapsible: true,
                             //header: "> div > .layout-header",
                             header: function( elem ) {

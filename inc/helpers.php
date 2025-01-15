@@ -933,9 +933,10 @@ if ( ! function_exists( 'merchant_get_modules_campaign_data' ) ) {
 			}
 
 			$campaigns[ $campaign['flexible_id'] ] = array(
+				'campaign_key'    => $key,
 				'campaign_id'     => $campaign['flexible_id'],
 				'campaign_title'  => $campaign['offer-title'] ?? $campaign['label-title'] ?? '',
-				'campaign_status' => $campaign['status'] ?? 'active',
+				'campaign_status' => empty( $campaign['disable_campaign'] ) ? 'active' : 'inactive',
 			);
 		}
 
