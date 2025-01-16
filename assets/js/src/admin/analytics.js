@@ -362,9 +362,10 @@
 		 * Sends an AJAX request and returns the response.
 		 * @param {Object} data - The data to send with the request.
 		 * @param {string} [loadingIndicatorSelector] - Selector for the loading indicator element.
+		 * @param method - The HTTP method to use for the request.
 		 * @returns {Promise} - The resolved response or rejected error.
 		 */
-		sendAjaxRequest: async function (data, loadingIndicatorSelector = '') {
+		sendAjaxRequest: async function (data, loadingIndicatorSelector = '', method = 'GET') {
 			try {
 				if (loadingIndicatorSelector) {
 					$(loadingIndicatorSelector).addClass('show');
@@ -372,7 +373,7 @@
 
 				return await $.ajax({
 					url: this.AJAX_URL,
-					method: 'GET',
+					method: method,
 					data: data,
 				});
 			} catch (error) {
@@ -552,12 +553,33 @@
 		updatePerformingCampaignsTable: async function (dates) {
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('merchant_get_analytics_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					this.prepareAjaxData('merchant_get_top_performing_campaigns_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
 					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
 				);
 				if (response.success) {
 					// Update the cards with the new data
 					this.updateTopCampaignsWithData(response.data, dates.container);
+				}
+			} catch (error) {
+				console.error('Error fetching cards data:', error);
+			}
+		},
+
+		/**
+		 * Updates the all campaigns table with new data.
+		 * @param dates - The selected date ranges.
+		 * @returns {Promise<void>} - The resolved promise.
+		 */
+		updateAllCampaignsTable: async function (dates) {
+			try {
+				const response = await this.sendAjaxRequest(
+					this.prepareAjaxData('merchant_get_all_campaigns_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
+				);
+				if (response.success) {
+					// Update the cards with the new data
+					this.updateAllCampaignsWithData(response.data, dates.container);
+					this.populateFilterSelect(dates.container);
 				}
 			} catch (error) {
 				console.error('Error fetching cards data:', error);
@@ -589,6 +611,67 @@
 				// Append the row HTML to the container
 				$(table_body).append(rowHTML);
 			});
+		},
+
+		/**
+		 * Updates all campaigns table with new data.
+		 * @param data - The data to update the table with.
+		 * @param container - The container element for the table.
+		 */
+		updateAllCampaignsWithData: function (data, container) {
+			let rowsHTML = [];
+			let table_body = container.find('tbody');
+			container.find('table th').removeClass('asc desc');
+			table_body.empty();
+			$.each(data, function (moduleIndex, module_object) {
+				// Extract module and campaign info
+				let moduleId = module_object.module_id;
+				// check if module_object.campaigns is not empty
+				if (module_object.campaigns.length > 0) {
+					// Loop through each campaign
+					module_object.campaigns.forEach((campaign, index) => {
+						let switcherId = `${moduleId}-campaign-${moduleIndex}-${index}`;
+						rowsHTML.push(`
+				            <tr
+				                data-module-id="${moduleId}"
+				                data-campaign-key="${campaign.campaign_key}"
+				                data-campaign-id="${campaign.campaign_id}"
+				                data-row-count="${index}">
+				                <td><input type="checkbox" name="campaign_select[]" value="${campaign.title}" /></td>
+				                <td class="merchant__module-name js-module-name" data-module-id="${module_object.module_id}">${module_object.module_name}</td>
+				                <td class="merchant__campaign-name js-campaign-name">${campaign.title}</td>
+				                <td class="merchant__status merchant-module-page-setting-field-switcher js-status">
+				                    ${campaign.status === 'active' || campaign.status === 'inactive' ?
+							`<div class="merchant-toggle-switch">
+								                <input type="checkbox" id="${switcherId}" name="merchant[${switcherId}]" value="${campaign.status === 'active' ? '1' : ''}" ${campaign.status === 'active' ? 'checked ' : ''}class="toggle-switch-checkbox">
+								                <label class="toggle-switch-label" for="${switcherId}">
+								                    <span class="toggle-switch-inner"></span>
+								                    <span class="toggle-switch-switch"></span>
+								                </label>
+											</div>` :
+							'-'
+						}
+				                </td>
+				                <td class="merchant__impressions">${campaign.impression}</td>
+				                <td class="merchant__clicks">${campaign.clicks}</td>
+				                <td class="merchant__revenue">${campaign.revenue ?? '-'}</td>
+				                <td class="merchant__ctr ${campaign.ctr.change[1]}">${campaign.ctr.change[0] === 0 ? '-' : campaign.ctr.change[0]}</td>
+				                <td class="merchant__orders">${campaign.orders}</td>
+				                <td class="merchant__edit">
+				                    <a href="${module_object.edit_url || '#'}" target="_blank">
+				                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+				                            <path d="M8.30399 1.00174C8.90067 0.405063 9.8596 0.405063 10.4563 1.00174L10.7333 1.27876C11.33 1.87543 11.33 2.83437 10.7333 3.43104L6.51398 7.65037C6.3435 7.82085 6.10909 7.97001 5.85338 8.03394L3.7224 8.65192C3.55193 8.69454 3.36014 8.65192 3.23228 8.50276C3.08311 8.3749 3.04049 8.18311 3.08311 8.01263L3.70109 5.88166C3.76502 5.62594 3.91419 5.39154 4.08467 5.22106L8.30399 1.00174ZM9.73175 1.72627C9.53996 1.53448 9.22031 1.53448 9.02852 1.72627L8.38923 2.34425L9.39079 3.3458L10.0088 2.70651C10.2006 2.51473 10.2006 2.19508 10.0088 2.00329L9.73175 1.72627ZM4.68134 6.15869L4.31908 7.41596L5.57635 7.0537C5.66159 7.03239 5.72552 6.98977 5.78945 6.92584L8.66626 4.04903L7.68601 3.06878L4.8092 5.94559C4.74527 6.00952 4.70265 6.07345 4.68134 6.15869ZM4.61741 1.83281C4.89444 1.83281 5.12885 2.06722 5.12885 2.34425C5.12885 2.64258 4.89444 2.85568 4.61741 2.85568H2.23072C1.7406 2.85568 1.37834 3.23926 1.37834 3.70807V9.50431C1.37834 9.99444 1.7406 10.3567 2.23072 10.3567H8.02697C8.49578 10.3567 8.87936 9.99444 8.87936 9.50431V7.11763C8.87936 6.8406 9.09245 6.60619 9.39079 6.60619C9.66782 6.60619 9.90222 6.8406 9.90222 7.11763V9.50431C9.90222 10.5485 9.04983 11.3796 8.02697 11.3796H2.23072C1.18655 11.3796 0.355469 10.5485 0.355469 9.50431V3.70807C0.355469 2.6852 1.18655 1.83281 2.23072 1.83281H4.61741Z" fill="#565865"/>
+				                        </svg>
+				                        Edit
+				                    </a>
+				                </td>
+				            </tr>
+				        `);
+					});
+				}
+			});
+
+			$(table_body).append(rowsHTML.join(''));
 		},
 
 		/**
@@ -684,7 +767,7 @@
 		 */
 		renderChart: function (container, chartOptions, updateFunction, loadingIndicatorSelector) {
 			const chartEl = container.find('.chart');
-			if ( ! chartEl.length ) {
+			if (!chartEl.length) {
 				return;
 			}
 
@@ -777,100 +860,181 @@
 			}
 		},
 
+		/**
+		 * Initializes the all campaigns table.
+		 */
+		initAllCampaignsTable: function () {
+			let container = $('.merchant-analytics-section.all-campaigns-table');
+			let self = this;
+			// Initialize the date picker
+			this.datePickerInit(container, {
+				onSelectHandler: () => {
+					// Get both date range inputs
+					const firstInput = container.find('.first-date-range .date-range-input');
+					const secondInput = container.find('.second-date-range .date-range-input');
+
+					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
+					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+
+					// Ensure both date ranges have exactly two dates
+					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
+						self.updateAllCampaignsTable({
+							startDate: firstDateRange[0],
+							endDate: firstDateRange[1],
+							compareStartDate: secondDateRange[0],
+							compareEndDate: secondDateRange[1],
+							container: container
+						});
+					}
+				}
+			});
+
+
+			if (container.length) {
+				self.setupSortableTableEventListeners(container);
+				self.populateFilterSelect(container);
+			}
+		},
+
+		/**
+		 * Filters the table based on the the available module in the table
+		 *
+		 * @param container - The table container element.
+		 */
+		populateFilterSelect: function (container) {
+			let table = container.find('.js-campaigns-table');
+			let selectorField = $('.filter-campaign select')
+			// Clear all options except the first one
+			$(selectorField).find('option:not(:first)').remove();
+
+			// Get unique values from the specified table column
+			let values = [];
+			$(table).find('tr .js-module-name').each(function () {
+				let value = $(this).attr('data-module-id');
+				let label = $(this).text().trim();
+
+				// Check if the value is not already in the values array
+				if (value && !values.some(item => item.value === value)) {
+					values.push({
+						value: value,
+						label: label
+					});
+				}
+			});
+
+			// Sort the values alphabetically (optional)
+			values.sort();
+
+			// Append new options to the select field
+			$.each(values, function (index, item) {
+				$(selectorField).append($('<option>', {
+					value: item.value,
+					text: item.label
+				}));
+			});
+		},
+
+		/**
+		 * Add event listeners to the sortable table.
+		 * @param container
+		 */
 		setupSortableTableEventListeners: function (container) {
 			let self = this;
 			container.find('th:not(.no-sort)').on('click', (event) => {
 				self.sortableTable($(event.currentTarget), container);
 			});
 
-			const $table = $( '.js-campaigns-table' );
-			const $searchInput = $( '.js-campaign-search' );
-			const $filterSelect = $( '.js-filter-module' );
-			const $rows = $table.find( 'tbody tr' );
-			const $pagination = $( '.js-pagination' );
-			const $bulkActionBtn = $( '.js-bulk-action' );
+			const table = $('.js-campaigns-table');
+			const searchInput = $('.js-campaign-search');
+			const filterSelect = $('.js-filter-module');
+			const bulkActionBtn = $('.js-bulk-action');
 
 			// "Select All" checkbox
-			$table.find( 'thead th:first-child input[type="checkbox"]' ).on( 'change', function() {
-				const isChecked = $( this ).prop( 'checked' );
-				$table
-					.find( 'tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox)' )
-					.prop( 'checked', isChecked );
-			} );
+			table.find('thead th:first-child input[type="checkbox"]').on('change', function () {
+				const isChecked = $(this).prop('checked');
+				table
+					.find('tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox)')
+					.prop('checked', isChecked);
+			});
 
 			// Status - Single row
-			$table.on( 'change', '.js-status input[type="checkbox"]', function() {
-				const $checkbox = $( this );
-				const $row = $checkbox.closest( 'tr' );
-				const moduleId = $row.attr( 'data-module-id' );
+			table.on('change', '.js-status input[type="checkbox"]', function () {
+				const checkbox = $(this);
+				const row = checkbox.closest('tr');
+				const moduleId = row.attr('data-module-id');
 
 				const campaignData = {
-					[ moduleId ]: {
-						campaign_key: $row.attr( 'data-campaign-key' ),
-						campaigns: [ {
-							campaign_id: $row.attr( 'data-campaign-id' ),
-							status: $checkbox.prop( 'checked' ) ? 'active' : 'inactive',
-						} ],
+					[moduleId]: {
+						campaign_key: row.attr('data-campaign-key'),
+						campaigns: [{
+							campaign_id: row.attr('data-campaign-id'),
+							status: checkbox.prop('checked') ? 'active' : 'inactive',
+						}],
 					},
 				};
 
-				self.updateCampaignStatus( campaignData, $checkbox, [ $checkbox ], true );
-			} );
+				self.updateCampaignStatus(campaignData, checkbox, [checkbox], true);
+			});
 
 			// Status - Bulk action
-			$bulkActionBtn.on( 'click', function( e ) {
+			bulkActionBtn.on('click', function (e) {
 				e.preventDefault();
 
-				const $select = $( this ).closest( '.bulk-action' ).find( 'select' );
+				const $select = $(this).closest('.bulk-action').find('select');
 				const statusAction = $select.val();
 
-				if ( ! statusAction ) {
-					alert( 'Please select an action.' );
+				if (!statusAction) {
+					alert('Please select an action.');
 					return;
 				}
 
-				const $checkboxes = $table.find( 'tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox):checked' );
+				const $checkboxes = table.find('tbody tr:not(.is-hidden) input[type="checkbox"]:not(.toggle-switch-checkbox):checked');
 
-				if ( ! $checkboxes.length ) {
-					alert( 'Please select campaigns.' );
+				if (!$checkboxes.length) {
+					alert('Please select campaigns.');
 					return;
 				}
 
 				const campaignData = {};
 
-				$checkboxes.each( function() {
-					const $row = $( this ).closest( 'tr' );
-					const moduleId = $row.attr( 'data-module-id' );
+				$checkboxes.each(function () {
+					const $row = $(this).closest('tr');
+					const moduleId = $row.attr('data-module-id');
 
-					if ( ! campaignData[ moduleId ] ) {
-						campaignData[ moduleId ] = {
-							campaign_key: $row.attr( 'data-campaign-key' ),
+					if (!campaignData[moduleId]) {
+						campaignData[moduleId] = {
+							campaign_key: $row.attr('data-campaign-key'),
 							campaigns: [],
 						};
 					}
 
-					campaignData[ moduleId ].campaigns.push( {
-						campaign_id: $row.attr( 'data-campaign-id' ),
+					campaignData[moduleId].campaigns.push({
+						campaign_id: $row.attr('data-campaign-id'),
 						status: statusAction,
-					} );
-				} );
+					});
+				});
 
-				self.updateCampaignStatus( campaignData, $( this ), $checkboxes );
-			} );
+				self.updateCampaignStatus(campaignData, $(this), $checkboxes);
+			});
 
 			// Search input
-			$searchInput.on( 'input', self.debounce( function() {
+			searchInput.on('input', self.debounce(function () {
 				// currentPage = 1;
-				self.filterTableTable( $filterSelect.val(), $table, $( this ).val() );
-			}, 300 ) )
+				self.filterTableTable(filterSelect.val(), table, $(this).val());
+			}, 300))
 
 			// Module filter
-			$filterSelect.on( 'change', function() {
+			filterSelect.on('change', function () {
 				// currentPage = 1;
-				self.filterTableTable( $( this ).val(), $table, '' );
-			} );
+				self.filterTableTable($(this).val(), table, '');
+			});
 		},
 
+		/**
+		 * Make the table sortable by the selected column.
+		 * @param header - The header element that was clicked.
+		 * @param container - The table container element.
+		 */
 		sortableTable: function (header, container) {
 			let self = this;
 			const column = header.index();
@@ -914,99 +1078,115 @@
 			tbody.append(rows);
 		},
 
-		filterTableTable: function ( moduleId, $table, searchTerm = '' ) {
-			if ( ! $table.length ) {
+		/**
+		 * Filter the table rows based on the selected module and search term.
+		 * @param moduleId
+		 * @param $table
+		 * @param searchTerm
+		 */
+		filterTableTable: function (moduleId, $table, searchTerm = '') {
+			if (!$table.length) {
 				return;
 			}
 
-			const $rows = $table.find( 'tbody tr' );
+			const $rows = $table.find('tbody tr');
 
-			$rows.each( function() {
-				const $row = $( this );
-				const rowModuleId = $row.attr( 'data-module-id' );
-				const campaignName = $row.find( '.js-campaign-name' ).text().toLowerCase();
-				const moduleName = $row.find( '.js-module-name' ).text().toLowerCase();
+			$rows.each(function () {
+				const $row = $(this);
+				const rowModuleId = $row.attr('data-module-id');
+				const campaignName = $row.find('.js-campaign-name').text().toLowerCase();
+				const moduleName = $row.find('.js-module-name').text().toLowerCase();
 
-				const moduleMatch = ! moduleId || rowModuleId === moduleId;
-				const searchMatch = ! searchTerm || campaignName.includes( searchTerm ) || moduleName.includes( searchTerm );
+				const moduleMatch = !moduleId || rowModuleId === moduleId;
+				const searchMatch = !searchTerm || campaignName.includes(searchTerm) || moduleName.includes(searchTerm);
 
-				if ( moduleMatch && searchMatch ) {
-					$row.show().removeClass( 'filtered-out' );
+				if (moduleMatch && searchMatch) {
+					$row.show().removeClass('filtered-out');
 				} else {
-					$row.hide().addClass( 'filtered-out' );
+					$row.hide().addClass('filtered-out');
 				}
-			} );
+			});
 		},
 
-		updateCampaignStatus: function ( campaignData, $el, $checkboxes, singleRow = false ) {
+		/**
+		 * Update the campaign status.
+		 * @param campaignData - The campaign data to update.
+		 * @param el - The element that triggered the update.
+		 * @param checkboxes - The checkboxes to update.
+		 * @param singleRow - Whether to update a single row or multiple rows.
+		 */
+		updateCampaignStatus: async function (campaignData, el, checkboxes, singleRow = false) {
 			const self = this;
-			const $table = $el.closest( '.campaigns-table' ).find( '.js-campaigns-table' );
+			const $table = el.closest('.campaigns-table').find('.js-campaigns-table');
 
 			const $loader = '<span class="spinner is-active"></span>';
 
-			$el.prop( 'disabled', true );
+			el.prop('disabled', true);
 
-			if ( singleRow ) {
-				$el.closest( '.merchant-toggle-switch' ).append( $loader );
-				$el.closest( 'tr' ).css( 'opacity', '.7' );
+			if (singleRow) {
+				el.closest('.merchant-toggle-switch').append($loader);
+				el.closest('tr').css('opacity', '.7');
 			} else {
-				$table.css( 'opacity', '.7' );
-				$el.closest( '.bulk-action' ).append( $loader );
+				$table.css('opacity', '.7');
+				el.closest('.bulk-action').append($loader);
 			}
 
-			$.ajax( {
-				url: self.AJAX_URL,
-				type: 'POST',
-				data: {
-					action: 'merchant_update_campaign_status',
-					nonce: self.NONCE,
-					campaign_data: campaignData,
-				},
-				success: function( response ) {
-					if ( ! response.success ) {
-						return;
+			try {
+				const response = await this.sendAjaxRequest(
+					{
+						action: 'merchant_update_campaign_status',
+						nonce: self.NONCE,
+						campaign_data: campaignData,
+					},
+					'',
+					'POST'
+				).then((response) => {
+					if (response.success) {
+						if (!singleRow) {
+							checkboxes?.each(function () {
+								$table.find('thead th:first-child input[type="checkbox"]').prop('checked', false);
+								$(this)
+									.prop('checked', false)
+									.closest('tr')
+									.find('.js-status input[type="checkbox"]')
+									.prop('checked', response.data.status === 'active');
+							});
+						}
+
+						$(document).trigger('merchant_campaign_status_updated', [
+							response.data,
+							el,
+							checkboxes,
+							singleRow,
+							campaignData
+						]);
 					}
 
-					if ( ! singleRow ) {
-						$checkboxes?.each( function() {
-							$table.find( 'thead th:first-child input[type="checkbox"]' ).prop( 'checked', false );
-							$( this )
-								.prop( 'checked', false )
-								.closest( 'tr' )
-								.find( '.js-status input[type="checkbox"]' )
-								.prop( 'checked', response.data.status === 'active' );
-						} );
-					}
+					$('.spinner').remove();
+					el.prop('disabled', false);
 
-					$( document ).trigger( 'merchant_campaign_status_updated', [
-						response.data,
-						$el,
-						$checkboxes,
-						singleRow,
-						campaignData
-					] );
-				},
-				error: function( error ) {
-					console.log( error );
-				},
-				complete: function() {
-					$( '.spinner' ).remove();
-					$el.prop( 'disabled', false );
-
-					if ( singleRow ) {
-						$el.closest( 'tr' ).css( 'opacity', '' );
+					if (singleRow) {
+						el.closest('tr').css('opacity', '');
 					} else {
-						$table.css( 'opacity', '' );
+						$table.css('opacity', '');
 					}
-				}
-			} );
+				})
+			} catch (error) {
+				console.error('Error fetching campaign status data:', error);
+			}
 		},
 
-		debounce: function( func, wait ) {
+		/**
+		 * Debounce function to limit the number of times a function is called.
+		 * @param func - The function to debounce.
+		 * @param wait - The time to wait before calling the function.
+		 * @returns {(function(...[*]): void)|*} - The debounced function.
+		 */
+		debounce: function (func, wait) {
 			let timeout;
-			return function( ...args ) {
-				clearTimeout( timeout );
-				timeout = setTimeout( () => func.apply( this, args ), wait );
+			return function (...args) {
+				clearTimeout(timeout);
+				timeout = setTimeout(() => func.apply(this, args), wait);
 			};
 		}
 	};
@@ -1018,5 +1198,6 @@
 		merchantAnalyticsChart.avgOrderValChartRender();
 		merchantAnalyticsChart.impressionsChartRender();
 		merchantAnalyticsChart.initTopCampaignsTable();
+		merchantAnalyticsChart.initAllCampaignsTable();
 	});
 })(jQuery);
