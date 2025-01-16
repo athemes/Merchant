@@ -251,7 +251,6 @@ class Merchant_Analytics_Data_Ajax {
 						}
 					}
 				}
-
 			}
 		}
 

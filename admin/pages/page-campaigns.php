@@ -64,13 +64,9 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
         <div class="alignright filter-campaign">
             <select class="filter-campaign-selector js-filter-module">
                 <option value=""><?php echo esc_html__( 'All Campaigns', 'merchant' ); ?></option>
-				<?php foreach ( $campaigns_data as $index => $module ) : ?>
-                    <option value="<?php echo esc_attr( $module['module_id'] ?? '' ); ?>"><?php echo esc_html( $module['module_name'] ?? '' ); ?></option>
-				<?php endforeach;?>
             </select>
         </div>
     </div>
-
     <div class="campaigns-table-wrapper merchant-page-campaigns">
         <table class="wp-list-table widefat table-view-list merchant__campaigns-table js-campaigns-table">
             <thead>
