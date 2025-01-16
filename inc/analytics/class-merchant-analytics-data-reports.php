@@ -185,11 +185,11 @@ class Merchant_Analytics_Data_Reports {
 		$change = $this->calculate_percentage_difference( $conversion_second_period, $conversion_first_period );
 
 		return array(
-			'diff'                               => $diff,
-			'change'                             => $change,
-			'conversion_first_period'            => $conversion_first_period,
-			'conversion_first_period_percentage' => wc_format_decimal( $conversion_first_period, 2 ) . '%',
-			'conversion_second_period'           => $conversion_second_period,
+			'diff'                                => $diff,
+			'change'                              => $change,
+			'conversion_first_period'             => $conversion_first_period,
+			'conversion_first_period_percentage'  => wc_format_decimal( $conversion_first_period, 2 ) . '%',
+			'conversion_second_period'            => $conversion_second_period,
 			'conversion_second_period_percentage' => wc_format_decimal( $conversion_second_period, 2 ) . '%',
 		);
 	}
