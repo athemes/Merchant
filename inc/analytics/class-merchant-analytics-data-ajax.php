@@ -50,7 +50,8 @@ class Merchant_Analytics_Data_Ajax {
 		add_action( 'wp_ajax_merchant_get_revenue_chart_data', array( $this, 'get_revenue_chart_data' ) );
 		add_action( 'wp_ajax_merchant_get_avg_order_value_chart_data', array( $this, 'get_aov_chart_data' ) );
 		add_action( 'wp_ajax_merchant_get_analytics_cards_data', array( $this, 'get_analytics_cards_data' ) );
-		add_action( 'wp_ajax_merchant_get_analytics_table_data', array( $this, 'get_analytics_table_data' ) );
+		add_action( 'wp_ajax_merchant_get_top_performing_campaigns_table_data', array( $this, 'get_analytics_table_data' ) );
+		add_action( 'wp_ajax_merchant_get_all_campaigns_table_data', array( $this, 'get_all_campaigns_table_data' ) );
 		add_action( 'wp_ajax_merchant_get_impressions_chart_data', array( $this, 'get_impressions_chart_data' ) );
 		add_action( 'wp_ajax_merchant_update_campaign_status', array( $this, 'update_campaign_status' ) );
 	}
@@ -158,9 +159,47 @@ class Merchant_Analytics_Data_Ajax {
 			$compare_range = array(
 				'start' => $compare_start_date,
 				'end'   => $compare_end_date,
-			);$data          = $this->reports->get_top_performing_campaigns( $start_range, $compare_range );
+			);
+			$data          = $this->reports->get_top_performing_campaigns( $start_range, $compare_range );
 
-			$data          = array_map( static function ( $item ) {
+			$data = array_map( static function ( $item ) {
+				$item['revenue'] = wc_price( $item['revenue'] );
+
+				return $item;
+			}, $data );
+			wp_send_json_success( $data );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Get analytics table data.
+	 */
+	public function get_all_campaigns_table_data() {
+		// nonce verification.
+		check_ajax_referer( 'merchant', 'nonce' );
+
+		try {
+			$start_date         = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date           = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+			$compare_start_date = isset( $_GET['compare_start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_start_date'] ) ) : '';
+			$compare_end_date   = isset( $_GET['compare_end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_end_date'] ) ) : '';
+
+			if ( $start_date === '' || $end_date === '' || $compare_start_date === '' || $compare_end_date === '' ) {
+				wp_send_json_error( __( 'Invalid date ranges.', 'merchant' ) );
+			}
+			$start_range   = array(
+				'start' => $start_date,
+				'end'   => $end_date,
+			);
+			$compare_range = array(
+				'start' => $compare_start_date,
+				'end'   => $compare_end_date,
+			);
+			$data          = $this->reports->get_all_campaigns( $start_range, $compare_range );
+
+			$data = array_map( static function ( $item ) {
 				$item['revenue'] = wc_price( $item['revenue'] );
 
 				return $item;
@@ -212,8 +251,8 @@ class Merchant_Analytics_Data_Ajax {
 			wp_send_json_error( array( 'message' => esc_html__( 'No campaigns found.', 'merchant' ) ), 400 );
 		}
 
-		$should_update  = false;
-		$new_status     = '';
+		$should_update = false;
+		$new_status    = '';
 
 		foreach ( $campaign_data as $module_id => $option ) {
 			if ( ! is_string( $module_id ) || empty( $module_id ) ) {
@@ -266,7 +305,7 @@ class Merchant_Analytics_Data_Ajax {
 			}
 		}
 
-		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ) , 400  );
+		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ), 400 );
 	}
 }
 
