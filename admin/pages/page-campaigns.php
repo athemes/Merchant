@@ -9,55 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$all_modules = merchant_get_modules_data();
-if ( empty( $all_modules ) ) {
-    return;
-}
+$reports     = new Merchant_Analytics_Data_Reports();
+$date_ranges = $reports->get_last_and_previous_7_days_ranges();
 
-$reports       = new Merchant_Analytics_Data_Reports();
-$data_provider = $reports->get_data_provider();
-$date_ranges   = $reports->get_last_and_previous_7_days_ranges();
+$total_rows = 0; // Todo: pagination
 
-$total_rows     = 0; // For pagination
-$campaigns_data = array();
-
-foreach ( $all_modules as $module_id => $module ) {
-    $campaigns = $module['campaigns'] ?? array();
-    if ( empty( $campaigns ) ) {
-        continue;
-    }
-
-	$data = array();
-	foreach ( $campaigns as $campaign_id => $campaign ) {
-
-		$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
-        $impressions  = $data_provider->get_campaign_impressions( $campaign_id, $module_id );
-
-		// Prepare each campaign data
-		$data[] = array(
-			'campaign_key' => $campaign['campaign_key'] ?? '',
-			'campaign_id'  => $campaign_id,
-			'title'        => $campaign['campaign_title'] ?? '',
-			'status'       => $campaign['campaign_status'] ?? 'active',
-			'impression'   => $impressions === 0 ? '-' : $impressions,
-			'clicks'       => $data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-			'revenue'      => $data_provider->get_campaign_revenue( $campaign_id, $module_id ),
-			'ctr'          => $reports->get_campaign_ctr_change( $campaign_id, $module_id, $date_ranges['previous_7_days'], $date_ranges['last_7_days'] ),
-			'orders'       => $data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-			'url'          => $campaign_url,
-		);
-
-
-		++$total_rows;
-	}
-
-	// Prepare the campaigns data
-	$campaigns_data[] = array(
-		'module_id'   => $module_id,
-		'module_name' => esc_html( $module['name'] ?? '' ),
-		'campaigns'   => $data,
-	);
-}
+$campaigns_data = $reports->get_all_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 
 // Todo
 $rows_per_page = 50;

@@ -381,6 +381,59 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Get all campaigns for the given date ranges.
+	 *
+	 * @param $first_period
+	 * @param $second_period
+	 *
+	 * @return array
+	 */
+	public function get_all_campaigns( $first_period, $second_period ) {
+		$campaigns_data = array();
+
+		$all_modules = merchant_get_modules_data();
+		if ( empty( $all_modules ) ) {
+			return $campaigns_data;
+		}
+
+		foreach ( $all_modules as $module_id => $module ) {
+			$campaigns = $module['campaigns'] ?? array();
+			if ( empty( $campaigns ) ) {
+				continue;
+			}
+
+			$data = array();
+			foreach ( $campaigns as $campaign_id => $campaign ) {
+				$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
+				$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
+
+				// Prepare each campaign data
+				$data[] = array(
+					'campaign_key' => $campaign['campaign_key'] ?? '',
+					'campaign_id'  => $campaign_id,
+					'title'        => $campaign['campaign_title'] ?? '',
+					'status'       => $campaign['campaign_status'] ?? 'active',
+					'impression'   => $impressions === 0 ? '-' : $impressions,
+					'clicks'       => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
+					'revenue'      => $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ),
+					'ctr'          => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period  ),
+					'orders'       => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
+					'url'          => $campaign_url,
+				);
+			}
+
+			// Prepare the campaigns data
+			$campaigns_data[] = array(
+				'module_id'   => $module_id,
+				'module_name' => esc_html( $module['name'] ?? '' ),
+				'campaigns'   => $data,
+			);
+		}
+
+		return $campaigns_data;
+	}
+
+	/**
 	 * Get the CTR change for the given campaign and date ranges.
 	 *
 	 * @param int   $campaign_id   The campaign ID.
