@@ -24,7 +24,7 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
     <?php esc_html_e( 'All Campaigns', 'merchant' ); ?>
 </div>
 
-<div class="merchant-module-page merchant-page-campaigns merchant-analytics-section campaigns-table">
+<div class="merchant-module-page merchant-page-campaigns merchant-analytics-section all-campaigns-table">
     <div class="merchant__campaigns-table-nav">
         <div class="alignleft bulk-action">
             <select class="bulk-action-selector">
@@ -72,8 +72,8 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
             <thead>
             <tr>
                 <th class="no-sort"><input type="checkbox"/></th>
-                <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Campaign Name', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Module Name', 'merchant' ); ?></th>
+                <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Campaign Name', 'merchant' ); ?></th>
                 <th><?php echo esc_html__( 'Status', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="int"><?php echo esc_html__( 'Impressions', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="int"> <?php echo esc_html__( 'Clicks', 'merchant' ); ?></th>
@@ -100,12 +100,16 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
                         data-campaign-id="<?php echo esc_attr( $campaign['campaign_id'] ); ?>"
                         data-row-count="<?php echo esc_attr( ++$count ); ?>">
                         <td><input type="checkbox" name="campaign_select[]" value="<?php echo esc_attr( $campaign['title'] ); ?>" /></td>
+                        <td class="merchant__module-name js-module-name" data-module-id="<?php echo esc_attr( $module['module_id'] ); ?>"><?php echo esc_html( $module['module_name'] ); ?></td>
                         <td class="merchant__campaign-name js-campaign-name"><?php echo esc_html( $campaign['title'] ); ?></td>
-                        <td class="merchant__module-name js-module-name"><?php echo esc_html( $module['module_name'] ); ?></td>
                         <td class="merchant__status merchant-module-page-setting-field-switcher js-status">
 						    <?php
-						    $_id = $module_id . '-campaign-' . $module_index . '-' . $campaign_index;
-						    Merchant_Admin_Options::switcher( array( 'id' => $_id ), $campaign['status'] === 'active', $module_id );
+						    if ( in_array( $campaign['status'], array( 'active', 'inactive' ), true ) ) {
+	                            $_id = $module_id . '-campaign-' . $module_index . '-' . $campaign_index;
+	                            Merchant_Admin_Options::switcher( array( 'id' => $_id ), $campaign['status'] === 'active', $module_id );
+                            } else {
+                                echo '-';
+                            }
 						    ?>
                         </td>
                         <td class="merchant__impressions"><?php echo esc_html( $campaign['impression'] ); ?></td>
