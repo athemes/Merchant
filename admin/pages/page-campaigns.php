@@ -103,11 +103,7 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
                         data-module-id="<?php echo esc_attr( $module_id ); ?>"
                         data-campaign-key="<?php echo esc_attr( $campaign['campaign_key'] ?? '' ); ?>"
                         data-campaign-id="<?php echo esc_attr( $campaign['campaign_id'] ); ?>"
-                        data-row-count="<?php echo esc_attr( ++$count ); ?>"
-					    <?php if ( $count > $rows_per_page ) : ?>
-                            class="is-hidden"
-                            style="display: none;"
-					    <?php endif; ?>>
+                        data-row-count="<?php echo esc_attr( ++$count ); ?>">
                         <td><input type="checkbox" name="campaign_select[]" value="<?php echo esc_attr( $campaign['title'] ); ?>" /></td>
                         <td class="merchant__campaign-name js-campaign-name"><?php echo esc_html( $campaign['title'] ); ?></td>
                         <td class="merchant__module-name js-module-name"><?php echo esc_html( $module['module_name'] ); ?></td>
