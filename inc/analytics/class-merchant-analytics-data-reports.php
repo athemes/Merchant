@@ -761,6 +761,10 @@ class Merchant_Analytics_Data_Reports {
 			$difference = ( ( $current_value - $previous_value ) / $previous_value ) * 100;
 			$diff_type  = ( $difference >= 0 ) ? 'increase' : 'decrease';
 
+			if ( $difference === 0 ) {
+				$diff_type = 'none';
+			}
+
 			return array( round( abs( $difference ), 2 ), $diff_type ); // Round to 2 decimal places
 		}
 
