@@ -447,6 +447,21 @@ class Merchant_Analytics_Data_Provider {
 	}
 
 	/**
+	 * Get module CTR percentage.
+	 *
+	 * @return float The module CTR percentage or 0 if not found.
+	 */
+	public function get_module_ctr_percentage( $module_id ) {
+		$module_orders_count = $this->get_module_clicks( $module_id );
+		$module_impressions  = $this->get_module_impressions( $module_id );
+		if ( $module_impressions > 0 && $module_orders_count > 0 ) {
+			return ( $module_orders_count / $module_impressions ) * 100;
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Get the top performing campaigns.
 	 *
 	 * @return array The top performing campaigns.
