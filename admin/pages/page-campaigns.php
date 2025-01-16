@@ -20,7 +20,7 @@ $rows_per_page = 50;
 $current_page  = isset( $_GET['page'] ) ? max( 1, (int) $_GET['page'] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $total_pages   = ceil( $total_rows / $rows_per_page );
 ?>
-<div class="merchant-modules-header-heading">
+<div class="merchant-modules-header-heading merchant-modules-header-heading__campaigns">
     <?php esc_html_e( 'All Campaigns', 'merchant' ); ?>
 </div>
 
