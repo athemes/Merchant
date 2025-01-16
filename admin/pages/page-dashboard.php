@@ -237,7 +237,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 				<div class="merchant-modules-header-heading"><?php esc_html_e( 'Welcome To Merchant', 'merchant' ); ?> <img class="merchant-admin-hand-icon" src="<?php echo esc_url( MERCHANT_URI . '/assets/images/admin-hand-icon.png' ); ?>" alt="<?php echo esc_attr__( 'Welcome To Merchant', 'merchant' ); ?>" /></div>
 				<div class="merchant-modules-header-subheading"><?php esc_html_e( 'We’re glad to see you :)', 'merchant' ); ?></div>
-				<div class="merchant-modules-header-image">
+				<div class="merchant-modules-header-image merchant-modules-header-image__dashboard">
 					<img src="<?php echo esc_url( MERCHANT_URI ); ?>assets/images/dashboard-hero.svg" alt="Merchant" />
 				</div>
 
@@ -335,7 +335,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 
 		</div>
 
-        <div class="merchant-analytics-panel">
+        <div class="merchant-analytics-panel merchant-analytics-panel__dashboard">
 			<?php require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
         </div>
 

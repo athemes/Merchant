@@ -12,11 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 $reports     = new Merchant_Analytics_Data_Reports();
 $date_ranges = $reports->get_last_and_previous_7_days_ranges();
 
-$total_rows = 0; // Todo: pagination
-
 $campaigns_data = $reports->get_all_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 
-// Todo
+// Todo: pagination
+$total_rows = 0;
 $rows_per_page = 50;
 $current_page  = isset( $_GET['page'] ) ? max( 1, (int) $_GET['page'] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $total_pages   = ceil( $total_rows / $rows_per_page );

@@ -416,7 +416,7 @@
   align-items: flex-end;
 
   &__dashboard {
-    margin-bottom: -50px;
+    margin-bottom: -80px;
   }
 
   svg {
@@ -427,6 +427,17 @@
     img {
       max-width: 450px;
       margin-top: 20px;
+    }
+  }
+}
+
+.merchant-analytics-panel {
+  &__dashboard {
+    .merchant-analytics-overview-section .overview-head {
+      margin-bottom: 0;
+    }
+    .title {
+      visibility: hidden;
     }
   }
 }

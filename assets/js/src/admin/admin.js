@@ -901,13 +901,13 @@
                     let campaignIndex = 0;
 
                     // Find the campaignIndex based on campaignId
-                    if (campaignId) {
-                        $content.find('input.flexible-id').each(function (index) {
-                            if ($(this).val() === campaignId) {
-                                campaignIndex = index; // Set the campaignIndex to the matched input's index
-                                return false; // Exit the loop once a match is found
+                    if ( campaignId ) {
+                        $content.find( 'input.flexible-id' ).each( function ( index ) {
+                            if ( $( this ).val() === campaignId ) {
+                                campaignIndex = index;
+                                return false;
                             }
-                        });
+                        } );
                     }
 
                     if (hasAccordion) {
