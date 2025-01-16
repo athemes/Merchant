@@ -388,28 +388,46 @@ class Merchant_Analytics_Data_Reports {
 		}
 
 		foreach ( $all_modules as $module_id => $module ) {
+			$data      = array();
 			$campaigns = $module['campaigns'] ?? array();
-			if ( empty( $campaigns ) ) {
-				continue;
-			}
-
-			$data = array();
-			foreach ( $campaigns as $campaign_id => $campaign ) {
-				$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
-				$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
-
-				// Prepare each campaign data
+			$this->data_provider->set_start_date( $second_period['start'] );
+			$this->data_provider->set_end_date( $second_period['end'] );
+			if ( ! empty( $module['campaigns'] ) ) {
+				foreach ( $campaigns as $campaign_id => $campaign ) {
+					$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
+					$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
+					$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
+					// Prepare each campaign data
+					$data[] = array(
+						'campaign_key' => $campaign['campaign_key'] ?? '',
+						'campaign_id'  => $campaign_id,
+						'title'        => $campaign['campaign_title'] ?? '',
+						'status'       => $campaign['campaign_status'] ?? 'active',
+						'impression'   => $impressions === 0 ? '-' : $impressions,
+						'clicks'       => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
+						'revenue'      => wc_price( $revenue ),
+						'ctr'          => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
+						'orders'       => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
+						'url'          => $campaign_url,
+					);
+				}
+			} elseif ( Merchant_Modules::is_module_active( $module_id ) ) {
+				// todo: check if we need to show analytics for inactive modules (only for non-campaigns modules)
+				$module_url  = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id ), 'admin.php' );
+				$impressions = $this->data_provider->get_module_impressions( $module_id );
+				$revenue     = $this->data_provider->get_module_revenue( $module_id );
+				// Prepare the module data
 				$data[] = array(
-					'campaign_key' => $campaign['campaign_key'] ?? '',
-					'campaign_id'  => $campaign_id,
-					'title'        => $campaign['campaign_title'] ?? '',
-					'status'       => $campaign['campaign_status'] ?? 'active',
+					'campaign_key' => '',
+					'campaign_id'  => '',
+					'title'        => '-',
+					'status'       => 'n\a',
 					'impression'   => $impressions === 0 ? '-' : $impressions,
-					'clicks'       => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-					'revenue'      => $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ),
-					'ctr'          => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period  ),
-					'orders'       => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-					'url'          => $campaign_url,
+					'clicks'       => $this->data_provider->get_module_clicks( $module_id ),
+					'revenue'      => wc_price( $revenue ),
+					'ctr'          => $this->get_module_ctr_change( $module_id, $first_period, $second_period ),
+					'orders'       => $this->data_provider->get_module_orders_count( $module_id ),
+					'url'          => $module_url,
 				);
 			}
 
