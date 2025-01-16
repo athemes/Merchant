@@ -458,6 +458,38 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Get the CTR change for the given module and date ranges.
+	 *
+	 * @param int   $module_id     The module ID.
+	 * @param array $first_period  The first date range.
+	 * @param array $second_period The second date range.
+	 *
+	 * @return array
+	 */
+	public function get_module_ctr_change( $module_id, $first_period, $second_period ) {
+		$this->data_provider->set_start_date( $first_period['start'] );
+		$this->data_provider->set_end_date( $first_period['end'] );
+
+		$ctr_first_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
+
+		$this->data_provider->set_start_date( $second_period['start'] );
+		$this->data_provider->set_end_date( $second_period['end'] );
+
+		$ctr_second_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
+
+		$ctr_difference = $ctr_second_period - $ctr_first_period;
+
+		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
+
+		return array(
+			'change'            => $change,
+			'ctr_difference'    => $ctr_difference,
+			'ctr_first_period'  => $ctr_first_period,
+			'ctr_second_period' => $ctr_second_period,
+		);
+	}
+
+	/**
 	 * Sort orders by timestamp in ascending order.
 	 *
 	 * @param array $orders The orders to sort.
