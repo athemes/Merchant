@@ -355,11 +355,13 @@ class Merchant_Analytics_Data_Reports {
 		/**
 		 * Filter the top performing campaigns data.
 		 *
-		 * @param array $db_campaigns The top performing campaigns data.
+		 * @param array $db_campaigns  The top performing campaigns data.
+		 * @param array $first_period  The first date range.
+		 * @param array $second_period The second date range.
 		 *
 		 * @since 2.0.0
 		 */
-		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns );
+		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns, $first_period, $second_period );
 		if ( ! empty( $db_campaigns ) ) {
 			foreach ( $db_campaigns as $campaign ) {
 				$this->data_provider->set_start_date( $second_period['start'] );
@@ -377,7 +379,6 @@ class Merchant_Analytics_Data_Reports {
 						'aov'           => $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ),
 						'ctr'           => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
 						'clicks'        => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-						// todo: add list for valid modules that can have impressions
 						'impressions'   => $impressions === 0 ? '-' : $impressions,
 						'campaign_info' => $campaign_info,
 					);
@@ -385,7 +386,16 @@ class Merchant_Analytics_Data_Reports {
 			}
 		}
 
-		return $campaigns;
+		/**
+		 * Filter the top performing campaigns data.
+		 *
+		 * @param array $campaigns     The top performing campaigns data.
+		 * @param array $first_period  The first date range.
+		 * @param array $second_period The second date range.
+		 *
+		 * @since 2.0.0
+		 */
+		return apply_filters( 'merchant_analytics_top_performing_campaigns_data', $campaigns, $first_period, $second_period );
 	}
 
 	/**
@@ -467,7 +477,16 @@ class Merchant_Analytics_Data_Reports {
 			}
 		}
 
-		return $campaigns_data;
+		/**
+		 * Filter all campaigns data for the campaigns report.
+		 *
+		 * @param array $campaigns_data All campaigns data.
+		 * @param array $first_period   The first date range.
+		 * @param array $second_period  The second date range.
+		 *
+		 * @since 2.0.0
+		 */
+		return apply_filters( 'merchant_analytics_all_campaigns_data', $campaigns_data, $first_period, $second_period );
 	}
 
 	/**
@@ -495,11 +514,29 @@ class Merchant_Analytics_Data_Reports {
 
 		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
 
-		return array(
-			'change'            => $change,
-			'ctr_difference'    => $ctr_difference,
-			'ctr_first_period'  => $ctr_first_period,
-			'ctr_second_period' => $ctr_second_period,
+		/**
+		 * Filter the CTR change for the given campaign and date ranges.
+		 *
+		 * @param array $data          The CTR change data.
+		 * @param int   $campaign_id   The campaign ID.
+		 * @param int   $module_id     The module ID.
+		 * @param array $first_period  The first date range.
+		 * @param array $second_period The second date range.
+		 *
+		 * @since 2.0.0
+		 */
+		return apply_filters(
+			'merchant_analytics_campaign_ctr_change',
+			array(
+				'change'            => $change,
+				'ctr_difference'    => $ctr_difference,
+				'ctr_first_period'  => $ctr_first_period,
+				'ctr_second_period' => $ctr_second_period,
+			),
+			$campaign_id,
+			$module_id,
+			$first_period,
+			$second_period
 		);
 	}
 
@@ -527,11 +564,27 @@ class Merchant_Analytics_Data_Reports {
 
 		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
 
-		return array(
-			'change'            => $change,
-			'ctr_difference'    => $ctr_difference,
-			'ctr_first_period'  => $ctr_first_period,
-			'ctr_second_period' => $ctr_second_period,
+		/**
+		 * Filter the CTR change for the given module id and date ranges.
+		 *
+		 * @param array $data          The CTR change data.
+		 * @param int   $module_id     The module ID.
+		 * @param array $first_period  The first date range.
+		 * @param array $second_period The second date range.
+		 *
+		 * @since 2.0.0
+		 */
+		return apply_filters(
+			'merchant_analytics_module_ctr_change',
+			array(
+				'change'            => $change,
+				'ctr_difference'    => $ctr_difference,
+				'ctr_first_period'  => $ctr_first_period,
+				'ctr_second_period' => $ctr_second_period,
+			),
+			$module_id,
+			$first_period,
+			$second_period
 		);
 	}
 
