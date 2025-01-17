@@ -30,7 +30,7 @@ foreach ( $all_modules as $module_group ) {
 <div class="merchant-modules-box">
 	<?php if ( $has_active_modules ) : ?>
 		<div class="merchant-modules-box-heading">
-			<?php esc_html_e( 'My Modules', 'merchant' ); ?>
+			<?php esc_html_e( 'Active Modules', 'merchant' ); ?>
 		</div>
 
 		<div class="merchant-modules-list">
