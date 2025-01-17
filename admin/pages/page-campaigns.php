@@ -114,7 +114,7 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
                         </td>
                         <td class="merchant__impressions"><?php echo esc_html( $campaign['impression'] ); ?></td>
                         <td class="merchant__clicks"><?php echo esc_html( $campaign['clicks'] ); ?></td>
-                        <td class="merchant__revenue"><?php echo wp_kses( wc_price( $campaign['revenue'] ), merchant_kses_allowed_tags( array( 'all' ) ) ); ?></td>
+                        <td class="merchant__revenue"><?php echo wp_kses($campaign['revenue'], merchant_kses_allowed_tags( array( 'all' ) ) ); ?></td>
                         <td class="merchant__ctr <?php echo esc_attr( $campaign['ctr']['change'][1] ); ?>"><?php echo esc_html( $campaign['ctr']['change'][0] === 0 ? '-' : $campaign['ctr']['change'][0] ); ?></td>
                         <td class="merchant__orders"><?php echo esc_html( $campaign['orders'] ); ?></td>
                         <td class="merchant__edit">
