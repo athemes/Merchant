@@ -341,8 +341,25 @@ class Merchant_Analytics_Data_Reports {
 	public function get_top_performing_campaigns( $first_period, $second_period ) {
 		$this->data_provider->set_start_date( $second_period['start'] );
 		$this->data_provider->set_end_date( $second_period['end'] );
-		$campaigns    = array();
-		$db_campaigns = $this->data_provider->get_top_performing_campaigns( 10 );
+		$campaigns = array();
+		/**
+		 * Filter the maximum number of top performing campaigns to retrieve.
+		 *
+		 * @param int $limit The maximum number of top performing campaigns to retrieve.
+		 *
+		 * @since 2.0.0
+		 */
+		$limit        = apply_filters( 'merchant_analytics_top_performing_campaigns_limit', 10 );
+		$db_campaigns = $this->data_provider->get_top_performing_campaigns( $limit );
+
+		/**
+		 * Filter the top performing campaigns data.
+		 *
+		 * @param array $db_campaigns The top performing campaigns data.
+		 *
+		 * @since 2.0.0
+		 */
+		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns );
 		if ( ! empty( $db_campaigns ) ) {
 			foreach ( $db_campaigns as $campaign ) {
 				$this->data_provider->set_start_date( $second_period['start'] );
