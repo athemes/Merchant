@@ -382,7 +382,15 @@ class Merchant_Analytics_Data_Reports {
 	public function get_all_campaigns( $first_period, $second_period ) {
 		$campaigns_data = array();
 
-		$all_modules = merchant_get_modules_data();
+		/**
+		 * Filter all modules data for the campaigns report.
+		 *
+		 * @param array $all_modules All modules data.
+		 *
+		 * @since 2.0.0
+		 */
+		$all_modules = apply_filters( 'merchant_analytics_all_modules_data_campaigns_table', merchant_get_modules_data() );
+
 		if ( empty( $all_modules ) ) {
 			return $campaigns_data;
 		}
