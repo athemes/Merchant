@@ -336,7 +336,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 		</div>
 
         <div class="merchant-analytics-panel merchant-analytics-panel__dashboard">
-			<?php require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
+			<?php // require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
         </div>
 
         <div class="merchant-modules-panel">
