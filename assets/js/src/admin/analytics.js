@@ -638,8 +638,8 @@
 				                data-campaign-id="${campaign.campaign_id}"
 				                data-row-count="${index}">
 				                <td><input type="checkbox" name="campaign_select[]" value="${campaign.title}" /></td>
-				                <td class="merchant__module-name js-module-name" data-module-id="${module_object.module_id}">${module_object.module_name}</td>
 				                <td class="merchant__campaign-name js-campaign-name">${campaign.title}</td>
+				                <td class="merchant__module-name js-module-name" data-module-id="${module_object.module_id}">${module_object.module_name}</td>
 				                <td class="merchant__status merchant-module-page-setting-field-switcher js-status">
 				                    ${campaign.status === 'active' || campaign.status === 'inactive' ?
 							`<div class="merchant-toggle-switch">
