@@ -399,16 +399,17 @@ class Merchant_Analytics_Data_Reports {
 					$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
 					// Prepare each campaign data
 					$data[] = array(
-						'campaign_key' => $campaign['campaign_key'] ?? '',
-						'campaign_id'  => $campaign_id,
-						'title'        => $campaign['campaign_title'] ?? '',
-						'status'       => $campaign['campaign_status'] ?? 'active',
-						'impression'   => $impressions === 0 ? '-' : $impressions,
-						'clicks'       => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-						'revenue'      => wc_price( $revenue ),
-						'ctr'          => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
-						'orders'       => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-						'url'          => $campaign_url,
+						'campaign_key'   => $campaign['campaign_key'] ?? '',
+						'campaign_id'    => $campaign_id,
+						'title'          => $campaign['campaign_title'] ?? '',
+						'status'         => $campaign['campaign_status'] ?? 'active',
+						'impression'     => $impressions === 0 ? '-' : $impressions,
+						'clicks'         => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
+						'revenue'        => wc_price( $revenue ),
+						'revenue_number' => $revenue,
+						'ctr'            => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
+						'orders'         => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
+						'url'            => $campaign_url,
 					);
 				}
 			} elseif ( Merchant_Modules::is_module_active( $module_id ) ) {
@@ -418,16 +419,17 @@ class Merchant_Analytics_Data_Reports {
 				$revenue     = $this->data_provider->get_module_revenue( $module_id );
 				// Prepare the module data
 				$data[] = array(
-					'campaign_key' => '',
-					'campaign_id'  => '',
-					'title'        => '-',
-					'status'       => 'n\a',
-					'impression'   => $impressions === 0 ? '-' : $impressions,
-					'clicks'       => $this->data_provider->get_module_clicks( $module_id ),
-					'revenue'      => wc_price( $revenue ),
-					'ctr'          => $this->get_module_ctr_change( $module_id, $first_period, $second_period ),
-					'orders'       => $this->data_provider->get_module_orders_count( $module_id ),
-					'url'          => $module_url,
+					'campaign_key'   => '',
+					'campaign_id'    => '',
+					'title'          => '-',
+					'status'         => 'n\a',
+					'impression'     => $impressions === 0 ? '-' : $impressions,
+					'clicks'         => $this->data_provider->get_module_clicks( $module_id ),
+					'revenue'        => wc_price( $revenue ),
+					'revenue_number' => $revenue,
+					'ctr'            => $this->get_module_ctr_change( $module_id, $first_period, $second_period ),
+					'orders'         => $this->data_provider->get_module_orders_count( $module_id ),
+					'url'            => $module_url,
 				);
 			}
 
