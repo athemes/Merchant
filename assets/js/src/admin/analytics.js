@@ -619,10 +619,19 @@
 		 * @param container - The container element for the table.
 		 */
 		updateAllCampaignsWithData: function (data, container) {
+			let self = this;
 			let rowsHTML = [];
 			let table_body = container.find('tbody');
-			container.find('table th').removeClass('asc desc');
 			table_body.empty();
+			container.find('table th').removeClass('asc desc');
+			container.find('.js-campaign-search').val('');
+			container.find('.no-results-message').hide();
+
+			let count = 0;
+
+			const $pagination = container.find('.js-pagination');
+			const rowsPerPage = parseInt($pagination.attr('data-rows-per-page'));
+
 			$.each(data, function (moduleIndex, module_object) {
 				// Extract module and campaign info
 				let moduleId = module_object.module_id;
@@ -630,13 +639,16 @@
 				if (module_object.campaigns.length > 0) {
 					// Loop through each campaign
 					module_object.campaigns.forEach((campaign, index) => {
+						count++;
 						let switcherId = `${moduleId}-campaign-${moduleIndex}-${index}`;
 						rowsHTML.push(`
 				            <tr
+				            	class="${count > rowsPerPage ? 'is-hidden' : ''}"
+				            	${count > rowsPerPage ? 'style="display: none;"' : ''}
 				                data-module-id="${moduleId}"
 				                data-campaign-key="${campaign.campaign_key}"
 				                data-campaign-id="${campaign.campaign_id}"
-				                data-row-count="${index}">
+				                data-row-count="${count}">
 				                <td><input type="checkbox" name="campaign_select[]" value="${campaign.title}" /></td>
 				                <td class="merchant__module-name js-module-name" data-module-id="${module_object.module_id}">${module_object.module_name}</td>
 				                <td class="merchant__campaign-name js-campaign-name">${campaign.title}</td>
@@ -672,6 +684,9 @@
 			});
 
 			$(table_body).append(rowsHTML.join(''));
+
+			// Reset pagination initial state
+			self.updatePaginationButtons(1, parseInt($pagination.attr('data-total-pages-initial')), parseInt($pagination.attr('data-total-rows-initial')));
 		},
 
 		/**
@@ -948,6 +963,7 @@
 			const searchInput = $('.js-campaign-search');
 			const filterSelect = $('.js-filter-module');
 			const bulkActionBtn = $('.js-bulk-action');
+			const $pagination = $( '.js-pagination' );
 
 			// "Select All" checkbox
 			table.find('thead th:first-child input[type="checkbox"]').on('change', function () {
@@ -1019,15 +1035,32 @@
 
 			// Search input
 			searchInput.on('input', self.debounce(function () {
-				// currentPage = 1;
 				self.filterTableTable(filterSelect.val(), table, $(this).val());
 			}, 300))
 
 			// Module filter
 			filterSelect.on('change', function () {
-				// currentPage = 1;
 				self.filterTableTable($(this).val(), table, '');
+				searchInput.val('');
 			});
+
+			// Pagination clicks
+			$pagination.on( 'click', '.pagination-button', function( e ) {
+				e.preventDefault();
+				let currentPage = parseInt( $( this ).attr( 'data-current-page' ) );
+
+				const nextPage = parseInt( $( this ).attr( 'data-page' ) );
+
+				if ( isNaN( nextPage ) || nextPage === currentPage ) {
+					return;
+				}
+
+				currentPage = nextPage;
+
+				self.paginateRows(currentPage,table.find('tbody tr'));
+
+				self.updatePaginationButtons(currentPage);
+			} );
 		},
 
 		/**
@@ -1088,6 +1121,9 @@
 			if (!$table.length) {
 				return;
 			}
+			const self = this;
+
+			let visibleCount = 0;
 
 			const $rows = $table.find('tbody tr');
 
@@ -1101,11 +1137,139 @@
 				const searchMatch = !searchTerm || campaignName.includes(searchTerm) || moduleName.includes(searchTerm);
 
 				if (moduleMatch && searchMatch) {
-					$row.show().removeClass('filtered-out');
+					$row.show().removeClass('filtered-out is-hidden');
+					visibleCount++;
 				} else {
 					$row.hide().addClass('filtered-out');
 				}
 			});
+
+			const currentPage = 1;
+			const totalRows  = visibleCount;
+			const rowsPerPage = parseInt($table.closest('.merchant-page-campaigns').find('.js-pagination').attr('data-rows-per-page'));
+			const totalPages = Math.max( 1, Math.ceil( totalRows / rowsPerPage ) );
+
+			// Update after filtering
+			self.paginateRows(currentPage, $rows);
+			self.updateNoResults( visibleCount === 0, $table );
+			self.updatePaginationButtons(currentPage, totalPages, totalRows);
+		},
+
+		/**
+		 * Update the table to show rows for the selected page.
+		 *
+		 * @param currentPage
+		 * @param $rows
+		 */
+		paginateRows: function ( currentPage = 1, $rows ) {
+			const $pagination = $('.js-pagination');
+
+			const rowsPerPage = parseInt( $pagination.attr( 'data-rows-per-page' ) );
+			const startIndex = ( currentPage - 1 ) * rowsPerPage;
+			const endIndex = startIndex + rowsPerPage;
+
+			$rows.hide().addClass( 'is-hidden' );
+
+			$rows
+				.filter( ':not(.filtered-out)' )
+				.each( function( index ) {
+					if ( index >= startIndex && index < endIndex ) {
+						$( this ).show().removeClass( 'is-hidden' );
+					}
+				}
+			);
+		},
+
+		/**
+		 * Show no rows found message.
+		 *
+		 * @param show
+		 * @param $table
+		 */
+		updateNoResults: function ( show, $table ) {
+			let $noResults = $table.next( '.no-results-message' );
+
+			if ( show ) {
+				if ( !$noResults.length ) {
+					$noResults = $( '<div class="no-results-message" style="">No matching campaigns found</div>' );
+					$table.after( $noResults );
+				}
+				$noResults.show();
+			} else if ( $noResults.length ) {
+				$noResults.hide();
+			}
+		},
+
+		/**
+		 * Update the pagination buttons.
+		 *
+		 * @param currentPage
+		 * @param totalPages
+		 * @param totalRows
+		 */
+		updatePaginationButtons: function( currentPage, totalPages, totalRows ) {
+			const $pagination = $('.js-pagination');
+
+			$pagination.attr( 'data-current-page', currentPage )
+
+			// If totalPages provided, update it to use the latest value
+			if ( totalPages ) {
+				$pagination.attr( 'data-total-pages', totalPages )
+			}
+			if ( totalRows ) {
+				$pagination.attr( 'data-total-rows', totalRows )
+			}
+
+			// Get the latest value
+			totalPages = parseInt( $pagination.attr( 'data-total-pages' ) );
+
+			let html = '';
+
+			if ( currentPage > 1 ) {
+				html += `
+		          <button class="pagination-button prev-page" data-page="${ currentPage - 1 }">
+		            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
+		              <path d="M5.16797 11.3301L0.521484 6.48047C0.394531 6.32812 0.34375 6.17578 0.34375 6.02344C0.34375 5.89648 0.394531 5.74414 0.496094 5.61719L5.14258 0.767578C5.37109 0.513672 5.77734 0.513672 6.00586 0.742188C6.25977 0.970703 6.25977 1.35156 6.03125 1.60547L1.79102 6.02344L6.05664 10.4922C6.28516 10.7207 6.28516 11.127 6.03125 11.3555C5.80273 11.584 5.39648 11.584 5.16797 11.3301Z"/>
+		            </svg>
+		          </button>
+				`;
+			}
+
+			if ( totalPages > 1 ) {
+				for ( let i = 1; i <= totalPages; i++ ) {
+					html += `
+          			<button class="pagination-button${ i === currentPage ? ' pagination-active' : '' }" data-page="${ i }">${ i }</button>
+				`;
+				}
+			}
+
+			if ( currentPage < totalPages ) {
+				html += `
+		          <button class="pagination-button next-page" data-page="${ currentPage + 1 }">
+		            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
+		              <path d="M1.80664 0.742188L6.45312 5.5918C6.55469 5.71875 6.63086 5.87109 6.63086 6.02344C6.63086 6.17578 6.55469 6.32812 6.45312 6.42969L1.80664 11.2793C1.57812 11.5332 1.17188 11.5332 0.943359 11.3047C0.689453 11.0762 0.689453 10.6953 0.917969 10.4414L5.18359 5.99805L0.917969 1.58008C0.689453 1.35156 0.689453 0.945312 0.943359 0.716797C1.17188 0.488281 1.57812 0.488281 1.80664 0.742188Z"/>
+		            </svg>
+		          </button>
+				`;
+			}
+
+			$pagination.html( html );
+
+			// Update results
+			const $paginationNotice = $('.js-pagination-results');
+			if ( totalPages > 1 ) {
+				const _totalRows = parseInt($pagination.attr( 'data-total-rows'))
+				const rowsPerPage = parseInt( $pagination.attr( 'data-rows-per-page' ) );
+				const startIndex = ( currentPage - 1 ) * rowsPerPage;
+				const endIndex = startIndex + rowsPerPage;
+
+				$paginationNotice.find( '.pagination-start-row' ).text(startIndex ? startIndex : 1)
+				$paginationNotice.find( '.pagination-end-row' ).text(endIndex > _totalRows ? _totalRows: endIndex)
+				$paginationNotice.find( '.pagination-total-rows' ).text(totalRows)
+				$paginationNotice.show();
+			} else {
+				$paginationNotice.hide();
+			}
 		},
 
 		/**

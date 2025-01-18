@@ -200,7 +200,7 @@ class Merchant_Analytics_Data_Ajax {
 			$data          = $this->reports->get_all_campaigns( $start_range, $compare_range );
 
 			$data = array_map( static function ( $item ) {
-				$item['revenue'] = wc_price( $item['revenue'] );
+				$item['revenue'] = wc_price( $item['revenue'] ?? '' );
 
 				return $item;
 			}, $data );

@@ -14,11 +14,25 @@ $date_ranges = $reports->get_last_and_previous_7_days_ranges();
 
 $campaigns_data = $reports->get_all_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 
-// Todo: pagination
-$total_rows = 0;
-$rows_per_page = 50;
+$total_rows = array_reduce(
+	$campaigns_data,
+	function ( $count, $module ) {
+		return $count + count( $module['campaigns'] ?? array() );
+	},
+	0
+);
+
+/**
+ * `merchant_all_campaigns_items_per_page`
+ *
+ * @since 2.0.0
+ */
+$rows_per_page = apply_filters( 'merchant_all_campaigns_items_per_page', 25 );
+
 $current_page  = isset( $_GET['page'] ) ? max( 1, (int) $_GET['page'] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $total_pages   = ceil( $total_rows / $rows_per_page );
+$start_row     = ( $current_page - 1 ) * $rows_per_page + 1;
+$end_row       = min( $current_page * $rows_per_page, $total_rows );
 ?>
 <div class="merchant-modules-header-heading merchant-modules-header-heading__campaigns">
     <?php esc_html_e( 'All Campaigns', 'merchant' ); ?>
@@ -93,12 +107,19 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
 				    continue;
 			    }
 
-			    foreach ( $module['campaigns'] as $campaign_index => $campaign ) : ?>
+			    foreach ( $module['campaigns'] as $campaign_index => $campaign ) :
+				    ++$count;
+				    $hide = $count > $rows_per_page;
+                    ?>
                     <tr
+                        class="<?php echo $hide ? esc_attr( 'is-hidden' ) : ''; ?>"
+	                    <?php if ( $hide ) : ?>
+                            style="display: none;"
+	                    <?php endif; ?>
                         data-module-id="<?php echo esc_attr( $module_id ); ?>"
                         data-campaign-key="<?php echo esc_attr( $campaign['campaign_key'] ?? '' ); ?>"
                         data-campaign-id="<?php echo esc_attr( $campaign['campaign_id'] ); ?>"
-                        data-row-count="<?php echo esc_attr( ++$count ); ?>">
+                        data-row-count="<?php echo esc_attr( $count ); ?>">
                         <td><input type="checkbox" name="campaign_select[]" value="<?php echo esc_attr( $campaign['title'] ); ?>" /></td>
                         <td class="merchant__module-name js-module-name" data-module-id="<?php echo esc_attr( $module['module_id'] ); ?>"><?php echo esc_html( $module['module_name'] ); ?></td>
                         <td class="merchant__campaign-name js-campaign-name"><?php echo esc_html( $campaign['title'] ); ?></td>
@@ -133,39 +154,56 @@ $total_pages   = ceil( $total_rows / $rows_per_page );
             </tbody>
         </table>
 
-        <div
-            class="merchant__campaigns-pagination js-pagination"
-            data-total-rows="<?php echo esc_attr( $total_rows ); ?>"
-            data-total-pages="<?php echo esc_attr( $total_pages ); ?>"
-            data-rows-per-page="<?php echo esc_attr( $rows_per_page ); ?>"
-            data-current-page="<?php echo esc_attr( $current_page ); ?>">
-		    <?php if ( $total_pages > 1 ) : ?>
-                <button
-                    class="pagination-button prev-page"
-                    data-page="<?php echo esc_attr( $current_page - 1 ); ?>"
-				    <?php if ( $current_page === 1 ) : ?>
-                        style="display: none;"
-				    <?php endif; ?>>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
-                        <path d="M5.16797 11.3301L0.521484 6.48047C0.394531 6.32812 0.34375 6.17578 0.34375 6.02344C0.34375 5.89648 0.394531 5.74414 0.496094 5.61719L5.14258 0.767578C5.37109 0.513672 5.77734 0.513672 6.00586 0.742188C6.25977 0.970703 6.25977 1.35156 6.03125 1.60547L1.79102 6.02344L6.05664 10.4922C6.28516 10.7207 6.28516 11.127 6.03125 11.3555C5.80273 11.584 5.39648 11.584 5.16797 11.3301Z"/>
-                    </svg>
-                </button>
+        <div class="merchant__campaigns-pagination-section">
+            <div
+                class="merchant__campaigns-pagination js-pagination"
+                data-total-rows="<?php echo esc_attr( $total_rows ); ?>"
+                data-total-rows-initial="<?php echo esc_attr( $total_rows ); ?>"
+                data-total-pages="<?php echo esc_attr( $total_pages ); ?>"
+                data-total-pages-initial="<?php echo esc_attr( $total_pages ); ?>"
+                data-rows-per-page="<?php echo esc_attr( $rows_per_page ); ?>"
+                data-current-page="<?php echo esc_attr( $current_page ); ?>">
+		        <?php if ( $total_pages > 1 ) : ?>
+                    <button
+                        class="pagination-button prev-page"
+                        data-page="<?php echo esc_attr( $current_page - 1 ); ?>"
+				        <?php if ( $current_page === 1 ) : ?>
+                            style="display: none;"
+				        <?php endif; ?>>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
+                            <path d="M5.16797 11.3301L0.521484 6.48047C0.394531 6.32812 0.34375 6.17578 0.34375 6.02344C0.34375 5.89648 0.394531 5.74414 0.496094 5.61719L5.14258 0.767578C5.37109 0.513672 5.77734 0.513672 6.00586 0.742188C6.25977 0.970703 6.25977 1.35156 6.03125 1.60547L1.79102 6.02344L6.05664 10.4922C6.28516 10.7207 6.28516 11.127 6.03125 11.3555C5.80273 11.584 5.39648 11.584 5.16797 11.3301Z"/>
+                        </svg>
+                    </button>
 
-			    <?php for ( $_page = 1; $_page <= $total_pages; $_page++ ) : ?>
-                    <button class="pagination-button<?php echo esc_attr( $_page === $current_page ? ' pagination-active' : '' ); ?>"  data-page="<?php echo esc_attr( $_page ); ?>"><?php echo esc_html( $_page ); ?></button>
-			    <?php endfor;?>
+			        <?php for ( $_page = 1; $_page <= $total_pages; $_page++ ) : ?>
+                        <button class="pagination-button<?php echo esc_attr( $_page === $current_page ? ' pagination-active' : '' ); ?>"  data-page="<?php echo esc_attr( $_page ); ?>"><?php echo esc_html( $_page ); ?></button>
+			        <?php endfor;?>
 
-                <button
-                    class="pagination-button next-page"
-                    data-page="<?php echo esc_attr( $current_page + 1 ); ?>"
-				    <?php if ( $current_page >= $total_pages ) : ?>
-                        style="display: none;"
-				    <?php endif; ?>>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
-                        <path d="M1.80664 0.742188L6.45312 5.5918C6.55469 5.71875 6.63086 5.87109 6.63086 6.02344C6.63086 6.17578 6.55469 6.32812 6.45312 6.42969L1.80664 11.2793C1.57812 11.5332 1.17188 11.5332 0.943359 11.3047C0.689453 11.0762 0.689453 10.6953 0.917969 10.4414L5.18359 5.99805L0.917969 1.58008C0.689453 1.35156 0.689453 0.945312 0.943359 0.716797C1.17188 0.488281 1.57812 0.488281 1.80664 0.742188Z"/>
-                    </svg>
-                </button>
-		    <?php endif; ?>
+                    <button
+                        class="pagination-button next-page"
+                        data-page="<?php echo esc_attr( $current_page + 1 ); ?>"
+				        <?php if ( $current_page >= $total_pages ) : ?>
+                            style="display: none;"
+				        <?php endif; ?>>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
+                            <path d="M1.80664 0.742188L6.45312 5.5918C6.55469 5.71875 6.63086 5.87109 6.63086 6.02344C6.63086 6.17578 6.55469 6.32812 6.45312 6.42969L1.80664 11.2793C1.57812 11.5332 1.17188 11.5332 0.943359 11.3047C0.689453 11.0762 0.689453 10.6953 0.917969 10.4414L5.18359 5.99805L0.917969 1.58008C0.689453 1.35156 0.689453 0.945312 0.943359 0.716797C1.17188 0.488281 1.57812 0.488281 1.80664 0.742188Z"/>
+                        </svg>
+                    </button>
+		        <?php endif; ?>
+            </div>
+            <?php if ( $total_pages > 1 ) : ?>
+            <div class="merchant__campaigns-pagination-results js-pagination-results">
+                <?php
+                printf(
+                    /* translators: 1: Start number, 2: End number, 3: Total rows */
+	                esc_html__( 'Showing %1$s to %2$s of %3$s items', 'merchant' ),
+	                '<span class="pagination-start-row">' . esc_html( $start_row ) . '</span>',
+	                '<span class="pagination-end-row">' . esc_html( $end_row ) . '</span>',
+	                '<span class="pagination-total-rows">' . esc_html( $total_rows ) . '</span>'
+                );
+                ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
