@@ -19,9 +19,9 @@ $merchant_modules = Merchant_Admin_Modules::get_modules();
             </a>
         </div>
 
-        <div class="merchant-modules-header-heading"><?php esc_html_e( 'Explore All 40+ Modules', 'merchant' ); ?> <?php esc_html_e('👍', 'merchant'); ?></div>
+        <div class="merchant-modules-header-heading"><?php esc_html_e( 'Explore All Merchant Modules', 'merchant' ); ?></div>
 
-        <div class="merchant-modules-header-subheading"><?php esc_html_e( 'Quickly navigate through all the modules and customize each in real-time to transform your store', 'merchant' ); ?></div>
+        <div class="merchant-modules-header-subheading"><?php esc_html_e( 'Select any module to configure its settings and enable it for your store.', 'merchant' ); ?></div>
 
         <div class="merchant-modules-header-status">
             <div class="merchant-modules-header-status-box">

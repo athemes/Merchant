@@ -86,8 +86,8 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
             <thead>
             <tr>
                 <th class="no-sort"><input type="checkbox"/></th>
-                <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Module Name', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Campaign Name', 'merchant' ); ?></th>
+                <th class="merchant-sort" data-sort="string"><?php echo esc_html__( 'Module Name', 'merchant' ); ?></th>
                 <th><?php echo esc_html__( 'Status', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="int"><?php echo esc_html__( 'Impressions', 'merchant' ); ?></th>
                 <th class="merchant-sort" data-sort="int"> <?php echo esc_html__( 'Clicks', 'merchant' ); ?></th>
@@ -121,8 +121,8 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
                         data-campaign-id="<?php echo esc_attr( $campaign['campaign_id'] ); ?>"
                         data-row-count="<?php echo esc_attr( $count ); ?>">
                         <td><input type="checkbox" name="campaign_select[]" value="<?php echo esc_attr( $campaign['title'] ); ?>" /></td>
-                        <td class="merchant__module-name js-module-name" data-module-id="<?php echo esc_attr( $module['module_id'] ); ?>"><?php echo esc_html( $module['module_name'] ); ?></td>
                         <td class="merchant__campaign-name js-campaign-name"><?php echo esc_html( $campaign['title'] ); ?></td>
+                        <td class="merchant__module-name js-module-name" data-module-id="<?php echo esc_attr( $module['module_id'] ); ?>"><?php echo esc_html( $module['module_name'] ); ?></td>
                         <td class="merchant__status merchant-module-page-setting-field-switcher js-status">
 						    <?php
 						    if ( in_array( $campaign['status'], array( 'active', 'inactive' ), true ) ) {
@@ -135,7 +135,7 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
                         </td>
                         <td class="merchant__impressions"><?php echo esc_html( $campaign['impression'] ); ?></td>
                         <td class="merchant__clicks"><?php echo esc_html( $campaign['clicks'] ); ?></td>
-                        <td class="merchant__revenue"><?php echo wp_kses( wc_price( $campaign['revenue'] ), merchant_kses_allowed_tags( array( 'all' ) ) ); ?></td>
+                        <td class="merchant__revenue"><?php echo wp_kses($campaign['revenue'], merchant_kses_allowed_tags( array( 'all' ) ) ); ?></td>
                         <td class="merchant__ctr <?php echo esc_attr( $campaign['ctr']['change'][1] ); ?>"><?php echo esc_html( $campaign['ctr']['change'][0] === 0 ? '-' : $campaign['ctr']['change'][0] ); ?></td>
                         <td class="merchant__orders"><?php echo esc_html( $campaign['orders'] ); ?></td>
                         <td class="merchant__edit">
