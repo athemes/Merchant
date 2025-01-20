@@ -40,7 +40,7 @@
   "scripts": {
     "start": "gulp",
     "zip": "gulp zip",
-    "zip-remote-upload": "gulp zip && gulp upload-file-to-remote --local-path /home/rodrigo/docker/athemes/athemesdev/ --remote-path /var/www/html/wp-content/plugins/ --file-name merchant.zip",
+    "zip-remote-upload": "gulp zip && gulp copy-file-to-remote --local-path /home/rodrigo/docker/athemes/dev/wp-content/plugins/ --remote-path /var/www/html/wp-content/plugins/ --file-name merchant.zip && gulp unzip-remote-file --local-path /home/rodrigo/docker/athemes/athemesdev/ --remote-path /var/www/html/wp-content/plugins/ --file-name merchant.zip",
     "production": "gulp production",
     "styles": "gulp styles",
     "styles-rtl": "gulp stylesRTL",
