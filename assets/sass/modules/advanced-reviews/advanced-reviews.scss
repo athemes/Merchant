@@ -497,7 +497,7 @@ body {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(#212121, 0.8);
@@ -723,6 +723,10 @@ body {
 					}
 
 					&.comment-form-cookies-consent {
+						input,
+						label {
+							display: inline;
+						}
 						input {
 							border-width: 1px;
 							border-radius: 2px;

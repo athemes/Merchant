@@ -89,7 +89,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'exclusion_enabled',
 							'type'       => 'switcher',
 							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-							'desc'       => esc_html__( 'Select the products that will not show the offer.', 'merchant' ),
+							'desc'       => esc_html__( 'Select products to exclude from the campaign.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',
