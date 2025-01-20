@@ -876,3 +876,141 @@ if ( ! function_exists( 'merchant_get_product_reviews_count' ) ) {
 		return $product ? $product->get_review_count() : 0;
 	}
 }
+
+if ( ! function_exists( 'merchant_get_modules_campaign_data' ) ) {
+	/**
+	 * Retrieves campaign data for a specific module.
+	 *
+	 * This function fetches campaign data based on the provided module ID and processes it
+	 * into a standardized format. The campaigns are indexed by their `flexible_id` (expected to be a UUID v4)
+	 * and include details such as ID, title, and status.
+	 *
+	 * @param string $module_id The ID of the module for which to retrieve campaign data.
+	 *                          Expected values include constants like `Merchant_Buy_X_Get_Y::MODULE_ID`,
+	 *                          `Merchant_Pre_Orders::MODULE_ID`, and `Merchant_Product_Labels::MODULE_ID`.
+	 *
+	 * @return array An associative array of campaigns, where each key is the `flexible_id` (UUID v4)
+	 *               of the campaign, and the value is an array containing the campaign's `id`, `title`,
+	 *               and `status`.
+	 *               Example:
+	 *               [
+	 *                   '550e8400-e29b-41d4-a716-446655440000' => [
+	 *                       'id'     => '550e8400-e29b-41d4-a716-446655440000',
+	 *                       'title'  => 'Campaign Title',
+	 *                       'status' => 'active',
+	 *                   ],
+	 *                   'f47ac10b-58cc-4372-a567-0e02b2c3d479' => [
+	 *                       'id'     => 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+	 *                       'title'  => 'Another Campaign',
+	 *                       'status' => 'inactive',
+	 *                   ],
+	 *               ]
+	 */
+	function merchant_get_module_campaigns_data( $module_id ) {
+		$campaigns = array();
+
+		// Determine the key to use based on the module ID
+		$key = '';
+		if ( Merchant_Buy_X_Get_Y::MODULE_ID === $module_id || Merchant_Pre_Orders::MODULE_ID === $module_id ) {
+			$key = 'rules';
+		} elseif ( Merchant_Product_Labels::MODULE_ID === $module_id ) {
+			$key = 'labels';
+		} else {
+			$key = 'offers';
+		}
+
+		// Fetch the module campaigns
+		$module_campaigns = Merchant_Admin_Options::get( $module_id, $key, array() );
+		if ( empty( $module_campaigns ) ) {
+			return $campaigns;
+		}
+
+		// Process each campaign
+		foreach ( $module_campaigns as $campaign ) {
+			if ( empty( $campaign['flexible_id'] ) ) {
+				continue;
+			}
+
+			$campaigns[ $campaign['flexible_id'] ] = array(
+				'campaign_key'    => $key,
+				'campaign_id'     => $campaign['flexible_id'],
+				'campaign_title'  => $campaign['offer-title'] ?? $campaign['label-title'] ?? '',
+				'campaign_status' => empty( $campaign['disable_campaign'] ) ? 'active' : 'inactive',
+			);
+		}
+
+		return $campaigns;
+	}
+}
+
+if ( ! function_exists( 'merchant_get_modules_data' ) ) {
+	/**
+	 * Get the data of all the modules.
+	 *
+	 * @return array
+	 */
+	function merchant_get_modules_data() {
+		$modules            = array();
+		$registered_modules = Merchant_Admin_Modules::get_modules();
+		foreach ( $registered_modules as $module_category => $module_data ) {
+			foreach ( $module_data['modules'] as $module_id => $module ) {
+				$modules[ $module_id ] = array(
+					'id'       => $module_id,
+					'active'   => Merchant_Modules::is_module_active( $module_id ),
+					'name'     => $module['title'],
+					'desc'     => $module['desc'],
+					'category' => $module_category,
+					'pro'      => $module['pro'],
+				);
+
+				$campaigns = merchant_get_module_campaigns_data( $module_id );
+
+				if ( ! empty( $campaigns ) ) {
+					$modules[ $module_id ]['campaigns'] = $campaigns;
+				}
+			}
+		}
+
+		return $modules;
+	}
+}
+
+if ( ! function_exists( 'merchant_get_campaign_data' ) ) {
+	/**
+	 * Get the data of a specific campaign.
+	 *
+	 * @param string $campaign_id The ID of the campaign.
+	 * @param string $module_id   The ID of the module.
+	 *
+	 * @return array
+	 */
+	function merchant_get_campaign_data( $campaign_id, $module_id ) {
+		if ( Merchant_Buy_X_Get_Y::MODULE_ID === $module_id || Merchant_Pre_Orders::MODULE_ID === $module_id ) {
+			$key = 'rules';
+		} elseif ( Merchant_Product_Labels::MODULE_ID === $module_id ) {
+			$key = 'labels';
+		} else {
+			$key = 'offers';
+		}
+
+		$all_modules      = merchant_get_modules_data();
+		$module_campaigns = Merchant_Admin_Options::get( $module_id, $key, array() );
+		if ( ! empty( $module_campaigns ) ) {
+			foreach ( $module_campaigns as $campaign ) {
+				if ( isset( $all_modules[ $module_id ], $campaign['flexible_id'] ) && $campaign_id === $campaign['flexible_id'] ) {
+					return array(
+						'campaign_id'      => $campaign['flexible_id'],
+						'campaign_title'   => $campaign['offer-title'] ?? $campaign['label-title'] ?? '',
+						'campaign_status'  => $campaign['status'] ?? 'active',
+						'module_id'        => $module_id,
+						'module_name'      => $all_modules[ $module_id ]['name'],
+						'is_pro'           => $all_modules[ $module_id ]['pro'],
+						'is_module_active' => $all_modules[ $module_id ]['active'],
+					);
+				}
+			}
+		}
+
+		return array();
+	}
+}

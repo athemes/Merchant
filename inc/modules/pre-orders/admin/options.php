@@ -36,6 +36,13 @@ Merchant_Admin_Options::create(
 						'title-field' => 'offer-title', // text field ID to use as title for the layout
 						'fields'      => array(
 							array(
+								'id'      => 'disable_campaign',
+								'type'    => 'switcher',
+								'title'   => esc_html__( 'Disable Campaign', 'merchant' ),
+								'desc'    => esc_html__( 'Turn this option on to disable the entire campaign.', 'merchant' ),
+								'default' => 0,
+							),
+							array(
 								'id'      => 'offer-title',
 								'type'    => 'text',
 								'title'   => esc_html__( 'Order name', 'merchant' ),

@@ -42,8 +42,100 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			}
 
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+			add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'analytics_assets' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
 			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
+		}
+
+        /**
+         * Enqueue assets for analytics page.
+         *
+         * @return void
+         */
+		public function analytics_assets( $hook ) {
+            $section = sanitize_text_field( $_GET['section'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( $hook === 'toplevel_page_merchant' && $section !== 'settings' ) {
+				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
+				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
+				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				wp_enqueue_script( 'apexcharts', MERCHANT_URI . 'assets/js/vendor/apexcharts.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
+				wp_enqueue_script( 'merchant-analytics', MERCHANT_URI . 'assets/js/admin/analytics.js', array( 'jquery', 'apexcharts' ), MERCHANT_VERSION, true );
+				wp_localize_script( 'merchant-analytics', 'merchant_analytics', array(
+					'nonce'           => wp_create_nonce( 'merchant' ),
+					'ajax_url'        => admin_url( 'admin-ajax.php' ),
+					'currency_name'   => get_woocommerce_currency(),
+					'currency_symbol' => get_woocommerce_currency_symbol(),
+					'labels'          => array(
+						'orders'     => esc_html__( 'orders', 'merchant' ),
+						'orders_aov' => esc_html__( 'Orders AOV', 'merchant' ),
+					),
+				) );
+
+				wp_localize_script( 'merchant-analytics', 'merchant_datepicker_locale', array(
+					wp_json_encode(
+						array(
+							'days'        => array(
+								esc_html__( 'Sunday', 'merchant' ),
+								esc_html__( 'Monday', 'merchant' ),
+								esc_html__( 'Tuesday', 'merchant' ),
+								esc_html__( 'Wednesday', 'merchant' ),
+								esc_html__( 'Thursday', 'merchant' ),
+								esc_html__( 'Friday', 'merchant' ),
+								esc_html__( 'Saturday', 'merchant' ),
+							),
+							'daysShort'   => array(
+								esc_html__( 'Sun', 'merchant' ),
+								esc_html__( 'Mon', 'merchant' ),
+								esc_html__( 'Tue', 'merchant' ),
+								esc_html__( 'Wed', 'merchant' ),
+								esc_html__( 'Thu', 'merchant' ),
+								esc_html__( 'Fri', 'merchant' ),
+								esc_html__( 'Sat', 'merchant' ),
+							),
+							'daysMin'     => array(
+								esc_html__( 'Su', 'merchant' ),
+								esc_html__( 'Mo', 'merchant' ),
+								esc_html__( 'Tu', 'merchant' ),
+								esc_html__( 'We', 'merchant' ),
+								esc_html__( 'Th', 'merchant' ),
+								esc_html__( 'Fr', 'merchant' ),
+								esc_html__( 'Sa', 'merchant' ),
+							),
+							'months'      => array(
+								esc_html__( 'January', 'merchant' ),
+								esc_html__( 'February', 'merchant' ),
+								esc_html__( 'March', 'merchant' ),
+								esc_html__( 'April', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'June', 'merchant' ),
+								esc_html__( 'July', 'merchant' ),
+								esc_html__( 'August', 'merchant' ),
+								esc_html__( 'September', 'merchant' ),
+								esc_html__( 'October', 'merchant' ),
+								esc_html__( 'November', 'merchant' ),
+								esc_html__( 'December', 'merchant' ),
+							),
+							'monthsShort' => array(
+								esc_html__( 'Jan', 'merchant' ),
+								esc_html__( 'Feb', 'merchant' ),
+								esc_html__( 'Mar', 'merchant' ),
+								esc_html__( 'Apr', 'merchant' ),
+								esc_html__( 'May', 'merchant' ),
+								esc_html__( 'Jun', 'merchant' ),
+								esc_html__( 'Jul', 'merchant' ),
+								esc_html__( 'Aug', 'merchant' ),
+								esc_html__( 'Sep', 'merchant' ),
+								esc_html__( 'Oct', 'merchant' ),
+								esc_html__( 'Nov', 'merchant' ),
+								esc_html__( 'Dec', 'merchant' ),
+							),
+							'clear'       => esc_html__( 'Clear', 'merchant' ),
+						)
+					),
+				) );
+			}
 		}
 
 		/**
@@ -97,11 +189,11 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				1
 			);
 
-			// Enabled Modules.
+			// All Modules.
 			add_submenu_page(
 				$this->plugin_slug,
-				esc_html__('Enabled Modules', 'merchant'),
-				esc_html__('Enabled Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
+				esc_html__('Modules', 'merchant'),
 				'manage_options',
 				'admin.php?page=merchant&section=modules',
 				'',
@@ -119,6 +211,28 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				3
 			);
 
+
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Campaigns', 'merchant'),
+				esc_html__('Campaigns', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=campaigns',
+				'',
+				4
+			);
+
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Analytics', 'merchant'),
+				esc_html__('Analytics', 'merchant'),
+				'manage_options',
+				'admin.php?page=merchant&section=analytics',
+				'',
+				5
+			);
+
+
 			// Add 'aThemes Patcher' link
 			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page
 				'merchant',
@@ -127,11 +241,12 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'manage_options',
 				'athemes-patcher-preview-mp',
 				array( $this, 'html_patcher' ),
-				4
+				6
 			);
 
+
 			// Add 'Upgrade' link.
-			if( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
 				add_submenu_page(
 					$this->plugin_slug,
 					esc_html__('Upgrade to Pro', 'merchant'),
@@ -139,8 +254,99 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					'manage_options',
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
-					5
+            7
 				);
+			}
+		}
+
+        /**
+         * Add admin bar menu.
+         *
+         * @param WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance.
+         */
+		public function add_admin_bar_menu( $wp_admin_bar ) {
+			// Check if the current user has the capability to manage options
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			// Parent menu item (Dashboard)
+			$wp_admin_bar->add_node( array(
+				'id'    => 'merchant-dashboard',
+				'title' => esc_html__( 'Merchant', 'merchant' ), // Use your plugin name or page title
+				'href'  => admin_url( 'admin.php?page=merchant' ), // Link to the main dashboard
+				'meta'  => array(
+					'title' => esc_html__( 'Merchant Dashboard', 'merchant' ),
+				),
+			) );
+
+			// Dashboard Sub Item
+			$wp_admin_bar->add_node( array(
+				'id'     => 'merchant-dashboard-sub',
+				'parent' => 'merchant-dashboard',
+				'title'  => esc_html__( 'Dashboard', 'merchant' ),
+				'href'   => admin_url( 'admin.php?page=merchant' ),
+				'meta'   => array(
+					'title' => esc_html__( 'Dashboard', 'merchant' ),
+				),
+			) );
+
+			// All Modules
+			$wp_admin_bar->add_node( array(
+				'id'     => 'merchant-modules',
+				'parent' => 'merchant-dashboard',
+				'title'  => esc_html__( 'Modules', 'merchant' ),
+				'href'   => admin_url( 'admin.php?page=merchant&section=modules' ),
+				'meta'   => array(
+					'title' => esc_html__( 'Modules', 'merchant' ),
+				),
+			) );
+
+			// Settings
+			$wp_admin_bar->add_node( array(
+				'id'     => 'merchant-settings',
+				'parent' => 'merchant-dashboard',
+				'title'  => esc_html__( 'Settings', 'merchant' ),
+				'href'   => admin_url( 'admin.php?page=merchant&section=settings' ),
+				'meta'   => array(
+					'title' => esc_html__( 'Settings', 'merchant' ),
+				),
+			) );
+
+			// Campaigns
+			$wp_admin_bar->add_node( array(
+				'id'     => 'merchant-campaigns',
+				'parent' => 'merchant-dashboard',
+				'title'  => esc_html__( 'Campaigns', 'merchant' ),
+				'href'   => admin_url( 'admin.php?page=merchant&section=campaigns' ),
+				'meta'   => array(
+					'title' => esc_html__( 'Campaigns', 'merchant' ),
+				),
+			) );
+
+			// Analytics
+			$wp_admin_bar->add_node( array(
+				'id'     => 'merchant-analytics',
+				'parent' => 'merchant-dashboard',
+				'title'  => esc_html__( 'Analytics', 'merchant' ),
+				'href'   => admin_url( 'admin.php?page=merchant&section=analytics' ),
+				'meta'   => array(
+					'title' => esc_html__( 'Analytics', 'merchant' ),
+				),
+			) );
+
+			// Upgrade to Pro (if not already defined)
+			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
+				$wp_admin_bar->add_node( array(
+					'id'     => 'merchant-upgrade',
+					'parent' => 'merchant-dashboard',
+					'title'  => esc_html__( 'Upgrade to Pro', 'merchant' ),
+					'href'   => 'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
+					'meta'   => array(
+						'title'  => esc_html__( 'Upgrade to Pro', 'merchant' ),
+						'target' => '_blank', // Open link in a new tab
+					),
+				) );
 			}
 		}
 
