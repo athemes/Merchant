@@ -254,7 +254,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					'manage_options',
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
-          7
+            7
 				);
 			}
 		}
