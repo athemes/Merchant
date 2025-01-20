@@ -30,7 +30,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'product_navigation_mode',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Navigation Mode', 'merchant' ),
-			'desc'    => esc_html__( 'Choose to show navigation links in default order or within the same category or tag.', 'merchant' ),
+			'desc'    => esc_html__( 'Choose to show navigation links in the default order (following Products > All Products) or within the same category or tag.', 'merchant' ),
 			'options' => array(
 				'default'  => esc_html__( 'Default', 'merchant' ),
 				'category' => esc_html__( 'Category', 'merchant' ),
