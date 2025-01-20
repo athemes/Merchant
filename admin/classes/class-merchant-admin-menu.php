@@ -37,9 +37,34 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				return;
 			}
 
+			if( $this->is_patcher_page() ) {
+				add_action('admin_enqueue_scripts', array( $this, 'enqueue_patcher_scripts' ));
+			}
+
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
 			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
+		}
+
+		/**
+		 * Is aThemes Patcher page.
+		 * 
+		 * @return bool
+		 */
+		public function is_patcher_page() {
+			global $pagenow;
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return $pagenow === 'admin.php' && ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] === 'athemes-patcher-preview-mp' );
+		}
+
+		/**
+		 * Enqueue aThemes Patcher preview scripts and styles.
+		 * 
+		 * @return void
+		 */
+		public function enqueue_patcher_scripts() {
+			wp_enqueue_style( 'wp-components' );
 		}
 
 		/**
@@ -94,6 +119,17 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				3
 			);
 
+			// Add 'aThemes Patcher' link
+			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page
+				'merchant',
+				esc_html__('Patcher', 'merchant'),
+				esc_html__('Patcher', 'merchant'),
+				'manage_options',
+				'athemes-patcher-preview-mp',
+				array( $this, 'html_patcher' ),
+				4
+			);
+
 			// Add 'Upgrade' link.
 			if( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
 				add_submenu_page(
@@ -103,7 +139,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					'manage_options',
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
-					4
+					5
 				);
 			}
 		}
@@ -233,6 +269,15 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
                 });
             </script>
 			<?php
+		}
+
+		/**
+		 * HTML aThemes Patcher.
+		 *
+		 * @return void 
+		 */
+		public function html_patcher() {
+			require_once MERCHANT_DIR . 'admin/pages/page-patcher.php';
 		}
 	}
 
