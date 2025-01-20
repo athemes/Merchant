@@ -723,6 +723,10 @@ body {
 					}
 
 					&.comment-form-cookies-consent {
+						input,
+						label {
+							display: inline;
+						}
 						input {
 							border-width: 1px;
 							border-radius: 2px;
