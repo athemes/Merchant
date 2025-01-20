@@ -37,6 +37,10 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				return;
 			}
 
+			if( $this->is_patcher_page() ) {
+				add_action('admin_enqueue_scripts', array( $this, 'enqueue_patcher_scripts' ));
+			}
+
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'analytics_assets' ) );
@@ -135,6 +139,27 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 		}
 
 		/**
+		 * Is aThemes Patcher page.
+		 * 
+		 * @return bool
+		 */
+		public function is_patcher_page() {
+			global $pagenow;
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return $pagenow === 'admin.php' && ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] === 'athemes-patcher-preview-mp' );
+		}
+
+		/**
+		 * Enqueue aThemes Patcher preview scripts and styles.
+		 * 
+		 * @return void
+		 */
+		public function enqueue_patcher_scripts() {
+			wp_enqueue_style( 'wp-components' );
+		}
+
+		/**
 		 * Include required classes.
 		 *
 		 * @return void
@@ -186,6 +211,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				3
 			);
 
+
 			add_submenu_page(
 				$this->plugin_slug,
 				esc_html__('Campaigns', 'merchant'),
@@ -206,6 +232,19 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				5
 			);
 
+
+			// Add 'aThemes Patcher' link
+			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page
+				'merchant',
+				esc_html__('Patcher', 'merchant'),
+				esc_html__('Patcher', 'merchant'),
+				'manage_options',
+				'athemes-patcher-preview-mp',
+				array( $this, 'html_patcher' ),
+				6
+			);
+
+
 			// Add 'Upgrade' link.
 			if ( ! defined( 'MERCHANT_PRO_VERSION' ) ) {
 				add_submenu_page(
@@ -215,7 +254,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					'manage_options',
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
-					6
+          7
 				);
 			}
 		}
@@ -436,6 +475,15 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
                 });
             </script>
 			<?php
+		}
+
+		/**
+		 * HTML aThemes Patcher.
+		 *
+		 * @return void 
+		 */
+		public function html_patcher() {
+			require_once MERCHANT_DIR . 'admin/pages/page-patcher.php';
 		}
 	}
 
