@@ -28,6 +28,13 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
+							'id'      => 'disable_campaign',
+							'type'    => 'switcher',
+							'title'   => esc_html__( 'Disable Campaign', 'merchant' ),
+							'desc'    => esc_html__( 'Turn this option on to disable the entire campaign.', 'merchant' ),
+							'default' => 0,
+						),
+						array(
 							'id'      => 'offer-title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer name', 'merchant' ),
@@ -293,6 +300,49 @@ Merchant_Admin_Options::create( array(
 							'multiple'  => true,
 							'classes'   => array( 'flex-grow' ),
 							'condition' => array( 'user_condition', '==', 'customers' ),
+						),
+
+						array(
+							'id'         => 'user_exclusion_enabled',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
+							'desc'       => esc_html__( 'Select the users that will not show the offer.', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'user_condition',
+										'operator' => 'in',
+										'value'    => array( 'all', 'roles' ),
+									),
+								),
+							),
+						),
+
+						array(
+							'id'         => 'exclude_users',
+							'type'       => 'select_ajax',
+							'title'      => esc_html__( 'Exclude Users', 'merchant' ),
+							'desc'       => esc_html__( 'This will exclude the offer for the selected customers.', 'merchant' ),
+							'source'     => 'user',
+							'multiple'   => true,
+							'classes'    => array( 'flex-grow' ),
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'user_condition',
+										'operator' => 'in',
+										'value'    => array( 'all', 'roles' ),
+									),
+									array(
+										'field'    => 'user_exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 
 						array(

@@ -301,7 +301,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings, $text ) {
 		?>
-
         <div class="mrc-preview-single-product-elements">
             <div class="mrc-preview-left-column">
                 <div class="mrc-preview-product-image-wrapper">
@@ -326,7 +325,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
                 </div>
             </div>
         </div>
-
 		<?php
 	}
 

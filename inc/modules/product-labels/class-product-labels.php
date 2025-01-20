@@ -690,6 +690,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
+				if ( ! empty( $label['disable_campaign'] ) ) {
+					continue;
+				}
+
                 if ( ! isset( $label['show_pages'] ) ) {
 	                $label['show_pages'] = array( 'homepage', 'single', 'archive' );
                 }

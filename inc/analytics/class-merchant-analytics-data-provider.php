@@ -62,7 +62,8 @@ class Merchant_Analytics_Data_Provider {
 	 * @throws InvalidArgumentException If the date format is invalid.
 	 */
 	private function validate_date( $date ) {
-		$d = DateTime::createFromFormat( 'Y-m-d H:i:s', $date );
+		$date .= ' 23:59:59'; // make the date compatible with the format without forcing the user to select the time.
+		$d    = DateTime::createFromFormat( 'Y-m-d H:i:s', $date );
 		if ( $d && $d->format( 'Y-m-d H:i:s' ) === $date ) {
 			return $date;
 		}
@@ -447,6 +448,21 @@ class Merchant_Analytics_Data_Provider {
 	}
 
 	/**
+	 * Get module CTR percentage.
+	 *
+	 * @return float The module CTR percentage or 0 if not found.
+	 */
+	public function get_module_ctr_percentage( $module_id ) {
+		$module_orders_count = $this->get_module_clicks( $module_id );
+		$module_impressions  = $this->get_module_impressions( $module_id );
+		if ( $module_impressions > 0 && $module_orders_count > 0 ) {
+			return ( $module_orders_count / $module_impressions ) * 100;
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Get the top performing campaigns.
 	 *
 	 * @return array The top performing campaigns.
@@ -550,22 +566,36 @@ class Merchant_Analytics_Data_Provider {
 	 * @return float The module revenue.
 	 */
 	public function get_module_revenue( $module_id ) {
-		$module_revenue = $this->analytics
-			->distinct( 'order_id' )
+		$revenue           = 0;
+		$db_orders_records = $this->analytics
 			->where( 'order_id > %d', 0 )
 			->where( 'event_type = %s', 'order' )
 			->where( 'module_id = %s', $module_id )
-			->sum( 'order_subtotal' )
 			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
-			->first();
+			->get();
 
-		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+		$this->analytics->reset_query();
 
-		if ( ! empty( $module_revenue ) ) {
-			return $module_revenue['sum_order_subtotal'];
+		$grouped_orders = array();
+		foreach ( $db_orders_records as $order ) {
+			$order_id      = $order['order_id'];
+			$product_id    = $order['source_product_id'];
+			$campaign_cost = (float) $order['campaign_cost'];
+
+			if ( ! isset( $grouped_orders[ $order_id ] ) ) {
+				$grouped_orders[ $order_id ] = array( 'products' => array() );
+			}
+
+			if ( ! isset( $grouped_orders[ $order_id ]['products'][ $product_id ] ) || $campaign_cost > $grouped_orders[ $order_id ]['products'][ $product_id ] ) {
+				$grouped_orders[ $order_id ]['products'][ $product_id ] = $campaign_cost;
+			}
 		}
 
-		return 0;
+		foreach ( $grouped_orders as $order ) {
+			$revenue += array_sum( $order['products'] );
+		}
+
+		return $revenue;
 	}
 
 	/**
