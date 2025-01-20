@@ -46,7 +46,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				echo esc_html( wc_format_decimal( $added_revenue['revenue_change'][0], 2 ) ) ?>%
 			</div>
 			<span class="info-icon" data-tooltip="<?php
-			esc_attr_e( '💰 How much extra cash flowed in between your dates.', 'merchant' ); ?>"></span>
+			esc_attr_e( 'Revenue added by Merchant.', 'merchant' ); ?>"></span>
 		</div>
 		<div class="overview-card total-orders">
 			<div class="card-title"><?php
@@ -58,7 +58,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				echo esc_html( wc_format_decimal( $added_orders['orders_change'][0], 2 ) ) ?>%
 			</div>
 			<span class="info-icon" data-tooltip="<?php
-			esc_attr_e( '📦 More or fewer orders? Here’s the gap.', 'merchant' ); ?>"></span>
+			esc_attr_e( 'Total number of orders involving Merchant.', 'merchant' ); ?>"></span>
 		</div>
 		<div class="overview-card aov">
 			<div class="card-title"><?php
@@ -70,7 +70,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				echo esc_html( wc_format_decimal( $aov_rate['change'][0], 2 ) ) ?>%
 			</div>
 			<span class="info-icon" data-tooltip="<?php
-			esc_attr_e( '💸 Did customers spend more or less per order?', 'merchant' ); ?>"></span>
+			esc_attr_e( 'Average order value for Merchant orders.', 'merchant' ); ?>"></span>
 		</div>
 		<div class="overview-card conversion-rate">
 			<div class="card-title"><?php
@@ -83,7 +83,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				echo esc_html( wc_format_decimal( $conversion_rate['change'][0], 2 ) ) ?>%
 			</div>
 			<span class="info-icon" data-tooltip="<?php
-			esc_attr_e( '📊 Did more visitors turn into buyers?', 'merchant' ); ?>"></span>
+			esc_attr_e( 'The percentage of Merchant offer viewers who made a purchase.', 'merchant' ); ?>"></span>
 		</div>
 		<div class="overview-card impressions">
 			<div class="card-title"><?php
@@ -96,7 +96,7 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				echo esc_html( wc_format_decimal( $impressions['change'][0], 2 ) ) ?>%
 			</div>
 			<span class="info-icon" data-tooltip="<?php
-			esc_attr_e( '👀 How many more eyes saw your content?', 'merchant' ); ?>"></span>
+			esc_attr_e( 'The number of times Merchant offers were seen.', 'merchant' ); ?>"></span>
 		</div>
 	</div>
 </div>
