@@ -75,11 +75,7 @@ class Merchant_Clear_Cart extends Merchant_Add_Module {
 			'style'                       => 'solid',
         );
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
