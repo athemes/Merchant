@@ -62,7 +62,8 @@ class Merchant_Analytics_Data_Provider {
 	 * @throws InvalidArgumentException If the date format is invalid.
 	 */
 	private function validate_date( $date ) {
-		$d = DateTime::createFromFormat( 'Y-m-d H:i:s', $date );
+		$date .= ' 23:59:59'; // make the date compatible with the format without forcing the user to select the time.
+		$d    = DateTime::createFromFormat( 'Y-m-d H:i:s', $date );
 		if ( $d && $d->format( 'Y-m-d H:i:s' ) === $date ) {
 			return $date;
 		}

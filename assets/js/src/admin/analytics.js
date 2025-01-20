@@ -727,7 +727,7 @@
 					locale: JSON.parse(merchant_datepicker_locale),
 					range: true,
 					position: 'bottom right',
-					timepicker: true,
+					timepicker: false,
 					timeFormat: 'HH:mm:59',
 					dateFormat: 'yyyy-MM-dd',
 					selectedDates: selectedDates, // Set the selected dates
