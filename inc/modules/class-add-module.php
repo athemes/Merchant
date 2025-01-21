@@ -147,57 +147,6 @@ class Merchant_Add_Module {
 	}
 
 	/**
-	 * Todo: remove if not used anywhere.
-	 *
-	 * Get preview URL
-	 *
-	 * @param array $args
-	 *
-	 * @return string
-	 */
-	public function set_module_preview_url( $args = array() ) {
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		// Type based preview url
-		if ( isset( $args['type'] ) ) {
-			switch ( $args['type'] ) {
-				case 'shop':
-					if ( function_exists( 'wc_get_page_id' ) ) {
-						$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
-					}
-					break;
-
-				case 'product':
-					$query_args = array(
-						'post_type'      => 'product',
-						'posts_per_page' => 1,
-					);
-
-					if ( isset( $args['query'] ) ) {
-						$products = ( new WP_Query( wp_parse_args( $args['query'], $query_args ) ) )->get_posts();
-
-						// If no results can be found with the custom query,
-						// then use the default args
-						if ( empty( $products ) || ! isset( $products[0] ) ) {
-							$products = ( new WP_Query( $query_args ) )->get_posts();
-						}
-					} else {
-						$products = ( new WP_Query( $query_args ) )->get_posts();
-					}
-
-					if ( ! empty( $products ) && isset( $products[0] ) ) {
-						$preview_url = get_permalink( $products[0] );
-					}
-
-					break;
-			}
-		}
-
-		return $preview_url;
-	}
-
-	/**
 	 * Add module.
 	 *
 	 */
