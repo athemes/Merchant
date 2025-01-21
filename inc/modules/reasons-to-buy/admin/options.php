@@ -28,11 +28,14 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'title',
 					'fields'      => array(
 						array(
-							'id'      => 'disable_campaign',
-							'type'    => 'switcher',
-							'title'   => esc_html__( 'Disable Campaign', 'merchant' ),
-							'desc'    => esc_html__( 'Turn this option on to disable the entire campaign.', 'merchant' ),
-							'default' => 0,
+							'id'      => 'campaign_status',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Status', 'merchant' ),
+							'options' => array(
+								'active'   => esc_html__( 'Active', 'merchant' ),
+								'inactive' => esc_html__( 'Inactive', 'merchant' ),
+							),
+							'default' => 'active',
 						),
 						array(
 							'id'      => 'title',
