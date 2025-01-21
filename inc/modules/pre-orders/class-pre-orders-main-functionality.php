@@ -1479,7 +1479,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$current_time   = merchant_get_current_timestamp();
 
 		foreach ( $rules as $rule ) {
-			if ( ! empty( $rule['disable_campaign'] ) ) {
+			if ( isset( $rule['campaign_status'] ) && $rule['campaign_status'] === 'inactive' ) {
 				continue;
 			}
 

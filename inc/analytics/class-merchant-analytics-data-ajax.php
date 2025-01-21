@@ -280,10 +280,10 @@ class Merchant_Analytics_Data_Ajax {
 
 					foreach ( $db_campaigns as &$item ) {
 						if ( isset( $item['flexible_id'] ) && $item['flexible_id'] === $campaign_id ) {
-							if ( $status === 'inactive' ) {
-								$item['disable_campaign'] = true;
+							if ( $status === 'active' ) {
+								$item['campaign_status'] = 'active';
 							} else {
-								unset( $item['disable_campaign'] );
+								$item['campaign_status'] = 'inactive';
 							}
 							$new_status    = $status;
 							$should_update = true;
