@@ -1281,7 +1281,7 @@
 		 */
 		updateCampaignStatus: async function (campaignData, el, checkboxes, singleRow = false) {
 			const self = this;
-			const $table = el.closest('.campaigns-table').find('.js-campaigns-table');
+			const $table = el.closest('.all-campaigns-table').find('.js-campaigns-table'); // $ sign is used to indicate that it is a jQuery object
 
 			const $loader = '<span class="spinner is-active"></span>';
 
@@ -1306,14 +1306,14 @@
 					'POST'
 				).then((response) => {
 					if (response.success) {
+
 						if (!singleRow) {
+							// Change the toggle of the selected campaigns
 							checkboxes?.each(function () {
-								$table.find('thead th:first-child input[type="checkbox"]').prop('checked', false);
 								$(this)
-									.prop('checked', false)
 									.closest('tr')
 									.find('.js-status input[type="checkbox"]')
-									.prop('checked', response.data.status === 'active');
+									.prop('checked', response.data.status === 'active')
 							});
 						}
 
@@ -1329,9 +1329,14 @@
 					$('.spinner').remove();
 					el.prop('disabled', false);
 
+					// Uncheck checkboxes & remove opacity
 					if (singleRow) {
 						el.closest('tr').css('opacity', '');
 					} else {
+						checkboxes?.each(function () {
+							$table.find('thead th:first-child input[type="checkbox"]').prop('checked', false);
+							$(this).prop('checked', false)
+						});
 						$table.css('opacity', '');
 					}
 				})
