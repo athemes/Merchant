@@ -711,8 +711,9 @@
 		 * @param {jQuery} container - The container element for the chart.
 		 * @param {Object} options - Options for the date picker.
 		 * @param {Function} options.onSelectHandler - Callback function for date selection.
+		 * @param {Object} options.datePickerArgs - Additional arguments for the date picker.
 		 */
-		datePickerInit: function (container, {onSelectHandler}) {
+		datePickerInit: function (container, {onSelectHandler, datePickerArgs}) {
 			const inputs = container.find('.date-range-input');
 
 			inputs.each(function () {
@@ -722,22 +723,25 @@
 				if (initialValue) {
 					selectedDates = initialValue.split(' - ').map(dateStr => new Date(dateStr.trim()));
 				}
-				new AirDatepicker(datePicker.getPath(), {
-					maxDate: new Date(),
-					locale: JSON.parse(merchant_datepicker_locale),
-					range: true,
-					position: 'bottom right',
-					dateFormat: 'yyyy-MM-dd',
-					selectedDates: selectedDates, // Set the selected dates
-					multipleDatesSeparator: ' - ',
-					onSelect: function (data) {
-						if (typeof onSelectHandler === 'function') {
-							onSelectHandler(data);
-						} else {
-							console.error('onSelectHandler is not a function');
+				const dpArgs = {
+					...{
+						maxDate: new Date(),
+						locale: JSON.parse(merchant_datepicker_locale),
+						range: true,
+						position: 'bottom right',
+						dateFormat: 'yyyy-MM-dd',
+						selectedDates: selectedDates, // Set the selected dates
+						multipleDatesSeparator: ' - ',
+						onSelect: function (data) {
+							if (typeof onSelectHandler === 'function') {
+								onSelectHandler(data);
+							}
 						}
-					}
-				});
+					},
+					...datePickerArgs
+				};
+
+				new AirDatepicker(datePicker.getPath(), dpArgs);
 			});
 		},
 
