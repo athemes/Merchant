@@ -553,7 +553,7 @@
 		updatePerformingCampaignsTable: async function (dates) {
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('merchant_get_top_performing_campaigns_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					this.prepareAjaxData('merchant_get_top_performing_campaigns_table_data', dates.startDate, dates.endDate, '', ''),
 					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
 				);
 				if (response.success) {
@@ -602,7 +602,7 @@
 		                <td>${campaign.campaign_info.module_name}: ${campaign.campaign_info.campaign_title}</td>
 		                <td>${campaign.impressions}</td>
 		                <td>${campaign.clicks}</td>
-		                <td class="${campaign.ctr.change[1]}">${campaign.ctr.change[0] === 0 ? '-' : campaign.ctr.change[0]}</td>
+		                <td class="ctr">${campaign.ctr}</td>
 		                <td>${campaign.orders}</td>
 		                <td>${campaign.revenue}</td>
 		            </tr>
@@ -853,21 +853,20 @@
 				onSelectHandler: () => {
 					// Get both date range inputs
 					const firstInput = container.find('.first-date-range .date-range-input');
-					const secondInput = container.find('.second-date-range .date-range-input');
 
 					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
-					const secondDateRange = secondInput.val().split(' - ').map(dateStr => dateStr.trim());
 
 					// Ensure both date ranges have exactly two dates
-					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
+					if (firstDateRange.length === 2) {
 						self.updatePerformingCampaignsTable({
 							startDate: firstDateRange[0],
 							endDate: firstDateRange[1],
-							compareStartDate: secondDateRange[0],
-							compareEndDate: secondDateRange[1],
 							container: container
 						});
 					}
+				},
+				datePickerArgs: {
+					position: 'top right',
 				}
 			});
 

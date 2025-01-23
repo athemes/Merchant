@@ -333,14 +333,13 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * Get top performing campaigns for the given date ranges.
 	 *
-	 * @param array $first_period  The first date range.
-	 * @param array $second_period The second date range.
+	 * @param array $date_range The date range.
 	 *
 	 * @return array
 	 */
-	public function get_top_performing_campaigns( $first_period, $second_period ) {
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
+	public function get_top_performing_campaigns( $date_range ) {
+		$this->data_provider->set_start_date( $date_range['start'] );
+		$this->data_provider->set_end_date( $date_range['end'] );
 		$campaigns = array();
 		/**
 		 * Filter the maximum number of top performing campaigns to retrieve.
@@ -355,33 +354,34 @@ class Merchant_Analytics_Data_Reports {
 		/**
 		 * Filter the top performing campaigns data.
 		 *
-		 * @param array $db_campaigns  The top performing campaigns data.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
+		 * @param array $db_campaigns The top performing campaigns data.
+		 * @param array $date_range   The date range.
 		 *
 		 * @since 2.0.0
 		 */
-		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns, $first_period, $second_period );
+		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns, $date_range );
 		if ( ! empty( $db_campaigns ) ) {
 			foreach ( $db_campaigns as $campaign ) {
-				$this->data_provider->set_start_date( $second_period['start'] );
-				$this->data_provider->set_end_date( $second_period['end'] );
 				$module_id     = $campaign['module_id'];
 				$campaign_id   = $campaign['campaign_id'];
 				$campaign_info = merchant_get_campaign_data( $campaign_id, $module_id );
 				$impressions   = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
 				if ( ! empty( $campaign_info ) ) {
-					$campaigns[] = array(
-						'module_id'     => $module_id,
-						'campaign_id'   => $campaign_id,
-						'revenue'       => $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ),
-						'orders'        => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-						'aov'           => $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ),
-						'ctr'           => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
-						'clicks'        => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-						'impressions'   => $impressions === 0 ? '-' : $impressions,
-						'campaign_info' => $campaign_info,
-					);
+					$modules = $this->get_analytics_modules();
+					if ( array_key_exists( $module_id, $modules ) ) {
+						$module      = $modules[ $module_id ];
+						$campaigns[] = array(
+							'module_id'     => $module_id,
+							'campaign_id'   => $campaign_id,
+							'revenue'       => $module['metrics']['revenue'] ? $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ) : '-',
+							'orders'        => $module['metrics']['orders_count'] ? $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ) : '-',
+							'aov'           => $module['metrics']['aov'] ? $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ) : '-',
+							'ctr'           => $module['metrics']['ctr'] ? $this->get_campaign_ctr_change( $campaign_id, $module_id, $date_range ) : '-',
+							'clicks'        => $module['metrics']['clicks'] ? $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ) : '-',
+							'impressions'   => $module['metrics']['impressions'] ? $impressions : '-',
+							'campaign_info' => $campaign_info,
+						);
+					}
 				}
 			}
 		}
@@ -389,13 +389,12 @@ class Merchant_Analytics_Data_Reports {
 		/**
 		 * Filter the top performing campaigns data.
 		 *
-		 * @param array $campaigns     The top performing campaigns data.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
+		 * @param array $campaigns  The top performing campaigns data.
+		 * @param array $date_range The date range.
 		 *
 		 * @since 2.0.0
 		 */
-		return apply_filters( 'merchant_analytics_top_performing_campaigns_data', $campaigns, $first_period, $second_period );
+		return apply_filters( 'merchant_analytics_top_performing_campaigns_data', $campaigns, $date_range );
 	}
 
 	/**
@@ -517,6 +516,38 @@ class Merchant_Analytics_Data_Reports {
 		$this->data_provider->set_end_date( $first_period['end'] );
 
 		return (int) $this->data_provider->get_module_ctr_percentage( $module_id );
+	}
+
+	/**
+	 * Get all analytics modules.
+	 *
+	 * @return array
+	 */
+	private function get_analytics_modules() {
+		$modules = array();
+
+		/**
+		 * Filter all modules data for the campaigns report.
+		 *
+		 * @param array $all_modules All modules data.
+		 *
+		 * @since 2.0.0
+		 */
+		$all_modules = apply_filters( 'merchant_analytics_all_modules_data_campaigns_table', merchant_get_modules_data() );
+		foreach ( $all_modules as $module_id => $module ) {
+			if ( Merchant_Modules::is_module_active( $module_id ) ) {
+				$module_object = Merchant_Modules::get_module( $module_id );
+				if ( $module_object->has_analytics() ) {
+					$modules[ $module_id ] = array(
+						'module_object' => $module_object,
+						'metrics'       => $module_object->analytics_metrics(),
+						'data'          => $module,
+					);
+				}
+			}
+		}
+
+		return $modules;
 	}
 
 	/**
