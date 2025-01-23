@@ -86,6 +86,26 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		$metrics                = $this->default_analytics_metrics();
+		$metrics['impressions'] = false;
+
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $metrics, $this->module_id, $this );
+	}
+
+	/**
 	 * Init translations.
 	 *
 	 * @return void
