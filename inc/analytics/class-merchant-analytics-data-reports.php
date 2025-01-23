@@ -406,73 +406,63 @@ class Merchant_Analytics_Data_Reports {
 	 */
 	public function get_all_campaigns( $period ) {
 		$campaigns_data = array();
-
-		/**
-		 * Filter all modules data for the campaigns report.
-		 *
-		 * @param array $all_modules All modules data.
-		 *
-		 * @since 2.0.0
-		 */
-		$all_modules = apply_filters( 'merchant_analytics_all_modules_data_campaigns_table', merchant_get_modules_data() );
+		$all_modules    = $this->get_analytics_modules();
 
 		if ( empty( $all_modules ) ) {
 			return $campaigns_data;
 		}
 
 		foreach ( $all_modules as $module_id => $module ) {
-			if ( Merchant_Modules::is_module_active( $module_id ) ) {
-				$data      = array();
-				$campaigns = $module['campaigns'] ?? array();
-				$this->data_provider->set_start_date( $period['start'] );
-				$this->data_provider->set_end_date( $period['end'] );
-				if ( ! empty( $module['campaigns'] ) ) {
-					foreach ( $campaigns as $campaign_id => $campaign ) {
-						$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
-						$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
-						$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
-						// Prepare each campaign data
-						$data[] = array(
-							'campaign_key'   => $campaign['campaign_key'] ?? '',
-							'campaign_id'    => $campaign_id,
-							'title'          => $campaign['campaign_title'] ?? '',
-							'status'         => $campaign['campaign_status'] ?? 'active',
-							'impression'     => $impressions === 0 ? '-' : $impressions,
-							'clicks'         => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-							'revenue'        => wc_price( $revenue ),
-							'revenue_number' => $revenue,
-							'ctr'            => $this->get_campaign_ctr_change( $campaign_id, $module_id, $period ),
-							'orders'         => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-							'url'            => $campaign_url,
-						);
-					}
-				} else {
-					$module_url  = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id ), 'admin.php' );
-					$impressions = $this->data_provider->get_module_impressions( $module_id );
-					$revenue     = $this->data_provider->get_module_revenue( $module_id );
-					// Prepare the module data
+			$data      = array();
+			$campaigns = $module['data']['campaigns'] ?? array();
+			$this->data_provider->set_start_date( $period['start'] );
+			$this->data_provider->set_end_date( $period['end'] );
+			if ( ! empty( $module['data']['campaigns'] ) ) {
+				foreach ( $campaigns as $campaign_id => $campaign ) {
+					$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
+					$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
+					$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
+					// Prepare each campaign data
 					$data[] = array(
-						'campaign_key'   => '',
-						'campaign_id'    => '',
-						'title'          => '-',
-						'status'         => 'n\a',
-						'impression'     => $impressions === 0 ? '-' : $impressions,
-						'clicks'         => $this->data_provider->get_module_clicks( $module_id ),
-						'revenue'        => wc_price( $revenue ),
-						'revenue_number' => $revenue,
-						'ctr'            => $this->get_module_ctr_change( $module_id, $period, $period ),
-						'orders'         => $this->data_provider->get_module_orders_count( $module_id ),
-						'url'            => $module_url,
+						'campaign_key'   => $campaign['campaign_key'] ?? '',
+						'campaign_id'    => $campaign_id,
+						'title'          => $campaign['campaign_title'] ?? '',
+						'status'         => $campaign['campaign_status'] ?? 'active',
+						'impression'     => $module['metrics']['impressions'] ? $impressions : '-',
+						'clicks'         => $module['metrics']['clicks'] ? $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ) : '-',
+						'revenue'        => $module['metrics']['revenue'] ? wc_price( $revenue ) : '-',
+						'revenue_number' => $module['metrics']['revenue'] ? $revenue : '-',
+						'ctr'            => $module['metrics']['ctr'] ? $this->get_campaign_ctr_change( $campaign_id, $module_id, $period ) : '-',
+						'orders'         => $module['metrics']['orders_count'] ? $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ) : '-',
+						'url'            => $campaign_url,
 					);
 				}
-
-				// Prepare the campaigns data
-				$campaigns_data[] = array(
-					'module_id'   => $module_id,
-					'module_name' => esc_html( $module['name'] ?? '' ),
-					'campaigns'   => $data,
+			} else {
+				$module_url  = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id ), 'admin.php' );
+				$impressions = $this->data_provider->get_module_impressions( $module_id );
+				$revenue     = $this->data_provider->get_module_revenue( $module_id );
+				// Prepare the module data
+				$data[] = array(
+					'campaign_key'   => '',
+					'campaign_id'    => '',
+					'title'          => '-',
+					'status'         => 'n\a',
+					'impression'     => $module['metrics']['impressions'] ? $impressions : '-',
+					'clicks'         => $module['metrics']['clicks'] ? $this->data_provider->get_module_clicks( $module_id ) : '-',
+					'revenue'        => $module['metrics']['revenue'] ? wc_price( $revenue ) : '-',
+					'revenue_number' => $module['metrics']['revenue'] ? $revenue : '-',
+					'ctr'            => $module['metrics']['ctr'] ? $this->get_module_ctr_change( $module_id, $period ) : '-',
+					'orders'         => $module['metrics']['orders_count'] ? $this->data_provider->get_module_orders_count( $module_id ) : '-',
+					'url'            => $module_url,
 				);
 			}
+
+			// Prepare the campaigns data
+			$campaigns_data[] = array(
+				'module_id'   => $module_id,
+				'module_name' => esc_html( $module['data']['name'] ?? '' ),
+				'campaigns'   => $data,
+			);
 		}
 
 		/**
