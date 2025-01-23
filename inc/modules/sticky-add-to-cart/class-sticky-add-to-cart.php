@@ -35,6 +35,13 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 	public static $module_settings = array();
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
