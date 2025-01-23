@@ -32,6 +32,13 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	const MODULE_TEMPLATES = 'modules/' . self::MODULE_ID;
 
 	/**
+     * Set the module as having analytics.
+     *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
