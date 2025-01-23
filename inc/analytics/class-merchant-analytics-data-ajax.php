@@ -62,6 +62,9 @@ class Merchant_Analytics_Data_Ajax {
 	public function get_revenue_chart_data() {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
+
+		$this->verify_capability();
+
 		try {
 			// Get the date ranges.
 			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -84,6 +87,8 @@ class Merchant_Analytics_Data_Ajax {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
 
+		$this->verify_capability();
+
 		try {
 			// Get the date ranges.
 			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -105,6 +110,8 @@ class Merchant_Analytics_Data_Ajax {
 	public function get_analytics_cards_data() {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
+
+		$this->verify_capability();
 
 		try {
 			$start_date         = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -180,6 +187,8 @@ class Merchant_Analytics_Data_Ajax {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
 
+		$this->verify_capability();
+
 		try {
 			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
 			$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
@@ -210,6 +219,9 @@ class Merchant_Analytics_Data_Ajax {
 	public function get_impressions_chart_data() {
 		// nonce verification.
 		check_ajax_referer( 'merchant', 'nonce' );
+
+		$this->verify_capability();
+
 		try {
 			// Get the date ranges.
 			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -228,9 +240,7 @@ class Merchant_Analytics_Data_Ajax {
 	public function update_campaign_status() {
 		check_ajax_referer( 'merchant', 'nonce' );
 
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( esc_html__( 'You are not allowed to do this.', 'merchant' ), 403 );
-		}
+		$this->verify_capability();
 
 		$campaign_data = $_POST['campaign_data'] ?? array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
@@ -300,6 +310,22 @@ class Merchant_Analytics_Data_Ajax {
 		}
 
 		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ), 400 );
+	}
+
+	/**
+	 * Verify capability.
+	 */
+	private function verify_capability() {
+		/**
+		 * Filter to verify capability.
+		 *
+		 * @param bool $verify_capability Default is true.
+		 *
+		 * @since 1.10.0
+		 */
+		if ( apply_filters( 'merchant_analytics_data_ajax_verify_capability', true ) && ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'You are not allowed to do this.', 'merchant' ), 403 );
+		}
 	}
 }
 
