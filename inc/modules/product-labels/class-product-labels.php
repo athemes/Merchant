@@ -682,7 +682,7 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
-				if ( ! empty( $label['disable_campaign'] ) ) {
+				if ( isset( $label['campaign_status'] ) && $label['campaign_status'] === 'inactive' ) {
 					continue;
 				}
 
