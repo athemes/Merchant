@@ -41,6 +41,13 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 		public $dummy_product;
 
 		/**
+		 * Set the module as having analytics.
+		 *
+		 * @var bool
+		 */
+		protected $has_analytics = true;
+
+		/**
 		 * Constructor.
 		 *
 		 */
