@@ -21,7 +21,7 @@ $merchant_notifications_pro = apply_filters( 'merchant_notifications_pro', false
 $merchant_notification_tabs = apply_filters( 'merchant_notification_tabs', false );
 $merchant_notification_read = $this->is_latest_notification_read();
 ?>
-<div class="merchant-top-bar">
+<div class="merchant-top-bar merchant-top-bar__dashboard">
 	<a href="https://athemes.com/?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-top-bar-logo" target="_blank">
 		<svg width="96" height="24" viewBox="0 0 96 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M23.4693 1.32313L8.45381 14.3107L0.67962 4.82163L23.4693 1.32313Z" fill="#335EEA"/>
@@ -173,7 +173,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 	</div>
 </div>
 
-<div class="wrap merchant-wrap">
+<div class="wrap merchant-wrap merchant-wrap__dashboard">
 
 	<?php if ( ! empty( $_GET['module'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 
