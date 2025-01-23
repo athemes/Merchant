@@ -84,6 +84,40 @@ class Merchant_Add_Module {
 	}
 
 	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $this->default_analytics_metrics(), $this->module_id, $this );
+	}
+
+	/**
+	 * Get analytics metrics.
+	 *
+	 * @return array List of available metrics.
+	 */
+	protected function default_analytics_metrics() {
+		return array(
+			'campaigns'    => true,
+			'impressions'  => true,
+			'clicks'       => true,
+			'ctr'          => true,
+			'revenue'      => true,
+			'orders_count' => true,
+			'aov'          => true,
+		);
+	}
+
+	/**
 	 * Active modules class handler.
 	 *
 	 */
