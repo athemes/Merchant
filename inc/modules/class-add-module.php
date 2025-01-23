@@ -49,6 +49,8 @@ class Merchant_Add_Module {
 	 */
 	public $has_shortcode = false;
 
+	protected $has_analytics = false;
+
 	/**
 	 * Constructor.
 	 *
@@ -70,6 +72,15 @@ class Merchant_Add_Module {
 			add_action( 'wp', array( $this, 'setup_product_object' ) );
 			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
 		}
+	}
+
+	/**
+	 * Check if the module has analytics.
+	 *
+	 * @return bool
+	 */
+	public function has_analytics() {
+		return $this->has_analytics;
 	}
 
 	/**
