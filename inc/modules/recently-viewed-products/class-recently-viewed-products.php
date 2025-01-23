@@ -29,6 +29,13 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 * 
 	 */
