@@ -573,7 +573,7 @@
 		updateAllCampaignsTable: async function (dates) {
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('merchant_get_all_campaigns_table_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					this.prepareAjaxData('merchant_get_all_campaigns_table_data', dates.startDate, dates.endDate, '', ''),
 					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
 				);
 				if (response.success) {
@@ -667,7 +667,7 @@
 				                <td class="merchant__impressions">${campaign.impression}</td>
 				                <td class="merchant__clicks">${campaign.clicks}</td>
 				                <td class="merchant__revenue">${campaign.revenue ?? '-'}</td>
-				                <td class="merchant__ctr ${campaign.ctr.change[1]}">${campaign.ctr.change[0] === 0 ? '-' : campaign.ctr.change[0]}</td>
+				                <td class="merchant__ctr">${campaign.ctr}</td>
 				                <td class="merchant__orders">${campaign.orders}</td>
 				                <td class="merchant__edit">
 				                    <a href="${module_object.edit_url || '#'}" target="_blank">
@@ -720,18 +720,16 @@
 				const initialValue = datePicker.val();
 				let selectedDates = [];
 				if (initialValue) {
-					selectedDates = initialValue.split(',').map(dateStr => new Date(dateStr.trim()));
+					selectedDates = initialValue.split(' - ').map(dateStr => new Date(dateStr.trim()));
 				}
 				new AirDatepicker(datePicker.getPath(), {
 					maxDate: new Date(),
 					locale: JSON.parse(merchant_datepicker_locale),
 					range: true,
 					position: 'bottom right',
-					timepicker: false,
-					timeFormat: 'HH:mm:59',
 					dateFormat: 'yyyy-MM-dd',
 					selectedDates: selectedDates, // Set the selected dates
-					multipleDatesSeparator: ',',
+					multipleDatesSeparator: ' - ',
 					onSelect: function (data) {
 						if (typeof onSelectHandler === 'function') {
 							onSelectHandler(data);
@@ -756,8 +754,8 @@
 					const firstInput = container.find('.first-date-range .date-range-input');
 					const secondInput = container.find('.second-date-range .date-range-input');
 
-					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
-					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
+					const secondDateRange = secondInput.val().split(' - ').map(dateStr => dateStr.trim());
 
 					// Ensure both date ranges have exactly two dates
 					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
@@ -853,8 +851,8 @@
 					const firstInput = container.find('.first-date-range .date-range-input');
 					const secondInput = container.find('.second-date-range .date-range-input');
 
-					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
-					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
+					const secondDateRange = secondInput.val().split(' - ').map(dateStr => dateStr.trim());
 
 					// Ensure both date ranges have exactly two dates
 					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
@@ -886,24 +884,18 @@
 				onSelectHandler: () => {
 					// Get both date range inputs
 					const firstInput = container.find('.first-date-range .date-range-input');
-					const secondInput = container.find('.second-date-range .date-range-input');
-
-					const firstDateRange = firstInput.val().split(',').map(dateStr => dateStr.trim());
-					const secondDateRange = secondInput.val().split(',').map(dateStr => dateStr.trim());
+					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
 
 					// Ensure both date ranges have exactly two dates
-					if (firstDateRange.length === 2 && secondDateRange.length === 2) {
+					if (firstDateRange.length === 2) {
 						self.updateAllCampaignsTable({
 							startDate: firstDateRange[0],
 							endDate: firstDateRange[1],
-							compareStartDate: secondDateRange[0],
-							compareEndDate: secondDateRange[1],
 							container: container
 						});
 					}
 				}
 			});
-
 
 			if (container.length) {
 				self.setupSortableTableEventListeners(container);
@@ -1296,7 +1288,7 @@
 			}
 
 			try {
-				const response = await this.sendAjaxRequest(
+				await this.sendAjaxRequest(
 					{
 						action: 'merchant_update_campaign_status',
 						nonce: self.NONCE,

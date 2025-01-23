@@ -924,26 +924,6 @@
 			&:after {
 				content: '%';
 			}
-
-			&.increase {
-				color: #00BD8A;
-
-				&:before {
-					content: '+ ';
-				}
-			}
-
-			&.decrease {
-				color: #E36131;
-
-				&:before {
-					content: '- ';
-				}
-			}
-
-			&.none:after {
-				content: '';
-			}
 		}
 
 		input {

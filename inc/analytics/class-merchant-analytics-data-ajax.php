@@ -181,23 +181,17 @@ class Merchant_Analytics_Data_Ajax {
 		check_ajax_referer( 'merchant', 'nonce' );
 
 		try {
-			$start_date         = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
-			$end_date           = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
-			$compare_start_date = isset( $_GET['compare_start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_start_date'] ) ) : '';
-			$compare_end_date   = isset( $_GET['compare_end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['compare_end_date'] ) ) : '';
+			$start_date = isset( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+			$end_date   = isset( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
 
-			if ( $start_date === '' || $end_date === '' || $compare_start_date === '' || $compare_end_date === '' ) {
+			if ( $start_date === '' || $end_date === '' ) {
 				wp_send_json_error( __( 'Invalid date ranges.', 'merchant' ) );
 			}
-			$start_range   = array(
+			$start_range = array(
 				'start' => $start_date,
 				'end'   => $end_date,
 			);
-			$compare_range = array(
-				'start' => $compare_start_date,
-				'end'   => $compare_end_date,
-			);
-			$data          = $this->reports->get_all_campaigns( $start_range, $compare_range );
+			$data        = $this->reports->get_all_campaigns( $start_range );
 
 			$data = array_map( static function ( $item ) {
 				$item['revenue'] = wc_price( $item['revenue'] ?? '' );

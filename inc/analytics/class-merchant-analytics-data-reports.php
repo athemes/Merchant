@@ -401,12 +401,11 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * Get all campaigns for the given date ranges.
 	 *
-	 * @param $first_period
-	 * @param $second_period
+	 * @param $period
 	 *
 	 * @return array
 	 */
-	public function get_all_campaigns( $first_period, $second_period ) {
+	public function get_all_campaigns( $period ) {
 		$campaigns_data = array();
 
 		/**
@@ -426,8 +425,8 @@ class Merchant_Analytics_Data_Reports {
 			if ( Merchant_Modules::is_module_active( $module_id ) ) {
 				$data      = array();
 				$campaigns = $module['campaigns'] ?? array();
-				$this->data_provider->set_start_date( $second_period['start'] );
-				$this->data_provider->set_end_date( $second_period['end'] );
+				$this->data_provider->set_start_date( $period['start'] );
+				$this->data_provider->set_end_date( $period['end'] );
 				if ( ! empty( $module['campaigns'] ) ) {
 					foreach ( $campaigns as $campaign_id => $campaign ) {
 						$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
@@ -443,7 +442,7 @@ class Merchant_Analytics_Data_Reports {
 							'clicks'         => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
 							'revenue'        => wc_price( $revenue ),
 							'revenue_number' => $revenue,
-							'ctr'            => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
+							'ctr'            => $this->get_campaign_ctr_change( $campaign_id, $module_id, $period ),
 							'orders'         => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
 							'url'            => $campaign_url,
 						);
@@ -462,7 +461,7 @@ class Merchant_Analytics_Data_Reports {
 						'clicks'         => $this->data_provider->get_module_clicks( $module_id ),
 						'revenue'        => wc_price( $revenue ),
 						'revenue_number' => $revenue,
-						'ctr'            => $this->get_module_ctr_change( $module_id, $first_period, $second_period ),
+						'ctr'            => $this->get_module_ctr_change( $module_id, $period, $period ),
 						'orders'         => $this->data_provider->get_module_orders_count( $module_id ),
 						'url'            => $module_url,
 					);
@@ -481,63 +480,27 @@ class Merchant_Analytics_Data_Reports {
 		 * Filter all campaigns data for the campaigns report.
 		 *
 		 * @param array $campaigns_data All campaigns data.
-		 * @param array $first_period   The first date range.
-		 * @param array $second_period  The second date range.
+		 * @param array $period         The first date range.
 		 *
 		 * @since 2.0.0
 		 */
-		return apply_filters( 'merchant_analytics_all_campaigns_data', $campaigns_data, $first_period, $second_period );
+		return apply_filters( 'merchant_analytics_all_campaigns_data', $campaigns_data, $period );
 	}
 
 	/**
 	 * Get the CTR change for the given campaign and date ranges.
 	 *
-	 * @param int   $campaign_id   The campaign ID.
-	 * @param int   $module_id     The module ID.
-	 * @param array $first_period  The first date range.
-	 * @param array $second_period The second date range.
+	 * @param int   $campaign_id The campaign ID.
+	 * @param int   $module_id   The module ID.
+	 * @param array $period      The first date range.
 	 *
-	 * @return array
+	 * @return int The CTR change percentage.
 	 */
-	public function get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ) {
-		$this->data_provider->set_start_date( $first_period['start'] );
-		$this->data_provider->set_end_date( $first_period['end'] );
+	public function get_campaign_ctr_change( $campaign_id, $module_id, $period ) {
+		$this->data_provider->set_start_date( $period['start'] );
+		$this->data_provider->set_end_date( $period['end'] );
 
-		$ctr_first_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
-
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
-
-		$ctr_second_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
-
-		$ctr_difference = $ctr_second_period - $ctr_first_period;
-
-		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
-
-		/**
-		 * Filter the CTR change for the given campaign and date ranges.
-		 *
-		 * @param array $data          The CTR change data.
-		 * @param int   $campaign_id   The campaign ID.
-		 * @param int   $module_id     The module ID.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
-		 *
-		 * @since 2.0.0
-		 */
-		return apply_filters(
-			'merchant_analytics_campaign_ctr_change',
-			array(
-				'change'            => $change,
-				'ctr_difference'    => $ctr_difference,
-				'ctr_first_period'  => $ctr_first_period,
-				'ctr_second_period' => $ctr_second_period,
-			),
-			$campaign_id,
-			$module_id,
-			$first_period,
-			$second_period
-		);
+		return (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
 	}
 
 	/**
@@ -547,45 +510,13 @@ class Merchant_Analytics_Data_Reports {
 	 * @param array $first_period  The first date range.
 	 * @param array $second_period The second date range.
 	 *
-	 * @return array
+	 * @return int The CTR change percentage.
 	 */
-	public function get_module_ctr_change( $module_id, $first_period, $second_period ) {
+	public function get_module_ctr_change( $module_id, $first_period ) {
 		$this->data_provider->set_start_date( $first_period['start'] );
 		$this->data_provider->set_end_date( $first_period['end'] );
 
-		$ctr_first_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
-
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
-
-		$ctr_second_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
-
-		$ctr_difference = $ctr_second_period - $ctr_first_period;
-
-		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
-
-		/**
-		 * Filter the CTR change for the given module id and date ranges.
-		 *
-		 * @param array $data          The CTR change data.
-		 * @param int   $module_id     The module ID.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
-		 *
-		 * @since 2.0.0
-		 */
-		return apply_filters(
-			'merchant_analytics_module_ctr_change',
-			array(
-				'change'            => $change,
-				'ctr_difference'    => $ctr_difference,
-				'ctr_first_period'  => $ctr_first_period,
-				'ctr_second_period' => $ctr_second_period,
-			),
-			$module_id,
-			$first_period,
-			$second_period
-		);
+		return (int) $this->data_provider->get_module_ctr_percentage( $module_id );
 	}
 
 	/**
