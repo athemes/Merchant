@@ -231,6 +231,11 @@ class Merchant_Analytics_Data_Ajax {
 		}
 	}
 
+	/**
+	 * Update campaign status.
+	 *
+	 * @return void
+	 */
 	public function update_campaign_status() {
 		check_ajax_referer( 'merchant', 'nonce' );
 
@@ -303,7 +308,7 @@ class Merchant_Analytics_Data_Ajax {
 			}
 		}
 
-		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ), 400 );
+		wp_send_json_error( array( 'message' => esc_html__( 'No campaigns were updated.', 'merchant' ) ) );
 	}
 
 	/**

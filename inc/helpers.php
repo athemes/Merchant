@@ -705,7 +705,7 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 
 		$is_logged_in = is_user_logged_in();
 		$current_user = $is_logged_in ? wp_get_current_user() : null;
-		$customer_id  = (int) $current_user->ID ?? 0;
+		$customer_id  = is_object( $current_user ) && isset( $current_user->ID ) ? (int) $current_user->ID : 0;
 
 		$condition = $args['user_condition'] ?? 'all';
 
@@ -729,7 +729,7 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 				}
 
 				$allowed_roles = $args['user_condition_roles'] ?? array();
-				$user_role     = $current_user->roles[0] ?? '';
+				$user_role     = is_object( $current_user ) && isset( $current_user->roles ) ? $current_user->roles[0] : '';
 
 				return in_array( $user_role, $allowed_roles, true );
 

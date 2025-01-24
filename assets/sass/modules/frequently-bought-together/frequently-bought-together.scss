@@ -20,6 +20,11 @@
 	&.after-tabs {
 		padding-bottom: 40px;
 	}
+
+	.added_to_cart,
+	.wc-forward {
+		display: none !important;
+	}
 }
 
 .merchant-frequently-bought-together-bundles {
