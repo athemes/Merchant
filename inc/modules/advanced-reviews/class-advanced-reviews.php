@@ -111,7 +111,71 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 				add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 
 				add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
+
+				add_action( 'merchant_admin_after_module_page_page_header', array( $this, 'module_analytics' ), 1 );
 			}
+		}
+
+		/**
+         * Render module analytics section.
+         *
+		 * @return void
+		 */
+		public function module_analytics() {
+			if ( ! $this->has_analytics() ) {
+				return;
+			}
+			$reports           = new Merchant_Advanced_Reviews_Analytics();
+			$date_ranges       = $reports->get_last_and_previous_7_days_ranges();
+			$collected_reviews = $reports->get_collected_reviews_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+			$sent_emails       = $reports->get_sent_emails_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+			$scheduled_emails  = $reports->get_scheduled_emails_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+			$open_rate         = $reports->get_opened_emails_rate_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+			$overview_data     = array(
+				'section_title' => __( 'Module Overview', 'merchant' ), // Raw string
+				'date_ranges'   => $date_ranges,
+				'action'        => 'merchant_get_adv_reviews_analytics_cards_data',
+				'cards'         => array(
+					'reviews-collected' => array(
+						'title'   => __( 'Reviews collected', 'merchant' ), // Raw string
+						'value'   => $collected_reviews['second_period'], // Raw value
+						'change'  => array(
+							'value' => wc_format_decimal( $collected_reviews['change'][0], 2 ) . '%', // Raw value
+							'class' => $collected_reviews['change'][1], // Raw value
+						),
+						'tooltip' => __( 'Revenue added by Merchant.', 'merchant' ), // Raw string
+					),
+					'scheduled-emails'  => array(
+						'title'   => __( 'Scheduled emails', 'merchant' ), // Raw string
+						'value'   => $scheduled_emails['second_period'], // Raw value
+						'change'  => array(
+							'value' => wc_format_decimal( $scheduled_emails['change'][0], 2 ) . '%', // Raw value
+							'class' => $scheduled_emails['change'][1], // Raw value
+						),
+						'tooltip' => __( 'Average order value for Merchant orders.', 'merchant' ), // Raw string
+					),
+					'sent-emails'       => array(
+						'title'   => __( 'Sent emails', 'merchant' ), // Raw string
+						'value'   => $sent_emails['second_period'], // Raw value
+						'change'  => array(
+							'value' => wc_format_decimal( $sent_emails['change'][0], 2 ) . '%', // Raw value
+							'class' => $sent_emails['change'][1], // Raw value
+						),
+						'tooltip' => __( 'Total number of orders involving Merchant.', 'merchant' ), // Raw string
+					),
+					'open-rate'         => array(
+						'title'   => __( 'Open rate', 'merchant' ), // Raw string
+						'value'   => wc_format_decimal( $open_rate['second_period'], 2 ) . '%', // Raw value
+						'change'  => array(
+							'value' => wc_format_decimal( $open_rate['change'][0], 2 ) . '%', // Raw value
+							'class' => $open_rate['change'][1], // Raw value
+						),
+						'tooltip' => __( 'The percentage of Merchant offer viewers who made a purchase.', 'merchant' ), // Raw string
+					),
+				),
+			);
+
+			require_once MERCHANT_DIR . 'admin/components/analytics-overview.php';
 		}
 
 		/**
@@ -441,6 +505,7 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 	// Dummy content.
 	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-product-dummy-data.php';
+	require MERCHANT_DIR . 'inc/modules/advanced-reviews/class-advanced-reviews-analytics.php';
 
 	// Reviews List Table
 	// require_once MERCHANT_DIR . 'inc/modules/advanced-reviews/admin/class-reviews-table.php';
