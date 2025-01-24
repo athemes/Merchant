@@ -61,8 +61,8 @@ class Merchant_Analytics_Data_Reports {
 
 		// Return the ranges as an array
 		return array(
-			'last_7_days'     => $last_7_days_range,
-			'previous_7_days' => $previous_7_days_range,
+			'recent_period' => $last_7_days_range,
+			'last_period'   => $previous_7_days_range,
 		);
 	}
 
@@ -490,6 +490,73 @@ class Merchant_Analytics_Data_Reports {
 		$this->data_provider->set_end_date( $period['end'] );
 
 		return (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
+	}
+
+	/**
+	 * Prepare the data for the main analytics cards report component.
+	 *
+	 * @return array The main analytics cards report data.
+	 */
+	public function main_analytics_cards_report() {
+		$date_ranges     = $this->get_last_and_previous_7_days_ranges();
+		$added_revenue   = $this->get_reveue_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$added_orders    = $this->get_total_new_orders_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$aov_rate        = $this->get_aov_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$conversion_rate = $this->get_conversion_rate_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$impressions     = $this->get_impressions_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+
+		return array(
+			'section_title' => __( 'Merchant Analytics Dashboard', 'merchant' ), // Raw string
+			'date_ranges'   => $date_ranges,
+			'action'        => 'merchant_get_analytics_cards_data',
+			'cards'         => array(
+				'revenue'         => array(
+					'title'   => __( 'Added revenue', 'merchant' ), // Raw string
+					'value'   => wc_price( $added_revenue['revenue_second_period'] ), // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $added_revenue['revenue_change'][0], 2 ) . '%', // Raw value
+						'class' => $added_revenue['revenue_change'][1], // Raw value
+					),
+					'tooltip' => __( 'Revenue added by Merchant.', 'merchant' ), // Raw string
+				),
+				'total-orders'    => array(
+					'title'   => __( 'Total orders', 'merchant' ), // Raw string
+					'value'   => $added_orders['orders_second_period'], // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $added_orders['orders_change'][0], 2 ) . '%', // Raw value
+						'class' => $added_orders['orders_change'][1], // Raw value
+					),
+					'tooltip' => __( 'Total number of orders involving Merchant.', 'merchant' ), // Raw string
+				),
+				'aov'             => array(
+					'title'   => __( 'Average order value', 'merchant' ), // Raw string
+					'value'   => wc_price( $aov_rate['aov_second_period'] ), // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $aov_rate['change'][0], 2 ) . '%', // Raw value
+						'class' => $aov_rate['change'][1], // Raw value
+					),
+					'tooltip' => __( 'Average order value for Merchant orders.', 'merchant' ), // Raw string
+				),
+				'conversion-rate' => array(
+					'title'   => __( 'Conversion rate', 'merchant' ), // Raw string
+					'value'   => wc_format_decimal( $conversion_rate['conversion_second_period'], 2 ) . '%', // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $conversion_rate['change'][0], 2 ) . '%', // Raw value
+						'class' => $conversion_rate['change'][1], // Raw value
+					),
+					'tooltip' => __( 'The percentage of Merchant offer viewers who made a purchase.', 'merchant' ), // Raw string
+				),
+				'impressions'     => array(
+					'title'   => __( 'Impressions', 'merchant' ), // Raw string
+					'value'   => $impressions['impressions_second_period'], // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $impressions['change'][0], 2 ) . '%', // Raw value
+						'class' => $impressions['change'][1], // Raw value
+					),
+					'tooltip' => __( 'The number of times Merchant offers were seen.', 'merchant' ), // Raw string
+				),
+			),
+		);
 	}
 
 	/**

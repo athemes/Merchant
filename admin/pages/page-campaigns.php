@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $reports     = new Merchant_Analytics_Data_Reports();
 $date_ranges = $reports->get_last_and_previous_7_days_ranges();
 
-$campaigns_data = $reports->get_all_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$campaigns_data = $reports->get_all_campaigns( $date_ranges['last_period'] );
 
 $total_rows = array_reduce(
 	$campaigns_data,
@@ -63,7 +63,7 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span class="first-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>
