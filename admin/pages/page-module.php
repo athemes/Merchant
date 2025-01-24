@@ -205,8 +205,9 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 				 * Hook 'merchant_admin_after_module_page_page_header'
 				 *
 				 * @since 1.0
+                 * @updated 2.0 added $merchant_module as parameter
 				 */
-				do_action( 'merchant_admin_after_module_page_page_header' );
+				do_action( 'merchant_admin_after_module_page_page_header', $merchant_module );
 
 				?>
 
