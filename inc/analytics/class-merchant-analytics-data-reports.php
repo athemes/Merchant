@@ -14,7 +14,7 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * @var Merchant_Analytics_Data_Provider
 	 */
-	private $data_provider;
+	protected $data_provider;
 
 	/**
 	 * Constructor.
@@ -61,8 +61,8 @@ class Merchant_Analytics_Data_Reports {
 
 		// Return the ranges as an array
 		return array(
-			'last_7_days'     => $last_7_days_range,
-			'previous_7_days' => $previous_7_days_range,
+			'recent_period' => $last_7_days_range,
+			'last_period'   => $previous_7_days_range,
 		);
 	}
 
@@ -493,6 +493,73 @@ class Merchant_Analytics_Data_Reports {
 	}
 
 	/**
+	 * Prepare the data for the main analytics cards report component.
+	 *
+	 * @return array The main analytics cards report data.
+	 */
+	public function main_analytics_cards_report() {
+		$date_ranges     = $this->get_last_and_previous_7_days_ranges();
+		$added_revenue   = $this->get_reveue_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$added_orders    = $this->get_total_new_orders_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$aov_rate        = $this->get_aov_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$conversion_rate = $this->get_conversion_rate_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+		$impressions     = $this->get_impressions_card_report( $date_ranges['last_period'], $date_ranges['recent_period'] );
+
+		return array(
+			'section_title' => __( 'Merchant Analytics Dashboard', 'merchant' ), // Raw string
+			'date_ranges'   => $date_ranges,
+			'action'        => 'merchant_get_analytics_cards_data',
+			'cards'         => array(
+				'revenue'         => array(
+					'title'   => __( 'Added revenue', 'merchant' ), // Raw string
+					'value'   => wc_price( $added_revenue['revenue_second_period'] ), // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $added_revenue['revenue_change'][0], 2 ) . '%', // Raw value
+						'class' => $added_revenue['revenue_change'][1], // Raw value
+					),
+					'tooltip' => __( 'Revenue added by Merchant.', 'merchant' ), // Raw string
+				),
+				'total-orders'    => array(
+					'title'   => __( 'Total orders', 'merchant' ), // Raw string
+					'value'   => $added_orders['orders_second_period'], // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $added_orders['orders_change'][0], 2 ) . '%', // Raw value
+						'class' => $added_orders['orders_change'][1], // Raw value
+					),
+					'tooltip' => __( 'Total number of orders involving Merchant.', 'merchant' ), // Raw string
+				),
+				'aov'             => array(
+					'title'   => __( 'Average order value', 'merchant' ), // Raw string
+					'value'   => wc_price( $aov_rate['aov_second_period'] ), // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $aov_rate['change'][0], 2 ) . '%', // Raw value
+						'class' => $aov_rate['change'][1], // Raw value
+					),
+					'tooltip' => __( 'Average order value for Merchant orders.', 'merchant' ), // Raw string
+				),
+				'conversion-rate' => array(
+					'title'   => __( 'Conversion rate', 'merchant' ), // Raw string
+					'value'   => wc_format_decimal( $conversion_rate['conversion_second_period'], 2 ) . '%', // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $conversion_rate['change'][0], 2 ) . '%', // Raw value
+						'class' => $conversion_rate['change'][1], // Raw value
+					),
+					'tooltip' => __( 'The percentage of Merchant offer viewers who made a purchase.', 'merchant' ), // Raw string
+				),
+				'impressions'     => array(
+					'title'   => __( 'Impressions', 'merchant' ), // Raw string
+					'value'   => $impressions['impressions_second_period'], // Raw value
+					'change'  => array(
+						'value' => wc_format_decimal( $impressions['change'][0], 2 ) . '%', // Raw value
+						'class' => $impressions['change'][1], // Raw value
+					),
+					'tooltip' => __( 'The number of times Merchant offers were seen.', 'merchant' ), // Raw string
+				),
+			),
+		);
+	}
+
+	/**
 	 * Get the CTR change for the given module and date ranges.
 	 *
 	 * @param int   $module_id     The module ID.
@@ -513,7 +580,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_analytics_modules() {
+	protected function get_analytics_modules() {
 		$modules = array();
 
 		/**
@@ -547,7 +614,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function sort_orders_by_timestamp( $orders ) {
+	protected function sort_orders_by_timestamp( $orders ) {
 		usort( $orders, static function ( $a, $b ) {
 			return strtotime( $a['timestamp'] ) - strtotime( $b['timestamp'] );
 		} );
@@ -562,7 +629,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function sort_impressions_by_timestamp( $impressions ) {
+	protected function sort_impressions_by_timestamp( $impressions ) {
 		usort( $impressions, static function ( $a, $b ) {
 			return strtotime( $a['timestamp'] ) - strtotime( $b['timestamp'] );
 		} );
@@ -578,7 +645,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return string
 	 */
-	private function determine_grouping_interval( $start_date, $end_date ) {
+	protected function determine_grouping_interval( $start_date, $end_date ) {
 		$days_between = $this->calculate_days_between_dates( $start_date, $end_date );
 
 		if ( $days_between > 365 ) {
@@ -604,7 +671,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return int
 	 */
-	private function calculate_days_between_dates( $start_date, $end_date ) {
+	protected function calculate_days_between_dates( $start_date, $end_date ) {
 		$start_date_time = new DateTime( $start_date );
 		$end_date_time   = new DateTime( $end_date );
 
@@ -622,7 +689,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function group_data_by_interval( $orders, $interval, $start_date, $end_date, $metric = 'revenue' ) {
+	protected function group_data_by_interval( $orders, $interval, $start_date, $end_date, $metric = 'revenue' ) {
 		$grouped_data        = array();
 		$current_group_start = strtotime( $start_date );
 		$end_timestamp       = strtotime( $end_date );
@@ -685,7 +752,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function group_impressions_by_interval( $impressions, $interval, $start_date, $end_date ) {
+	protected function group_impressions_by_interval( $impressions, $interval, $start_date, $end_date ) {
 		$grouped_data        = array();
 		$current_group_start = strtotime( $start_date );
 		$end_timestamp       = strtotime( $end_date );
@@ -736,7 +803,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return int
 	 */
-	private function calculate_interval_end( $current_group_start, $interval ) {
+	protected function calculate_interval_end( $current_group_start, $interval ) {
 		if ( $interval === 'daily' ) {
 			return strtotime( '+1 day', $current_group_start );
 		}
@@ -765,7 +832,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_orders_in_interval( $orders, $interval_start, $interval_end ) {
+	protected function get_orders_in_interval( $orders, $interval_start, $interval_end ) {
 		return array_filter( $orders, function ( $order ) use ( $interval_start, $interval_end ) {
 			$timestamp = strtotime( $order['timestamp'] );
 
@@ -782,7 +849,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_impressions_in_interval( $impressions, $interval_start, $interval_end ) {
+	protected function get_impressions_in_interval( $impressions, $interval_start, $interval_end ) {
 		return array_filter( $impressions, function ( $impression ) use ( $interval_start, $interval_end ) {
 			$timestamp = strtotime( $impression['timestamp'] );
 
@@ -798,7 +865,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array [difference, diff_type]
 	 */
-	private function calculate_percentage_difference( $current_value, $previous_value ) {
+	protected function calculate_percentage_difference( $current_value, $previous_value ) {
 		if ( $previous_value !== null ) {
 			if ( $previous_value === 0 ) {
 				// If previous value is 0, handle it as a special case
@@ -831,7 +898,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return string
 	 */
-	private function format_x_axis_label( $current_group_start, $interval_end, $interval ) {
+	protected function format_x_axis_label( $current_group_start, $interval_end, $interval ) {
 		if ( $interval === 'daily' ) {
 			return gmdate( 'j M', $current_group_start ); // e.g., "1 Jan"
 		}

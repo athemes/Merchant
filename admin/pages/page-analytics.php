@@ -5,15 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $reports         = new Merchant_Analytics_Data_Reports();
 $date_ranges     = $reports->get_last_and_previous_7_days_ranges();
-$added_revenue   = $reports->get_reveue_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$added_orders    = $reports->get_total_new_orders_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$aov_rate        = $reports->get_aov_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$conversion_rate = $reports->get_conversion_rate_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$impressions     = $reports->get_impressions_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_days'] );
-?>
-<?php require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
+$campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['recent_period'] );
+$overview_data   = $reports->main_analytics_cards_report();
 
+require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 <div class="merchant-analytics-section revenue-chart-section">
     <div class="chart-head">
         <div class="head-wrapper">
@@ -25,14 +20,14 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
 <div class="merchant-analytics-section aov-chart-section">
@@ -46,14 +41,14 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_aov_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_aov_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
 <div class="merchant-analytics-section impressions-chart-section">
@@ -67,14 +62,14 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
         </div>
     </div>
     <div class="chart" data-period="<?php
-	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( $date_ranges['last_7_days']['start'], $date_ranges['last_7_days']['end'] ) ) )
+	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
 <div class="merchant-analytics-section campaigns-table">
@@ -88,7 +83,7 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span class="first-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>

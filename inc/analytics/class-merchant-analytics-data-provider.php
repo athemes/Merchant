@@ -190,6 +190,119 @@ class Merchant_Analytics_Data_Provider {
 	}
 
 	/**
+	 * Get the total number of reviews collected.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return int The total number of reviews collected.
+	 */
+	public function get_collected_reviews_count( $limit = 10000 ) {
+		$result = $this->analytics
+			->where( 'event_type = %s', 'submit_product_review' )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->count( 'id' )
+			->limit( $limit )
+			->first();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		if ( ! empty( $result ) ) {
+			return $result['count_id'];
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Get the total number of sent emails.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return int The total number of sent emails.
+	 */
+	public function get_sent_emails_count( $limit = 10000 ) {
+		$result = $this->analytics
+			->where( array(
+				'event_type' => array(
+					'in' => array(
+						'send_review_request_email',
+						'send_review_discount_code_email',
+						'send_review_request_reminder_email',
+						'send_review_discount_code_reminder_email',
+					),
+				),
+			) )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->count( 'id' )
+			->limit( $limit )
+			->first();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		if ( ! empty( $result ) ) {
+			return $result['count_id'];
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Get the total number of scheduled emails.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return int The total number of scheduled emails.
+	 */
+	public function get_scheduled_emails_count( $limit = 10000 ) {
+		$result = $this->analytics
+			->where( array(
+				'event_type' => array(
+					'in' => array(
+						'schedule_review_request',
+						'schedule_review_request_reminder',
+						'schedule_discount_code_review_email',
+					),
+				),
+			) )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->count( 'id' )
+			->limit( $limit )
+			->first();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		if ( ! empty( $result ) ) {
+			return $result['count_id'];
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Get the total number of opened emails.
+	 *
+	 * @param int $limit The limit of the query.
+	 *
+	 * @return int The total number of opened emails.
+	 */
+	public function get_opened_emails_count( $limit = 10000 ) {
+		$result = $this->analytics
+			->where( 'event_type LIKE %s', 'email_open_%' )
+			->where_between_dates( $this->get_start_date(), $this->get_end_date() )
+			->count( 'id' )
+			->limit( $limit )
+			->first();
+
+		$this->analytics->reset_query(); // Reset the query to avoid conflicts with other queries.
+
+		if ( ! empty( $result ) ) {
+			return $result['count_id'];
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Get the dated revenue.
 	 *
 	 * @param $limit int The limit of the query.

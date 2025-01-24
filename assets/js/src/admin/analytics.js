@@ -474,7 +474,7 @@
 		updateOverviewCards: async function (dates) {
 			try {
 				const response = await this.sendAjaxRequest(
-					this.prepareAjaxData('merchant_get_analytics_cards_data', dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
+					this.prepareAjaxData($('.merchant-analytics-overview-section').attr('data-action'), dates.startDate, dates.endDate, dates.compareStartDate, dates.compareEndDate),
 					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
 				);
 				if (response.success) {
@@ -492,55 +492,8 @@
 		 */
 		updateCardsWithData: function (data) {
 			const container = $('.merchant-analytics-overview-section');
-			// Update Revenue Card
-			if (data.revenue) {
-				this.updateSingleCard(
-					container.find('.overview-card.revenue'),
-					data.revenue.revenue_second_period_currency, // Value
-					data.revenue.revenue_change[0], // Change percentage
-					data.revenue.revenue_change[1] // Change type (increase/decrease)
-				);
-			}
-
-			// Update Orders Card
-			if (data.orders) {
-				this.updateSingleCard(
-					container.find('.overview-card.total-orders'),
-					data.orders.orders_second_period, // Value
-					data.orders.orders_change[0], // Change percentage
-					data.orders.orders_change[1] // Change type (increase/decrease)
-				);
-			}
-
-			// Update AOV Card
-			if (data.aov) {
-				this.updateSingleCard(
-					container.find('.overview-card.aov'),
-					data.aov.aov_second_period_currency, // Value
-					data.aov.change[0], // Change percentage
-					data.aov.change[1] // Change type (increase/decrease)
-				);
-			}
-
-			// Update Conversion Rate Card
-			if (data.conversion) {
-				this.updateSingleCard(
-					container.find('.overview-card.conversion-rate'),
-					data.conversion.conversion_second_period_percentage, // Value
-					data.conversion.change[0], // Change percentage
-					data.conversion.change[1] // Change type (increase/decrease)
-				);
-			}
-
-			// Update Impressions Card
-			if (data.impressions) {
-				this.updateSingleCard(
-					container.find('.overview-card.impressions'),
-					data.impressions.impressions_second_period, // Value
-					data.impressions.change[0], // Change percentage
-					data.impressions.change[1] // Change type (increase/decrease)
-				);
-			}
+			const cards = container.find('.overview-cards');
+			cards.html(data);
 		},
 
 		/**
@@ -687,23 +640,6 @@
 
 			// Reset pagination initial state
 			self.updatePaginationButtons(1, parseInt($pagination.attr('data-total-pages-initial')), parseInt($pagination.attr('data-total-rows-initial')));
-		},
-
-		/**
-		 * Updates a single card with new data.
-		 * @param {jQuery} card - The card element to update.
-		 * @param {string} value - The new value to display.
-		 * @param {string} change - The change percentage to display.
-		 * @param {string} change_type - The type of change (increase/decrease).
-		 * @returns {void}
-		 */
-		updateSingleCard: function (card, value, change, change_type) {
-			if (value) {
-				card.find('.card-value').html(value);
-			}
-			if (change_type && change) {
-				card.find('.card-change').removeClass('increase decrease').addClass(change_type).html(change + '%');
-			}
 		},
 
 		/**
