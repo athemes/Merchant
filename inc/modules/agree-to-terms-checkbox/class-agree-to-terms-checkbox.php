@@ -89,7 +89,19 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		}
 
 		// Show the agree to terms when the module is active.
+		// This is needed to ensure the checkbox will be displayed.
 		add_filter( 'woocommerce_checkout_show_terms', '__return_true' );
+
+		// Force the enable of the terms checkbox.
+		// This is needed to ensure the checkbox will be displayed.
+		// The logic here is to get the checkout page ID if the terms page ID is not set. In this condition, the ID actually doesn't matter, we just need to force the checkbox to be displayed.
+		add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
+			add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
+				$terms_page_id = get_option( 'woocommerce_terms_page_id' );
+				
+				return $terms_page_id ? $terms_page_id : get_option( 'woocommerce_checkout_page_id' );
+			} );
+		} );
 
 		// Control the text from the module settings.
 		add_filter( 'woocommerce_get_terms_and_conditions_checkbox_text', array( $this, 'agree_to_terms_form_field' ) );
