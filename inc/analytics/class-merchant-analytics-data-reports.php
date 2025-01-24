@@ -527,7 +527,7 @@ class Merchant_Analytics_Data_Reports {
 		foreach ( $all_modules as $module_id => $module ) {
 			if ( Merchant_Modules::is_module_active( $module_id ) ) {
 				$module_object = Merchant_Modules::get_module( $module_id );
-				if ( $module_object->has_analytics() ) {
+				if ( $module_object && $module_object->has_analytics() ) {
 					$modules[ $module_id ] = array(
 						'module_object' => $module_object,
 						'metrics'       => $module_object->analytics_metrics(),
