@@ -35,6 +35,13 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 	public static $module_settings = array();
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -87,6 +94,26 @@ class Merchant_Sticky_Add_To_Cart extends Merchant_Add_Module {
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
+	}
+
+	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		$metrics              = $this->default_analytics_metrics();
+		$metrics['campaigns'] = false;
+
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $metrics, $this->module_id, $this );
 	}
 
 	/**

@@ -35,6 +35,13 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public $main_func;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */

@@ -10,7 +10,7 @@ $added_orders    = $reports->get_total_new_orders_card_report( $date_ranges['pre
 $aov_rate        = $reports->get_aov_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 $conversion_rate = $reports->get_conversion_rate_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
 $impressions     = $reports->get_impressions_card_report( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
-$campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previous_7_days'], $date_ranges['last_7_days'] );
+$campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['last_7_days'] );
 ?>
 <?php require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 
@@ -25,7 +25,7 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previou
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
@@ -46,7 +46,7 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previou
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
@@ -67,7 +67,7 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previou
                 <span class="merchant-analytics-loading-spinner"></span>
                 <span>
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
                 </span>
             </div>
@@ -86,17 +86,9 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previou
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span class="second-date-range">
-                    <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
-                    esc_attr_e( 'Date range', 'merchant' ); ?>">
-                </span>
-                <span class="compare-text">
-                    Comparing to
-                </span>
                 <span class="first-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>
@@ -127,9 +119,8 @@ $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['previou
 							echo esc_html( $campaign['impressions'] ) ?></td>
                         <td><?php
 							echo esc_html( $campaign['clicks'] ) ?></td>
-                        <td class="<?php
-                        echo esc_attr( $campaign['ctr']['change'][1] ) ?>"><?php
-	                        echo esc_html( $campaign['ctr']['change'][0] === 0 ? '-' : $campaign['ctr']['change'][0]  ) ?></td>
+                        <td class="ctr"><?php
+	                        echo esc_html( $campaign['ctr'] ) ?></td>
                         <td><?php
 							echo esc_html( $campaign['orders'] ) ?></td>
                         <td><?php

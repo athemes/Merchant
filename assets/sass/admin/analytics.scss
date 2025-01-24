@@ -665,25 +665,7 @@
 				border-bottom-right-radius: 8px;
 			}
 
-			td.increase {
-				color: #00BD8A;
-
-				&:before {
-					content: '+ ';
-				}
-
-				&:after {
-					content: '%';
-				}
-			}
-
-			td.decrease {
-				color: #E36131;
-
-				&:before {
-					content: '- ';
-				}
-
+			td.ctr {
 				&:after {
 					content: '%';
 				}
@@ -930,26 +912,6 @@
 		td.merchant__ctr {
 			&:after {
 				content: '%';
-			}
-
-			&.increase {
-				color: #00BD8A;
-
-				&:before {
-					content: '+ ';
-				}
-			}
-
-			&.decrease {
-				color: #E36131;
-
-				&:before {
-					content: '- ';
-				}
-			}
-
-			&.none:after {
-				content: '';
 			}
 		}
 

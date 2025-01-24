@@ -34,6 +34,13 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {

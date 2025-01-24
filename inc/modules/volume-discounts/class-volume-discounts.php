@@ -38,6 +38,13 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */

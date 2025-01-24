@@ -183,7 +183,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->plugin_slug,
 				esc_html__('Dashboard', 'merchant'),
 				esc_html__('Dashboard', 'merchant'),
-				'manage_options',
+				$this->capability,
 				$this->plugin_slug,
 				'',
 				1
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->plugin_slug,
 				esc_html__('Modules', 'merchant'),
 				esc_html__('Modules', 'merchant'),
-				'manage_options',
+				$this->capability,
 				'admin.php?page=merchant&section=modules',
 				'',
 				2
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->plugin_slug,
 				esc_html__('Settings', 'merchant'),
 				esc_html__('Settings', 'merchant'),
-				'manage_options',
+				$this->capability,
 				'admin.php?page=merchant&section=settings',
 				'',
 				3
@@ -216,7 +216,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->plugin_slug,
 				esc_html__('Campaigns', 'merchant'),
 				esc_html__('Campaigns', 'merchant'),
-				'manage_options',
+				$this->capability,
 				'admin.php?page=merchant&section=campaigns',
 				'',
 				4
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				$this->plugin_slug,
 				esc_html__('Analytics', 'merchant'),
 				esc_html__('Analytics', 'merchant'),
-				'manage_options',
+				$this->capability,
 				'admin.php?page=merchant&section=analytics',
 				'',
 				5
@@ -238,7 +238,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				'merchant',
 				esc_html__('Patcher', 'merchant'),
 				esc_html__('Patcher', 'merchant'),
-				'manage_options',
+				$this->capability,
 				'athemes-patcher-preview-mp',
 				array( $this, 'html_patcher' ),
 				6
@@ -251,7 +251,7 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 					$this->plugin_slug,
 					esc_html__('Upgrade to Pro', 'merchant'),
 					esc_html__('Upgrade to Pro', 'merchant'),
-					'manage_options',
+					$this->capability,
 					'https://athemes.com/merchant-upgrade?utm_source=theme_submenu_page&utm_medium=button&utm_campaign=Merchant',
 					'',
             7

@@ -333,14 +333,13 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * Get top performing campaigns for the given date ranges.
 	 *
-	 * @param array $first_period  The first date range.
-	 * @param array $second_period The second date range.
+	 * @param array $date_range The date range.
 	 *
 	 * @return array
 	 */
-	public function get_top_performing_campaigns( $first_period, $second_period ) {
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
+	public function get_top_performing_campaigns( $date_range ) {
+		$this->data_provider->set_start_date( $date_range['start'] );
+		$this->data_provider->set_end_date( $date_range['end'] );
 		$campaigns = array();
 		/**
 		 * Filter the maximum number of top performing campaigns to retrieve.
@@ -355,33 +354,34 @@ class Merchant_Analytics_Data_Reports {
 		/**
 		 * Filter the top performing campaigns data.
 		 *
-		 * @param array $db_campaigns  The top performing campaigns data.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
+		 * @param array $db_campaigns The top performing campaigns data.
+		 * @param array $date_range   The date range.
 		 *
 		 * @since 2.0.0
 		 */
-		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns, $first_period, $second_period );
+		$db_campaigns = apply_filters( 'merchant_analytics_top_performing_campaigns', $db_campaigns, $date_range );
 		if ( ! empty( $db_campaigns ) ) {
 			foreach ( $db_campaigns as $campaign ) {
-				$this->data_provider->set_start_date( $second_period['start'] );
-				$this->data_provider->set_end_date( $second_period['end'] );
 				$module_id     = $campaign['module_id'];
 				$campaign_id   = $campaign['campaign_id'];
 				$campaign_info = merchant_get_campaign_data( $campaign_id, $module_id );
 				$impressions   = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
 				if ( ! empty( $campaign_info ) ) {
-					$campaigns[] = array(
-						'module_id'     => $module_id,
-						'campaign_id'   => $campaign_id,
-						'revenue'       => $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ),
-						'orders'        => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-						'aov'           => $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ),
-						'ctr'           => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
-						'clicks'        => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-						'impressions'   => $impressions === 0 ? '-' : $impressions,
-						'campaign_info' => $campaign_info,
-					);
+					$modules = $this->get_analytics_modules();
+					if ( array_key_exists( $module_id, $modules ) ) {
+						$module      = $modules[ $module_id ];
+						$campaigns[] = array(
+							'module_id'     => $module_id,
+							'campaign_id'   => $campaign_id,
+							'revenue'       => $module['metrics']['revenue'] ? $this->data_provider->get_campaign_revenue( $campaign_id, $module_id ) : '-',
+							'orders'        => $module['metrics']['orders_count'] ? $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ) : '-',
+							'aov'           => $module['metrics']['aov'] ? $this->data_provider->get_campaign_average_order_value( $campaign_id, $module_id ) : '-',
+							'ctr'           => $module['metrics']['ctr'] ? $this->get_campaign_ctr_change( $campaign_id, $module_id, $date_range ) : '-',
+							'clicks'        => $module['metrics']['clicks'] ? $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ) : '-',
+							'impressions'   => $module['metrics']['impressions'] ? $impressions : '-',
+							'campaign_info' => $campaign_info,
+						);
+					}
 				}
 			}
 		}
@@ -389,155 +389,107 @@ class Merchant_Analytics_Data_Reports {
 		/**
 		 * Filter the top performing campaigns data.
 		 *
-		 * @param array $campaigns     The top performing campaigns data.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
+		 * @param array $campaigns  The top performing campaigns data.
+		 * @param array $date_range The date range.
 		 *
 		 * @since 2.0.0
 		 */
-		return apply_filters( 'merchant_analytics_top_performing_campaigns_data', $campaigns, $first_period, $second_period );
+		return apply_filters( 'merchant_analytics_top_performing_campaigns_data', $campaigns, $date_range );
 	}
 
 	/**
 	 * Get all campaigns for the given date ranges.
 	 *
-	 * @param $first_period
-	 * @param $second_period
+	 * @param $period
 	 *
 	 * @return array
 	 */
-	public function get_all_campaigns( $first_period, $second_period ) {
+	public function get_all_campaigns( $period ) {
 		$campaigns_data = array();
-
-		/**
-		 * Filter all modules data for the campaigns report.
-		 *
-		 * @param array $all_modules All modules data.
-		 *
-		 * @since 2.0.0
-		 */
-		$all_modules = apply_filters( 'merchant_analytics_all_modules_data_campaigns_table', merchant_get_modules_data() );
+		$all_modules    = $this->get_analytics_modules();
 
 		if ( empty( $all_modules ) ) {
 			return $campaigns_data;
 		}
 
 		foreach ( $all_modules as $module_id => $module ) {
-			if ( Merchant_Modules::is_module_active( $module_id ) ) {
-				$data      = array();
-				$campaigns = $module['campaigns'] ?? array();
-				$this->data_provider->set_start_date( $second_period['start'] );
-				$this->data_provider->set_end_date( $second_period['end'] );
-				if ( ! empty( $module['campaigns'] ) ) {
-					foreach ( $campaigns as $campaign_id => $campaign ) {
-						$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
-						$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
-						$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
-						// Prepare each campaign data
-						$data[] = array(
-							'campaign_key'   => $campaign['campaign_key'] ?? '',
-							'campaign_id'    => $campaign_id,
-							'title'          => $campaign['campaign_title'] ?? '',
-							'status'         => $campaign['campaign_status'] ?? 'active',
-							'impression'     => $impressions === 0 ? '-' : $impressions,
-							'clicks'         => $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ),
-							'revenue'        => wc_price( $revenue ),
-							'revenue_number' => $revenue,
-							'ctr'            => $this->get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ),
-							'orders'         => $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ),
-							'url'            => $campaign_url,
-						);
-					}
-				} else {
-					$module_url  = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id ), 'admin.php' );
-					$impressions = $this->data_provider->get_module_impressions( $module_id );
-					$revenue     = $this->data_provider->get_module_revenue( $module_id );
-					// Prepare the module data
+			$data      = array();
+			$campaigns = $module['data']['campaigns'] ?? array();
+			$this->data_provider->set_start_date( $period['start'] );
+			$this->data_provider->set_end_date( $period['end'] );
+			if ( ! empty( $module['data']['campaigns'] ) ) {
+				foreach ( $campaigns as $campaign_id => $campaign ) {
+					$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
+					$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
+					$revenue      = $this->data_provider->get_campaign_revenue( $campaign_id, $module_id );
+					// Prepare each campaign data
 					$data[] = array(
-						'campaign_key'   => '',
-						'campaign_id'    => '',
-						'title'          => '-',
-						'status'         => 'n\a',
-						'impression'     => $impressions === 0 ? '-' : $impressions,
-						'clicks'         => $this->data_provider->get_module_clicks( $module_id ),
-						'revenue'        => wc_price( $revenue ),
-						'revenue_number' => $revenue,
-						'ctr'            => $this->get_module_ctr_change( $module_id, $first_period, $second_period ),
-						'orders'         => $this->data_provider->get_module_orders_count( $module_id ),
-						'url'            => $module_url,
+						'campaign_key'   => $campaign['campaign_key'] ?? '',
+						'campaign_id'    => $campaign_id,
+						'title'          => $campaign['campaign_title'] ?? '',
+						'status'         => $campaign['campaign_status'] ?? 'active',
+						'impression'     => $module['metrics']['impressions'] ? $impressions : '-',
+						'clicks'         => $module['metrics']['clicks'] ? $this->data_provider->get_campaign_clicks( $campaign_id, $module_id ) : '-',
+						'revenue'        => $module['metrics']['revenue'] ? wc_price( $revenue ) : '-',
+						'revenue_number' => $module['metrics']['revenue'] ? $revenue : '-',
+						'ctr'            => $module['metrics']['ctr'] ? $this->get_campaign_ctr_change( $campaign_id, $module_id, $period ) : '-',
+						'orders'         => $module['metrics']['orders_count'] ? $this->data_provider->get_campaign_orders_count( $campaign_id, $module_id ) : '-',
+						'url'            => $campaign_url,
 					);
 				}
-
-				// Prepare the campaigns data
-				$campaigns_data[] = array(
-					'module_id'   => $module_id,
-					'module_name' => esc_html( $module['name'] ?? '' ),
-					'campaigns'   => $data,
+			} else {
+				$module_url  = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id ), 'admin.php' );
+				$impressions = $this->data_provider->get_module_impressions( $module_id );
+				$revenue     = $this->data_provider->get_module_revenue( $module_id );
+				// Prepare the module data
+				$data[] = array(
+					'campaign_key'   => '',
+					'campaign_id'    => '',
+					'title'          => '-',
+					'status'         => 'n\a',
+					'impression'     => $module['metrics']['impressions'] ? $impressions : '-',
+					'clicks'         => $module['metrics']['clicks'] ? $this->data_provider->get_module_clicks( $module_id ) : '-',
+					'revenue'        => $module['metrics']['revenue'] ? wc_price( $revenue ) : '-',
+					'revenue_number' => $module['metrics']['revenue'] ? $revenue : '-',
+					'ctr'            => $module['metrics']['ctr'] ? $this->get_module_ctr_change( $module_id, $period ) : '-',
+					'orders'         => $module['metrics']['orders_count'] ? $this->data_provider->get_module_orders_count( $module_id ) : '-',
+					'url'            => $module_url,
 				);
 			}
+
+			// Prepare the campaigns data
+			$campaigns_data[] = array(
+				'module_id'   => $module_id,
+				'module_name' => esc_html( $module['data']['name'] ?? '' ),
+				'campaigns'   => $data,
+			);
 		}
 
 		/**
 		 * Filter all campaigns data for the campaigns report.
 		 *
 		 * @param array $campaigns_data All campaigns data.
-		 * @param array $first_period   The first date range.
-		 * @param array $second_period  The second date range.
+		 * @param array $period         The first date range.
 		 *
 		 * @since 2.0.0
 		 */
-		return apply_filters( 'merchant_analytics_all_campaigns_data', $campaigns_data, $first_period, $second_period );
+		return apply_filters( 'merchant_analytics_all_campaigns_data', $campaigns_data, $period );
 	}
 
 	/**
 	 * Get the CTR change for the given campaign and date ranges.
 	 *
-	 * @param int   $campaign_id   The campaign ID.
-	 * @param int   $module_id     The module ID.
-	 * @param array $first_period  The first date range.
-	 * @param array $second_period The second date range.
+	 * @param int   $campaign_id The campaign ID.
+	 * @param int   $module_id   The module ID.
+	 * @param array $period      The first date range.
 	 *
-	 * @return array
+	 * @return int The CTR change percentage.
 	 */
-	public function get_campaign_ctr_change( $campaign_id, $module_id, $first_period, $second_period ) {
-		$this->data_provider->set_start_date( $first_period['start'] );
-		$this->data_provider->set_end_date( $first_period['end'] );
+	public function get_campaign_ctr_change( $campaign_id, $module_id, $period ) {
+		$this->data_provider->set_start_date( $period['start'] );
+		$this->data_provider->set_end_date( $period['end'] );
 
-		$ctr_first_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
-
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
-
-		$ctr_second_period = (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
-
-		$ctr_difference = $ctr_second_period - $ctr_first_period;
-
-		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
-
-		/**
-		 * Filter the CTR change for the given campaign and date ranges.
-		 *
-		 * @param array $data          The CTR change data.
-		 * @param int   $campaign_id   The campaign ID.
-		 * @param int   $module_id     The module ID.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
-		 *
-		 * @since 2.0.0
-		 */
-		return apply_filters(
-			'merchant_analytics_campaign_ctr_change',
-			array(
-				'change'            => $change,
-				'ctr_difference'    => $ctr_difference,
-				'ctr_first_period'  => $ctr_first_period,
-				'ctr_second_period' => $ctr_second_period,
-			),
-			$campaign_id,
-			$module_id,
-			$first_period,
-			$second_period
-		);
+		return (int) $this->data_provider->get_campaign_ctr_percentage( $campaign_id, $module_id );
 	}
 
 	/**
@@ -547,45 +499,45 @@ class Merchant_Analytics_Data_Reports {
 	 * @param array $first_period  The first date range.
 	 * @param array $second_period The second date range.
 	 *
-	 * @return array
+	 * @return int The CTR change percentage.
 	 */
-	public function get_module_ctr_change( $module_id, $first_period, $second_period ) {
+	public function get_module_ctr_change( $module_id, $first_period ) {
 		$this->data_provider->set_start_date( $first_period['start'] );
 		$this->data_provider->set_end_date( $first_period['end'] );
 
-		$ctr_first_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
+		return (int) $this->data_provider->get_module_ctr_percentage( $module_id );
+	}
 
-		$this->data_provider->set_start_date( $second_period['start'] );
-		$this->data_provider->set_end_date( $second_period['end'] );
-
-		$ctr_second_period = (int) $this->data_provider->get_module_ctr_percentage( $module_id );
-
-		$ctr_difference = $ctr_second_period - $ctr_first_period;
-
-		$change = $this->calculate_percentage_difference( $ctr_second_period, $ctr_first_period );
+	/**
+	 * Get all analytics modules.
+	 *
+	 * @return array
+	 */
+	private function get_analytics_modules() {
+		$modules = array();
 
 		/**
-		 * Filter the CTR change for the given module id and date ranges.
+		 * Filter all modules data for the campaigns report.
 		 *
-		 * @param array $data          The CTR change data.
-		 * @param int   $module_id     The module ID.
-		 * @param array $first_period  The first date range.
-		 * @param array $second_period The second date range.
+		 * @param array $all_modules All modules data.
 		 *
 		 * @since 2.0.0
 		 */
-		return apply_filters(
-			'merchant_analytics_module_ctr_change',
-			array(
-				'change'            => $change,
-				'ctr_difference'    => $ctr_difference,
-				'ctr_first_period'  => $ctr_first_period,
-				'ctr_second_period' => $ctr_second_period,
-			),
-			$module_id,
-			$first_period,
-			$second_period
-		);
+		$all_modules = apply_filters( 'merchant_analytics_all_modules_data_campaigns_table', merchant_get_modules_data() );
+		foreach ( $all_modules as $module_id => $module ) {
+			if ( Merchant_Modules::is_module_active( $module_id ) ) {
+				$module_object = Merchant_Modules::get_module( $module_id );
+				if ( $module_object->has_analytics() ) {
+					$modules[ $module_id ] = array(
+						'module_object' => $module_object,
+						'metrics'       => $module_object->analytics_metrics(),
+						'data'          => $module,
+					);
+				}
+			}
+		}
+
+		return $modules;
 	}
 
 	/**

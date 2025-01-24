@@ -34,6 +34,13 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -86,6 +93,26 @@ class Merchant_Wait_List extends Merchant_Add_Module {
 			// Init translations.
 			$this->init_translations();
 		}
+	}
+
+	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		$metrics              = $this->default_analytics_metrics();
+		$metrics['campaigns'] = false;
+
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $metrics, $this->module_id, $this );
 	}
 
 	/**

@@ -61,15 +61,9 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
         <div class="alignright overview-head">
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span class="second-date-range">
-                    <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
-                    esc_attr_e( 'Date range', 'merchant' ); ?>">
-                </span>
-                <span class="compare-text"><?php echo esc_html__( 'Comparing to', 'merchant' ); ?></span>
                 <span class="first-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>
@@ -136,7 +130,7 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
                         <td class="merchant__impressions"><?php echo esc_html( $campaign['impression'] ); ?></td>
                         <td class="merchant__clicks"><?php echo esc_html( $campaign['clicks'] ); ?></td>
                         <td class="merchant__revenue"><?php echo wp_kses($campaign['revenue'], merchant_kses_allowed_tags( array( 'all' ) ) ); ?></td>
-                        <td class="merchant__ctr <?php echo esc_attr( $campaign['ctr']['change'][1] ); ?>"><?php echo esc_html( $campaign['ctr']['change'][0] === 0 ? '-' : $campaign['ctr']['change'][0] ); ?></td>
+                        <td class="merchant__ctr"><?php echo esc_html( $campaign['ctr'] ); ?></td>
                         <td class="merchant__orders"><?php echo esc_html( $campaign['orders'] ); ?></td>
                         <td class="merchant__edit">
                             <a href="<?php echo esc_url( $campaign['url'] ); ?>" target="_blank">

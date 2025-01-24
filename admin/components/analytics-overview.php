@@ -22,14 +22,14 @@ $impressions     = $reports->get_impressions_card_report( $date_ranges['previous
 				<span class="merchant-analytics-loading-spinner"></span>
                 <span class="second-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['last_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
 
 				<span class="compare-text"><?php esc_html_e( 'Comparing to', 'merchant' ); ?></span>
                 <span class="first-date-range">
                     <input type="text" class="date-range-input" readonly value="<?php
-                    echo esc_attr( implode( ',', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
+                    echo esc_attr( implode( ' - ', array_values( $date_ranges['previous_7_days'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
 			</div>
