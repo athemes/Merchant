@@ -14,7 +14,7 @@ class Merchant_Analytics_Data_Reports {
 	/**
 	 * @var Merchant_Analytics_Data_Provider
 	 */
-	private $data_provider;
+	protected $data_provider;
 
 	/**
 	 * Constructor.
@@ -580,7 +580,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_analytics_modules() {
+	protected function get_analytics_modules() {
 		$modules = array();
 
 		/**
@@ -614,7 +614,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function sort_orders_by_timestamp( $orders ) {
+	protected function sort_orders_by_timestamp( $orders ) {
 		usort( $orders, static function ( $a, $b ) {
 			return strtotime( $a['timestamp'] ) - strtotime( $b['timestamp'] );
 		} );
@@ -629,7 +629,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function sort_impressions_by_timestamp( $impressions ) {
+	protected function sort_impressions_by_timestamp( $impressions ) {
 		usort( $impressions, static function ( $a, $b ) {
 			return strtotime( $a['timestamp'] ) - strtotime( $b['timestamp'] );
 		} );
@@ -645,7 +645,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return string
 	 */
-	private function determine_grouping_interval( $start_date, $end_date ) {
+	protected function determine_grouping_interval( $start_date, $end_date ) {
 		$days_between = $this->calculate_days_between_dates( $start_date, $end_date );
 
 		if ( $days_between > 365 ) {
@@ -671,7 +671,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return int
 	 */
-	private function calculate_days_between_dates( $start_date, $end_date ) {
+	protected function calculate_days_between_dates( $start_date, $end_date ) {
 		$start_date_time = new DateTime( $start_date );
 		$end_date_time   = new DateTime( $end_date );
 
@@ -689,7 +689,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function group_data_by_interval( $orders, $interval, $start_date, $end_date, $metric = 'revenue' ) {
+	protected function group_data_by_interval( $orders, $interval, $start_date, $end_date, $metric = 'revenue' ) {
 		$grouped_data        = array();
 		$current_group_start = strtotime( $start_date );
 		$end_timestamp       = strtotime( $end_date );
@@ -752,7 +752,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function group_impressions_by_interval( $impressions, $interval, $start_date, $end_date ) {
+	protected function group_impressions_by_interval( $impressions, $interval, $start_date, $end_date ) {
 		$grouped_data        = array();
 		$current_group_start = strtotime( $start_date );
 		$end_timestamp       = strtotime( $end_date );
@@ -803,7 +803,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return int
 	 */
-	private function calculate_interval_end( $current_group_start, $interval ) {
+	protected function calculate_interval_end( $current_group_start, $interval ) {
 		if ( $interval === 'daily' ) {
 			return strtotime( '+1 day', $current_group_start );
 		}
@@ -832,7 +832,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_orders_in_interval( $orders, $interval_start, $interval_end ) {
+	protected function get_orders_in_interval( $orders, $interval_start, $interval_end ) {
 		return array_filter( $orders, function ( $order ) use ( $interval_start, $interval_end ) {
 			$timestamp = strtotime( $order['timestamp'] );
 
@@ -849,7 +849,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array
 	 */
-	private function get_impressions_in_interval( $impressions, $interval_start, $interval_end ) {
+	protected function get_impressions_in_interval( $impressions, $interval_start, $interval_end ) {
 		return array_filter( $impressions, function ( $impression ) use ( $interval_start, $interval_end ) {
 			$timestamp = strtotime( $impression['timestamp'] );
 
@@ -865,7 +865,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return array [difference, diff_type]
 	 */
-	private function calculate_percentage_difference( $current_value, $previous_value ) {
+	protected function calculate_percentage_difference( $current_value, $previous_value ) {
 		if ( $previous_value !== null ) {
 			if ( $previous_value === 0 ) {
 				// If previous value is 0, handle it as a special case
@@ -898,7 +898,7 @@ class Merchant_Analytics_Data_Reports {
 	 *
 	 * @return string
 	 */
-	private function format_x_axis_label( $current_group_start, $interval_end, $interval ) {
+	protected function format_x_axis_label( $current_group_start, $interval_end, $interval ) {
 		if ( $interval === 'daily' ) {
 			return gmdate( 'j M', $current_group_start ); // e.g., "1 Jan"
 		}
