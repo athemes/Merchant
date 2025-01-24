@@ -405,8 +405,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
-								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
-							} elseif ( 'textarea_multiline' === $field['type'] ) {
+								$value = trim( wp_kses( stripslashes_deep( $_POST['merchant'][ $field['id'] ] ), merchant_kses_allowed_tags_for_code_snippets() ) );
+                            } elseif ( 'textarea_multiline' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
 							} elseif ( 'flexible_content' === $field['type'] ) {
 								// Handle flexible_content field
