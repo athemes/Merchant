@@ -513,5 +513,5 @@ class Merchant_Real_Time_Search extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Real_Time_Search();
+	Merchant_Modules::create_module( new Merchant_Real_Time_Search() );
 } );

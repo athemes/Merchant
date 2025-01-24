@@ -275,5 +275,5 @@ class Merchant_Scroll_To_Top_Button extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Scroll_To_Top_Button();
+	Merchant_Modules::create_module( new Merchant_Scroll_To_Top_Button() );
 } );

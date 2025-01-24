@@ -921,5 +921,5 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	Merchant_Quick_View::get_instance();
+	Merchant_Modules::create_module( Merchant_Quick_View::get_instance() );
 } );

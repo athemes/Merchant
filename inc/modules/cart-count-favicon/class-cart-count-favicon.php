@@ -249,5 +249,5 @@ class Merchant_Cart_Count_Favicon extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Cart_Count_Favicon();
+	Merchant_Modules::create_module( new Merchant_Cart_Count_Favicon() );
 } );
