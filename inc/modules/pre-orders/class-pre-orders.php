@@ -488,5 +488,5 @@ require MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders-main-functionali
 
 // Initialize the module.
 add_action( 'init', function () {
-	new Merchant_Pre_Orders( new Merchant_Pre_Orders_Main_Functionality() );
+	Merchant_Modules::create_module( new Merchant_Pre_Orders( new Merchant_Pre_Orders_Main_Functionality() ) );
 } );

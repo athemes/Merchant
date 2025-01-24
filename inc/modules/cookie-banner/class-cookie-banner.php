@@ -274,5 +274,5 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Cookie_Banner();
+	Merchant_Modules::create_module( new Merchant_Cookie_Banner() );
 } );

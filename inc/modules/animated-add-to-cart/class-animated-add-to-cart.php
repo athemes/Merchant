@@ -321,5 +321,5 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Animated_Add_To_Cart();
+	Merchant_Modules::create_module( new Merchant_Animated_Add_To_Cart() );
 } );

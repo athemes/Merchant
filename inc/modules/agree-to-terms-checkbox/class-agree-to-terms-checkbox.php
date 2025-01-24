@@ -272,5 +272,5 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	new Merchant_Agree_To_Terms_Checkbox();
+	Merchant_Modules::create_module( new Merchant_Agree_To_Terms_Checkbox() );
 } );

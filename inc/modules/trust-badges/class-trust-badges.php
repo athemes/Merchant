@@ -423,5 +423,5 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Trust_Badges();
+	Merchant_Modules::create_module( new Merchant_Trust_Badges() );
 } );
