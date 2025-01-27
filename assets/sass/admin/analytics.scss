@@ -101,9 +101,12 @@
 				}
 
 				input {
-					border: 1px solid #F0F0F1;
+					width: 200px;
+					padding: 3px 8px;
+					border: 2px solid #F0F0F1;
 					border-radius: 4px;
 					background-color: #ffffff;
+					text-align: center;
 				}
 			}
 		}
@@ -195,23 +198,39 @@
 
 				.compare-text {
 					color: #335EEA;
-					font-size: 14px; /* Increased font size */
-					margin: 0 15px; /* Increased margin */
+					font-size: 14px;
 
 					@media (max-width: 768px) {
-						margin: 0 10px; /* Adjusted margin */
+						margin-top: 12px;
 					}
 				}
 
 				input {
-					border: 1px solid #F0F0F1;
+					width: 200px;
+					max-width: 100%;
+					font-size: 14px;
+					text-align: center;
+					background: #fff;
+					border: 2px solid #F0F0F1;
 					border-radius: 4px;
-					padding: 8px; /* Increased padding for better touch interaction */
-					font-size: 14px; /* Increased font size */
+					padding: 3px 8px;
+				}
 
-					@media (max-width: 768px) {
-						padding: 6px; /* Adjusted padding */
-						width: 100%; /* Make inputs full width on mobile */
+				.first-date-range {
+					input {
+						background: none;
+						border: none;
+						color: #939393;
+						padding-inline: 0;
+
+						@media (min-width: 769px) {
+							margin-left: -12px;
+						}
+
+						&:focus {
+							box-shadow: none;
+							outline: none;
+						}
 					}
 				}
 			}
@@ -549,24 +568,22 @@
 				.compare-text {
 					color: #335EEA;
 					font-size: 12px; /* Increased font size */
-					margin: 0 15px; /* Increased margin */
+					//margin: 0 15px; /* Increased margin */
 
 					@media (max-width: 768px) {
-						margin: 0 10px; /* Adjusted margin */
+						//margin: 0 10px; /* Adjusted margin */
 					}
 				}
 
 				input {
-					border: 1px solid #F0F0F1;
+					width: 200px;
+					max-width: 100%;
+					border: 2px solid #F0F0F1;
 					border-radius: 4px;
-					padding: 8px; /* Increased padding for better touch interaction */
+					padding: 3px 8px; /* Increased padding for better touch interaction */
 					font-size: 14px; /* Increased font size */
 					background-color: #fff;
-
-					@media (max-width: 768px) {
-						padding: 6px; /* Adjusted padding */
-						width: 100%; /* Make inputs full width on mobile */
-					}
+					text-align: center;
 				}
 			}
 
@@ -685,6 +702,13 @@
 			border: 1px solid #F0F0F1;
 			border-radius: 5px 5px 0 0;
 
+			> .alignright {
+				@media (max-width: 1099px) {
+					float: left;
+					margin-top: 15px;
+				}
+			}
+
 			select,
 			input,
 			.button {
@@ -693,7 +717,7 @@
 				color: #747474;
 				font-weight: 300;
 				padding-inline: 12px;
-				min-height: 35px;
+				height: 36px;
 
 				&:focus,
 				&:active {
@@ -766,6 +790,22 @@
 					width: 170px;
 				}
 			}
+
+			.date-range {
+				margin-left: 10px;
+
+				input {
+					width: 200px;
+				}
+			}
+
+			.merchant-analytics-loading-spinner {
+				display: none;
+
+				&.show {
+					display: inline-block;
+				}
+			}
 		}
 
 		&__campaigns-pagination {
@@ -816,6 +856,33 @@
 					pointer-events: none;
 					cursor: default;
 				}
+			}
+		}
+
+		&__campaigns-no-results {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+			padding: 50px 25px;
+			background: #fff;
+			border-radius: 5px;
+
+			span {
+				color: #787C82;
+				font-size: 14px;
+
+				&:first-of-type {
+					color: #101517;
+					font-size: 20px;
+				}
+			}
+
+			img {
+				width: 300px;
+				max-width: 100%;
+				height: auto;
+				margin-bottom: 10px;
 			}
 		}
 	}
