@@ -200,18 +200,18 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				2
 			);
 
-			// Settings.
+            // Analytics.
 			add_submenu_page(
 				$this->plugin_slug,
-				esc_html__('Settings', 'merchant'),
-				esc_html__('Settings', 'merchant'),
+				esc_html__('Analytics', 'merchant'),
+				esc_html__('Analytics', 'merchant'),
 				$this->capability,
-				'admin.php?page=merchant&section=settings',
+				'admin.php?page=merchant&section=analytics',
 				'',
 				3
 			);
 
-
+            // Campaigns.
 			add_submenu_page(
 				$this->plugin_slug,
 				esc_html__('Campaigns', 'merchant'),
@@ -222,16 +222,16 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				4
 			);
 
+			// Settings.
 			add_submenu_page(
 				$this->plugin_slug,
-				esc_html__('Analytics', 'merchant'),
-				esc_html__('Analytics', 'merchant'),
+				esc_html__('Settings', 'merchant'),
+				esc_html__('Settings', 'merchant'),
 				$this->capability,
-				'admin.php?page=merchant&section=analytics',
+				'admin.php?page=merchant&section=settings',
 				'',
 				5
 			);
-
 
 			// Add 'aThemes Patcher' link
 			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page

@@ -527,7 +527,7 @@
 			try {
 				const response = await this.sendAjaxRequest(
 					this.prepareAjaxData('merchant_get_all_campaigns_table_data', dates.startDate, dates.endDate, '', ''),
-					'.merchant-analytics-overview-section .merchant-analytics-loading-spinner'
+					'.merchant-page-campaigns .merchant-analytics-loading-spinner'
 				);
 				if (response.success) {
 					// Update the cards with the new data
