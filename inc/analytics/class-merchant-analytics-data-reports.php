@@ -417,7 +417,7 @@ class Merchant_Analytics_Data_Reports {
 			$campaigns = $module['data']['campaigns'] ?? array();
 			$this->data_provider->set_start_date( $period['start'] );
 			$this->data_provider->set_end_date( $period['end'] );
-			if ( ! empty( $module['data']['campaigns'] ) ) {
+			if ( $module['module_object']->analytics_metrics()['campaigns'] === true ) {
 				foreach ( $campaigns as $campaign_id => $campaign ) {
 					$campaign_url = add_query_arg( array( 'page' => 'merchant', 'module' => $module_id, 'campaign_id' => $campaign_id ), 'admin.php' );
 					$impressions  = $this->data_provider->get_campaign_impressions( $campaign_id, $module_id );
