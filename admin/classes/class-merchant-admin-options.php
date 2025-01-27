@@ -2491,7 +2491,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                 <div class="layout-header">
                                     <div class="layout-count"><?php
                                         echo absint( $option_key + 1 ) ?></div>
-                                    <div class="layout-title xxx"<?php
+                                    <div class="layout-title"<?php
                                     if ( ! empty( $title_field ) ) {
                                         echo ' data-title-field="' . esc_attr( $title_field ) . '"';
                                     } ?>>

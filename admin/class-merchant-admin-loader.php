@@ -117,11 +117,9 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-				if( !empty($module) ) {
+				if ( ! empty( $module ) ) {
 					wp_enqueue_script( 'merchant-admin-preview', MERCHANT_URI . 'assets/js/admin/merchant-preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				}
-
-
 			}
 		}
 
