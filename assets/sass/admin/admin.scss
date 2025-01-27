@@ -464,6 +464,7 @@
   img {
     width: 350px;
     max-width: 100%;
+    margin-bottom: 10px;
   }
 
   &__text {
@@ -477,6 +478,10 @@
       color: #757575;
       font-size: 13px;
     }
+  }
+  .merchant-module-page-button {
+    width: 180px;
+    margin-top: 5px;
   }
 }
 
