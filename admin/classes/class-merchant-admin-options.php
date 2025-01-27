@@ -405,8 +405,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 
 						if ( isset( $_POST['merchant'] ) && isset( $_POST['merchant'][ $field['id'] ] ) ) {
 							if ( 'textarea_code' === $field['type'] ) {
-								$value = wp_kses( $_POST['merchant'][ $field['id'] ], merchant_kses_allowed_tags_for_code_snippets() );
-							} elseif ( 'textarea_multiline' === $field['type'] ) {
+								$value = trim( wp_kses( stripslashes_deep( $_POST['merchant'][ $field['id'] ] ), merchant_kses_allowed_tags_for_code_snippets() ) );
+                            } elseif ( 'textarea_multiline' === $field['type'] ) {
 								$value = sanitize_textarea_field( $_POST['merchant'][ $field['id'] ] );
 							} elseif ( 'flexible_content' === $field['type'] ) {
 								// Handle flexible_content field
@@ -2468,8 +2468,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                 ?>
                 <div class="merchant-flexible-content <?php echo esc_attr( $empty ); ?> sortable">
 					<?php
-					foreach ( $values as $option_key => $option ) : ?>
-                        <div class="layout" data-type="<?php echo esc_attr( $option['layout'] ) ?>" data-layout-id="<?php echo ! empty( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : ''
+					foreach ( $values as $option_key => $option ) :
+                        $layout      = $option['layout'] ?? '';
+                        $title_field = $settings['layouts'][ $layout ]['title-field'] ?? '';
+                        $title       = $option[ $title_field ] ?? ''
+                        ?>
+                        <div class="layout" data-type="<?php echo esc_attr( $layout ) ?>" data-layout-id="<?php echo ! empty( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : ''
                         ?>">
                             <div class="layout__inner">
                                 <?php if ( $has_sorting ) : ?>
@@ -2488,14 +2492,14 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     <div class="layout-count"><?php
                                         echo absint( $option_key + 1 ) ?></div>
                                     <div class="layout-title"<?php
-                                    if ( isset( $layout['title-field'] ) && ! empty( $layout['title-field'] ) ) {
-                                        echo ' data-title-field="' . esc_attr( $layout['title-field'] ) . '"';
+                                    if ( ! empty( $title_field ) ) {
+                                        echo ' data-title-field="' . esc_attr( $title_field ) . '"';
                                     } ?>>
-                                        <?php
-                                        echo isset( $settings['layouts'][ $option['layout'] ]['title'] ) ? esc_html( $settings['layouts'][ $option['layout'] ]['title'] ) : '' ?>
+                                        <?php echo esc_html( $title ); ?>
                                     </div>
                                     <div class="layout-toggle">
-                                        <?php if ( $has_accordion ) : ?>
+                                        <?php if ( $has_accordion ) :
+                                            ?>
                                             <span class="customize-control-flexible-content-accordion">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.71967 0.732854C1.01256 0.43996 1.48744 0.43996 1.78033 0.732854L5.25 4.20252L8.71967 0.732854C9.01256 0.43996 9.48744 0.43996 9.78033 0.732854C10.0732 1.02575 10.0732 1.50062 9.78033 1.79351L5.78033 5.79351C5.48744 6.08641 5.01256 6.08641 4.71967 5.79351L0.71967 1.79351C0.426777 1.50062 0.426777 1.02575 0.71967 0.732854Z" fill="#4A4A4A"/>
@@ -2506,7 +2510,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                 </div>
                                 <div class="layout-body">
                                     <?php
-                                    foreach ( $settings['layouts'][ $option['layout'] ]['fields'] as $sub_field ) :
+                                    foreach ( $settings['layouts'][ $layout ]['fields'] as $sub_field ) :
                                         $classes = array( 'layout-field' );
                                         if ( isset( $sub_field['classes'] ) ) {
                                             $classes = array_merge( $classes, $sub_field['classes'] );
@@ -2546,12 +2550,12 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                     echo esc_attr( $settings['id'] ) ?>][<?php
                                     echo absint( $option_key ) ?>][layout]"
                                             value="<?php
-                                            echo esc_attr( $option['layout'] ) ?>">
+                                            echo esc_attr( $layout ) ?>">
                                     <input type="hidden" class="flexible-id" name="merchant[<?php
 	                                echo esc_attr( $settings['id'] ) ?>][0][flexible_id]" value="<?php
                                     echo isset( $option['flexible_id'] ) ? esc_attr( $option['flexible_id'] ) : '' ?>">
                                 </div>
-                                <?php self::print_flexible_layout_actions( $settings, $option['layout'] ); ?>
+                                <?php self::print_flexible_layout_actions( $settings, $layout ); ?>
                             </div>
                         </div>
 					<?php

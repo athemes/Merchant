@@ -654,6 +654,14 @@ const scripts = [
 		file: 'analytics',
 	},
 
+	// Settings
+	{
+		name: 'settings',
+		src: './assets/js/src/admin/settings.js',
+		destination: './assets/js/admin',
+		file: 'settings',
+	},
+
 	// Metabox.
 	{
 		name: 'metabox',

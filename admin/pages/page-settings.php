@@ -68,7 +68,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'module'    => 'global-settings',
 					'title'     => esc_html__( 'Merchant Operating Mode', 'merchant' ),
 					'fields'    => array(
-
 						array(
 							'id'      => 'operating_mode',
 							'type'    => 'radio_alt',
@@ -88,7 +87,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 							),
 							'default' => 'active',
 						),
-
 					),
 				) );
 
@@ -96,7 +94,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'module'    => 'global-settings',
 					'title'     => esc_html__( 'Global Customizations', 'merchant' ),
 					'fields'    => array(
-
 						array(
 							'type'    => 'warning',
 							'content' => esc_html__( 'These settings allow you to add custom code, and are recommended for developers or advanced users only', 'merchant' ),
@@ -108,25 +105,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						array(
 							'id'    => 'custom_css',
-							'type'  => 'textarea',
+							'type'  => 'textarea_code',
 							'title' => esc_html__( 'Custom CSS', 'merchant' ),
 						),
 
 						array(
-							'id'    => 'custom_js_first',
-							'type'  => 'textarea',
-							'title' => esc_html__( 'Custom JS First - runs at the beginning of Merchant', 'merchant' ),
-						),
-
-						array(
-							'id'    => 'custom_js_last',
-							'type'  => 'textarea',
-							'title' => esc_html__( 'Custom JS Last - runs at the end of Merchant', 'merchant' ),
-						),
-
-						array(
 							'id'    => 'custom_js',
-							'type'  => 'textarea',
+							'type'  => 'textarea_code',
 							'title' => esc_html__( 'Custom JS', 'merchant' ),
 						),
 
@@ -139,13 +124,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				 * @since 1.0
 				 */
 				do_action( 'merchant_admin_settings_after_options' );
-
 				?>
-
 			</div>
-
 		</form>
-
 	</div>
-
 </div>
