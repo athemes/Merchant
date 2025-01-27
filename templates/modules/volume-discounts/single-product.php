@@ -188,37 +188,22 @@ $product_id     = $product->get_id();
 		            if ( $is_variable && ! empty( $attributes ) ) {
                         ?>
                         <div class="variation-form">
-				            <?php
-				            foreach ( $attributes as $attribute_name => $options ) :
-					            $attribute_label = wc_attribute_label( $attribute_name );
-					            ?>
+	                        <?php
+	                        foreach ( $attributes as $attribute_name => $options ) :
+		                        $attribute_label = wc_attribute_label( $attribute_name );
+		                        ?>
                                 <div class="variation-dropdown">
-                                    <select required name="<?php echo esc_attr( $attribute_name ); ?>" data-attribute_name="attribute_<?php echo esc_attr( $attribute_name ); ?>">
+                                    <select required name="<?php
+			                        echo esc_attr( $attribute_name ); ?>" data-attribute_name="attribute_<?php
+			                        echo esc_attr( $attribute_name ); ?>">
                                         <option value=""><?php echo esc_html( $attribute_label ); ?></option>
-							            <?php
-							            foreach ( $options as $option ) :
-								            // Check if this is a taxonomy attribute
-								            $is_taxonomy = str_starts_with( $attribute_name, 'pa_' );
-
-								            if ( $is_taxonomy ) {
-									            // Taxonomy attributes
-									            $option_term = get_term_by( 'slug', $option, $attribute_name );
-									            $option_label = $option_term ? $option_term->name : $option;
-								            } else {
-									            // Custom attributes
-									            $option_label = $option;
-								            }
-								            ?>
-                                            <option value="<?php echo esc_attr( $option ); ?>">
-									            <?php echo esc_html( $option_label ); ?>
-                                            </option>
-							            <?php
-							            endforeach; ?>
+				                        <?php foreach ( $options as $option ) : ?>
+                                            <option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( ucfirst( $option ) ); ?></option>
+				                        <?php endforeach; ?>
                                     </select>
                                 </div>
-				            <?php
-				            endforeach;
-				            ?>
+	                        <?php
+	                        endforeach; ?>
                         </div>
 		            <?php
 		            }
