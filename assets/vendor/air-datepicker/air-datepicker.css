@@ -121,6 +121,11 @@
     border-radius: 4px;
 }
 
+.air-datepicker-cell.-selected-.-year-,
+.air-datepicker-cell.-selected-.-month-{
+    border-radius: 5px;
+}
+
 .air-datepicker-cell.-selected- {
     color: var(--adp-day-name-color-hover);
     border: none;
