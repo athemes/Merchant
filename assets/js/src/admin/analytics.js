@@ -665,7 +665,7 @@
 						locale: JSON.parse(merchant_datepicker_locale),
 						range: true,
 						position: 'bottom right',
-						dateFormat: 'yyyy-MM-dd',
+						dateFormat: 'MM/dd/yy',
 						selectedDates: selectedDates, // Set the selected dates
 						multipleDatesSeparator: ' - ',
 						onSelect: function (data) {

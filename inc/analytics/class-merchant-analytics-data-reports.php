@@ -50,13 +50,13 @@ class Merchant_Analytics_Data_Reports {
 
 		// Format the dates to match the required format
 		$last_7_days_range = array(
-			'start' => $last_7_days_start->format( 'Y-m-d' ),
-			'end'   => $last_7_days_end->format( 'Y-m-d' ),
+			'start' => $last_7_days_start->format( 'm/d/y' ),
+			'end'   => $last_7_days_end->format( 'm/d/y' ),
 		);
 
 		$previous_7_days_range = array(
-			'start' => $previous_7_days_start->format( 'Y-m-d' ),
-			'end'   => $previous_7_days_end->format( 'Y-m-d' ),
+			'start' => $previous_7_days_start->format( 'm/d/y' ),
+			'end'   => $previous_7_days_end->format( 'm/d/y' ),
 		);
 
 		// Return the ranges as an array

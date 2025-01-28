@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Merchant_Analytics_Data_Provider {
 
 	/**
-	 * @var string The start date in 'Y-m-d H:i:s' format.
+	 * @var string The start date in 'm/d/y H:i:s' format.
 	 */
 	private $start_date;
 
 	/**
-	 * @var string The end date in 'Y-m-d H:i:s' format.
+	 * @var string The end date in 'm/d/y H:i:s' format.
 	 */
 	private $end_date;
 
@@ -38,7 +38,7 @@ class Merchant_Analytics_Data_Provider {
 	/**
 	 * Set the start date for filtering data.
 	 *
-	 * @param string $start_date The start date in 'Y-m-d H:i:s' format.
+	 * @param string $start_date The start date in 'm/d/y H:i:s' format.
 	 */
 	public function set_start_date( $start_date ) {
 		$this->start_date = $this->validate_date( $start_date );
@@ -47,33 +47,16 @@ class Merchant_Analytics_Data_Provider {
 	/**
 	 * Set the end date for filtering data.
 	 *
-	 * @param string $end_date The end date in 'Y-m-d H:i:s' format.
+	 * @param string $end_date The end date in 'm/d/y H:i:s' format.
 	 */
 	public function set_end_date( $end_date ) {
 		$this->end_date = $this->validate_date( $end_date );
 	}
 
 	/**
-	 * Validate the date format.
-	 *
-	 * @param string $date The date string to validate.
-	 *
-	 * @return string Validated date string.
-	 * @throws InvalidArgumentException If the date format is invalid.
-	 */
-	private function validate_date( $date ) {
-		$date .= ' 23:59:59'; // make the date compatible with the format without forcing the user to select the time.
-		$d    = DateTime::createFromFormat( 'Y-m-d H:i:s', $date );
-		if ( $d && $d->format( 'Y-m-d H:i:s' ) === $date ) {
-			return $date;
-		}
-		throw new InvalidArgumentException( 'Invalid date format. Expected Y-m-d H:i:s given ' . esc_html( $date ) );
-	}
-
-	/**
 	 * Get the start date. If not set, initialize with the default value.
 	 *
-	 * @return string The start date in 'Y-m-d H:i:s' format.
+	 * @return string The start date in 'm/d/y H:i:s' format.
 	 */
 	public function get_start_date() {
 		if ( ! $this->start_date ) {
@@ -81,13 +64,13 @@ class Merchant_Analytics_Data_Provider {
 			$this->start_date = gmdate( 'Y-m-d 00:00:00', strtotime( '-30 days' ) );
 		}
 
-		return $this->start_date;
+		return $this->convert_date_format( $this->start_date );
 	}
 
 	/**
 	 * Get the end date. If not set, initialize with the default value.
 	 *
-	 * @return string The end date in 'Y-m-d H:i:s' format.
+	 * @return string The end date in 'm/d/y H:i:s' format.
 	 */
 	public function get_end_date() {
 		if ( ! $this->end_date ) {
@@ -95,7 +78,7 @@ class Merchant_Analytics_Data_Provider {
 			$this->end_date = gmdate( 'Y-m-d H:i:s', time() );
 		}
 
-		return $this->end_date;
+		return $this->convert_date_format( $this->end_date );
 	}
 
 	/**
@@ -752,5 +735,38 @@ class Merchant_Analytics_Data_Provider {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Validate the date format.
+	 *
+	 * @param string $date The date string to validate.
+	 *
+	 * @return string Validated date string.
+	 * @throws InvalidArgumentException If the date format is invalid.
+	 */
+	private function validate_date( $date ) {
+		$date .= ' 23:59:59'; // make the date compatible with the format without forcing the user to select the time.
+		$d    = DateTime::createFromFormat( 'm/d/y H:i:s', $date );
+		if ( $d && $d->format( 'm/d/y H:i:s' ) === $date ) {
+			return $date;
+		}
+		throw new InvalidArgumentException( 'Invalid date format. Expected m/d/y H:i:s given ' . esc_html( $date ) );
+	}
+
+	/**
+	 * Convert the date from m/d/y H:i:s format to 'Y-m-d H:i:s' to make it compatible with the database.
+	 *
+	 * @param string $date The date string to convert.
+	 *
+	 * @return string The date string in 'Y-m-d H:i:s' format.
+	 */
+	protected function convert_date_format( $date ) {
+		$d = DateTime::createFromFormat( 'm/d/y H:i:s', $date );
+		if ( $d ) {
+			return $d->format( 'Y-m-d H:i:s' );
+		}
+
+		return '';
 	}
 }
