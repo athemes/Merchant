@@ -70,7 +70,7 @@ $end_row       = min( $current_page * $rows_per_page, $total_rows );
             <div class="alignright overview-head">
                 <div class="date-range">
                     <span class="merchant-analytics-loading-spinner"></span>
-                    <span class="first-date-range">
+                    <span class="first-date-range first-date-range-all-campaigns" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                         <input type="text" class="date-range-input" readonly value="<?php
                         echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                         esc_attr_e( 'Date range', 'merchant' ); ?>">

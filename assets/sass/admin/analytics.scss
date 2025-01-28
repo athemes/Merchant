@@ -92,23 +92,6 @@
 					}
 				}
 			}
-
-			.date-range {
-				.compare-text {
-					color: #335EEA;
-					font-size: 12px;
-					margin: 0 10px;
-				}
-
-				input {
-					width: 200px;
-					padding: 3px 8px;
-					border: 2px solid #F0F0F1;
-					border-radius: 4px;
-					background-color: #ffffff;
-					text-align: center;
-				}
-			}
 		}
 	}
 }
@@ -194,44 +177,6 @@
 					flex-direction: column; /* Stack inputs vertically on mobile */
 					width: 100%; /* Make date range full width on mobile */
 					gap: 10px; /* Increased gap between stacked elements */
-				}
-
-				.compare-text {
-					color: #335EEA;
-					font-size: 14px;
-
-					@media (max-width: 768px) {
-						margin-top: 12px;
-					}
-				}
-
-				input {
-					width: 200px;
-					max-width: 100%;
-					font-size: 14px;
-					text-align: center;
-					background: #fff;
-					border: 2px solid #F0F0F1;
-					border-radius: 4px;
-					padding: 3px 8px;
-				}
-
-				.first-date-range {
-					input {
-						background: none;
-						border: none;
-						color: #939393;
-						padding-inline: 0;
-
-						@media (min-width: 769px) {
-							margin-left: -12px;
-						}
-
-						&:focus {
-							box-shadow: none;
-							outline: none;
-						}
-					}
 				}
 			}
 
@@ -564,27 +509,6 @@
 					width: 100%; /* Make date range full width on mobile */
 					gap: 10px; /* Increased gap between stacked elements */
 				}
-
-				.compare-text {
-					color: #335EEA;
-					font-size: 12px; /* Increased font size */
-					//margin: 0 15px; /* Increased margin */
-
-					@media (max-width: 768px) {
-						//margin: 0 10px; /* Adjusted margin */
-					}
-				}
-
-				input {
-					width: 200px;
-					max-width: 100%;
-					border: 2px solid #F0F0F1;
-					border-radius: 4px;
-					padding: 3px 8px; /* Increased padding for better touch interaction */
-					font-size: 14px; /* Increased font size */
-					background-color: #fff;
-					text-align: center;
-				}
 			}
 
 			@media (max-width: 768px) {
@@ -793,10 +717,6 @@
 
 			.date-range {
 				margin-left: 10px;
-
-				input {
-					width: 200px;
-				}
 			}
 
 			.merchant-analytics-loading-spinner {
@@ -992,5 +912,82 @@
 	.no-results-message {
 		text-align: center;
 		padding: 20px;
+	}
+}
+
+.merchant-analytics-section.all-campaigns-table,
+.merchant-analytics-section.campaigns-table,
+.merchant-analytics-overview-section,
+.merchant-analytics-section {
+	.date-range {
+		.compare-text {
+			color: #3858E9;
+			font-size: 12px;
+			//margin: 0 10px;
+
+			@media (min-width: 769px) {
+				margin-right: -35px;
+			}
+
+			@media (max-width: 768px) {
+				margin-top: 12px;
+			}
+		}
+
+		input {
+			width: 245px;
+			max-width: 100%;
+			font-size: 13px;
+			text-align: center;
+			color: #757575;
+			background: #fff;
+			border: 2px solid #F0F0F1;
+			border-radius: 4px;
+			padding: 3px 15px 3px 30px;
+		}
+
+		.single-date-range,
+		.first-date-range,
+		.second-date-range {
+			display: inline-block;
+			position: relative;
+
+			&:before,
+			&:after {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			&:before {
+				color: #4A4A4A;
+				content: attr(data-title);
+				left: 15px;
+			}
+
+			&:after {
+				content: '';
+				background-image: url('../../images/admin/calendar.svg');
+				background-size: 13px 14px;
+				width: 13px;
+				height: 14px;
+				right: 15px;
+			}
+		}
+
+		.first-date-range:not(.first-date-range-top-campaigns, .first-date-range-all-campaigns) {
+			input {
+				width: 225px;
+				background: none;
+				border: none;
+				color: #939393;
+				padding-inline: 0;
+
+				&:focus {
+					box-shadow: none;
+					outline: none;
+				}
+			}
+		}
 	}
 }
