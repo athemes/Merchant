@@ -923,10 +923,9 @@
 		.compare-text {
 			color: #3858E9;
 			font-size: 12px;
-			//margin: 0 10px;
 
 			@media (min-width: 769px) {
-				margin-right: -35px;
+				margin-right: -25px;
 			}
 
 			@media (max-width: 768px) {
@@ -987,6 +986,16 @@
 					box-shadow: none;
 					outline: none;
 				}
+			}
+		}
+
+		.first-date-range-analytics-overview {
+			&:after {
+				right: 0;
+			}
+
+			input {
+				width: 200px !important;
 			}
 		}
 	}

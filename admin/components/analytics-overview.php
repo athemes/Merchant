@@ -21,7 +21,7 @@ $date_ranges   = $overview_data['date_ranges'];
                     <input type="text" class="date-range-input" readonly value="<?php echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ); ?>" placeholder="<?php esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
                 <span class="compare-text"><?php esc_html_e( 'comparing to', 'merchant' ); ?></span>
-                <span class="first-date-range">
+                <span class="first-date-range first-date-range-analytics-overview">
                     <input type="text" class="date-range-input" readonly value="<?php echo esc_attr( implode( ' - ', array_values( $date_ranges['last_period'] ) ) ); ?>" placeholder="<?php esc_attr_e( 'Date range', 'merchant' ); ?>">
                 </span>
             </div>
