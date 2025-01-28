@@ -126,7 +126,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 			} else {
 				?>
                 <tr>
-                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 25px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
+                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 50px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
                 </tr>
 				<?php
 			}
