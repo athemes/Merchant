@@ -18,7 +18,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -39,7 +39,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -60,7 +60,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -81,7 +81,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span class="first-date-range">
+                <span class="first-date-range first-date-range-top-campaigns" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
@@ -126,7 +126,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 			} else {
 				?>
                 <tr>
-                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 25px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
+                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 50px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
                 </tr>
 				<?php
 			}

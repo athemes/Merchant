@@ -141,21 +141,18 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 * Add admin body class.
 		 */
 		public function add_admin_body_class( $classes ) {          
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$page    = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$module  = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$section = ( ! empty( $_GET['section'] ) ) ? sanitize_text_field( wp_unslash( $_GET['section'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
-
 				if ( ! empty( $module ) ) {
-
 					$classes .= ' merchant-admin-page-module';
-
 				} else {
-
-					$classes .= ' merchant-admin-page';
+					$section  = $section ? 'merchant-admin-page__' . $section : 'merchant-admin-page__dashboard';
+					$classes .= ' merchant-admin-page ' . $section;
 
 				}
-
 			}
 
 			return $classes;
@@ -163,5 +160,4 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 	}
 
 	Merchant_Admin_Loader::instance();
-
 }
