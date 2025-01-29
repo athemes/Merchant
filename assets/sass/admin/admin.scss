@@ -500,6 +500,10 @@
       outline: none;
       box-shadow: none;
     }
+
+    svg:first-of-type {
+		width: 24px;
+    }
   }
 
   span {
