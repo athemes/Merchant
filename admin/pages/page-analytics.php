@@ -8,6 +8,14 @@ $date_ranges     = $reports->get_last_and_previous_7_days_ranges();
 $campaigns_table = $reports->get_top_performing_campaigns( $date_ranges['recent_period'] );
 $overview_data   = $reports->main_analytics_cards_report();
 
+/**
+ * Hook: merchant_analytics_page_before.
+ *
+ * @hooked merchant_analytics_page_before - 10
+ *
+ * @since 2.0
+ */
+do_action( 'merchant_analytics_page_before', $reports, $date_ranges );
 require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 <div class="merchant-analytics-section revenue-chart-section">
     <div class="chart-head">
@@ -30,6 +38,15 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 	echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
+<?php
+/**
+ * Hook: merchant_analytics_page_between_revenue_and_aov.
+ *
+ * @hooked merchant_analytics_page_between_revenue_and_aov - 10
+ *
+ * @since 2.0
+ */
+do_action( 'merchant_analytics_page_between_revenue_and_aov', $reports, $date_ranges ); ?>
 <div class="merchant-analytics-section aov-chart-section">
     <div class="chart-head">
         <div class="head-wrapper">
@@ -51,6 +68,15 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 	echo esc_attr( wp_json_encode( $reports->get_aov_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
+<?php
+/**
+ * Hook: merchant_analytics_page_between_aov_and_impressions.
+ *
+ * @hooked merchant_analytics_page_between_aov_and_impressions - 10
+ *
+ * @since 2.0
+ */
+do_action( 'merchant_analytics_page_between_aov_and_impressions', $reports, $date_ranges ); ?>
 <div class="merchant-analytics-section impressions-chart-section">
     <div class="chart-head">
         <div class="head-wrapper">
@@ -72,6 +98,16 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
 	echo esc_attr( wp_json_encode( $reports->get_impressions_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
 	?>"></div>
 </div>
+<?php
+/**
+ * Hook: merchant_analytics_page_between_impressions_and_campaigns_table.
+ *
+ * @hooked merchant_analytics_page_between_impressions_and_campaigns_table - 10
+ *
+ * @since 2.0
+ */
+do_action( 'merchant_analytics_page_between_impressions_and_campaigns_table', $reports, $date_ranges );
+?>
 <div class="merchant-analytics-section campaigns-table">
     <div class="overview-head">
         <div class="head-wrapper">
@@ -89,7 +125,6 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
         </div>
     </div>
-
     <div class="campaigns-table-wrapper">
         <table>
             <thead>
@@ -135,3 +170,12 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
         </table>
     </div>
 </div>
+<?php
+/**
+ * Hook: merchant_analytics_page_after.
+ *
+ * @hooked merchant_analytics_page_after - 10
+ *
+ * @since 2.0
+ */
+do_action( 'merchant_analytics_page_after', $reports, $date_ranges );
