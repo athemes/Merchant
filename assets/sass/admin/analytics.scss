@@ -915,6 +915,29 @@
 	}
 }
 
+.merchant-analytics-widget {
+	margin: 0 -12px -12px -12px;
+	.foot {
+		background-color: #FAFAFA;
+		border-top: 1px solid #F0F0F1;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px;
+
+		input {
+			border-color: #8c8f94;
+			background-color: #fff;
+		}
+
+		.analytics-link{
+			font-size: 14px;
+			font-weight: 500;
+			color: #2271b1;
+		}
+	}
+}
+
 .merchant-analytics-section.all-campaigns-table,
 .merchant-analytics-section.campaigns-table,
 .merchant-analytics-overview-section,
