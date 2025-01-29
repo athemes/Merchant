@@ -42,10 +42,11 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
-			'id'      => 'privacy_policy_url',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Privacy policy URL', 'merchant' ),
-			'default' => get_privacy_policy_url(),
+			'id'          => 'privacy_policy_url',
+			'type'        => 'url',
+			'title'       => esc_html__( 'Privacy policy URL', 'merchant' ),
+			'default'     => get_privacy_policy_url(),
+			'placeholder' => 'yoursite.com/privacy-policy',
 		),
 
 		array(
