@@ -44,8 +44,53 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 			add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'analytics_assets' ) );
+			add_action( 'wp_dashboard_setup', array( $this, 'dashboard_analytics_widget' ) );
 			add_action( 'wp_ajax_merchant_notifications_read', array( $this, 'ajax_notifications_read' ) );
 			add_action('admin_footer', array( $this, 'footer_internal_scripts' ));
+		}
+
+        /**
+         * Add dashboard widget.
+         *
+         * @return void
+         */
+		public function dashboard_analytics_widget() {
+			wp_add_dashboard_widget(
+				'merchant_modules_revenue',         // Widget slug.
+				esc_html__( 'Daily added revenue by Merchant', 'merchant' ),   // Title.
+				array( $this, 'dashboard_analytics_widget_content' ) // Display function.
+			);
+		}
+
+        /**
+         * Dashboard widget content.
+         *
+         * @return void
+         */
+		public function dashboard_analytics_widget_content() {
+			$reports     = new Merchant_Analytics_Data_Reports();
+			$date_ranges = $reports->get_last_and_previous_7_days_ranges();
+			?>
+            <div class="merchant-analytics-widget widget-chart-section">
+                <div class="chart" data-period="<?php
+				echo esc_attr( wp_json_encode( $reports->get_revenue_chart_report( $date_ranges['recent_period']['start'], $date_ranges['recent_period']['end'] ) ) )
+				?>"></div>
+                <div class="foot">
+                    <div class="date-range">
+                        <span>
+                            <input type="text" class="date-range-input" readonly value="<?php
+                            echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
+                            esc_attr_e( 'Select date range', 'merchant' ); ?>">
+                        </span>
+                        <span class="merchant-analytics-loading-spinner"></span>
+                    </div>
+                    <div class="analytics-link">
+                        <a href="<?php echo esc_url( admin_url( 'admin.php?page=merchant&section=analytics' ) ); ?>"><?php
+			                esc_html_e( 'View Full Analytics', 'merchant' ); ?></a>
+                    </div>
+                </div>
+            </div>
+			<?php
 		}
 
         /**
@@ -54,9 +99,10 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
          * @return void
          */
 		public function analytics_assets( $hook ) {
+            global $pagenow;
             $section = sanitize_text_field( $_GET['section'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-			if ( $hook === 'toplevel_page_merchant' && $section !== 'settings' && class_exists('WooCommerce') ) {
+			if ( ($hook === 'toplevel_page_merchant' && $section !== 'settings' && class_exists('WooCommerce')) || ($pagenow === 'index.php') ) {
 				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
 				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
 				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );

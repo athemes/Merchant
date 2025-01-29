@@ -245,6 +245,107 @@
 		},
 
 		/**
+		 * Options for the revenue chart (area chart).
+		 * @type {Object}
+		 */
+		widgetChartOptions: {
+			series: [{data: []}],
+			noData: {
+				text: 'No data available',
+				align: 'center',
+				verticalAlign: 'middle',
+				offsetX: 0,
+				offsetY: 0,
+				style: {
+					color: '#686868',
+					fontSize: '18px',
+				}
+			},
+			legend: {
+				show: false // This hides the legend
+			},
+			chart: {
+				type: 'area',
+				height: 350,
+				stacked: false,
+				toolbar: {
+					show: false,
+					offsetX: -10,
+					offsetY: 10,
+					tools: {
+						download: false,
+						selection: true,
+						zoom: true,
+						zoomin: true,
+						zoomout: true,
+						pan: false,
+						reset: true,
+					}
+				},
+				zoom: {
+					enabled: false,
+					allowMouseWheelZoom: false,
+				}
+			},
+			stroke: {
+				curve: 'smooth',
+				// dashArray: 6,
+				width: 2,
+				lineCap: 'round',
+			},
+			fill: {
+				type: 'gradient',
+				colors: ['#23d388'],
+				gradient: {
+					inverseColors: false,
+					opacityFrom: 0.55,
+					opacityTo: 0.15,
+					stops: [10, 100]
+				},
+			},
+			colors: ['#0F8A56'],
+			dataLabels: {
+				enabled: false
+			},
+			grid: {
+				show: true,
+				borderColor: '#D8D8D8',
+				strokeDashArray: 5,
+				position: 'back',
+				xaxis: {
+					lines: {
+						show: true,
+						offsetX: 60,
+						style: {
+							dashArray: 5,
+						}
+					}
+				},
+				yaxis: {
+					lines: {
+						show: false
+					}
+				}
+			},
+			xaxis: {
+				axisTicks: {
+					show: false
+				},
+				axisBorder: {
+					show: true,
+					color: '#D8D8D8',
+					height: 1,
+				},
+				tooltip: {
+					enabled: false,
+				}
+			},
+			tooltip: {
+				enabled: false,
+			}
+		},
+
+		/**
 		 * Options for the average order value (AOV) chart (area chart).
 		 * @type {Object}
 		 */
@@ -651,6 +752,9 @@
 		 */
 		datePickerInit: function (container, {onSelectHandler, datePickerArgs}) {
 			const inputs = container.find('.date-range-input');
+			if (!inputs.length) {
+				return;
+			}
 
 			inputs.each(function () {
 				const datePicker = $(this);
@@ -677,7 +781,7 @@
 					...datePickerArgs
 				};
 
-				new AirDatepicker(datePicker.getPath(), dpArgs);
+				new AirDatepicker(datePicker.get(0), dpArgs);
 			});
 		},
 
@@ -716,9 +820,10 @@
 		 * @param {Object} chartOptions - Options for the ApexCharts instance.
 		 * @param {Function} updateFunction - Function to call when the date is selected.
 		 * @param {string} loadingIndicatorSelector - Selector for the loading indicator.
+		 * @param datePickerArgs
 		 * @returns {ApexCharts} - The rendered chart instance.
 		 */
-		renderChart: function (container, chartOptions, updateFunction, loadingIndicatorSelector) {
+		renderChart: function (container, chartOptions, updateFunction, loadingIndicatorSelector, datePickerArgs = {}) {
 			const chartEl = container.find('.chart');
 			if (!chartEl.length) {
 				return;
@@ -733,7 +838,8 @@
 					if (data.formattedDate.length === 2) {
 						updateFunction(data);
 					}
-				}
+				},
+				datePickerArgs: datePickerArgs
 			});
 
 			return chart;
@@ -742,14 +848,33 @@
 		/**
 		 * Renders the revenue chart.
 		 */
+		widgetChartRender: function () {
+			const container = $('.widget-chart-section');
+			const isRTL = $('body').hasClass('rtl');
+			merchantAnalyticsChart.revenueChart = this.renderChart(
+				container,
+				this.widgetChartOptions,
+				(data) => this.updateRevenueChart(data),
+				'.widget-chart-section .merchant-analytics-loading-spinner',
+				{
+					position: isRTL ? 'top right' : 'top left',
+				}
+			);
+		},
+
+		/**
+		 * Renders the revenue chart.
+		 */
 		revenueChartRender: function () {
 			const container = $('.revenue-chart-section');
-			this.revenueChart = this.renderChart(
-				container,
-				this.revenueChartOptions,
-				(data) => this.updateRevenueChart(data),
-				'.revenue-chart-section .merchant-analytics-loading-spinner'
-			);
+			if (container.length) {
+				this.revenueChart = this.renderChart(
+					container,
+					this.revenueChartOptions,
+					(data) => this.updateRevenueChart(data),
+					'.revenue-chart-section .merchant-analytics-loading-spinner'
+				);
+			}
 		},
 
 		/**
@@ -757,12 +882,14 @@
 		 */
 		avgOrderValChartRender: function () {
 			const container = $('.aov-chart-section');
-			this.avgOrderValChart = this.renderChart(
-				container,
-				this.avgOrderValChartOptions,
-				(data) => this.updateAOVChart(data),
-				'.aov-chart-section .merchant-analytics-loading-spinner'
-			);
+			if (container.length) {
+				this.avgOrderValChart = this.renderChart(
+					container,
+					this.avgOrderValChartOptions,
+					(data) => this.updateAOVChart(data),
+					'.aov-chart-section .merchant-analytics-loading-spinner'
+				);
+			}
 		},
 
 		/**
@@ -770,12 +897,14 @@
 		 */
 		impressionsChartRender: function () {
 			const container = $('.impressions-chart-section');
-			this.impressionsChart = this.renderChart(
-				container,
-				this.columnChartOptions,
-				(data) => this.updateImpressionsChart(data),
-				'.impressions-chart-section .merchant-analytics-loading-spinner'
-			);
+			if (container.length) {
+				this.impressionsChart = this.renderChart(
+					container,
+					this.columnChartOptions,
+					(data) => this.updateImpressionsChart(data),
+					'.impressions-chart-section .merchant-analytics-loading-spinner'
+				);
+			}
 		},
 
 		/**
@@ -784,30 +913,28 @@
 		initTopCampaignsTable: function () {
 			let container = $('.merchant-analytics-section.campaigns-table');
 			let self = this;
-			// Initialize the date picker
-			this.datePickerInit(container, {
-				onSelectHandler: () => {
-					// Get both date range inputs
-					const firstInput = container.find('.first-date-range .date-range-input');
-
-					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
-
-					// Ensure both date ranges have exactly two dates
-					if (firstDateRange.length === 2) {
-						self.updatePerformingCampaignsTable({
-							startDate: firstDateRange[0],
-							endDate: firstDateRange[1],
-							container: container
-						});
-					}
-				},
-				datePickerArgs: {
-					position: 'top right',
-				}
-			});
-
-
 			if (container.length) {
+				// Initialize the date picker
+				this.datePickerInit(container, {
+					onSelectHandler: () => {
+						// Get both date range inputs
+						const firstInput = container.find('.first-date-range .date-range-input');
+
+						const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
+
+						// Ensure both date ranges have exactly two dates
+						if (firstDateRange.length === 2) {
+							self.updatePerformingCampaignsTable({
+								startDate: firstDateRange[0],
+								endDate: firstDateRange[1],
+								container: container
+							});
+						}
+					},
+					datePickerArgs: {
+						position: 'top right',
+					}
+				});
 				this.setupSortableTableEventListeners(container);
 			}
 		},
@@ -818,25 +945,26 @@
 		initAllCampaignsTable: function () {
 			let container = $('.merchant-analytics-section.all-campaigns-table');
 			let self = this;
-			// Initialize the date picker
-			this.datePickerInit(container, {
-				onSelectHandler: () => {
-					// Get both date range inputs
-					const firstInput = container.find('.first-date-range .date-range-input');
-					const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
-
-					// Ensure both date ranges have exactly two dates
-					if (firstDateRange.length === 2) {
-						self.updateAllCampaignsTable({
-							startDate: firstDateRange[0],
-							endDate: firstDateRange[1],
-							container: container
-						});
-					}
-				}
-			});
-
 			if (container.length) {
+				// Initialize the date picker
+				this.datePickerInit(container, {
+					onSelectHandler: () => {
+						// Get both date range inputs
+						const firstInput = container.find('.first-date-range .date-range-input');
+						const firstDateRange = firstInput.val().split(' - ').map(dateStr => dateStr.trim());
+
+						// Ensure both date ranges have exactly two dates
+						if (firstDateRange.length === 2) {
+							self.updateAllCampaignsTable({
+								startDate: firstDateRange[0],
+								endDate: firstDateRange[1],
+								container: container
+							});
+						}
+					}
+				});
+
+
 				self.setupSortableTableEventListeners(container);
 				self.populateFilterSelect(container);
 			}
@@ -894,7 +1022,7 @@
 			const searchInput = $('.js-campaign-search');
 			const filterSelect = $('.js-filter-module');
 			const bulkActionBtn = $('.js-bulk-action');
-			const $pagination = $( '.js-pagination' );
+			const $pagination = $('.js-pagination');
 
 			// "Select All" checkbox
 			table.find('thead th:first-child input[type="checkbox"]').on('change', function () {
@@ -976,22 +1104,22 @@
 			});
 
 			// Pagination clicks
-			$pagination.on( 'click', '.pagination-button', function( e ) {
+			$pagination.on('click', '.pagination-button', function (e) {
 				e.preventDefault();
-				let currentPage = parseInt( $( this ).attr( 'data-current-page' ) );
+				let currentPage = parseInt($(this).attr('data-current-page'));
 
-				const nextPage = parseInt( $( this ).attr( 'data-page' ) );
+				const nextPage = parseInt($(this).attr('data-page'));
 
-				if ( isNaN( nextPage ) || nextPage === currentPage ) {
+				if (isNaN(nextPage) || nextPage === currentPage) {
 					return;
 				}
 
 				currentPage = nextPage;
 
-				self.paginateRows(currentPage,table.find('tbody tr'));
+				self.paginateRows(currentPage, table.find('tbody tr'));
 
 				self.updatePaginationButtons(currentPage);
-			} );
+			});
 		},
 
 		/**
@@ -1076,13 +1204,13 @@
 			});
 
 			const currentPage = 1;
-			const totalRows  = visibleCount;
+			const totalRows = visibleCount;
 			const rowsPerPage = parseInt($table.closest('.merchant-page-campaigns').find('.js-pagination').attr('data-rows-per-page'));
-			const totalPages = Math.max( 1, Math.ceil( totalRows / rowsPerPage ) );
+			const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
 
 			// Update after filtering
 			self.paginateRows(currentPage, $rows);
-			self.updateNoResults( visibleCount === 0, $table );
+			self.updateNoResults(visibleCount === 0, $table);
 			self.updatePaginationButtons(currentPage, totalPages, totalRows);
 		},
 
@@ -1092,23 +1220,23 @@
 		 * @param currentPage
 		 * @param $rows
 		 */
-		paginateRows: function ( currentPage = 1, $rows ) {
+		paginateRows: function (currentPage = 1, $rows) {
 			const $pagination = $('.js-pagination');
 
-			const rowsPerPage = parseInt( $pagination.attr( 'data-rows-per-page' ) );
-			const startIndex = ( currentPage - 1 ) * rowsPerPage;
+			const rowsPerPage = parseInt($pagination.attr('data-rows-per-page'));
+			const startIndex = (currentPage - 1) * rowsPerPage;
 			const endIndex = startIndex + rowsPerPage;
 
-			$rows.hide().addClass( 'is-hidden' );
+			$rows.hide().addClass('is-hidden');
 
 			$rows
-				.filter( ':not(.filtered-out)' )
-				.each( function( index ) {
-					if ( index >= startIndex && index < endIndex ) {
-						$( this ).show().removeClass( 'is-hidden' );
+				.filter(':not(.filtered-out)')
+				.each(function (index) {
+						if (index >= startIndex && index < endIndex) {
+							$(this).show().removeClass('is-hidden');
+						}
 					}
-				}
-			);
+				);
 		},
 
 		/**
@@ -1117,16 +1245,16 @@
 		 * @param show
 		 * @param $table
 		 */
-		updateNoResults: function ( show, $table ) {
-			let $noResults = $table.next( '.no-results-message' );
+		updateNoResults: function (show, $table) {
+			let $noResults = $table.next('.no-results-message');
 
-			if ( show ) {
-				if ( !$noResults.length ) {
-					$noResults = $( '<div class="no-results-message" style="">No matching campaigns found</div>' );
-					$table.after( $noResults );
+			if (show) {
+				if (!$noResults.length) {
+					$noResults = $('<div class="no-results-message" style="">No matching campaigns found</div>');
+					$table.after($noResults);
 				}
 				$noResults.show();
-			} else if ( $noResults.length ) {
+			} else if ($noResults.length) {
 				$noResults.hide();
 			}
 		},
@@ -1138,27 +1266,27 @@
 		 * @param totalPages
 		 * @param totalRows
 		 */
-		updatePaginationButtons: function( currentPage, totalPages, totalRows ) {
+		updatePaginationButtons: function (currentPage, totalPages, totalRows) {
 			const $pagination = $('.js-pagination');
 
-			$pagination.attr( 'data-current-page', currentPage )
+			$pagination.attr('data-current-page', currentPage)
 
 			// If totalPages provided, update it to use the latest value
-			if ( totalPages ) {
-				$pagination.attr( 'data-total-pages', totalPages )
+			if (totalPages) {
+				$pagination.attr('data-total-pages', totalPages)
 			}
-			if ( totalRows ) {
-				$pagination.attr( 'data-total-rows', totalRows )
+			if (totalRows) {
+				$pagination.attr('data-total-rows', totalRows)
 			}
 
 			// Get the latest value
-			totalPages = parseInt( $pagination.attr( 'data-total-pages' ) );
+			totalPages = parseInt($pagination.attr('data-total-pages'));
 
 			let html = '';
 
-			if ( currentPage > 1 ) {
+			if (currentPage > 1) {
 				html += `
-		          <button class="pagination-button prev-page" data-page="${ currentPage - 1 }">
+		          <button class="pagination-button prev-page" data-page="${currentPage - 1}">
 		            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
 		              <path d="M5.16797 11.3301L0.521484 6.48047C0.394531 6.32812 0.34375 6.17578 0.34375 6.02344C0.34375 5.89648 0.394531 5.74414 0.496094 5.61719L5.14258 0.767578C5.37109 0.513672 5.77734 0.513672 6.00586 0.742188C6.25977 0.970703 6.25977 1.35156 6.03125 1.60547L1.79102 6.02344L6.05664 10.4922C6.28516 10.7207 6.28516 11.127 6.03125 11.3555C5.80273 11.584 5.39648 11.584 5.16797 11.3301Z"/>
 		            </svg>
@@ -1166,17 +1294,17 @@
 				`;
 			}
 
-			if ( totalPages > 1 ) {
-				for ( let i = 1; i <= totalPages; i++ ) {
+			if (totalPages > 1) {
+				for (let i = 1; i <= totalPages; i++) {
 					html += `
-          			<button class="pagination-button${ i === currentPage ? ' pagination-active' : '' }" data-page="${ i }">${ i }</button>
+          			<button class="pagination-button${i === currentPage ? ' pagination-active' : ''}" data-page="${i}">${i}</button>
 				`;
 				}
 			}
 
-			if ( currentPage < totalPages ) {
+			if (currentPage < totalPages) {
 				html += `
-		          <button class="pagination-button next-page" data-page="${ currentPage + 1 }">
+		          <button class="pagination-button next-page" data-page="${currentPage + 1}">
 		            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="#565865">
 		              <path d="M1.80664 0.742188L6.45312 5.5918C6.55469 5.71875 6.63086 5.87109 6.63086 6.02344C6.63086 6.17578 6.55469 6.32812 6.45312 6.42969L1.80664 11.2793C1.57812 11.5332 1.17188 11.5332 0.943359 11.3047C0.689453 11.0762 0.689453 10.6953 0.917969 10.4414L5.18359 5.99805L0.917969 1.58008C0.689453 1.35156 0.689453 0.945312 0.943359 0.716797C1.17188 0.488281 1.57812 0.488281 1.80664 0.742188Z"/>
 		            </svg>
@@ -1184,19 +1312,19 @@
 				`;
 			}
 
-			$pagination.html( html );
+			$pagination.html(html);
 
 			// Update results
 			const $paginationNotice = $('.js-pagination-results');
-			if ( totalPages > 1 ) {
-				const _totalRows = parseInt($pagination.attr( 'data-total-rows'))
-				const rowsPerPage = parseInt( $pagination.attr( 'data-rows-per-page' ) );
-				const startIndex = ( currentPage - 1 ) * rowsPerPage;
+			if (totalPages > 1) {
+				const _totalRows = parseInt($pagination.attr('data-total-rows'))
+				const rowsPerPage = parseInt($pagination.attr('data-rows-per-page'));
+				const startIndex = (currentPage - 1) * rowsPerPage;
 				const endIndex = startIndex + rowsPerPage;
 
-				$paginationNotice.find( '.pagination-start-row' ).text(startIndex ? startIndex : 1)
-				$paginationNotice.find( '.pagination-end-row' ).text(endIndex > _totalRows ? _totalRows: endIndex)
-				$paginationNotice.find( '.pagination-total-rows' ).text(totalRows)
+				$paginationNotice.find('.pagination-start-row').text(startIndex ? startIndex : 1)
+				$paginationNotice.find('.pagination-end-row').text(endIndex > _totalRows ? _totalRows : endIndex)
+				$paginationNotice.find('.pagination-total-rows').text(totalRows)
 				$paginationNotice.show();
 			} else {
 				$paginationNotice.hide();
@@ -1294,6 +1422,7 @@
 	// Initialize charts when the document is ready
 	$(document).ready(function () {
 		merchantAnalyticsChart.initOverviewCards();
+		merchantAnalyticsChart.widgetChartRender();
 		merchantAnalyticsChart.revenueChartRender();
 		merchantAnalyticsChart.avgOrderValChartRender();
 		merchantAnalyticsChart.impressionsChartRender();
