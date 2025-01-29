@@ -295,7 +295,7 @@
 			},
 			fill: {
 				type: 'gradient',
-				colors: ['#23d388'],
+				colors: ['#3A63E9'],
 				gradient: {
 					inverseColors: false,
 					opacityFrom: 0.55,
@@ -303,7 +303,7 @@
 					stops: [10, 100]
 				},
 			},
-			colors: ['#0F8A56'],
+			colors: ['#3A63E9'],
 			dataLabels: {
 				enabled: false
 			},
