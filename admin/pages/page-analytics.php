@@ -26,7 +26,7 @@ require_once MERCHANT_DIR . 'admin/components/analytics-overview.php'; ?>
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -56,7 +56,7 @@ do_action( 'merchant_analytics_page_between_revenue_and_aov', $reports, $date_ra
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -86,7 +86,7 @@ do_action( 'merchant_analytics_page_between_aov_and_impressions', $reports, $dat
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span>
+                <span class="single-date-range" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Select date range', 'merchant' ); ?>">
@@ -117,7 +117,7 @@ do_action( 'merchant_analytics_page_between_impressions_and_campaigns_table', $r
             </div>
             <div class="date-range">
                 <span class="merchant-analytics-loading-spinner"></span>
-                <span class="first-date-range">
+                <span class="first-date-range first-date-range-top-campaigns" data-title="<?php echo esc_attr__( 'Date:', 'merchant' ); ?>">
                     <input type="text" class="date-range-input" readonly value="<?php
                     echo esc_attr( implode( ' - ', array_values( $date_ranges['recent_period'] ) ) ) ?>" placeholder="<?php
                     esc_attr_e( 'Date range', 'merchant' ); ?>">
@@ -161,7 +161,7 @@ do_action( 'merchant_analytics_page_between_impressions_and_campaigns_table', $r
 			} else {
 				?>
                 <tr>
-                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 25px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
+                    <td colspan="6" style="text-align: center;background: #fff;font-size: 20px;padding-block: 50px;color: #101517;"><?php esc_html_e( 'No data available', 'merchant' ); ?></td>
                 </tr>
 				<?php
 			}

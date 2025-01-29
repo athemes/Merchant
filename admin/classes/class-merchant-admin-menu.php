@@ -246,6 +246,17 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				2
 			);
 
+			// Campaigns.
+			add_submenu_page(
+				$this->plugin_slug,
+				esc_html__('Campaigns', 'merchant'),
+				esc_html__('Campaigns', 'merchant'),
+				$this->capability,
+				'admin.php?page=merchant&section=campaigns',
+				'',
+				3
+			);
+
             // Analytics.
 			add_submenu_page(
 				$this->plugin_slug,
@@ -253,17 +264,6 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				esc_html__('Analytics', 'merchant'),
 				$this->capability,
 				'admin.php?page=merchant&section=analytics',
-				'',
-				3
-			);
-
-            // Campaigns.
-			add_submenu_page(
-				$this->plugin_slug,
-				esc_html__('Campaigns', 'merchant'),
-				esc_html__('Campaigns', 'merchant'),
-				$this->capability,
-				'admin.php?page=merchant&section=campaigns',
 				'',
 				4
 			);
