@@ -58,7 +58,7 @@ const modulesDemoUrls = [
 	{
 		id: 'pre-order',
 		type: 'contains-text',
-		selector: '.product .entry-summary .single_add_to_cart_button',
+		selector: '.product .entry-summary .single_add_to_casssrt_button',
 		text: 'Pre-Order',
 		name: 'Pre-Order',
 		url: 'https://demo.athemes.com/merchant/product/ultra-facial-moisturizing-cream-with-squalane-combination/?display=pre-order'
