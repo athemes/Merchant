@@ -5,7 +5,7 @@ name: Deploy to demos network
 on:
   push:
     branches:
-      - test-demos-network-deploy
+      - improvement/rt/demos-network-deploy
       
 jobs:
   deploy:
