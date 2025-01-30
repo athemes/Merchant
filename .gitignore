@@ -9,3 +9,9 @@ package-lock.json
 assets/css
 assets/js/**/*.js
 !assets/js/src/**/*.js
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
