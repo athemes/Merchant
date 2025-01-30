@@ -112,12 +112,14 @@ if ( ! class_exists( 'Merchant_Advanced_Reviews' ) ) {
 
 				add_action( 'merchant_admin_before_include_modules_options', array( $this, 'help_banner' ) );
 
-				add_action( 'merchant_admin_after_module_page_page_header', array( $this, 'module_analytics' ), 1 );
+                // This hook is deactivated until we decide a better place for the analytics in module pages
+				//add_action( 'merchant_admin_after_module_page_page_header', array( $this, 'module_analytics' ), 1 );
 			}
 		}
 
 		/**
          * Render module analytics section.
+         * This method is deactivated until we decide a better place for the analytics in module pages
          *
 		 * @return void
 		 */
