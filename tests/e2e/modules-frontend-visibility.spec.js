@@ -300,7 +300,7 @@ const modulesDemoUrls = [
 ];
 
 for(const module of modulesDemoUrls) {
-	test(`Module ${module.name} is visible`, async ({ page }) => {
+	test(`Module ${module.name} is visible`, async ({ page, browserName }) => {
 		await page.goto(module.url);
 
 		if ( typeof module.type !== 'undefined' &&  module.type === 'contains-text' ) {
