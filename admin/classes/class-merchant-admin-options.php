@@ -479,6 +479,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					$value = sanitize_text_field( $value );
 					break;
 
+                case 'url':
+	                $value = sanitize_url( $value);
+	                break;
+
 				case 'textarea_multiline':
 				case 'textarea':
 					$value = sanitize_textarea_field( $value );
@@ -632,6 +636,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					if ( $type === 'checkbox_multiple' ) {
 						$value = is_array( $value ) ? $value : (array) $default;
 					} elseif ( $type === 'text' && ! empty( $module_id ) ) {
+						$value = Merchant_Option::get( $module_id, $id );
+					} elseif ( $type === 'url' && ! empty( $module_id ) ) {
 						$value = Merchant_Option::get( $module_id, $id );
 					} else {
 						$value = $default;
@@ -816,6 +822,20 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			echo esc_attr( $settings['id'] ); ?>]" value="<?php
 			echo esc_attr( $value ); ?>" placeholder="<?php
             echo esc_attr( $settings['placeholder'] ?? '' ); ?>"/>
+			<?php
+		}
+
+		/**
+		 * Field: URL
+		 */
+		public static function url( $settings, $value, $module_id = '' ) {
+			?>
+            <input
+                type="url"
+                name="merchant[<?php echo esc_attr( $settings['id'] ); ?>]"
+                value="<?php echo esc_url( $value ); ?>"
+                placeholder="<?php echo esc_url( $settings['placeholder'] ?? '' ); ?>"
+            />
 			<?php
 		}
 
