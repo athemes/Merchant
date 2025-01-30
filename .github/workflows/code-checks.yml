@@ -31,9 +31,6 @@ jobs:
       - name: Validate composer.json
         run: composer validate
 
-      - name: show files
-        run: ls -la
-
       - name: Cache Composer dependencies
         id: composer-cache
         uses: actions/cache@v3
