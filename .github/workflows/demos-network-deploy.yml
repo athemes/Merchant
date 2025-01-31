@@ -84,7 +84,7 @@ jobs:
           username: ${{ secrets.INSTAWP_SERVER_REMOTE_USER }}
           password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
           port: "22"
-          script: pwd
+          script: whoami
 
       # - name: 📂 Send files to the Instawp template
       #   uses: easingthemes/ssh-deploy@main
