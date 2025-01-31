@@ -116,5 +116,3 @@ class Merchant {
  * Run the plugin.
  */
 Merchant::instance();
-
-echo 123;
