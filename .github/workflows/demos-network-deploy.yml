@@ -87,6 +87,5 @@ jobs:
           REMOTE_HOST: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
           REMOTE_USER: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
           REMOTE_PORT: "22"
-          TARGET: "www/wp-content/plugins/merchant/"
-        
+          TARGET: "/home/gusivisije6327/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"
         
