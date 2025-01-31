@@ -90,3 +90,4 @@ jobs:
           TARGET: "/home/gusivisije6327/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"
           SCRIPT_BEFORE: ls
         
+        
