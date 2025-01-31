@@ -82,11 +82,9 @@ jobs:
           
         env:
           SSH_PRIVATE_KEY: ${{secrets.INSTAWP_SERVER_SSH_KEY}}
-          ARGS: "-rlgoDzvc -i --delete -v"
+          ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "merchant/"
           REMOTE_HOST: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
           REMOTE_USER: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
           REMOTE_PORT: "22"
-          TARGET: "/home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"
-          SCRIPT_BEFORE: ls
-        
+          TARGET: "/home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"        
