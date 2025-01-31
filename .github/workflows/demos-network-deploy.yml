@@ -1,16 +1,12 @@
 # GitHub Actions Workflow to deploy to the demos network server
+# This workflow will also deploy the plugin to the Instawp template
 
 name: Deploy to demos network
-
-# on:
-#   push:
-#     branches:
-#       - main
 
 on:
   push:
     branches:
-      - improvement/rt/instawp-automatic-deploy
+      - main
       
 jobs:
   deploy:
