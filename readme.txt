@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 1.11.2
+Stable tag: 2.0.0
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,13 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 2.0.0 =
+* Added - Introduced Merchant 2.0 with a brand-new refreshed interface.
+* Added - Analytics is now available in Merchant 2.0 for better insights.
+* Fixed - Advanced Reviews: The "Submit" button now works correctly when review options are set to Text Only.
+* Fixed - Login Popup: Form styling on the My Account page is now properly displayed.
+* Fixed - Cookie Banner: The "Privacy Policy URL" field now only accepts valid URLs.
+
 = 1.11.2 =
 * Fixed - Pre-Orders and Variable Products: Corrected an issue where the wrong price range was displayed when discounts were disabled
 * Fixed - Real-Time Search: Prevented hidden products from the catalog from appearing in search results
