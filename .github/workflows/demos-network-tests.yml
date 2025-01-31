@@ -1,14 +1,10 @@
 name: Demos Network Tests
 
-# on:
-#   workflow_run:
-#     workflows: ["Deploy to demos network"]
-#     types:
-#       - completed
-
 on:
-  push:
-    branches: [ improvement/rt/demos-network-tests ]
+  workflow_run:
+    workflows: ["Deploy to demos network"]
+    types:
+      - completed
 
 jobs:
   test:
@@ -54,7 +50,6 @@ jobs:
         run: |
           curl -F file=@playwright-report.zip \
                -F "initial_comment=Hey team! 
-               
                A new version from Merchant was released, and the frontend demo site tests have *passed successfully*! :white_check_mark:" \
                -F channels=${{ secrets.SLACK_MERCHANT_DEMO_STATUS_CHANNEL_ID }} \
                -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
@@ -77,8 +72,7 @@ jobs:
       - name: Slack notification (Failure)
         run: |
           curl -F file=@playwright-report.zip \
-               -F "initial_comment=Hey team!
-               
+               -F "initial_comment=Hey team! 
                A new version from Merchant was released, but at least one of the frontend demo site tests *failed*! :x:" \
                -F channels=${{ secrets.SLACK_MERCHANT_DEMO_STATUS_CHANNEL_ID }} \
                -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
