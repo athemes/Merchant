@@ -35,3 +35,32 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+
+    - name: Download Playwright Report
+      uses: actions/download-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report
+
+    - name: Zip the playwright report
+      run: zip -r playwright-report.zip playwright-report/
+
+    if: success()
+    steps:
+      - name: Slack notification (Success)
+        run: >
+          curl -F file=@playwright-report.zip
+          -F "initial_comment=:white_check_mark: A new version from Merchant were released and the frontend demo site tests have passed successfully! :white_check_mark: "
+          -F channels=${{ secrets.SLACK_MERCHANT_DEMO_STATUS_CHANNEL_ID }}
+          -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+          https://slack.com/api/files.upload
+
+    if: failure()
+    steps:
+      - name: Slack notification (Failure)
+        run: >
+          curl -F file=@playwright-report.zip
+          -F "initial_comment=:x: A new version from Merchant were released and the frontend demo site tests have passed successfully! :x: "
+          -F channels=${{ secrets.SLACK_MERCHANT_DEMO_STATUS_CHANNEL_ID }}
+          -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+          https://slack.com/api/files.upload    
