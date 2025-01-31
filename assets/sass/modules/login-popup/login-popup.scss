@@ -188,8 +188,13 @@
 		}
 	}
 
+	#customer_login {
+		margin: 0;
+	}
+
 	.col-1,
 	.col-2 {
+		min-width: 100%;
 		display: none;
 		padding: 0;
 		margin: 0;
@@ -204,6 +209,9 @@
 		display: flex;
 		grid-gap: 20px;
 		flex-direction: column;
+		padding: 0 !important;
+		border: none !important;
+		min-height: auto !important;
 	}
 
 	p {

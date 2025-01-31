@@ -1,5 +1,10 @@
 .merchant-volume-discounts {
 	margin: 20px 0;
+
+	.added_to_cart,
+	.wc-forward {
+		display: none !important;
+	}
 }
 
 .merchant-volume-discounts-title {

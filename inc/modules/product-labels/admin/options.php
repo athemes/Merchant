@@ -61,6 +61,16 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'label-title',
 					'fields'      => array(
 						array(
+							'id'      => 'campaign_status',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Status', 'merchant' ),
+							'options' => array(
+								'active'   => esc_html__( 'Active', 'merchant' ),
+								'inactive' => esc_html__( 'Inactive', 'merchant' ),
+							),
+							'default' => 'active',
+						),
+						array(
 							'id'      => 'label-title',
 							'title'   => esc_html__( 'Label name', 'merchant' ),
 							'desc'    => esc_html__( 'Internal label name. This is not visible to customers.', 'merchant' ),

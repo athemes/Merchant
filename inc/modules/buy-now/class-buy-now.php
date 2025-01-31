@@ -53,7 +53,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $this->set_module_preview_url( array( 'type' => 'product' ) );
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -469,5 +468,5 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Buy_Now();
+	Merchant_Modules::create_module( new Merchant_Buy_Now() );
 } );

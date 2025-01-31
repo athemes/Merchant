@@ -155,7 +155,7 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
 	</section>
 <?php endif; ?>
 
-<section id="reviews" class="merchant-adv-reviews products<?php echo ( $args[ 'hide_title' ] ) ? ' hide-title' : ''; ?>">
+<section id="reviews" class="merchant-adv-reviews products<?php echo ( $args[ 'hide_title' ] ) ? ' hide-title' : ''; ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>">
 	<?php
 	if ( ! $args[ 'hide_title' ] ) :
 		echo wp_kses_post(

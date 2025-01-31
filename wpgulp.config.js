@@ -34,6 +34,13 @@ const styles = [
 		destination: './assets/css/admin',
 	},
 
+	// analytics
+	{
+		name: 'analytics',
+		src: './assets/sass/admin/analytics.scss',
+		destination: './assets/css/admin',
+	},
+
 	// Admin Notices.
 	{
 		name: 'adminNotices',
@@ -623,12 +630,36 @@ const scripts = [
 		file: 'merchant',
 	},
 
+	// Plugin installer.
+	{
+		name: 'pluginInstaller',
+		src: './assets/js/src/admin/plugin-installer.js',
+		destination: './assets/js/admin',
+		file: 'plugin-installer',
+	},
+
 	// Admin.
 	{
 		name: 'admin',
 		src: './assets/js/src/admin/admin.js',
 		destination: './assets/js/admin',
 		file: 'admin',
+	},
+
+	// analytics
+	{
+		name: 'analytics',
+		src: './assets/js/src/admin/analytics.js',
+		destination: './assets/js/admin',
+		file: 'analytics',
+	},
+
+	// Settings
+	{
+		name: 'settings',
+		src: './assets/js/src/admin/settings.js',
+		destination: './assets/js/admin',
+		file: 'settings',
 	},
 
 	// Metabox.

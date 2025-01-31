@@ -35,6 +35,11 @@ class Merchant_Pre_Orders_Main_Functionality {
 	private $is_pre_order_filter_on = false;
 
 	/**
+	 * @var string The module ID.
+	 */
+	private $module_id = 'pre-orders';
+
+	/**
 	 * Init.
 	 *
 	 * @return void
@@ -42,6 +47,8 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function init() {
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'allow_one_type_only' ), 99, 2 );
 		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'add_cart_item_data' ), 10, 4 );
+		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'record_add_to_cart_event' ), 11, 2 );
+		add_action( 'woocommerce_after_calculate_totals', array( $this, 'update_analytics' ) );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
 		add_action( 'woocommerce_add_order_item_meta', array( $this, 'add_order_item_meta' ), 10, 2 );
 
@@ -63,6 +70,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 
 		add_action( 'woocommerce_order_item_meta_end', array( $this, 'order_item_meta_end' ), 10, 4 );
 		add_action( 'woocommerce_shop_loop_item_title', array( $this, 'shop_loop_item_title' ) );
+
+		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'create_order_line_item' ), 10, 3 );
+		add_action( 'woocommerce_checkout_order_created', array( $this, 'log_order_event' ) );
 
 		// Products block.
 		add_filter( 'render_block_context', array( $this, 'add_block_title_filter' ), 10, 1 );
@@ -143,6 +153,59 @@ class Merchant_Pre_Orders_Main_Functionality {
 	}
 
 	/**
+	 * Record add to cart event.
+	 *
+	 * @param $cart_item_data array Cart item data
+	 * @param $product_id    int Product ID
+	 *
+	 * @return mixed
+	 */
+	public function record_add_to_cart_event( $cart_item_data, $product_id ) {
+		$user_id   = WC()->session->get_customer_id();
+		$analytics = new Merchant_Analytics_Logger();
+		$analytics->set_user_id( $user_id );
+		$module_id                  = $this->module_id;
+		$impression_event           = $analytics->get_product_module_last_impression( $module_id, $product_id );
+		$existing_add_to_cart_event = $analytics->get_event_by(
+			array(
+				'event_type'        => 'add_to_cart',
+				'source_product_id' => $product_id,
+				'customer_id'       => $user_id,
+				'module_id'         => $this->module_id,
+			)
+		);
+
+		$args = array(
+			'event_type'        => 'add_to_cart',
+			'source_product_id' => $product_id,
+			'customer_id'       => $user_id,
+			'campaign_id'       => isset( $impression_event['campaign_id'] ) ? $impression_event['campaign_id'] : '',
+			'related_event_id'  => isset( $impression_event['id'] ) ? $impression_event['id'] : '',
+			'module_id'         => $this->module_id,
+			'meta_data'         => isset( $impression_event['meta_data'] ) ? $impression_event['meta_data'] : '',
+		);
+
+		if ( null !== $existing_add_to_cart_event ) {
+			// Check if this appeared in order event
+			$appeared_in_order = $analytics->get_event_by( array(
+				'event_type'        => 'order',
+				'source_product_id' => $product_id,
+				'customer_id'       => $user_id,
+				'module_id'         => $this->module_id,
+				'related_event_id'  => $existing_add_to_cart_event['id'],
+			) );
+
+			// Set the pre_order_add_to_cart_event_id based on whether the event exists
+			$cart_item_data['pre_order_add_to_cart_event_id'] = null !== $appeared_in_order ? $analytics->log_event( $args ) : $existing_add_to_cart_event['id'];
+		} else {
+			// Log a new add to cart event if no previous event exists
+			$cart_item_data['pre_order_add_to_cart_event_id'] = $analytics->log_event( $args );
+		}
+
+		return $cart_item_data;
+	}
+
+	/**
 	 * Add offer details to the product.
 	 *
 	 * @param $cart_item_data array The cart item data.
@@ -164,6 +227,32 @@ class Merchant_Pre_Orders_Main_Functionality {
 		}
 
 		return $cart_item_data;
+	}
+
+	/**
+	 * Update analytics.
+	 *
+	 * @param $cart WC_Cart Cart object
+	 *
+	 * @return void
+	 */
+	public function update_analytics( $cart ) {
+		$cart_items = $cart->get_cart();
+		$user_id    = WC()->session->get_customer_id();
+		$analytics  = new Merchant_Analytics_Logger();
+		$analytics->set_user_id( $user_id );
+		foreach ( $cart_items as $cart_item_key => $cart_item_data ) {
+			if (
+				isset( $cart_item_data['pre_order_add_to_cart_event_id'], $cart_item_data['_merchant_pre_order'] )
+				&& $analytics->event_exists( $cart_item_data['pre_order_add_to_cart_event_id'] )
+			) {
+				$analytics->update_event( $cart_item_data['pre_order_add_to_cart_event_id'], array(
+					'campaign_id'   => $cart_item_data['_merchant_pre_order']['flexible_id'],
+					'campaign_cost' => $cart_item_data['line_total'],
+					'meta_data'     => wp_json_encode( $cart_item_data['_merchant_pre_order'] ),
+				) );
+			}
+		}
 	}
 
 	/**
@@ -894,7 +983,33 @@ class Merchant_Pre_Orders_Main_Functionality {
 			$pre_order_rule = self::available_product_rule( $_product->get_id() );
 			if ( ! empty( $pre_order_rule ) && $pre_order_rule['placement'] === 'before' ) {
 				$this->maybe_render_additional_information( $pre_order_rule );
+				$this->record_impression( $_product->get_id(), $pre_order_rule );
 			}
+		}
+	}
+
+	/**
+	 * Record impression.
+	 *
+	 * @return void
+	 */
+	public function record_impression( $product_id, $campaign ) {
+		$analytics   = new Merchant_Analytics_Logger();
+		$campaign_id = isset( $campaign['flexible_id'] ) ? $campaign['flexible_id'] : 0;
+		$module_id   = $this->module_id;
+		$user_id     = WC()->session->get_customer_id();
+		$analytics->set_user_id( $user_id );
+		$args = array(
+			'source_product_id' => $product_id,
+			'event_type'        => 'impression',
+			'related_event_id'  => 0,
+			'module_id'         => $module_id,
+			'campaign_id'       => $campaign_id,
+			'meta_data'         => wp_json_encode( $campaign ),
+		);
+
+		if ( $analytics->get_product_module_last_impression( $module_id, $product_id ) === null ) {
+			$analytics->log_event( $args );
 		}
 	}
 
@@ -1037,6 +1152,70 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	public function shop_loop_item_title() {
 		echo $this->get_pre_order_text( get_the_ID(), 'span' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+
+	/**
+	 * Log order event.
+	 * Only runs if bundle main product.
+	 *
+	 * @param $order            WC_Order instance
+	 *
+	 * @return void
+	 */
+	public function log_order_event( $order ) {
+		$module_id = $this->module_id;
+		$user_id   = WC()->session->get_customer_id();
+		$analytics = new Merchant_Analytics_Logger();
+		$analytics->set_user_id( $user_id );
+		foreach ( $order->get_items() as $order_item ) {
+			$analytics_id = $order_item->get_meta( '_pre_order_add_to_cart_event_id' );
+			if ( ! empty( $analytics_id ) ) {
+				$add_to_cart_event_id = $analytics_id;
+				$event_data           = $analytics->get_event( $add_to_cart_event_id );
+				$campaign_cost        = ! empty( $event_data['campaign_cost'] ) ? $event_data['campaign_cost'] : 0;
+				$args                 = array(
+					'source_product_id' => $order_item->get_product_id(),
+					'event_type'        => 'order',
+					'related_event_id'  => $add_to_cart_event_id,
+					'campaign_cost'     => $campaign_cost,
+					'campaign_id'       => ! empty( $event_data['campaign_id'] ) ? $event_data['campaign_id'] : 0,
+					'module_id'         => $module_id,
+					'order_id'          => $order->get_id(),
+					'order_subtotal'    => $order->get_subtotal(),
+					'meta_data'         => ! empty( $event_data['meta_data'] ) ? $event_data['meta_data'] : '',
+				);
+				if (
+					null === $analytics->get_event_by(
+						array(
+							'source_product_id' => $order_item->get_product_id(),
+							'event_type'        => 'order',
+							'related_event_id'  => $add_to_cart_event_id,
+							'module_id'         => $module_id,
+							'order_id'          => $order->get_id(),
+							'customer_id'       => $user_id,
+						)
+					)
+				) {
+					$analytics->log_event( $args );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Add order item meta data.
+	 *
+	 * @param $order_item    WC_Order_Item_Product instance
+	 * @param $cart_item_key string Cart item key
+	 * @param $values        array Cart item values
+	 *
+	 * @return void
+	 */
+	public function create_order_line_item( $order_item, $cart_item_key, $values ) {
+		if ( isset( $values['pre_order_add_to_cart_event_id'] ) ) {
+			// use _ to hide the data
+			$order_item->update_meta_data( '_pre_order_add_to_cart_event_id', $values['pre_order_add_to_cart_event_id'] );
+		}
 	}
 
 	/**
@@ -1298,8 +1477,12 @@ class Merchant_Pre_Orders_Main_Functionality {
 		$available_rule = array();
 		$rules          = self::pre_order_rules();
 		$current_time   = merchant_get_current_timestamp();
-		$current_user   = wp_get_current_user();
+
 		foreach ( $rules as $rule ) {
+			if ( isset( $rule['campaign_status'] ) && $rule['campaign_status'] === 'inactive' ) {
+				continue;
+			}
+
 			if ( self::is_valid_rule( $rule ) ) {
 				$rule = self::prepare_rule( $rule );
 

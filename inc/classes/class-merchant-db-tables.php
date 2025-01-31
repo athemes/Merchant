@@ -40,7 +40,53 @@ if ( ! class_exists( 'Merchant_DB_Tables' ) ) {
 				array(
 					'sales_notifications_table'       => self::get_sales_notifications_table(),
 					'sales_notifications_shown_table' => self::get_sales_notifications_shown_table(),
+					'modules_analytics_table'         => self::get_modules_analytics_table(),
 				)
+			);
+		}
+
+		/**
+		 * Get the modules analytics table definition.
+		 * This table is used to store analytics data for merchant modules.
+		 *
+		 * @return array
+		 */
+		private static function get_modules_analytics_table() {
+			global $wpdb;
+
+			$table_name = $wpdb->prefix . 'merchant_modules_analytics';
+			$collate    = $wpdb->has_cap( 'collation' ) ? $wpdb->get_charset_collate() : '';
+
+			return array(
+				'name'           => $table_name,
+				'query'          => "
+			        CREATE TABLE $table_name (
+			            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			            source_product_id BIGINT UNSIGNED DEFAULT NULL,
+			            event_type VARCHAR(200) DEFAULT NULL,
+			            customer_id VARCHAR(400) DEFAULT NULL,
+			            related_event_id BIGINT UNSIGNED DEFAULT NULL,
+			            module_id VARCHAR(200) DEFAULT NULL,
+			            campaign_id VARCHAR(200) DEFAULT NULL,
+			            campaign_cost DECIMAL(12, 4) DEFAULT NULL,
+			            order_id BIGINT UNSIGNED DEFAULT NULL,
+			            order_subtotal DECIMAL(12, 4) DEFAULT NULL,
+			            order_total DECIMAL(12, 4) DEFAULT NULL,
+			            meta_data LONGTEXT DEFAULT NULL,
+			            meta_data_2 LONGTEXT DEFAULT NULL,
+			            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			            PRIMARY KEY (id),
+			            INDEX (event_type),
+			            INDEX (event_type, timestamp),
+			            INDEX (event_type, timestamp, module_id, campaign_id),
+			            INDEX (module_id),
+			            INDEX (campaign_id),
+			            INDEX (order_id),
+			            INDEX (timestamp)
+			        ) $collate;
+			    ",
+				'version'        => 1,
+				'schema_updater' => '', // Attach a callable here to update the schema when needed, you must increment the version number
 			);
 		}
 

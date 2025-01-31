@@ -35,6 +35,13 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	public $main_func;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -59,16 +66,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			'additional_text' => __( 'Ships on {date}.', 'merchant' ),
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -122,6 +121,8 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		$this->supply_missing_id( 'rules' );
 	}
 
 	/**
@@ -299,7 +300,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 	 */
 	public function admin_preview_content( $settings, $text ) {
 		?>
-
         <div class="mrc-preview-single-product-elements">
             <div class="mrc-preview-left-column">
                 <div class="mrc-preview-product-image-wrapper">
@@ -324,7 +324,6 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
                 </div>
             </div>
         </div>
-
 		<?php
 	}
 
@@ -442,6 +441,38 @@ class Merchant_Pre_Orders extends Merchant_Add_Module {
 			<?php
 		}
 	}
+
+	/**
+	 * Supply missing ID for flexible items.
+	 *
+	 * @param string $setting_key
+	 *
+	 * @return void
+	 */
+	public function supply_missing_id( $setting_key = 'offers' ) {
+		$option = 'merchant_' . $this->module_id . '_missing_id_flag';
+
+		if ( get_option( $option, false ) || ! method_exists( 'Merchant_Admin_Options', 'set' ) ) {
+			return;
+		}
+
+		$flexible_items = Merchant_Admin_Options::get( $this->module_id, $setting_key, array() );
+		if ( ! empty( $flexible_items ) ) {
+			$update = 0;
+			foreach ( $flexible_items as $key => $item ) {
+				if ( empty( $item['flexible_id'] ) ) {
+					$flexible_items[ $key ]['flexible_id'] = wp_generate_uuid4();
+					++ $update;
+				}
+			}
+
+			if ( $update > 0 ) {
+				Merchant_Admin_Options::set( $this->module_id, $setting_key, $flexible_items );
+			}
+
+			update_option( $option, true, false );
+		}
+	}
 }
 
 // Main functionality.
@@ -449,5 +480,5 @@ require MERCHANT_DIR . 'inc/modules/pre-orders/class-pre-orders-main-functionali
 
 // Initialize the module.
 add_action( 'init', function () {
-	new Merchant_Pre_Orders( new Merchant_Pre_Orders_Main_Functionality() );
+	Merchant_Modules::create_module( new Merchant_Pre_Orders( new Merchant_Pre_Orders_Main_Functionality() ) );
 } );

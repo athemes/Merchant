@@ -32,6 +32,13 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 	const MODULE_TEMPLATES = 'modules/' . self::MODULE_ID;
 
 	/**
+     * Set the module as having analytics.
+     *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -48,20 +55,8 @@ class Merchant_Buy_X_Get_Y extends Merchant_Add_Module {
 		// Module section.
 		$this->module_section = 'boost-revenue';
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = self::MODULE_DIR . "/admin/options.php";

@@ -34,6 +34,13 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -76,6 +83,26 @@ class Merchant_Storewide_Sale extends Merchant_Add_Module {
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
+	}
+
+	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		$metrics                = $this->default_analytics_metrics();
+		$metrics['impressions'] = false;
+
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $metrics, $this->module_id, $this );
 	}
 
 	/**

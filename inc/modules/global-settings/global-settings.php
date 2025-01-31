@@ -5,11 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Todo: remove
+ *
  * Head custom JS
  * 
  */
 function merchant_head_custom_js_first() {
-
 	// Custom JS First - runs at the beginning of Merchant
 	$custom_js_first = Merchant_Option::get( 'global-settings', 'custom_js_first', '' );
 
@@ -17,24 +18,39 @@ function merchant_head_custom_js_first() {
 		wp_add_inline_script( 'merchant', wp_kses( $custom_js_first, array() ), 'before' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_first', 11 );
+// add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_first', 11 );
 
 /**
  * Head Custom JS
  * 
  */
 function merchant_head_custom_js() {
-
-	// Custom JS
 	$custom_js = Merchant_Option::get( 'global-settings', 'custom_js', '' );
 
+	$custom_js = html_entity_decode( $custom_js, ENT_QUOTES, 'UTF-8' );
+
 	if ( ! empty( $custom_js ) ) {
-		wp_add_inline_script( 'merchant', wp_kses( $custom_js, array() ), 'after' );
+		// Simple minification
+		$minified_js = preg_replace(
+			array( '/\/\/.*/', '/\/\*.*?\*\//s', '/\s+/' ),
+			array( '', '', ' ' ),
+			$custom_js
+		);
+
+		wp_add_inline_script( 'merchant', $minified_js );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js', 12 );
 
 /**
+ * `merchant_head_custom_js_priority`
+ *
+ * @since 2.0.0
+ */
+add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js', apply_filters( 'merchant_head_custom_js_priority', 12 ) );
+
+/**
+ * Todo: remove
+ *
  * Head Custom JS Later
  * 
  */
@@ -47,4 +63,4 @@ function merchant_head_custom_js_later() {
 		wp_add_inline_script( 'merchant', wp_kses( $custom_js_last, array() ), 'after' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_later', 13 );
+// add_action( 'wp_enqueue_scripts', 'merchant_head_custom_js_later', 13 );

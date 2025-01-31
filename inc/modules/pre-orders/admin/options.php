@@ -36,6 +36,16 @@ Merchant_Admin_Options::create(
 						'title-field' => 'offer-title', // text field ID to use as title for the layout
 						'fields'      => array(
 							array(
+								'id'      => 'campaign_status',
+								'type'    => 'select',
+								'title'   => esc_html__( 'Status', 'merchant' ),
+								'options' => array(
+									'active'   => esc_html__( 'Active', 'merchant' ),
+									'inactive' => esc_html__( 'Inactive', 'merchant' ),
+								),
+								'default' => 'active',
+							),
+							array(
 								'id'      => 'offer-title',
 								'type'    => 'text',
 								'title'   => esc_html__( 'Order name', 'merchant' ),

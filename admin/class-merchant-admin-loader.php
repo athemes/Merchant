@@ -64,20 +64,28 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-preview.php';
+			
+			// Plugin installer.
+			require_once MERCHANT_DIR . 'admin/classes/class-merchant-plugin-installer.php';
 		}
 
 		/**
 		 * Enqueue admin styles and scripts.
 		 */
 		public function enqueue_styles_scripts() {
-			
-			$page = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$page    = sanitize_text_field( wp_unslash( $_GET['page'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$section = sanitize_text_field( wp_unslash( $_GET['section'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			wp_register_script( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
-
 			wp_register_style( 'merchant-select2', MERCHANT_URI . 'assets/vendor/select2/select2.min.css', array(), '4.0.13' );
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
+
+				// For settings page only
+				if ( $section === 'settings' ) {
+					wp_enqueue_code_editor( array( 'type' => 'text/css' ) ); // No need to enqueue again for JS. It'll be handled by JS.
+					wp_enqueue_script( 'merchant-settings', MERCHANT_URI . 'assets/js/admin/settings.min.js', array( 'jquery', 'code-editor' ), MERCHANT_VERSION, true );
+				}
 
 				wp_enqueue_media();
 
@@ -109,7 +117,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 
 				$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-				if( !empty($module) ) {
+				if ( ! empty( $module ) ) {
 					wp_enqueue_script( 'merchant-admin-preview', MERCHANT_URI . 'assets/js/admin/merchant-preview.min.js', array( 'jquery' ), MERCHANT_VERSION, true );
 				}
 			}
@@ -133,21 +141,18 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 		 * Add admin body class.
 		 */
 		public function add_admin_body_class( $classes ) {          
-			$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$page    = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$module  = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$section = ( ! empty( $_GET['section'] ) ) ? sanitize_text_field( wp_unslash( $_GET['section'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			if ( ! empty( $page ) && false !== strpos( $page, 'merchant' ) ) {
-
 				if ( ! empty( $module ) ) {
-
 					$classes .= ' merchant-admin-page-module';
-
 				} else {
-
-					$classes .= ' merchant-admin-page';
+					$section  = $section ? 'merchant-admin-page__' . $section : 'merchant-admin-page__dashboard';
+					$classes .= ' merchant-admin-page ' . $section;
 
 				}
-
 			}
 
 			return $classes;
@@ -155,5 +160,4 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 	}
 
 	Merchant_Admin_Loader::instance();
-
 }

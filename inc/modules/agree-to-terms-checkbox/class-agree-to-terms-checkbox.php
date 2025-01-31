@@ -53,16 +53,8 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			'warning_text' => __( 'Obtain consent before customers start the checkout process', 'merchant' ),
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'checkout' ) );
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -97,7 +89,19 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		}
 
 		// Show the agree to terms when the module is active.
+		// This is needed to ensure the checkbox will be displayed.
 		add_filter( 'woocommerce_checkout_show_terms', '__return_true' );
+
+		// Force the enable of the terms checkbox.
+		// This is needed to ensure the checkbox will be displayed.
+		// The logic here is to get the checkout page ID if the terms page ID is not set. In this condition, the ID actually doesn't matter, we just need to force the checkbox to be displayed.
+		add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
+			add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
+				$terms_page_id = get_option( 'woocommerce_terms_page_id' );
+				
+				return $terms_page_id ? $terms_page_id : get_option( 'woocommerce_checkout_page_id' );
+			} );
+		} );
 
 		// Control the text from the module settings.
 		add_filter( 'woocommerce_get_terms_and_conditions_checkbox_text', array( $this, 'agree_to_terms_form_field' ) );
@@ -272,5 +276,5 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	new Merchant_Agree_To_Terms_Checkbox();
+	Merchant_Modules::create_module( new Merchant_Agree_To_Terms_Checkbox() );
 } );

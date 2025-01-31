@@ -28,6 +28,16 @@ Merchant_Admin_Options::create( array(
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
+							'id'      => 'campaign_status',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Status', 'merchant' ),
+							'options' => array(
+								'active'   => esc_html__( 'Active', 'merchant' ),
+								'inactive' => esc_html__( 'Inactive', 'merchant' ),
+							),
+							'default' => 'active',
+						),
+						array(
 							'id'      => 'offer-title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer name', 'merchant' ),
@@ -82,7 +92,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'exclusion_enabled',
 							'type'       => 'switcher',
 							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-							'desc'       => esc_html__( 'Select the products that will not show the offer.', 'merchant' ),
+							'desc'       => esc_html__( 'Select products to exclude from the campaign.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',

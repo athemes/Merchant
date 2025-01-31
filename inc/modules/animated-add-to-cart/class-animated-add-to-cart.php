@@ -52,20 +52,8 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 			'animation' => 'swing',
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -321,5 +309,5 @@ class Merchant_Animated_Add_To_Cart extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function() {
-	new Merchant_Animated_Add_To_Cart();
+	Merchant_Modules::create_module( new Merchant_Animated_Add_To_Cart() );
 } );

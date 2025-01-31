@@ -68,6 +68,7 @@ $product_id     = $product->get_id();
             <div
                 class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>"
                 data-in-cart="<?php echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>"
+                data-flexible-id="<?php echo isset( $discount_tier['flexible_id'] ) ? esc_attr( $discount_tier['flexible_id'] ) : ''; ?>"
                 data-offer-id="<?php echo esc_attr( $offer_id ); ?>" data-variations="<?php echo esc_attr( wp_json_encode( $available_variations ) ); ?>"
                 style="<?php
                     // Inline CSS variables to use in CSS. Will work per item.
@@ -187,29 +188,22 @@ $product_id     = $product->get_id();
 		            if ( $is_variable && ! empty( $attributes ) ) {
                         ?>
                         <div class="variation-form">
-				            <?php
-				            foreach ( $attributes as $attribute_name => $options ) :
-					            $attribute_label = wc_attribute_label( $attribute_name );
-                            ?>
+	                        <?php
+	                        foreach ( $attributes as $attribute_name => $options ) :
+		                        $attribute_label = wc_attribute_label( $attribute_name );
+		                        ?>
                                 <div class="variation-dropdown">
                                     <select required name="<?php
-						            echo esc_attr( $attribute_name ); ?>" data-attribute_name="attribute_<?php
-						            echo esc_attr( $attribute_name ); ?>">
-                                        <option value=""><?php
-								            echo esc_html( $attribute_label ); ?></option>
-							            <?php
-							            foreach ( $options as $option ) : 
-											$option_term = get_term_by( 'slug', $option, $attribute_name );
-											?>
-                                            <option value="<?php
-								            echo esc_attr( $option ); ?>"><?php
-									            echo esc_html( $option_term->name ); ?></option>
-							            <?php
-							            endforeach; ?>
+			                        echo esc_attr( $attribute_name ); ?>" data-attribute_name="attribute_<?php
+			                        echo esc_attr( $attribute_name ); ?>">
+                                        <option value=""><?php echo esc_html( $attribute_label ); ?></option>
+				                        <?php foreach ( $options as $option ) : ?>
+                                            <option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( ucfirst( $option ) ); ?></option>
+				                        <?php endforeach; ?>
                                     </select>
                                 </div>
-				            <?php
-				            endforeach; ?>
+	                        <?php
+	                        endforeach; ?>
                         </div>
 		            <?php
 		            }

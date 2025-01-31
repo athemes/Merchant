@@ -29,6 +29,13 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 * 
 	 */
@@ -61,20 +68,8 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 			'hook_order'     => 20,
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_products' ) ) {
-			$products = wc_get_products( array( 'limit' => 1 ) );
-
-			if ( ! empty( $products ) && ! empty( $products[0] ) ) {
-				$preview_url = get_permalink( $products[0]->get_id() );
-			}
-		}
-
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/recently-viewed-products/admin/options.php';
@@ -99,6 +94,26 @@ class Merchant_Recently_Viewed_Products extends Merchant_Add_Module {
 			// Init translations.
 			$this->init_translations();
 		}
+	}
+
+	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		$metrics              = $this->default_analytics_metrics();
+		$metrics['campaigns'] = false;
+
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $metrics, $this->module_id, $this );
 	}
 
 	/**

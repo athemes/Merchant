@@ -16,6 +16,11 @@
 		font-weight: var(--merchant-font-weight);
 		color: var(--merchant-text-color);
 	}
+
+	.added_to_cart,
+	.wc-forward {
+		display: none !important;
+	}
 }
 
 .merchant-bogo-offer {

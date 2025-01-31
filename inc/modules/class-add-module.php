@@ -49,6 +49,8 @@ class Merchant_Add_Module {
 	 */
 	public $has_shortcode = false;
 
+	protected $has_analytics = false;
+
 	/**
 	 * Constructor.
 	 *
@@ -70,6 +72,49 @@ class Merchant_Add_Module {
 			add_action( 'wp', array( $this, 'setup_product_object' ) );
 			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
 		}
+	}
+
+	/**
+	 * Check if the module has analytics.
+	 *
+	 * @return bool
+	 */
+	public function has_analytics() {
+		return $this->has_analytics;
+	}
+
+	/**
+	 * Get all analytics metrics and allow modules to filter them.
+	 *
+	 * @return array List of available metrics.
+	 */
+	public function analytics_metrics() {
+		/**
+		 * Hook: merchant_analytics_module_metrics
+		 *
+		 * @param array  $metrics   List of available metrics.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0
+		 */
+		return apply_filters( 'merchant_analytics_module_metrics', $this->default_analytics_metrics(), $this->module_id, $this );
+	}
+
+	/**
+	 * Get analytics metrics.
+	 *
+	 * @return array List of available metrics.
+	 */
+	protected function default_analytics_metrics() {
+		return array(
+			'campaigns'    => true,
+			'impressions'  => true,
+			'clicks'       => true,
+			'ctr'          => true,
+			'revenue'      => true,
+			'orders_count' => true,
+			'aov'          => true,
+		);
 	}
 
 	/**
@@ -144,55 +189,6 @@ class Merchant_Add_Module {
 		$settings = apply_filters( 'merchant_module_settings', $settings, $this->module_id );
 
 		return $settings;
-	}
-
-	/**
-	 * Get preview URL
-	 *
-	 * @param array $args
-	 *
-	 * @return string
-	 */
-	public function set_module_preview_url( $args = array() ) {
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		// Type based preview url
-		if ( isset( $args['type'] ) ) {
-			switch ( $args['type'] ) {
-				case 'shop':
-					if ( function_exists( 'wc_get_page_id' ) ) {
-						$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
-					}
-					break;
-
-				case 'product':
-					$query_args = array(
-						'post_type'      => 'product',
-						'posts_per_page' => 1,
-					);
-
-					if ( isset( $args['query'] ) ) {
-						$products = ( new WP_Query( wp_parse_args( $args['query'], $query_args ) ) )->get_posts();
-
-						// If no results can be found with the custom query,
-						// then use the default args
-						if ( empty( $products ) || ! isset( $products[0] ) ) {
-							$products = ( new WP_Query( $query_args ) )->get_posts();
-						}
-					} else {
-						$products = ( new WP_Query( $query_args ) )->get_posts();
-					}
-
-					if ( ! empty( $products ) && isset( $products[0] ) ) {
-						$preview_url = get_permalink( $products[0] );
-					}
-
-					break;
-			}
-		}
-
-		return $preview_url;
 	}
 
 	/**

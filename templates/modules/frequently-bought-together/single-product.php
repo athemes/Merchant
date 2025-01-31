@@ -31,7 +31,8 @@ if ( empty( $args['bundles'] ) ) {
                 <h3 class="merchant-frequently-bought-together-title">
 					<?php echo isset( $bundle['product_single_page']['title'] ) ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['title'] ) ) : esc_html__( 'Frequently Bought Together', 'merchant' ) ?>
                 </h3>
-				<div class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>">
+				<div class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>" data-flexible-id="<?php echo ! empty(
+                        $bundle['flexible_id'] ) ? esc_attr( $bundle['flexible_id'] ) : '' ?>" data-product-id="<?php echo esc_attr( get_the_ID() )?>">
 					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) :

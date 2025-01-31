@@ -52,16 +52,8 @@ class Merchant_Checkout extends Merchant_Add_Module {
 			'sticky_totals_box' => 0,
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'checkout' ) );
-		}
-
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data[ 'preview_url' ] = $preview_url;
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';

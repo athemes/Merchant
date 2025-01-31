@@ -64,16 +64,8 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
             ),
 		);
 
-		// Mount preview url.
-		$preview_url = site_url( '/' );
-
-		if ( function_exists( 'wc_get_page_id' ) ) {
-			$preview_url = get_permalink( wc_get_page_id( 'shop' ) );
-		}
-
 		// Module data.
-		$this->module_data                = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-		$this->module_data['preview_url'] = $preview_url;
+		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
 
 		// Module options path.
 		$this->module_options_path = MERCHANT_DIR . 'inc/modules/' . self::MODULE_ID . '/admin/options.php';
@@ -690,6 +682,10 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 		if ( isset( $settings['labels'] ) ) {
 			$labels = $settings['labels'];
 			foreach ( $labels as $label ) {
+				if ( isset( $label['campaign_status'] ) && $label['campaign_status'] === 'inactive' ) {
+					continue;
+				}
+
                 if ( ! isset( $label['show_pages'] ) ) {
 	                $label['show_pages'] = array( 'homepage', 'single', 'archive' );
                 }
@@ -1174,5 +1170,5 @@ class Merchant_Product_Labels extends Merchant_Add_Module {
 
 // Initialize the module.
 add_action( 'init', function () {
-	new Merchant_Product_Labels();
+	Merchant_Modules::create_module( new Merchant_Product_Labels() );
 } );

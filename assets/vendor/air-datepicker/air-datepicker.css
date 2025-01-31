@@ -118,7 +118,12 @@
 }
 
 .air-datepicker-cell.-range-to-.-range-from- {
-    border-radius: var(--adp-cell-border-radius)
+    border-radius: 4px;
+}
+
+.air-datepicker-cell.-selected-.-year-,
+.air-datepicker-cell.-selected-.-month-{
+    border-radius: 5px;
 }
 
 .air-datepicker-cell.-selected- {

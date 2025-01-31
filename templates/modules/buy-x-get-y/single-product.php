@@ -61,7 +61,8 @@ $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) :
 		} ?>
         <div class="merchant-bogo-offer" data-product="<?php
 		echo esc_attr( $product_id ) ?>" data-offer="<?php
-		echo esc_attr( $key ); ?>">
+		echo esc_attr( $key ); ?>" data-flexible-id="<?php echo ! empty(
+        $offer['flexible_id'] ) ? esc_attr( $offer['flexible_id'] ) : '' ?>">
             <div class="merchant-bogo-product-x is-<?php
 			echo esc_attr( $product_type ); ?>">
                 <div class="merchant-bogo-product-label merchant-bogo-product-buy-label" style="<?php

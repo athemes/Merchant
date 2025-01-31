@@ -38,6 +38,13 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 	public static $is_module_preview = false;
 
 	/**
+	 * Set the module as having analytics.
+	 *
+	 * @var bool
+	 */
+	protected $has_analytics = true;
+
+	/**
 	 * Constructor.
 	 *
 	 */
@@ -69,27 +76,6 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 
 		// Module data.
 		$this->module_data = Merchant_Admin_Modules::$modules_data[ self::MODULE_ID ];
-
-		// Module preview URL
-		$this->module_data['preview_url'] = $this->set_module_preview_url( array(
-			'type'  => 'product',
-			'query' => array(
-				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'key'     => '_merchant_volume_discounts',
-						'value'   => '',
-						'compare' => '!=',
-					),
-					array(
-						'key'     => '_merchant_volume_discounts',
-						'value'   => 'a:0:{}',
-						'compare' => '!=',
-					),
-				),
-			),
-		) );
 
 		// Module options path.
 		$this->module_options_path = self::MODULE_DIR . '/admin/options.php';
