@@ -77,15 +77,26 @@ jobs:
       #     REMOTE_PORT: "22"
       #     TARGET: "www/wp-content/plugins/merchant/"
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      # - name: 📂 Sync files
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: merchant-pro.instawp.xyz
+      #     username: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
+      #     password: ${{secrets.INSTAWP_SERVER_REMOTE_PASSWORD}}
+      #     local-dir: ./
+      #     server-dir: /home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/
+      #     port: "22"
+
+      - name: Deploy to Server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
-          server: merchant-pro.instawp.xyz
-          username: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
-          password: ${{secrets.INSTAWP_SERVER_REMOTE_PASSWORD}}
-          local-dir: ./
-          server-dir: /home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/
+          username: ${{ secrets.INSTAWP_SERVER_REMOTE_USER }}
+          server: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
           port: "22"
+          local_path: '/*'
+          remote_path: '/home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/'
+          sftp_only: true
+          password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
 
       # - name: 📂 Send files to the Instawp template
       #   uses: easingthemes/ssh-deploy@main
