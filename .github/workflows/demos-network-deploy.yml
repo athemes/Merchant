@@ -81,7 +81,7 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.INSTAWP_SERVER_REMOTE_HOST }}
-          username: ${{ secrets.INSTAWP_SERVER_REMOTE_USER }}
+          username: 'test123'
           password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
           port: "22"
           script: |
