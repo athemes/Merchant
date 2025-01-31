@@ -87,16 +87,15 @@ jobs:
       #     server-dir: /home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/
       #     port: "22"
 
-      - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
         with:
+          host: ${{ secrets.INSTAWP_SERVER_REMOTE_HOST }}
           username: ${{ secrets.INSTAWP_SERVER_REMOTE_USER }}
-          server: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
-          port: "22"
-          local_path: '/*'
-          remote_path: '/home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/'
-          sftp_only: true
           password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
+          port: "22"
+          source: "./"
+          target: /home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/
 
       # - name: 📂 Send files to the Instawp template
       #   uses: easingthemes/ssh-deploy@main
