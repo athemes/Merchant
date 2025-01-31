@@ -77,26 +77,16 @@ jobs:
       #     REMOTE_PORT: "22"
       #     TARGET: "www/wp-content/plugins/merchant/"
 
-      - name: Test SSH connection
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.INSTAWP_SERVER_REMOTE_HOST }}
-          username: 'test123'
-          password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
-          port: "22"
-          script: |
-            echo "Running pwd command"
-            pwd
-
-      # - name: 📂 Send files to the Instawp template
-      #   uses: easingthemes/ssh-deploy@main
+      - name: 📂 Send files to the Instawp template
+        uses: easingthemes/ssh-deploy@main
           
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{secrets.INSTAWP_SERVER_SSH_KEY}}
-      #     ARGS: "-rlgoDzvc -i --delete"
-      #     SOURCE: "merchant/"
-      #     REMOTE_HOST: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
-      #     REMOTE_USER: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
-      #     REMOTE_PORT: "22"
-      #     TARGET: "/home/gusivisije6327/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.INSTAWP_SERVER_SSH_KEY}}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "merchant/"
+          REMOTE_HOST: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
+          REMOTE_USER: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
+          REMOTE_PORT: "22"
+          TARGET: "/home/gusivisije6327/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/"
+          SCRIPT_BEFORE: ls
         
