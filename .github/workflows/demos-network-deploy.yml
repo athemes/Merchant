@@ -2,10 +2,15 @@
 
 name: Deploy to demos network
 
+# on:
+#   push:
+#     branches:
+#       - main
+
 on:
   push:
     branches:
-      - main
+      - improvement/rt/instawp-automatic-deploy
       
 jobs:
   deploy:
@@ -60,15 +65,27 @@ jobs:
       - name: Move files to merchant directory
         run: rsync -av --progress --exclude=merchant . merchant/
   
-      - name: 📂 Sync files with SSH
+      # - name: 📂 Send files to the Demos Network
+      #   uses: easingthemes/ssh-deploy@main
+          
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
+      #     ARGS: "-rlgoDzvc -i --delete"
+      #     SOURCE: "merchant/"
+      #     REMOTE_HOST: ${{secrets.SERVER_REMOTE_HOST}}
+      #     REMOTE_USER: ${{secrets.SERVER_REMOTE_USER}}
+      #     REMOTE_PORT: "22"
+      #     TARGET: "www/wp-content/plugins/merchant/"
+
+      - name: 📂 Send files to the Instawp template
         uses: easingthemes/ssh-deploy@main
           
         env:
-          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
+          SSH_PRIVATE_KEY: ${{secrets.INSTAWP_SERVER_SSH_KEY}}
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "merchant/"
-          REMOTE_HOST: ${{secrets.SERVER_REMOTE_HOST}}
-          REMOTE_USER: ${{secrets.SERVER_REMOTE_USER}}
+          REMOTE_HOST: ${{secrets.INSTAWP_SERVER_REMOTE_HOST}}
+          REMOTE_USER: ${{secrets.INSTAWP_SERVER_REMOTE_USER}}
           REMOTE_PORT: "22"
           TARGET: "www/wp-content/plugins/merchant/"
         
