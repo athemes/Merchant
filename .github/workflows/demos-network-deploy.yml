@@ -1,4 +1,5 @@
 # GitHub Actions Workflow to deploy to the demos network server
+# This workflow will also deploy the plugin to the Instawp template
 
 name: Deploy to demos network
 
@@ -60,7 +61,7 @@ jobs:
       - name: Move files to merchant directory
         run: rsync -av --progress --exclude=merchant . merchant/
   
-      - name: 📂 Sync files with SSH
+      - name: 📂 Deploy files to the Demos Network
         uses: easingthemes/ssh-deploy@main
           
         env:
@@ -71,4 +72,13 @@ jobs:
           REMOTE_USER: ${{secrets.SERVER_REMOTE_USER}}
           REMOTE_PORT: "22"
           TARGET: "www/wp-content/plugins/merchant/"
-        
+
+      - name: 📂 Deploy files to the Instawp template
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.INSTAWP_SERVER_REMOTE_HOST }}
+          username: ${{ secrets.INSTAWP_SERVER_REMOTE_USER }}
+          password: ${{ secrets.INSTAWP_SERVER_REMOTE_PASSWORD }}
+          port: "22"
+          source: "./"
+          target: /home/${{secrets.INSTAWP_SERVER_REMOTE_USER}}/web/merchant-pro.instawp.xyz/public_html/wp-content/plugins/merchant/
