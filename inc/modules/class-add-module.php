@@ -72,6 +72,15 @@ class Merchant_Add_Module {
 			add_action( 'wp', array( $this, 'setup_product_object' ) );
 			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
 		}
+
+		// Remove merchant shortcodes from Botiga product card short description
+		add_filter( 'botiga_loop_product_elements', function( $elements ) {
+			add_filter( 'get_the_excerpt', function( $excerpt ) {
+				return preg_replace( '/\[merchant_[^]]+]/', '', $excerpt );
+			} );
+
+			return $elements;
+		} );
 	}
 
 	/**
