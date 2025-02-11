@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $product; // Required to prevent errors where woocommerce_loop_add_to_cart_link() is used with a global product object. Example: Botiga theme.
+global $product; // Required to prevent errors where `woocommerce_loop_add_to_cart_link` is used with a global product object. Example: Botiga theme.
 
 $product = $args['product'] ?? null;
 if ( ! is_object( $product ) ) {
