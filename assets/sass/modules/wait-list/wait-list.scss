@@ -15,9 +15,10 @@
 
 .merchant-wait-list-error {
 	color: red;
+	margin-block: 10px;
 }
 
-#merchant-wait-list p {
+#merchant-wait-list p:not(.merchant-wait-list-error, .merchant-wait-list-success) {
 	font-weight: bold;
 	margin: 0;
 }
