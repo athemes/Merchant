@@ -31,10 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </a>
                 </div>
                 <div class="product-summary">
-                    <a href="<?php
-					echo esc_url( $product->get_permalink() ); ?>">
-                        <h3><?php
-							echo esc_html( wp_trim_words(
+                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+                        <h3>
+                            <?php echo esc_html( wp_trim_words(
 								$product->get_name(),
 								/**
 								 * Product title words count.
@@ -54,9 +53,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 								 * @since 1.9.7
 								 */
 								apply_filters( 'merchant_popup_recently_viewed_products_product_title_suffix', '...', $product )
-							) ); ?></h3></a>
-                    <div class="product-price"><?php
-						echo wp_kses_post( $product->get_price_html() ); ?></div>
+							) ); ?>
+                        </h3>
+                    </a>
+                    <div class="product-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
+                    <div class="product-price-add-to-cart">
+		                <?php
+		                merchant_get_template_part(
+			                Merchant_Added_To_Cart_Popup::MODULE_TEMPLATES_PATH . '/common',
+			                'add-to-cart',
+			                array(
+				                'product' => $product,
+			                )
+		                );
+		                ?>
+                    </div>
                 </div>
             </li>
 			<?php
