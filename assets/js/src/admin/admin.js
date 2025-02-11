@@ -345,7 +345,6 @@
                     crossIcon.show();
                 } else {
                     crossIcon.hide();
-
                 }
                 crossIcon.on( 'click', function() {
                     file.val('');
