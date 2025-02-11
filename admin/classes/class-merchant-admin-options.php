@@ -40,6 +40,8 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 			add_action( 'wp_ajax_merchant_get_review_images', array( $this, 'get_review_images' ) );
 			add_action( 'wp_ajax_merchant_search_reviews', array( $this, 'search_reviews' ) );
 			add_action( 'wp_ajax_merchant_load_more_reviews', array( $this, 'load_more_reviews' ) );
+			add_action( 'wp_ajax_merchant_get_module_settings', array( $this, 'get_module_settings' ) );
+			add_action( 'wp_ajax_merchant_restore_module_settings', array( $this, 'restore_module_settings' ) );
 
 
             add_action( 'clean_user_cache', array( $this, 'clear_customer_choices_cache' ), 10, 2 );
@@ -63,6 +65,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					'ajaxurl'                             => admin_url( 'admin-ajax.php' ),
 					'ajaxnonce'                           => wp_create_nonce( 'merchant_admin_options' ),
 					'product_delete_confirmation_message' => esc_html__( 'Are you sure you want to remove this product?', 'merchant' ),
+                    'invalid_file'                        => esc_html__( 'Invalid file', 'merchant' ),
 				) );
 
 				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
@@ -1115,6 +1118,97 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
             }
 
             wp_send_json_success( self::get_rendered_product_reviews( wc_get_product( $product_id ), $offset ) );
+        }
+
+		/**
+         * Get module settings for a specific module for backup and restore.
+         *
+		 * @return void
+		 */
+		public function get_module_settings() {
+			if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['nonce'] ), 'merchant_admin_options' ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'merchant' ) ) );
+			}
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to access this page', 'merchant' ) ) );
+			}
+
+			if ( ! isset( $_GET['module_id'] ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Module ID is required', 'merchant' ) ) );
+			}
+
+			$module_id = sanitize_text_field( $_GET['module_id'] );
+
+			$module_object = Merchant_Modules::get_module( $module_id );
+
+            $modules = merchant_get_modules_data();
+
+            if ( ! isset( $modules[ $module_id ] ) ) {
+                wp_send_json_error( array( 'message' => esc_html__( 'Module not found', 'merchant' ) ) );
+            }
+
+			wp_send_json_success( array(
+				'timestamp' => time(),
+				'module_id' => $module_id,
+				'settings'  => $module_object->get_module_settings(),
+			) );
+		}
+
+        public function restore_module_settings() {
+	        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'merchant_admin_options' ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed', 'merchant' ) ) );
+	        }
+
+	        if ( ! current_user_can( 'manage_options' ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to access this page', 'merchant' ) ) );
+	        }
+
+	        if ( ! isset( $_POST['module_id'] ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Module ID is required', 'merchant' ) ) );
+	        }
+
+	        $module_id = sanitize_text_field( $_POST['module_id'] );
+
+	        $modules = merchant_get_modules_data();
+
+	        if ( ! isset( $modules[ $module_id ] ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Module not found', 'merchant' ) ) );
+	        }
+
+	        if ( ! isset( $_POST['module_settings'] ) ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Default settings not found', 'merchant' ) ) );
+	        }
+
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	        $module_settings = json_decode( wp_unslash($_POST['module_settings']), true );
+
+	        if ( json_last_error() !== JSON_ERROR_NONE ) {
+		        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		        wp_send_json_error( array( 'message' => esc_html__( 'Invalid settings data', 'merchant' ), $_POST['module_settings'] ) );
+	        }
+
+	        $sanitized_settings = map_deep( $module_settings, 'sanitize_text_field' );
+
+            $module_object = Merchant_Modules::get_module( $module_id );
+
+	        if ( ! isset( $sanitized_settings['module_id'] ) || $sanitized_settings['module_id'] !== $module_id ) {
+		        wp_send_json_error( array( 'message' => esc_html__( 'Invalid module ID', 'merchant' ) ) );
+	        }
+
+            $module_object->update_module_settings( $sanitized_settings['settings'] );
+
+	        $admin_url = add_query_arg( array(
+		        'page'   => 'merchant',
+		        'module' => $module_id,
+	        ), esc_url( admin_url( 'admin.php' ) ) );
+
+	        wp_send_json_success(
+		        array(
+			        'message'      => esc_html__( 'Settings restored successfully', 'merchant' ),
+			        'redirect_url' => $admin_url,
+		        )
+	        );
         }
 
 		/**
