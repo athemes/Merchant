@@ -127,6 +127,13 @@ button.button.merchant-bogo-add-to-cart {
 	color: red;
 	font-size: 12px;
 	margin-top: 10px;
+	line-height: 1.6;
+
+	.error {
+		margin-bottom: 10px;
+		display: block;
+		text-align: center;
+	}
 }
 
 .merchant-bogo-product-attributes {

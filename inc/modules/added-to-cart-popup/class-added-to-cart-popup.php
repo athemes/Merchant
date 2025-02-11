@@ -22,6 +22,11 @@ class Merchant_Added_To_Cart_Popup extends Merchant_Add_Module {
 	const MODULE_ID = 'added-to-cart-popup';
 
 	/**
+	 * Module template path.
+	 */
+	const MODULE_TEMPLATES_PATH = 'modules/' . self::MODULE_ID;
+
+	/**
 	 * Is module preview.
 	 *
 	 */
