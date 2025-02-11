@@ -41,8 +41,8 @@ if ( $main_product_type === 'simple' ) {
     }
 }
 
-if ( ! $is_main_product_in_stock ) {
-    return;
+if ( ! is_admin() && ! $is_main_product_in_stock ) {
+	return;
 }
 ?>
 <div class="merchant-bogo">
