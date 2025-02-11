@@ -60,6 +60,8 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'cookie_duration',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Cookie duration (days)', 'merchant' ),
+			'min'     => 1,
+			'step'    => 1,
 			'default' => '365',
 		),
 
