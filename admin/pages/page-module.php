@@ -251,8 +251,9 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
                                         <div class="form-field">
                                             <label for="backup-file"><?php esc_html_e( 'Upload Backup File', 'merchant' ); ?></label>
                                             <input type="file" id="merchant-backup-file" class="merchant-backup-file" name="backup-file" accept=".json">
-                                            <button type="button" data-module-id="<?php echo esc_attr( $merchant_module )?>" id="restore-backup-button"><?php esc_html_e( 'Restore', 'merchant' ); ?></button>
+                                            <i style="display: none;" class="dashicons dashicons-no-alt backup-file-remove"></i>
                                             <span class="merchant-loading-spinner"></span>
+                                            <button type="button" data-module-id="<?php echo esc_attr( $merchant_module )?>" id="restore-backup-button" class="restore-button"><?php esc_html_e( 'Restore', 'merchant' ); ?></button>
                                         </div>
                                     </section>
                                 </div>

@@ -247,6 +247,7 @@
             events: function () {
                 $(document).on('click', '#download-backup-button', this.download.bind(this));
                 $(document).on('click', '#restore-backup-button', this.restore.bind(this));
+                $(document).on('change', '#merchant-backup-file', this.removeBackupFile.bind(this));
             },
             download: function (e) {
                 let self = this;
@@ -293,6 +294,7 @@
                 self.hideError(container);
                 let module_id = $(e.target).attr('data-module-id');
                 let file = $('.merchant-backup-file').prop('files')[0];
+
                 // Check if file is selected and it's a JSON file
                 if (file && file.type === 'application/json') {
                     let reader = new FileReader();
@@ -323,13 +325,31 @@
                             error: function(xhr, status, error) {
                                 self.displayError(error, container);
                                 self.hideLoadingIndicator(container);
-                            }
+                            },
                         });
                     };
                     reader.readAsText(file);
                 } else {
                     self.displayError(merchant_admin_options.invalid_file, container);
                 }
+            },
+            removeBackupFile: function ( e ) {
+                const file = $( e.target );
+                if ( ! file.length ) {
+                    return;
+                }
+
+                const crossIcon = $( '.backup-file-remove' );
+
+                if ( file[0]?.files.length > 0 ) {
+                    crossIcon.show();
+                } else {
+                    crossIcon.hide();
+                }
+                crossIcon.on( 'click', function() {
+                    file.val('');
+                    $( this ).hide();
+                } );
             },
             downloadJson: function (data, filename) {
                 if (typeof data === 'object') {
