@@ -4772,6 +4772,7 @@ $error-color: #dc3232;
     h3 {
       color: $secondary-color;
       position: relative;
+      margin-block: 0 10px;
     }
 
     .form-field {
@@ -4783,12 +4784,12 @@ $error-color: #dc3232;
         color: $secondary-color;
       }
 
-      button{
+      button {
         padding: 0.75rem 1.5rem;
         margin-right: 15px;
-        background: $primary-color;
-        color: white;
-        border: none;
+        border: 1px solid #3858e9;
+        background-color: rgba(0, 0, 0, 0);
+        color: #3858e9;
         border-radius: 4px;
         cursor: pointer;
         font-size: 0.9rem;
@@ -4796,10 +4797,12 @@ $error-color: #dc3232;
         transition: all 0.2s ease-in-out;
 
         &:hover {
-          background: darken($primary-color, 10%);
+          opacity: .8;
+          //background: darken($primary-color, 10%);
         }
 
         &:focus {
+          background-color: rgba(0, 0, 0, 0);
           outline: 2px solid $primary-color;
           outline-offset: 2px;
         }
@@ -4807,6 +4810,18 @@ $error-color: #dc3232;
         &:disabled {
           opacity: 0.5;
           cursor: not-allowed;
+        }
+
+        &.download-button,
+        &.restore-button {
+          display: block;
+
+          margin: 10px 0 0;
+
+          &:hover {
+            color: #183ad6;
+            border-color: #183ad6;
+          }
         }
       }
 
@@ -4816,6 +4831,18 @@ $error-color: #dc3232;
         margin-top: 0.5rem;
         font-style: italic;
       }
+
+      .backup-file-remove {
+        color: #c5280c;
+        border-radius: 50%;
+        position: relative;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+      }
+    }
+    .error-message p {
+      margin-bottom: 0;
     }
   }
 
