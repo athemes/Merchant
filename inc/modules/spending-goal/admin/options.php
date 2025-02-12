@@ -102,7 +102,7 @@ Merchant_Admin_Options::create( array(
 			'id'         => 'user_exclusion_enabled',
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-			'desc'       => esc_html__( 'Select the users that will not show the offer.', 'merchant' ),
+			'desc'       => esc_html__( 'Choose the users who will not see this offer.', 'merchant' ),
 			'default'    => 0,
 			'conditions' => array(
 				'relation' => 'AND',
