@@ -135,11 +135,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
@@ -153,8 +150,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function enqueue_css() {
-
-		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
 	}
 
@@ -185,7 +180,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 			// Display Customizer.
 			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'merchant-custom-buy-now-button' );
-
 		}
 
 		return $preview;
@@ -206,7 +200,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
-		
 		?>
 		<div class="mrc-preview-single-product-elements">
 			<div class="mrc-preview-left-column">
