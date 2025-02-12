@@ -83,8 +83,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'inclusion',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Inclusion', 'merchant' ),
-			'desc'    => esc_html__( 'Include only products or categories', 'merchant' ),
+			'title'   => esc_html__( 'Product Inclusion', 'merchant' ),
+			'desc'    => esc_html__( 'Include only certain products or categories', 'merchant' ),
 			'default' => 0,
 		),
 
@@ -128,8 +128,8 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'exclusion',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Exclusion', 'merchant' ),
-			'desc'    => esc_html__( 'Exclude products or categories', 'merchant' ),
+			'title'   => esc_html__( 'Product Exclusion', 'merchant' ),
+			'desc'    => esc_html__( 'Exclude certain products or categories', 'merchant' ),
 			'default' => 0,
 		),
 
