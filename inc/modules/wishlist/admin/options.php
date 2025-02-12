@@ -79,6 +79,96 @@ Merchant_Admin_Options::create( array(
 			'default'   => 'h2',
 			'condition' => array( 'display_on_cart_page', '==', '1' ),
 		),
+
+		array(
+			'id'      => 'inclusion',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Product Inclusion', 'merchant' ),
+			'desc'    => esc_html__( 'Include only certain products or categories', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'         => 'included_products',
+			'type'       => 'products_selector',
+			'title'      => esc_html__( 'Include Products', 'merchant' ),
+			'multiple'   => true,
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'inclusion',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'          => 'included_categories',
+			'type'        => 'select_ajax',
+			'title'       => esc_html__( 'Include Categories', 'merchant' ),
+			'source'      => 'options',
+			'multiple'    => true,
+			'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+			'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'inclusion',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'      => 'exclusion',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Product Exclusion', 'merchant' ),
+			'desc'    => esc_html__( 'Exclude certain products or categories', 'merchant' ),
+			'default' => 0,
+		),
+
+		array(
+			'id'         => 'excluded_products',
+			'type'       => 'products_selector',
+			'title'      => esc_html__( 'Exclude Products', 'merchant' ),
+			'multiple'   => true,
+			'conditions' => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'exclusion',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
+
+		array(
+			'id'          => 'excluded_categories',
+			'type'        => 'select_ajax',
+			'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+			'source'      => 'options',
+			'multiple'    => true,
+			'options'     => Merchant_Admin_Options::get_category_select2_choices(),
+			'placeholder' => esc_html__( 'Select categories', 'merchant' ),
+			'conditions'  => array(
+				'relation' => 'AND',
+				'terms'    => array(
+					array(
+						'field'    => 'exclusion',
+						'operator' => '===',
+						'value'    => true,
+					),
+				),
+			),
+		),
 	),
 ) );
 

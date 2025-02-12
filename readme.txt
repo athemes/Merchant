@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 2.0.1 =
+* Fixed - Cookie Banner: "Cookie duration (days)" now requires a minimum value of 1 (previously accepted 0).
+* Added - Backup & Restore: Added the ability to back up and restore module settings.
+
 = 2.0.0 =
 * Added - Introduced Merchant 2.0 with a brand-new refreshed interface.
 * Added - Analytics is now available in Merchant 2.0 for better insights.

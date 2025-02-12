@@ -19,8 +19,31 @@ if ( ! method_exists( 'Merchant_Pro_Buy_X_Get_Y', 'product_args' ) && ! is_admin
 
 	return;
 }
-$settings     = isset( $args['settings'] ) ? $args['settings'] : array();
+$settings     = $args['settings'] ?? array();
 $main_product = isset( $args['product'] ) ? wc_get_product( $args['product'] ) : wc_get_product();
+
+if ( empty( $main_product ) ) {
+    return;
+}
+
+$is_main_product_in_stock = false;
+$main_product_type        = $main_product->get_type();
+
+if ( $main_product_type === 'simple' ) {
+	$is_main_product_in_stock = $main_product->is_in_stock();
+} elseif ( $main_product_type === 'variable' ) {
+	$available_variations = $main_product->get_available_variations();
+    foreach ( $available_variations as $variation ) {
+	    if ( ! empty( $variation['is_in_stock'] ) ) {
+            $is_main_product_in_stock = true;
+            break;
+        }
+    }
+}
+
+if ( ! is_admin() && ! $is_main_product_in_stock ) {
+	return;
+}
 ?>
 <div class="merchant-bogo">
     <div class="merchant-bogo-offers" data-nonce="<?php

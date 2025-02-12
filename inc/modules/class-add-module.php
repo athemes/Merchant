@@ -72,6 +72,15 @@ class Merchant_Add_Module {
 			add_action( 'wp', array( $this, 'setup_product_object' ) );
 			add_shortcode( 'merchant_module_' . str_replace( '-', '_', $this->module_id ), array( $this, 'shortcode_handler' ) );
 		}
+
+		// Remove merchant shortcodes from Botiga product card short description
+		add_filter( 'botiga_loop_product_elements', function( $elements ) {
+			add_filter( 'get_the_excerpt', function( $excerpt ) {
+				return preg_replace( '/\[merchant_[^]]+]/', '', $excerpt );
+			} );
+
+			return $elements;
+		} );
 	}
 
 	/**
@@ -165,7 +174,7 @@ class Merchant_Add_Module {
 	 *
 	 */
 	public function get_module_settings() {
-		$settings = get_option( 'merchant' ) ? get_option( 'merchant' ) : array();
+		$settings = get_option( 'merchant', array() );
 
 		// Default settings.
 		$defaults = $this->module_default_settings;
@@ -189,6 +198,31 @@ class Merchant_Add_Module {
 		$settings = apply_filters( 'merchant_module_settings', $settings, $this->module_id );
 
 		return $settings;
+	}
+
+	/**
+	 * Update module settings.
+	 *
+	 * @param array $module_settings
+	 *
+	 * @return void
+	 */
+	public function update_module_settings( $module_settings ) {
+		$settings = get_option( 'merchant', array() );
+
+		$settings[ $this->module_id ] = $module_settings;
+
+		/**
+		 * Hook: merchant_module_settings_update
+		 *
+		 * @param array  $settings  Module settings.
+		 * @param string $module_id Module ID.
+		 *
+		 * @since 2.0.0
+		 */
+		$settings = apply_filters( 'merchant_module_settings_update', $settings, $this->module_id );
+
+		update_option( 'merchant', $settings );
 	}
 
 	/**

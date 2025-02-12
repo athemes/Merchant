@@ -4738,3 +4738,142 @@ body.merchant-module-disabled {
   border-radius: 5px;
   border: 1px solid #f0f0f1;
 }
+
+
+
+
+
+
+// Define color variables
+$primary-color: #3858e9; // WordPress admin blue
+$secondary-color: #23282d;
+$background-color: #f9f9f9;
+$light-gray: #f1f1f1;
+$error-color: #dc3232;
+
+.merchant-module-page-settings.backup-restore-section {
+  border-radius: 8px;
+
+  .merchant-module-page-setting-box {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  // Section container styling
+  section {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 24px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      color: $secondary-color;
+      position: relative;
+      margin-block: 0 10px;
+    }
+
+    .form-field {
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: $secondary-color;
+      }
+
+      button {
+        padding: 0.75rem 1.5rem;
+        margin-right: 15px;
+        border: 1px solid #3858e9;
+        background-color: rgba(0, 0, 0, 0);
+        color: #3858e9;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          opacity: .8;
+          //background: darken($primary-color, 10%);
+        }
+
+        &:focus {
+          background-color: rgba(0, 0, 0, 0);
+          outline: 2px solid $primary-color;
+          outline-offset: 2px;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        &.download-button,
+        &.restore-button {
+          display: block;
+          margin: 10px 0 0;
+        }
+      }
+
+      p.description {
+        font-size: 0.875rem;
+        color: #666;
+        margin-top: 0.5rem;
+        font-style: italic;
+      }
+
+      .backup-file-remove {
+        color: #c5280c;
+        border-radius: 50%;
+        position: relative;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+      }
+    }
+    .error-message p {
+      margin-bottom: 0;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+
+    section {
+      padding: 1.5rem;
+    }
+  }
+}
+
+.merchant-loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3D65E9; // Change this color to your preference
+  animation: spin 1s ease-in-out infinite;
+  vertical-align: middle;
+  transition: 300ms;
+  opacity: 0;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

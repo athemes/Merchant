@@ -231,7 +231,34 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 						}
 
 						?>
-
+                        <div class="merchant-module-page-settings backup-restore-section">
+                            <div class="merchant-module-page-setting-box">
+                                <div class="merchant-module-page-setting-title">
+                                    <?php esc_html_e( 'Backup & Restore', 'merchant' ); ?>
+                                </div>
+                                <div class="merchant-module-page-setting-fields">
+                                    <section class="backup-section">
+                                        <h3><?php esc_html_e( 'Backup Module Settings', 'merchant' ); ?></h3>
+                                        <p><?php esc_html_e( 'Download a backup of your currently saved module settings as a JSON file. To capture the most up-to-date configuration, remember to save your settings before downloading the backup. You can then use this file to restore your settings later.', 'merchant' ); ?></p>
+                                        <div class="form-field">
+                                            <button type="button" data-module-id="<?php echo esc_attr($merchant_module)?>" id="download-backup-button"><?php esc_html_e( 'Download', 'merchant' ); ?></button>
+                                            <span class="merchant-loading-spinner"></span>
+                                        </div>
+                                    </section>
+                                    <section class="restore-section">
+                                        <h3><?php esc_html_e( 'Restore Module Settings', 'merchant' ); ?></h3>
+                                        <p><?php esc_html_e( 'Restore the module settings by uploading a previously saved backup file. Please be aware that restoring settings will overwrite your current module configurations.', 'merchant' ); ?></p>
+                                        <div class="form-field">
+                                            <label for="backup-file"><?php esc_html_e( 'Upload Backup File', 'merchant' ); ?></label>
+                                            <input type="file" id="merchant-backup-file" class="merchant-backup-file" name="backup-file" accept=".json">
+                                            <i style="display: none;" class="dashicons dashicons-no-alt backup-file-remove"></i>
+                                            <span class="merchant-loading-spinner"></span>
+                                            <button type="button" data-module-id="<?php echo esc_attr( $merchant_module )?>" id="restore-backup-button" class="restore-button"><?php esc_html_e( 'Restore', 'merchant' ); ?></button>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 					<?php if ( Merchant_Admin_Preview::has_preview() ) : ?>
@@ -277,7 +304,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
     </div>
 
     <div class="merchant-module-footer-text">
-		<?php esc_html_e( 'Copyright © aThemes 2024. All Rights Reserved.', 'merchant' ); ?>
+		<?php esc_html_e( 'Copyright © aThemes ' . gmdate( 'Y' ) . '. All Rights Reserved.', 'merchant' ); ?>
     </div>
 
 <?php else : ?>
