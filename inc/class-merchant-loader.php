@@ -85,6 +85,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-provider.php';
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-reports.php';
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-ajax.php';
+			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-hooks.php';
 
 			// Modules (free and pro).
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
