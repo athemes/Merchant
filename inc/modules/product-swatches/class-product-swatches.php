@@ -442,6 +442,45 @@ class Merchant_Product_Swatches extends Merchant_Add_Module {
 		        border-style: solid;
 		        border-radius: 50%;
 			}
+			.merchant-variations-wrapper .merchant-variation-type-image > a.disabled,
+			.merchant-variations-wrapper .merchant-variation-type-image > a.permanent-disabled,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.disabled,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.permanent-disabled,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.disabled,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.permanent-disabled {
+				position: relative;
+				pointer-events: none;
+				opacity: 0.5;
+			}
+			.merchant-variations-wrapper .merchant-variation-type-image > a.disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-image > a.permanent-disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.permanent-disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.permanent-disabled:before,
+			.merchant-variations-wrapper .merchant-variation-type-image > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-image > a.permanent-disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.permanent-disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.permanent-disabled:after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: calc(100% + 10px);
+				height: 2px;
+				background: red;
+				transform: translate3d(-50%, -50%, 0) rotate(45deg);
+			}
+			.merchant-variations-wrapper .merchant-variation-type-image > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-image > a.permanent-disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-button > a.permanent-disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.disabled:after,
+			.merchant-variations-wrapper .merchant-variation-type-color > a.permanent-disabled:after {
+				transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+			}
 			.merchant-variations-wrapper .merchant-variation-type-image > a > span,
 			.merchant-variations-wrapper .merchant-variation-type-color > a > span {
 			    width: 100%;
