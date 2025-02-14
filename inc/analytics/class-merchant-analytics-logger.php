@@ -43,6 +43,21 @@ class Merchant_Analytics_Logger {
 	 * @return false|int The ID of the inserted row on success, false on failure.
 	 */
 	public function log_event( $args ) {
+		if (
+			/**
+			 * Filter the analytics toggle.
+			 *
+			 * @param bool $analytics_toggle The analytics toggle.
+			 *
+			 * @since 2.0.1
+			 */
+			! apply_filters(
+				'merchant_analytics_toggle',
+				Merchant_Admin_Options::get( 'global-settings', 'analytics_toggle', true )
+			)
+		) {
+			return false;
+		}
 		if ( ! $this->is_db_table_exists() ) {
 			return false;
 		}
