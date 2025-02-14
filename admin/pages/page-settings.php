@@ -87,6 +87,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 							),
 							'default' => 'active',
 						),
+						array(
+							'id'      => 'analytics_toggle',
+							'type'    => 'switcher',
+							'title'   => __( 'Enable module analytics', 'merchant' ),
+							'default' => true,
+						),
 					),
 				) );
 
