@@ -60,6 +60,7 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/notices/class-merchant-notice-upsell.php';
 			require_once MERCHANT_DIR . 'admin/notices/class-merchant-notice-campaign.php';
 
+			// Admin classes.
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-menu.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
