@@ -87,6 +87,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							),
 							'default' => 'active',
 						),
+                        // Analytics toggle
 						array(
 							'id'      => 'analytics_toggle',
 							'type'    => 'switcher',
