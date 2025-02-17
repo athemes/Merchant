@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						array(
 							'id'      => 'analytics_toggle',
 							'type'    => 'switcher',
-							'title'   => __( 'Enable module analytics', 'merchant' ),
+							'title'   => __( 'Enable analytics', 'merchant' ),
 							'desc'    => __( 'Track revenue and performance insights from our modules. No personal data is collected. Disable this if you prefer not to track analytics.', 'merchant' ),
 							'default' => true,
 						),
