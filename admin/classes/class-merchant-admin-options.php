@@ -591,7 +591,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					break;
 
 				case 'sortable_repeater':
-					$values = json_decode( $value );
+					$values = json_decode( stripslashes( $value ) );
 					$value  = array_map( 'sanitize_text_field', $values );
 					break;
 				case 'flexible_content':
