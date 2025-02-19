@@ -185,29 +185,28 @@ $product_id     = $product->get_id();
                 </div>
                 <div class="offer-form">
 		            <?php
-		            if ( $is_variable && ! empty( $attributes ) ) {
-                        ?>
+		            if ( $is_variable && ! empty( $attributes ) ) : ?>
                         <div class="variation-form">
 	                        <?php
-	                        foreach ( $attributes as $attribute_name => $options ) :
-		                        $attribute_label = wc_attribute_label( $attribute_name );
-		                        ?>
-                                <div class="variation-dropdown">
-                                    <select required name="<?php
-			                        echo esc_attr( $attribute_name ); ?>" data-attribute_name="attribute_<?php
-			                        echo esc_attr( $attribute_name ); ?>">
-                                        <option value=""><?php echo esc_html( $attribute_label ); ?></option>
-				                        <?php foreach ( $options as $option ) : ?>
-                                            <option value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( ucfirst( $option ) ); ?></option>
-				                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-	                        <?php
-	                        endforeach; ?>
+	                        foreach ( $attributes as $attribute_name => $options ) {
+		                        echo '<div class="variations variation-dropdown">';
+		                        wc_dropdown_variation_attribute_options(
+			                        array(
+				                        'options'          => $options,
+				                        'attribute'        => $attribute_name,
+				                        'product'          => $product,
+				                        'required'         => true,
+				                        /* Translators: 1. Attribute name */
+				                        'show_option_none' => sprintf( __( 'Select %s', 'merchant' ), wc_attribute_label( $attribute_name ) ),
+			                        )
+		                        );
+		                        echo '</div>';
+	                        }
+                            ?>
                         </div>
-		            <?php
-		            }
-	                if ( $is_variable ) { ?>
+		            <?php endif; ?>
+
+	                <?php if ( $is_variable ) : ?>
                         <div class="form-footer">
                             <div class="offer-quantity-input">
 				                <?php
@@ -218,13 +217,11 @@ $product_id     = $product->get_id();
                             </div>
                             <div class="offer-submit">
                                 <button type="submit" class="single_add_to_cart_button button alt">
-                            <span class="offer-submit-text"><?php
-	                            esc_html_e( 'Add to cart', 'merchant' ); ?></span>
+                                    <span class="offer-submit-text"><?php esc_html_e( 'Add to cart', 'merchant' ); ?></span>
                                 </button>
                             </div>
                         </div>
-		                <?php
-	                } ?>
+	                <?php endif; ?>
                 </div>
                 <div class="user-message"><span class="message-text"></span></div>
             </div>
