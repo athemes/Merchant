@@ -69,6 +69,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-custom-css.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-svg-icons.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-db-tables.php';
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-general-hooks.php';
 
 			// Metabox
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-metabox.php';
