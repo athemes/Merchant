@@ -188,7 +188,7 @@ Merchant_Admin_Options::create( array(
 								'ai'     => esc_html__( 'AI Recommendations', 'merchant' ),
 							),
 							'default' => 'manual',
-							'desc'    => esc_html__( 'Select the products that will be included in the bundle.', 'merchant' ),
+							'desc'    => esc_html__( 'Choose the maximum number of products you’d like the bundle to include.', 'merchant' ),
 						),
 						array(
 							'id'         => 'ai_products_count',
