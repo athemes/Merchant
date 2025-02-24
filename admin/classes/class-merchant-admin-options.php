@@ -528,7 +528,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'buttons':
 				case 'buttons_alt':
 				case 'buttons_content':
-					$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
+					$value = ( in_array( $value, array_map( 'strval', array_keys( $field['options'] ) ), true ) ) ? sanitize_key( $value ) : '';
 					break;
 
 				case 'reviews_selector':

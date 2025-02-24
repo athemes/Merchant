@@ -179,21 +179,78 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
-
 						array(
-							'id'       => 'products',
-							'title'    => esc_html__( 'Products to offer', 'merchant' ),
-							'type'     => 'products_selector',
-							'multiple' => true,
-							'desc'     => esc_html__( 'Select the products that will be included the bundle.', 'merchant' ),
+							'id'      => 'offer_products_based_on',
+							'type'    => 'radio',
+							'title'   => esc_html__( 'Offer products based on', 'merchant' ),
+							'options' => array(
+								'manual' => esc_html__( 'Manual Selection', 'merchant' ),
+								'ai'     => esc_html__( 'AI Recommendations', 'merchant' ),
+							),
+							'default' => 'manual',
+							'desc'    => esc_html__( 'Choose the maximum number of products you’d like the bundle to include.', 'merchant' ),
 						),
-
 						array(
-							'id'        => 'external',
-							'label'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
-							'type'      => 'checkbox',
-							'default'   => 0,
-							'condition' => array( 'rules_to_display', '==', 'products' ),
+							'id'         => 'ai_products_count',
+							'title'      => esc_html__( 'Maximum number of offer products shown', 'merchant' ),
+							'type'       => 'select',
+							'desc'       => esc_html__( 'You can show a maximum of 5 offer products.', 'merchant' ),
+							'options'    => array(
+								'1' => esc_html__( '2 products (Target product + 1 AI product)', 'merchant' ),
+								'2' => esc_html__( '3 products (Target product + 2 AI products)', 'merchant' ),
+								'3' => esc_html__( '4 products (Target product + 3 AI products)', 'merchant' ),
+								'4' => esc_html__( '5 products (Target product + 4 AI products)', 'merchant' ),
+								'5' => esc_html__( '6 products (Target product + 5 AI products)', 'merchant' ),
+							),
+							'default'    => '2',
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'offer_products_based_on',
+										'operator' => '===',
+										'value'    => 'ai',
+									),
+								),
+							),
+						),
+						array(
+							'id'         => 'products',
+							'title'      => esc_html__( 'Products to offer', 'merchant' ),
+							'type'       => 'products_selector',
+							'multiple'   => true,
+							'desc'       => esc_html__( 'Select the products that will be included the bundle.', 'merchant' ),
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'offer_products_based_on',
+										'operator' => '===',
+										'value'    => 'manual',
+									),
+								),
+							),
+						),
+						array(
+							'id'         => 'external',
+							'label'      => __( 'Display the offer on all products in the bundle', 'merchant' ),
+							'type'       => 'checkbox',
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'offer_products_based_on',
+										'operator' => '===',
+										'value'    => 'manual',
+									),
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => '===',
+										'value'    => 'products',
+									),
+								),
+							),
 						),
 						array(
 							'id'      => 'enable_discount',
