@@ -69,7 +69,7 @@ Merchant_Admin_Preview::set_preview( $merchant_module );
 									<?php if ( $merchant_module_is_upsell ) : ?>
                                         <div class="merchant-module-buy">
 
-                                            <a href="https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" target="_blank"
+                                            <a href="https://athemes.com/merchant-upgrade?utm_source=module_inner_settings&utm_content=<?php echo esc_attr( $merchant_module ); ?>&utm_medium=merchant_dashboard&utm_campaign=Merchant" target="_blank"
                                                 class="merchant-module-page-button ">
 												<?php esc_html_e( 'Buy Pro', 'merchant' ); ?>
                                             </a>
