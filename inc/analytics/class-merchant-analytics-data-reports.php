@@ -866,7 +866,7 @@ class Merchant_Analytics_Data_Reports {
 	 * @return array [difference, diff_type]
 	 */
 	protected function calculate_percentage_difference( $current_value, $previous_value ) {
-		if ( $previous_value !== null ) {
+		if ( $previous_value !== null || is_numeric( $previous_value ) ) {
 			if ( $previous_value === 0 ) {
 				// If previous value is 0, handle it as a special case
 				if ( $current_value === 0 ) {
