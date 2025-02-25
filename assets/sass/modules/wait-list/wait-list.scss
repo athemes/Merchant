@@ -77,7 +77,6 @@
 	z-index: 2;
 	display: block;
 	font-size: 26px;
-	animation: merchant-fa-spin .75s linear infinite;
 	opacity: 0;
 	visibility: hidden;
 	
@@ -85,5 +84,6 @@
 		width: 1em;
 		height: 1em;
 		fill: #212121;
+		animation: merchant-fa-spin .75s linear infinite;
 	}
 }

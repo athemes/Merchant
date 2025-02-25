@@ -28,7 +28,7 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 
 			$ajax_cart = ! class_exists( 'OhioOptions' ) || OhioOptions::get( 'woocommerce_product_ajax_cart', true );
 
-            // Product Archive
+            // Custom scripts
 			add_action( 'wp_footer', function() {
 				?>
                 <script>
@@ -154,47 +154,6 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 				// Side Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
                     remove_filter( 'woocommerce_cart_item_name', 'ohio_add_cart_product_category', 99 );
-
-					add_action( 'wp_footer', function() {
-						?>
-						<script>
-							/**
-							 * Ohio overrides the default WooCommerce Add to cart Ajax and added their own custom code.
-							 * But they didn't trigger any event when a product is added to the cart.
-							 * That's why creating a custom event when a product is added to the cart based on the alert they added on the page.
-							 *
-							 * @type {MutationObserver}
-							 */
-							jQuery( document ).ready( function ( $ ) {
-								$( document ).on( 'merchant.side-cart-is-allowed-device', function( event, data ) {
-                                    if ( data?.isAllowed ) {
-                                        const observer = new MutationObserver( ( mutations ) => {
-                                            mutations.forEach( ( mutation ) => {
-                                                // Look through added nodes
-                                                mutation.addedNodes.forEach( ( node ) => {
-                                                    // Check if the added node is an element and has the class we're looking for
-                                                    if ( node.nodeType === 1 && node.classList.contains( 'woo-alert-group' ) ) {
-	                                                    if ( node.querySelector( '.ajax-cart-response.-success' ) ) {
-                                                            if ( ! $( 'body' ).hasClass( 'merchant-side-cart-show' ) ) {
-			                                                    $( 'body' ).addClass( 'merchant-side-cart-show' );
-		                                                    }
-	                                                    }
-                                                    }
-                                                } );
-                                            } );
-                                        } );
-
-                                        // Start observing the body for changes
-                                        observer.observe( document.body, {
-                                            childList: true,
-                                            subtree: true,
-                                        } );
-                                    }
-                                } );
-							} );
-						</script>
-						<?php
-					} );
 				}
 			}
 		}
@@ -251,13 +210,6 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 			}
 
 			if ( merchant_is_ohio_active() ) {
-				// Variation Swatches
-				if ( Merchant_Modules::is_module_active( Merchant_Product_Swatches::MODULE_ID ) ) {
-					$css .= '
-					    
-					';
-				}
-
 				// Wishlist
 				if ( Merchant_Modules::is_module_active( Merchant_Wishlist::MODULE_ID ) ) {
 					$css .= '
@@ -286,55 +238,6 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 						.merchant-adv-reviews .star-rating:before {
                             content: "★★★★★" !important;
                         }
-					';
-				}
-
-				// Sticky Add to Cart
-				if ( Merchant_Modules::is_module_active( Merchant_Sticky_Add_To_Cart::MODULE_ID ) ) {
-					$css .= '
-						
-					';
-				}
-
-				// Recently Viewed Products
-				if ( Merchant_Modules::is_module_active( Merchant_Recently_Viewed_Products::MODULE_ID ) ) {
-					$css .= '
-					    
-					';
-				}
-
-				// Product Audio/Video
-				if ( Merchant_Modules::is_module_active( Merchant_Product_Audio::MODULE_ID ) || Merchant_Modules::is_module_active( Merchant_Product_Video::MODULE_ID ) ) {
-					$css .= '
-						
-					';
-				}
-
-				// Waitlist
-				if ( Merchant_Modules::is_module_active( Merchant_Wait_List::MODULE_ID ) ) {
-					$css .= '
-						
-					';
-				}
-
-				// Advanced Reviews
-				if ( Merchant_Modules::is_module_active( Merchant_Advanced_Reviews::MODULE_ID ) ) {
-					$css .= '
-						
-					';
-				}
-
-				// Login Popup
-				if ( ! is_user_logged_in() && Merchant_Modules::is_module_active( Merchant_Login_Popup::MODULE_ID ) ) {
-					$css .= '
-						
-					';
-				}
-
-				// Checkout
-				if ( Merchant_Modules::is_module_active( Merchant_Checkout::MODULE_ID ) ) {
-					$css .= '
-						 
 					';
 				}
 			}
