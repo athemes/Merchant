@@ -54,7 +54,7 @@ class Merchant_Notice_Upsell extends Merchant_Notice {
 				?>
 			</p>
 
-			<a href="https://athemes.com/merchant-upgrade?utm_source=plugin_notice&utm_medium=button&utm_campaign=Merchant" class="merchant-btn merchant-btn-secondary" target="_blank"><?php esc_html_e( 'Upgrade To Merchant Pro', 'merchant' ); ?></a>
+			<a href="https://athemes.com/merchant-upgrade?utm_source=plugin_notice&utm_content=upgrade_notice&utm_medium=button&utm_campaign=Merchant" class="merchant-btn merchant-btn-secondary" target="_blank"><?php esc_html_e( 'Upgrade To Merchant Pro', 'merchant' ); ?></a>
 			
 			<a class="notice-dismiss" href="?<?php echo esc_attr( $this->id ); ?>_dismiss=1" style="text-decoration:none;"></a>
 		</div>
