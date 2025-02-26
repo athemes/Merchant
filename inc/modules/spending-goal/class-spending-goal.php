@@ -57,6 +57,8 @@ class Merchant_Spending_Goal extends Merchant_Add_Module {
 			'discount_type'     => 'percent',
 			'discount_amount'   => 10,
 			'discount_name'     => esc_html__( 'Spending goal', 'merchant' ),
+			'inclusion'         => false,
+			'exclusion'         => false,
 			'user_condition'    => 'all',
 			'text_goal_zero'    => esc_html__( 'Spend {spending_goal} to get a {discount_amount} discount!', 'merchant' ),
 			'text_goal_started' => esc_html__( 'Spend {spending_goal} more to get a {discount_amount} discount!', 'merchant' ),
