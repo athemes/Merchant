@@ -69,7 +69,7 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
                             }
                         } );
 
-						// Quick View, Wishlist, Product Labels Position
+						// Quick View, Wishlist, Product Labels, Product Video/Audio Position
 						$( '.merchant-product-labels, .merchant-quick-view-button, .merchant-wishlist-button, .merchant-product-video, .merchant-product-audio' ).each( function() {
 							const $product = $( this ).closest( 'li.product' );
 							const $thumbnail = $product.find( '.product-item-thumbnail' );
@@ -167,7 +167,14 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
                         return 'woocommerce_after_shop_loop_item_title';
                     } );
 
-                    // Single Product
+                    /*
+                     * Single Product
+                     *
+                     * `YITH_Featured_Audio_Video_Init` function is needed in Ohio theme for firing `woocommerce_single_product_image_thumbnail_html` action
+                     * That's why just defining it here to make sure it exists.
+                     * No need any implementation
+                     *
+                     */
 					if ( ! function_exists( 'YITH_Featured_Audio_Video_Init' ) ) {
 						function YITH_Featured_Audio_Video_Init() {}
                     }
