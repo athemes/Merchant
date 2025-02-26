@@ -70,7 +70,7 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
                         } );
 
 						// Quick View, Wishlist, Product Labels Position
-						$( '.merchant-product-labels, .merchant-quick-view-button, .merchant-wishlist-button' ).each( function() {
+						$( '.merchant-product-labels, .merchant-quick-view-button, .merchant-wishlist-button, .merchant-product-video, .merchant-product-audio' ).each( function() {
 							const $product = $( this ).closest( 'li.product' );
 							const $thumbnail = $product.find( '.product-item-thumbnail' );
 
@@ -155,6 +155,23 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
                     remove_filter( 'woocommerce_cart_item_name', 'ohio_add_cart_product_category', 99 );
 				}
+
+				// Product Video/Audio
+				if ( Merchant_Modules::is_module_active( Merchant_Product_Video::MODULE_ID ) || Merchant_Modules::is_module_active( Merchant_Product_Audio::MODULE_ID ) ) {
+                    // Archive
+                    add_filter( 'merchant_product_video_before_woo_hook', function() {
+                        return 'woocommerce_after_shop_loop_item_title';
+                    } );
+
+                    add_filter( 'merchant_product_audio_before_woo_hook', function() {
+                        return 'woocommerce_after_shop_loop_item_title';
+                    } );
+
+                    // Single Product
+					if ( ! function_exists( 'YITH_Featured_Audio_Video_Init' ) ) {
+						function YITH_Featured_Audio_Video_Init() {}
+                    }
+				}
 			}
 		}
 
@@ -237,6 +254,20 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 						.merchant-adv-reviews-modal-photo-slider .star-rating:before,
 						.merchant-adv-reviews .star-rating:before {
                             content: "★★★★★" !important;
+                        }
+					';
+				}
+
+                // Product Video/Audio
+				if ( Merchant_Modules::is_module_active( Merchant_Product_Video::MODULE_ID ) || Merchant_Modules::is_module_active( Merchant_Product_Audio::MODULE_ID ) ) {
+					$css .= '
+						li.product:has(.merchant-product-video) .product-item-thumbnail .image-holder,
+						li.product:has(.merchant-product-audio) .product-item-thumbnail .image-holder {
+                            display: none;
+                        }
+                        li.product .merchant-product-video,
+                        li.product .merchant-product-audio {
+                            visibility: hidden;
                         }
 					';
 				}
