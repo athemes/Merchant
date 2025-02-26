@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$product        = $args['product'];
-$product_id     = $product->get_id();
+$product    = $args['product'];
+$product_id = $product->get_id();
 ?>
 <div class="merchant-volume-discounts">
 	<?php
@@ -63,7 +63,26 @@ $product_id     = $product->get_id();
 			// Get available variations and attributes
 			$available_variations = $is_variable ? $product->get_available_variations() : array();
 			$attributes           = $is_variable ? $product->get_variation_attributes() : array();
-			$available_variations = $is_variable ? $product->get_available_variations() : array();
+
+            // Add the merchant discount pricing details to each variation
+			if ( ! empty( $available_variations ) ) {
+				foreach ( $available_variations as &$variation ) {
+					$variation_price = (float) $variation['display_price'];
+
+					$variation_discount = $discount_tier['discount_type'] === 'percentage_discount'
+						? ( $variation_price * $discount_tier['discount'] ) / 100
+						: $discount_tier['discount'];
+
+					$variation_discounted_price = $variation_price - $variation_discount;
+
+					// Add the merchant bulk discount prices
+					$variation['merchant_bulk_discounts_price_regular_html'] = wp_kses( wc_price( $variation_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+					$variation['merchant_bulk_discounts_price']              = $variation_discounted_price;
+					$variation['merchant_bulk_discounts_price_html']         = wp_kses( wc_price( $variation_discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+					$variation['merchant_bulk_discounts_price_html_total']   = wp_kses( wc_price( $discount_qty * $variation_discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+				}
+				unset( $variation ); // Unset the reference after the loop
+			}
 			?>
             <div
                 class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>"
@@ -124,24 +143,31 @@ $product_id     = $product->get_id();
                 <ul>
                     <li>
                         <div></div>
-                        <div>
-                            <del><?php
-								echo wp_kses( wc_price( $args['product_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
+                        <div class="merchant-volume-discounts-item-price-strikethrough">
+                            <del><?php echo wp_kses( wc_price( $args['product_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
                         </div>
                     </li>
                     <li>
-                        <div class="merchant-volume-discounts-item-text"><?php
-							echo isset($discount_tier['product_single_page']['item_text']) ? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['item_text'] ) ) : esc_html__( 'Per item:', 'merchant' ); ?></div>
-                        <div><strong style="color: #ff0000 !important;"><?php
-								echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
+                        <div class="merchant-volume-discounts-item-text">
+                            <?php echo isset( $discount_tier['product_single_page']['item_text'] ) ? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['item_text'] ) ) : esc_html__( 'Per item:', 'merchant' ); ?>
+                        </div>
+                        <div class="merchant-volume-discounts-item-price" data-item-price="<?php echo esc_attr( $discounted_price ); ?>">
+                            <strong style="color: #ff0000 !important;">
+                                <?php echo wp_kses( wc_price( $discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+                            </strong>
+                        </div>
                     </li>
                     <li>
-                        <div class="merchant-volume-discounts-total-text"><?php
-							echo isset( $discount_tier['product_single_page']['total_text'] )
+                        <div class="merchant-volume-discounts-total-text">
+                            <?php echo isset( $discount_tier['product_single_page']['total_text'] )
 								? esc_html( Merchant_Translator::translate( $discount_tier['product_single_page']['total_text'] ) )
-								: esc_html__( 'Total price:', 'merchant' ); ?></div>
-                        <div><strong><?php
-								echo wp_kses( wc_price( $total_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></strong></div>
+								: esc_html__( 'Total price:', 'merchant' ); ?>
+                        </div>
+                        <div class="merchant-volume-discounts-item-price-total" data-total-price="<?php echo esc_attr( $total_price ); ?>">
+                            <strong>
+                                <?php echo wp_kses( wc_price( $total_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+                            </strong>
+                        </div>
                     </li>
                 </ul>
                 <div class="merchant-volume-discounts-item-label">
@@ -190,16 +216,16 @@ $product_id     = $product->get_id();
 	                        <?php
 	                        foreach ( $attributes as $attribute_name => $options ) {
 		                        echo '<div class="variations variation-dropdown">';
-		                        wc_dropdown_variation_attribute_options(
-			                        array(
-				                        'options'          => $options,
-				                        'attribute'        => $attribute_name,
-				                        'product'          => $product,
-				                        'required'         => true,
-				                        /* Translators: 1. Attribute name */
-				                        'show_option_none' => sprintf( __( 'Select %s', 'merchant' ), wc_attribute_label( $attribute_name ) ),
-			                        )
-		                        );
+                                    wc_dropdown_variation_attribute_options(
+                                        array(
+                                            'options'          => $options,
+                                            'attribute'        => $attribute_name,
+                                            'product'          => $product,
+                                            'required'         => true,
+                                            /* Translators: 1. Attribute name */
+                                            'show_option_none' => sprintf( __( 'Select %s', 'merchant' ), wc_attribute_label( $attribute_name ) ),
+                                        )
+                                    );
 		                        echo '</div>';
 	                        }
                             ?>
@@ -213,6 +239,7 @@ $product_id     = $product->get_id();
 				                woocommerce_quantity_input( array(
 					                'input_name'  => 'offer-quantity',
 					                'input_value' => Merchant_Pro_Volume_Discounts::offer_dynamic_remaining_quantity( $discount_tier, $product ),
+                                    'min_value'   => $discount_qty,
 				                ) ) ?>
                             </div>
                             <div class="offer-submit">

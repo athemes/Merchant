@@ -242,6 +242,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'quantity',
 							'type'    => 'number',
 							'title'   => esc_html__( 'Quantity', 'merchant' ),
+							'min'     => 1,
 							'default' => 2,
 						),
 
