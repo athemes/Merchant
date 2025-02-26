@@ -50,7 +50,7 @@ class Merchant_Pre_Orders_Main_Functionality {
 		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'record_add_to_cart_event' ), 11, 2 );
 		add_action( 'woocommerce_after_calculate_totals', array( $this, 'update_analytics' ) );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hidden_order_itemmeta' ) );
-		add_action( 'woocommerce_add_order_item_meta', array( $this, 'add_order_item_meta' ), 10, 2 );
+		add_action( 'woocommerce_checkout_create_order_line_item', array( $this, 'add_order_item_meta' ), 10, 4 );
 
 		// Cronjob.
 		if ( ! wp_next_scheduled( 'check_for_released_preorders' ) ) {
@@ -258,18 +258,21 @@ class Merchant_Pre_Orders_Main_Functionality {
 	/**
 	 * Add pre-order data to order item meta.
 	 *
-	 * @param $item_id int The item ID.
+	 * @param $item WC_Order_Item The order item object.
+	 * @param $cart_item_key string The cart item key.
 	 * @param $values  array The values.
+	 * @param $order WC_Order The order object.
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
-	public function add_order_item_meta( $item_id, $values ) {
+	public function add_order_item_meta( $item, $cart_item_key, $values, $order ) {
 		if ( isset( $values['_merchant_pre_order'] ) ) {
-			wc_add_order_item_meta( $item_id, '_merchant_pre_order', $values['_merchant_pre_order'] );
+			$item->update_meta_data( '_merchant_pre_order', $values['_merchant_pre_order'] );
 		}
 
 		if ( isset( $values['_merchant_pre_order_shipping_date'] ) ) {
-			wc_add_order_item_meta( $item_id, '_merchant_pre_order_shipping_date', $values['_merchant_pre_order_shipping_date'] );
+			$item->update_meta_data( '_merchant_pre_order_shipping_date', $values['_merchant_pre_order_shipping_date'] );
 		}
 	}
 
