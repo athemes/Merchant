@@ -47,6 +47,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
+				'complementary-products' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-pre-orders' ),
+					'title' => esc_html__( 'Complementary Products', 'merchant' ),
+					'desc' => esc_html__( 'Sell complementary products in addition to a specific product with discount', 'merchant' ),
+					'tutorial_url' => '#',
+				),
 				'wait-list' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
