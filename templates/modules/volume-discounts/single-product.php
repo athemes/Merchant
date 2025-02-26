@@ -64,7 +64,7 @@ $product_id = $product->get_id();
 			$available_variations = $is_variable ? $product->get_available_variations() : array();
 			$attributes           = $is_variable ? $product->get_variation_attributes() : array();
 
-            // Add the merchant discount price to each variation
+            // Add the merchant discount pricing details to each variation
 			if ( ! empty( $available_variations ) ) {
 				foreach ( $available_variations as &$variation ) {
 					$variation_price = (float) $variation['display_price'];
