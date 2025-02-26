@@ -225,6 +225,17 @@ if ( ! function_exists( 'merchant_is_elementor_active' ) ) {
 }
 
 /**
+ * Check if Ohio theme is installed and active.
+ *
+ * @return bool
+ */
+if ( ! function_exists( 'merchant_is_ohio_active' ) ) {
+	function merchant_is_ohio_active() {
+		return function_exists( 'ohio_setup' );
+	}
+}
+
+/**
  * Check if any shortcode starts with merchant doesn't exist.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
  */

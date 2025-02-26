@@ -62,6 +62,7 @@ if ( ! function_exists( 'merchant_kses_allowed_tags' ) ) {
 					'stroke-width'    => true,
 					'stroke-linejoin' => true,
 					'clip-rule'       => true,
+					'opacity'         => true,
 				),
 				'polyline' => array(
 					'points'          => true,

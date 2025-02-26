@@ -115,6 +115,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-elementor-builder.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-bricks-builder.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-woo-payments-plugin.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-ohio-theme.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.
