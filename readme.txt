@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,14 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 2.0.2 =
+* Added - Added a toggle to control analytics logging. This prevents the "record impression" AJAX event from firing if analytics is disabled
+* Changed - Analytics: Removed records from analytics when an order is refunded
+* Fixed - Buy Now: Resolved an issue where clicking the "Buy Now" button did not add grouped products to the cart
+* Fixed - Reasons to Buy: Fixed a bug where the "Save" button was not saving data and got stuck on loading
+* Fixed - Merchant Compatibility: Addressed compatibility issues with the Ohio theme
+* Fixed - Pre-orders: Fixed the use of the deprecated woocommerce_add_order_item_meta hook
+
 = 2.0.1 =
 * Fixed - Cookie Banner: "Cookie duration (days)" now requires a minimum value of 1 (previously accepted 0).
 * Added - Backup & Restore: Added the ability to back up and restore module settings.
