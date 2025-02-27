@@ -237,6 +237,23 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
+							'id'         => 'min_selection_discount',
+							'title'      => esc_html__( 'Minimum product selection to trigger the discount', 'merchant' ),
+							'type'       => 'number',
+							'default'    => 1,
+							'step'       => 1,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'enable_discount',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+						array(
 							'id'      => 'offer-title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer title', 'merchant' ),
