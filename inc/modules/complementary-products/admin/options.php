@@ -274,7 +274,7 @@ Merchant_Admin_Options::create( array(
 								'auto-checked' => esc_html__( 'Auto checked', 'merchant' ),
 								'unchecked'    => esc_html__( 'Unchecked', 'merchant' ),
 							),
-							'default' => 'unchecked',
+							'default' => 'auto-checked',
 						),
 						array(
 							'id'      => 'hide_product_parts',
