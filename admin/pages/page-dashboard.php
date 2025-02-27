@@ -22,7 +22,7 @@ $merchant_notification_tabs = apply_filters( 'merchant_notification_tabs', false
 $merchant_notification_read = $this->is_latest_notification_read();
 ?>
 <div class="merchant-top-bar">
-	<a href="https://athemes.com/?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-top-bar-logo" target="_blank">
+	<a href="https://athemes.com/" class="merchant-top-bar-logo" target="_blank">
 		<svg width="96" height="24" viewBox="0 0 96 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M23.4693 1.32313L8.45381 14.3107L0.67962 4.82163L23.4693 1.32313Z" fill="#335EEA"/>
 			<path fill-rule="evenodd" clip-rule="evenodd" d="M23.2942 1.17329L8.23868 14.112L16.0129 23.601L23.2942 1.17329Z" fill="#BECCF9"/>
@@ -47,7 +47,7 @@ $merchant_notification_read = $this->is_latest_notification_read();
 			</a>
 		</div>
 		<div class="merchant-top-bar-info-item">
-			<a href="https://athemes.com/merchant?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-website" target="_blank">
+			<a href="https://athemes.com/merchant?utm_source=plugin_dashboard&utm_content=top_bar_website_link&utm_medium=merchant_dashboard&utm_campaign=Merchant" class="merchant-website" target="_blank">
 				<?php esc_html_e( 'Website', 'merchant' ); ?>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M13.6 2.40002H7.20002L8.00002 4.00002H11.264L6.39202 8.88002L7.52002 10.008L12 5.53602V8.00002L13.6 8.80002V2.40002ZM9.60002 9.60002V12H4.00002V6.40002H7.20002L8.80002 4.80002H2.40002V13.6H11.2V8.00002L9.60002 9.60002Z" fill="#3858E9"/>

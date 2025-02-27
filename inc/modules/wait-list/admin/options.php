@@ -82,6 +82,14 @@ Merchant_Admin_Options::create( array(
 		),
 
 		array(
+			'id'      => 'show_notified_users',
+			'type'    => 'switcher',
+			'title'   => __( 'Show notified users', 'merchant' ),
+			'default' => 1,
+			'desc'    => esc_html__( 'When products are back in stock, show an admin notice with a list of the notified users', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'email_new_subscriber',
 			'type'    => 'textarea_multiline',
 			'title'   => esc_html__( 'Email new subscribers', 'merchant' ),

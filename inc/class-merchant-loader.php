@@ -69,6 +69,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-custom-css.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-svg-icons.php';
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-db-tables.php';
+			require_once MERCHANT_DIR . 'inc/classes/class-merchant-general-hooks.php';
 
 			// Metabox
 			require_once MERCHANT_DIR . 'inc/classes/class-merchant-metabox.php';
@@ -85,6 +86,7 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-provider.php';
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-reports.php';
 			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-ajax.php';
+			require_once MERCHANT_DIR . 'inc/analytics/class-merchant-analytics-data-hooks.php';
 
 			// Modules (free and pro).
 			foreach ( Merchant_Admin_Modules::$modules_data as $module_id => $module_data ) {
@@ -112,6 +114,8 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-breakdance-builder.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-elementor-builder.php';
 			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-bricks-builder.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-woo-payments-plugin.php';
+			require_once MERCHANT_DIR . 'inc/compatibility/class-merchant-ohio-theme.php';
 
 			/**
 			 * Hook 'merchant_admin_after_include_modules_classes'.

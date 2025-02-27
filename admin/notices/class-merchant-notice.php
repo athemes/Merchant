@@ -113,6 +113,10 @@ class Merchant_Notice {
 		$dismissed_notice = $this->is_notice_dismissed();
 		$has_end_date_passed = $this->has_end_date_passed();
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		if( $this->only_free && defined( 'MERCHANT_PRO_VERSION' ) ) {
 			return;
 		}

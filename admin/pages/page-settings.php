@@ -66,6 +66,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				Merchant_Admin_Options::create( array(
 					'module'    => 'global-settings',
+					'title'     => esc_html__( 'Merchant Analytics', 'merchant' ),
+					'fields'    => array(
+						// Analytics toggle
+						array(
+							'id'      => 'analytics_toggle',
+							'type'    => 'switcher',
+							'title'   => __( 'Enable analytics', 'merchant' ),
+							'desc'    => __( 'Track revenue and performance insights from our modules. No personal data is collected. Disable this if you prefer not to track analytics.', 'merchant' ),
+							'default' => true,
+						),
+					),
+				) );
+
+				Merchant_Admin_Options::create( array(
+					'module'    => 'global-settings',
 					'title'     => esc_html__( 'Merchant Operating Mode', 'merchant' ),
 					'fields'    => array(
 						array(

@@ -95,6 +95,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 		// Buy now listener.
 		add_action( 'wp_loaded', array( $this, 'buy_now_listener' ) );
+		add_action( 'wp_loaded', array( $this, 'buy_now_listener_grouped' ), 999 );
 
 		// Single product buy now button.
 		$single_product_hook = ! empty( $settings['hook-order-single-product'] ) ? $settings['hook-order-single-product'] : array(
@@ -135,11 +136,8 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : '';
+		$page   = ( ! empty( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$module = ( ! empty( $_GET['module'] ) ) ? sanitize_text_field( wp_unslash( $_GET['module'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( 'merchant' === $page && self::MODULE_ID === $module ) {
 			wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
@@ -153,8 +151,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function enqueue_css() {
-
-		// Specific module styles.
 		wp_enqueue_style( 'merchant-' . self::MODULE_ID, MERCHANT_URI . 'assets/css/modules/' . self::MODULE_ID . '/buy-now.min.css', array(), MERCHANT_VERSION );
 	}
 
@@ -185,7 +181,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 
 			// Display Customizer.
 			$preview->set_class( 'customize-button', '.merchant-buy-now-button', array(), 'merchant-custom-buy-now-button' );
-
 		}
 
 		return $preview;
@@ -206,7 +201,6 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
-		
 		?>
 		<div class="mrc-preview-single-product-elements">
 			<div class="mrc-preview-left-column">
@@ -232,31 +226,93 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 	}
 
 	/**
-	 * Buy now listener.
-	 *
+     * Buy now listener.
+     *
 	 * @return void
+	 * @throws Exception
 	 */
 	public function buy_now_listener() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$product_id = ( isset( $_REQUEST['merchant-buy-now'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ) ) : '';
+		$product_id = (int) sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! $product_id ) {
+			return;
+		}
 
-		if ( $product_id ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$variation_id = ( isset( $_REQUEST['variation_id'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ) ) : '';
+		$product = wc_get_product( $product_id );
 
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $quantity = (int) sanitize_text_field( $_REQUEST['quantity'] ?? 1 );
-            if ( $variation_id ) {
+		if ( ! $product->is_type( 'grouped' ) ) {
+			$variation_id = (int) sanitize_text_field( wp_unslash( $_REQUEST['variation_id'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$quantity     = (int) sanitize_text_field( $_REQUEST['quantity'] ?? 1 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( $variation_id ) {
 				WC()->cart->add_to_cart( $product_id, $quantity, $variation_id );
 			} else {
 				WC()->cart->add_to_cart( $product_id, $quantity );
 			}
 
 			wp_safe_redirect( wc_get_checkout_url() );
-
 			exit;
 		}
 	}
+
+	/**
+     * Buy now listener for Grouped products.
+     *
+	 * @return void
+	 * @throws Exception
+	 */
+	public function buy_now_listener_grouped() {
+		$product_id = (int) sanitize_text_field( wp_unslash( $_REQUEST['merchant-buy-now'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! $product_id ) {
+            return;
+        }
+
+		$product = wc_get_product( $product_id );
+
+		// reference 'add_to_cart_handler_grouped' method in woocommerce/includes/class-wc-form-handler.php
+		if ( $product->is_type( 'grouped' ) ) {
+			$quantity_set      = false;
+			$was_added_to_cart = false;
+			$added_to_cart     = array();
+			$items             = isset( $_REQUEST['quantity'] ) && is_array( $_REQUEST['quantity'] ) ? wp_unslash( $_REQUEST['quantity'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			foreach ( $items as $item => $quantity ) {
+				$quantity = wc_stock_amount( $quantity );
+				if ( $quantity <= 0 ) {
+					continue;
+				}
+				$quantity_set = true;
+
+				/**
+				 * `woocommerce_add_to_cart_validation`
+				 *
+				 * @since WC 7.2.0
+				 */
+				$passed_validation = apply_filters( 'woocommerce_add_to_cart_validation', true, $item, $quantity );
+
+				// Suppress total recalculation until finished.
+				remove_action( 'woocommerce_add_to_cart', array( WC()->cart, 'calculate_totals' ), 20, 0 );
+
+				if ( $passed_validation && false !== WC()->cart->add_to_cart( $item, $quantity ) ) {
+					$was_added_to_cart      = true;
+					$added_to_cart[ $item ] = $quantity;
+				}
+
+				add_action( 'woocommerce_add_to_cart', array( WC()->cart, 'calculate_totals' ), 20, 0 );
+			}
+
+			if ( ! $was_added_to_cart && ! $quantity_set ) {
+				if ( ! wc_has_notice( __( 'Please choose the quantity of items you wish to add to your cart&hellip;', 'merchant' ), 'error' ) ) {
+					wc_add_notice( __( 'Please choose the quantity of items you wish to add to your cart&hellip;', 'merchant' ), 'error' );
+				}
+				return;
+			} elseif ( $was_added_to_cart ) {
+				wc_add_to_cart_message( $added_to_cart );
+			}
+		}
+
+		wp_safe_redirect( wc_get_checkout_url() );
+		exit;
+    }
 
 	/**
 	 * Single product buy now button.
@@ -378,9 +434,7 @@ class Merchant_Buy_Now extends Merchant_Add_Module {
 		 * @since 1.8
 		 */
 		$wrapper_classes = apply_filters( 'merchant_module_buy_now_wrapper_class', array() );
-
 		?>
-
 		<a href="<?php echo esc_url( add_query_arg( array( 'merchant-buy-now' => $product->get_ID() ), wc_get_checkout_url() ) ); ?>" class="button alt wp-element-button product_type_simple add_to_cart_button merchant-buy-now-button <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>"><?php echo esc_html( Merchant_Translator::translate( $text ) ); ?></a>
 		<?php
 	}

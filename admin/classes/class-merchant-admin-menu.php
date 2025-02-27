@@ -55,11 +55,13 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
          * @return void
          */
 		public function dashboard_analytics_widget() {
-			wp_add_dashboard_widget(
-				'merchant_modules_revenue',         // Widget slug.
-				esc_html__( 'Daily added revenue by Merchant', 'merchant' ),   // Title.
-				array( $this, 'dashboard_analytics_widget_content' ) // Display function.
-			);
+            if( class_exists( 'WooCommerce' ) ) {
+	            wp_add_dashboard_widget(
+		            'merchant_modules_revenue',         // Widget slug.
+		            esc_html__( 'Daily added revenue by Merchant', 'merchant' ),   // Title.
+		            array( $this, 'dashboard_analytics_widget_content' ) // Display function.
+	            );
+            }
 		}
 
         /**
@@ -102,7 +104,10 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
             global $pagenow;
             $section = sanitize_text_field( $_GET['section'] ?? '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-			if ( ($hook === 'toplevel_page_merchant' && $section !== 'settings' && class_exists('WooCommerce')) || ($pagenow === 'index.php') ) {
+			if (
+                    ( $hook === 'toplevel_page_merchant' && $section !== 'settings' && class_exists( 'WooCommerce' ) )
+				|| ( $pagenow === 'index.php' && class_exists( 'WooCommerce' ) )
+			) {
 				wp_enqueue_style('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.css', array(), MERCHANT_VERSION, 'all' );
 				wp_enqueue_style( 'merchant-analytics', MERCHANT_URI . 'assets/css/admin/analytics.css', array(), MERCHANT_VERSION );
 				wp_enqueue_script('date-picker', MERCHANT_URI . 'assets/vendor/air-datepicker/air-datepicker.js', array( 'jquery' ), MERCHANT_VERSION, true );
@@ -246,27 +251,29 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				2
 			);
 
-			// Campaigns.
-			add_submenu_page(
-				$this->plugin_slug,
-				esc_html__('Campaigns', 'merchant'),
-				esc_html__('Campaigns', 'merchant'),
-				$this->capability,
-				'admin.php?page=merchant&section=campaigns',
-				'',
-				3
-			);
+			if( class_exists( 'WooCommerce' ) ) {
+				// Campaigns.
+				add_submenu_page(
+					$this->plugin_slug,
+					esc_html__( 'Campaigns', 'merchant' ),
+					esc_html__( 'Campaigns', 'merchant' ),
+					$this->capability,
+					'admin.php?page=merchant&section=campaigns',
+					'',
+					3
+				);
 
-            // Analytics.
-			add_submenu_page(
-				$this->plugin_slug,
-				esc_html__('Analytics', 'merchant'),
-				esc_html__('Analytics', 'merchant'),
-				$this->capability,
-				'admin.php?page=merchant&section=analytics',
-				'',
-				4
-			);
+				// Analytics.
+				add_submenu_page(
+					$this->plugin_slug,
+					esc_html__( 'Analytics', 'merchant' ),
+					esc_html__( 'Analytics', 'merchant' ),
+					$this->capability,
+					'admin.php?page=merchant&section=analytics',
+					'',
+					4
+				);
+			}
 
 			// Settings.
 			add_submenu_page(
@@ -348,27 +355,29 @@ if ( ! class_exists( 'Merchant_Admin_Menu' ) ) {
 				),
 			) );
 
-			// Settings
-			$wp_admin_bar->add_node( array(
-				'id'     => 'merchant-settings',
-				'parent' => 'merchant-dashboard',
-				'title'  => esc_html__( 'Settings', 'merchant' ),
-				'href'   => admin_url( 'admin.php?page=merchant&section=settings' ),
-				'meta'   => array(
-					'title' => esc_html__( 'Settings', 'merchant' ),
-				),
-			) );
+			if( class_exists( 'WooCommerce' ) ) {
+				// Settings
+				$wp_admin_bar->add_node( array(
+					'id'     => 'merchant-settings',
+					'parent' => 'merchant-dashboard',
+					'title'  => esc_html__( 'Settings', 'merchant' ),
+					'href'   => admin_url( 'admin.php?page=merchant&section=settings' ),
+					'meta'   => array(
+						'title' => esc_html__( 'Settings', 'merchant' ),
+					),
+				) );
 
-			// Campaigns
-			$wp_admin_bar->add_node( array(
-				'id'     => 'merchant-campaigns',
-				'parent' => 'merchant-dashboard',
-				'title'  => esc_html__( 'Campaigns', 'merchant' ),
-				'href'   => admin_url( 'admin.php?page=merchant&section=campaigns' ),
-				'meta'   => array(
-					'title' => esc_html__( 'Campaigns', 'merchant' ),
-				),
-			) );
+				// Campaigns
+				$wp_admin_bar->add_node( array(
+					'id'     => 'merchant-campaigns',
+					'parent' => 'merchant-dashboard',
+					'title'  => esc_html__( 'Campaigns', 'merchant' ),
+					'href'   => admin_url( 'admin.php?page=merchant&section=campaigns' ),
+					'meta'   => array(
+						'title' => esc_html__( 'Campaigns', 'merchant' ),
+					),
+				) );
+			}
 
 			// Analytics
 			$wp_admin_bar->add_node( array(

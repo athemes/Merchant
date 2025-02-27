@@ -40,7 +40,7 @@ if ( empty( $all_modules ) ) {
 
 					if ( $requires_wc_class ) {
 						if ( $is_pro ) {
-							$module_link = 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_medium=merchant_dashboard&utm_campaign=Merchant';
+							$module_link = 'https://athemes.com/merchant-upgrade?utm_source=plugin_dashboard&utm_content='. $module_id .'&utm_medium=merchant_dashboard&utm_campaign=Merchant';
 							$link_target = '_blank';
 						} else {
 							$module_link = '#';
