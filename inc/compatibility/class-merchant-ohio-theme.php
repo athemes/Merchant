@@ -153,7 +153,7 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 
 				// Side Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
-                    remove_filter( 'woocommerce_cart_item_name', 'ohio_add_cart_product_category', 99 );
+                    // remove_filter( 'woocommerce_cart_item_name', 'ohio_add_cart_product_category', 99 );
 				}
 
 				// Product Video/Audio
@@ -192,13 +192,16 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 			$css .= Merchant_Side_Cart::get_module_custom_css();
 
             $css .= '
-                body .cart_item .product-name .variation {
+                body .cart_item .product-name .variation,
+                body .cart_item .product-total .variation {
                     display: block;
                 }
-                body .cart_item .product-name .variation dd {
+                body .cart_item .product-name .variation dd,
+                body .cart_item .product-total .variation dd {
                     margin-inline: 0;
                 }
-                body .cart_item .product-name .variation p {
+                body .cart_item .product-name .variation p,
+                body .cart_item .product-total .variation p {
                     margin: 0;
                 }
             ';
@@ -246,7 +249,8 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 				// Side Cart
 				if ( Merchant_Modules::is_module_active( Merchant_Side_Cart::MODULE_ID ) ) {
 					$css .= '
-					    .merchant-side-cart-item .woo-product-name {
+					    .merchant-side-cart-item .woo-product-name,
+					    .merchant-side-cart-item .woo-category {
                             display: none !important;
                         }
                         .merchant-side-cart-widget .product_list_widget .merchant-quantity-wrap span.merchant-cart-item-name a {
