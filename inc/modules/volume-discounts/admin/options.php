@@ -264,6 +264,17 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'      => 'discount_target',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Apply discount to', 'merchant' ),
+							'options' => array(
+								'regular' => esc_html__( 'Regular Price', 'merchant' ),
+								'sale'    => esc_html__( 'Sale Price', 'merchant' ),
+							),
+							'default' => 'sale',
+						),
+
+						array(
 							'id'      => 'exclude_coupon',
 							'type'    => 'switcher',
 							'title'   => esc_html__( 'Exclude coupons', 'merchant' ),

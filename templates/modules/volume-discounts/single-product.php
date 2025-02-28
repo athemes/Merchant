@@ -28,14 +28,27 @@ $product_id = $product->get_id();
     $i = 0;
 	foreach ( $args['discount_tiers'] as $offer_id => $discount_tier ) :
 		if ( isset( $discount_tier['discount_type'], $discount_tier['product_single_page']['save_label'], $discount_tier['product_single_page']['item_text'], $discount_tier['product_single_page']['total_text'] ) ) {
-			$discount = $discount_tier['discount_type'] === 'percentage_discount'
-				? ( $args['product_price'] * $discount_tier['discount'] ) / 100
+			$is_variable     = $product->is_type( 'variable' );
+            $discount_target = $discount_tier['discount_target'] ?? 'sale';
+
+            if ( $is_variable ) {
+	            $product_price = $discount_target === 'regular'
+		            ? (float) $product->get_variation_regular_price( 'min' )
+		            : (float) ( $product->get_variation_sale_price( 'min' ) ? $product->get_variation_sale_price( 'min' ) : $product->get_variation_regular_price( 'min' ) );
+            } else {
+	            $product_price = $discount_target === 'regular'
+		            ? (float) $product->get_regular_price()
+		            : (float) ( $product->get_sale_price() ? $product->get_sale_price() : $product->get_regular_price() );
+            }
+
+            $discount = $discount_tier['discount_type'] === 'percentage_discount'
+				? ( $product_price * $discount_tier['discount'] ) / 100
 				: $discount_tier['discount'];
 
             $discount_percent = ( $discount_tier['discount'] ?? 0 ) . '%';
             $discount_qty = (int) ( $discount_tier['quantity'] ?? 1 );
 
-			$discounted_price = $args['product_price'] - $discount;
+			$discounted_price = $product_price - $discount;
 			$total_discount   = $discount_qty * $discount;
 			$total_price      = $discount_qty * $discounted_price;
 			$clickable        = '';
@@ -54,11 +67,9 @@ $product_id = $product->get_id();
 			<?php
 			endif;
 
-			$item_classes = 'merchant-volume-discounts-item' . esc_attr( $clickable );
+			$item_classes  = 'merchant-volume-discounts-item' . esc_attr( $clickable );
 			$item_classes .= ' merchant-volume-discounts-item-' . esc_attr( $product->get_type() );
 			$item_classes .= ' merchant-volume-discounts-item-' . esc_attr( $i );
-			// Check if it's a variable product
-			$is_variable = $product->is_type( 'variable' );
 
 			// Get available variations and attributes
 			$available_variations = $is_variable ? $product->get_available_variations() : array();
@@ -67,7 +78,23 @@ $product_id = $product->get_id();
             // Add the merchant discount pricing details to each variation
 			if ( ! empty( $available_variations ) ) {
 				foreach ( $available_variations as &$variation ) {
-					$variation_price = (float) $variation['display_price'];
+					$variation_product = wc_get_product( $variation['variation_id'] );
+
+					$variation_price = $discount_target === 'regular'
+						? (float) $variation_product->get_regular_price()
+						: (float) ( $variation_product->get_sale_price() ? $variation_product->get_sale_price() : $variation_product->get_regular_price() );
+
+                    if ( $discount_target === 'sale' ) {
+	                    /**
+	                     * `merchant_storewide_sale_variation_sale_price`
+	                     *
+	                     * This filter is used to get the sale price of the product
+	                     * when a discount is applied through the Storewide Sale module.
+	                     *
+	                     * @since 2.0.2
+	                     */
+	                    $variation_price = apply_filters( 'merchant_storewide_sale_variation_sale_price', $variation_price, $variation_product );
+                    }
 
 					$variation_discount = $discount_tier['discount_type'] === 'percentage_discount'
 						? ( $variation_price * $discount_tier['discount'] ) / 100
@@ -144,7 +171,7 @@ $product_id = $product->get_id();
                     <li>
                         <div></div>
                         <div class="merchant-volume-discounts-item-price-strikethrough">
-                            <del><?php echo wp_kses( wc_price( $args['product_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
+                            <del><?php echo wp_kses( wc_price( $product_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
                         </div>
                     </li>
                     <li>
