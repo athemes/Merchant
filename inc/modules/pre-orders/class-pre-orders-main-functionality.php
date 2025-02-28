@@ -1304,7 +1304,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	private function get_pre_order_text( $product_id, $render_type = '' ) {
 		if ( ! $this->is_pre_order( $product_id ) ) {
-			return '';
+			$product = wc_get_product( $product_id );
+			if ( $product->is_type( 'variation' ) ) {
+				$product_id = $product->get_parent_id();
+
+				if ( ! $this->is_pre_order( $product_id ) ) {
+					return '';
+				}
+			} else {
+				return '';
+			}
 		}
 
 		$pre_order_rule = self::available_product_rule( $product_id );
