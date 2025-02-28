@@ -192,13 +192,16 @@ if ( ! class_exists( 'Merchant_Ohio_Theme' ) ) {
 			$css .= Merchant_Side_Cart::get_module_custom_css();
 
             $css .= '
-                body .cart_item .product-name .variation {
+                body .cart_item .product-name .variation,
+                body .cart_item .product-total .variation {
                     display: block;
                 }
-                body .cart_item .product-name .variation dd {
+                body .cart_item .product-name .variation dd,
+                body .cart_item .product-total .variation dd {
                     margin-inline: 0;
                 }
-                body .cart_item .product-name .variation p {
+                body .cart_item .product-name .variation p,
+                body .cart_item .product-total .variation p {
                     margin: 0;
                 }
             ';
