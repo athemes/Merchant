@@ -715,6 +715,10 @@ class Merchant_Analytics_Data_Reports {
 				$value = $total_revenue; // Total revenue
 			}
 
+			if ( $previous_value === null ) {
+				$previous_value = 0;
+			}
+
 			// Calculate percentage difference
 			list( $difference, $diff_type ) = $this->calculate_percentage_difference( $value, $previous_value );
 
