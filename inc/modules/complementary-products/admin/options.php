@@ -361,6 +361,32 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+
+						array(
+							'id'             => 'cart_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Cart Page', 'merchant' ),
+							'default'        => 'inactive',
+							'sub-desc'       => esc_html__( 'Use these settings to control how complementary products offers appear on the cart page.', 'merchant' ),
+							'state'          => 'closed',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								// text formatting settings
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Campaign title', 'merchant' ),
+									'default' => esc_html__( 'Add', 'merchant' ),
+								),
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
+								),
+							),
+						),
 					),
 				),
 			),
