@@ -387,6 +387,61 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+
+						array(
+							'id'             => 'checkout_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how Frequently bought together offers appear on the checkout page.', 'merchant' ),
+							'state'          => 'closed',
+							'default'        => 'inactive',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement', 'merchant' ),
+									'options' => array(
+										'before_billing_details'     => esc_html__( 'Before Billing Details', 'merchant' ),
+										'after_billing_details'      => esc_html__( 'After Billing Details', 'merchant' ),
+										'before_order_details'       => esc_html__( 'Before Order Details', 'merchant' ),
+										'before_payment_options'     => esc_html__( 'Before Payment Gateways', 'merchant' ),
+										'before_order_placement_btn' => esc_html__( 'Before Order Placement Button', 'merchant' ),
+										'after_order_placement_btn'  => esc_html__( 'After Order Placement Button', 'merchant' ),
+									),
+									'default' => 'before_payment_options',
+								),
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Bundle and Save!', 'merchant' ),
+								),
+								array(
+									'id'      => 'discount_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Discount text', 'merchant' ),
+									'default' => esc_html__( 'Add to get {discount} off all items in your bundle ({fbt_products}).', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
+										__(
+											'<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show the product names in the offer',
+											'merchant'
+										),
+										'{discount}',
+										'{fbt_products}'
+									),
+								),
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
 					),
 				),
 			),
