@@ -201,6 +201,7 @@ Merchant_Admin_Options::create( array(
 							'options'    => array(
 								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
 								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
+								'cheapest_item_free'  => esc_html__( 'Cheapest item free', 'merchant' ),
 								'free_shipping'       => esc_html__( 'Free Shipping', 'merchant' ),
 							),
 							'default'    => 'percentage_discount',
@@ -419,10 +420,10 @@ Merchant_Admin_Options::create( array(
 									'default' => esc_html__( 'Bundle and Save!', 'merchant' ),
 								),
 								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'Add to get {discount} off all items in your bundle.', 'merchant' ),
+									'id'          => 'discount_text',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Discount text', 'merchant' ),
+									'default'     => esc_html__( 'Add to get {discount} off all items in your bundle.', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
@@ -464,10 +465,10 @@ Merchant_Admin_Options::create( array(
 									'default' => 'before_order_details',
 								),
 								array(
-									'id'      => 'title',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Bundle title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
+									'id'          => 'title',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Bundle title', 'merchant' ),
+									'default'     => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
