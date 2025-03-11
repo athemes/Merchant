@@ -221,6 +221,7 @@ Merchant_Admin_Options::create( array(
 							),
 							'default' => 'percentage',
 						),
+
 						array(
 							'id'      => 'discount',
 							'type'    => 'number',
@@ -228,6 +229,17 @@ Merchant_Admin_Options::create( array(
 							'step'    => 0.01,
 							//'title'   => esc_html__( 'Discount Value', 'merchant' ),
 							'default' => 1,
+						),
+
+						array(
+							'id'      => 'discount_target',
+							'type'    => 'select',
+							'title'   => esc_html__( 'Apply discount to', 'merchant' ),
+							'options' => array(
+								'regular' => esc_html__( 'Regular Price', 'merchant' ),
+								'sale'    => esc_html__( 'Sale Price', 'merchant' ),
+							),
+							'default' => 'sale',
 						),
 
 						array(

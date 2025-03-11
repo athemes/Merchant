@@ -56,12 +56,13 @@ Merchant_Admin_Options::create( array(
 							'default' => 'products',
 						),
 						array(
-							'id'        => 'product_to_display',
-							'type'      => 'products_selector',
-							'title'     => esc_html__( 'Select a product', 'merchant' ),
-							'multiple'  => false,
-							'desc'      => esc_html__( 'Select the product that you want to create the bundle for.', 'merchant' ),
-							'condition' => array( 'rules_to_display', '==', 'products' ),
+							'id'            => 'product_to_display',
+							'type'          => 'products_selector',
+							'title'         => esc_html__( 'Select a product', 'merchant' ),
+							'multiple'      => false,
+							'desc'          => esc_html__( 'Select the product that you want to create the bundle for.', 'merchant' ),
+							'condition'     => array( 'rules_to_display', '==', 'products' ),
+							'allowed_types' => array( 'simple', 'variable' ),
 						),
 						array(
 							'id'          => 'category_slugs',
@@ -274,6 +275,18 @@ Merchant_Admin_Options::create( array(
 							'type'      => 'number',
 							'default'   => 10,
 							'step'      => 0.01,
+							'condition' => array( 'enable_discount', '==', '1' ),
+						),
+
+						array(
+							'id'        => 'discount_target',
+							'type'      => 'select',
+							'title'     => esc_html__( 'Apply discount to', 'merchant' ),
+							'options'   => array(
+								'regular' => esc_html__( 'Regular Price', 'merchant' ),
+								'sale'    => esc_html__( 'Sale Price', 'merchant' ),
+							),
+							'default'   => 'sale',
 							'condition' => array( 'enable_discount', '==', '1' ),
 						),
 

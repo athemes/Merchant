@@ -31,15 +31,15 @@ $product_id = $product->get_id();
 			$is_variable     = $product->is_type( 'variable' );
             $discount_target = $discount_tier['discount_target'] ?? 'sale';
 
-            if ( $is_variable ) {
-	            $product_price = $discount_target === 'regular'
-		            ? (float) $product->get_variation_regular_price( 'min' )
-		            : (float) ( $product->get_variation_sale_price( 'min' ) ? $product->get_variation_sale_price( 'min' ) : $product->get_variation_regular_price( 'min' ) );
-            } else {
-	            $product_price = $discount_target === 'regular'
-		            ? (float) $product->get_regular_price()
-		            : (float) ( $product->get_sale_price() ? $product->get_sale_price() : $product->get_regular_price() );
-            }
+			if ( $is_variable ) {
+				$regular_price = (float) $product->get_variation_regular_price( 'min' );
+				$sale_price    = (float) $product->get_variation_sale_price( 'min' );
+			} else {
+				$regular_price = (float) $product->get_regular_price();
+				$sale_price    = (float) $product->get_sale_price();
+			}
+
+			$product_price = ( $discount_target === 'regular' || empty( $sale_price ) ) ? $regular_price : $sale_price;
 
             $discount = $discount_tier['discount_type'] === 'percentage_discount'
 				? ( $product_price * $discount_tier['discount'] ) / 100
@@ -74,48 +74,16 @@ $product_id = $product->get_id();
 			// Get available variations and attributes
 			$available_variations = $is_variable ? $product->get_available_variations() : array();
 			$attributes           = $is_variable ? $product->get_variation_attributes() : array();
-
-            // Add the merchant discount pricing details to each variation
-			if ( ! empty( $available_variations ) ) {
-				foreach ( $available_variations as &$variation ) {
-					$variation_product = wc_get_product( $variation['variation_id'] );
-
-					$variation_price = $discount_target === 'regular'
-						? (float) $variation_product->get_regular_price()
-						: (float) ( $variation_product->get_sale_price() ? $variation_product->get_sale_price() : $variation_product->get_regular_price() );
-
-                    if ( $discount_target === 'sale' ) {
-	                    /**
-	                     * `merchant_storewide_sale_variation_sale_price`
-	                     *
-	                     * This filter is used to get the sale price of the product
-	                     * when a discount is applied through the Storewide Sale module.
-	                     *
-	                     * @since 2.0.2
-	                     */
-	                    $variation_price = apply_filters( 'merchant_storewide_sale_variation_sale_price', $variation_price, $variation_product );
-                    }
-
-					$variation_discount = $discount_tier['discount_type'] === 'percentage_discount'
-						? ( $variation_price * $discount_tier['discount'] ) / 100
-						: $discount_tier['discount'];
-
-					$variation_discounted_price = $variation_price - $variation_discount;
-
-					// Add the merchant bulk discount prices
-					$variation['merchant_bulk_discounts_price_regular_html'] = wp_kses( wc_price( $variation_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
-					$variation['merchant_bulk_discounts_price']              = $variation_discounted_price;
-					$variation['merchant_bulk_discounts_price_html']         = wp_kses( wc_price( $variation_discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
-					$variation['merchant_bulk_discounts_price_html_total']   = wp_kses( wc_price( $discount_qty * $variation_discounted_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
-				}
-				unset( $variation ); // Unset the reference after the loop
-			}
 			?>
             <div
-                class="<?php echo esc_attr( $item_classes ); ?>" title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>"
-                data-in-cart="<?php echo esc_attr( $in_cart ); ?>" data-product-id="<?php echo esc_attr( $product_id ); ?>" data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>"
+                class="<?php echo esc_attr( $item_classes ); ?>"
+                title="<?php echo esc_attr__( 'Add offer to cart', 'merchant' ); ?>"
+                data-in-cart="<?php echo esc_attr( $in_cart ); ?>"
+                data-product-id="<?php echo esc_attr( $product_id ); ?>"
+                data-offer-quantity="<?php echo esc_attr( $discount_qty ); ?>"
                 data-flexible-id="<?php echo isset( $discount_tier['flexible_id'] ) ? esc_attr( $discount_tier['flexible_id'] ) : ''; ?>"
                 data-offer-id="<?php echo esc_attr( $offer_id ); ?>" data-variations="<?php echo esc_attr( wp_json_encode( $available_variations ) ); ?>"
+                data-discount-target="<?php echo esc_attr( $discount_target ); ?>"
                 style="<?php
                     // Inline CSS variables to use in CSS. Will work per item.
                     echo isset( $discount_tier['product_single_page']['table_item_text_color'] ) ? '--merchant-item-text-color:' . esc_attr( $discount_tier['product_single_page']['table_item_text_color'] ). ';' : '';

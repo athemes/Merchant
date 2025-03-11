@@ -36,12 +36,11 @@ if ( empty( $args['bundles'] ) ) {
 					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) :
-								$is_variable_product  = isset( $product['type'] ) && 'variable' === $product['type'] ? true : false;
+								$is_variable_product = isset( $product['type'] ) && 'variable' === $product['type'] ? true : false;
 
-								if( $is_variable_product ) {
+								if ( $is_variable_product ) {
 									$bundle_has_variable_product = true;
 								}
-
 								?>
 								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ); ?>" style="<?php
 								echo isset( $bundle['product_single_page']['bundle_border_radius'] ) ? esc_attr( 'border-radius: ' . $bundle['product_single_page']['bundle_border_radius'] . 'px;' ) : '';
@@ -50,7 +49,7 @@ if ( empty( $args['bundles'] ) ) {
 									<div class="merchant-frequently-bought-together-bundle-product-contents">
 										<p class="woocommerce-loop-product__title">
 											<a href="<?php echo esc_url( $product['permalink'] ); ?>" target="_blank">
-												<?php echo esc_html( $product['title'] ); ?>
+												<?php echo esc_html( $product['name'] ?? ( $product['title'] ?? '' ) ); ?>
 											</a>
 										</p>
 										<div class="merchant-frequently-bought-together-bundle-product-price">
@@ -87,23 +86,26 @@ if ( empty( $args['bundles'] ) ) {
 								<?php echo isset( $bundle['product_single_page']['price_label'] ) ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['price_label'] ) ) : esc_html__( 'Bundle price', 'merchant' ); ?>
 							</p>
 							<?php if ( $bundle_has_variable_product ) : ?>
-								<?php
-								if ( $has_no_discount ) : ?>
-                                    <p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php
-										echo isset( $bundle['product_single_page']['no_variation_selected_text_has_no_discount'] )
-											? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['no_variation_selected_text_has_no_discount'] ) ) : esc_html__( 'Please select an option to see the total price.', 'merchant' ); ?></p>
-								<?php
-								else : ?>
-                                    <p class="merchant-frequently-bought-together-bundle-variable-default-message"><?php
-										echo isset( $bundle['product_single_page']['no_variation_selected_text'] ) ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['no_variation_selected_text'] ) )
-											: esc_html__( 'Please select an option to see your savings.', 'merchant' ); ?></p>
-								<?php
-								endif; ?>
+								<?php if ( $has_no_discount ) : ?>
+                                    <p class="merchant-frequently-bought-together-bundle-variable-default-message">
+                                        <?php echo isset( $bundle['product_single_page']['no_variation_selected_text_has_no_discount'] )
+											? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['no_variation_selected_text_has_no_discount'] ) )
+                                            : esc_html__( 'Please select an option to see the total price.', 'merchant' ); ?>
+                                    </p>
+								<?php else : ?>
+                                    <p class="merchant-frequently-bought-together-bundle-variable-default-message">
+                                        <?php echo isset( $bundle['product_single_page']['no_variation_selected_text'] )
+                                            ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['no_variation_selected_text'] ) )
+											: esc_html__( 'Please select an option to see your savings.', 'merchant' ); ?>
+                                    </p>
+								<?php endif; ?>
 							<?php endif; ?>
 
 							<p class="merchant-frequently-bought-together-bundle-total-price price<?php echo $bundle_has_variable_product ? ' merchant-hidden' : ''; ?>">
 								<?php if ( $has_no_discount ) : ?>
-									<ins class="mrc-fbt-total-price"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
+									<ins class="mrc-fbt-total-price">
+                                        <?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?>
+                                    </ins>
 								<?php else : ?>
 									<del class="mrc-fbt-total-price" aria-hidden="true"><?php echo wp_kses( wc_price( $bundle['total_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></del>
 									<ins class="mrc-fbt-total-discounted-price"><?php echo wp_kses( wc_price( $bundle['total_discounted_price'] ), merchant_kses_allowed_tags( array( 'bdi' ) ) ); ?></ins>
@@ -120,7 +122,7 @@ if ( empty( $args['bundles'] ) ) {
 										); ?>
 								</p>
 							<?php endif; ?>
-							<button type="submit" name="merchant-buy-bundle" value="97" class="button alt wp-element-button merchant-add-bundle-to-cart">
+							<button type="submit" name="merchant-buy-bundle" value="97" class="button alt wp-element-button merchant-add-bundle-to-cart<?php echo esc_attr( $bundle_has_variable_product ? ' merchant-add-bundle-to-cart-variable' : '' ); ?>">
 								<?php echo isset( $bundle['product_single_page']['button_text'] ) ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['button_text'] ) ) : esc_html__( 'Add to cart', 'merchant' ); ?>
 							</button>
 							<div class="merchant-frequently-bought-together-bundle-error"></div>
