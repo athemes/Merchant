@@ -255,19 +255,6 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
-							'id'      => 'offer-title',
-							'type'    => 'text',
-							'title'   => esc_html__( 'Offer title', 'merchant' ),
-							'default' => esc_html__( 'Campaign', 'merchant' ),
-							'desc'    => esc_html__( 'Enter an optional title to show before the complementary products', 'merchant' ),
-						),
-						array(
-							'id'    => 'offer-description',
-							'type'  => 'text',
-							'title' => esc_html__( 'Short description', 'merchant' ),
-							'desc'  => esc_html__( 'Enter an optional description to display before the complementary products', 'merchant' ),
-						),
-						array(
 							'id'      => 'checkboxes-state',
 							'type'    => 'radio',
 							'title'   => esc_html__( 'Checkboxes for each product', 'merchant' ),
@@ -358,6 +345,74 @@ Merchant_Admin_Options::create( array(
 										'field'    => 'user_exclusion_enabled',
 										'operator' => '===',
 										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
+							'id'             => 'product_single_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how frequently bought together offers appear on product pages.',
+								'merchant' ),
+							'state'          => 'open',
+							'default'        => 'active',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'single_product_placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
+									'options' => array(
+										'before-add-to-cart' => esc_html__( 'Before Add to Cart', 'merchant' ),
+										'after-summary'      => esc_html__( 'After Product Summary', 'merchant' ),
+										'after-tabs'         => esc_html__( 'After Product Tabs', 'merchant' ),
+									),
+									'default' => 'before-add-to-cart',
+								),
+
+								array(
+									'id'      => 'layout',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Layout', 'merchant' ),
+									'options' => array(
+										'classic' => esc_html__( 'Classic', 'merchant' ),
+										'slider'  => esc_html__( 'Slider', 'merchant' ),
+									),
+									'default' => 'classic',
+								),
+
+								// text formatting settings
+								array(
+									'id'      => 'offer-title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Offer title', 'merchant' ),
+									'default' => esc_html__( 'Campaign', 'merchant' ),
+									'desc'    => esc_html__( 'Enter an optional title to show before the complementary products', 'merchant' ),
+								),
+
+								array(
+									'id'    => 'offer-description',
+									'type'  => 'textarea',
+									'title' => esc_html__( 'Short description', 'merchant' ),
+									'desc'  => esc_html__( 'Enter an optional description to display before the complementary products', 'merchant' ),
+								),
+
+								array(
+									'id'          => 'save_label',
+									'type'        => 'text',
+									'title'       => esc_html__( 'You save label', 'merchant' ),
+									'default'     => esc_html__( 'You save: {amount}', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{amount}'
 									),
 								),
 							),
