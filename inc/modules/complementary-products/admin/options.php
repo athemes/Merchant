@@ -422,16 +422,15 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'discount_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'Add to get {discount} off all items in your bundle ({fbt_products}).', 'merchant' ),
+									'default' => esc_html__( 'Add to get {discount} off all items in your bundle.', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
 										__(
-											'<strong>%1$s:</strong> to show discount amount<br><strong>%2$s:</strong> to show the product names in the offer',
+											'<strong>%1$s:</strong> to show discount amount',
 											'merchant'
 										),
-										'{discount}',
-										'{fbt_products}'
+										'{discount}'
 									),
 								),
 								array(
@@ -439,6 +438,52 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Button text', 'merchant' ),
 									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+								),
+							),
+						),
+
+						array(
+							'id'             => 'thank_you_page',
+							'type'           => 'fields_group',
+							'title'          => esc_html__( 'Thank you Page', 'merchant' ),
+							'default'        => 'inactive',
+							'sub-desc'       => esc_html__( 'Use these settings to control how frequently bought together offers appear on the thank you page.', 'merchant' ),
+							'state'          => 'closed',
+							'accordion'      => true,
+							'display_status' => true,
+							'fields'         => array(
+								array(
+									'id'      => 'placement',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Placement', 'merchant' ),
+									'options' => array(
+										'on_top'               => esc_html__( 'On Top', 'merchant' ),
+										'before_order_details' => esc_html__( 'Before Order details', 'merchant' ),
+										'after_order_details'  => esc_html__( 'After Order details', 'merchant' ),
+									),
+									'default' => 'before_order_details',
+								),
+								array(
+									'id'      => 'title',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Bundle title', 'merchant' ),
+									'default' => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
+									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Discount amount */
+										__(
+											'<strong>%1$s:</strong> to show discount amount',
+											'merchant'
+										),
+										'{discount}'
+									),
+								),
+
+								array(
+									'id'      => 'button_text',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Button text', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
 								),
 							),
 						),
