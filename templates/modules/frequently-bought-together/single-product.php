@@ -13,27 +13,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( empty( $args['bundles'] ) ) {
 	return;
 }
+
 ?>
 <div class="merchant-frequently-bought-together">
 	<div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>">
-		<?php foreach($args['bundles'] as $parent_id => $bundles ) : ?>
+		<?php foreach ( $args['bundles'] as $parent_id => $bundles ) : ?>
 			<?php foreach ( $bundles as $key => $bundle ) :
 				$bundle_has_variable_product = false;
-				$discount_type        = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
-				$discount_value       = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
-				$has_no_discount      = $discount_value <= 0;
+
+				$discount_type   = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
+				$discount_value  = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
+				$has_no_discount = $discount_value <= 0;
 				if ( ! isset( $bundle['enable_discount'] ) ) {
 					$has_no_discount = true;
 					$bundle['discount_value'] = 0;
 				}
+				if ( empty( $bundle['products'] ) ) {
+                    continue;
+                }
 				?>
-				<?php if ( empty( $bundle['products'] ) ) continue ?>
                 <h3 class="merchant-frequently-bought-together-title">
 					<?php echo isset( $bundle['product_single_page']['title'] ) ? esc_html( Merchant_Translator::translate( $bundle['product_single_page']['title'] ) ) : esc_html__( 'Frequently Bought Together', 'merchant' ) ?>
                 </h3>
-				<div class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>" data-flexible-id="<?php echo ! empty(
-                        $bundle['flexible_id'] ) ? esc_attr( $bundle['flexible_id'] ) : '' ?>" data-product-id="<?php echo esc_attr( get_the_ID() )?>">
-					<form class="merchant-frequently-bought-together-form" data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>" data-bundle="<?php echo esc_attr( $key ); ?>" data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>" data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
+				<div
+                    class="merchant-frequently-bought-together-bundle<?php echo ( $has_no_discount ) ? ' has-no-discount' : ''; ?>"
+                    data-flexible-id="<?php echo ! empty( $bundle['flexible_id'] ) ? esc_attr( $bundle['flexible_id'] ) : '' ?>"
+                    data-product-id="<?php echo esc_attr( get_the_ID() )?>">
+					<form
+                        class="merchant-frequently-bought-together-form"
+                        data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>"
+                        data-bundle="<?php echo esc_attr( $bundle['offer_key'] ); ?>"
+                        data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>"
+                        data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
 							<?php foreach ( $bundle['products'] as $product_key => $product ) :
 								$is_variable_product = isset( $product['type'] ) && 'variable' === $product['type'] ? true : false;
@@ -57,19 +68,24 @@ if ( empty( $args['bundles'] ) ) {
 										</div>
 										<?php if ( isset( $product['attributes'] ) && ! empty( $product['attributes'] ) ) : ?>
 											<div class="merchant-frequently-bought-together-bundle-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
-												<?php foreach ( $product['attributes'] as $attr_key => $attribute ) : ?>
-													<select name="<?php echo esc_attr( $attr_key ) ?>" required>
-														<option value="">
-															<?php echo esc_html(
-																/* Translators: 1. Attribute label */
-																sprintf( __( 'Select %s', 'merchant' ), $attribute['label'] )
-															); ?>
-														</option>
-														<?php foreach ( $attribute['terms'] as $_term ) : ?>
-															<option value="<?php echo esc_attr( $_term['slug'] ) ?>" <?php selected( $_term['selected'], true, true ); ?>><?php echo esc_html( $_term['name'] ) ?></option>
-														<?php endforeach; ?>
-													</select>
-												<?php endforeach; ?>
+												<?php
+												$_product   = wc_get_product( $product['id'] );
+												$attributes = $_product->get_variation_attributes();
+												foreach ( $attributes as $attribute_name => $options ) {
+													echo '<div class="variations variation-dropdown">';
+													wc_dropdown_variation_attribute_options(
+														array(
+															'options'          => $options,
+															'attribute'        => $attribute_name,
+															'product'          => $_product,
+															'required'         => true,
+															/* Translators: 1. Attribute name */
+															'show_option_none' => sprintf( __( 'Select %s', 'merchant' ), wc_attribute_label( $attribute_name ) ),
+														)
+													);
+													echo '</div>';
+												}
+												?>
 											</div>
 										<?php endif; ?>
 									</div>

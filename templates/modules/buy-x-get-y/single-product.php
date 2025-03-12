@@ -201,24 +201,24 @@ if ( ! is_admin() && ! $is_main_product_in_stock ) {
                         <?php
                         if ( $buy_product->is_type( 'variable' ) ) : ?>
                             <div class="merchant-bogo-product-attributes" data-nonce="<?php echo esc_attr( wp_create_nonce( 'mrc_get_variation_data_nonce' ) ); ?>">
-                                <?php foreach ( $buy_product->get_variation_attributes() as $attribute => $terms ) :
-                                    $attribute_label = wc_attribute_label( $attribute );
-                                    ?>
-                                    <select class="merchant-bogo-select-attribute" name="<?php echo esc_attr( $attribute ) ?>" required>
-                                        <option value="">
-                                            <?php
-                                            echo esc_html(
-                                                /* Translators: 1. Attribute label */
-                                                sprintf( __( 'Select %s', 'merchant' ), $attribute_label )
-                                            ); ?>
-                                        </option>
-                                        <?php foreach ( $terms as $_term_key => $_term ) : ?>
-                                            <option value="<?php echo esc_attr( $_term ) ?>">
-                                                <?php echo esc_html( ucfirst( $_term ) ) ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                <?php endforeach; ?>
+	                            <?php
+	                            $attributes = $buy_product->get_variation_attributes();
+	                            foreach ( $attributes as $attribute_name => $options ) {
+		                            echo '<div class="variations variation-dropdown">';
+                                        wc_dropdown_variation_attribute_options(
+                                            array(
+                                                'options'          => $options,
+                                                'attribute'        => $attribute_name,
+                                                'product'          => $buy_product,
+                                                'required'         => true,
+                                                'class'            => 'merchant-bogo-select-attribute',
+                                                /* Translators: 1. Attribute name */
+                                                'show_option_none' => sprintf( __( 'Select %s', 'merchant' ), wc_attribute_label( $attribute_name ) ),
+                                            )
+                                        );
+		                            echo '</div>';
+	                            }
+	                            ?>
                             </div>
                         <?php endif; ?>
                         <button type="submit" name="merchant-bogo-add-to-cart" value="97" class="button alt wp-element-button merchant-bogo-add-to-cart" <?php if ( ! $is_in_stock ) : ?>
