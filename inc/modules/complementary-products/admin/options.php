@@ -265,15 +265,6 @@ Merchant_Admin_Options::create( array(
 							'default' => 'unchecked',
 						),
 						array(
-							'id'      => 'hide_product_parts',
-							'type'    => 'checkbox_multiple',
-							'title'   => esc_html__( 'Hide the options', 'merchant' ),
-							'options' => array(
-								'hide_images' => esc_html__( 'Complementary Product Images', 'merchant' ),
-								'hide_prices' => esc_html__( 'Complementary Product Prices', 'merchant' ),
-							),
-						),
-						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
 							'title'   => esc_html__( 'User Condition', 'merchant' ),
@@ -373,17 +364,6 @@ Merchant_Admin_Options::create( array(
 									'default' => 'before-add-to-cart',
 								),
 
-								array(
-									'id'      => 'layout',
-									'type'    => 'select',
-									'title'   => esc_html__( 'Layout', 'merchant' ),
-									'options' => array(
-										'classic' => esc_html__( 'Classic', 'merchant' ),
-										'slider'  => esc_html__( 'Slider', 'merchant' ),
-									),
-									'default' => 'classic',
-								),
-
 								// text formatting settings
 								array(
 									'id'      => 'offer-title',
@@ -414,6 +394,31 @@ Merchant_Admin_Options::create( array(
 										),
 										'{amount}'
 									),
+								),
+
+								array(
+									'id'      => 'layout',
+									'type'    => 'select',
+									'title'   => esc_html__( 'Layout', 'merchant' ),
+									'options' => array(
+										'classic' => esc_html__( 'Classic', 'merchant' ),
+										'slider'  => esc_html__( 'Slider', 'merchant' ),
+									),
+									'default' => 'classic',
+								),
+
+								array(
+									'id'      => 'hide_product_image',
+									'type'    => 'checkbox',
+									'label'   => esc_html__( 'Hide product images', 'merchant' ),
+									'default' => false,
+								),
+
+								array(
+									'id'      => 'hide_product_price',
+									'type'    => 'checkbox',
+									'label'   => esc_html__( 'Hide product prices', 'merchant' ),
+									'default' => false,
 								),
 							),
 						),
