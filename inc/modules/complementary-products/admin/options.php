@@ -406,20 +406,6 @@ Merchant_Admin_Options::create( array(
 									),
 									'default' => 'classic',
 								),
-
-								array(
-									'id'      => 'hide_product_image',
-									'type'    => 'checkbox',
-									'label'   => esc_html__( 'Hide product images', 'merchant' ),
-									'default' => false,
-								),
-
-								array(
-									'id'      => 'hide_product_price',
-									'type'    => 'checkbox',
-									'label'   => esc_html__( 'Hide product prices', 'merchant' ),
-									'default' => false,
-								),
 							),
 						),
 
