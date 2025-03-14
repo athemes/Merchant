@@ -440,7 +440,7 @@ Merchant_Admin_Options::create( array(
 								),
 								array(
 									'id'          => 'offer_description',
-									'type'        => 'text',
+									'type'        => 'textarea',
 									'title'       => esc_html__( 'Description', 'merchant' ),
 									'desc'     => esc_html__( 'Enter an optional campaign description', 'merchant' ),
 								),
@@ -478,7 +478,7 @@ Merchant_Admin_Options::create( array(
 									'id'          => 'title',
 									'type'        => 'text',
 									'title'       => esc_html__( 'Bundle title', 'merchant' ),
-									'default'     => esc_html__( 'Add', 'merchant' ),
+									'default'     => esc_html__( 'Last chance to get', 'merchant' ),
 								),
 
 								array(
