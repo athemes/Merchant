@@ -550,6 +550,133 @@ Merchant_Admin_Options::create( array(
 ) );
 
 
+/**
+ * Style
+ */
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Look and Feel', 'merchant' ),
+	'module' => Merchant_Complementary_Products::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'layout',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Layout', 'merchant' ),
+			'options' => array(
+				'classic' => esc_html__( 'Classic', 'merchant' ),
+				'slider'  => esc_html__( 'Slider', 'merchant' ),
+			),
+			'default' => 'classic',
+		),
+
+		array(
+			'id'      => 'checkbox_style',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Checkbox style', 'merchant' ),
+			'options' => array(
+				'rounded' => esc_html__( 'Rounded', 'merchant' ),
+				'square'  => esc_html__( 'Square', 'merchant' ),
+			),
+			'default' => 'square',
+		),
+
+		array(
+			'id'      => 'checkbox_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Checkbox color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'title_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Title color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'description_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Description color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'border_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Border color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'image_border_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Image border color', 'merchant' ),
+			'default' => 'rgba(0,0,0,0)',
+		),
+
+		array(
+			'id'      => 'title_heading_size',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Title heading', 'merchant' ),
+			'options' => array(
+				'h1' => esc_html__( 'H1', 'merchant' ),
+				'h2' => esc_html__( 'H2', 'merchant' ),
+				'h3' => esc_html__( 'H3', 'merchant' ),
+				'h4' => esc_html__( 'H4', 'merchant' ),
+				'h5' => esc_html__( 'H5', 'merchant' ),
+				'h6' => esc_html__( 'H6', 'merchant' ),
+			),
+			'default' => 'h4',
+		),
+
+
+		array(
+			'id'      => 'description_font_size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Description font size', 'merchant' ),
+			'min'     => 0,
+			'max'     => 100,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 14,
+		),
+
+		array(
+			'id'      => 'title_description_alignment',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Title and description alignment', 'merchant' ),
+			'options' => array(
+				'left'   => esc_html__( 'Left', 'merchant' ),
+				'center' => esc_html__( 'Center', 'merchant' ),
+				'right'  => esc_html__( 'Right', 'merchant' ),
+			),
+			'default' => 'left',
+		),
+
+		array(
+			'id'        => 'border_radius',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Border radius', 'merchant' ),
+			'min'       => 0,
+			'max'       => 60,
+			'step'      => 1,
+			'default'   => 0,
+			'unit'      => 'px',
+		),
+
+		array(
+			'id'        => 'image_border_radius',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Image border radius', 'merchant' ),
+			'min'       => 0,
+			'max'       => 60,
+			'step'      => 1,
+			'default'   => 0,
+			'unit'      => 'px',
+		),
+	),
+) );
+
 // Shortcode
 $merchant_module_id = Merchant_Complementary_Products::MODULE_ID;
 Merchant_Admin_Options::create( array(
