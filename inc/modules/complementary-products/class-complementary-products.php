@@ -79,6 +79,46 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 	 * @return void
 	 */
 	public function init_translations() {
+		$settings = $this->get_module_settings();
+		if ( ! empty( $settings['offers'] ) ) {
+			foreach ( $settings['offers'] as $offer ) {
+				if ( ! empty( $offer['product_single_page']['offer-title'] ) ) {
+					Merchant_Translator::register_string( $offer['product_single_page']['offer-title'] );
+				}
+
+				if ( ! empty( $offer['product_single_page']['offer-description'] ) ) {
+					Merchant_Translator::register_string( $offer['product_single_page']['offer-description'] );
+				}
+
+				if ( ! empty( $offer['cart_page']['title'] ) ) {
+					Merchant_Translator::register_string( $offer['cart_page']['title'] );
+				}
+
+				if ( ! empty( $offer['cart_page']['button_text'] ) ) {
+					Merchant_Translator::register_string( $offer['cart_page']['button_text'] );
+				}
+
+				if ( ! empty( $offer['checkout_page']['title'] ) ) {
+					Merchant_Translator::register_string( $offer['checkout_page']['title'] );
+				}
+
+				if ( ! empty( $offer['checkout_page']['offer_description'] ) ) {
+					Merchant_Translator::register_string( $offer['checkout_page']['offer_description'] );
+				}
+
+				if ( ! empty( $offer['checkout_page']['button_text'] ) ) {
+					Merchant_Translator::register_string( $offer['checkout_page']['button_text'] );
+				}
+
+				if ( ! empty( $offer['thank_you_page']['title'] ) ) {
+					Merchant_Translator::register_string( $offer['thank_you_page']['title'] );
+				}
+
+				if ( ! empty( $offer['thank_you_page']['button_text'] ) ) {
+					Merchant_Translator::register_string( $offer['thank_you_page']['button_text'] );
+				}
+			}
+		}
 	}
 
 	/**
