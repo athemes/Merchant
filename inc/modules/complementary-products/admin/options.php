@@ -379,33 +379,6 @@ Merchant_Admin_Options::create( array(
 									'title' => esc_html__( 'Short description', 'merchant' ),
 									'desc'  => esc_html__( 'Enter an optional description to display before the complementary products', 'merchant' ),
 								),
-
-								array(
-									'id'          => 'save_label',
-									'type'        => 'text',
-									'title'       => esc_html__( 'You save label', 'merchant' ),
-									'default'     => esc_html__( 'You save: {amount}', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: Discount amount */
-										__(
-											'<strong>%1$s:</strong> to show discount amount',
-											'merchant'
-										),
-										'{amount}'
-									),
-								),
-
-								array(
-									'id'      => 'layout',
-									'type'    => 'select',
-									'title'   => esc_html__( 'Layout', 'merchant' ),
-									'options' => array(
-										'classic' => esc_html__( 'Classic', 'merchant' ),
-										'slider'  => esc_html__( 'Slider', 'merchant' ),
-									),
-									'default' => 'classic',
-								),
 							),
 						),
 
@@ -466,19 +439,10 @@ Merchant_Admin_Options::create( array(
 									'default' => esc_html__( 'Bundle and Save!', 'merchant' ),
 								),
 								array(
-									'id'          => 'discount_text',
+									'id'          => 'offer_description',
 									'type'        => 'text',
-									'title'       => esc_html__( 'Discount text', 'merchant' ),
-									'default'     => esc_html__( 'Add to get {discount} off all items in your bundle.', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
-										__(
-											'<strong>%1$s:</strong> to show discount amount',
-											'merchant'
-										),
-										'{discount}'
-									),
+									'title'       => esc_html__( 'Description', 'merchant' ),
+									'desc'     => esc_html__( 'Enter an optional campaign description', 'merchant' ),
 								),
 								array(
 									'id'      => 'button_text',
@@ -514,16 +478,7 @@ Merchant_Admin_Options::create( array(
 									'id'          => 'title',
 									'type'        => 'text',
 									'title'       => esc_html__( 'Bundle title', 'merchant' ),
-									'default'     => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: Discount amount */
-										__(
-											'<strong>%1$s:</strong> to show discount amount',
-											'merchant'
-										),
-										'{discount}'
-									),
+									'default'     => esc_html__( 'Add', 'merchant' ),
 								),
 
 								array(
