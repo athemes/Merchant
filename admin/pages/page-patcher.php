@@ -306,17 +306,6 @@ if (!defined('ABSPATH')) {
             </a>
         </div>
     <?php endif; ?>
-    <?php if ( defined( 'MERCHANT_PRO_VERSION' ) && ! defined( 'ATHEMES_PATCHER_VERSION' ) ) : ?>
-        <div class="merchant-dashboard-alert merchant-dashboard-alert-warning merchant-dashboard-alert-with-icon merchant-dashboard-alert-with-upsell-link">
-            <div class="alert-icon">
-                <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><title/><path d="M85.57,446.25H426.43a32,32,0,0,0,28.17-47.17L284.18,82.58c-12.09-22.44-44.27-22.44-56.36,0L57.4,399.08A32,32,0,0,0,85.57,446.25Z" fill="none" stroke="#000" stroke-linecap="rounded" stroke-width="32" stroke-linejoin="round" /><path d="M250.26,195.39l5.74,122,5.73-121.95a5.74,5.74,0,0,0-5.79-6h0A5.74,5.74,0,0,0,250.26,195.39Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /><path d="M256,397.25a20,20,0,1,1,20-20A20,20,0,0,1,256,397.25Z"/></svg>
-            </div>
-            <p class="bt-text-color-grey"><?php echo esc_html__( 'Please note that to use this feature you need to activate the aThemes Patcher plugin.', 'merchant' ); ?></p>
-            <a href="#" class="merchant-dashboard-link merchant-dashboard-link-succes merchant-dashboard-external-link merchant-install-plugin" data-type="external" data-plugin-url="https://patcher.athemes.com/athemes-patcher.zip?nocache=<?php echo esc_attr( time() ); ?>" data-plugin-name="athemes-patcher/athemes-patcher.php" data-redirect-to="<?php echo esc_url( add_query_arg('page', 'athemes-patcher-mp', admin_url('admin.php')) ); ?>">
-                <?php echo esc_html__( 'Install and Activate aThemes Patcher', 'merchant' ); ?>
-            </a>
-        </div>
-    <?php endif; ?>
 
     <div data-wp-c16t="true" data-wp-component="Card" class="components-surface components-card athemes-patcher-card css-1hdyajo css-1otwcjs e19lxcc00">
         <div class="css-10klw3m e19lxcc00">
@@ -348,10 +337,16 @@ if (!defined('ABSPATH')) {
                             <td>#467</td>
                             <td>Improved performance when loading custom assets during page transitions.</td>
                             <td>
-                                <a class="components-button has-lock-icon css-adm54n merchant-dashboard-pro-tooltip" href="https://athemes.com/merchant?utm_source=athemes-patcher&utm_medium=link&utm_campaign=Merchant" target="_blank" data-tooltip-message="<?php echo esc_attr__( 'This is only available on Merchant Pro', 'merchant' ); ?>">
-                                    Apply
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="48" height="48" aria-hidden="true" focusable="false"><path d="M17 10h-1.2V7c0-2.1-1.7-3.8-3.8-3.8-2.1 0-3.8 1.7-3.8 3.8v3H7c-.6 0-1 .4-1 1v8c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-8c0-.6-.4-1-1-1zM9.8 7c0-1.2 1-2.2 2.2-2.2 1.2 0 2.2 1 2.2 2.2v3H9.8V7zm6.7 11.5h-9v-7h9v7z"></path></svg>
-                                </a>
+                                <?php if ( defined( 'MERCHANT_PRO_VERSION' ) && ! defined( 'ATHEMES_PATCHER_VERSION' ) ) : ?>
+                                    <a class="components-button has-lock-icon css-adm54n merchant-dashboard-pro-tooltip merchant-install-plugin" href="https://athemes.com/merchant?utm_source=athemes-patcher&utm_medium=link&utm_campaign=Merchant" target="_blank" data-tooltip-message="<?php echo esc_attr__( 'This will install and activate the aThemes Patcher plugin', 'merchant' ); ?>" data-type="external" data-plugin-url="https://patcher.athemes.com/athemes-patcher.zip?nocache=<?php echo esc_attr( time() ); ?>" data-plugin-name="athemes-patcher/athemes-patcher.php" data-redirect-to="<?php echo esc_url( add_query_arg('page', 'athemes-patcher-mp', admin_url('admin.php')) ); ?>">
+                                        Install Patcher
+                                    </a>
+                                <?php else : ?>
+                                    <a class="components-button has-lock-icon css-adm54n merchant-dashboard-pro-tooltip" href="https://athemes.com/merchant?utm_source=athemes-patcher&utm_medium=link&utm_campaign=Merchant" target="_blank" data-tooltip-message="<?php echo esc_attr__( 'This is only available on Merchant Pro', 'merchant' ); ?>">
+                                        Apply
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="48" height="48" aria-hidden="true" focusable="false"><path d="M17 10h-1.2V7c0-2.1-1.7-3.8-3.8-3.8-2.1 0-3.8 1.7-3.8 3.8v3H7c-.6 0-1 .4-1 1v8c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-8c0-.6-.4-1-1-1zM9.8 7c0-1.2 1-2.2 2.2-2.2 1.2 0 2.2 1 2.2 2.2v3H9.8V7zm6.7 11.5h-9v-7h9v7z"></path></svg>
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <tr>
