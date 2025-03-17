@@ -378,6 +378,14 @@ Merchant_Admin_Options::create( array(
 									'type'  => 'textarea',
 									'title' => esc_html__( 'Short description', 'merchant' ),
 									'desc'  => esc_html__( 'Enter an optional description to display after the offer title.', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong>  only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
 								),
 							),
 						),
