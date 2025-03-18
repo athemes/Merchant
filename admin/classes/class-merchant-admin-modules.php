@@ -47,14 +47,6 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'desc' => esc_html__( 'Allow visitors to pre-order products that are either out of stock or not yet released', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/pre-orders/',
 				),
-				'complementary-products' => array(
-					'pro' => true,
-					'section' => 'boost-revenue',
-					'icon' => Merchant_SVG_Icons::get_svg_icon( 'module-pre-orders' ),
-					'title' => esc_html__( 'Complementary Products', 'merchant' ),
-					'desc' => esc_html__( 'Offer complementary products with a main product to increase order value', 'merchant' ),
-					'tutorial_url' => 'https://docs.athemes.com/article/merchant-complementary-products/',
-				),
 				'wait-list' => array(
 					'pro' => true,
 					'section' => 'boost-revenue',
@@ -86,6 +78,14 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'title' => esc_html__( 'Buy X, Get Y', 'merchant' ),
 					'desc' => esc_html__( 'Create offers where purchasing a specific quantity of Product X triggers a discount on Product Y', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-buy-x-get-y/',
+				),
+				'complementary-products' => array(
+					'pro' => true,
+					'section' => 'boost-revenue',
+					'icon' => Merchant_SVG_Icons::get_svg_icon( 'complementary-products' ),
+					'title' => esc_html__( 'Complementary Products', 'merchant' ),
+					'desc' => esc_html__( 'Offer complementary products with a main product to increase order value', 'merchant' ),
+					'tutorial_url' => 'https://docs.athemes.com/article/merchant-complementary-products/',
 				),
 				'volume-discounts' => array(
 					'pro' => true,
