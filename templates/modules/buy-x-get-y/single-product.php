@@ -159,7 +159,6 @@ if ( ! is_admin() && ! $is_main_product_in_stock ) {
                                 <div class="merchant-bogo-product-price">
                                     <?php
                                     $discount_target = $offer['discount_target'] ?? 'sale';
-                                    // $product_price = $buy_product->get_price();
 
                                     if ( $buy_product->is_type( 'variable' ) ) {
 	                                    $regular_price = (float) $buy_product->get_variation_regular_price( 'min' );

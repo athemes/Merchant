@@ -13,18 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( empty( $args['bundles'] ) ) {
 	return;
 }
-
 ?>
 <div class="merchant-frequently-bought-together">
 	<div class="merchant-frequently-bought-together-bundles" data-nonce="<?php echo isset( $args['nonce'] ) ? esc_attr( $args['nonce'] ) : '' ?>" data-cart-url="<?php echo esc_attr( wc_get_cart_url() ) ?>">
 		<?php foreach ( $args['bundles'] as $parent_id => $bundles ) : ?>
 			<?php foreach ( $bundles as $key => $bundle ) :
-				$bundle_has_variable_product = false;
-
-                $offer_key       = $bundle['offer_key'] ?? $key;
-				$discount_type   = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
-				$discount_value  = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
+				$offer_key       = $bundle['offer_key'] ?? $key;
+				$discount_type   = $bundle['discount_type'] ?? '';
+				$discount_value  = $bundle['discount_value'] ?? 0;
 				$has_no_discount = $discount_value <= 0;
+
+				$bundle_has_variable_product = false;
 				if ( ! isset( $bundle['enable_discount'] ) ) {
 					$has_no_discount = true;
 					$bundle['discount_value'] = 0;
