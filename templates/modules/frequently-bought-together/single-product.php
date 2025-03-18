@@ -21,6 +21,7 @@ if ( empty( $args['bundles'] ) ) {
 			<?php foreach ( $bundles as $key => $bundle ) :
 				$bundle_has_variable_product = false;
 
+                $offer_key       = $bundle['offer_key'] ?? $key;
 				$discount_type   = isset( $bundle['discount_type'] ) ? $bundle['discount_type'] : '';
 				$discount_value  = isset( $bundle['discount_value'] ) ? $bundle['discount_value'] : 0;
 				$has_no_discount = $discount_value <= 0;
@@ -42,7 +43,7 @@ if ( empty( $args['bundles'] ) ) {
 					<form
                         class="merchant-frequently-bought-together-form"
                         data-product="<?php echo esc_attr( isset( $bundle['product_to_display'] ) ? $bundle['product_to_display'] : $parent_id ) ?>"
-                        data-bundle="<?php echo esc_attr( $bundle['offer_key'] ); ?>"
+                        data-bundle="<?php echo esc_attr( $offer_key ); ?>"
                         data-bundle-discount-type="<?php echo esc_attr( $discount_type ); ?>"
                         data-bundle-discount-value="<?php echo esc_attr( $discount_value ); ?>">
 						<div class="merchant-frequently-bought-together-bundle-products">
