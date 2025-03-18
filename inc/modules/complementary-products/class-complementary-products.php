@@ -22,6 +22,11 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 	const MODULE_ID = 'complementary-products';
 
 	/**
+	 * Module template path.
+	 */
+	const MODULE_TEMPLATES_PATH = 'modules/' . self::MODULE_ID;
+
+	/**
 	 * Is module preview.
 	 *
 	 */
@@ -57,6 +62,9 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 			// Enqueue admin styles.
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_css' ) );
 
+			// Enqueue admin scripts.
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_js' ) );
+
 			// Admin preview box.
 			add_filter( 'merchant_module_preview', array( $this, 'render_admin_preview' ), 10, 2 );
 		}
@@ -69,7 +77,6 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 		if ( ! $this->is_module_active() ) {
 			return;
 		}
-
 		// actions and filters goes here.
 	}
 
@@ -133,10 +140,23 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 	}
 
 	/**
+	 * Admin enqueue scripts.
+	 *
+	 * @return void
+	 */
+	public function admin_enqueue_js() {
+		if ( $this->is_module_settings_page() ) {
+			wp_enqueue_script( 'merchant-admin-' . self::MODULE_ID, MERCHANT_URI . 'assets/js/modules/' . self::MODULE_ID . '/admin/preview.min.js', array( 'jquery' ),
+				MERCHANT_VERSION, true );
+
+		}
+	}
+
+	/**
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
@@ -164,17 +184,32 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 	/**
 	 * Admin preview content.
 	 *
+	 * @param array $settings
+	 *
 	 * @return void
 	 */
 	public function admin_preview_content( $settings ) {
-		?>
-
-		<?php
+		merchant_get_template_part(
+			self::MODULE_TEMPLATES_PATH . '/admin-preview/',
+			'single-product'
+		);
+        merchant_get_template_part(
+			self::MODULE_TEMPLATES_PATH . '/admin-preview/',
+			'cart'
+		);
+        merchant_get_template_part(
+			self::MODULE_TEMPLATES_PATH . '/admin-preview/',
+			'checkout'
+		);
+        merchant_get_template_part(
+			self::MODULE_TEMPLATES_PATH . '/admin-preview/',
+			'thank-you-page'
+		);
 	}
 
-    private function is_module_active() {
+	private function is_module_active() {
 		return Merchant_Modules::is_module_active( self::MODULE_ID );
-    }
+	}
 }
 
 // Initialize the module.
