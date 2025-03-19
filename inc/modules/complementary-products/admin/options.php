@@ -26,7 +26,7 @@ Merchant_Admin_Options::create( array(
 			'layouts'      => array(
 				'offer-details' => array(
 					'title'       => esc_html__( 'Create Discount Tiers', 'merchant' ),
-					'title-field' => 'offer-name', // text field ID to use as title for the layout
+					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
 							'id'      => 'campaign_status',
@@ -39,7 +39,7 @@ Merchant_Admin_Options::create( array(
 							'default' => 'active',
 						),
 						array(
-							'id'      => 'offer-name',
+							'id'      => 'offer-title',
 							'type'    => 'text',
 							'title'   => esc_html__( 'Offer name', 'merchant' ),
 							'default' => esc_html__( 'Campaign', 'merchant' ),
