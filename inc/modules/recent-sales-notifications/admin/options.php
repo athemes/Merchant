@@ -411,6 +411,21 @@ Merchant_Admin_Options::create( array(
 	'module' => Merchant_Recent_Sales_Notifications::MODULE_ID,
 	'fields' => array(
 		array(
+			'id'      => 'customer_name_format',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Customer Name Format', 'merchant' ),
+			'options' => array(
+				'firstname'         => esc_html__( 'First Name', 'merchant' ),
+				'lastname'          => esc_html__( 'Last Name', 'merchant' ),
+				'firstname_initial' => esc_html__( 'First Name + Initial', 'merchant' ),
+				'lastname_initial'  => esc_html__( 'Initial + Last Name', 'merchant' ),
+				'full'              => esc_html__( 'Full Name', 'merchant' ),
+			),
+			'default' => 'full',
+			'desc'    => esc_html__( 'Choose how the customer’s name will be displayed in notifications.', 'merchant' ),
+		),
+
+		array(
 			'id'      => 'hide_on_mobile',
 			'type'    => 'checkbox',
 			'label'   => esc_html__( 'Hide on Mobile', 'merchant' ),

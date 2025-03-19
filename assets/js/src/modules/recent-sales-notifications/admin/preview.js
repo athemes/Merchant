@@ -134,11 +134,14 @@
 	$(document).on('change.merchant keyup click', 'input[type="text"]:not(.merchant-color-input)', function (e) {
 		let widget = $('.merchant-recent-sales-notifications-widget');
 		let message = widget.find('.merchant-notification-message');
-		message.text(
+
+		const customerName = getFormattedCustomerName( $( '.merchant-field-customer_name_format select' ).val() );
+
+		message.html(
 			$(this).val()
 				.replace(
 					'{customer_name}',
-					'John Doe'
+					`<span class="customer-name">${customerName}</span>`
 				)
 				.replace(
 					'{country_code}',
@@ -155,6 +158,11 @@
 		);
 	});
 
+	$(document).on('change', '.merchant-field-customer_name_format select', function (e) {
+		const customerName = getFormattedCustomerName( $( this ).val() );
+		$('.customer-name').text( customerName );
+	});
+
 	$(document).on('change.merchant keyup', function (e) {
 		merchantInitPreview(e);
 	});
@@ -162,4 +170,34 @@
 	$(document).ready(function () {
 		merchantInitPreview();
 	});
+
+
+	// Helpers
+	function getFormattedCustomerName( format ) {
+		let customerName;
+		switch ( format ) {
+			case 'firstname':
+				customerName = 'John';
+				break;
+
+			case 'lastname':
+				customerName = 'Doe';
+				break;
+
+			case 'firstname_initial':
+				customerName = 'John D.';
+				break;
+
+			case 'lastname_initial':
+				customerName = 'J. Doe';
+				break;
+
+			case 'full':
+			default:
+				customerName = 'John Doe';
+		}
+
+		return customerName;
+	}
+
 })(jQuery);
