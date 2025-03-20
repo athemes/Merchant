@@ -30,6 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="product-info">
 					<div class="product-name"><?php
 						esc_html_e( 'Your Product Name', 'merchant' ); ?></div>
+                    <div class="discount-text"><?php
+						esc_html_e( 'With discount', 'merchant' ); ?></div>
 					<button class="add-to-order"><?php
 						esc_html_e( 'Add To My Order', 'merchant' ); ?></button>
 				</div>

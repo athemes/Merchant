@@ -39,7 +39,8 @@
 			checkoutBundleDesc = layout.find('.merchant-group-field-checkout_page .merchant-field-offer_description textarea').val(),
 
 			thankYouBundleBtnTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
-			thankYouBundleTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val()
+			thankYouBundleTitle = layout.find('.merchant-group-field-thank_you_page .merchant-field-title input').val(),
+			thankYouDiscountText = layout.find('.merchant-group-field-thank_you_page .merchant-field-discount_text input').val()
 
 
 		let title = $('.mrc-preview-bundle-title');
@@ -61,15 +62,16 @@
 			"--merchant-cp-product-checkbox-radius": bundleCheckboxStyle === 'rounded' ? '5px' : '0px',
 		});
 
-		$('.merchant-cart-preview .upsell-offer').text(cartBundleTitle);
+		$('.merchant-cart-preview .upsell-offer').text(cartBundleTitle.replace('{discount_amount}', '10%'));
 		$('.merchant-cart-preview .add-to-cart').text(cartBundleBtnTitle);
 
-		$('.merchant-checkout-preview .offer-title').text(checkoutBundleTitle);
+		$('.merchant-checkout-preview .offer-title').text(checkoutBundleTitle.replace('{discount_amount}', '10%'));
 		$('.merchant-checkout-preview .offer-desc').text(checkoutBundleDesc);
 		$('.merchant-checkout-preview .add-to-order').text(checkoutBundleBtnTitle);
 
-		$('.merchant-thank-you-preview .offer-title').text(thankYouBundleTitle);
+		$('.merchant-thank-you-preview .offer-title').text(thankYouBundleTitle.replace('{discount_amount}', '10%'));
 		$('.merchant-thank-you-preview .add-to-order').text(thankYouBundleBtnTitle);
+		$('.merchant-thank-you-preview .discount-text').text(thankYouDiscountText.replace('{discount_amount}', '10%'));
 	}
 
 	$('.merchant-flexible-content-control .layout:first-child').addClass('active').trigger('click');

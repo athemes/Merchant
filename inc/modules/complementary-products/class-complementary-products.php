@@ -128,6 +128,10 @@ class Merchant_Complementary_Products extends Merchant_Add_Module {
 					Merchant_Translator::register_string( $offer['thank_you_page']['title'] );
 				}
 
+				if ( ! empty( $offer['thank_you_page']['discount_text'] ) ) {
+					Merchant_Translator::register_string( $offer['thank_you_page']['discount_text'] );
+				}
+
 				if ( ! empty( $offer['thank_you_page']['button_text'] ) ) {
 					Merchant_Translator::register_string( $offer['thank_you_page']['button_text'] );
 				}

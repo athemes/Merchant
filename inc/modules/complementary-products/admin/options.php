@@ -381,7 +381,7 @@ Merchant_Admin_Options::create( array(
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Display the discount amount */
 										__(
-											'<strong>%1$s:</strong>  only applies to percentage or fixed-amount discounts',
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
 											'merchant'
 										),
 										'{discount_amount}',
@@ -406,6 +406,14 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Campaign title', 'merchant' ),
 									'default' => esc_html__( 'Add', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
 								),
 								array(
 									'id'      => 'button_text',
@@ -445,6 +453,14 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
 									'default' => esc_html__( 'Recommended For You', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
 								),
 								array(
 									'id'          => 'offer_description',
@@ -487,6 +503,29 @@ Merchant_Admin_Options::create( array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Bundle title', 'merchant' ),
 									'default'     => esc_html__( 'Last chance to get', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
+								),
+
+								array(
+									'id'          => 'discount_text',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Discount text', 'merchant' ),
+									'default'     => esc_html__( 'With discount', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
 								),
 
 								array(
