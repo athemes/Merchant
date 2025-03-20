@@ -84,7 +84,7 @@ if ( ! class_exists( 'Merchant_Admin_Modules' ) ) {
 					'section' => 'boost-revenue',
 					'icon' => Merchant_SVG_Icons::get_svg_icon( 'complementary-products' ),
 					'title' => esc_html__( 'Complementary Products', 'merchant' ),
-					'desc' => esc_html__( 'Offer complementary products with a main product to increase order value', 'merchant' ),
+					'desc' => esc_html__( 'Offer complementary products to help increase average order value', 'merchant' ),
 					'tutorial_url' => 'https://docs.athemes.com/article/merchant-complementary-products/',
 				),
 				'volume-discounts' => array(
