@@ -1,7 +1,7 @@
 <?php
 /**
  * Trust Badges
- * 
+ *
  * @package Merchant
  */
 
@@ -16,6 +16,18 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Trust Badges', 'merchant' ),
 	'module' => Merchant_Trust_Badges::MODULE_ID,
 	'fields' => array(
+
+		array(
+			'id'       => 'default_badges',
+			'type'     => 'choices',
+			'multiple' => true,
+			'title'    => esc_html__( 'Default badges', 'merchant' ),
+			'options'  => array(
+				'badge1' => MERCHANT_URI . 'inc/modules/' . Merchant_Trust_Badges::MODULE_ID . '/admin/images/badge1.svg',
+				'badge2' => MERCHANT_URI . 'inc/modules/' . Merchant_Trust_Badges::MODULE_ID . '/admin/images/badge2.svg',
+				'badge3' => MERCHANT_URI . 'inc/modules/' . Merchant_Trust_Badges::MODULE_ID . '/admin/images/badge3.svg',
+			),
+		),
 
 		array(
 			'id'    => 'badges',
