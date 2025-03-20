@@ -1116,8 +1116,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 	public function cart_message_handler( $item_data, $cart_item ) {
 		$product_id = $cart_item['product_id'];
 		if ( $cart_item['data']->is_type( 'variation' ) ) {
-			$product_id = $cart_item['variation_id'];
+			$variation_id = $cart_item['variation_id'];
+			$parent_id    = $cart_item['data']->get_parent_id();
+
+			if ( ! $this->is_pre_order( $variation_id ) && $this->is_pre_order( $parent_id ) ) {
+				$product_id = $parent_id;
+			} else {
+				$product_id = $variation_id;
+			}
 		}
+
 		if ( $this->is_pre_order( $product_id ) ) {
 			$pre_order_rule = self::available_product_rule( $product_id );
 			if ( $pre_order_rule ) {
@@ -1296,7 +1304,16 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 */
 	private function get_pre_order_text( $product_id, $render_type = '' ) {
 		if ( ! $this->is_pre_order( $product_id ) ) {
-			return '';
+			$product = wc_get_product( $product_id );
+			if ( $product->is_type( 'variation' ) ) {
+				$product_id = $product->get_parent_id();
+
+				if ( ! $this->is_pre_order( $product_id ) ) {
+					return '';
+				}
+			} else {
+				return '';
+			}
 		}
 
 		$pre_order_rule = self::available_product_rule( $product_id );

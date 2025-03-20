@@ -715,6 +715,10 @@ class Merchant_Analytics_Data_Reports {
 				$value = $total_revenue; // Total revenue
 			}
 
+			if ( $previous_value === null ) {
+				$previous_value = 0;
+			}
+
 			// Calculate percentage difference
 			list( $difference, $diff_type ) = $this->calculate_percentage_difference( $value, $previous_value );
 
@@ -866,27 +870,33 @@ class Merchant_Analytics_Data_Reports {
 	 * @return array [difference, diff_type]
 	 */
 	protected function calculate_percentage_difference( $current_value, $previous_value ) {
-		if ( $previous_value !== null || is_numeric( $previous_value ) ) {
-			if ( $previous_value === 0 ) {
-				// If previous value is 0, handle it as a special case
-				if ( $current_value === 0 ) {
-					return array( 0, 'none' ); // No change
-				}
+		// Ensure numeric values
+		$current_value  = (float) $current_value;
+		$previous_value = $previous_value === null ? null : (float) $previous_value;
 
-				return array( 100, 'increase' ); // Infinite increase (from 0 to any positive value)
-			}
-
-			$difference = ( ( $current_value - $previous_value ) / $previous_value ) * 100;
-			$diff_type  = ( $difference >= 0 ) ? 'increase' : 'decrease';
-
-			if ( $difference === 0 ) {
-				$diff_type = 'none';
-			}
-
-			return array( round( abs( $difference ), 2 ), $diff_type ); // Round to 2 decimal places
+		if ( $previous_value === null ) {
+			return array( 0, 'none' ); // No previous data to compare
 		}
 
-		return array( 0, 'none' ); // No previous data to compare
+		// Handle zero or near-zero previous value
+		if ( abs( $previous_value ) < 0.0001 ) { // Use a small threshold to catch float precision issues
+			if ( abs( $current_value ) < 0.0001 ) {
+				return array( 0, 'none' ); // Both are effectively zero, no change
+			}
+
+			// If current_value is non-zero and previous_value is zero, treat as infinite change
+			return array( $current_value > 0 ? 100 : - 100, $current_value > 0 ? 'increase' : 'decrease' );
+		}
+
+		// Safe calculation of percentage difference
+		$difference = ( ( $current_value - $previous_value ) / $previous_value ) * 100;
+		$diff_type  = ( $difference >= 0 ) ? 'increase' : 'decrease';
+
+		if ( abs( $difference ) < 0.0001 ) { // Handle very small differences as no change
+			$diff_type = 'none';
+		}
+
+		return array( round( abs( $difference ), 2 ), $diff_type ); // Round to 2 decimal places
 	}
 
 	/**

@@ -142,6 +142,13 @@ const styles = [
 		destination: './assets/css/modules/address-autocomplete/admin',
 	},
 
+	// complementary-products
+	{
+		name: 'ComplementaryProductsAdminPreview',
+		src: './assets/sass/modules/complementary-products/admin/preview.scss',
+		destination: './assets/css/modules/complementary-products/admin',
+	},
+
 	// Animated Add To Cart.
 	{
 		name: 'animatedAddToCart',
@@ -750,6 +757,13 @@ const scripts = [
 		file: 'preview'
 	},
 
+	// complementary products
+	{
+		name: 'complementaryProductsAdminPreview',
+		src: './assets/js/src/modules/complementary-products/admin/preview.js',
+		destination: './assets/js/modules/complementary-products/admin',
+		file: 'preview'
+	},
 	// added to cart popup admin preview
 	{
 		name: 'addedToCartPopupAdminPreview',

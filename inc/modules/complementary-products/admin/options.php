@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Buy X Get Y Options.
+ * Add To Cart Text Options.
  *
  * @package Merchant
  */
@@ -10,21 +10,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// Settings
 Merchant_Admin_Options::create( array(
-	'module' => Merchant_Buy_X_Get_Y::MODULE_ID,
-	'title'  => esc_html__( 'Offers', 'merchant' ),
+	'title'  => esc_html__( 'Complementary Offers', 'merchant' ),
+	'module' => Merchant_Complementary_Products::MODULE_ID,
 	'fields' => array(
 		array(
-			'id'           => 'rules',
+			'id'           => 'offers',
 			'type'         => 'flexible_content',
+			'button_label' => esc_html__( 'Add New Complementary Offer', 'merchant' ),
+			'style'        => Merchant_Complementary_Products::MODULE_ID . '-style default',
 			'sorting'      => true,
-			'accordion'    => true,
 			'duplicate'    => true,
-			'style'        => Merchant_Buy_X_Get_Y::MODULE_ID . '-style default',
-			'button_label' => esc_html__( 'Add New Offer', 'merchant' ),
+			'accordion'    => true,
 			'layouts'      => array(
 				'offer-details' => array(
-					'title'       => esc_html__( 'Campaign', 'merchant' ),
+					'title'       => esc_html__( 'Create Discount Tiers', 'merchant' ),
 					'title-field' => 'offer-title', // text field ID to use as title for the layout
 					'fields'      => array(
 						array(
@@ -56,13 +57,12 @@ Merchant_Admin_Options::create( array(
 							'default' => 'products',
 						),
 						array(
-							'id'            => 'product_ids',
-							'type'          => 'products_selector',
-							'title'         => esc_html__( 'Customer buys', 'merchant' ),
-							'multiple'      => true,
-							'desc'          => esc_html__( 'Select the products that will show the offer', 'merchant' ),
-							'condition'     => array( 'rules_to_display', '==', 'products' ),
-							'allowed_types' => array( 'simple', 'variable' ),
+							'id'        => 'product_to_display',
+							'type'      => 'products_selector',
+							'title'     => esc_html__( 'Select a product', 'merchant' ),
+							'multiple'  => false,
+							'desc'      => esc_html__( 'Select the product you want to pair with the complementary items.', 'merchant' ),
+							'condition' => array( 'rules_to_display', '==', 'products' ),
 						),
 						array(
 							'id'          => 'category_slugs',
@@ -72,9 +72,10 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product categories that will show the offer.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product categories that will show the complementary items.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'categories' ),
 						),
+
 						array(
 							'id'          => 'tag_slugs',
 							'type'        => 'select_ajax',
@@ -83,7 +84,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Select the product tags that will show the offer.', 'merchant' ),
+							'desc'        => esc_html__( 'Select the product tags that will show the complementary items.', 'merchant' ),
 							'condition'   => array( 'rules_to_display', '==', 'tags' ),
 						),
 
@@ -127,6 +128,7 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+
 						array(
 							'id'          => 'excluded_categories',
 							'type'        => 'select_ajax',
@@ -180,68 +182,88 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'      => 'min_quantity',
-							'type'    => 'number',
-							'min'     => 0,
-							'step'    => 1,
-							'title'   => esc_html__( 'Quantity', 'merchant' ),
-							'desc'    => esc_html__( 'The minimum quantity that customers should purchase to get the offer', 'merchant' ),
-							'default' => 1,
-						),
-						array(
-							'id'       => 'customer_get_product_ids',
+							'id'       => 'products',
+							'title'    => esc_html__( 'Complementary products', 'merchant' ),
 							'type'     => 'products_selector',
-							'title'    => esc_html__( 'Customer Gets', 'merchant' ),
-							'multiple' => false,
-							'desc'     => esc_html__( 'Select the products that the customer will get when they purchase the minimum required quantity.',
-								'merchant' ),
+							'multiple' => true,
+							'desc'     => esc_html__( 'Select the products you want to sell alongside the main product', 'merchant' ),
 						),
 						array(
-							'id'        => 'external',
-							'label'     => __( 'Display the offer on all products in the bundle', 'merchant' ),
-							'type'      => 'checkbox',
-							'default'   => 0,
-							'condition' => array( 'rules_to_display', '==', 'products' ),
+							'id'      => 'enable_discount',
+							'type'    => 'switcher',
+							'title'   => __( 'Offer a discount on this bundle', 'merchant' ),
+							'default' => 0,
 						),
 						array(
-							'id'      => 'quantity',
-							'type'    => 'number',
-							'min'     => 0,
-							'step'    => 1,
-							'title'   => esc_html__( 'Quantity', 'merchant' ),
-							'default' => 3,
+							'id'         => 'discount_type',
+							'type'       => 'radio',
+							'title'      => esc_html__( 'Discount', 'merchant' ),
+							'options'    => array(
+								'percentage_discount' => esc_html__( 'Percentage', 'merchant' ),
+								'fixed_discount'      => esc_html__( 'Fixed', 'merchant' ),
+								'cheapest_item_free'  => esc_html__( 'Cheapest item free', 'merchant' ),
+								'free_shipping'       => esc_html__( 'Free Shipping', 'merchant' ),
+							),
+							'default'    => 'percentage_discount',
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'enable_discount',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
 						),
 						array(
-							'id'      => 'discount_type',
+							'id'         => 'discount_value',
+							'type'       => 'number',
+							'default'    => 10,
+							'step'       => 0.01,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'enable_discount',
+										'operator' => '===',
+										'value'    => true,
+									),
+									array(
+										'field'    => 'discount_type',
+										'operator' => 'in',
+										'value'    => array( 'percentage_discount', 'fixed_discount' ),
+									),
+								),
+							),
+						),
+						array(
+							'id'         => 'min_selection_discount',
+							'title'      => esc_html__( 'Minimum product selection to trigger the discount', 'merchant' ),
+							'type'       => 'number',
+							'default'    => 1,
+							'step'       => 1,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'enable_discount',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+						array(
+							'id'      => 'checkboxes-state',
 							'type'    => 'radio',
-							'title'   => esc_html__( 'Discount Type', 'merchant' ),
+							'title'   => esc_html__( 'Checkboxes for each product', 'merchant' ),
 							'options' => array(
-								'percentage' => esc_html__( 'Percentage Discount', 'merchant' ),
-								'fixed'      => esc_html__( 'Fixed Discount', 'merchant' ),
+								'auto-checked' => esc_html__( 'Auto checked', 'merchant' ),
+								'unchecked'    => esc_html__( 'Unchecked', 'merchant' ),
 							),
-							'default' => 'percentage',
+							'default' => 'unchecked',
 						),
-
-						array(
-							'id'      => 'discount',
-							'type'    => 'number',
-							'min'     => 0,
-							'step'    => 0.01,
-							//'title'   => esc_html__( 'Discount Value', 'merchant' ),
-							'default' => 1,
-						),
-
-						array(
-							'id'      => 'discount_target',
-							'type'    => 'select',
-							'title'   => esc_html__( 'Apply discount to', 'merchant' ),
-							'options' => array(
-								'regular' => esc_html__( 'Regular Price', 'merchant' ),
-								'sale'    => esc_html__( 'Sale Price', 'merchant' ),
-							),
-							'default' => 'sale',
-						),
-
 						array(
 							'id'      => 'user_condition',
 							'type'    => 'select',
@@ -253,7 +275,6 @@ Merchant_Admin_Options::create( array(
 							),
 							'default' => 'all',
 						),
-
 						array(
 							'id'        => 'user_condition_roles',
 							'type'      => 'select_ajax',
@@ -281,7 +302,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'user_exclusion_enabled',
 							'type'       => 'switcher',
 							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-							'desc'       => esc_html__( 'Select the users that will not show the offer.', 'merchant' ),
+							'desc'       => esc_html__( 'Hide this offer from certain users.', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',
@@ -324,7 +345,8 @@ Merchant_Admin_Options::create( array(
 							'id'             => 'product_single_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Product Single Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on product pages.', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how complementary product offers appear on product pages.',
+								'merchant' ),
 							'state'          => 'open',
 							'default'        => 'active',
 							'accordion'      => true,
@@ -332,198 +354,81 @@ Merchant_Admin_Options::create( array(
 							'fields'         => array(
 								array(
 									'id'      => 'single_product_placement',
-									'type'    => 'radio',
+									'type'    => 'select',
 									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 									'options' => array(
-										'after-cart-form'  => esc_html__( 'After add to cart', 'merchant' ),
-										'before-cart-form' => esc_html__( 'Before add to cart', 'merchant' ),
+										'before-add-to-cart' => esc_html__( 'Before Add to Cart', 'merchant' ),
+										'after-summary'      => esc_html__( 'After Product Summary', 'merchant' ),
+										'after-tabs'         => esc_html__( 'After Product Tabs', 'merchant' ),
 									),
-									'default' => 'after-cart-form',
+									'default' => 'before-add-to-cart',
 								),
 
-								// Text Formatting Settings
+								// text formatting settings
 								array(
-									'id'      => 'title',
+									'id'      => 'offer-title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Buy One Get One', 'merchant' ),
+									'default' => esc_html__( 'Campaign', 'merchant' ),
+									'desc'    => esc_html__( 'Enter an optional title to show before the complementary products', 'merchant' ),
 								),
 
 								array(
-									'id'      => 'buy_label',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Buy label', 'merchant' ),
-									'default' => esc_html__( 'Buy {quantity}', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'id'    => 'offer-description',
+									'type'  => 'textarea',
+									'title' => esc_html__( 'Short description', 'merchant' ),
+									'desc'  => esc_html__( 'Enter an optional description to display after the offer title.', 'merchant' ),
 									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo offered product quantity */
+									/* Translators: %1$s: Display the discount amount */
 										__(
-											'<strong>%1$s:</strong> to show offered product quantity',
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
 											'merchant'
 										),
-										'{quantity}'
+										'{discount_amount}',
 									),
-								),
-
-								array(
-									'id'      => 'get_label',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Get label', 'merchant' ),
-									'default' => esc_html__( 'Get {quantity} with {discount} off', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo offered product quantity, %2$s: bogo offer discount */
-										__(
-											'<strong>%1$s:</strong> to show offered product quantity<br><strong>%2$s:</strong> to show offer discount',
-											'merchant'
-										),
-										'{quantity}',
-										'{discount}'
-									),
-								),
-
-								array(
-									'id'      => 'button_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Button text', 'merchant' ),
-									'default' => esc_html__( 'Add To Cart', 'merchant' ),
-								),
-
-								// Style Settings
-								array(
-									'id'      => 'title_font_weight',
-									'type'    => 'select',
-									'title'   => esc_html__( 'Font weight', 'merchant' ),
-									'options' => array(
-										'lighter' => esc_html__( 'Light', 'merchant' ),
-										'normal'  => esc_html__( 'Normal', 'merchant' ),
-										'bold'    => esc_html__( 'Bold', 'merchant' ),
-									),
-									'default' => 'normal',
-								),
-
-								array(
-									'id'      => 'title_font_size',
-									'type'    => 'range',
-									'title'   => esc_html__( 'Font size', 'merchant' ),
-									'min'     => 0,
-									'max'     => 100,
-									'step'    => 1,
-									'unit'    => 'px',
-									'default' => 16,
-								),
-
-								array(
-									'id'      => 'title_text_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Title text color', 'merchant' ),
-									'default' => '#212121',
-								),
-
-								array(
-									'id'      => 'label_bg_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Label background color', 'merchant' ),
-									'default' => '#d61313',
-								),
-
-								array(
-									'id'      => 'label_text_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Label text color', 'merchant' ),
-									'default' => '#fff',
-								),
-
-								array(
-									'id'      => 'arrow_bg_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Arrow background color', 'merchant' ),
-									'default' => '#d61313',
-								),
-
-								array(
-									'id'      => 'arrow_text_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Arrow text color', 'merchant' ),
-									'default' => '#fff',
-								),
-
-
-								array(
-									'id'      => 'offer_border_color',
-									'type'    => 'color',
-									'title'   => esc_html__( 'Offer border color', 'merchant' ),
-									'default' => '#cccccc',
-								),
-
-								array(
-									'id'      => 'offer_border_radius',
-									'type'    => 'range',
-									'title'   => esc_html__( 'Offer border Radius', 'merchant' ),
-									'min'     => 0,
-									'max'     => 100,
-									'step'    => 1,
-									'unit'    => 'px',
-									'default' => 5,
 								),
 							),
 						),
+
 						array(
 							'id'             => 'cart_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Cart Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Use these settings to control how bulk discount offers appear on the cart page.', 'merchant' ),
-							'state'          => 'closed',
 							'default'        => 'inactive',
+							'sub-desc'       => esc_html__( 'Use these settings to control how complementary product offers appear on the cart page.', 'merchant' ),
+							'state'          => 'closed',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
-								// Text Formatting Settings
+								// text formatting settings
 								array(
 									'id'      => 'title',
 									'type'    => 'text',
-									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'title'   => esc_html__( 'Campaign title', 'merchant' ),
+									'default' => esc_html__( 'Add', 'merchant' ),
 									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo offered product quantity */
+									/* Translators: %1$s: Display the discount amount */
 										__(
-											'<strong>%1$s:</strong> to show offered product quantity',
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
 											'merchant'
 										),
-										'{offer_quantity}'
+										'{discount_amount}',
 									),
 								),
-
-								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo Discount amount */
-										__(
-											'<strong>%1$s:</strong> to show discount amount',
-											'merchant'
-										),
-										'{discount}'
-									),
-								),
-
 								array(
 									'id'      => 'button_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Button text', 'merchant' ),
-									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
 								),
 							),
 						),
+
 						array(
 							'id'             => 'checkout_page',
 							'type'           => 'fields_group',
 							'title'          => esc_html__( 'Checkout Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Use these settings to control how Buy X get Y offers appear on the checkout page.', 'merchant' ),
+							'sub-desc'       => esc_html__( 'Use these settings to control how complementary product offers appear on the checkout page.', 'merchant' ),
 							'state'          => 'closed',
 							'default'        => 'inactive',
 							'accordion'      => true,
@@ -547,31 +452,21 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'title',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'You are eligible to get {offer_quantity}x', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'default' => esc_html__( 'Recommended For You', 'merchant' ),
 									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo offer quantity */
+									/* Translators: %1$s: Display the discount amount */
 										__(
-											'<strong>%1$s:</strong> to show offer quantity',
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
 											'merchant'
 										),
-										'{offer_quantity}'
+										'{discount_amount}',
 									),
 								),
 								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo Discount amount */
-										__(
-											'<strong>%1$s:</strong> to show discount amount',
-											'merchant'
-										),
-										'{discount}'
-									),
+									'id'          => 'offer_description',
+									'type'        => 'textarea',
+									'title'       => esc_html__( 'Description', 'merchant' ),
+									'desc'     => esc_html__( 'Enter an optional campaign description', 'merchant' ),
 								),
 								array(
 									'id'      => 'button_text',
@@ -581,33 +476,17 @@ Merchant_Admin_Options::create( array(
 								),
 							),
 						),
+
 						array(
 							'id'             => 'thank_you_page',
 							'type'           => 'fields_group',
-							'title'          => esc_html__( 'Thank You Page', 'merchant' ),
-							'sub-desc'       => esc_html__( 'Use these settings to control how Buy X get Y offers appear on the thank you page.', 'merchant' ),
-							'state'          => 'closed',
+							'title'          => esc_html__( 'Thank you Page', 'merchant' ),
 							'default'        => 'inactive',
+							'sub-desc'       => esc_html__( 'Use these settings to control how complementary product offers appear on the thank you page.', 'merchant' ),
+							'state'          => 'closed',
 							'accordion'      => true,
 							'display_status' => true,
 							'fields'         => array(
-								// Text Formatting Settings
-								array(
-									'id'      => 'title',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {offer_quantity}x', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
-									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo {offer_quantity} tag */
-										__(
-											'<strong>%1$s:</strong> to show offer quantity',
-											'merchant'
-										),
-										'{offer_quantity}'
-									),
-								),
-
 								array(
 									'id'      => 'placement',
 									'type'    => 'select',
@@ -619,20 +498,33 @@ Merchant_Admin_Options::create( array(
 									),
 									'default' => 'before_order_details',
 								),
-
 								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'with {discount} off', 'merchant' ),
-									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
+									'id'          => 'title',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Bundle title', 'merchant' ),
+									'default'     => esc_html__( 'Last chance to get', 'merchant' ),
 									'hidden_desc' => sprintf(
-									/* Translators: %1$s: bogo Discount amount */
+									/* Translators: %1$s: Display the discount amount */
 										__(
-											'<strong>%1$s:</strong> to show discount amount',
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
 											'merchant'
 										),
-										'{discount}'
+										'{discount_amount}',
+									),
+								),
+
+								array(
+									'id'          => 'discount_text',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Discount text', 'merchant' ),
+									'default'     => esc_html__( 'With discount', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
 									),
 								),
 
@@ -640,7 +532,7 @@ Merchant_Admin_Options::create( array(
 									'id'      => 'button_text',
 									'type'    => 'text',
 									'title'   => esc_html__( 'Button text', 'merchant' ),
-									'default' => esc_html__( 'Add To Cart', 'merchant' ),
+									'default' => esc_html__( 'Add to cart', 'merchant' ),
 								),
 							),
 						),
@@ -649,16 +541,147 @@ Merchant_Admin_Options::create( array(
 			),
 			'default'      => array(
 				array(
-					'layout' => 'offer-details',
-					'label'  => esc_html__( 'Buy 1 Get 1', 'merchant' ),
+					'layout'        => 'offer-details',
+					'min_quantity'  => 2,
+					'discount'      => 10,
+					'discount_type' => 'percentage_discount',
 				),
 			),
 		),
 	),
 ) );
 
+
+/**
+ * Style
+ */
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'Look and Feel', 'merchant' ),
+	'module' => Merchant_Complementary_Products::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'layout',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Layout', 'merchant' ),
+			'options' => array(
+				'classic' => esc_html__( 'Classic', 'merchant' ),
+				// only the copy has been changed to carousel, but the naming is the same "slider"
+				'slider'  => esc_html__( 'Carousel', 'merchant' ),
+			),
+			'default' => 'slider',
+		),
+
+		array(
+			'id'      => 'checkbox_style',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Checkbox style', 'merchant' ),
+			'options' => array(
+				'rounded' => esc_html__( 'Rounded', 'merchant' ),
+				'square'  => esc_html__( 'Square', 'merchant' ),
+			),
+			'default' => 'square',
+		),
+
+		array(
+			'id'      => 'checkbox_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Checkbox color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'title_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Title color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'description_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Description color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'border_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Border color', 'merchant' ),
+			'default' => '#000000',
+		),
+
+		array(
+			'id'      => 'image_border_color',
+			'type'    => 'color',
+			'title'   => esc_html__( 'Image border color', 'merchant' ),
+			'default' => 'rgba(0,0,0,0)',
+		),
+
+		array(
+			'id'      => 'title_heading_size',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Title heading', 'merchant' ),
+			'options' => array(
+				'h1' => esc_html__( 'H1', 'merchant' ),
+				'h2' => esc_html__( 'H2', 'merchant' ),
+				'h3' => esc_html__( 'H3', 'merchant' ),
+				'h4' => esc_html__( 'H4', 'merchant' ),
+				'h5' => esc_html__( 'H5', 'merchant' ),
+				'h6' => esc_html__( 'H6', 'merchant' ),
+			),
+			'default' => 'h4',
+		),
+
+
+		array(
+			'id'      => 'description_font_size',
+			'type'    => 'range',
+			'title'   => esc_html__( 'Description font size', 'merchant' ),
+			'min'     => 0,
+			'max'     => 100,
+			'step'    => 1,
+			'unit'    => 'px',
+			'default' => 14,
+		),
+
+		array(
+			'id'      => 'title_description_alignment',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Title and description alignment', 'merchant' ),
+			'options' => array(
+				'left'   => esc_html__( 'Left', 'merchant' ),
+				'center' => esc_html__( 'Center', 'merchant' ),
+				'right'  => esc_html__( 'Right', 'merchant' ),
+			),
+			'default' => 'left',
+		),
+
+		array(
+			'id'        => 'border_radius',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Border radius', 'merchant' ),
+			'min'       => 0,
+			'max'       => 60,
+			'step'      => 1,
+			'default'   => 0,
+			'unit'      => 'px',
+		),
+
+		array(
+			'id'        => 'image_border_radius',
+			'type'      => 'range',
+			'title'     => esc_html__( 'Image border radius', 'merchant' ),
+			'min'       => 0,
+			'max'       => 60,
+			'step'      => 1,
+			'default'   => 0,
+			'unit'      => 'px',
+		),
+	),
+) );
+
 // Shortcode
-$merchant_module_id = Merchant_Buy_X_Get_Y::MODULE_ID;
+$merchant_module_id = Merchant_Complementary_Products::MODULE_ID;
 Merchant_Admin_Options::create( array(
 	'module' => $merchant_module_id,
 	'title'  => esc_html__( 'Use shortcode', 'merchant' ),

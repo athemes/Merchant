@@ -2,7 +2,7 @@
 
 /**
  * Trust Badges.
- * 
+ *
  * @package Merchant
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Trust Badges Class.
- * 
+ *
  */
 class Merchant_Trust_Badges extends Merchant_Add_Module {
 
@@ -24,7 +24,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Is module preview.
-	 * 
+	 *
 	 */
 	public static $is_module_preview = false;
 
@@ -37,10 +37,9 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 	public function __construct() {
-
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
@@ -56,8 +55,8 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		// Module default settings.
 		$this->module_default_settings = array(
 			'badges' => '',
-			'align' => 'center',
-			'title' => __( 'Product Quality Guaranteed!', 'merchant' ),
+			'align'  => 'center',
+			'title'  => __( 'Product Quality Guaranteed!', 'merchant' ),
 		);
 
 		// Module data.
@@ -79,7 +78,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
@@ -93,7 +91,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 		// Return early if it's on admin but not in the respective module settings page.
 		if ( is_admin() && ! parent::is_module_settings_page() ) {
-			return; 
+			return;
 		}
 
 		// Enqueue styles.
@@ -104,6 +102,8 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 		// Custom CSS.
 		add_filter( 'merchant_custom_css', array( $this, 'frontend_custom_css' ) );
+
+		$this->backward_compatibility();
 	}
 
 	/**
@@ -133,35 +133,32 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 		}
 		ob_start();
 
-		$settings               = $this->get_module_settings();
-		$is_placeholder         = empty( $settings['badges'] );
-		$badges                 = $this->get_badges( $settings[ 'badges' ] );
-		$placeholder_badges_alt = $this->get_placeholder_badges_alt_map();
-		?>
-        <fieldset class="merchant-trust-badges">
-			<?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
-                <legend class="merchant-trust-badges-title"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></legend>
-			<?php endif; ?>
-			<?php if ( ! $is_placeholder ) : ?>
+		$settings       = $this->get_module_settings();
+		$default_badges = ! empty( $settings['default_badges'] ) ? $settings['default_badges'] : array();
+		$badges         = $this->get_badges( $settings['badges'] );
+		if ( ! empty( $default_badges ) || ! empty( $badges ) ) {
+			?>
+            <fieldset class="merchant-trust-badges">
+				<?php
+				if ( ! empty( $settings['title'] ) ) : ?>
+                    <legend class="merchant-trust-badges-title"><?php
+						echo esc_html( Merchant_Translator::translate( $settings['title'] ) ); ?></legend>
+				<?php
+				endif; ?>
                 <div class="merchant-trust-badges-images">
 					<?php
-                    foreach ( $badges as $image_id ) {
+					foreach ( $default_badges as $badge_name ) {
+						$badge_src = MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/' . $badge_name . '.svg';
+						echo '<img src="' . esc_url( $badge_src ) . '" alt="' . esc_attr( $badge_name ) . '"/>';
+					}
+					foreach ( $badges as $image_id ) {
 						echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );
-                    }
-                    ?>
+					}
+					?>
                 </div>
-			<?php else : ?>
-                <div class="merchant-trust-badges-images is-placeholder">
-					<?php foreach ( $badges as $badge_src ) :
-						$image_basename = basename( $badge_src );
-						$image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
-						?>
-                        <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
-					<?php endforeach; ?>
-                </div>
-			<?php endif; ?>
-        </fieldset>
-		<?php
+            </fieldset>
+			<?php
+		}
 		$shortcode_content = ob_get_clean();
 
 		/**
@@ -190,7 +187,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Admin enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_enqueue_css() {
@@ -205,7 +202,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Enqueue CSS.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function enqueue_css() {
@@ -221,7 +218,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 	 * Render admin preview
 	 *
 	 * @param Merchant_Admin_Preview $preview
-	 * @param string $module
+	 * @param string                 $module
 	 *
 	 * @return Merchant_Admin_Preview
 	 */
@@ -236,7 +233,6 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 			// Text Above the Logos.
 			$preview->set_text( 'title', '.merchant-trust-badges-title' );
-
 		}
 
 		return $preview;
@@ -244,67 +240,52 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Admin preview content.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function admin_preview_content() {
 		?>
-		<div class="mrc-preview-single-product-elements">
-			<div class="mrc-preview-left-column">
-				<div class="mrc-preview-product-image-wrapper">
-					<div class="mrc-preview-product-image"></div>
-					<div class="mrc-preview-product-image-thumbs">
-						<div class="mrc-preview-product-image-thumb"></div>
-						<div class="mrc-preview-product-image-thumb"></div>
-						<div class="mrc-preview-product-image-thumb"></div>
-					</div>
-				</div>
-			</div>
-			<div class="mrc-preview-right-column">
-				<div class="mrc-preview-text-placeholder"></div>
-				<div class="mrc-preview-text-placeholder mrc-mw-70"></div>
-				<div class="mrc-preview-text-placeholder mrc-mw-30 mrc-hide-on-smaller-screens"></div>
-				<div class="mrc-preview-addtocart-placeholder mrc-hide-on-smaller-screens"></div>
-				<?php $this->trust_badges_output(); ?>
-			</div>
-		</div>
+        <div class="mrc-preview-single-product-elements">
+            <div class="mrc-preview-left-column">
+                <div class="mrc-preview-product-image-wrapper">
+                    <div class="mrc-preview-product-image"></div>
+                    <div class="mrc-preview-product-image-thumbs">
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                        <div class="mrc-preview-product-image-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mrc-preview-right-column">
+                <div class="mrc-preview-text-placeholder"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-70"></div>
+                <div class="mrc-preview-text-placeholder mrc-mw-30 mrc-hide-on-smaller-screens"></div>
+                <div class="mrc-preview-addtocart-placeholder mrc-hide-on-smaller-screens"></div>
+				<?php
+				$this->trust_badges_output(); ?>
+            </div>
+        </div>
 
 		<?php
 	}
 
 	/**
 	 * Get trust badges.
-	 * 
+	 *
 	 * @param string $badges
+	 *
 	 * @return array $badges Array of logos.
 	 */
 	public function get_badges( $badges ) {
-		return ! empty( $badges ) 
-			? explode( ',', $badges ) 
-			: array(
-				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge1.svg',
-				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge2.svg',
-				MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/badge3.svg',
-			);
-	}
-
-	/**
-	 * Get placeholder badges alternative descriptions.
-	 * 
-	 * @return array $logos_alt Array of badges alternative descriptions.
-	 */
-	public function get_placeholder_badges_alt_map() {
-		return array(
-			'badge1.svg' => __( 'Original', 'merchant' ),
-			'badge2.svg' => __( '24/7 Support', 'merchant' ),
-			'badge3.svg' => __( 'Satisfaction', 'merchant' ),
-		);
+		return ! empty( $badges )
+			? explode( ',', $badges )
+			: array();
 	}
 
 	/**
 	 * Render trust badges.
 	 * TODO: Render through template files.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function trust_badges_output() {
@@ -312,42 +293,38 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 			return;
 		}
 
-		$settings               = $this->get_module_settings();
-		$is_placeholder         = empty( $settings['badges'] );
-		$badges                 = $this->get_badges( $settings[ 'badges' ] );
-		$placeholder_badges_alt = $this->get_placeholder_badges_alt_map();
+		$settings       = $this->get_module_settings();
+		$default_badges = ! empty( $settings['default_badges'] ) ? $settings['default_badges'] : array();
+		$badges         = $this->get_badges( $settings['badges'] );
+		if ( empty( $default_badges ) && empty( $badges ) ) {
+			return;
+		}
 		?>
         <fieldset class="merchant-trust-badges">
-            <?php if ( ! empty( $settings[ 'title' ] ) ) : ?>
-                <legend class="merchant-trust-badges-title"><?php echo esc_html( Merchant_Translator::translate( $settings[ 'title' ] ) ); ?></legend>
-            <?php endif; ?>
-
-            <?php if ( ! $is_placeholder ) : ?>
-                <div class="merchant-trust-badges-images">
-                    <?php
-                    foreach ( $badges as $image_id ) {
-                        echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );
-                    }
-                    ?>
-                </div>
-
-            <?php else : ?>
-                <div class="merchant-trust-badges-images is-placeholder">
-                    <?php foreach ( $badges as $badge_src ) :
-                        $image_basename = basename( $badge_src );
-                        $image_alt      = isset( $placeholder_badges_alt[ $image_basename ] ) ? $placeholder_badges_alt[ $image_basename ] : '';
-                        ?>
-                        <img src="<?php echo esc_url( $badge_src ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+			<?php
+			if ( ! empty( $settings['title'] ) ) : ?>
+                <legend class="merchant-trust-badges-title"><?php
+					echo esc_html( Merchant_Translator::translate( $settings['title'] ) ); ?></legend>
+			<?php
+			endif; ?>
+            <div class="merchant-trust-badges-images">
+				<?php
+				foreach ( $default_badges as $badge_name ) {
+					$badge_src = MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/' . $badge_name . '.svg';
+					echo '<img src="' . esc_url( $badge_src ) . '" alt="' . esc_attr( $badge_name ) . '"/>';
+				}
+				foreach ( $badges as $image_id ) {
+					echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );
+				}
+				?>
+            </div>
         </fieldset>
-		<?php 
+		<?php
 	}
 
 	/**
 	 * Custom CSS.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function get_module_custom_css() {
@@ -382,34 +359,63 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 
 	/**
 	 * Admin custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
+	 *
 	 * @return string $css The custom CSS.
 	 */
 	public function admin_custom_css( $css ) {
-		$css .= $this->get_module_custom_css(); 
+		$css .= $this->get_module_custom_css();
 
 		return $css;
 	}
 
 	/**
 	 * Frontend custom CSS.
-	 * 
+	 *
 	 * @param string $css The custom CSS.
+	 *
 	 * @return string $css The custom CSS.
 	 */
 	public function frontend_custom_css( $css ) {
 		if ( ! is_singular( 'product' ) && ! Merchant_Modules::is_module_active( 'quick-view' ) ) {
 			return $css;
 		}
-		
+
 		$css .= $this->get_module_custom_css();
 
 		return $css;
 	}
+
+	/**
+	 * Backward compatibility.
+	 *
+	 * @return void
+	 */
+	public function backward_compatibility() {
+		$option_key = 'merchant_trust_badges_default_badges';
+		$flag       = get_option( $option_key, false );
+
+		if ( ! $flag ) {
+			$settings = $this->get_module_settings();
+			if ( empty( $settings['badges'] ) ) {
+				Merchant_Admin_Options::set(
+					$this->module_id,
+					'default_badges',
+					array(
+						'badge1',
+						'badge2',
+						'badge3',
+					)
+				);
+			}
+
+			update_option( $option_key, true );
+		}
+	}
 }
 
 // Initialize the module.
-add_action( 'init', function() {
+add_action( 'init', function () {
 	Merchant_Modules::create_module( new Merchant_Trust_Badges() );
 } );

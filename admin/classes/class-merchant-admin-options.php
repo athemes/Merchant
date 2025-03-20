@@ -494,7 +494,13 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'textarea_code':
 					$value = $value;
 					break;
-
+				case 'choices':
+					if ( is_array( $value ) ) {
+						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
+					} else {
+						$value = ( in_array( $value, array_keys( $field['options'] ), true ) ) ? sanitize_key( $value ) : '';
+					}
+					break;
 				case 'checkbox_multiple':
 					if ( is_array( $value ) && ! empty( $value ) ) {
 						$value = array_filter( array_map( 'sanitize_text_field', $value ) );
@@ -524,7 +530,6 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				case 'radio':
 				case 'radio_alt':
 				case 'select':
-				case 'choices':
 				case 'buttons':
 				case 'buttons_alt':
 				case 'buttons_content':
@@ -1463,6 +1468,7 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 		 * Field: Choices
 		 */
 		public static function choices( $settings, $value, $module_id = '' ) {
+            $multiple = isset( $settings['multiple'] ) ? $settings['multiple'] : false;
 			?>
             <div class="merchant-choices merchant-choices-<?php
 			echo esc_attr( $settings['id'] ) ?>">
@@ -1471,10 +1477,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 					<?php
 					foreach ( $settings['options'] as $key => $option ) : ?>
                         <label>
-                            <input type="radio" name="merchant[<?php
-							echo esc_attr( $settings['id'] ); ?>]" value="<?php
+                            <input type="<?php echo $multiple ? 'checkbox' : 'radio' ?>" name="merchant[<?php
+							echo esc_attr( $settings['id'] ); ?>]<?php echo $multiple ? '[]' : '' ?>" value="<?php
 							echo esc_attr( $key ); ?>" <?php
-							checked( $value, $key, true ); ?>/>
+                            $multiple && is_array( $value ) ? checked( in_array( $key, $value, true ), true ) : checked( $value, $key, true ); ?>/>
 							<?php
 							if ( ! empty( $option['svg'] ) ) : ?>
                                 <span class="merchant-svg">

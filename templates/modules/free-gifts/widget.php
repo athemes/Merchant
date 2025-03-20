@@ -19,7 +19,7 @@ $fg_classes .= ! empty( $settings['mobile_width'] ) ? ' merchant-free-gifts-widg
 ?>
 <div id="merchant-free-gifts-widget" class="<?php echo esc_attr( $fg_classes ); ?>">
     <div class="merchant-free-gifts-widget-inner">
-        <div class="merchant-free-gifts-widget-button" onclick="document.getElementById('merchant-free-gifts-widget').classList.toggle('active');">
+        <div class="merchant-free-gifts-widget-button">
             <span class="merchant-free-gifts-widget-count"><?php echo absint( $args['count'] ?? 0 ); ?></span>
             <div class="merchant-free-gifts-widget-icon">
 			    <?php echo wp_kses( Merchant_SVG_Icons::get_svg_icon( $settings['icon'] ?? 'gifts-icon-1' ), merchant_kses_allowed_tags( array(), false ) ); ?>

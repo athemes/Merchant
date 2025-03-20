@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
 	// Add to cart AJAX event.
 	if (sideCartObj.hasOwnProperty('add_to_cart_slide_out') && merchant_is_allowed_device()) {
 		$(document.body).on('added_to_cart', function (event, fragments, cart_hash, $button, $context) {
-			if ($context !== 'side-cart') {
+			if ($context !== 'side-cart' && $context !== 'free-gifts') {
 				$body.toggleClass('merchant-side-cart-show');
 			}
 			$(window).trigger('merchant.side-cart-resize');
@@ -82,7 +82,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// Update Product quantity in Side Cart
-	if ( sideCartObj.hasOwnProperty('add_to_cart_slide_out') && merchant_is_allowed_device() ) {
+	// if ( sideCartObj.hasOwnProperty('add_to_cart_slide_out') && merchant_is_allowed_device() ) {
 		// Update quantity on plus/minus click
 		$(document).on('click', '.js-merchant-quantity-btn', function (e) {
 			e.preventDefault();
@@ -177,7 +177,7 @@ jQuery(document).ready(function ($) {
 				350
 			);
 		}
-	}
+	// }
 
 	let merchant_upsells = {
 		init: function () {
