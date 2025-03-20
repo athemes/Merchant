@@ -56,7 +56,10 @@ if ( empty( $args['bundles'] ) ) {
 								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ); ?>" style="<?php
 								echo isset( $bundle['product_single_page']['bundle_border_radius'] ) ? esc_attr( 'border-radius: ' . $bundle['product_single_page']['bundle_border_radius'] . 'px;' ) : '';
 								echo isset( $bundle['product_single_page']['bundle_border_color'] ) ? esc_attr( 'border-color: ' . $bundle['product_single_page']['bundle_border_color'] . ';' ) : ''; ?>">
-									<?php echo wp_kses_post( $product['image'] ); ?>
+                                    <a href="<?php echo esc_url( $product['permalink'] ) ?>">
+                                        <?php
+                                        echo wp_kses_post( $product['image'] ); ?>
+                                    </a>
 									<div class="merchant-frequently-bought-together-bundle-product-contents">
 										<p class="woocommerce-loop-product__title">
 											<a href="<?php echo esc_url( $product['permalink'] ); ?>" target="_blank">
