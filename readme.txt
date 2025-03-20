@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,9 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 2.0.3 =
+* Fixed - Pre-orders: Resolved an issue where shipping information was not appearing on the Cart and Order email when the Trigger was set to a Variable product in the module settings
+
 = 2.0.2 =
 * Added - Added a toggle to control analytics logging. This prevents the "record impression" AJAX event from firing if analytics is disabled
 * Changed - Analytics: Removed records from analytics when an order is refunded
