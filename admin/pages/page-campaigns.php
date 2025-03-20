@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $reports     = new Merchant_Analytics_Data_Reports();
 $date_ranges = $reports->get_last_and_previous_7_days_ranges();
 
-$campaigns_data = $reports->get_all_campaigns( $date_ranges['last_period'] );
+$campaigns_data = $reports->get_all_campaigns( $date_ranges['recent_period'] );
 
 $total_rows = array_reduce(
 	$campaigns_data,

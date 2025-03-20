@@ -278,6 +278,7 @@ if ( ! function_exists( 'merchant_modules_shortcode_exists' ) ) {
 				'merchant_module_quick_view',
 				'merchant_module_real_time_search',
 				'merchant_reviews_carousel',
+				'merchant_module_complementary_products',
 			)
 		);
 
