@@ -526,9 +526,10 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Layout', 'merchant' ),
 			'options' => array(
 				'classic' => esc_html__( 'Classic', 'merchant' ),
-				'slider'  => esc_html__( 'Slider', 'merchant' ),
+				// only the copy has been changed to carousel, but the naming is the same "slider"
+				'slider'  => esc_html__( 'Carousel', 'merchant' ),
 			),
-			'default' => 'classic',
+			'default' => 'slider',
 		),
 
 		array(
