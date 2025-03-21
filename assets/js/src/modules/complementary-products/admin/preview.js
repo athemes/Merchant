@@ -66,7 +66,7 @@
 		$('.merchant-cart-preview .add-to-cart').text(cartBundleBtnTitle);
 
 		$('.merchant-checkout-preview .offer-title').text(checkoutBundleTitle.replace('{discount_amount}', '10%'));
-		$('.merchant-checkout-preview .offer-desc').text(checkoutBundleDesc);
+		$('.merchant-checkout-preview .offer-desc').text(checkoutBundleDesc.replace('{discount_amount}', '10%'));
 		$('.merchant-checkout-preview .add-to-order').text(checkoutBundleBtnTitle);
 
 		$('.merchant-thank-you-preview .offer-title').text(thankYouBundleTitle.replace('{discount_amount}', '10%'));
