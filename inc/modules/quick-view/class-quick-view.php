@@ -495,7 +495,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 								$description = apply_filters( 'merchant_quick_view_description', $description );
 								?>
                                 <div class="merchant-quick-view-product-excerpt">
-									<?php echo wp_kses_post( $description ); ?>
+									<?php echo wp_kses_post( do_shortcode( $description ) ); ?>
                                 </div>
 
 								<?php
@@ -548,7 +548,7 @@ class Merchant_Quick_View extends Merchant_Add_Module {
 								$description = apply_filters( 'merchant_quick_view_description', $description );
 								?>
                                 <div class="merchant-quick-view-product-excerpt">
-									<?php echo wp_kses_post( $description ); ?>
+									<?php echo wp_kses_post( do_shortcode( $description ) ); ?>
                                 </div>
 
 								<?php
