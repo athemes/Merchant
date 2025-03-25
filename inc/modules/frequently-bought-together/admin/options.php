@@ -192,6 +192,12 @@ Merchant_Admin_Options::create( array(
 							'desc'    => esc_html__( 'Choose the maximum number of products you’d like the bundle to include.', 'merchant' ),
 						),
 						array(
+							'id'      => 'optional_offer_products',
+							'type'    => 'checkbox',
+							'label'   => __( 'Offer products as optional', 'merchant' ),
+							'default' => 0,
+						),
+						array(
 							'id'         => 'ai_products_count',
 							'title'      => esc_html__( 'Maximum number of offer products shown', 'merchant' ),
 							'type'       => 'select',
