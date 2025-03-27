@@ -46,9 +46,7 @@
 		max-height: var(--mrc-tb-image-max-height, 70px) !important;
 	}
 	
-	&.is-placeholder {
-		img {
-			width: 100%;
-		}
+	.is-placeholder {
+		width: 100%;
 	}
 }
