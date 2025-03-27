@@ -28,6 +28,7 @@
             addToCartText = layout.find('.merchant-field-button_text input').val(),
             plusSignBgColor = layout.find('.merchant-field-plus_bg_color input').val(),
             plusSignTextColor = layout.find('.merchant-field-plus_text_color input').val(),
+            optionalProducts = layout.find('.merchant-field-optional_offer_products input').is(':checked'),
             offerBorderColor = layout.find('.merchant-field-bundle_border_color input').val(),
             offerBorderRadius = layout.find('.merchant-field-bundle_border_radius input.merchant-range-number-input').val(),
             cartBundleTitle = layout.find('.merchant-group-field-cart_page .merchant-field-title input').val(),
@@ -49,6 +50,12 @@
             'border-color': offerBorderColor,
             'border-radius': offerBorderRadius + 'px'
         });
+
+        if(optionalProducts){
+            $('.merchant-frequently-bought-together-bundle-product .optional-product').show();
+        }else{
+            $('.merchant-frequently-bought-together-bundle-product .optional-product').hide();
+        }
 
         $('.merchant-frequently-bought-together-title').html(titleTextColor);
         $('.merchant-frequently-bought-together-bundle-total').html(totalText);

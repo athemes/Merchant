@@ -355,7 +355,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			),
 			true
 		),
-			merchant_kses_allowed_tags() );
+			merchant_kses_allowed_tags( array( 'all' ) ) );
 		?>
         </div>
         <div class="merchant-cart-preview">
