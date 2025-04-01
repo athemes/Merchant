@@ -421,6 +421,14 @@ Merchant_Admin_Options::create( array(
 								),
 
 								array(
+									'id'      => 'price_label_single_product',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Price label for one selected product', 'merchant' ),
+									'default' => esc_html__( 'Product price', 'merchant' ),
+									'desc'    => esc_html__( 'Price label when only one product selected', 'merchant' ),
+								),
+
+								array(
 									'id'      => 'save_label',
 									'type'    => 'text',
 									'title'   => esc_html__( 'You save label', 'merchant' ),
