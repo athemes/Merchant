@@ -167,7 +167,7 @@
 			width: 100%;
 			border: 1px solid var(--merchant-cp-product-border-color, transparent);
 			padding: 5px 10px;
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 			border-radius: var(--merchant-cp-product-border-radius, 0);
 
 			&:last-of-type {
@@ -232,6 +232,18 @@
 				.mrc-preview-bundle-product-price {
 					margin-bottom: 0;
 				}
+			}
+		}
+
+		&.compact {
+			.mrc-preview-bundle-product {
+				margin-bottom: 5px;
+			}
+
+			.mrc-preview-bundle-product-image {
+				height: 35px;
+				width: 35px;
+				margin-right: 10px;
 			}
 		}
 
