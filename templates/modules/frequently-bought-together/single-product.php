@@ -56,6 +56,7 @@ if ( empty( $args['bundles'] ) ) {
 								<div class="merchant-frequently-bought-together-bundle-product<?php echo $is_variable_product ? ' is-variable' : ''; ?>" data-product="<?php echo esc_attr( $product['id'] ) ?>" data-key="<?php echo esc_attr( $product_key ) ?>" data-product-price="<?php echo esc_attr( $product['price'] ); ?>" style="<?php
 								echo isset( $bundle['product_single_page']['bundle_border_radius'] ) ? esc_attr( 'border-radius: ' . $bundle['product_single_page']['bundle_border_radius'] . 'px;' ) : '';
 								echo isset( $bundle['product_single_page']['bundle_border_color'] ) ? esc_attr( 'border-color: ' . $bundle['product_single_page']['bundle_border_color'] . ';' ) : ''; ?>">
+                                    <input type="checkbox" class="optional-product" checked>
                                     <a href="<?php echo esc_url( $product['permalink'] ) ?>">
                                         <?php
                                         echo wp_kses_post( $product['image'] ); ?>
@@ -92,12 +93,17 @@ if ( empty( $args['bundles'] ) ) {
 											</div>
 										<?php endif; ?>
 									</div>
-									<?php if ( $product_key !== ( count( $bundle['products'] ) - 1 ) ) : ?>
-										<div class="merchant-frequently-bought-together-bundle-product-plus" style="<?php
-										echo isset( $bundle['product_single_page']['plus_bg_color'] ) ? esc_attr( 'background-color: ' . $bundle['product_single_page']['plus_bg_color'] . ';' ) : '';
-										echo isset( $bundle['product_single_page']['plus_text_color'] ) ? esc_attr( 'color: ' . $bundle['product_single_page']['plus_text_color'] . ';' ) : ''; ?>">+</div>
-									<?php endif; ?>
 								</div>
+								<?php if ( $product_key !== ( count( $bundle['products'] ) - 1 ) ) : ?>
+                                <div class="plus-icon">
+                                    <div class="bundle-product-plus" style="<?php
+									echo isset( $bundle['product_single_page']['plus_bg_color'] ) ? esc_attr( 'background-color: ' . $bundle['product_single_page']['plus_bg_color']
+																												. ';' ) : '';
+									echo isset( $bundle['product_single_page']['plus_text_color'] ) ? esc_attr( 'color: ' . $bundle['product_single_page']['plus_text_color']
+									                                                                            . ';' ) : ''; ?>">+
+                                    </div>
+                                </div>
+							<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
 						<div class="merchant-frequently-bought-together-bundle-offer">

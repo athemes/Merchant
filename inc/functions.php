@@ -235,6 +235,33 @@ if ( ! function_exists( 'merchant_is_ohio_active' ) ) {
 	}
 }
 
+if ( ! function_exists( 'merchant_supply_defaults' ) ) {
+	/**
+	 * Recursively merge two arrays, preserving distinct values.
+	 *
+	 * Merges the provided arguments into the defaults recursively. If a key exists in both arrays
+	 * and both values are arrays, they are merged recursively. Otherwise, the value from the
+	 * arguments array overrides the default value.
+	 *
+	 * @param array $defaults The default array containing base values.
+	 * @param array $args     The arguments array containing values to override or supplement defaults.
+	 *
+	 * @return array The merged array with defaults supplemented or overridden by arguments.
+	 */
+	function merchant_supply_defaults( array $defaults, array $args ) {
+		$merged = $defaults;
+		foreach ( $args as $key => $value ) {
+			if ( is_array( $value ) && isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) {
+				$merged[ $key ] = merchant_supply_defaults( $merged[ $key ], $value );
+			} else {
+				$merged[ $key ] = $value;
+			}
+		}
+
+		return $merged;
+	}
+}
+
 /**
  * Check if any shortcode starts with merchant doesn't exist.
  * If the shortcode is not registered, register it with return null to guarantee it exists.

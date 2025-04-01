@@ -98,13 +98,15 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 	 */
 	public function init_translations() {
 		$settings = $this->get_module_settings();
-		$strings  = array(
+		$strings = array(
 			'title'                                      => 'Frequently bought together: title',
 			'price_label'                                => 'Frequently bought together: price label',
 			'save_label'                                 => 'Frequently bought together: save label',
 			'no_variation_selected_text'                 => 'Frequently bought together: no variation selected text',
 			'no_variation_selected_text_has_no_discount' => 'Frequently bought together: no variation selected text (no discount)',
 			'button_text'                                => 'Frequently bought together: button text',
+			'discount_text'                              => 'Frequently bought together: discount text',
+			'bonus_tip_text'                             => 'Frequently bought together: bonus tip text',
 		);
 		if ( ! empty( $settings['offers'] ) ) {
 			foreach ( $settings['offers'] as $offer ) {
@@ -114,7 +116,13 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 						Merchant_Translator::register_string( $offer['product_single_page'][ $key ], $string . ' - product single page' );
 					}
 					if ( ! empty( $offer['cart_page'][ $key ] ) ) {
-						Merchant_Translator::register_string( $offer['cart_page'][ $key ], $string . ' - cart page' );
+						Merchant_Translator::register_string( $offer['cart_page'][ $key ], $string );
+					}
+					if ( ! empty( $offer['checkout_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $offer['checkout_page'][ $key ], $string );
+					}
+					if ( ! empty( $offer['thank_you_page'][ $key ] ) ) {
+						Merchant_Translator::register_string( $offer['thank_you_page'][ $key ], $string );
 					}
 				}
 			}
@@ -355,7 +363,7 @@ class Merchant_Frequently_Bought_Together extends Merchant_Add_Module {
 			),
 			true
 		),
-			merchant_kses_allowed_tags() );
+			merchant_kses_allowed_tags( array( 'all' ) ) );
 		?>
         </div>
         <div class="merchant-cart-preview">

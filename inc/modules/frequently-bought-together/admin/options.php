@@ -192,6 +192,12 @@ Merchant_Admin_Options::create( array(
 							'desc'    => esc_html__( 'Choose the maximum number of products you’d like the bundle to include.', 'merchant' ),
 						),
 						array(
+							'id'      => 'optional_offer_products',
+							'type'    => 'checkbox',
+							'label'   => __( 'Offer products as optional', 'merchant' ),
+							'default' => 1,
+						),
+						array(
 							'id'         => 'ai_products_count',
 							'title'      => esc_html__( 'Maximum number of offer products shown', 'merchant' ),
 							'type'       => 'select',
@@ -412,6 +418,14 @@ Merchant_Admin_Options::create( array(
 									'type'    => 'text',
 									'title'   => esc_html__( 'Price label', 'merchant' ),
 									'default' => esc_html__( 'Bundle price', 'merchant' ),
+								),
+
+								array(
+									'id'      => 'price_label_single_product',
+									'type'    => 'text',
+									'title'   => esc_html__( 'Price label for one selected product', 'merchant' ),
+									'default' => esc_html__( 'Product price', 'merchant' ),
+									'desc'    => esc_html__( 'Price label when only one product selected', 'merchant' ),
 								),
 
 								array(
