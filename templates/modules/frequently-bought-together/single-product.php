@@ -98,7 +98,7 @@ if ( empty( $args['bundles'] ) ) {
                                 <div class="plus-icon">
                                     <div class="bundle-product-plus" style="<?php
 									echo isset( $bundle['product_single_page']['plus_bg_color'] ) ? esc_attr( 'background-color: ' . $bundle['product_single_page']['plus_bg_color']
-									                                                                          . ';' ) : '';
+																												. ';' ) : '';
 									echo isset( $bundle['product_single_page']['plus_text_color'] ) ? esc_attr( 'color: ' . $bundle['product_single_page']['plus_text_color']
 									                                                                            . ';' ) : ''; ?>">+
                                     </div>
