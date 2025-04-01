@@ -46,7 +46,7 @@
 		let title = $('.mrc-preview-bundle-title');
 		title.replaceWith(`<${headingSize} class="mrc-preview-bundle-title">${title.text()}</${headingSize}>`);
 		title.text(singleBundleTitle);
-		$('.mrc-preview-bundle-wrapper').removeClass('slider classic').addClass(singleLayout);
+		$('.mrc-preview-bundle-wrapper').removeClass('slider compact classic').addClass(singleLayout);
 		$('.mrc-preview-bundle-description').text(singleBundleDescription.replace('{discount_amount}', '10%'));
 
 		$(":root").css({

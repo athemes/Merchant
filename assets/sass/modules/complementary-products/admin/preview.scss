@@ -96,12 +96,12 @@
 	.mrc-preview-product-image-wrapper {
 		.mrc-preview-product-image {
 			background-color: #f5f5f5;
-			height: 12vw;
+			height: 100vw;
 		}
 
 		.mrc-preview-product-image-thumbs {
 			width: 100%;
-			display: flex;
+			display: none;
 			gap: 10px;
 			flex-wrap: nowrap;
 
@@ -167,7 +167,7 @@
 			width: 100%;
 			border: 1px solid var(--merchant-cp-product-border-color, transparent);
 			padding: 5px 10px;
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 			border-radius: var(--merchant-cp-product-border-radius, 0);
 
 			&:last-of-type {
@@ -235,11 +235,23 @@
 			}
 		}
 
+		&.compact {
+			.mrc-preview-bundle-product {
+				margin-bottom: 5px;
+			}
+
+			.mrc-preview-bundle-product-image {
+				height: 35px;
+				width: 35px;
+				margin-right: 10px;
+			}
+		}
+
 		&.slider {
-			display: flex;
-			flex-direction: row;
-			gap: 10px;
-			width: 100%;
+			display: block;
+			//flex-direction: row;
+			//gap: 10px;
+			//width: 100%;
 
 			.mrc-preview-bundle-title {
 				//flex: 1;
@@ -260,6 +272,7 @@
 				scroll-behavior: smooth;
 				cursor: grab; /* Shows grab cursor */
 				user-select: none; /* Prevents text selection while dragging */
+				gap: 30px;
 
 				&::-webkit-scrollbar {
 					display: none;
@@ -273,18 +286,20 @@
 				position: relative;
 				flex-shrink: 0; /* Prevent shrinking */
 				white-space: nowrap; /* Optional: prevent text wrapping */
-				padding: 5px;
+				padding: 0;
+				margin-bottom: 0;
 
 				.mrc-preview-bundle-checkbox {
 					position: absolute;
-					top: 15px;
-					right: 10px;
+					top: 10px;
+					right: 0;
 				}
 
 				.mrc-preview-bundle-product-image {
 					width: 100%;
-					height: 100px;
+					height: 150px;
 					margin-bottom: 10px;
+					margin-right: 0;
 				}
 
 				.mrc-preview-bundle-product-info {
