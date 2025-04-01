@@ -195,7 +195,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'optional_offer_products',
 							'type'    => 'checkbox',
 							'label'   => __( 'Offer products as optional', 'merchant' ),
-							'default' => 0,
+							'default' => 1,
 						),
 						array(
 							'id'         => 'ai_products_count',
