@@ -417,7 +417,10 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
                                 // skip the sanitization for the flexible_content field, we will sanitize each item
 								if ( is_array( $value ) ) {
 									foreach ( $value as &$item ) {
-										$item = map_deep( $item, 'sanitize_text_field' );
+										$item = map_deep( $item, function( $data ) {
+											return sanitize_text_field( stripslashes( $data ) );
+										} );
+
 										// Ensure each item has a flexible_id
 										if ( ! isset( $item['flexible_id'] ) || empty( $item['flexible_id'] ) ) {
                                             // If there are any JavaScript errors, this will ensure that the flexible_id is generated
@@ -474,7 +477,9 @@ if ( ! class_exists( 'Merchant_Admin_Options' ) ) {
 				return call_user_func( $field['sanitize'], $value );
 			}
 
-			switch ( $field['type'] ) {
+            $type = $field['type'] ?? '';
+
+			switch ( $type ) {
 				case 'text':
 				case 'color':
 				case 'number':
