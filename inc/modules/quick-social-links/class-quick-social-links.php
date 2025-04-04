@@ -281,6 +281,7 @@ class Merchant_Quick_Social_Links extends Merchant_Add_Module {
 				'bandcamp'   => esc_html__( 'Bandcamp', 'merchant' ),
 				'reddit'     => esc_html__( 'Reddit', 'merchant' ),
 				'github'     => esc_html__( 'Github', 'merchant' ),
+				'bsky'       => esc_html__( 'Bluesky', 'merchant' ),
 		);
 	}
 
