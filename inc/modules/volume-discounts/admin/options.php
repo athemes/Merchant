@@ -746,6 +746,7 @@ Merchant_Admin_Options::create( array(
 			'id'      => 'max_checkout_offers',
 			'type'    => 'number',
 			'title'   => __( 'Max offers on checkout page', 'merchant' ),
+			'desc'    => __( 'Set the maximum offers can be displayed on the checkout page.', 'merchant' ),
 			'default' => 3,
 		),
 	),
