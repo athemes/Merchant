@@ -7,7 +7,7 @@
         const input  = $(this).val();
         const layout = $(this).closest('.layout');
 
-        var socialMediaIcons = [
+        const socialMediaIcons = [
           'facebook',
           'instagram',
           'twitter',
@@ -33,10 +33,11 @@
           'bandcamp',
           'reddit',
           'github',
+          'bsky',
         ];
 
-        for (var i = 0; i < socialMediaIcons.length; i++) {
-          var socialMediaIcon = socialMediaIcons[i];
+        for (let i = 0; i < socialMediaIcons.length; i++) {
+          const socialMediaIcon = socialMediaIcons[i];
 
           if (input.includes(socialMediaIcon)) {
             layout.find('input[type=radio][value="' + socialMediaIcon + '"]').prop('checked', true);

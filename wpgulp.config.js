@@ -389,11 +389,6 @@ const styles = [
 		src: './assets/sass/modules/frequently-bought-together/admin/preview.scss',
 		destination: './assets/css/modules/frequently-bought-together/admin',
 	},
-	{
-		name: 'frequentlyBoughtTogether',
-		src: './assets/sass/modules/frequently-bought-together/frequently-bought-together.scss',
-		destination: './assets/css/modules/frequently-bought-together',
-	},
 
 	//recent-sales-notifications
 	{

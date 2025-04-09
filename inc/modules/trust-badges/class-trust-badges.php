@@ -149,7 +149,7 @@ class Merchant_Trust_Badges extends Merchant_Add_Module {
 					<?php
 					foreach ( $default_badges as $badge_name ) {
 						$badge_src = MERCHANT_URI . 'inc/modules/' . self::MODULE_ID . '/admin/images/' . $badge_name . '.svg';
-						echo '<img src="' . esc_url( $badge_src ) . '" alt="' . esc_attr( $badge_name ) . '"/>';
+						echo '<img src="' . esc_url( $badge_src ) . '" class="is-placeholder" alt="' . esc_attr( $badge_name ) . '"/>';
 					}
 					foreach ( $badges as $image_id ) {
 						echo wp_kses_post( wp_get_attachment_image( $image_id, 'full' ) );

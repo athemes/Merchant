@@ -402,10 +402,11 @@ Merchant_Admin_Options::create( array(
 							'fields'         => array(
 								// text formatting settings
 								array(
-									'id'      => 'title',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Campaign title', 'merchant' ),
-									'default' => esc_html__( 'Add', 'merchant' ),
+									'id'          => 'title',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Campaign title', 'merchant' ),
+									'default'     => esc_html__( 'Add', 'merchant' ),
+									'desc'        => esc_html__( 'Add discount title', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Display the discount amount */
 										__(
@@ -449,10 +450,11 @@ Merchant_Admin_Options::create( array(
 									'default' => 'before_payment_options',
 								),
 								array(
-									'id'      => 'title',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Offer title', 'merchant' ),
-									'default' => esc_html__( 'Recommended For You', 'merchant' ),
+									'id'          => 'title',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Offer title', 'merchant' ),
+									'default'     => esc_html__( 'Recommended For You', 'merchant' ),
+									'desc'        => esc_html__( 'Enter an optional title to show before the complementary products', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Display the discount amount */
 										__(
@@ -466,7 +468,15 @@ Merchant_Admin_Options::create( array(
 									'id'          => 'offer_description',
 									'type'        => 'textarea',
 									'title'       => esc_html__( 'Description', 'merchant' ),
-									'desc'     => esc_html__( 'Enter an optional campaign description', 'merchant' ),
+									'desc'        => esc_html__( 'Enter an optional campaign description', 'merchant' ),
+									'hidden_desc' => sprintf(
+									/* Translators: %1$s: Display the discount amount */
+										__(
+											'<strong>%1$s:</strong> Display the discount, only applies to percentage or fixed-amount discounts',
+											'merchant'
+										),
+										'{discount_amount}',
+									),
 								),
 								array(
 									'id'      => 'button_text',
@@ -502,6 +512,7 @@ Merchant_Admin_Options::create( array(
 									'id'          => 'title',
 									'type'        => 'text',
 									'title'       => esc_html__( 'Bundle title', 'merchant' ),
+									'desc'        => esc_html__( 'Add discount title', 'merchant' ),
 									'default'     => esc_html__( 'Last chance to get', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Display the discount amount */
@@ -518,6 +529,7 @@ Merchant_Admin_Options::create( array(
 									'type'        => 'text',
 									'title'       => esc_html__( 'Discount text', 'merchant' ),
 									'default'     => esc_html__( 'With discount', 'merchant' ),
+									'desc'        => esc_html__( 'Show the discount details on the product', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Display the discount amount */
 										__(
@@ -565,6 +577,7 @@ Merchant_Admin_Options::create( array(
 			'title'   => esc_html__( 'Layout', 'merchant' ),
 			'options' => array(
 				'classic' => esc_html__( 'Classic', 'merchant' ),
+				'compact' => esc_html__( 'Compact', 'merchant' ),
 				// only the copy has been changed to carousel, but the naming is the same "slider"
 				'slider'  => esc_html__( 'Carousel', 'merchant' ),
 			),

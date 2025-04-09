@@ -233,8 +233,16 @@ Merchant_Admin_Options::create( array(
 							),
 						),
 						array(
+							'id'      => 'optional_offer_products',
+							'type'    => 'checkbox',
+							'label'   => __( 'Offer products as optional', 'merchant' ),
+							'desc'    => __( 'Offer the products as an optional add-on, giving customers customize their purchase', 'merchant' ),
+							'default' => 1,
+						),
+						array(
 							'id'         => 'external',
 							'label'      => __( 'Display the offer on all products in the bundle', 'merchant' ),
+							'desc'       => __( 'Show the campaign on the offered products included in the bundle to maximize visibility', 'merchant' ),
 							'type'       => 'checkbox',
 							'default'    => 0,
 							'conditions' => array(
@@ -382,13 +390,13 @@ Merchant_Admin_Options::create( array(
 								array(
 									'id'      => 'single_product_placement',
 									'type'    => 'hook_select',
-									'title'   => esc_html__('Placement on product page', 'merchant'),
+									'title'   => esc_html__( 'Placement on product page', 'merchant' ),
 									'options' => array(
 										'after-summary' => esc_html__( 'After Product Summary', 'merchant' ),
 										'after-tabs'    => esc_html__( 'After Product Tabs', 'merchant' ),
 										'bottom'        => esc_html__( 'At the Bottom', 'merchant' ),
 									),
-									'min'     => -999,
+									'min'     => - 999,
 									'max'     => 999,
 									'step'    => 1,
 									'unit'    => '',
@@ -415,10 +423,18 @@ Merchant_Admin_Options::create( array(
 								),
 
 								array(
-									'id'      => 'save_label',
+									'id'      => 'price_label_single_product',
 									'type'    => 'text',
-									'title'   => esc_html__( 'You save label', 'merchant' ),
-									'default' => esc_html__( 'You save: {amount}', 'merchant' ),
+									'title'   => esc_html__( 'Price label for one selected product', 'merchant' ),
+									'default' => esc_html__( 'Product price', 'merchant' ),
+									'desc'    => esc_html__( 'Price label when only one product selected', 'merchant' ),
+								),
+
+								array(
+									'id'          => 'save_label',
+									'type'        => 'text',
+									'title'       => esc_html__( 'You save label', 'merchant' ),
+									'default'     => esc_html__( 'You save: {amount}', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
@@ -513,10 +529,10 @@ Merchant_Admin_Options::create( array(
 								//                              ),
 
 								array(
-									'id'      => 'save_label',
-									'type'    => 'text',
-									'title'   => esc_html__( 'And save label', 'merchant' ),
-									'default' => esc_html__( 'and save: {amount}', 'merchant' ),
+									'id'          => 'save_label',
+									'type'        => 'text',
+									'title'       => esc_html__( 'And save label', 'merchant' ),
+									'default'     => esc_html__( 'and save: {amount}', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
@@ -582,10 +598,10 @@ Merchant_Admin_Options::create( array(
 									'default' => esc_html__( 'Bundle and Save!', 'merchant' ),
 								),
 								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'Add to get {discount} off all items in your bundle ({fbt_products}).', 'merchant' ),
+									'id'          => 'discount_text',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Discount text', 'merchant' ),
+									'default'     => esc_html__( 'Add to get {discount} off all items in your bundle ({fbt_products}).', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount, %2$s: FBT offer product names */
@@ -616,10 +632,10 @@ Merchant_Admin_Options::create( array(
 							'display_status' => true,
 							'fields'         => array(
 								array(
-									'id'      => 'title',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Bundle title', 'merchant' ),
-									'default' => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
+									'id'          => 'title',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Bundle title', 'merchant' ),
+									'default'     => esc_html__( 'Last chance to get {discount} off your bundle!', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
@@ -644,10 +660,10 @@ Merchant_Admin_Options::create( array(
 								),
 
 								array(
-									'id'      => 'discount_text',
-									'type'    => 'text',
-									'title'   => esc_html__( 'Discount text', 'merchant' ),
-									'default' => esc_html__( 'Add now to complete your bundle ({fbt_products}) and save', 'merchant' ),
+									'id'          => 'discount_text',
+									'type'        => 'text',
+									'title'       => esc_html__( 'Discount text', 'merchant' ),
+									'default'     => esc_html__( 'Add now to complete your bundle ({fbt_products}) and save', 'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */
@@ -660,10 +676,11 @@ Merchant_Admin_Options::create( array(
 									),
 								),
 								array(
-									'id'      => 'bonus_tip_text',
-									'type'    => 'textarea',
-									'title'   => esc_html__( 'Bonus tip text', 'merchant' ),
-									'default' => esc_html__( 'Note: When you click ‘Add to Cart’, the item will be added to your cart and you’ll be taken to the cart page where you’ll see that a bundle discount has been applied to it. This is shown under ‘Your Savings’, and reflects a {discount} discount based on the original prices of the {fbt_products}. You can then proceed to checkout as usual. ', 'merchant' ),
+									'id'          => 'bonus_tip_text',
+									'type'        => 'textarea',
+									'title'       => esc_html__( 'Bonus tip text', 'merchant' ),
+									'default'     => esc_html__( 'Note: When you click ‘Add to Cart’, the item will be added to your cart and you’ll be taken to the cart page where you’ll see that a bundle discount has been applied to it. This is shown under ‘Your Savings’, and reflects a {discount} discount based on the original prices of the {fbt_products}. You can then proceed to checkout as usual. ',
+										'merchant' ),
 									'desc'        => __( 'You can use these codes in the content.', 'merchant' ),
 									'hidden_desc' => sprintf(
 									/* Translators: %1$s: Discount amount */

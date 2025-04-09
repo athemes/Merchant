@@ -738,6 +738,20 @@ Merchant_Admin_Options::create( array(
 	),
 ) );
 
+Merchant_Admin_Options::create( array(
+	'title'  => esc_html__( 'General', 'merchant' ),
+	'module' => Merchant_Volume_Discounts::MODULE_ID,
+	'fields' => array(
+		array(
+			'id'      => 'max_checkout_offers',
+			'type'    => 'number',
+			'title'   => __( 'Max offers on checkout page', 'merchant' ),
+			'desc'    => __( 'Set the maximum offers can be displayed on the checkout page.', 'merchant' ),
+			'default' => 3,
+		),
+	),
+) );
+
 // Shortcode
 $merchant_module_id = Merchant_Volume_Discounts::MODULE_ID;
 Merchant_Admin_Options::create( array(

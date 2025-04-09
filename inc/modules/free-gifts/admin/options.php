@@ -386,6 +386,18 @@ Merchant_Admin_Options::create( array(
 	'title'  => esc_html__( 'Cart Settings', 'merchant' ),
 	'fields' => array(
 		array(
+			'id'      => 'gift_claim_method',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Gift claim method', 'merchant' ),
+			'desc'    => esc_html__( 'Select how customers receive free gifts. ‘Manual’ requires customers to click a claim button, while ‘Automatic’ adds the gift to their cart once they meet the spending threshold.', 'merchant' ),
+			'options' => array(
+				'manual'    => esc_html__( 'Manual', 'merchant' ),
+				'automatic' => esc_html__( 'Automatic', 'merchant' ),
+			),
+			'default' => 'manual',
+		),
+
+		array(
 			'id'      => 'total_type',
 			'type'    => 'select',
 			'title'   => esc_html__( 'Gift based on spending type', 'merchant' ),
@@ -423,7 +435,7 @@ Merchant_Admin_Options::create( array(
 		array(
 			'id'      => 'tiered_free_gifts',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'Tiered Free Gifts', 'merchant' ),
+			'title'   => esc_html__( 'Tiered free gifts', 'merchant' ),
 			'desc'    => esc_html__( 'Customers can claim one free gift per order. Selecting a new gift automatically replaces any previously chosen gift.', 'merchant' ),
 			'default' => 0,
 		),
