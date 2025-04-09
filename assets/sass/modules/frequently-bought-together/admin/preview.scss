@@ -558,17 +558,41 @@
 	}
 }
 
-// Frequently Bought Together.
+
 .merchant-frequently-bought-together {
 	margin: 0 auto;
 	width: 100%;
 }
 
+.merchant-frequently-bought-together-bundle {
+	display: flex;
+	gap: 15px;
+}
+
+.merchant-frequently-bought-together-bundle-products {
+	display: flex;
+	gap: 25px;
+}
+
+.merchant-frequently-bought-together-bundle-offer {
+	.merchant-frequently-bought-together-bundle-total-price {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		ins {
+			text-decoration: none;
+			font-weight: 700;
+		}
+	}
+}
+
 .merchant-frequently-bought-together-bundle-product {
-	padding: 0px;
+	padding: 0;
 	max-width: 140px;
 	border: none;
 	margin-right: 10px;
+	position: relative;
 
 	.optional-product {
 		position: absolute;
@@ -582,7 +606,7 @@
 		cursor: pointer;
 		border-radius: var(--merchant-fbt-checkbox-border-radius, 0);
 
-		&:focus{
+		&:focus {
 			outline: none;
 			box-shadow: none;
 			border: 1px solid var(--merchant-fbt-checkbox-color, #000);
@@ -591,7 +615,7 @@
 		&:checked {
 			background: var(--merchant-fbt-checkbox-color, #000);
 
-			&:before{
+			&:before {
 				display: none;
 			}
 
@@ -609,7 +633,7 @@
 }
 
 .merchant-frequently-bought-together-bundle-product img,
-.merchant-frequently-bought-together-bundle-product:not(:first-child) img{
+.merchant-frequently-bought-together-bundle-product:not(:first-child) img {
 	width: 100%;
 	height: auto;
 }
@@ -671,16 +695,5 @@
 		color: #FFF;
 		border-color: #212121;
 		pointer-events: none;
-	}
-}
-
-.merchant-frequently-bought-together-bundle-total-price {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-
-	ins {
-		text-decoration: none;
-		font-weight: 700;
 	}
 }
