@@ -317,6 +317,32 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'         => 'exclude_roles',
+							'type'       => 'select_ajax',
+							'title'      => esc_html__( 'Exclude Roles', 'merchant' ),
+							'desc'       => esc_html__( 'This will exclude the offer for users with these roles.', 'merchant' ),
+							'source'     => 'options',
+							'multiple'   => true,
+							'classes'    => array( 'flex-grow' ),
+							'options'    => Merchant_Admin_Options::get_user_roles_select2_choices(),
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'user_condition',
+										'operator' => 'in',
+										'value'    => array( 'all' ),
+									),
+									array(
+										'field'    => 'user_exclusion_enabled',
+										'operator' => '===',
+										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
 							'id'         => 'exclude_users',
 							'type'       => 'select_ajax',
 							'title'      => esc_html__( 'Exclude Users', 'merchant' ),
