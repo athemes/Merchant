@@ -22,7 +22,7 @@ class Merchant_Admin_Statistics_Tracking {
 	 *
 	 * @var string
 	 */
-	private const WEBSITE_API_LINK = 'https://www.athemes.com/wp-json/athemes-stats/v1';
+	private const WEBSITE_API_LINK = 'https://ai.test/wp-json/athemes-stats/v1';
 
 	/**
 	 * The endpoint for registering the site.
@@ -44,6 +44,13 @@ class Merchant_Admin_Statistics_Tracking {
 	 * @var string
 	 */
 	private const SEND_SINGLE_USAGE_ENDPOINT = 'track-event';
+
+	/**
+	 * The endpoint for sending heartbeat updates.
+	 *
+	 * @var string
+	 */
+	private const SEND_HEART_BEAT_ENDPOINT = 'update-heartbeat';
 
 	/**
 	 * @var Merchant_Admin_Statistics_Tracking $instance Singleton instance
@@ -77,6 +84,7 @@ class Merchant_Admin_Statistics_Tracking {
 		add_action( 'merchant_single_module_activation_tracking', array( $this, 'log_module_activation_background_process' ) );
 		add_action( 'merchant_admin_module_deactivated', array( $this, 'log_module_deactivation' ) );
 		add_action( 'merchant_single_module_deactivation_tracking', array( $this, 'log_module_deactivation_background_process' ) );
+		add_action( 'merchant_weekly_schedule', array( $this, 'update_last_seen' ) );
 	}
 
 	/**
@@ -112,15 +120,16 @@ class Merchant_Admin_Statistics_Tracking {
 			$site_key   = $this->get_site_key();
 			$event_type = 'activate';
 			$body       = array(
-				'site_id'    => $site_key,
-				'event_type' => $event_type,
-				'module_id'  => $module_id,
+				'site_key'     => $site_key,
+				'event_type'   => $event_type,
+				'module_slug'  => $module_id,
+				'project_name' => 'merchant',
 			);
 
 			$response = wp_remote_post(
 				self::WEBSITE_API_LINK . '/' . self::SEND_SINGLE_USAGE_ENDPOINT,
 				array(
-					'body' => $body,
+					'body'      => $body,
 				)
 			);
 
@@ -166,15 +175,16 @@ class Merchant_Admin_Statistics_Tracking {
 			$site_key   = $this->get_site_key();
 			$event_type = 'deactivate';
 			$body       = array(
-				'site_id'    => $site_key,
-				'event_type' => $event_type,
-				'module_id'  => $module_id,
+				'site_key'     => $site_key,
+				'event_type'   => $event_type,
+				'module_slug'  => $module_id,
+				'project_name' => 'merchant',
 			);
 
 			$response = wp_remote_post(
 				self::WEBSITE_API_LINK . '/' . self::SEND_SINGLE_USAGE_ENDPOINT,
 				array(
-					'body' => $body,
+					'body'      => $body,
 				)
 			);
 
@@ -226,9 +236,11 @@ class Merchant_Admin_Statistics_Tracking {
 			$response       = wp_remote_post(
 				self::WEBSITE_API_LINK . '/' . self::SEND_BULK_USAGE_ENDPOINT,
 				array(
-					'body' => array(
-						'site_id'    => $site_key,
-						'module_ids' => $active_modules,
+					'body'      => array(
+						'site_key'     => $site_key,
+						'module_slugs' => $active_modules,
+						'project_name' => 'merchant',
+						'event_type'   => 'activate',
 					),
 				)
 			);
@@ -316,24 +328,45 @@ class Merchant_Admin_Statistics_Tracking {
 		$response = wp_remote_post(
 			self::WEBSITE_API_LINK . '/' . self::REGISTER_SITE_ENDPOINT,
 			array(
-				'body' => array(
+				'body'      => array(
 					'site_url' => $website_url,
 					'blog_id'  => $blog_id,
 				),
 			)
 		);
 
+
 		// check if response is 200
 		if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
 			$response_body = wp_remote_retrieve_body( $response );
 			$response_data = json_decode( $response_body, true );
 			// save the new site key
-			if ( ! empty( $response_data['site_key'] ) ) {
-				return $response_data['site_key'];
+			if ( ! empty( $response_data['data']['site_key'] ) ) {
+				return $response_data['data']['site_key'];
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Update the last seen timestamp for the site
+	 *
+	 * This method is called during the 'merchant_weekly_schedule' action.
+	 * It sends a request to the API to update the last seen timestamp for the site.
+	 *
+	 * @return void
+	 */
+	public function update_last_seen() {
+		wp_remote_post(
+			self::WEBSITE_API_LINK . '/' . self::SEND_HEART_BEAT_ENDPOINT,
+			array(
+				'body'      => array(
+					'site_key' => $this->get_site_key(),
+					'blog_id'  => get_option( 'blog_id' ),
+				),
+			)
+		);
 	}
 
 	/**
