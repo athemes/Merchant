@@ -22,7 +22,7 @@ class Merchant_Admin_Statistics_Tracking {
 	 *
 	 * @var string
 	 */
-	private const WEBSITE_API_LINK = 'https://ai.test/wp-json/athemes-stats/v1';
+	private const WEBSITE_API_LINK = 'https://rkwl5hpvp9-staging.onrocket.site/wp-json/athemes-stats/v1';
 
 	/**
 	 * The endpoint for registering the site.
