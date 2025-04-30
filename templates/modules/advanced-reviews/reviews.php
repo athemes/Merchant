@@ -33,29 +33,44 @@ $title_tag = $args[ 'title_tag' ] ?? 'h2';
 $default_sorting = $args[ 'default_sorting' ] ?? 'newest';
 $sort_orderby    = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : $default_sorting;  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-// Get Comments args
+// Get post IDs for the specific post and its translations
+$post_ids = array( $product_id );
+if ( function_exists( 'pll_get_post_translations' ) ) {
+	$translations = pll_get_post_translations( $product_id );
+	$post_ids = array_values( $translations ); // Get all translated post IDs
+}
+
+// Base comments args
 $comments_args = array(
-	'post_id' => $product_id,
-	'number'  => get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : '',
+	'number'      => get_option( 'page_comments' ) ? get_option( 'comments_per_page' ) : '',
+	'status'      => 'approve',
 );
 
 // Pagination
 $comment_pages = 0;
+$all_comments = array();
 if ( get_option( 'page_comments' ) ) {
 	$cpaged = get_query_var( 'cpage' );
 
-	$comment_pages = count( get_comments( array(
-		'post_id' => $product_id,
-		'fields'  => 'ids',
-		'status'  => 'approve',
-		'hierarchical' => 'threaded',
-	) ) );
+	// Count total comments across all translated posts
+	$total_comments = 0;
+	foreach ( $post_ids as $single_post_id ) {
+		$total_comments += count( get_comments( array(
+			'post_id'      => $single_post_id,
+			'fields'       => 'ids',
+			'status'       => 'approve',
+			'hierarchical' => 'threaded',
+		) ) );
+	}
 
-	$comment_pages = ceil( $comment_pages / get_option( 'comments_per_page' ) );
+	$comment_pages = ceil( $total_comments / get_option( 'comments_per_page' ) );
 
 	$comments_args['product_id'] = $product_id;
 	$comments_args['cpage']      = empty( $cpaged ) ? 1 : $cpaged;
 	$comments_args['total']      = $comment_pages;
+
+	// Calculate offset for pagination
+	$comments_args['offset'] = ( $comments_args['cpage'] - 1 ) * get_option( 'comments_per_page' );
 }
 
 // Orderby
@@ -110,14 +125,60 @@ switch ( $sort_orderby ) {
 // Set hierarchy to threaded.
 $comments_args['hierarchical'] = 'threaded';
 
-/**
- * Hook 'merchant_wc_reviews_advanced_sorting_args'
- *
- * @since 1.0
- */
-$_comments = isset( $args['comments'] ) ? $args['comments'] : get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args', $comments_args ) );
+// Fetch comments for each post ID and merge
+$_comments = isset( $args['comments'] ) ? $args['comments'] : array();
+if ( ! isset( $args['comments'] ) ) {
+	foreach ( $post_ids as $single_post_id ) {
+		$single_comments_args = array_merge( $comments_args, array( 'post_id' => $single_post_id ) );
+		/**
+		 * Hook 'merchant_wc_reviews_advanced_sorting_args'
+		 *
+		 * @since 1.0
+		 */
+		$post_comments = get_comments( apply_filters( 'merchant_wc_reviews_advanced_sorting_args', $single_comments_args ) );
+		$_comments = array_merge( $_comments, $post_comments );
+	}
 
-$args['comments'] = ! isset( $args['comments'] ) ? $_comments : $args['comments'];
+	// Sort merged comments to respect the orderby setting
+	if ( ! empty( $_comments ) ) {
+		usort( $_comments, function( $a, $b ) use ( $sort_orderby ) {
+			switch ( $sort_orderby ) {
+				case 'newest':
+					return strtotime( $b->comment_date_gmt ) - strtotime( $a->comment_date_gmt );
+				case 'oldest':
+					return strtotime( $a->comment_date_gmt ) - strtotime( $b->comment_date_gmt );
+				case 'top-rated':
+				case 'low-rated':
+					$a_rating = get_comment_meta( $a->comment_ID, 'rating', true );
+					$b_rating = get_comment_meta( $b->comment_ID, 'rating', true );
+					$a_rating = $a_rating ? $a_rating : 0;
+					$b_rating = $b_rating ? $b_rating : 0;
+					return $sort_orderby === 'top-rated' ? $b_rating - $a_rating : $a_rating - $b_rating;
+				case 'photo-first':
+					$a_has_image = metadata_exists( 'comment', $a->comment_ID, 'review_images' );
+					$b_has_image = metadata_exists( 'comment', $b->comment_ID, 'review_images' );
+                    if ( $a_has_image && ! $b_has_image ) {
+	                    return -1;
+                    } elseif ( ! $a_has_image && $b_has_image ) {
+	                    return 1;
+                    } else {
+	                    return strtotime( $b->comment_date ) - strtotime( $a->comment_date );
+                    }
+				default:
+					return 0;
+			}
+		});
+
+		// Apply pagination manually if needed
+		if ( get_option( 'page_comments' ) ) {
+			$count_per_page = get_option( 'comments_per_page' );
+			$offset = ( $comments_args['cpage'] - 1 ) * $count_per_page;
+			$_comments = array_slice( $_comments, $offset, $count_per_page );
+		}
+	}
+}
+
+$args['comments'] = $_comments;
 
 // Reviews bars rating
 $bars_data     = $args['bars_data'] ?? array();
@@ -277,3 +338,4 @@ if ( $is_carousel_on && is_array( $carousel_images_data ) && ! empty( $carousel_
  * @since 1.0
  */
 do_action( 'merchant_after_adv_reviews_section' );
+?>
