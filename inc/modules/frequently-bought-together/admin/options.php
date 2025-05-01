@@ -236,7 +236,7 @@ Merchant_Admin_Options::create( array(
 							'id'      => 'optional_offer_products',
 							'type'    => 'checkbox',
 							'label'   => __( 'Offer products as optional', 'merchant' ),
-							'desc'    => __( 'Offer the products as an optional add-on, giving customers customize their purchase', 'merchant' ),
+							'desc'    => __( 'Offer the products using checkboxes, so shoppers can choose what to buy', 'merchant' ),
 							'default' => 1,
 						),
 						array(
@@ -337,7 +337,7 @@ Merchant_Admin_Options::create( array(
 							'id'         => 'user_exclusion_enabled',
 							'type'       => 'switcher',
 							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-							'desc'       => esc_html__( 'Select the users that will not show the offer.', 'merchant' ),
+							'desc'       => esc_html__( 'Exclude specific users from seeing the offer', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',
