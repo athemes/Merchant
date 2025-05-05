@@ -707,18 +707,27 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 		$is_logged_in = is_user_logged_in();
 		$current_user = $is_logged_in ? wp_get_current_user() : null;
 		$customer_id  = is_object( $current_user ) && isset( $current_user->ID ) ? (int) $current_user->ID : 0;
+		$user_role    = is_object( $current_user ) && isset( $current_user->roles ) ? $current_user->roles[0] : '';
 
 		$condition = $args['user_condition'] ?? 'all';
 
 		$is_exclusion_enabled = $args['user_exclusion_enabled'] ?? false;
 		$excluded_customers   = array_map( 'intval', $args['exclude_users'] ?? array() );
+		$excluded_roles       = $args['exclude_roles'] ?? array();
 
 		switch ( $condition ) {
 			case 'all':
 			case '':
-				if ( $is_exclusion_enabled && in_array( $customer_id, $excluded_customers, true ) ) {
-					return false;
+				if ( $is_exclusion_enabled ) {
+					if ( in_array( $customer_id, $excluded_customers, true ) ) {
+						return false;
+					}
+
+					if ( $condition === 'all' && in_array( $user_role, $excluded_roles, true ) ) {
+						return false;
+					}
 				}
+
 				return true;
 
 			case 'logged-in':
@@ -730,8 +739,6 @@ if ( ! function_exists( 'merchant_is_user_condition_passed' ) ) {
 				}
 
 				$allowed_roles = $args['user_condition_roles'] ?? array();
-				$user_role     = is_object( $current_user ) && isset( $current_user->roles ) ? $current_user->roles[0] : '';
-
 				return in_array( $user_role, $allowed_roles, true );
 
 			case 'customers':
@@ -973,6 +980,21 @@ if ( ! function_exists( 'merchant_get_modules_data' ) ) {
 		}
 
 		return $modules;
+	}
+}
+
+if ( ! function_exists( 'merchant_get_active_modules' ) ) {
+	/**
+	 * Get the active modules.
+	 *
+	 * @return array
+	 */
+	function merchant_get_active_modules() {
+		$modules = array_keys( merchant_get_modules_data() );
+
+		return array_values( array_filter( $modules, static function ( $module_id ) {
+			return Merchant_Modules::is_module_active( $module_id );
+		} ) );
 	}
 }
 
