@@ -402,7 +402,7 @@ class Merchant_Admin_Statistics_Tracking {
 	 * @return bool True if the user has given consent, false otherwise.
 	 */
 	private function is_user_consent() {
-		return Merchant_Admin_Options::get( 'global-settings', 'usage_statistics_tracking', false );
+		return Merchant_Admin_Options::get( 'global-settings', 'usage_statistics_tracking', true );
 	}
 
 	/**

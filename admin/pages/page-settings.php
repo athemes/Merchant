@@ -81,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'type'    => 'switcher',
 							'title'   => __( 'Enable modules usage tracking', 'merchant' ),
 							'desc'    => __( 'Track which modules are used on your site. This helps us improve our products and services. No personal data is collected.', 'merchant' ),
-							'default' => false,
+							'default' => true,
 						),
 					),
 				) );
