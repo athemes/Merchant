@@ -983,6 +983,21 @@ if ( ! function_exists( 'merchant_get_modules_data' ) ) {
 	}
 }
 
+if ( ! function_exists( 'merchant_get_active_modules' ) ) {
+	/**
+	 * Get the active modules.
+	 *
+	 * @return array
+	 */
+	function merchant_get_active_modules() {
+		$modules = array_keys( merchant_get_modules_data() );
+
+		return array_values( array_filter( $modules, static function ( $module_id ) {
+			return Merchant_Modules::is_module_active( $module_id );
+		} ) );
+	}
+}
+
 if ( ! function_exists( 'merchant_get_campaign_data' ) ) {
 	/**
 	 * Get the data of a specific campaign.

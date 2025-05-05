@@ -34,10 +34,20 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			$this->includes_not_hooked();
 
 			add_action( 'init', array( $this, 'includes' ) );
+			add_action( 'plugins_loaded', array( $this, 'includes_after_plugins_loaded' ) );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );
 			add_action( 'plugin_action_links_' . MERCHANT_BASE, array( $this, 'action_links' ) );
 			add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ), 999 );
+		}
+
+		/**
+		 * Include files after plugins loaded.
+		 *
+		 * Before init hook.
+		 */
+		public function includes_after_plugins_loaded() {
+			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-statistics-tracking.php';
 		}
 
 		/**
@@ -65,7 +75,6 @@ if ( ! class_exists( 'Merchant_Admin_Loader' ) ) {
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-options.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-utils.php';
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-admin-preview.php';
-			
 			// Plugin installer.
 			require_once MERCHANT_DIR . 'admin/classes/class-merchant-plugin-installer.php';
 		}

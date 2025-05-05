@@ -76,6 +76,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'desc'    => __( 'Track revenue and performance insights from our modules. No personal data is collected. Disable this if you prefer not to track analytics.', 'merchant' ),
 							'default' => true,
 						),
+						array(
+							'id'      => 'usage_statistics_tracking',
+							'type'    => 'switcher',
+							'title'   => __( 'Enable modules usage tracking', 'merchant' ),
+							'desc'    => __( 'Track which modules are used on your site. This helps us improve our products and services. No personal data is collected.', 'merchant' ),
+							'default' => true,
+						),
 					),
 				) );
 
