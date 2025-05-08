@@ -235,6 +235,41 @@ class Merchant_Volume_Discounts extends Merchant_Add_Module {
 							'product_price'  => 20,
 						)
 					);
+
+					merchant_get_template_part(
+						Merchant_Volume_Discounts::MODULE_TEMPLATES_PATH,
+						'admin-preview-tiered-radio',
+						array(
+							'settings'       => $settings,
+							'discount_tiers' => array(
+								array(
+									'quantity'            => 10,
+									'discount'            => 5,
+									'discount_type'       => 'percentage_discount',
+									'product_single_page' => array(
+										'save_label'  => esc_html__( 'Save {amount}', 'merchant' ),
+										'item_text'   => esc_html__( 'Per item:', 'merchant' ),
+										'total_text'  => esc_html__( 'Total price:', 'merchant' ),
+										'buy_text'    => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
+										'table_title' => esc_html__( 'Buy more, save more!', 'merchant' ),
+									),
+								),
+                                array(
+									'quantity'            => 10,
+									'discount'            => 5,
+									'discount_type'       => 'percentage_discount',
+									'product_single_page' => array(
+										'save_label'  => esc_html__( 'Save {amount}', 'merchant' ),
+										'item_text'   => esc_html__( 'Per item:', 'merchant' ),
+										'total_text'  => esc_html__( 'Total price:', 'merchant' ),
+										'buy_text'    => esc_html__( 'Buy {quantity}, get {discount} off each', 'merchant' ),
+										'table_title' => null,
+									),
+								),
+							),
+							'product_price'  => 20,
+						)
+					);
 					?>
                 </div>
             </div>

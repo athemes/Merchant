@@ -27,7 +27,7 @@
 // Canvas.
 .merchant-module-page-preview-browser-inner {
 	position: relative;
-	min-height: 320px;
+	min-height: 440px;
 }
 
 .link-do-nothing {
@@ -405,6 +405,91 @@
 						height: 200px;
 					}
 				}
+			}
+		}
+	}
+}
+
+.tiered-radio,
+.standard-style{
+	display: none;
+
+	&.show{
+		display: block;
+	}
+}
+
+.tiered-radio{
+	border: 3px dashed var(--merchant-item-bg-color, #fcf0f1);
+	padding: 20px;
+	border-radius: 8px;
+
+	.merchant-volume-discounts{
+		max-width: unset;
+	}
+
+	.merchant-selected-offer {
+		appearance: none;
+		width: 15px;
+		height: 15px;
+		border: 2px solid #333;
+		border-radius: 50%;
+		outline: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		vertical-align: middle;
+
+		&:checked {
+			background-color: var(--merchant-item-border-color, #d83b3b);
+			border-color: var(--merchant-item-border-color, #d83b3b);
+
+			&::before{
+				display: none;
+			}
+
+			&::after {
+				content: "";
+				display: block;
+				width: 8px;
+				height: 8px;
+				background: #fff;
+				border-radius: 50%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+
+		&:hover {
+			border-color: var(--merchant-item-border-color, #d83b3b);
+		}
+
+		&:focus{
+			outline: none;
+			box-shadow: none;
+		}
+	}
+
+	.add-to-cart-wrapper {
+		display: flex;
+		justify-content: flex-end;
+
+		.merchant-blk-discounts-add-to-cart {
+			width: 100%;
+			background-color: #212121;
+			color: #fff;
+			border-radius: 0;
+			border: none;
+			text-transform: uppercase;
+			text-decoration: none;
+			outline: none;
+			padding: 10px 5px;
+
+			&:focus{
+				outline: none;
+				box-shadow: none;
 			}
 		}
 	}

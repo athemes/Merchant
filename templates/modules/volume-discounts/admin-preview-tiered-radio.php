@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="standard-style">
+<div class="tiered-radio">
 <div class="merchant-volume-discounts">
 	<?php
     $in_cart = 'false';
@@ -23,6 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     if ( ! empty( $args['product_cart_quantity'] ) ) {
         $quantity = $args['product_cart_quantity'];
     }
+    $i = 0;
+	$offers_count = count( $args['discount_tiers'] );
 	foreach ( $args['discount_tiers'] as $discount_tier ) :
 		if ( isset( $discount_tier['discount_type'], $discount_tier['product_single_page']['save_label'], $discount_tier['product_single_page']['item_text'], $discount_tier['product_single_page']['total_text'] ) ) {
 			$discount = $discount_tier['discount_type'] === 'percentage_discount'
@@ -66,6 +68,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			echo isset( $discount_tier['product_single_page']['table_item_border_color'] ) ? esc_attr( 'border-color: ' . $discount_tier['product_single_page']['table_item_border_color'] . ';' ) : '';
 			echo isset( $discount_tier['product_single_page']['table_item_text_color'] ) ? esc_attr( 'color: ' . $discount_tier['product_single_page']['table_item_text_color'] . ';' ) : ''; ?>">
                 <div class="merchant-volume-discounts-buy-label">
+                    <input type="radio" name="merchant-selected-offer" class="merchant-selected-offer" <?php
+	                if ( $offers_count === 1 ) {
+		                echo 'checked style="display:none;"';
+	                } elseif( $i === 0 ) {
+		                echo 'checked';
+	                }
+	                ?>>
                     <span class="inner-text">
 					    <?php
 					/**
@@ -174,6 +183,10 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
 			<?php
 		}
+        ++$i;
 	endforeach; ?>
 </div>
+    <div class="add-to-cart-wrapper">
+        <button type="button" class="merchant-blk-discounts-add-to-cart button alt"><?php esc_html_e( 'Add to cart', 'merchant' ); ?></button>
+    </div>
 </div>
