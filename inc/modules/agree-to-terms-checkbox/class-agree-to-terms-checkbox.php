@@ -42,6 +42,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		// Parent construct.
 		parent::__construct();
 
+		if ( ! is_admin() && ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+			return;
+		}
+
 		// Module section.
 		$this->module_section = 'protect-your-store';
 
@@ -72,10 +76,6 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			// Custom CSS.
 			// The custom CSS should be added here as well due to ensure preview box works properly.
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
-		}
-
-		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
-			return;
 		}
 
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
