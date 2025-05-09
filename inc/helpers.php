@@ -962,19 +962,21 @@ if ( ! function_exists( 'merchant_get_modules_data' ) ) {
 		$registered_modules = Merchant_Admin_Modules::get_modules();
 		foreach ( $registered_modules as $module_category => $module_data ) {
 			foreach ( $module_data['modules'] as $module_id => $module ) {
-				$modules[ $module_id ] = array(
-					'id'       => $module_id,
-					'active'   => Merchant_Modules::is_module_active( $module_id ),
-					'name'     => $module['title'],
-					'desc'     => $module['desc'],
-					'category' => $module_category,
-					'pro'      => $module['pro'],
-				);
+				if ( ! empty( $module ) ) {
+					$modules[ $module_id ] = array(
+						'id'       => $module_id,
+						'active'   => Merchant_Modules::is_module_active( $module_id ),
+						'name'     => $module['title'],
+						'desc'     => $module['desc'],
+						'category' => $module_category,
+						'pro'      => $module['pro'],
+					);
 
-				$campaigns = merchant_get_module_campaigns_data( $module_id );
+					$campaigns = merchant_get_module_campaigns_data( $module_id );
 
-				if ( ! empty( $campaigns ) ) {
-					$modules[ $module_id ]['campaigns'] = $campaigns;
+					if ( ! empty( $campaigns ) ) {
+						$modules[ $module_id ]['campaigns'] = $campaigns;
+					}
 				}
 			}
 		}
