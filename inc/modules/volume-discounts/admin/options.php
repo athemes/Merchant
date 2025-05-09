@@ -775,6 +775,17 @@ Merchant_Admin_Options::create( array(
 			'desc'    => __( 'Set the maximum offers can be displayed on the checkout page.', 'merchant' ),
 			'default' => 3,
 		),
+
+		array(
+			'id'      => 'offers_display_style',
+			'type'    => 'radio',
+			'title'   => esc_html__( 'Discount Display Style', 'merchant' ),
+			'options' => array(
+				'standard' => esc_html__( 'Standard Boxes', 'merchant' ),
+				'radio'    => esc_html__( 'Tiered Radio Select', 'merchant' ),
+			),
+			'default' => 'standard',
+		),
 	),
 ) );
 

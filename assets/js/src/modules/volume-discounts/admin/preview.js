@@ -15,6 +15,7 @@
 
     function initPreview() {
         let layout = $('.merchant-flexible-content-control.volume-discounts-style').find('.layout.active'),
+            displayStyle = $('.merchant-field-offers_display_style input:checked').val(),
             titleText = layout.find('.merchant-field-table_title input').val(),
             titleTextColor = layout.find('.merchant-field-title_text_color input').val(),
             titleTextFontSize = layout.find('.merchant-field-title_font_size input').val(),
@@ -42,6 +43,16 @@
             thankYouButtonText = layout.find('.merchant-group-field-thank_you_page .merchant-field-button_text input').val(),
             cartBundleButtonText = layout.find('.merchant-group-field-cart_page .merchant-field-button_text input').val();
 
+        console.log(displayStyle)
+
+        if(displayStyle === 'standard'){
+            $('.tiered-radio,.standard-style').removeClass('show');
+            $('.standard-style').addClass('show');
+        } else if (displayStyle === 'radio'){
+            $('.tiered-radio,.standard-style').removeClass('show');
+            $('.tiered-radio').addClass('show');
+        }
+
         $('.merchant-volume-discounts-title').css({
             'color': titleTextColor,
             'font-size': titleTextFontSize + 'px',
@@ -58,7 +69,7 @@
         });
 
         const $saveLabelPreview = $( '.merchant-volume-discounts-item-label' );
-        const $buyLabelPreview = $( '.merchant-volume-discounts-buy-label' );
+        const $buyLabelPreview = $( '.merchant-volume-discounts-buy-label .inner-text' );
 
         $saveLabelPreview.find( 'span:first' ).css({
             '--merchant-label-text-color': labelTextColor,
