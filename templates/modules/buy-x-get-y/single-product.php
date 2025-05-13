@@ -125,24 +125,29 @@ if ( ! is_admin() && ! $is_main_product_in_stock ) {
                     echo isset( $offer['product_single_page']['label_bg_color'] ) ? esc_attr( 'background-color: ' . $offer['product_single_page']['label_bg_color'] . ';' ) : '';
                     echo isset( $offer['product_single_page']['label_text_color'] ) ? esc_attr( 'color: ' . $offer['product_single_page']['label_text_color'] . ';' ) : ''; ?>">
                         <?php
-                        $discount = $offer['discount_type'] === 'percentage' ? $offer['discount'] . '%' : wc_price( $offer['discount'] );
+                        if($offer['discount_type'] === 'shipping'){
+	                        $discount = 'free shipping';
+                        } else {
+	                        $discount = $offer['discount_type'] === 'percentage' ? $offer['discount'] . '%' : wc_price( $offer['discount'] );
+                        }
+
                         echo isset( $offer['product_single_page']['get_label'] )
-                            ? wp_kses( str_replace(
-                                array(
-                                    '{quantity}',
-                                    '{discount}',
-                                ),
-                                array(
-                                    $offer['quantity'],
-                                    $discount,
-                                ),
-                                Merchant_Translator::translate( $offer['product_single_page']['get_label'] )
-                            ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
-                            : wp_kses(
-                                /* Translators: 1. quantity 2. discount value*/
-                                sprintf( __( 'Get %1$s with %2$s off', 'merchant' ), $offer['quantity'], $discount ),
-                                merchant_kses_allowed_tags( array( 'bdi' ) )
-                            );
+	                        ? wp_kses( str_replace(
+		                        array(
+			                        '{quantity}',
+			                        '{discount}',
+		                        ),
+		                        array(
+			                        $offer['quantity'],
+			                        $discount,
+		                        ),
+		                        Merchant_Translator::translate( $offer['product_single_page']['get_label'] )
+	                        ), merchant_kses_allowed_tags( array( 'bdi' ) ) )
+	                        : wp_kses(
+	                        /* Translators: 1. quantity 2. discount value*/
+		                        sprintf( __( 'Get %1$s with %2$s off', 'merchant' ), $offer['quantity'], $discount ),
+		                        merchant_kses_allowed_tags( array( 'bdi' ) )
+	                        );
                         ?>
                     </div>
                     <?php
@@ -184,14 +189,18 @@ if ( ! is_admin() && ! $is_main_product_in_stock ) {
                                     }
 
                                     if ( $is_in_stock ) {
-                                        if ( $offer['discount_type'] === 'percentage' ) {
-                                            $buy_product_reduced_price = $product_price - ( $product_price * $offer['discount'] / 100 );
-                                        } else {
-                                            $buy_product_reduced_price = $product_price - ( $offer['discount'] / $offer['quantity'] );
-                                        }
-                                        echo wp_kses( wc_format_sale_price( $product_price, $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+	                                    if ( $offer['discount_type'] === 'shipping' ) {
+		                                    echo wp_kses( $buy_product->get_price_html(), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+	                                    } else {
+		                                    if ( $offer['discount_type'] === 'percentage' ) {
+			                                    $buy_product_reduced_price = $product_price - ( $product_price * $offer['discount'] / 100 );
+		                                    } else {
+			                                    $buy_product_reduced_price = $product_price - ( $offer['discount'] / $offer['quantity'] );
+		                                    }
+		                                    echo wp_kses( wc_format_sale_price( $product_price, $buy_product_reduced_price ), merchant_kses_allowed_tags( array( 'bdi' ) ) );
+	                                    }
                                     } else {
-                                        echo '<span class="error">' . esc_html__( 'Out of stock', 'merchant' ) . '</span>';
+	                                    echo '<span class="error">' . esc_html__( 'Out of stock', 'merchant' ) . '</span>';
                                     }
                                     ?>
                                 </div>
