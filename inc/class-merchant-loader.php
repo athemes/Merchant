@@ -41,6 +41,12 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 
 			// Add identifier to body class.
 			add_filter( 'body_class', array( $this, 'add_body_class' ) );
+
+			// Add row meta to the plugin screen.
+			add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
+
+			// Add settings link to the plugin screen.
+			add_filter( 'plugin_action_links_' . plugin_basename( MERCHANT_DIR . 'merchant.php' ), array( $this, 'settings_link' ) );
 		}
 
 		/**
@@ -136,6 +142,113 @@ if ( ! class_exists( 'Merchant_Loader' ) ) {
 			$classes[] = 'merchant-theme-' . strtolower( esc_attr( $theme_name ) );
 
 			return $classes;
+		}
+
+		/**
+		 * Show row meta on the plugin screen.
+		 *
+		 * @param mixed $links Plugin Row Meta.
+		 * @param mixed $file  Plugin Base file.
+		 *
+		 * @since 2.1.2
+		 *
+		 * @return array
+		 */
+		public function plugin_row_meta($links, $file) {
+			if ( plugin_basename( MERCHANT_FILE ) !== $file ) {
+				return $links;
+			}
+
+			/**
+			 * The Merchant documentation URL.
+			 *
+			 * @since 2.1.2
+			 */
+			$docs_url = apply_filters( 'merchant_docs_url', 'https://docs.athemes.com/documentation/merchant/' );
+
+			/**
+			 * The Merchant landing page URL.
+			 *
+			 * @since 2.1.2
+			 */
+			$plugin_site = apply_filters( 'merchant_plugin_site_url', 'https://athemes.com/merchant/' );
+
+			/**
+			 * The Merchant changelog URL.
+			 *
+			 * @since 2.1.2
+			 */
+			$changelog = apply_filters( 'merchant_changelog_url', 'https://athemes.com/changelog/merchant/' );
+
+			$row_meta = array(
+				'docs'    => '<a href="' . esc_url( $docs_url ) . '" aria-label="' . esc_attr__( 'View Merchant documentation', 'merchant' ) . '" target="_blank">' . esc_html__(
+						'Docs',
+						'merchant'
+					) . '</a>',
+				'apidocs' => '<a href="' . esc_url( $plugin_site ) . '" aria-label="' . esc_attr__( 'View Merchant plugin site', 'merchant' ) . '" target="_blank">' . esc_html__(
+						'Visit plugin site',
+						'merchant' ) . '</a>',
+				'support' => '<a href="' . esc_url( $changelog ) . '" aria-label="' . esc_attr__( 'View Merchant changelog', 'merchant' ) . '" target="_blank">' . esc_html__( 'Changelog',
+						'merchant' ) . '</a>',
+			);
+
+			/**
+			 * Filter the plugin row meta links.
+			 *
+			 * @since 2.1.2
+			 *
+			 * @param array  $row_meta The plugin row meta links.
+			 * @param string $file    The plugin file.
+			 */
+			$row_meta = apply_filters( 'merchant_plugin_row_meta', $row_meta, $file );
+
+			return array_merge( $links, $row_meta );
+		}
+
+		/**
+		 * Add settings link to the Plugins page.
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param array  $links       Plugin row links.
+		 *
+		 * @return array $links
+		 */
+		public function settings_link( $links ) {
+			if ( ! merchant_pro_is_active() || ! merchant_pro_license_exists() ) {
+				$links['merchant-pro'] = sprintf(
+					'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer"
+				style="color: #00a32a; font-weight: 700;"
+				onmouseover="this.style.color=\'#008a20\';"
+				onmouseout="this.style.color=\'#00a32a\';"
+				>%3$s</a>',
+					esc_url(
+						merchant_admin_upgrade_link(
+							'all-plugins',
+							'Get Merchant Pro'
+						)
+					),
+					esc_attr__( 'Upgrade to Merchant Pro', 'merchant' ),
+					esc_html__( 'Get Merchant Pro', 'merchant' )
+				);
+			}
+
+			$custom['merchant-settings'] = sprintf(
+				'<a href="%s" aria-label="%s">%s</a>',
+				esc_url(
+					add_query_arg(
+						array(
+							'page'    => 'merchant',
+							'section' => 'settings',
+						),
+						admin_url( 'admin.php' )
+					)
+				),
+				esc_attr__( 'Go to Merchant Settings page', 'merchant' ),
+				esc_html__( 'Settings', 'merchant' )
+			);
+
+			return array_merge( $custom, (array) $links );
 		}
 
 		/**

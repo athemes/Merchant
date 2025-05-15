@@ -40,6 +40,10 @@ class Merchant_Cookie_Banner extends Merchant_Add_Module {
 		// Module id.
 		$this->module_id = self::MODULE_ID;
 
+		if ( ! is_admin() && ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+			return;
+		}
+
 		// Module default settings.
 		$this->module_default_settings = array(
 			'theme' => 'merchant-cookie-banner-floating',

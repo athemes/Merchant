@@ -42,6 +42,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		// Parent construct.
 		parent::__construct();
 
+		if ( ! is_admin() && ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
+			return;
+		}
+
 		// Module section.
 		$this->module_section = 'protect-your-store';
 
@@ -74,10 +78,6 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 			add_filter( 'merchant_custom_css', array( $this, 'admin_custom_css' ) );
 		}
 
-		if ( ! Merchant_Modules::is_module_active( self::MODULE_ID ) ) {
-			return;
-		}
-
 		if ( Merchant_Modules::is_module_active( self::MODULE_ID ) && is_admin() ) {
 			// Init translations.
 			$this->init_translations();
@@ -95,12 +95,10 @@ class Merchant_Agree_To_Terms_Checkbox extends Merchant_Add_Module {
 		// Force the enable of the terms checkbox.
 		// This is needed to ensure the checkbox will be displayed.
 		// The logic here is to get the checkout page ID if the terms page ID is not set. In this condition, the ID actually doesn't matter, we just need to force the checkbox to be displayed.
-		add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
-			add_filter( 'woocommerce_terms_and_conditions_page_id', function(){
-				$terms_page_id = get_option( 'woocommerce_terms_page_id' );
-				
-				return $terms_page_id ? $terms_page_id : get_option( 'woocommerce_checkout_page_id' );
-			} );
+		add_filter( 'woocommerce_terms_and_conditions_page_id', function($id){
+			$terms_page_id = get_option( 'woocommerce_terms_page_id' );
+
+			return $terms_page_id ? $terms_page_id : get_option( 'woocommerce_checkout_page_id' );
 		} );
 
 		// Control the text from the module settings.

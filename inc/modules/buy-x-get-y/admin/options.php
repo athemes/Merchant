@@ -218,6 +218,7 @@ Merchant_Admin_Options::create( array(
 							'options' => array(
 								'percentage' => esc_html__( 'Percentage Discount', 'merchant' ),
 								'fixed'      => esc_html__( 'Fixed Discount', 'merchant' ),
+								'shipping'   => esc_html__( 'Free shipping', 'merchant' ),
 							),
 							'default' => 'percentage',
 						),
@@ -229,6 +230,16 @@ Merchant_Admin_Options::create( array(
 							'step'    => 0.01,
 							//'title'   => esc_html__( 'Discount Value', 'merchant' ),
 							'default' => 1,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'discount_type',
+										'operator' => 'in',
+										'value'    => array( 'percentage', 'fixed' ),
+									),
+								),
+							),
 						),
 
 						array(
@@ -240,6 +251,16 @@ Merchant_Admin_Options::create( array(
 								'sale'    => esc_html__( 'Sale Price', 'merchant' ),
 							),
 							'default' => 'sale',
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'discount_type',
+										'operator' => 'in',
+										'value'    => array( 'percentage', 'fixed' ),
+									),
+								),
+							),
 						),
 
 						array(
