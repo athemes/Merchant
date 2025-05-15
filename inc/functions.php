@@ -262,6 +262,52 @@ if ( ! function_exists( 'merchant_supply_defaults' ) ) {
 	}
 }
 
+if ( ! function_exists( 'merchant_admin_upgrade_link' ) ) {
+	/**
+	 * Get the Merchant Pro upgrade link.
+	 *
+	 * @param string $medium  The medium type (link, button, etc.).
+	 * @param string $content The content to display.
+	 *
+	 * @return string The upgrade link.
+	 */
+	function merchant_admin_upgrade_link( $medium = 'link', $content = '' ) {
+		$url = 'https://athemes.com/merchant/#pricing';
+
+		/**
+		 * Modify upgrade link.
+		 *
+		 * @param string $upgrade Upgrade links.
+		 *
+		 * @since 2.1.2
+		 *
+		 */
+		return apply_filters( 'merchant_upgrade_link', $url );
+	}
+}
+
+if ( ! function_exists( 'merchant_pro_is_active' ) ) {
+	/**
+	 * Check if Merchant Pro is active.
+	 *
+	 * @return bool
+	 */
+	function merchant_pro_is_active() {
+		return defined( 'MERCHANT_PRO_VERSION' );
+	}
+}
+
+if ( ! function_exists( 'merchant_pro_license_exists' ) ) {
+	/**
+	 * Check if Merchant Pro license exists.
+	 *
+	 * @return bool
+	 */
+	function merchant_pro_license_exists() {
+		return ! empty( get_option( 'merchant_license_key' ) );
+	}
+}
+
 /**
  * Check if any shortcode starts with merchant doesn't exist.
  * If the shortcode is not registered, register it with return null to guarantee it exists.
