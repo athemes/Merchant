@@ -510,7 +510,23 @@ Best regards,', 'merchant' ),
 							)
 						),
 					),
-
+					array(
+						'id'      => 'email-template-info-1',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. settings link */
+							__( 'To customize the content of the email template, please go to Email Sender Options under WooCommerce > Settings > Emails or click <a href="%1$s" target="_blank">here</a> to open the option directly.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'page' => 'wc-settings',
+										'tab'  => 'email#email_options-description',
+									),
+									admin_url( 'admin.php' )
+								)
+							)
+						),
+					),
 				),
 			),
 			array(
@@ -618,7 +634,23 @@ Best regards,', 'merchant' ),
 							)
 						),
 					),
-
+					array(
+						'id'      => 'email-template-info-2',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. settings link */
+							__( 'To customize the content of the email template, please go to Email Sender Options under WooCommerce > Settings > Emails or click <a href="%1$s" target="_blank">here</a> to open the option directly.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'page' => 'wc-settings',
+										'tab'  => 'email#email_options-description',
+									),
+									admin_url( 'admin.php' )
+								)
+							)
+						),
+					),
 				),
 			),
 			array(
@@ -683,7 +715,23 @@ Best regards,', 'merchant' ),
 							)
 						),
 					),
-
+					array(
+						'id'      => 'email-template-info-3',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. settings link */
+							__( 'To customize the content of the email template, please go to Email Sender Options under WooCommerce > Settings > Emails or click <a href="%1$s" target="_blank">here</a> to open the option directly.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'page' => 'wc-settings',
+										'tab'  => 'email#email_options-description',
+									),
+									admin_url( 'admin.php' )
+								)
+							)
+						),
+					),
 				),
 			),
 			array(
@@ -754,7 +802,23 @@ This is a reminder to let you know that you are eligible to receive a discount o
 							)
 						),
 					),
-
+					array(
+						'id'      => 'email-template-info-4',
+						'type'    => 'info',
+						'content' => sprintf(
+						/* Translators: 1. settings link */
+							__( 'To customize the content of the email template, please go to Email Sender Options under WooCommerce > Settings > Emails or click <a href="%1$s" target="_blank">here</a> to open the option directly.', 'merchant' ),
+							esc_url(
+								add_query_arg(
+									array(
+										'page' => 'wc-settings',
+										'tab'  => 'email#email_options-description',
+									),
+									admin_url( 'admin.php' )
+								)
+							)
+						),
+					),
 				),
 			),
 			array(
