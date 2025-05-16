@@ -1155,7 +1155,9 @@ class Merchant_Pre_Orders_Main_Functionality {
 	 * @return string
 	 */
 	public function order_item_meta_end( $item_id, $item, $order, $plain_text ) {
-		echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text ? '' : 'dl' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		if( $item->get_product() ) {
+			echo $this->get_pre_order_text( $item->get_product()->get_id(), $plain_text ? '' : 'dl' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
 	}
 
 	/**
