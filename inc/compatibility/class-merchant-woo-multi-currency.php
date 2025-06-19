@@ -16,6 +16,7 @@ if ( ! class_exists( 'Merchant_Woo_Multi_Currency' ) ) {
 		 */
 		public function __construct() {
 			add_filter( 'merchant_discounted_price', array( $this, 'multi_currency_support' ), 10, 3 );
+			add_filter( 'merchant_free_gifts_min_amount', array( $this, 'multi_currency_support_free_gifts' ), 10, 3 );
 		}
 
 		/**
@@ -41,6 +42,23 @@ if ( ! class_exists( 'Merchant_Woo_Multi_Currency' ) ) {
 			}
 
 			return $price;
+		}
+
+		/**
+		 * Multi-currency support for free gifts minimum amount
+		 *
+		 * @param float  $min_amount Minimum amount for free gifts.
+		 * @param object $product    Product object.
+		 * @param object $offer      Offer object.
+		 *
+		 * @return float
+		 */
+		public function multi_currency_support_free_gifts( $min_amount, $product, $offer ) {
+			if ( class_exists( 'WOOMULTI_CURRENCY_F_Data' ) && function_exists( 'wmc_get_price' ) ) {
+				$min_amount = wmc_get_price( $min_amount );
+			}
+
+			return $min_amount;
 		}
 	}
 
