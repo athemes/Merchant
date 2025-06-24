@@ -89,10 +89,9 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
-							'id'         => 'exclusion_enabled',
+							'id'         => 'exclude_products_toggle',
 							'type'       => 'switcher',
-							'title'      => esc_html__( 'Exclusion List', 'merchant' ),
-							'desc'       => esc_html__( 'Select products to exclude from the campaign.', 'merchant' ),
+							'title'      => esc_html__( 'Exclude products', 'merchant' ),
 							'default'    => 0,
 							'conditions' => array(
 								'relation' => 'AND',
@@ -109,9 +108,9 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'         => 'excluded_products',
 							'type'       => 'products_selector',
-							'title'      => esc_html__( 'Exclude products', 'merchant' ),
+							'title'      => esc_html__( 'Exclude Products', 'merchant' ),
 							'multiple'   => true,
-							'desc'       => esc_html__( 'Exclude products from this discount campaign.', 'merchant' ),
+							'desc'       => esc_html__( 'Exclude products from this campaign.', 'merchant' ),
 							'conditions' => array(
 								'relation' => 'AND',
 								'terms'    => array(
@@ -121,9 +120,26 @@ Merchant_Admin_Options::create( array(
 										'value'    => array( 'all', 'categories', 'tags' ),
 									),
 									array(
-										'field'    => 'exclusion_enabled',
+										'field'    => 'exclude_products_toggle',
 										'operator' => '===',
 										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
+							'id'         => 'exclude_categories_toggle',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclude categories', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
 									),
 								),
 							),
@@ -132,22 +148,22 @@ Merchant_Admin_Options::create( array(
 						array(
 							'id'          => 'excluded_categories',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Exclude Categories', 'merchant' ),
+							'title'       => esc_html__( 'Excluded Categories List', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_category_select2_choices(),
 							'placeholder' => esc_html__( 'Select categories', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude categories from this discount campaign.', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude categories from this campaign.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND',
 								'terms'    => array(
 									array(
 										'field'    => 'rules_to_display',
 										'operator' => 'in',
-										'value'    => array( 'all' ),
+										'value'    => array( 'all', 'categories', 'tags' ),
 									),
 									array(
-										'field'    => 'exclusion_enabled',
+										'field'    => 'exclude_categories_toggle',
 										'operator' => '===',
 										'value'    => true,
 									),
@@ -156,26 +172,60 @@ Merchant_Admin_Options::create( array(
 						),
 
 						array(
+							'id'         => 'exclude_tags_toggle',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclude product tags', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
+									),
+								),
+							),
+						),
+
+						array(
 							'id'          => 'excluded_tags',
 							'type'        => 'select_ajax',
-							'title'       => esc_html__( 'Exclude Tags', 'merchant' ),
+							'title'       => esc_html__( 'Excluded Tags List', 'merchant' ),
 							'source'      => 'options',
 							'multiple'    => true,
 							'options'     => Merchant_Admin_Options::get_tag_select2_choices(),
 							'placeholder' => esc_html__( 'Select tags', 'merchant' ),
-							'desc'        => esc_html__( 'Exclude tags from this discount campaign.', 'merchant' ),
+							'desc'        => esc_html__( 'Exclude tags from this campaign.', 'merchant' ),
 							'conditions'  => array(
 								'relation' => 'AND',
 								'terms'    => array(
 									array(
 										'field'    => 'rules_to_display',
 										'operator' => 'in',
-										'value'    => array( 'all' ),
+										'value'    => array( 'all', 'categories', 'tags' ),
 									),
 									array(
-										'field'    => 'exclusion_enabled',
+										'field'    => 'exclude_tags_toggle',
 										'operator' => '===',
 										'value'    => true,
+									),
+								),
+							),
+						),
+
+						array(
+							'id'         => 'exclude_onsale_products_toggle',
+							'type'       => 'switcher',
+							'title'      => esc_html__( 'Exclude On-Sale products', 'merchant' ),
+							'default'    => 0,
+							'conditions' => array(
+								'relation' => 'AND',
+								'terms'    => array(
+									array(
+										'field'    => 'rules_to_display',
+										'operator' => 'in',
+										'value'    => array( 'all', 'categories', 'tags' ),
 									),
 								),
 							),
