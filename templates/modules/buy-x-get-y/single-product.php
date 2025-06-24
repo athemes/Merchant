@@ -71,7 +71,7 @@ if ( ! is_admin() && ! $is_main_product_in_stock ) {
 
 		    $is_in_stock = ( $buy_product->is_type( 'simple' ) || $buy_product->is_type( 'variation' ) ) ? $buy_product->is_in_stock() : true; // For variable products it'll be handled by JS when a variable will be selected
 		    ?>
-            <p class="merchant-bogo-title" style="<?php
+            <p class="merchant-bogo-title" data-flexible-id="<?php echo ! empty( $offer['flexible_id'] ) ? esc_attr( $offer['flexible_id'] ) : '' ?>" style="<?php
             echo isset( $offer['product_single_page']['title_font_weight'] ) ? esc_attr( 'font-weight: ' . $offer['product_single_page']['title_font_weight'] . ';' ) : '';
             echo isset( $offer['product_single_page']['title_font_size'] ) ? esc_attr( 'font-size: ' . $offer['product_single_page']['title_font_size'] . 'px;' ) : '';
             echo isset( $offer['product_single_page']['title_text_color'] ) ? esc_attr( 'color: ' . $offer['product_single_page']['title_text_color'] . ';' ) : ''; ?>">

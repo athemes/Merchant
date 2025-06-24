@@ -62,7 +62,7 @@ Merchant_Admin_Options::create( array(
 							'multiple'      => true,
 							'desc'          => esc_html__( 'Select the products that will show the offer', 'merchant' ),
 							'condition'     => array( 'rules_to_display', '==', 'products' ),
-							'allowed_types' => array( 'simple', 'variable' ),
+							'allowed_types' => array( 'simple', 'variable', 'variation' ),
 						),
 						array(
 							'id'          => 'category_slugs',

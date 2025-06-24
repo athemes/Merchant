@@ -26,6 +26,7 @@
 .merchant-bogo-offer {
 	display: flex;
 	grid-gap: 20px;
+	transition: opacity 0.3s ease;
 
 	> div {
 		position: relative;
@@ -33,6 +34,11 @@
 
 	&:not(:last-child) {
 		margin-bottom: 20px;
+	}
+
+	&.hidden {
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	@media(max-width: 1024px) and (min-width: 769px) {
@@ -115,7 +121,6 @@
 	z-index: 2;
 }
 
-
 button.button.merchant-bogo-add-to-cart {
 	font-size: 12px;
 	margin-top: 10px;
@@ -147,7 +152,6 @@ button.button.merchant-bogo-add-to-cart {
 		padding: 7px;
 		font-size: 12px;
 	}
-
 }
 
 @media (min-width: 470px) {
