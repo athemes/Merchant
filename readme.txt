@@ -3,7 +3,7 @@ Tags: pre-orders, buy now button, product labels, quick view, clear cart
 Requires at least: 5.5
 Tested up to: 6.7
 Requires PHP: 7.3
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 Contributors: aThemes
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -218,6 +218,10 @@ Absolutely not. You can enable and customize modules without any coding knowledg
 15. Cookie Banner Module
 
 == Changelog ==
+= 2.1.3 =
+* Added - Pre-orders: Added compatibility with Kadence Email Designer
+* Added - Woo Multi-Currency: Introduced compatibility layer
+
 = 2.1.2 =
 * Fixed - Cookie Banner: Resolved unnecessary database queries when modules are disabled
 * Fixed - Agree to Terms Checkbox: Resolved unnecessary database queries when modules are disabled
