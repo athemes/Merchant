@@ -805,6 +805,21 @@ class Merchant_Pre_Orders_Main_Functionality {
 				}
 				$regular_price = $product->get_regular_price();
 				$sale_price    = $this->calculate_discounted_price( $regular_price, $offer, $product );
+				/**
+				 * Filter the discounted price.
+				 *
+				 * @param float  $sale_price    The discounted price.
+				 * @param array  $cart_item     The cart item.
+				 * @param string $cart_item_key The cart item key.
+				 *
+				 * @since 2.1.3
+				 */
+				$sale_price    = apply_filters(
+					'merchant_pre_order_cart_sale_price',
+					$sale_price,
+					$cart_item,
+					$cart_item_key
+				);
 				$cart_item['data']->set_price( $sale_price );
 				$cart_item['data']->set_meta_data( array( '_merchant_pre_order_sale' => $offer ) );
 			}
